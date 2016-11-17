@@ -1,0 +1,15 @@
+class MainClass{
+	private int array[];
+	
+	public MainClass(){
+		array = new int[10];
+		
+		array[1] = 39;
+		int elem = array[1];
+		System.println(elem);
+	}
+};
+
+MainClass obj = new MainClass();
+return 0;
+

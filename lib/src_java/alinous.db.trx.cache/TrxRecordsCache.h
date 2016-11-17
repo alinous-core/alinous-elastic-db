@@ -1,0 +1,201 @@
+#ifndef ALINOUS_DB_TRX_CACHE_TRXRECORDSCACHE_H_
+#define ALINOUS_DB_TRX_CACHE_TRXRECORDSCACHE_H_
+namespace alinous{namespace annotation{
+class OneSource;
+}}
+namespace alinous {namespace db {namespace trx {namespace cache {
+class TrxRecordsCache;}}}}
+
+namespace alinous {namespace db {namespace table {
+class TableMetadata;}}}
+
+namespace alinous {namespace db {namespace trx {
+class DbTransaction;}}}
+
+namespace alinous {namespace btreememory {
+class BTreeOnMemory;}}
+
+namespace alinous {namespace db {namespace table {
+class TableIndexMetadata;}}}
+
+namespace alinous {namespace db {
+class AlinousDbException;}}
+
+namespace alinous {namespace runtime {namespace dom {
+class VariableException;}}}
+
+namespace java {namespace lang {
+class InterruptedException;}}
+
+namespace java {namespace io {
+class IOException;}}
+
+namespace alinous {namespace btree {
+class BTreeException;}}
+
+namespace alinous {namespace db {
+class AlinousDatabase;}}
+
+namespace java {namespace io {
+class File;}}
+
+namespace alinous {namespace btree {
+class BTree;}}
+
+namespace alinous {namespace db {namespace trx {namespace cache {
+class TrxRecordCacheIndex;}}}}
+
+namespace alinous {namespace system {
+class AlinousException;}}
+
+namespace java {namespace lang {
+class StringBuilder;}}
+
+namespace alinous {namespace compile {namespace sql {namespace analyze {
+class ScanTableColumnIdentifier;}}}}
+
+namespace alinous {namespace db {namespace table {
+class TableColumnMetadata;}}}
+
+namespace alinous {namespace db {namespace table {
+class DatabaseTable;}}}
+
+namespace alinous {namespace runtime {namespace parallel {
+class SequentialBackgroundJob;}}}
+
+namespace alinous {namespace btree {namespace scan {
+class BTreeScanner;}}}
+
+namespace alinous {namespace btree {
+class IBTreeNode;}}
+
+namespace alinous {namespace btree {
+class IBTreeValue;}}
+
+namespace alinous {namespace db {namespace trx {namespace cache {
+class CachedRecord;}}}}
+
+namespace java {namespace lang {
+class Throwable;}}
+
+namespace alinous {namespace btree {
+class LongKey;}}
+
+namespace alinous {namespace db {namespace trx {namespace scan {
+class ScanResultRecord;}}}}
+
+namespace alinous {namespace runtime {namespace dom {
+class IDomVariable;}}}
+
+namespace alinous {namespace db {namespace trx {namespace cache {
+class CulumnOrder;}}}}
+
+namespace alinous {namespace runtime {namespace dom {
+class DomArray;}}}
+
+namespace alinous {namespace system {
+class AlinousNotSupportedException;}}
+
+namespace alinous {namespace btree {
+class IBTree;}}
+
+namespace alinous {namespace btree {
+class IBTreeKey;}}
+
+namespace java {namespace lang {
+class IObject;
+}}
+
+namespace alinous {
+class ThreadContext;
+}
+
+namespace alinous {namespace db {namespace trx {namespace cache {
+
+using namespace ::alinous;
+using namespace ::java::lang;
+using ::java::util::Iterator;
+using ::java::io::File;
+using ::java::io::IOException;
+using ::java::util::ArrayList;
+using ::alinous::btree::BTree;
+using ::alinous::btree::BTreeException;
+using ::alinous::btree::IBTree;
+using ::alinous::btree::IBTreeKey;
+using ::alinous::btree::IBTreeNode;
+using ::alinous::btree::IBTreeValue;
+using ::alinous::btree::LongKey;
+using ::alinous::btree::scan::BTreeScanner;
+using ::alinous::btreememory::BTreeOnMemory;
+using ::alinous::compile::sql::analyze::ScanTableColumnIdentifier;
+using ::alinous::db::AlinousDatabase;
+using ::alinous::db::AlinousDbException;
+using ::alinous::db::table::DatabaseTable;
+using ::alinous::db::table::TableColumnMetadata;
+using ::alinous::db::table::TableIndexMetadata;
+using ::alinous::db::table::TableMetadata;
+using ::alinous::db::trx::DbTransaction;
+using ::alinous::db::trx::scan::ScanResultRecord;
+using ::alinous::runtime::dom::DomArray;
+using ::alinous::runtime::dom::IDomVariable;
+using ::alinous::runtime::dom::VariableException;
+using ::alinous::runtime::parallel::SequentialBackgroundJob;
+using ::alinous::system::AlinousException;
+using ::alinous::system::AlinousNotSupportedException;
+
+
+
+class TrxRecordsCache final : public virtual IObject {
+public:
+	TrxRecordsCache(const TrxRecordsCache& base) = default;
+public:
+	TrxRecordsCache(ThreadContext* ctx) throw()  : IObject(ctx), insert(0), tmpDir(nullptr), schema(nullptr), tableName(nullptr), storagePath(nullptr), storage(nullptr), metadata(nullptr), serial(0), trx(nullptr), indexList(GCUtils<ArrayList<TrxRecordCacheIndex> >::ins(this, (new(ctx) ArrayList<TrxRecordCacheIndex>(ctx)), ctx, __FILEW__, __LINE__, L""))
+	{
+	}
+	void __construct_impl(ThreadContext* ctx) throw() 
+	{
+	}
+	virtual ~TrxRecordsCache() throw();
+	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
+private:
+	bool insert;
+	String* tmpDir;
+	String* schema;
+	String* tableName;
+	String* storagePath;
+	IBTree* storage;
+	TableMetadata* metadata;
+	long long serial;
+	DbTransaction* trx;
+	ArrayList<TrxRecordCacheIndex>* indexList;
+private:
+	constexpr static const long long BLOCK_SIZE{256};
+public:
+	TrxRecordsCache* init(String* tmpDir, String* schema, String* tableName, TableMetadata* metadata, DbTransaction* trx, bool insert, ThreadContext* ctx);
+	void switchToDisk(AlinousDatabase* database, ThreadContext* ctx);
+	void dispose(ThreadContext* ctx);
+	TrxRecordCacheIndex* getCachedIndex(ArrayList<ScanTableColumnIdentifier>* colIdList, ThreadContext* ctx) throw() ;
+	void commitUpdateRecord(AlinousDatabase* db, DatabaseTable* table, long long newCommitId, ThreadContext* ctx);
+	void commitInsertRecord(AlinousDatabase* db, DatabaseTable* table, long long newCommitId, ThreadContext* ctx);
+	CachedRecord* getRecordByOid(long long oid, ThreadContext* ctx);
+	void insertUpdateRecord(ScanResultRecord* srecord, ThreadContext* ctx);
+	void insertRecord(ArrayList<IDomVariable>* values, ArrayList<CulumnOrder>* columns, ThreadContext* ctx);
+	void createIndex(String* indexName, ArrayList<String>* columns, TableMetadata* tblMetadata, AlinousDatabase* database, ThreadContext* ctx);
+	DbTransaction* getTrx(ThreadContext* ctx) throw() ;
+	IBTreeNode* findByKey(LongKey* oidKey, ThreadContext* ctx);
+private:
+	void setStorageFilePath(ThreadContext* ctx) throw() ;
+	bool matchIndexByIdList(ArrayList<TableColumnMetadata>* cachedIndexCols, ArrayList<ScanTableColumnIdentifier>* colIdList, ThreadContext* ctx) throw() ;
+	void buildFirstIndex(TrxRecordCacheIndex* newIndex, ThreadContext* ctx);
+	CachedRecord* getLastCommitedRecord(IBTreeNode* node, ThreadContext* ctx) throw() ;
+public:
+	static bool __init_done;
+	static bool __init_static_variables();
+public:
+	static void __cleanUp(ThreadContext* ctx){
+	}
+};
+
+}}}}
+
+#endif /* end of ALINOUS_DB_TRX_CACHE_TRXRECORDSCACHE_H_ */

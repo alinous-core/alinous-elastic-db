@@ -1,0 +1,18 @@
+
+include("/commonclass.alns");
+
+
+Dog dog = new commonclass.Dog();
+
+String staticStr = Amimal.typeName;
+System.println(staticStr);
+
+dog.run();
+
+Feature.live("Hello world");
+
+
+
+return 0;
+
+

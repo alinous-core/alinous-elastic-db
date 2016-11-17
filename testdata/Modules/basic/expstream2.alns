@@ -1,0 +1,12 @@
+
+int val = 10;
+$dom = 1;
+
+val = $dom;
+
+$dom.inner = "test";
+
+String test = $dom.inner;
+
+
+return 0;

@@ -1,0 +1,53 @@
+
+BEGIN;
+
+CREATE TABLE customers (
+customer_id int,
+customer_name varchar(255),
+customer_pref_id int,
+
+PRIMARY KEY(customer_id)
+);
+
+CREATE TABLE customer_pref (
+customer_pref_id int,
+pref_name varchar(255),
+
+PRIMARY KEY(customer_pref_id)
+);
+
+COMMIT;
+
+
+BEGIN;
+
+INSERT INTO customers (customer_id, customer_name, customer_pref_id) VALUES(1, 'yamada', 9);
+INSERT INTO customers (customer_id, customer_name, customer_pref_id) VALUES(2, 'tanaka', 9);
+INSERT INTO customers (customer_id, customer_name, customer_pref_id) VALUES(3, 'test01', 1);
+INSERT INTO customers (customer_id, customer_name, customer_pref_id) VALUES(4, 'test02', 2);
+INSERT INTO customers (customer_id, customer_name, customer_pref_id) VALUES(5, 'test03', 4);
+INSERT INTO customers (customer_id, customer_name, customer_pref_id) VALUES(6, 'test04', 8);
+INSERT INTO customers (customer_id, customer_name, customer_pref_id) VALUES(7, 'test05', 5);
+INSERT INTO customers (customer_id, customer_name, customer_pref_id) VALUES(8, 'test06', 6);
+
+INSERT INTO customer_pref (customer_pref_id, pref_name) VALUES (1, 'hokkaido');
+INSERT INTO customer_pref (customer_pref_id, pref_name) VALUES (2, 'aomori');
+INSERT INTO customer_pref (customer_pref_id, pref_name) VALUES (3, 'iwate');
+INSERT INTO customer_pref (customer_pref_id, pref_name) VALUES (4, 'fukushima');
+INSERT INTO customer_pref (customer_pref_id, pref_name) VALUES (5, 'niigata');
+INSERT INTO customer_pref (customer_pref_id, pref_name) VALUES (6, 'ibaraki');
+INSERT INTO customer_pref (customer_pref_id, pref_name) VALUES (7, 'gunma');
+INSERT INTO customer_pref (customer_pref_id, pref_name) VALUES (8, 'chiba');
+INSERT INTO customer_pref (customer_pref_id, pref_name) VALUES (9, 'tokyo');
+
+COMMIT;
+
+BEGIN;
+
+SELECT * INTO result FROM customers;
+
+
+COMMIT;
+
+return 0;
+

@@ -1,0 +1,35 @@
+
+BEGIN;
+
+CREATE TABLE customers (
+	customer_id int,
+	customer_id2 int,
+	customer_name varchar(255),
+	customer_pref_id int,
+
+PRIMARY KEY(customer_id)
+);
+
+INSERT INTO customers (customer_id, customer_id2, customer_name, customer_pref_id) VALUES(1,1, 'yamada', 9);
+INSERT INTO customers (customer_id, customer_id2, customer_name, customer_pref_id) VALUES(2,2, 'tanaka', 9);
+INSERT INTO customers (customer_id, customer_id2, customer_name, customer_pref_id) VALUES(3,3, 'test01', 1);
+INSERT INTO customers (customer_id, customer_id2, customer_name, customer_pref_id) VALUES(4,4, 'test02', 2);
+INSERT INTO customers (customer_id, customer_id2, customer_name, customer_pref_id) VALUES(5,5, 'test03', 4);
+INSERT INTO customers (customer_id, customer_id2, customer_name, customer_pref_id) VALUES(6,6, 'test04', 8);
+INSERT INTO customers (customer_id, customer_id2, customer_name, customer_pref_id) VALUES(7,7, 'test05', 5);
+INSERT INTO customers (customer_id, customer_id2, customer_name, customer_pref_id) VALUES(8,8, 'test06', 6);
+
+COMMIT;
+
+BEGIN;
+
+SELECT * INTO records
+FROM
+	customers
+WHERE
+	customer_id IN (1, 2, 4);
+
+COMMIT;
+
+
+return 0;

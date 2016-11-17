@@ -1,0 +1,12 @@
+BEGIN;
+
+SELECT * INTO result
+FROM
+	customers CROSS JOIN customer_pref
+WHERE
+	customers.customer_id = 1;
+
+
+COMMIT;
+
+return 0;

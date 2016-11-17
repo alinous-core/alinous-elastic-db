@@ -1,0 +1,13 @@
+class MainClass{
+	private $id;
+	
+	public MainClass(){
+		//this.id = 100;
+		
+		this.id.test = 1;
+		System.println(this.id.test);
+	}
+};
+
+MainClass obj = new MainClass();
+return 0;

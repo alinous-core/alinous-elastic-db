@@ -1,0 +1,21 @@
+
+
+
+BEGIN;
+
+SELECT * INTO records
+FROM
+	(customers LEFT JOIN customer_pref
+	ON
+		customers.customer_pref_id = customer_pref.customer_pref_id)
+	LEFT JOIN segment
+	ON
+		customer_pref.segment_id = segment.segment_id;
+
+COMMIT;
+
+return 0;
+
+
+
+

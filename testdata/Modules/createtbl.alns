@@ -1,0 +1,36 @@
+
+
+$ar[2] = 10;
+$ar[0].test.value = $ar[2];
+
+$first = "first value";
+$container.first = $first;
+
+
+
+BEGIN;
+
+CREATE TABLE test_table(
+	row_id int,
+	title varchar(255),
+	contents text,
+	PRIMARY KEY(row_id)
+);
+
+INSERT INTO test_table(
+	row_id,
+	title,
+	contents
+)
+VALUES(
+	1,
+	'hello world',
+	'this is the first article of this website.'
+);
+
+
+COMMIT;
+
+
+return 0;
+

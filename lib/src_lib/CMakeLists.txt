@@ -1,0 +1,86 @@
+set(srcsrc
+
+	"src_lib/baselib/AlinousDebug.cpp"
+	"src_lib/baselib/Character.cpp"
+	"src_lib/baselib/CharSequence.cpp"
+	"src_lib/baselib/Console.cpp"
+	"src_lib/baselib/IObject.cpp"
+	"src_lib/baselib/Java2CppSystem.cpp"
+	"src_lib/baselib/Math.cpp"
+	"src_lib/baselib/StaticUnicodeString.cpp"
+	"src_lib/baselib/StdOutputStream.cpp"
+	"src_lib/baselib/System.cpp"
+	"src_lib/baselib/ThreadContext.cpp"
+	"src_lib/baselib/Throwable.cpp"
+	"src_lib/baselib/UnicodeString.cpp"
+	"src_lib/baselib/UnicodeStringEncodeCache.cpp"
+	"src_lib/baselib/UnicodeStringWrapper.cpp"
+	"src_lib/baselib/AlinousDebug.cpp"
+	"src_lib/baselib/AlinousDebug.cpp"
+	
+	"src_lib/baselib_debug/gc_debug.cpp"
+
+	"src_lib/baselib_exceptions/exceptions.cpp"
+	
+	"src_lib/baselib_io/AlinousServerSocket.cpp"
+	"src_lib/baselib_io/CharBuffer.cpp"
+	"src_lib/baselib_io/File.cpp"
+	"src_lib/baselib_io/FileInputStream.cpp"
+	"src_lib/baselib_io/FileOutputStream.cpp"
+	"src_lib/baselib_io/InputStreamReader.cpp"
+	"src_lib/baselib_io/MMapSegments.cpp"
+	"src_lib/baselib_io/OutputStream.cpp"
+	"src_lib/baselib_io/OutputStreamWriter.cpp"
+	"src_lib/baselib_io/PrintStream.cpp"
+	"src_lib/baselib_io/PrintWriter.cpp"
+	"src_lib/baselib_io/RandomAccessFile.cpp"
+	"src_lib/baselib_io/Reader.cpp"
+	"src_lib/baselib_io/Socket.cpp"
+	"src_lib/baselib_io/SSLSocketFactory.cpp"
+	"src_lib/baselib_io/Writer.cpp"
+
+	"src_lib/baselib_io_charset/CoderResult.cpp"
+	
+	"src_lib/baselib_thread/ConcurrentTaskQueue.cpp"
+	"src_lib/baselib_thread/Thread.cpp"
+	
+	"src_lib/gc/BackGroundGcExecutor.cpp"
+	"src_lib/gc/GCEngine.cpp"
+	"src_lib/gc/GCLogCollector.cpp"
+	"src_lib/gc/GCNotifier.cpp"
+	"src_lib/gc/IObjectUtils.cpp"
+	"src_lib/gc/IOblectStatus.cpp"
+	"src_lib/gc/ObjectEraser.cpp"
+	"src_lib/gc/StaticInitializer.cpp"
+
+	"src_lib/jnilib/DomConverter.cpp"
+	"src_lib/jnilib/JavaFunctionManager.cpp"
+	
+	"src_lib/memory/MemoryManager.cpp"
+	"src_lib/memory/MemoryReleaser.cpp"
+	"src_lib/memory/RawArrayMemAlloc.cpp"
+	"src_lib/memory/RawArrayMemThread.cpp"
+	"src_lib/memory/SegBitSet.cpp"
+	"src_lib/memory/SegLinkedList.cpp"
+	"src_lib/memory/SegRawArray.cpp"
+	
+	"src_lib/memory/MemoryManager.cpp"
+	"src_lib/memory/MemoryReleaser.cpp"
+	"src_lib/memory/RawArrayMemAlloc.cpp"
+	"src_lib/memory/RawArrayMemThread.cpp"
+	"src_lib/memory/SegBitSet.cpp"
+	"src_lib/memory/SegLinkedList.cpp"
+	"src_lib/memory/SegRawArray.cpp"
+	
+	"src_lib/system/FNVHash.cpp"
+	"src_lib/system/Mutex.cpp"
+	"src_lib/system/RawBitSet.cpp"
+	"src_lib/system/SysThread.cpp"
+	
+	"src_lib/unicode/ubidi_props_data.cpp"
+	"src_lib/unicode/ucase_props_data.cpp"
+	"src_lib/unicode/uchar_props_data.cpp"
+	"src_lib/unicode/unicode_imples.cpp"	
+
+
+PARENT_SCOPE)

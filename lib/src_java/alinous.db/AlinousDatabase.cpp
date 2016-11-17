@@ -1,0 +1,375 @@
+#include "includes.h"
+
+
+namespace alinous {namespace db {
+
+
+
+
+
+const IntKey AlinousDatabase:: __SCHEMA = (IntKey(10, nullptr));
+const IntKey AlinousDatabase:: __USERS = (IntKey(20, nullptr));
+const IntKey AlinousDatabase:: __MAX_COMMIT_ID = (IntKey(30, nullptr));
+bool AlinousDatabase::__init_done = __init_static_variables();
+bool AlinousDatabase::__init_static_variables(){
+	Java2CppSystem::getSelf();
+	ThreadContext* ctx = ThreadContext::newThreadContext();
+	{
+		GCNotifier __refobj1(ctx, __FILEW__, __LINE__, L"AlinousDatabase", L"__init_static_variables");
+	}
+	ctx->localGC();
+	delete ctx;
+	return true;
+}
+ AlinousDatabase::AlinousDatabase(ThreadContext* ctx) throw()  : IObject(ctx), instanceConfigLock(__GC_INS(this, (new(ctx) LockObject(ctx)), LockObject)), schemas(nullptr), workerThreadsPool(nullptr), trxManager(nullptr), core(nullptr), dataDir(nullptr), dbconfig(nullptr), configFile(nullptr), lockManager(nullptr), maxCommitId(0), trxWriterThread(nullptr), cahceEngine(nullptr), btreeCache(nullptr)
+{
+	__GC_MV(this, &(this->trxWriterThread), nullptr, AlinousThread);
+	__GC_MV(this, &(this->workerThreadsPool), nullptr, ThreadPool);
+	__GC_MV(this, &(this->lockManager), nullptr, DBThreadMonitor);
+	this->maxCommitId = 0;
+}
+void AlinousDatabase::__construct_impl(ThreadContext* ctx) throw() 
+{
+	__GC_MV(this, &(this->trxWriterThread), nullptr, AlinousThread);
+	__GC_MV(this, &(this->workerThreadsPool), nullptr, ThreadPool);
+	__GC_MV(this, &(this->lockManager), nullptr, DBThreadMonitor);
+	this->maxCommitId = 0;
+}
+ AlinousDatabase::~AlinousDatabase() throw() 
+{
+	ThreadContext *ctx = ThreadContext::getCurentContext();
+	if(ctx != nullptr){ctx->incGcDenial();}
+	__releaseRegerences(false, ctx);
+	if(ctx != nullptr){ctx->decGcDenial();}
+}
+void AlinousDatabase::__releaseRegerences(bool prepare, ThreadContext* ctx) throw() 
+{
+	ObjectEraser __e_obj1(ctx, __FILEW__, __LINE__, L"AlinousDatabase", L"~AlinousDatabase");
+	__e_obj1.add(this->instanceConfigLock, this);
+	instanceConfigLock = nullptr;
+	__e_obj1.add(this->schemas, this);
+	schemas = nullptr;
+	__e_obj1.add(this->workerThreadsPool, this);
+	workerThreadsPool = nullptr;
+	__e_obj1.add(this->trxManager, this);
+	trxManager = nullptr;
+	__e_obj1.add(this->core, this);
+	core = nullptr;
+	__e_obj1.add(this->dataDir, this);
+	dataDir = nullptr;
+	__e_obj1.add(this->dbconfig, this);
+	dbconfig = nullptr;
+	__e_obj1.add(this->configFile, this);
+	configFile = nullptr;
+	__e_obj1.add(this->lockManager, this);
+	lockManager = nullptr;
+	__e_obj1.add(this->trxWriterThread, this);
+	trxWriterThread = nullptr;
+	__e_obj1.add(this->cahceEngine, this);
+	cahceEngine = nullptr;
+	__e_obj1.add(this->btreeCache, this);
+	btreeCache = nullptr;
+	if(!prepare){
+		return;
+	}
+}
+void AlinousDatabase::construct(AlinousCore* core, String* dataDir, String* trxTmpDir, int maxConnection, ThreadContext* ctx)
+{
+	__GC_MV(this, &(this->cahceEngine), (new(ctx) RecordCacheEngine(ctx))->init(1024, ctx), RecordCacheEngine);
+	__GC_MV(this, &(this->core), core, AlinousCore);
+	__GC_MV(this, &(this->dataDir), dataDir, String);
+	__GC_MV(this, &(this->schemas), (new(ctx) SchemaManager(this->cahceEngine, dataDir, this->core->getLogger(ctx), ctx)), SchemaManager);
+	__GC_MV(this, &(this->trxManager), (new(ctx) DbTransactionManager(this, trxTmpDir, maxConnection, core->getLogger(ctx), this->workerThreadsPool, ctx)), DbTransactionManager);
+	File* file = getConfigFile(ctx);
+	{
+		try
+		{
+			__GC_MV(this, &(this->btreeCache), (new(ctx) BTreeGlobalCache(ctx))->init(1024, ctx), BTreeGlobalCache);
+			__GC_MV(this, &(this->dbconfig), (new(ctx) BTree(ctx))->init(file, this->btreeCache, core->diskCache, ctx), BTree);
+		}
+		catch(IOException* e)
+		{
+			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1556(), e, ctx));
+		}
+		catch(InterruptedException* e)
+		{
+			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1556(), e, ctx));
+		}
+		catch(BTreeException* e)
+		{
+			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1556(), e, ctx));
+		}
+	}
+}
+ThreadLocker* AlinousDatabase::newLockContext(ThreadContext* ctx) throw() 
+{
+	return this->lockManager->newThread(ctx);
+}
+void AlinousDatabase::initInstance(ThreadContext* ctx)
+{
+	File* file = (new(ctx) File(this->dataDir, ctx));
+	if(!file->exists(ctx))
+	{
+		file->mkdirs(ctx);
+	}
+	this->schemas->createSchema(ConstStr::getCNST_STR_951(), ctx);
+	{
+		try
+		{
+			int BLOCK_SIZE = 256;
+			int nodeCapacity = 8;
+			long long capacity = 1024;
+			this->dbconfig->initTreeStorage(nodeCapacity, IBTreeKey::TYPE_INT, IBTreeKey::TYPE_INT, capacity, (long long)BLOCK_SIZE, ctx);
+			this->dbconfig->open(ctx);
+			this->dbconfig->putKeyValue(SCHEMA, this->schemas, ctx);
+			LongValue* lvTrx = (new(ctx) LongValue(this->maxCommitId, ctx));
+			this->dbconfig->putKeyValue(MAX_COMMIT_ID, lvTrx, ctx);
+			this->dbconfig->close(ctx);
+		}
+		catch(IOException* e)
+		{
+			e->printStackTrace(ctx);
+			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1557(), e, ctx));
+		}
+		catch(InterruptedException* e)
+		{
+			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1557(), e, ctx));
+		}
+		catch(BTreeException* e)
+		{
+			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1557(), e, ctx));
+		}
+		catch(VariableException* e)
+		{
+			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1557(), e, ctx));
+		}
+	}
+}
+long long AlinousDatabase::getCommitId(ThreadContext* ctx) throw() 
+{
+	{
+		SynchronizedBlockObj __synchronized_2(instanceConfigLock, ctx);
+		return this->maxCommitId;
+	}
+}
+long long AlinousDatabase::newCommitId(ThreadContext* ctx)
+{
+	{
+		SynchronizedBlockObj __synchronized_2(instanceConfigLock, ctx);
+		this->maxCommitId ++ ;
+		long long newCommitId = this->maxCommitId;
+		syncScheme(ctx);
+		return newCommitId;
+	}
+}
+void AlinousDatabase::syncScheme(ThreadContext* ctx)
+{
+	BTreeLeafNode* lvTrxIdNode = nullptr;
+	{
+		try
+		{
+			this->dbconfig->open(ctx);
+			this->dbconfig->putKeyValue(SCHEMA, this->schemas, ctx);
+			lvTrxIdNode = this->dbconfig->findByKey(MAX_COMMIT_ID, ctx);
+			ArrayList<IBTreeValue>* trxvals = lvTrxIdNode->getValues(ctx);
+			if(trxvals->size(ctx) > 0)
+			{
+				trxvals->clear(ctx);
+				;
+				trxvals->add((new(ctx) LongValue(this->maxCommitId, ctx)), ctx);
+				lvTrxIdNode->save(ctx);
+			}
+						else 
+			{
+				LongValue* lvTrx = (new(ctx) LongValue(this->maxCommitId, ctx));
+				this->dbconfig->putKeyValue(MAX_COMMIT_ID, lvTrx, ctx);
+			}
+			this->dbconfig->close(ctx);
+		}
+		catch(Throwable* e)
+		{
+			{
+				try
+				{
+					if(lvTrxIdNode != nullptr)
+					{
+						lvTrxIdNode->endUse(ctx);
+					}
+				}
+				catch(InterruptedException* e2)
+				{
+					e->printStackTrace(ctx);
+					this->core->getLogger(ctx)->logError(e2, ctx);
+				}
+			}
+			e->printStackTrace(ctx);
+			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1558(), e, ctx));
+		}
+	}
+	{
+		try
+		{
+			lvTrxIdNode->endUse(ctx);
+		}
+		catch(InterruptedException* e)
+		{
+			e->printStackTrace(ctx);
+			this->core->getLogger(ctx)->logError(e, ctx);
+		}
+	}
+}
+void AlinousDatabase::open(ThreadContext* ctx)
+{
+	__GC_MV(this, &(this->workerThreadsPool), (new(ctx) ThreadPool(16, ConstStr::getCNST_STR_1560(), ctx)), ThreadPool);
+	LaunchJoin* trxLaunchJoin = (new(ctx) LaunchJoin(1, ctx));
+	__GC_MV(this, &(this->trxWriterThread), (new(ctx) AlinousThread(trxLaunchJoin, ctx)), AlinousThread);
+	{
+		try
+		{
+			trxLaunchJoin->parentJoin(ctx);
+		}
+		catch(InterruptedException* e)
+		{
+			this->workerThreadsPool->dispose(ctx);
+			__GC_MV(this, &(this->workerThreadsPool), nullptr, ThreadPool);
+			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1561(), e, ctx));
+		}
+	}
+	__GC_MV(this, &(this->lockManager), (new(ctx) DBThreadMonitor(this->workerThreadsPool, ctx)), DBThreadMonitor);
+	{
+		try
+		{
+			this->dbconfig->open(ctx);
+			ArrayList<IBTreeValue>* schemeValue = this->dbconfig->getValues(SCHEMA, ctx);
+			if(schemeValue->size(ctx) > 0)
+			{
+				__GC_MV(this, &(this->schemas), static_cast<SchemaManager*>(schemeValue->get(0, ctx)), SchemaManager);
+				this->schemas->loadAfterFetch(this->cahceEngine, this->dataDir, this->core->getLogger(ctx), this, ctx);
+			}
+			ArrayList<IBTreeValue>* lvTrxIds = this->dbconfig->getValues(MAX_COMMIT_ID, ctx);
+			this->maxCommitId = (static_cast<LongValue*>(lvTrxIds->get(0, ctx)))->value;
+		}
+		catch(Throwable* e)
+		{
+			{
+				try
+				{
+					this->dbconfig->close(ctx);
+				}
+				catch(IOException* e2)
+				{
+					throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1562(), e2, ctx));
+				}
+				catch(InterruptedException* e2)
+				{
+					throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1562(), e2, ctx));
+				}
+			}
+			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1562(), e, ctx));
+		}
+	}
+	{
+		try
+		{
+			this->dbconfig->close(ctx);
+		}
+		catch(IOException* e)
+		{
+			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1562(), e, ctx));
+		}
+		catch(InterruptedException* e)
+		{
+			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1562(), e, ctx));
+		}
+	}
+}
+TableSchema* AlinousDatabase::getSchema(String* name, ThreadContext* ctx) throw() 
+{
+	return this->schemas->getSchema(name, ctx);
+}
+DatabaseTable* AlinousDatabase::getTable(AlinousName* tableName, String* currentSchema, ThreadContext* ctx) throw() 
+{
+	ArrayList<String>* segs = tableName->getSegments(ctx);
+	int size = segs->size(ctx);
+	if(size == 1)
+	{
+		return getTable(currentSchema, segs->get(0, ctx), ctx);
+	}
+	return getTable(segs->get(0, ctx), segs->get(1, ctx), ctx);
+}
+DatabaseTable* AlinousDatabase::getTable(String* schemaName, String* tableName, ThreadContext* ctx) throw() 
+{
+	TableSchema* sc = getSchema(schemaName, ctx);
+	return sc->getTableStore(tableName, ctx);
+}
+void AlinousDatabase::closeDatabase(ThreadContext* ctx) throw() 
+{
+	{
+		try
+		{
+			{
+				SynchronizedBlockObj __synchronized_3(instanceConfigLock, ctx);
+				syncScheme(ctx);
+			}
+		}
+		catch(AlinousDbException* e)
+		{
+			this->core->getLogger(ctx)->logError(e, ctx);
+		}
+	}
+	if(this->trxManager != nullptr)
+	{
+		this->trxManager->dispose(ctx);
+		__GC_MV(this, &(this->trxManager), nullptr, DbTransactionManager);
+	}
+	if(this->workerThreadsPool != nullptr)
+	{
+		this->workerThreadsPool->dispose(ctx);
+		__GC_MV(this, &(this->workerThreadsPool), nullptr, ThreadPool);
+	}
+	if(this->trxWriterThread != nullptr)
+	{
+		this->trxWriterThread->shutdown(ctx);
+		__GC_MV(this, &(this->trxWriterThread), nullptr, AlinousThread);
+	}
+}
+AlinousDbConnection* AlinousDatabase::connect(ConnectInfo* info, ThreadContext* ctx) throw() 
+{
+	AlinousDbConnection* con = (new(ctx) AlinousDbConnection(this, info, ctx));
+	return con;
+}
+void AlinousDatabase::disConnect(AlinousDbConnection* con, ThreadContext* ctx) throw() 
+{
+}
+void AlinousDatabase::dropInstance(ThreadContext* ctx) throw() 
+{
+	File* file = (new(ctx) File(this->dataDir, ctx));
+	if(file->exists(ctx))
+	{
+		FileUtils::removeAll(file, ctx);
+	}
+}
+bool AlinousDatabase::exists(ThreadContext* ctx) throw() 
+{
+	File* file = getConfigFile(ctx);
+	return file->exists(ctx);
+}
+AlinousCore* AlinousDatabase::getCore(ThreadContext* ctx) throw() 
+{
+	return core;
+}
+BTreeGlobalCache* AlinousDatabase::getBtreeCache(ThreadContext* ctx) throw() 
+{
+	return btreeCache;
+}
+File* AlinousDatabase::getConfigFile(ThreadContext* ctx) throw() 
+{
+	if(this->configFile == nullptr)
+	{
+		String* pathname = this->dataDir->clone(ctx)->append(ConstStr::getCNST_STR_1559(), ctx);
+		__GC_MV(this, &(this->configFile), (new(ctx) File(pathname, ctx)), File);
+	}
+	return this->configFile;
+}
+}}
+

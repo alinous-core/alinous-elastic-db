@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<alinous-config>
+	<system>
+		<module-dir>testdata/Modules/</module-dir>
+		<system-datastore id="alinousdb" />
+		<default-datastore id="alinousdb" />
+	</system>
+
+	<alinous-db id="alinousdb">
+		<data-dir>./out/database01/</data-dir>
+	</alinous-db>
+	
+	<datasources id="pgsrc" class="org.alinous.plugin.postgres.PostgreSQLDataSource">
+		<connect>jdbc:postgresql://localhost:5432/apcms</connect>
+		<user>postgres</user>
+		<pass>postgres</pass>
+	</datasources>
+
+	<datasources id="pgapps" class="org.alinous.plugin.postgres.PostgreSQLDataSource">
+		<connect>jdbc:postgresql://localhost:5432/apcms</connect>"testdata/Modules/createtbl.alns"
+		<user>postgres</user>
+		<pass>postgres</pass>
+	</datasources>
+	
+
+	
+	
+	<mail>
+		<server>mail.nanntoka.com</server>
+		<port>25</port>
+		
+		<!-- If language encoding is necessary -->
+		<lang-encode>ISO2022JP</lang-encode>
+		
+		<!-- If authentication is necessary -->
+		<auth>
+			<method>login</method>
+			<user>user</user>
+			<pass>pass</pass>
+		</auth>
+	</mail>
+	
+	<web-handler>
+		<document-root></document-root>
+		<basic-auth>
+			<relm>
+				<datastore>pgsrc</datastore>
+				<table>AUTH_TABLE</table>
+				<users>USERS</users>
+				<passwords>PASSWORDS</passwords>
+				<roles>ROLES</roles>
+			</relm>
+			
+			<zones>
+				<zone>
+					<area>/admin/</area>
+					<roles>user</roles>
+					<form-auth>
+						<login>/admin/login.html</login>
+						<confirm>/admin/confirm.html</confirm>
+					</form-auth>
+				</zone>
+			</zones>
+		</basic-auth>
+		
+	    <service-filter>
+	        <filter-class>org.alinous.cms.filter.CmsFilter</filter-class>
+	        <params>
+	        </params>
+	    </service-filter>
+	    
+		<http-cache-control>
+			<control match="/api/">max-age=0</control>
+		</http-cache-control>
+	</web-handler>
+
+</alinous-config>

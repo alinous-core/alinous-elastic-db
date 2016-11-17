@@ -1,0 +1,35 @@
+
+
+class MyObject {
+	private String test = "aaa";
+
+	public MyObject(){
+	
+	}
+	
+	public void hello(){
+		
+	}
+}
+
+class MyBaseObject {
+	public MyBaseObject(){
+	
+	}
+}
+
+class MyString {
+	private String str;
+	public  MyString(){
+		this.str = str;
+	}
+	
+	public void getString(){
+		return this.str;
+	}
+}
+
+MyBaseObject obj = new MyObject();
+
+
+return 0;

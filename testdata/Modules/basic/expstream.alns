@@ -1,0 +1,13 @@
+include ("/common.alns");
+
+String str = "test";
+
+String ans = String.toUpperCase(str);
+
+
+System.println(ans);
+
+int val = 10;
+$dom = 1;
+
+return 0;

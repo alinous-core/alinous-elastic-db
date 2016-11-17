@@ -1,0 +1,23 @@
+
+
+BEGIN;
+
+CREATE TABLE test_tableA(
+	row_id int,
+	title varchar(255),
+	contents text,
+	PRIMARY KEY(row_id)
+);
+
+CREATE TABLE test_tableB(
+	row_id int,
+	title varchar(255),
+	contents text,
+	PRIMARY KEY(row_id)
+);
+
+
+COMMIT;
+
+return 0;
+

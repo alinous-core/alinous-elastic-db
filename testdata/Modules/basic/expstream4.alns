@@ -1,0 +1,24 @@
+
+class MainClass{
+	private String id;
+	
+	public MainClass(String id){
+		this.id = id;
+	}
+	
+	public String getId(){
+		return this.id;
+	}
+	
+	public MainClass getSelf(){
+		return this;
+	}
+};
+
+MainClass obj = new MainClass("test_id");
+
+String str = obj.getSelf().getId();
+
+System.println(str);
+
+return 0;

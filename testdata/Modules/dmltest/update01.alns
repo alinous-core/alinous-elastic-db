@@ -1,0 +1,47 @@
+
+
+BEGIN;
+
+CREATE TABLE test_table(
+	row_id int,
+	title varchar(255),
+	contents text,
+	PRIMARY KEY(row_id)
+);
+
+CREATE INDEX test_table_title_idx
+ON
+	test_table(title);
+
+
+
+INSERT INTO test_table(
+	row_id,
+	title,
+	contents
+)
+VALUES(
+	1,
+	'hello world',
+	'this is the first article of this website.'
+);
+
+CREATE INDEX test_row_id_table_title_idx
+ON
+	test_table(row_id, title);
+
+
+COMMIT;
+
+BEGIN;
+
+UPDATE test_table
+SET
+	title = 'changed hello world'
+WHERE
+	row_id = 1;
+
+COMMIT;
+
+
+return 0;

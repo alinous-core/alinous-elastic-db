@@ -1,0 +1,81 @@
+
+BEGIN;
+
+CREATE TABLE customers (
+	customer_id int,
+	customer_id2 int,
+	customer_name varchar(255),
+	customer_pref_id int,
+
+PRIMARY KEY(customer_id)
+);
+
+CREATE TABLE customer_pref (
+	customer_pref_id int,
+	customer_pref_id2 int,
+	pref_name varchar(255),
+	
+	segment_id int,
+
+	PRIMARY KEY(customer_pref_id)
+);
+
+CREATE TABLE segment (
+	segment_id int,
+	
+	segment_name varchar(255),
+
+	PRIMARY KEY(segment_id)
+);
+
+
+COMMIT;
+
+
+BEGIN;
+
+INSERT INTO customers (customer_id, customer_id2, customer_name, customer_pref_id) VALUES(1,1, 'yamada', 9);
+INSERT INTO customers (customer_id, customer_id2, customer_name, customer_pref_id) VALUES(2,2, 'tanaka', 9);
+INSERT INTO customers (customer_id, customer_id2, customer_name, customer_pref_id) VALUES(3,3, 'test01', 1);
+INSERT INTO customers (customer_id, customer_id2, customer_name, customer_pref_id) VALUES(4,4, 'test02', 2);
+INSERT INTO customers (customer_id, customer_id2, customer_name, customer_pref_id) VALUES(5,5, 'test03', 4);
+INSERT INTO customers (customer_id, customer_id2, customer_name, customer_pref_id) VALUES(6,6, 'test04', 8);
+INSERT INTO customers (customer_id, customer_id2, customer_name, customer_pref_id) VALUES(7,7, 'test05', 5);
+INSERT INTO customers (customer_id, customer_id2, customer_name, customer_pref_id) VALUES(8,8, 'test06', 6);
+
+INSERT INTO customer_pref (customer_pref_id, customer_pref_id2, pref_name, segment_id) VALUES (1,1, 'hokkaido', 1);
+INSERT INTO customer_pref (customer_pref_id, customer_pref_id2, pref_name, segment_id) VALUES (2,2, 'aomori', 2);
+INSERT INTO customer_pref (customer_pref_id, customer_pref_id2, pref_name, segment_id) VALUES (3,3, 'iwate', 2);
+INSERT INTO customer_pref (customer_pref_id, customer_pref_id2, pref_name, segment_id) VALUES (4,4, 'fukushima', 2);
+INSERT INTO customer_pref (customer_pref_id, customer_pref_id2, pref_name, segment_id) VALUES (5,5, 'niigata', 3);
+INSERT INTO customer_pref (customer_pref_id, customer_pref_id2, pref_name, segment_id) VALUES (6,6, 'ibaraki', 4);
+INSERT INTO customer_pref (customer_pref_id, customer_pref_id2, pref_name, segment_id) VALUES (7,7, 'gunma', 4);
+INSERT INTO customer_pref (customer_pref_id, customer_pref_id2, pref_name, segment_id) VALUES (8,8, 'chiba', 4);
+INSERT INTO customer_pref (customer_pref_id, customer_pref_id2, pref_name, segment_id) VALUES (9,9, 'tokyo', 4);
+
+INSERT INTO segment(segment_id, segment_name) VALUES (1, 'hokkaido');
+INSERT INTO segment(segment_id, segment_name) VALUES (2, 'touhoku');
+INSERT INTO segment(segment_id, segment_name) VALUES (3, 'chubu');
+INSERT INTO segment(segment_id, segment_name) VALUES (4, 'kanto');
+INSERT INTO segment(segment_id, segment_name) VALUES (5, 'kinki');
+
+COMMIT;
+
+BEGIN;
+
+SELECT * INTO records
+FROM
+	(customers LEFT JOIN customer_pref
+	ON
+		customers.customer_pref_id = customer_pref.customer_pref_id)
+	LEFT JOIN segment
+	ON
+		customer_pref.segment_id = segment.segment_id;
+
+COMMIT;
+
+return 0;
+
+
+
+

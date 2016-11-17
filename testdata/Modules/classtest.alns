@@ -1,0 +1,25 @@
+
+class BaseObject {
+	private String msg;
+	private int count = 0;
+	public BaseObject(){
+		this.msg = "hello world";
+		count = 1;
+	}
+	
+	public void setCount(int count){
+		count += 10;
+	}
+	
+	public void update(){
+		BEGIN;
+		UPDATE TABlE base_object
+		SET
+			count = this.count
+		WHERE
+			msg = this.msg;
+		COMMIT;
+	}
+}
+
+return 0;

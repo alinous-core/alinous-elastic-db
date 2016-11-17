@@ -1,0 +1,45 @@
+
+
+class Detail{
+	public String getStr(){
+		return "test";
+	}
+}
+
+class Feature {
+	public static String live(String str){
+		System.println(str);
+		
+		return str;
+	}
+}
+
+class Fish extends Feature {
+
+}
+
+
+class Amimal extends Feature {
+	public static String typeName = "Animal Class";
+
+	public void run(){
+	
+	}
+}
+
+class Dog extends Amimal {
+	public void run(){
+	
+	}
+}
+
+class Cat extends Amimal {
+	public void run(){
+	
+	}
+}
+
+
+
+
+

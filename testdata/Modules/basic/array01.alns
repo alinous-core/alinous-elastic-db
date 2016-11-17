@@ -1,0 +1,9 @@
+
+int array[] = new int[10];
+
+array[1] = 39;
+
+int elem = array[1];
+System.println(elem);
+
+return 0;

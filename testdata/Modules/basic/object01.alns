@@ -1,0 +1,42 @@
+
+class BaseObject2 {
+	public BaseObject2(String arg){
+	
+	}
+	
+	public void hello(){
+		
+	}
+}
+
+class BaseObject extends BaseObject2 {
+	public BaseObject(){
+		super("test");
+	}
+	
+	public void hello(){
+		
+	}
+}
+
+class DefConst extends BaseObject {
+	public void hello(){
+		
+	}
+}
+
+class MyObject extends DefConst {
+	private String test = "aaa";
+
+	public MyObject(){
+	
+	}
+	
+	public void hello(){
+		
+	}
+}
+
+MyObject obj = new MyObject();
+
+return 0;

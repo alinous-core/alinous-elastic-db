@@ -1,0 +1,14 @@
+
+
+$test = "aaa";
+System.println($test);
+
+
+$array.test[0] = 1;
+$array.test[1] = 2;
+
+System.println($array.test[0]);
+System.println($array.test[1]);
+
+
+return 0;
