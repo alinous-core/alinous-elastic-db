@@ -103,5 +103,9 @@ long long PadddingRecord::getOid(ThreadContext* ctx) throw()
 {
 	return -1;
 }
+long long PadddingRecord::getMaxCommitId(ThreadContext* ctx) throw() 
+{
+	return 0;
+}
 }}}}
 

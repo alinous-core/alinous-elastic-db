@@ -7,7 +7,7 @@ namespace alinous {namespace db {namespace table {namespace lockmonitor {namespa
 class TableLockMamager;}}}}}
 
 namespace alinous {namespace db {namespace table {
-class DatabaseTable;}}}
+class IDatabaseTable;}}}
 
 namespace alinous {namespace db {namespace table {namespace lockmonitor {
 class ConcurrentGatePool;}}}}
@@ -35,7 +35,7 @@ using namespace ::alinous;
 using namespace ::java::lang;
 using ::java::util::Iterator;
 using ::java::util::BitSet;
-using ::alinous::db::table::DatabaseTable;
+using ::alinous::db::table::IDatabaseTable;
 using ::alinous::db::table::lockmonitor::ConcurrentGatePool;
 using ::alinous::db::table::lockmonitor::TableLock;
 using ::alinous::db::table::lockmonitor::ThreadLocker;
@@ -60,8 +60,8 @@ private:
 public:
 	int size(ThreadContext* ctx) throw() ;
 	void inc(ThreadContext* ctx) throw() ;
-	TableLockMamager* getTableLockManager(DatabaseTable* table, ConcurrentGatePool* gatePool, ThreadContext* ctx) throw() ;
-	TableLock* releaseLock(DatabaseTable* table, ThreadLocker* locker, ThreadContext* ctx) throw() ;
+	TableLockMamager* getTableLockManager(IDatabaseTable* table, ConcurrentGatePool* gatePool, ThreadContext* ctx) throw() ;
+	TableLock* releaseLock(IDatabaseTable* table, ThreadLocker* locker, ThreadContext* ctx) throw() ;
 public:
 	static bool __init_done;
 	static bool __init_static_variables();

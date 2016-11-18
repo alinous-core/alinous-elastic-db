@@ -22,7 +22,7 @@ template class alinous::MemoryUtils<::alinous::HashMapInternalElement<::java::la
 template class alinous::MemoryUtils<::alinous::HashMapInternalElement<::java::lang::String, ::alinous::runtime::function::IAlinousNativeFunction>>;
 template class alinous::MemoryUtils<::alinous::HashMapInternalElement<::java::lang::String, ::alinous::system::config::AlinousDbInstanceInfo>>;
 template class alinous::MemoryUtils<::alinous::HashMapInternalElement<::java::lang::String, ::alinous::db::table::TableMetadata>>;
-template class alinous::MemoryUtils<::alinous::HashMapInternalElement<::java::lang::String, ::alinous::db::table::DatabaseTable>>;
+template class alinous::MemoryUtils<::alinous::HashMapInternalElement<::java::lang::String, ::alinous::db::table::IDatabaseTable>>;
 template class alinous::MemoryUtils<::alinous::HashMapInternalElement<::java::lang::String, ::alinous::db::TableSchema>>;
 template class alinous::MemoryUtils<::alinous::HashMapInternalElement<::java::lang::String, ::java::lang::Integer>>;
 template class alinous::MemoryUtils<::alinous::HashMapInternalElement<::java::lang::String, ::alinous::db::table::TableColumnMetadata>>;
@@ -52,7 +52,7 @@ template class alinous::MemoryUtils<::alinous::HashMapRawArray<::java::lang::Str
 template class alinous::MemoryUtils<::alinous::HashMapRawArray<::java::lang::String, ::alinous::runtime::function::IAlinousNativeFunction>>;
 template class alinous::MemoryUtils<::alinous::HashMapRawArray<::java::lang::String, ::alinous::system::config::AlinousDbInstanceInfo>>;
 template class alinous::MemoryUtils<::alinous::HashMapRawArray<::java::lang::String, ::alinous::db::table::TableMetadata>>;
-template class alinous::MemoryUtils<::alinous::HashMapRawArray<::java::lang::String, ::alinous::db::table::DatabaseTable>>;
+template class alinous::MemoryUtils<::alinous::HashMapRawArray<::java::lang::String, ::alinous::db::table::IDatabaseTable>>;
 template class alinous::MemoryUtils<::alinous::HashMapRawArray<::java::lang::String, ::alinous::db::TableSchema>>;
 template class alinous::MemoryUtils<::alinous::HashMapRawArray<::java::lang::String, ::java::lang::Integer>>;
 template class alinous::MemoryUtils<::alinous::HashMapRawArray<::java::lang::String, ::alinous::db::table::TableColumnMetadata>>;

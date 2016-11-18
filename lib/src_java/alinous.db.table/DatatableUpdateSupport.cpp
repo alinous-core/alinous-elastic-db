@@ -40,7 +40,7 @@ void DatatableUpdateSupport::__releaseRegerences(bool prepare, ThreadContext* ct
 }
 void DatatableUpdateSupport::updateData(CachedRecord* data, long long commitId, IArrayObject<SequentialBackgroundJob>* jobs, ISystemLog* log, ThreadContext* ctx)
 {
-	DatabaseRecord* lastdbrecord = getLastRecord(data->getOid(ctx), commitId, ctx);
+	IDatabaseRecord* lastdbrecord = getLastRecord(data->getOid(ctx), commitId, ctx);
 	data->setLastUpdateCommitId(commitId, ctx);
 	data->setInsertedCommitId(lastdbrecord->getInsertedCommitId(ctx), ctx);
 	data->setDeletedCommitId((long long)0, ctx);

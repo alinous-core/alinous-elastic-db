@@ -58,7 +58,7 @@ namespace alinous {namespace db {namespace table {
 class TableColumnMetadata;}}}
 
 namespace alinous {namespace db {namespace table {
-class DatabaseTable;}}}
+class IDatabaseTable;}}}
 
 namespace alinous {namespace runtime {namespace parallel {
 class SequentialBackgroundJob;}}}
@@ -130,7 +130,7 @@ using ::alinous::btreememory::BTreeOnMemory;
 using ::alinous::compile::sql::analyze::ScanTableColumnIdentifier;
 using ::alinous::db::AlinousDatabase;
 using ::alinous::db::AlinousDbException;
-using ::alinous::db::table::DatabaseTable;
+using ::alinous::db::table::IDatabaseTable;
 using ::alinous::db::table::TableColumnMetadata;
 using ::alinous::db::table::TableIndexMetadata;
 using ::alinous::db::table::TableMetadata;
@@ -175,8 +175,8 @@ public:
 	void switchToDisk(AlinousDatabase* database, ThreadContext* ctx);
 	void dispose(ThreadContext* ctx);
 	TrxRecordCacheIndex* getCachedIndex(ArrayList<ScanTableColumnIdentifier>* colIdList, ThreadContext* ctx) throw() ;
-	void commitUpdateRecord(AlinousDatabase* db, DatabaseTable* table, long long newCommitId, ThreadContext* ctx);
-	void commitInsertRecord(AlinousDatabase* db, DatabaseTable* table, long long newCommitId, ThreadContext* ctx);
+	void commitUpdateRecord(AlinousDatabase* db, IDatabaseTable* table, long long newCommitId, ThreadContext* ctx);
+	void commitInsertRecord(AlinousDatabase* db, IDatabaseTable* table, long long newCommitId, ThreadContext* ctx);
 	CachedRecord* getRecordByOid(long long oid, ThreadContext* ctx);
 	void insertUpdateRecord(ScanResultRecord* srecord, ThreadContext* ctx);
 	void insertRecord(ArrayList<IDomVariable>* values, ArrayList<CulumnOrder>* columns, ThreadContext* ctx);

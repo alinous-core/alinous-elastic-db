@@ -131,7 +131,7 @@ bool UpdateSet::analyseSQL(SQLAnalyseContext* context, bool leftValue, bool debu
 		throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1007()->clone(ctx)->append(this->name->toString(ctx), ctx), ctx));
 		break;
 	}
-	DatabaseTable* dataStore = context->getDatabase(ctx)->getTable(schema, table, ctx);
+	IDatabaseTable* dataStore = context->getDatabase(ctx)->getTable(schema, table, ctx);
 	if(dataStore == nullptr)
 	{
 		throw (new(ctx) DatabaseException(schema->clone(ctx)->append(ConstStr::getCNST_STR_947(), ctx)->append(table, ctx)->append(ConstStr::getCNST_STR_1008(), ctx), ctx));

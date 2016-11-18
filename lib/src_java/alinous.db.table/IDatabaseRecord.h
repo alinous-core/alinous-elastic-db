@@ -52,6 +52,7 @@ public:
 	virtual void setValue(int index, VariantValue* value, ThreadContext* ctx) throw()  = 0;
 	virtual void addValue(VariantValue* vv, ThreadContext* ctx) throw()  = 0;
 	virtual long long getOid(ThreadContext* ctx) throw()  = 0;
+	virtual long long getMaxCommitId(ThreadContext* ctx) throw()  = 0;
 public:
 	static bool __init_done;
 	static bool __init_static_variables();

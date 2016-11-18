@@ -22,7 +22,7 @@ namespace alinous {namespace compile {namespace sql {namespace analyze {
 class SQLAnalyseContext;}}}}
 
 namespace alinous {namespace db {namespace table {
-class DatabaseTable;}}}
+class IDatabaseTable;}}}
 
 namespace java {namespace util {
 template <typename  T, typename V> class HashMap;}}
@@ -44,7 +44,7 @@ using ::java::util::ArrayList;
 using ::java::util::HashMap;
 using ::alinous::compile::sql::expression::ISQLExpression;
 using ::alinous::db::AlinousDatabase;
-using ::alinous::db::table::DatabaseTable;
+using ::alinous::db::table::IDatabaseTable;
 using ::alinous::runtime::engine::ScriptMachine;
 
 

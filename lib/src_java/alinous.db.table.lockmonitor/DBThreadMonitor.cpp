@@ -65,12 +65,12 @@ ThreadLocker* DBThreadMonitor::newThread(ThreadContext* ctx) throw()
 	ThreadLocker* thread = 0;
 	{
 		SynchronizedBlockObj __synchronized_2(this->threadLock, ctx);
-		thread = (new(ctx) ThreadLocker(this, ctx));
+		thread = (new(ctx) ThreadLocker(ctx));
 		this->threads->add(thread, ctx);
 	}
 	return thread;
 }
-void DBThreadMonitor::lockTable(DatabaseTable* table, ThreadLocker* locker, bool update, ThreadContext* ctx)
+void DBThreadMonitor::lockTable(IDatabaseTable* table, ThreadLocker* locker, bool update, ThreadContext* ctx)
 {
 	TableLockMamager* mgr = 0;
 	TableLock* lock = 0;
@@ -108,7 +108,7 @@ void DBThreadMonitor::lockTable(DatabaseTable* table, ThreadLocker* locker, bool
 	__GC_MV(locker, &(locker->blockingLock), nullptr, IDatabaseLock);
 	this->globalLock->unlock(ctx);
 }
-void DBThreadMonitor::unlockTable(DatabaseTable* table, ThreadLocker* locker, ThreadContext* ctx)
+void DBThreadMonitor::unlockTable(IDatabaseTable* table, ThreadLocker* locker, ThreadContext* ctx)
 {
 	this->globalLock->lock(ctx);
 	TableLock* lock = this->tableLockDb->releaseLock(table, locker, ctx);
@@ -119,7 +119,7 @@ void DBThreadMonitor::unlockTable(DatabaseTable* table, ThreadLocker* locker, Th
 	this->globalLock->unlock(ctx);
 	lock->unlock(this->gatePool, ctx);
 }
-void DBThreadMonitor::unlockRow(DatabaseTable* table, long long oid, ThreadLocker* locker, ThreadContext* ctx)
+void DBThreadMonitor::unlockRow(IDatabaseTable* table, long long oid, ThreadLocker* locker, ThreadContext* ctx)
 {
 	RowLock* lock = nullptr;
 	this->globalLock->lock(ctx);
@@ -131,7 +131,7 @@ void DBThreadMonitor::unlockRow(DatabaseTable* table, long long oid, ThreadLocke
 	this->globalLock->unlock(ctx);
 	lock->unlock(this->gatePool, ctx);
 }
-void DBThreadMonitor::lockRow(DatabaseTable* table, long long oid, ThreadLocker* locker, bool update, ThreadContext* ctx)
+void DBThreadMonitor::lockRow(IDatabaseTable* table, long long oid, ThreadLocker* locker, bool update, ThreadContext* ctx)
 {
 	RowLockManager* mgr = 0;
 	RowLock* lock = 0;

@@ -46,7 +46,7 @@ namespace alinous {namespace db {namespace table {namespace scan {
 class SingleTableIndexScanner;}}}}
 
 namespace alinous {namespace db {namespace table {
-class DatabaseTable;}}}
+class IDatabaseTable;}}}
 
 namespace alinous {namespace db {namespace trx {namespace cache {
 class TrxStorageManager;}}}}
@@ -139,7 +139,7 @@ using ::alinous::compile::sql::select::SQLWhere;
 using ::alinous::db::AlinousDatabase;
 using ::alinous::db::AlinousDbException;
 using ::alinous::db::table::DatabaseException;
-using ::alinous::db::table::DatabaseTable;
+using ::alinous::db::table::IDatabaseTable;
 using ::alinous::db::table::TableColumnMetadata;
 using ::alinous::db::table::TableIndex;
 using ::alinous::db::table::scan::IndexEqScanner;

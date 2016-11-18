@@ -137,7 +137,7 @@ ITableTargetScanner* ScanSingleStrategy::getNoWhereConditionScanner(ScriptMachin
 SingleTableIndexScanner* ScanSingleStrategy::getIndexScanner(DbTransaction* trx, ScanTableIndexMetadata* indexMeta, ThreadContext* ctx)
 {
 	ScanTableMetadata* metadata = this->table;
-	DatabaseTable* tableStore = this->database->getTable(metadata->getSchemaName(ctx), metadata->getTableName(ctx), ctx);
+	IDatabaseTable* tableStore = this->database->getTable(metadata->getSchemaName(ctx), metadata->getTableName(ctx), ctx);
 	TrxStorageManager* trxStorageManager = trx->getTrxStorageManager(ctx);
 	TableIndex* index = tableStore->getAbailableIndex(indexMeta->getColumnsStr(ctx), ctx);
 	TrxRecordCacheIndex* insertCacheindex = nullptr;
@@ -167,7 +167,7 @@ SingleTableIndexScanner* ScanSingleStrategy::getIndexScanner(DbTransaction* trx,
 ITableTargetScanner* ScanSingleStrategy::getFullScanScanner(DbTransaction* trx, ThreadContext* ctx)
 {
 	ScanTableMetadata* metadata = this->table;
-	DatabaseTable* tableStore = this->database->getTable(metadata->getSchemaName(ctx), metadata->getTableName(ctx), ctx);
+	IDatabaseTable* tableStore = this->database->getTable(metadata->getSchemaName(ctx), metadata->getTableName(ctx), ctx);
 	TableIndex* index = tableStore->getPrimaryIndex(ctx);
 	TrxStorageManager* trxStorageManager = trx->getTrxStorageManager(ctx);
 	TrxRecordCacheIndex* insertCacheindex = nullptr;
@@ -279,7 +279,7 @@ ITableTargetScanner* ScanSingleStrategy::initOnTheFlyScanner(ScriptMachine* mach
 		return initOnTheFlyScanner4Join(machine, plan, trx, joinRequest, necessaryCnd, ctx);
 	}
 	ScanTableMetadata* metadata = this->table;
-	DatabaseTable* tableStore = this->database->getTable(metadata->getSchemaName(ctx), metadata->getTableName(ctx), ctx);
+	IDatabaseTable* tableStore = this->database->getTable(metadata->getSchemaName(ctx), metadata->getTableName(ctx), ctx);
 	TableIndex* index = plan->getIndex(tableStore, ctx);
 	TrxStorageManager* trxStorageManager = trx->getTrxStorageManager(ctx);
 	TrxRecordCacheIndex* insertCacheindex = nullptr;
@@ -338,7 +338,7 @@ ITableTargetScanner* ScanSingleStrategy::initOnTheFlyScanner(ScriptMachine* mach
 ITableTargetScanner* ScanSingleStrategy::initOnTheFlyScanner4Join(ScriptMachine* machine, IndexScanStrategyPlan* plan, DbTransaction* trx, ArrayList<ScanTableColumnIdentifier>* joinRequest, InnerNecessaryCondition* necessaryCnd, ThreadContext* ctx)
 {
 	ScanTableMetadata* metadata = this->table;
-	DatabaseTable* tableStore = this->database->getTable(metadata->getSchemaName(ctx), metadata->getTableName(ctx), ctx);
+	IDatabaseTable* tableStore = this->database->getTable(metadata->getSchemaName(ctx), metadata->getTableName(ctx), ctx);
 	TableIndex* index = tableStore->getAbailableIndexByScanColId(joinRequest, ctx);
 	if(index == nullptr)
 	{

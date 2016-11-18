@@ -27,8 +27,8 @@ public:
 	virtual ~DatatableLockSupport() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 public:
-	void lockStorage(ThreadContext* ctx);
-	void unlockStorage(ThreadContext* ctx);
+	void lockStorage(ThreadContext* ctx) final;
+	void unlockStorage(ThreadContext* ctx) final;
 	void sharelockStorage(ThreadContext* ctx);
 	void shareunlockStorage(ThreadContext* ctx) throw() ;
 public:

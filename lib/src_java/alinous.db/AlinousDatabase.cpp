@@ -21,7 +21,7 @@ bool AlinousDatabase::__init_static_variables(){
 	delete ctx;
 	return true;
 }
- AlinousDatabase::AlinousDatabase(ThreadContext* ctx) throw()  : IObject(ctx), instanceConfigLock(__GC_INS(this, (new(ctx) LockObject(ctx)), LockObject)), schemas(nullptr), workerThreadsPool(nullptr), trxManager(nullptr), core(nullptr), dataDir(nullptr), dbconfig(nullptr), configFile(nullptr), lockManager(nullptr), maxCommitId(0), trxWriterThread(nullptr), cahceEngine(nullptr), btreeCache(nullptr)
+ AlinousDatabase::AlinousDatabase(ThreadContext* ctx) throw()  : IObject(ctx), instanceConfigLock(__GC_INS(this, (new(ctx) LockObject(ctx)), LockObject)), schemas(nullptr), lockManager(nullptr), workerThreadsPool(nullptr), trxManager(nullptr), core(nullptr), dataDir(nullptr), dbconfig(nullptr), configFile(nullptr), maxCommitId(0), trxWriterThread(nullptr), cahceEngine(nullptr), btreeCache(nullptr)
 {
 	__GC_MV(this, &(this->trxWriterThread), nullptr, AlinousThread);
 	__GC_MV(this, &(this->workerThreadsPool), nullptr, ThreadPool);
@@ -49,6 +49,8 @@ void AlinousDatabase::__releaseRegerences(bool prepare, ThreadContext* ctx) thro
 	instanceConfigLock = nullptr;
 	__e_obj1.add(this->schemas, this);
 	schemas = nullptr;
+	__e_obj1.add(this->lockManager, this);
+	lockManager = nullptr;
 	__e_obj1.add(this->workerThreadsPool, this);
 	workerThreadsPool = nullptr;
 	__e_obj1.add(this->trxManager, this);
@@ -61,8 +63,6 @@ void AlinousDatabase::__releaseRegerences(bool prepare, ThreadContext* ctx) thro
 	dbconfig = nullptr;
 	__e_obj1.add(this->configFile, this);
 	configFile = nullptr;
-	__e_obj1.add(this->lockManager, this);
-	lockManager = nullptr;
 	__e_obj1.add(this->trxWriterThread, this);
 	trxWriterThread = nullptr;
 	__e_obj1.add(this->cahceEngine, this);
@@ -287,7 +287,7 @@ TableSchema* AlinousDatabase::getSchema(String* name, ThreadContext* ctx) throw(
 {
 	return this->schemas->getSchema(name, ctx);
 }
-DatabaseTable* AlinousDatabase::getTable(AlinousName* tableName, String* currentSchema, ThreadContext* ctx) throw() 
+IDatabaseTable* AlinousDatabase::getTable(AlinousName* tableName, String* currentSchema, ThreadContext* ctx) throw() 
 {
 	ArrayList<String>* segs = tableName->getSegments(ctx);
 	int size = segs->size(ctx);
@@ -297,7 +297,7 @@ DatabaseTable* AlinousDatabase::getTable(AlinousName* tableName, String* current
 	}
 	return getTable(segs->get(0, ctx), segs->get(1, ctx), ctx);
 }
-DatabaseTable* AlinousDatabase::getTable(String* schemaName, String* tableName, ThreadContext* ctx) throw() 
+IDatabaseTable* AlinousDatabase::getTable(String* schemaName, String* tableName, ThreadContext* ctx) throw() 
 {
 	TableSchema* sc = getSchema(schemaName, ctx);
 	return sc->getTableStore(tableName, ctx);

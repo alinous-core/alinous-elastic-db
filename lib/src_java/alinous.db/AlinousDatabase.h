@@ -70,7 +70,7 @@ namespace alinous {namespace db {
 class TableSchema;}}
 
 namespace alinous {namespace db {namespace table {
-class DatabaseTable;}}}
+class IDatabaseTable;}}}
 
 namespace alinous {namespace compile {namespace declare {
 class AlinousName;}}}
@@ -121,7 +121,7 @@ using ::alinous::btree::IBTreeValue;
 using ::alinous::btree::IntKey;
 using ::alinous::btree::LongValue;
 using ::alinous::compile::declare::AlinousName;
-using ::alinous::db::table::DatabaseTable;
+using ::alinous::db::table::IDatabaseTable;
 using ::alinous::db::table::cache::RecordCacheEngine;
 using ::alinous::db::table::lockmonitor::DBThreadMonitor;
 using ::alinous::db::table::lockmonitor::ThreadLocker;
@@ -148,6 +148,7 @@ public:
 public:
 	LockObject* instanceConfigLock;
 	SchemaManager* schemas;
+	DBThreadMonitor* lockManager;
 	ThreadPool* workerThreadsPool;
 	DbTransactionManager* trxManager;
 private:
@@ -155,7 +156,6 @@ private:
 	String* dataDir;
 	BTree* dbconfig;
 	File* configFile;
-	DBThreadMonitor* lockManager;
 	long long maxCommitId;
 	AlinousThread* trxWriterThread;
 	RecordCacheEngine* cahceEngine;
@@ -176,8 +176,8 @@ public:
 	void syncScheme(ThreadContext* ctx);
 	void open(ThreadContext* ctx);
 	TableSchema* getSchema(String* name, ThreadContext* ctx) throw() ;
-	DatabaseTable* getTable(AlinousName* tableName, String* currentSchema, ThreadContext* ctx) throw() ;
-	DatabaseTable* getTable(String* schemaName, String* tableName, ThreadContext* ctx) throw() ;
+	IDatabaseTable* getTable(AlinousName* tableName, String* currentSchema, ThreadContext* ctx) throw() ;
+	IDatabaseTable* getTable(String* schemaName, String* tableName, ThreadContext* ctx) throw() ;
 	void closeDatabase(ThreadContext* ctx) throw() ;
 	AlinousDbConnection* connect(ConnectInfo* info, ThreadContext* ctx) throw() ;
 	void disConnect(AlinousDbConnection* con, ThreadContext* ctx) throw() ;

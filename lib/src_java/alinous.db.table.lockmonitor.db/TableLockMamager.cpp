@@ -18,14 +18,14 @@ bool TableLockMamager::__init_static_variables(){
 	delete ctx;
 	return true;
 }
- TableLockMamager::TableLockMamager(DatabaseTable* table, ConcurrentGate* gate, ThreadContext* ctx) throw()  : IObject(ctx), list(GCUtils<ArrayList<TableLock> >::ins(this, (new(ctx) ArrayList<TableLock>(ctx)), ctx, __FILEW__, __LINE__, L"")), table(nullptr), gate(nullptr)
+ TableLockMamager::TableLockMamager(IDatabaseTable* table, ConcurrentGate* gate, ThreadContext* ctx) throw()  : IObject(ctx), list(GCUtils<ArrayList<TableLock> >::ins(this, (new(ctx) ArrayList<TableLock>(ctx)), ctx, __FILEW__, __LINE__, L"")), table(nullptr), gate(nullptr)
 {
-	__GC_MV(this, &(this->table), table, DatabaseTable);
+	__GC_MV(this, &(this->table), table, IDatabaseTable);
 	__GC_MV(this, &(this->gate), gate, ConcurrentGate);
 }
-void TableLockMamager::__construct_impl(DatabaseTable* table, ConcurrentGate* gate, ThreadContext* ctx) throw() 
+void TableLockMamager::__construct_impl(IDatabaseTable* table, ConcurrentGate* gate, ThreadContext* ctx) throw() 
 {
-	__GC_MV(this, &(this->table), table, DatabaseTable);
+	__GC_MV(this, &(this->table), table, IDatabaseTable);
 	__GC_MV(this, &(this->gate), gate, ConcurrentGate);
 }
  TableLockMamager::~TableLockMamager() throw() 
@@ -48,7 +48,7 @@ void TableLockMamager::__releaseRegerences(bool prepare, ThreadContext* ctx) thr
 		return;
 	}
 }
-DatabaseTable* TableLockMamager::getTable(ThreadContext* ctx) throw() 
+IDatabaseTable* TableLockMamager::getTable(ThreadContext* ctx) throw() 
 {
 	return this->table;
 }

@@ -140,7 +140,7 @@ void DbTransaction::update(UpdateStatement* update, ScriptMachine* machine, bool
 		return;
 	}
 	AlinousName* tableName = update->getTableName(ctx);
-	DatabaseTable* tableStore = this->database->getTable(tableName, ConstStr::getCNST_STR_951(), ctx);
+	IDatabaseTable* tableStore = this->database->getTable(tableName, ConstStr::getCNST_STR_951(), ctx);
 	{
 		try
 		{
@@ -198,7 +198,7 @@ void DbTransaction::createIndex(CreateIndexStatement* stmt, ScriptMachine* machi
 	TableMetadata* metadata = this->trxSchema->getTableMetadata(tas->getSchema(ctx), tas->getTable(ctx), ctx);
 	if(metadata == nullptr)
 	{
-		DatabaseTable* tableStore = this->database->getTable(tas->getSchema(ctx), tas->getTable(ctx), ctx);
+		IDatabaseTable* tableStore = this->database->getTable(tas->getSchema(ctx), tas->getTable(ctx), ctx);
 		metadata = tableStore->getMetadata(ctx);
 	}
 	{

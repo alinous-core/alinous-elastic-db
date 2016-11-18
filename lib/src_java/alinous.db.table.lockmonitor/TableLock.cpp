@@ -18,18 +18,18 @@ bool TableLock::__init_static_variables(){
 	delete ctx;
 	return true;
 }
- TableLock::TableLock(bool update, DatabaseTable* table, ThreadLocker* locker, ConcurrentGate* gate, ThreadContext* ctx) throw()  : IObject(ctx), IDatabaseLock(ctx), update(0), table(nullptr), locker(nullptr), count(0), pushBack(0), gate(nullptr)
+ TableLock::TableLock(bool update, IDatabaseTable* table, ThreadLocker* locker, ConcurrentGate* gate, ThreadContext* ctx) throw()  : IObject(ctx), IDatabaseLock(ctx), update(0), table(nullptr), locker(nullptr), count(0), pushBack(0), gate(nullptr)
 {
 	this->update = update;
-	__GC_MV(this, &(this->table), table, DatabaseTable);
+	__GC_MV(this, &(this->table), table, IDatabaseTable);
 	__GC_MV(this, &(this->locker), locker, ThreadLocker);
 	__GC_MV(this, &(this->gate), gate, ConcurrentGate);
 	this->pushBack = false;
 }
-void TableLock::__construct_impl(bool update, DatabaseTable* table, ThreadLocker* locker, ConcurrentGate* gate, ThreadContext* ctx) throw() 
+void TableLock::__construct_impl(bool update, IDatabaseTable* table, ThreadLocker* locker, ConcurrentGate* gate, ThreadContext* ctx) throw() 
 {
 	this->update = update;
-	__GC_MV(this, &(this->table), table, DatabaseTable);
+	__GC_MV(this, &(this->table), table, IDatabaseTable);
 	__GC_MV(this, &(this->locker), locker, ThreadLocker);
 	__GC_MV(this, &(this->gate), gate, ConcurrentGate);
 	this->pushBack = false;

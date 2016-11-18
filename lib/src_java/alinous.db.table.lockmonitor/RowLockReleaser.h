@@ -4,7 +4,7 @@ namespace alinous {namespace db {namespace table {namespace lockmonitor {
 class DBThreadMonitor;}}}}
 
 namespace alinous {namespace db {namespace table {
-class DatabaseTable;}}}
+class IDatabaseTable;}}}
 
 namespace alinous {namespace db {namespace table {namespace lockmonitor {
 class ThreadLocker;}}}}
@@ -25,7 +25,7 @@ namespace alinous {namespace db {namespace table {namespace lockmonitor {
 using namespace ::alinous;
 using namespace ::java::lang;
 using ::java::util::Iterator;
-using ::alinous::db::table::DatabaseTable;
+using ::alinous::db::table::IDatabaseTable;
 using ::alinous::runtime::parallel::IThreadAction;
 
 
@@ -34,12 +34,12 @@ class RowLockReleaser final : public IThreadAction, public virtual IObject {
 public:
 	RowLockReleaser(const RowLockReleaser& base) = default;
 public:
-	RowLockReleaser(DBThreadMonitor* monitor, DatabaseTable* table, long long oid, ThreadLocker* locker, ThreadContext* ctx) throw() ;
-	void __construct_impl(DBThreadMonitor* monitor, DatabaseTable* table, long long oid, ThreadLocker* locker, ThreadContext* ctx) throw() ;
+	RowLockReleaser(DBThreadMonitor* monitor, IDatabaseTable* table, long long oid, ThreadLocker* locker, ThreadContext* ctx) throw() ;
+	void __construct_impl(DBThreadMonitor* monitor, IDatabaseTable* table, long long oid, ThreadLocker* locker, ThreadContext* ctx) throw() ;
 	virtual ~RowLockReleaser() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 public:
-	DatabaseTable* table;
+	IDatabaseTable* table;
 	long long oid;
 	ThreadLocker* locker;
 	DBThreadMonitor* monitor;

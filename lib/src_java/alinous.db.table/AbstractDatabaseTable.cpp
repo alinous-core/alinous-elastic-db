@@ -18,7 +18,7 @@ bool AbstractDatabaseTable::__init_static_variables(){
 	delete ctx;
 	return true;
 }
- AbstractDatabaseTable::AbstractDatabaseTable(String* schema, String* name, String* baseDir, ThreadContext* ctx) throw()  : IObject(ctx), tableId(nullptr), metadata(nullptr), indexes(GCUtils<ArrayList<TableIndex> >::ins(this, (new(ctx) ArrayList<TableIndex>(ctx)), ctx, __FILEW__, __LINE__, L"")), primaryIndex(nullptr), name(nullptr), baseDir(nullptr), oidIndexPath(nullptr), dataStoragePath(nullptr), oidIndex(nullptr), dataStorage(nullptr), storageLock(nullptr), schmeUpdated(nullptr), updateHistoryCache(nullptr)
+ AbstractDatabaseTable::AbstractDatabaseTable(String* schema, String* name, String* baseDir, ThreadContext* ctx) throw()  : IObject(ctx), IDatabaseTable(ctx), tableId(nullptr), metadata(nullptr), indexes(GCUtils<ArrayList<TableIndex> >::ins(this, (new(ctx) ArrayList<TableIndex>(ctx)), ctx, __FILEW__, __LINE__, L"")), primaryIndex(nullptr), name(nullptr), baseDir(nullptr), oidIndexPath(nullptr), dataStoragePath(nullptr), oidIndex(nullptr), dataStorage(nullptr), storageLock(nullptr), schmeUpdated(nullptr), updateHistoryCache(nullptr)
 {
 	__GC_MV(this, &(this->tableId), (new(ctx) Integer(DatabaseTableIdPublisher::getId(name, ctx), ctx)), Integer);
 	__GC_MV(this, &(this->metadata), (new(ctx) TableMetadata(schema, name, ctx)), TableMetadata);
@@ -281,6 +281,14 @@ FileStorage* AbstractDatabaseTable::getDataStorage(ThreadContext* ctx) throw()
 BTree* AbstractDatabaseTable::getOidIndex(ThreadContext* ctx) throw() 
 {
 	return oidIndex;
+}
+Integer* AbstractDatabaseTable::getTableId(ThreadContext* ctx) throw() 
+{
+	return tableId;
+}
+void AbstractDatabaseTable::setTableId(Integer* tableId, ThreadContext* ctx) throw() 
+{
+	__GC_MV(this, &(this->tableId), tableId, Integer);
 }
 void AbstractDatabaseTable::syncScheme(ThreadContext* ctx)
 {

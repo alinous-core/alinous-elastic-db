@@ -1,10 +1,7 @@
 #ifndef ALINOUS_DB_TABLE_LOCKMONITOR_THREADLOCKER_H_
 #define ALINOUS_DB_TABLE_LOCKMONITOR_THREADLOCKER_H_
-namespace alinous {namespace db {namespace table {namespace lockmonitor {
-class DBThreadMonitor;}}}}
-
 namespace alinous {namespace db {namespace table {
-class DatabaseTable;}}}
+class IDatabaseTable;}}}
 
 namespace alinous {namespace db {namespace table {namespace lockmonitor {
 class IDatabaseLock;}}}}
@@ -29,7 +26,7 @@ using namespace ::alinous;
 using namespace ::java::lang;
 using ::java::util::Iterator;
 using ::java::util::ArrayList;
-using ::alinous::db::table::DatabaseTable;
+using ::alinous::db::table::IDatabaseTable;
 
 
 
@@ -37,25 +34,27 @@ class ThreadLocker final : public virtual IObject {
 public:
 	ThreadLocker(const ThreadLocker& base) = default;
 public:
-	ThreadLocker(DBThreadMonitor* monitor, ThreadContext* ctx) throw() ;
-	void __construct_impl(DBThreadMonitor* monitor, ThreadContext* ctx) throw() ;
+	ThreadLocker(ThreadContext* ctx) throw()  : IObject(ctx), blockingLock(nullptr), tableLocks(GCUtils<ArrayList<TableLock> >::ins(this, (new(ctx) ArrayList<TableLock>(ctx)), ctx, __FILEW__, __LINE__, L"")), rowLocks(GCUtils<ArrayList<RowLock> >::ins(this, (new(ctx) ArrayList<RowLock>(ctx)), ctx, __FILEW__, __LINE__, L""))
+	{
+	}
+	void __construct_impl(ThreadContext* ctx) throw() 
+	{
+	}
 	virtual ~ThreadLocker() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 public:
 	IDatabaseLock* blockingLock;
 	ArrayList<TableLock>* tableLocks;
 	ArrayList<RowLock>* rowLocks;
-private:
-	DBThreadMonitor* monitor;
 public:
-	void updateLockTable(DatabaseTable* table, ThreadContext* ctx);
-	void updateUnlockTable(DatabaseTable* table, ThreadContext* ctx);
-	void shareLockTable(DatabaseTable* table, ThreadContext* ctx);
-	void shareUnlockTable(DatabaseTable* table, ThreadContext* ctx);
-	void shareLockRow(DatabaseTable* table, long long oid, ThreadContext* ctx);
-	void shareUnlockRow(DatabaseTable* table, long long oid, ThreadContext* ctx);
-	void updateLockRow(DatabaseTable* table, long long oid, ThreadContext* ctx);
-	void updateUnlockRow(DatabaseTable* table, long long oid, ThreadContext* ctx);
+	void updateLockTable(IDatabaseTable* table, ThreadContext* ctx);
+	void updateUnlockTable(IDatabaseTable* table, ThreadContext* ctx);
+	void shareLockTable(IDatabaseTable* table, ThreadContext* ctx);
+	void shareUnlockTable(IDatabaseTable* table, ThreadContext* ctx);
+	void shareLockRow(IDatabaseTable* table, long long oid, ThreadContext* ctx);
+	void shareUnlockRow(IDatabaseTable* table, long long oid, ThreadContext* ctx);
+	void updateLockRow(IDatabaseTable* table, long long oid, ThreadContext* ctx);
+	void updateUnlockRow(IDatabaseTable* table, long long oid, ThreadContext* ctx);
 	bool checkContention(IDatabaseLock* lock, ThreadContext* ctx) throw() ;
 public:
 	static bool __init_done;

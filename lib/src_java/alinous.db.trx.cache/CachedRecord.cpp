@@ -157,6 +157,10 @@ void CachedRecord::addValue(VariantValue* vv, ThreadContext* ctx) throw()
 {
 	this->values->add(vv, ctx);
 }
+long long CachedRecord::getMaxCommitId(ThreadContext* ctx) throw() 
+{
+	return 0;
+}
 CachedRecord* CachedRecord::valueFromFetcher(FileStorageEntryFetcher* fetcher, ThreadContext* ctx)
 {
 	long long oid = fetcher->fetchLong(ctx);

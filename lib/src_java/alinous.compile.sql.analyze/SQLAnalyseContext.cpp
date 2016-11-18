@@ -99,7 +99,7 @@ String* SQLAnalyseContext::findTable(SQLAnalyseContext* context, String* schema,
 		{
 			continue;
 		}
-		DatabaseTable* tableStore = db->getTable(schema, tbl->getTableName(ctx), ctx);
+		IDatabaseTable* tableStore = db->getTable(schema, tbl->getTableName(ctx), ctx);
 		if(tableStore != nullptr)
 		{
 			return tbl->getTableName(ctx);

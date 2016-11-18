@@ -48,13 +48,13 @@ void TableIndexScanner::__releaseRegerences(bool prepare, ThreadContext* ctx) th
 		return;
 	}
 }
-TableIndexScanner* TableIndexScanner::init(ScanTableIdentifier* tableId, DbTransaction* trx, TableIndex* index, DatabaseTable* tableStore, int lockMode, ThreadContext* ctx)
+TableIndexScanner* TableIndexScanner::init(ScanTableIdentifier* tableId, DbTransaction* trx, TableIndex* index, IDatabaseTable* tableStore, int lockMode, ThreadContext* ctx)
 {
 	__GC_MV(this, &(this->trx), trx, DbTransaction);
 	__GC_MV(this, &(this->index), index, TableIndex);
 	__GC_MV(this, &(this->storage), this->index->storage, BTree);
 	__GC_MV(this, &(this->scanner), (new(ctx) BTreeScanner(this->storage, ctx)), BTreeScanner);
-	__GC_MV(this, &(this->tableStore), tableStore, DatabaseTable);
+	__GC_MV(this, &(this->tableStore), tableStore, IDatabaseTable);
 	this->lockMode = lockMode;
 	__GC_MV(this, &(this->tableId), tableId, ScanTableIdentifier);
 	return this;
@@ -183,7 +183,7 @@ bool TableIndexScanner::loadNextRecord(ThreadContext* ctx)
 	ThreadLocker* locker = trx->lockContext;
 	while(true)
 	{
-		DatabaseRecord* record = nextIndexValue(ctx);
+		IDatabaseRecord* record = nextIndexValue(ctx);
 		if(record == nullptr)
 		{
 			break ;
@@ -209,7 +209,7 @@ bool TableIndexScanner::loadNextRecord(ThreadContext* ctx)
 	}
 	return false;
 }
-DatabaseRecord* TableIndexScanner::nextIndexValue(ThreadContext* ctx)
+IDatabaseRecord* TableIndexScanner::nextIndexValue(ThreadContext* ctx)
 {
 	if(this->values == nullptr || this->values->size(ctx) == this->current)
 	{
@@ -243,7 +243,7 @@ DatabaseRecord* TableIndexScanner::nextIndexValue(ThreadContext* ctx)
 	default:
 		break ;
 	}
-	DatabaseRecord* record = nullptr;
+	IDatabaseRecord* record = nullptr;
 	{
 		try
 		{

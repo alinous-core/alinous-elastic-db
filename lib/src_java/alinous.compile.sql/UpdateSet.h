@@ -34,7 +34,7 @@ namespace alinous {namespace db {namespace table {
 class DatabaseException;}}}
 
 namespace alinous {namespace db {namespace table {
-class DatabaseTable;}}}
+class IDatabaseTable;}}}
 
 namespace alinous {namespace compile {namespace sql {
 class TableAndSchema;}}}
@@ -82,7 +82,7 @@ using ::alinous::compile::sql::analyze::ScanTableMetadata;
 using ::alinous::compile::sql::analyze::ScanTableColumnIdentifier;
 using ::alinous::compile::sql::expression::ISQLExpression;
 using ::alinous::db::table::DatabaseException;
-using ::alinous::db::table::DatabaseTable;
+using ::alinous::db::table::IDatabaseTable;
 using ::alinous::db::trx::scan::ScanResultRecord;
 using ::alinous::runtime::dom::IAlinousVariable;
 using ::alinous::runtime::engine::ScriptMachine;

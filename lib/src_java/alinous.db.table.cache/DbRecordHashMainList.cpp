@@ -79,7 +79,7 @@ bool DbRecordHashMainList::removeByObj(DatabaseRecord* obj, ThreadContext* ctx) 
 }
 DatabaseRecord* DbRecordHashMainList::search(DataTableStorageSupport* table, long long position, ThreadContext* ctx) throw() 
 {
-	int hashcode = ((int)(((unsigned long long)((position + table->tableId->intValue(ctx)) * 2654404609L))>> 32));
+	int hashcode = ((int)(((unsigned long long)((position + table->getTableId(ctx)->intValue(ctx)) * 2654404609L))>> 32));
 	hashcode = hashcode & MAX_HASH_MASK;
 	return arrays->get(hashcode)->search(table, position, ctx);
 }

@@ -50,7 +50,7 @@ void IndexEqScanner::__releaseRegerences(bool prepare, ThreadContext* ctx) throw
 		return;
 	}
 }
-IndexEqScanner* IndexEqScanner::init(ScanTableIdentifier* tableId, DbTransaction* trx, TableIndex* index, DatabaseTable* tableStore, TrxRecordCacheIndex* insertCacheindex, TrxRecordCacheIndex* updateCacheindex, int lockMode, ScanResultIndexKey* eqKey, int effectiveKeyLength, InnerNecessaryCondition* necessaryCondition, ScriptMachine* machine, ThreadContext* ctx)
+IndexEqScanner* IndexEqScanner::init(ScanTableIdentifier* tableId, DbTransaction* trx, TableIndex* index, IDatabaseTable* tableStore, TrxRecordCacheIndex* insertCacheindex, TrxRecordCacheIndex* updateCacheindex, int lockMode, ScanResultIndexKey* eqKey, int effectiveKeyLength, InnerNecessaryCondition* necessaryCondition, ScriptMachine* machine, ThreadContext* ctx)
 {
 	__GC_MV(this, &(this->trx), trx, DbTransaction);
 	TableMetadata* tableMeta = tableStore->getMetadata(ctx);

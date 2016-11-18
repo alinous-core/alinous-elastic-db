@@ -34,7 +34,7 @@ namespace alinous {namespace db {
 class SchemaManager;}}
 
 namespace alinous {namespace db {namespace table {
-class DatabaseTable;}}}
+class IDatabaseTable;}}}
 
 namespace java {namespace lang {
 class Throwable;}}
@@ -74,7 +74,7 @@ using ::alinous::db::AlinousDbException;
 using ::alinous::db::SchemaManager;
 using ::alinous::db::TableSchema;
 using ::alinous::db::table::DatabaseException;
-using ::alinous::db::table::DatabaseTable;
+using ::alinous::db::table::IDatabaseTable;
 using ::alinous::db::table::TableMetadata;
 using ::alinous::db::trx::CreateIndexMetadata;
 using ::alinous::system::AlinousException;

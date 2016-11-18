@@ -34,7 +34,7 @@ namespace alinous {namespace compile {namespace sql {
 class TableAndSchema;}}}
 
 namespace alinous {namespace db {namespace table {
-class DatabaseTable;}}}
+class IDatabaseTable;}}}
 
 namespace alinous {namespace runtime {namespace variant {
 class VariantValue;}}}
@@ -95,8 +95,8 @@ using ::alinous::compile::sql::TableAndSchema;
 using ::alinous::compile::sql::analyze::ScanTableIdentifier;
 using ::alinous::compile::sql::analyze::ScanTableMetadata;
 using ::alinous::db::AlinousDatabase;
-using ::alinous::db::table::DatabaseTable;
 using ::alinous::db::table::IDatabaseRecord;
+using ::alinous::db::table::IDatabaseTable;
 using ::alinous::db::table::lockmonitor::DatabaseLockException;
 using ::alinous::db::table::lockmonitor::ThreadLocker;
 using ::alinous::db::table::scan::IndexScannerLockRequirement;

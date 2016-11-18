@@ -18,7 +18,7 @@ bool TableSchema::__init_static_variables(){
 	delete ctx;
 	return true;
 }
- TableSchema::TableSchema(String* name, String* dataDir, ThreadContext* ctx) throw()  : IObject(ctx), IBTreeValue(ctx), name(nullptr), dataDir(nullptr), schemaDir(nullptr), tables(GCUtils<HashMap<String,TableMetadata> >::ins(this, (new(ctx) HashMap<String,TableMetadata>(ctx)), ctx, __FILEW__, __LINE__, L"")), tableStores(GCUtils<HashMap<String,DatabaseTable> >::ins(this, (new(ctx) HashMap<String,DatabaseTable>(ctx)), ctx, __FILEW__, __LINE__, L""))
+ TableSchema::TableSchema(String* name, String* dataDir, ThreadContext* ctx) throw()  : IObject(ctx), IBTreeValue(ctx), name(nullptr), dataDir(nullptr), schemaDir(nullptr), tables(GCUtils<HashMap<String,TableMetadata> >::ins(this, (new(ctx) HashMap<String,TableMetadata>(ctx)), ctx, __FILEW__, __LINE__, L"")), tableStores(GCUtils<HashMap<String,IDatabaseTable> >::ins(this, (new(ctx) HashMap<String,IDatabaseTable>(ctx)), ctx, __FILEW__, __LINE__, L""))
 {
 	__GC_MV(this, &(this->dataDir), dataDir, String);
 	__GC_MV(this, &(this->name), name, String);
@@ -71,7 +71,7 @@ void TableSchema::initAfterFetched(RecordCacheEngine* cacheEngine, String* dataD
 	while(it->hasNext(ctx))
 	{
 		String* tableNname = it->next(ctx);
-		DatabaseTable* dataStore = (new(ctx) DatabaseTable(cacheEngine, schemaName, tableNname, baseDir, ctx));
+		IDatabaseTable* dataStore = (new(ctx) DatabaseTable(cacheEngine, schemaName, tableNname, baseDir, database->lockManager, ctx));
 		this->tableStores->put(tableNname, dataStore, ctx);
 		dataStore->open(database, ctx);
 	}
@@ -84,12 +84,12 @@ String* TableSchema::getSchemaDir(ThreadContext* ctx) throw()
 	}
 	return this->schemaDir;
 }
-void TableSchema::addTableStore(DatabaseTable* tableStore, ThreadContext* ctx) throw() 
+void TableSchema::addTableStore(IDatabaseTable* tableStore, ThreadContext* ctx) throw() 
 {
 	this->tableStores->put(tableStore->getName(ctx), tableStore, ctx);
 	this->tables->put(tableStore->getName(ctx), tableStore->getMetadata(ctx), ctx);
 }
-DatabaseTable* TableSchema::getTableStore(String* tableName, ThreadContext* ctx) throw() 
+IDatabaseTable* TableSchema::getTableStore(String* tableName, ThreadContext* ctx) throw() 
 {
 	return this->tableStores->get(tableName, ctx);
 }

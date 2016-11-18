@@ -123,8 +123,8 @@ public:
 	virtual ~DatatableDDLSupport() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 public:
-	void createTable(TableMetadata* metadata, AlinousDatabase* database, ThreadContext* ctx);
-	void createIndex(String* indexName, ArrayList<String>* columns, AlinousDatabase* database, ThreadContext* ctx);
+	void createTable(TableMetadata* metadata, AlinousDatabase* database, ThreadContext* ctx) final;
+	void createIndex(String* indexName, ArrayList<String>* columns, AlinousDatabase* database, ThreadContext* ctx) final;
 private:
 	void buildFirstindexValue(TableIndex* newindex, ThreadContext* ctx);
 public:

@@ -170,7 +170,7 @@ TrxRecordCacheIndex* TrxRecordsCache::getCachedIndex(ArrayList<ScanTableColumnId
 	}
 	return retIndex;
 }
-void TrxRecordsCache::commitUpdateRecord(AlinousDatabase* db, DatabaseTable* table, long long newCommitId, ThreadContext* ctx)
+void TrxRecordsCache::commitUpdateRecord(AlinousDatabase* db, IDatabaseTable* table, long long newCommitId, ThreadContext* ctx)
 {
 	table->lockStorage(ctx);
 	int slotSize = table->getIndexes(ctx)->size(ctx) + 2;
@@ -217,7 +217,7 @@ void TrxRecordsCache::commitUpdateRecord(AlinousDatabase* db, DatabaseTable* tab
 	}
 	table->unlockStorage(ctx);
 }
-void TrxRecordsCache::commitInsertRecord(AlinousDatabase* db, DatabaseTable* table, long long newCommitId, ThreadContext* ctx)
+void TrxRecordsCache::commitInsertRecord(AlinousDatabase* db, IDatabaseTable* table, long long newCommitId, ThreadContext* ctx)
 {
 	table->lockStorage(ctx);
 	{

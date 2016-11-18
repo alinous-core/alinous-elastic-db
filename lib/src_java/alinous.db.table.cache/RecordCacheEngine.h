@@ -46,6 +46,9 @@ namespace java {namespace lang {
 class Throwable;}}
 
 namespace alinous {namespace db {namespace table {
+class IDatabaseRecord;}}}
+
+namespace alinous {namespace db {namespace table {
 class DataTableStorageSupport;}}}
 
 namespace alinous {namespace buffer {namespace storage {
@@ -92,6 +95,7 @@ using ::alinous::db::AlinousDbException;
 using ::alinous::db::table::DataTableStorageSupport;
 using ::alinous::db::table::DatabaseRecord;
 using ::alinous::db::table::DatatableUpdateSupport;
+using ::alinous::db::table::IDatabaseRecord;
 using ::alinous::db::table::IndexInsertJob;
 using ::alinous::db::table::OidIndexJob;
 using ::alinous::db::table::TableIndex;
@@ -120,7 +124,7 @@ private:
 public:
 	RecordCacheEngine* init(int maxCache, ThreadContext* ctx);
 	void insertData(DatatableUpdateSupport* table, DatabaseRecord* dbrecord, long long commitId, IArrayObject<SequentialBackgroundJob>* jobs, ISystemLog* log, ThreadContext* ctx);
-	DatabaseRecord* loadRecord(DataTableStorageSupport* table, long long filePointer, ThreadContext* ctx);
+	IDatabaseRecord* loadRecord(DataTableStorageSupport* table, long long filePointer, ThreadContext* ctx);
 	int getMaxCache(ThreadContext* ctx) throw() ;
 public:
 	static bool __init_done;

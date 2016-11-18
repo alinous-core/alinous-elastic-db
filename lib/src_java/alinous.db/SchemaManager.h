@@ -19,6 +19,9 @@ namespace alinous {namespace db {
 class TableSchema;}}
 
 namespace alinous {namespace db {namespace table {
+class IDatabaseTable;}}}
+
+namespace alinous {namespace db {namespace table {
 class DatabaseTable;}}}
 
 namespace alinous {namespace db {
@@ -77,6 +80,7 @@ using ::alinous::buffer::storage::FileStorageEntryBuilder;
 using ::alinous::buffer::storage::FileStorageEntryFetcher;
 using ::alinous::db::table::DatabaseException;
 using ::alinous::db::table::DatabaseTable;
+using ::alinous::db::table::IDatabaseTable;
 using ::alinous::db::table::TableMetadata;
 using ::alinous::db::table::cache::RecordCacheEngine;
 using ::alinous::system::AlinousException;

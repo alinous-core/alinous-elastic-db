@@ -13,6 +13,9 @@ namespace alinous {namespace system {
 class ISystemLog;}}
 
 namespace alinous {namespace db {namespace table {
+class IDatabaseRecord;}}}
+
+namespace alinous {namespace db {namespace table {
 class DatabaseRecord;}}}
 
 namespace alinous {namespace db {namespace table {
@@ -58,8 +61,8 @@ public:
 	virtual ~DatatableUpdateSupport() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 public:
-	void updateData(CachedRecord* data, long long commitId, IArrayObject<SequentialBackgroundJob>* jobs, ISystemLog* log, ThreadContext* ctx);
-	void insertData(CachedRecord* data, long long commitId, IArrayObject<SequentialBackgroundJob>* jobs, ISystemLog* log, ThreadContext* ctx);
+	void updateData(CachedRecord* data, long long commitId, IArrayObject<SequentialBackgroundJob>* jobs, ISystemLog* log, ThreadContext* ctx) final;
+	void insertData(CachedRecord* data, long long commitId, IArrayObject<SequentialBackgroundJob>* jobs, ISystemLog* log, ThreadContext* ctx) final;
 public:
 	static bool __init_done;
 	static bool __init_static_variables();

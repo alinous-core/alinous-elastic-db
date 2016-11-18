@@ -145,7 +145,7 @@ void TrxStorageManager::commit(long long newCommitId, ThreadContext* ctx)
 		{
 			String* key = it->next(ctx);
 			TrxRecordsCache* cache = cacheMap->get(key, ctx);
-			DatabaseTable* table = schema->getTableStore(key, ctx);
+			IDatabaseTable* table = schema->getTableStore(key, ctx);
 			cache->commitInsertRecord(db, table, newCommitId, ctx);
 		}
 	}
@@ -160,7 +160,7 @@ void TrxStorageManager::commit(long long newCommitId, ThreadContext* ctx)
 		{
 			String* key = it->next(ctx);
 			TrxRecordsCache* cache = cacheMap->get(key, ctx);
-			DatabaseTable* table = schema->getTableStore(key, ctx);
+			IDatabaseTable* table = schema->getTableStore(key, ctx);
 			cache->commitUpdateRecord(db, table, newCommitId, ctx);
 		}
 	}

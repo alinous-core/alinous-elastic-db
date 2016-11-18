@@ -95,7 +95,7 @@ bool TableJoinTarget::analyseSQLTables(SQLAnalyseContext* context, bool leftValu
 		break;
 	}
 	AlinousDatabase* db = context->getDatabase(ctx);
-	DatabaseTable* tableStore = db->getTable(schema, table, ctx);
+	IDatabaseTable* tableStore = db->getTable(schema, table, ctx);
 	if(tableStore == nullptr)
 	{
 		throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1037()->clone(ctx)->append(this->name->toString(ctx), ctx), ctx));

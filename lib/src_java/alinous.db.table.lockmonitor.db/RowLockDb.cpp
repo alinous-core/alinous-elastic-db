@@ -56,14 +56,14 @@ void RowLockDb::__releaseRegerences(bool prepare, ThreadContext* ctx) throw()
 		return;
 	}
 }
-RowLockManager* RowLockDb::getRowLockManager(DatabaseTable* table, long long oid, ConcurrentGatePool* gatePool, ThreadContext* ctx) throw() 
+RowLockManager* RowLockDb::getRowLockManager(IDatabaseTable* table, long long oid, ConcurrentGatePool* gatePool, ThreadContext* ctx) throw() 
 {
-	int hashcode = ((int)((table->tableId->intValue(ctx) << 8 | oid) & MAX_HASH_MASK));
+	int hashcode = ((int)((table->getTableId(ctx)->intValue(ctx) << 8 | oid) & MAX_HASH_MASK));
 	return arrays->get(hashcode)->getRowLockManager(table, oid, this->bitset, hashcode, this, gatePool, ctx);
 }
-RowLock* RowLockDb::releaseLock(DatabaseTable* table, long long oid, ThreadLocker* locker, ThreadContext* ctx) throw() 
+RowLock* RowLockDb::releaseLock(IDatabaseTable* table, long long oid, ThreadLocker* locker, ThreadContext* ctx) throw() 
 {
-	int hashcode = ((int)((table->tableId->intValue(ctx) << 8 | oid) & MAX_HASH_MASK));
+	int hashcode = ((int)((table->getTableId(ctx)->intValue(ctx) << 8 | oid) & MAX_HASH_MASK));
 	RowLockManagerList* list = arrays->get(hashcode);
 	return list->releaseLock(table, oid, this->bitset, hashcode, locker, ctx);
 }

@@ -19,6 +19,9 @@ namespace java {namespace util {
 template <typename  T> class Iterator;}}
 
 namespace alinous {namespace db {namespace table {
+class IDatabaseTable;}}}
+
+namespace alinous {namespace db {namespace table {
 class DatabaseTable;}}}
 
 namespace alinous {namespace db {namespace table {
@@ -71,6 +74,7 @@ using ::alinous::buffer::storage::FileStorageEntryBuilder;
 using ::alinous::buffer::storage::FileStorageEntryFetcher;
 using ::alinous::db::table::DatabaseException;
 using ::alinous::db::table::DatabaseTable;
+using ::alinous::db::table::IDatabaseTable;
 using ::alinous::db::table::TableMetadata;
 using ::alinous::db::table::cache::RecordCacheEngine;
 
@@ -90,13 +94,13 @@ private:
 	String* dataDir;
 	String* schemaDir;
 	HashMap<String,TableMetadata>* tables;
-	HashMap<String,DatabaseTable>* tableStores;
+	HashMap<String,IDatabaseTable>* tableStores;
 public:
 	void create(ThreadContext* ctx) throw() ;
 	void initAfterFetched(RecordCacheEngine* cacheEngine, String* dataDir, String* schemaName, AlinousDatabase* database, ThreadContext* ctx);
 	String* getSchemaDir(ThreadContext* ctx) throw() ;
-	void addTableStore(DatabaseTable* tableStore, ThreadContext* ctx) throw() ;
-	DatabaseTable* getTableStore(String* tableName, ThreadContext* ctx) throw() ;
+	void addTableStore(IDatabaseTable* tableStore, ThreadContext* ctx) throw() ;
+	IDatabaseTable* getTableStore(String* tableName, ThreadContext* ctx) throw() ;
 	TableMetadata* getDableMetadata(String* tableName, ThreadContext* ctx) throw() ;
 	Set<String>* getTableNames(ThreadContext* ctx) throw() ;
 	void addTableMetadata(TableMetadata* tblMetadata, ThreadContext* ctx) throw() ;

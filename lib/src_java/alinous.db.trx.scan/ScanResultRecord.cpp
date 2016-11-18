@@ -105,7 +105,7 @@ void ScanResultRecord::unlock(DbTransaction* trx, ThreadContext* ctx)
 		}
 		ScanTableIdentifier* tableId = tables->get(i, ctx);
 		TableAndSchema* ts = tableId->getTable(ctx);
-		DatabaseTable* tableStore = db->getTable(ts->getSchema(ctx), ts->getTable(ctx), ctx);
+		IDatabaseTable* tableStore = db->getTable(ts->getSchema(ctx), ts->getTable(ctx), ctx);
 		int lockingMode = this->lockingModeList->get(i, ctx)->intValue(ctx);
 		switch(lockingMode) {
 		case IndexScannerLockRequirement::EXPLICIT_SHARE:

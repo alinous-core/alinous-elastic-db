@@ -1,7 +1,7 @@
 #ifndef ALINOUS_DB_TABLE_LOCKMONITOR_TABLELOCK_H_
 #define ALINOUS_DB_TABLE_LOCKMONITOR_TABLELOCK_H_
 namespace alinous {namespace db {namespace table {
-class DatabaseTable;}}}
+class IDatabaseTable;}}}
 
 namespace alinous {namespace db {namespace table {namespace lockmonitor {
 class ThreadLocker;}}}}
@@ -34,7 +34,7 @@ namespace alinous {namespace db {namespace table {namespace lockmonitor {
 using namespace ::alinous;
 using namespace ::java::lang;
 using ::java::util::Iterator;
-using ::alinous::db::table::DatabaseTable;
+using ::alinous::db::table::IDatabaseTable;
 using ::alinous::lock::ConcurrentGate;
 
 
@@ -43,13 +43,13 @@ class TableLock final : public IDatabaseLock, public virtual IObject {
 public:
 	TableLock(const TableLock& base) = default;
 public:
-	TableLock(bool update, DatabaseTable* table, ThreadLocker* locker, ConcurrentGate* gate, ThreadContext* ctx) throw() ;
-	void __construct_impl(bool update, DatabaseTable* table, ThreadLocker* locker, ConcurrentGate* gate, ThreadContext* ctx) throw() ;
+	TableLock(bool update, IDatabaseTable* table, ThreadLocker* locker, ConcurrentGate* gate, ThreadContext* ctx) throw() ;
+	void __construct_impl(bool update, IDatabaseTable* table, ThreadLocker* locker, ConcurrentGate* gate, ThreadContext* ctx) throw() ;
 	virtual ~TableLock() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 public:
 	bool update;
-	DatabaseTable* table;
+	IDatabaseTable* table;
 	ThreadLocker* locker;
 	int count;
 	bool pushBack;

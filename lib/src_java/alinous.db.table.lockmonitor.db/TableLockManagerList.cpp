@@ -34,7 +34,7 @@ void TableLockManagerList::__releaseRegerences(bool prepare, ThreadContext* ctx)
 		return;
 	}
 }
-TableLockMamager* TableLockManagerList::getTableLockmanager(DatabaseTable* table, BitSet* bitset, int hashcode, TableLockHashDb* hashDb, ConcurrentGatePool* gatePool, ThreadContext* ctx) throw() 
+TableLockMamager* TableLockManagerList::getTableLockmanager(IDatabaseTable* table, BitSet* bitset, int hashcode, TableLockHashDb* hashDb, ConcurrentGatePool* gatePool, ThreadContext* ctx) throw() 
 {
 	TableLockMamager* mgr = 0;
 	int maxLoop = this->list->size(ctx);
@@ -52,7 +52,7 @@ TableLockMamager* TableLockManagerList::getTableLockmanager(DatabaseTable* table
 	hashDb->inc(ctx);
 	return mgr;
 }
-TableLock* TableLockManagerList::releaseLock(DatabaseTable* table, BitSet* bitset, int hashcode, ThreadLocker* locker, ThreadContext* ctx) throw() 
+TableLock* TableLockManagerList::releaseLock(IDatabaseTable* table, BitSet* bitset, int hashcode, ThreadLocker* locker, ThreadContext* ctx) throw() 
 {
 	TableLockMamager* mgr = nullptr;
 	int maxLoop = this->list->size(ctx);

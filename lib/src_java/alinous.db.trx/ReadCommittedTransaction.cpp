@@ -38,7 +38,7 @@ void ReadCommittedTransaction::__releaseRegerences(bool prepare, ThreadContext* 
 	}
 	DbTransaction::__releaseRegerences(true, ctx);
 }
-bool ReadCommittedTransaction::isVisible(DatabaseRecord* record, DatabaseTable* tableStore, ThreadContext* ctx)
+bool ReadCommittedTransaction::isVisible(IDatabaseRecord* record, IDatabaseTable* tableStore, ThreadContext* ctx)
 {
 	{
 		try

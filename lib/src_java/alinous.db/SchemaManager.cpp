@@ -59,13 +59,13 @@ void SchemaManager::createTable(String* schemaName, TableMetadata* tableMetadata
 	{
 		schema = createSchema(schemaName, ctx);
 	}
-	DatabaseTable* table = schema->getTableStore(tableMetadata->getTableName(ctx), ctx);
+	IDatabaseTable* table = schema->getTableStore(tableMetadata->getTableName(ctx), ctx);
 	if(table != nullptr)
 	{
 		logger->logWarning(ConstStr::getCNST_STR_1563()->clone(ctx)->append(tableMetadata->getTableName(ctx), ctx)->append(ConstStr::getCNST_STR_1564(), ctx), ctx);
 		return;
 	}
-	DatabaseTable* tableStore = (new(ctx) DatabaseTable(this->cacheEngine, schemaName, tableMetadata->getTableName(ctx), schema->getSchemaDir(ctx), ctx));
+	IDatabaseTable* tableStore = (new(ctx) DatabaseTable(this->cacheEngine, schemaName, tableMetadata->getTableName(ctx), schema->getSchemaDir(ctx), database->lockManager, ctx));
 	tableStore->createTable(tableMetadata, database, ctx);
 	schema->addTableStore(tableStore, ctx);
 }

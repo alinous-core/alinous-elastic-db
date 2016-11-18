@@ -13,10 +13,10 @@ namespace alinous {namespace system {
 class ISystemLog;}}
 
 namespace alinous {namespace db {namespace table {
-class DatabaseRecord;}}}
+class IDatabaseRecord;}}}
 
 namespace alinous {namespace db {namespace table {
-class DatabaseTable;}}}
+class IDatabaseTable;}}}
 
 namespace alinous {namespace db {namespace table {
 class DatabaseException;}}}
@@ -49,8 +49,8 @@ using ::java::io::IOException;
 using ::alinous::btree::BTreeException;
 using ::alinous::db::AlinousDatabase;
 using ::alinous::db::table::DatabaseException;
-using ::alinous::db::table::DatabaseRecord;
-using ::alinous::db::table::DatabaseTable;
+using ::alinous::db::table::IDatabaseRecord;
+using ::alinous::db::table::IDatabaseTable;
 using ::alinous::runtime::dom::VariableException;
 using ::alinous::system::ISystemLog;
 
@@ -65,7 +65,7 @@ public:
 	virtual ~RepeatableReadTransaction() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 public:
-	bool isVisible(DatabaseRecord* record, DatabaseTable* tableStore, ThreadContext* ctx) final;
+	bool isVisible(IDatabaseRecord* record, IDatabaseTable* tableStore, ThreadContext* ctx) final;
 public:
 	static bool __init_done;
 	static bool __init_static_variables();

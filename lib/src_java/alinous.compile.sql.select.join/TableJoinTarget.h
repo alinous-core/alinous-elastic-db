@@ -25,7 +25,7 @@ namespace alinous {namespace db {
 class AlinousDatabase;}}
 
 namespace alinous {namespace db {namespace table {
-class DatabaseTable;}}}
+class IDatabaseTable;}}}
 
 namespace alinous {namespace compile {namespace sql {namespace analyze {
 class ScanTableMetadata;}}}}
@@ -98,7 +98,7 @@ using ::alinous::compile::sql::select::SQLLimitOffset;
 using ::alinous::compile::sql::select::SQLWhere;
 using ::alinous::db::AlinousDatabase;
 using ::alinous::db::table::DatabaseException;
-using ::alinous::db::table::DatabaseTable;
+using ::alinous::db::table::IDatabaseTable;
 using ::alinous::db::trx::DbTransaction;
 using ::alinous::db::trx::scan::ITableTargetScanner;
 using ::alinous::runtime::engine::ScriptMachine;

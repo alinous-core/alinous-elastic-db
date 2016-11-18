@@ -4,10 +4,10 @@ namespace alinous{namespace annotation{
 class OneSource;
 }}
 namespace alinous {namespace db {namespace table {
-class DatabaseRecord;}}}
+class IDatabaseRecord;}}}
 
 namespace alinous {namespace db {namespace table {
-class DatabaseTable;}}}
+class IDatabaseTable;}}}
 
 namespace alinous {namespace db {namespace trx {
 class DbTransactionManager;}}}
@@ -192,8 +192,8 @@ using ::alinous::db::AlinousDatabase;
 using ::alinous::db::AlinousDbException;
 using ::alinous::db::TableSchema;
 using ::alinous::db::table::DatabaseException;
-using ::alinous::db::table::DatabaseRecord;
-using ::alinous::db::table::DatabaseTable;
+using ::alinous::db::table::IDatabaseRecord;
+using ::alinous::db::table::IDatabaseTable;
 using ::alinous::db::table::TableMetadata;
 using ::alinous::db::table::lockmonitor::DatabaseLockException;
 using ::alinous::db::table::lockmonitor::ThreadLocker;
@@ -242,7 +242,7 @@ public:
 private:
 	long long soidSerial;
 public:
-	virtual bool isVisible(DatabaseRecord* record, DatabaseTable* tableStore, ThreadContext* ctx) = 0;
+	virtual bool isVisible(IDatabaseRecord* record, IDatabaseTable* tableStore, ThreadContext* ctx) = 0;
 	long long newSoid(ThreadContext* ctx) throw() ;
 	ScanResult* newResult(ScanTableMetadata* metadata, ThreadContext* ctx);
 	void select(SelectStatement* selectStmt, ScriptMachine* machine, bool debug, ThreadContext* ctx);

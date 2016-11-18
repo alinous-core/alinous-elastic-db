@@ -18,16 +18,16 @@ bool RowLockReleaser::__init_static_variables(){
 	delete ctx;
 	return true;
 }
- RowLockReleaser::RowLockReleaser(DBThreadMonitor* monitor, DatabaseTable* table, long long oid, ThreadLocker* locker, ThreadContext* ctx) throw()  : IObject(ctx), IThreadAction(ctx), table(nullptr), oid(0), locker(nullptr), monitor(nullptr)
+ RowLockReleaser::RowLockReleaser(DBThreadMonitor* monitor, IDatabaseTable* table, long long oid, ThreadLocker* locker, ThreadContext* ctx) throw()  : IObject(ctx), IThreadAction(ctx), table(nullptr), oid(0), locker(nullptr), monitor(nullptr)
 {
-	__GC_MV(this, &(this->table), table, DatabaseTable);
+	__GC_MV(this, &(this->table), table, IDatabaseTable);
 	this->oid = oid;
 	__GC_MV(this, &(this->locker), locker, ThreadLocker);
 	__GC_MV(this, &(this->monitor), monitor, DBThreadMonitor);
 }
-void RowLockReleaser::__construct_impl(DBThreadMonitor* monitor, DatabaseTable* table, long long oid, ThreadLocker* locker, ThreadContext* ctx) throw() 
+void RowLockReleaser::__construct_impl(DBThreadMonitor* monitor, IDatabaseTable* table, long long oid, ThreadLocker* locker, ThreadContext* ctx) throw() 
 {
-	__GC_MV(this, &(this->table), table, DatabaseTable);
+	__GC_MV(this, &(this->table), table, IDatabaseTable);
 	this->oid = oid;
 	__GC_MV(this, &(this->locker), locker, ThreadLocker);
 	__GC_MV(this, &(this->monitor), monitor, DBThreadMonitor);

@@ -18,18 +18,18 @@ bool RowLock::__init_static_variables(){
 	delete ctx;
 	return true;
 }
- RowLock::RowLock(DatabaseTable* table, long long oid, bool update, ThreadLocker* locker, ConcurrentGate* gate, ThreadContext* ctx) throw()  : IObject(ctx), IDatabaseLock(ctx), update(0), table(nullptr), oid(0), locker(nullptr), gate(nullptr), count(0), pushBack(0)
+ RowLock::RowLock(IDatabaseTable* table, long long oid, bool update, ThreadLocker* locker, ConcurrentGate* gate, ThreadContext* ctx) throw()  : IObject(ctx), IDatabaseLock(ctx), update(0), table(nullptr), oid(0), locker(nullptr), gate(nullptr), count(0), pushBack(0)
 {
-	__GC_MV(this, &(this->table), table, DatabaseTable);
+	__GC_MV(this, &(this->table), table, IDatabaseTable);
 	this->oid = oid;
 	this->update = update;
 	__GC_MV(this, &(this->locker), locker, ThreadLocker);
 	__GC_MV(this, &(this->gate), gate, ConcurrentGate);
 	this->pushBack = false;
 }
-void RowLock::__construct_impl(DatabaseTable* table, long long oid, bool update, ThreadLocker* locker, ConcurrentGate* gate, ThreadContext* ctx) throw() 
+void RowLock::__construct_impl(IDatabaseTable* table, long long oid, bool update, ThreadLocker* locker, ConcurrentGate* gate, ThreadContext* ctx) throw() 
 {
-	__GC_MV(this, &(this->table), table, DatabaseTable);
+	__GC_MV(this, &(this->table), table, IDatabaseTable);
 	this->oid = oid;
 	this->update = update;
 	__GC_MV(this, &(this->locker), locker, ThreadLocker);

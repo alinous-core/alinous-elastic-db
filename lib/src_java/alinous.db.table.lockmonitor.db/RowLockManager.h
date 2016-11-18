@@ -1,7 +1,7 @@
 #ifndef ALINOUS_DB_TABLE_LOCKMONITOR_DB_ROWLOCKMANAGER_H_
 #define ALINOUS_DB_TABLE_LOCKMONITOR_DB_ROWLOCKMANAGER_H_
 namespace alinous {namespace db {namespace table {
-class DatabaseTable;}}}
+class IDatabaseTable;}}}
 
 namespace alinous {namespace lock {
 class ConcurrentGate;}}
@@ -29,7 +29,7 @@ using namespace ::alinous;
 using namespace ::java::lang;
 using ::java::util::Iterator;
 using ::java::util::ArrayList;
-using ::alinous::db::table::DatabaseTable;
+using ::alinous::db::table::IDatabaseTable;
 using ::alinous::db::table::lockmonitor::IDatabaseLock;
 using ::alinous::db::table::lockmonitor::RowLock;
 using ::alinous::db::table::lockmonitor::ThreadLocker;
@@ -41,12 +41,12 @@ class RowLockManager final : public virtual IObject {
 public:
 	RowLockManager(const RowLockManager& base) = default;
 public:
-	RowLockManager(DatabaseTable* table, long long oid, ConcurrentGate* concurrentGate, ThreadContext* ctx) throw() ;
-	void __construct_impl(DatabaseTable* table, long long oid, ConcurrentGate* concurrentGate, ThreadContext* ctx) throw() ;
+	RowLockManager(IDatabaseTable* table, long long oid, ConcurrentGate* concurrentGate, ThreadContext* ctx) throw() ;
+	void __construct_impl(IDatabaseTable* table, long long oid, ConcurrentGate* concurrentGate, ThreadContext* ctx) throw() ;
 	virtual ~RowLockManager() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 public:
-	DatabaseTable* table;
+	IDatabaseTable* table;
 	long long oid;
 	ArrayList<RowLock>* list;
 private:

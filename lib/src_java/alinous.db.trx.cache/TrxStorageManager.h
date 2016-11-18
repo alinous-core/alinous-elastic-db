@@ -31,7 +31,7 @@ namespace alinous {namespace db {
 class TableSchema;}}
 
 namespace alinous {namespace db {namespace table {
-class DatabaseTable;}}}
+class IDatabaseTable;}}}
 
 namespace alinous {namespace system {
 class AlinousException;}}
@@ -79,7 +79,7 @@ using ::alinous::compile::sql::TableAndSchema;
 using ::alinous::db::AlinousDatabase;
 using ::alinous::db::AlinousDbException;
 using ::alinous::db::TableSchema;
-using ::alinous::db::table::DatabaseTable;
+using ::alinous::db::table::IDatabaseTable;
 using ::alinous::db::table::TableMetadata;
 using ::alinous::db::trx::CreateIndexMetadata;
 using ::alinous::db::trx::DbTransaction;

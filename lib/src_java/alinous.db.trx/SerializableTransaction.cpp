@@ -38,7 +38,7 @@ void SerializableTransaction::__releaseRegerences(bool prepare, ThreadContext* c
 	}
 	DbTransaction::__releaseRegerences(true, ctx);
 }
-bool SerializableTransaction::isVisible(DatabaseRecord* record, DatabaseTable* tableStore, ThreadContext* ctx)
+bool SerializableTransaction::isVisible(IDatabaseRecord* record, IDatabaseTable* tableStore, ThreadContext* ctx)
 {
 	{
 		try

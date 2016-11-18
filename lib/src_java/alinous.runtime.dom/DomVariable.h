@@ -438,6 +438,7 @@ public:
 	int diskSize(ThreadContext* ctx) final;
 	IValueFetcher* getFetcher(ThreadContext* ctx) throw()  final;
 	bool equals(IObject* other, ThreadContext* ctx) throw()  final;
+	long long getMaxCommitId(ThreadContext* ctx) throw()  final;
 public:
 	static DomVariable* importFromDebugXml(DomNode* node, ThreadContext* ctx) throw() ;
 	static DomVariable* valueFromFetcher(FileStorageEntryFetcher* fetcher, ThreadContext* ctx);

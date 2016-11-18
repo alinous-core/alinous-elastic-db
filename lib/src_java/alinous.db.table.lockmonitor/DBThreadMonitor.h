@@ -16,7 +16,7 @@ namespace alinous {namespace db {namespace table {namespace lockmonitor {
 class ThreadLocker;}}}}
 
 namespace alinous {namespace db {namespace table {
-class DatabaseTable;}}}
+class IDatabaseTable;}}}
 
 namespace alinous {namespace db {namespace table {namespace lockmonitor {namespace db {
 class TableLockMamager;}}}}}
@@ -57,7 +57,7 @@ using namespace ::java::lang;
 using ::java::util::Iterator;
 using ::java::util::ArrayList;
 using ::alinous::concurrent::SpinMutex;
-using ::alinous::db::table::DatabaseTable;
+using ::alinous::db::table::IDatabaseTable;
 using ::alinous::db::table::lockmonitor::db::RowLockDb;
 using ::alinous::db::table::lockmonitor::db::RowLockManager;
 using ::alinous::db::table::lockmonitor::db::TableLockHashDb;
@@ -85,10 +85,10 @@ private:
 	SpinMutex* globalLock;
 public:
 	ThreadLocker* newThread(ThreadContext* ctx) throw() ;
-	void lockTable(DatabaseTable* table, ThreadLocker* locker, bool update, ThreadContext* ctx);
-	void unlockTable(DatabaseTable* table, ThreadLocker* locker, ThreadContext* ctx);
-	void unlockRow(DatabaseTable* table, long long oid, ThreadLocker* locker, ThreadContext* ctx);
-	void lockRow(DatabaseTable* table, long long oid, ThreadLocker* locker, bool update, ThreadContext* ctx);
+	void lockTable(IDatabaseTable* table, ThreadLocker* locker, bool update, ThreadContext* ctx);
+	void unlockTable(IDatabaseTable* table, ThreadLocker* locker, ThreadContext* ctx);
+	void unlockRow(IDatabaseTable* table, long long oid, ThreadLocker* locker, ThreadContext* ctx);
+	void lockRow(IDatabaseTable* table, long long oid, ThreadLocker* locker, bool update, ThreadContext* ctx);
 	ThreadPool* getThreadPool(ThreadContext* ctx) throw() ;
 public:
 	static bool __init_done;

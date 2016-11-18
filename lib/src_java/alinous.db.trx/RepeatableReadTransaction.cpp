@@ -38,7 +38,7 @@ void RepeatableReadTransaction::__releaseRegerences(bool prepare, ThreadContext*
 	}
 	DbTransaction::__releaseRegerences(true, ctx);
 }
-bool RepeatableReadTransaction::isVisible(DatabaseRecord* record, DatabaseTable* tableStore, ThreadContext* ctx)
+bool RepeatableReadTransaction::isVisible(IDatabaseRecord* record, IDatabaseTable* tableStore, ThreadContext* ctx)
 {
 	{
 		try

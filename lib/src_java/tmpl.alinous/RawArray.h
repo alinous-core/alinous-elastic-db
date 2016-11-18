@@ -22,7 +22,7 @@ template class alinous::RawArray<::alinous::HashMapInternalElement<::java::lang:
 template class alinous::RawArray<::alinous::HashMapInternalElement<::java::lang::String, ::alinous::runtime::function::IAlinousNativeFunction>, ::alinous::HashMapInternalElement<::java::lang::String, ::alinous::runtime::function::IAlinousNativeFunction>::ValueCompare>;
 template class alinous::RawArray<::alinous::HashMapInternalElement<::java::lang::String, ::alinous::system::config::AlinousDbInstanceInfo>, ::alinous::HashMapInternalElement<::java::lang::String, ::alinous::system::config::AlinousDbInstanceInfo>::ValueCompare>;
 template class alinous::RawArray<::alinous::HashMapInternalElement<::java::lang::String, ::alinous::db::table::TableMetadata>, ::alinous::HashMapInternalElement<::java::lang::String, ::alinous::db::table::TableMetadata>::ValueCompare>;
-template class alinous::RawArray<::alinous::HashMapInternalElement<::java::lang::String, ::alinous::db::table::DatabaseTable>, ::alinous::HashMapInternalElement<::java::lang::String, ::alinous::db::table::DatabaseTable>::ValueCompare>;
+template class alinous::RawArray<::alinous::HashMapInternalElement<::java::lang::String, ::alinous::db::table::IDatabaseTable>, ::alinous::HashMapInternalElement<::java::lang::String, ::alinous::db::table::IDatabaseTable>::ValueCompare>;
 template class alinous::RawArray<::alinous::HashMapInternalElement<::java::lang::String, ::alinous::db::TableSchema>, ::alinous::HashMapInternalElement<::java::lang::String, ::alinous::db::TableSchema>::ValueCompare>;
 template class alinous::RawArray<::alinous::HashMapInternalElement<::java::lang::String, ::java::lang::Integer>, ::alinous::HashMapInternalElement<::java::lang::String, ::java::lang::Integer>::ValueCompare>;
 template class alinous::RawArray<::alinous::HashMapInternalElement<::java::lang::String, ::alinous::db::table::TableColumnMetadata>, ::alinous::HashMapInternalElement<::java::lang::String, ::alinous::db::table::TableColumnMetadata>::ValueCompare>;
@@ -52,7 +52,7 @@ template class alinous::RawArray<::alinous::HashMapRawArray<::java::lang::String
 template class alinous::RawArray<::alinous::HashMapRawArray<::java::lang::String, ::alinous::runtime::function::IAlinousNativeFunction>>;
 template class alinous::RawArray<::alinous::HashMapRawArray<::java::lang::String, ::alinous::system::config::AlinousDbInstanceInfo>>;
 template class alinous::RawArray<::alinous::HashMapRawArray<::java::lang::String, ::alinous::db::table::TableMetadata>>;
-template class alinous::RawArray<::alinous::HashMapRawArray<::java::lang::String, ::alinous::db::table::DatabaseTable>>;
+template class alinous::RawArray<::alinous::HashMapRawArray<::java::lang::String, ::alinous::db::table::IDatabaseTable>>;
 template class alinous::RawArray<::alinous::HashMapRawArray<::java::lang::String, ::alinous::db::TableSchema>>;
 template class alinous::RawArray<::alinous::HashMapRawArray<::java::lang::String, ::java::lang::Integer>>;
 template class alinous::RawArray<::alinous::HashMapRawArray<::java::lang::String, ::alinous::db::table::TableColumnMetadata>>;

@@ -4,7 +4,7 @@ namespace alinous{namespace annotation{
 class OneSource;
 }}
 namespace alinous {namespace db {namespace table {
-class DatabaseRecord;}}}
+class IDatabaseRecord;}}}
 
 namespace alinous {namespace db {namespace table {
 class BTreeIndexKey;}}}
@@ -71,12 +71,12 @@ public:
 public:
 	RecordCacheEngine* cacheEngine;
 public:
-	DatabaseRecord* loadRecord(long long filePointer, ThreadContext* ctx);
-	bool hasLaterVersionBefore(long long oid, long long commitId, long long currentCommitId, ThreadContext* ctx);
-	bool hasLaterVersion(long long oid, long long commitId, ThreadContext* ctx);
+	IDatabaseRecord* loadRecord(long long filePointer, ThreadContext* ctx) final;
+	bool hasLaterVersionBefore(long long oid, long long commitId, long long currentCommitId, ThreadContext* ctx) final;
+	bool hasLaterVersion(long long oid, long long commitId, ThreadContext* ctx) final;
 	bool isDeleted(long long oid, ThreadContext* ctx);
 	bool isLatest(long long oid, long long commitId, ThreadContext* ctx);
-	DatabaseRecord* getLastRecord(long long oid, long long commitId, ThreadContext* ctx);
+	IDatabaseRecord* getLastRecord(long long oid, long long commitId, ThreadContext* ctx);
 public:
 	static bool __init_done;
 	static bool __init_static_variables();

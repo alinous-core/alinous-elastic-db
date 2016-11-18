@@ -22,7 +22,7 @@ template class ::java::util::HashMapKeySet<::java::lang::String, ::alinous::runt
 template class ::java::util::HashMapKeySet<::java::lang::String, ::alinous::runtime::function::IAlinousNativeFunction>;
 template class ::java::util::HashMapKeySet<::java::lang::String, ::alinous::system::config::AlinousDbInstanceInfo>;
 template class ::java::util::HashMapKeySet<::java::lang::String, ::alinous::db::table::TableMetadata>;
-template class ::java::util::HashMapKeySet<::java::lang::String, ::alinous::db::table::DatabaseTable>;
+template class ::java::util::HashMapKeySet<::java::lang::String, ::alinous::db::table::IDatabaseTable>;
 template class ::java::util::HashMapKeySet<::java::lang::String, ::alinous::db::TableSchema>;
 template class ::java::util::HashMapKeySet<::java::lang::String, ::java::lang::Integer>;
 template class ::java::util::HashMapKeySet<::java::lang::String, ::alinous::db::table::TableColumnMetadata>;

@@ -41,7 +41,7 @@ void DataTableStorageSupport::__releaseRegerences(bool prepare, ThreadContext* c
 	}
 	AbstractDatabaseTable::__releaseRegerences(true, ctx);
 }
-DatabaseRecord* DataTableStorageSupport::loadRecord(long long filePointer, ThreadContext* ctx)
+IDatabaseRecord* DataTableStorageSupport::loadRecord(long long filePointer, ThreadContext* ctx)
 {
 	return this->cacheEngine->loadRecord(this, filePointer, ctx);
 }
@@ -66,7 +66,7 @@ bool DataTableStorageSupport::hasLaterVersionBefore(long long oid, long long com
 	this->oidIndex->gate->exit(ctx);
 	int maxIndex = values->size(ctx) - 1;
 	int i = 0;
-	DatabaseRecord* lastRecord = nullptr;
+	IDatabaseRecord* lastRecord = nullptr;
 	for(i = maxIndex; i != -1; --i)
 	{
 		LongValue* positionValue = static_cast<LongValue*>(values->get(i, ctx));
@@ -109,7 +109,7 @@ bool DataTableStorageSupport::isDeleted(long long oid, ThreadContext* ctx)
 	this->oidIndex->gate->exit(ctx);
 	int maxIndex = values->size(ctx) - 1;
 	LongValue* positionValue = static_cast<LongValue*>(values->get(maxIndex, ctx));
-	DatabaseRecord* lastRecord = this->cacheEngine->loadRecord(this, positionValue->value, ctx);
+	IDatabaseRecord* lastRecord = this->cacheEngine->loadRecord(this, positionValue->value, ctx);
 	return lastRecord->getDeletedCommitId(ctx) != (long long)0;
 }
 bool DataTableStorageSupport::isLatest(long long oid, long long commitId, ThreadContext* ctx)
@@ -133,10 +133,10 @@ bool DataTableStorageSupport::isLatest(long long oid, long long commitId, Thread
 	this->oidIndex->gate->exit(ctx);
 	int maxIndex = values->size(ctx) - 1;
 	LongValue* positionValue = static_cast<LongValue*>(values->get(maxIndex, ctx));
-	DatabaseRecord* lastRecord = this->cacheEngine->loadRecord(this, positionValue->value, ctx);
+	IDatabaseRecord* lastRecord = this->cacheEngine->loadRecord(this, positionValue->value, ctx);
 	return lastRecord->getMaxCommitId(ctx) == commitId;
 }
-DatabaseRecord* DataTableStorageSupport::getLastRecord(long long oid, long long commitId, ThreadContext* ctx)
+IDatabaseRecord* DataTableStorageSupport::getLastRecord(long long oid, long long commitId, ThreadContext* ctx)
 {
 	BTreeIndexKey* indexKey = (new(ctx) BTreeIndexKey(ctx));
 	indexKey->values->add((new(ctx) VariantValue(oid, ctx)), ctx);
@@ -159,7 +159,7 @@ DatabaseRecord* DataTableStorageSupport::getLastRecord(long long oid, long long 
 	for(int i = maxIndex; i != -1; --i)
 	{
 		LongValue* positionValue = static_cast<LongValue*>(values->get(i, ctx));
-		DatabaseRecord* lastRecord = this->cacheEngine->loadRecord(this, positionValue->value, ctx);
+		IDatabaseRecord* lastRecord = this->cacheEngine->loadRecord(this, positionValue->value, ctx);
 		if(lastRecord->getLastUpdateCommitId(ctx) < commitId)
 		{
 			return lastRecord;

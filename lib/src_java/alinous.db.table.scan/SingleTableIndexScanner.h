@@ -16,7 +16,7 @@ namespace alinous {namespace db {namespace table {
 class TableIndex;}}}
 
 namespace alinous {namespace db {namespace table {
-class DatabaseTable;}}}
+class IDatabaseTable;}}}
 
 namespace alinous {namespace db {namespace trx {namespace cache {
 class TrxRecordCacheIndex;}}}}
@@ -77,8 +77,8 @@ using ::java::io::IOException;
 using ::alinous::compile::sql::analyze::ScanTableIdentifier;
 using ::alinous::db::AlinousDbException;
 using ::alinous::db::table::DatabaseException;
-using ::alinous::db::table::DatabaseTable;
 using ::alinous::db::table::IDatabaseRecord;
+using ::alinous::db::table::IDatabaseTable;
 using ::alinous::db::table::TableIndex;
 using ::alinous::db::table::TableMetadata;
 using ::alinous::db::trx::DbTransaction;
@@ -112,7 +112,7 @@ private:
 	TrxRecordCacheIndexScanner* updateScanner;
 	ScanResultRecord* result;
 public:
-	SingleTableIndexScanner* init(ScanTableIdentifier* tableId, DbTransaction* trx, TableIndex* index, DatabaseTable* tableStore, TrxRecordCacheIndex* insertCacheindex, TrxRecordCacheIndex* updateCacheindex, int lockMode, ThreadContext* ctx);
+	SingleTableIndexScanner* init(ScanTableIdentifier* tableId, DbTransaction* trx, TableIndex* index, IDatabaseTable* tableStore, TrxRecordCacheIndex* insertCacheindex, TrxRecordCacheIndex* updateCacheindex, int lockMode, ThreadContext* ctx);
 	bool hasNext(bool debug, ThreadContext* ctx) final;
 	ScanResultRecord* next(bool debug, ThreadContext* ctx) final;
 	void startScan(ScanResultIndexKey* indexKeyValue, ThreadContext* ctx) final;

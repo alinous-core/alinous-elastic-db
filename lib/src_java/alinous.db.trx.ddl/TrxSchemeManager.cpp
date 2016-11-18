@@ -133,7 +133,7 @@ TableMetadata* TrxSchemeManager::getTableMetadata(String* schemaName, String* ta
 }
 bool TrxSchemeManager::tableExists(String* schemaName, String* tableName, ThreadContext* ctx) throw() 
 {
-	DatabaseTable* tbl = this->database->getTable(schemaName, tableName, ctx);
+	IDatabaseTable* tbl = this->database->getTable(schemaName, tableName, ctx);
 	if(tbl != nullptr)
 	{
 		return true;
@@ -178,7 +178,7 @@ void TrxSchemeManager::executeCreateIndex(CreateIndexMetadata* meta, ThreadConte
 		this->logger->logWarning(ConstStr::getCNST_STR_1619()->clone(ctx)->append(meta->getindexName(ctx), ctx)->append(ConstStr::getCNST_STR_1620(), ctx), ctx);
 		return;
 	}
-	DatabaseTable* tableStore = schema->getTableStore(tableName, ctx);
+	IDatabaseTable* tableStore = schema->getTableStore(tableName, ctx);
 	if(tableStore == nullptr)
 	{
 		this->logger->logWarning(ConstStr::getCNST_STR_1619()->clone(ctx)->append(meta->getindexName(ctx), ctx)->append(ConstStr::getCNST_STR_1620(), ctx), ctx);

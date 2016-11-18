@@ -67,6 +67,7 @@ public:
 	void setValue(int index, VariantValue* value, ThreadContext* ctx) throw()  final;
 	void addValue(VariantValue* vv, ThreadContext* ctx) throw()  final;
 	long long getOid(ThreadContext* ctx) throw()  final;
+	long long getMaxCommitId(ThreadContext* ctx) throw()  final;
 public:
 	static bool __init_done;
 	static bool __init_static_variables();

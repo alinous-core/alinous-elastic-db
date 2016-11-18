@@ -64,14 +64,14 @@ void TableLockHashDb::inc(ThreadContext* ctx) throw()
 {
 	this->numElements ++ ;
 }
-TableLockMamager* TableLockHashDb::getTableLockManager(DatabaseTable* table, ConcurrentGatePool* gatePool, ThreadContext* ctx) throw() 
+TableLockMamager* TableLockHashDb::getTableLockManager(IDatabaseTable* table, ConcurrentGatePool* gatePool, ThreadContext* ctx) throw() 
 {
-	int hashcode = ((int)(table->tableId->intValue(ctx) & MAX_HASH_MASK));
+	int hashcode = ((int)(table->getTableId(ctx)->intValue(ctx) & MAX_HASH_MASK));
 	return arrays->get(hashcode)->getTableLockmanager(table, this->bitset, hashcode, this, gatePool, ctx);
 }
-TableLock* TableLockHashDb::releaseLock(DatabaseTable* table, ThreadLocker* locker, ThreadContext* ctx) throw() 
+TableLock* TableLockHashDb::releaseLock(IDatabaseTable* table, ThreadLocker* locker, ThreadContext* ctx) throw() 
 {
-	int hashcode = ((int)(table->tableId->intValue(ctx) & MAX_HASH_MASK));
+	int hashcode = ((int)(table->getTableId(ctx)->intValue(ctx) & MAX_HASH_MASK));
 	TableLockManagerList* list = arrays->get(hashcode);
 	return list->releaseLock(table, this->bitset, hashcode, locker, ctx);
 }

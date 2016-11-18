@@ -78,7 +78,7 @@ void RecordCacheEngine::insertData(DatatableUpdateSupport* table, DatabaseRecord
 	}
 	writer->end(ctx);
 }
-DatabaseRecord* RecordCacheEngine::loadRecord(DataTableStorageSupport* table, long long filePointer, ThreadContext* ctx)
+IDatabaseRecord* RecordCacheEngine::loadRecord(DataTableStorageSupport* table, long long filePointer, ThreadContext* ctx)
 {
 	DatabaseRecord* record = this->cache->loadRecord(table, filePointer, ctx);
 	if(record != nullptr)

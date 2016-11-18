@@ -4,7 +4,7 @@ namespace alinous {namespace db {namespace table {namespace lockmonitor {namespa
 class TableLockMamager;}}}}}
 
 namespace alinous {namespace db {namespace table {
-class DatabaseTable;}}}
+class IDatabaseTable;}}}
 
 namespace java {namespace util {
 class BitSet;}}
@@ -36,7 +36,7 @@ using namespace ::java::lang;
 using ::java::util::Iterator;
 using ::java::util::ArrayList;
 using ::java::util::BitSet;
-using ::alinous::db::table::DatabaseTable;
+using ::alinous::db::table::IDatabaseTable;
 using ::alinous::db::table::lockmonitor::ConcurrentGatePool;
 using ::alinous::db::table::lockmonitor::TableLock;
 using ::alinous::db::table::lockmonitor::ThreadLocker;
@@ -58,8 +58,8 @@ public:
 private:
 	ArrayList<TableLockMamager>* list;
 public:
-	TableLockMamager* getTableLockmanager(DatabaseTable* table, BitSet* bitset, int hashcode, TableLockHashDb* hashDb, ConcurrentGatePool* gatePool, ThreadContext* ctx) throw() ;
-	TableLock* releaseLock(DatabaseTable* table, BitSet* bitset, int hashcode, ThreadLocker* locker, ThreadContext* ctx) throw() ;
+	TableLockMamager* getTableLockmanager(IDatabaseTable* table, BitSet* bitset, int hashcode, TableLockHashDb* hashDb, ConcurrentGatePool* gatePool, ThreadContext* ctx) throw() ;
+	TableLock* releaseLock(IDatabaseTable* table, BitSet* bitset, int hashcode, ThreadLocker* locker, ThreadContext* ctx) throw() ;
 public:
 	static bool __init_done;
 	static bool __init_static_variables();

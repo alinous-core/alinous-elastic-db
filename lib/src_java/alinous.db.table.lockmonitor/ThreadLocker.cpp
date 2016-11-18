@@ -18,14 +18,6 @@ bool ThreadLocker::__init_static_variables(){
 	delete ctx;
 	return true;
 }
- ThreadLocker::ThreadLocker(DBThreadMonitor* monitor, ThreadContext* ctx) throw()  : IObject(ctx), blockingLock(nullptr), tableLocks(GCUtils<ArrayList<TableLock> >::ins(this, (new(ctx) ArrayList<TableLock>(ctx)), ctx, __FILEW__, __LINE__, L"")), rowLocks(GCUtils<ArrayList<RowLock> >::ins(this, (new(ctx) ArrayList<RowLock>(ctx)), ctx, __FILEW__, __LINE__, L"")), monitor(nullptr)
-{
-	__GC_MV(this, &(this->monitor), monitor, DBThreadMonitor);
-}
-void ThreadLocker::__construct_impl(DBThreadMonitor* monitor, ThreadContext* ctx) throw() 
-{
-	__GC_MV(this, &(this->monitor), monitor, DBThreadMonitor);
-}
  ThreadLocker::~ThreadLocker() throw() 
 {
 	ThreadContext *ctx = ThreadContext::getCurentContext();
@@ -42,43 +34,41 @@ void ThreadLocker::__releaseRegerences(bool prepare, ThreadContext* ctx) throw()
 	tableLocks = nullptr;
 	__e_obj1.add(this->rowLocks, this);
 	rowLocks = nullptr;
-	__e_obj1.add(this->monitor, this);
-	monitor = nullptr;
 	if(!prepare){
 		return;
 	}
 }
-void ThreadLocker::updateLockTable(DatabaseTable* table, ThreadContext* ctx)
+void ThreadLocker::updateLockTable(IDatabaseTable* table, ThreadContext* ctx)
 {
-	this->monitor->lockTable(table, this, true, ctx);
+	table->updateLockTable(table, this, ctx);
 }
-void ThreadLocker::updateUnlockTable(DatabaseTable* table, ThreadContext* ctx)
+void ThreadLocker::updateUnlockTable(IDatabaseTable* table, ThreadContext* ctx)
 {
-	this->monitor->unlockTable(table, this, ctx);
+	table->updateUnlockTable(table, this, ctx);
 }
-void ThreadLocker::shareLockTable(DatabaseTable* table, ThreadContext* ctx)
+void ThreadLocker::shareLockTable(IDatabaseTable* table, ThreadContext* ctx)
 {
-	this->monitor->lockTable(table, this, false, ctx);
+	table->shareLockTable(table, this, ctx);
 }
-void ThreadLocker::shareUnlockTable(DatabaseTable* table, ThreadContext* ctx)
+void ThreadLocker::shareUnlockTable(IDatabaseTable* table, ThreadContext* ctx)
 {
-	this->monitor->unlockTable(table, this, ctx);
+	table->shareUnlockTable(table, this, ctx);
 }
-void ThreadLocker::shareLockRow(DatabaseTable* table, long long oid, ThreadContext* ctx)
+void ThreadLocker::shareLockRow(IDatabaseTable* table, long long oid, ThreadContext* ctx)
 {
-	this->monitor->lockRow(table, oid, this, false, ctx);
+	table->shareLockRow(table, oid, this, ctx);
 }
-void ThreadLocker::shareUnlockRow(DatabaseTable* table, long long oid, ThreadContext* ctx)
+void ThreadLocker::shareUnlockRow(IDatabaseTable* table, long long oid, ThreadContext* ctx)
 {
-	this->monitor->unlockRow(table, oid, this, ctx);
+	table->shareUnlockRow(table, oid, this, ctx);
 }
-void ThreadLocker::updateLockRow(DatabaseTable* table, long long oid, ThreadContext* ctx)
+void ThreadLocker::updateLockRow(IDatabaseTable* table, long long oid, ThreadContext* ctx)
 {
-	this->monitor->lockRow(table, oid, this, true, ctx);
+	table->updateLockRow(table, oid, this, ctx);
 }
-void ThreadLocker::updateUnlockRow(DatabaseTable* table, long long oid, ThreadContext* ctx)
+void ThreadLocker::updateUnlockRow(IDatabaseTable* table, long long oid, ThreadContext* ctx)
 {
-	this->monitor->unlockRow(table, oid, this, ctx);
+	table->updateUnlockRow(table, oid, this, ctx);
 }
 bool ThreadLocker::checkContention(IDatabaseLock* lock, ThreadContext* ctx) throw() 
 {

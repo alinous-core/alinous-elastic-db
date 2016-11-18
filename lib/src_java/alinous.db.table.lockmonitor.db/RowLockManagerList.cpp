@@ -34,7 +34,7 @@ void RowLockManagerList::__releaseRegerences(bool prepare, ThreadContext* ctx) t
 		return;
 	}
 }
-RowLockManager* RowLockManagerList::getRowLockManager(DatabaseTable* table, long long oid, BitSet* bitset, int hashcode, RowLockDb* hashDb, ConcurrentGatePool* getePool, ThreadContext* ctx) throw() 
+RowLockManager* RowLockManagerList::getRowLockManager(IDatabaseTable* table, long long oid, BitSet* bitset, int hashcode, RowLockDb* hashDb, ConcurrentGatePool* getePool, ThreadContext* ctx) throw() 
 {
 	RowLockManager* mgr = 0;
 	ArrayList<RowLockManager>* list = this->list;
@@ -52,7 +52,7 @@ RowLockManager* RowLockManagerList::getRowLockManager(DatabaseTable* table, long
 	this->list->add(mgr, ctx);
 	return mgr;
 }
-RowLock* RowLockManagerList::releaseLock(DatabaseTable* table, long long oid, BitSet* bitset, int hashcode, ThreadLocker* locker, ThreadContext* ctx) throw() 
+RowLock* RowLockManagerList::releaseLock(IDatabaseTable* table, long long oid, BitSet* bitset, int hashcode, ThreadLocker* locker, ThreadContext* ctx) throw() 
 {
 	RowLockManager* mgr = nullptr;
 	ArrayList<RowLockManager>* list = this->list;

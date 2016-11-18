@@ -75,6 +75,9 @@ class FileStorageEntryFetcher;}}}
 namespace alinous {namespace db {namespace table {
 class DatabaseTable;}}}
 
+namespace alinous {namespace db {namespace table {
+class IDatabaseTable;}}}
+
 namespace java {namespace lang {
 class IObject;
 }}
@@ -107,7 +110,7 @@ using ::alinous::runtime::dom::VariableException;
 
 
 
-class AbstractDatabaseTable : public virtual IObject {
+class AbstractDatabaseTable : public IDatabaseTable, public virtual IObject {
 public:
 	AbstractDatabaseTable(const AbstractDatabaseTable& base) = default;
 public:
@@ -130,21 +133,23 @@ public:
 	Timestamp* schmeUpdated;
 	DatatableUpdateCache* updateHistoryCache;
 public:
-	void open(AlinousDatabase* database, ThreadContext* ctx);
+	void open(AlinousDatabase* database, ThreadContext* ctx) final;
 	void open(bool loadscheme, AlinousDatabase* database, ThreadContext* ctx);
-	void close(ThreadContext* ctx) throw() ;
-	TableMetadata* getMetadata(ThreadContext* ctx) throw() ;
-	ArrayList<TableIndex>* getIndexes(ThreadContext* ctx) throw() ;
-	String* getName(ThreadContext* ctx) throw() ;
+	void close(ThreadContext* ctx) throw()  final;
+	TableMetadata* getMetadata(ThreadContext* ctx) throw()  final;
+	ArrayList<TableIndex>* getIndexes(ThreadContext* ctx) throw()  final;
+	String* getName(ThreadContext* ctx) throw()  final;
 	String* getSchemaName(ThreadContext* ctx) throw() ;
 	String* getBaseDir(ThreadContext* ctx) throw() ;
 	bool equals(IObject* obj, ThreadContext* ctx) throw() ;
 	Timestamp* getSchmeUpdated(ThreadContext* ctx) throw() ;
 	DatatableUpdateCache* getUpdateHistoryCache(ThreadContext* ctx) throw() ;
-	TableIndex* getPrimaryIndex(ThreadContext* ctx) throw() ;
-	int getColumnCount(ThreadContext* ctx) throw() ;
+	TableIndex* getPrimaryIndex(ThreadContext* ctx) throw()  final;
+	int getColumnCount(ThreadContext* ctx) throw()  final;
 	FileStorage* getDataStorage(ThreadContext* ctx) throw() ;
 	BTree* getOidIndex(ThreadContext* ctx) throw() ;
+	Integer* getTableId(ThreadContext* ctx) throw()  final;
+	void setTableId(Integer* tableId, ThreadContext* ctx) throw() ;
 	void syncScheme(ThreadContext* ctx);
 	String* getDataStorageName(ThreadContext* ctx) throw() ;
 	int indexSchemeSize(ThreadContext* ctx) throw() ;

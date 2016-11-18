@@ -18,15 +18,15 @@ bool RowLockManager::__init_static_variables(){
 	delete ctx;
 	return true;
 }
- RowLockManager::RowLockManager(DatabaseTable* table, long long oid, ConcurrentGate* concurrentGate, ThreadContext* ctx) throw()  : IObject(ctx), table(nullptr), oid(0), list(GCUtils<ArrayList<RowLock> >::ins(this, (new(ctx) ArrayList<RowLock>(ctx)), ctx, __FILEW__, __LINE__, L"")), concurrentGate(nullptr)
+ RowLockManager::RowLockManager(IDatabaseTable* table, long long oid, ConcurrentGate* concurrentGate, ThreadContext* ctx) throw()  : IObject(ctx), table(nullptr), oid(0), list(GCUtils<ArrayList<RowLock> >::ins(this, (new(ctx) ArrayList<RowLock>(ctx)), ctx, __FILEW__, __LINE__, L"")), concurrentGate(nullptr)
 {
-	__GC_MV(this, &(this->table), table, DatabaseTable);
+	__GC_MV(this, &(this->table), table, IDatabaseTable);
 	this->oid = oid;
 	__GC_MV(this, &(this->concurrentGate), concurrentGate, ConcurrentGate);
 }
-void RowLockManager::__construct_impl(DatabaseTable* table, long long oid, ConcurrentGate* concurrentGate, ThreadContext* ctx) throw() 
+void RowLockManager::__construct_impl(IDatabaseTable* table, long long oid, ConcurrentGate* concurrentGate, ThreadContext* ctx) throw() 
 {
-	__GC_MV(this, &(this->table), table, DatabaseTable);
+	__GC_MV(this, &(this->table), table, IDatabaseTable);
 	this->oid = oid;
 	__GC_MV(this, &(this->concurrentGate), concurrentGate, ConcurrentGate);
 }

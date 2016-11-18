@@ -1,7 +1,7 @@
 #ifndef ALINOUS_DB_TABLE_LOCKMONITOR_DB_TABLELOCKMAMAGER_H_
 #define ALINOUS_DB_TABLE_LOCKMONITOR_DB_TABLELOCKMAMAGER_H_
 namespace alinous {namespace db {namespace table {
-class DatabaseTable;}}}
+class IDatabaseTable;}}}
 
 namespace alinous {namespace lock {
 class ConcurrentGate;}}
@@ -29,7 +29,7 @@ using namespace ::alinous;
 using namespace ::java::lang;
 using ::java::util::Iterator;
 using ::java::util::ArrayList;
-using ::alinous::db::table::DatabaseTable;
+using ::alinous::db::table::IDatabaseTable;
 using ::alinous::db::table::lockmonitor::IDatabaseLock;
 using ::alinous::db::table::lockmonitor::TableLock;
 using ::alinous::db::table::lockmonitor::ThreadLocker;
@@ -41,17 +41,17 @@ class TableLockMamager final : public virtual IObject {
 public:
 	TableLockMamager(const TableLockMamager& base) = default;
 public:
-	TableLockMamager(DatabaseTable* table, ConcurrentGate* gate, ThreadContext* ctx) throw() ;
-	void __construct_impl(DatabaseTable* table, ConcurrentGate* gate, ThreadContext* ctx) throw() ;
+	TableLockMamager(IDatabaseTable* table, ConcurrentGate* gate, ThreadContext* ctx) throw() ;
+	void __construct_impl(IDatabaseTable* table, ConcurrentGate* gate, ThreadContext* ctx) throw() ;
 	virtual ~TableLockMamager() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 public:
 	ArrayList<TableLock>* list;
 private:
-	DatabaseTable* table;
+	IDatabaseTable* table;
 	ConcurrentGate* gate;
 public:
-	DatabaseTable* getTable(ThreadContext* ctx) throw() ;
+	IDatabaseTable* getTable(ThreadContext* ctx) throw() ;
 	TableLock* newLock(ThreadLocker* locker, bool update, ThreadContext* ctx) throw() ;
 	TableLock* releaseLock(ThreadLocker* locker, ThreadContext* ctx) throw() ;
 	bool checkDedLock(ThreadLocker* locker, ThreadContext* ctx) throw() ;

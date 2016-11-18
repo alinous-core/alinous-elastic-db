@@ -96,7 +96,7 @@ public:
 	void setInsertedCommitId(long long insertedCommitId, ThreadContext* ctx) throw() ;
 	long long getDeletedCommitId(ThreadContext* ctx) throw()  final;
 	void setDeletedCommitId(long long deletedCommitId, ThreadContext* ctx) throw() ;
-	long long getMaxCommitId(ThreadContext* ctx) throw() ;
+	long long getMaxCommitId(ThreadContext* ctx) throw()  final;
 	String* toString(ThreadContext* ctx) throw() ;
 	long long getPosition(ThreadContext* ctx) throw() ;
 	void setPosition(long long position, ThreadContext* ctx) throw() ;

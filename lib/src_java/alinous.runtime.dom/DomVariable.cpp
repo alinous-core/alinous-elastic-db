@@ -1229,6 +1229,10 @@ bool DomVariable::equals(IObject* other, ThreadContext* ctx) throw()
 {
 	return this == other;
 }
+long long DomVariable::getMaxCommitId(ThreadContext* ctx) throw() 
+{
+	return 0;
+}
 DomVariable* DomVariable::importFromDebugXml(DomNode* node, ThreadContext* ctx) throw() 
 {
 	if(!node->getName(ctx)->equals(DomVariable::VAL_TYPE, ctx))

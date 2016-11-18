@@ -16,7 +16,7 @@ namespace alinous {namespace db {namespace table {
 class TableIndex;}}}
 
 namespace alinous {namespace db {namespace table {
-class DatabaseTable;}}}
+class IDatabaseTable;}}}
 
 namespace alinous {namespace btree {namespace scan {
 class BTreeScanner;}}}
@@ -49,7 +49,7 @@ namespace alinous {namespace db {namespace table {namespace lockmonitor {
 class ThreadLocker;}}}}
 
 namespace alinous {namespace db {namespace table {
-class DatabaseRecord;}}}
+class IDatabaseRecord;}}}
 
 namespace alinous {namespace db {namespace trx {namespace scan {
 class ScanResultRecord;}}}}
@@ -78,9 +78,6 @@ class IBTreeValue;}}
 namespace alinous {namespace db {namespace trx {namespace scan {
 class ITableTargetScanner;}}}}
 
-namespace alinous {namespace db {namespace table {
-class IDatabaseRecord;}}}
-
 namespace alinous {namespace db {namespace table {namespace lockmonitor {
 class DatabaseLockException;}}}}
 
@@ -107,9 +104,8 @@ using ::alinous::btree::scan::BTreeScanner;
 using ::alinous::compile::sql::analyze::ScanTableIdentifier;
 using ::alinous::db::table::BTreeIndexKey;
 using ::alinous::db::table::DatabaseException;
-using ::alinous::db::table::DatabaseRecord;
-using ::alinous::db::table::DatabaseTable;
 using ::alinous::db::table::IDatabaseRecord;
+using ::alinous::db::table::IDatabaseTable;
 using ::alinous::db::table::TableIndex;
 using ::alinous::db::table::TableIndexValue;
 using ::alinous::db::table::lockmonitor::DatabaseLockException;
@@ -142,14 +138,14 @@ private:
 	TableIndex* index;
 	BTree* storage;
 	BTreeScanner* scanner;
-	DatabaseTable* tableStore;
+	IDatabaseTable* tableStore;
 	ArrayList<IBTreeValue>* values;
 	int current;
 	int lockMode;
 	ScanTableIdentifier* tableId;
 	ScanResultRecord* nextresult;
 public:
-	TableIndexScanner* init(ScanTableIdentifier* tableId, DbTransaction* trx, TableIndex* index, DatabaseTable* tableStore, int lockMode, ThreadContext* ctx);
+	TableIndexScanner* init(ScanTableIdentifier* tableId, DbTransaction* trx, TableIndex* index, IDatabaseTable* tableStore, int lockMode, ThreadContext* ctx);
 	void startScan(ScanResultIndexKey* indexKeyValue, ThreadContext* ctx) final;
 	void endScan(ThreadContext* ctx) final;
 	bool hasNext(bool debug, ThreadContext* ctx) final;
@@ -157,7 +153,7 @@ public:
 	void dispose(ISystemLog* core, ThreadContext* ctx) final;
 private:
 	bool loadNextRecord(ThreadContext* ctx);
-	DatabaseRecord* nextIndexValue(ThreadContext* ctx);
+	IDatabaseRecord* nextIndexValue(ThreadContext* ctx);
 public:
 	static bool __init_done;
 	static bool __init_static_variables();
