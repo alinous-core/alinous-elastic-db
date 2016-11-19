@@ -1,7 +1,14 @@
-# alinous-elastic-db
+# Alinous Elastic DB
 Alinous Elastic DB is database for bigdata. It can scale both the SQL engine and storage engine.
 
 ![Web Database Programming](img/top.png)
+
+This database engine is for scaling and sharding.
+
+- Scale out SQL & Stored Procedure for OLTP(Online Transaction Processing)
+- Sharding Data Storage Engine with auto shard map for Bigdata
+
+This software is open source (MIT License) so that we can use it on any cloud service.
 
 ## Development status
 Currently on development. Reporting the progress on twitter account [@alinous_core](https://twitter.com/alinous_core).
