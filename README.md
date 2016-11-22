@@ -10,6 +10,8 @@ This database engine is for scaling and sharding.
 
 This software is open source (MIT License) so that we can use it on any cloud service.
 
+- [Alinous Elastic DB Official Site](http://alinousdb.com/)
+
 ## Development status
 Currently on development. Reporting the progress on twitter account [@alinous_core](https://twitter.com/alinous_core).
 
