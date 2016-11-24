@@ -588,6 +588,8 @@
 #include "alinous.db.trx/RepeatableReadTransaction.h"
 #include "alinous.db.trx/SerializableTransaction.h"
 #include "alinous.db.trx/DbTransactionManager.h"
+#include "alinous.db/ICommidIdPublisher.h"
+#include "alinous.db/LocalCommitIdPublisher.h"
 #include "alinous.db/AlinousDatabase.h"
 #include "alinous.db.table.scan/UpdateHistoryValuesIterator.h"
 #include "alinous.db.table.scan/UpdateHistoryBTreeIndexScanner.h"
@@ -698,6 +700,9 @@
 #include "alinous.system.config/ConfigPathUtils.h"
 #include "alinous.system.functions/IAlinousSystem.h"
 #include "alinous.btreememory.scan/MemoryBTreeScanner.h"
+#include "alinous.db/ITableRegion.h"
+#include "alinous.db/LocalTableRegion.h"
+#include "alinous.db/TableRegionManager.h"
 #include "alinous.db.table/DatabaseTableIdPublisher.h"
 #include "alinous.db.table.lockmonitor/RowLockReleaser.h"
 #include "alinous.db.trx.cache/TrxRecordCacheFullScanner.h"
@@ -1338,8 +1343,13 @@ inline static void __cleanUpStatics(alinous::ThreadContext* ctx){
 	alinous::buffer::storage::FileStorageEntryBuilder::__cleanUp(ctx);
 	alinous::db::AlinousDatabase::__cleanUp(ctx);
 	alinous::db::TableSchema::__cleanUp(ctx);
+	alinous::db::ICommidIdPublisher::__cleanUp(ctx);
+	alinous::db::LocalTableRegion::__cleanUp(ctx);
+	alinous::db::LocalCommitIdPublisher::__cleanUp(ctx);
 	alinous::db::ConnectInfo::__cleanUp(ctx);
 	alinous::db::SchemaManager::__cleanUp(ctx);
+	alinous::db::TableRegionManager::__cleanUp(ctx);
+	alinous::db::ITableRegion::__cleanUp(ctx);
 	alinous::db::AlinousDbConnection::__cleanUp(ctx);
 	alinous::db::AlinousDbException::__cleanUp(ctx);
 	alinous::db::table::DatatableUpdateCache::__cleanUp(ctx);

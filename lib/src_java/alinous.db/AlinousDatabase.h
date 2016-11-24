@@ -3,6 +3,9 @@
 namespace alinous{namespace annotation{
 class OneSource;
 }}
+namespace alinous {namespace db {
+class LocalCommitIdPublisher;}}
+
 namespace alinous {namespace system {
 class AlinousCore;}}
 
@@ -87,6 +90,9 @@ class IntKey;}}
 namespace alinous {namespace lock {
 class LockObject;}}
 
+namespace alinous {namespace db {
+class ICommidIdPublisher;}}
+
 namespace alinous {namespace btree {
 class IBTreeKey;}}
 
@@ -149,6 +155,7 @@ public:
 	LockObject* instanceConfigLock;
 	SchemaManager* schemas;
 	DBThreadMonitor* lockManager;
+	ICommidIdPublisher* localCommitId;
 	ThreadPool* workerThreadsPool;
 	DbTransactionManager* trxManager;
 private:
@@ -156,7 +163,6 @@ private:
 	String* dataDir;
 	BTree* dbconfig;
 	File* configFile;
-	long long maxCommitId;
 	AlinousThread* trxWriterThread;
 	RecordCacheEngine* cahceEngine;
 	BTreeGlobalCache* btreeCache;

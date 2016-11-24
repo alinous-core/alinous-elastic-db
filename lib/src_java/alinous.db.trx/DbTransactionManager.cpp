@@ -18,7 +18,7 @@ bool DbTransactionManager::__init_static_variables(){
 	delete ctx;
 	return true;
 }
- DbTransactionManager::DbTransactionManager(AlinousDatabase* database, String* trxTmpDir, int maxConnection, ISystemLog* logger, ThreadPool* workerThreadsPool, ThreadContext* ctx) throw()  : IObject(ctx), trxTmpDir(nullptr), maxConnection(0), trxCount(0), database(nullptr), lock(__GC_INS(this, (new(ctx) LockObject(ctx)), LockObject)), logger(nullptr), trxReady(GCUtils<ArrayList<DbTransaction> >::ins(this, (new(ctx) ArrayList<DbTransaction>(ctx)), ctx, __FILEW__, __LINE__, L"")), workerThreadsPool(nullptr), trxIdSerial(0)
+ DbTransactionManager::DbTransactionManager(AlinousDatabase* database, String* trxTmpDir, int maxConnection, ISystemLog* logger, ThreadPool* workerThreadsPool, ThreadContext* ctx) throw()  : IObject(ctx), trxTmpDir(nullptr), maxConnection(0), trxCount(0), database(nullptr), lock(__GC_INS(this, (new(ctx) LockObject(ctx)), LockObject)), logger(nullptr), trxReady(GCUtils<ArrayList<DbTransaction> >::ins(this, (new(ctx) ArrayList<DbTransaction>(ctx)), ctx, __FILEW__, __LINE__, L"")), workerThreadsPool(nullptr)
 {
 	__GC_MV(this, &(this->workerThreadsPool), workerThreadsPool, ThreadPool);
 	__GC_MV(this, &(this->trxTmpDir), trxTmpDir, String);
@@ -102,7 +102,7 @@ DbTransaction* DbTransactionManager::borrowTransaction(int acid, ThreadContext* 
 		}
 	}
 	long long commitId = this->database->getCommitId(ctx);
-	long long trxId = this->trxIdSerial++;
+	long long trxId = commitId++;
 	String* tmpDir = this->trxTmpDir->clone(ctx)->append(trxId, ctx)->append(ConstStr::getCNST_STR_984(), ctx);
 	DbTransaction* trx = nullptr;
 	switch(acid) {

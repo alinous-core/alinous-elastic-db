@@ -84,7 +84,6 @@ private:
 	ISystemLog* logger;
 	ArrayList<DbTransaction>* trxReady;
 	ThreadPool* workerThreadsPool;
-	long long trxIdSerial;
 public:
 	DbTransaction* borrowTransaction(int acid, ThreadContext* ctx);
 	void returnTransaction(DbTransaction* trx, ThreadContext* ctx) throw() ;
