@@ -55,7 +55,7 @@ void DatatableDDLSupport::createTable(TableMetadata* metadata, AlinousDatabase* 
 			__GC_MV(this, &(this->oidIndex), (new(ctx) BTree(ctx))->init((new(ctx) File(this->oidIndexPath, ctx)), database->getBtreeCache(ctx), database->getCore(ctx)->diskCache, ctx), BTree);
 			this->oidIndex->initTreeStorage(32, IBTreeValue::TYPE_LONG, IBTreeValue::TYPE_LONG, (long long)DatatableConstants::capacity, (long long)64, ctx);
 			StringBuilder* primname = (new(ctx) StringBuilder(ctx));
-			primname->append(this->name, ctx)->append(ConstStr::getCNST_STR_1569(), ctx);
+			primname->append(this->name, ctx)->append(ConstStr::getCNST_STR_1570(), ctx);
 			__GC_MV(this, &(this->primaryIndex), (new(ctx) TableIndex(primname->toString(ctx), this->baseDir, true, metadata->getPrimaryKeys(ctx), ctx)), TableIndex);
 			this->primaryIndex->createIndex(database, ctx);
 			__GC_MV(this, &(this->metadata), metadata, TableMetadata);
@@ -112,7 +112,7 @@ void DatatableDDLSupport::createIndex(String* indexName, ArrayList<String>* colu
 		catch(Throwable* e)
 		{
 			unlockStorage(ctx);
-			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1570(), e, ctx));
+			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1571(), e, ctx));
 		}
 	}
 	unlockStorage(ctx);

@@ -45,8 +45,8 @@ class BTreeIndexKey;}}}
 namespace alinous {namespace system {
 class AlinousException;}}
 
-namespace alinous {namespace db {namespace table {namespace lockmonitor {
-class ThreadLocker;}}}}
+namespace alinous {namespace db {namespace trx {
+class TrxLockContext;}}}
 
 namespace alinous {namespace db {namespace table {
 class IDatabaseRecord;}}}
@@ -109,8 +109,8 @@ using ::alinous::db::table::IDatabaseTable;
 using ::alinous::db::table::TableIndex;
 using ::alinous::db::table::TableIndexValue;
 using ::alinous::db::table::lockmonitor::DatabaseLockException;
-using ::alinous::db::table::lockmonitor::ThreadLocker;
 using ::alinous::db::trx::DbTransaction;
+using ::alinous::db::trx::TrxLockContext;
 using ::alinous::db::trx::scan::ITableTargetScanner;
 using ::alinous::db::trx::scan::ScanException;
 using ::alinous::db::trx::scan::ScanResultIndexKey;

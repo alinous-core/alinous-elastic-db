@@ -27,8 +27,8 @@ class ScanResultRecord;}}}}
 namespace alinous {namespace db {
 class AlinousDatabase;}}
 
-namespace alinous {namespace db {namespace table {namespace lockmonitor {
-class ThreadLocker;}}}}
+namespace alinous {namespace db {namespace trx {
+class TrxLockContext;}}}
 
 namespace alinous {namespace compile {namespace sql {
 class TableAndSchema;}}}
@@ -98,9 +98,9 @@ using ::alinous::db::AlinousDatabase;
 using ::alinous::db::table::IDatabaseRecord;
 using ::alinous::db::table::IDatabaseTable;
 using ::alinous::db::table::lockmonitor::DatabaseLockException;
-using ::alinous::db::table::lockmonitor::ThreadLocker;
 using ::alinous::db::table::scan::IndexScannerLockRequirement;
 using ::alinous::db::trx::DbTransaction;
+using ::alinous::db::trx::TrxLockContext;
 using ::alinous::runtime::dom::DomVariable;
 using ::alinous::runtime::dom::VariableException;
 using ::alinous::runtime::variant::VariantValue;
@@ -142,7 +142,7 @@ public:
 	long long getInsertedCommitId(ThreadContext* ctx) throw() ;
 	long long getDeletedCommitId(ThreadContext* ctx) throw() ;
 	long long getOid(ThreadContext* ctx) throw() ;
-	void releaseLocks(ThreadLocker* lockContext, ThreadContext* ctx) throw() ;
+	void releaseLocks(TrxLockContext* lockContext, ThreadContext* ctx) throw() ;
 	ScanTableIdentifier* getTableId(ThreadContext* ctx) throw() ;
 	int diskSize(ThreadContext* ctx) final;
 	void appendToEntry(FileStorageEntryBuilder* builder, ThreadContext* ctx) final;

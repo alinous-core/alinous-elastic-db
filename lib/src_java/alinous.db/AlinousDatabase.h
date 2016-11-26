@@ -13,7 +13,10 @@ namespace alinous {namespace db {namespace table {namespace cache {
 class RecordCacheEngine;}}}}
 
 namespace alinous {namespace db {
-class SchemaManager;}}
+class LocalTableRegion;}}
+
+namespace alinous {namespace db {
+class TableRegionManager;}}
 
 namespace alinous {namespace db {namespace trx {
 class DbTransactionManager;}}}
@@ -39,8 +42,11 @@ class InterruptedException;}}
 namespace alinous {namespace btree {
 class BTreeException;}}
 
-namespace alinous {namespace db {namespace table {namespace lockmonitor {
-class ThreadLocker;}}}}
+namespace alinous {namespace db {namespace trx {
+class TrxLockContext;}}}
+
+namespace alinous {namespace db {
+class SchemaManager;}}
 
 namespace alinous {namespace btree {
 class LongValue;}}
@@ -66,11 +72,11 @@ class LaunchJoin;}}}
 namespace alinous {namespace runtime {namespace parallel {
 class AlinousThread;}}}
 
-namespace alinous {namespace db {namespace table {namespace lockmonitor {
-class DBThreadMonitor;}}}}
+namespace alinous {namespace db {namespace trx {
+class TrxLockManager;}}}
 
 namespace alinous {namespace db {
-class TableSchema;}}
+class TableSchemaCollection;}}
 
 namespace alinous {namespace db {namespace table {
 class IDatabaseTable;}}}
@@ -129,9 +135,9 @@ using ::alinous::btree::LongValue;
 using ::alinous::compile::declare::AlinousName;
 using ::alinous::db::table::IDatabaseTable;
 using ::alinous::db::table::cache::RecordCacheEngine;
-using ::alinous::db::table::lockmonitor::DBThreadMonitor;
-using ::alinous::db::table::lockmonitor::ThreadLocker;
 using ::alinous::db::trx::DbTransactionManager;
+using ::alinous::db::trx::TrxLockContext;
+using ::alinous::db::trx::TrxLockManager;
 using ::alinous::lock::LockObject;
 using ::alinous::runtime::dom::VariableException;
 using ::alinous::runtime::parallel::AlinousThread;
@@ -153,11 +159,10 @@ public:
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 public:
 	LockObject* instanceConfigLock;
-	SchemaManager* schemas;
-	DBThreadMonitor* lockManager;
+	DbTransactionManager* trxManager;
+	TrxLockManager* trxLockManager;
 	ICommidIdPublisher* localCommitId;
 	ThreadPool* workerThreadsPool;
-	DbTransactionManager* trxManager;
 private:
 	AlinousCore* core;
 	String* dataDir;
@@ -166,6 +171,7 @@ private:
 	AlinousThread* trxWriterThread;
 	RecordCacheEngine* cahceEngine;
 	BTreeGlobalCache* btreeCache;
+	TableRegionManager* regionManager;
 public:
 	const static IntKey __SCHEMA;
 	constexpr static IntKey* SCHEMA{const_cast<IntKey*>(&__SCHEMA)};
@@ -175,13 +181,13 @@ public:
 	constexpr static IntKey* MAX_COMMIT_ID{const_cast<IntKey*>(&__MAX_COMMIT_ID)};
 public:
 	void construct(AlinousCore* core, String* dataDir, String* trxTmpDir, int maxConnection, ThreadContext* ctx);
-	ThreadLocker* newLockContext(ThreadContext* ctx) throw() ;
+	TrxLockContext* newLockContext(ThreadContext* ctx) throw() ;
 	void initInstance(ThreadContext* ctx);
 	long long getCommitId(ThreadContext* ctx) throw() ;
 	long long newCommitId(ThreadContext* ctx);
 	void syncScheme(ThreadContext* ctx);
 	void open(ThreadContext* ctx);
-	TableSchema* getSchema(String* name, ThreadContext* ctx) throw() ;
+	TableSchemaCollection* getSchema(String* name, ThreadContext* ctx) throw() ;
 	IDatabaseTable* getTable(AlinousName* tableName, String* currentSchema, ThreadContext* ctx) throw() ;
 	IDatabaseTable* getTable(String* schemaName, String* tableName, ThreadContext* ctx) throw() ;
 	void closeDatabase(ThreadContext* ctx) throw() ;
@@ -191,6 +197,7 @@ public:
 	bool exists(ThreadContext* ctx) throw() ;
 	AlinousCore* getCore(ThreadContext* ctx) throw() ;
 	BTreeGlobalCache* getBtreeCache(ThreadContext* ctx) throw() ;
+	TableRegionManager* getRegionManager(ThreadContext* ctx) throw() ;
 private:
 	File* getConfigFile(ThreadContext* ctx) throw() ;
 public:

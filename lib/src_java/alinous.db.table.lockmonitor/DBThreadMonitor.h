@@ -18,14 +18,14 @@ class ThreadLocker;}}}}
 namespace alinous {namespace db {namespace table {
 class IDatabaseTable;}}}
 
+namespace alinous {namespace db {namespace table {namespace lockmonitor {
+class IThreadLocker;}}}}
+
 namespace alinous {namespace db {namespace table {namespace lockmonitor {namespace db {
 class TableLockMamager;}}}}}
 
 namespace alinous {namespace db {namespace table {namespace lockmonitor {
 class TableLock;}}}}
-
-namespace alinous {namespace db {namespace table {namespace lockmonitor {
-class DatabaseLockException;}}}}
 
 namespace java {namespace lang {
 class Throwable;}}
@@ -85,10 +85,10 @@ private:
 	SpinMutex* globalLock;
 public:
 	ThreadLocker* newThread(ThreadContext* ctx) throw() ;
-	void lockTable(IDatabaseTable* table, ThreadLocker* locker, bool update, ThreadContext* ctx);
-	void unlockTable(IDatabaseTable* table, ThreadLocker* locker, ThreadContext* ctx);
-	void unlockRow(IDatabaseTable* table, long long oid, ThreadLocker* locker, ThreadContext* ctx);
-	void lockRow(IDatabaseTable* table, long long oid, ThreadLocker* locker, bool update, ThreadContext* ctx);
+	void lockTable(IDatabaseTable* table, IThreadLocker* locker, bool update, ThreadContext* ctx);
+	void unlockTable(IDatabaseTable* table, IThreadLocker* locker, ThreadContext* ctx);
+	void unlockRow(IDatabaseTable* table, long long oid, IThreadLocker* locker, ThreadContext* ctx);
+	void lockRow(IDatabaseTable* table, long long oid, IThreadLocker* locker, bool update, ThreadContext* ctx);
 	ThreadPool* getThreadPool(ThreadContext* ctx) throw() ;
 public:
 	static bool __init_done;

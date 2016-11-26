@@ -15,11 +15,8 @@ class TableMetadata;}}}
 namespace alinous {namespace db {namespace table {
 class IDatabaseRecord;}}}
 
-namespace alinous {namespace db {namespace table {
-class IDatabaseTable;}}}
-
 namespace alinous {namespace db {namespace table {namespace lockmonitor {
-class ThreadLocker;}}}}
+class IThreadLocker;}}}}
 
 namespace alinous {namespace db {
 class AlinousDatabase;}}
@@ -71,7 +68,7 @@ using ::alinous::compile::sql::analyze::ScanTableColumnIdentifier;
 using ::alinous::db::AlinousDatabase;
 using ::alinous::db::AlinousDbException;
 using ::alinous::db::table::lockmonitor::DatabaseLockException;
-using ::alinous::db::table::lockmonitor::ThreadLocker;
+using ::alinous::db::table::lockmonitor::IThreadLocker;
 using ::alinous::db::trx::cache::CachedRecord;
 using ::alinous::runtime::dom::VariableException;
 using ::alinous::runtime::parallel::SequentialBackgroundJob;
@@ -113,14 +110,14 @@ public:
 	virtual void updateData(CachedRecord* record, long long newCommitId, IArrayObject<SequentialBackgroundJob>* jobs, ISystemLog* logger, ThreadContext* ctx) = 0;
 	virtual void createIndex(String* getindexName, ArrayList<String>* columns, AlinousDatabase* database, ThreadContext* ctx) = 0;
 	virtual void close(ThreadContext* ctx) throw()  = 0;
-	virtual void updateUnlockRow(IDatabaseTable* table, long long oid, ThreadLocker* locker, ThreadContext* ctx) = 0;
-	virtual void updateLockRow(IDatabaseTable* table, long long oid, ThreadLocker* locker, ThreadContext* ctx) = 0;
-	virtual void shareUnlockRow(IDatabaseTable* table, long long oid, ThreadLocker* locker, ThreadContext* ctx) = 0;
-	virtual void shareLockRow(IDatabaseTable* table, long long oid, ThreadLocker* locker, ThreadContext* ctx) = 0;
-	virtual void shareUnlockTable(IDatabaseTable* table, ThreadLocker* locker, ThreadContext* ctx) = 0;
-	virtual void shareLockTable(IDatabaseTable* table, ThreadLocker* locker, ThreadContext* ctx) = 0;
-	virtual void updateUnlockTable(IDatabaseTable* table, ThreadLocker* locker, ThreadContext* ctx) = 0;
-	virtual void updateLockTable(IDatabaseTable* table, ThreadLocker* locker, ThreadContext* ctx) = 0;
+	virtual void updateUnlockRow(long long oid, IThreadLocker* locker, ThreadContext* ctx) = 0;
+	virtual void updateLockRow(long long oid, IThreadLocker* locker, ThreadContext* ctx) = 0;
+	virtual void shareUnlockRow(long long oid, IThreadLocker* locker, ThreadContext* ctx) = 0;
+	virtual void shareLockRow(long long oid, IThreadLocker* locker, ThreadContext* ctx) = 0;
+	virtual void shareUnlockTable(IThreadLocker* locker, ThreadContext* ctx) = 0;
+	virtual void shareLockTable(IThreadLocker* locker, ThreadContext* ctx) = 0;
+	virtual void updateUnlockTable(IThreadLocker* locker, ThreadContext* ctx) = 0;
+	virtual void updateLockTable(IThreadLocker* locker, ThreadContext* ctx) = 0;
 public:
 	static bool __init_done;
 	static bool __init_static_variables();

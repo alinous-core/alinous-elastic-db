@@ -54,7 +54,7 @@ ConcurrentGate* RowLockManager::getConcurrentGate(ThreadContext* ctx) throw()
 {
 	return concurrentGate;
 }
-RowLock* RowLockManager::newLock(ThreadLocker* locker, bool update, ThreadContext* ctx) throw() 
+RowLock* RowLockManager::newLock(IThreadLocker* locker, bool update, ThreadContext* ctx) throw() 
 {
 	ArrayList<RowLock>* list = this->list;
 	int maxLoop = list->size(ctx);
@@ -70,22 +70,7 @@ RowLock* RowLockManager::newLock(ThreadLocker* locker, bool update, ThreadContex
 	this->list->add(lock, ctx);
 	return lock;
 }
-bool RowLockManager::checkDedLock(ThreadLocker* locker, ThreadContext* ctx) throw() 
-{
-	ArrayList<RowLock>* list = this->list;
-	int maxLoop = list->size(ctx);
-	for(int i = 0; i != maxLoop; ++i)
-	{
-		RowLock* lock = list->get(i, ctx);
-		IDatabaseLock* blockingLock = lock->locker->blockingLock;
-		if(blockingLock != nullptr && locker->checkContention(blockingLock, ctx))
-		{
-			return true;
-		}
-	}
-	return false;
-}
-RowLock* RowLockManager::releaseLock(ThreadLocker* locker, ThreadContext* ctx) throw() 
+RowLock* RowLockManager::releaseLock(IThreadLocker* locker, ThreadContext* ctx) throw() 
 {
 	ArrayList<RowLock>* list = this->list;
 	int maxLoop = list->size(ctx);

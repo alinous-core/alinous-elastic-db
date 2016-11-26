@@ -138,7 +138,7 @@ void TrxStorageManager::commit(long long newCommitId, ThreadContext* ctx)
 	while(scit->hasNext(ctx))
 	{
 		String* sckey = scit->next(ctx);
-		TableSchema* schema = db->getSchema(sckey, ctx);
+		TableSchemaCollection* schema = db->getSchema(sckey, ctx);
 		HashMap<String,TrxRecordsCache>* cacheMap = this->insertStorages->get(sckey, ctx);
 		Iterator<String>* it = cacheMap->keySet(ctx)->iterator(ctx);
 		while(it->hasNext(ctx))
@@ -153,7 +153,7 @@ void TrxStorageManager::commit(long long newCommitId, ThreadContext* ctx)
 	while(scit->hasNext(ctx))
 	{
 		String* sckey = scit->next(ctx);
-		TableSchema* schema = db->getSchema(sckey, ctx);
+		TableSchemaCollection* schema = db->getSchema(sckey, ctx);
 		HashMap<String,TrxRecordsCache>* cacheMap = this->updateStorages->get(sckey, ctx);
 		Iterator<String>* it = cacheMap->keySet(ctx)->iterator(ctx);
 		while(it->hasNext(ctx))

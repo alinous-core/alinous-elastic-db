@@ -52,7 +52,7 @@ TableLockMamager* TableLockManagerList::getTableLockmanager(IDatabaseTable* tabl
 	hashDb->inc(ctx);
 	return mgr;
 }
-TableLock* TableLockManagerList::releaseLock(IDatabaseTable* table, BitSet* bitset, int hashcode, ThreadLocker* locker, ThreadContext* ctx) throw() 
+TableLock* TableLockManagerList::releaseLock(IDatabaseTable* table, BitSet* bitset, int hashcode, IThreadLocker* locker, ThreadContext* ctx) throw() 
 {
 	TableLockMamager* mgr = nullptr;
 	int maxLoop = this->list->size(ctx);

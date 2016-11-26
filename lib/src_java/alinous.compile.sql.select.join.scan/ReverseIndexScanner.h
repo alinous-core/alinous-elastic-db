@@ -51,8 +51,8 @@ class ScanTableIndexMetadata;}}}}
 namespace alinous {namespace compile {namespace sql {namespace expression {
 class ISQLExpression;}}}}
 
-namespace alinous {namespace db {namespace table {namespace lockmonitor {
-class ThreadLocker;}}}}
+namespace alinous {namespace db {namespace trx {
+class TrxLockContext;}}}
 
 namespace alinous {namespace db {namespace trx {namespace scan {
 class ScanException;}}}}
@@ -76,8 +76,8 @@ using ::alinous::compile::sql::analyze::ScanTableMetadata;
 using ::alinous::compile::sql::expression::ISQLExpression;
 using ::alinous::compile::sql::select::join::SQLJoinCondition;
 using ::alinous::db::table::DatabaseException;
-using ::alinous::db::table::lockmonitor::ThreadLocker;
 using ::alinous::db::trx::DbTransaction;
+using ::alinous::db::trx::TrxLockContext;
 using ::alinous::db::trx::scan::ITableTargetScanner;
 using ::alinous::db::trx::scan::ScanException;
 using ::alinous::db::trx::scan::ScanResultIndexKey;
@@ -116,7 +116,7 @@ private:
 	ScannedOids* scannedoids;
 	ISQLExpression* joinCondition;
 	ScriptMachine* machine;
-	ThreadLocker* lockContext;
+	TrxLockContext* lockContext;
 	DbTransaction* trx;
 public:
 	bool hasNext(bool debug, ThreadContext* ctx) final;

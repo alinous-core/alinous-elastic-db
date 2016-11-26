@@ -18,15 +18,15 @@ bool DatabaseTable::__init_static_variables(){
 	delete ctx;
 	return true;
 }
- DatabaseTable::DatabaseTable(RecordCacheEngine* cacheEngine, String* schema, String* name, String* baseDir, DBThreadMonitor* monitor, ThreadContext* ctx) throw()  : IObject(ctx), DatatableUpdateSupport(schema, name, baseDir, ctx), monitor(nullptr)
+ DatabaseTable::DatabaseTable(RecordCacheEngine* cacheEngine, String* schema, String* name, String* baseDir, ThreadPool* threadPool, ThreadContext* ctx) throw()  : IObject(ctx), DatatableUpdateSupport(schema, name, baseDir, ctx), monitor(nullptr)
 {
 	__GC_MV(this, &(this->cacheEngine), cacheEngine, RecordCacheEngine);
-	__GC_MV(this, &(this->monitor), monitor, DBThreadMonitor);
+	__GC_MV(this, &(this->monitor), (new(ctx) DBThreadMonitor(threadPool, ctx)), DBThreadMonitor);
 }
-void DatabaseTable::__construct_impl(RecordCacheEngine* cacheEngine, String* schema, String* name, String* baseDir, DBThreadMonitor* monitor, ThreadContext* ctx) throw() 
+void DatabaseTable::__construct_impl(RecordCacheEngine* cacheEngine, String* schema, String* name, String* baseDir, ThreadPool* threadPool, ThreadContext* ctx) throw() 
 {
 	__GC_MV(this, &(this->cacheEngine), cacheEngine, RecordCacheEngine);
-	__GC_MV(this, &(this->monitor), monitor, DBThreadMonitor);
+	__GC_MV(this, &(this->monitor), (new(ctx) DBThreadMonitor(threadPool, ctx)), DBThreadMonitor);
 }
  DatabaseTable::~DatabaseTable() throw() 
 {
@@ -129,37 +129,37 @@ TableIndex* DatabaseTable::getTableIndex(ArrayList<String>* columns, ThreadConte
 	}
 	return matchedindex;
 }
-void DatabaseTable::updateLockTable(IDatabaseTable* table, ThreadLocker* locker, ThreadContext* ctx)
+void DatabaseTable::updateLockTable(IThreadLocker* locker, ThreadContext* ctx)
 {
-	this->monitor->lockTable(table, locker, true, ctx);
+	this->monitor->lockTable(this, locker, true, ctx);
 }
-void DatabaseTable::updateUnlockTable(IDatabaseTable* table, ThreadLocker* locker, ThreadContext* ctx)
+void DatabaseTable::updateUnlockTable(IThreadLocker* locker, ThreadContext* ctx)
 {
-	this->monitor->unlockTable(table, locker, ctx);
+	this->monitor->unlockTable(this, locker, ctx);
 }
-void DatabaseTable::shareLockTable(IDatabaseTable* table, ThreadLocker* locker, ThreadContext* ctx)
+void DatabaseTable::shareLockTable(IThreadLocker* locker, ThreadContext* ctx)
 {
-	this->monitor->lockTable(table, locker, false, ctx);
+	this->monitor->lockTable(this, locker, false, ctx);
 }
-void DatabaseTable::shareUnlockTable(IDatabaseTable* table, ThreadLocker* locker, ThreadContext* ctx)
+void DatabaseTable::shareUnlockTable(IThreadLocker* locker, ThreadContext* ctx)
 {
-	this->monitor->unlockTable(table, locker, ctx);
+	this->monitor->unlockTable(this, locker, ctx);
 }
-void DatabaseTable::shareLockRow(IDatabaseTable* table, long long oid, ThreadLocker* locker, ThreadContext* ctx)
+void DatabaseTable::shareLockRow(long long oid, IThreadLocker* locker, ThreadContext* ctx)
 {
-	this->monitor->lockRow(table, oid, locker, false, ctx);
+	this->monitor->lockRow(this, oid, locker, false, ctx);
 }
-void DatabaseTable::shareUnlockRow(IDatabaseTable* table, long long oid, ThreadLocker* locker, ThreadContext* ctx)
+void DatabaseTable::shareUnlockRow(long long oid, IThreadLocker* locker, ThreadContext* ctx)
 {
-	this->monitor->unlockRow(table, oid, locker, ctx);
+	this->monitor->unlockRow(this, oid, locker, ctx);
 }
-void DatabaseTable::updateLockRow(IDatabaseTable* table, long long oid, ThreadLocker* locker, ThreadContext* ctx)
+void DatabaseTable::updateLockRow(long long oid, IThreadLocker* locker, ThreadContext* ctx)
 {
-	this->monitor->lockRow(table, oid, locker, true, ctx);
+	this->monitor->lockRow(this, oid, locker, true, ctx);
 }
-void DatabaseTable::updateUnlockRow(IDatabaseTable* table, long long oid, ThreadLocker* locker, ThreadContext* ctx)
+void DatabaseTable::updateUnlockRow(long long oid, IThreadLocker* locker, ThreadContext* ctx)
 {
-	this->monitor->unlockRow(table, oid, locker, ctx);
+	this->monitor->unlockRow(this, oid, locker, ctx);
 }
 bool DatabaseTable::matchIndexByIdList(ArrayList<TableColumnMetadata>* columnsMetadataList, ArrayList<ScanTableColumnIdentifier>* columns, ThreadContext* ctx) throw() 
 {

@@ -6,6 +6,9 @@ class OneSource;
 namespace alinous {namespace db {namespace table {namespace cache {
 class RecordCacheEngine;}}}}
 
+namespace alinous {namespace runtime {namespace parallel {
+class ThreadPool;}}}
+
 namespace alinous {namespace db {namespace table {namespace lockmonitor {
 class DBThreadMonitor;}}}}
 
@@ -18,11 +21,8 @@ class ScanTableColumnIdentifier;}}}}
 namespace alinous {namespace db {namespace table {
 class TableColumnMetadata;}}}
 
-namespace alinous {namespace db {namespace table {
-class IDatabaseTable;}}}
-
 namespace alinous {namespace db {namespace table {namespace lockmonitor {
-class ThreadLocker;}}}}
+class IThreadLocker;}}}}
 
 namespace alinous {namespace db {namespace table {
 class DatatableUpdateSupport;}}}
@@ -44,7 +44,8 @@ using ::alinous::compile::sql::analyze::ScanTableColumnIdentifier;
 using ::alinous::db::table::cache::RecordCacheEngine;
 using ::alinous::db::table::lockmonitor::DBThreadMonitor;
 using ::alinous::db::table::lockmonitor::DatabaseLockException;
-using ::alinous::db::table::lockmonitor::ThreadLocker;
+using ::alinous::db::table::lockmonitor::IThreadLocker;
+using ::alinous::runtime::parallel::ThreadPool;
 
 
 
@@ -52,8 +53,8 @@ class DatabaseTable final : public DatatableUpdateSupport {
 public:
 	DatabaseTable(const DatabaseTable& base) = default;
 public:
-	DatabaseTable(RecordCacheEngine* cacheEngine, String* schema, String* name, String* baseDir, DBThreadMonitor* monitor, ThreadContext* ctx) throw() ;
-	void __construct_impl(RecordCacheEngine* cacheEngine, String* schema, String* name, String* baseDir, DBThreadMonitor* monitor, ThreadContext* ctx) throw() ;
+	DatabaseTable(RecordCacheEngine* cacheEngine, String* schema, String* name, String* baseDir, ThreadPool* threadPool, ThreadContext* ctx) throw() ;
+	void __construct_impl(RecordCacheEngine* cacheEngine, String* schema, String* name, String* baseDir, ThreadPool* threadPool, ThreadContext* ctx) throw() ;
 	virtual ~DatabaseTable() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 private:
@@ -63,14 +64,14 @@ public:
 	TableIndex* getAbailableIndex(ArrayList<String>* columns, ThreadContext* ctx) throw()  final;
 	TableIndex* getAbailableIndexByScanColId(ArrayList<ScanTableColumnIdentifier>* columns, ThreadContext* ctx) throw()  final;
 	TableIndex* getTableIndex(ArrayList<String>* columns, ThreadContext* ctx) throw() ;
-	void updateLockTable(IDatabaseTable* table, ThreadLocker* locker, ThreadContext* ctx) final;
-	void updateUnlockTable(IDatabaseTable* table, ThreadLocker* locker, ThreadContext* ctx) final;
-	void shareLockTable(IDatabaseTable* table, ThreadLocker* locker, ThreadContext* ctx) final;
-	void shareUnlockTable(IDatabaseTable* table, ThreadLocker* locker, ThreadContext* ctx) final;
-	void shareLockRow(IDatabaseTable* table, long long oid, ThreadLocker* locker, ThreadContext* ctx) final;
-	void shareUnlockRow(IDatabaseTable* table, long long oid, ThreadLocker* locker, ThreadContext* ctx) final;
-	void updateLockRow(IDatabaseTable* table, long long oid, ThreadLocker* locker, ThreadContext* ctx) final;
-	void updateUnlockRow(IDatabaseTable* table, long long oid, ThreadLocker* locker, ThreadContext* ctx) final;
+	void updateLockTable(IThreadLocker* locker, ThreadContext* ctx) final;
+	void updateUnlockTable(IThreadLocker* locker, ThreadContext* ctx) final;
+	void shareLockTable(IThreadLocker* locker, ThreadContext* ctx) final;
+	void shareUnlockTable(IThreadLocker* locker, ThreadContext* ctx) final;
+	void shareLockRow(long long oid, IThreadLocker* locker, ThreadContext* ctx) final;
+	void shareUnlockRow(long long oid, IThreadLocker* locker, ThreadContext* ctx) final;
+	void updateLockRow(long long oid, IThreadLocker* locker, ThreadContext* ctx) final;
+	void updateUnlockRow(long long oid, IThreadLocker* locker, ThreadContext* ctx) final;
 private:
 	bool matchIndexByIdList(ArrayList<TableColumnMetadata>* columnsMetadataList, ArrayList<ScanTableColumnIdentifier>* columns, ThreadContext* ctx) throw() ;
 	bool matchIndexByStrList(ArrayList<TableColumnMetadata>* columnsMetadataList, ArrayList<String>* columns, ThreadContext* ctx) throw() ;

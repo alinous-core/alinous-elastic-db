@@ -61,7 +61,7 @@ RowLockManager* RowLockDb::getRowLockManager(IDatabaseTable* table, long long oi
 	int hashcode = ((int)((table->getTableId(ctx)->intValue(ctx) << 8 | oid) & MAX_HASH_MASK));
 	return arrays->get(hashcode)->getRowLockManager(table, oid, this->bitset, hashcode, this, gatePool, ctx);
 }
-RowLock* RowLockDb::releaseLock(IDatabaseTable* table, long long oid, ThreadLocker* locker, ThreadContext* ctx) throw() 
+RowLock* RowLockDb::releaseLock(IDatabaseTable* table, long long oid, IThreadLocker* locker, ThreadContext* ctx) throw() 
 {
 	int hashcode = ((int)((table->getTableId(ctx)->intValue(ctx) << 8 | oid) & MAX_HASH_MASK));
 	RowLockManagerList* list = arrays->get(hashcode);

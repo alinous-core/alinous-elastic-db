@@ -18,19 +18,19 @@ bool TableLock::__init_static_variables(){
 	delete ctx;
 	return true;
 }
- TableLock::TableLock(bool update, IDatabaseTable* table, ThreadLocker* locker, ConcurrentGate* gate, ThreadContext* ctx) throw()  : IObject(ctx), IDatabaseLock(ctx), update(0), table(nullptr), locker(nullptr), count(0), pushBack(0), gate(nullptr)
+ TableLock::TableLock(bool update, IDatabaseTable* table, IThreadLocker* locker, ConcurrentGate* gate, ThreadContext* ctx) throw()  : IObject(ctx), IDatabaseLock(ctx), update(0), table(nullptr), locker(nullptr), count(0), pushBack(0), gate(nullptr)
 {
 	this->update = update;
 	__GC_MV(this, &(this->table), table, IDatabaseTable);
-	__GC_MV(this, &(this->locker), locker, ThreadLocker);
+	__GC_MV(this, &(this->locker), locker, IThreadLocker);
 	__GC_MV(this, &(this->gate), gate, ConcurrentGate);
 	this->pushBack = false;
 }
-void TableLock::__construct_impl(bool update, IDatabaseTable* table, ThreadLocker* locker, ConcurrentGate* gate, ThreadContext* ctx) throw() 
+void TableLock::__construct_impl(bool update, IDatabaseTable* table, IThreadLocker* locker, ConcurrentGate* gate, ThreadContext* ctx) throw() 
 {
 	this->update = update;
 	__GC_MV(this, &(this->table), table, IDatabaseTable);
-	__GC_MV(this, &(this->locker), locker, ThreadLocker);
+	__GC_MV(this, &(this->locker), locker, IThreadLocker);
 	__GC_MV(this, &(this->gate), gate, ConcurrentGate);
 	this->pushBack = false;
 }
@@ -75,7 +75,7 @@ void TableLock::lock(ThreadContext* ctx)
 		}
 		catch(InterruptedException* e)
 		{
-			throw (new(ctx) DatabaseLockException(ConstStr::getCNST_STR_1581(), e, ctx));
+			throw (new(ctx) DatabaseLockException(ConstStr::getCNST_STR_1582(), e, ctx));
 		}
 	}
 	count ++ ;
@@ -105,7 +105,7 @@ void TableLock::unlock(ConcurrentGatePool* gatePool, ThreadContext* ctx)
 			{
 				gatePool->pushBack(gate, ctx);
 			}
-			throw (new(ctx) DatabaseLockException(ConstStr::getCNST_STR_1581(), e, ctx));
+			throw (new(ctx) DatabaseLockException(ConstStr::getCNST_STR_1582(), e, ctx));
 		}
 	}
 	if(this->pushBack)

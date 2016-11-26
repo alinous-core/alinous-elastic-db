@@ -26,7 +26,7 @@ bool DbTransaction::__init_static_variables(){
 	__GC_MV(this, &(this->database), database, AlinousDatabase);
 	__GC_MV(this, &(this->logger), logger, ISystemLog);
 	this->commitId = commitId;
-	__GC_MV(this, &(this->lockContext), database->newLockContext(ctx), ThreadLocker);
+	__GC_MV(this, &(this->lockContext), database->newLockContext(ctx), TrxLockContext);
 	this->lockMode = IndexScannerLockRequirement::INSTANT_SHARE;
 	this->resultSerial = 1;
 	__GC_MV(this, &(this->trxDir), tmpDir, String);
@@ -40,7 +40,7 @@ void DbTransaction::__construct_impl(DbTransactionManager* mgr, String* tmpDir, 
 	__GC_MV(this, &(this->database), database, AlinousDatabase);
 	__GC_MV(this, &(this->logger), logger, ISystemLog);
 	this->commitId = commitId;
-	__GC_MV(this, &(this->lockContext), database->newLockContext(ctx), ThreadLocker);
+	__GC_MV(this, &(this->lockContext), database->newLockContext(ctx), TrxLockContext);
 	this->lockMode = IndexScannerLockRequirement::INSTANT_SHARE;
 	this->resultSerial = 1;
 	__GC_MV(this, &(this->trxDir), tmpDir, String);
@@ -234,11 +234,7 @@ TableMetadata* DbTransaction::getMetadata(String* schemaName, String* tableName,
 	{
 		return metadata;
 	}
-	TableSchema* sc = this->database->getSchema(schemaName, ctx);
-	if(sc == nullptr)
-	{
-		return nullptr;
-	}
+	TableSchemaCollection* sc = this->database->getSchema(schemaName, ctx);
 	return sc->getDableMetadata(tableName, ctx);
 }
 void DbTransaction::commit(ThreadContext* ctx)

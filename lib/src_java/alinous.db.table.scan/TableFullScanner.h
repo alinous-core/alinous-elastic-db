@@ -69,8 +69,8 @@ class BTree;}}
 namespace alinous {namespace btree {
 class IBTreeValue;}}
 
-namespace alinous {namespace db {namespace table {namespace lockmonitor {
-class ThreadLocker;}}}}
+namespace alinous {namespace db {namespace trx {
+class TrxLockContext;}}}
 
 namespace alinous {namespace db {namespace trx {namespace scan {
 class ITableTargetScanner;}}}}
@@ -105,8 +105,8 @@ using ::alinous::db::table::IDatabaseTable;
 using ::alinous::db::table::TableIndex;
 using ::alinous::db::table::TableIndexValue;
 using ::alinous::db::table::lockmonitor::DatabaseLockException;
-using ::alinous::db::table::lockmonitor::ThreadLocker;
 using ::alinous::db::trx::DbTransaction;
+using ::alinous::db::trx::TrxLockContext;
 using ::alinous::db::trx::scan::ITableTargetScanner;
 using ::alinous::db::trx::scan::ScanException;
 using ::alinous::db::trx::scan::ScanResultIndexKey;
@@ -138,7 +138,7 @@ private:
 	ArrayList<IBTreeValue>* values;
 	int current;
 	int lockMode;
-	ThreadLocker* locker;
+	TrxLockContext* locker;
 	ScanResultRecord* nextresult;
 	ScanTableIdentifier* tableId;
 public:

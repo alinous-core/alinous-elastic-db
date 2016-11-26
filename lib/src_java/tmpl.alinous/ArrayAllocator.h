@@ -30,6 +30,8 @@ template class alinous::ArrayAllocator<::com::google::re2j::Machine::LogicalThre
 template class alinous::ArrayAllocator<::com::google::re2j::Inst>;
 template class alinous::ArrayAllocator<::com::google::re2j::Machine>;
 template class alinous::ArrayAllocator<::alinous::runtime::engine::debugger::server::IServerCommand>;
+template class alinous::ArrayAllocator<::alinous::db::ITableRegion>;
+template class alinous::ArrayAllocator<::alinous::db::TableSchema>;
 template class alinous::ArrayAllocator<::alinous::compile::IncludePreprocessor>;
 template class alinous::ArrayAllocator<::alinous::compile::declare::IDeclare>;
 template class alinous::ArrayAllocator<::alinous::compile::stmt::StatementList>;
@@ -95,7 +97,6 @@ template class alinous::ArrayAllocator<::alinous::db::trx::scan::ScanResultIndex
 template class alinous::ArrayAllocator<::alinous::db::trx::DbTransaction>;
 template class alinous::ArrayAllocator<::alinous::db::trx::scan::ScanResultRecord>;
 template class alinous::ArrayAllocator<::alinous::db::trx::cache::TrxRecordCacheIndex>;
-template class alinous::ArrayAllocator<::alinous::db::TableSchema>;
 template class alinous::ArrayAllocator<::alinous::db::trx::CreateIndexMetadata>;
 template class alinous::ArrayAllocator<::alinous::db::trx::scan::ScanResultIndex>;
 template class alinous::ArrayAllocator<::alinous::db::table::IDatabaseRecord>;

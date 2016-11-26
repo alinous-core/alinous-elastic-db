@@ -72,6 +72,8 @@ template class ::java::util::ArrayListIterator<::alinous::runtime::engine::debug
 template class ::java::util::ArrayListIterator<::alinous::compile::analyse::AlinousType>;
 template class ::java::util::ArrayListIterator<::alinous::html::xpath::match::MatchCandidate>;
 template class ::java::util::ArrayListIterator<::alinous::btree::IBTreeValue>;
+template class ::java::util::ArrayListIterator<::alinous::db::ITableRegion>;
+template class ::java::util::ArrayListIterator<::alinous::db::TableSchema>;
 template class ::java::util::ArrayListIterator<::alinous::db::table::TableIndex>;
 template class ::java::util::ArrayListIterator<::alinous::db::table::DatabaseRecord>;
 template class ::java::util::ArrayListIterator<::alinous::db::table::lockmonitor::TableLock>;
@@ -83,7 +85,6 @@ template class ::java::util::ArrayListIterator<::alinous::db::trx::scan::ScanRes
 template class ::java::util::ArrayListIterator<::alinous::db::trx::DbTransaction>;
 template class ::java::util::ArrayListIterator<::alinous::db::trx::scan::ScanResultRecord>;
 template class ::java::util::ArrayListIterator<::alinous::db::trx::cache::TrxRecordCacheIndex>;
-template class ::java::util::ArrayListIterator<::alinous::db::TableSchema>;
 template class ::java::util::ArrayListIterator<::alinous::db::trx::CreateIndexMetadata>;
 template class ::java::util::ArrayListIterator<::alinous::db::trx::scan::ScanResultIndex>;
 template class ::java::util::ArrayListIterator<::alinous::db::table::IDatabaseRecord>;

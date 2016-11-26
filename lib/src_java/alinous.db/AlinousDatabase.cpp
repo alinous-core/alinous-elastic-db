@@ -21,18 +21,16 @@ bool AlinousDatabase::__init_static_variables(){
 	delete ctx;
 	return true;
 }
- AlinousDatabase::AlinousDatabase(ThreadContext* ctx) throw()  : IObject(ctx), instanceConfigLock(__GC_INS(this, (new(ctx) LockObject(ctx)), LockObject)), schemas(nullptr), lockManager(nullptr), localCommitId(nullptr), workerThreadsPool(nullptr), trxManager(nullptr), core(nullptr), dataDir(nullptr), dbconfig(nullptr), configFile(nullptr), trxWriterThread(nullptr), cahceEngine(nullptr), btreeCache(nullptr)
+ AlinousDatabase::AlinousDatabase(ThreadContext* ctx) throw()  : IObject(ctx), instanceConfigLock(__GC_INS(this, (new(ctx) LockObject(ctx)), LockObject)), trxManager(nullptr), trxLockManager(nullptr), localCommitId(nullptr), workerThreadsPool(nullptr), core(nullptr), dataDir(nullptr), dbconfig(nullptr), configFile(nullptr), trxWriterThread(nullptr), cahceEngine(nullptr), btreeCache(nullptr), regionManager(nullptr)
 {
 	__GC_MV(this, &(this->trxWriterThread), nullptr, AlinousThread);
 	__GC_MV(this, &(this->workerThreadsPool), nullptr, ThreadPool);
-	__GC_MV(this, &(this->lockManager), nullptr, DBThreadMonitor);
 	__GC_MV(this, &(this->localCommitId), (new(ctx) LocalCommitIdPublisher(this, ctx)), ICommidIdPublisher);
 }
 void AlinousDatabase::__construct_impl(ThreadContext* ctx) throw() 
 {
 	__GC_MV(this, &(this->trxWriterThread), nullptr, AlinousThread);
 	__GC_MV(this, &(this->workerThreadsPool), nullptr, ThreadPool);
-	__GC_MV(this, &(this->lockManager), nullptr, DBThreadMonitor);
 	__GC_MV(this, &(this->localCommitId), (new(ctx) LocalCommitIdPublisher(this, ctx)), ICommidIdPublisher);
 }
  AlinousDatabase::~AlinousDatabase() throw() 
@@ -47,16 +45,14 @@ void AlinousDatabase::__releaseRegerences(bool prepare, ThreadContext* ctx) thro
 	ObjectEraser __e_obj1(ctx, __FILEW__, __LINE__, L"AlinousDatabase", L"~AlinousDatabase");
 	__e_obj1.add(this->instanceConfigLock, this);
 	instanceConfigLock = nullptr;
-	__e_obj1.add(this->schemas, this);
-	schemas = nullptr;
-	__e_obj1.add(this->lockManager, this);
-	lockManager = nullptr;
+	__e_obj1.add(this->trxManager, this);
+	trxManager = nullptr;
+	__e_obj1.add(this->trxLockManager, this);
+	trxLockManager = nullptr;
 	__e_obj1.add(this->localCommitId, this);
 	localCommitId = nullptr;
 	__e_obj1.add(this->workerThreadsPool, this);
 	workerThreadsPool = nullptr;
-	__e_obj1.add(this->trxManager, this);
-	trxManager = nullptr;
 	__e_obj1.add(this->core, this);
 	core = nullptr;
 	__e_obj1.add(this->dataDir, this);
@@ -71,6 +67,8 @@ void AlinousDatabase::__releaseRegerences(bool prepare, ThreadContext* ctx) thro
 	cahceEngine = nullptr;
 	__e_obj1.add(this->btreeCache, this);
 	btreeCache = nullptr;
+	__e_obj1.add(this->regionManager, this);
+	regionManager = nullptr;
 	if(!prepare){
 		return;
 	}
@@ -80,7 +78,9 @@ void AlinousDatabase::construct(AlinousCore* core, String* dataDir, String* trxT
 	__GC_MV(this, &(this->cahceEngine), (new(ctx) RecordCacheEngine(ctx))->init(1024, ctx), RecordCacheEngine);
 	__GC_MV(this, &(this->core), core, AlinousCore);
 	__GC_MV(this, &(this->dataDir), dataDir, String);
-	__GC_MV(this, &(this->schemas), (new(ctx) SchemaManager(this->cahceEngine, dataDir, this->core->getLogger(ctx), ctx)), SchemaManager);
+	LocalTableRegion* localRegion = (new(ctx) LocalTableRegion(this->cahceEngine, dataDir, this->core->getLogger(ctx), this, ctx));
+	__GC_MV(this, &(this->regionManager), (new(ctx) TableRegionManager(ctx)), TableRegionManager);
+	this->regionManager->addRegion(localRegion, ctx);
 	__GC_MV(this, &(this->trxManager), (new(ctx) DbTransactionManager(this, trxTmpDir, maxConnection, core->getLogger(ctx), this->workerThreadsPool, ctx)), DbTransactionManager);
 	File* file = getConfigFile(ctx);
 	{
@@ -103,9 +103,9 @@ void AlinousDatabase::construct(AlinousCore* core, String* dataDir, String* trxT
 		}
 	}
 }
-ThreadLocker* AlinousDatabase::newLockContext(ThreadContext* ctx) throw() 
+TrxLockContext* AlinousDatabase::newLockContext(ThreadContext* ctx) throw() 
 {
-	return this->lockManager->newThread(ctx);
+	return this->trxLockManager->newLockContext(ctx);
 }
 void AlinousDatabase::initInstance(ThreadContext* ctx)
 {
@@ -114,7 +114,9 @@ void AlinousDatabase::initInstance(ThreadContext* ctx)
 	{
 		file->mkdirs(ctx);
 	}
-	this->schemas->createSchema(ConstStr::getCNST_STR_951(), ctx);
+	LocalTableRegion* localRegion = this->regionManager->getLocalRegion(ctx);
+	SchemaManager* schemas = localRegion->getSchemaManager(ctx);
+	schemas->createSchema(ConstStr::getCNST_STR_951(), ctx);
 	{
 		try
 		{
@@ -123,7 +125,7 @@ void AlinousDatabase::initInstance(ThreadContext* ctx)
 			long long capacity = 1024;
 			this->dbconfig->initTreeStorage(nodeCapacity, IBTreeKey::TYPE_INT, IBTreeKey::TYPE_INT, capacity, (long long)BLOCK_SIZE, ctx);
 			this->dbconfig->open(ctx);
-			this->dbconfig->putKeyValue(SCHEMA, this->schemas, ctx);
+			this->dbconfig->putKeyValue(SCHEMA, schemas, ctx);
 			LongValue* lvTrx = (new(ctx) LongValue(this->localCommitId->getMaxCommitId(ctx), ctx));
 			this->dbconfig->putKeyValue(MAX_COMMIT_ID, lvTrx, ctx);
 			this->dbconfig->close(ctx);
@@ -157,12 +159,14 @@ long long AlinousDatabase::newCommitId(ThreadContext* ctx)
 }
 void AlinousDatabase::syncScheme(ThreadContext* ctx)
 {
+	LocalTableRegion* localRegion = this->regionManager->getLocalRegion(ctx);
+	SchemaManager* schemas = localRegion->getSchemaManager(ctx);
 	BTreeLeafNode* lvTrxIdNode = nullptr;
 	{
 		try
 		{
 			this->dbconfig->open(ctx);
-			this->dbconfig->putKeyValue(SCHEMA, this->schemas, ctx);
+			this->dbconfig->putKeyValue(SCHEMA, schemas, ctx);
 			lvTrxIdNode = this->dbconfig->findByKey(MAX_COMMIT_ID, ctx);
 			ArrayList<IBTreeValue>* trxvals = lvTrxIdNode->getValues(ctx);
 			if(trxvals->size(ctx) > 0)
@@ -228,7 +232,7 @@ void AlinousDatabase::open(ThreadContext* ctx)
 			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1561(), e, ctx));
 		}
 	}
-	__GC_MV(this, &(this->lockManager), (new(ctx) DBThreadMonitor(this->workerThreadsPool, ctx)), DBThreadMonitor);
+	__GC_MV(this, &(this->trxLockManager), (new(ctx) TrxLockManager(ctx)), TrxLockManager);
 	{
 		try
 		{
@@ -236,8 +240,10 @@ void AlinousDatabase::open(ThreadContext* ctx)
 			ArrayList<IBTreeValue>* schemeValue = this->dbconfig->getValues(SCHEMA, ctx);
 			if(schemeValue->size(ctx) > 0)
 			{
-				__GC_MV(this, &(this->schemas), static_cast<SchemaManager*>(schemeValue->get(0, ctx)), SchemaManager);
-				this->schemas->loadAfterFetch(this->cahceEngine, this->dataDir, this->core->getLogger(ctx), this, ctx);
+				LocalTableRegion* localRegion = this->regionManager->getLocalRegion(ctx);
+				SchemaManager* schemas = localRegion->getSchemaManager(ctx);
+				schemas = static_cast<SchemaManager*>(schemeValue->get(0, ctx));
+				schemas->loadAfterFetch(this->cahceEngine, this->dataDir, this->core->getLogger(ctx), this, ctx);
 			}
 			ArrayList<IBTreeValue>* lvTrxIds = this->dbconfig->getValues(MAX_COMMIT_ID, ctx);
 			this->localCommitId->setMaxCommitId((static_cast<LongValue*>(lvTrxIds->get(0, ctx)))->value, ctx);
@@ -276,9 +282,9 @@ void AlinousDatabase::open(ThreadContext* ctx)
 		}
 	}
 }
-TableSchema* AlinousDatabase::getSchema(String* name, ThreadContext* ctx) throw() 
+TableSchemaCollection* AlinousDatabase::getSchema(String* name, ThreadContext* ctx) throw() 
 {
-	return this->schemas->getSchema(name, ctx);
+	return this->regionManager->getSchema(name, ctx);
 }
 IDatabaseTable* AlinousDatabase::getTable(AlinousName* tableName, String* currentSchema, ThreadContext* ctx) throw() 
 {
@@ -292,7 +298,7 @@ IDatabaseTable* AlinousDatabase::getTable(AlinousName* tableName, String* curren
 }
 IDatabaseTable* AlinousDatabase::getTable(String* schemaName, String* tableName, ThreadContext* ctx) throw() 
 {
-	TableSchema* sc = getSchema(schemaName, ctx);
+	TableSchemaCollection* sc = this->regionManager->getSchema(schemaName, ctx);
 	return sc->getTableStore(tableName, ctx);
 }
 void AlinousDatabase::closeDatabase(ThreadContext* ctx) throw() 
@@ -354,6 +360,10 @@ AlinousCore* AlinousDatabase::getCore(ThreadContext* ctx) throw()
 BTreeGlobalCache* AlinousDatabase::getBtreeCache(ThreadContext* ctx) throw() 
 {
 	return btreeCache;
+}
+TableRegionManager* AlinousDatabase::getRegionManager(ThreadContext* ctx) throw() 
+{
+	return regionManager;
 }
 File* AlinousDatabase::getConfigFile(ThreadContext* ctx) throw() 
 {

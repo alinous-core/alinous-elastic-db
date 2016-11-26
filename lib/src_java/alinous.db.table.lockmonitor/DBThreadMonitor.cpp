@@ -70,26 +70,14 @@ ThreadLocker* DBThreadMonitor::newThread(ThreadContext* ctx) throw()
 	}
 	return thread;
 }
-void DBThreadMonitor::lockTable(IDatabaseTable* table, ThreadLocker* locker, bool update, ThreadContext* ctx)
+void DBThreadMonitor::lockTable(IDatabaseTable* table, IThreadLocker* locker, bool update, ThreadContext* ctx)
 {
 	TableLockMamager* mgr = 0;
 	TableLock* lock = 0;
 	this->globalLock->lock(ctx);
 	mgr = this->tableLockDb->getTableLockManager(table, this->gatePool, ctx);
-	if(mgr->checkDedLock(locker, ctx))
-	{
-		globalLock->unlock(ctx);
-		throw (new(ctx) DatabaseLockException(ConstStr::getCNST_STR_1582(), ctx));
-	}
 	lock = mgr->newLock(locker, update, ctx);
-	if(lock->count > 0)
-	{
-		__GC_MV(locker, &(locker->blockingLock), lock, IDatabaseLock);
-	}
-		else 
-	{
-		locker->tableLocks->add(lock, ctx);
-	}
+	locker->getTableLocks(ctx)->add(lock, ctx);
 	this->globalLock->unlock(ctx);
 	{
 		try
@@ -99,59 +87,44 @@ void DBThreadMonitor::lockTable(IDatabaseTable* table, ThreadLocker* locker, boo
 		catch(Throwable* e)
 		{
 			this->globalLock->lock(ctx);
-			__GC_MV(locker, &(locker->blockingLock), nullptr, IDatabaseLock);
 			this->globalLock->unlock(ctx);
 			throw e;
 		}
 	}
 	this->globalLock->lock(ctx);
-	__GC_MV(locker, &(locker->blockingLock), nullptr, IDatabaseLock);
 	this->globalLock->unlock(ctx);
 }
-void DBThreadMonitor::unlockTable(IDatabaseTable* table, ThreadLocker* locker, ThreadContext* ctx)
+void DBThreadMonitor::unlockTable(IDatabaseTable* table, IThreadLocker* locker, ThreadContext* ctx)
 {
 	this->globalLock->lock(ctx);
 	TableLock* lock = this->tableLockDb->releaseLock(table, locker, ctx);
 	if(lock->count == 1)
 	{
-		locker->tableLocks->remove(lock, ctx);
+		locker->getTableLocks(ctx)->remove(lock, ctx);
 	}
 	this->globalLock->unlock(ctx);
 	lock->unlock(this->gatePool, ctx);
 }
-void DBThreadMonitor::unlockRow(IDatabaseTable* table, long long oid, ThreadLocker* locker, ThreadContext* ctx)
+void DBThreadMonitor::unlockRow(IDatabaseTable* table, long long oid, IThreadLocker* locker, ThreadContext* ctx)
 {
 	RowLock* lock = nullptr;
 	this->globalLock->lock(ctx);
 	lock = this->rowLockDb->releaseLock(table, oid, locker, ctx);
 	if(lock->count == 1)
 	{
-		locker->rowLocks->remove(lock, ctx);
+		locker->getRowLocks(ctx)->remove(lock, ctx);
 	}
 	this->globalLock->unlock(ctx);
 	lock->unlock(this->gatePool, ctx);
 }
-void DBThreadMonitor::lockRow(IDatabaseTable* table, long long oid, ThreadLocker* locker, bool update, ThreadContext* ctx)
+void DBThreadMonitor::lockRow(IDatabaseTable* table, long long oid, IThreadLocker* locker, bool update, ThreadContext* ctx)
 {
 	RowLockManager* mgr = 0;
 	RowLock* lock = 0;
 	this->globalLock->lock(ctx);
 	mgr = this->rowLockDb->getRowLockManager(table, oid, this->gatePool, ctx);
-	if(mgr->checkDedLock(locker, ctx))
-	{
-		this->globalLock->unlock(ctx);
-		throw (new(ctx) DatabaseLockException(ConstStr::getCNST_STR_1582(), ctx));
-	}
 	lock = mgr->newLock(locker, update, ctx);
-	if(lock->count > 0)
-	{
-		__GC_MV(locker, &(locker->blockingLock), lock, IDatabaseLock);
-	}
-		else 
-	{
-		__GC_MV(locker, &(locker->blockingLock), lock, IDatabaseLock);
-		locker->rowLocks->add(lock, ctx);
-	}
+	locker->getRowLocks(ctx)->add(lock, ctx);
 	this->globalLock->unlock(ctx);
 	{
 		try
@@ -161,14 +134,10 @@ void DBThreadMonitor::lockRow(IDatabaseTable* table, long long oid, ThreadLocker
 		catch(Throwable* e)
 		{
 			this->globalLock->lock(ctx);
-			__GC_MV(locker, &(locker->blockingLock), nullptr, IDatabaseLock);
 			this->globalLock->unlock(ctx);
 			throw e;
 		}
 	}
-	this->globalLock->lock(ctx);
-	__GC_MV(locker, &(locker->blockingLock), nullptr, IDatabaseLock);
-	this->globalLock->unlock(ctx);
 }
 ThreadPool* DBThreadMonitor::getThreadPool(ThreadContext* ctx) throw() 
 {

@@ -10,10 +10,7 @@ namespace alinous {namespace db {namespace table {namespace lockmonitor {
 class RowLock;}}}}
 
 namespace alinous {namespace db {namespace table {namespace lockmonitor {
-class ThreadLocker;}}}}
-
-namespace alinous {namespace db {namespace table {namespace lockmonitor {
-class IDatabaseLock;}}}}
+class IThreadLocker;}}}}
 
 namespace java {namespace lang {
 class IObject;
@@ -30,9 +27,8 @@ using namespace ::java::lang;
 using ::java::util::Iterator;
 using ::java::util::ArrayList;
 using ::alinous::db::table::IDatabaseTable;
-using ::alinous::db::table::lockmonitor::IDatabaseLock;
+using ::alinous::db::table::lockmonitor::IThreadLocker;
 using ::alinous::db::table::lockmonitor::RowLock;
-using ::alinous::db::table::lockmonitor::ThreadLocker;
 using ::alinous::lock::ConcurrentGate;
 
 
@@ -53,9 +49,8 @@ private:
 	ConcurrentGate* concurrentGate;
 public:
 	ConcurrentGate* getConcurrentGate(ThreadContext* ctx) throw() ;
-	RowLock* newLock(ThreadLocker* locker, bool update, ThreadContext* ctx) throw() ;
-	bool checkDedLock(ThreadLocker* locker, ThreadContext* ctx) throw() ;
-	RowLock* releaseLock(ThreadLocker* locker, ThreadContext* ctx) throw() ;
+	RowLock* newLock(IThreadLocker* locker, bool update, ThreadContext* ctx) throw() ;
+	RowLock* releaseLock(IThreadLocker* locker, ThreadContext* ctx) throw() ;
 public:
 	static bool __init_done;
 	static bool __init_static_variables();

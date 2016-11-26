@@ -180,7 +180,7 @@ bool TableIndexScanner::loadNextRecord(ThreadContext* ctx)
 	{
 		return true;
 	}
-	ThreadLocker* locker = trx->lockContext;
+	TrxLockContext* locker = trx->lockContext;
 	while(true)
 	{
 		IDatabaseRecord* record = nextIndexValue(ctx);
@@ -226,7 +226,7 @@ IDatabaseRecord* TableIndexScanner::nextIndexValue(ThreadContext* ctx)
 	TableIndexValue* value = static_cast<TableIndexValue*>(this->values->get(this->current++, ctx));
 	long long position = value->getPosition(ctx);
 	long long oid = value->getOid(ctx);
-	ThreadLocker* locker = trx->lockContext;
+	TrxLockContext* locker = trx->lockContext;
 	switch(this->lockMode) {
 	case IndexScannerLockRequirement::EXPLICIT_SHARE:
 		locker->shareLockRow(this->tableStore, oid, ctx);

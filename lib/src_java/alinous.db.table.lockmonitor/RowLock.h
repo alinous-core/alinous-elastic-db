@@ -4,7 +4,7 @@ namespace alinous {namespace db {namespace table {
 class IDatabaseTable;}}}
 
 namespace alinous {namespace db {namespace table {namespace lockmonitor {
-class ThreadLocker;}}}}
+class IThreadLocker;}}}}
 
 namespace alinous {namespace lock {
 class ConcurrentGate;}}
@@ -43,15 +43,15 @@ class RowLock final : public IDatabaseLock, public virtual IObject {
 public:
 	RowLock(const RowLock& base) = default;
 public:
-	RowLock(IDatabaseTable* table, long long oid, bool update, ThreadLocker* locker, ConcurrentGate* gate, ThreadContext* ctx) throw() ;
-	void __construct_impl(IDatabaseTable* table, long long oid, bool update, ThreadLocker* locker, ConcurrentGate* gate, ThreadContext* ctx) throw() ;
+	RowLock(IDatabaseTable* table, long long oid, bool update, IThreadLocker* locker, ConcurrentGate* gate, ThreadContext* ctx) throw() ;
+	void __construct_impl(IDatabaseTable* table, long long oid, bool update, IThreadLocker* locker, ConcurrentGate* gate, ThreadContext* ctx) throw() ;
 	virtual ~RowLock() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 public:
 	bool update;
 	IDatabaseTable* table;
 	long long oid;
-	ThreadLocker* locker;
+	IThreadLocker* locker;
 	ConcurrentGate* gate;
 	int count;
 	bool pushBack;

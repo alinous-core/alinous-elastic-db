@@ -52,7 +52,7 @@ IDatabaseTable* TableLockMamager::getTable(ThreadContext* ctx) throw()
 {
 	return this->table;
 }
-TableLock* TableLockMamager::newLock(ThreadLocker* locker, bool update, ThreadContext* ctx) throw() 
+TableLock* TableLockMamager::newLock(IThreadLocker* locker, bool update, ThreadContext* ctx) throw() 
 {
 	ArrayList<TableLock>* list = this->list;
 	int maxLoop = list->size(ctx);
@@ -66,7 +66,7 @@ TableLock* TableLockMamager::newLock(ThreadLocker* locker, bool update, ThreadCo
 	}
 	return (new(ctx) TableLock(update, this->table, locker, this->gate, ctx));
 }
-TableLock* TableLockMamager::releaseLock(ThreadLocker* locker, ThreadContext* ctx) throw() 
+TableLock* TableLockMamager::releaseLock(IThreadLocker* locker, ThreadContext* ctx) throw() 
 {
 	ArrayList<TableLock>* list = this->list;
 	int maxLoop = list->size(ctx);
@@ -83,21 +83,6 @@ TableLock* TableLockMamager::releaseLock(ThreadLocker* locker, ThreadContext* ct
 		}
 	}
 	return nullptr;
-}
-bool TableLockMamager::checkDedLock(ThreadLocker* locker, ThreadContext* ctx) throw() 
-{
-	ArrayList<TableLock>* list = this->list;
-	int maxLoop = list->size(ctx);
-	for(int i = 0; i != maxLoop; ++i)
-	{
-		TableLock* lock = list->get(i, ctx);
-		IDatabaseLock* blockingLock = lock->locker->blockingLock;
-		if(blockingLock != nullptr && locker->checkContention(blockingLock, ctx))
-		{
-			return true;
-		}
-	}
-	return false;
 }
 }}}}}
 

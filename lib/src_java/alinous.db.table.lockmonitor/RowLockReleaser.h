@@ -7,7 +7,7 @@ namespace alinous {namespace db {namespace table {
 class IDatabaseTable;}}}
 
 namespace alinous {namespace db {namespace table {namespace lockmonitor {
-class ThreadLocker;}}}}
+class IThreadLocker;}}}}
 
 namespace alinous {namespace runtime {namespace parallel {
 class IThreadAction;}}}
@@ -34,14 +34,14 @@ class RowLockReleaser final : public IThreadAction, public virtual IObject {
 public:
 	RowLockReleaser(const RowLockReleaser& base) = default;
 public:
-	RowLockReleaser(DBThreadMonitor* monitor, IDatabaseTable* table, long long oid, ThreadLocker* locker, ThreadContext* ctx) throw() ;
-	void __construct_impl(DBThreadMonitor* monitor, IDatabaseTable* table, long long oid, ThreadLocker* locker, ThreadContext* ctx) throw() ;
+	RowLockReleaser(DBThreadMonitor* monitor, IDatabaseTable* table, long long oid, IThreadLocker* locker, ThreadContext* ctx) throw() ;
+	void __construct_impl(DBThreadMonitor* monitor, IDatabaseTable* table, long long oid, IThreadLocker* locker, ThreadContext* ctx) throw() ;
 	virtual ~RowLockReleaser() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 public:
 	IDatabaseTable* table;
 	long long oid;
-	ThreadLocker* locker;
+	IThreadLocker* locker;
 	DBThreadMonitor* monitor;
 public:
 	void execute(ThreadContext* ctx) final;

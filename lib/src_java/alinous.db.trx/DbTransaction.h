@@ -135,6 +135,9 @@ class BTreeException;}}
 namespace alinous {namespace db {
 class TableSchema;}}
 
+namespace alinous {namespace db {
+class TableSchemaCollection;}}
+
 namespace java {namespace lang {
 class InterruptedException;}}
 
@@ -147,8 +150,8 @@ class ThreadPool;}}}
 namespace alinous {namespace db {namespace trx {
 class DbTransaction;}}}
 
-namespace alinous {namespace db {namespace table {namespace lockmonitor {
-class ThreadLocker;}}}}
+namespace alinous {namespace db {namespace trx {
+class TrxLockContext;}}}
 
 namespace alinous {namespace db {namespace table {
 class DatabaseException;}}}
@@ -191,12 +194,12 @@ using ::alinous::compile::sql::select::join::IJoinTarget;
 using ::alinous::db::AlinousDatabase;
 using ::alinous::db::AlinousDbException;
 using ::alinous::db::TableSchema;
+using ::alinous::db::TableSchemaCollection;
 using ::alinous::db::table::DatabaseException;
 using ::alinous::db::table::IDatabaseRecord;
 using ::alinous::db::table::IDatabaseTable;
 using ::alinous::db::table::TableMetadata;
 using ::alinous::db::table::lockmonitor::DatabaseLockException;
-using ::alinous::db::table::lockmonitor::ThreadLocker;
 using ::alinous::db::table::scan::IndexScannerLockRequirement;
 using ::alinous::db::trx::cache::CachedRecord;
 using ::alinous::db::trx::cache::CulumnOrder;
@@ -228,7 +231,7 @@ public:
 	virtual ~DbTransaction() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 public:
-	ThreadLocker* lockContext;
+	TrxLockContext* lockContext;
 	int lockMode;
 	long long commitId;
 	DbTransactionManager* trxManager;

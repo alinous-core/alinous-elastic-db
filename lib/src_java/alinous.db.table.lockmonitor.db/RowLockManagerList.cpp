@@ -52,7 +52,7 @@ RowLockManager* RowLockManagerList::getRowLockManager(IDatabaseTable* table, lon
 	this->list->add(mgr, ctx);
 	return mgr;
 }
-RowLock* RowLockManagerList::releaseLock(IDatabaseTable* table, long long oid, BitSet* bitset, int hashcode, ThreadLocker* locker, ThreadContext* ctx) throw() 
+RowLock* RowLockManagerList::releaseLock(IDatabaseTable* table, long long oid, BitSet* bitset, int hashcode, IThreadLocker* locker, ThreadContext* ctx) throw() 
 {
 	RowLockManager* mgr = nullptr;
 	ArrayList<RowLockManager>* list = this->list;

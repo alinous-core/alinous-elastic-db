@@ -9,11 +9,11 @@ class RecordCacheEngine;}}}}
 namespace alinous {namespace system {
 class ISystemLog;}}
 
-namespace alinous {namespace db {namespace table {
-class TableMetadata;}}}
-
 namespace alinous {namespace db {
 class AlinousDatabase;}}
+
+namespace alinous {namespace db {namespace table {
+class TableMetadata;}}}
 
 namespace alinous {namespace db {
 class TableSchema;}}
@@ -92,8 +92,8 @@ class SchemaManager final : public IBTreeValue, public virtual IObject {
 public:
 	SchemaManager(const SchemaManager& base) = default;
 public:
-	SchemaManager(RecordCacheEngine* cacheEngine, String* dataDir, ISystemLog* logger, ThreadContext* ctx) throw() ;
-	void __construct_impl(RecordCacheEngine* cacheEngine, String* dataDir, ISystemLog* logger, ThreadContext* ctx) throw() ;
+	SchemaManager(RecordCacheEngine* cacheEngine, String* dataDir, ISystemLog* logger, AlinousDatabase* database, ThreadContext* ctx) throw() ;
+	void __construct_impl(RecordCacheEngine* cacheEngine, String* dataDir, ISystemLog* logger, AlinousDatabase* database, ThreadContext* ctx) throw() ;
 	virtual ~SchemaManager() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 private:
@@ -101,8 +101,9 @@ private:
 	HashMap<String,TableSchema>* schemas;
 	ISystemLog* logger;
 	RecordCacheEngine* cacheEngine;
+	AlinousDatabase* database;
 public:
-	void createTable(String* schemaName, TableMetadata* tableMetadata, AlinousDatabase* database, ThreadContext* ctx);
+	void createTable(String* schemaName, TableMetadata* tableMetadata, ThreadContext* ctx);
 	TableSchema* createSchema(String* name, ThreadContext* ctx) throw() ;
 	TableSchema* getSchema(String* name, ThreadContext* ctx) throw() ;
 	void loadAfterFetch(RecordCacheEngine* cacheEngine, String* dataDir, ISystemLog* logger, AlinousDatabase* database, ThreadContext* ctx);

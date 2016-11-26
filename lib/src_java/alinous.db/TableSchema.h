@@ -95,6 +95,7 @@ private:
 	String* schemaDir;
 	HashMap<String,TableMetadata>* tables;
 	HashMap<String,IDatabaseTable>* tableStores;
+	String* regionName;
 public:
 	void create(ThreadContext* ctx) throw() ;
 	void initAfterFetched(RecordCacheEngine* cacheEngine, String* dataDir, String* schemaName, AlinousDatabase* database, ThreadContext* ctx);
@@ -109,6 +110,8 @@ public:
 	bool equals(IObject* obj, ThreadContext* ctx) throw()  final;
 	bool equals(TableSchema* other, ThreadContext* ctx) throw() ;
 	IValueFetcher* getFetcher(ThreadContext* ctx) throw()  final;
+	String* getregionName(ThreadContext* ctx) throw() ;
+	void setRegionName(String* name, ThreadContext* ctx) throw() ;
 public:
 	static TableSchema* valueFromFetcher(FileStorageEntryFetcher* fetcher, ThreadContext* ctx);
 public:

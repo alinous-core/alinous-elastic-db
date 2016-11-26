@@ -38,7 +38,7 @@ bool ReverseIndexScanner::__init_static_variables(){
 	}
 	__GC_MV(this, &(this->machine), machine, ScriptMachine);
 	this->firstScanDone = false;
-	__GC_MV(this, &(this->lockContext), trx->lockContext, ThreadLocker);
+	__GC_MV(this, &(this->lockContext), trx->lockContext, TrxLockContext);
 }
 void ReverseIndexScanner::__construct_impl(DbTransaction* trx, ITableTargetScanner* left, ITableTargetScanner* right, ScanTableMetadata* leftMetadata, ScanTableMetadata* rightMetadata, bool inner, JoinMatchExpression* match, SQLJoinCondition* condition, ScriptMachine* machine, ThreadContext* ctx) throw() 
 {
@@ -60,7 +60,7 @@ void ReverseIndexScanner::__construct_impl(DbTransaction* trx, ITableTargetScann
 	}
 	__GC_MV(this, &(this->machine), machine, ScriptMachine);
 	this->firstScanDone = false;
-	__GC_MV(this, &(this->lockContext), trx->lockContext, ThreadLocker);
+	__GC_MV(this, &(this->lockContext), trx->lockContext, TrxLockContext);
 }
  ReverseIndexScanner::~ReverseIndexScanner() throw() 
 {

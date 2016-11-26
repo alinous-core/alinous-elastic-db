@@ -58,7 +58,7 @@ TableFullScanner* TableFullScanner::init(ScanTableIdentifier* tableId, DbTransac
 	__GC_MV(this, &(this->scanner), (new(ctx) BTreeScanner(this->storage, ctx)), BTreeScanner);
 	__GC_MV(this, &(this->tableStore), tableStore, IDatabaseTable);
 	this->lockMode = lockMode;
-	__GC_MV(this, &(this->locker), trx->lockContext, ThreadLocker);
+	__GC_MV(this, &(this->locker), trx->lockContext, TrxLockContext);
 	return this;
 }
 void TableFullScanner::startScan(ScanResultIndexKey* indexKeyValue, ThreadContext* ctx)

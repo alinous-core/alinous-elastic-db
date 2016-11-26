@@ -18,15 +18,17 @@ bool TableSchema::__init_static_variables(){
 	delete ctx;
 	return true;
 }
- TableSchema::TableSchema(String* name, String* dataDir, ThreadContext* ctx) throw()  : IObject(ctx), IBTreeValue(ctx), name(nullptr), dataDir(nullptr), schemaDir(nullptr), tables(GCUtils<HashMap<String,TableMetadata> >::ins(this, (new(ctx) HashMap<String,TableMetadata>(ctx)), ctx, __FILEW__, __LINE__, L"")), tableStores(GCUtils<HashMap<String,IDatabaseTable> >::ins(this, (new(ctx) HashMap<String,IDatabaseTable>(ctx)), ctx, __FILEW__, __LINE__, L""))
+ TableSchema::TableSchema(String* name, String* dataDir, ThreadContext* ctx) throw()  : IObject(ctx), IBTreeValue(ctx), name(nullptr), dataDir(nullptr), schemaDir(nullptr), tables(GCUtils<HashMap<String,TableMetadata> >::ins(this, (new(ctx) HashMap<String,TableMetadata>(ctx)), ctx, __FILEW__, __LINE__, L"")), tableStores(GCUtils<HashMap<String,IDatabaseTable> >::ins(this, (new(ctx) HashMap<String,IDatabaseTable>(ctx)), ctx, __FILEW__, __LINE__, L"")), regionName(nullptr)
 {
 	__GC_MV(this, &(this->dataDir), dataDir, String);
 	__GC_MV(this, &(this->name), name, String);
+	__GC_MV(this, &(this->regionName), ConstStr::getCNST_STR_1563(), String);
 }
 void TableSchema::__construct_impl(String* name, String* dataDir, ThreadContext* ctx) throw() 
 {
 	__GC_MV(this, &(this->dataDir), dataDir, String);
 	__GC_MV(this, &(this->name), name, String);
+	__GC_MV(this, &(this->regionName), ConstStr::getCNST_STR_1563(), String);
 }
  TableSchema::~TableSchema() throw() 
 {
@@ -48,6 +50,8 @@ void TableSchema::__releaseRegerences(bool prepare, ThreadContext* ctx) throw()
 	tables = nullptr;
 	__e_obj1.add(this->tableStores, this);
 	tableStores = nullptr;
+	__e_obj1.add(this->regionName, this);
+	regionName = nullptr;
 	if(!prepare){
 		return;
 	}
@@ -71,7 +75,7 @@ void TableSchema::initAfterFetched(RecordCacheEngine* cacheEngine, String* dataD
 	while(it->hasNext(ctx))
 	{
 		String* tableNname = it->next(ctx);
-		IDatabaseTable* dataStore = (new(ctx) DatabaseTable(cacheEngine, schemaName, tableNname, baseDir, database->lockManager, ctx));
+		IDatabaseTable* dataStore = (new(ctx) DatabaseTable(cacheEngine, schemaName, tableNname, baseDir, database->workerThreadsPool, ctx));
 		this->tableStores->put(tableNname, dataStore, ctx);
 		dataStore->open(database, ctx);
 	}
@@ -146,6 +150,14 @@ bool TableSchema::equals(TableSchema* other, ThreadContext* ctx) throw()
 IValueFetcher* TableSchema::getFetcher(ThreadContext* ctx) throw() 
 {
 	return nullptr;
+}
+String* TableSchema::getregionName(ThreadContext* ctx) throw() 
+{
+	return regionName;
+}
+void TableSchema::setRegionName(String* name, ThreadContext* ctx) throw() 
+{
+	__GC_MV(this, &(this->name), name, String);
 }
 TableSchema* TableSchema::valueFromFetcher(FileStorageEntryFetcher* fetcher, ThreadContext* ctx)
 {

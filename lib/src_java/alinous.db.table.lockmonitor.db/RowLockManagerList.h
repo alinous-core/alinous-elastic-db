@@ -19,7 +19,7 @@ namespace alinous {namespace db {namespace table {namespace lockmonitor {
 class RowLock;}}}}
 
 namespace alinous {namespace db {namespace table {namespace lockmonitor {
-class ThreadLocker;}}}}
+class IThreadLocker;}}}}
 
 namespace java {namespace lang {
 class IObject;
@@ -38,8 +38,8 @@ using ::java::util::ArrayList;
 using ::java::util::BitSet;
 using ::alinous::db::table::IDatabaseTable;
 using ::alinous::db::table::lockmonitor::ConcurrentGatePool;
+using ::alinous::db::table::lockmonitor::IThreadLocker;
 using ::alinous::db::table::lockmonitor::RowLock;
-using ::alinous::db::table::lockmonitor::ThreadLocker;
 
 
 
@@ -59,7 +59,7 @@ private:
 	ArrayList<RowLockManager>* list;
 public:
 	RowLockManager* getRowLockManager(IDatabaseTable* table, long long oid, BitSet* bitset, int hashcode, RowLockDb* hashDb, ConcurrentGatePool* getePool, ThreadContext* ctx) throw() ;
-	RowLock* releaseLock(IDatabaseTable* table, long long oid, BitSet* bitset, int hashcode, ThreadLocker* locker, ThreadContext* ctx) throw() ;
+	RowLock* releaseLock(IDatabaseTable* table, long long oid, BitSet* bitset, int hashcode, IThreadLocker* locker, ThreadContext* ctx) throw() ;
 public:
 	static bool __init_done;
 	static bool __init_static_variables();

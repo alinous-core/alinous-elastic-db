@@ -6,8 +6,8 @@ class OneSource;
 namespace alinous {namespace compile {namespace sql {namespace analyze {
 class ScanTableMetadata;}}}}
 
-namespace alinous {namespace db {namespace table {namespace lockmonitor {
-class ThreadLocker;}}}}
+namespace alinous {namespace db {namespace trx {
+class TrxLockContext;}}}
 
 namespace alinous {namespace btreememory {
 class BTreeOnMemory;}}
@@ -117,9 +117,9 @@ using ::alinous::db::AlinousDatabase;
 using ::alinous::db::table::DatabaseRecord;
 using ::alinous::db::table::DatatableConstants;
 using ::alinous::db::table::IDatabaseRecord;
-using ::alinous::db::table::lockmonitor::ThreadLocker;
 using ::alinous::db::table::scan::IndexScannerLockRequirement;
 using ::alinous::db::trx::DbTransaction;
+using ::alinous::db::trx::TrxLockContext;
 using ::alinous::runtime::dom::DomVariable;
 using ::alinous::runtime::dom::VariableException;
 using ::alinous::system::AlinousException;
@@ -131,8 +131,8 @@ class ScanResult final : public virtual IObject {
 public:
 	ScanResult(const ScanResult& base) = default;
 public:
-	ScanResult(ScanTableMetadata* metadata, String* trxDir, int serial, ThreadLocker* lockContext, ThreadContext* ctx);
-	void __construct_impl(ScanTableMetadata* metadata, String* trxDir, int serial, ThreadLocker* lockContext, ThreadContext* ctx);
+	ScanResult(ScanTableMetadata* metadata, String* trxDir, int serial, TrxLockContext* lockContext, ThreadContext* ctx);
+	void __construct_impl(ScanTableMetadata* metadata, String* trxDir, int serial, TrxLockContext* lockContext, ThreadContext* ctx);
 	virtual ~ScanResult() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 private:

@@ -69,7 +69,7 @@ void TrxSchemeManager::executeCommit(ThreadContext* ctx)
 			}
 			catch(InterruptedException* e)
 			{
-				throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1575(), e, ctx));
+				throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1576(), e, ctx));
 			}
 			catch(BTreeException* e)
 			{
@@ -171,13 +171,7 @@ void TrxSchemeManager::executeCreateIndex(CreateIndexMetadata* meta, ThreadConte
 {
 	String* schemaName = meta->getTas(ctx)->getSchema(ctx);
 	String* tableName = meta->getTas(ctx)->getTable(ctx);
-	SchemaManager* schemaManager = this->database->schemas;
-	TableSchema* schema = schemaManager->getSchema(schemaName, ctx);
-	if(schema == nullptr)
-	{
-		this->logger->logWarning(ConstStr::getCNST_STR_1619()->clone(ctx)->append(meta->getindexName(ctx), ctx)->append(ConstStr::getCNST_STR_1620(), ctx), ctx);
-		return;
-	}
+	TableSchemaCollection* schema = this->database->getSchema(schemaName, ctx);
 	IDatabaseTable* tableStore = schema->getTableStore(tableName, ctx);
 	if(tableStore == nullptr)
 	{
@@ -199,15 +193,15 @@ void TrxSchemeManager::executeCreateIndex(CreateIndexMetadata* meta, ThreadConte
 void TrxSchemeManager::executeCreateSchemaAndTable(TableSchema* sc, ThreadContext* ctx)
 {
 	String* schemaName = sc->name;
-	SchemaManager* schemaManager = this->database->schemas;
-	schemaManager->createSchema(schemaName, ctx);
+	String* regionName = sc->getregionName(ctx);
+	TableRegionManager* regions = this->database->getRegionManager(ctx);
 	Set<String>* keys = sc->getTableNames(ctx);
 	Iterator<String>* it = keys->iterator(ctx);
 	while(it->hasNext(ctx))
 	{
 		String* tableName = it->next(ctx);
 		TableMetadata* tblMeta = sc->getDableMetadata(tableName, ctx);
-		schemaManager->createTable(schemaName, tblMeta, this->database, ctx);
+		regions->createTable(regionName, schemaName, tblMeta, this->database, ctx);
 	}
 	{
 		SynchronizedBlockObj __synchronized_2(this->database->instanceConfigLock, ctx);

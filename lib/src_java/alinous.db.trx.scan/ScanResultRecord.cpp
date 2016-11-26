@@ -94,7 +94,7 @@ void ScanResultRecord::unlock(DbTransaction* trx, ThreadContext* ctx)
 	ArrayList<IDatabaseRecord>* records = this->records;
 	ArrayList<ScanTableIdentifier>* tables = this->tables;
 	AlinousDatabase* db = trx->getDatabase(ctx);
-	ThreadLocker* locker = trx->lockContext;
+	TrxLockContext* locker = trx->lockContext;
 	int maxLoop = records->size(ctx);
 	for(int i = 0; i != maxLoop; ++i)
 	{
@@ -201,7 +201,7 @@ long long ScanResultRecord::getOid(ThreadContext* ctx) throw()
 {
 	return this->records->get(0, ctx)->getOid(ctx);
 }
-void ScanResultRecord::releaseLocks(ThreadLocker* lockContext, ThreadContext* ctx) throw() 
+void ScanResultRecord::releaseLocks(TrxLockContext* lockContext, ThreadContext* ctx) throw() 
 {
 }
 ScanTableIdentifier* ScanResultRecord::getTableId(ThreadContext* ctx) throw() 

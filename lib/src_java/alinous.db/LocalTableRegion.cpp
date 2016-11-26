@@ -18,6 +18,14 @@ bool LocalTableRegion::__init_static_variables(){
 	delete ctx;
 	return true;
 }
+ LocalTableRegion::LocalTableRegion(RecordCacheEngine* cacheEngine, String* dataDir, ISystemLog* logger, AlinousDatabase* database, ThreadContext* ctx) throw()  : IObject(ctx), ITableRegion(ctx), schemas(nullptr)
+{
+	__GC_MV(this, &(this->schemas), (new(ctx) SchemaManager(cacheEngine, dataDir, logger, database, ctx)), SchemaManager);
+}
+void LocalTableRegion::__construct_impl(RecordCacheEngine* cacheEngine, String* dataDir, ISystemLog* logger, AlinousDatabase* database, ThreadContext* ctx) throw() 
+{
+	__GC_MV(this, &(this->schemas), (new(ctx) SchemaManager(cacheEngine, dataDir, logger, database, ctx)), SchemaManager);
+}
  LocalTableRegion::~LocalTableRegion() throw() 
 {
 	ThreadContext *ctx = ThreadContext::getCurentContext();
@@ -27,9 +35,36 @@ bool LocalTableRegion::__init_static_variables(){
 }
 void LocalTableRegion::__releaseRegerences(bool prepare, ThreadContext* ctx) throw() 
 {
+	ObjectEraser __e_obj1(ctx, __FILEW__, __LINE__, L"LocalTableRegion", L"~LocalTableRegion");
+	__e_obj1.add(this->schemas, this);
+	schemas = nullptr;
 	if(!prepare){
 		return;
 	}
+}
+SchemaManager* LocalTableRegion::getSchemaManager(ThreadContext* ctx) throw() 
+{
+	return this->schemas;
+}
+int LocalTableRegion::getRegionType(ThreadContext* ctx) throw() 
+{
+	return ITableRegion::LOCAL_REGION;
+}
+String* LocalTableRegion::getRegionName(ThreadContext* ctx) throw() 
+{
+	return ConstStr::getCNST_STR_1563();
+}
+TableSchema* LocalTableRegion::getSchema(String* name, ThreadContext* ctx) throw() 
+{
+	return this->schemas->getSchema(name, ctx);
+}
+void LocalTableRegion::createSchema(String* schemaName, ThreadContext* ctx) throw() 
+{
+	this->schemas->createSchema(schemaName, ctx);
+}
+void LocalTableRegion::createTable(String* schemaName, TableMetadata* tblMeta, ThreadContext* ctx)
+{
+	this->schemas->createTable(schemaName, tblMeta, ctx);
 }
 }}
 

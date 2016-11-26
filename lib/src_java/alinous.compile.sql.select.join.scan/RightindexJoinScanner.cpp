@@ -24,7 +24,7 @@ bool RightindexJoinScanner::__init_static_variables(){
 	__GC_MV(this, &(this->left), left, ITableTargetScanner);
 	__GC_MV(this, &(this->right), right, ITableTargetScanner);
 	this->inner = inner;
-	__GC_MV(this, &(this->locker), trx->lockContext, ThreadLocker);
+	__GC_MV(this, &(this->locker), trx->lockContext, TrxLockContext);
 	this->leftColumnIndex = leftMetadata->getColumnOrder(match->getLeftColumn(ctx), ctx);
 	this->rightColumnIndex = rightMetadata->getColumnOrder(match->getRightColumn(ctx), ctx);
 	__GC_MV(this, &(this->rightMetadata), rightMetadata, ScanTableMetadata);
@@ -41,7 +41,7 @@ void RightindexJoinScanner::__construct_impl(DbTransaction* trx, ITableTargetSca
 	__GC_MV(this, &(this->left), left, ITableTargetScanner);
 	__GC_MV(this, &(this->right), right, ITableTargetScanner);
 	this->inner = inner;
-	__GC_MV(this, &(this->locker), trx->lockContext, ThreadLocker);
+	__GC_MV(this, &(this->locker), trx->lockContext, TrxLockContext);
 	this->leftColumnIndex = leftMetadata->getColumnOrder(match->getLeftColumn(ctx), ctx);
 	this->rightColumnIndex = rightMetadata->getColumnOrder(match->getRightColumn(ctx), ctx);
 	__GC_MV(this, &(this->rightMetadata), rightMetadata, ScanTableMetadata);

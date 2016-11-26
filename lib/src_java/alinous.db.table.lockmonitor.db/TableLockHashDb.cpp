@@ -69,7 +69,7 @@ TableLockMamager* TableLockHashDb::getTableLockManager(IDatabaseTable* table, Co
 	int hashcode = ((int)(table->getTableId(ctx)->intValue(ctx) & MAX_HASH_MASK));
 	return arrays->get(hashcode)->getTableLockmanager(table, this->bitset, hashcode, this, gatePool, ctx);
 }
-TableLock* TableLockHashDb::releaseLock(IDatabaseTable* table, ThreadLocker* locker, ThreadContext* ctx) throw() 
+TableLock* TableLockHashDb::releaseLock(IDatabaseTable* table, IThreadLocker* locker, ThreadContext* ctx) throw() 
 {
 	int hashcode = ((int)(table->getTableId(ctx)->intValue(ctx) & MAX_HASH_MASK));
 	TableLockManagerList* list = arrays->get(hashcode);

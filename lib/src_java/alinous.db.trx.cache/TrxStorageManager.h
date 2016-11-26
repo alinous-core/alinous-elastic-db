@@ -28,7 +28,7 @@ namespace java {namespace util {
 template <typename  T> class Iterator;}}
 
 namespace alinous {namespace db {
-class TableSchema;}}
+class TableSchemaCollection;}}
 
 namespace alinous {namespace db {namespace table {
 class IDatabaseTable;}}}
@@ -78,7 +78,7 @@ using ::alinous::btree::BTreeException;
 using ::alinous::compile::sql::TableAndSchema;
 using ::alinous::db::AlinousDatabase;
 using ::alinous::db::AlinousDbException;
-using ::alinous::db::TableSchema;
+using ::alinous::db::TableSchemaCollection;
 using ::alinous::db::table::IDatabaseTable;
 using ::alinous::db::table::TableMetadata;
 using ::alinous::db::trx::CreateIndexMetadata;

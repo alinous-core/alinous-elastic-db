@@ -31,13 +31,16 @@ namespace alinous {namespace db {namespace trx {
 class CreateIndexMetadata;}}}
 
 namespace alinous {namespace db {
-class SchemaManager;}}
+class TableSchemaCollection;}}
 
 namespace alinous {namespace db {namespace table {
 class IDatabaseTable;}}}
 
 namespace java {namespace lang {
 class Throwable;}}
+
+namespace alinous {namespace db {
+class TableRegionManager;}}
 
 namespace java {namespace util {
 template <typename  T> class Set;}}
@@ -71,8 +74,9 @@ using ::java::util::Set;
 using ::alinous::btree::BTreeException;
 using ::alinous::db::AlinousDatabase;
 using ::alinous::db::AlinousDbException;
-using ::alinous::db::SchemaManager;
+using ::alinous::db::TableRegionManager;
 using ::alinous::db::TableSchema;
+using ::alinous::db::TableSchemaCollection;
 using ::alinous::db::table::DatabaseException;
 using ::alinous::db::table::IDatabaseTable;
 using ::alinous::db::table::TableMetadata;

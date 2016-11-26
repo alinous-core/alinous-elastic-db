@@ -18,14 +18,14 @@ bool ScanResult::__init_static_variables(){
 	delete ctx;
 	return true;
 }
- ScanResult::ScanResult(ScanTableMetadata* metadata, String* trxDir, int serial, ThreadLocker* lockContext, ThreadContext* ctx) : IObject(ctx), store(nullptr), serial(0), storagePath(nullptr), trxDir(nullptr), indexes(GCUtils<ArrayList<ScanResultIndex> >::ins(this, (new(ctx) ArrayList<ScanResultIndex>(ctx)), ctx, __FILEW__, __LINE__, L"")), metadata(nullptr)
+ ScanResult::ScanResult(ScanTableMetadata* metadata, String* trxDir, int serial, TrxLockContext* lockContext, ThreadContext* ctx) : IObject(ctx), store(nullptr), serial(0), storagePath(nullptr), trxDir(nullptr), indexes(GCUtils<ArrayList<ScanResultIndex> >::ins(this, (new(ctx) ArrayList<ScanResultIndex>(ctx)), ctx, __FILEW__, __LINE__, L"")), metadata(nullptr)
 {
 	this->serial = serial;
 	__GC_MV(this, &(this->metadata), metadata, ScanTableMetadata);
 	__GC_MV(this, &(this->trxDir), trxDir, String);
 	__GC_MV(this, &(this->store), (new(ctx) BTreeOnMemory(4, ctx)), IBTree);
 }
-void ScanResult::__construct_impl(ScanTableMetadata* metadata, String* trxDir, int serial, ThreadLocker* lockContext, ThreadContext* ctx)
+void ScanResult::__construct_impl(ScanTableMetadata* metadata, String* trxDir, int serial, TrxLockContext* lockContext, ThreadContext* ctx)
 {
 	this->serial = serial;
 	__GC_MV(this, &(this->metadata), metadata, ScanTableMetadata);
