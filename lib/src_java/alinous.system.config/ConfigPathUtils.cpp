@@ -48,7 +48,7 @@ String* ConfigPathUtils::getAbsDirPath(String* base, String* path, ThreadContext
 	while(it->hasNext(ctx))
 	{
 		String* pa = it->next(ctx);
-		if(pa->equals(ConstStr::getCNST_STR_1180(), ctx))
+		if(pa->equals(ConstStr::getCNST_STR_1179(), ctx))
 		{
 			baseList->pop(ctx);
 		}

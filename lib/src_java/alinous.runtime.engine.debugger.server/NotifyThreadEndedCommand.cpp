@@ -7,7 +7,7 @@ namespace alinous {namespace runtime {namespace engine {namespace debugger {name
 
 
 
-String* NotifyThreadEndedCommand::CMD_STRING = ConstStr::getCNST_STR_1142();
+String* NotifyThreadEndedCommand::CMD_STRING = ConstStr::getCNST_STR_1141();
 bool NotifyThreadEndedCommand::__init_done = __init_static_variables();
 bool NotifyThreadEndedCommand::__init_static_variables(){
 	Java2CppSystem::getSelf();

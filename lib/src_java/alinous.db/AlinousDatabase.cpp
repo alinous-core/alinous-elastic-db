@@ -91,15 +91,15 @@ void AlinousDatabase::construct(AlinousCore* core, String* dataDir, String* trxT
 		}
 		catch(IOException* e)
 		{
-			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1556(), e, ctx));
+			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1555(), e, ctx));
 		}
 		catch(InterruptedException* e)
 		{
-			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1556(), e, ctx));
+			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1555(), e, ctx));
 		}
 		catch(BTreeException* e)
 		{
-			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1556(), e, ctx));
+			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1555(), e, ctx));
 		}
 	}
 }
@@ -133,19 +133,19 @@ void AlinousDatabase::initInstance(ThreadContext* ctx)
 		catch(IOException* e)
 		{
 			e->printStackTrace(ctx);
-			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1557(), e, ctx));
+			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1556(), e, ctx));
 		}
 		catch(InterruptedException* e)
 		{
-			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1557(), e, ctx));
+			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1556(), e, ctx));
 		}
 		catch(BTreeException* e)
 		{
-			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1557(), e, ctx));
+			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1556(), e, ctx));
 		}
 		catch(VariableException* e)
 		{
-			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1557(), e, ctx));
+			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1556(), e, ctx));
 		}
 	}
 }
@@ -200,7 +200,7 @@ void AlinousDatabase::syncScheme(ThreadContext* ctx)
 				}
 			}
 			e->printStackTrace(ctx);
-			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1558(), e, ctx));
+			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1557(), e, ctx));
 		}
 	}
 	{
@@ -217,7 +217,7 @@ void AlinousDatabase::syncScheme(ThreadContext* ctx)
 }
 void AlinousDatabase::open(ThreadContext* ctx)
 {
-	__GC_MV(this, &(this->workerThreadsPool), (new(ctx) ThreadPool(16, ConstStr::getCNST_STR_1560(), ctx)), ThreadPool);
+	__GC_MV(this, &(this->workerThreadsPool), (new(ctx) ThreadPool(16, ConstStr::getCNST_STR_1559(), ctx)), ThreadPool);
 	LaunchJoin* trxLaunchJoin = (new(ctx) LaunchJoin(1, ctx));
 	__GC_MV(this, &(this->trxWriterThread), (new(ctx) AlinousThread(trxLaunchJoin, ctx)), AlinousThread);
 	{
@@ -229,7 +229,7 @@ void AlinousDatabase::open(ThreadContext* ctx)
 		{
 			this->workerThreadsPool->dispose(ctx);
 			__GC_MV(this, &(this->workerThreadsPool), nullptr, ThreadPool);
-			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1561(), e, ctx));
+			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1560(), e, ctx));
 		}
 	}
 	__GC_MV(this, &(this->trxLockManager), (new(ctx) TrxLockManager(ctx)), TrxLockManager);
@@ -257,14 +257,14 @@ void AlinousDatabase::open(ThreadContext* ctx)
 				}
 				catch(IOException* e2)
 				{
-					throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1562(), e2, ctx));
+					throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1561(), e2, ctx));
 				}
 				catch(InterruptedException* e2)
 				{
-					throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1562(), e2, ctx));
+					throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1561(), e2, ctx));
 				}
 			}
-			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1562(), e, ctx));
+			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1561(), e, ctx));
 		}
 	}
 	{
@@ -274,11 +274,11 @@ void AlinousDatabase::open(ThreadContext* ctx)
 		}
 		catch(IOException* e)
 		{
-			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1562(), e, ctx));
+			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1561(), e, ctx));
 		}
 		catch(InterruptedException* e)
 		{
-			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1562(), e, ctx));
+			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1561(), e, ctx));
 		}
 	}
 }
@@ -369,7 +369,7 @@ File* AlinousDatabase::getConfigFile(ThreadContext* ctx) throw()
 {
 	if(this->configFile == nullptr)
 	{
-		String* pathname = this->dataDir->clone(ctx)->append(ConstStr::getCNST_STR_1559(), ctx);
+		String* pathname = this->dataDir->clone(ctx)->append(ConstStr::getCNST_STR_1558(), ctx);
 		__GC_MV(this, &(this->configFile), (new(ctx) File(pathname, ctx)), File);
 	}
 	return this->configFile;

@@ -36,6 +36,33 @@ void ThreadLocker::__releaseRegerences(bool prepare, ThreadContext* ctx) throw()
 		return;
 	}
 }
+void ThreadLocker::dispose(ThreadContext* ctx)
+{
+	while(this->tableLocks->size(ctx) > 0)
+	{
+		TableLock* l = this->tableLocks->get(0, ctx);
+		if(l->update)
+		{
+			l->table->updateUnlockTable(this, ctx);
+		}
+				else 
+		{
+			l->table->shareUnlockTable(this, ctx);
+		}
+	}
+	while(this->rowLocks->size(ctx) > 0)
+	{
+		RowLock* rl = this->rowLocks->get(0, ctx);
+		if(rl->update)
+		{
+			rl->table->updateUnlockRow(rl->oid, this, ctx);
+		}
+				else 
+		{
+			rl->table->shareUnlockRow(rl->oid, this, ctx);
+		}
+	}
+}
 void ThreadLocker::updateLockTable(IDatabaseTable* table, ThreadContext* ctx)
 {
 	table->updateLockTable(this, ctx);

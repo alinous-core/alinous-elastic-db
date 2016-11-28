@@ -27,27 +27,65 @@ bool TrxLockContext::__init_static_variables(){
 }
 void TrxLockContext::__releaseRegerences(bool prepare, ThreadContext* ctx) throw() 
 {
+	ObjectEraser __e_obj1(ctx, __FILEW__, __LINE__, L"TrxLockContext", L"~TrxLockContext");
+	__e_obj1.add(this->map, this);
+	map = nullptr;
 	if(!prepare){
 		return;
 	}
 }
+void TrxLockContext::reset(ThreadContext* ctx)
+{
+	Iterator<String>* it = this->map->keySet(ctx)->iterator(ctx);
+	while(it->hasNext(ctx))
+	{
+		String* key = it->next(ctx);
+		IThreadLocker* locker = this->map->get(key, ctx);
+		locker->dispose(ctx);
+	}
+	this->map->clear(ctx);
+}
 void TrxLockContext::shareLockTable(IDatabaseTable* tableStore, ThreadContext* ctx)
 {
+	IThreadLocker* locker = getLocker(tableStore, ctx);
+	tableStore->shareLockTable(locker, ctx);
 }
-void TrxLockContext::shareUnlockTable(IDatabaseTable* tableStore, ThreadContext* ctx) throw() 
+void TrxLockContext::shareUnlockTable(IDatabaseTable* tableStore, ThreadContext* ctx)
 {
+	IThreadLocker* locker = getLocker(tableStore, ctx);
+	tableStore->shareUnlockTable(locker, ctx);
 }
-void TrxLockContext::shareUnlockRow(IDatabaseTable* tableStore, long long oid, ThreadContext* ctx) throw() 
+void TrxLockContext::shareUnlockRow(IDatabaseTable* tableStore, long long oid, ThreadContext* ctx)
 {
+	IThreadLocker* locker = getLocker(tableStore, ctx);
+	tableStore->shareUnlockRow(oid, locker, ctx);
 }
-void TrxLockContext::updateUnlockRow(IDatabaseTable* tableStore, long long oid, ThreadContext* ctx) throw() 
+void TrxLockContext::updateUnlockRow(IDatabaseTable* tableStore, long long oid, ThreadContext* ctx)
 {
+	IThreadLocker* locker = getLocker(tableStore, ctx);
+	tableStore->updateUnlockRow(oid, locker, ctx);
 }
-void TrxLockContext::shareLockRow(IDatabaseTable* tableStore, long long oid, ThreadContext* ctx) throw() 
+void TrxLockContext::shareLockRow(IDatabaseTable* tableStore, long long oid, ThreadContext* ctx)
 {
+	IThreadLocker* locker = getLocker(tableStore, ctx);
+	tableStore->shareLockRow(oid, locker, ctx);
 }
-void TrxLockContext::updateLockRow(IDatabaseTable* tableStore, long long oid, ThreadContext* ctx) throw() 
+void TrxLockContext::updateLockRow(IDatabaseTable* tableStore, long long oid, ThreadContext* ctx)
 {
+	IThreadLocker* locker = getLocker(tableStore, ctx);
+	tableStore->updateLockRow(oid, locker, ctx);
+}
+IThreadLocker* TrxLockContext::getLocker(IDatabaseTable* tableStore, ThreadContext* ctx) throw() 
+{
+	String* name = tableStore->getFullName(ctx);
+	IThreadLocker* locker = this->map->get(name, ctx);
+	if(locker != nullptr)
+	{
+		return locker;
+	}
+	locker = tableStore->newThreadLocker(ctx);
+	this->map->put(name, locker, ctx);
+	return locker;
 }
 }}}
 

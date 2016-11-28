@@ -255,7 +255,7 @@ public:
 	void createTable(TableSchema* schema, ThreadContext* ctx) throw() ;
 	TableMetadata* getMetadata(String* schemaName, String* tableName, ThreadContext* ctx) throw() ;
 	void commit(ThreadContext* ctx);
-	void close(ThreadContext* ctx) throw() ;
+	void close(ThreadContext* ctx);
 	void dispose(ThreadContext* ctx) throw() ;
 	DbTransactionManager* getTrxManager(ThreadContext* ctx) throw() ;
 	TrxSchemeManager* getTrxSchema(ThreadContext* ctx) throw() ;

@@ -1,13 +1,13 @@
 #ifndef ALINOUS_DB_TABLE_LOCKMONITOR_THREADLOCKER_H_
 #define ALINOUS_DB_TABLE_LOCKMONITOR_THREADLOCKER_H_
-namespace alinous {namespace db {namespace table {
-class IDatabaseTable;}}}
-
 namespace alinous {namespace db {namespace table {namespace lockmonitor {
 class TableLock;}}}}
 
 namespace alinous {namespace db {namespace table {namespace lockmonitor {
 class RowLock;}}}}
+
+namespace alinous {namespace db {namespace table {
+class IDatabaseTable;}}}
 
 namespace alinous {namespace db {namespace table {namespace lockmonitor {
 class IThreadLocker;}}}}
@@ -42,10 +42,11 @@ public:
 	}
 	virtual ~ThreadLocker() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
-public:
+private:
 	ArrayList<TableLock>* tableLocks;
 	ArrayList<RowLock>* rowLocks;
 public:
+	void dispose(ThreadContext* ctx) final;
 	void updateLockTable(IDatabaseTable* table, ThreadContext* ctx) final;
 	void updateUnlockTable(IDatabaseTable* table, ThreadContext* ctx) final;
 	void shareLockTable(IDatabaseTable* table, ThreadContext* ctx) final;

@@ -7,7 +7,7 @@ namespace alinous {namespace runtime {namespace variant {
 
 
 
-String* ShortData::TAG_NAME = ConstStr::getCNST_STR_1174();
+String* ShortData::TAG_NAME = ConstStr::getCNST_STR_1173();
 bool ShortData::__init_done = __init_static_variables();
 bool ShortData::__init_static_variables(){
 	Java2CppSystem::getSelf();

@@ -74,7 +74,7 @@ void SetupAllBreakPointsRequest::importParams(Map<String,String>* params, Thread
 	while(it->hasNext(ctx))
 	{
 		String* key = it->next(ctx);
-		if(key->equals(ConstStr::getCNST_STR_1114(), ctx))
+		if(key->equals(ConstStr::getCNST_STR_1113(), ctx))
 		{
 			break ;
 		}

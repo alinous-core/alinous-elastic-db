@@ -13,13 +13,13 @@ namespace alinous {namespace db {namespace table {namespace lockmonitor {
 class ConcurrentGatePool;}}}}
 
 namespace alinous {namespace db {namespace table {namespace lockmonitor {
+class IThreadLocker;}}}}
+
+namespace alinous {namespace db {namespace table {namespace lockmonitor {
 class ThreadLocker;}}}}
 
 namespace alinous {namespace db {namespace table {
 class IDatabaseTable;}}}
-
-namespace alinous {namespace db {namespace table {namespace lockmonitor {
-class IThreadLocker;}}}}
 
 namespace alinous {namespace db {namespace table {namespace lockmonitor {namespace db {
 class TableLockMamager;}}}}}
@@ -84,7 +84,7 @@ private:
 	ThreadPool* threadPool;
 	SpinMutex* globalLock;
 public:
-	ThreadLocker* newThread(ThreadContext* ctx) throw() ;
+	IThreadLocker* newThread(ThreadContext* ctx) throw() ;
 	void lockTable(IDatabaseTable* table, IThreadLocker* locker, bool update, ThreadContext* ctx);
 	void unlockTable(IDatabaseTable* table, IThreadLocker* locker, ThreadContext* ctx);
 	void unlockRow(IDatabaseTable* table, long long oid, IThreadLocker* locker, ThreadContext* ctx);

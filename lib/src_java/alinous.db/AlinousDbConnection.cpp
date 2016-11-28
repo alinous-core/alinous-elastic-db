@@ -67,7 +67,7 @@ void AlinousDbConnection::commit(ThreadContext* ctx)
 {
 	if(this->autoCommit)
 	{
-		throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1566(), ctx));
+		throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1565(), ctx));
 	}
 	if(this->trx != nullptr)
 	{
@@ -78,12 +78,32 @@ void AlinousDbConnection::commit(ThreadContext* ctx)
 			}
 			catch(Throwable* e)
 			{
-				this->trx->close(ctx);
+				{
+					try
+					{
+						this->trx->close(ctx);
+					}
+					catch(DatabaseLockException* e1)
+					{
+						e1->printStackTrace(ctx);
+						this->database->getCore(ctx)->getLogger(ctx)->logError(e1, ctx);
+					}
+				}
 				__GC_MV(this, &(this->trx), nullptr, DbTransaction);
 				throw e;
 			}
 		}
-		this->trx->close(ctx);
+		{
+			try
+			{
+				this->trx->close(ctx);
+			}
+			catch(DatabaseLockException* e)
+			{
+				e->printStackTrace(ctx);
+				this->database->getCore(ctx)->getLogger(ctx)->logError(e, ctx);
+			}
+		}
 		__GC_MV(this, &(this->trx), nullptr, DbTransaction);
 	}
 	this->autoCommit = true;
@@ -92,7 +112,17 @@ void AlinousDbConnection::rollback(ThreadContext* ctx) throw()
 {
 	if(this->trx != nullptr)
 	{
-		this->trx->close(ctx);
+		{
+			try
+			{
+				this->trx->close(ctx);
+			}
+			catch(DatabaseLockException* e)
+			{
+				e->printStackTrace(ctx);
+				this->database->getCore(ctx)->getLogger(ctx)->logError(e, ctx);
+			}
+		}
 	}
 	this->autoCommit = true;
 }
@@ -193,11 +223,31 @@ void AlinousDbConnection::createIndex(CreateIndexStatement* stmt, ScriptMachine*
 			}
 			catch(Throwable* e)
 			{
-				this->trx->close(ctx);
+				{
+					try
+					{
+						this->trx->close(ctx);
+					}
+					catch(DatabaseLockException* e1)
+					{
+						e1->printStackTrace(ctx);
+						this->database->getCore(ctx)->getLogger(ctx)->logError(e1, ctx);
+					}
+				}
 				throw e;
 			}
 		}
-		this->trx->close(ctx);
+		{
+			try
+			{
+				this->trx->close(ctx);
+			}
+			catch(DatabaseLockException* e)
+			{
+				e->printStackTrace(ctx);
+				this->database->getCore(ctx)->getLogger(ctx)->logError(e, ctx);
+			}
+		}
 	}
 }
 void AlinousDbConnection::dropIndex(DropIndexStatement* stmt, ScriptMachine* machine, bool debug, ThreadContext* ctx) throw() 

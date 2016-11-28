@@ -60,7 +60,7 @@ void DBThreadMonitor::__releaseRegerences(bool prepare, ThreadContext* ctx) thro
 		return;
 	}
 }
-ThreadLocker* DBThreadMonitor::newThread(ThreadContext* ctx) throw() 
+IThreadLocker* DBThreadMonitor::newThread(ThreadContext* ctx) throw() 
 {
 	ThreadLocker* thread = 0;
 	{

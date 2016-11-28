@@ -80,9 +80,9 @@ String* Attribute::toString(ThreadContext* ctx) throw()
 	if(this->name != nullptr && this->value != nullptr)
 	{
 		buff->append(this->name, ctx);
-		buff->append(ConstStr::getCNST_STR_1649(), ctx);
+		buff->append(ConstStr::getCNST_STR_1648(), ctx);
 		buff->append(this->value, ctx);
-		buff->append(ConstStr::getCNST_STR_1208(), ctx);
+		buff->append(ConstStr::getCNST_STR_1207(), ctx);
 	}
 		else 
 	{
@@ -94,9 +94,9 @@ String* Attribute::toString(ThreadContext* ctx) throw()
 		{
 			if(this->name == nullptr && this->value != nullptr)
 			{
-				buff->append(ConstStr::getCNST_STR_1208(), ctx);
+				buff->append(ConstStr::getCNST_STR_1207(), ctx);
 				buff->append(this->value, ctx);
-				buff->append(ConstStr::getCNST_STR_1208(), ctx);
+				buff->append(ConstStr::getCNST_STR_1207(), ctx);
 			}
 		}
 	}

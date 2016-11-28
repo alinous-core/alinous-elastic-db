@@ -71,7 +71,6 @@ void ScriptRunner::executeMainScript(ArrayList<StatementList>* statements, Scrip
 	{
 		std::function<void(void)> finallyLm2= [&, this]()
 		{
-			System::out->print(ConstStr::getCNST_STR_1101(), ctx);
 			if(debug)
 			{
 				machine->getCore(ctx)->getDebugger(ctx)->endAlinousOperation(machine, ctx);
@@ -172,7 +171,7 @@ bool ScriptRunner::executeStatement(IStatement* stmt, ScriptMachine* machine, bo
 	default:
 		break ;
 	}
-	throw (new(ctx) AlinousException(ConstStr::getCNST_STR_1102(), ctx));
+	throw (new(ctx) AlinousException(ConstStr::getCNST_STR_1101(), ctx));
 }
 }}}
 

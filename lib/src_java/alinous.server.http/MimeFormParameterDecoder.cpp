@@ -44,13 +44,13 @@ void MimeFormParameterDecoder::decode(InputStream* inStream, String* boundary, i
 {
 	__GC_MV(this, &(this->inStream), inStream, InputStream);
 	this->contentLength = contentLength;
-	__GC_MV(this, &(this->boundary), ConstStr::getCNST_STR_1633()->clone(ctx)->append(boundary, ctx), String);
-	__GC_MV(this, &(this->boundaryEnd), boundary->clone(ctx)->append(ConstStr::getCNST_STR_1633(), ctx), String);
+	__GC_MV(this, &(this->boundary), ConstStr::getCNST_STR_1632()->clone(ctx)->append(boundary, ctx), String);
+	__GC_MV(this, &(this->boundaryEnd), boundary->clone(ctx)->append(ConstStr::getCNST_STR_1632(), ctx), String);
 	this->readBytes = 0;
 	String* line = readHeaderLine(ctx);
 	if(!line->equals(this->boundary, ctx))
 	{
-		throw (new(ctx) IOException(ConstStr::getCNST_STR_3411(), ctx));
+		throw (new(ctx) IOException(ConstStr::getCNST_STR_3410(), ctx));
 	}
 	do
 	{

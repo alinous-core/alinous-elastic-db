@@ -7,14 +7,14 @@ namespace alinous {namespace runtime {namespace engine {
 
 
 
-String* MainStackFrame::TAG_STACKFRAME = ConstStr::getCNST_STR_1103();
-String* MainStackFrame::ATTR_LINE = ConstStr::getCNST_STR_1104();
-String* MainStackFrame::ATTR_FILENAME = ConstStr::getCNST_STR_1105();
-String* MainStackFrame::ATTR_PEEK = ConstStr::getCNST_STR_1106();
+String* MainStackFrame::TAG_STACKFRAME = ConstStr::getCNST_STR_1102();
+String* MainStackFrame::ATTR_LINE = ConstStr::getCNST_STR_1103();
+String* MainStackFrame::ATTR_FILENAME = ConstStr::getCNST_STR_1104();
+String* MainStackFrame::ATTR_PEEK = ConstStr::getCNST_STR_1105();
 String* MainStackFrame::ATTR_NAME = ConstStr::getCNST_STR_1061();
-String* MainStackFrame::ATTR_STACKID = ConstStr::getCNST_STR_1107();
-String* MainStackFrame::ATTR_STEPIN_CANDIDATES = ConstStr::getCNST_STR_1108();
-String* MainStackFrame::ATTR_STEPIN_EXECUTED = ConstStr::getCNST_STR_1109();
+String* MainStackFrame::ATTR_STACKID = ConstStr::getCNST_STR_1106();
+String* MainStackFrame::ATTR_STEPIN_CANDIDATES = ConstStr::getCNST_STR_1107();
+String* MainStackFrame::ATTR_STEPIN_EXECUTED = ConstStr::getCNST_STR_1108();
 bool MainStackFrame::__init_done = __init_static_variables();
 bool MainStackFrame::__init_static_variables(){
 	Java2CppSystem::getSelf();

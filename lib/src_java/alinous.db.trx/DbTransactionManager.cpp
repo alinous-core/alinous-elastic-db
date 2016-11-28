@@ -86,7 +86,7 @@ DbTransaction* DbTransactionManager::borrowTransaction(int acid, ThreadContext* 
 {
 	{
 		SynchronizedBlockObj __synchronized_2(this->lock, ctx);
-		while(trxCount > this->maxConnection)
+		while(this->trxCount > this->maxConnection)
 		{
 			{
 				try
@@ -96,7 +96,7 @@ DbTransaction* DbTransactionManager::borrowTransaction(int acid, ThreadContext* 
 				catch(InterruptedException* e)
 				{
 					e->printStackTrace(ctx);
-					throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1588(), e, ctx));
+					throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1587(), e, ctx));
 				}
 			}
 		}

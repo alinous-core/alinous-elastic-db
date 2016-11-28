@@ -18,7 +18,7 @@ bool AbstractDatabaseTable::__init_static_variables(){
 	delete ctx;
 	return true;
 }
- AbstractDatabaseTable::AbstractDatabaseTable(String* schema, String* name, String* baseDir, ThreadContext* ctx) throw()  : IObject(ctx), IDatabaseTable(ctx), tableId(nullptr), metadata(nullptr), indexes(GCUtils<ArrayList<TableIndex> >::ins(this, (new(ctx) ArrayList<TableIndex>(ctx)), ctx, __FILEW__, __LINE__, L"")), primaryIndex(nullptr), name(nullptr), baseDir(nullptr), oidIndexPath(nullptr), dataStoragePath(nullptr), oidIndex(nullptr), dataStorage(nullptr), storageLock(nullptr), schmeUpdated(nullptr), updateHistoryCache(nullptr)
+ AbstractDatabaseTable::AbstractDatabaseTable(String* schema, String* name, String* baseDir, ThreadContext* ctx) throw()  : IObject(ctx), IDatabaseTable(ctx), tableId(nullptr), metadata(nullptr), indexes(GCUtils<ArrayList<TableIndex> >::ins(this, (new(ctx) ArrayList<TableIndex>(ctx)), ctx, __FILEW__, __LINE__, L"")), primaryIndex(nullptr), name(nullptr), baseDir(nullptr), oidIndexPath(nullptr), dataStoragePath(nullptr), oidIndex(nullptr), dataStorage(nullptr), storageLock(nullptr), schmeUpdated(nullptr), updateHistoryCache(nullptr), fullName(nullptr)
 {
 	__GC_MV(this, &(this->tableId), (new(ctx) Integer(DatabaseTableIdPublisher::getId(name, ctx), ctx)), Integer);
 	__GC_MV(this, &(this->metadata), (new(ctx) TableMetadata(schema, name, ctx)), TableMetadata);
@@ -30,6 +30,7 @@ bool AbstractDatabaseTable::__init_static_variables(){
 	__GC_MV(this, &(this->storageLock), (new(ctx) ConcurrentGate(ctx)), ConcurrentGate);
 	__GC_MV(this, &(this->schmeUpdated), (new(ctx) Timestamp(System::currentTimeMillis(ctx), ctx)), Timestamp);
 	__GC_MV(this, &(this->updateHistoryCache), nullptr, DatatableUpdateCache);
+	__GC_MV(this, &(this->fullName), schema->clone(ctx)->append(ConstStr::getCNST_STR_947(), ctx)->append(name, ctx), String);
 }
 void AbstractDatabaseTable::__construct_impl(String* schema, String* name, String* baseDir, ThreadContext* ctx) throw() 
 {
@@ -43,6 +44,7 @@ void AbstractDatabaseTable::__construct_impl(String* schema, String* name, Strin
 	__GC_MV(this, &(this->storageLock), (new(ctx) ConcurrentGate(ctx)), ConcurrentGate);
 	__GC_MV(this, &(this->schmeUpdated), (new(ctx) Timestamp(System::currentTimeMillis(ctx), ctx)), Timestamp);
 	__GC_MV(this, &(this->updateHistoryCache), nullptr, DatatableUpdateCache);
+	__GC_MV(this, &(this->fullName), schema->clone(ctx)->append(ConstStr::getCNST_STR_947(), ctx)->append(name, ctx), String);
 }
  AbstractDatabaseTable::~AbstractDatabaseTable() throw() 
 {
@@ -80,6 +82,8 @@ void AbstractDatabaseTable::__releaseRegerences(bool prepare, ThreadContext* ctx
 	schmeUpdated = nullptr;
 	__e_obj1.add(this->updateHistoryCache, this);
 	updateHistoryCache = nullptr;
+	__e_obj1.add(this->fullName, this);
+	fullName = nullptr;
 	if(!prepare){
 		return;
 	}
@@ -88,7 +92,7 @@ void AbstractDatabaseTable::open(AlinousDatabase* database, ThreadContext* ctx)
 {
 	getDataStorageName(ctx);
 	getOidIndexName(ctx);
-	__GC_MV(this, &(this->dataStorage), (new(ctx) FileStorage(database->getCore(ctx)->diskCache, (new(ctx) File(dataStoragePath, ctx)), ConstStr::getCNST_STR_1551(), ctx)), FileStorage);
+	__GC_MV(this, &(this->dataStorage), (new(ctx) FileStorage(database->getCore(ctx)->diskCache, (new(ctx) File(dataStoragePath, ctx)), ConstStr::getCNST_STR_1550(), ctx)), FileStorage);
 	{
 		try
 		{
@@ -96,7 +100,7 @@ void AbstractDatabaseTable::open(AlinousDatabase* database, ThreadContext* ctx)
 		}
 		catch(Throwable* e)
 		{
-			throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1567(), e, ctx));
+			throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1566(), e, ctx));
 		}
 	}
 	__GC_MV(this, &(this->updateHistoryCache), (new(ctx) DatatableUpdateCache(this, ctx)), DatatableUpdateCache);
@@ -158,15 +162,15 @@ void AbstractDatabaseTable::open(bool loadscheme, AlinousDatabase* database, Thr
 		}
 		catch(IOException* e)
 		{
-			throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1574(), e, ctx));
+			throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1573(), e, ctx));
 		}
 		catch(BTreeException* e)
 		{
-			throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1574(), e, ctx));
+			throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1573(), e, ctx));
 		}
 		catch(InterruptedException* e)
 		{
-			throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1574(), e, ctx));
+			throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1573(), e, ctx));
 		}
 	}
 }
@@ -290,6 +294,10 @@ void AbstractDatabaseTable::setTableId(Integer* tableId, ThreadContext* ctx) thr
 {
 	__GC_MV(this, &(this->tableId), tableId, Integer);
 }
+String* AbstractDatabaseTable::getFullName(ThreadContext* ctx) throw() 
+{
+	return fullName;
+}
 void AbstractDatabaseTable::syncScheme(ThreadContext* ctx)
 {
 	FileStorageEntryWriter* writer = this->dataStorage->getWriter(ctx);
@@ -314,7 +322,7 @@ String* AbstractDatabaseTable::getDataStorageName(ThreadContext* ctx) throw()
 		{
 			buff->append(ConstStr::getCNST_STR_984(), ctx);
 		}
-		buff->append(this->name, ctx)->append(ConstStr::getCNST_STR_1575(), ctx);
+		buff->append(this->name, ctx)->append(ConstStr::getCNST_STR_1574(), ctx);
 		__GC_MV(this, &(this->dataStoragePath), buff->toString(ctx), String);
 	}
 	return this->dataStoragePath;
@@ -352,7 +360,7 @@ void AbstractDatabaseTable::loadScheme(ThreadContext* ctx)
 		}
 		catch(InterruptedException* e)
 		{
-			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1576(), e, ctx));
+			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1575(), e, ctx));
 		}
 	}
 	FileStorageEntry* entry = reader->readFirstEntry(ctx);
@@ -373,7 +381,7 @@ String* AbstractDatabaseTable::getOidIndexName(ThreadContext* ctx) throw()
 		{
 			buff->append(ConstStr::getCNST_STR_984(), ctx);
 		}
-		buff->append(ConstStr::getCNST_STR_1568(), ctx)->append(this->name, ctx)->append(ConstStr::getCNST_STR_1577(), ctx);
+		buff->append(ConstStr::getCNST_STR_1567(), ctx)->append(this->name, ctx)->append(ConstStr::getCNST_STR_1576(), ctx);
 		__GC_MV(this, &(this->oidIndexPath), buff->toString(ctx), String);
 	}
 	return this->oidIndexPath;

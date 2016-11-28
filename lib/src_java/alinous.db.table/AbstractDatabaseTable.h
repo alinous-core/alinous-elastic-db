@@ -132,6 +132,7 @@ public:
 	ConcurrentGate* storageLock;
 	Timestamp* schmeUpdated;
 	DatatableUpdateCache* updateHistoryCache;
+	String* fullName;
 public:
 	void open(AlinousDatabase* database, ThreadContext* ctx) final;
 	void open(bool loadscheme, AlinousDatabase* database, ThreadContext* ctx);
@@ -150,6 +151,7 @@ public:
 	BTree* getOidIndex(ThreadContext* ctx) throw() ;
 	Integer* getTableId(ThreadContext* ctx) throw()  final;
 	void setTableId(Integer* tableId, ThreadContext* ctx) throw() ;
+	String* getFullName(ThreadContext* ctx) throw()  final;
 	void syncScheme(ThreadContext* ctx);
 	String* getDataStorageName(ThreadContext* ctx) throw() ;
 	int indexSchemeSize(ThreadContext* ctx) throw() ;

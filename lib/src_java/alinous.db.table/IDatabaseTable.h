@@ -98,6 +98,7 @@ public:
 	virtual IDatabaseRecord* loadRecord(long long position, ThreadContext* ctx) = 0;
 	virtual TableIndex* getAbailableIndex(ArrayList<String>* columnsStr, ThreadContext* ctx) throw()  = 0;
 	virtual TableIndex* getAbailableIndexByScanColId(ArrayList<ScanTableColumnIdentifier>* joinRequest, ThreadContext* ctx) throw()  = 0;
+	virtual IThreadLocker* newThreadLocker(ThreadContext* ctx) throw()  = 0;
 	virtual bool hasLaterVersion(long long oid, long long currentId, ThreadContext* ctx) = 0;
 	virtual bool hasLaterVersionBefore(long long oid, long long maxCommitId, long long currentCommitId, ThreadContext* ctx) = 0;
 	virtual String* getName(ThreadContext* ctx) throw()  = 0;
@@ -110,6 +111,7 @@ public:
 	virtual void updateData(CachedRecord* record, long long newCommitId, IArrayObject<SequentialBackgroundJob>* jobs, ISystemLog* logger, ThreadContext* ctx) = 0;
 	virtual void createIndex(String* getindexName, ArrayList<String>* columns, AlinousDatabase* database, ThreadContext* ctx) = 0;
 	virtual void close(ThreadContext* ctx) throw()  = 0;
+	virtual String* getFullName(ThreadContext* ctx) throw()  = 0;
 	virtual void updateUnlockRow(long long oid, IThreadLocker* locker, ThreadContext* ctx) = 0;
 	virtual void updateLockRow(long long oid, IThreadLocker* locker, ThreadContext* ctx) = 0;
 	virtual void shareUnlockRow(long long oid, IThreadLocker* locker, ThreadContext* ctx) = 0;

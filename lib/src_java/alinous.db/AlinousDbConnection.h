@@ -12,6 +12,9 @@ class ConnectInfo;}}
 namespace alinous {namespace db {
 class AlinousDbException;}}
 
+namespace alinous {namespace db {namespace table {namespace lockmonitor {
+class DatabaseLockException;}}}}
+
 namespace java {namespace lang {
 class Throwable;}}
 
@@ -90,6 +93,7 @@ using ::alinous::compile::sql::SelectStatement;
 using ::alinous::compile::sql::UpdateStatement;
 using ::alinous::compile::sql::analyze::SQLAnalyseContext;
 using ::alinous::db::table::DatabaseException;
+using ::alinous::db::table::lockmonitor::DatabaseLockException;
 using ::alinous::db::trx::DbTransaction;
 using ::alinous::runtime::dbif::IDatabaseConnection;
 using ::alinous::runtime::dbif::IDatabaseDriver;

@@ -24,6 +24,7 @@ template class ::java::util::HashMap<::java::lang::String, ::alinous::db::table:
 template class ::java::util::HashMap<::java::lang::String, ::alinous::db::TableSchema>;
 template class ::java::util::HashMap<::java::lang::String, ::java::lang::Integer>;
 template class ::java::util::HashMap<::java::lang::String, ::alinous::db::table::TableColumnMetadata>;
+template class ::java::util::HashMap<::java::lang::String, ::alinous::db::table::lockmonitor::IThreadLocker>;
 template class ::java::util::HashMap<::java::lang::String, ::alinous::db::trx::cache::TrxRecordsCache>;
 template class ::java::util::HashMap<::java::lang::String, ::java::util::HashMap<::java::lang::String, ::alinous::db::trx::cache::TrxRecordsCache>>;
 template class ::java::util::HashMap<::alinous::html::DomNode, ::java::util::ArrayList<::alinous::html::xpath::match::MatchCandidate>>;

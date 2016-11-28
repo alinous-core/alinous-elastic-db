@@ -129,6 +129,10 @@ TableIndex* DatabaseTable::getTableIndex(ArrayList<String>* columns, ThreadConte
 	}
 	return matchedindex;
 }
+IThreadLocker* DatabaseTable::newThreadLocker(ThreadContext* ctx) throw() 
+{
+	return this->monitor->newThread(ctx);
+}
 void DatabaseTable::updateLockTable(IThreadLocker* locker, ThreadContext* ctx)
 {
 	this->monitor->lockTable(this, locker, true, ctx);

@@ -1,6 +1,7 @@
 template class ::java::util::Map<::java::lang::String, ::alinous::runtime::dom::IDomVariable>;
 template class ::java::util::Map<::java::lang::String, ::alinous::runtime::dom::typed::ITypedVariable>;
 template class ::java::util::Map<::java::lang::String, ::java::lang::String>;
+template class ::java::util::Map<::java::lang::String, ::alinous::db::table::lockmonitor::IThreadLocker>;
 template class ::java::util::Map<::alinous::html::DomNode, ::java::util::ArrayList<::alinous::html::xpath::match::MatchCandidate>>;
 template class ::java::util::Map<::java::lang::String, ::com::google::re2j::CharGroup>;
 template class ::java::util::Map<::java::lang::String, ::java::util::TimeZone>;
