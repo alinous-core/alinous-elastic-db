@@ -243,8 +243,7 @@
 #include "alinous.runtime.parallel/SequentialBackgroundJob.h"
 #include "alinous.system/ISystemLog.h"
 #include "alinous.db.table/DatabaseRecord.h"
-#include "alinous.db.table/TableIndexValue.h"
-#include "alinous.db.table/TableIndex.h"
+#include "alinous.db.table/IScannableIndex.h"
 #include "alinous.db.table/TableIndexMetadata.h"
 #include "alinous.db.table/TableMetadata.h"
 #include "alinous.db.table/IDatabaseTable.h"
@@ -290,6 +289,7 @@
 #include "alinous.db.trx.cache/CulumnOrder.h"
 #include "alinous.db.trx.cache/TrxRecordsCache.h"
 #include "alinous.db.trx.cache/TrxRecordCacheIndexScanner.h"
+#include "alinous.db.table/TableIndexValue.h"
 #include "alinous.db.trx/TrxLockContext.h"
 #include "alinous.db.table.scan/TableIndexScanner.h"
 #include "alinous.db.table.scan/IndexEqScanner.h"
@@ -593,6 +593,7 @@
 #include "alinous.db.table.scan/UpdateHistoryValuesIterator.h"
 #include "alinous.db.table.scan/UpdateHistoryBTreeIndexScanner.h"
 #include "alinous.db.table/DatatableUpdateCache.h"
+#include "alinous.db.table/TableIndex.h"
 #include "alinous.db.table/AbstractDatabaseTable.h"
 #include "alinous.db.table/DataTableStorageSupport.h"
 #include "alinous.db.table/DatatableLockSupport.h"
@@ -1382,6 +1383,7 @@ inline static void __cleanUpStatics(alinous::ThreadContext* ctx){
 	alinous::db::table::BTreeIndexKey::__cleanUp(ctx);
 	alinous::db::table::TableIndex::__cleanUp(ctx);
 	alinous::db::table::TableColumnMetadata::__cleanUp(ctx);
+	alinous::db::table::IScannableIndex::__cleanUp(ctx);
 	alinous::db::table::DatatableUpdateSupport::__cleanUp(ctx);
 	alinous::db::table::TableMetadata::__cleanUp(ctx);
 	alinous::db::table::cache::DbRecordHashMainList::__cleanUp(ctx);

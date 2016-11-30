@@ -52,7 +52,7 @@ void IndexListScanner::__releaseRegerences(bool prepare, ThreadContext* ctx) thr
 		return;
 	}
 }
-IndexListScanner* IndexListScanner::init(ScanTableIdentifier* tableId, DbTransaction* trx, TableIndex* index, IDatabaseTable* tableStore, TrxRecordCacheIndex* insertCacheindex, TrxRecordCacheIndex* updateCacheindex, int lockMode, IndexListScannerParam* param, int effectiveKeyLength, InnerNecessaryCondition* necessaryCondition, ScriptMachine* machine, ThreadContext* ctx)
+IndexListScanner* IndexListScanner::init(ScanTableIdentifier* tableId, DbTransaction* trx, IScannableIndex* index, IDatabaseTable* tableStore, TrxRecordCacheIndex* insertCacheindex, TrxRecordCacheIndex* updateCacheindex, int lockMode, IndexListScannerParam* param, int effectiveKeyLength, InnerNecessaryCondition* necessaryCondition, ScriptMachine* machine, ThreadContext* ctx)
 {
 	__GC_MV(this, &(this->trx), trx, DbTransaction);
 	TableMetadata* tableMeta = tableStore->getMetadata(ctx);

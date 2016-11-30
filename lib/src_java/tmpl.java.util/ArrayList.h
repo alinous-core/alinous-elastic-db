@@ -63,7 +63,7 @@ template class ::java::util::ArrayList<::alinous::btree::IBTreeValue>;
 template class ::java::util::ArrayList<::alinous::btree::IBTreeNode>;
 template class ::java::util::ArrayList<::alinous::db::ITableRegion>;
 template class ::java::util::ArrayList<::alinous::db::TableSchema>;
-template class ::java::util::ArrayList<::alinous::db::table::TableIndex>;
+template class ::java::util::ArrayList<::alinous::db::table::IScannableIndex>;
 template class ::java::util::ArrayList<::alinous::db::table::DatabaseRecord>;
 template class ::java::util::ArrayList<::alinous::db::table::lockmonitor::TableLock>;
 template class ::java::util::ArrayList<::alinous::db::table::lockmonitor::RowLock>;

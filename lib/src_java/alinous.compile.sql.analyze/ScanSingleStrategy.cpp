@@ -139,7 +139,7 @@ SingleTableIndexScanner* ScanSingleStrategy::getIndexScanner(DbTransaction* trx,
 	ScanTableMetadata* metadata = this->table;
 	IDatabaseTable* tableStore = this->database->getTable(metadata->getSchemaName(ctx), metadata->getTableName(ctx), ctx);
 	TrxStorageManager* trxStorageManager = trx->getTrxStorageManager(ctx);
-	TableIndex* index = tableStore->getAbailableIndex(indexMeta->getColumnsStr(ctx), ctx);
+	IScannableIndex* index = tableStore->getAbailableIndex(indexMeta->getColumnsStr(ctx), ctx);
 	TrxRecordCacheIndex* insertCacheindex = nullptr;
 	TrxRecordCacheIndex* updateCacheindex = nullptr;
 	{
@@ -168,7 +168,7 @@ ITableTargetScanner* ScanSingleStrategy::getFullScanScanner(DbTransaction* trx, 
 {
 	ScanTableMetadata* metadata = this->table;
 	IDatabaseTable* tableStore = this->database->getTable(metadata->getSchemaName(ctx), metadata->getTableName(ctx), ctx);
-	TableIndex* index = tableStore->getPrimaryIndex(ctx);
+	IScannableIndex* index = tableStore->getPrimaryIndex(ctx);
 	TrxStorageManager* trxStorageManager = trx->getTrxStorageManager(ctx);
 	TrxRecordCacheIndex* insertCacheindex = nullptr;
 	TrxRecordCacheIndex* updateCacheindex = nullptr;
@@ -280,7 +280,7 @@ ITableTargetScanner* ScanSingleStrategy::initOnTheFlyScanner(ScriptMachine* mach
 	}
 	ScanTableMetadata* metadata = this->table;
 	IDatabaseTable* tableStore = this->database->getTable(metadata->getSchemaName(ctx), metadata->getTableName(ctx), ctx);
-	TableIndex* index = plan->getIndex(tableStore, ctx);
+	IScannableIndex* index = plan->getIndex(tableStore, ctx);
 	TrxStorageManager* trxStorageManager = trx->getTrxStorageManager(ctx);
 	TrxRecordCacheIndex* insertCacheindex = nullptr;
 	TrxRecordCacheIndex* updateCacheindex = nullptr;
@@ -339,7 +339,7 @@ ITableTargetScanner* ScanSingleStrategy::initOnTheFlyScanner4Join(ScriptMachine*
 {
 	ScanTableMetadata* metadata = this->table;
 	IDatabaseTable* tableStore = this->database->getTable(metadata->getSchemaName(ctx), metadata->getTableName(ctx), ctx);
-	TableIndex* index = tableStore->getAbailableIndexByScanColId(joinRequest, ctx);
+	IScannableIndex* index = tableStore->getAbailableIndexByScanColId(joinRequest, ctx);
 	if(index == nullptr)
 	{
 		TableIndexScanner* indexScanner = (new(ctx) TableIndexScanner(ctx))->init(this->tableId, trx, index, tableStore, trx->lockMode, ctx);

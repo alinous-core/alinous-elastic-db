@@ -57,11 +57,11 @@ void RecordCacheEngine::insertData(DatatableUpdateSupport* table, DatabaseRecord
 			int slot = 0;
 			jobs->get(slot++)->addJob((new(ctx) OidIndexJob(nextOid, table->getOidIndex(ctx), entry->position, ctx)), ctx);
 			jobs->get(slot++)->addJob((new(ctx) IndexInsertJob(table->getPrimaryIndex(ctx), dbrecord, ctx)), ctx);
-			ArrayList<TableIndex>* indexes = table->getIndexes(ctx);
+			ArrayList<IScannableIndex>* indexes = table->getIndexes(ctx);
 			int maxLoop = indexes->size(ctx);
 			for(int i = 0; i != maxLoop; ++i)
 			{
-				TableIndex* tableIndex = indexes->get(i, ctx);
+				IScannableIndex* tableIndex = indexes->get(i, ctx);
 				jobs->get(slot++)->addJob((new(ctx) IndexInsertJob(tableIndex, dbrecord, ctx)), ctx);
 			}
 			this->cache->addCachedRecord(table, dbrecord, ctx);

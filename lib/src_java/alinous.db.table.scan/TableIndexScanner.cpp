@@ -48,11 +48,11 @@ void TableIndexScanner::__releaseRegerences(bool prepare, ThreadContext* ctx) th
 		return;
 	}
 }
-TableIndexScanner* TableIndexScanner::init(ScanTableIdentifier* tableId, DbTransaction* trx, TableIndex* index, IDatabaseTable* tableStore, int lockMode, ThreadContext* ctx)
+TableIndexScanner* TableIndexScanner::init(ScanTableIdentifier* tableId, DbTransaction* trx, IScannableIndex* index, IDatabaseTable* tableStore, int lockMode, ThreadContext* ctx)
 {
 	__GC_MV(this, &(this->trx), trx, DbTransaction);
-	__GC_MV(this, &(this->index), index, TableIndex);
-	__GC_MV(this, &(this->storage), this->index->storage, BTree);
+	__GC_MV(this, &(this->index), index, IScannableIndex);
+	__GC_MV(this, &(this->storage), this->index->getStorage(ctx), BTree);
 	__GC_MV(this, &(this->scanner), (new(ctx) BTreeScanner(this->storage, ctx)), BTreeScanner);
 	__GC_MV(this, &(this->tableStore), tableStore, IDatabaseTable);
 	this->lockMode = lockMode;

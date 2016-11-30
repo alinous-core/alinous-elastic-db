@@ -86,7 +86,7 @@ template class alinous::ArrayAllocator<::alinous::runtime::engine::DatabaseHandl
 template class alinous::ArrayAllocator<::alinous::compile::analyse::AlinousType>;
 template class alinous::ArrayAllocator<::alinous::html::xpath::match::MatchCandidate>;
 template class alinous::ArrayAllocator<::alinous::btree::IBTreeValue>;
-template class alinous::ArrayAllocator<::alinous::db::table::TableIndex>;
+template class alinous::ArrayAllocator<::alinous::db::table::IScannableIndex>;
 template class alinous::ArrayAllocator<::alinous::db::table::DatabaseRecord>;
 template class alinous::ArrayAllocator<::alinous::db::table::lockmonitor::TableLock>;
 template class alinous::ArrayAllocator<::alinous::db::table::lockmonitor::RowLock>;

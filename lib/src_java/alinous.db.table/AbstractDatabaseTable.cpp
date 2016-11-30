@@ -18,7 +18,7 @@ bool AbstractDatabaseTable::__init_static_variables(){
 	delete ctx;
 	return true;
 }
- AbstractDatabaseTable::AbstractDatabaseTable(String* schema, String* name, String* baseDir, ThreadContext* ctx) throw()  : IObject(ctx), IDatabaseTable(ctx), tableId(nullptr), metadata(nullptr), indexes(GCUtils<ArrayList<TableIndex> >::ins(this, (new(ctx) ArrayList<TableIndex>(ctx)), ctx, __FILEW__, __LINE__, L"")), primaryIndex(nullptr), name(nullptr), baseDir(nullptr), oidIndexPath(nullptr), dataStoragePath(nullptr), oidIndex(nullptr), dataStorage(nullptr), storageLock(nullptr), schmeUpdated(nullptr), updateHistoryCache(nullptr), fullName(nullptr)
+ AbstractDatabaseTable::AbstractDatabaseTable(String* schema, String* name, String* baseDir, ThreadContext* ctx) throw()  : IObject(ctx), IDatabaseTable(ctx), tableId(nullptr), metadata(nullptr), indexes(GCUtils<ArrayList<IScannableIndex> >::ins(this, (new(ctx) ArrayList<IScannableIndex>(ctx)), ctx, __FILEW__, __LINE__, L"")), primaryIndex(nullptr), name(nullptr), baseDir(nullptr), oidIndexPath(nullptr), dataStoragePath(nullptr), oidIndex(nullptr), dataStorage(nullptr), storageLock(nullptr), schmeUpdated(nullptr), updateHistoryCache(nullptr), fullName(nullptr)
 {
 	__GC_MV(this, &(this->tableId), (new(ctx) Integer(DatabaseTableIdPublisher::getId(name, ctx), ctx)), Integer);
 	__GC_MV(this, &(this->metadata), (new(ctx) TableMetadata(schema, name, ctx)), TableMetadata);
@@ -156,7 +156,7 @@ void AbstractDatabaseTable::open(bool loadscheme, AlinousDatabase* database, Thr
 			int maxLoop = this->indexes->size(ctx);
 			for(int i = 0; i != maxLoop; ++i)
 			{
-				TableIndex* index = this->indexes->get(i, ctx);
+				IScannableIndex* index = this->indexes->get(i, ctx);
 				index->open(database, ctx);
 			}
 		}
@@ -222,7 +222,7 @@ void AbstractDatabaseTable::close(ThreadContext* ctx) throw()
 			int maxLoop = this->indexes->size(ctx);
 			for(int i = 0; i != maxLoop; ++i)
 			{
-				TableIndex* index = this->indexes->get(i, ctx);
+				IScannableIndex* index = this->indexes->get(i, ctx);
 				index->close(ctx);
 			}
 		}
@@ -242,7 +242,7 @@ TableMetadata* AbstractDatabaseTable::getMetadata(ThreadContext* ctx) throw()
 {
 	return metadata;
 }
-ArrayList<TableIndex>* AbstractDatabaseTable::getIndexes(ThreadContext* ctx) throw() 
+ArrayList<IScannableIndex>* AbstractDatabaseTable::getIndexes(ThreadContext* ctx) throw() 
 {
 	return indexes;
 }
@@ -334,7 +334,7 @@ int AbstractDatabaseTable::indexSchemeSize(ThreadContext* ctx) throw()
 	int maxLoop = this->indexes->size(ctx);
 	for(int i = 0; i != maxLoop; ++i)
 	{
-		TableIndex* index = this->indexes->get(i, ctx);
+		IScannableIndex* index = this->indexes->get(i, ctx);
 		total += index->archiveSize(ctx);
 	}
 	return total;
@@ -346,7 +346,7 @@ void AbstractDatabaseTable::syncIndexScheme(FileStorageEntryBuilder* builder, Th
 	builder->putInt(maxLoop, ctx);
 	for(int i = 0; i != maxLoop; ++i)
 	{
-		TableIndex* index = this->indexes->get(i, ctx);
+		IScannableIndex* index = this->indexes->get(i, ctx);
 		index->appendToEntry(builder, ctx);
 	}
 }

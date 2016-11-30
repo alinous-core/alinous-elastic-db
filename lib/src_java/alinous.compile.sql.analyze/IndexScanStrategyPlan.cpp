@@ -170,10 +170,10 @@ int IndexScanStrategyPlan::getEqKeyLength(ThreadContext* ctx) throw()
 {
 	return this->matchConditions->size(ctx);
 }
-TableIndex* IndexScanStrategyPlan::getIndex(IDatabaseTable* tableStore, ThreadContext* ctx) throw() 
+IScannableIndex* IndexScanStrategyPlan::getIndex(IDatabaseTable* tableStore, ThreadContext* ctx) throw() 
 {
 	ArrayList<ScanTableColumnIdentifier>* colIdList = getColumns(ctx);
-	TableIndex* tableindex = tableStore->getTableIndexByColIds(colIdList, ctx);
+	IScannableIndex* tableindex = tableStore->getTableIndexByColIds(colIdList, ctx);
 	return tableindex;
 }
 int IndexScanStrategyPlan::calcEfficience(ThreadContext* ctx) throw() 

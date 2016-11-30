@@ -455,6 +455,7 @@ set(srcjava
 	"src_java/alinous.db.table/DatatableUpdateCache.cpp"
 	"src_java/alinous.db.table/TableIndexMetadata.cpp"
 	"src_java/alinous.db.table/OidIndexJob.cpp"
+	"src_java/alinous.db.table/IScannableIndex.cpp"
 	"src_java/alinous.db.table/TableIndexValue.cpp"
 	"src_java/alinous.db.table/BTreeIndexKey.cpp"
 	"src_java/alinous.db.table/IDatabaseTable.cpp"

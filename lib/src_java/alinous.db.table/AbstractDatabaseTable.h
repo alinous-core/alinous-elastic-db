@@ -49,7 +49,7 @@ namespace alinous {namespace db {
 class AlinousDbException;}}
 
 namespace alinous {namespace db {namespace table {
-class TableIndex;}}}
+class IScannableIndex;}}}
 
 namespace alinous {namespace runtime {namespace dom {
 class VariableException;}}}
@@ -71,6 +71,9 @@ class FileStorageEntryReader;}}}
 
 namespace alinous {namespace buffer {namespace storage {
 class FileStorageEntryFetcher;}}}
+
+namespace alinous {namespace db {namespace table {
+class TableIndex;}}}
 
 namespace alinous {namespace db {namespace table {
 class DatabaseTable;}}}
@@ -121,7 +124,7 @@ public:
 public:
 	Integer* tableId;
 	TableMetadata* metadata;
-	ArrayList<TableIndex>* indexes;
+	ArrayList<IScannableIndex>* indexes;
 	TableIndex* primaryIndex;
 	String* name;
 	String* baseDir;
@@ -138,7 +141,7 @@ public:
 	void open(bool loadscheme, AlinousDatabase* database, ThreadContext* ctx);
 	void close(ThreadContext* ctx) throw()  final;
 	TableMetadata* getMetadata(ThreadContext* ctx) throw()  final;
-	ArrayList<TableIndex>* getIndexes(ThreadContext* ctx) throw()  final;
+	ArrayList<IScannableIndex>* getIndexes(ThreadContext* ctx) throw()  final;
 	String* getName(ThreadContext* ctx) throw()  final;
 	String* getSchemaName(ThreadContext* ctx) throw() ;
 	String* getBaseDir(ThreadContext* ctx) throw() ;

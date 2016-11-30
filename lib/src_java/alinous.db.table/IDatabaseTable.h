@@ -4,7 +4,7 @@ namespace java {namespace lang {
 class Integer;}}
 
 namespace alinous {namespace db {namespace table {
-class TableIndex;}}}
+class IScannableIndex;}}}
 
 namespace alinous {namespace compile {namespace sql {namespace analyze {
 class ScanTableColumnIdentifier;}}}}
@@ -92,12 +92,12 @@ public:
 public:
 	virtual Integer* getTableId(ThreadContext* ctx) throw()  = 0;
 	virtual int getColumnCount(ThreadContext* ctx) throw()  = 0;
-	virtual TableIndex* getTableIndexByColIds(ArrayList<ScanTableColumnIdentifier>* colIdList, ThreadContext* ctx) throw()  = 0;
-	virtual TableIndex* getPrimaryIndex(ThreadContext* ctx) throw()  = 0;
+	virtual IScannableIndex* getTableIndexByColIds(ArrayList<ScanTableColumnIdentifier>* colIdList, ThreadContext* ctx) throw()  = 0;
+	virtual IScannableIndex* getPrimaryIndex(ThreadContext* ctx) throw()  = 0;
 	virtual TableMetadata* getMetadata(ThreadContext* ctx) throw()  = 0;
 	virtual IDatabaseRecord* loadRecord(long long position, ThreadContext* ctx) = 0;
-	virtual TableIndex* getAbailableIndex(ArrayList<String>* columnsStr, ThreadContext* ctx) throw()  = 0;
-	virtual TableIndex* getAbailableIndexByScanColId(ArrayList<ScanTableColumnIdentifier>* joinRequest, ThreadContext* ctx) throw()  = 0;
+	virtual IScannableIndex* getAbailableIndex(ArrayList<String>* columnsStr, ThreadContext* ctx) throw()  = 0;
+	virtual IScannableIndex* getAbailableIndexByScanColId(ArrayList<ScanTableColumnIdentifier>* joinRequest, ThreadContext* ctx) throw()  = 0;
 	virtual IThreadLocker* newThreadLocker(ThreadContext* ctx) throw()  = 0;
 	virtual bool hasLaterVersion(long long oid, long long currentId, ThreadContext* ctx) = 0;
 	virtual bool hasLaterVersionBefore(long long oid, long long maxCommitId, long long currentCommitId, ThreadContext* ctx) = 0;
@@ -106,7 +106,7 @@ public:
 	virtual void createTable(TableMetadata* tableMetadata, AlinousDatabase* database, ThreadContext* ctx) = 0;
 	virtual void lockStorage(ThreadContext* ctx) = 0;
 	virtual void unlockStorage(ThreadContext* ctx) = 0;
-	virtual ArrayList<TableIndex>* getIndexes(ThreadContext* ctx) throw()  = 0;
+	virtual ArrayList<IScannableIndex>* getIndexes(ThreadContext* ctx) throw()  = 0;
 	virtual void insertData(CachedRecord* record, long long newCommitId, IArrayObject<SequentialBackgroundJob>* jobs, ISystemLog* logger, ThreadContext* ctx) = 0;
 	virtual void updateData(CachedRecord* record, long long newCommitId, IArrayObject<SequentialBackgroundJob>* jobs, ISystemLog* logger, ThreadContext* ctx) = 0;
 	virtual void createIndex(String* getindexName, ArrayList<String>* columns, AlinousDatabase* database, ThreadContext* ctx) = 0;

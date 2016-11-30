@@ -21,7 +21,7 @@ bool TableIndex::__init_static_variables(){
 	delete ctx;
 	return true;
 }
- TableIndex::TableIndex(String* name, String* baseDir, bool primary, ArrayList<TableColumnMetadata>* metadata, ThreadContext* ctx) throw()  : IObject(ctx), IBtreeTableIndex(ctx), name(nullptr), storage(nullptr), baseDir(nullptr), primary(0), columns(GCUtils<ArrayList<TableColumnMetadata> >::ins(this, (new(ctx) ArrayList<TableColumnMetadata>(ctx)), ctx, __FILEW__, __LINE__, L"")), filePath(nullptr)
+ TableIndex::TableIndex(String* name, String* baseDir, bool primary, ArrayList<TableColumnMetadata>* metadata, ThreadContext* ctx) throw()  : IObject(ctx), IBtreeTableIndex(ctx), IScannableIndex(ctx), name(nullptr), baseDir(nullptr), primary(0), columns(GCUtils<ArrayList<TableColumnMetadata> >::ins(this, (new(ctx) ArrayList<TableColumnMetadata>(ctx)), ctx, __FILEW__, __LINE__, L"")), filePath(nullptr), storage(nullptr)
 {
 	__GC_MV(this, &(this->name), name, String);
 	__GC_MV(this, &(this->baseDir), baseDir, String);
@@ -49,14 +49,14 @@ void TableIndex::__releaseRegerences(bool prepare, ThreadContext* ctx) throw()
 	ObjectEraser __e_obj1(ctx, __FILEW__, __LINE__, L"TableIndex", L"~TableIndex");
 	__e_obj1.add(this->name, this);
 	name = nullptr;
-	__e_obj1.add(this->storage, this);
-	storage = nullptr;
 	__e_obj1.add(this->baseDir, this);
 	baseDir = nullptr;
 	__e_obj1.add(this->columns, this);
 	columns = nullptr;
 	__e_obj1.add(this->filePath, this);
 	filePath = nullptr;
+	__e_obj1.add(this->storage, this);
+	storage = nullptr;
 	if(!prepare){
 		return;
 	}
@@ -179,6 +179,18 @@ void TableIndex::appendToEntry(FileStorageEntryBuilder* builder, ThreadContext* 
 		TableColumnMetadata* col = this->columns->get(i, ctx);
 		col->toFileEntry(builder, ctx);
 	}
+}
+BTree* TableIndex::getStorage(ThreadContext* ctx) throw() 
+{
+	return storage;
+}
+String* TableIndex::getName(ThreadContext* ctx) throw() 
+{
+	return name;
+}
+bool TableIndex::isPrimary(ThreadContext* ctx) throw() 
+{
+	return primary;
 }
 ArrayList<TableColumnMetadata>* TableIndex::getColumns(ThreadContext* ctx) throw() 
 {

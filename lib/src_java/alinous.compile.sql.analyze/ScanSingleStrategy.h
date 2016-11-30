@@ -52,7 +52,7 @@ namespace alinous {namespace db {namespace trx {namespace cache {
 class TrxStorageManager;}}}}
 
 namespace alinous {namespace db {namespace table {
-class TableIndex;}}}
+class IScannableIndex;}}}
 
 namespace alinous {namespace db {namespace trx {namespace cache {
 class TrxRecordCacheIndex;}}}}
@@ -140,8 +140,8 @@ using ::alinous::db::AlinousDatabase;
 using ::alinous::db::AlinousDbException;
 using ::alinous::db::table::DatabaseException;
 using ::alinous::db::table::IDatabaseTable;
+using ::alinous::db::table::IScannableIndex;
 using ::alinous::db::table::TableColumnMetadata;
-using ::alinous::db::table::TableIndex;
 using ::alinous::db::table::scan::IndexEqScanner;
 using ::alinous::db::table::scan::IndexListScanner;
 using ::alinous::db::table::scan::IndexListScannerParam;

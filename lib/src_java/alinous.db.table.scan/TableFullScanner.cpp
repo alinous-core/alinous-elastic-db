@@ -53,8 +53,8 @@ void TableFullScanner::__releaseRegerences(bool prepare, ThreadContext* ctx) thr
 TableFullScanner* TableFullScanner::init(ScanTableIdentifier* tableId, DbTransaction* trx, IDatabaseTable* tableStore, int lockMode, ThreadContext* ctx)
 {
 	__GC_MV(this, &(this->trx), trx, DbTransaction);
-	__GC_MV(this, &(this->index), tableStore->getPrimaryIndex(ctx), TableIndex);
-	__GC_MV(this, &(this->storage), this->index->storage, BTree);
+	__GC_MV(this, &(this->index), tableStore->getPrimaryIndex(ctx), IScannableIndex);
+	__GC_MV(this, &(this->storage), this->index->getStorage(ctx), BTree);
 	__GC_MV(this, &(this->scanner), (new(ctx) BTreeScanner(this->storage, ctx)), BTreeScanner);
 	__GC_MV(this, &(this->tableStore), tableStore, IDatabaseTable);
 	this->lockMode = lockMode;

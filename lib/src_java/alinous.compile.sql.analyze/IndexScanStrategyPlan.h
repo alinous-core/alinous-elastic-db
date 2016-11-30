@@ -34,7 +34,7 @@ namespace alinous {namespace db {namespace table {namespace scan {
 class IndexListScannerParam;}}}}
 
 namespace alinous {namespace db {namespace table {
-class TableIndex;}}}
+class IScannableIndex;}}}
 
 namespace alinous {namespace db {namespace table {
 class IDatabaseTable;}}}
@@ -81,8 +81,8 @@ using ::alinous::compile::expression::IExpression;
 using ::alinous::compile::sql::expression::ISQLExpression;
 using ::alinous::db::table::DatabaseException;
 using ::alinous::db::table::IDatabaseTable;
+using ::alinous::db::table::IScannableIndex;
 using ::alinous::db::table::TableColumnMetadata;
-using ::alinous::db::table::TableIndex;
 using ::alinous::db::table::scan::IndexListScannerParam;
 using ::alinous::db::table::scan::IndexRangeScannerParam;
 using ::alinous::db::trx::scan::ScanResultIndexKey;
@@ -118,7 +118,7 @@ public:
 	IndexRangeScannerParam* getRamgeIndexKeyParam(ScriptMachine* machine, ArrayList<TableColumnMetadata>* cols, bool debug, ThreadContext* ctx);
 	IndexListScannerParam* getListIndexKey(ScriptMachine* machine, ArrayList<TableColumnMetadata>* cols, bool debug, ThreadContext* ctx);
 	int getEqKeyLength(ThreadContext* ctx) throw() ;
-	TableIndex* getIndex(IDatabaseTable* tableStore, ThreadContext* ctx) throw() ;
+	IScannableIndex* getIndex(IDatabaseTable* tableStore, ThreadContext* ctx) throw() ;
 	int calcEfficience(ThreadContext* ctx) throw() ;
 	bool indexIncludesColumns(ArrayList<ScanTableColumnIdentifier>* colOrder, ThreadContext* ctx) throw() ;
 	void addEqColumn(IndexColumnMatchCondition* matchingCondition, ScanTableIndexMetadata* indexMetadata, bool debug, ThreadContext* ctx);

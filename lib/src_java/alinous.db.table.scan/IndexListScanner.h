@@ -13,7 +13,7 @@ namespace alinous {namespace db {namespace trx {
 class DbTransaction;}}}
 
 namespace alinous {namespace db {namespace table {
-class TableIndex;}}}
+class IScannableIndex;}}}
 
 namespace alinous {namespace db {namespace table {
 class IDatabaseTable;}}}
@@ -102,8 +102,8 @@ using ::alinous::db::AlinousDbException;
 using ::alinous::db::table::DatabaseException;
 using ::alinous::db::table::IDatabaseRecord;
 using ::alinous::db::table::IDatabaseTable;
+using ::alinous::db::table::IScannableIndex;
 using ::alinous::db::table::TableColumnMetadata;
-using ::alinous::db::table::TableIndex;
 using ::alinous::db::table::TableMetadata;
 using ::alinous::db::table::lockmonitor::DatabaseLockException;
 using ::alinous::db::trx::DbTransaction;
@@ -146,7 +146,7 @@ private:
 	InnerNecessaryCondition* necessaryCondition;
 	ScanResultIndexKey* currentKey;
 public:
-	IndexListScanner* init(ScanTableIdentifier* tableId, DbTransaction* trx, TableIndex* index, IDatabaseTable* tableStore, TrxRecordCacheIndex* insertCacheindex, TrxRecordCacheIndex* updateCacheindex, int lockMode, IndexListScannerParam* param, int effectiveKeyLength, InnerNecessaryCondition* necessaryCondition, ScriptMachine* machine, ThreadContext* ctx);
+	IndexListScanner* init(ScanTableIdentifier* tableId, DbTransaction* trx, IScannableIndex* index, IDatabaseTable* tableStore, TrxRecordCacheIndex* insertCacheindex, TrxRecordCacheIndex* updateCacheindex, int lockMode, IndexListScannerParam* param, int effectiveKeyLength, InnerNecessaryCondition* necessaryCondition, ScriptMachine* machine, ThreadContext* ctx);
 	void startScan(ScanResultIndexKey* indexKeyValue, ThreadContext* ctx) final;
 	bool hasNext(bool debug, ThreadContext* ctx) final;
 	void endScan(ThreadContext* ctx) final;

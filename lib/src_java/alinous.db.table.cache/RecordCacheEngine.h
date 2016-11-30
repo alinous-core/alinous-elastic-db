@@ -34,7 +34,7 @@ namespace alinous {namespace db {namespace table {
 class IndexInsertJob;}}}
 
 namespace alinous {namespace db {namespace table {
-class TableIndex;}}}
+class IScannableIndex;}}}
 
 namespace alinous {namespace db {
 class AlinousDbException;}}
@@ -96,9 +96,9 @@ using ::alinous::db::table::DataTableStorageSupport;
 using ::alinous::db::table::DatabaseRecord;
 using ::alinous::db::table::DatatableUpdateSupport;
 using ::alinous::db::table::IDatabaseRecord;
+using ::alinous::db::table::IScannableIndex;
 using ::alinous::db::table::IndexInsertJob;
 using ::alinous::db::table::OidIndexJob;
-using ::alinous::db::table::TableIndex;
 using ::alinous::runtime::dom::VariableException;
 using ::alinous::runtime::parallel::SequentialBackgroundJob;
 using ::alinous::system::AlinousException;

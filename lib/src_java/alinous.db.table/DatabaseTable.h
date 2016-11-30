@@ -13,7 +13,7 @@ namespace alinous {namespace db {namespace table {namespace lockmonitor {
 class DBThreadMonitor;}}}}
 
 namespace alinous {namespace db {namespace table {
-class TableIndex;}}}
+class IScannableIndex;}}}
 
 namespace alinous {namespace compile {namespace sql {namespace analyze {
 class ScanTableColumnIdentifier;}}}}
@@ -60,10 +60,10 @@ public:
 private:
 	DBThreadMonitor* monitor;
 public:
-	TableIndex* getTableIndexByColIds(ArrayList<ScanTableColumnIdentifier>* columns, ThreadContext* ctx) throw()  final;
-	TableIndex* getAbailableIndex(ArrayList<String>* columns, ThreadContext* ctx) throw()  final;
-	TableIndex* getAbailableIndexByScanColId(ArrayList<ScanTableColumnIdentifier>* columns, ThreadContext* ctx) throw()  final;
-	TableIndex* getTableIndex(ArrayList<String>* columns, ThreadContext* ctx) throw() ;
+	IScannableIndex* getTableIndexByColIds(ArrayList<ScanTableColumnIdentifier>* columns, ThreadContext* ctx) throw()  final;
+	IScannableIndex* getAbailableIndex(ArrayList<String>* columns, ThreadContext* ctx) throw()  final;
+	IScannableIndex* getAbailableIndexByScanColId(ArrayList<ScanTableColumnIdentifier>* columns, ThreadContext* ctx) throw()  final;
+	IScannableIndex* getTableIndex(ArrayList<String>* columns, ThreadContext* ctx) throw() ;
 	IThreadLocker* newThreadLocker(ThreadContext* ctx) throw()  final;
 	void updateLockTable(IThreadLocker* locker, ThreadContext* ctx) final;
 	void updateUnlockTable(IThreadLocker* locker, ThreadContext* ctx) final;

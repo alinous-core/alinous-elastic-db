@@ -61,7 +61,7 @@ namespace alinous {namespace system {
 class ISystemLog;}}
 
 namespace alinous {namespace db {namespace table {
-class TableIndex;}}}
+class IScannableIndex;}}}
 
 namespace alinous {namespace btree {
 class BTree;}}
@@ -102,7 +102,7 @@ using ::alinous::compile::sql::analyze::ScanTableIdentifier;
 using ::alinous::db::table::DatabaseException;
 using ::alinous::db::table::IDatabaseRecord;
 using ::alinous::db::table::IDatabaseTable;
-using ::alinous::db::table::TableIndex;
+using ::alinous::db::table::IScannableIndex;
 using ::alinous::db::table::TableIndexValue;
 using ::alinous::db::table::lockmonitor::DatabaseLockException;
 using ::alinous::db::trx::DbTransaction;
@@ -131,7 +131,7 @@ public:
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 private:
 	DbTransaction* trx;
-	TableIndex* index;
+	IScannableIndex* index;
 	BTree* storage;
 	BTreeScanner* scanner;
 	IDatabaseTable* tableStore;

@@ -54,6 +54,9 @@ class FileStorageEntryBuilder;}}}
 namespace alinous {namespace db {namespace table {
 class IBtreeTableIndex;}}}
 
+namespace alinous {namespace db {namespace table {
+class IScannableIndex;}}}
+
 namespace alinous {namespace btree {
 class IBTreeValue;}}
 
@@ -88,7 +91,7 @@ using ::alinous::runtime::dom::VariableException;
 
 
 
-class TableIndex final : public IBtreeTableIndex, public virtual IObject {
+class TableIndex final : public IBtreeTableIndex, public IScannableIndex, public virtual IObject {
 public:
 	TableIndex(const TableIndex& base) = default;
 public:
@@ -96,28 +99,30 @@ public:
 	void __construct_impl(String* name, String* baseDir, bool primary, ArrayList<TableColumnMetadata>* metadata, ThreadContext* ctx) throw() ;
 	virtual ~TableIndex() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
-public:
-	String* name;
-	BTree* storage;
 private:
+	String* name;
 	String* baseDir;
 	bool primary;
 	ArrayList<TableColumnMetadata>* columns;
 	String* filePath;
+	BTree* storage;
 public:
 	constexpr static const int capacity{1024};
 	constexpr static const int BLOCK_SIZE{128};
 	constexpr static const int maxCache{256};
 public:
-	bool isOpened(ThreadContext* ctx) throw() ;
-	void open(AlinousDatabase* database, ThreadContext* ctx);
-	void close(ThreadContext* ctx);
-	bool isAvailable(ArrayList<String>* columnsStr, ThreadContext* ctx) throw() ;
-	bool isAvailableByScanId(ArrayList<ScanTableColumnIdentifier>* columnIds, ThreadContext* ctx) throw() ;
-	void addIndexValue(DatabaseRecord* record, ThreadContext* ctx);
-	void createIndex(AlinousDatabase* database, ThreadContext* ctx);
-	int archiveSize(ThreadContext* ctx) throw() ;
-	void appendToEntry(FileStorageEntryBuilder* builder, ThreadContext* ctx);
+	bool isOpened(ThreadContext* ctx) throw()  final;
+	void open(AlinousDatabase* database, ThreadContext* ctx) final;
+	void close(ThreadContext* ctx) final;
+	bool isAvailable(ArrayList<String>* columnsStr, ThreadContext* ctx) throw()  final;
+	bool isAvailableByScanId(ArrayList<ScanTableColumnIdentifier>* columnIds, ThreadContext* ctx) throw()  final;
+	void addIndexValue(DatabaseRecord* record, ThreadContext* ctx) final;
+	void createIndex(AlinousDatabase* database, ThreadContext* ctx) final;
+	int archiveSize(ThreadContext* ctx) throw()  final;
+	void appendToEntry(FileStorageEntryBuilder* builder, ThreadContext* ctx) final;
+	BTree* getStorage(ThreadContext* ctx) throw()  final;
+	String* getName(ThreadContext* ctx) throw()  final;
+	bool isPrimary(ThreadContext* ctx) throw()  final;
 	ArrayList<TableColumnMetadata>* getColumns(ThreadContext* ctx) throw()  final;
 private:
 	void setPath(ThreadContext* ctx) throw() ;

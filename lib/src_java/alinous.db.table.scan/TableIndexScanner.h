@@ -13,7 +13,7 @@ namespace alinous {namespace db {namespace trx {
 class DbTransaction;}}}
 
 namespace alinous {namespace db {namespace table {
-class TableIndex;}}}
+class IScannableIndex;}}}
 
 namespace alinous {namespace db {namespace table {
 class IDatabaseTable;}}}
@@ -106,7 +106,7 @@ using ::alinous::db::table::BTreeIndexKey;
 using ::alinous::db::table::DatabaseException;
 using ::alinous::db::table::IDatabaseRecord;
 using ::alinous::db::table::IDatabaseTable;
-using ::alinous::db::table::TableIndex;
+using ::alinous::db::table::IScannableIndex;
 using ::alinous::db::table::TableIndexValue;
 using ::alinous::db::table::lockmonitor::DatabaseLockException;
 using ::alinous::db::trx::DbTransaction;
@@ -135,7 +135,7 @@ public:
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 private:
 	DbTransaction* trx;
-	TableIndex* index;
+	IScannableIndex* index;
 	BTree* storage;
 	BTreeScanner* scanner;
 	IDatabaseTable* tableStore;
@@ -145,7 +145,7 @@ private:
 	ScanTableIdentifier* tableId;
 	ScanResultRecord* nextresult;
 public:
-	TableIndexScanner* init(ScanTableIdentifier* tableId, DbTransaction* trx, TableIndex* index, IDatabaseTable* tableStore, int lockMode, ThreadContext* ctx);
+	TableIndexScanner* init(ScanTableIdentifier* tableId, DbTransaction* trx, IScannableIndex* index, IDatabaseTable* tableStore, int lockMode, ThreadContext* ctx);
 	void startScan(ScanResultIndexKey* indexKeyValue, ThreadContext* ctx) final;
 	void endScan(ThreadContext* ctx) final;
 	bool hasNext(bool debug, ThreadContext* ctx) final;

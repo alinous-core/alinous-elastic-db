@@ -18,14 +18,14 @@ bool IndexInsertJob::__init_static_variables(){
 	delete ctx;
 	return true;
 }
- IndexInsertJob::IndexInsertJob(TableIndex* tableIndex, DatabaseRecord* dbrecord, ThreadContext* ctx) throw()  : IObject(ctx), IThreadAction(ctx), tableIndex(nullptr), dbrecord(nullptr)
+ IndexInsertJob::IndexInsertJob(IScannableIndex* tableIndex, DatabaseRecord* dbrecord, ThreadContext* ctx) throw()  : IObject(ctx), IThreadAction(ctx), tableIndex(nullptr), dbrecord(nullptr)
 {
-	__GC_MV(this, &(this->tableIndex), tableIndex, TableIndex);
+	__GC_MV(this, &(this->tableIndex), tableIndex, IScannableIndex);
 	__GC_MV(this, &(this->dbrecord), dbrecord, DatabaseRecord);
 }
-void IndexInsertJob::__construct_impl(TableIndex* tableIndex, DatabaseRecord* dbrecord, ThreadContext* ctx) throw() 
+void IndexInsertJob::__construct_impl(IScannableIndex* tableIndex, DatabaseRecord* dbrecord, ThreadContext* ctx) throw() 
 {
-	__GC_MV(this, &(this->tableIndex), tableIndex, TableIndex);
+	__GC_MV(this, &(this->tableIndex), tableIndex, IScannableIndex);
 	__GC_MV(this, &(this->dbrecord), dbrecord, DatabaseRecord);
 }
  IndexInsertJob::~IndexInsertJob() throw() 

@@ -45,17 +45,17 @@ void DatabaseTable::__releaseRegerences(bool prepare, ThreadContext* ctx) throw(
 	}
 	DatatableUpdateSupport::__releaseRegerences(true, ctx);
 }
-TableIndex* DatabaseTable::getTableIndexByColIds(ArrayList<ScanTableColumnIdentifier>* columns, ThreadContext* ctx) throw() 
+IScannableIndex* DatabaseTable::getTableIndexByColIds(ArrayList<ScanTableColumnIdentifier>* columns, ThreadContext* ctx) throw() 
 {
 	int maxLoop = this->indexes->size(ctx);
-	TableIndex* matchedindex = nullptr;
+	IScannableIndex* matchedindex = nullptr;
 	if(matchIndexByIdList(this->primaryIndex->getColumns(ctx), columns, ctx))
 	{
 		return this->primaryIndex;
 	}
 	for(int i = 0; i != maxLoop; ++i)
 	{
-		TableIndex* index = this->indexes->get(i, ctx);
+		IScannableIndex* index = this->indexes->get(i, ctx);
 		ArrayList<TableColumnMetadata>* columnsMetadataList = index->getColumns(ctx);
 		bool match = matchIndexByIdList(columnsMetadataList, columns, ctx);
 		if(columnsMetadataList->size(ctx) == columns->size(ctx) && match)
@@ -72,7 +72,7 @@ TableIndex* DatabaseTable::getTableIndexByColIds(ArrayList<ScanTableColumnIdenti
 	}
 	return matchedindex;
 }
-TableIndex* DatabaseTable::getAbailableIndex(ArrayList<String>* columns, ThreadContext* ctx) throw() 
+IScannableIndex* DatabaseTable::getAbailableIndex(ArrayList<String>* columns, ThreadContext* ctx) throw() 
 {
 	if(this->primaryIndex->isAvailable(columns, ctx))
 	{
@@ -81,7 +81,7 @@ TableIndex* DatabaseTable::getAbailableIndex(ArrayList<String>* columns, ThreadC
 	int maxLoop = this->indexes->size(ctx);
 	for(int i = 0; i != maxLoop; ++i)
 	{
-		TableIndex* index = this->indexes->get(i, ctx);
+		IScannableIndex* index = this->indexes->get(i, ctx);
 		if(index->isAvailable(columns, ctx))
 		{
 			return index;
@@ -89,7 +89,7 @@ TableIndex* DatabaseTable::getAbailableIndex(ArrayList<String>* columns, ThreadC
 	}
 	return nullptr;
 }
-TableIndex* DatabaseTable::getAbailableIndexByScanColId(ArrayList<ScanTableColumnIdentifier>* columns, ThreadContext* ctx) throw() 
+IScannableIndex* DatabaseTable::getAbailableIndexByScanColId(ArrayList<ScanTableColumnIdentifier>* columns, ThreadContext* ctx) throw() 
 {
 	if(this->primaryIndex->isAvailableByScanId(columns, ctx))
 	{
@@ -98,7 +98,7 @@ TableIndex* DatabaseTable::getAbailableIndexByScanColId(ArrayList<ScanTableColum
 	int maxLoop = this->indexes->size(ctx);
 	for(int i = 0; i != maxLoop; ++i)
 	{
-		TableIndex* index = this->indexes->get(i, ctx);
+		IScannableIndex* index = this->indexes->get(i, ctx);
 		if(index->isAvailableByScanId(columns, ctx))
 		{
 			return index;
@@ -106,13 +106,13 @@ TableIndex* DatabaseTable::getAbailableIndexByScanColId(ArrayList<ScanTableColum
 	}
 	return nullptr;
 }
-TableIndex* DatabaseTable::getTableIndex(ArrayList<String>* columns, ThreadContext* ctx) throw() 
+IScannableIndex* DatabaseTable::getTableIndex(ArrayList<String>* columns, ThreadContext* ctx) throw() 
 {
 	int maxLoop = this->indexes->size(ctx);
-	TableIndex* matchedindex = nullptr;
+	IScannableIndex* matchedindex = nullptr;
 	for(int i = 0; i != maxLoop; ++i)
 	{
-		TableIndex* index = this->indexes->get(i, ctx);
+		IScannableIndex* index = this->indexes->get(i, ctx);
 		ArrayList<TableColumnMetadata>* columnsMetadataList = index->getColumns(ctx);
 		bool matched = matchIndexByStrList(columnsMetadataList, columns, ctx);
 		if(columnsMetadataList->size(ctx) == columns->size(ctx) && matched)

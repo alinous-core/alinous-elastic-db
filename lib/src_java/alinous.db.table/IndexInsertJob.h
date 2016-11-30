@@ -4,7 +4,7 @@ namespace alinous{namespace annotation{
 class OneSource;
 }}
 namespace alinous {namespace db {namespace table {
-class TableIndex;}}}
+class IScannableIndex;}}}
 
 namespace alinous {namespace db {namespace table {
 class DatabaseRecord;}}}
@@ -33,12 +33,12 @@ class IndexInsertJob final : public IThreadAction, public virtual IObject {
 public:
 	IndexInsertJob(const IndexInsertJob& base) = default;
 public:
-	IndexInsertJob(TableIndex* tableIndex, DatabaseRecord* dbrecord, ThreadContext* ctx) throw() ;
-	void __construct_impl(TableIndex* tableIndex, DatabaseRecord* dbrecord, ThreadContext* ctx) throw() ;
+	IndexInsertJob(IScannableIndex* tableIndex, DatabaseRecord* dbrecord, ThreadContext* ctx) throw() ;
+	void __construct_impl(IScannableIndex* tableIndex, DatabaseRecord* dbrecord, ThreadContext* ctx) throw() ;
 	virtual ~IndexInsertJob() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 private:
-	TableIndex* tableIndex;
+	IScannableIndex* tableIndex;
 	DatabaseRecord* dbrecord;
 public:
 	void execute(ThreadContext* ctx) final;

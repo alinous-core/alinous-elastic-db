@@ -75,7 +75,7 @@ template class ::java::util::List<::alinous::runtime::engine::debugger::DebugSta
 template class ::java::util::List<::alinous::compile::analyse::AlinousType>;
 template class ::java::util::List<::alinous::html::xpath::match::MatchCandidate>;
 template class ::java::util::List<::alinous::btree::IBTreeValue>;
-template class ::java::util::List<::alinous::db::table::TableIndex>;
+template class ::java::util::List<::alinous::db::table::IScannableIndex>;
 template class ::java::util::List<::alinous::db::table::DatabaseRecord>;
 template class ::java::util::List<::alinous::db::table::lockmonitor::TableLock>;
 template class ::java::util::List<::alinous::db::table::lockmonitor::RowLock>;
