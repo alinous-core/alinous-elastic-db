@@ -18,9 +18,6 @@ class AlinousFunctionManager;}}}
 namespace alinous {namespace runtime {
 class AlinousModuleRepository;}}
 
-namespace alinous {namespace runtime {namespace dbif {
-class DataSourceManager;}}}
-
 namespace alinous {namespace runtime {namespace engine {namespace debugger {
 class AlinousScriptDebugger;}}}}
 
@@ -32,6 +29,9 @@ class SQLFunctionManager;}}}}
 
 namespace alinous {namespace server {namespace webmodule {
 class WebModuleManager;}}}
+
+namespace alinous {namespace runtime {namespace dbif {
+class DataSourceManager;}}}
 
 namespace java {namespace lang {
 class InterruptedException;}}
@@ -88,6 +88,7 @@ private:
 	ScriptRunner* runner;
 public:
 	void init(int debugPort, ThreadContext* ctx);
+	void initDatabase(ThreadContext* ctx);
 	void dispose(ThreadContext* ctx) throw() ;
 	String* getAlinousHome(ThreadContext* ctx) throw() ;
 	AlinousConfig* getConfig(ThreadContext* ctx) throw() ;

@@ -21,12 +21,10 @@ bool DataSourceManager::__init_static_variables(){
  DataSourceManager::DataSourceManager(AlinousCore* core, ThreadContext* ctx) : IObject(ctx), drivers(GCUtils<HashMap<String,IDatabaseDriver> >::ins(this, (new(ctx) HashMap<String,IDatabaseDriver>(ctx)), ctx, __FILEW__, __LINE__, L"")), core(nullptr)
 {
 	__GC_MV(this, &(this->core), core, AlinousCore);
-	init(ctx);
 }
 void DataSourceManager::__construct_impl(AlinousCore* core, ThreadContext* ctx)
 {
 	__GC_MV(this, &(this->core), core, AlinousCore);
-	init(ctx);
 }
  DataSourceManager::~DataSourceManager() throw() 
 {
@@ -45,21 +43,6 @@ void DataSourceManager::__releaseRegerences(bool prepare, ThreadContext* ctx) th
 	if(!prepare){
 		return;
 	}
-}
-IDatabaseDriver* DataSourceManager::get(String* id, ThreadContext* ctx) throw() 
-{
-	return this->drivers->get(id, ctx);
-}
-void DataSourceManager::dispose(ThreadContext* ctx) throw() 
-{
-	Iterator<String>* it = this->drivers->keySet(ctx)->iterator(ctx);
-	while(it->hasNext(ctx))
-	{
-		String* id = it->next(ctx);
-		IDatabaseDriver* driver = this->drivers->get(id, ctx);
-		driver->dispose(ctx);
-	}
-	this->drivers->clear(ctx);
 }
 void DataSourceManager::init(ThreadContext* ctx)
 {
@@ -89,6 +72,21 @@ void DataSourceManager::init(ThreadContext* ctx)
 		}
 		this->drivers->put(id, driver, ctx);
 	}
+}
+IDatabaseDriver* DataSourceManager::get(String* id, ThreadContext* ctx) throw() 
+{
+	return this->drivers->get(id, ctx);
+}
+void DataSourceManager::dispose(ThreadContext* ctx) throw() 
+{
+	Iterator<String>* it = this->drivers->keySet(ctx)->iterator(ctx);
+	while(it->hasNext(ctx))
+	{
+		String* id = it->next(ctx);
+		IDatabaseDriver* driver = this->drivers->get(id, ctx);
+		driver->dispose(ctx);
+	}
+	this->drivers->clear(ctx);
 }
 }}}
 

@@ -18,7 +18,7 @@ bool WebHandlerInfo::__init_static_variables(){
 	delete ctx;
 	return true;
 }
- WebHandlerInfo::WebHandlerInfo(String* alinousHome, ThreadContext* ctx) throw()  : IObject(ctx), documentRoot(nullptr), alinousHome(nullptr)
+ WebHandlerInfo::WebHandlerInfo(String* alinousHome, ThreadContext* ctx) throw()  : IObject(ctx), IAlinousConfigElement(ctx), documentRoot(nullptr), alinousHome(nullptr)
 {
 	__GC_MV(this, &(this->alinousHome), alinousHome, String);
 }

@@ -3,6 +3,9 @@
 namespace alinous{namespace annotation{
 class OneSource;
 }}
+namespace alinous {namespace system {namespace config {
+class IAlinousConfigElement;}}}
+
 namespace alinous {namespace runtime {namespace dbif {
 class IDatabaseDriver;}}}
 
@@ -23,11 +26,11 @@ using ::alinous::runtime::dbif::IDatabaseDriver;
 
 
 
-class DataSourceInfo final : public virtual IObject {
+class DataSourceInfo final : public IAlinousConfigElement, public virtual IObject {
 public:
 	DataSourceInfo(const DataSourceInfo& base) = default;
 public:
-	DataSourceInfo(ThreadContext* ctx) throw()  : IObject(ctx), connect(nullptr), user(nullptr), pass(nullptr), defaultAcid(IDatabaseDriver::READ_COMMITTED)
+	DataSourceInfo(ThreadContext* ctx) throw()  : IObject(ctx), IAlinousConfigElement(ctx), connect(nullptr), user(nullptr), pass(nullptr), defaultAcid(IDatabaseDriver::READ_COMMITTED)
 	{
 	}
 	void __construct_impl(ThreadContext* ctx) throw() 

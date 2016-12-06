@@ -34,6 +34,14 @@ void AlinousDbInstanceInfo::__releaseRegerences(bool prepare, ThreadContext* ctx
 	dataDir = nullptr;
 	__e_obj1.add(this->trxTmpDir, this);
 	trxTmpDir = nullptr;
+	__e_obj1.add(this->regionsRef, this);
+	regionsRef = nullptr;
+	__e_obj1.add(this->regions, this);
+	regions = nullptr;
+	__e_obj1.add(this->nodes, this);
+	nodes = nullptr;
+	__e_obj1.add(this->monitor, this);
+	monitor = nullptr;
 	if(!prepare){
 		return;
 	}
@@ -69,6 +77,38 @@ int AlinousDbInstanceInfo::getMaxConnections(ThreadContext* ctx) throw()
 void AlinousDbInstanceInfo::setMaxConnections(int maxConnections, ThreadContext* ctx) throw() 
 {
 	this->maxConnections = maxConnections;
+}
+RegionsRef* AlinousDbInstanceInfo::getRegionsRef(ThreadContext* ctx) throw() 
+{
+	return regionsRef;
+}
+void AlinousDbInstanceInfo::setRegionsRef(RegionsRef* regionsRef, ThreadContext* ctx) throw() 
+{
+	__GC_MV(this, &(this->regionsRef), regionsRef, RegionsRef);
+}
+Regions* AlinousDbInstanceInfo::getRegions(ThreadContext* ctx) throw() 
+{
+	return regions;
+}
+void AlinousDbInstanceInfo::setRegions(Regions* regions, ThreadContext* ctx) throw() 
+{
+	__GC_MV(this, &(this->regions), regions, Regions);
+}
+Nodes* AlinousDbInstanceInfo::getNodes(ThreadContext* ctx) throw() 
+{
+	return nodes;
+}
+void AlinousDbInstanceInfo::setNodes(Nodes* nodes, ThreadContext* ctx) throw() 
+{
+	__GC_MV(this, &(this->nodes), nodes, Nodes);
+}
+Monitor* AlinousDbInstanceInfo::getMonitor(ThreadContext* ctx) throw() 
+{
+	return monitor;
+}
+void AlinousDbInstanceInfo::setMonitor(Monitor* monitor, ThreadContext* ctx) throw() 
+{
+	__GC_MV(this, &(this->monitor), monitor, Monitor);
 }
 }}}
 

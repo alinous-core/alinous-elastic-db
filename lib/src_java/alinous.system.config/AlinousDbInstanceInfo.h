@@ -3,6 +3,21 @@
 namespace alinous{namespace annotation{
 class OneSource;
 }}
+namespace alinous {namespace system {namespace config {namespace remote {
+class RegionsRef;}}}}
+
+namespace alinous {namespace system {namespace config {namespace remote {
+class Regions;}}}}
+
+namespace alinous {namespace system {namespace config {namespace remote {
+class Nodes;}}}}
+
+namespace alinous {namespace system {namespace config {namespace remote {
+class Monitor;}}}}
+
+namespace alinous {namespace system {namespace config {
+class IAlinousConfigElement;}}}
+
 namespace java {namespace lang {
 class IObject;
 }}
@@ -16,14 +31,18 @@ namespace alinous {namespace system {namespace config {
 using namespace ::alinous;
 using namespace ::java::lang;
 using ::java::util::Iterator;
+using ::alinous::system::config::remote::Monitor;
+using ::alinous::system::config::remote::Nodes;
+using ::alinous::system::config::remote::Regions;
+using ::alinous::system::config::remote::RegionsRef;
 
 
 
-class AlinousDbInstanceInfo final : public virtual IObject {
+class AlinousDbInstanceInfo final : public IAlinousConfigElement, public virtual IObject {
 public:
 	AlinousDbInstanceInfo(const AlinousDbInstanceInfo& base) = default;
 public:
-	AlinousDbInstanceInfo(ThreadContext* ctx) throw()  : IObject(ctx), id(nullptr), dataDir(nullptr), trxTmpDir(nullptr), maxConnections(16)
+	AlinousDbInstanceInfo(ThreadContext* ctx) throw()  : IObject(ctx), IAlinousConfigElement(ctx), id(nullptr), dataDir(nullptr), trxTmpDir(nullptr), maxConnections(16), regionsRef(nullptr), regions(nullptr), nodes(nullptr), monitor(nullptr)
 	{
 	}
 	void __construct_impl(ThreadContext* ctx) throw() 
@@ -36,6 +55,10 @@ private:
 	String* dataDir;
 	String* trxTmpDir;
 	int maxConnections;
+	RegionsRef* regionsRef;
+	Regions* regions;
+	Nodes* nodes;
+	Monitor* monitor;
 public:
 	String* getId(ThreadContext* ctx) throw() ;
 	void setId(String* id, ThreadContext* ctx) throw() ;
@@ -45,6 +68,14 @@ public:
 	void setTrxTmpDir(String* trxTmpDir, ThreadContext* ctx) throw() ;
 	int getMaxConnections(ThreadContext* ctx) throw() ;
 	void setMaxConnections(int maxConnections, ThreadContext* ctx) throw() ;
+	RegionsRef* getRegionsRef(ThreadContext* ctx) throw() ;
+	void setRegionsRef(RegionsRef* regionsRef, ThreadContext* ctx) throw() ;
+	Regions* getRegions(ThreadContext* ctx) throw() ;
+	void setRegions(Regions* regions, ThreadContext* ctx) throw() ;
+	Nodes* getNodes(ThreadContext* ctx) throw() ;
+	void setNodes(Nodes* nodes, ThreadContext* ctx) throw() ;
+	Monitor* getMonitor(ThreadContext* ctx) throw() ;
+	void setMonitor(Monitor* monitor, ThreadContext* ctx) throw() ;
 public:
 	static bool __init_done;
 	static bool __init_static_variables();

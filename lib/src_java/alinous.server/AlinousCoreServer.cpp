@@ -22,11 +22,13 @@ bool AlinousCoreServer::__init_static_variables(){
 {
 	__GC_MV(this, &(this->core), (new(ctx) AlinousCore(home, debug, ctx)), AlinousCore);
 	this->core->init(debugPort, ctx);
+	this->core->initDatabase(ctx);
 }
 void AlinousCoreServer::__construct_impl(String* home, bool debug, int debugPort, ThreadContext* ctx)
 {
 	__GC_MV(this, &(this->core), (new(ctx) AlinousCore(home, debug, ctx)), AlinousCore);
 	this->core->init(debugPort, ctx);
+	this->core->initDatabase(ctx);
 }
  AlinousCoreServer::~AlinousCoreServer() throw() 
 {

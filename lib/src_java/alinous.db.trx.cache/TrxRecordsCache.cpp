@@ -73,19 +73,19 @@ TrxRecordsCache* TrxRecordsCache::init(String* tmpDir, String* schema, String* t
 			}
 			catch(VariableException* e)
 			{
-				throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1597(), ctx));
+				throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1608(), ctx));
 			}
 			catch(InterruptedException* e)
 			{
-				throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1597(), ctx));
+				throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1608(), ctx));
 			}
 			catch(IOException* e)
 			{
-				throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1597(), ctx));
+				throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1608(), ctx));
 			}
 			catch(BTreeException* e)
 			{
-				throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1597(), ctx));
+				throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1608(), ctx));
 			}
 		}
 	}
@@ -112,15 +112,15 @@ void TrxRecordsCache::switchToDisk(AlinousDatabase* database, ThreadContext* ctx
 		}
 		catch(IOException* e)
 		{
-			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1598(), ctx));
+			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1609(), ctx));
 		}
 		catch(InterruptedException* e)
 		{
-			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1598(), ctx));
+			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1609(), ctx));
 		}
 		catch(BTreeException* e)
 		{
-			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1598(), ctx));
+			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1609(), ctx));
 		}
 	}
 }
@@ -140,11 +140,11 @@ void TrxRecordsCache::dispose(ThreadContext* ctx)
 		}
 		catch(IOException* e)
 		{
-			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_1599(), e, ctx));
+			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_1610(), e, ctx));
 		}
 		catch(InterruptedException* e)
 		{
-			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_1600(), e, ctx));
+			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_1611(), e, ctx));
 		}
 	}
 }
@@ -263,19 +263,19 @@ CachedRecord* TrxRecordsCache::getRecordByOid(long long oid, ThreadContext* ctx)
 		}
 		catch(VariableException* e)
 		{
-			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_1605(), e, ctx));
+			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_1616(), e, ctx));
 		}
 		catch(IOException* e)
 		{
-			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_1606(), e, ctx));
+			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_1617(), e, ctx));
 		}
 		catch(InterruptedException* e)
 		{
-			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_1607(), e, ctx));
+			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_1618(), e, ctx));
 		}
 		catch(BTreeException* e)
 		{
-			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_1608(), e, ctx));
+			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_1619(), e, ctx));
 		}
 	}
 	if(node == nullptr)
@@ -309,15 +309,15 @@ void TrxRecordsCache::insertUpdateRecord(ScanResultRecord* srecord, ThreadContex
 		}
 		catch(InterruptedException* e)
 		{
-			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_1609(), e, ctx));
+			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_1620(), e, ctx));
 		}
 		catch(IOException* e)
 		{
-			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_1610(), e, ctx));
+			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_1621(), e, ctx));
 		}
 		catch(BTreeException* e)
 		{
-			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_1611(), e, ctx));
+			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_1622(), e, ctx));
 		}
 	}
 	for(int i = 0; i != maxIndexes; ++i)
@@ -330,15 +330,15 @@ void TrxRecordsCache::insertUpdateRecord(ScanResultRecord* srecord, ThreadContex
 			}
 			catch(InterruptedException* e)
 			{
-				throw (new(ctx) AlinousException(ConstStr::getCNST_STR_1612(), e, ctx));
+				throw (new(ctx) AlinousException(ConstStr::getCNST_STR_1623(), e, ctx));
 			}
 			catch(IOException* e)
 			{
-				throw (new(ctx) AlinousException(ConstStr::getCNST_STR_1613(), e, ctx));
+				throw (new(ctx) AlinousException(ConstStr::getCNST_STR_1624(), e, ctx));
 			}
 			catch(BTreeException* e)
 			{
-				throw (new(ctx) AlinousException(ConstStr::getCNST_STR_1614(), e, ctx));
+				throw (new(ctx) AlinousException(ConstStr::getCNST_STR_1625(), e, ctx));
 			}
 		}
 	}
@@ -375,15 +375,15 @@ void TrxRecordsCache::insertRecord(ArrayList<IDomVariable>* values, ArrayList<Cu
 			}
 			catch(InterruptedException* e)
 			{
-				throw (new(ctx) AlinousException(ConstStr::getCNST_STR_1609(), e, ctx));
+				throw (new(ctx) AlinousException(ConstStr::getCNST_STR_1620(), e, ctx));
 			}
 			catch(IOException* e)
 			{
-				throw (new(ctx) AlinousException(ConstStr::getCNST_STR_1610(), e, ctx));
+				throw (new(ctx) AlinousException(ConstStr::getCNST_STR_1621(), e, ctx));
 			}
 			catch(BTreeException* e)
 			{
-				throw (new(ctx) AlinousException(ConstStr::getCNST_STR_1611(), e, ctx));
+				throw (new(ctx) AlinousException(ConstStr::getCNST_STR_1622(), e, ctx));
 			}
 		}
 		for(int i = 0; i != maxIndexes; ++i)
@@ -396,15 +396,15 @@ void TrxRecordsCache::insertRecord(ArrayList<IDomVariable>* values, ArrayList<Cu
 				}
 				catch(InterruptedException* e)
 				{
-					throw (new(ctx) AlinousException(ConstStr::getCNST_STR_1612(), e, ctx));
+					throw (new(ctx) AlinousException(ConstStr::getCNST_STR_1623(), e, ctx));
 				}
 				catch(IOException* e)
 				{
-					throw (new(ctx) AlinousException(ConstStr::getCNST_STR_1613(), e, ctx));
+					throw (new(ctx) AlinousException(ConstStr::getCNST_STR_1624(), e, ctx));
 				}
 				catch(BTreeException* e)
 				{
-					throw (new(ctx) AlinousException(ConstStr::getCNST_STR_1614(), e, ctx));
+					throw (new(ctx) AlinousException(ConstStr::getCNST_STR_1625(), e, ctx));
 				}
 			}
 		}
@@ -431,12 +431,12 @@ IBTreeNode* TrxRecordsCache::findByKey(LongKey* oidKey, ThreadContext* ctx)
 void TrxRecordsCache::setStorageFilePath(ThreadContext* ctx) throw() 
 {
 	StringBuilder* buff = (new(ctx) StringBuilder(ctx));
-	String* postfix = ConstStr::getCNST_STR_1601();
+	String* postfix = ConstStr::getCNST_STR_1612();
 	if(!this->insert)
 	{
-		postfix = ConstStr::getCNST_STR_1602();
+		postfix = ConstStr::getCNST_STR_1613();
 	}
-	buff->append(this->tmpDir, ctx)->append(this->schema, ctx)->append(ConstStr::getCNST_STR_1603(), ctx)->append(this->tableName, ctx)->append(postfix, ctx)->append(ConstStr::getCNST_STR_1604(), ctx);
+	buff->append(this->tmpDir, ctx)->append(this->schema, ctx)->append(ConstStr::getCNST_STR_1614(), ctx)->append(this->tableName, ctx)->append(postfix, ctx)->append(ConstStr::getCNST_STR_1615(), ctx);
 	__GC_MV(this, &(this->storagePath), buff->toString(ctx), String);
 }
 bool TrxRecordsCache::matchIndexByIdList(ArrayList<TableColumnMetadata>* cachedIndexCols, ArrayList<ScanTableColumnIdentifier>* colIdList, ThreadContext* ctx) throw() 

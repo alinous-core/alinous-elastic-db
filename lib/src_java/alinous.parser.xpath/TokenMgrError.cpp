@@ -86,7 +86,7 @@ String* TokenMgrError::addEscapes(String* str, ThreadContext* ctx) throw()
 			retval->append(ConstStr::getCNST_STR_123(), ctx);
 			continue;
 		case L'\'':
-			retval->append(ConstStr::getCNST_STR_1201(), ctx);
+			retval->append(ConstStr::getCNST_STR_1212(), ctx);
 			continue;
 		case L'\\':
 			retval->append(ConstStr::getCNST_STR_124(), ctx);
@@ -96,7 +96,7 @@ String* TokenMgrError::addEscapes(String* str, ThreadContext* ctx) throw()
 			if((ch) < (wchar_t)0x20 || ch > (wchar_t)0x7e)
 			{
 				String* s = ConstStr::getCNST_STR_384()->clone(ctx)->append(Integer::toString((int)ch, 16, ctx), ctx);
-				retval->append(ConstStr::getCNST_STR_1202()->clone(ctx)->append(s->substring(s->length(ctx) - 4, s->length(ctx), ctx), ctx), ctx);
+				retval->append(ConstStr::getCNST_STR_1213()->clone(ctx)->append(s->substring(s->length(ctx) - 4, s->length(ctx), ctx), ctx), ctx);
 			}
 						else 
 			{
@@ -110,7 +110,7 @@ String* TokenMgrError::addEscapes(String* str, ThreadContext* ctx) throw()
 }
 String* TokenMgrError::LexicalError(bool EOFSeen, int lexState, int errorLine, int errorColumn, String* errorAfter, wchar_t curChar, ThreadContext* ctx) throw() 
 {
-	return (ConstStr::getCNST_STR_1203()->clone(ctx)->append(errorLine, ctx)->append(ConstStr::getCNST_STR_1204(), ctx)->append(errorColumn, ctx)->append(ConstStr::getCNST_STR_1205(), ctx)->append((EOFSeen ? ConstStr::getCNST_STR_1206() : (ConstStr::getCNST_STR_1207()->clone(ctx)->append(addEscapes(String::valueOf(curChar, ctx), ctx), ctx)->append(ConstStr::getCNST_STR_1207(), ctx))->clone(ctx)->append(ConstStr::getCNST_STR_887(), ctx)->append(((int)curChar), ctx)->append(ConstStr::getCNST_STR_1208(), ctx)), ctx)->append(ConstStr::getCNST_STR_1209(), ctx)->append(addEscapes(errorAfter, ctx), ctx)->append(ConstStr::getCNST_STR_1207(), ctx));
+	return (ConstStr::getCNST_STR_1214()->clone(ctx)->append(errorLine, ctx)->append(ConstStr::getCNST_STR_1215(), ctx)->append(errorColumn, ctx)->append(ConstStr::getCNST_STR_1216(), ctx)->append((EOFSeen ? ConstStr::getCNST_STR_1217() : (ConstStr::getCNST_STR_1218()->clone(ctx)->append(addEscapes(String::valueOf(curChar, ctx), ctx), ctx)->append(ConstStr::getCNST_STR_1218(), ctx))->clone(ctx)->append(ConstStr::getCNST_STR_887(), ctx)->append(((int)curChar), ctx)->append(ConstStr::getCNST_STR_1219(), ctx)), ctx)->append(ConstStr::getCNST_STR_1220(), ctx)->append(addEscapes(errorAfter, ctx), ctx)->append(ConstStr::getCNST_STR_1218(), ctx));
 }
 }}}
 

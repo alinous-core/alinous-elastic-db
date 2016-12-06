@@ -18,7 +18,7 @@ bool AlinousDbInfo::__init_static_variables(){
 	delete ctx;
 	return true;
 }
- AlinousDbInfo::AlinousDbInfo(String* alinousHome, ThreadContext* ctx) throw()  : IObject(ctx), instances(GCUtils<HashMap<String,AlinousDbInstanceInfo> >::ins(this, (new(ctx) HashMap<String,AlinousDbInstanceInfo>(ctx)), ctx, __FILEW__, __LINE__, L"")), alinousHome(nullptr)
+ AlinousDbInfo::AlinousDbInfo(String* alinousHome, ThreadContext* ctx) throw()  : IObject(ctx), IAlinousConfigElement(ctx), instances(GCUtils<HashMap<String,AlinousDbInstanceInfo> >::ins(this, (new(ctx) HashMap<String,AlinousDbInstanceInfo>(ctx)), ctx, __FILEW__, __LINE__, L"")), alinousHome(nullptr)
 {
 	__GC_MV(this, &(this->alinousHome), alinousHome, String);
 }
@@ -44,12 +44,13 @@ void AlinousDbInfo::__releaseRegerences(bool prepare, ThreadContext* ctx) throw(
 		return;
 	}
 }
-void AlinousDbInfo::addInstance(String* id, String* dataDir, ThreadContext* ctx) throw() 
+AlinousDbInstanceInfo* AlinousDbInfo::addInstance(String* id, String* dataDir, ThreadContext* ctx) throw() 
 {
 	AlinousDbInstanceInfo* info = (new(ctx) AlinousDbInstanceInfo(ctx));
 	info->setId(id, ctx);
 	info->setDataDir(ConfigPathUtils::getAbsDirPath(this->alinousHome, dataDir, ctx), ctx);
 	this->instances->put(id, info, ctx);
+	return info;
 }
 AlinousDbInstanceInfo* AlinousDbInfo::getInstance(String* id, ThreadContext* ctx) throw() 
 {

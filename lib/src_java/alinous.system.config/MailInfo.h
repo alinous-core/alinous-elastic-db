@@ -3,6 +3,9 @@
 namespace alinous{namespace annotation{
 class OneSource;
 }}
+namespace alinous {namespace system {namespace config {
+class IAlinousConfigElement;}}}
+
 namespace java {namespace lang {
 class IObject;
 }}
@@ -19,11 +22,11 @@ using ::java::util::Iterator;
 
 
 
-class MailInfo final : public virtual IObject {
+class MailInfo final : public IAlinousConfigElement, public virtual IObject {
 public:
 	MailInfo(const MailInfo& base) = default;
 public:
-	MailInfo(ThreadContext* ctx) throw()  : IObject(ctx)
+	MailInfo(ThreadContext* ctx) throw()  : IObject(ctx), IAlinousConfigElement(ctx)
 	{
 	}
 	void __construct_impl(ThreadContext* ctx) throw() 

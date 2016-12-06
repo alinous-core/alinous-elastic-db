@@ -65,10 +65,9 @@ private:
 	HashMap<String,IDatabaseDriver>* drivers;
 	AlinousCore* core;
 public:
+	void init(ThreadContext* ctx);
 	IDatabaseDriver* get(String* id, ThreadContext* ctx) throw() ;
 	void dispose(ThreadContext* ctx) throw() ;
-private:
-	void init(ThreadContext* ctx);
 public:
 	static bool __init_done;
 	static bool __init_static_variables();

@@ -3,6 +3,9 @@
 namespace alinous{namespace annotation{
 class OneSource;
 }}
+namespace alinous {namespace system {namespace config {
+class IAlinousConfigElement;}}}
+
 namespace java {namespace lang {
 class IObject;
 }}
@@ -19,7 +22,7 @@ using ::java::util::Iterator;
 
 
 
-class SystemInfo final : public virtual IObject {
+class SystemInfo final : public IAlinousConfigElement, public virtual IObject {
 public:
 	SystemInfo(const SystemInfo& base) = default;
 public:

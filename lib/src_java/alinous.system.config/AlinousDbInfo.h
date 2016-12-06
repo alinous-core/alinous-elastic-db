@@ -12,6 +12,9 @@ template <typename  T> class Set;}}
 namespace java {namespace util {
 template <typename  T, typename V> class HashMap;}}
 
+namespace alinous {namespace system {namespace config {
+class IAlinousConfigElement;}}}
+
 namespace java {namespace lang {
 class IObject;
 }}
@@ -30,7 +33,7 @@ using ::java::util::Set;
 
 
 
-class AlinousDbInfo final : public virtual IObject {
+class AlinousDbInfo final : public IAlinousConfigElement, public virtual IObject {
 public:
 	AlinousDbInfo(const AlinousDbInfo& base) = default;
 public:
@@ -42,7 +45,7 @@ private:
 	HashMap<String,AlinousDbInstanceInfo>* instances;
 	String* alinousHome;
 public:
-	void addInstance(String* id, String* dataDir, ThreadContext* ctx) throw() ;
+	AlinousDbInstanceInfo* addInstance(String* id, String* dataDir, ThreadContext* ctx) throw() ;
 	AlinousDbInstanceInfo* getInstance(String* id, ThreadContext* ctx) throw() ;
 	Set<String>* idSet(ThreadContext* ctx) throw() ;
 public:

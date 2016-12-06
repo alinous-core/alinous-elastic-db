@@ -3,6 +3,9 @@
 namespace alinous{namespace annotation{
 class OneSource;
 }}
+namespace alinous {namespace system {namespace config {
+class IAlinousConfigElement;}}}
+
 namespace java {namespace lang {
 class IObject;
 }}
@@ -19,7 +22,7 @@ using ::java::util::Iterator;
 
 
 
-class WebHandlerInfo final : public virtual IObject {
+class WebHandlerInfo final : public IAlinousConfigElement, public virtual IObject {
 public:
 	WebHandlerInfo(const WebHandlerInfo& base) = default;
 public:

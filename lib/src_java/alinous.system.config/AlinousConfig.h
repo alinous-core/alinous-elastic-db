@@ -49,6 +49,21 @@ namespace alinous {namespace html {namespace xpath {
 class IVariableValue;}}}
 
 namespace alinous {namespace system {namespace config {
+class AlinousDbInstanceInfo;}}}
+
+namespace alinous {namespace system {namespace config {namespace remote {
+class RegionsRef;}}}}
+
+namespace alinous {namespace system {namespace config {namespace remote {
+class Regions;}}}}
+
+namespace alinous {namespace system {namespace config {namespace remote {
+class Nodes;}}}}
+
+namespace alinous {namespace system {namespace config {namespace remote {
+class Monitor;}}}}
+
+namespace alinous {namespace system {namespace config {
 class WebHandlerInfo;}}}
 
 namespace java {namespace lang {
@@ -92,6 +107,10 @@ using ::alinous::html::xpath::match::MatchCandidatesCollection;
 using ::alinous::html::xpath::match::Matcher;
 using ::alinous::html::xpath::match::MatchingException;
 using ::alinous::parser::xpath::ParseException;
+using ::alinous::system::config::remote::Monitor;
+using ::alinous::system::config::remote::Nodes;
+using ::alinous::system::config::remote::Regions;
+using ::alinous::system::config::remote::RegionsRef;
 using ::alinous::system::utils::ConfigFileUtiles;
 using ::alinous::system::utils::FileUtils;
 
@@ -128,6 +147,7 @@ public:
 private:
 	void handleSystem(MatchCandidatesCollection* result, DomDocument* document, Matcher* matcher, ThreadContext* ctx);
 	void handleAlinousDbSetting(MatchCandidatesCollection* result, DomDocument* document, Matcher* matcher, ThreadContext* ctx);
+	void handleRegionRef(AlinousDbInstanceInfo* dbinfo, DomNode* alinousDb, DomDocument* document, Matcher* matcher, ThreadContext* ctx);
 	void handleWebSetting(MatchCandidatesCollection* result, DomDocument* document, Matcher* matcher, ThreadContext* ctx);
 	void handleSourceSetting(MatchCandidatesCollection* result, ThreadContext* ctx) throw() ;
 	void handleMailSetting(MatchCandidatesCollection* result, ThreadContext* ctx) throw() ;

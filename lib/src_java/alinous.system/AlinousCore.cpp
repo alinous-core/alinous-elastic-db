@@ -87,11 +87,15 @@ void AlinousCore::init(int debugPort, ThreadContext* ctx)
 	__GC_MV(this, &(this->functionManager), (new(ctx) AlinousFunctionManager(this, ctx)), AlinousFunctionManager);
 	this->functionManager->init(ctx);
 	__GC_MV(this, &(this->modulerepository), (new(ctx) AlinousModuleRepository(this, ctx)), AlinousModuleRepository);
-	__GC_MV(this, &(this->databaseManager), (new(ctx) DataSourceManager(this, ctx)), DataSourceManager);
 	__GC_MV(this, &(this->debugger), (new(ctx) AlinousScriptDebugger(this, debugPort, ctx)), AlinousScriptDebugger);
 	__GC_MV(this, &(this->runner), (new(ctx) ScriptRunner(ctx)), ScriptRunner);
 	__GC_MV(this, &(this->sqlFunctionManager), (new(ctx) SQLFunctionManager(ctx)), SQLFunctionManager);
 	__GC_MV(this, &(this->webModuleManager), (new(ctx) WebModuleManager(this, ctx)), WebModuleManager);
+}
+void AlinousCore::initDatabase(ThreadContext* ctx)
+{
+	__GC_MV(this, &(this->databaseManager), (new(ctx) DataSourceManager(this, ctx)), DataSourceManager);
+	this->databaseManager->init(ctx);
 }
 void AlinousCore::dispose(ThreadContext* ctx) throw() 
 {

@@ -70,7 +70,7 @@ void TableRegionManager::createTable(String* regionName, String* schemaName, Tab
 {
 	if(regionName == nullptr)
 	{
-		regionName = ConstStr::getCNST_STR_1562();
+		regionName = ConstStr::getCNST_STR_1573();
 	}
 	int maxLoop = this->regions->size(ctx);
 	ITableRegion* region = nullptr;

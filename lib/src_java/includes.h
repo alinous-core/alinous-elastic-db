@@ -441,11 +441,61 @@
 #include "alinous.compile/AlinousPlusParserConstants.h"
 #include "alinous.compile/AlinousPlusParserTokenManager.h"
 #include "alinous.compile/AlinousPlusParser.h"
+#include "alinous.system.config/IAlinousConfigElement.h"
 #include "alinous.system.config/SystemInfo.h"
 #include "alinous.system.config/WebHandlerInfo.h"
 #include "alinous.runtime/ModuleNotFoundException.h"
 #include "alinous.runtime/CompileErrorException.h"
 #include "alinous.runtime/AlinousModuleRepository.h"
+#include "alinous.html/DomDocument.h"
+#include "alinous.html.xpath/IXpathElement.h"
+#include "alinous.html.xpath.match/MatchCursor.h"
+#include "alinous.html.xpath.match/MatchCandidate.h"
+#include "alinous.html.xpath.match/MatchingException.h"
+#include "alinous.html.xpath/IXpathStatement.h"
+#include "alinous.html.xpath/NumberValue.h"
+#include "alinous.html.xpath/XpathFunctionArgument.h"
+#include "alinous.html.xpath/IXpathFunction.h"
+#include "alinous.html.xpath.function/First.h"
+#include "alinous.html.xpath.function/Last.h"
+#include "alinous.html.xpath/XpathFunction.h"
+#include "alinous.html.xpath.match/MatchCandidatesCollection.h"
+#include "alinous.html.xpath/XpathIdentifier.h"
+#include "alinous.html.xpath/AttributeIdentifier.h"
+#include "alinous.html.xpath/IXpathBooleanCondition.h"
+#include "alinous.html.xpath/XpathReference.h"
+#include "alinous.html.xpath/Xpath2Compare.h"
+#include "alinous.html.xpath/XpathNumber.h"
+#include "alinous.html.xpath/XpathFilter.h"
+#include "alinous.html.xpath/XpathContextLocationCtrl.h"
+#include "alinous.html.xpath/XpathContextLocation.h"
+#include "alinous.html.xpath/XpathContext.h"
+#include "alinous.html.xpath/Xpath.h"
+#include "alinous.html.xpath/XPathParser.h"
+#include "alinous.html.xpath/AbstractContainerStatement.h"
+#include "alinous.html.xpath/XpathAndStatement.h"
+#include "alinous.html.xpath/XpathNotStatement.h"
+#include "alinous.html.xpath/XpathOrStatement.h"
+#include "alinous.html.xpath/XpathString.h"
+#include "alinous.parser.xpath/Token.h"
+#include "alinous.parser.xpath/ParseException.h"
+#include "alinous.parser.xpath/JavaCharStream.h"
+#include "alinous.parser.xpath/TokenMgrError.h"
+#include "alinous.parser.xpath/AlinousXpathParserConstants.h"
+#include "alinous.parser.xpath/AlinousXpathParserTokenManager.h"
+#include "alinous.parser.xpath/AlinousXpathParser.h"
+#include "alinous.html.xpath.match/Matcher.h"
+#include "alinous.system.config/AlinousInitException.h"
+#include "alinous.system.config.remote/Monitor.h"
+#include "alinous.system.config.remote/NodeRef.h"
+#include "alinous.system.config.remote/Table.h"
+#include "alinous.system.config.remote/Tables.h"
+#include "alinous.system.config.remote/Node.h"
+#include "alinous.system.config.remote/Nodes.h"
+#include "alinous.system.config.remote/Region.h"
+#include "alinous.system.config.remote/Regions.h"
+#include "alinous.system.config.remote/RegionRef.h"
+#include "alinous.system.config.remote/RegionsRef.h"
 #include "alinous.system.config/AlinousDbInstanceInfo.h"
 #include "alinous.system.config/AlinousDbInfo.h"
 #include "alinous.runtime.dbif/ISQLSelectResult.h"
@@ -513,7 +563,6 @@
 #include "alinous.server.webmodule/DynamicWebPageModuleStream.h"
 #include "alinous.server.webmodule/DynamicWebPageModule.h"
 #include "alinous.server.webmodule/WebModuleManager.h"
-#include "alinous.html/DomDocument.h"
 #include "alinous.html/DomText.h"
 #include "alinous.html/DomComment.h"
 #include "alinous.html/DocType.h"
@@ -522,45 +571,7 @@
 #include "alinous.html/AlinousDomReplacer.h"
 #include "alinous.html/DomTokenizer.h"
 #include "alinous.html/DomConverter.h"
-#include "alinous.html.xpath/IXpathElement.h"
-#include "alinous.html.xpath.match/MatchCursor.h"
-#include "alinous.html.xpath.match/MatchCandidate.h"
-#include "alinous.html.xpath.match/MatchingException.h"
-#include "alinous.html.xpath/IXpathStatement.h"
-#include "alinous.html.xpath/NumberValue.h"
-#include "alinous.html.xpath/XpathFunctionArgument.h"
-#include "alinous.html.xpath/IXpathFunction.h"
-#include "alinous.html.xpath.function/First.h"
-#include "alinous.html.xpath.function/Last.h"
-#include "alinous.html.xpath/XpathFunction.h"
-#include "alinous.html.xpath.match/MatchCandidatesCollection.h"
-#include "alinous.html.xpath/XpathIdentifier.h"
-#include "alinous.html.xpath/AttributeIdentifier.h"
-#include "alinous.html.xpath/IXpathBooleanCondition.h"
-#include "alinous.html.xpath/XpathReference.h"
-#include "alinous.html.xpath/Xpath2Compare.h"
-#include "alinous.html.xpath/XpathNumber.h"
-#include "alinous.html.xpath/XpathFilter.h"
-#include "alinous.html.xpath/XpathContextLocationCtrl.h"
-#include "alinous.html.xpath/XpathContextLocation.h"
-#include "alinous.html.xpath/XpathContext.h"
-#include "alinous.html.xpath/Xpath.h"
-#include "alinous.html.xpath/XPathParser.h"
-#include "alinous.html.xpath/AbstractContainerStatement.h"
-#include "alinous.html.xpath/XpathAndStatement.h"
-#include "alinous.html.xpath/XpathNotStatement.h"
-#include "alinous.html.xpath/XpathOrStatement.h"
-#include "alinous.html.xpath/XpathString.h"
-#include "alinous.parser.xpath/Token.h"
-#include "alinous.parser.xpath/ParseException.h"
-#include "alinous.parser.xpath/JavaCharStream.h"
-#include "alinous.parser.xpath/TokenMgrError.h"
-#include "alinous.parser.xpath/AlinousXpathParserConstants.h"
-#include "alinous.parser.xpath/AlinousXpathParserTokenManager.h"
-#include "alinous.parser.xpath/AlinousXpathParser.h"
-#include "alinous.html.xpath.match/Matcher.h"
 #include "alinous.system.utils/ConfigFileUtiles.h"
-#include "alinous.system.config/AlinousInitException.h"
 #include "alinous.system.config/DataSourceInfo.h"
 #include "alinous.system.config/MailInfo.h"
 #include "alinous.system.config/AlinousConfig.h"
@@ -749,8 +760,8 @@
 #include "alinous.server.webmodule/BinaryModuleStream.h"
 #include "alinous.server.webmodule/BinaryModule.h"
 #include "alinous.remote/RemoteTableRegionHandle.h"
-#include "alinous.remote.db/RemoteTableRegion.h"
-#include "alinous.remote.db/RemoteTableStorage.h"
+#include "alinous.remote.db/RemoteTableStorageServer.h"
+#include "alinous.remote.db/RemoteTableRegionServer.h"
 
 
 inline static void __cleanUpStatics(alinous::ThreadContext* ctx){
@@ -1263,7 +1274,18 @@ inline static void __cleanUpStatics(alinous::ThreadContext* ctx){
 	alinous::system::config::AlinousDbInfo::__cleanUp(ctx);
 	alinous::system::config::DataSourceInfo::__cleanUp(ctx);
 	alinous::system::config::AlinousConfig::__cleanUp(ctx);
+	alinous::system::config::IAlinousConfigElement::__cleanUp(ctx);
 	alinous::system::config::WebHandlerInfo::__cleanUp(ctx);
+	alinous::system::config::remote::RegionRef::__cleanUp(ctx);
+	alinous::system::config::remote::NodeRef::__cleanUp(ctx);
+	alinous::system::config::remote::Node::__cleanUp(ctx);
+	alinous::system::config::remote::Table::__cleanUp(ctx);
+	alinous::system::config::remote::Monitor::__cleanUp(ctx);
+	alinous::system::config::remote::Tables::__cleanUp(ctx);
+	alinous::system::config::remote::RegionsRef::__cleanUp(ctx);
+	alinous::system::config::remote::Nodes::__cleanUp(ctx);
+	alinous::system::config::remote::Regions::__cleanUp(ctx);
+	alinous::system::config::remote::Region::__cleanUp(ctx);
 	alinous::system::functions::IAlinousSystem::__cleanUp(ctx);
 	alinous::system::functions::NativeFunctionManager::__cleanUp(ctx);
 	alinous::system::functions::AlinousFunctionManager::__cleanUp(ctx);
@@ -1586,8 +1608,8 @@ inline static void __cleanUpStatics(alinous::ThreadContext* ctx){
 	alinous::server::webmodule::DynamicWebPageModule::__cleanUp(ctx);
 	alinous::server::webmodule::WebModuleManager::__cleanUp(ctx);
 	alinous::remote::RemoteTableRegionHandle::__cleanUp(ctx);
-	alinous::remote::db::RemoteTableRegion::__cleanUp(ctx);
-	alinous::remote::db::RemoteTableStorage::__cleanUp(ctx);
+	alinous::remote::db::RemoteTableStorageServer::__cleanUp(ctx);
+	alinous::remote::db::RemoteTableRegionServer::__cleanUp(ctx);
 	java::io::File::__cleanUp(ctx);
 	java::nio::charset::CoderResult::__cleanUp(ctx);
 	java::lang::UnicodeString::__cleanUp(ctx);

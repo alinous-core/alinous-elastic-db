@@ -71,6 +71,11 @@ template class ::java::util::ArrayListIterator<::alinous::runtime::engine::debug
 template class ::java::util::ArrayListIterator<::alinous::runtime::engine::debugger::server::ServerBreakPoint>;
 template class ::java::util::ArrayListIterator<::alinous::compile::analyse::AlinousType>;
 template class ::java::util::ArrayListIterator<::alinous::html::xpath::match::MatchCandidate>;
+template class ::java::util::ArrayListIterator<::alinous::system::config::remote::NodeRef>;
+template class ::java::util::ArrayListIterator<::alinous::system::config::remote::Table>;
+template class ::java::util::ArrayListIterator<::alinous::system::config::remote::RegionRef>;
+template class ::java::util::ArrayListIterator<::alinous::system::config::remote::Node>;
+template class ::java::util::ArrayListIterator<::alinous::system::config::remote::Region>;
 template class ::java::util::ArrayListIterator<::alinous::btree::IBTreeValue>;
 template class ::java::util::ArrayListIterator<::alinous::db::ITableRegion>;
 template class ::java::util::ArrayListIterator<::alinous::db::TableSchema>;

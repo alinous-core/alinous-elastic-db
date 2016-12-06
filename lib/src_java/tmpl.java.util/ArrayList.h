@@ -59,6 +59,11 @@ template class ::java::util::ArrayList<::alinous::runtime::engine::debugger::Deb
 template class ::java::util::ArrayList<::alinous::runtime::engine::debugger::server::ServerBreakPoint>;
 template class ::java::util::ArrayList<::alinous::compile::analyse::AlinousType>;
 template class ::java::util::ArrayList<::alinous::html::xpath::match::MatchCandidate>;
+template class ::java::util::ArrayList<::alinous::system::config::remote::NodeRef>;
+template class ::java::util::ArrayList<::alinous::system::config::remote::Table>;
+template class ::java::util::ArrayList<::alinous::system::config::remote::RegionRef>;
+template class ::java::util::ArrayList<::alinous::system::config::remote::Node>;
+template class ::java::util::ArrayList<::alinous::system::config::remote::Region>;
 template class ::java::util::ArrayList<::alinous::btree::IBTreeValue>;
 template class ::java::util::ArrayList<::alinous::btree::IBTreeNode>;
 template class ::java::util::ArrayList<::alinous::db::ITableRegion>;

@@ -18,7 +18,7 @@ bool SystemInfo::__init_static_variables(){
 	delete ctx;
 	return true;
 }
- SystemInfo::SystemInfo(String* alinousHome, ThreadContext* ctx) throw()  : IObject(ctx), moduleDir(nullptr), systemDatastore(nullptr), defaultDatastore(nullptr), alinousHome(nullptr)
+ SystemInfo::SystemInfo(String* alinousHome, ThreadContext* ctx) throw()  : IObject(ctx), IAlinousConfigElement(ctx), moduleDir(nullptr), systemDatastore(nullptr), defaultDatastore(nullptr), alinousHome(nullptr)
 {
 	__GC_MV(this, &(this->alinousHome), alinousHome, String);
 }
