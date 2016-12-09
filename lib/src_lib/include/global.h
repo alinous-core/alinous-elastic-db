@@ -247,6 +247,8 @@ const int PLOSS = 6;
 #include "baselib_io/ServerSocket.h"
 #include "baselib_io/AlinousServerSocket.h"
 #include "baselib_io/SSLSocketFactory.h"
+#include "baselib_io/AlinousSocket.h"
+#include "baselib_io/AlinousSSLSocketFactory.h"
 
 #include "baselib/AlinousDebug.h"
 

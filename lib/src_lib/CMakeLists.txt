@@ -23,6 +23,8 @@ set(srcsrc
 	"src_lib/baselib_exceptions/exceptions.cpp"
 	
 	"src_lib/baselib_io/AlinousServerSocket.cpp"
+	"src_lib/baselib_io/AlinousSocket.cpp"
+	"src_lib/baselib_io/AlinousSSLSocketFactory.cpp"
 	"src_lib/baselib_io/CharBuffer.cpp"
 	"src_lib/baselib_io/File.cpp"
 	"src_lib/baselib_io/FileInputStream.cpp"
