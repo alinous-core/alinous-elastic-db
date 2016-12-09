@@ -329,6 +329,7 @@
 #include "alinous.compile.sql.functions/Coalesce.h"
 #include "alinous.compile.sql.functions/ToNumber.h"
 #include "alinous.compile.sql.functions/SQLFunctionManager.h"
+#include "alinous.remote.monitor/TransactionMonitorServer.h"
 #include "alinous.compile.declare/ClassExtends.h"
 #include "alinous.compile.declare/ClassImplements.h"
 #include "alinous.compile.declare.function/ReturnValueDefinition.h"
@@ -486,14 +487,6 @@
 #include "alinous.parser.xpath/AlinousXpathParser.h"
 #include "alinous.html.xpath.match/Matcher.h"
 #include "alinous.system.config/AlinousInitException.h"
-#include "alinous.system.config.remote/Monitor.h"
-#include "alinous.system.config.remote/NodeRef.h"
-#include "alinous.system.config.remote/Table.h"
-#include "alinous.system.config.remote/Tables.h"
-#include "alinous.system.config.remote/Node.h"
-#include "alinous.system.config.remote/Nodes.h"
-#include "alinous.system.config.remote/Region.h"
-#include "alinous.system.config.remote/Regions.h"
 #include "alinous.system.config.remote/RegionRef.h"
 #include "alinous.system.config.remote/RegionsRef.h"
 #include "alinous.system.config/AlinousDbInstanceInfo.h"
@@ -571,6 +564,14 @@
 #include "alinous.html/AlinousDomReplacer.h"
 #include "alinous.html/DomTokenizer.h"
 #include "alinous.html/DomConverter.h"
+#include "alinous.system.config.remote/Monitor.h"
+#include "alinous.system.config.remote/NodeRef.h"
+#include "alinous.system.config.remote/Table.h"
+#include "alinous.system.config.remote/Tables.h"
+#include "alinous.system.config.remote/Node.h"
+#include "alinous.system.config.remote/Nodes.h"
+#include "alinous.system.config.remote/Region.h"
+#include "alinous.system.config.remote/Regions.h"
 #include "alinous.system.utils/ConfigFileUtiles.h"
 #include "alinous.system.config/DataSourceInfo.h"
 #include "alinous.system.config/MailInfo.h"
@@ -762,6 +763,14 @@
 #include "alinous.remote/RemoteTableRegionHandle.h"
 #include "alinous.remote.db/RemoteTableStorageServer.h"
 #include "alinous.remote.db/RemoteTableRegionServer.h"
+#include "alinous.remote.monitor/AbstractMonitorCommand.h"
+#include "alinous.remote.monitor/TerminateCommand.h"
+#include "alinous.remote.socket/SocketServer.h"
+#include "alinous.remote.socket/SocketActionFactory.h"
+#include "alinous.remote.monitor/MonitorResponceAction.h"
+#include "alinous.remote.monitor/MonitorResponseActionFactory.h"
+#include "alinous.remote.monitor/FinishConnection.h"
+#include "alinous.remote.monitor/VoidCommand.h"
 
 
 inline static void __cleanUpStatics(alinous::ThreadContext* ctx){
@@ -1610,6 +1619,15 @@ inline static void __cleanUpStatics(alinous::ThreadContext* ctx){
 	alinous::remote::RemoteTableRegionHandle::__cleanUp(ctx);
 	alinous::remote::db::RemoteTableStorageServer::__cleanUp(ctx);
 	alinous::remote::db::RemoteTableRegionServer::__cleanUp(ctx);
+	alinous::remote::monitor::TerminateCommand::__cleanUp(ctx);
+	alinous::remote::monitor::MonitorResponseActionFactory::__cleanUp(ctx);
+	alinous::remote::monitor::TransactionMonitorServer::__cleanUp(ctx);
+	alinous::remote::monitor::MonitorResponceAction::__cleanUp(ctx);
+	alinous::remote::monitor::FinishConnection::__cleanUp(ctx);
+	alinous::remote::monitor::AbstractMonitorCommand::__cleanUp(ctx);
+	alinous::remote::monitor::VoidCommand::__cleanUp(ctx);
+	alinous::remote::socket::SocketServer::__cleanUp(ctx);
+	alinous::remote::socket::SocketActionFactory::__cleanUp(ctx);
 	java::io::File::__cleanUp(ctx);
 	java::nio::charset::CoderResult::__cleanUp(ctx);
 	java::lang::UnicodeString::__cleanUp(ctx);

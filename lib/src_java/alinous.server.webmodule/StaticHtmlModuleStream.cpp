@@ -79,7 +79,7 @@ void StaticHtmlModuleStream::prepare(AlinousCore* core, bool debug, ThreadContex
 }
 String* StaticHtmlModuleStream::getContentType(ThreadContext* ctx) throw() 
 {
-	return ConstStr::getCNST_STR_1775();
+	return ConstStr::getCNST_STR_1790();
 }
 }}}
 

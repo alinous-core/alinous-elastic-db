@@ -33,6 +33,24 @@ class WebModuleManager;}}}
 namespace alinous {namespace runtime {namespace dbif {
 class DataSourceManager;}}}
 
+namespace alinous {namespace system {namespace config {namespace remote {
+class Monitor;}}}}
+
+namespace alinous {namespace system {namespace config {
+class AlinousInitException;}}}
+
+namespace java {namespace lang {
+class Throwable;}}
+
+namespace alinous {namespace remote {namespace monitor {
+class TransactionMonitorServer;}}}
+
+namespace alinous {namespace system {namespace config {namespace remote {
+class Nodes;}}}}
+
+namespace alinous {namespace system {namespace config {namespace remote {
+class Regions;}}}}
+
 namespace java {namespace lang {
 class InterruptedException;}}
 
@@ -54,12 +72,17 @@ using namespace ::java::lang;
 using ::java::util::Iterator;
 using ::alinous::compile::sql::functions::SQLFunctionManager;
 using ::alinous::io::DiskCacheManager;
+using ::alinous::remote::monitor::TransactionMonitorServer;
 using ::alinous::runtime::AlinousModuleRepository;
 using ::alinous::runtime::dbif::DataSourceManager;
 using ::alinous::runtime::engine::ScriptRunner;
 using ::alinous::runtime::engine::debugger::AlinousScriptDebugger;
 using ::alinous::server::webmodule::WebModuleManager;
 using ::alinous::system::config::AlinousConfig;
+using ::alinous::system::config::AlinousInitException;
+using ::alinous::system::config::remote::Monitor;
+using ::alinous::system::config::remote::Nodes;
+using ::alinous::system::config::remote::Regions;
 using ::alinous::system::functions::AlinousFunctionManager;
 
 
@@ -86,6 +109,7 @@ private:
 	DataSourceManager* databaseManager;
 	AlinousScriptDebugger* debugger;
 	ScriptRunner* runner;
+	TransactionMonitorServer* monitor;
 public:
 	void init(int debugPort, ThreadContext* ctx);
 	void initDatabase(ThreadContext* ctx);
@@ -98,6 +122,8 @@ public:
 	ScriptRunner* getRunner(ThreadContext* ctx) throw() ;
 	AlinousScriptDebugger* getDebugger(ThreadContext* ctx) throw() ;
 	AlinousFunctionManager* getFunctionManager(ThreadContext* ctx) throw() ;
+private:
+	void initDistributedParts(ThreadContext* ctx);
 public:
 	static bool __init_done;
 	static bool __init_static_variables();

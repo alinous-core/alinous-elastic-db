@@ -30,8 +30,8 @@ void Region::__releaseRegerences(bool prepare, ThreadContext* ctx) throw()
 	ObjectEraser __e_obj1(ctx, __FILEW__, __LINE__, L"Region", L"~Region");
 	__e_obj1.add(this->name, this);
 	name = nullptr;
-	__e_obj1.add(this->url, this);
-	url = nullptr;
+	__e_obj1.add(this->port, this);
+	port = nullptr;
 	__e_obj1.add(this->tables, this);
 	tables = nullptr;
 	if(!prepare){
@@ -46,13 +46,13 @@ void Region::setName(String* name, ThreadContext* ctx) throw()
 {
 	__GC_MV(this, &(this->name), name, String);
 }
-String* Region::getUrl(ThreadContext* ctx) throw() 
+String* Region::getPort(ThreadContext* ctx) throw() 
 {
-	return url;
+	return port;
 }
-void Region::setUrl(String* url, ThreadContext* ctx) throw() 
+void Region::setPort(String* port, ThreadContext* ctx) throw() 
 {
-	__GC_MV(this, &(this->url), url, String);
+	__GC_MV(this, &(this->port), port, String);
 }
 Tables* Region::getTables(ThreadContext* ctx) throw() 
 {
@@ -62,9 +62,30 @@ void Region::setTables(Tables* tables, ThreadContext* ctx) throw()
 {
 	__GC_MV(this, &(this->tables), tables, Tables);
 }
-Region* Region::parseInstance(DomNode* dom, DomDocument* document, Matcher* matcher, ThreadContext* ctx) throw() 
+Region* Region::parseInstance(DomNode* dom, DomDocument* document, Matcher* matcher, ThreadContext* ctx)
 {
 	Region* reg = (new(ctx) Region(ctx));
+	IVariableValue* attr = dom->getAttributeValue(ConstStr::getCNST_STR_1061(), ctx);
+	if(attr == nullptr)
+	{
+		throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_1222(), ctx));
+	}
+	reg->setName(attr->toString(ctx)->trim(ctx), ctx);
+	attr = dom->getAttributeValue(ConstStr::getCNST_STR_1205(), ctx);
+	if(attr == nullptr)
+	{
+		throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_1223(), ctx));
+	}
+	reg->setPort(attr->toString(ctx)->trim(ctx), ctx);
+	MatchCandidatesCollection* result = matcher->match(document, dom, ConstStr::getCNST_STR_1221(), ctx);
+	ArrayList<MatchCandidate>* list = result->getCandidatesList(ctx);
+	if(!list->isEmpty(ctx))
+	{
+		MatchCandidate* cand = list->get(0, ctx);
+		DomNode* tablesdom = cand->getCandidateDom(ctx);
+		Tables* tables = Tables::parseInstance(tablesdom, document, matcher, ctx);
+		reg->setTables(tables, ctx);
+	}
 	return reg;
 }
 }}}}

@@ -47,7 +47,7 @@ class Monitor final : public virtual IObject {
 public:
 	Monitor(const Monitor& base) = default;
 public:
-	Monitor(ThreadContext* ctx) throw()  : IObject(ctx), url(nullptr)
+	Monitor(ThreadContext* ctx) throw()  : IObject(ctx), port(nullptr)
 	{
 	}
 	void __construct_impl(ThreadContext* ctx) throw() 
@@ -56,10 +56,10 @@ public:
 	virtual ~Monitor() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 private:
-	String* url;
+	String* port;
 public:
-	String* getUrl(ThreadContext* ctx) throw() ;
-	void setUrl(String* url, ThreadContext* ctx) throw() ;
+	String* getPort(ThreadContext* ctx) throw() ;
+	void setPort(String* port, ThreadContext* ctx) throw() ;
 public:
 	static Monitor* parseInstance(MatchCandidate* candidate, DomDocument* document, Matcher* matcher, ThreadContext* ctx);
 public:

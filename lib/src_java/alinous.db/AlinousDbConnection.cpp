@@ -67,7 +67,7 @@ void AlinousDbConnection::commit(ThreadContext* ctx)
 {
 	if(this->autoCommit)
 	{
-		throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1576(), ctx));
+		throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1591(), ctx));
 	}
 	if(this->trx != nullptr)
 	{

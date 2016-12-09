@@ -28,30 +28,30 @@ bool Monitor::__init_static_variables(){
 void Monitor::__releaseRegerences(bool prepare, ThreadContext* ctx) throw() 
 {
 	ObjectEraser __e_obj1(ctx, __FILEW__, __LINE__, L"Monitor", L"~Monitor");
-	__e_obj1.add(this->url, this);
-	url = nullptr;
+	__e_obj1.add(this->port, this);
+	port = nullptr;
 	if(!prepare){
 		return;
 	}
 }
-String* Monitor::getUrl(ThreadContext* ctx) throw() 
+String* Monitor::getPort(ThreadContext* ctx) throw() 
 {
-	return url;
+	return port;
 }
-void Monitor::setUrl(String* url, ThreadContext* ctx) throw() 
+void Monitor::setPort(String* port, ThreadContext* ctx) throw() 
 {
-	__GC_MV(this, &(this->url), url, String);
+	__GC_MV(this, &(this->port), port, String);
 }
 Monitor* Monitor::parseInstance(MatchCandidate* candidate, DomDocument* document, Matcher* matcher, ThreadContext* ctx)
 {
 	Monitor* ref = (new(ctx) Monitor(ctx));
 	DomNode* selfDom = candidate->getCandidateDom(ctx);
-	IVariableValue* attr = selfDom->getAttributeValue(ConstStr::getCNST_STR_1202(), ctx);
+	IVariableValue* attr = selfDom->getAttributeValue(ConstStr::getCNST_STR_1205(), ctx);
 	if(attr == nullptr)
 	{
-		throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_1203(), ctx));
+		throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_1215(), ctx));
 	}
-	ref->setUrl(attr->toString(ctx)->trim(ctx), ctx);
+	ref->setPort(attr->toString(ctx)->trim(ctx), ctx);
 	return ref;
 }
 }}}}

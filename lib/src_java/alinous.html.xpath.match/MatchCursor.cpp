@@ -67,14 +67,7 @@ void MatchCursor::caluculateStopNode(ThreadContext* ctx) throw()
 	{
 		return;
 	}
-	DomNode* grandNode = this->ptr->getParent(ctx)->getParent(ctx);
-	if(grandNode == nullptr)
-	{
-		return;
-	}
-	DomNode* parent = this->ptr->getParent(ctx);
-	int index = grandNode->getChildNodeIndexOf(parent, ctx) + 1;
-	__GC_MV(this, &(this->stopNode), grandNode->getChildNodeAt(index, ctx), DomNode);
+	__GC_MV(this, &(this->stopNode), getNextNode(this->baseObj, ctx), DomNode);
 }
 void MatchCursor::caluculateScanPolicy(IXpathElement::ScanPolicy scanPolicy, ThreadContext* ctx)
 {
@@ -94,6 +87,21 @@ DomNode* MatchCursor::getNext(ThreadContext* ctx) throw()
 		break ;
 	}
 	return nullptr;
+}
+DomNode* MatchCursor::getNextNode(DomNode* node, ThreadContext* ctx) throw() 
+{
+	DomNode* parent = node->getParent(ctx);
+	if(parent == nullptr)
+	{
+		return nullptr;
+	}
+	int index = parent->getChildNodeIndexOf(node, ctx) + 1;
+	int lastIndex = parent->getNumChildern(ctx);
+	if(lastIndex == index)
+	{
+		return getNextNode(parent, ctx);
+	}
+	return parent->getChildNodeAt(index, ctx);
 }
 void MatchCursor::setupFirstPtr(ThreadContext* ctx) throw() 
 {

@@ -70,7 +70,7 @@ BinaryContentByteStream* DebugProcessor::process(AlinousCore* core, HttpHeaderPr
 			e->printStackTrace(ctx);
 		}
 	}
-	System::out->println(ConstStr::getCNST_STR_3417(), ctx);
+	System::out->println(ConstStr::getCNST_STR_3432(), ctx);
 	System::out->println(strXml, ctx);
 	return binstream;
 }

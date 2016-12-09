@@ -42,5 +42,20 @@ List<Table>* Tables::getList(ThreadContext* ctx) throw()
 {
 	return list;
 }
+Tables* Tables::parseInstance(DomNode* dom, DomDocument* document, Matcher* matcher, ThreadContext* ctx)
+{
+	Tables* tables = (new(ctx) Tables(ctx));
+	MatchCandidatesCollection* result = matcher->match(document, dom, ConstStr::getCNST_STR_1216(), ctx);
+	ArrayList<MatchCandidate>* list = result->getCandidatesList(ctx);
+	Iterator<MatchCandidate>* it = list->iterator(ctx);
+	while(it->hasNext(ctx))
+	{
+		MatchCandidate* cand = it->next(ctx);
+		DomNode* tableDom = cand->getCandidateDom(ctx);
+		Table* table = Table::parseInstance(tableDom, document, matcher, ctx);
+		tables->addTable(table, ctx);
+	}
+	return tables;
+}
 }}}}
 

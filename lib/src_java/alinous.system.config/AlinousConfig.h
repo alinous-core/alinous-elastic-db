@@ -54,15 +54,6 @@ class AlinousDbInstanceInfo;}}}
 namespace alinous {namespace system {namespace config {namespace remote {
 class RegionsRef;}}}}
 
-namespace alinous {namespace system {namespace config {namespace remote {
-class Regions;}}}}
-
-namespace alinous {namespace system {namespace config {namespace remote {
-class Nodes;}}}}
-
-namespace alinous {namespace system {namespace config {namespace remote {
-class Monitor;}}}}
-
 namespace alinous {namespace system {namespace config {
 class WebHandlerInfo;}}}
 
@@ -74,6 +65,15 @@ class DataSourceInfo;}}}
 
 namespace alinous {namespace system {namespace config {
 class MailInfo;}}}
+
+namespace alinous {namespace system {namespace config {namespace remote {
+class Regions;}}}}
+
+namespace alinous {namespace system {namespace config {namespace remote {
+class Nodes;}}}}
+
+namespace alinous {namespace system {namespace config {namespace remote {
+class Monitor;}}}}
 
 namespace alinous {namespace system {namespace utils {
 class ConfigFileUtiles;}}}
@@ -131,6 +131,9 @@ private:
 	MailInfo* mail;
 	AlinousDbInfo* alinousDb;
 	WebHandlerInfo* webHandler;
+	Regions* regions;
+	Nodes* nodes;
+	Monitor* monitor;
 	String* alinousConfigPath;
 	long long fileTimestamp;
 public:
@@ -144,8 +147,12 @@ public:
 	WebHandlerInfo* getWebHandler(ThreadContext* ctx) throw() ;
 	String* getAlinousConfigPath(ThreadContext* ctx) throw() ;
 	long long getFileTimestamp(ThreadContext* ctx) throw() ;
+	Regions* getRegions(ThreadContext* ctx) throw() ;
+	Nodes* getNodes(ThreadContext* ctx) throw() ;
+	Monitor* getMonitor(ThreadContext* ctx) throw() ;
 private:
 	void handleSystem(MatchCandidatesCollection* result, DomDocument* document, Matcher* matcher, ThreadContext* ctx);
+	void handleDistributedDbParts(DomDocument* document, Matcher* matcher, ThreadContext* ctx);
 	void handleAlinousDbSetting(MatchCandidatesCollection* result, DomDocument* document, Matcher* matcher, ThreadContext* ctx);
 	void handleRegionRef(AlinousDbInstanceInfo* dbinfo, DomNode* alinousDb, DomDocument* document, Matcher* matcher, ThreadContext* ctx);
 	void handleWebSetting(MatchCandidatesCollection* result, DomDocument* document, Matcher* matcher, ThreadContext* ctx);

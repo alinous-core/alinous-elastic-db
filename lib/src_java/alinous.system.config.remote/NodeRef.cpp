@@ -42,5 +42,16 @@ void NodeRef::setUrl(String* url, ThreadContext* ctx) throw()
 {
 	__GC_MV(this, &(this->url), url, String);
 }
+NodeRef* NodeRef::parseInstance(DomNode* dom, DomDocument* document, Matcher* matcher, ThreadContext* ctx)
+{
+	NodeRef* noderef = (new(ctx) NodeRef(ctx));
+	IVariableValue* attr = dom->getAttributeValue(ConstStr::getCNST_STR_1203(), ctx);
+	if(attr == nullptr)
+	{
+		throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_1204(), ctx));
+	}
+	noderef->setUrl(attr->toString(ctx)->trim(ctx), ctx);
+	return noderef;
+}
 }}}}
 

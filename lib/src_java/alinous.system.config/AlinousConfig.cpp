@@ -18,7 +18,7 @@ bool AlinousConfig::__init_static_variables(){
 	delete ctx;
 	return true;
 }
- AlinousConfig::AlinousConfig(String* home, ThreadContext* ctx) throw()  : IObject(ctx), alinousHome(__GC_INS(this, (new(ctx) StringBuffer(ctx)), StringBuffer)), system(nullptr), database(nullptr), mail(nullptr), alinousDb(nullptr), webHandler(nullptr), alinousConfigPath(nullptr), fileTimestamp(0)
+ AlinousConfig::AlinousConfig(String* home, ThreadContext* ctx) throw()  : IObject(ctx), alinousHome(__GC_INS(this, (new(ctx) StringBuffer(ctx)), StringBuffer)), system(nullptr), database(nullptr), mail(nullptr), alinousDb(nullptr), webHandler(nullptr), regions(nullptr), nodes(nullptr), monitor(nullptr), alinousConfigPath(nullptr), fileTimestamp(0)
 {
 	this->alinousHome->append(home, ctx);
 	if(!home->endsWith(ConstStr::getCNST_STR_984(), ctx))
@@ -56,6 +56,12 @@ void AlinousConfig::__releaseRegerences(bool prepare, ThreadContext* ctx) throw(
 	alinousDb = nullptr;
 	__e_obj1.add(this->webHandler, this);
 	webHandler = nullptr;
+	__e_obj1.add(this->regions, this);
+	regions = nullptr;
+	__e_obj1.add(this->nodes, this);
+	nodes = nullptr;
+	__e_obj1.add(this->monitor, this);
+	monitor = nullptr;
 	__e_obj1.add(this->alinousConfigPath, this);
 	alinousConfigPath = nullptr;
 	if(!prepare){
@@ -64,14 +70,14 @@ void AlinousConfig::__releaseRegerences(bool prepare, ThreadContext* ctx) throw(
 }
 void AlinousConfig::parseInitFile(ThreadContext* ctx)
 {
-	__GC_MV(this, &(this->alinousConfigPath), this->alinousHome->clone(ctx)->append(ConstStr::getCNST_STR_1180(), ctx), String);
+	__GC_MV(this, &(this->alinousConfigPath), this->alinousHome->clone(ctx)->append(ConstStr::getCNST_STR_1181(), ctx), String);
 	String* encode = ConstStr::getCNST_STR_1047();
 	File* confFile = (new(ctx) File(this->alinousConfigPath, ctx));
 	this->fileTimestamp = confFile->lastModified(ctx);
 	String* xmlSrc = FileUtils::readAllText(this->alinousConfigPath, encode, ctx);
 	if(xmlSrc == nullptr)
 	{
-		throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_1181(), ctx));
+		throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_1182(), ctx));
 	}
 	AlinousDomReplacer* replacer = (new(ctx) AlinousDomReplacer(ctx));
 	DomConverter* converter = (new(ctx) DomConverter(xmlSrc, replacer, ctx));
@@ -82,24 +88,25 @@ void AlinousConfig::parseInitFile(ThreadContext* ctx)
 	{
 		try
 		{
-			result = matcher->match(document, document, ConstStr::getCNST_STR_1182(), ctx);
-			handleSystem(result, document, matcher, ctx);
 			result = matcher->match(document, document, ConstStr::getCNST_STR_1183(), ctx);
-			handleAlinousDbSetting(result, document, matcher, ctx);
+			handleSystem(result, document, matcher, ctx);
 			result = matcher->match(document, document, ConstStr::getCNST_STR_1184(), ctx);
-			handleSourceSetting(result, ctx);
+			handleAlinousDbSetting(result, document, matcher, ctx);
 			result = matcher->match(document, document, ConstStr::getCNST_STR_1185(), ctx);
-			handleWebSetting(result, document, matcher, ctx);
+			handleSourceSetting(result, ctx);
 			result = matcher->match(document, document, ConstStr::getCNST_STR_1186(), ctx);
+			handleWebSetting(result, document, matcher, ctx);
+			result = matcher->match(document, document, ConstStr::getCNST_STR_1187(), ctx);
 			handleMailSetting(result, ctx);
+			handleDistributedDbParts(document, matcher, ctx);
 		}
 		catch(alinous::parser::xpath::ParseException* e)
 		{
-			throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_1187(), ctx));
+			throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_1188(), ctx));
 		}
 		catch(MatchingException* e)
 		{
-			throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_1187(), ctx));
+			throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_1188(), ctx));
 		}
 	}
 }
@@ -139,33 +146,71 @@ long long AlinousConfig::getFileTimestamp(ThreadContext* ctx) throw()
 {
 	return fileTimestamp;
 }
+Regions* AlinousConfig::getRegions(ThreadContext* ctx) throw() 
+{
+	return regions;
+}
+Nodes* AlinousConfig::getNodes(ThreadContext* ctx) throw() 
+{
+	return nodes;
+}
+Monitor* AlinousConfig::getMonitor(ThreadContext* ctx) throw() 
+{
+	return monitor;
+}
 void AlinousConfig::handleSystem(MatchCandidatesCollection* result, DomDocument* document, Matcher* matcher, ThreadContext* ctx)
 {
 	ArrayList<MatchCandidate>* list = result->getCandidatesList(ctx);
 	if(list->isEmpty(ctx))
 	{
-		throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_1188(), ctx));
+		throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_1189(), ctx));
 	}
 	if(list->size(ctx) > 1)
 	{
-		throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_1189(), ctx));
+		throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_1190(), ctx));
 	}
 	__GC_MV(this, &(this->system), (new(ctx) SystemInfo(this->alinousHome->toString(ctx), ctx)), SystemInfo);
 	MatchCandidate* candidate = list->get(0, ctx);
-	String* moduleDir = ConfigFileUtiles::getText(document, candidate->getCandidateDom(ctx), matcher, ConstStr::getCNST_STR_1190(), ctx);
+	String* moduleDir = ConfigFileUtiles::getText(document, candidate->getCandidateDom(ctx), matcher, ConstStr::getCNST_STR_1191(), ctx);
 	if(moduleDir != nullptr)
 	{
 		this->system->setModuleDir(moduleDir->trim(ctx), ctx);
 	}
-	String* systemDatastore = ConfigFileUtiles::getAttribute(document, candidate->getCandidateDom(ctx), matcher, ConstStr::getCNST_STR_1191(), ConstStr::getCNST_STR_1192(), ctx);
+	String* systemDatastore = ConfigFileUtiles::getAttribute(document, candidate->getCandidateDom(ctx), matcher, ConstStr::getCNST_STR_1192(), ConstStr::getCNST_STR_1193(), ctx);
 	if(systemDatastore != nullptr)
 	{
 		this->system->setSystemDatastore(systemDatastore->trim(ctx), ctx);
 	}
-	String* defaultDatastore = ConfigFileUtiles::getAttribute(document, candidate->getCandidateDom(ctx), matcher, ConstStr::getCNST_STR_1193(), ConstStr::getCNST_STR_1192(), ctx);
+	String* defaultDatastore = ConfigFileUtiles::getAttribute(document, candidate->getCandidateDom(ctx), matcher, ConstStr::getCNST_STR_1194(), ConstStr::getCNST_STR_1193(), ctx);
 	if(defaultDatastore != nullptr)
 	{
 		this->system->setDefaultDatastore(defaultDatastore->trim(ctx), ctx);
+	}
+}
+void AlinousConfig::handleDistributedDbParts(DomDocument* document, Matcher* matcher, ThreadContext* ctx)
+{
+	MatchCandidatesCollection* result = nullptr;
+	ArrayList<MatchCandidate>* list = nullptr;
+	result = matcher->match(document, document, ConstStr::getCNST_STR_1195(), ctx);
+	list = result->getCandidatesList(ctx);
+	if(!list->isEmpty(ctx))
+	{
+		MatchCandidate* candidate = list->get(0, ctx);
+		__GC_MV(this, &(this->regions), Regions::parseInstance(candidate, document, matcher, ctx), Regions);
+	}
+	result = matcher->match(document, document, ConstStr::getCNST_STR_1196(), ctx);
+	list = result->getCandidatesList(ctx);
+	if(!list->isEmpty(ctx))
+	{
+		MatchCandidate* candidate = list->get(0, ctx);
+		__GC_MV(this, &(this->nodes), Nodes::parseInstance(candidate, document, matcher, ctx), Nodes);
+	}
+	result = matcher->match(document, document, ConstStr::getCNST_STR_1197(), ctx);
+	list = result->getCandidatesList(ctx);
+	if(!list->isEmpty(ctx))
+	{
+		MatchCandidate* candidate = list->get(0, ctx);
+		__GC_MV(this, &(this->monitor), Monitor::parseInstance(candidate, document, matcher, ctx), Monitor);
 	}
 }
 void AlinousConfig::handleAlinousDbSetting(MatchCandidatesCollection* result, DomDocument* document, Matcher* matcher, ThreadContext* ctx)
@@ -181,16 +226,16 @@ void AlinousConfig::handleAlinousDbSetting(MatchCandidatesCollection* result, Do
 	{
 		MatchCandidate* candidate = it->next(ctx);
 		DomNode* node = candidate->getCandidateDom(ctx);
-		IVariableValue* attr = node->getAttributeValue(ConstStr::getCNST_STR_1192(), ctx);
+		IVariableValue* attr = node->getAttributeValue(ConstStr::getCNST_STR_1193(), ctx);
 		if(attr == nullptr)
 		{
-			throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_1194(), ctx));
+			throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_1198(), ctx));
 		}
 		String* id = attr->toString(ctx)->trim(ctx);
-		String* dataDir = ConfigFileUtiles::getText(document, candidate->getCandidateDom(ctx), matcher, ConstStr::getCNST_STR_1195(), ctx);
+		String* dataDir = ConfigFileUtiles::getText(document, candidate->getCandidateDom(ctx), matcher, ConstStr::getCNST_STR_1199(), ctx);
 		if(dataDir == nullptr)
 		{
-			throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_1196(), ctx));
+			throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_1200(), ctx));
 		}
 		AlinousDbInstanceInfo* dbinfo = this->alinousDb->addInstance(id, dataDir->trim(ctx), ctx);
 		handleRegionRef(dbinfo, node, document, matcher, ctx);
@@ -200,37 +245,13 @@ void AlinousConfig::handleRegionRef(AlinousDbInstanceInfo* dbinfo, DomNode* alin
 {
 	MatchCandidatesCollection* result = nullptr;
 	ArrayList<MatchCandidate>* list = nullptr;
-	result = matcher->match(document, alinousDb, ConstStr::getCNST_STR_1197(), ctx);
+	result = matcher->match(document, alinousDb, ConstStr::getCNST_STR_1201(), ctx);
 	list = result->getCandidatesList(ctx);
 	if(!list->isEmpty(ctx))
 	{
 		MatchCandidate* candidate = list->get(0, ctx);
 		RegionsRef* regionsRef = RegionsRef::parseInstance(candidate, document, matcher, ctx);
 		dbinfo->setRegionsRef(regionsRef, ctx);
-	}
-	result = matcher->match(document, alinousDb, ConstStr::getCNST_STR_1198(), ctx);
-	list = result->getCandidatesList(ctx);
-	if(!list->isEmpty(ctx))
-	{
-		MatchCandidate* candidate = list->get(0, ctx);
-		Regions* regions = Regions::parseInstance(candidate, document, matcher, ctx);
-		dbinfo->setRegions(regions, ctx);
-	}
-	result = matcher->match(document, alinousDb, ConstStr::getCNST_STR_1199(), ctx);
-	list = result->getCandidatesList(ctx);
-	if(!list->isEmpty(ctx))
-	{
-		MatchCandidate* candidate = list->get(0, ctx);
-		Nodes* nodes = Nodes::parseInstance(candidate, document, matcher, ctx);
-		dbinfo->setNodes(nodes, ctx);
-	}
-	result = matcher->match(document, alinousDb, ConstStr::getCNST_STR_1200(), ctx);
-	list = result->getCandidatesList(ctx);
-	if(!list->isEmpty(ctx))
-	{
-		MatchCandidate* candidate = list->get(0, ctx);
-		Monitor* monitor = Monitor::parseInstance(candidate, document, matcher, ctx);
-		dbinfo->setMonitor(monitor, ctx);
 	}
 }
 void AlinousConfig::handleWebSetting(MatchCandidatesCollection* result, DomDocument* document, Matcher* matcher, ThreadContext* ctx)
@@ -242,7 +263,7 @@ void AlinousConfig::handleWebSetting(MatchCandidatesCollection* result, DomDocum
 	}
 	__GC_MV(this, &(this->webHandler), (new(ctx) WebHandlerInfo(this->alinousHome->toString(ctx), ctx)), WebHandlerInfo);
 	MatchCandidate* candidateWebHandler = list->get(0, ctx);
-	String* documentRoot = ConfigFileUtiles::getText(document, candidateWebHandler->getCandidateDom(ctx), matcher, ConstStr::getCNST_STR_1201(), ctx);
+	String* documentRoot = ConfigFileUtiles::getText(document, candidateWebHandler->getCandidateDom(ctx), matcher, ConstStr::getCNST_STR_1202(), ctx);
 	if(document != nullptr)
 	{
 		this->webHandler->setDocumentRoot(documentRoot, ctx);

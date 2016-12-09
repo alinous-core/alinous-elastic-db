@@ -36,6 +36,9 @@ class MatchingException;}}}}
 namespace alinous {namespace parser {namespace xpath {
 class ParseException;}}}
 
+namespace alinous {namespace system {namespace config {
+class AlinousInitException;}}}
+
 namespace java {namespace lang {
 class IObject;
 }}
@@ -59,6 +62,7 @@ using ::alinous::html::xpath::match::MatchCandidatesCollection;
 using ::alinous::html::xpath::match::Matcher;
 using ::alinous::html::xpath::match::MatchingException;
 using ::alinous::parser::xpath::ParseException;
+using ::alinous::system::config::AlinousInitException;
 using ::alinous::system::config::IAlinousConfigElement;
 
 

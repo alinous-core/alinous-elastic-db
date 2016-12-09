@@ -49,6 +49,7 @@ public:
 	void caluculateScanPolicy(IXpathElement::ScanPolicy scanPolicy, ThreadContext* ctx);
 	DomNode* getNext(ThreadContext* ctx) throw() ;
 private:
+	DomNode* getNextNode(DomNode* node, ThreadContext* ctx) throw() ;
 	void setupFirstPtr(ThreadContext* ctx) throw() ;
 	DomNode* scanAllInheritedChildren(ThreadContext* ctx) throw() ;
 	DomNode* scanChildren(ThreadContext* ctx) throw() ;

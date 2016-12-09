@@ -9,8 +9,8 @@ namespace alinous {namespace server {namespace http {
 
 constexpr const int MimeHeader::TYPE_CONTENT_DESCRIPTION;
 constexpr const int MimeHeader::TYPE_CONTENT_TYPE;
-String* MimeHeader::CONTENT_DESCRIPTION = ConstStr::getCNST_STR_3419();
-String* MimeHeader::CONTENT_TYPE = ConstStr::getCNST_STR_3420();
+String* MimeHeader::CONTENT_DESCRIPTION = ConstStr::getCNST_STR_3434();
+String* MimeHeader::CONTENT_TYPE = ConstStr::getCNST_STR_3435();
 bool MimeHeader::__init_done = __init_static_variables();
 bool MimeHeader::__init_static_variables(){
 	Java2CppSystem::getSelf();
@@ -49,13 +49,13 @@ MimeHeader* MimeHeader::init(String* line, ThreadContext* ctx)
 	int pos = line->indexOf((int)L':', ctx);
 	if(pos < 0)
 	{
-		throw (new(ctx) IOException(ConstStr::getCNST_STR_3418(), ctx));
+		throw (new(ctx) IOException(ConstStr::getCNST_STR_3433(), ctx));
 	}
 	__GC_MV(this, &(this->headerName), line->substring(0, pos, ctx), String);
 	pos ++ ;
 	if(pos >= line->length(ctx))
 	{
-		throw (new(ctx) IOException(ConstStr::getCNST_STR_3418(), ctx));
+		throw (new(ctx) IOException(ConstStr::getCNST_STR_3433(), ctx));
 	}
 	String* value = line->substring(pos, line->length(ctx), ctx);
 	if(this->headerName->equals(CONTENT_DESCRIPTION, ctx))
@@ -107,7 +107,7 @@ void MimeHeader::parseContentDescription(String* value, ThreadContext* ctx)
 }
 String* MimeHeader::stripQuate(String* value, ThreadContext* ctx) throw() 
 {
-	if(value->startsWith(ConstStr::getCNST_STR_1218(), ctx) && value->endsWith(ConstStr::getCNST_STR_1218(), ctx) && value->length(ctx) >= 2)
+	if(value->startsWith(ConstStr::getCNST_STR_1233(), ctx) && value->endsWith(ConstStr::getCNST_STR_1233(), ctx) && value->length(ctx) >= 2)
 	{
 		return value->substring(1, value->length(ctx) - 1, ctx);
 	}
@@ -118,7 +118,7 @@ String* MimeHeader::afterEq(String* value, ThreadContext* ctx)
 	int idx = value->indexOf(ConstStr::getCNST_STR_1030(), ctx);
 	if(idx < 0)
 	{
-		throw (new(ctx) IOException(ConstStr::getCNST_STR_3418(), ctx));
+		throw (new(ctx) IOException(ConstStr::getCNST_STR_3433(), ctx));
 	}
 	return value->substring(idx + 1, ctx);
 }

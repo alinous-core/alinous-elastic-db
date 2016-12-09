@@ -28,21 +28,23 @@ bool Node::__init_static_variables(){
 void Node::__releaseRegerences(bool prepare, ThreadContext* ctx) throw() 
 {
 	ObjectEraser __e_obj1(ctx, __FILEW__, __LINE__, L"Node", L"~Node");
-	__e_obj1.add(this->url, this);
-	url = nullptr;
+	__e_obj1.add(this->port, this);
+	port = nullptr;
 	__e_obj1.add(this->tables, this);
 	tables = nullptr;
+	__e_obj1.add(this->dataDir, this);
+	dataDir = nullptr;
 	if(!prepare){
 		return;
 	}
 }
-String* Node::getUrl(ThreadContext* ctx) throw() 
+String* Node::getPort(ThreadContext* ctx) throw() 
 {
-	return url;
+	return port;
 }
-void Node::setUrl(String* url, ThreadContext* ctx) throw() 
+void Node::setPort(String* port, ThreadContext* ctx) throw() 
 {
-	__GC_MV(this, &(this->url), url, String);
+	__GC_MV(this, &(this->port), port, String);
 }
 Tables* Node::getTables(ThreadContext* ctx) throw() 
 {
@@ -52,9 +54,38 @@ void Node::setTables(Tables* tables, ThreadContext* ctx) throw()
 {
 	__GC_MV(this, &(this->tables), tables, Tables);
 }
+String* Node::getDataDir(ThreadContext* ctx) throw() 
+{
+	return dataDir;
+}
+void Node::setDataDir(String* dataDir, ThreadContext* ctx) throw() 
+{
+	__GC_MV(this, &(this->dataDir), dataDir, String);
+}
 Node* Node::parseInstance(DomNode* dom, DomDocument* document, Matcher* matcher, ThreadContext* ctx)
 {
 	Node* node = (new(ctx) Node(ctx));
+	IVariableValue* attr = dom->getAttributeValue(ConstStr::getCNST_STR_1205(), ctx);
+	if(attr == nullptr)
+	{
+		throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_1206(), ctx));
+	}
+	node->setPort(attr->toString(ctx)->trim(ctx), ctx);
+	attr = dom->getAttributeValue(ConstStr::getCNST_STR_1207(), ctx);
+	if(attr == nullptr)
+	{
+		throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_1208(), ctx));
+	}
+	node->setDataDir(attr->toString(ctx)->trim(ctx), ctx);
+	MatchCandidatesCollection* result = matcher->match(document, dom, ConstStr::getCNST_STR_1209(), ctx);
+	ArrayList<MatchCandidate>* list = result->getCandidatesList(ctx);
+	if(!list->isEmpty(ctx))
+	{
+		MatchCandidate* candidate = list->get(0, ctx);
+		DomNode* tablesdom = candidate->getCandidateDom(ctx);
+		Tables* tables = Tables::parseInstance(tablesdom, document, matcher, ctx);
+		node->setTables(tables, ctx);
+	}
 	return node;
 }
 }}}}

@@ -28,8 +28,6 @@ bool Table::__init_static_variables(){
 void Table::__releaseRegerences(bool prepare, ThreadContext* ctx) throw() 
 {
 	ObjectEraser __e_obj1(ctx, __FILEW__, __LINE__, L"Table", L"~Table");
-	__e_obj1.add(this->scheme, this);
-	scheme = nullptr;
 	__e_obj1.add(this->name, this);
 	name = nullptr;
 	__e_obj1.add(this->keys, this);
@@ -41,14 +39,6 @@ void Table::__releaseRegerences(bool prepare, ThreadContext* ctx) throw()
 	if(!prepare){
 		return;
 	}
-}
-String* Table::getScheme(ThreadContext* ctx) throw() 
-{
-	return scheme;
-}
-void Table::setScheme(String* scheme, ThreadContext* ctx) throw() 
-{
-	__GC_MV(this, &(this->scheme), scheme, String);
 }
 String* Table::getName(ThreadContext* ctx) throw() 
 {
@@ -81,6 +71,45 @@ String* Table::getMax(ThreadContext* ctx) throw()
 void Table::setMax(String* max, ThreadContext* ctx) throw() 
 {
 	__GC_MV(this, &(this->max), max, String);
+}
+Table* Table::parseInstance(DomNode* dom, DomDocument* document, Matcher* matcher, ThreadContext* ctx)
+{
+	Table* tbl = (new(ctx) Table(ctx));
+	IVariableValue* attr = dom->getAttributeValue(ConstStr::getCNST_STR_1061(), ctx);
+	if(attr == nullptr)
+	{
+		throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_1210(), ctx));
+	}
+	tbl->setName(attr->toString(ctx)->trim(ctx), ctx);
+	attr = dom->getAttributeValue(ConstStr::getCNST_STR_1211(), ctx);
+	if(attr == nullptr)
+	{
+		throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_1212(), ctx));
+	}
+	String* keysstr = attr->toString(ctx)->trim(ctx);
+	IArrayObject<String>* keyar = keysstr->split(ConstStr::getCNST_STR_888(), ctx);
+	int maxLoop = keyar->length;
+	for(int i = 0; i != maxLoop; ++i)
+	{
+		String* key = keyar->get(i);
+		tbl->addKey(key, ctx);
+	}
+	attr = dom->getAttributeValue(ConstStr::getCNST_STR_1213(), ctx);
+	if(attr != nullptr)
+	{
+		tbl->setMax(attr->toString(ctx)->trim(ctx), ctx);
+	}
+	MatchCandidatesCollection* result = matcher->match(document, dom, ConstStr::getCNST_STR_1214(), ctx);
+	ArrayList<MatchCandidate>* list = result->getCandidatesList(ctx);
+	Iterator<MatchCandidate>* it = list->iterator(ctx);
+	while(it->hasNext(ctx))
+	{
+		MatchCandidate* cnd = it->next(ctx);
+		DomNode* domnode = cnd->getCandidateDom(ctx);
+		NodeRef* noderef = NodeRef::parseInstance(domnode, document, matcher, ctx);
+		tbl->addNodeRef(noderef, ctx);
+	}
+	return tbl;
 }
 }}}}
 

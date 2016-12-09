@@ -18,7 +18,7 @@ bool AlinousCore::__init_static_variables(){
 	delete ctx;
 	return true;
 }
- AlinousCore::AlinousCore(String* home, bool debug, ThreadContext* ctx) throw()  : IObject(ctx), diskCache(nullptr), sqlFunctionManager(nullptr), webModuleManager(nullptr), debug(0), alinousHome(nullptr), config(nullptr), logger(nullptr), functionManager(nullptr), modulerepository(nullptr), databaseManager(nullptr), debugger(nullptr), runner(nullptr)
+ AlinousCore::AlinousCore(String* home, bool debug, ThreadContext* ctx) throw()  : IObject(ctx), diskCache(nullptr), sqlFunctionManager(nullptr), webModuleManager(nullptr), debug(0), alinousHome(nullptr), config(nullptr), logger(nullptr), functionManager(nullptr), modulerepository(nullptr), databaseManager(nullptr), debugger(nullptr), runner(nullptr), monitor(nullptr)
 {
 	if(home->endsWith(ConstStr::getCNST_STR_984(), ctx))
 	{
@@ -74,6 +74,8 @@ void AlinousCore::__releaseRegerences(bool prepare, ThreadContext* ctx) throw()
 	debugger = nullptr;
 	__e_obj1.add(this->runner, this);
 	runner = nullptr;
+	__e_obj1.add(this->monitor, this);
+	monitor = nullptr;
 	if(!prepare){
 		return;
 	}
@@ -94,6 +96,7 @@ void AlinousCore::init(int debugPort, ThreadContext* ctx)
 }
 void AlinousCore::initDatabase(ThreadContext* ctx)
 {
+	initDistributedParts(ctx);
 	__GC_MV(this, &(this->databaseManager), (new(ctx) DataSourceManager(this, ctx)), DataSourceManager);
 	this->databaseManager->init(ctx);
 }
@@ -157,6 +160,34 @@ AlinousScriptDebugger* AlinousCore::getDebugger(ThreadContext* ctx) throw()
 AlinousFunctionManager* AlinousCore::getFunctionManager(ThreadContext* ctx) throw() 
 {
 	return functionManager;
+}
+void AlinousCore::initDistributedParts(ThreadContext* ctx)
+{
+	Monitor* monitorConf = this->config->getMonitor(ctx);
+	if(monitorConf != nullptr)
+	{
+		int port = -1;
+		{
+			try
+			{
+				port = Integer::parseInt(monitorConf->getPort(ctx), ctx);
+			}
+			catch(Throwable* e)
+			{
+				throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_1179()->clone(ctx)->append(monitorConf->getPort(ctx), ctx), ctx));
+			}
+		}
+		__GC_MV(this, &(this->monitor), (new(ctx) TransactionMonitorServer(port, ctx)), TransactionMonitorServer);
+		this->monitor->start(ctx);
+	}
+	Nodes* nodesConf = this->config->getNodes(ctx);
+	if(nodesConf != nullptr)
+	{
+	}
+	Regions* resionsConf = this->config->getRegions(ctx);
+	if(resionsConf != nullptr)
+	{
+	}
 }
 }}
 

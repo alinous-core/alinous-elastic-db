@@ -36,12 +36,6 @@ void AlinousDbInstanceInfo::__releaseRegerences(bool prepare, ThreadContext* ctx
 	trxTmpDir = nullptr;
 	__e_obj1.add(this->regionsRef, this);
 	regionsRef = nullptr;
-	__e_obj1.add(this->regions, this);
-	regions = nullptr;
-	__e_obj1.add(this->nodes, this);
-	nodes = nullptr;
-	__e_obj1.add(this->monitor, this);
-	monitor = nullptr;
 	if(!prepare){
 		return;
 	}
@@ -85,30 +79,6 @@ RegionsRef* AlinousDbInstanceInfo::getRegionsRef(ThreadContext* ctx) throw()
 void AlinousDbInstanceInfo::setRegionsRef(RegionsRef* regionsRef, ThreadContext* ctx) throw() 
 {
 	__GC_MV(this, &(this->regionsRef), regionsRef, RegionsRef);
-}
-Regions* AlinousDbInstanceInfo::getRegions(ThreadContext* ctx) throw() 
-{
-	return regions;
-}
-void AlinousDbInstanceInfo::setRegions(Regions* regions, ThreadContext* ctx) throw() 
-{
-	__GC_MV(this, &(this->regions), regions, Regions);
-}
-Nodes* AlinousDbInstanceInfo::getNodes(ThreadContext* ctx) throw() 
-{
-	return nodes;
-}
-void AlinousDbInstanceInfo::setNodes(Nodes* nodes, ThreadContext* ctx) throw() 
-{
-	__GC_MV(this, &(this->nodes), nodes, Nodes);
-}
-Monitor* AlinousDbInstanceInfo::getMonitor(ThreadContext* ctx) throw() 
-{
-	return monitor;
-}
-void AlinousDbInstanceInfo::setMonitor(Monitor* monitor, ThreadContext* ctx) throw() 
-{
-	__GC_MV(this, &(this->monitor), monitor, Monitor);
 }
 }}}
 

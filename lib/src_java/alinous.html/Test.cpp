@@ -33,8 +33,8 @@ void Test::__releaseRegerences(bool prepare, ThreadContext* ctx) throw()
 }
 void Test::main(IArrayObject<String>* args, ThreadContext* ctx) throw() 
 {
-	String* encode = ConstStr::getCNST_STR_1657();
-	String* sourceHtml = readAllText(ConstStr::getCNST_STR_1658(), encode, ctx);
+	String* encode = ConstStr::getCNST_STR_1672();
+	String* sourceHtml = readAllText(ConstStr::getCNST_STR_1673(), encode, ctx);
 	AlinousDomReplacer* replacer = (new(ctx) AlinousDomReplacer(ctx));
 	DomConverter* converter = (new(ctx) DomConverter(sourceHtml, replacer, ctx));
 	converter->parse(ctx);

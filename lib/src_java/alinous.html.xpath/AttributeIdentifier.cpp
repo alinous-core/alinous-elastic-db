@@ -40,7 +40,7 @@ void AttributeIdentifier::__releaseRegerences(bool prepare, ThreadContext* ctx) 
 }
 String* AttributeIdentifier::toString(ThreadContext* ctx) throw() 
 {
-	return ConstStr::getCNST_STR_1222()->clone(ctx)->append(this->id, ctx);
+	return ConstStr::getCNST_STR_1237()->clone(ctx)->append(this->id, ctx);
 }
 }}}
 
