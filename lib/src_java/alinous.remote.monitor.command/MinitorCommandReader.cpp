@@ -33,7 +33,7 @@ void MinitorCommandReader::__releaseRegerences(bool prepare, ThreadContext* ctx)
 }
 AbstractMonitorCommand* MinitorCommandReader::readFromStream(InputStream* stream, ThreadContext* ctx)
 {
-	int type = readInt(stream, ctx);
+	int type = NetworkBinalyUtils::readInt(stream, ctx);
 	AbstractMonitorCommand* cmd = nullptr;
 	switch(type) {
 	case AbstractMonitorCommand::TYPE_FINISH:
@@ -46,18 +46,11 @@ AbstractMonitorCommand* MinitorCommandReader::readFromStream(InputStream* stream
 		cmd = (new(ctx) VoidCommand(ctx));
 		break ;
 	default:
-		throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3472(), ctx));
+		throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3473(), ctx));
 		break;
 	}
 	cmd->readFromStream(stream, ctx);
 	return cmd;
-}
-int MinitorCommandReader::readInt(InputStream* stream, ThreadContext* ctx)
-{
-	IArrayObjectPrimitive<char>* intbytes = ArrayAllocatorPrimitive<char>::allocatep(ctx, 4);
-	stream->read(intbytes, ctx);
-	ByteBuffer* buff = ByteBuffer::wrap(intbytes, ctx);
-	return buff->getInt(ctx);
 }
 }}}}
 

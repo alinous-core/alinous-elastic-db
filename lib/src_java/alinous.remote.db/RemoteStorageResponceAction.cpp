@@ -1,43 +1,43 @@
 #include "includes.h"
 
 
-namespace alinous {namespace remote {namespace region {
+namespace alinous {namespace remote {namespace db {
 
 
 
 
 
-bool NodeRegionResponceAction::__init_done = __init_static_variables();
-bool NodeRegionResponceAction::__init_static_variables(){
+bool RemoteStorageResponceAction::__init_done = __init_static_variables();
+bool RemoteStorageResponceAction::__init_static_variables(){
 	Java2CppSystem::getSelf();
 	ThreadContext* ctx = ThreadContext::newThreadContext();
 	{
-		GCNotifier __refobj1(ctx, __FILEW__, __LINE__, L"NodeRegionResponceAction", L"__init_static_variables");
+		GCNotifier __refobj1(ctx, __FILEW__, __LINE__, L"RemoteStorageResponceAction", L"__init_static_variables");
 	}
 	ctx->localGC();
 	delete ctx;
 	return true;
 }
- NodeRegionResponceAction::NodeRegionResponceAction(Socket* socket, SocketServer* server, ThreadContext* ctx) throw()  : IObject(ctx), IThreadAction(ctx), socket(nullptr), server(nullptr)
+ RemoteStorageResponceAction::RemoteStorageResponceAction(Socket* socket, SocketServer* server, ThreadContext* ctx) throw()  : IObject(ctx), IThreadAction(ctx), socket(nullptr), server(nullptr)
 {
 	__GC_MV(this, &(this->socket), socket, Socket);
 	__GC_MV(this, &(this->server), server, SocketServer);
 }
-void NodeRegionResponceAction::__construct_impl(Socket* socket, SocketServer* server, ThreadContext* ctx) throw() 
+void RemoteStorageResponceAction::__construct_impl(Socket* socket, SocketServer* server, ThreadContext* ctx) throw() 
 {
 	__GC_MV(this, &(this->socket), socket, Socket);
 	__GC_MV(this, &(this->server), server, SocketServer);
 }
- NodeRegionResponceAction::~NodeRegionResponceAction() throw() 
+ RemoteStorageResponceAction::~RemoteStorageResponceAction() throw() 
 {
 	ThreadContext *ctx = ThreadContext::getCurentContext();
 	if(ctx != nullptr){ctx->incGcDenial();}
 	__releaseRegerences(false, ctx);
 	if(ctx != nullptr){ctx->decGcDenial();}
 }
-void NodeRegionResponceAction::__releaseRegerences(bool prepare, ThreadContext* ctx) throw() 
+void RemoteStorageResponceAction::__releaseRegerences(bool prepare, ThreadContext* ctx) throw() 
 {
-	ObjectEraser __e_obj1(ctx, __FILEW__, __LINE__, L"NodeRegionResponceAction", L"~NodeRegionResponceAction");
+	ObjectEraser __e_obj1(ctx, __FILEW__, __LINE__, L"RemoteStorageResponceAction", L"~RemoteStorageResponceAction");
 	__e_obj1.add(this->socket, this);
 	socket = nullptr;
 	__e_obj1.add(this->server, this);
@@ -46,7 +46,7 @@ void NodeRegionResponceAction::__releaseRegerences(bool prepare, ThreadContext* 
 		return;
 	}
 }
-void NodeRegionResponceAction::execute(ThreadContext* ctx)
+void RemoteStorageResponceAction::execute(ThreadContext* ctx)
 {
 	{
 		std::function<void(void)> finallyLm2= [&, this]()
@@ -71,26 +71,26 @@ void NodeRegionResponceAction::execute(ThreadContext* ctx)
 		}
 	}
 }
-void NodeRegionResponceAction::handleCommand(BufferedInputStream* stream, BufferedOutputStream* outStream, ThreadContext* ctx)
+void RemoteStorageResponceAction::handleCommand(BufferedInputStream* stream, BufferedOutputStream* outStream, ThreadContext* ctx)
 {
 	bool loop = true;
-	AbstractNodeRegionCommand* cmd = nullptr;
+	AbstractRemoteStorageCommand* cmd = nullptr;
 	while(loop)
 	{
-		cmd = NodeRegionCommandReader::readFromStream(stream, ctx);
+		cmd = RemoteStorageCommandReader::readFromStream(stream, ctx);
 		if(cmd == nullptr)
 		{
 			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3470(), ctx));
 		}
 		int type = cmd->getType(ctx);
 		switch(type) {
-		case AbstractNodeRegionCommand::TYPE_FINISH:
+		case AbstractRemoteStorageCommand::TYPE_FINISH:
 			loop = false;
 			break ;
-		case AbstractNodeRegionCommand::TYPE_TERMINATE:
+		case AbstractRemoteStorageCommand::TYPE_TERMINATE:
 			loop = false;
 			break ;
-		case AbstractNodeRegionCommand::TYPE_VOID:
+		case AbstractRemoteStorageCommand::TYPE_VOID:
 		default:
 			break ;
 		}

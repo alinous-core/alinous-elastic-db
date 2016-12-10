@@ -2389,9 +2389,9 @@ public:
 	constexpr static StaticUnicodeString __CNST_STR_1776{L"Accept",6};
 public:
 	static UnicodeStringWrapper* getCNST_STR_1776() throw();
-	constexpr static StaticUnicodeString __CNST_STR_3470{L"MonitorServer",13};
+	constexpr static StaticUnicodeString __CNST_STR_3472{L"MonitorServer",13};
 public:
-	static UnicodeStringWrapper* getCNST_STR_3470() throw();
+	static UnicodeStringWrapper* getCNST_STR_3472() throw();
 	constexpr static StaticUnicodeString __CNST_STR_3356{L"xenc",4};
 public:
 	static UnicodeStringWrapper* getCNST_STR_3356() throw();
@@ -3910,9 +3910,9 @@ public:
 	constexpr static StaticUnicodeString __CNST_STR_850{L"Asia/Jayapura",13};
 public:
 	static UnicodeStringWrapper* getCNST_STR_850() throw();
-	constexpr static StaticUnicodeString __CNST_STR_3471{L"Command is wrong format.",24};
+	constexpr static StaticUnicodeString __CNST_STR_3470{L"Command is wrong format.",24};
 public:
-	static UnicodeStringWrapper* getCNST_STR_3471() throw();
+	static UnicodeStringWrapper* getCNST_STR_3470() throw();
 	constexpr static StaticUnicodeString __CNST_STR_244{L"Lycian",6};
 public:
 	static UnicodeStringWrapper* getCNST_STR_244() throw();
@@ -4861,9 +4861,9 @@ public:
 	constexpr static StaticUnicodeString __CNST_STR_826{L"Asia/Thimphu",12};
 public:
 	static UnicodeStringWrapper* getCNST_STR_826() throw();
-	constexpr static StaticUnicodeString __CNST_STR_3474{L"Wrong Command Type of Node Region Command.",42};
+	constexpr static StaticUnicodeString __CNST_STR_3475{L"Wrong Command Type of Node Region Command.",42};
 public:
-	static UnicodeStringWrapper* getCNST_STR_3474() throw();
+	static UnicodeStringWrapper* getCNST_STR_3475() throw();
 	constexpr static StaticUnicodeString __CNST_STR_53{L"Zero length BigInteger",22};
 public:
 	static UnicodeStringWrapper* getCNST_STR_53() throw();
@@ -6118,9 +6118,9 @@ public:
 	constexpr static StaticUnicodeString __CNST_STR_2530{L"image/vnd.ms-modi",17};
 public:
 	static UnicodeStringWrapper* getCNST_STR_2530() throw();
-	constexpr static StaticUnicodeString __CNST_STR_3472{L"Wrong Command Type of Monitor Command.",38};
+	constexpr static StaticUnicodeString __CNST_STR_3473{L"Wrong Command Type of Monitor Command.",38};
 public:
-	static UnicodeStringWrapper* getCNST_STR_3472() throw();
+	static UnicodeStringWrapper* getCNST_STR_3473() throw();
 	constexpr static StaticUnicodeString __CNST_STR_2175{L"etx",3};
 public:
 	static UnicodeStringWrapper* getCNST_STR_2175() throw();
@@ -6598,9 +6598,9 @@ public:
 	constexpr static StaticUnicodeString __CNST_STR_1063{L"CLASS_VARIABLE",14};
 public:
 	static UnicodeStringWrapper* getCNST_STR_1063() throw();
-	constexpr static StaticUnicodeString __CNST_STR_3473{L"NodeRegionServer",16};
+	constexpr static StaticUnicodeString __CNST_STR_3474{L"NodeRegionServer",16};
 public:
-	static UnicodeStringWrapper* getCNST_STR_3473() throw();
+	static UnicodeStringWrapper* getCNST_STR_3474() throw();
 	constexpr static StaticUnicodeString __CNST_STR_3466{L"Html format is wrong",20};
 public:
 	static UnicodeStringWrapper* getCNST_STR_3466() throw();
@@ -10159,6 +10159,9 @@ public:
 	constexpr static StaticUnicodeString __CNST_STR_1042{L"No Join strategy",16};
 public:
 	static UnicodeStringWrapper* getCNST_STR_1042() throw();
+	constexpr static StaticUnicodeString __CNST_STR_3471{L"Wrong Command Type of Remote Table Storage Command.",51};
+public:
+	static UnicodeStringWrapper* getCNST_STR_3471() throw();
 	constexpr static StaticUnicodeString __CNST_STR_2714{L"application/vnd.palm",20};
 public:
 	static UnicodeStringWrapper* getCNST_STR_2714() throw();

@@ -18,11 +18,11 @@ class VoidCommand;}}}}
 namespace alinous {namespace system {
 class AlinousException;}}
 
-namespace java {namespace nio {
-class ByteBuffer;}}
-
 namespace java {namespace io {
 class IOException;}}
+
+namespace alinous {namespace remote {namespace socket {
+class NetworkBinalyUtils;}}}
 
 namespace java {namespace lang {
 class IObject;
@@ -39,7 +39,7 @@ using namespace ::java::lang;
 using ::java::util::Iterator;
 using ::java::io::IOException;
 using ::java::io::InputStream;
-using ::java::nio::ByteBuffer;
+using ::alinous::remote::socket::NetworkBinalyUtils;
 using ::alinous::system::AlinousException;
 
 
@@ -58,8 +58,6 @@ public:
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 public:
 	static AbstractMonitorCommand* readFromStream(InputStream* stream, ThreadContext* ctx);
-private:
-	static int readInt(InputStream* stream, ThreadContext* ctx);
 public:
 	static bool __init_done;
 	static bool __init_static_variables();

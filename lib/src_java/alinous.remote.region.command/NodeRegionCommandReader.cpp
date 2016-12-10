@@ -33,7 +33,7 @@ void NodeRegionCommandReader::__releaseRegerences(bool prepare, ThreadContext* c
 }
 AbstractNodeRegionCommand* NodeRegionCommandReader::readFromStream(InputStream* stream, ThreadContext* ctx)
 {
-	int type = readInt(stream, ctx);
+	int type = NetworkBinalyUtils::readInt(stream, ctx);
 	AbstractNodeRegionCommand* cmd = nullptr;
 	switch(type) {
 	case AbstractNodeRegionCommand::TYPE_FINISH:
@@ -46,18 +46,11 @@ AbstractNodeRegionCommand* NodeRegionCommandReader::readFromStream(InputStream* 
 		cmd = (new(ctx) NodeRegionVoidCommand(ctx));
 		break ;
 	default:
-		throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3474(), ctx));
+		throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3475(), ctx));
 		break;
 	}
 	cmd->readFromStream(stream, ctx);
 	return cmd;
-}
-int NodeRegionCommandReader::readInt(InputStream* stream, ThreadContext* ctx)
-{
-	IArrayObjectPrimitive<char>* intbytes = ArrayAllocatorPrimitive<char>::allocatep(ctx, 4);
-	stream->read(intbytes, ctx);
-	ByteBuffer* buff = ByteBuffer::wrap(intbytes, ctx);
-	return buff->getInt(ctx);
 }
 }}}}
 
