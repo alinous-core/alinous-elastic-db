@@ -296,6 +296,7 @@ set(srcjava
 	"src_java/alinous.html/IDomObject.cpp"
 	"src_java/alinous.remote.monitor.command/VoidCommand.cpp"
 	"src_java/alinous.remote.monitor.command/FinishConnectionCommand.cpp"
+	"src_java/alinous.remote.monitor.command/MinitorCommandReader.cpp"
 	"src_java/alinous.remote.monitor.command/AbstractMonitorCommand.cpp"
 	"src_java/alinous.remote.monitor.command/TerminateCommand.cpp"
 	"src_java/alinous.remote.db/RemoteTableRegionServer.cpp"

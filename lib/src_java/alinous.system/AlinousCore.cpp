@@ -102,6 +102,10 @@ void AlinousCore::initDatabase(ThreadContext* ctx)
 }
 void AlinousCore::dispose(ThreadContext* ctx) throw() 
 {
+	if(this->monitor != nullptr)
+	{
+		this->monitor->dispose(ctx);
+	}
 	if(this->functionManager != nullptr)
 	{
 		this->functionManager->dispose(ctx);

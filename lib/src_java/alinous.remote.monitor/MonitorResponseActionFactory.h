@@ -50,6 +50,7 @@ private:
 	TransactionMonitorServer* monitorServer;
 public:
 	IThreadAction* getAction(Socket* socket, SocketServer* server, ThreadContext* ctx) throw()  final;
+	TransactionMonitorServer* getMonitorServer(ThreadContext* ctx) throw() ;
 public:
 	static bool __init_done;
 	static bool __init_static_variables();

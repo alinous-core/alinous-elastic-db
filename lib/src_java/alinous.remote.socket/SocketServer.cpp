@@ -107,6 +107,7 @@ void SocketServer::dispose(ThreadContext* ctx) throw()
 			this->logger->logError(e, ctx);
 		}
 	}
+	this->threadPool->dispose(ctx);
 }
 void SocketServer::run(ThreadContext* ctx) throw() 
 {
@@ -146,6 +147,19 @@ void SocketServer::run(ThreadContext* ctx) throw()
 	{
 		handleRequest(ctx);
 	}
+	while(getRefs(ctx) > 0)
+	{
+		{
+			try
+			{
+				Thread::sleep(300, ctx);
+			}
+			catch(InterruptedException* e)
+			{
+				e->printStackTrace(ctx);
+			}
+		}
+	}
 }
 void SocketServer::dec(ThreadContext* ctx) throw() 
 {
@@ -156,7 +170,12 @@ void SocketServer::dec(ThreadContext* ctx) throw()
 }
 int SocketServer::getRefs(ThreadContext* ctx) throw() 
 {
-	return refs;
+	int cur = 0;
+	{
+		SynchronizedBlockObj __synchronized_2(this->refLock, ctx);
+		cur = refs;
+	}
+	return cur;
 }
 void SocketServer::handleRequest(ThreadContext* ctx) throw() 
 {

@@ -1,8 +1,5 @@
 #ifndef ALINOUS_REMOTE_MONITOR_MONITORRESPONCEACTION_H_
 #define ALINOUS_REMOTE_MONITOR_MONITORRESPONCEACTION_H_
-namespace alinous {namespace remote {namespace monitor {
-class TransactionMonitorServer;}}}
-
 namespace java {namespace net {
 class Socket;}}
 
@@ -33,6 +30,12 @@ class AlinousException;}}
 namespace alinous {namespace runtime {namespace parallel {
 class IThreadAction;}}}
 
+namespace java {namespace io {
+class IOException;}}
+
+namespace alinous {namespace remote {namespace monitor {namespace command {
+class MinitorCommandReader;}}}}
+
 namespace java {namespace lang {
 class IObject;
 }}
@@ -48,10 +51,12 @@ using namespace ::java::lang;
 using ::java::util::Iterator;
 using ::java::io::BufferedInputStream;
 using ::java::io::BufferedOutputStream;
+using ::java::io::IOException;
 using ::java::io::InputStream;
 using ::java::io::OutputStream;
 using ::java::net::Socket;
 using ::alinous::remote::monitor::command::AbstractMonitorCommand;
+using ::alinous::remote::monitor::command::MinitorCommandReader;
 using ::alinous::remote::socket::SocketServer;
 using ::alinous::runtime::parallel::IThreadAction;
 using ::alinous::system::AlinousException;
@@ -62,19 +67,18 @@ class MonitorResponceAction final : public IThreadAction, public virtual IObject
 public:
 	MonitorResponceAction(const MonitorResponceAction& base) = default;
 public:
-	MonitorResponceAction(TransactionMonitorServer* monitorServer, Socket* socket, SocketServer* server, ThreadContext* ctx) throw() ;
-	void __construct_impl(TransactionMonitorServer* monitorServer, Socket* socket, SocketServer* server, ThreadContext* ctx) throw() ;
+	MonitorResponceAction(Socket* socket, SocketServer* server, ThreadContext* ctx) throw() ;
+	void __construct_impl(Socket* socket, SocketServer* server, ThreadContext* ctx) throw() ;
 	virtual ~MonitorResponceAction() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 private:
-	TransactionMonitorServer* monitorServer;
 	Socket* socket;
 	SocketServer* server;
 public:
 	void execute(ThreadContext* ctx) final;
 private:
 	void handleCommand(BufferedInputStream* stream, BufferedOutputStream* outStream, ThreadContext* ctx);
-	AbstractMonitorCommand* parseCommand(BufferedInputStream* stream, ThreadContext* ctx) throw() ;
+	AbstractMonitorCommand* parseCommand(BufferedInputStream* stream, ThreadContext* ctx);
 public:
 	static bool __init_done;
 	static bool __init_static_variables();

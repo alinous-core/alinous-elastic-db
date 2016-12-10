@@ -40,14 +40,15 @@ void TerminateCommand::__releaseRegerences(bool prepare, ThreadContext* ctx) thr
 	}
 	AbstractMonitorCommand::__releaseRegerences(true, ctx);
 }
-void TerminateCommand::sendCommand(AlinousSocket* socket, ThreadContext* ctx)
+void TerminateCommand::readFromStream(InputStream* stream, ThreadContext* ctx)
 {
-	OutputStream* out = socket->getOutputStream(ctx);
-	toByteStream(out, ctx);
-	out->flush(ctx);
 }
-void TerminateCommand::toByteStream(OutputStream* out, ThreadContext* ctx) throw() 
+void TerminateCommand::writeByteStream(OutputStream* out, ThreadContext* ctx)
 {
+	ByteBuffer* buffer = ByteBuffer::allocate(256, ctx);
+	buffer->putInt(this->type, ctx);
+	IArrayObjectPrimitive<char>* bytes = buffer->array(ctx);
+	out->write(bytes, ctx);
 }
 }}}}
 

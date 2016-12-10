@@ -39,5 +39,11 @@ int AbstractMonitorCommand::getType(ThreadContext* ctx) throw()
 {
 	return type;
 }
+void AbstractMonitorCommand::sendCommand(AlinousSocket* socket, ThreadContext* ctx)
+{
+	OutputStream* out = socket->getOutputStream(ctx);
+	writeByteStream(out, ctx);
+	out->flush(ctx);
+}
 }}}}
 

@@ -18,15 +18,13 @@ bool MonitorResponceAction::__init_static_variables(){
 	delete ctx;
 	return true;
 }
- MonitorResponceAction::MonitorResponceAction(TransactionMonitorServer* monitorServer, Socket* socket, SocketServer* server, ThreadContext* ctx) throw()  : IObject(ctx), IThreadAction(ctx), monitorServer(nullptr), socket(nullptr), server(nullptr)
+ MonitorResponceAction::MonitorResponceAction(Socket* socket, SocketServer* server, ThreadContext* ctx) throw()  : IObject(ctx), IThreadAction(ctx), socket(nullptr), server(nullptr)
 {
-	__GC_MV(this, &(this->monitorServer), monitorServer, TransactionMonitorServer);
 	__GC_MV(this, &(this->socket), socket, Socket);
 	__GC_MV(this, &(this->server), server, SocketServer);
 }
-void MonitorResponceAction::__construct_impl(TransactionMonitorServer* monitorServer, Socket* socket, SocketServer* server, ThreadContext* ctx) throw() 
+void MonitorResponceAction::__construct_impl(Socket* socket, SocketServer* server, ThreadContext* ctx) throw() 
 {
-	__GC_MV(this, &(this->monitorServer), monitorServer, TransactionMonitorServer);
 	__GC_MV(this, &(this->socket), socket, Socket);
 	__GC_MV(this, &(this->server), server, SocketServer);
 }
@@ -40,8 +38,6 @@ void MonitorResponceAction::__construct_impl(TransactionMonitorServer* monitorSe
 void MonitorResponceAction::__releaseRegerences(bool prepare, ThreadContext* ctx) throw() 
 {
 	ObjectEraser __e_obj1(ctx, __FILEW__, __LINE__, L"MonitorResponceAction", L"~MonitorResponceAction");
-	__e_obj1.add(this->monitorServer, this);
-	monitorServer = nullptr;
 	__e_obj1.add(this->socket, this);
 	socket = nullptr;
 	__e_obj1.add(this->server, this);
@@ -93,7 +89,6 @@ void MonitorResponceAction::handleCommand(BufferedInputStream* stream, BufferedO
 			break ;
 		case AbstractMonitorCommand::TYPE_TERMINATE:
 			loop = false;
-			this->monitorServer->dispose(ctx);
 			break ;
 		case AbstractMonitorCommand::TYPE_VOID:
 		default:
@@ -102,9 +97,10 @@ void MonitorResponceAction::handleCommand(BufferedInputStream* stream, BufferedO
 		}
 	}
 }
-AbstractMonitorCommand* MonitorResponceAction::parseCommand(BufferedInputStream* stream, ThreadContext* ctx) throw() 
+AbstractMonitorCommand* MonitorResponceAction::parseCommand(BufferedInputStream* stream, ThreadContext* ctx)
 {
-	return nullptr;
+	AbstractMonitorCommand* cmd = MinitorCommandReader::readFromStream(stream, ctx);
+	return cmd;
 }
 }}}
 

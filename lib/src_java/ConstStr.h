@@ -6112,6 +6112,9 @@ public:
 	constexpr static StaticUnicodeString __CNST_STR_2530{L"image/vnd.ms-modi",17};
 public:
 	static UnicodeStringWrapper* getCNST_STR_2530() throw();
+	constexpr static StaticUnicodeString __CNST_STR_3471{L"Wrong Command Type of Monitor Command.",38};
+public:
+	static UnicodeStringWrapper* getCNST_STR_3471() throw();
 	constexpr static StaticUnicodeString __CNST_STR_2175{L"etx",3};
 public:
 	static UnicodeStringWrapper* getCNST_STR_2175() throw();

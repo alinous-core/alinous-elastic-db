@@ -333,6 +333,9 @@
 #include "alinous.remote.monitor.command/TerminateCommand.h"
 #include "alinous.remote.socket/ISocketActionFactory.h"
 #include "alinous.remote.socket/SocketServer.h"
+#include "alinous.remote.monitor.command/FinishConnectionCommand.h"
+#include "alinous.remote.monitor.command/VoidCommand.h"
+#include "alinous.remote.monitor.command/MinitorCommandReader.h"
 #include "alinous.remote.monitor/MonitorResponceAction.h"
 #include "alinous.remote.monitor/MonitorResponseActionFactory.h"
 #include "alinous.remote.monitor/TransactionMonitorServer.h"
@@ -776,8 +779,6 @@
 #include "alinous.remote.monitor.client/MonitorConnectionInfo.h"
 #include "alinous.remote.monitor.client/MonitorConnection.h"
 #include "alinous.remote.monitor.client/MonitorClientConnectionFactory.h"
-#include "alinous.remote.monitor.command/FinishConnectionCommand.h"
-#include "alinous.remote.monitor.command/VoidCommand.h"
 
 
 inline static void __cleanUpStatics(alinous::ThreadContext* ctx){
@@ -1634,6 +1635,7 @@ inline static void __cleanUpStatics(alinous::ThreadContext* ctx){
 	alinous::remote::monitor::client::MonitorConnectionInfo::__cleanUp(ctx);
 	alinous::remote::monitor::client::MonitorConnection::__cleanUp(ctx);
 	alinous::remote::monitor::command::TerminateCommand::__cleanUp(ctx);
+	alinous::remote::monitor::command::MinitorCommandReader::__cleanUp(ctx);
 	alinous::remote::monitor::command::FinishConnectionCommand::__cleanUp(ctx);
 	alinous::remote::monitor::command::AbstractMonitorCommand::__cleanUp(ctx);
 	alinous::remote::monitor::command::VoidCommand::__cleanUp(ctx);

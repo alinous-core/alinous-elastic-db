@@ -40,8 +40,15 @@ void FinishConnectionCommand::__releaseRegerences(bool prepare, ThreadContext* c
 	}
 	AbstractMonitorCommand::__releaseRegerences(true, ctx);
 }
-void FinishConnectionCommand::sendCommand(ThreadContext* ctx) throw() 
+void FinishConnectionCommand::readFromStream(InputStream* stream, ThreadContext* ctx)
 {
+}
+void FinishConnectionCommand::writeByteStream(OutputStream* out, ThreadContext* ctx)
+{
+	ByteBuffer* buffer = ByteBuffer::allocate(256, ctx);
+	buffer->putInt(this->type, ctx);
+	IArrayObjectPrimitive<char>* bytes = buffer->array(ctx);
+	out->write(bytes, ctx);
 }
 }}}}
 

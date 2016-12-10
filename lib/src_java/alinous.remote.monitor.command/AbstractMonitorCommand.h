@@ -1,5 +1,17 @@
 #ifndef ALINOUS_REMOTE_MONITOR_COMMAND_ABSTRACTMONITORCOMMAND_H_
 #define ALINOUS_REMOTE_MONITOR_COMMAND_ABSTRACTMONITORCOMMAND_H_
+namespace alinous {namespace net {
+class AlinousSocket;}}
+
+namespace java {namespace io {
+class OutputStream;}}
+
+namespace java {namespace io {
+class InputStream;}}
+
+namespace java {namespace io {
+class IOException;}}
+
 namespace java {namespace lang {
 class IObject;
 }}
@@ -13,6 +25,10 @@ namespace alinous {namespace remote {namespace monitor {namespace command {
 using namespace ::alinous;
 using namespace ::java::lang;
 using ::java::util::Iterator;
+using ::java::io::IOException;
+using ::java::io::InputStream;
+using ::java::io::OutputStream;
+using ::alinous::net::AlinousSocket;
 
 
 
@@ -36,6 +52,9 @@ public:
 	constexpr static const int TYPE_TERMINATE{2};
 public:
 	int getType(ThreadContext* ctx) throw() ;
+	void sendCommand(AlinousSocket* socket, ThreadContext* ctx);
+	virtual void readFromStream(InputStream* stream, ThreadContext* ctx) = 0;
+	virtual void writeByteStream(OutputStream* out, ThreadContext* ctx) = 0;
 public:
 	static bool __init_done;
 	static bool __init_static_variables();
