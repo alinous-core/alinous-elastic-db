@@ -4861,6 +4861,9 @@ public:
 	constexpr static StaticUnicodeString __CNST_STR_826{L"Asia/Thimphu",12};
 public:
 	static UnicodeStringWrapper* getCNST_STR_826() throw();
+	constexpr static StaticUnicodeString __CNST_STR_3474{L"Wrong Command Type of Node Region Command.",42};
+public:
+	static UnicodeStringWrapper* getCNST_STR_3474() throw();
 	constexpr static StaticUnicodeString __CNST_STR_53{L"Zero length BigInteger",22};
 public:
 	static UnicodeStringWrapper* getCNST_STR_53() throw();
@@ -6595,6 +6598,9 @@ public:
 	constexpr static StaticUnicodeString __CNST_STR_1063{L"CLASS_VARIABLE",14};
 public:
 	static UnicodeStringWrapper* getCNST_STR_1063() throw();
+	constexpr static StaticUnicodeString __CNST_STR_3473{L"NodeRegionServer",16};
+public:
+	static UnicodeStringWrapper* getCNST_STR_3473() throw();
 	constexpr static StaticUnicodeString __CNST_STR_3466{L"Html format is wrong",20};
 public:
 	static UnicodeStringWrapper* getCNST_STR_3466() throw();

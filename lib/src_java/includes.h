@@ -778,6 +778,15 @@
 #include "alinous.remote.monitor.client/MonitorConnectionInfo.h"
 #include "alinous.remote.monitor.client/MonitorConnection.h"
 #include "alinous.remote.monitor.client/MonitorClientConnectionFactory.h"
+#include "alinous.remote.region.command/AbstractNodeRegionCommand.h"
+#include "alinous.remote.region.command/NodeRegionFinishConnectionCommand.h"
+#include "alinous.remote.region.command/NodeRegionTerminateCommand.h"
+#include "alinous.remote.region.command/NodeRegionVoidCommand.h"
+#include "alinous.remote.region.command/NodeRegionCommandReader.h"
+#include "alinous.remote.region/NodeRegionResponceAction.h"
+#include "alinous.remote.region/NodeRegionResponceActionFactory.h"
+#include "alinous.remote.region/NodeRegionServer.h"
+#include "alinous.remote.region.client/StorageNodeRegionClient.h"
 
 
 inline static void __cleanUpStatics(alinous::ThreadContext* ctx){
@@ -1637,6 +1646,15 @@ inline static void __cleanUpStatics(alinous::ThreadContext* ctx){
 	alinous::remote::monitor::command::FinishConnectionCommand::__cleanUp(ctx);
 	alinous::remote::monitor::command::AbstractMonitorCommand::__cleanUp(ctx);
 	alinous::remote::monitor::command::VoidCommand::__cleanUp(ctx);
+	alinous::remote::region::NodeRegionServer::__cleanUp(ctx);
+	alinous::remote::region::NodeRegionResponceAction::__cleanUp(ctx);
+	alinous::remote::region::NodeRegionResponceActionFactory::__cleanUp(ctx);
+	alinous::remote::region::client::StorageNodeRegionClient::__cleanUp(ctx);
+	alinous::remote::region::command::NodeRegionCommandReader::__cleanUp(ctx);
+	alinous::remote::region::command::AbstractNodeRegionCommand::__cleanUp(ctx);
+	alinous::remote::region::command::NodeRegionVoidCommand::__cleanUp(ctx);
+	alinous::remote::region::command::NodeRegionFinishConnectionCommand::__cleanUp(ctx);
+	alinous::remote::region::command::NodeRegionTerminateCommand::__cleanUp(ctx);
 	alinous::remote::socket::SocketServer::__cleanUp(ctx);
 	alinous::remote::socket::SocketConnectionPool::__cleanUp(ctx);
 	alinous::remote::socket::ISocketConnection::__cleanUp(ctx);
