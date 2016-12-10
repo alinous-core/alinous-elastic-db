@@ -1,13 +1,13 @@
-#ifndef ALINOUS_REMOTE_MONITOR_VOIDCOMMAND_H_
-#define ALINOUS_REMOTE_MONITOR_VOIDCOMMAND_H_
-namespace alinous {namespace remote {namespace monitor {
-class AbstractMonitorCommand;}}}
+#ifndef ALINOUS_REMOTE_MONITOR_COMMAND_VOIDCOMMAND_H_
+#define ALINOUS_REMOTE_MONITOR_COMMAND_VOIDCOMMAND_H_
+namespace alinous {namespace remote {namespace monitor {namespace command {
+class AbstractMonitorCommand;}}}}
 
 namespace alinous {
 class ThreadContext;
 }
 
-namespace alinous {namespace remote {namespace monitor {
+namespace alinous {namespace remote {namespace monitor {namespace command {
 
 using namespace ::alinous;
 using namespace ::java::lang;
@@ -31,6 +31,6 @@ public:
 	}
 };
 
-}}}
+}}}}
 
-#endif /* end of ALINOUS_REMOTE_MONITOR_VOIDCOMMAND_H_ */
+#endif /* end of ALINOUS_REMOTE_MONITOR_COMMAND_VOIDCOMMAND_H_ */

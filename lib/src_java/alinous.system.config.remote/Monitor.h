@@ -22,6 +22,9 @@ namespace alinous {namespace system {namespace config {
 class AlinousInitException;}}}
 
 namespace java {namespace lang {
+class Throwable;}}
+
+namespace java {namespace lang {
 class IObject;
 }}
 
@@ -47,7 +50,7 @@ class Monitor final : public virtual IObject {
 public:
 	Monitor(const Monitor& base) = default;
 public:
-	Monitor(ThreadContext* ctx) throw()  : IObject(ctx), port(nullptr)
+	Monitor(ThreadContext* ctx) throw()  : IObject(ctx), port(nullptr), maxConnection(8)
 	{
 	}
 	void __construct_impl(ThreadContext* ctx) throw() 
@@ -57,9 +60,12 @@ public:
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 private:
 	String* port;
+	int maxConnection;
 public:
 	String* getPort(ThreadContext* ctx) throw() ;
 	void setPort(String* port, ThreadContext* ctx) throw() ;
+	int getMaxConnection(ThreadContext* ctx) throw() ;
+	void setMaxConnection(int maxConnection, ThreadContext* ctx) throw() ;
 public:
 	static Monitor* parseInstance(MatchCandidate* candidate, DomDocument* document, Matcher* matcher, ThreadContext* ctx);
 public:

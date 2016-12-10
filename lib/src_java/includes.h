@@ -329,6 +329,12 @@
 #include "alinous.compile.sql.functions/Coalesce.h"
 #include "alinous.compile.sql.functions/ToNumber.h"
 #include "alinous.compile.sql.functions/SQLFunctionManager.h"
+#include "alinous.remote.monitor.command/AbstractMonitorCommand.h"
+#include "alinous.remote.monitor.command/TerminateCommand.h"
+#include "alinous.remote.socket/ISocketActionFactory.h"
+#include "alinous.remote.socket/SocketServer.h"
+#include "alinous.remote.monitor/MonitorResponceAction.h"
+#include "alinous.remote.monitor/MonitorResponseActionFactory.h"
 #include "alinous.remote.monitor/TransactionMonitorServer.h"
 #include "alinous.compile.declare/ClassExtends.h"
 #include "alinous.compile.declare/ClassImplements.h"
@@ -487,6 +493,7 @@
 #include "alinous.parser.xpath/AlinousXpathParser.h"
 #include "alinous.html.xpath.match/Matcher.h"
 #include "alinous.system.config/AlinousInitException.h"
+#include "alinous.system.config.remote/MonitorRef.h"
 #include "alinous.system.config.remote/RegionRef.h"
 #include "alinous.system.config.remote/RegionsRef.h"
 #include "alinous.system.config/AlinousDbInstanceInfo.h"
@@ -763,14 +770,14 @@
 #include "alinous.remote/RemoteTableRegionHandle.h"
 #include "alinous.remote.db/RemoteTableStorageServer.h"
 #include "alinous.remote.db/RemoteTableRegionServer.h"
-#include "alinous.remote.monitor/AbstractMonitorCommand.h"
-#include "alinous.remote.monitor/TerminateCommand.h"
-#include "alinous.remote.socket/SocketServer.h"
-#include "alinous.remote.socket/SocketActionFactory.h"
-#include "alinous.remote.monitor/MonitorResponceAction.h"
-#include "alinous.remote.monitor/MonitorResponseActionFactory.h"
-#include "alinous.remote.monitor/FinishConnection.h"
-#include "alinous.remote.monitor/VoidCommand.h"
+#include "alinous.remote.socket/ISocketConnection.h"
+#include "alinous.remote.socket/SocketConnectionPool.h"
+#include "alinous.remote.socket/ISocketConnectionFactory.h"
+#include "alinous.remote.monitor.client/MonitorConnectionInfo.h"
+#include "alinous.remote.monitor.client/MonitorConnection.h"
+#include "alinous.remote.monitor.client/MonitorClientConnectionFactory.h"
+#include "alinous.remote.monitor.command/FinishConnectionCommand.h"
+#include "alinous.remote.monitor.command/VoidCommand.h"
 
 
 inline static void __cleanUpStatics(alinous::ThreadContext* ctx){
@@ -1293,6 +1300,7 @@ inline static void __cleanUpStatics(alinous::ThreadContext* ctx){
 	alinous::system::config::remote::Tables::__cleanUp(ctx);
 	alinous::system::config::remote::RegionsRef::__cleanUp(ctx);
 	alinous::system::config::remote::Nodes::__cleanUp(ctx);
+	alinous::system::config::remote::MonitorRef::__cleanUp(ctx);
 	alinous::system::config::remote::Regions::__cleanUp(ctx);
 	alinous::system::config::remote::Region::__cleanUp(ctx);
 	alinous::system::functions::IAlinousSystem::__cleanUp(ctx);
@@ -1619,15 +1627,21 @@ inline static void __cleanUpStatics(alinous::ThreadContext* ctx){
 	alinous::remote::RemoteTableRegionHandle::__cleanUp(ctx);
 	alinous::remote::db::RemoteTableStorageServer::__cleanUp(ctx);
 	alinous::remote::db::RemoteTableRegionServer::__cleanUp(ctx);
-	alinous::remote::monitor::TerminateCommand::__cleanUp(ctx);
 	alinous::remote::monitor::MonitorResponseActionFactory::__cleanUp(ctx);
 	alinous::remote::monitor::TransactionMonitorServer::__cleanUp(ctx);
 	alinous::remote::monitor::MonitorResponceAction::__cleanUp(ctx);
-	alinous::remote::monitor::FinishConnection::__cleanUp(ctx);
-	alinous::remote::monitor::AbstractMonitorCommand::__cleanUp(ctx);
-	alinous::remote::monitor::VoidCommand::__cleanUp(ctx);
+	alinous::remote::monitor::client::MonitorClientConnectionFactory::__cleanUp(ctx);
+	alinous::remote::monitor::client::MonitorConnectionInfo::__cleanUp(ctx);
+	alinous::remote::monitor::client::MonitorConnection::__cleanUp(ctx);
+	alinous::remote::monitor::command::TerminateCommand::__cleanUp(ctx);
+	alinous::remote::monitor::command::FinishConnectionCommand::__cleanUp(ctx);
+	alinous::remote::monitor::command::AbstractMonitorCommand::__cleanUp(ctx);
+	alinous::remote::monitor::command::VoidCommand::__cleanUp(ctx);
 	alinous::remote::socket::SocketServer::__cleanUp(ctx);
-	alinous::remote::socket::SocketActionFactory::__cleanUp(ctx);
+	alinous::remote::socket::SocketConnectionPool::__cleanUp(ctx);
+	alinous::remote::socket::ISocketConnection::__cleanUp(ctx);
+	alinous::remote::socket::ISocketActionFactory::__cleanUp(ctx);
+	alinous::remote::socket::ISocketConnectionFactory::__cleanUp(ctx);
 	java::io::File::__cleanUp(ctx);
 	java::nio::charset::CoderResult::__cleanUp(ctx);
 	java::lang::UnicodeString::__cleanUp(ctx);

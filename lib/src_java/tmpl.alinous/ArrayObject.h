@@ -943,3 +943,10 @@ template class alinous::ArrayObject<alinous::ArrayObject<alinous::IArrayObject<:
 template class alinous::ArrayObject<alinous::ArrayObject<::alinous::web::htmlxml::module::AbstractSerializedHtmlPart>>;
 template class alinous::ArrayObject<alinous::IArrayObject<alinous::ArrayObject<::alinous::web::htmlxml::module::AbstractSerializedHtmlPart>>>;
 template class alinous::ArrayObject<alinous::ArrayObject<alinous::ArrayObject<::alinous::web::htmlxml::module::AbstractSerializedHtmlPart>>>;
+template class alinous::ArrayObject<::alinous::remote::socket::ISocketConnection>;
+template class alinous::ArrayObject<alinous::IArrayObject<::alinous::remote::socket::ISocketConnection>>;
+template class alinous::ArrayObject<alinous::IArrayObject<alinous::IArrayObject<::alinous::remote::socket::ISocketConnection>>>;
+template class alinous::ArrayObject<alinous::ArrayObject<alinous::IArrayObject<::alinous::remote::socket::ISocketConnection>>>;
+template class alinous::ArrayObject<alinous::ArrayObject<::alinous::remote::socket::ISocketConnection>>;
+template class alinous::ArrayObject<alinous::IArrayObject<alinous::ArrayObject<::alinous::remote::socket::ISocketConnection>>>;
+template class alinous::ArrayObject<alinous::ArrayObject<alinous::ArrayObject<::alinous::remote::socket::ISocketConnection>>>;

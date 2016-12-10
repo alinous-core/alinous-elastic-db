@@ -6,6 +6,9 @@ class OneSource;
 namespace alinous {namespace system {namespace config {namespace remote {
 class RegionsRef;}}}}
 
+namespace alinous {namespace system {namespace config {namespace remote {
+class MonitorRef;}}}}
+
 namespace alinous {namespace system {namespace config {
 class IAlinousConfigElement;}}}
 
@@ -22,6 +25,7 @@ namespace alinous {namespace system {namespace config {
 using namespace ::alinous;
 using namespace ::java::lang;
 using ::java::util::Iterator;
+using ::alinous::system::config::remote::MonitorRef;
 using ::alinous::system::config::remote::RegionsRef;
 
 
@@ -30,7 +34,7 @@ class AlinousDbInstanceInfo final : public IAlinousConfigElement, public virtual
 public:
 	AlinousDbInstanceInfo(const AlinousDbInstanceInfo& base) = default;
 public:
-	AlinousDbInstanceInfo(ThreadContext* ctx) throw()  : IObject(ctx), IAlinousConfigElement(ctx), id(nullptr), dataDir(nullptr), trxTmpDir(nullptr), maxConnections(16), regionsRef(nullptr)
+	AlinousDbInstanceInfo(ThreadContext* ctx) throw()  : IObject(ctx), IAlinousConfigElement(ctx), id(nullptr), dataDir(nullptr), trxTmpDir(nullptr), maxConnections(16), regionsRef(nullptr), monitorRef(nullptr)
 	{
 	}
 	void __construct_impl(ThreadContext* ctx) throw() 
@@ -44,6 +48,7 @@ private:
 	String* trxTmpDir;
 	int maxConnections;
 	RegionsRef* regionsRef;
+	MonitorRef* monitorRef;
 public:
 	String* getId(ThreadContext* ctx) throw() ;
 	void setId(String* id, ThreadContext* ctx) throw() ;
@@ -55,6 +60,8 @@ public:
 	void setMaxConnections(int maxConnections, ThreadContext* ctx) throw() ;
 	RegionsRef* getRegionsRef(ThreadContext* ctx) throw() ;
 	void setRegionsRef(RegionsRef* regionsRef, ThreadContext* ctx) throw() ;
+	MonitorRef* getMonitorRef(ThreadContext* ctx) throw() ;
+	void setMonitorRef(MonitorRef* monitorRef, ThreadContext* ctx) throw() ;
 public:
 	static bool __init_done;
 	static bool __init_static_variables();

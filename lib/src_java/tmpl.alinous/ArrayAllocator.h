@@ -133,3 +133,4 @@ template class alinous::ArrayAllocator<::alinous::runtime::parallel::AlinousThre
 template class alinous::ArrayAllocator<::alinous::btree::scan::INodeIterator>;
 template class alinous::ArrayAllocator<::alinous::lock::ConcurrentGate>;
 template class alinous::ArrayAllocator<::alinous::web::htmlxml::module::AbstractSerializedHtmlPart>;
+template class alinous::ArrayAllocator<::alinous::remote::socket::ISocketConnection>;

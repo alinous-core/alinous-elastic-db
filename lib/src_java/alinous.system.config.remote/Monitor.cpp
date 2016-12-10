@@ -42,16 +42,40 @@ void Monitor::setPort(String* port, ThreadContext* ctx) throw()
 {
 	__GC_MV(this, &(this->port), port, String);
 }
+int Monitor::getMaxConnection(ThreadContext* ctx) throw() 
+{
+	return maxConnection;
+}
+void Monitor::setMaxConnection(int maxConnection, ThreadContext* ctx) throw() 
+{
+	this->maxConnection = maxConnection;
+}
 Monitor* Monitor::parseInstance(MatchCandidate* candidate, DomDocument* document, Matcher* matcher, ThreadContext* ctx)
 {
 	Monitor* ref = (new(ctx) Monitor(ctx));
 	DomNode* selfDom = candidate->getCandidateDom(ctx);
-	IVariableValue* attr = selfDom->getAttributeValue(ConstStr::getCNST_STR_1205(), ctx);
+	IVariableValue* attr = selfDom->getAttributeValue(ConstStr::getCNST_STR_1206(), ctx);
 	if(attr == nullptr)
 	{
-		throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_1215(), ctx));
+		throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_1216(), ctx));
 	}
 	ref->setPort(attr->toString(ctx)->trim(ctx), ctx);
+	attr = selfDom->getAttributeValue(ConstStr::getCNST_STR_1217(), ctx);
+	if(attr != nullptr)
+	{
+		String* str = attr->toString(ctx)->trim(ctx);
+		{
+			try
+			{
+				int cons = Integer::parseInt(str, ctx);
+				ref->setMaxConnection(cons, ctx);
+			}
+			catch(Throwable* e)
+			{
+				throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_1218(), ctx));
+			}
+		}
+	}
 	return ref;
 }
 }}}}

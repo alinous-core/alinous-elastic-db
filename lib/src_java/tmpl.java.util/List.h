@@ -24,6 +24,7 @@ template class ::java::util::List<::alinous::btree::scan::INodeIterator>;
 template class ::java::util::List<::alinous::lock::ConcurrentGate>;
 template class ::java::util::List<::alinous::html::DomNode>;
 template class ::java::util::List<::alinous::web::htmlxml::module::AbstractSerializedHtmlPart>;
+template class ::java::util::List<::alinous::remote::socket::ISocketConnection>;
 template class ::java::util::List<::com::google::re2j::Regexp>;
 template class ::java::util::List<::alinous::compile::IncludePreprocessor>;
 template class ::java::util::List<::alinous::compile::declare::IDeclare>;

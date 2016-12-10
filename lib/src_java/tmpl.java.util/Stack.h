@@ -11,3 +11,4 @@ template class ::java::util::Stack<::alinous::btree::scan::INodeIterator>;
 template class ::java::util::Stack<::alinous::lock::ConcurrentGate>;
 template class ::java::util::Stack<::alinous::html::DomNode>;
 template class ::java::util::Stack<::alinous::web::htmlxml::module::AbstractSerializedHtmlPart>;
+template class ::java::util::Stack<::alinous::remote::socket::ISocketConnection>;

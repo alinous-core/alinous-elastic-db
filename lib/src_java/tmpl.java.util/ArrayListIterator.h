@@ -11,6 +11,7 @@ template class ::java::util::ArrayListIterator<::alinous::btree::scan::INodeIter
 template class ::java::util::ArrayListIterator<::alinous::lock::ConcurrentGate>;
 template class ::java::util::ArrayListIterator<::alinous::html::DomNode>;
 template class ::java::util::ArrayListIterator<::alinous::web::htmlxml::module::AbstractSerializedHtmlPart>;
+template class ::java::util::ArrayListIterator<::alinous::remote::socket::ISocketConnection>;
 template class ::java::util::ArrayListIterator<::com::google::re2j::Regexp>;
 template class ::java::util::ArrayListIterator<::com::google::re2j::Machine::LogicalThread>;
 template class ::java::util::ArrayListIterator<::com::google::re2j::Inst>;

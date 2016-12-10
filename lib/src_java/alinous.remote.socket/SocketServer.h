@@ -7,7 +7,7 @@ namespace alinous {namespace system {
 class ISystemLog;}}
 
 namespace alinous {namespace remote {namespace socket {
-class SocketActionFactory;}}}
+class ISocketActionFactory;}}}
 
 namespace alinous {namespace runtime {namespace parallel {
 class ThreadPool;}}}
@@ -17,6 +17,15 @@ class Thread;}}
 
 namespace java {namespace lang {
 class InterruptedException;}}
+
+namespace alinous {namespace net {
+class AlinousSocket;}}
+
+namespace alinous {namespace remote {namespace monitor {namespace command {
+class TerminateCommand;}}}}
+
+namespace java {namespace io {
+class IOException;}}
 
 namespace alinous {namespace net {
 class AlinousServerSocket;}}
@@ -32,9 +41,6 @@ class AlinousThread;}}}
 
 namespace alinous {namespace runtime {namespace parallel {
 class IThreadAction;}}}
-
-namespace java {namespace io {
-class IOException;}}
 
 namespace alinous {namespace lock {
 class LockObject;}}
@@ -59,6 +65,8 @@ using ::java::io::IOException;
 using ::java::net::Socket;
 using ::alinous::lock::LockObject;
 using ::alinous::net::AlinousServerSocket;
+using ::alinous::net::AlinousSocket;
+using ::alinous::remote::monitor::command::TerminateCommand;
 using ::alinous::runtime::parallel::AlinousThread;
 using ::alinous::runtime::parallel::IThreadAction;
 using ::alinous::runtime::parallel::ThreadPool;
@@ -70,8 +78,8 @@ class SocketServer final : public Runnable, public virtual IObject {
 public:
 	SocketServer(const SocketServer& base) = default;
 public:
-	SocketServer(int port, ISystemLog* logger, SocketActionFactory* factory, ThreadContext* ctx) throw() ;
-	void __construct_impl(int port, ISystemLog* logger, SocketActionFactory* factory, ThreadContext* ctx) throw() ;
+	SocketServer(int port, ISystemLog* logger, ISocketActionFactory* factory, ThreadContext* ctx) throw() ;
+	void __construct_impl(int port, ISystemLog* logger, ISocketActionFactory* factory, ThreadContext* ctx) throw() ;
 	virtual ~SocketServer() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 private:
@@ -81,7 +89,7 @@ private:
 	Thread* thread;
 	bool running;
 	ISystemLog* logger;
-	SocketActionFactory* factory;
+	ISocketActionFactory* factory;
 	LockObject* refLock;
 	int refs;
 public:

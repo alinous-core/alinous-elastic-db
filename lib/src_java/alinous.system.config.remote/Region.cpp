@@ -68,16 +68,16 @@ Region* Region::parseInstance(DomNode* dom, DomDocument* document, Matcher* matc
 	IVariableValue* attr = dom->getAttributeValue(ConstStr::getCNST_STR_1061(), ctx);
 	if(attr == nullptr)
 	{
-		throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_1222(), ctx));
+		throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_1226(), ctx));
 	}
 	reg->setName(attr->toString(ctx)->trim(ctx), ctx);
-	attr = dom->getAttributeValue(ConstStr::getCNST_STR_1205(), ctx);
+	attr = dom->getAttributeValue(ConstStr::getCNST_STR_1206(), ctx);
 	if(attr == nullptr)
 	{
-		throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_1223(), ctx));
+		throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_1227(), ctx));
 	}
 	reg->setPort(attr->toString(ctx)->trim(ctx), ctx);
-	MatchCandidatesCollection* result = matcher->match(document, dom, ConstStr::getCNST_STR_1221(), ctx);
+	MatchCandidatesCollection* result = matcher->match(document, dom, ConstStr::getCNST_STR_1225(), ctx);
 	ArrayList<MatchCandidate>* list = result->getCandidatesList(ctx);
 	if(!list->isEmpty(ctx))
 	{

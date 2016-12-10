@@ -1,7 +1,7 @@
 #ifndef ALINOUS_HTTP_CLIENT_HTTPCLIENT_H_
 #define ALINOUS_HTTP_CLIENT_HTTPCLIENT_H_
-namespace java {namespace net {
-class Socket;}}
+namespace alinous {namespace net {
+class AlinousSocket;}}
 
 namespace alinous {namespace http {namespace client {
 class HttpRequestHeaders;}}}
@@ -54,8 +54,8 @@ using ::java::io::IOException;
 using ::java::io::InputStream;
 using ::java::io::OutputStream;
 using ::java::io::OutputStreamWriter;
-using ::java::net::Socket;
 using ::java::util::HashMap;
+using ::alinous::net::AlinousSocket;
 using ::alinous::net::UnknownHostException;
 using ::alinous::system::AlinousException;
 
@@ -70,7 +70,7 @@ public:
 	virtual ~HttpClient() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 public:
-	Socket* socket;
+	AlinousSocket* socket;
 	HashMap<String,String>* responseHeader;
 	int chunkSize;
 	IArrayObjectPrimitive<char>* buf;

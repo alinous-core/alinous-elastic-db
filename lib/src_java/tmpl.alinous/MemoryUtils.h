@@ -1005,3 +1005,10 @@ template class alinous::MemoryUtils<alinous::ArrayObject<alinous::IArrayObject<:
 template class alinous::MemoryUtils<alinous::ArrayObject<::alinous::web::htmlxml::module::AbstractSerializedHtmlPart>>;
 template class alinous::MemoryUtils<alinous::IArrayObject<alinous::ArrayObject<::alinous::web::htmlxml::module::AbstractSerializedHtmlPart>>>;
 template class alinous::MemoryUtils<alinous::ArrayObject<alinous::ArrayObject<::alinous::web::htmlxml::module::AbstractSerializedHtmlPart>>>;
+template class alinous::MemoryUtils<::alinous::remote::socket::ISocketConnection>;
+template class alinous::MemoryUtils<alinous::IArrayObject<::alinous::remote::socket::ISocketConnection>>;
+template class alinous::MemoryUtils<alinous::IArrayObject<alinous::IArrayObject<::alinous::remote::socket::ISocketConnection>>>;
+template class alinous::MemoryUtils<alinous::ArrayObject<alinous::IArrayObject<::alinous::remote::socket::ISocketConnection>>>;
+template class alinous::MemoryUtils<alinous::ArrayObject<::alinous::remote::socket::ISocketConnection>>;
+template class alinous::MemoryUtils<alinous::IArrayObject<alinous::ArrayObject<::alinous::remote::socket::ISocketConnection>>>;
+template class alinous::MemoryUtils<alinous::ArrayObject<alinous::ArrayObject<::alinous::remote::socket::ISocketConnection>>>;

@@ -1,5 +1,5 @@
-#ifndef ALINOUS_REMOTE_MONITOR_ABSTRACTMONITORCOMMAND_H_
-#define ALINOUS_REMOTE_MONITOR_ABSTRACTMONITORCOMMAND_H_
+#ifndef ALINOUS_REMOTE_MONITOR_COMMAND_ABSTRACTMONITORCOMMAND_H_
+#define ALINOUS_REMOTE_MONITOR_COMMAND_ABSTRACTMONITORCOMMAND_H_
 namespace java {namespace lang {
 class IObject;
 }}
@@ -8,7 +8,7 @@ namespace alinous {
 class ThreadContext;
 }
 
-namespace alinous {namespace remote {namespace monitor {
+namespace alinous {namespace remote {namespace monitor {namespace command {
 
 using namespace ::alinous;
 using namespace ::java::lang;
@@ -44,6 +44,6 @@ public:
 	}
 };
 
-}}}
+}}}}
 
-#endif /* end of ALINOUS_REMOTE_MONITOR_ABSTRACTMONITORCOMMAND_H_ */
+#endif /* end of ALINOUS_REMOTE_MONITOR_COMMAND_ABSTRACTMONITORCOMMAND_H_ */

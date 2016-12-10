@@ -18,7 +18,7 @@ bool MonitorResponseActionFactory::__init_static_variables(){
 	delete ctx;
 	return true;
 }
- MonitorResponseActionFactory::MonitorResponseActionFactory(TransactionMonitorServer* monitorServer, ThreadContext* ctx) throw()  : IObject(ctx), SocketActionFactory(ctx), monitorServer(nullptr)
+ MonitorResponseActionFactory::MonitorResponseActionFactory(TransactionMonitorServer* monitorServer, ThreadContext* ctx) throw()  : IObject(ctx), ISocketActionFactory(ctx), monitorServer(nullptr)
 {
 	__GC_MV(this, &(this->monitorServer), monitorServer, TransactionMonitorServer);
 }

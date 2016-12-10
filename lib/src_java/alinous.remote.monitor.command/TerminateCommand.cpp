@@ -1,7 +1,7 @@
 #include "includes.h"
 
 
-namespace alinous {namespace remote {namespace monitor {
+namespace alinous {namespace remote {namespace monitor {namespace command {
 
 
 
@@ -40,5 +40,14 @@ void TerminateCommand::__releaseRegerences(bool prepare, ThreadContext* ctx) thr
 	}
 	AbstractMonitorCommand::__releaseRegerences(true, ctx);
 }
-}}}
+void TerminateCommand::sendCommand(AlinousSocket* socket, ThreadContext* ctx)
+{
+	OutputStream* out = socket->getOutputStream(ctx);
+	toByteStream(out, ctx);
+	out->flush(ctx);
+}
+void TerminateCommand::toByteStream(OutputStream* out, ThreadContext* ctx) throw() 
+{
+}
+}}}}
 

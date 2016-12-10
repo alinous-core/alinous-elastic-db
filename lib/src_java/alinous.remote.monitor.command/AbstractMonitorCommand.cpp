@@ -1,7 +1,7 @@
 #include "includes.h"
 
 
-namespace alinous {namespace remote {namespace monitor {
+namespace alinous {namespace remote {namespace monitor {namespace command {
 
 
 
@@ -39,5 +39,5 @@ int AbstractMonitorCommand::getType(ThreadContext* ctx) throw()
 {
 	return type;
 }
-}}}
+}}}}
 

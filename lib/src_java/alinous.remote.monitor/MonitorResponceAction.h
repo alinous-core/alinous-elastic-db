@@ -24,8 +24,8 @@ class BufferedOutputStream;}}
 namespace java {namespace lang {
 class Throwable;}}
 
-namespace alinous {namespace remote {namespace monitor {
-class AbstractMonitorCommand;}}}
+namespace alinous {namespace remote {namespace monitor {namespace command {
+class AbstractMonitorCommand;}}}}
 
 namespace alinous {namespace system {
 class AlinousException;}}
@@ -51,6 +51,7 @@ using ::java::io::BufferedOutputStream;
 using ::java::io::InputStream;
 using ::java::io::OutputStream;
 using ::java::net::Socket;
+using ::alinous::remote::monitor::command::AbstractMonitorCommand;
 using ::alinous::remote::socket::SocketServer;
 using ::alinous::runtime::parallel::IThreadAction;
 using ::alinous::system::AlinousException;

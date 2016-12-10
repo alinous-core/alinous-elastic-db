@@ -16,7 +16,7 @@ namespace alinous {namespace remote {namespace monitor {
 class MonitorResponceAction;}}}
 
 namespace alinous {namespace remote {namespace socket {
-class SocketActionFactory;}}}
+class ISocketActionFactory;}}}
 
 namespace java {namespace lang {
 class IObject;
@@ -32,13 +32,13 @@ using namespace ::alinous;
 using namespace ::java::lang;
 using ::java::util::Iterator;
 using ::java::net::Socket;
-using ::alinous::remote::socket::SocketActionFactory;
+using ::alinous::remote::socket::ISocketActionFactory;
 using ::alinous::remote::socket::SocketServer;
 using ::alinous::runtime::parallel::IThreadAction;
 
 
 
-class MonitorResponseActionFactory final : public SocketActionFactory, public virtual IObject {
+class MonitorResponseActionFactory final : public ISocketActionFactory, public virtual IObject {
 public:
 	MonitorResponseActionFactory(const MonitorResponseActionFactory& base) = default;
 public:

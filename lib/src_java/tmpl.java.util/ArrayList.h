@@ -110,3 +110,4 @@ template class ::java::util::ArrayList<::alinous::runtime::parallel::AlinousThre
 template class ::java::util::ArrayList<::alinous::btree::scan::INodeIterator>;
 template class ::java::util::ArrayList<::alinous::lock::ConcurrentGate>;
 template class ::java::util::ArrayList<::alinous::web::htmlxml::module::AbstractSerializedHtmlPart>;
+template class ::java::util::ArrayList<::alinous::remote::socket::ISocketConnection>;

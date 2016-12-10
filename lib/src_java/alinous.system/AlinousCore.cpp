@@ -177,8 +177,8 @@ void AlinousCore::initDistributedParts(ThreadContext* ctx)
 				throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_1179()->clone(ctx)->append(monitorConf->getPort(ctx), ctx), ctx));
 			}
 		}
-		__GC_MV(this, &(this->monitor), (new(ctx) TransactionMonitorServer(port, ctx)), TransactionMonitorServer);
-		this->monitor->start(ctx);
+		__GC_MV(this, &(this->monitor), (new(ctx) TransactionMonitorServer(port, monitorConf->getMaxConnection(ctx), ctx)), TransactionMonitorServer);
+		this->monitor->start(this->logger, ctx);
 	}
 	Nodes* nodesConf = this->config->getNodes(ctx);
 	if(nodesConf != nullptr)

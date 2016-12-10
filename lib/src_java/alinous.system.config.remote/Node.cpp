@@ -65,19 +65,19 @@ void Node::setDataDir(String* dataDir, ThreadContext* ctx) throw()
 Node* Node::parseInstance(DomNode* dom, DomDocument* document, Matcher* matcher, ThreadContext* ctx)
 {
 	Node* node = (new(ctx) Node(ctx));
-	IVariableValue* attr = dom->getAttributeValue(ConstStr::getCNST_STR_1205(), ctx);
+	IVariableValue* attr = dom->getAttributeValue(ConstStr::getCNST_STR_1206(), ctx);
 	if(attr == nullptr)
 	{
-		throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_1206(), ctx));
+		throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_1207(), ctx));
 	}
 	node->setPort(attr->toString(ctx)->trim(ctx), ctx);
-	attr = dom->getAttributeValue(ConstStr::getCNST_STR_1207(), ctx);
+	attr = dom->getAttributeValue(ConstStr::getCNST_STR_1208(), ctx);
 	if(attr == nullptr)
 	{
-		throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_1208(), ctx));
+		throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_1209(), ctx));
 	}
 	node->setDataDir(attr->toString(ctx)->trim(ctx), ctx);
-	MatchCandidatesCollection* result = matcher->match(document, dom, ConstStr::getCNST_STR_1209(), ctx);
+	MatchCandidatesCollection* result = matcher->match(document, dom, ConstStr::getCNST_STR_1210(), ctx);
 	ArrayList<MatchCandidate>* list = result->getCandidatesList(ctx);
 	if(!list->isEmpty(ctx))
 	{

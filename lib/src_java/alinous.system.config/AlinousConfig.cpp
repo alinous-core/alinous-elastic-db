@@ -238,10 +238,10 @@ void AlinousConfig::handleAlinousDbSetting(MatchCandidatesCollection* result, Do
 			throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_1200(), ctx));
 		}
 		AlinousDbInstanceInfo* dbinfo = this->alinousDb->addInstance(id, dataDir->trim(ctx), ctx);
-		handleRegionRef(dbinfo, node, document, matcher, ctx);
+		handleRemoteRef(dbinfo, node, document, matcher, ctx);
 	}
 }
-void AlinousConfig::handleRegionRef(AlinousDbInstanceInfo* dbinfo, DomNode* alinousDb, DomDocument* document, Matcher* matcher, ThreadContext* ctx)
+void AlinousConfig::handleRemoteRef(AlinousDbInstanceInfo* dbinfo, DomNode* alinousDb, DomDocument* document, Matcher* matcher, ThreadContext* ctx)
 {
 	MatchCandidatesCollection* result = nullptr;
 	ArrayList<MatchCandidate>* list = nullptr;
@@ -253,6 +253,14 @@ void AlinousConfig::handleRegionRef(AlinousDbInstanceInfo* dbinfo, DomNode* alin
 		RegionsRef* regionsRef = RegionsRef::parseInstance(candidate, document, matcher, ctx);
 		dbinfo->setRegionsRef(regionsRef, ctx);
 	}
+	result = matcher->match(document, alinousDb, ConstStr::getCNST_STR_1202(), ctx);
+	list = result->getCandidatesList(ctx);
+	if(!list->isEmpty(ctx))
+	{
+		MatchCandidate* candidate = list->get(0, ctx);
+		MonitorRef* monitorRef = MonitorRef::parseInstance(candidate, document, matcher, ctx);
+		dbinfo->setMonitorRef(monitorRef, ctx);
+	}
 }
 void AlinousConfig::handleWebSetting(MatchCandidatesCollection* result, DomDocument* document, Matcher* matcher, ThreadContext* ctx)
 {
@@ -263,7 +271,7 @@ void AlinousConfig::handleWebSetting(MatchCandidatesCollection* result, DomDocum
 	}
 	__GC_MV(this, &(this->webHandler), (new(ctx) WebHandlerInfo(this->alinousHome->toString(ctx), ctx)), WebHandlerInfo);
 	MatchCandidate* candidateWebHandler = list->get(0, ctx);
-	String* documentRoot = ConfigFileUtiles::getText(document, candidateWebHandler->getCandidateDom(ctx), matcher, ConstStr::getCNST_STR_1202(), ctx);
+	String* documentRoot = ConfigFileUtiles::getText(document, candidateWebHandler->getCandidateDom(ctx), matcher, ConstStr::getCNST_STR_1203(), ctx);
 	if(document != nullptr)
 	{
 		this->webHandler->setDocumentRoot(documentRoot, ctx);

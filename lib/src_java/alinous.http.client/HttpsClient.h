@@ -1,13 +1,13 @@
 #ifndef ALINOUS_HTTP_CLIENT_HTTPSCLIENT_H_
 #define ALINOUS_HTTP_CLIENT_HTTPSCLIENT_H_
-namespace javax {namespace net {namespace ssl {
-class SSLSocketFactory;}}}
-
 namespace alinous {namespace http {namespace client {
 class HttpClient;}}}
 
 namespace java {namespace io {
 class IOException;}}
+
+namespace alinous {namespace net {
+class AlinousSSLSocketFactory;}}
 
 namespace alinous {namespace net {
 class UnknownHostException;}}
@@ -22,7 +22,7 @@ using namespace ::alinous;
 using namespace ::java::lang;
 using ::java::util::Iterator;
 using ::java::io::IOException;
-using ::javax::net::ssl::SSLSocketFactory;
+using ::alinous::net::AlinousSSLSocketFactory;
 using ::alinous::net::UnknownHostException;
 
 

@@ -1,7 +1,7 @@
 #include "includes.h"
 
 
-namespace alinous {namespace remote {namespace monitor {
+namespace alinous {namespace remote {namespace monitor {namespace command {
 
 
 
@@ -40,5 +40,5 @@ void VoidCommand::__releaseRegerences(bool prepare, ThreadContext* ctx) throw()
 	}
 	AbstractMonitorCommand::__releaseRegerences(true, ctx);
 }
-}}}
+}}}}
 

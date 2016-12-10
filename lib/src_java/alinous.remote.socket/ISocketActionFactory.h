@@ -1,5 +1,5 @@
-#ifndef ALINOUS_REMOTE_SOCKET_SOCKETACTIONFACTORY_H_
-#define ALINOUS_REMOTE_SOCKET_SOCKETACTIONFACTORY_H_
+#ifndef ALINOUS_REMOTE_SOCKET_ISOCKETACTIONFACTORY_H_
+#define ALINOUS_REMOTE_SOCKET_ISOCKETACTIONFACTORY_H_
 namespace alinous {namespace runtime {namespace parallel {
 class IThreadAction;}}}
 
@@ -27,17 +27,17 @@ using ::alinous::runtime::parallel::IThreadAction;
 
 
 
-class SocketActionFactory : public virtual IObject {
+class ISocketActionFactory : public virtual IObject {
 public:
-	SocketActionFactory(const SocketActionFactory& base) = default;
+	ISocketActionFactory(const ISocketActionFactory& base) = default;
 public:
-	SocketActionFactory(ThreadContext* ctx) throw()  : IObject(ctx)
+	ISocketActionFactory(ThreadContext* ctx) throw()  : IObject(ctx)
 	{
 	}
 	void __construct_impl(ThreadContext* ctx) throw() 
 	{
 	}
-	virtual ~SocketActionFactory() throw();
+	virtual ~ISocketActionFactory() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 public:
 	virtual IThreadAction* getAction(Socket* socket, SocketServer* server, ThreadContext* ctx) throw()  = 0;
@@ -51,4 +51,4 @@ public:
 
 }}}
 
-#endif /* end of ALINOUS_REMOTE_SOCKET_SOCKETACTIONFACTORY_H_ */
+#endif /* end of ALINOUS_REMOTE_SOCKET_ISOCKETACTIONFACTORY_H_ */

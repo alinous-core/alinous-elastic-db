@@ -18,19 +18,19 @@ bool SocketServer::__init_static_variables(){
 	delete ctx;
 	return true;
 }
- SocketServer::SocketServer(int port, ISystemLog* logger, SocketActionFactory* factory, ThreadContext* ctx) throw()  : IObject(ctx), Runnable(ctx), port(0), serverSocket(nullptr), threadPool(nullptr), thread(nullptr), running(0), logger(nullptr), factory(nullptr), refLock(__GC_INS(this, (new(ctx) LockObject(ctx)), LockObject)), refs(0)
+ SocketServer::SocketServer(int port, ISystemLog* logger, ISocketActionFactory* factory, ThreadContext* ctx) throw()  : IObject(ctx), Runnable(ctx), port(0), serverSocket(nullptr), threadPool(nullptr), thread(nullptr), running(0), logger(nullptr), factory(nullptr), refLock(__GC_INS(this, (new(ctx) LockObject(ctx)), LockObject)), refs(0)
 {
 	this->running = false;
 	this->port = port;
 	__GC_MV(this, &(this->logger), logger, ISystemLog);
-	__GC_MV(this, &(this->factory), factory, SocketActionFactory);
+	__GC_MV(this, &(this->factory), factory, ISocketActionFactory);
 }
-void SocketServer::__construct_impl(int port, ISystemLog* logger, SocketActionFactory* factory, ThreadContext* ctx) throw() 
+void SocketServer::__construct_impl(int port, ISystemLog* logger, ISocketActionFactory* factory, ThreadContext* ctx) throw() 
 {
 	this->running = false;
 	this->port = port;
 	__GC_MV(this, &(this->logger), logger, ISystemLog);
-	__GC_MV(this, &(this->factory), factory, SocketActionFactory);
+	__GC_MV(this, &(this->factory), factory, ISocketActionFactory);
 }
  SocketServer::~SocketServer() throw() 
 {
@@ -80,6 +80,33 @@ void SocketServer::start(int maxthread, String* threadName, ThreadContext* ctx) 
 }
 void SocketServer::dispose(ThreadContext* ctx) throw() 
 {
+	this->running = false;
+	AlinousSocket* socket = (new(ctx) AlinousSocket(ConstStr::getCNST_STR_1121(), this->port, ctx));
+	{
+		try
+		{
+			socket->init(ctx);
+			TerminateCommand* cmd = (new(ctx) TerminateCommand(ctx));
+			cmd->sendCommand(socket, ctx);
+			socket->close(ctx);
+		}
+		catch(IOException* e)
+		{
+			e->printStackTrace(ctx);
+			this->logger->logError(e, ctx);
+		}
+	}
+	{
+		try
+		{
+			this->thread->join(ctx);
+		}
+		catch(InterruptedException* e)
+		{
+			e->printStackTrace(ctx);
+			this->logger->logError(e, ctx);
+		}
+	}
 }
 void SocketServer::run(ThreadContext* ctx) throw() 
 {
@@ -100,7 +127,7 @@ void SocketServer::run(ThreadContext* ctx) throw()
 					return;
 				}
 				retry ++ ;
-				System::out->println(ConstStr::getCNST_STR_3440(), ctx);
+				System::out->println(ConstStr::getCNST_STR_3444(), ctx);
 				{
 					try
 					{
@@ -115,7 +142,10 @@ void SocketServer::run(ThreadContext* ctx) throw()
 		}
 	}
 	this->running = true;
-	handleRequest(ctx);
+	while(this->running)
+	{
+		handleRequest(ctx);
+	}
 }
 void SocketServer::dec(ThreadContext* ctx) throw() 
 {

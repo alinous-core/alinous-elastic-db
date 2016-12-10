@@ -34,8 +34,7 @@ void HttpsClient::__releaseRegerences(bool prepare, ThreadContext* ctx) throw()
 }
 void HttpsClient::connect(String* host, int port, ThreadContext* ctx)
 {
-	SSLSocketFactory* ssf = static_cast<SSLSocketFactory*>(SSLSocketFactory::getDefault(ctx));
-	__GC_MV(this, &(this->socket), ssf->createSocket(host, port, ctx), Socket);
+	__GC_MV(this, &(this->socket), AlinousSSLSocketFactory::createSocket(host, port, ctx), AlinousSocket);
 }
 }}}
 
