@@ -60,8 +60,8 @@ class ReadCommittedTransaction final : public DbTransaction {
 public:
 	ReadCommittedTransaction(const ReadCommittedTransaction& base) = default;
 public:
-	ReadCommittedTransaction(DbTransactionManager* mgr, String* tmpDir, AlinousDatabase* database, ISystemLog* logger, long long trxId, ThreadContext* ctx) throw() ;
-	void __construct_impl(DbTransactionManager* mgr, String* tmpDir, AlinousDatabase* database, ISystemLog* logger, long long trxId, ThreadContext* ctx) throw() ;
+	ReadCommittedTransaction(DbTransactionManager* mgr, String* tmpDir, AlinousDatabase* database, ISystemLog* logger, long long commitId, ThreadContext* ctx) throw() ;
+	void __construct_impl(DbTransactionManager* mgr, String* tmpDir, AlinousDatabase* database, ISystemLog* logger, long long commitId, ThreadContext* ctx) throw() ;
 	virtual ~ReadCommittedTransaction() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 public:

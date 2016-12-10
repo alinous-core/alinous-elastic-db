@@ -60,8 +60,8 @@ class SerializableTransaction final : public DbTransaction {
 public:
 	SerializableTransaction(const SerializableTransaction& base) = default;
 public:
-	SerializableTransaction(DbTransactionManager* mgr, String* tmpDir, AlinousDatabase* database, ISystemLog* logger, long long trxId, ThreadContext* ctx) throw() ;
-	void __construct_impl(DbTransactionManager* mgr, String* tmpDir, AlinousDatabase* database, ISystemLog* logger, long long trxId, ThreadContext* ctx) throw() ;
+	SerializableTransaction(DbTransactionManager* mgr, String* tmpDir, AlinousDatabase* database, ISystemLog* logger, long long commitId, ThreadContext* ctx) throw() ;
+	void __construct_impl(DbTransactionManager* mgr, String* tmpDir, AlinousDatabase* database, ISystemLog* logger, long long commitId, ThreadContext* ctx) throw() ;
 	virtual ~SerializableTransaction() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 public:

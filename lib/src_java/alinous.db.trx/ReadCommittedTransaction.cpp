@@ -18,10 +18,10 @@ bool ReadCommittedTransaction::__init_static_variables(){
 	delete ctx;
 	return true;
 }
- ReadCommittedTransaction::ReadCommittedTransaction(DbTransactionManager* mgr, String* tmpDir, AlinousDatabase* database, ISystemLog* logger, long long trxId, ThreadContext* ctx) throw()  : IObject(ctx), DbTransaction(mgr, tmpDir, database, logger, trxId, ctx)
+ ReadCommittedTransaction::ReadCommittedTransaction(DbTransactionManager* mgr, String* tmpDir, AlinousDatabase* database, ISystemLog* logger, long long commitId, ThreadContext* ctx) throw()  : IObject(ctx), DbTransaction(mgr, tmpDir, database, logger, commitId, ctx)
 {
 }
-void ReadCommittedTransaction::__construct_impl(DbTransactionManager* mgr, String* tmpDir, AlinousDatabase* database, ISystemLog* logger, long long trxId, ThreadContext* ctx) throw() 
+void ReadCommittedTransaction::__construct_impl(DbTransactionManager* mgr, String* tmpDir, AlinousDatabase* database, ISystemLog* logger, long long commitId, ThreadContext* ctx) throw() 
 {
 }
  ReadCommittedTransaction::~ReadCommittedTransaction() throw() 

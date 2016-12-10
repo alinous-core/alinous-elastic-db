@@ -18,10 +18,10 @@ bool SerializableTransaction::__init_static_variables(){
 	delete ctx;
 	return true;
 }
- SerializableTransaction::SerializableTransaction(DbTransactionManager* mgr, String* tmpDir, AlinousDatabase* database, ISystemLog* logger, long long trxId, ThreadContext* ctx) throw()  : IObject(ctx), DbTransaction(mgr, tmpDir, database, logger, trxId, ctx)
+ SerializableTransaction::SerializableTransaction(DbTransactionManager* mgr, String* tmpDir, AlinousDatabase* database, ISystemLog* logger, long long commitId, ThreadContext* ctx) throw()  : IObject(ctx), DbTransaction(mgr, tmpDir, database, logger, commitId, ctx)
 {
 }
-void SerializableTransaction::__construct_impl(DbTransactionManager* mgr, String* tmpDir, AlinousDatabase* database, ISystemLog* logger, long long trxId, ThreadContext* ctx) throw() 
+void SerializableTransaction::__construct_impl(DbTransactionManager* mgr, String* tmpDir, AlinousDatabase* database, ISystemLog* logger, long long commitId, ThreadContext* ctx) throw() 
 {
 }
  SerializableTransaction::~SerializableTransaction() throw() 
