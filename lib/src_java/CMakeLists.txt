@@ -278,7 +278,6 @@ set(srcjava
 	"src_java/alinous.runtime.function/AbstractNativeFunction.cpp"
 	"src_java/alinous.compile.sql.analyze.scan/VoidScanner.cpp"
 	"src_java/alinous.compile.sql.analyze.scan/ScanListScanner.cpp"
-	"src_java/alinous.remote/RemoteTableRegionHandle.cpp"
 	"src_java/alinous.server.debug/DebugProcessor.cpp"
 	"src_java/alinous.server.debug/DebugConfigLoader.cpp"
 	"src_java/alinous.html/IReplacer.cpp"

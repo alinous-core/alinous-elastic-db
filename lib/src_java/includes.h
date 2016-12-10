@@ -770,7 +770,6 @@
 #include "alinous.server.http/HttpParamHandler.h"
 #include "alinous.server.webmodule/BinaryModuleStream.h"
 #include "alinous.server.webmodule/BinaryModule.h"
-#include "alinous.remote/RemoteTableRegionHandle.h"
 #include "alinous.remote.db/RemoteTableStorageServer.h"
 #include "alinous.remote.db/RemoteTableRegionServer.h"
 #include "alinous.remote.socket/ISocketConnection.h"
@@ -1625,7 +1624,6 @@ inline static void __cleanUpStatics(alinous::ThreadContext* ctx){
 	alinous::server::webmodule::DirectModuleStream::__cleanUp(ctx);
 	alinous::server::webmodule::DynamicWebPageModule::__cleanUp(ctx);
 	alinous::server::webmodule::WebModuleManager::__cleanUp(ctx);
-	alinous::remote::RemoteTableRegionHandle::__cleanUp(ctx);
 	alinous::remote::db::RemoteTableStorageServer::__cleanUp(ctx);
 	alinous::remote::db::RemoteTableRegionServer::__cleanUp(ctx);
 	alinous::remote::monitor::MonitorResponseActionFactory::__cleanUp(ctx);

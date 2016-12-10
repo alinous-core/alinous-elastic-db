@@ -2389,6 +2389,9 @@ public:
 	constexpr static StaticUnicodeString __CNST_STR_1776{L"Accept",6};
 public:
 	static UnicodeStringWrapper* getCNST_STR_1776() throw();
+	constexpr static StaticUnicodeString __CNST_STR_3470{L"MonitorServer",13};
+public:
+	static UnicodeStringWrapper* getCNST_STR_3470() throw();
 	constexpr static StaticUnicodeString __CNST_STR_3356{L"xenc",4};
 public:
 	static UnicodeStringWrapper* getCNST_STR_3356() throw();
@@ -3907,9 +3910,9 @@ public:
 	constexpr static StaticUnicodeString __CNST_STR_850{L"Asia/Jayapura",13};
 public:
 	static UnicodeStringWrapper* getCNST_STR_850() throw();
-	constexpr static StaticUnicodeString __CNST_STR_3470{L"Command is wrong format.",24};
+	constexpr static StaticUnicodeString __CNST_STR_3471{L"Command is wrong format.",24};
 public:
-	static UnicodeStringWrapper* getCNST_STR_3470() throw();
+	static UnicodeStringWrapper* getCNST_STR_3471() throw();
 	constexpr static StaticUnicodeString __CNST_STR_244{L"Lycian",6};
 public:
 	static UnicodeStringWrapper* getCNST_STR_244() throw();
@@ -6112,9 +6115,9 @@ public:
 	constexpr static StaticUnicodeString __CNST_STR_2530{L"image/vnd.ms-modi",17};
 public:
 	static UnicodeStringWrapper* getCNST_STR_2530() throw();
-	constexpr static StaticUnicodeString __CNST_STR_3471{L"Wrong Command Type of Monitor Command.",38};
+	constexpr static StaticUnicodeString __CNST_STR_3472{L"Wrong Command Type of Monitor Command.",38};
 public:
-	static UnicodeStringWrapper* getCNST_STR_3471() throw();
+	static UnicodeStringWrapper* getCNST_STR_3472() throw();
 	constexpr static StaticUnicodeString __CNST_STR_2175{L"etx",3};
 public:
 	static UnicodeStringWrapper* getCNST_STR_2175() throw();

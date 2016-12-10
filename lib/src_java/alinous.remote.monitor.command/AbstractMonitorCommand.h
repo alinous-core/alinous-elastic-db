@@ -49,7 +49,7 @@ public:
 public:
 	constexpr static const int TYPE_VOID{0};
 	constexpr static const int TYPE_FINISH{1};
-	constexpr static const int TYPE_TERMINATE{2};
+	constexpr static const int TYPE_TERMINATE{404};
 public:
 	int getType(ThreadContext* ctx) throw() ;
 	void sendCommand(AlinousSocket* socket, ThreadContext* ctx);
