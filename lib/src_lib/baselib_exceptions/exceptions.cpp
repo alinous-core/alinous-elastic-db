@@ -113,3 +113,11 @@ UnsupportedCharsetException::UnsupportedCharsetException(UnicodeString* message,
 UnsupportedCharsetException::UnsupportedCharsetException(UnicodeString* message, Throwable* cause, ThreadContext* ctx) : IObject(ctx),Throwable(message, cause, ctx) {}
 }}}
 
+namespace java { namespace net {
+UnknownHostException::UnknownHostException(ThreadContext* ctx) : IObject(ctx),Throwable(ctx) {}
+UnknownHostException::UnknownHostException(UnicodeString* message, ThreadContext* ctx) : IObject(ctx),Throwable(message, ctx) {}
+UnknownHostException::UnknownHostException(UnicodeString* message, Throwable* cause, ThreadContext* ctx) : IObject(ctx),Throwable(message, cause, ctx) {}
+
+}}
+
+

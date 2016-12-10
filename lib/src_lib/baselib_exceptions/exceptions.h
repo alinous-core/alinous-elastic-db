@@ -211,7 +211,17 @@ public:
 	virtual ~UnsupportedCharsetException() throw() {}
 };
 
-
 }}}
 
+namespace java { namespace net {
+using namespace java::lang;
 
+class UnknownHostException : public Throwable {
+public:
+	UnknownHostException(ThreadContext* ctx);
+	UnknownHostException(UnicodeString* message, ThreadContext* ctx);
+	UnknownHostException(UnicodeString* message, Throwable* cause, ThreadContext* ctx);
+	virtual ~UnknownHostException() throw() {}
+};
+
+}}
