@@ -12,6 +12,7 @@ This software is open source (MIT License) so that we can use it on any cloud se
 
 - [Alinous Elastic DB Official Site](http://alinousdb.com/)
 - [@alinousdb](https://twitter.com/alinousdb/)
+- [@alinous_core (Author of Alinous Elastic DB)](https://twitter.com/alinous_core/)
 
 ## Development status
 Currently on development. Reporting the progress on twitter account [@alinous_core](https://twitter.com/alinous_core).
