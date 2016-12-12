@@ -345,6 +345,7 @@
 #include "alinous.remote.db/RemoteTableStorageServer.h"
 #include "alinous.remote.monitor.command/FinishConnectionCommand.h"
 #include "alinous.remote.monitor.command/VoidCommand.h"
+#include "alinous.remote.monitor.command/MonitorConnectCommand.h"
 #include "alinous.remote.monitor.command/MinitorCommandReader.h"
 #include "alinous.remote.monitor/MonitorResponceAction.h"
 #include "alinous.remote.monitor/MonitorResponseActionFactory.h"
@@ -627,6 +628,13 @@
 #include "alinous.db.trx/DbTransactionManager.h"
 #include "alinous.db.trx/TrxLockManager.h"
 #include "alinous.db/ICommidIdPublisher.h"
+#include "alinous.remote.socket/ISocketConnection.h"
+#include "alinous.remote.socket/ISocketConnectionFactory.h"
+#include "alinous.remote.socket/SocketConnectionPool.h"
+#include "alinous.remote.monitor.client/MonitorConnectionInfo.h"
+#include "alinous.remote.monitor.client/MonitorConnection.h"
+#include "alinous.remote.monitor.client/MonitorClientConnectionFactory.h"
+#include "alinous.remote.monitor.client/RemoteCommitIdPublisher.h"
 #include "alinous.db/LocalCommitIdPublisher.h"
 #include "alinous.db/AlinousDatabase.h"
 #include "alinous.db.table.scan/UpdateHistoryValuesIterator.h"
@@ -788,12 +796,6 @@
 #include "alinous.server.webmodule/BinaryModuleStream.h"
 #include "alinous.server.webmodule/BinaryModule.h"
 #include "alinous.remote.db.client/RemoteTableStorageClient.h"
-#include "alinous.remote.socket/ISocketConnection.h"
-#include "alinous.remote.socket/SocketConnectionPool.h"
-#include "alinous.remote.socket/ISocketConnectionFactory.h"
-#include "alinous.remote.monitor.client/MonitorConnectionInfo.h"
-#include "alinous.remote.monitor.client/MonitorConnection.h"
-#include "alinous.remote.monitor.client/MonitorClientConnectionFactory.h"
 #include "alinous.remote.region.client/StorageNodeRegionClient.h"
 
 
@@ -1654,10 +1656,12 @@ inline static void __cleanUpStatics(alinous::ThreadContext* ctx){
 	alinous::remote::monitor::TransactionMonitorServer::__cleanUp(ctx);
 	alinous::remote::monitor::MonitorResponceAction::__cleanUp(ctx);
 	alinous::remote::monitor::client::MonitorClientConnectionFactory::__cleanUp(ctx);
+	alinous::remote::monitor::client::RemoteCommitIdPublisher::__cleanUp(ctx);
 	alinous::remote::monitor::client::MonitorConnectionInfo::__cleanUp(ctx);
 	alinous::remote::monitor::client::MonitorConnection::__cleanUp(ctx);
 	alinous::remote::monitor::command::TerminateCommand::__cleanUp(ctx);
 	alinous::remote::monitor::command::MinitorCommandReader::__cleanUp(ctx);
+	alinous::remote::monitor::command::MonitorConnectCommand::__cleanUp(ctx);
 	alinous::remote::monitor::command::FinishConnectionCommand::__cleanUp(ctx);
 	alinous::remote::monitor::command::AbstractMonitorCommand::__cleanUp(ctx);
 	alinous::remote::monitor::command::VoidCommand::__cleanUp(ctx);

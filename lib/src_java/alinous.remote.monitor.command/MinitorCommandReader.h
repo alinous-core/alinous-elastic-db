@@ -15,6 +15,9 @@ class TerminateCommand;}}}}
 namespace alinous {namespace remote {namespace monitor {namespace command {
 class VoidCommand;}}}}
 
+namespace alinous {namespace remote {namespace monitor {namespace command {
+class MonitorConnectCommand;}}}}
+
 namespace alinous {namespace system {
 class AlinousException;}}
 

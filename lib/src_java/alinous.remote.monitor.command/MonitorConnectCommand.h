@@ -1,13 +1,10 @@
-#ifndef ALINOUS_REMOTE_MONITOR_COMMAND_FINISHCONNECTIONCOMMAND_H_
-#define ALINOUS_REMOTE_MONITOR_COMMAND_FINISHCONNECTIONCOMMAND_H_
-namespace java {namespace io {
-class InputStream;}}
-
+#ifndef ALINOUS_REMOTE_MONITOR_COMMAND_MONITORCONNECTCOMMAND_H_
+#define ALINOUS_REMOTE_MONITOR_COMMAND_MONITORCONNECTCOMMAND_H_
 namespace java {namespace io {
 class OutputStream;}}
 
-namespace java {namespace nio {
-class ByteBuffer;}}
+namespace java {namespace io {
+class InputStream;}}
 
 namespace alinous {namespace remote {namespace monitor {namespace command {
 class AbstractMonitorCommand;}}}}
@@ -31,17 +28,16 @@ using ::java::io::BufferedOutputStream;
 using ::java::io::IOException;
 using ::java::io::InputStream;
 using ::java::io::OutputStream;
-using ::java::nio::ByteBuffer;
 
 
 
-class FinishConnectionCommand final : public AbstractMonitorCommand {
+class MonitorConnectCommand final : public AbstractMonitorCommand {
 public:
-	FinishConnectionCommand(const FinishConnectionCommand& base) = default;
+	MonitorConnectCommand(const MonitorConnectCommand& base) = default;
 public:
-	FinishConnectionCommand(ThreadContext* ctx) throw() ;
+	MonitorConnectCommand(ThreadContext* ctx) throw() ;
 	void __construct_impl(ThreadContext* ctx) throw() ;
-	virtual ~FinishConnectionCommand() throw();
+	virtual ~MonitorConnectCommand() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 public:
 	void readFromStream(InputStream* stream, ThreadContext* ctx) final;
@@ -57,4 +53,4 @@ public:
 
 }}}}
 
-#endif /* end of ALINOUS_REMOTE_MONITOR_COMMAND_FINISHCONNECTIONCOMMAND_H_ */
+#endif /* end of ALINOUS_REMOTE_MONITOR_COMMAND_MONITORCONNECTCOMMAND_H_ */

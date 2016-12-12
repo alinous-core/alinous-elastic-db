@@ -45,6 +45,15 @@ class BTreeException;}}
 namespace alinous {namespace db {namespace trx {
 class TrxLockContext;}}}
 
+namespace alinous {namespace system {namespace config {
+class AlinousDbInstanceInfo;}}}
+
+namespace alinous {namespace system {namespace config {namespace remote {
+class MonitorRef;}}}}
+
+namespace alinous {namespace remote {namespace monitor {namespace client {
+class RemoteCommitIdPublisher;}}}}
+
 namespace alinous {namespace db {
 class SchemaManager;}}
 
@@ -139,12 +148,15 @@ using ::alinous::db::trx::DbTransactionManager;
 using ::alinous::db::trx::TrxLockContext;
 using ::alinous::db::trx::TrxLockManager;
 using ::alinous::lock::LockObject;
+using ::alinous::remote::monitor::client::RemoteCommitIdPublisher;
 using ::alinous::runtime::dom::VariableException;
 using ::alinous::runtime::parallel::AlinousThread;
 using ::alinous::runtime::parallel::LaunchJoin;
 using ::alinous::runtime::parallel::ThreadPool;
 using ::alinous::system::AlinousCore;
 using ::alinous::system::AlinousException;
+using ::alinous::system::config::AlinousDbInstanceInfo;
+using ::alinous::system::config::remote::MonitorRef;
 using ::alinous::system::utils::FileUtils;
 
 
@@ -161,7 +173,7 @@ public:
 	LockObject* instanceConfigLock;
 	DbTransactionManager* trxManager;
 	TrxLockManager* trxLockManager;
-	ICommidIdPublisher* localCommitId;
+	ICommidIdPublisher* commitIdPublisher;
 	ThreadPool* workerThreadsPool;
 private:
 	AlinousCore* core;
@@ -182,7 +194,7 @@ public:
 public:
 	void construct(AlinousCore* core, String* dataDir, String* trxTmpDir, int maxConnection, ThreadContext* ctx);
 	TrxLockContext* newLockContext(ThreadContext* ctx) throw() ;
-	void initInstance(ThreadContext* ctx);
+	void initInstance(AlinousDbInstanceInfo* instanceConfig, ThreadContext* ctx);
 	long long getCommitId(ThreadContext* ctx) throw() ;
 	long long newCommitId(ThreadContext* ctx);
 	void syncScheme(ThreadContext* ctx);

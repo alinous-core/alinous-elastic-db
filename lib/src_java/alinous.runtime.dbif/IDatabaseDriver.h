@@ -6,6 +6,9 @@ class OneSource;
 namespace alinous {namespace system {
 class AlinousCore;}}
 
+namespace alinous {namespace system {namespace config {
+class AlinousDbInstanceInfo;}}}
+
 namespace alinous {namespace runtime {namespace dbif {
 class IDatabaseConnection;}}}
 
@@ -75,6 +78,7 @@ using ::alinous::db::table::DatabaseException;
 using ::alinous::runtime::engine::ScriptMachine;
 using ::alinous::system::AlinousCore;
 using ::alinous::system::AlinousException;
+using ::alinous::system::config::AlinousDbInstanceInfo;
 
 
 
@@ -98,7 +102,7 @@ public:
 public:
 	virtual IObject* getDatabase(ThreadContext* ctx) throw()  = 0;
 	virtual int getDefaultAcid(ThreadContext* ctx) throw()  = 0;
-	virtual void initDriver(AlinousCore* core, ThreadContext* ctx) = 0;
+	virtual void initDriver(AlinousCore* core, AlinousDbInstanceInfo* instanceConfig, ThreadContext* ctx) = 0;
 	virtual void dispose(ThreadContext* ctx) throw()  = 0;
 	virtual void createInstance(String* instanceName, ThreadContext* ctx) throw()  = 0;
 	virtual void dropInstance(String* instanceName, ThreadContext* ctx) throw()  = 0;

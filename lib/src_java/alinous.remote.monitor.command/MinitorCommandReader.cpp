@@ -45,8 +45,11 @@ AbstractMonitorCommand* MinitorCommandReader::readFromStream(InputStream* stream
 	case AbstractMonitorCommand::TYPE_VOID:
 		cmd = (new(ctx) VoidCommand(ctx));
 		break ;
+	case AbstractMonitorCommand::TYPE_CONNECT:
+		cmd = (new(ctx) MonitorConnectCommand(ctx));
+		break ;
 	default:
-		throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3477(), ctx));
+		throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3479(), ctx));
 		break;
 	}
 	cmd->readFromStream(stream, ctx);

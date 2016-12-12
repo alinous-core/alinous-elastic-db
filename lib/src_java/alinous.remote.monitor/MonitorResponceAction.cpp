@@ -90,12 +90,19 @@ void MonitorResponceAction::handleCommand(BufferedInputStream* stream, BufferedO
 		case AbstractMonitorCommand::TYPE_TERMINATE:
 			loop = false;
 			break ;
+		case AbstractMonitorCommand::TYPE_CONNECT:
+			handleCommand(cmd, outStream, ctx);
+			break ;
 		case AbstractMonitorCommand::TYPE_VOID:
+			break ;
 		default:
 			loop = false;
 			break ;
 		}
 	}
+}
+void MonitorResponceAction::handleCommand(AbstractMonitorCommand* cmd, BufferedOutputStream* outStream, ThreadContext* ctx) throw() 
+{
 }
 AbstractMonitorCommand* MonitorResponceAction::parseCommand(BufferedInputStream* stream, ThreadContext* ctx)
 {

@@ -50,7 +50,7 @@ int AlinousDatabaseHandler::getDefaultAcid(ThreadContext* ctx) throw()
 {
 	return this->defaultAcid;
 }
-void AlinousDatabaseHandler::initDriver(AlinousCore* core, ThreadContext* ctx)
+void AlinousDatabaseHandler::initDriver(AlinousCore* core, AlinousDbInstanceInfo* instanceConfig, ThreadContext* ctx)
 {
 	String* dataDir = this->instanceConfig->getDataDir(ctx);
 	String* trxTmpDir = this->instanceConfig->getTrxTmpDir(ctx);
@@ -63,7 +63,7 @@ void AlinousDatabaseHandler::initDriver(AlinousCore* core, ThreadContext* ctx)
 	this->database->construct(core, dataDir, trxTmpDir, maxConnection, ctx);
 	if(!this->database->exists(ctx))
 	{
-		this->database->initInstance(ctx);
+		this->database->initInstance(instanceConfig, ctx);
 	}
 	this->database->open(ctx);
 }

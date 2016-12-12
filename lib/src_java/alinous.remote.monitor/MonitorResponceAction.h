@@ -78,6 +78,7 @@ public:
 	void execute(ThreadContext* ctx) final;
 private:
 	void handleCommand(BufferedInputStream* stream, BufferedOutputStream* outStream, ThreadContext* ctx);
+	void handleCommand(AbstractMonitorCommand* cmd, BufferedOutputStream* outStream, ThreadContext* ctx) throw() ;
 	AbstractMonitorCommand* parseCommand(BufferedInputStream* stream, ThreadContext* ctx);
 public:
 	static bool __init_done;

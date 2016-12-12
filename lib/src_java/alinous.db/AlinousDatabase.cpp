@@ -21,17 +21,17 @@ bool AlinousDatabase::__init_static_variables(){
 	delete ctx;
 	return true;
 }
- AlinousDatabase::AlinousDatabase(ThreadContext* ctx) throw()  : IObject(ctx), instanceConfigLock(__GC_INS(this, (new(ctx) LockObject(ctx)), LockObject)), trxManager(nullptr), trxLockManager(nullptr), localCommitId(nullptr), workerThreadsPool(nullptr), core(nullptr), dataDir(nullptr), dbconfig(nullptr), configFile(nullptr), trxWriterThread(nullptr), cahceEngine(nullptr), btreeCache(nullptr), regionManager(nullptr)
+ AlinousDatabase::AlinousDatabase(ThreadContext* ctx) throw()  : IObject(ctx), instanceConfigLock(__GC_INS(this, (new(ctx) LockObject(ctx)), LockObject)), trxManager(nullptr), trxLockManager(nullptr), commitIdPublisher(nullptr), workerThreadsPool(nullptr), core(nullptr), dataDir(nullptr), dbconfig(nullptr), configFile(nullptr), trxWriterThread(nullptr), cahceEngine(nullptr), btreeCache(nullptr), regionManager(nullptr)
 {
 	__GC_MV(this, &(this->trxWriterThread), nullptr, AlinousThread);
 	__GC_MV(this, &(this->workerThreadsPool), nullptr, ThreadPool);
-	__GC_MV(this, &(this->localCommitId), (new(ctx) LocalCommitIdPublisher(this, ctx)), ICommidIdPublisher);
+	__GC_MV(this, &(this->commitIdPublisher), (new(ctx) LocalCommitIdPublisher(this, ctx)), ICommidIdPublisher);
 }
 void AlinousDatabase::__construct_impl(ThreadContext* ctx) throw() 
 {
 	__GC_MV(this, &(this->trxWriterThread), nullptr, AlinousThread);
 	__GC_MV(this, &(this->workerThreadsPool), nullptr, ThreadPool);
-	__GC_MV(this, &(this->localCommitId), (new(ctx) LocalCommitIdPublisher(this, ctx)), ICommidIdPublisher);
+	__GC_MV(this, &(this->commitIdPublisher), (new(ctx) LocalCommitIdPublisher(this, ctx)), ICommidIdPublisher);
 }
  AlinousDatabase::~AlinousDatabase() throw() 
 {
@@ -49,8 +49,8 @@ void AlinousDatabase::__releaseRegerences(bool prepare, ThreadContext* ctx) thro
 	trxManager = nullptr;
 	__e_obj1.add(this->trxLockManager, this);
 	trxLockManager = nullptr;
-	__e_obj1.add(this->localCommitId, this);
-	localCommitId = nullptr;
+	__e_obj1.add(this->commitIdPublisher, this);
+	commitIdPublisher = nullptr;
 	__e_obj1.add(this->workerThreadsPool, this);
 	workerThreadsPool = nullptr;
 	__e_obj1.add(this->core, this);
@@ -107,12 +107,17 @@ TrxLockContext* AlinousDatabase::newLockContext(ThreadContext* ctx) throw()
 {
 	return this->trxLockManager->newLockContext(ctx);
 }
-void AlinousDatabase::initInstance(ThreadContext* ctx)
+void AlinousDatabase::initInstance(AlinousDbInstanceInfo* instanceConfig, ThreadContext* ctx)
 {
 	File* file = (new(ctx) File(this->dataDir, ctx));
 	if(!file->exists(ctx))
 	{
 		file->mkdirs(ctx);
+	}
+	MonitorRef* monitorRef = instanceConfig->getMonitorRef(ctx);
+	if(monitorRef != nullptr)
+	{
+		__GC_MV(this, &(this->commitIdPublisher), (new(ctx) RemoteCommitIdPublisher(monitorRef, ctx))->init(ctx), ICommidIdPublisher);
 	}
 	LocalTableRegion* localRegion = this->regionManager->getLocalRegion(ctx);
 	SchemaManager* schemas = localRegion->getSchemaManager(ctx);
@@ -126,7 +131,7 @@ void AlinousDatabase::initInstance(ThreadContext* ctx)
 			this->dbconfig->initTreeStorage(nodeCapacity, IBTreeKey::TYPE_INT, IBTreeKey::TYPE_INT, capacity, (long long)BLOCK_SIZE, ctx);
 			this->dbconfig->open(ctx);
 			this->dbconfig->putKeyValue(SCHEMA, schemas, ctx);
-			LongValue* lvTrx = (new(ctx) LongValue(this->localCommitId->getMaxCommitId(ctx), ctx));
+			LongValue* lvTrx = (new(ctx) LongValue(this->commitIdPublisher->getMaxCommitId(ctx), ctx));
 			this->dbconfig->putKeyValue(MAX_COMMIT_ID, lvTrx, ctx);
 			this->dbconfig->close(ctx);
 		}
@@ -151,11 +156,11 @@ void AlinousDatabase::initInstance(ThreadContext* ctx)
 }
 long long AlinousDatabase::getCommitId(ThreadContext* ctx) throw() 
 {
-	return this->localCommitId->getMaxCommitId(ctx);
+	return this->commitIdPublisher->getMaxCommitId(ctx);
 }
 long long AlinousDatabase::newCommitId(ThreadContext* ctx)
 {
-	return this->localCommitId->newCommitId(ctx);
+	return this->commitIdPublisher->newCommitId(ctx);
 }
 void AlinousDatabase::syncScheme(ThreadContext* ctx)
 {
@@ -173,12 +178,12 @@ void AlinousDatabase::syncScheme(ThreadContext* ctx)
 			{
 				trxvals->clear(ctx);
 				;
-				trxvals->add((new(ctx) LongValue(this->localCommitId->getMaxCommitId(ctx), ctx)), ctx);
+				trxvals->add((new(ctx) LongValue(this->commitIdPublisher->getMaxCommitId(ctx), ctx)), ctx);
 				lvTrxIdNode->save(ctx);
 			}
 						else 
 			{
-				LongValue* lvTrx = (new(ctx) LongValue(this->localCommitId->getMaxCommitId(ctx), ctx));
+				LongValue* lvTrx = (new(ctx) LongValue(this->commitIdPublisher->getMaxCommitId(ctx), ctx));
 				this->dbconfig->putKeyValue(MAX_COMMIT_ID, lvTrx, ctx);
 			}
 			this->dbconfig->close(ctx);
@@ -246,7 +251,7 @@ void AlinousDatabase::open(ThreadContext* ctx)
 				schemas->loadAfterFetch(this->cahceEngine, this->dataDir, this->core->getLogger(ctx), this, ctx);
 			}
 			ArrayList<IBTreeValue>* lvTrxIds = this->dbconfig->getValues(MAX_COMMIT_ID, ctx);
-			this->localCommitId->setMaxCommitId((static_cast<LongValue*>(lvTrxIds->get(0, ctx)))->value, ctx);
+			this->commitIdPublisher->setMaxCommitId((static_cast<LongValue*>(lvTrxIds->get(0, ctx)))->value, ctx);
 		}
 		catch(Throwable* e)
 		{

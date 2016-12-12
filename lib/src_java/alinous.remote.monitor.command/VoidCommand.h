@@ -13,6 +13,9 @@ namespace alinous {namespace remote {namespace monitor {namespace command {
 class AbstractMonitorCommand;}}}}
 
 namespace java {namespace io {
+class BufferedOutputStream;}}
+
+namespace java {namespace io {
 class IOException;}}
 
 namespace alinous {
@@ -24,6 +27,7 @@ namespace alinous {namespace remote {namespace monitor {namespace command {
 using namespace ::alinous;
 using namespace ::java::lang;
 using ::java::util::Iterator;
+using ::java::io::BufferedOutputStream;
 using ::java::io::IOException;
 using ::java::io::InputStream;
 using ::java::io::OutputStream;
@@ -42,6 +46,7 @@ public:
 public:
 	void readFromStream(InputStream* stream, ThreadContext* ctx) final;
 	void writeByteStream(OutputStream* out, ThreadContext* ctx) final;
+	void executeOnServer(AbstractMonitorCommand* cmd, BufferedOutputStream* outStream, ThreadContext* ctx) throw()  final;
 public:
 	static bool __init_done;
 	static bool __init_static_variables();

@@ -62,7 +62,7 @@ void DataSourceManager::init(ThreadContext* ctx)
 		{
 			try
 			{
-				driver->initDriver(this->core, ctx);
+				driver->initDriver(this->core, instanceConfig, ctx);
 			}
 			catch(AlinousDbException* e)
 			{

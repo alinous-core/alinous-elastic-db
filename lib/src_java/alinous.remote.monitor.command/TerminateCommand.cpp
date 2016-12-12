@@ -50,5 +50,8 @@ void TerminateCommand::writeByteStream(OutputStream* out, ThreadContext* ctx)
 	IArrayObjectPrimitive<char>* bytes = buffer->array(ctx);
 	out->write(bytes, ctx);
 }
+void TerminateCommand::executeOnServer(AbstractMonitorCommand* cmd, BufferedOutputStream* outStream, ThreadContext* ctx) throw() 
+{
+}
 }}}}
 

@@ -50,5 +50,8 @@ void VoidCommand::writeByteStream(OutputStream* out, ThreadContext* ctx)
 	IArrayObjectPrimitive<char>* bytes = buffer->array(ctx);
 	out->write(bytes, ctx);
 }
+void VoidCommand::executeOnServer(AbstractMonitorCommand* cmd, BufferedOutputStream* outStream, ThreadContext* ctx) throw() 
+{
+}
 }}}}
 

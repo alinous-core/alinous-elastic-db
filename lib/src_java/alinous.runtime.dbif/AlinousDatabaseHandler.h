@@ -111,7 +111,7 @@ private:
 	int defaultAcid;
 public:
 	int getDefaultAcid(ThreadContext* ctx) throw()  final;
-	void initDriver(AlinousCore* core, ThreadContext* ctx) final;
+	void initDriver(AlinousCore* core, AlinousDbInstanceInfo* instanceConfig, ThreadContext* ctx) final;
 	void dispose(ThreadContext* ctx) throw()  final;
 	void createInstance(String* instanceName, ThreadContext* ctx) throw()  final;
 	void dropInstance(String* instanceName, ThreadContext* ctx) throw()  final;
