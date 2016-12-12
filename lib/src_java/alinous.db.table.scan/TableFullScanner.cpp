@@ -144,7 +144,7 @@ void TableFullScanner::dispose(ISystemLog* core, ThreadContext* ctx)
 		catch(InterruptedException* e)
 		{
 			e->printStackTrace(ctx);
-			throw (new(ctx) ScanException(ConstStr::getCNST_STR_1613(), e, ctx));
+			throw (new(ctx) ScanException(ConstStr::getCNST_STR_1616(), e, ctx));
 		}
 	}
 }
@@ -231,7 +231,7 @@ IDatabaseRecord* TableFullScanner::nextIndexValue(ThreadContext* ctx)
 				locker->updateUnlockRow(this->tableStore, oid, ctx);
 				break ;
 			}
-			throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1612(), e, ctx));
+			throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1615(), e, ctx));
 		}
 	}
 	switch(this->lockMode) {

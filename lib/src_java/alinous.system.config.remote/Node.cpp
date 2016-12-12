@@ -28,8 +28,6 @@ bool Node::__init_static_variables(){
 void Node::__releaseRegerences(bool prepare, ThreadContext* ctx) throw() 
 {
 	ObjectEraser __e_obj1(ctx, __FILEW__, __LINE__, L"Node", L"~Node");
-	__e_obj1.add(this->port, this);
-	port = nullptr;
 	__e_obj1.add(this->tables, this);
 	tables = nullptr;
 	__e_obj1.add(this->dataDir, this);
@@ -38,13 +36,13 @@ void Node::__releaseRegerences(bool prepare, ThreadContext* ctx) throw()
 		return;
 	}
 }
-String* Node::getPort(ThreadContext* ctx) throw() 
+int Node::getPort(ThreadContext* ctx) throw() 
 {
 	return port;
 }
-void Node::setPort(String* port, ThreadContext* ctx) throw() 
+void Node::setPort(int port, ThreadContext* ctx) throw() 
 {
-	__GC_MV(this, &(this->port), port, String);
+	this->port = port;
 }
 Tables* Node::getTables(ThreadContext* ctx) throw() 
 {
@@ -62,6 +60,14 @@ void Node::setDataDir(String* dataDir, ThreadContext* ctx) throw()
 {
 	__GC_MV(this, &(this->dataDir), dataDir, String);
 }
+int Node::getMaxCon(ThreadContext* ctx) throw() 
+{
+	return maxCon;
+}
+void Node::setMaxCon(int maxCon, ThreadContext* ctx) throw() 
+{
+	this->maxCon = maxCon;
+}
 Node* Node::parseInstance(DomNode* dom, DomDocument* document, Matcher* matcher, ThreadContext* ctx)
 {
 	Node* node = (new(ctx) Node(ctx));
@@ -70,14 +76,24 @@ Node* Node::parseInstance(DomNode* dom, DomDocument* document, Matcher* matcher,
 	{
 		throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_1207(), ctx));
 	}
-	node->setPort(attr->toString(ctx)->trim(ctx), ctx);
-	attr = dom->getAttributeValue(ConstStr::getCNST_STR_1208(), ctx);
+	{
+		try
+		{
+			int port = Integer::parseInt(attr->toString(ctx)->trim(ctx), ctx);
+			node->setPort(port, ctx);
+		}
+		catch(Throwable* e)
+		{
+			throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_1208(), ctx));
+		}
+	}
+	attr = dom->getAttributeValue(ConstStr::getCNST_STR_1209(), ctx);
 	if(attr == nullptr)
 	{
-		throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_1209(), ctx));
+		throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_1210(), ctx));
 	}
 	node->setDataDir(attr->toString(ctx)->trim(ctx), ctx);
-	MatchCandidatesCollection* result = matcher->match(document, dom, ConstStr::getCNST_STR_1210(), ctx);
+	MatchCandidatesCollection* result = matcher->match(document, dom, ConstStr::getCNST_STR_1211(), ctx);
 	ArrayList<MatchCandidate>* list = result->getCandidatesList(ctx);
 	if(!list->isEmpty(ctx))
 	{

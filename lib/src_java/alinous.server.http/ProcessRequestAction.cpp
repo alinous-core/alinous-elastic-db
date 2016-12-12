@@ -7,7 +7,7 @@ namespace alinous {namespace server {namespace http {
 
 
 
-String* ProcessRequestAction::endStr = ConstStr::getCNST_STR_3459();
+String* ProcessRequestAction::endStr = ConstStr::getCNST_STR_3462();
 bool ProcessRequestAction::__init_done = __init_static_variables();
 bool ProcessRequestAction::__init_static_variables(){
 	Java2CppSystem::getSelf();
@@ -103,14 +103,14 @@ void ProcessRequestAction::outCodeResult(ContentResult* result, OutputStream* ou
 void ProcessRequestAction::outResponse(int contentLength, OutputStream* outStream, ThreadContext* ctx)
 {
 	StringBuffer* buff = (new(ctx) StringBuffer(ctx));
-	buff->append(ConstStr::getCNST_STR_3454(), ctx);
-	buff->append(ConstStr::getCNST_STR_3455(), ctx);
+	buff->append(ConstStr::getCNST_STR_3457(), ctx);
+	buff->append(ConstStr::getCNST_STR_3458(), ctx);
 	if(contentLength > 0)
 	{
-		buff->append(ConstStr::getCNST_STR_3456(), ctx)->append(contentLength, ctx)->append(ConstStr::getCNST_STR_1784(), ctx);
+		buff->append(ConstStr::getCNST_STR_3459(), ctx)->append(contentLength, ctx)->append(ConstStr::getCNST_STR_1787(), ctx);
 	}
-	buff->append(ConstStr::getCNST_STR_3457(), ctx);
-	buff->append(ConstStr::getCNST_STR_1784(), ctx);
+	buff->append(ConstStr::getCNST_STR_3460(), ctx);
+	buff->append(ConstStr::getCNST_STR_1787(), ctx);
 	String* byteStr = buff->toString(ctx);
 	IArrayObjectPrimitive<char>* byteData = byteStr->getBytes(ConstStr::getCNST_STR_1047(), ctx);
 	outStream->write(byteData, ctx);
@@ -118,10 +118,10 @@ void ProcessRequestAction::outResponse(int contentLength, OutputStream* outStrea
 void ProcessRequestAction::out404ResponceHeader(ContentResult* result, OutputStream* outStream, ThreadContext* ctx)
 {
 	StringBuffer* buff = (new(ctx) StringBuffer(ctx));
+	buff->append(ConstStr::getCNST_STR_3461(), ctx);
 	buff->append(ConstStr::getCNST_STR_3458(), ctx);
-	buff->append(ConstStr::getCNST_STR_3455(), ctx);
-	buff->append(ConstStr::getCNST_STR_3457(), ctx);
-	buff->append(ConstStr::getCNST_STR_1784(), ctx);
+	buff->append(ConstStr::getCNST_STR_3460(), ctx);
+	buff->append(ConstStr::getCNST_STR_1787(), ctx);
 	if(!result->head)
 	{
 	}

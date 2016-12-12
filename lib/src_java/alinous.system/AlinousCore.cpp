@@ -106,6 +106,26 @@ void AlinousCore::initDatabase(ThreadContext* ctx)
 }
 void AlinousCore::dispose(ThreadContext* ctx) throw() 
 {
+	if(!this->regionServers->isEmpty(ctx))
+	{
+		Iterator<NodeRegionServer>* it = this->regionServers->iterator(ctx);
+		while(it->hasNext(ctx))
+		{
+			NodeRegionServer* server = it->next(ctx);
+			server->dispose(ctx);
+		}
+		this->regionServers->clear(ctx);
+	}
+	if(!this->storageServers->isEmpty(ctx))
+	{
+		Iterator<RemoteTableStorageServer>* it = this->storageServers->iterator(ctx);
+		while(it->hasNext(ctx))
+		{
+			RemoteTableStorageServer* server = it->next(ctx);
+			server->dispose(ctx);
+		}
+		this->storageServers->clear(ctx);
+	}
 	if(this->monitor != nullptr)
 	{
 		this->monitor->dispose(ctx);
@@ -196,7 +216,8 @@ void AlinousCore::initDistributedParts(ThreadContext* ctx)
 		while(it->hasNext(ctx))
 		{
 			Node* n = it->next(ctx);
-			RemoteTableStorageServer* tableNode = (new(ctx) RemoteTableStorageServer(ctx));
+			RemoteTableStorageServer* tableNode = (new(ctx) RemoteTableStorageServer(n->getPort(ctx), n->getMaxCon(ctx), ctx));
+			tableNode->start(this->logger, ctx);
 			this->storageServers->add(tableNode, ctx);
 		}
 	}
@@ -208,6 +229,9 @@ void AlinousCore::initDistributedParts(ThreadContext* ctx)
 		while(it->hasNext(ctx))
 		{
 			Region* reg = it->next(ctx);
+			NodeRegionServer* server = (new(ctx) NodeRegionServer(reg->getPort(ctx), reg->getMaxCon(ctx), ctx));
+			server->start(this->logger, ctx);
+			this->regionServers->add(server, ctx);
 		}
 	}
 }

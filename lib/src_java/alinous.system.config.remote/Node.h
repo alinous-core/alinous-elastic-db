@@ -18,6 +18,9 @@ class IVariableValue;}}}
 namespace alinous {namespace system {namespace config {
 class AlinousInitException;}}}
 
+namespace java {namespace lang {
+class Throwable;}}
+
 namespace alinous {namespace html {namespace xpath {namespace match {
 class MatchCandidatesCollection;}}}}
 
@@ -67,7 +70,7 @@ class Node final : public IAlinousConfigElement, public virtual IObject {
 public:
 	Node(const Node& base) = default;
 public:
-	Node(ThreadContext* ctx) throw()  : IObject(ctx), IAlinousConfigElement(ctx), port(nullptr), tables(nullptr), dataDir(nullptr)
+	Node(ThreadContext* ctx) throw()  : IObject(ctx), IAlinousConfigElement(ctx), port(0), tables(nullptr), dataDir(nullptr), maxCon(8)
 	{
 	}
 	void __construct_impl(ThreadContext* ctx) throw() 
@@ -76,16 +79,19 @@ public:
 	virtual ~Node() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 private:
-	String* port;
+	int port;
 	Tables* tables;
 	String* dataDir;
+	int maxCon;
 public:
-	String* getPort(ThreadContext* ctx) throw() ;
-	void setPort(String* port, ThreadContext* ctx) throw() ;
+	int getPort(ThreadContext* ctx) throw() ;
+	void setPort(int port, ThreadContext* ctx) throw() ;
 	Tables* getTables(ThreadContext* ctx) throw() ;
 	void setTables(Tables* tables, ThreadContext* ctx) throw() ;
 	String* getDataDir(ThreadContext* ctx) throw() ;
 	void setDataDir(String* dataDir, ThreadContext* ctx) throw() ;
+	int getMaxCon(ThreadContext* ctx) throw() ;
+	void setMaxCon(int maxCon, ThreadContext* ctx) throw() ;
 public:
 	static Node* parseInstance(DomNode* dom, DomDocument* document, Matcher* matcher, ThreadContext* ctx);
 public:

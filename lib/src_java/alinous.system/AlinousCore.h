@@ -66,14 +66,14 @@ class Regions;}}}}
 namespace alinous {namespace system {namespace config {namespace remote {
 class Region;}}}}
 
+namespace alinous {namespace remote {namespace region {
+class NodeRegionServer;}}}
+
 namespace java {namespace lang {
 class InterruptedException;}}
 
 namespace alinous {namespace system {
 class ISystemLog;}}
-
-namespace alinous {namespace remote {namespace region {
-class NodeRegionServer;}}}
 
 namespace java {namespace lang {
 class IObject;

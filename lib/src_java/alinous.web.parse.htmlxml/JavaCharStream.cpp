@@ -231,7 +231,7 @@ wchar_t JavaCharStream::readChar(ThreadContext* ctx)
 			}
 			catch(java::io::IOException* e)
 			{
-				throw (new(ctx) Error(ConstStr::getCNST_STR_1250()->clone(ctx)->append(line, ctx)->append(ConstStr::getCNST_STR_1251(), ctx)->append(column, ctx)->append(ConstStr::getCNST_STR_947(), ctx), ctx));
+				throw (new(ctx) Error(ConstStr::getCNST_STR_1253()->clone(ctx)->append(line, ctx)->append(ConstStr::getCNST_STR_1254(), ctx)->append(column, ctx)->append(ConstStr::getCNST_STR_947(), ctx), ctx));
 			}
 		}
 		if(backSlashCnt == 1)

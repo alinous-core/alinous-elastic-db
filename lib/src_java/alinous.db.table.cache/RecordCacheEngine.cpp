@@ -68,7 +68,7 @@ void RecordCacheEngine::insertData(DatatableUpdateSupport* table, DatabaseRecord
 		}
 		catch(VariableException* e)
 		{
-			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1610(), ctx));
+			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1613(), ctx));
 		}
 		catch(Throwable* e)
 		{

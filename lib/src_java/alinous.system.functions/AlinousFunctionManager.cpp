@@ -138,11 +138,11 @@ bool AlinousFunctionManager::executeJavaConnector(String* prefix, String* funcNa
 		}
 		catch(VariableException* e)
 		{
-			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_1230(), e, ctx));
+			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_1233(), e, ctx));
 		}
 		catch(Throwable* e)
 		{
-			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_1230(), e, ctx));
+			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_1233(), e, ctx));
 		}
 	}
 	return true;

@@ -13,9 +13,9 @@ const StaticArrayObjectPrimitive<uint64_t> HtmlXmlParserTokenManager::__jjbitVec
 IArrayObjectPrimitive<uint64_t>* HtmlXmlParserTokenManager::jjbitVec2 = (IArrayObjectPrimitive<uint64_t>*)const_cast<StaticArrayObjectPrimitive<uint64_t>*>(&__jjbitVec2);
 const StaticArrayObjectPrimitive<uint64_t> HtmlXmlParserTokenManager::__jjnextStates = {24, 22, 21, 11, 12, 14, 2, 3, 5, 2, 3, 7, 5, 11, 12, 16, 14, 11, 12, 20, 14, 4, 6, 8, 13, 15, 17, 19};
 IArrayObjectPrimitive<uint64_t>* HtmlXmlParserTokenManager::jjnextStates = (IArrayObjectPrimitive<uint64_t>*)const_cast<StaticArrayObjectPrimitive<uint64_t>*>(&__jjnextStates);
-const StaticArrayObject<UnicodeStringWrapper> HtmlXmlParserTokenManager::__jjstrLiteralImages = {ConstStr::getCNST_STR_4(), (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, ConstStr::getCNST_STR_1490(), ConstStr::getCNST_STR_1492(), ConstStr::getCNST_STR_1766(), ConstStr::getCNST_STR_1767(), ConstStr::getCNST_STR_1465(), ConstStr::getCNST_STR_1768(), ConstStr::getCNST_STR_1769(), ConstStr::getCNST_STR_1770(), ConstStr::getCNST_STR_1771(), ConstStr::getCNST_STR_1772(), (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, ConstStr::getCNST_STR_1773(), ConstStr::getCNST_STR_1774()};
+const StaticArrayObject<UnicodeStringWrapper> HtmlXmlParserTokenManager::__jjstrLiteralImages = {ConstStr::getCNST_STR_4(), (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, ConstStr::getCNST_STR_1493(), ConstStr::getCNST_STR_1495(), ConstStr::getCNST_STR_1769(), ConstStr::getCNST_STR_1770(), ConstStr::getCNST_STR_1468(), ConstStr::getCNST_STR_1771(), ConstStr::getCNST_STR_1772(), ConstStr::getCNST_STR_1773(), ConstStr::getCNST_STR_1774(), ConstStr::getCNST_STR_1775(), (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, ConstStr::getCNST_STR_1776(), ConstStr::getCNST_STR_1777()};
 IArrayObject<String>* HtmlXmlParserTokenManager::jjstrLiteralImages = (IArrayObject<String>*)const_cast<StaticArrayObject<UnicodeStringWrapper>*>(&__jjstrLiteralImages);
-const StaticArrayObject<UnicodeStringWrapper> HtmlXmlParserTokenManager::__lexStateNames = {ConstStr::getCNST_STR_1560(), ConstStr::getCNST_STR_1561()};
+const StaticArrayObject<UnicodeStringWrapper> HtmlXmlParserTokenManager::__lexStateNames = {ConstStr::getCNST_STR_1563(), ConstStr::getCNST_STR_1564()};
 IArrayObject<String>* HtmlXmlParserTokenManager::lexStateNames = (IArrayObject<String>*)const_cast<StaticArrayObject<UnicodeStringWrapper>*>(&__lexStateNames);
 const StaticArrayObjectPrimitive<long long> HtmlXmlParserTokenManager::__jjnewLexState = {-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 1, 0, -1, -1, -1, -1, -1, -1, -1, -1, -1};
 IArrayObjectPrimitive<long long>* HtmlXmlParserTokenManager::jjnewLexState = (IArrayObjectPrimitive<long long>*)const_cast<StaticArrayObjectPrimitive<long long>*>(&__jjnewLexState);
@@ -38,7 +38,7 @@ bool HtmlXmlParserTokenManager::__init_static_variables(){
 {
 	if(JavaCharStream::staticFlag)
 	{
-		throw (new(ctx) Error(ConstStr::getCNST_STR_1461(), ctx));
+		throw (new(ctx) Error(ConstStr::getCNST_STR_1464(), ctx));
 	}
 	__GC_MV(this, &(input_stream), stream, JavaCharStream);
 }
@@ -46,7 +46,7 @@ void HtmlXmlParserTokenManager::__construct_impl(JavaCharStream* stream, ThreadC
 {
 	if(JavaCharStream::staticFlag)
 	{
-		throw (new(ctx) Error(ConstStr::getCNST_STR_1461(), ctx));
+		throw (new(ctx) Error(ConstStr::getCNST_STR_1464(), ctx));
 	}
 	__GC_MV(this, &(input_stream), stream, JavaCharStream);
 }
@@ -214,7 +214,7 @@ void HtmlXmlParserTokenManager::SwitchTo(long long lexState, ThreadContext* ctx)
 {
 	if(lexState >= (long long)2 || lexState < (long long)0)
 	{
-		throw (new(ctx) TokenMgrError(ConstStr::getCNST_STR_1462()->clone(ctx)->append(lexState, ctx)->append(ConstStr::getCNST_STR_1463(), ctx), TokenMgrError::INVALID_LEXICAL_STATE, ctx));
+		throw (new(ctx) TokenMgrError(ConstStr::getCNST_STR_1465()->clone(ctx)->append(lexState, ctx)->append(ConstStr::getCNST_STR_1466(), ctx), TokenMgrError::INVALID_LEXICAL_STATE, ctx));
 	}
 		else 
 	{
@@ -813,7 +813,7 @@ long long HtmlXmlParserTokenManager::jjMoveNfa_0(long long startState, long long
 		}
 		catch(java::io::IOException* e)
 		{
-			throw (new(ctx) Error(ConstStr::getCNST_STR_1459(), ctx));
+			throw (new(ctx) Error(ConstStr::getCNST_STR_1462(), ctx));
 		}
 	}
 	curPos = 0;
@@ -1297,7 +1297,7 @@ long long HtmlXmlParserTokenManager::jjMoveNfa_0(long long startState, long long
 			}
 			catch(java::io::IOException* e)
 			{
-				throw (new(ctx) Error(ConstStr::getCNST_STR_1460(), ctx));
+				throw (new(ctx) Error(ConstStr::getCNST_STR_1463(), ctx));
 			}
 		}
 	}

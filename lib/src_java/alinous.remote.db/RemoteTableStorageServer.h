@@ -1,5 +1,14 @@
 #ifndef ALINOUS_REMOTE_DB_REMOTETABLESTORAGESERVER_H_
 #define ALINOUS_REMOTE_DB_REMOTETABLESTORAGESERVER_H_
+namespace alinous {namespace system {
+class ISystemLog;}}
+
+namespace alinous {namespace remote {namespace db {
+class RemoteStorageResponceActionFactory;}}}
+
+namespace alinous {namespace remote {namespace socket {
+class SocketServer;}}}
+
 namespace java {namespace lang {
 class IObject;
 }}
@@ -13,6 +22,8 @@ namespace alinous {namespace remote {namespace db {
 using namespace ::alinous;
 using namespace ::java::lang;
 using ::java::util::Iterator;
+using ::alinous::remote::socket::SocketServer;
+using ::alinous::system::ISystemLog;
 
 
 
@@ -20,14 +31,19 @@ class RemoteTableStorageServer final : public virtual IObject {
 public:
 	RemoteTableStorageServer(const RemoteTableStorageServer& base) = default;
 public:
-	RemoteTableStorageServer(ThreadContext* ctx) throw()  : IObject(ctx)
-	{
-	}
-	void __construct_impl(ThreadContext* ctx) throw() 
-	{
-	}
+	RemoteTableStorageServer(int port, int maxthread, ThreadContext* ctx) throw() ;
+	void __construct_impl(int port, int maxthread, ThreadContext* ctx) throw() ;
 	virtual ~RemoteTableStorageServer() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
+private:
+	int port;
+	int maxthread;
+	SocketServer* socketServer;
+private:
+	static String* THREAD_NAME;
+public:
+	void start(ISystemLog* logger, ThreadContext* ctx) throw() ;
+	void dispose(ThreadContext* ctx) throw() ;
 public:
 	static bool __init_done;
 	static bool __init_static_variables();

@@ -57,10 +57,10 @@ Monitor* Monitor::parseInstance(MatchCandidate* candidate, DomDocument* document
 	IVariableValue* attr = selfDom->getAttributeValue(ConstStr::getCNST_STR_1206(), ctx);
 	if(attr == nullptr)
 	{
-		throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_1216(), ctx));
+		throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_1217(), ctx));
 	}
 	ref->setPort(attr->toString(ctx)->trim(ctx), ctx);
-	attr = selfDom->getAttributeValue(ConstStr::getCNST_STR_1217(), ctx);
+	attr = selfDom->getAttributeValue(ConstStr::getCNST_STR_1218(), ctx);
 	if(attr != nullptr)
 	{
 		String* str = attr->toString(ctx)->trim(ctx);
@@ -72,7 +72,7 @@ Monitor* Monitor::parseInstance(MatchCandidate* candidate, DomDocument* document
 			}
 			catch(Throwable* e)
 			{
-				throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_1218(), ctx));
+				throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_1219(), ctx));
 			}
 		}
 	}

@@ -46,7 +46,7 @@ AbstractRemoteStorageCommand* RemoteStorageCommandReader::readFromStream(InputSt
 		cmd = (new(ctx) VoidRemoteStorageCommand(ctx));
 		break ;
 	default:
-		throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3471(), ctx));
+		throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3475(), ctx));
 		break;
 	}
 	cmd->readFromStream(stream, ctx);

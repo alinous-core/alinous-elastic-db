@@ -89,7 +89,7 @@ FileStorageEntry* FileStorageEntryReader::read(long long filePointer, FileStorag
 {
 	if(!this->storage->isOpened(ctx))
 	{
-		throw (new(ctx) IOException(ConstStr::getCNST_STR_1584(), ctx));
+		throw (new(ctx) IOException(ConstStr::getCNST_STR_1587(), ctx));
 	}
 	entry->position = filePointer;
 	storage->loadBlocks(filePointer, entry, block, ctx);

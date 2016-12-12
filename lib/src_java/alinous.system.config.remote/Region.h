@@ -18,6 +18,9 @@ class IVariableValue;}}}
 namespace alinous {namespace system {namespace config {
 class AlinousInitException;}}}
 
+namespace java {namespace lang {
+class Throwable;}}
+
 namespace alinous {namespace html {namespace xpath {namespace match {
 class MatchCandidatesCollection;}}}}
 
@@ -67,7 +70,7 @@ class Region final : public IAlinousConfigElement, public virtual IObject {
 public:
 	Region(const Region& base) = default;
 public:
-	Region(ThreadContext* ctx) throw()  : IObject(ctx), IAlinousConfigElement(ctx), name(nullptr), port(nullptr), tables(nullptr), maxCon(8)
+	Region(ThreadContext* ctx) throw()  : IObject(ctx), IAlinousConfigElement(ctx), name(nullptr), port(0), tables(nullptr), maxCon(8)
 	{
 	}
 	void __construct_impl(ThreadContext* ctx) throw() 
@@ -77,14 +80,14 @@ public:
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 private:
 	String* name;
-	String* port;
+	int port;
 	Tables* tables;
 	int maxCon;
 public:
 	String* getName(ThreadContext* ctx) throw() ;
 	void setName(String* name, ThreadContext* ctx) throw() ;
-	String* getPort(ThreadContext* ctx) throw() ;
-	void setPort(String* port, ThreadContext* ctx) throw() ;
+	int getPort(ThreadContext* ctx) throw() ;
+	void setPort(int port, ThreadContext* ctx) throw() ;
 	Tables* getTables(ThreadContext* ctx) throw() ;
 	void setTables(Tables* tables, ThreadContext* ctx) throw() ;
 	int getMaxCon(ThreadContext* ctx) throw() ;

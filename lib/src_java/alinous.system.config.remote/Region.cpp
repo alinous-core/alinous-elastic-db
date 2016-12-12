@@ -30,8 +30,6 @@ void Region::__releaseRegerences(bool prepare, ThreadContext* ctx) throw()
 	ObjectEraser __e_obj1(ctx, __FILEW__, __LINE__, L"Region", L"~Region");
 	__e_obj1.add(this->name, this);
 	name = nullptr;
-	__e_obj1.add(this->port, this);
-	port = nullptr;
 	__e_obj1.add(this->tables, this);
 	tables = nullptr;
 	if(!prepare){
@@ -46,13 +44,13 @@ void Region::setName(String* name, ThreadContext* ctx) throw()
 {
 	__GC_MV(this, &(this->name), name, String);
 }
-String* Region::getPort(ThreadContext* ctx) throw() 
+int Region::getPort(ThreadContext* ctx) throw() 
 {
 	return port;
 }
-void Region::setPort(String* port, ThreadContext* ctx) throw() 
+void Region::setPort(int port, ThreadContext* ctx) throw() 
 {
-	__GC_MV(this, &(this->port), port, String);
+	this->port = port;
 }
 Tables* Region::getTables(ThreadContext* ctx) throw() 
 {
@@ -76,16 +74,41 @@ Region* Region::parseInstance(DomNode* dom, DomDocument* document, Matcher* matc
 	IVariableValue* attr = dom->getAttributeValue(ConstStr::getCNST_STR_1061(), ctx);
 	if(attr == nullptr)
 	{
-		throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_1226(), ctx));
+		throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_1227(), ctx));
 	}
 	reg->setName(attr->toString(ctx)->trim(ctx), ctx);
 	attr = dom->getAttributeValue(ConstStr::getCNST_STR_1206(), ctx);
 	if(attr == nullptr)
 	{
-		throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_1227(), ctx));
+		throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_1228(), ctx));
 	}
-	reg->setPort(attr->toString(ctx)->trim(ctx), ctx);
-	MatchCandidatesCollection* result = matcher->match(document, dom, ConstStr::getCNST_STR_1225(), ctx);
+	{
+		try
+		{
+			int port = Integer::parseInt(attr->toString(ctx)->trim(ctx), ctx);
+			reg->setPort(port, ctx);
+		}
+		catch(Throwable* e)
+		{
+			throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_1229(), ctx));
+		}
+	}
+	attr = dom->getAttributeValue(ConstStr::getCNST_STR_1218(), ctx);
+	if(attr != nullptr)
+	{
+		{
+			try
+			{
+				int n = Integer::parseInt(attr->toString(ctx)->trim(ctx), ctx);
+				reg->setMaxCon(n, ctx);
+			}
+			catch(Throwable* e)
+			{
+				throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_1230(), ctx));
+			}
+		}
+	}
+	MatchCandidatesCollection* result = matcher->match(document, dom, ConstStr::getCNST_STR_1226(), ctx);
 	ArrayList<MatchCandidate>* list = result->getCandidatesList(ctx);
 	if(!list->isEmpty(ctx))
 	{
