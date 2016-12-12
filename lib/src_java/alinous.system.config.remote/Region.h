@@ -67,7 +67,7 @@ class Region final : public IAlinousConfigElement, public virtual IObject {
 public:
 	Region(const Region& base) = default;
 public:
-	Region(ThreadContext* ctx) throw()  : IObject(ctx), IAlinousConfigElement(ctx), name(nullptr), port(nullptr), tables(nullptr)
+	Region(ThreadContext* ctx) throw()  : IObject(ctx), IAlinousConfigElement(ctx), name(nullptr), port(nullptr), tables(nullptr), maxCon(8)
 	{
 	}
 	void __construct_impl(ThreadContext* ctx) throw() 
@@ -79,6 +79,7 @@ private:
 	String* name;
 	String* port;
 	Tables* tables;
+	int maxCon;
 public:
 	String* getName(ThreadContext* ctx) throw() ;
 	void setName(String* name, ThreadContext* ctx) throw() ;
@@ -86,6 +87,8 @@ public:
 	void setPort(String* port, ThreadContext* ctx) throw() ;
 	Tables* getTables(ThreadContext* ctx) throw() ;
 	void setTables(Tables* tables, ThreadContext* ctx) throw() ;
+	int getMaxCon(ThreadContext* ctx) throw() ;
+	void setMaxCon(int maxCon, ThreadContext* ctx) throw() ;
 public:
 	static Region* parseInstance(DomNode* dom, DomDocument* document, Matcher* matcher, ThreadContext* ctx);
 public:

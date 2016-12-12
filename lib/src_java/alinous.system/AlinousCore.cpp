@@ -18,7 +18,7 @@ bool AlinousCore::__init_static_variables(){
 	delete ctx;
 	return true;
 }
- AlinousCore::AlinousCore(String* home, bool debug, ThreadContext* ctx) throw()  : IObject(ctx), diskCache(nullptr), sqlFunctionManager(nullptr), webModuleManager(nullptr), debug(0), alinousHome(nullptr), config(nullptr), logger(nullptr), functionManager(nullptr), modulerepository(nullptr), databaseManager(nullptr), debugger(nullptr), runner(nullptr), monitor(nullptr)
+ AlinousCore::AlinousCore(String* home, bool debug, ThreadContext* ctx) throw()  : IObject(ctx), diskCache(nullptr), sqlFunctionManager(nullptr), webModuleManager(nullptr), debug(0), alinousHome(nullptr), config(nullptr), logger(nullptr), functionManager(nullptr), modulerepository(nullptr), databaseManager(nullptr), debugger(nullptr), runner(nullptr), monitor(nullptr), storageServers(GCUtils<List<RemoteTableStorageServer> >::ins(this, (new(ctx) ArrayList<RemoteTableStorageServer>(ctx)), ctx, __FILEW__, __LINE__, L"")), regionServers(GCUtils<List<NodeRegionServer> >::ins(this, (new(ctx) ArrayList<NodeRegionServer>(ctx)), ctx, __FILEW__, __LINE__, L""))
 {
 	if(home->endsWith(ConstStr::getCNST_STR_984(), ctx))
 	{
@@ -76,6 +76,10 @@ void AlinousCore::__releaseRegerences(bool prepare, ThreadContext* ctx) throw()
 	runner = nullptr;
 	__e_obj1.add(this->monitor, this);
 	monitor = nullptr;
+	__e_obj1.add(this->storageServers, this);
+	storageServers = nullptr;
+	__e_obj1.add(this->regionServers, this);
+	regionServers = nullptr;
 	if(!prepare){
 		return;
 	}
@@ -187,10 +191,24 @@ void AlinousCore::initDistributedParts(ThreadContext* ctx)
 	Nodes* nodesConf = this->config->getNodes(ctx);
 	if(nodesConf != nullptr)
 	{
+		List<Node>* list = nodesConf->getList(ctx);
+		Iterator<Node>* it = list->iterator(ctx);
+		while(it->hasNext(ctx))
+		{
+			Node* n = it->next(ctx);
+			RemoteTableStorageServer* tableNode = (new(ctx) RemoteTableStorageServer(ctx));
+			this->storageServers->add(tableNode, ctx);
+		}
 	}
-	Regions* resionsConf = this->config->getRegions(ctx);
-	if(resionsConf != nullptr)
+	Regions* regionsConf = this->config->getRegions(ctx);
+	if(regionsConf != nullptr)
 	{
+		List<Region>* list = regionsConf->getList(ctx);
+		Iterator<Region>* it = list->iterator(ctx);
+		while(it->hasNext(ctx))
+		{
+			Region* reg = it->next(ctx);
+		}
 	}
 }
 }}

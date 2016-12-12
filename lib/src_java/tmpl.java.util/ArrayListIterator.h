@@ -71,6 +71,8 @@ template class ::java::util::ArrayListIterator<::alinous::runtime::engine::debug
 template class ::java::util::ArrayListIterator<::alinous::runtime::engine::debugger::DebugThread>;
 template class ::java::util::ArrayListIterator<::alinous::runtime::engine::debugger::server::ServerBreakPoint>;
 template class ::java::util::ArrayListIterator<::alinous::compile::analyse::AlinousType>;
+template class ::java::util::ArrayListIterator<::alinous::remote::db::RemoteTableStorageServer>;
+template class ::java::util::ArrayListIterator<::alinous::remote::region::NodeRegionServer>;
 template class ::java::util::ArrayListIterator<::alinous::html::xpath::match::MatchCandidate>;
 template class ::java::util::ArrayListIterator<::alinous::system::config::remote::NodeRef>;
 template class ::java::util::ArrayListIterator<::alinous::system::config::remote::Table>;

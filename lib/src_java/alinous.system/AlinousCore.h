@@ -48,14 +48,32 @@ class TransactionMonitorServer;}}}
 namespace alinous {namespace system {namespace config {namespace remote {
 class Nodes;}}}}
 
+namespace java {namespace util {
+template <typename  T> class List;}}
+
+namespace alinous {namespace system {namespace config {namespace remote {
+class Node;}}}}
+
+namespace java {namespace util {
+template <typename  T> class Iterator;}}
+
+namespace alinous {namespace remote {namespace db {
+class RemoteTableStorageServer;}}}
+
 namespace alinous {namespace system {namespace config {namespace remote {
 class Regions;}}}}
+
+namespace alinous {namespace system {namespace config {namespace remote {
+class Region;}}}}
 
 namespace java {namespace lang {
 class InterruptedException;}}
 
 namespace alinous {namespace system {
 class ISystemLog;}}
+
+namespace alinous {namespace remote {namespace region {
+class NodeRegionServer;}}}
 
 namespace java {namespace lang {
 class IObject;
@@ -70,9 +88,14 @@ namespace alinous {namespace system {
 using namespace ::alinous;
 using namespace ::java::lang;
 using ::java::util::Iterator;
+using ::java::util::ArrayList;
+using ::java::util::Iterator;
+using ::java::util::List;
 using ::alinous::compile::sql::functions::SQLFunctionManager;
 using ::alinous::io::DiskCacheManager;
+using ::alinous::remote::db::RemoteTableStorageServer;
 using ::alinous::remote::monitor::TransactionMonitorServer;
+using ::alinous::remote::region::NodeRegionServer;
 using ::alinous::runtime::AlinousModuleRepository;
 using ::alinous::runtime::dbif::DataSourceManager;
 using ::alinous::runtime::engine::ScriptRunner;
@@ -81,7 +104,9 @@ using ::alinous::server::webmodule::WebModuleManager;
 using ::alinous::system::config::AlinousConfig;
 using ::alinous::system::config::AlinousInitException;
 using ::alinous::system::config::remote::Monitor;
+using ::alinous::system::config::remote::Node;
 using ::alinous::system::config::remote::Nodes;
+using ::alinous::system::config::remote::Region;
 using ::alinous::system::config::remote::Regions;
 using ::alinous::system::functions::AlinousFunctionManager;
 
@@ -110,6 +135,8 @@ private:
 	AlinousScriptDebugger* debugger;
 	ScriptRunner* runner;
 	TransactionMonitorServer* monitor;
+	List<RemoteTableStorageServer>* storageServers;
+	List<NodeRegionServer>* regionServers;
 public:
 	void init(int debugPort, ThreadContext* ctx);
 	void initDatabase(ThreadContext* ctx);

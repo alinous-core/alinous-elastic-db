@@ -62,6 +62,14 @@ void Region::setTables(Tables* tables, ThreadContext* ctx) throw()
 {
 	__GC_MV(this, &(this->tables), tables, Tables);
 }
+int Region::getMaxCon(ThreadContext* ctx) throw() 
+{
+	return maxCon;
+}
+void Region::setMaxCon(int maxCon, ThreadContext* ctx) throw() 
+{
+	this->maxCon = maxCon;
+}
 Region* Region::parseInstance(DomNode* dom, DomDocument* document, Matcher* matcher, ThreadContext* ctx)
 {
 	Region* reg = (new(ctx) Region(ctx));
