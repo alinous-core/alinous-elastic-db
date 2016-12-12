@@ -42,9 +42,11 @@ void MonitorClientConnectionFactory::__releaseRegerences(bool prepare, ThreadCon
 		return;
 	}
 }
-ISocketConnection* MonitorClientConnectionFactory::newConnection(SocketConnectionPool* pool, ThreadContext* ctx) throw() 
+ISocketConnection* MonitorClientConnectionFactory::newConnection(SocketConnectionPool* pool, ThreadContext* ctx)
 {
-	return (new(ctx) MonitorConnection(pool, this->info, ctx));
+	MonitorConnection* con = (new(ctx) MonitorConnection(pool, this->info, ctx));
+	con->connect(ctx);
+	return con;
 }
 }}}}
 

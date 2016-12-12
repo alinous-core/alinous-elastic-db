@@ -30,7 +30,7 @@ public:
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 public:
 	virtual void setMaxCommitId(long long maxCommitId, ThreadContext* ctx) throw()  = 0;
-	virtual long long getMaxCommitId(ThreadContext* ctx) throw()  = 0;
+	virtual long long getMaxCommitId(ThreadContext* ctx) = 0;
 	virtual long long newCommitId(ThreadContext* ctx) = 0;
 public:
 	static bool __init_done;

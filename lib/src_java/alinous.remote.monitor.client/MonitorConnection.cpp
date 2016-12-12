@@ -51,6 +51,12 @@ void MonitorConnection::__releaseRegerences(bool prepare, ThreadContext* ctx) th
 void MonitorConnection::connect(ThreadContext* ctx)
 {
 	__GC_MV(this, &(this->socket), (new(ctx) AlinousSocket(info->getHost(ctx), info->getPort(ctx), ctx))->init(ctx), AlinousSocket);
+	MonitorConnectCommand* cmd = (new(ctx) MonitorConnectCommand(ctx));
+	cmd->sendCommand(this->socket, ctx);
+	if(!cmd->isConnected(ctx))
+	{
+		throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3480(), ctx));
+	}
 }
 void MonitorConnection::close(ThreadContext* ctx) throw() 
 {

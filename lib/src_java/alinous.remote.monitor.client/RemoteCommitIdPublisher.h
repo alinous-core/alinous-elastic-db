@@ -24,6 +24,12 @@ class SocketConnectionPool;}}}
 namespace alinous {namespace remote {namespace socket {
 class ISocketConnection;}}}
 
+namespace alinous {namespace net {
+class UnknownHostException;}}
+
+namespace java {namespace io {
+class IOException;}}
+
 namespace alinous {namespace db {
 class ICommidIdPublisher;}}
 
@@ -40,6 +46,8 @@ namespace alinous {namespace remote {namespace monitor {namespace client {
 using namespace ::alinous;
 using namespace ::java::lang;
 using ::java::util::Iterator;
+using ::java::io::IOException;
+using ::java::net::UnknownHostException;
 using ::alinous::db::AlinousDbException;
 using ::alinous::db::ICommidIdPublisher;
 using ::alinous::remote::socket::ISocketConnection;
@@ -63,7 +71,7 @@ private:
 public:
 	RemoteCommitIdPublisher* init(ThreadContext* ctx);
 	void setMaxCommitId(long long maxCommitId, ThreadContext* ctx) throw()  final;
-	long long getMaxCommitId(ThreadContext* ctx) throw()  final;
+	long long getMaxCommitId(ThreadContext* ctx) final;
 	long long newCommitId(ThreadContext* ctx) final;
 public:
 	static bool __init_done;

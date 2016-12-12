@@ -4867,9 +4867,9 @@ public:
 	constexpr static StaticUnicodeString __CNST_STR_826{L"Asia/Thimphu",12};
 public:
 	static UnicodeStringWrapper* getCNST_STR_826() throw();
-	constexpr static StaticUnicodeString __CNST_STR_3481{L"Wrong Command Type of Node Region Command.",42};
+	constexpr static StaticUnicodeString __CNST_STR_3483{L"Wrong Command Type of Node Region Command.",42};
 public:
-	static UnicodeStringWrapper* getCNST_STR_3481() throw();
+	static UnicodeStringWrapper* getCNST_STR_3483() throw();
 	constexpr static StaticUnicodeString __CNST_STR_53{L"Zero length BigInteger",22};
 public:
 	static UnicodeStringWrapper* getCNST_STR_53() throw();
@@ -6127,9 +6127,9 @@ public:
 	constexpr static StaticUnicodeString __CNST_STR_2533{L"image/vnd.ms-modi",17};
 public:
 	static UnicodeStringWrapper* getCNST_STR_2533() throw();
-	constexpr static StaticUnicodeString __CNST_STR_3479{L"Wrong Command Type of Monitor Command.",38};
+	constexpr static StaticUnicodeString __CNST_STR_3481{L"Wrong Command Type of Monitor Command.",38};
 public:
-	static UnicodeStringWrapper* getCNST_STR_3479() throw();
+	static UnicodeStringWrapper* getCNST_STR_3481() throw();
 	constexpr static StaticUnicodeString __CNST_STR_2178{L"etx",3};
 public:
 	static UnicodeStringWrapper* getCNST_STR_2178() throw();
@@ -6607,9 +6607,9 @@ public:
 	constexpr static StaticUnicodeString __CNST_STR_1063{L"CLASS_VARIABLE",14};
 public:
 	static UnicodeStringWrapper* getCNST_STR_1063() throw();
-	constexpr static StaticUnicodeString __CNST_STR_3480{L"NodeRegionServer",16};
+	constexpr static StaticUnicodeString __CNST_STR_3482{L"NodeRegionServer",16};
 public:
-	static UnicodeStringWrapper* getCNST_STR_3480() throw();
+	static UnicodeStringWrapper* getCNST_STR_3482() throw();
 	constexpr static StaticUnicodeString __CNST_STR_3469{L"Html format is wrong",20};
 public:
 	static UnicodeStringWrapper* getCNST_STR_3469() throw();
@@ -6835,6 +6835,9 @@ public:
 	constexpr static StaticUnicodeString __CNST_STR_2700{L"odt",3};
 public:
 	static UnicodeStringWrapper* getCNST_STR_2700() throw();
+	constexpr static StaticUnicodeString __CNST_STR_3480{L"Connection Failed",17};
+public:
+	static UnicodeStringWrapper* getCNST_STR_3480() throw();
 	constexpr static StaticUnicodeString __CNST_STR_1072{L"TypedVariableArray",18};
 public:
 	static UnicodeStringWrapper* getCNST_STR_1072() throw();
@@ -8008,6 +8011,9 @@ public:
 	constexpr static StaticUnicodeString __CNST_STR_2601{L"application/vnd.ms-project",26};
 public:
 	static UnicodeStringWrapper* getCNST_STR_2601() throw();
+	constexpr static StaticUnicodeString __CNST_STR_3479{L"Connection Error",16};
+public:
+	static UnicodeStringWrapper* getCNST_STR_3479() throw();
 	constexpr static StaticUnicodeString __CNST_STR_951{L"public",6};
 public:
 	static UnicodeStringWrapper* getCNST_STR_951() throw();

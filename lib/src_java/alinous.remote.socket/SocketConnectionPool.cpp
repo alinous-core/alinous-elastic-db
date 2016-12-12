@@ -46,7 +46,7 @@ void SocketConnectionPool::__releaseRegerences(bool prepare, ThreadContext* ctx)
 		return;
 	}
 }
-ISocketConnection* SocketConnectionPool::getConnection(ThreadContext* ctx) throw() 
+ISocketConnection* SocketConnectionPool::getConnection(ThreadContext* ctx)
 {
 	ISocketConnection* con = nullptr;
 	{

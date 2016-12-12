@@ -154,7 +154,7 @@ void AlinousDatabase::initInstance(AlinousDbInstanceInfo* instanceConfig, Thread
 		}
 	}
 }
-long long AlinousDatabase::getCommitId(ThreadContext* ctx) throw() 
+long long AlinousDatabase::getCommitId(ThreadContext* ctx)
 {
 	return this->commitIdPublisher->getMaxCommitId(ctx);
 }

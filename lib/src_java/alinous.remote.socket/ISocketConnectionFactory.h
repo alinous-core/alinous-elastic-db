@@ -6,6 +6,15 @@ class ISocketConnection;}}}
 namespace alinous {namespace remote {namespace socket {
 class SocketConnectionPool;}}}
 
+namespace java {namespace io {
+class IOException;}}
+
+namespace alinous {namespace net {
+class UnknownHostException;}}
+
+namespace alinous {namespace db {
+class AlinousDbException;}}
+
 namespace java {namespace lang {
 class IObject;
 }}
@@ -19,6 +28,9 @@ namespace alinous {namespace remote {namespace socket {
 using namespace ::alinous;
 using namespace ::java::lang;
 using ::java::util::Iterator;
+using ::java::io::IOException;
+using ::java::net::UnknownHostException;
+using ::alinous::db::AlinousDbException;
 
 
 
@@ -35,7 +47,7 @@ public:
 	virtual ~ISocketConnectionFactory() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 public:
-	virtual ISocketConnection* newConnection(SocketConnectionPool* pool, ThreadContext* ctx) throw()  = 0;
+	virtual ISocketConnection* newConnection(SocketConnectionPool* pool, ThreadContext* ctx) = 0;
 public:
 	static bool __init_done;
 	static bool __init_static_variables();

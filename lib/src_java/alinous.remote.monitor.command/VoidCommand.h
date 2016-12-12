@@ -9,11 +9,11 @@ class OutputStream;}}
 namespace java {namespace nio {
 class ByteBuffer;}}
 
-namespace alinous {namespace remote {namespace monitor {namespace command {
-class AbstractMonitorCommand;}}}}
-
 namespace java {namespace io {
 class BufferedOutputStream;}}
+
+namespace alinous {namespace remote {namespace monitor {namespace command {
+class AbstractMonitorCommand;}}}}
 
 namespace java {namespace io {
 class IOException;}}
@@ -46,7 +46,7 @@ public:
 public:
 	void readFromStream(InputStream* stream, ThreadContext* ctx) final;
 	void writeByteStream(OutputStream* out, ThreadContext* ctx) final;
-	void executeOnServer(AbstractMonitorCommand* cmd, BufferedOutputStream* outStream, ThreadContext* ctx) throw()  final;
+	void executeOnServer(BufferedOutputStream* outStream, ThreadContext* ctx) final;
 public:
 	static bool __init_done;
 	static bool __init_static_variables();

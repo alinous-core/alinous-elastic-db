@@ -31,12 +31,26 @@ void NetworkBinalyUtils::__releaseRegerences(bool prepare, ThreadContext* ctx) t
 		return;
 	}
 }
+long long NetworkBinalyUtils::readLong(InputStream* stream, ThreadContext* ctx)
+{
+	IArrayObjectPrimitive<char>* intbytes = ArrayAllocatorPrimitive<char>::allocatep(ctx, 8);
+	stream->read(intbytes, ctx);
+	ByteBuffer* buff = ByteBuffer::wrap(intbytes, ctx);
+	return buff->getLong(ctx);
+}
 int NetworkBinalyUtils::readInt(InputStream* stream, ThreadContext* ctx)
 {
 	IArrayObjectPrimitive<char>* intbytes = ArrayAllocatorPrimitive<char>::allocatep(ctx, 4);
 	stream->read(intbytes, ctx);
 	ByteBuffer* buff = ByteBuffer::wrap(intbytes, ctx);
 	return buff->getInt(ctx);
+}
+short NetworkBinalyUtils::readShort(InputStream* stream, ThreadContext* ctx)
+{
+	IArrayObjectPrimitive<char>* intbytes = ArrayAllocatorPrimitive<char>::allocatep(ctx, 2);
+	stream->read(intbytes, ctx);
+	ByteBuffer* buff = ByteBuffer::wrap(intbytes, ctx);
+	return buff->getShort(ctx);
 }
 }}}
 

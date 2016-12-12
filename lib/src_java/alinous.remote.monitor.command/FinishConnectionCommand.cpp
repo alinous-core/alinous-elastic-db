@@ -50,7 +50,7 @@ void FinishConnectionCommand::writeByteStream(OutputStream* out, ThreadContext* 
 	IArrayObjectPrimitive<char>* bytes = buffer->array(ctx);
 	out->write(bytes, ctx);
 }
-void FinishConnectionCommand::executeOnServer(AbstractMonitorCommand* cmd, BufferedOutputStream* outStream, ThreadContext* ctx) throw() 
+void FinishConnectionCommand::executeOnServer(BufferedOutputStream* outStream, ThreadContext* ctx)
 {
 }
 }}}}

@@ -45,6 +45,8 @@ void AbstractMonitorCommand::sendCommand(AlinousSocket* socket, ThreadContext* c
 	OutputStream* out = socket->getOutputStream(ctx);
 	writeByteStream(out, ctx);
 	out->flush(ctx);
+	InputStream* stream = socket->getInputStream(ctx);
+	readFromStream(stream, ctx);
 }
 }}}}
 

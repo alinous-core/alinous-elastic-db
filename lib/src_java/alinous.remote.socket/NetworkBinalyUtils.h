@@ -41,7 +41,9 @@ public:
 	virtual ~NetworkBinalyUtils() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 public:
+	static long long readLong(InputStream* stream, ThreadContext* ctx);
 	static int readInt(InputStream* stream, ThreadContext* ctx);
+	static short readShort(InputStream* stream, ThreadContext* ctx);
 public:
 	static bool __init_done;
 	static bool __init_static_variables();

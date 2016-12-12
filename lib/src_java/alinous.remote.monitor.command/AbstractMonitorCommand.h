@@ -6,14 +6,11 @@ class AlinousSocket;}}
 namespace java {namespace io {
 class OutputStream;}}
 
-namespace alinous {namespace remote {namespace monitor {namespace command {
-class AbstractMonitorCommand;}}}}
+namespace java {namespace io {
+class InputStream;}}
 
 namespace java {namespace io {
 class BufferedOutputStream;}}
-
-namespace java {namespace io {
-class InputStream;}}
 
 namespace java {namespace io {
 class IOException;}}
@@ -62,7 +59,7 @@ public:
 	int getType(ThreadContext* ctx) throw() ;
 	void sendCommand(AlinousSocket* socket, ThreadContext* ctx);
 	virtual void readFromStream(InputStream* stream, ThreadContext* ctx) = 0;
-	virtual void executeOnServer(AbstractMonitorCommand* cmd, BufferedOutputStream* outStream, ThreadContext* ctx) throw()  = 0;
+	virtual void executeOnServer(BufferedOutputStream* outStream, ThreadContext* ctx) = 0;
 	virtual void writeByteStream(OutputStream* out, ThreadContext* ctx) = 0;
 public:
 	static bool __init_done;

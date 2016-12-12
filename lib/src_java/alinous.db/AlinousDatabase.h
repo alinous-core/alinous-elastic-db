@@ -195,7 +195,7 @@ public:
 	void construct(AlinousCore* core, String* dataDir, String* trxTmpDir, int maxConnection, ThreadContext* ctx);
 	TrxLockContext* newLockContext(ThreadContext* ctx) throw() ;
 	void initInstance(AlinousDbInstanceInfo* instanceConfig, ThreadContext* ctx);
-	long long getCommitId(ThreadContext* ctx) throw() ;
+	long long getCommitId(ThreadContext* ctx);
 	long long newCommitId(ThreadContext* ctx);
 	void syncScheme(ThreadContext* ctx);
 	void open(ThreadContext* ctx);

@@ -15,6 +15,15 @@ class MonitorConnection;}}}}
 namespace alinous {namespace remote {namespace socket {
 class ISocketConnectionFactory;}}}
 
+namespace java {namespace io {
+class IOException;}}
+
+namespace alinous {namespace net {
+class UnknownHostException;}}
+
+namespace alinous {namespace db {
+class AlinousDbException;}}
+
 namespace java {namespace lang {
 class IObject;
 }}
@@ -28,6 +37,9 @@ namespace alinous {namespace remote {namespace monitor {namespace client {
 using namespace ::alinous;
 using namespace ::java::lang;
 using ::java::util::Iterator;
+using ::java::io::IOException;
+using ::java::net::UnknownHostException;
+using ::alinous::db::AlinousDbException;
 using ::alinous::remote::socket::ISocketConnection;
 using ::alinous::remote::socket::ISocketConnectionFactory;
 using ::alinous::remote::socket::SocketConnectionPool;
@@ -45,7 +57,7 @@ public:
 private:
 	MonitorConnectionInfo* info;
 public:
-	ISocketConnection* newConnection(SocketConnectionPool* pool, ThreadContext* ctx) throw()  final;
+	ISocketConnection* newConnection(SocketConnectionPool* pool, ThreadContext* ctx) final;
 public:
 	static bool __init_done;
 	static bool __init_static_variables();

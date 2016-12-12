@@ -12,6 +12,15 @@ template <typename  T> class Stack;}}
 namespace alinous {namespace lock {
 class LockObject;}}
 
+namespace java {namespace io {
+class IOException;}}
+
+namespace alinous {namespace net {
+class UnknownHostException;}}
+
+namespace alinous {namespace db {
+class AlinousDbException;}}
+
 namespace java {namespace lang {
 class IObject;
 }}
@@ -25,7 +34,10 @@ namespace alinous {namespace remote {namespace socket {
 using namespace ::alinous;
 using namespace ::java::lang;
 using ::java::util::Iterator;
+using ::java::io::IOException;
+using ::java::net::UnknownHostException;
 using ::java::util::Stack;
+using ::alinous::db::AlinousDbException;
 using ::alinous::lock::LockObject;
 
 
@@ -43,7 +55,7 @@ private:
 	LockObject* lockObject;
 	ISocketConnectionFactory* factory;
 public:
-	ISocketConnection* getConnection(ThreadContext* ctx) throw() ;
+	ISocketConnection* getConnection(ThreadContext* ctx);
 	void returnConnection(ISocketConnection* con, ThreadContext* ctx) throw() ;
 	void dispose(ThreadContext* ctx) throw() ;
 public:
