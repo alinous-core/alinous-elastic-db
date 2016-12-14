@@ -1,7 +1,7 @@
-#ifndef ALINOUS_DB_TRX_SCAN_GROUPEDSCANRESULTRECORD_H_
-#define ALINOUS_DB_TRX_SCAN_GROUPEDSCANRESULTRECORD_H_
+#ifndef ALINOUS_DB_TRX_SCAN_IFILTERSCANNER_H_
+#define ALINOUS_DB_TRX_SCAN_IFILTERSCANNER_H_
 namespace alinous {namespace db {namespace trx {namespace scan {
-class ScanResultRecord;}}}}
+class ITableTargetScanner;}}}}
 
 namespace alinous {
 class ThreadContext;
@@ -15,17 +15,17 @@ using ::java::util::Iterator;
 
 
 
-class GroupedScanREsultRecord final : public ScanResultRecord {
+class IFilterScanner : public virtual IObject, public ITableTargetScanner {
 public:
-	GroupedScanREsultRecord(const GroupedScanREsultRecord& base) = default;
+	IFilterScanner(const IFilterScanner& base) = default;
 public:
-	GroupedScanREsultRecord(ThreadContext* ctx) throw()  : IObject(ctx), ScanResultRecord(ctx)
+	IFilterScanner(ThreadContext* ctx) throw()  : IObject(ctx), ITableTargetScanner(ctx)
 	{
 	}
 	void __construct_impl(ThreadContext* ctx) throw() 
 	{
 	}
-	virtual ~GroupedScanREsultRecord() throw();
+	virtual ~IFilterScanner() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 public:
 	static bool __init_done;
@@ -37,4 +37,4 @@ public:
 
 }}}}
 
-#endif /* end of ALINOUS_DB_TRX_SCAN_GROUPEDSCANRESULTRECORD_H_ */
+#endif /* end of ALINOUS_DB_TRX_SCAN_IFILTERSCANNER_H_ */

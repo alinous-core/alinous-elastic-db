@@ -76,7 +76,7 @@ namespace alinous {namespace btree {
 class IBTreeValue;}}
 
 namespace alinous {namespace db {namespace trx {namespace scan {
-class ITableTargetScanner;}}}}
+class IFilterScanner;}}}}
 
 namespace alinous {namespace db {namespace table {namespace lockmonitor {
 class DatabaseLockException;}}}}
@@ -111,7 +111,7 @@ using ::alinous::db::table::TableIndexValue;
 using ::alinous::db::table::lockmonitor::DatabaseLockException;
 using ::alinous::db::trx::DbTransaction;
 using ::alinous::db::trx::TrxLockContext;
-using ::alinous::db::trx::scan::ITableTargetScanner;
+using ::alinous::db::trx::scan::IFilterScanner;
 using ::alinous::db::trx::scan::ScanException;
 using ::alinous::db::trx::scan::ScanResultIndexKey;
 using ::alinous::db::trx::scan::ScanResultRecord;
@@ -121,11 +121,11 @@ using ::alinous::system::ISystemLog;
 
 
 
-class TableIndexScanner final : public ITableTargetScanner, public virtual IObject {
+class TableIndexScanner final : public IFilterScanner, public virtual IObject {
 public:
 	TableIndexScanner(const TableIndexScanner& base) = default;
 public:
-	TableIndexScanner(ThreadContext* ctx) throw()  : IObject(ctx), ITableTargetScanner(ctx), trx(nullptr), index(nullptr), storage(nullptr), scanner(nullptr), tableStore(nullptr), values(nullptr), current(0), lockMode(0), tableId(nullptr), nextresult(nullptr)
+	TableIndexScanner(ThreadContext* ctx) throw()  : IObject(ctx), IFilterScanner(ctx), trx(nullptr), index(nullptr), storage(nullptr), scanner(nullptr), tableStore(nullptr), values(nullptr), current(0), lockMode(0), tableId(nullptr), nextresult(nullptr)
 	{
 	}
 	void __construct_impl(ThreadContext* ctx) throw() 

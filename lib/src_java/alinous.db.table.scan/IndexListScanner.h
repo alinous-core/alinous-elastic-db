@@ -58,7 +58,7 @@ namespace alinous {namespace system {
 class ISystemLog;}}
 
 namespace alinous {namespace db {namespace trx {namespace scan {
-class ITableTargetScanner;}}}}
+class IFilterScanner;}}}}
 
 namespace java {namespace io {
 class IOException;}}
@@ -110,7 +110,7 @@ using ::alinous::db::trx::DbTransaction;
 using ::alinous::db::trx::cache::TrxRecordCacheIndex;
 using ::alinous::db::trx::cache::TrxRecordCacheIndexScanner;
 using ::alinous::db::trx::cache::TrxRecordsCache;
-using ::alinous::db::trx::scan::ITableTargetScanner;
+using ::alinous::db::trx::scan::IFilterScanner;
 using ::alinous::db::trx::scan::ScanException;
 using ::alinous::db::trx::scan::ScanResultIndexKey;
 using ::alinous::db::trx::scan::ScanResultRecord;
@@ -121,11 +121,11 @@ using ::alinous::system::ISystemLog;
 
 
 
-class IndexListScanner final : public ITableTargetScanner, public virtual IObject {
+class IndexListScanner final : public IFilterScanner, public virtual IObject {
 public:
 	IndexListScanner(const IndexListScanner& base) = default;
 public:
-	IndexListScanner(ThreadContext* ctx) throw()  : IObject(ctx), ITableTargetScanner(ctx), trx(nullptr), machine(nullptr), scanner(nullptr), insertScanner(nullptr), updateScanner(nullptr), param(nullptr), effectiveKeyLength(0), meta(nullptr), result(nullptr), necessaryCondition(nullptr), currentKey(nullptr)
+	IndexListScanner(ThreadContext* ctx) throw()  : IObject(ctx), IFilterScanner(ctx), trx(nullptr), machine(nullptr), scanner(nullptr), insertScanner(nullptr), updateScanner(nullptr), param(nullptr), effectiveKeyLength(0), meta(nullptr), result(nullptr), necessaryCondition(nullptr), currentKey(nullptr)
 	{
 	}
 	void __construct_impl(ThreadContext* ctx) throw() 

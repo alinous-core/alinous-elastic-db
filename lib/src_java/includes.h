@@ -289,6 +289,7 @@
 #include "alinous.db.trx.cache/CulumnOrder.h"
 #include "alinous.db.trx.cache/TrxRecordsCache.h"
 #include "alinous.db.trx.cache/TrxRecordCacheIndexScanner.h"
+#include "alinous.db.trx.scan/IFilterScanner.h"
 #include "alinous.db.table/TableIndexValue.h"
 #include "alinous.db.trx/TrxLockContext.h"
 #include "alinous.db.table.scan/TableIndexScanner.h"
@@ -758,9 +759,9 @@
 #include "alinous.db.table/DatabaseTableIdPublisher.h"
 #include "alinous.db.table.lockmonitor/RowLockReleaser.h"
 #include "alinous.db.trx.cache/TrxRecordCacheFullScanner.h"
+#include "alinous.db.trx.scan/GroupedScanResultRecord.h"
 #include "alinous.db.trx.scan/JoinedRecords.h"
 #include "alinous.db.trx.scan/ScanResultScanner.h"
-#include "alinous.db.trx.scan/GroupedScanREsultRecord.h"
 #include "alinous.db.variable.util/LongArrayStore.h"
 #include "alinous.db.variable.util/RecordStore.h"
 #include "alinous.lock/ILock.h"
@@ -1495,8 +1496,10 @@ inline static void __cleanUpStatics(alinous::ThreadContext* ctx){
 	alinous::db::trx::scan::ScanException::__cleanUp(ctx);
 	alinous::db::trx::scan::ScanResult::__cleanUp(ctx);
 	alinous::db::trx::scan::ITableTargetScanner::__cleanUp(ctx);
+	alinous::db::trx::scan::IFilterScanner::__cleanUp(ctx);
 	alinous::db::trx::scan::ScanResultIndex::__cleanUp(ctx);
 	alinous::db::trx::scan::ScanResultIndexKey::__cleanUp(ctx);
+	alinous::db::trx::scan::GroupedScanResultRecord::__cleanUp(ctx);
 	alinous::db::trx::scan::ScannedResultIndexScanner::__cleanUp(ctx);
 	alinous::db::trx::scan::ScanResultRecord::__cleanUp(ctx);
 	alinous::db::trx::scan::JoinedRecords::__cleanUp(ctx);
@@ -1505,7 +1508,6 @@ inline static void __cleanUpStatics(alinous::ThreadContext* ctx){
 	alinous::db::trx::scan::ScannedOids::OidsArray::__cleanUp(ctx);
 	alinous::db::trx::scan::ScanResultScanner::__cleanUp(ctx);
 	alinous::db::trx::scan::PadddingRecord::__cleanUp(ctx);
-	alinous::db::trx::scan::GroupedScanREsultRecord::__cleanUp(ctx);
 	alinous::db::variable::util::LongArrayStore::__cleanUp(ctx);
 	alinous::db::variable::util::RecordStore::__cleanUp(ctx);
 	alinous::lock::ConcurrentLock::__cleanUp(ctx);
