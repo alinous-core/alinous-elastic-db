@@ -48,6 +48,12 @@ AbstractMonitorCommand* MinitorCommandReader::readFromStream(InputStream* stream
 	case AbstractMonitorCommand::TYPE_CONNECT:
 		cmd = (new(ctx) MonitorConnectCommand(ctx));
 		break ;
+	case AbstractMonitorCommand::TYPE_GET_MAX_COMMIT_ID:
+		cmd = (new(ctx) GetMaxCommitIdCommand(ctx));
+		break ;
+	case AbstractMonitorCommand::TYPE_NEW_MAX_COMMIT_ID:
+		cmd = (new(ctx) NewCommitIdCommand(ctx));
+		break ;
 	default:
 		throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3481(), ctx));
 		break;

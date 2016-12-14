@@ -43,15 +43,15 @@ void FinishConnectionCommand::__releaseRegerences(bool prepare, ThreadContext* c
 void FinishConnectionCommand::readFromStream(InputStream* stream, ThreadContext* ctx)
 {
 }
+void FinishConnectionCommand::executeOnServer(TransactionMonitorServer* monitorServer, BufferedOutputStream* outStream, ThreadContext* ctx)
+{
+}
 void FinishConnectionCommand::writeByteStream(OutputStream* out, ThreadContext* ctx)
 {
 	ByteBuffer* buffer = ByteBuffer::allocate(256, ctx);
 	buffer->putInt(this->type, ctx);
 	IArrayObjectPrimitive<char>* bytes = buffer->array(ctx);
 	out->write(bytes, ctx);
-}
-void FinishConnectionCommand::executeOnServer(BufferedOutputStream* outStream, ThreadContext* ctx)
-{
 }
 }}}}
 

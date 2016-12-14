@@ -1,5 +1,8 @@
 #ifndef ALINOUS_REMOTE_MONITOR_MONITORRESPONCEACTION_H_
 #define ALINOUS_REMOTE_MONITOR_MONITORRESPONCEACTION_H_
+namespace alinous {namespace remote {namespace monitor {
+class TransactionMonitorServer;}}}
+
 namespace java {namespace net {
 class Socket;}}
 
@@ -67,18 +70,19 @@ class MonitorResponceAction final : public IThreadAction, public virtual IObject
 public:
 	MonitorResponceAction(const MonitorResponceAction& base) = default;
 public:
-	MonitorResponceAction(Socket* socket, SocketServer* server, ThreadContext* ctx) throw() ;
-	void __construct_impl(Socket* socket, SocketServer* server, ThreadContext* ctx) throw() ;
+	MonitorResponceAction(TransactionMonitorServer* monitorServer, Socket* socket, SocketServer* server, ThreadContext* ctx) throw() ;
+	void __construct_impl(TransactionMonitorServer* monitorServer, Socket* socket, SocketServer* server, ThreadContext* ctx) throw() ;
 	virtual ~MonitorResponceAction() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 private:
 	Socket* socket;
 	SocketServer* server;
+	TransactionMonitorServer* monitorServer;
 public:
 	void execute(ThreadContext* ctx) final;
 private:
 	void handleCommand(BufferedInputStream* stream, BufferedOutputStream* outStream, ThreadContext* ctx);
-	void handleCommand(AbstractMonitorCommand* cmd, BufferedOutputStream* outStream, ThreadContext* ctx) throw() ;
+	void handleCommand(AbstractMonitorCommand* cmd, BufferedOutputStream* outStream, ThreadContext* ctx);
 	AbstractMonitorCommand* parseCommand(BufferedInputStream* stream, ThreadContext* ctx);
 public:
 	static bool __init_done;

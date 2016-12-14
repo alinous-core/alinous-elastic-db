@@ -43,15 +43,15 @@ void TerminateCommand::__releaseRegerences(bool prepare, ThreadContext* ctx) thr
 void TerminateCommand::readFromStream(InputStream* stream, ThreadContext* ctx)
 {
 }
+void TerminateCommand::executeOnServer(TransactionMonitorServer* monitorServer, BufferedOutputStream* outStream, ThreadContext* ctx)
+{
+}
 void TerminateCommand::writeByteStream(OutputStream* out, ThreadContext* ctx)
 {
 	ByteBuffer* buffer = ByteBuffer::allocate(256, ctx);
 	buffer->putInt(this->type, ctx);
 	IArrayObjectPrimitive<char>* bytes = buffer->array(ctx);
 	out->write(bytes, ctx);
-}
-void TerminateCommand::executeOnServer(BufferedOutputStream* outStream, ThreadContext* ctx)
-{
 }
 }}}}
 

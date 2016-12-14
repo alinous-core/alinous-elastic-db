@@ -18,13 +18,15 @@ bool MonitorResponceAction::__init_static_variables(){
 	delete ctx;
 	return true;
 }
- MonitorResponceAction::MonitorResponceAction(Socket* socket, SocketServer* server, ThreadContext* ctx) throw()  : IObject(ctx), IThreadAction(ctx), socket(nullptr), server(nullptr)
+ MonitorResponceAction::MonitorResponceAction(TransactionMonitorServer* monitorServer, Socket* socket, SocketServer* server, ThreadContext* ctx) throw()  : IObject(ctx), IThreadAction(ctx), socket(nullptr), server(nullptr), monitorServer(nullptr)
 {
+	__GC_MV(this, &(this->monitorServer), monitorServer, TransactionMonitorServer);
 	__GC_MV(this, &(this->socket), socket, Socket);
 	__GC_MV(this, &(this->server), server, SocketServer);
 }
-void MonitorResponceAction::__construct_impl(Socket* socket, SocketServer* server, ThreadContext* ctx) throw() 
+void MonitorResponceAction::__construct_impl(TransactionMonitorServer* monitorServer, Socket* socket, SocketServer* server, ThreadContext* ctx) throw() 
 {
+	__GC_MV(this, &(this->monitorServer), monitorServer, TransactionMonitorServer);
 	__GC_MV(this, &(this->socket), socket, Socket);
 	__GC_MV(this, &(this->server), server, SocketServer);
 }
@@ -42,6 +44,8 @@ void MonitorResponceAction::__releaseRegerences(bool prepare, ThreadContext* ctx
 	socket = nullptr;
 	__e_obj1.add(this->server, this);
 	server = nullptr;
+	__e_obj1.add(this->monitorServer, this);
+	monitorServer = nullptr;
 	if(!prepare){
 		return;
 	}
@@ -93,6 +97,12 @@ void MonitorResponceAction::handleCommand(BufferedInputStream* stream, BufferedO
 		case AbstractMonitorCommand::TYPE_CONNECT:
 			handleCommand(cmd, outStream, ctx);
 			break ;
+		case AbstractMonitorCommand::TYPE_GET_MAX_COMMIT_ID:
+			handleCommand(cmd, outStream, ctx);
+			break ;
+		case AbstractMonitorCommand::TYPE_NEW_MAX_COMMIT_ID:
+			handleCommand(cmd, outStream, ctx);
+			break ;
 		case AbstractMonitorCommand::TYPE_VOID:
 			break ;
 		default:
@@ -101,8 +111,9 @@ void MonitorResponceAction::handleCommand(BufferedInputStream* stream, BufferedO
 		}
 	}
 }
-void MonitorResponceAction::handleCommand(AbstractMonitorCommand* cmd, BufferedOutputStream* outStream, ThreadContext* ctx) throw() 
+void MonitorResponceAction::handleCommand(AbstractMonitorCommand* cmd, BufferedOutputStream* outStream, ThreadContext* ctx)
 {
+	cmd->executeOnServer(this->monitorServer, outStream, ctx);
 }
 AbstractMonitorCommand* MonitorResponceAction::parseCommand(BufferedInputStream* stream, ThreadContext* ctx)
 {

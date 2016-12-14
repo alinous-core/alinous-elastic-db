@@ -48,6 +48,11 @@ void MonitorConnectCommand::readFromStream(InputStream* stream, ThreadContext* c
 	int res = NetworkBinalyUtils::readInt(stream, ctx);
 	this->connected = (res == 1);
 }
+void MonitorConnectCommand::executeOnServer(TransactionMonitorServer* monitorServer, BufferedOutputStream* outStream, ThreadContext* ctx)
+{
+	this->connected = true;
+	writeByteStream(outStream, ctx);
+}
 bool MonitorConnectCommand::isConnected(ThreadContext* ctx) throw() 
 {
 	return connected;
@@ -66,11 +71,6 @@ void MonitorConnectCommand::writeByteStream(OutputStream* out, ThreadContext* ct
 	IArrayObjectPrimitive<char>* b = buffer->array(ctx);
 	out->write(b, ctx);
 	out->flush(ctx);
-}
-void MonitorConnectCommand::executeOnServer(BufferedOutputStream* outStream, ThreadContext* ctx)
-{
-	this->connected = true;
-	writeByteStream(outStream, ctx);
 }
 }}}}
 

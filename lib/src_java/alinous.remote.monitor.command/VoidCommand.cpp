@@ -43,15 +43,15 @@ void VoidCommand::__releaseRegerences(bool prepare, ThreadContext* ctx) throw()
 void VoidCommand::readFromStream(InputStream* stream, ThreadContext* ctx)
 {
 }
+void VoidCommand::executeOnServer(TransactionMonitorServer* monitorServer, BufferedOutputStream* outStream, ThreadContext* ctx)
+{
+}
 void VoidCommand::writeByteStream(OutputStream* out, ThreadContext* ctx)
 {
 	ByteBuffer* buffer = ByteBuffer::allocate(256, ctx);
 	buffer->putInt(this->type, ctx);
 	IArrayObjectPrimitive<char>* bytes = buffer->array(ctx);
 	out->write(bytes, ctx);
-}
-void VoidCommand::executeOnServer(BufferedOutputStream* outStream, ThreadContext* ctx)
-{
 }
 }}}}
 

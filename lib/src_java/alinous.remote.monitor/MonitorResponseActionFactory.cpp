@@ -44,7 +44,7 @@ void MonitorResponseActionFactory::__releaseRegerences(bool prepare, ThreadConte
 }
 IThreadAction* MonitorResponseActionFactory::getAction(Socket* socket, SocketServer* server, ThreadContext* ctx) throw() 
 {
-	return (new(ctx) MonitorResponceAction(socket, server, ctx));
+	return (new(ctx) MonitorResponceAction(this->monitorServer, socket, server, ctx));
 }
 TransactionMonitorServer* MonitorResponseActionFactory::getMonitorServer(ThreadContext* ctx) throw() 
 {

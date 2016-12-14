@@ -18,6 +18,12 @@ class VoidCommand;}}}}
 namespace alinous {namespace remote {namespace monitor {namespace command {
 class MonitorConnectCommand;}}}}
 
+namespace alinous {namespace remote {namespace monitor {namespace command {namespace commitId {
+class GetMaxCommitIdCommand;}}}}}
+
+namespace alinous {namespace remote {namespace monitor {namespace command {namespace commitId {
+class NewCommitIdCommand;}}}}}
+
 namespace alinous {namespace system {
 class AlinousException;}}
 
@@ -42,6 +48,8 @@ using namespace ::java::lang;
 using ::java::util::Iterator;
 using ::java::io::IOException;
 using ::java::io::InputStream;
+using ::alinous::remote::monitor::command::commitId::GetMaxCommitIdCommand;
+using ::alinous::remote::monitor::command::commitId::NewCommitIdCommand;
 using ::alinous::remote::socket::NetworkBinalyUtils;
 using ::alinous::system::AlinousException;
 
