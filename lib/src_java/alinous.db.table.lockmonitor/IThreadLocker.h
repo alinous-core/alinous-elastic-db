@@ -51,6 +51,7 @@ public:
 	virtual ArrayList<TableLock>* getTableLocks(ThreadContext* ctx) throw()  = 0;
 	virtual ArrayList<RowLock>* getRowLocks(ThreadContext* ctx) throw()  = 0;
 	virtual void dispose(ThreadContext* ctx) = 0;
+	virtual String* getFullName(ThreadContext* ctx) throw()  = 0;
 public:
 	static bool __init_done;
 	static bool __init_static_variables();

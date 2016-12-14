@@ -18,6 +18,14 @@ bool ThreadLocker::__init_static_variables(){
 	delete ctx;
 	return true;
 }
+ ThreadLocker::ThreadLocker(String* fullName, ThreadContext* ctx) throw()  : IObject(ctx), IThreadLocker(ctx), tableLocks(GCUtils<ArrayList<TableLock> >::ins(this, (new(ctx) ArrayList<TableLock>(ctx)), ctx, __FILEW__, __LINE__, L"")), rowLocks(GCUtils<ArrayList<RowLock> >::ins(this, (new(ctx) ArrayList<RowLock>(ctx)), ctx, __FILEW__, __LINE__, L"")), fullName(nullptr)
+{
+	__GC_MV(this, &(this->fullName), fullName, String);
+}
+void ThreadLocker::__construct_impl(String* fullName, ThreadContext* ctx) throw() 
+{
+	__GC_MV(this, &(this->fullName), fullName, String);
+}
  ThreadLocker::~ThreadLocker() throw() 
 {
 	ThreadContext *ctx = ThreadContext::getCurentContext();
@@ -32,6 +40,8 @@ void ThreadLocker::__releaseRegerences(bool prepare, ThreadContext* ctx) throw()
 	tableLocks = nullptr;
 	__e_obj1.add(this->rowLocks, this);
 	rowLocks = nullptr;
+	__e_obj1.add(this->fullName, this);
+	fullName = nullptr;
 	if(!prepare){
 		return;
 	}
@@ -102,6 +112,10 @@ ArrayList<TableLock>* ThreadLocker::getTableLocks(ThreadContext* ctx) throw()
 ArrayList<RowLock>* ThreadLocker::getRowLocks(ThreadContext* ctx) throw() 
 {
 	return rowLocks;
+}
+String* ThreadLocker::getFullName(ThreadContext* ctx) throw() 
+{
+	return fullName;
 }
 }}}}
 

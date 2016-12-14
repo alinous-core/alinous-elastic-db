@@ -84,7 +84,7 @@ private:
 	ThreadPool* threadPool;
 	SpinMutex* globalLock;
 public:
-	IThreadLocker* newThread(ThreadContext* ctx) throw() ;
+	IThreadLocker* newThread(String* fullName, ThreadContext* ctx) throw() ;
 	void lockTable(IDatabaseTable* table, IThreadLocker* locker, bool update, ThreadContext* ctx);
 	void unlockTable(IDatabaseTable* table, IThreadLocker* locker, ThreadContext* ctx);
 	void unlockRow(IDatabaseTable* table, long long oid, IThreadLocker* locker, ThreadContext* ctx);

@@ -64,7 +64,7 @@ public:
 	IScannableIndex* getAbailableIndex(ArrayList<String>* columns, ThreadContext* ctx) throw()  final;
 	IScannableIndex* getAbailableIndexByScanColId(ArrayList<ScanTableColumnIdentifier>* columns, ThreadContext* ctx) throw()  final;
 	IScannableIndex* getTableIndex(ArrayList<String>* columns, ThreadContext* ctx) throw() ;
-	IThreadLocker* newThreadLocker(ThreadContext* ctx) throw()  final;
+	IThreadLocker* newThreadLocker(String* fullName, ThreadContext* ctx) throw()  final;
 	void updateLockTable(IThreadLocker* locker, ThreadContext* ctx) final;
 	void updateUnlockTable(IThreadLocker* locker, ThreadContext* ctx) final;
 	void shareLockTable(IThreadLocker* locker, ThreadContext* ctx) final;

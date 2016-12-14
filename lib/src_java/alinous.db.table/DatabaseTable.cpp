@@ -129,9 +129,9 @@ IScannableIndex* DatabaseTable::getTableIndex(ArrayList<String>* columns, Thread
 	}
 	return matchedindex;
 }
-IThreadLocker* DatabaseTable::newThreadLocker(ThreadContext* ctx) throw() 
+IThreadLocker* DatabaseTable::newThreadLocker(String* fullName, ThreadContext* ctx) throw() 
 {
-	return this->monitor->newThread(ctx);
+	return this->monitor->newThread(fullName, ctx);
 }
 void DatabaseTable::updateLockTable(IThreadLocker* locker, ThreadContext* ctx)
 {

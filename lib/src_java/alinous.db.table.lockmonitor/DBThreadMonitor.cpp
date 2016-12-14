@@ -60,12 +60,12 @@ void DBThreadMonitor::__releaseRegerences(bool prepare, ThreadContext* ctx) thro
 		return;
 	}
 }
-IThreadLocker* DBThreadMonitor::newThread(ThreadContext* ctx) throw() 
+IThreadLocker* DBThreadMonitor::newThread(String* fullName, ThreadContext* ctx) throw() 
 {
 	ThreadLocker* thread = 0;
 	{
 		SynchronizedBlockObj __synchronized_2(this->threadLock, ctx);
-		thread = (new(ctx) ThreadLocker(ctx));
+		thread = (new(ctx) ThreadLocker(fullName, ctx));
 		this->threads->add(thread, ctx);
 	}
 	return thread;

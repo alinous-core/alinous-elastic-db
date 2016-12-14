@@ -83,7 +83,7 @@ IThreadLocker* TrxLockContext::getLocker(IDatabaseTable* tableStore, ThreadConte
 	{
 		return locker;
 	}
-	locker = tableStore->newThreadLocker(ctx);
+	locker = tableStore->newThreadLocker(name, ctx);
 	this->map->put(name, locker, ctx);
 	return locker;
 }

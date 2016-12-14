@@ -34,17 +34,14 @@ class ThreadLocker final : public IThreadLocker, public virtual IObject {
 public:
 	ThreadLocker(const ThreadLocker& base) = default;
 public:
-	ThreadLocker(ThreadContext* ctx) throw()  : IObject(ctx), IThreadLocker(ctx), tableLocks(GCUtils<ArrayList<TableLock> >::ins(this, (new(ctx) ArrayList<TableLock>(ctx)), ctx, __FILEW__, __LINE__, L"")), rowLocks(GCUtils<ArrayList<RowLock> >::ins(this, (new(ctx) ArrayList<RowLock>(ctx)), ctx, __FILEW__, __LINE__, L""))
-	{
-	}
-	void __construct_impl(ThreadContext* ctx) throw() 
-	{
-	}
+	ThreadLocker(String* fullName, ThreadContext* ctx) throw() ;
+	void __construct_impl(String* fullName, ThreadContext* ctx) throw() ;
 	virtual ~ThreadLocker() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 private:
 	ArrayList<TableLock>* tableLocks;
 	ArrayList<RowLock>* rowLocks;
+	String* fullName;
 public:
 	void dispose(ThreadContext* ctx) final;
 	void updateLockTable(IDatabaseTable* table, ThreadContext* ctx) final;
@@ -57,6 +54,7 @@ public:
 	void updateUnlockRow(IDatabaseTable* table, long long oid, ThreadContext* ctx) final;
 	ArrayList<TableLock>* getTableLocks(ThreadContext* ctx) throw()  final;
 	ArrayList<RowLock>* getRowLocks(ThreadContext* ctx) throw()  final;
+	String* getFullName(ThreadContext* ctx) throw()  final;
 public:
 	static bool __init_done;
 	static bool __init_static_variables();
