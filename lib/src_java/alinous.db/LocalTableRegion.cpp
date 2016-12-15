@@ -18,13 +18,13 @@ bool LocalTableRegion::__init_static_variables(){
 	delete ctx;
 	return true;
 }
- LocalTableRegion::LocalTableRegion(RecordCacheEngine* cacheEngine, String* dataDir, ISystemLog* logger, AlinousDatabase* database, ThreadContext* ctx) throw()  : IObject(ctx), ITableRegion(ctx), schemas(nullptr)
+ LocalTableRegion::LocalTableRegion(String* dataDir, ISystemLog* logger, AlinousDatabase* database, ThreadContext* ctx) throw()  : IObject(ctx), ITableRegion(ctx), schemas(nullptr)
 {
-	__GC_MV(this, &(this->schemas), (new(ctx) SchemaManager(cacheEngine, dataDir, logger, database, ctx)), SchemaManager);
+	__GC_MV(this, &(this->schemas), (new(ctx) SchemaManager(dataDir, logger, database, ctx)), SchemaManager);
 }
-void LocalTableRegion::__construct_impl(RecordCacheEngine* cacheEngine, String* dataDir, ISystemLog* logger, AlinousDatabase* database, ThreadContext* ctx) throw() 
+void LocalTableRegion::__construct_impl(String* dataDir, ISystemLog* logger, AlinousDatabase* database, ThreadContext* ctx) throw() 
 {
-	__GC_MV(this, &(this->schemas), (new(ctx) SchemaManager(cacheEngine, dataDir, logger, database, ctx)), SchemaManager);
+	__GC_MV(this, &(this->schemas), (new(ctx) SchemaManager(dataDir, logger, database, ctx)), SchemaManager);
 }
  LocalTableRegion::~LocalTableRegion() throw() 
 {

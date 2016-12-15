@@ -18,18 +18,16 @@ bool SchemaManager::__init_static_variables(){
 	delete ctx;
 	return true;
 }
- SchemaManager::SchemaManager(RecordCacheEngine* cacheEngine, String* dataDir, ISystemLog* logger, AlinousDatabase* database, ThreadContext* ctx) throw()  : IObject(ctx), IBTreeValue(ctx), dataDir(nullptr), schemas(GCUtils<HashMap<String,TableSchema> >::ins(this, (new(ctx) HashMap<String,TableSchema>(ctx)), ctx, __FILEW__, __LINE__, L"")), logger(nullptr), cacheEngine(nullptr), database(nullptr)
+ SchemaManager::SchemaManager(String* dataDir, ISystemLog* logger, AlinousDatabase* database, ThreadContext* ctx) throw()  : IObject(ctx), IBTreeValue(ctx), dataDir(nullptr), schemas(GCUtils<HashMap<String,TableSchema> >::ins(this, (new(ctx) HashMap<String,TableSchema>(ctx)), ctx, __FILEW__, __LINE__, L"")), logger(nullptr), database(nullptr)
 {
 	__GC_MV(this, &(this->dataDir), dataDir, String);
 	__GC_MV(this, &(this->logger), logger, ISystemLog);
-	__GC_MV(this, &(this->cacheEngine), cacheEngine, RecordCacheEngine);
 	__GC_MV(this, &(this->database), database, AlinousDatabase);
 }
-void SchemaManager::__construct_impl(RecordCacheEngine* cacheEngine, String* dataDir, ISystemLog* logger, AlinousDatabase* database, ThreadContext* ctx) throw() 
+void SchemaManager::__construct_impl(String* dataDir, ISystemLog* logger, AlinousDatabase* database, ThreadContext* ctx) throw() 
 {
 	__GC_MV(this, &(this->dataDir), dataDir, String);
 	__GC_MV(this, &(this->logger), logger, ISystemLog);
-	__GC_MV(this, &(this->cacheEngine), cacheEngine, RecordCacheEngine);
 	__GC_MV(this, &(this->database), database, AlinousDatabase);
 }
  SchemaManager::~SchemaManager() throw() 
@@ -48,8 +46,6 @@ void SchemaManager::__releaseRegerences(bool prepare, ThreadContext* ctx) throw(
 	schemas = nullptr;
 	__e_obj1.add(this->logger, this);
 	logger = nullptr;
-	__e_obj1.add(this->cacheEngine, this);
-	cacheEngine = nullptr;
 	__e_obj1.add(this->database, this);
 	database = nullptr;
 	if(!prepare){
@@ -69,7 +65,7 @@ void SchemaManager::createTable(String* schemaName, TableMetadata* tableMetadata
 		logger->logWarning(ConstStr::getCNST_STR_1596()->clone(ctx)->append(tableMetadata->getTableName(ctx), ctx)->append(ConstStr::getCNST_STR_1597(), ctx), ctx);
 		return;
 	}
-	IDatabaseTable* tableStore = (new(ctx) DatabaseTable(this->cacheEngine, schemaName, tableMetadata->getTableName(ctx), schema->getSchemaDir(ctx), database->workerThreadsPool, ctx));
+	IDatabaseTable* tableStore = (new(ctx) DatabaseTable(schemaName, tableMetadata->getTableName(ctx), schema->getSchemaDir(ctx), database->workerThreadsPool, ctx));
 	tableStore->createTable(tableMetadata, database, ctx);
 	schema->addTableStore(tableStore, ctx);
 }
@@ -89,18 +85,17 @@ TableSchema* SchemaManager::getSchema(String* name, ThreadContext* ctx) throw()
 {
 	return this->schemas->get(name, ctx);
 }
-void SchemaManager::loadAfterFetch(RecordCacheEngine* cacheEngine, String* dataDir, ISystemLog* logger, AlinousDatabase* database, ThreadContext* ctx)
+void SchemaManager::loadAfterFetch(String* dataDir, ISystemLog* logger, AlinousDatabase* database, ThreadContext* ctx)
 {
 	__GC_MV(this, &(this->dataDir), dataDir, String);
 	__GC_MV(this, &(this->logger), logger, ISystemLog);
-	__GC_MV(this, &(this->cacheEngine), cacheEngine, RecordCacheEngine);
 	__GC_MV(this, &(this->database), database, AlinousDatabase);
 	Iterator<String>* it = this->schemas->keySet(ctx)->iterator(ctx);
 	while(it->hasNext(ctx))
 	{
 		String* key = it->next(ctx);
 		TableSchema* sc = this->schemas->get(key, ctx);
-		sc->initAfterFetched(cacheEngine, dataDir, sc->name, database, ctx);
+		sc->initAfterFetched(dataDir, sc->name, database, ctx);
 	}
 }
 void SchemaManager::appendToEntry(FileStorageEntryBuilder* builder, ThreadContext* ctx) throw() 
@@ -137,7 +132,7 @@ IValueFetcher* SchemaManager::getFetcher(ThreadContext* ctx) throw()
 }
 SchemaManager* SchemaManager::valueFromFetcher(FileStorageEntryFetcher* fetcher, ThreadContext* ctx)
 {
-	SchemaManager* mgr = (new(ctx) SchemaManager(nullptr, nullptr, nullptr, nullptr, ctx));
+	SchemaManager* mgr = (new(ctx) SchemaManager(nullptr, nullptr, nullptr, ctx));
 	int maxLoop = fetcher->fetchInt(ctx);
 	for(int i = 0; i != maxLoop; ++i)
 	{

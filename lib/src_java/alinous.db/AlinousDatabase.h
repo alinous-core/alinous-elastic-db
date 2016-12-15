@@ -9,9 +9,6 @@ class LocalCommitIdPublisher;}}
 namespace alinous {namespace system {
 class AlinousCore;}}
 
-namespace alinous {namespace db {namespace table {namespace cache {
-class RecordCacheEngine;}}}}
-
 namespace alinous {namespace db {
 class LocalTableRegion;}}
 
@@ -143,7 +140,6 @@ using ::alinous::btree::IntKey;
 using ::alinous::btree::LongValue;
 using ::alinous::compile::declare::AlinousName;
 using ::alinous::db::table::IDatabaseTable;
-using ::alinous::db::table::cache::RecordCacheEngine;
 using ::alinous::db::trx::DbTransactionManager;
 using ::alinous::db::trx::TrxLockContext;
 using ::alinous::db::trx::TrxLockManager;
@@ -181,7 +177,6 @@ private:
 	BTree* dbconfig;
 	File* configFile;
 	AlinousThread* trxWriterThread;
-	RecordCacheEngine* cahceEngine;
 	BTreeGlobalCache* btreeCache;
 	TableRegionManager* regionManager;
 public:

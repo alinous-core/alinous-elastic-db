@@ -6,9 +6,6 @@ class OneSource;
 namespace java {namespace io {
 class File;}}
 
-namespace alinous {namespace db {namespace table {namespace cache {
-class RecordCacheEngine;}}}}
-
 namespace alinous {namespace db {
 class AlinousDatabase;}}
 
@@ -51,6 +48,9 @@ class IBTreeValue;}}
 namespace alinous {namespace db {namespace table {
 class DatabaseException;}}}
 
+namespace alinous {namespace system {
+class AlinousException;}}
+
 namespace java {namespace lang {
 class IObject;
 }}
@@ -76,7 +76,7 @@ using ::alinous::db::table::DatabaseException;
 using ::alinous::db::table::DatabaseTable;
 using ::alinous::db::table::IDatabaseTable;
 using ::alinous::db::table::TableMetadata;
-using ::alinous::db::table::cache::RecordCacheEngine;
+using ::alinous::system::AlinousException;
 
 
 
@@ -98,7 +98,7 @@ private:
 	String* regionName;
 public:
 	void create(ThreadContext* ctx) throw() ;
-	void initAfterFetched(RecordCacheEngine* cacheEngine, String* dataDir, String* schemaName, AlinousDatabase* database, ThreadContext* ctx);
+	void initAfterFetched(String* dataDir, String* schemaName, AlinousDatabase* database, ThreadContext* ctx);
 	String* getSchemaDir(ThreadContext* ctx) throw() ;
 	void addTableStore(IDatabaseTable* tableStore, ThreadContext* ctx) throw() ;
 	IDatabaseTable* getTableStore(String* tableName, ThreadContext* ctx) throw() ;

@@ -1,8 +1,5 @@
 #ifndef ALINOUS_DB_LOCALTABLEREGION_H_
 #define ALINOUS_DB_LOCALTABLEREGION_H_
-namespace alinous {namespace db {namespace table {namespace cache {
-class RecordCacheEngine;}}}}
-
 namespace alinous {namespace system {
 class ISystemLog;}}
 
@@ -50,7 +47,6 @@ using ::java::io::IOException;
 using ::alinous::btree::BTreeException;
 using ::alinous::db::table::DatabaseException;
 using ::alinous::db::table::TableMetadata;
-using ::alinous::db::table::cache::RecordCacheEngine;
 using ::alinous::system::AlinousException;
 using ::alinous::system::ISystemLog;
 
@@ -60,8 +56,8 @@ class LocalTableRegion final : public ITableRegion, public virtual IObject {
 public:
 	LocalTableRegion(const LocalTableRegion& base) = default;
 public:
-	LocalTableRegion(RecordCacheEngine* cacheEngine, String* dataDir, ISystemLog* logger, AlinousDatabase* database, ThreadContext* ctx) throw() ;
-	void __construct_impl(RecordCacheEngine* cacheEngine, String* dataDir, ISystemLog* logger, AlinousDatabase* database, ThreadContext* ctx) throw() ;
+	LocalTableRegion(String* dataDir, ISystemLog* logger, AlinousDatabase* database, ThreadContext* ctx) throw() ;
+	void __construct_impl(String* dataDir, ISystemLog* logger, AlinousDatabase* database, ThreadContext* ctx) throw() ;
 	virtual ~LocalTableRegion() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 public:

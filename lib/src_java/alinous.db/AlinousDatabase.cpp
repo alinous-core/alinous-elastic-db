@@ -21,7 +21,7 @@ bool AlinousDatabase::__init_static_variables(){
 	delete ctx;
 	return true;
 }
- AlinousDatabase::AlinousDatabase(ThreadContext* ctx) throw()  : IObject(ctx), instanceConfigLock(__GC_INS(this, (new(ctx) LockObject(ctx)), LockObject)), trxManager(nullptr), trxLockManager(nullptr), commitIdPublisher(nullptr), workerThreadsPool(nullptr), core(nullptr), dataDir(nullptr), dbconfig(nullptr), configFile(nullptr), trxWriterThread(nullptr), cahceEngine(nullptr), btreeCache(nullptr), regionManager(nullptr)
+ AlinousDatabase::AlinousDatabase(ThreadContext* ctx) throw()  : IObject(ctx), instanceConfigLock(__GC_INS(this, (new(ctx) LockObject(ctx)), LockObject)), trxManager(nullptr), trxLockManager(nullptr), commitIdPublisher(nullptr), workerThreadsPool(nullptr), core(nullptr), dataDir(nullptr), dbconfig(nullptr), configFile(nullptr), trxWriterThread(nullptr), btreeCache(nullptr), regionManager(nullptr)
 {
 	__GC_MV(this, &(this->trxWriterThread), nullptr, AlinousThread);
 	__GC_MV(this, &(this->workerThreadsPool), nullptr, ThreadPool);
@@ -63,8 +63,6 @@ void AlinousDatabase::__releaseRegerences(bool prepare, ThreadContext* ctx) thro
 	configFile = nullptr;
 	__e_obj1.add(this->trxWriterThread, this);
 	trxWriterThread = nullptr;
-	__e_obj1.add(this->cahceEngine, this);
-	cahceEngine = nullptr;
 	__e_obj1.add(this->btreeCache, this);
 	btreeCache = nullptr;
 	__e_obj1.add(this->regionManager, this);
@@ -75,10 +73,9 @@ void AlinousDatabase::__releaseRegerences(bool prepare, ThreadContext* ctx) thro
 }
 void AlinousDatabase::construct(AlinousCore* core, String* dataDir, String* trxTmpDir, int maxConnection, ThreadContext* ctx)
 {
-	__GC_MV(this, &(this->cahceEngine), (new(ctx) RecordCacheEngine(ctx))->init(1024, ctx), RecordCacheEngine);
 	__GC_MV(this, &(this->core), core, AlinousCore);
 	__GC_MV(this, &(this->dataDir), dataDir, String);
-	LocalTableRegion* localRegion = (new(ctx) LocalTableRegion(this->cahceEngine, dataDir, this->core->getLogger(ctx), this, ctx));
+	LocalTableRegion* localRegion = (new(ctx) LocalTableRegion(dataDir, this->core->getLogger(ctx), this, ctx));
 	__GC_MV(this, &(this->regionManager), (new(ctx) TableRegionManager(ctx)), TableRegionManager);
 	this->regionManager->addRegion(localRegion, ctx);
 	__GC_MV(this, &(this->trxManager), (new(ctx) DbTransactionManager(this, trxTmpDir, maxConnection, core->getLogger(ctx), this->workerThreadsPool, ctx)), DbTransactionManager);
@@ -248,7 +245,7 @@ void AlinousDatabase::open(ThreadContext* ctx)
 				LocalTableRegion* localRegion = this->regionManager->getLocalRegion(ctx);
 				SchemaManager* schemas = localRegion->getSchemaManager(ctx);
 				schemas = static_cast<SchemaManager*>(schemeValue->get(0, ctx));
-				schemas->loadAfterFetch(this->cahceEngine, this->dataDir, this->core->getLogger(ctx), this, ctx);
+				schemas->loadAfterFetch(this->dataDir, this->core->getLogger(ctx), this, ctx);
 			}
 			ArrayList<IBTreeValue>* lvTrxIds = this->dbconfig->getValues(MAX_COMMIT_ID, ctx);
 			this->commitIdPublisher->setMaxCommitId((static_cast<LongValue*>(lvTrxIds->get(0, ctx)))->value, ctx);

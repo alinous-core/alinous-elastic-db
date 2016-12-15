@@ -3,9 +3,6 @@
 namespace alinous{namespace annotation{
 class OneSource;
 }}
-namespace alinous {namespace db {namespace table {namespace cache {
-class RecordCacheEngine;}}}}
-
 namespace alinous {namespace system {
 class ISystemLog;}}
 
@@ -82,7 +79,6 @@ using ::alinous::db::table::DatabaseException;
 using ::alinous::db::table::DatabaseTable;
 using ::alinous::db::table::IDatabaseTable;
 using ::alinous::db::table::TableMetadata;
-using ::alinous::db::table::cache::RecordCacheEngine;
 using ::alinous::system::AlinousException;
 using ::alinous::system::ISystemLog;
 
@@ -92,21 +88,20 @@ class SchemaManager final : public IBTreeValue, public virtual IObject {
 public:
 	SchemaManager(const SchemaManager& base) = default;
 public:
-	SchemaManager(RecordCacheEngine* cacheEngine, String* dataDir, ISystemLog* logger, AlinousDatabase* database, ThreadContext* ctx) throw() ;
-	void __construct_impl(RecordCacheEngine* cacheEngine, String* dataDir, ISystemLog* logger, AlinousDatabase* database, ThreadContext* ctx) throw() ;
+	SchemaManager(String* dataDir, ISystemLog* logger, AlinousDatabase* database, ThreadContext* ctx) throw() ;
+	void __construct_impl(String* dataDir, ISystemLog* logger, AlinousDatabase* database, ThreadContext* ctx) throw() ;
 	virtual ~SchemaManager() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 private:
 	String* dataDir;
 	HashMap<String,TableSchema>* schemas;
 	ISystemLog* logger;
-	RecordCacheEngine* cacheEngine;
 	AlinousDatabase* database;
 public:
 	void createTable(String* schemaName, TableMetadata* tableMetadata, ThreadContext* ctx);
 	TableSchema* createSchema(String* name, ThreadContext* ctx) throw() ;
 	TableSchema* getSchema(String* name, ThreadContext* ctx) throw() ;
-	void loadAfterFetch(RecordCacheEngine* cacheEngine, String* dataDir, ISystemLog* logger, AlinousDatabase* database, ThreadContext* ctx);
+	void loadAfterFetch(String* dataDir, ISystemLog* logger, AlinousDatabase* database, ThreadContext* ctx);
 	void appendToEntry(FileStorageEntryBuilder* builder, ThreadContext* ctx) throw()  final;
 	int diskSize(ThreadContext* ctx) throw()  final;
 	bool equals(IObject* obj, ThreadContext* ctx) throw()  final;

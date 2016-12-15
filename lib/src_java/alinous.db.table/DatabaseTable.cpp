@@ -18,14 +18,14 @@ bool DatabaseTable::__init_static_variables(){
 	delete ctx;
 	return true;
 }
- DatabaseTable::DatabaseTable(RecordCacheEngine* cacheEngine, String* schema, String* name, String* baseDir, ThreadPool* threadPool, ThreadContext* ctx) throw()  : IObject(ctx), DatatableUpdateSupport(schema, name, baseDir, ctx), monitor(nullptr)
+ DatabaseTable::DatabaseTable(String* schema, String* name, String* baseDir, ThreadPool* threadPool, ThreadContext* ctx) : IObject(ctx), DatatableUpdateSupport(schema, name, baseDir, ctx), monitor(nullptr)
 {
-	__GC_MV(this, &(this->cacheEngine), cacheEngine, RecordCacheEngine);
+	__GC_MV(this, &(this->cacheEngine), (new(ctx) RecordCacheEngine(ctx))->init(1024, ctx), RecordCacheEngine);
 	__GC_MV(this, &(this->monitor), (new(ctx) DBThreadMonitor(threadPool, ctx)), DBThreadMonitor);
 }
-void DatabaseTable::__construct_impl(RecordCacheEngine* cacheEngine, String* schema, String* name, String* baseDir, ThreadPool* threadPool, ThreadContext* ctx) throw() 
+void DatabaseTable::__construct_impl(String* schema, String* name, String* baseDir, ThreadPool* threadPool, ThreadContext* ctx)
 {
-	__GC_MV(this, &(this->cacheEngine), cacheEngine, RecordCacheEngine);
+	__GC_MV(this, &(this->cacheEngine), (new(ctx) RecordCacheEngine(ctx))->init(1024, ctx), RecordCacheEngine);
 	__GC_MV(this, &(this->monitor), (new(ctx) DBThreadMonitor(threadPool, ctx)), DBThreadMonitor);
 }
  DatabaseTable::~DatabaseTable() throw() 

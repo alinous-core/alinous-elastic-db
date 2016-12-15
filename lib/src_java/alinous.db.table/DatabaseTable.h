@@ -3,11 +3,11 @@
 namespace alinous{namespace annotation{
 class OneSource;
 }}
-namespace alinous {namespace db {namespace table {namespace cache {
-class RecordCacheEngine;}}}}
-
 namespace alinous {namespace runtime {namespace parallel {
 class ThreadPool;}}}
+
+namespace alinous {namespace db {namespace table {namespace cache {
+class RecordCacheEngine;}}}}
 
 namespace alinous {namespace db {namespace table {namespace lockmonitor {
 class DBThreadMonitor;}}}}
@@ -30,6 +30,9 @@ class DatatableUpdateSupport;}}}
 namespace alinous {namespace db {namespace table {namespace lockmonitor {
 class DatabaseLockException;}}}}
 
+namespace alinous {namespace system {
+class AlinousException;}}
+
 namespace alinous {
 class ThreadContext;
 }
@@ -46,6 +49,7 @@ using ::alinous::db::table::lockmonitor::DBThreadMonitor;
 using ::alinous::db::table::lockmonitor::DatabaseLockException;
 using ::alinous::db::table::lockmonitor::IThreadLocker;
 using ::alinous::runtime::parallel::ThreadPool;
+using ::alinous::system::AlinousException;
 
 
 
@@ -53,8 +57,8 @@ class DatabaseTable final : public DatatableUpdateSupport {
 public:
 	DatabaseTable(const DatabaseTable& base) = default;
 public:
-	DatabaseTable(RecordCacheEngine* cacheEngine, String* schema, String* name, String* baseDir, ThreadPool* threadPool, ThreadContext* ctx) throw() ;
-	void __construct_impl(RecordCacheEngine* cacheEngine, String* schema, String* name, String* baseDir, ThreadPool* threadPool, ThreadContext* ctx) throw() ;
+	DatabaseTable(String* schema, String* name, String* baseDir, ThreadPool* threadPool, ThreadContext* ctx);
+	void __construct_impl(String* schema, String* name, String* baseDir, ThreadPool* threadPool, ThreadContext* ctx);
 	virtual ~DatabaseTable() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 private:
