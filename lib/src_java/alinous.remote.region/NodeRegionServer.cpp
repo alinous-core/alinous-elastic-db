@@ -19,15 +19,17 @@ bool NodeRegionServer::__init_static_variables(){
 	delete ctx;
 	return true;
 }
- NodeRegionServer::NodeRegionServer(int port, int maxthread, ThreadContext* ctx) throw()  : IObject(ctx), port(0), maxthread(0), socketServer(nullptr)
+ NodeRegionServer::NodeRegionServer(int port, int maxthread, ThreadContext* ctx) throw()  : IObject(ctx), port(0), maxthread(0), refs(nullptr), socketServer(nullptr)
 {
 	this->port = port;
 	this->maxthread = maxthread;
+	__GC_MV(this, &(this->refs), (new(ctx) NodeReferenceManager(ctx)), NodeReferenceManager);
 }
 void NodeRegionServer::__construct_impl(int port, int maxthread, ThreadContext* ctx) throw() 
 {
 	this->port = port;
 	this->maxthread = maxthread;
+	__GC_MV(this, &(this->refs), (new(ctx) NodeReferenceManager(ctx)), NodeReferenceManager);
 }
  NodeRegionServer::~NodeRegionServer() throw() 
 {
@@ -39,6 +41,8 @@ void NodeRegionServer::__construct_impl(int port, int maxthread, ThreadContext* 
 void NodeRegionServer::__releaseRegerences(bool prepare, ThreadContext* ctx) throw() 
 {
 	ObjectEraser __e_obj1(ctx, __FILEW__, __LINE__, L"NodeRegionServer", L"~NodeRegionServer");
+	__e_obj1.add(this->refs, this);
+	refs = nullptr;
 	__e_obj1.add(this->socketServer, this);
 	socketServer = nullptr;
 	if(!prepare){
@@ -54,6 +58,10 @@ void NodeRegionServer::start(ISystemLog* logger, ThreadContext* ctx) throw()
 void NodeRegionServer::dispose(ThreadContext* ctx) throw() 
 {
 	this->socketServer->dispose(ctx);
+}
+NodeReferenceManager* NodeRegionServer::getRefs(ThreadContext* ctx) throw() 
+{
+	return refs;
 }
 }}}
 

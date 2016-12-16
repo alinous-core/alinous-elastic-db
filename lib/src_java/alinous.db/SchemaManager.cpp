@@ -18,17 +18,17 @@ bool SchemaManager::__init_static_variables(){
 	delete ctx;
 	return true;
 }
- SchemaManager::SchemaManager(String* dataDir, ISystemLog* logger, AlinousDatabase* database, ThreadContext* ctx) throw()  : IObject(ctx), IBTreeValue(ctx), dataDir(nullptr), schemas(GCUtils<HashMap<String,TableSchema> >::ins(this, (new(ctx) HashMap<String,TableSchema>(ctx)), ctx, __FILEW__, __LINE__, L"")), logger(nullptr), database(nullptr), oidPublisher(nullptr)
+ SchemaManager::SchemaManager(String* dataDir, ISystemLog* logger, ThreadPool* threadPool, AlinousCore* core, BTreeGlobalCache* cache, ThreadContext* ctx) throw()  : IObject(ctx), IBTreeValue(ctx), dataDir(nullptr), schemas(GCUtils<HashMap<String,TableSchema> >::ins(this, (new(ctx) HashMap<String,TableSchema>(ctx)), ctx, __FILEW__, __LINE__, L"")), logger(nullptr), threadPool(nullptr), oidPublisher(nullptr)
 {
 	__GC_MV(this, &(this->dataDir), dataDir, String);
 	__GC_MV(this, &(this->logger), logger, ISystemLog);
-	__GC_MV(this, &(this->database), database, AlinousDatabase);
+	__GC_MV(this, &(this->threadPool), threadPool, ThreadPool);
 }
-void SchemaManager::__construct_impl(String* dataDir, ISystemLog* logger, AlinousDatabase* database, ThreadContext* ctx) throw() 
+void SchemaManager::__construct_impl(String* dataDir, ISystemLog* logger, ThreadPool* threadPool, AlinousCore* core, BTreeGlobalCache* cache, ThreadContext* ctx) throw() 
 {
 	__GC_MV(this, &(this->dataDir), dataDir, String);
 	__GC_MV(this, &(this->logger), logger, ISystemLog);
-	__GC_MV(this, &(this->database), database, AlinousDatabase);
+	__GC_MV(this, &(this->threadPool), threadPool, ThreadPool);
 }
  SchemaManager::~SchemaManager() throw() 
 {
@@ -46,15 +46,18 @@ void SchemaManager::__releaseRegerences(bool prepare, ThreadContext* ctx) throw(
 	schemas = nullptr;
 	__e_obj1.add(this->logger, this);
 	logger = nullptr;
-	__e_obj1.add(this->database, this);
-	database = nullptr;
+	__e_obj1.add(this->threadPool, this);
+	threadPool = nullptr;
 	__e_obj1.add(this->oidPublisher, this);
 	oidPublisher = nullptr;
 	if(!prepare){
 		return;
 	}
 }
-void SchemaManager::createTable(String* schemaName, TableMetadata* tableMetadata, ThreadContext* ctx)
+void SchemaManager::init(ThreadContext* ctx) throw() 
+{
+}
+void SchemaManager::createTable(String* schemaName, TableMetadata* tableMetadata, ThreadPool* threadPool, AlinousCore* core, BTreeGlobalCache* cache, ThreadContext* ctx)
 {
 	TableSchema* schema = this->schemas->get(schemaName, ctx);
 	if(schema == nullptr)
@@ -67,8 +70,8 @@ void SchemaManager::createTable(String* schemaName, TableMetadata* tableMetadata
 		logger->logWarning(ConstStr::getCNST_STR_1596()->clone(ctx)->append(tableMetadata->getTableName(ctx), ctx)->append(ConstStr::getCNST_STR_1597(), ctx), ctx);
 		return;
 	}
-	IDatabaseTable* tableStore = (new(ctx) DatabaseTable(schemaName, tableMetadata->getTableName(ctx), schema->getSchemaDir(ctx), database->workerThreadsPool, this->oidPublisher, ctx));
-	tableStore->createTable(tableMetadata, this->database, ctx);
+	IDatabaseTable* tableStore = (new(ctx) DatabaseTable(schemaName, tableMetadata->getTableName(ctx), schema->getSchemaDir(ctx), this->threadPool, this->oidPublisher, ctx));
+	tableStore->createTable(tableMetadata, threadPool, core, cache, ctx);
 	schema->addTableStore(tableStore, ctx);
 }
 TableSchema* SchemaManager::createSchema(String* name, ThreadContext* ctx) throw() 
@@ -87,17 +90,17 @@ TableSchema* SchemaManager::getSchema(String* name, ThreadContext* ctx) throw()
 {
 	return this->schemas->get(name, ctx);
 }
-void SchemaManager::loadAfterFetch(String* dataDir, ISystemLog* logger, AlinousDatabase* database, ThreadContext* ctx)
+void SchemaManager::loadAfterFetch(String* dataDir, ISystemLog* logger, ThreadPool* threadPool, AlinousCore* core, BTreeGlobalCache* cache, ThreadContext* ctx)
 {
 	__GC_MV(this, &(this->dataDir), dataDir, String);
 	__GC_MV(this, &(this->logger), logger, ISystemLog);
-	__GC_MV(this, &(this->database), database, AlinousDatabase);
+	__GC_MV(this, &(this->threadPool), threadPool, ThreadPool);
 	Iterator<String>* it = this->schemas->keySet(ctx)->iterator(ctx);
 	while(it->hasNext(ctx))
 	{
 		String* key = it->next(ctx);
 		TableSchema* sc = this->schemas->get(key, ctx);
-		sc->initAfterFetched(dataDir, sc->name, database, this->oidPublisher, ctx);
+		sc->initAfterFetched(dataDir, sc->name, threadPool, this->oidPublisher, core, cache, ctx);
 	}
 }
 void SchemaManager::appendToEntry(FileStorageEntryBuilder* builder, ThreadContext* ctx) throw() 
@@ -134,7 +137,7 @@ IValueFetcher* SchemaManager::getFetcher(ThreadContext* ctx) throw()
 }
 SchemaManager* SchemaManager::valueFromFetcher(FileStorageEntryFetcher* fetcher, ThreadContext* ctx)
 {
-	SchemaManager* mgr = (new(ctx) SchemaManager(nullptr, nullptr, nullptr, ctx));
+	SchemaManager* mgr = (new(ctx) SchemaManager(nullptr, nullptr, nullptr, nullptr, nullptr, ctx));
 	int maxLoop = fetcher->fetchInt(ctx);
 	for(int i = 0; i != maxLoop; ++i)
 	{

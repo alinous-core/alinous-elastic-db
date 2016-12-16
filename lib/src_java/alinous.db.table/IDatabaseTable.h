@@ -18,8 +18,14 @@ class IDatabaseRecord;}}}
 namespace alinous {namespace db {namespace table {namespace lockmonitor {
 class IThreadLocker;}}}}
 
-namespace alinous {namespace db {
-class AlinousDatabase;}}
+namespace alinous {namespace system {
+class AlinousCore;}}
+
+namespace alinous {namespace btree {
+class BTreeGlobalCache;}}
+
+namespace alinous {namespace runtime {namespace parallel {
+class ThreadPool;}}}
 
 namespace alinous {namespace db {namespace trx {namespace cache {
 class CachedRecord;}}}}
@@ -64,14 +70,16 @@ using ::java::util::Iterator;
 using ::java::io::IOException;
 using ::java::util::ArrayList;
 using ::alinous::btree::BTreeException;
+using ::alinous::btree::BTreeGlobalCache;
 using ::alinous::compile::sql::analyze::ScanTableColumnIdentifier;
-using ::alinous::db::AlinousDatabase;
 using ::alinous::db::AlinousDbException;
 using ::alinous::db::table::lockmonitor::DatabaseLockException;
 using ::alinous::db::table::lockmonitor::IThreadLocker;
 using ::alinous::db::trx::cache::CachedRecord;
 using ::alinous::runtime::dom::VariableException;
 using ::alinous::runtime::parallel::SequentialBackgroundJob;
+using ::alinous::runtime::parallel::ThreadPool;
+using ::alinous::system::AlinousCore;
 using ::alinous::system::AlinousException;
 using ::alinous::system::ISystemLog;
 
@@ -103,14 +111,14 @@ public:
 	virtual bool hasLaterVersion(long long oid, long long currentId, ThreadContext* ctx) = 0;
 	virtual bool hasLaterVersionBefore(long long oid, long long maxCommitId, long long currentCommitId, ThreadContext* ctx) = 0;
 	virtual String* getName(ThreadContext* ctx) throw()  = 0;
-	virtual void open(AlinousDatabase* database, ThreadContext* ctx) = 0;
-	virtual void createTable(TableMetadata* tableMetadata, AlinousDatabase* database, ThreadContext* ctx) = 0;
+	virtual void open(AlinousCore* core, BTreeGlobalCache* cache, ThreadContext* ctx) = 0;
+	virtual void createTable(TableMetadata* metadata, ThreadPool* threadPool, AlinousCore* core, BTreeGlobalCache* cache, ThreadContext* ctx) = 0;
 	virtual void lockStorage(ThreadContext* ctx) = 0;
 	virtual void unlockStorage(ThreadContext* ctx) = 0;
 	virtual ArrayList<IScannableIndex>* getIndexes(ThreadContext* ctx) throw()  = 0;
 	virtual void insertData(CachedRecord* record, long long newCommitId, IArrayObject<SequentialBackgroundJob>* jobs, ISystemLog* logger, ThreadContext* ctx) = 0;
 	virtual void updateData(CachedRecord* record, long long newCommitId, IArrayObject<SequentialBackgroundJob>* jobs, ISystemLog* logger, ThreadContext* ctx) = 0;
-	virtual void createIndex(String* getindexName, ArrayList<String>* columns, AlinousDatabase* database, ThreadContext* ctx) = 0;
+	virtual void createIndex(String* getindexName, ArrayList<String>* columns, AlinousCore* core, BTreeGlobalCache* cache, ThreadContext* ctx) = 0;
 	virtual void close(ThreadContext* ctx) throw()  = 0;
 	virtual String* getFullName(ThreadContext* ctx) throw()  = 0;
 	virtual void updateUnlockRow(long long oid, IThreadLocker* locker, ThreadContext* ctx) = 0;

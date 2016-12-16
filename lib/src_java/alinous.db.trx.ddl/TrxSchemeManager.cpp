@@ -52,7 +52,7 @@ void TrxSchemeManager::__releaseRegerences(bool prepare, ThreadContext* ctx) thr
 		return;
 	}
 }
-void TrxSchemeManager::executeCommit(ThreadContext* ctx)
+void TrxSchemeManager::executeCommit(AlinousCore* core, BTreeGlobalCache* cache, ThreadContext* ctx)
 {
 	int maxLoop = this->newMetadata->size(ctx);
 	for(int i = 0; i != maxLoop; ++i)
@@ -61,7 +61,7 @@ void TrxSchemeManager::executeCommit(ThreadContext* ctx)
 		{
 			try
 			{
-				executeCreateSchemaAndTable(sc, ctx);
+				executeCreateSchemaAndTable(sc, core, ctx);
 			}
 			catch(IOException* e)
 			{
@@ -85,7 +85,7 @@ void TrxSchemeManager::executeCommit(ThreadContext* ctx)
 	for(int i = 0; i != maxLoop; ++i)
 	{
 		CreateIndexMetadata* meta = this->createIndexMetadata->get(i, ctx);
-		executeCreateIndex(meta, ctx);
+		executeCreateIndex(meta, core, cache, ctx);
 	}
 }
 void TrxSchemeManager::addIndex(CreateIndexMetadata* meta, ThreadContext* ctx) throw() 
@@ -167,7 +167,7 @@ bool TrxSchemeManager::isHasOperation(ThreadContext* ctx) throw()
 {
 	return hasOperation;
 }
-void TrxSchemeManager::executeCreateIndex(CreateIndexMetadata* meta, ThreadContext* ctx) throw() 
+void TrxSchemeManager::executeCreateIndex(CreateIndexMetadata* meta, AlinousCore* core, BTreeGlobalCache* cache, ThreadContext* ctx) throw() 
 {
 	String* schemaName = meta->getTas(ctx)->getSchema(ctx);
 	String* tableName = meta->getTas(ctx)->getTable(ctx);
@@ -181,7 +181,7 @@ void TrxSchemeManager::executeCreateIndex(CreateIndexMetadata* meta, ThreadConte
 	{
 		try
 		{
-			tableStore->createIndex(meta->getindexName(ctx), meta->getColumns(ctx), this->database, ctx);
+			tableStore->createIndex(meta->getindexName(ctx), meta->getColumns(ctx), core, cache, ctx);
 		}
 		catch(Throwable* e)
 		{
@@ -190,7 +190,7 @@ void TrxSchemeManager::executeCreateIndex(CreateIndexMetadata* meta, ThreadConte
 		}
 	}
 }
-void TrxSchemeManager::executeCreateSchemaAndTable(TableSchema* sc, ThreadContext* ctx)
+void TrxSchemeManager::executeCreateSchemaAndTable(TableSchema* sc, AlinousCore* core, ThreadContext* ctx)
 {
 	String* schemaName = sc->name;
 	String* regionName = sc->getregionName(ctx);
@@ -201,7 +201,7 @@ void TrxSchemeManager::executeCreateSchemaAndTable(TableSchema* sc, ThreadContex
 	{
 		String* tableName = it->next(ctx);
 		TableMetadata* tblMeta = sc->getDableMetadata(tableName, ctx);
-		regions->commitCreateTable(regionName, schemaName, tblMeta, this->database, ctx);
+		regions->commitCreateTable(regionName, schemaName, tblMeta, this->database, core, ctx);
 	}
 	{
 		SynchronizedBlockObj __synchronized_2(this->database->instanceConfigLock, ctx);

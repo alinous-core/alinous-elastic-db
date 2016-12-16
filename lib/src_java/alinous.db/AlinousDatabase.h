@@ -9,12 +9,6 @@ class LocalCommitIdPublisher;}}
 namespace alinous {namespace system {
 class AlinousCore;}}
 
-namespace alinous {namespace db {
-class LocalTableRegion;}}
-
-namespace alinous {namespace db {
-class TableRegionManager;}}
-
 namespace alinous {namespace db {namespace trx {
 class DbTransactionManager;}}}
 
@@ -50,6 +44,12 @@ class MonitorRef;}}}}
 
 namespace alinous {namespace remote {namespace monitor {namespace client {
 class RemoteCommitIdPublisher;}}}}
+
+namespace alinous {namespace db {
+class LocalTableRegion;}}
+
+namespace alinous {namespace db {
+class TableRegionManager;}}
 
 namespace alinous {namespace db {
 class SchemaManager;}}

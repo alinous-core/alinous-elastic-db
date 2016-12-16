@@ -4,6 +4,7 @@ template class ::alinous::HashMapRawArray<::java::lang::String, ::alinous::runti
 template class ::alinous::HashMapRawArray<::java::lang::String, ::java::lang::String>;
 template class ::alinous::HashMapRawArray<::java::lang::String, ::alinous::db::table::lockmonitor::IThreadLocker>;
 template class ::alinous::HashMapRawArray<::alinous::html::DomNode, ::java::util::ArrayList<::alinous::html::xpath::match::MatchCandidate>>;
+template class ::alinous::HashMapRawArray<::java::lang::String, ::alinous::remote::region::NodeReference>;
 template class ::alinous::HashMapRawArray<::java::lang::String, ::java::util::TimeZone>;
 template class ::alinous::HashMapRawArray<::java::lang::String, ::org::alinous::charset::CharsetConverter>;
 template class ::alinous::HashMapRawArray<::java::lang::String, ::alinous::compile::analyse::DomVariableDeclareSource>;

@@ -38,7 +38,7 @@ void DatatableDDLSupport::__releaseRegerences(bool prepare, ThreadContext* ctx) 
 	}
 	DatatableLockSupport::__releaseRegerences(true, ctx);
 }
-void DatatableDDLSupport::createTable(TableMetadata* metadata, AlinousDatabase* database, ThreadContext* ctx)
+void DatatableDDLSupport::createTable(TableMetadata* metadata, ThreadPool* threadPool, AlinousCore* core, BTreeGlobalCache* cache, ThreadContext* ctx)
 {
 	getDataStorageName(ctx);
 	getOidIndexName(ctx);
@@ -50,18 +50,18 @@ void DatatableDDLSupport::createTable(TableMetadata* metadata, AlinousDatabase* 
 			{
 				dir->mkdirs(ctx);
 			}
-			__GC_MV(this, &(this->dataStorage), (new(ctx) FileStorage(database->getCore(ctx)->diskCache, (new(ctx) File(dataStoragePath, ctx)), ConstStr::getCNST_STR_1583(), ctx)), FileStorage);
+			__GC_MV(this, &(this->dataStorage), (new(ctx) FileStorage(core->diskCache, (new(ctx) File(dataStoragePath, ctx)), ConstStr::getCNST_STR_1583(), ctx)), FileStorage);
 			this->dataStorage->createStorage((long long)DatatableConstants::capacity, (long long)DatatableConstants::BLOCK_SIZE, ctx);
-			__GC_MV(this, &(this->oidIndex), (new(ctx) BTree(ctx))->init((new(ctx) File(this->oidIndexPath, ctx)), database->getBtreeCache(ctx), database->getCore(ctx)->diskCache, ctx), BTree);
+			__GC_MV(this, &(this->oidIndex), (new(ctx) BTree(ctx))->init((new(ctx) File(this->oidIndexPath, ctx)), cache, core->diskCache, ctx), BTree);
 			this->oidIndex->initTreeStorage(32, IBTreeValue::TYPE_LONG, IBTreeValue::TYPE_LONG, (long long)DatatableConstants::capacity, (long long)64, ctx);
 			StringBuilder* primname = (new(ctx) StringBuilder(ctx));
 			primname->append(this->name, ctx)->append(ConstStr::getCNST_STR_1602(), ctx);
 			__GC_MV(this, &(this->primaryIndex), (new(ctx) TableIndex(primname->toString(ctx), this->baseDir, true, metadata->getPrimaryKeys(ctx), ctx)), TableIndex);
-			this->primaryIndex->createIndex(database, ctx);
+			this->primaryIndex->createIndex(core, cache, ctx);
 			__GC_MV(this, &(this->metadata), metadata, TableMetadata);
 			__GC_MV(this, &(this->updateHistoryCache), (new(ctx) DatatableUpdateCache(this, ctx)), DatatableUpdateCache);
-			this->updateHistoryCache->execCreateTable(database, ctx);
-			open(false, database, ctx);
+			this->updateHistoryCache->execCreateTable(core, cache, ctx);
+			open(false, core, cache, ctx);
 			__GC_MV(this, &(this->schmeUpdated), (new(ctx) Timestamp(System::currentTimeMillis(ctx), ctx)), Timestamp);
 			syncScheme(ctx);
 		}
@@ -92,7 +92,7 @@ void DatatableDDLSupport::createTable(TableMetadata* metadata, AlinousDatabase* 
 		}
 	}
 }
-void DatatableDDLSupport::createIndex(String* indexName, ArrayList<String>* columns, AlinousDatabase* database, ThreadContext* ctx)
+void DatatableDDLSupport::createIndex(String* indexName, ArrayList<String>* columns, AlinousCore* core, BTreeGlobalCache* cache, ThreadContext* ctx)
 {
 	lockStorage(ctx);
 	{
@@ -102,9 +102,9 @@ void DatatableDDLSupport::createIndex(String* indexName, ArrayList<String>* colu
 			metadata->setupColumnMetadata(this->metadata, ctx);
 			this->metadata->addindex(metadata, ctx);
 			TableIndex* newindex = (new(ctx) TableIndex(indexName, this->baseDir, false, metadata->getMetadata(ctx), ctx));
-			newindex->createIndex(database, ctx);
+			newindex->createIndex(core, cache, ctx);
 			this->indexes->add(newindex, ctx);
-			newindex->open(database, ctx);
+			newindex->open(core, cache, ctx);
 			buildFirstindexValue(newindex, ctx);
 			__GC_MV(this, &(this->schmeUpdated), (new(ctx) Timestamp(System::currentTimeMillis(ctx), ctx)), Timestamp);
 			syncScheme(ctx);

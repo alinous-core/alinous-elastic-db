@@ -9,6 +9,9 @@ class RemoteStorageResponceActionFactory;}}}
 namespace alinous {namespace remote {namespace socket {
 class SocketServer;}}}
 
+namespace alinous {namespace db {
+class SchemaManager;}}
+
 namespace java {namespace lang {
 class IObject;
 }}
@@ -22,6 +25,7 @@ namespace alinous {namespace remote {namespace db {
 using namespace ::alinous;
 using namespace ::java::lang;
 using ::java::util::Iterator;
+using ::alinous::db::SchemaManager;
 using ::alinous::remote::socket::SocketServer;
 using ::alinous::system::ISystemLog;
 
@@ -35,6 +39,8 @@ public:
 	void __construct_impl(int port, int maxthread, ThreadContext* ctx) throw() ;
 	virtual ~RemoteTableStorageServer() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
+public:
+	SchemaManager* schemas;
 private:
 	int port;
 	int maxthread;

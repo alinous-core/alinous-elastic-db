@@ -9,8 +9,11 @@ class BTree;}}
 namespace alinous {namespace db {namespace table {
 class DatabaseRecord;}}}
 
-namespace alinous {namespace db {
-class AlinousDatabase;}}
+namespace alinous {namespace system {
+class AlinousCore;}}
+
+namespace alinous {namespace btree {
+class BTreeGlobalCache;}}
 
 namespace alinous {namespace compile {namespace sql {namespace analyze {
 class ScanTableColumnIdentifier;}}}}
@@ -47,11 +50,12 @@ using ::java::io::IOException;
 using ::java::util::ArrayList;
 using ::alinous::btree::BTree;
 using ::alinous::btree::BTreeException;
+using ::alinous::btree::BTreeGlobalCache;
 using ::alinous::buffer::storage::FileStorageEntryBuilder;
 using ::alinous::compile::sql::analyze::ScanTableColumnIdentifier;
-using ::alinous::db::AlinousDatabase;
 using ::alinous::db::AlinousDbException;
 using ::alinous::runtime::dom::VariableException;
+using ::alinous::system::AlinousCore;
 
 
 
@@ -73,11 +77,11 @@ public:
 	virtual String* getName(ThreadContext* ctx) throw()  = 0;
 	virtual bool isPrimary(ThreadContext* ctx) throw()  = 0;
 	virtual void addIndexValue(DatabaseRecord* record, ThreadContext* ctx) = 0;
-	virtual void createIndex(AlinousDatabase* database, ThreadContext* ctx) = 0;
+	virtual void createIndex(AlinousCore* core, BTreeGlobalCache* cache, ThreadContext* ctx) = 0;
 	virtual bool isAvailableByScanId(ArrayList<ScanTableColumnIdentifier>* columnIds, ThreadContext* ctx) throw()  = 0;
 	virtual bool isAvailable(ArrayList<String>* columnsStr, ThreadContext* ctx) throw()  = 0;
 	virtual bool isOpened(ThreadContext* ctx) throw()  = 0;
-	virtual void open(AlinousDatabase* database, ThreadContext* ctx) = 0;
+	virtual void open(AlinousCore* core, BTreeGlobalCache* cache, ThreadContext* ctx) = 0;
 	virtual void close(ThreadContext* ctx) = 0;
 	virtual void appendToEntry(FileStorageEntryBuilder* builder, ThreadContext* ctx) = 0;
 	virtual int archiveSize(ThreadContext* ctx) throw()  = 0;

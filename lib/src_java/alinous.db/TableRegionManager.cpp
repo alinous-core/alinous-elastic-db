@@ -66,7 +66,7 @@ TableSchemaCollection* TableRegionManager::getSchema(String* name, ThreadContext
 	}
 	return col;
 }
-void TableRegionManager::commitCreateTable(String* regionName, String* schemaName, TableMetadata* tblMeta, AlinousDatabase* database, ThreadContext* ctx)
+void TableRegionManager::commitCreateTable(String* regionName, String* schemaName, TableMetadata* tblMeta, AlinousDatabase* database, AlinousCore* core, ThreadContext* ctx)
 {
 	if(regionName == nullptr)
 	{
@@ -84,7 +84,7 @@ void TableRegionManager::commitCreateTable(String* regionName, String* schemaNam
 		}
 	}
 	region->createSchema(schemaName, ctx);
-	region->createTable(schemaName, tblMeta, ctx);
+	region->createTable(schemaName, tblMeta, database->workerThreadsPool, core, database->getBtreeCache(ctx), ctx);
 }
 }}
 

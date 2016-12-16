@@ -6,8 +6,14 @@ class OneSource;
 namespace alinous {namespace system {
 class ISystemLog;}}
 
-namespace alinous {namespace db {
-class AlinousDatabase;}}
+namespace alinous {namespace runtime {namespace parallel {
+class ThreadPool;}}}
+
+namespace alinous {namespace system {
+class AlinousCore;}}
+
+namespace alinous {namespace btree {
+class BTreeGlobalCache;}}
 
 namespace alinous {namespace db {namespace table {
 class TableMetadata;}}}
@@ -74,6 +80,7 @@ using ::java::io::IOException;
 using ::java::util::HashMap;
 using ::java::util::Iterator;
 using ::alinous::btree::BTreeException;
+using ::alinous::btree::BTreeGlobalCache;
 using ::alinous::btree::IBTreeValue;
 using ::alinous::btree::IValueFetcher;
 using ::alinous::buffer::storage::FileStorageEntryBuilder;
@@ -83,6 +90,8 @@ using ::alinous::db::table::DatabaseTable;
 using ::alinous::db::table::IDatabaseTable;
 using ::alinous::db::table::IOidPublisher;
 using ::alinous::db::table::TableMetadata;
+using ::alinous::runtime::parallel::ThreadPool;
+using ::alinous::system::AlinousCore;
 using ::alinous::system::AlinousException;
 using ::alinous::system::ISystemLog;
 
@@ -92,21 +101,22 @@ class SchemaManager final : public IBTreeValue, public virtual IObject {
 public:
 	SchemaManager(const SchemaManager& base) = default;
 public:
-	SchemaManager(String* dataDir, ISystemLog* logger, AlinousDatabase* database, ThreadContext* ctx) throw() ;
-	void __construct_impl(String* dataDir, ISystemLog* logger, AlinousDatabase* database, ThreadContext* ctx) throw() ;
+	SchemaManager(String* dataDir, ISystemLog* logger, ThreadPool* threadPool, AlinousCore* core, BTreeGlobalCache* cache, ThreadContext* ctx) throw() ;
+	void __construct_impl(String* dataDir, ISystemLog* logger, ThreadPool* threadPool, AlinousCore* core, BTreeGlobalCache* cache, ThreadContext* ctx) throw() ;
 	virtual ~SchemaManager() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 private:
 	String* dataDir;
 	HashMap<String,TableSchema>* schemas;
 	ISystemLog* logger;
-	AlinousDatabase* database;
+	ThreadPool* threadPool;
 	IOidPublisher* oidPublisher;
 public:
-	void createTable(String* schemaName, TableMetadata* tableMetadata, ThreadContext* ctx);
+	void init(ThreadContext* ctx) throw() ;
+	void createTable(String* schemaName, TableMetadata* tableMetadata, ThreadPool* threadPool, AlinousCore* core, BTreeGlobalCache* cache, ThreadContext* ctx);
 	TableSchema* createSchema(String* name, ThreadContext* ctx) throw() ;
 	TableSchema* getSchema(String* name, ThreadContext* ctx) throw() ;
-	void loadAfterFetch(String* dataDir, ISystemLog* logger, AlinousDatabase* database, ThreadContext* ctx);
+	void loadAfterFetch(String* dataDir, ISystemLog* logger, ThreadPool* threadPool, AlinousCore* core, BTreeGlobalCache* cache, ThreadContext* ctx);
 	void appendToEntry(FileStorageEntryBuilder* builder, ThreadContext* ctx) throw()  final;
 	int diskSize(ThreadContext* ctx) throw()  final;
 	bool equals(IObject* obj, ThreadContext* ctx) throw()  final;

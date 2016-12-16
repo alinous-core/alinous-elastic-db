@@ -65,7 +65,7 @@ void TableSchema::create(ThreadContext* ctx) throw()
 		file->mkdirs(ctx);
 	}
 }
-void TableSchema::initAfterFetched(String* dataDir, String* schemaName, AlinousDatabase* database, IOidPublisher* oidPublisher, ThreadContext* ctx)
+void TableSchema::initAfterFetched(String* dataDir, String* schemaName, ThreadPool* threadPool, IOidPublisher* oidPublisher, AlinousCore* core, BTreeGlobalCache* cache, ThreadContext* ctx)
 {
 	__GC_MV(this, &(this->dataDir), dataDir, String);
 	StringBuilder* buff = (new(ctx) StringBuilder(ctx));
@@ -75,9 +75,9 @@ void TableSchema::initAfterFetched(String* dataDir, String* schemaName, AlinousD
 	while(it->hasNext(ctx))
 	{
 		String* tableNname = it->next(ctx);
-		IDatabaseTable* dataStore = (new(ctx) DatabaseTable(schemaName, tableNname, baseDir, database->workerThreadsPool, oidPublisher, ctx));
+		IDatabaseTable* dataStore = (new(ctx) DatabaseTable(schemaName, tableNname, baseDir, threadPool, oidPublisher, ctx));
 		this->tableStores->put(tableNname, dataStore, ctx);
-		dataStore->open(database, ctx);
+		dataStore->open(core, cache, ctx);
 	}
 }
 String* TableSchema::getSchemaDir(ThreadContext* ctx) throw() 

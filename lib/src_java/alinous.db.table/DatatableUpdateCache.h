@@ -6,8 +6,11 @@ class OneSource;
 namespace alinous {namespace db {namespace table {
 class AbstractDatabaseTable;}}}
 
-namespace alinous {namespace db {
-class AlinousDatabase;}}
+namespace alinous {namespace system {
+class AlinousCore;}}
+
+namespace alinous {namespace btree {
+class BTreeGlobalCache;}}
 
 namespace alinous {namespace btree {
 class BTree;}}
@@ -77,15 +80,16 @@ using ::java::io::File;
 using ::java::io::IOException;
 using ::alinous::btree::BTree;
 using ::alinous::btree::BTreeException;
+using ::alinous::btree::BTreeGlobalCache;
 using ::alinous::btree::IBTree;
 using ::alinous::btree::IBTreeValue;
 using ::alinous::btree::LongKey;
 using ::alinous::compile::sql::analyze::ScanTableIdentifier;
-using ::alinous::db::AlinousDatabase;
 using ::alinous::db::table::scan::UpdateHistoryBTreeIndexScanner;
 using ::alinous::db::trx::DbTransaction;
 using ::alinous::db::trx::scan::ITableTargetScanner;
 using ::alinous::runtime::dom::VariableException;
+using ::alinous::system::AlinousCore;
 
 
 
@@ -103,8 +107,8 @@ private:
 	String* baseDir;
 	String* oidIndexPath;
 public:
-	void execCreateTable(AlinousDatabase* database, ThreadContext* ctx);
-	void open(AlinousDatabase* database, ThreadContext* ctx);
+	void execCreateTable(AlinousCore* core, BTreeGlobalCache* cache, ThreadContext* ctx);
+	void open(AlinousCore* core, BTreeGlobalCache* cache, ThreadContext* ctx);
 	ITableTargetScanner* getScanner(ScanTableIdentifier* tableId, long long commitId, DbTransaction* trx, ThreadContext* ctx);
 	void addHistory(DatabaseRecord* oldRecord, ThreadContext* ctx);
 	void close(ThreadContext* ctx) throw() ;

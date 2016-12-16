@@ -18,13 +18,13 @@ bool LocalTableRegion::__init_static_variables(){
 	delete ctx;
 	return true;
 }
- LocalTableRegion::LocalTableRegion(String* dataDir, ISystemLog* logger, AlinousDatabase* database, ThreadContext* ctx) throw()  : IObject(ctx), ITableRegion(ctx), schemas(nullptr)
+ LocalTableRegion::LocalTableRegion(String* dataDir, ISystemLog* logger, ThreadPool* threadPool, AlinousCore* core, BTreeGlobalCache* cache, ThreadContext* ctx) throw()  : IObject(ctx), ITableRegion(ctx), schemas(nullptr)
 {
-	__GC_MV(this, &(this->schemas), (new(ctx) SchemaManager(dataDir, logger, database, ctx)), SchemaManager);
+	__GC_MV(this, &(this->schemas), (new(ctx) SchemaManager(dataDir, logger, threadPool, core, cache, ctx)), SchemaManager);
 }
-void LocalTableRegion::__construct_impl(String* dataDir, ISystemLog* logger, AlinousDatabase* database, ThreadContext* ctx) throw() 
+void LocalTableRegion::__construct_impl(String* dataDir, ISystemLog* logger, ThreadPool* threadPool, AlinousCore* core, BTreeGlobalCache* cache, ThreadContext* ctx) throw() 
 {
-	__GC_MV(this, &(this->schemas), (new(ctx) SchemaManager(dataDir, logger, database, ctx)), SchemaManager);
+	__GC_MV(this, &(this->schemas), (new(ctx) SchemaManager(dataDir, logger, threadPool, core, cache, ctx)), SchemaManager);
 }
  LocalTableRegion::~LocalTableRegion() throw() 
 {
@@ -62,9 +62,9 @@ void LocalTableRegion::createSchema(String* schemaName, ThreadContext* ctx) thro
 {
 	this->schemas->createSchema(schemaName, ctx);
 }
-void LocalTableRegion::createTable(String* schemaName, TableMetadata* tblMeta, ThreadContext* ctx)
+void LocalTableRegion::createTable(String* schemaName, TableMetadata* tblMeta, ThreadPool* threadPool, AlinousCore* core, BTreeGlobalCache* cache, ThreadContext* ctx)
 {
-	this->schemas->createTable(schemaName, tblMeta, ctx);
+	this->schemas->createTable(schemaName, tblMeta, threadPool, core, cache, ctx);
 }
 }}
 

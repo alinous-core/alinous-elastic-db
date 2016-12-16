@@ -15,8 +15,11 @@ class ConcurrentGate;}}
 namespace java {namespace sql {
 class Timestamp;}}
 
-namespace alinous {namespace db {
-class AlinousDatabase;}}
+namespace alinous {namespace system {
+class AlinousCore;}}
+
+namespace alinous {namespace btree {
+class BTreeGlobalCache;}}
 
 namespace alinous {namespace buffer {namespace storage {
 class FileStorage;}}}
@@ -100,16 +103,17 @@ using ::java::sql::Timestamp;
 using ::java::util::ArrayList;
 using ::alinous::btree::BTree;
 using ::alinous::btree::BTreeException;
+using ::alinous::btree::BTreeGlobalCache;
 using ::alinous::buffer::storage::FileStorage;
 using ::alinous::buffer::storage::FileStorageEntry;
 using ::alinous::buffer::storage::FileStorageEntryBuilder;
 using ::alinous::buffer::storage::FileStorageEntryFetcher;
 using ::alinous::buffer::storage::FileStorageEntryReader;
 using ::alinous::buffer::storage::FileStorageEntryWriter;
-using ::alinous::db::AlinousDatabase;
 using ::alinous::db::AlinousDbException;
 using ::alinous::lock::ConcurrentGate;
 using ::alinous::runtime::dom::VariableException;
+using ::alinous::system::AlinousCore;
 
 
 
@@ -137,8 +141,8 @@ public:
 	DatatableUpdateCache* updateHistoryCache;
 	String* fullName;
 public:
-	void open(AlinousDatabase* database, ThreadContext* ctx) final;
-	void open(bool loadscheme, AlinousDatabase* database, ThreadContext* ctx);
+	void open(AlinousCore* core, BTreeGlobalCache* cache, ThreadContext* ctx) final;
+	void open(bool loadscheme, AlinousCore* core, BTreeGlobalCache* cache, ThreadContext* ctx);
 	void close(ThreadContext* ctx) throw()  final;
 	TableMetadata* getMetadata(ThreadContext* ctx) throw()  final;
 	ArrayList<IScannableIndex>* getIndexes(ThreadContext* ctx) throw()  final;

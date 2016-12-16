@@ -19,7 +19,7 @@ bool RemoteTableStorageServer::__init_static_variables(){
 	delete ctx;
 	return true;
 }
- RemoteTableStorageServer::RemoteTableStorageServer(int port, int maxthread, ThreadContext* ctx) throw()  : IObject(ctx), port(0), maxthread(0), socketServer(nullptr)
+ RemoteTableStorageServer::RemoteTableStorageServer(int port, int maxthread, ThreadContext* ctx) throw()  : IObject(ctx), schemas(nullptr), port(0), maxthread(0), socketServer(nullptr)
 {
 	this->port = port;
 	this->maxthread = maxthread;
@@ -39,6 +39,8 @@ void RemoteTableStorageServer::__construct_impl(int port, int maxthread, ThreadC
 void RemoteTableStorageServer::__releaseRegerences(bool prepare, ThreadContext* ctx) throw() 
 {
 	ObjectEraser __e_obj1(ctx, __FILEW__, __LINE__, L"RemoteTableStorageServer", L"~RemoteTableStorageServer");
+	__e_obj1.add(this->schemas, this);
+	schemas = nullptr;
 	__e_obj1.add(this->socketServer, this);
 	socketServer = nullptr;
 	if(!prepare){

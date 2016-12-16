@@ -6,11 +6,17 @@ class OneSource;
 namespace java {namespace io {
 class File;}}
 
-namespace alinous {namespace db {
-class AlinousDatabase;}}
+namespace alinous {namespace runtime {namespace parallel {
+class ThreadPool;}}}
 
 namespace alinous {namespace db {namespace table {
 class IOidPublisher;}}}
+
+namespace alinous {namespace system {
+class AlinousCore;}}
+
+namespace alinous {namespace btree {
+class BTreeGlobalCache;}}
 
 namespace java {namespace lang {
 class StringBuilder;}}
@@ -71,6 +77,7 @@ using ::java::io::File;
 using ::java::util::HashMap;
 using ::java::util::Iterator;
 using ::java::util::Set;
+using ::alinous::btree::BTreeGlobalCache;
 using ::alinous::btree::IBTreeValue;
 using ::alinous::btree::IValueFetcher;
 using ::alinous::buffer::storage::FileStorageEntryBuilder;
@@ -80,6 +87,8 @@ using ::alinous::db::table::DatabaseTable;
 using ::alinous::db::table::IDatabaseTable;
 using ::alinous::db::table::IOidPublisher;
 using ::alinous::db::table::TableMetadata;
+using ::alinous::runtime::parallel::ThreadPool;
+using ::alinous::system::AlinousCore;
 using ::alinous::system::AlinousException;
 
 
@@ -102,7 +111,7 @@ private:
 	String* regionName;
 public:
 	void create(ThreadContext* ctx) throw() ;
-	void initAfterFetched(String* dataDir, String* schemaName, AlinousDatabase* database, IOidPublisher* oidPublisher, ThreadContext* ctx);
+	void initAfterFetched(String* dataDir, String* schemaName, ThreadPool* threadPool, IOidPublisher* oidPublisher, AlinousCore* core, BTreeGlobalCache* cache, ThreadContext* ctx);
 	String* getSchemaDir(ThreadContext* ctx) throw() ;
 	void addTableStore(IDatabaseTable* tableStore, ThreadContext* ctx) throw() ;
 	IDatabaseTable* getTableStore(String* tableName, ThreadContext* ctx) throw() ;

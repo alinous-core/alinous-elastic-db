@@ -18,6 +18,9 @@ class TableMetadata;}}}
 namespace alinous {namespace db {
 class AlinousDatabase;}}
 
+namespace alinous {namespace system {
+class AlinousCore;}}
+
 namespace java {namespace util {
 template <typename  T> class List;}}
 
@@ -52,6 +55,7 @@ using ::java::util::List;
 using ::alinous::btree::BTreeException;
 using ::alinous::db::table::DatabaseException;
 using ::alinous::db::table::TableMetadata;
+using ::alinous::system::AlinousCore;
 using ::alinous::system::AlinousException;
 
 
@@ -74,7 +78,7 @@ public:
 	void addRegion(ITableRegion* region, ThreadContext* ctx) throw() ;
 	LocalTableRegion* getLocalRegion(ThreadContext* ctx) throw() ;
 	TableSchemaCollection* getSchema(String* name, ThreadContext* ctx) throw() ;
-	void commitCreateTable(String* regionName, String* schemaName, TableMetadata* tblMeta, AlinousDatabase* database, ThreadContext* ctx);
+	void commitCreateTable(String* regionName, String* schemaName, TableMetadata* tblMeta, AlinousDatabase* database, AlinousCore* core, ThreadContext* ctx);
 public:
 	static bool __init_done;
 	static bool __init_static_variables();

@@ -9,6 +9,12 @@ class AlinousDatabase;}}
 namespace alinous {namespace system {
 class ISystemLog;}}
 
+namespace alinous {namespace system {
+class AlinousCore;}}
+
+namespace alinous {namespace btree {
+class BTreeGlobalCache;}}
+
 namespace alinous {namespace db {
 class TableSchema;}}
 
@@ -72,6 +78,7 @@ using ::java::util::ArrayList;
 using ::java::util::Iterator;
 using ::java::util::Set;
 using ::alinous::btree::BTreeException;
+using ::alinous::btree::BTreeGlobalCache;
 using ::alinous::db::AlinousDatabase;
 using ::alinous::db::AlinousDbException;
 using ::alinous::db::TableRegionManager;
@@ -81,6 +88,7 @@ using ::alinous::db::table::DatabaseException;
 using ::alinous::db::table::IDatabaseTable;
 using ::alinous::db::table::TableMetadata;
 using ::alinous::db::trx::CreateIndexMetadata;
+using ::alinous::system::AlinousCore;
 using ::alinous::system::AlinousException;
 using ::alinous::system::ISystemLog;
 
@@ -102,7 +110,7 @@ private:
 	bool hasOperation;
 	AlinousDatabase* database;
 public:
-	void executeCommit(ThreadContext* ctx);
+	void executeCommit(AlinousCore* core, BTreeGlobalCache* cache, ThreadContext* ctx);
 	void addIndex(CreateIndexMetadata* meta, ThreadContext* ctx) throw() ;
 	void addNewMetadata(TableSchema* metadata, ThreadContext* ctx) throw() ;
 	TableMetadata* getTableMetadata(String* schemaName, String* tableName, ThreadContext* ctx) throw() ;
@@ -112,8 +120,8 @@ public:
 	void dispose(ThreadContext* ctx) throw() ;
 	bool isHasOperation(ThreadContext* ctx) throw() ;
 private:
-	void executeCreateIndex(CreateIndexMetadata* meta, ThreadContext* ctx) throw() ;
-	void executeCreateSchemaAndTable(TableSchema* sc, ThreadContext* ctx);
+	void executeCreateIndex(CreateIndexMetadata* meta, AlinousCore* core, BTreeGlobalCache* cache, ThreadContext* ctx) throw() ;
+	void executeCreateSchemaAndTable(TableSchema* sc, AlinousCore* core, ThreadContext* ctx);
 	TableSchema* getNewSchema(String* schemaName, ThreadContext* ctx) throw() ;
 public:
 	static bool __init_done;

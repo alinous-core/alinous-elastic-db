@@ -6,8 +6,11 @@ class OneSource;
 namespace alinous {namespace db {namespace table {
 class TableColumnMetadata;}}}
 
-namespace alinous {namespace db {
-class AlinousDatabase;}}
+namespace alinous {namespace system {
+class AlinousCore;}}
+
+namespace alinous {namespace btree {
+class BTreeGlobalCache;}}
 
 namespace java {namespace io {
 class File;}}
@@ -81,13 +84,14 @@ using ::java::io::IOException;
 using ::java::util::ArrayList;
 using ::alinous::btree::BTree;
 using ::alinous::btree::BTreeException;
+using ::alinous::btree::BTreeGlobalCache;
 using ::alinous::btree::IBTreeValue;
 using ::alinous::buffer::storage::FileStorageEntryBuilder;
 using ::alinous::buffer::storage::FileStorageEntryFetcher;
 using ::alinous::compile::sql::analyze::ScanTableColumnIdentifier;
-using ::alinous::db::AlinousDatabase;
 using ::alinous::db::AlinousDbException;
 using ::alinous::runtime::dom::VariableException;
+using ::alinous::system::AlinousCore;
 
 
 
@@ -112,12 +116,12 @@ public:
 	constexpr static const int maxCache{256};
 public:
 	bool isOpened(ThreadContext* ctx) throw()  final;
-	void open(AlinousDatabase* database, ThreadContext* ctx) final;
+	void open(AlinousCore* core, BTreeGlobalCache* cache, ThreadContext* ctx) final;
 	void close(ThreadContext* ctx) final;
 	bool isAvailable(ArrayList<String>* columnsStr, ThreadContext* ctx) throw()  final;
 	bool isAvailableByScanId(ArrayList<ScanTableColumnIdentifier>* columnIds, ThreadContext* ctx) throw()  final;
 	void addIndexValue(DatabaseRecord* record, ThreadContext* ctx) final;
-	void createIndex(AlinousDatabase* database, ThreadContext* ctx) final;
+	void createIndex(AlinousCore* core, BTreeGlobalCache* cache, ThreadContext* ctx) final;
 	int archiveSize(ThreadContext* ctx) throw()  final;
 	void appendToEntry(FileStorageEntryBuilder* builder, ThreadContext* ctx) final;
 	BTree* getStorage(ThreadContext* ctx) throw()  final;

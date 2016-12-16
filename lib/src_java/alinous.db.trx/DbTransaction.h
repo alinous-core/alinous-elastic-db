@@ -16,7 +16,7 @@ namespace alinous {namespace db {
 class AlinousDatabase;}}
 
 namespace alinous {namespace system {
-class ISystemLog;}}
+class AlinousCore;}}
 
 namespace alinous {namespace db {namespace trx {namespace ddl {
 class TrxSchemeManager;}}}}
@@ -144,6 +144,9 @@ class InterruptedException;}}
 namespace alinous {namespace runtime {namespace dom {
 class VariableException;}}}
 
+namespace alinous {namespace system {
+class ISystemLog;}}
+
 namespace alinous {namespace runtime {namespace parallel {
 class ThreadPool;}}}
 
@@ -217,6 +220,7 @@ using ::alinous::runtime::dom::VariableException;
 using ::alinous::runtime::engine::ScriptMachine;
 using ::alinous::runtime::parallel::ThreadPool;
 using ::alinous::runtime::variant::VariantValue;
+using ::alinous::system::AlinousCore;
 using ::alinous::system::AlinousException;
 using ::alinous::system::ISystemLog;
 
@@ -226,8 +230,8 @@ class DbTransaction : public virtual IObject {
 public:
 	DbTransaction(const DbTransaction& base) = default;
 public:
-	DbTransaction(DbTransactionManager* mgr, String* tmpDir, AlinousDatabase* database, ISystemLog* logger, long long commitId, ThreadContext* ctx) throw() ;
-	void __construct_impl(DbTransactionManager* mgr, String* tmpDir, AlinousDatabase* database, ISystemLog* logger, long long commitId, ThreadContext* ctx) throw() ;
+	DbTransaction(DbTransactionManager* mgr, String* tmpDir, AlinousDatabase* database, AlinousCore* core, long long commitId, ThreadContext* ctx) throw() ;
+	void __construct_impl(DbTransactionManager* mgr, String* tmpDir, AlinousDatabase* database, AlinousCore* core, long long commitId, ThreadContext* ctx) throw() ;
 	virtual ~DbTransaction() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 public:
@@ -244,6 +248,7 @@ public:
 	String* trxDir;
 private:
 	long long soidSerial;
+	AlinousCore* core;
 public:
 	virtual bool isVisible(IDatabaseRecord* record, IDatabaseTable* tableStore, ThreadContext* ctx) = 0;
 	long long newSoid(ThreadContext* ctx) throw() ;

@@ -88,15 +88,15 @@ void AbstractDatabaseTable::__releaseRegerences(bool prepare, ThreadContext* ctx
 		return;
 	}
 }
-void AbstractDatabaseTable::open(AlinousDatabase* database, ThreadContext* ctx)
+void AbstractDatabaseTable::open(AlinousCore* core, BTreeGlobalCache* cache, ThreadContext* ctx)
 {
 	getDataStorageName(ctx);
 	getOidIndexName(ctx);
-	__GC_MV(this, &(this->dataStorage), (new(ctx) FileStorage(database->getCore(ctx)->diskCache, (new(ctx) File(dataStoragePath, ctx)), ConstStr::getCNST_STR_1583(), ctx)), FileStorage);
+	__GC_MV(this, &(this->dataStorage), (new(ctx) FileStorage(core->diskCache, (new(ctx) File(dataStoragePath, ctx)), ConstStr::getCNST_STR_1583(), ctx)), FileStorage);
 	{
 		try
 		{
-			__GC_MV(this, &(this->oidIndex), (new(ctx) BTree(ctx))->init((new(ctx) File(this->oidIndexPath, ctx)), database->getBtreeCache(ctx), database->getCore(ctx)->diskCache, ctx), BTree);
+			__GC_MV(this, &(this->oidIndex), (new(ctx) BTree(ctx))->init((new(ctx) File(this->oidIndexPath, ctx)), cache, core->diskCache, ctx), BTree);
 		}
 		catch(Throwable* e)
 		{
@@ -104,16 +104,16 @@ void AbstractDatabaseTable::open(AlinousDatabase* database, ThreadContext* ctx)
 		}
 	}
 	__GC_MV(this, &(this->updateHistoryCache), (new(ctx) DatatableUpdateCache(this, ctx)), DatatableUpdateCache);
-	open(true, database, ctx);
+	open(true, core, cache, ctx);
 }
-void AbstractDatabaseTable::open(bool loadscheme, AlinousDatabase* database, ThreadContext* ctx)
+void AbstractDatabaseTable::open(bool loadscheme, AlinousCore* core, BTreeGlobalCache* cache, ThreadContext* ctx)
 {
 	{
 		try
 		{
 			this->dataStorage->open(ctx);
 			this->oidIndex->open(ctx);
-			this->updateHistoryCache->open(database, ctx);
+			this->updateHistoryCache->open(core, cache, ctx);
 		}
 		catch(IOException* e)
 		{
@@ -152,12 +152,12 @@ void AbstractDatabaseTable::open(bool loadscheme, AlinousDatabase* database, Thr
 	{
 		try
 		{
-			this->primaryIndex->open(database, ctx);
+			this->primaryIndex->open(core, cache, ctx);
 			int maxLoop = this->indexes->size(ctx);
 			for(int i = 0; i != maxLoop; ++i)
 			{
 				IScannableIndex* index = this->indexes->get(i, ctx);
-				index->open(database, ctx);
+				index->open(core, cache, ctx);
 			}
 		}
 		catch(IOException* e)

@@ -6,8 +6,14 @@ class OneSource;
 namespace alinous {namespace db {namespace table {
 class TableMetadata;}}}
 
-namespace alinous {namespace db {
-class AlinousDatabase;}}
+namespace alinous {namespace runtime {namespace parallel {
+class ThreadPool;}}}
+
+namespace alinous {namespace system {
+class AlinousCore;}}
+
+namespace alinous {namespace btree {
+class BTreeGlobalCache;}}
 
 namespace java {namespace io {
 class File;}}
@@ -99,6 +105,7 @@ using ::java::sql::Timestamp;
 using ::java::util::ArrayList;
 using ::alinous::btree::BTree;
 using ::alinous::btree::BTreeException;
+using ::alinous::btree::BTreeGlobalCache;
 using ::alinous::btree::IBTreeNode;
 using ::alinous::btree::IBTreeValue;
 using ::alinous::btree::LongValue;
@@ -107,9 +114,10 @@ using ::alinous::buffer::storage::FileStorage;
 using ::alinous::buffer::storage::FileStorageEntry;
 using ::alinous::buffer::storage::FileStorageEntryFetcher;
 using ::alinous::buffer::storage::FileStorageEntryReader;
-using ::alinous::db::AlinousDatabase;
 using ::alinous::db::AlinousDbException;
 using ::alinous::runtime::dom::VariableException;
+using ::alinous::runtime::parallel::ThreadPool;
+using ::alinous::system::AlinousCore;
 using ::alinous::system::AlinousException;
 
 
@@ -123,8 +131,8 @@ public:
 	virtual ~DatatableDDLSupport() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 public:
-	void createTable(TableMetadata* metadata, AlinousDatabase* database, ThreadContext* ctx) final;
-	void createIndex(String* indexName, ArrayList<String>* columns, AlinousDatabase* database, ThreadContext* ctx) final;
+	void createTable(TableMetadata* metadata, ThreadPool* threadPool, AlinousCore* core, BTreeGlobalCache* cache, ThreadContext* ctx) final;
+	void createIndex(String* indexName, ArrayList<String>* columns, AlinousCore* core, BTreeGlobalCache* cache, ThreadContext* ctx) final;
 private:
 	void buildFirstindexValue(TableIndex* newindex, ThreadContext* ctx);
 public:

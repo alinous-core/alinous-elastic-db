@@ -7,7 +7,7 @@ namespace alinous {namespace db {
 class AlinousDatabase;}}
 
 namespace alinous {namespace system {
-class ISystemLog;}}
+class AlinousCore;}}
 
 namespace alinous {namespace runtime {namespace parallel {
 class ThreadPool;}}}
@@ -62,7 +62,7 @@ using ::alinous::db::AlinousDbException;
 using ::alinous::lock::LockObject;
 using ::alinous::runtime::dbif::IDatabaseDriver;
 using ::alinous::runtime::parallel::ThreadPool;
-using ::alinous::system::ISystemLog;
+using ::alinous::system::AlinousCore;
 using ::alinous::system::utils::FileUtils;
 
 
@@ -71,8 +71,8 @@ class DbTransactionManager final : public virtual IObject {
 public:
 	DbTransactionManager(const DbTransactionManager& base) = default;
 public:
-	DbTransactionManager(AlinousDatabase* database, String* trxTmpDir, int maxConnection, ISystemLog* logger, ThreadPool* workerThreadsPool, ThreadContext* ctx) throw() ;
-	void __construct_impl(AlinousDatabase* database, String* trxTmpDir, int maxConnection, ISystemLog* logger, ThreadPool* workerThreadsPool, ThreadContext* ctx) throw() ;
+	DbTransactionManager(AlinousDatabase* database, String* trxTmpDir, int maxConnection, AlinousCore* core, ThreadPool* workerThreadsPool, ThreadContext* ctx) throw() ;
+	void __construct_impl(AlinousDatabase* database, String* trxTmpDir, int maxConnection, AlinousCore* core, ThreadPool* workerThreadsPool, ThreadContext* ctx) throw() ;
 	virtual ~DbTransactionManager() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 private:
@@ -81,7 +81,7 @@ private:
 	int trxCount;
 	AlinousDatabase* database;
 	LockObject* lock;
-	ISystemLog* logger;
+	AlinousCore* core;
 	ArrayList<DbTransaction>* trxReady;
 	ThreadPool* workerThreadsPool;
 public:

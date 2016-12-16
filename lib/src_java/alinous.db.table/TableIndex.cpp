@@ -65,12 +65,12 @@ bool TableIndex::isOpened(ThreadContext* ctx) throw()
 {
 	return this->storage->isOpened(ctx);
 }
-void TableIndex::open(AlinousDatabase* database, ThreadContext* ctx)
+void TableIndex::open(AlinousCore* core, BTreeGlobalCache* cache, ThreadContext* ctx)
 {
 	if(this->storage == nullptr)
 	{
 		File* file = (new(ctx) File(this->filePath, ctx));
-		__GC_MV(this, &(this->storage), (new(ctx) BTree(ctx))->init(file, database->getBtreeCache(ctx), database->getCore(ctx)->diskCache, ctx), BTree);
+		__GC_MV(this, &(this->storage), (new(ctx) BTree(ctx))->init(file, cache, core->diskCache, ctx), BTree);
 	}
 	if(!this->storage->isOpened(ctx))
 	{
@@ -128,7 +128,7 @@ void TableIndex::addIndexValue(DatabaseRecord* record, ThreadContext* ctx)
 	this->storage->putKeyValue(indexKey, positionValue, ctx);
 	this->storage->gate->open(ctx);
 }
-void TableIndex::createIndex(AlinousDatabase* database, ThreadContext* ctx)
+void TableIndex::createIndex(AlinousCore* core, BTreeGlobalCache* cache, ThreadContext* ctx)
 {
 	File* file = (new(ctx) File(this->filePath, ctx));
 	if(file->exists(ctx))
@@ -138,7 +138,7 @@ void TableIndex::createIndex(AlinousDatabase* database, ThreadContext* ctx)
 	{
 		try
 		{
-			__GC_MV(this, &(this->storage), (new(ctx) BTree(ctx))->init(file, database->getBtreeCache(ctx), database->getCore(ctx)->diskCache, ctx), BTree);
+			__GC_MV(this, &(this->storage), (new(ctx) BTree(ctx))->init(file, cache, core->diskCache, ctx), BTree);
 			this->storage->initTreeStorage(32, IBTreeValue::TYPE_LONG, IBTreeValue::TYPE_LONG, (long long)capacity, (long long)64, ctx);
 		}
 		catch(IOException* e)

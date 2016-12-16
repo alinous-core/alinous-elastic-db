@@ -18,13 +18,14 @@ bool DbTransaction::__init_static_variables(){
 	delete ctx;
 	return true;
 }
- DbTransaction::DbTransaction(DbTransactionManager* mgr, String* tmpDir, AlinousDatabase* database, ISystemLog* logger, long long commitId, ThreadContext* ctx) throw()  : IObject(ctx), lockContext(nullptr), lockMode(0), commitId(0), trxManager(nullptr), trxSchema(nullptr), trxStorageManager(nullptr), database(nullptr), logger(nullptr), subTransaction(nullptr), resultSerial(0), trxDir(nullptr), soidSerial(0)
+ DbTransaction::DbTransaction(DbTransactionManager* mgr, String* tmpDir, AlinousDatabase* database, AlinousCore* core, long long commitId, ThreadContext* ctx) throw()  : IObject(ctx), lockContext(nullptr), lockMode(0), commitId(0), trxManager(nullptr), trxSchema(nullptr), trxStorageManager(nullptr), database(nullptr), logger(nullptr), subTransaction(nullptr), resultSerial(0), trxDir(nullptr), soidSerial(0), core(nullptr)
 {
 	__GC_MV(this, &(this->trxManager), mgr, DbTransactionManager);
 	__GC_MV(this, &(this->trxSchema), (new(ctx) TrxSchemeManager(database, logger, ctx)), TrxSchemeManager);
 	__GC_MV(this, &(this->trxStorageManager), (new(ctx) TrxStorageManager(tmpDir, this, ctx)), TrxStorageManager);
 	__GC_MV(this, &(this->database), database, AlinousDatabase);
-	__GC_MV(this, &(this->logger), logger, ISystemLog);
+	__GC_MV(this, &(this->core), core, AlinousCore);
+	__GC_MV(this, &(this->logger), core->getLogger(ctx), ISystemLog);
 	this->commitId = commitId;
 	__GC_MV(this, &(this->lockContext), database->newLockContext(ctx), TrxLockContext);
 	this->lockMode = IndexScannerLockRequirement::INSTANT_SHARE;
@@ -32,13 +33,14 @@ bool DbTransaction::__init_static_variables(){
 	__GC_MV(this, &(this->trxDir), tmpDir, String);
 	this->soidSerial = 1;
 }
-void DbTransaction::__construct_impl(DbTransactionManager* mgr, String* tmpDir, AlinousDatabase* database, ISystemLog* logger, long long commitId, ThreadContext* ctx) throw() 
+void DbTransaction::__construct_impl(DbTransactionManager* mgr, String* tmpDir, AlinousDatabase* database, AlinousCore* core, long long commitId, ThreadContext* ctx) throw() 
 {
 	__GC_MV(this, &(this->trxManager), mgr, DbTransactionManager);
 	__GC_MV(this, &(this->trxSchema), (new(ctx) TrxSchemeManager(database, logger, ctx)), TrxSchemeManager);
 	__GC_MV(this, &(this->trxStorageManager), (new(ctx) TrxStorageManager(tmpDir, this, ctx)), TrxStorageManager);
 	__GC_MV(this, &(this->database), database, AlinousDatabase);
-	__GC_MV(this, &(this->logger), logger, ISystemLog);
+	__GC_MV(this, &(this->core), core, AlinousCore);
+	__GC_MV(this, &(this->logger), core->getLogger(ctx), ISystemLog);
 	this->commitId = commitId;
 	__GC_MV(this, &(this->lockContext), database->newLockContext(ctx), TrxLockContext);
 	this->lockMode = IndexScannerLockRequirement::INSTANT_SHARE;
@@ -72,6 +74,8 @@ void DbTransaction::__releaseRegerences(bool prepare, ThreadContext* ctx) throw(
 	subTransaction = nullptr;
 	__e_obj1.add(this->trxDir, this);
 	trxDir = nullptr;
+	__e_obj1.add(this->core, this);
+	core = nullptr;
 	if(!prepare){
 		return;
 	}
@@ -246,7 +250,7 @@ void DbTransaction::commit(ThreadContext* ctx)
 	long long newCommitId = this->database->newCommitId(ctx);
 	if(this->trxSchema->isHasOperation(ctx))
 	{
-		this->trxSchema->executeCommit(ctx);
+		this->trxSchema->executeCommit(this->core, this->database->getBtreeCache(ctx), ctx);
 		this->trxSchema->reset(ctx);
 	}
 	if(this->trxStorageManager->isHasOperation(ctx))

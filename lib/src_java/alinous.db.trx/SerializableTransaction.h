@@ -10,7 +10,7 @@ namespace alinous {namespace db {
 class AlinousDatabase;}}
 
 namespace alinous {namespace system {
-class ISystemLog;}}
+class AlinousCore;}}
 
 namespace alinous {namespace db {namespace table {
 class IDatabaseRecord;}}}
@@ -52,7 +52,7 @@ using ::alinous::db::table::DatabaseException;
 using ::alinous::db::table::IDatabaseRecord;
 using ::alinous::db::table::IDatabaseTable;
 using ::alinous::runtime::dom::VariableException;
-using ::alinous::system::ISystemLog;
+using ::alinous::system::AlinousCore;
 
 
 
@@ -60,8 +60,8 @@ class SerializableTransaction final : public DbTransaction {
 public:
 	SerializableTransaction(const SerializableTransaction& base) = default;
 public:
-	SerializableTransaction(DbTransactionManager* mgr, String* tmpDir, AlinousDatabase* database, ISystemLog* logger, long long commitId, ThreadContext* ctx) throw() ;
-	void __construct_impl(DbTransactionManager* mgr, String* tmpDir, AlinousDatabase* database, ISystemLog* logger, long long commitId, ThreadContext* ctx) throw() ;
+	SerializableTransaction(DbTransactionManager* mgr, String* tmpDir, AlinousDatabase* database, AlinousCore* core, long long commitId, ThreadContext* ctx) throw() ;
+	void __construct_impl(DbTransactionManager* mgr, String* tmpDir, AlinousDatabase* database, AlinousCore* core, long long commitId, ThreadContext* ctx) throw() ;
 	virtual ~SerializableTransaction() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 public:

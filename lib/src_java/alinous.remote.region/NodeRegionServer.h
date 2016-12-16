@@ -1,5 +1,8 @@
 #ifndef ALINOUS_REMOTE_REGION_NODEREGIONSERVER_H_
 #define ALINOUS_REMOTE_REGION_NODEREGIONSERVER_H_
+namespace alinous {namespace remote {namespace region {
+class NodeReferenceManager;}}}
+
 namespace alinous {namespace system {
 class ISystemLog;}}
 
@@ -38,12 +41,14 @@ public:
 private:
 	int port;
 	int maxthread;
+	NodeReferenceManager* refs;
 	SocketServer* socketServer;
 private:
 	static String* THREAD_NAME;
 public:
 	void start(ISystemLog* logger, ThreadContext* ctx) throw() ;
 	void dispose(ThreadContext* ctx) throw() ;
+	NodeReferenceManager* getRefs(ThreadContext* ctx) throw() ;
 public:
 	static bool __init_done;
 	static bool __init_static_variables();

@@ -18,12 +18,12 @@ bool DbTransactionManager::__init_static_variables(){
 	delete ctx;
 	return true;
 }
- DbTransactionManager::DbTransactionManager(AlinousDatabase* database, String* trxTmpDir, int maxConnection, ISystemLog* logger, ThreadPool* workerThreadsPool, ThreadContext* ctx) throw()  : IObject(ctx), trxTmpDir(nullptr), maxConnection(0), trxCount(0), database(nullptr), lock(__GC_INS(this, (new(ctx) LockObject(ctx)), LockObject)), logger(nullptr), trxReady(GCUtils<ArrayList<DbTransaction> >::ins(this, (new(ctx) ArrayList<DbTransaction>(ctx)), ctx, __FILEW__, __LINE__, L"")), workerThreadsPool(nullptr)
+ DbTransactionManager::DbTransactionManager(AlinousDatabase* database, String* trxTmpDir, int maxConnection, AlinousCore* core, ThreadPool* workerThreadsPool, ThreadContext* ctx) throw()  : IObject(ctx), trxTmpDir(nullptr), maxConnection(0), trxCount(0), database(nullptr), lock(__GC_INS(this, (new(ctx) LockObject(ctx)), LockObject)), core(nullptr), trxReady(GCUtils<ArrayList<DbTransaction> >::ins(this, (new(ctx) ArrayList<DbTransaction>(ctx)), ctx, __FILEW__, __LINE__, L"")), workerThreadsPool(nullptr)
 {
 	__GC_MV(this, &(this->workerThreadsPool), workerThreadsPool, ThreadPool);
 	__GC_MV(this, &(this->trxTmpDir), trxTmpDir, String);
 	__GC_MV(this, &(this->database), database, AlinousDatabase);
-	__GC_MV(this, &(this->logger), logger, ISystemLog);
+	__GC_MV(this, &(this->core), core, AlinousCore);
 	File* file = (new(ctx) File(this->trxTmpDir, ctx));
 	if(!file->exists(ctx))
 	{
@@ -37,12 +37,12 @@ bool DbTransactionManager::__init_static_variables(){
 	this->maxConnection = maxConnection;
 	this->trxCount = 0;
 }
-void DbTransactionManager::__construct_impl(AlinousDatabase* database, String* trxTmpDir, int maxConnection, ISystemLog* logger, ThreadPool* workerThreadsPool, ThreadContext* ctx) throw() 
+void DbTransactionManager::__construct_impl(AlinousDatabase* database, String* trxTmpDir, int maxConnection, AlinousCore* core, ThreadPool* workerThreadsPool, ThreadContext* ctx) throw() 
 {
 	__GC_MV(this, &(this->workerThreadsPool), workerThreadsPool, ThreadPool);
 	__GC_MV(this, &(this->trxTmpDir), trxTmpDir, String);
 	__GC_MV(this, &(this->database), database, AlinousDatabase);
-	__GC_MV(this, &(this->logger), logger, ISystemLog);
+	__GC_MV(this, &(this->core), core, AlinousCore);
 	File* file = (new(ctx) File(this->trxTmpDir, ctx));
 	if(!file->exists(ctx))
 	{
@@ -72,8 +72,8 @@ void DbTransactionManager::__releaseRegerences(bool prepare, ThreadContext* ctx)
 	database = nullptr;
 	__e_obj1.add(this->lock, this);
 	lock = nullptr;
-	__e_obj1.add(this->logger, this);
-	logger = nullptr;
+	__e_obj1.add(this->core, this);
+	core = nullptr;
 	__e_obj1.add(this->trxReady, this);
 	trxReady = nullptr;
 	__e_obj1.add(this->workerThreadsPool, this);
@@ -107,14 +107,14 @@ DbTransaction* DbTransactionManager::borrowTransaction(int acid, ThreadContext* 
 	DbTransaction* trx = nullptr;
 	switch(acid) {
 	case IDatabaseDriver::READ_COMMITTED:
-		trx = (new(ctx) ReadCommittedTransaction(this, tmpDir, database, logger, commitId, ctx));
+		trx = (new(ctx) ReadCommittedTransaction(this, tmpDir, database, core, commitId, ctx));
 		break ;
 	case IDatabaseDriver::REPEATABLE_READ:
-		trx = (new(ctx) RepeatableReadTransaction(this, tmpDir, database, logger, commitId, ctx));
+		trx = (new(ctx) RepeatableReadTransaction(this, tmpDir, database, core, commitId, ctx));
 		break ;
 	case IDatabaseDriver::SERIALIZABLE:
 	default:
-		trx = (new(ctx) SerializableTransaction(this, tmpDir, database, logger, commitId, ctx));
+		trx = (new(ctx) SerializableTransaction(this, tmpDir, database, this->core, commitId, ctx));
 		break ;
 	}
 	{

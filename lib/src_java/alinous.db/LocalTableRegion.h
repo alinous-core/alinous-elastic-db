@@ -3,8 +3,14 @@
 namespace alinous {namespace system {
 class ISystemLog;}}
 
-namespace alinous {namespace db {
-class AlinousDatabase;}}
+namespace alinous {namespace runtime {namespace parallel {
+class ThreadPool;}}}
+
+namespace alinous {namespace system {
+class AlinousCore;}}
+
+namespace alinous {namespace btree {
+class BTreeGlobalCache;}}
 
 namespace alinous {namespace db {
 class SchemaManager;}}
@@ -45,8 +51,11 @@ using namespace ::java::lang;
 using ::java::util::Iterator;
 using ::java::io::IOException;
 using ::alinous::btree::BTreeException;
+using ::alinous::btree::BTreeGlobalCache;
 using ::alinous::db::table::DatabaseException;
 using ::alinous::db::table::TableMetadata;
+using ::alinous::runtime::parallel::ThreadPool;
+using ::alinous::system::AlinousCore;
 using ::alinous::system::AlinousException;
 using ::alinous::system::ISystemLog;
 
@@ -56,8 +65,8 @@ class LocalTableRegion final : public ITableRegion, public virtual IObject {
 public:
 	LocalTableRegion(const LocalTableRegion& base) = default;
 public:
-	LocalTableRegion(String* dataDir, ISystemLog* logger, AlinousDatabase* database, ThreadContext* ctx) throw() ;
-	void __construct_impl(String* dataDir, ISystemLog* logger, AlinousDatabase* database, ThreadContext* ctx) throw() ;
+	LocalTableRegion(String* dataDir, ISystemLog* logger, ThreadPool* threadPool, AlinousCore* core, BTreeGlobalCache* cache, ThreadContext* ctx) throw() ;
+	void __construct_impl(String* dataDir, ISystemLog* logger, ThreadPool* threadPool, AlinousCore* core, BTreeGlobalCache* cache, ThreadContext* ctx) throw() ;
 	virtual ~LocalTableRegion() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 public:
@@ -68,7 +77,7 @@ public:
 	String* getRegionName(ThreadContext* ctx) throw()  final;
 	TableSchema* getSchema(String* name, ThreadContext* ctx) throw()  final;
 	void createSchema(String* schemaName, ThreadContext* ctx) throw()  final;
-	void createTable(String* schemaName, TableMetadata* tblMeta, ThreadContext* ctx) final;
+	void createTable(String* schemaName, TableMetadata* tblMeta, ThreadPool* threadPool, AlinousCore* core, BTreeGlobalCache* cache, ThreadContext* ctx) final;
 public:
 	static bool __init_done;
 	static bool __init_static_variables();

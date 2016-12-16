@@ -52,18 +52,18 @@ void DatatableUpdateCache::__releaseRegerences(bool prepare, ThreadContext* ctx)
 		return;
 	}
 }
-void DatatableUpdateCache::execCreateTable(AlinousDatabase* database, ThreadContext* ctx)
+void DatatableUpdateCache::execCreateTable(AlinousCore* core, BTreeGlobalCache* cache, ThreadContext* ctx)
 {
 	getOidIndexName(ctx);
-	__GC_MV(this, &(this->store), (new(ctx) BTree(ctx))->init((new(ctx) File(this->oidIndexPath, ctx)), database->getBtreeCache(ctx), database->getCore(ctx)->diskCache, ctx), IBTree);
+	__GC_MV(this, &(this->store), (new(ctx) BTree(ctx))->init((new(ctx) File(this->oidIndexPath, ctx)), cache, core->diskCache, ctx), IBTree);
 	this->store->initTreeStorage(32, IBTreeValue::TYPE_LONG, IBTreeValue::TYPE_LONG, (long long)DatatableConstants::capacity, (long long)64, ctx);
 }
-void DatatableUpdateCache::open(AlinousDatabase* database, ThreadContext* ctx)
+void DatatableUpdateCache::open(AlinousCore* core, BTreeGlobalCache* cache, ThreadContext* ctx)
 {
 	{
 		try
 		{
-			__GC_MV(this, &(this->store), (new(ctx) BTree(ctx))->init((new(ctx) File(getOidIndexName(ctx), ctx)), database->getBtreeCache(ctx), database->getCore(ctx)->diskCache, ctx), IBTree);
+			__GC_MV(this, &(this->store), (new(ctx) BTree(ctx))->init((new(ctx) File(getOidIndexName(ctx), ctx)), cache, core->diskCache, ctx), IBTree);
 		}
 		catch(Throwable* e)
 		{

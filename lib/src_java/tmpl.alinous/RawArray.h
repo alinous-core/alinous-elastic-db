@@ -4,6 +4,7 @@ template class alinous::RawArray<::alinous::HashMapInternalElement<::java::lang:
 template class alinous::RawArray<::alinous::HashMapInternalElement<::java::lang::String, ::java::lang::String>, ::alinous::HashMapInternalElement<::java::lang::String, ::java::lang::String>::ValueCompare>;
 template class alinous::RawArray<::alinous::HashMapInternalElement<::java::lang::String, ::alinous::db::table::lockmonitor::IThreadLocker>, ::alinous::HashMapInternalElement<::java::lang::String, ::alinous::db::table::lockmonitor::IThreadLocker>::ValueCompare>;
 template class alinous::RawArray<::alinous::HashMapInternalElement<::alinous::html::DomNode, ::java::util::ArrayList<::alinous::html::xpath::match::MatchCandidate>>, ::alinous::HashMapInternalElement<::alinous::html::DomNode, ::java::util::ArrayList<::alinous::html::xpath::match::MatchCandidate>>::ValueCompare>;
+template class alinous::RawArray<::alinous::HashMapInternalElement<::java::lang::String, ::alinous::remote::region::NodeReference>, ::alinous::HashMapInternalElement<::java::lang::String, ::alinous::remote::region::NodeReference>::ValueCompare>;
 template class alinous::RawArray<::alinous::HashMapInternalElement<::java::lang::String, ::java::util::TimeZone>, ::alinous::HashMapInternalElement<::java::lang::String, ::java::util::TimeZone>::ValueCompare>;
 template class alinous::RawArray<::alinous::HashMapInternalElement<::java::lang::String, ::org::alinous::charset::CharsetConverter>, ::alinous::HashMapInternalElement<::java::lang::String, ::org::alinous::charset::CharsetConverter>::ValueCompare>;
 template class alinous::RawArray<::alinous::HashMapInternalElement<::java::lang::String, ::alinous::compile::analyse::DomVariableDeclareSource>, ::alinous::HashMapInternalElement<::java::lang::String, ::alinous::compile::analyse::DomVariableDeclareSource>::ValueCompare>;
@@ -35,6 +36,7 @@ template class alinous::RawArray<::alinous::HashMapRawArray<::java::lang::String
 template class alinous::RawArray<::alinous::HashMapRawArray<::java::lang::String, ::java::lang::String>>;
 template class alinous::RawArray<::alinous::HashMapRawArray<::java::lang::String, ::alinous::db::table::lockmonitor::IThreadLocker>>;
 template class alinous::RawArray<::alinous::HashMapRawArray<::alinous::html::DomNode, ::java::util::ArrayList<::alinous::html::xpath::match::MatchCandidate>>>;
+template class alinous::RawArray<::alinous::HashMapRawArray<::java::lang::String, ::alinous::remote::region::NodeReference>>;
 template class alinous::RawArray<::alinous::HashMapRawArray<::java::lang::String, ::java::util::TimeZone>>;
 template class alinous::RawArray<::alinous::HashMapRawArray<::java::lang::String, ::org::alinous::charset::CharsetConverter>>;
 template class alinous::RawArray<::alinous::HashMapRawArray<::java::lang::String, ::alinous::compile::analyse::DomVariableDeclareSource>>;

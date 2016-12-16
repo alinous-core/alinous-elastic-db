@@ -76,10 +76,7 @@ void AlinousDatabase::construct(AlinousCore* core, String* dataDir, String* trxT
 {
 	__GC_MV(this, &(this->core), core, AlinousCore);
 	__GC_MV(this, &(this->dataDir), dataDir, String);
-	LocalTableRegion* localRegion = (new(ctx) LocalTableRegion(dataDir, this->core->getLogger(ctx), this, ctx));
-	__GC_MV(this, &(this->regionManager), (new(ctx) TableRegionManager(ctx)), TableRegionManager);
-	this->regionManager->addRegion(localRegion, ctx);
-	__GC_MV(this, &(this->trxManager), (new(ctx) DbTransactionManager(this, trxTmpDir, maxConnection, core->getLogger(ctx), this->workerThreadsPool, ctx)), DbTransactionManager);
+	__GC_MV(this, &(this->trxManager), (new(ctx) DbTransactionManager(this, trxTmpDir, maxConnection, core, this->workerThreadsPool, ctx)), DbTransactionManager);
 	File* file = getConfigFile(ctx);
 	{
 		try
@@ -117,7 +114,13 @@ void AlinousDatabase::initInstance(AlinousDbInstanceInfo* instanceConfig, Thread
 	{
 		__GC_MV(this, &(this->commitIdPublisher), (new(ctx) RemoteCommitIdPublisher(monitorRef, ctx))->init(ctx), ICommidIdPublisher);
 	}
-	LocalTableRegion* localRegion = this->regionManager->getLocalRegion(ctx);
+		else 
+	{
+		__GC_MV(this, &(this->commitIdPublisher), (new(ctx) LocalCommitIdPublisher(this, ctx)), ICommidIdPublisher);
+	}
+	LocalTableRegion* localRegion = (new(ctx) LocalTableRegion(dataDir, this->core->getLogger(ctx), nullptr, core, this->btreeCache, ctx));
+	__GC_MV(this, &(this->regionManager), (new(ctx) TableRegionManager(ctx)), TableRegionManager);
+	this->regionManager->addRegion(localRegion, ctx);
 	SchemaManager* schemas = localRegion->getSchemaManager(ctx);
 	schemas->createSchema(ConstStr::getCNST_STR_951(), ctx);
 	{
@@ -246,7 +249,7 @@ void AlinousDatabase::open(ThreadContext* ctx)
 				LocalTableRegion* localRegion = this->regionManager->getLocalRegion(ctx);
 				SchemaManager* schemas = localRegion->getSchemaManager(ctx);
 				schemas = static_cast<SchemaManager*>(schemeValue->get(0, ctx));
-				schemas->loadAfterFetch(this->dataDir, this->core->getLogger(ctx), this, ctx);
+				schemas->loadAfterFetch(this->dataDir, this->core->getLogger(ctx), this->workerThreadsPool, this->core, this->btreeCache, ctx);
 			}
 			ArrayList<IBTreeValue>* lvTrxIds = this->dbconfig->getValues(MAX_COMMIT_ID, ctx);
 			this->commitIdPublisher->setMaxCommitId((static_cast<LongValue*>(lvTrxIds->get(0, ctx)))->value, ctx);
