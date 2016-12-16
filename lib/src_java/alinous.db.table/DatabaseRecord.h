@@ -25,7 +25,7 @@ namespace java {namespace lang {
 class StringBuilder;}}
 
 namespace alinous {namespace db {namespace table {
-class DataTableStorageSupport;}}}
+class IDatabaseTable;}}}
 
 namespace alinous {namespace db {namespace table {
 class IDatabaseRecord;}}}
@@ -78,7 +78,7 @@ private:
 	long long insertedCommitId;
 	long long deletedCommitId;
 	ArrayList<VariantValue>* values;
-	DataTableStorageSupport* storageForCache;
+	IDatabaseTable* storageForCache;
 	int hashcode;
 public:
 	int getNumValues(ThreadContext* ctx) throw()  final;
@@ -102,8 +102,8 @@ public:
 	void setPosition(long long position, ThreadContext* ctx) throw() ;
 	bool equals(IObject* obj, ThreadContext* ctx) throw()  final;
 	int getHashKey(ThreadContext* ctx) throw() ;
-	DataTableStorageSupport* getStorageForCache(ThreadContext* ctx) throw() ;
-	void setStorageForCache(DataTableStorageSupport* storageForCache, ThreadContext* ctx) throw() ;
+	IDatabaseTable* getStorageForCache(ThreadContext* ctx) throw() ;
+	void setStorageForCache(IDatabaseTable* storageForCache, ThreadContext* ctx) throw() ;
 	ArrayList<VariantValue>* getValues(ThreadContext* ctx) throw()  final;
 	int getKind(ThreadContext* ctx) throw()  final;
 public:

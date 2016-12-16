@@ -7,10 +7,13 @@ namespace alinous {namespace db {namespace table {namespace cache {
 class DbRecordHashMainList;}}}}
 
 namespace alinous {namespace db {namespace table {
-class DataTableStorageSupport;}}}
+class IDatabaseTable;}}}
 
 namespace alinous {namespace db {namespace table {
 class DatabaseRecord;}}}
+
+namespace alinous {namespace db {namespace table {
+class DataTableStorageSupport;}}}
 
 namespace alinous {namespace buffer {
 template <typename  T> class FifoList;}}
@@ -38,6 +41,7 @@ using ::alinous::buffer::FifoList;
 using ::alinous::concurrent::SpinMutex;
 using ::alinous::db::table::DataTableStorageSupport;
 using ::alinous::db::table::DatabaseRecord;
+using ::alinous::db::table::IDatabaseTable;
 using ::alinous::system::AlinousException;
 
 
@@ -62,7 +66,7 @@ private:
 	int MAX_HASH;
 public:
 	DbRecordCache* init(int MAX_HASH, ThreadContext* ctx);
-	void addCachedRecord(DataTableStorageSupport* table, DatabaseRecord* record, ThreadContext* ctx);
+	void addCachedRecord(IDatabaseTable* table, DatabaseRecord* record, ThreadContext* ctx);
 	DatabaseRecord* loadRecord(DataTableStorageSupport* table, long long position, ThreadContext* ctx);
 public:
 	static bool __init_done;

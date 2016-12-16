@@ -98,6 +98,7 @@ public:
 	virtual IDatabaseRecord* loadRecord(long long position, ThreadContext* ctx) = 0;
 	virtual IScannableIndex* getAbailableIndex(ArrayList<String>* columnsStr, ThreadContext* ctx) throw()  = 0;
 	virtual IScannableIndex* getAbailableIndexByScanColId(ArrayList<ScanTableColumnIdentifier>* joinRequest, ThreadContext* ctx) throw()  = 0;
+	virtual IScannableIndex* getTableIndex(ArrayList<String>* columns, ThreadContext* ctx) throw()  = 0;
 	virtual IThreadLocker* newThreadLocker(String* fullName, ThreadContext* ctx) throw()  = 0;
 	virtual bool hasLaterVersion(long long oid, long long currentId, ThreadContext* ctx) = 0;
 	virtual bool hasLaterVersionBefore(long long oid, long long maxCommitId, long long currentCommitId, ThreadContext* ctx) = 0;

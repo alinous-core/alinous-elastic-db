@@ -44,7 +44,7 @@ DbRecordCache* DbRecordCache::init(int MAX_HASH, ThreadContext* ctx)
 	this->MAX_HASH = MAX_HASH;
 	return this;
 }
-void DbRecordCache::addCachedRecord(DataTableStorageSupport* table, DatabaseRecord* record, ThreadContext* ctx)
+void DbRecordCache::addCachedRecord(IDatabaseTable* table, DatabaseRecord* record, ThreadContext* ctx)
 {
 	record->setStorageForCache(table, ctx);
 	spin->lock(ctx);

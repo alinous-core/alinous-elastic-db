@@ -195,14 +195,14 @@ int DatabaseRecord::getHashKey(ThreadContext* ctx) throw()
 {
 	return this->hashcode;
 }
-DataTableStorageSupport* DatabaseRecord::getStorageForCache(ThreadContext* ctx) throw() 
+IDatabaseTable* DatabaseRecord::getStorageForCache(ThreadContext* ctx) throw() 
 {
 	return storageForCache;
 }
-void DatabaseRecord::setStorageForCache(DataTableStorageSupport* storageForCache, ThreadContext* ctx) throw() 
+void DatabaseRecord::setStorageForCache(IDatabaseTable* storageForCache, ThreadContext* ctx) throw() 
 {
-	__GC_MV(this, &(this->storageForCache), storageForCache, DataTableStorageSupport);
-	this->hashcode = ((int)(((unsigned long long)((this->position + this->storageForCache->tableId->intValue(ctx)) * 2654404609L))>> 32));
+	__GC_MV(this, &(this->storageForCache), storageForCache, IDatabaseTable);
+	this->hashcode = ((int)(((unsigned long long)((this->position + this->storageForCache->getTableId(ctx)->intValue(ctx)) * 2654404609L))>> 32));
 }
 ArrayList<VariantValue>* DatabaseRecord::getValues(ThreadContext* ctx) throw() 
 {

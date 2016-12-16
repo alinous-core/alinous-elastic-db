@@ -7,6 +7,9 @@ namespace alinous {namespace db {namespace table {
 class IDatabaseRecord;}}}
 
 namespace alinous {namespace db {namespace table {
+class DatabaseRecord;}}}
+
+namespace alinous {namespace db {namespace table {
 class BTreeIndexKey;}}}
 
 namespace alinous {namespace runtime {namespace variant {
@@ -76,7 +79,7 @@ public:
 	bool hasLaterVersion(long long oid, long long commitId, ThreadContext* ctx) final;
 	bool isDeleted(long long oid, ThreadContext* ctx);
 	bool isLatest(long long oid, long long commitId, ThreadContext* ctx);
-	IDatabaseRecord* getLastRecord(long long oid, long long commitId, ThreadContext* ctx);
+	DatabaseRecord* getLastRecord(long long oid, long long commitId, ThreadContext* ctx);
 public:
 	static bool __init_done;
 	static bool __init_static_variables();

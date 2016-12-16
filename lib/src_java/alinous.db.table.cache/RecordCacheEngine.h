@@ -28,9 +28,6 @@ namespace alinous {namespace buffer {namespace storage {
 class FileStorageEntry;}}}
 
 namespace alinous {namespace db {namespace table {
-class OidIndexJob;}}}
-
-namespace alinous {namespace db {namespace table {
 class IndexInsertJob;}}}
 
 namespace alinous {namespace db {namespace table {
@@ -46,7 +43,7 @@ namespace java {namespace lang {
 class Throwable;}}
 
 namespace alinous {namespace db {namespace table {
-class IDatabaseRecord;}}}
+class OidIndexJob;}}}
 
 namespace alinous {namespace db {namespace table {
 class DataTableStorageSupport;}}}
@@ -95,7 +92,6 @@ using ::alinous::db::AlinousDbException;
 using ::alinous::db::table::DataTableStorageSupport;
 using ::alinous::db::table::DatabaseRecord;
 using ::alinous::db::table::DatatableUpdateSupport;
-using ::alinous::db::table::IDatabaseRecord;
 using ::alinous::db::table::IScannableIndex;
 using ::alinous::db::table::IndexInsertJob;
 using ::alinous::db::table::OidIndexJob;
@@ -123,8 +119,9 @@ private:
 	DbRecordCache* cache;
 public:
 	RecordCacheEngine* init(int maxCache, ThreadContext* ctx);
+	void updateData(DatatableUpdateSupport* table, DatabaseRecord* dbrecord, long long commitId, IArrayObject<SequentialBackgroundJob>* jobs, ISystemLog* log, ThreadContext* ctx);
 	void insertData(DatatableUpdateSupport* table, DatabaseRecord* dbrecord, long long commitId, IArrayObject<SequentialBackgroundJob>* jobs, ISystemLog* log, ThreadContext* ctx);
-	IDatabaseRecord* loadRecord(DataTableStorageSupport* table, long long filePointer, ThreadContext* ctx);
+	DatabaseRecord* loadRecord(DataTableStorageSupport* table, long long filePointer, ThreadContext* ctx);
 	int getMaxCache(ThreadContext* ctx) throw() ;
 public:
 	static bool __init_done;

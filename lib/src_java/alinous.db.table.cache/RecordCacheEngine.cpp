@@ -40,10 +40,9 @@ RecordCacheEngine* RecordCacheEngine::init(int maxCache, ThreadContext* ctx)
 	__GC_MV(this, &(this->cache), (new(ctx) DbRecordCache(ctx))->init(maxCache, ctx), DbRecordCache);
 	return this;
 }
-void RecordCacheEngine::insertData(DatatableUpdateSupport* table, DatabaseRecord* dbrecord, long long commitId, IArrayObject<SequentialBackgroundJob>* jobs, ISystemLog* log, ThreadContext* ctx)
+void RecordCacheEngine::updateData(DatatableUpdateSupport* table, DatabaseRecord* dbrecord, long long commitId, IArrayObject<SequentialBackgroundJob>* jobs, ISystemLog* log, ThreadContext* ctx)
 {
 	FileStorageEntryWriter* writer = table->getDataStorage(ctx)->getWriter(ctx);
-	long long nextOid = table->getDataStorage(ctx)->getNextOid(ctx);
 	{
 		try
 		{
@@ -52,10 +51,44 @@ void RecordCacheEngine::insertData(DatatableUpdateSupport* table, DatabaseRecord
 			dbrecord->appendToEntry(builder, ctx);
 			FileStorageEntry* entry = builder->toEntry(ctx);
 			writer->write(entry, ctx);
-			dbrecord->setOid(entry->oid, ctx);
 			dbrecord->setPosition(entry->position, ctx);
 			int slot = 0;
-			jobs->get(slot++)->addJob((new(ctx) OidIndexJob(nextOid, table->getOidIndex(ctx), entry->position, ctx)), ctx);
+			jobs->get(slot++)->addJob((new(ctx) IndexInsertJob(table->getPrimaryIndex(ctx), dbrecord, ctx)), ctx);
+			ArrayList<IScannableIndex>* indexes = table->getIndexes(ctx);
+			int maxLoop = indexes->size(ctx);
+			for(int i = 0; i != maxLoop; ++i)
+			{
+				IScannableIndex* tableIndex = indexes->get(i, ctx);
+				jobs->get(slot++)->addJob((new(ctx) IndexInsertJob(tableIndex, dbrecord, ctx)), ctx);
+			}
+			this->cache->addCachedRecord(table, dbrecord, ctx);
+		}
+		catch(VariableException* e)
+		{
+			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1613(), ctx));
+		}
+		catch(Throwable* e)
+		{
+			writer->end(ctx);
+			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1613(), e, ctx));
+		}
+	}
+	writer->end(ctx);
+}
+void RecordCacheEngine::insertData(DatatableUpdateSupport* table, DatabaseRecord* dbrecord, long long commitId, IArrayObject<SequentialBackgroundJob>* jobs, ISystemLog* log, ThreadContext* ctx)
+{
+	FileStorageEntryWriter* writer = table->getDataStorage(ctx)->getWriter(ctx);
+	{
+		try
+		{
+			int cap = dbrecord->diskSize(ctx);
+			FileStorageEntryBuilder* builder = (new(ctx) FileStorageEntryBuilder(cap, ctx));
+			dbrecord->appendToEntry(builder, ctx);
+			FileStorageEntry* entry = builder->toEntry(ctx);
+			writer->write(entry, ctx);
+			dbrecord->setPosition(entry->position, ctx);
+			int slot = 0;
+			jobs->get(slot++)->addJob((new(ctx) OidIndexJob(dbrecord->getOid(ctx), table->getOidIndex(ctx), entry->position, ctx)), ctx);
 			jobs->get(slot++)->addJob((new(ctx) IndexInsertJob(table->getPrimaryIndex(ctx), dbrecord, ctx)), ctx);
 			ArrayList<IScannableIndex>* indexes = table->getIndexes(ctx);
 			int maxLoop = indexes->size(ctx);
@@ -78,7 +111,7 @@ void RecordCacheEngine::insertData(DatatableUpdateSupport* table, DatabaseRecord
 	}
 	writer->end(ctx);
 }
-IDatabaseRecord* RecordCacheEngine::loadRecord(DataTableStorageSupport* table, long long filePointer, ThreadContext* ctx)
+DatabaseRecord* RecordCacheEngine::loadRecord(DataTableStorageSupport* table, long long filePointer, ThreadContext* ctx)
 {
 	DatabaseRecord* record = this->cache->loadRecord(table, filePointer, ctx);
 	if(record != nullptr)

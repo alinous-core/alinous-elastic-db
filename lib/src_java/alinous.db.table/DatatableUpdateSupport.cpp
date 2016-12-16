@@ -18,7 +18,7 @@ bool DatatableUpdateSupport::__init_static_variables(){
 	delete ctx;
 	return true;
 }
- DatatableUpdateSupport::DatatableUpdateSupport(String* schema, String* name, String* baseDir, ThreadContext* ctx) throw()  : IObject(ctx), DatatableDDLSupport(schema, name, baseDir, ctx)
+ DatatableUpdateSupport::DatatableUpdateSupport(String* schema, String* name, String* baseDir, ThreadContext* ctx) throw()  : IObject(ctx), DatatableDDLSupport(schema, name, baseDir, ctx), oidPublisher(nullptr)
 {
 }
 void DatatableUpdateSupport::__construct_impl(String* schema, String* name, String* baseDir, ThreadContext* ctx) throw() 
@@ -33,6 +33,9 @@ void DatatableUpdateSupport::__construct_impl(String* schema, String* name, Stri
 }
 void DatatableUpdateSupport::__releaseRegerences(bool prepare, ThreadContext* ctx) throw() 
 {
+	ObjectEraser __e_obj1(ctx, __FILEW__, __LINE__, L"DatatableUpdateSupport", L"~DatatableUpdateSupport");
+	__e_obj1.add(this->oidPublisher, this);
+	oidPublisher = nullptr;
 	if(!prepare){
 		return;
 	}
@@ -40,11 +43,11 @@ void DatatableUpdateSupport::__releaseRegerences(bool prepare, ThreadContext* ct
 }
 void DatatableUpdateSupport::updateData(CachedRecord* data, long long commitId, IArrayObject<SequentialBackgroundJob>* jobs, ISystemLog* log, ThreadContext* ctx)
 {
-	IDatabaseRecord* lastdbrecord = getLastRecord(data->getOid(ctx), commitId, ctx);
+	DatabaseRecord* lastdbrecord = getLastRecord(data->getOid(ctx), commitId, ctx);
 	data->setLastUpdateCommitId(commitId, ctx);
 	data->setInsertedCommitId(lastdbrecord->getInsertedCommitId(ctx), ctx);
 	data->setDeletedCommitId((long long)0, ctx);
-	insertData(data, commitId, jobs, log, ctx);
+	this->cacheEngine->updateData(this, lastdbrecord, commitId, jobs, log, ctx);
 }
 void DatatableUpdateSupport::insertData(CachedRecord* data, long long commitId, IArrayObject<SequentialBackgroundJob>* jobs, ISystemLog* log, ThreadContext* ctx)
 {

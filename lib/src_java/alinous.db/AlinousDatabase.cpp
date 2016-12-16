@@ -10,6 +10,7 @@ namespace alinous {namespace db {
 const IntKey AlinousDatabase:: __SCHEMA = (IntKey(10, nullptr));
 const IntKey AlinousDatabase:: __USERS = (IntKey(20, nullptr));
 const IntKey AlinousDatabase:: __MAX_COMMIT_ID = (IntKey(30, nullptr));
+const IntKey AlinousDatabase:: __MAX_OID_ID = (IntKey(30, nullptr));
 bool AlinousDatabase::__init_done = __init_static_variables();
 bool AlinousDatabase::__init_static_variables(){
 	Java2CppSystem::getSelf();

@@ -13,10 +13,10 @@ namespace alinous {namespace system {
 class ISystemLog;}}
 
 namespace alinous {namespace db {namespace table {
-class IDatabaseRecord;}}}
+class DatabaseRecord;}}}
 
 namespace alinous {namespace db {namespace table {
-class DatabaseRecord;}}}
+class IOidPublisher;}}}
 
 namespace alinous {namespace db {namespace table {
 class DatatableDDLSupport;}}}
@@ -60,6 +60,8 @@ public:
 	void __construct_impl(String* schema, String* name, String* baseDir, ThreadContext* ctx) throw() ;
 	virtual ~DatatableUpdateSupport() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
+public:
+	IOidPublisher* oidPublisher;
 public:
 	void updateData(CachedRecord* data, long long commitId, IArrayObject<SequentialBackgroundJob>* jobs, ISystemLog* log, ThreadContext* ctx) final;
 	void insertData(CachedRecord* data, long long commitId, IArrayObject<SequentialBackgroundJob>* jobs, ISystemLog* log, ThreadContext* ctx) final;

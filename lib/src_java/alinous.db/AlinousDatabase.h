@@ -186,6 +186,8 @@ public:
 	constexpr static IntKey* USERS{const_cast<IntKey*>(&__USERS)};
 	const static IntKey __MAX_COMMIT_ID;
 	constexpr static IntKey* MAX_COMMIT_ID{const_cast<IntKey*>(&__MAX_COMMIT_ID)};
+	const static IntKey __MAX_OID_ID;
+	constexpr static IntKey* MAX_OID_ID{const_cast<IntKey*>(&__MAX_OID_ID)};
 public:
 	void construct(AlinousCore* core, String* dataDir, String* trxTmpDir, int maxConnection, ThreadContext* ctx);
 	TrxLockContext* newLockContext(ThreadContext* ctx) throw() ;

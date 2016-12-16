@@ -136,7 +136,7 @@ bool DataTableStorageSupport::isLatest(long long oid, long long commitId, Thread
 	IDatabaseRecord* lastRecord = this->cacheEngine->loadRecord(this, positionValue->value, ctx);
 	return lastRecord->getMaxCommitId(ctx) == commitId;
 }
-IDatabaseRecord* DataTableStorageSupport::getLastRecord(long long oid, long long commitId, ThreadContext* ctx)
+DatabaseRecord* DataTableStorageSupport::getLastRecord(long long oid, long long commitId, ThreadContext* ctx)
 {
 	BTreeIndexKey* indexKey = (new(ctx) BTreeIndexKey(ctx));
 	indexKey->values->add((new(ctx) VariantValue(oid, ctx)), ctx);
@@ -159,7 +159,7 @@ IDatabaseRecord* DataTableStorageSupport::getLastRecord(long long oid, long long
 	for(int i = maxIndex; i != -1; --i)
 	{
 		LongValue* positionValue = static_cast<LongValue*>(values->get(i, ctx));
-		IDatabaseRecord* lastRecord = this->cacheEngine->loadRecord(this, positionValue->value, ctx);
+		DatabaseRecord* lastRecord = this->cacheEngine->loadRecord(this, positionValue->value, ctx);
 		if(lastRecord->getLastUpdateCommitId(ctx) < commitId)
 		{
 			return lastRecord;
