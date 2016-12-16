@@ -18,7 +18,7 @@ bool SchemaManager::__init_static_variables(){
 	delete ctx;
 	return true;
 }
- SchemaManager::SchemaManager(String* dataDir, ISystemLog* logger, AlinousDatabase* database, ThreadContext* ctx) throw()  : IObject(ctx), IBTreeValue(ctx), dataDir(nullptr), schemas(GCUtils<HashMap<String,TableSchema> >::ins(this, (new(ctx) HashMap<String,TableSchema>(ctx)), ctx, __FILEW__, __LINE__, L"")), logger(nullptr), database(nullptr)
+ SchemaManager::SchemaManager(String* dataDir, ISystemLog* logger, AlinousDatabase* database, ThreadContext* ctx) throw()  : IObject(ctx), IBTreeValue(ctx), dataDir(nullptr), schemas(GCUtils<HashMap<String,TableSchema> >::ins(this, (new(ctx) HashMap<String,TableSchema>(ctx)), ctx, __FILEW__, __LINE__, L"")), logger(nullptr), database(nullptr), oidPublisher(nullptr)
 {
 	__GC_MV(this, &(this->dataDir), dataDir, String);
 	__GC_MV(this, &(this->logger), logger, ISystemLog);
@@ -48,6 +48,8 @@ void SchemaManager::__releaseRegerences(bool prepare, ThreadContext* ctx) throw(
 	logger = nullptr;
 	__e_obj1.add(this->database, this);
 	database = nullptr;
+	__e_obj1.add(this->oidPublisher, this);
+	oidPublisher = nullptr;
 	if(!prepare){
 		return;
 	}
@@ -65,8 +67,8 @@ void SchemaManager::createTable(String* schemaName, TableMetadata* tableMetadata
 		logger->logWarning(ConstStr::getCNST_STR_1596()->clone(ctx)->append(tableMetadata->getTableName(ctx), ctx)->append(ConstStr::getCNST_STR_1597(), ctx), ctx);
 		return;
 	}
-	IDatabaseTable* tableStore = (new(ctx) DatabaseTable(schemaName, tableMetadata->getTableName(ctx), schema->getSchemaDir(ctx), database->workerThreadsPool, ctx));
-	tableStore->createTable(tableMetadata, database, ctx);
+	IDatabaseTable* tableStore = (new(ctx) DatabaseTable(schemaName, tableMetadata->getTableName(ctx), schema->getSchemaDir(ctx), database->workerThreadsPool, this->oidPublisher, ctx));
+	tableStore->createTable(tableMetadata, this->database, ctx);
 	schema->addTableStore(tableStore, ctx);
 }
 TableSchema* SchemaManager::createSchema(String* name, ThreadContext* ctx) throw() 
@@ -95,7 +97,7 @@ void SchemaManager::loadAfterFetch(String* dataDir, ISystemLog* logger, AlinousD
 	{
 		String* key = it->next(ctx);
 		TableSchema* sc = this->schemas->get(key, ctx);
-		sc->initAfterFetched(dataDir, sc->name, database, ctx);
+		sc->initAfterFetched(dataDir, sc->name, database, this->oidPublisher, ctx);
 	}
 }
 void SchemaManager::appendToEntry(FileStorageEntryBuilder* builder, ThreadContext* ctx) throw() 

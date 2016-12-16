@@ -58,6 +58,10 @@ void MonitorConnection::connect(ThreadContext* ctx)
 		throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3480(), ctx));
 	}
 }
+AlinousSocket* MonitorConnection::getSocket(ThreadContext* ctx) throw() 
+{
+	return socket;
+}
 void MonitorConnection::close(ThreadContext* ctx) throw() 
 {
 	this->pool->returnConnection(this, ctx);

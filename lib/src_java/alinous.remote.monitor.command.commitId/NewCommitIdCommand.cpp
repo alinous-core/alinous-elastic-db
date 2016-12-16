@@ -18,7 +18,7 @@ bool NewCommitIdCommand::__init_static_variables(){
 	delete ctx;
 	return true;
 }
- NewCommitIdCommand::NewCommitIdCommand(ThreadContext* ctx) throw()  : IObject(ctx), AbstractMonitorCommand(ctx)
+ NewCommitIdCommand::NewCommitIdCommand(ThreadContext* ctx) throw()  : IObject(ctx), AbstractMonitorCommand(ctx), commitId(0)
 {
 	this->type = AbstractMonitorCommand::TYPE_NEW_MAX_COMMIT_ID;
 }
@@ -35,6 +35,7 @@ void NewCommitIdCommand::__construct_impl(ThreadContext* ctx) throw()
 }
 void NewCommitIdCommand::__releaseRegerences(bool prepare, ThreadContext* ctx) throw() 
 {
+	ObjectEraser __e_obj1(ctx, __FILEW__, __LINE__, L"NewCommitIdCommand", L"~NewCommitIdCommand");
 	if(!prepare){
 		return;
 	}
@@ -45,6 +46,10 @@ void NewCommitIdCommand::executeOnServer(TransactionMonitorServer* monitorServer
 }
 void NewCommitIdCommand::readFromStream(InputStream* stream, ThreadContext* ctx)
 {
+}
+long long NewCommitIdCommand::getCommitId(ThreadContext* ctx) throw() 
+{
+	return commitId;
 }
 void NewCommitIdCommand::writeByteStream(OutputStream* out, ThreadContext* ctx)
 {

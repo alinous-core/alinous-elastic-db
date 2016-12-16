@@ -39,6 +39,9 @@ class IValueFetcher;}}
 namespace java {namespace util {
 template <typename  T, typename V> class HashMap;}}
 
+namespace alinous {namespace db {namespace table {
+class IOidPublisher;}}}
+
 namespace alinous {namespace btree {
 class IBTreeValue;}}
 
@@ -78,6 +81,7 @@ using ::alinous::buffer::storage::FileStorageEntryFetcher;
 using ::alinous::db::table::DatabaseException;
 using ::alinous::db::table::DatabaseTable;
 using ::alinous::db::table::IDatabaseTable;
+using ::alinous::db::table::IOidPublisher;
 using ::alinous::db::table::TableMetadata;
 using ::alinous::system::AlinousException;
 using ::alinous::system::ISystemLog;
@@ -97,6 +101,7 @@ private:
 	HashMap<String,TableSchema>* schemas;
 	ISystemLog* logger;
 	AlinousDatabase* database;
+	IOidPublisher* oidPublisher;
 public:
 	void createTable(String* schemaName, TableMetadata* tableMetadata, ThreadContext* ctx);
 	TableSchema* createSchema(String* name, ThreadContext* ctx) throw() ;

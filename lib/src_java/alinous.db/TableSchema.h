@@ -9,6 +9,9 @@ class File;}}
 namespace alinous {namespace db {
 class AlinousDatabase;}}
 
+namespace alinous {namespace db {namespace table {
+class IOidPublisher;}}}
+
 namespace java {namespace lang {
 class StringBuilder;}}
 
@@ -75,6 +78,7 @@ using ::alinous::buffer::storage::FileStorageEntryFetcher;
 using ::alinous::db::table::DatabaseException;
 using ::alinous::db::table::DatabaseTable;
 using ::alinous::db::table::IDatabaseTable;
+using ::alinous::db::table::IOidPublisher;
 using ::alinous::db::table::TableMetadata;
 using ::alinous::system::AlinousException;
 
@@ -98,7 +102,7 @@ private:
 	String* regionName;
 public:
 	void create(ThreadContext* ctx) throw() ;
-	void initAfterFetched(String* dataDir, String* schemaName, AlinousDatabase* database, ThreadContext* ctx);
+	void initAfterFetched(String* dataDir, String* schemaName, AlinousDatabase* database, IOidPublisher* oidPublisher, ThreadContext* ctx);
 	String* getSchemaDir(ThreadContext* ctx) throw() ;
 	void addTableStore(IDatabaseTable* tableStore, ThreadContext* ctx) throw() ;
 	IDatabaseTable* getTableStore(String* tableName, ThreadContext* ctx) throw() ;

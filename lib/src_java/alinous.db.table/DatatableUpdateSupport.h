@@ -3,6 +3,9 @@
 namespace alinous{namespace annotation{
 class OneSource;
 }}
+namespace alinous {namespace db {namespace table {
+class IOidPublisher;}}}
+
 namespace alinous {namespace db {namespace trx {namespace cache {
 class CachedRecord;}}}}
 
@@ -14,9 +17,6 @@ class ISystemLog;}}
 
 namespace alinous {namespace db {namespace table {
 class DatabaseRecord;}}}
-
-namespace alinous {namespace db {namespace table {
-class IOidPublisher;}}}
 
 namespace alinous {namespace db {namespace table {
 class DatatableDDLSupport;}}}
@@ -56,8 +56,8 @@ class DatatableUpdateSupport : public DatatableDDLSupport {
 public:
 	DatatableUpdateSupport(const DatatableUpdateSupport& base) = default;
 public:
-	DatatableUpdateSupport(String* schema, String* name, String* baseDir, ThreadContext* ctx) throw() ;
-	void __construct_impl(String* schema, String* name, String* baseDir, ThreadContext* ctx) throw() ;
+	DatatableUpdateSupport(String* schema, String* name, String* baseDir, IOidPublisher* oidPublisher, ThreadContext* ctx) throw() ;
+	void __construct_impl(String* schema, String* name, String* baseDir, IOidPublisher* oidPublisher, ThreadContext* ctx) throw() ;
 	virtual ~DatatableUpdateSupport() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 public:

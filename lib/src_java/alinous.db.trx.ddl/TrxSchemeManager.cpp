@@ -201,7 +201,7 @@ void TrxSchemeManager::executeCreateSchemaAndTable(TableSchema* sc, ThreadContex
 	{
 		String* tableName = it->next(ctx);
 		TableMetadata* tblMeta = sc->getDableMetadata(tableName, ctx);
-		regions->createTable(regionName, schemaName, tblMeta, this->database, ctx);
+		regions->commitCreateTable(regionName, schemaName, tblMeta, this->database, ctx);
 	}
 	{
 		SynchronizedBlockObj __synchronized_2(this->database->instanceConfigLock, ctx);

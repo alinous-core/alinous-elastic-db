@@ -44,10 +44,13 @@ public:
 	void __construct_impl(ThreadContext* ctx) throw() ;
 	virtual ~GetMaxCommitIdCommand() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
+private:
+	long long commitId;
 public:
 	void executeOnServer(TransactionMonitorServer* monitorServer, BufferedOutputStream* outStream, ThreadContext* ctx) final;
 	void writeByteStream(OutputStream* out, ThreadContext* ctx) final;
 	void readFromStream(InputStream* stream, ThreadContext* ctx) final;
+	long long getCommitId(ThreadContext* ctx) throw() ;
 public:
 	static bool __init_done;
 	static bool __init_static_variables();

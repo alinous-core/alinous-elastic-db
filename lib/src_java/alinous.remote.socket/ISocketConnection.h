@@ -1,5 +1,8 @@
 #ifndef ALINOUS_REMOTE_SOCKET_ISOCKETCONNECTION_H_
 #define ALINOUS_REMOTE_SOCKET_ISOCKETCONNECTION_H_
+namespace alinous {namespace net {
+class AlinousSocket;}}
+
 namespace java {namespace io {
 class IOException;}}
 
@@ -25,6 +28,7 @@ using ::java::util::Iterator;
 using ::java::io::IOException;
 using ::java::net::UnknownHostException;
 using ::alinous::db::AlinousDbException;
+using ::alinous::net::AlinousSocket;
 
 
 
@@ -44,6 +48,7 @@ public:
 	virtual void connect(ThreadContext* ctx) = 0;
 	virtual void close(ThreadContext* ctx) throw()  = 0;
 	virtual void dispose(ThreadContext* ctx) throw()  = 0;
+	virtual AlinousSocket* getSocket(ThreadContext* ctx) throw()  = 0;
 public:
 	static bool __init_done;
 	static bool __init_static_variables();

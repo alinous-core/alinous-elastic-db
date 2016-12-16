@@ -21,6 +21,9 @@ class MonitorClientConnectionFactory;}}}}
 namespace alinous {namespace remote {namespace socket {
 class SocketConnectionPool;}}}
 
+namespace alinous {namespace remote {namespace monitor {namespace command {namespace commitId {
+class GetMaxCommitIdCommand;}}}}}
+
 namespace alinous {namespace remote {namespace socket {
 class ISocketConnection;}}}
 
@@ -29,6 +32,9 @@ class UnknownHostException;}}
 
 namespace java {namespace io {
 class IOException;}}
+
+namespace alinous {namespace remote {namespace monitor {namespace command {namespace commitId {
+class NewCommitIdCommand;}}}}}
 
 namespace alinous {namespace db {
 class ICommidIdPublisher;}}
@@ -50,6 +56,8 @@ using ::java::io::IOException;
 using ::java::net::UnknownHostException;
 using ::alinous::db::AlinousDbException;
 using ::alinous::db::ICommidIdPublisher;
+using ::alinous::remote::monitor::command::commitId::GetMaxCommitIdCommand;
+using ::alinous::remote::monitor::command::commitId::NewCommitIdCommand;
 using ::alinous::remote::socket::ISocketConnection;
 using ::alinous::remote::socket::SocketConnectionPool;
 using ::alinous::system::config::remote::MonitorRef;

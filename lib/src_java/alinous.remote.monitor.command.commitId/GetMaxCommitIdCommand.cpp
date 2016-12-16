@@ -18,7 +18,7 @@ bool GetMaxCommitIdCommand::__init_static_variables(){
 	delete ctx;
 	return true;
 }
- GetMaxCommitIdCommand::GetMaxCommitIdCommand(ThreadContext* ctx) throw()  : IObject(ctx), AbstractMonitorCommand(ctx)
+ GetMaxCommitIdCommand::GetMaxCommitIdCommand(ThreadContext* ctx) throw()  : IObject(ctx), AbstractMonitorCommand(ctx), commitId(0)
 {
 	this->type = AbstractMonitorCommand::TYPE_GET_MAX_COMMIT_ID;
 }
@@ -35,6 +35,7 @@ void GetMaxCommitIdCommand::__construct_impl(ThreadContext* ctx) throw()
 }
 void GetMaxCommitIdCommand::__releaseRegerences(bool prepare, ThreadContext* ctx) throw() 
 {
+	ObjectEraser __e_obj1(ctx, __FILEW__, __LINE__, L"GetMaxCommitIdCommand", L"~GetMaxCommitIdCommand");
 	if(!prepare){
 		return;
 	}
@@ -48,6 +49,10 @@ void GetMaxCommitIdCommand::writeByteStream(OutputStream* out, ThreadContext* ct
 }
 void GetMaxCommitIdCommand::readFromStream(InputStream* stream, ThreadContext* ctx)
 {
+}
+long long GetMaxCommitIdCommand::getCommitId(ThreadContext* ctx) throw() 
+{
+	return commitId;
 }
 }}}}}
 

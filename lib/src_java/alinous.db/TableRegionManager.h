@@ -74,7 +74,7 @@ public:
 	void addRegion(ITableRegion* region, ThreadContext* ctx) throw() ;
 	LocalTableRegion* getLocalRegion(ThreadContext* ctx) throw() ;
 	TableSchemaCollection* getSchema(String* name, ThreadContext* ctx) throw() ;
-	void createTable(String* regionName, String* schemaName, TableMetadata* tblMeta, AlinousDatabase* database, ThreadContext* ctx);
+	void commitCreateTable(String* regionName, String* schemaName, TableMetadata* tblMeta, AlinousDatabase* database, ThreadContext* ctx);
 public:
 	static bool __init_done;
 	static bool __init_static_variables();

@@ -61,6 +61,7 @@ private:
 	AlinousSocket* socket;
 public:
 	void connect(ThreadContext* ctx) final;
+	AlinousSocket* getSocket(ThreadContext* ctx) throw()  final;
 	void close(ThreadContext* ctx) throw()  final;
 	void dispose(ThreadContext* ctx) throw()  final;
 public:

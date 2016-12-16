@@ -18,11 +18,13 @@ bool DatatableUpdateSupport::__init_static_variables(){
 	delete ctx;
 	return true;
 }
- DatatableUpdateSupport::DatatableUpdateSupport(String* schema, String* name, String* baseDir, ThreadContext* ctx) throw()  : IObject(ctx), DatatableDDLSupport(schema, name, baseDir, ctx), oidPublisher(nullptr)
+ DatatableUpdateSupport::DatatableUpdateSupport(String* schema, String* name, String* baseDir, IOidPublisher* oidPublisher, ThreadContext* ctx) throw()  : IObject(ctx), DatatableDDLSupport(schema, name, baseDir, ctx), oidPublisher(nullptr)
 {
+	__GC_MV(this, &(this->oidPublisher), oidPublisher, IOidPublisher);
 }
-void DatatableUpdateSupport::__construct_impl(String* schema, String* name, String* baseDir, ThreadContext* ctx) throw() 
+void DatatableUpdateSupport::__construct_impl(String* schema, String* name, String* baseDir, IOidPublisher* oidPublisher, ThreadContext* ctx) throw() 
 {
+	__GC_MV(this, &(this->oidPublisher), oidPublisher, IOidPublisher);
 }
  DatatableUpdateSupport::~DatatableUpdateSupport() throw() 
 {

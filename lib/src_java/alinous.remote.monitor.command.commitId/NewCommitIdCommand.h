@@ -44,9 +44,12 @@ public:
 	void __construct_impl(ThreadContext* ctx) throw() ;
 	virtual ~NewCommitIdCommand() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
+private:
+	long long commitId;
 public:
 	void executeOnServer(TransactionMonitorServer* monitorServer, BufferedOutputStream* outStream, ThreadContext* ctx) final;
 	void readFromStream(InputStream* stream, ThreadContext* ctx) final;
+	long long getCommitId(ThreadContext* ctx) throw() ;
 	void writeByteStream(OutputStream* out, ThreadContext* ctx) final;
 public:
 	static bool __init_done;

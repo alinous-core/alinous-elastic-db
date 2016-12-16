@@ -75,10 +75,12 @@ void RemoteCommitIdPublisher::setMaxCommitId(long long maxCommitId, ThreadContex
 }
 long long RemoteCommitIdPublisher::getMaxCommitId(ThreadContext* ctx)
 {
+	GetMaxCommitIdCommand* cmd = (new(ctx) GetMaxCommitIdCommand(ctx));
 	{
 		try
 		{
 			ISocketConnection* con = this->pool->getConnection(ctx);
+			cmd->sendCommand(con->getSocket(ctx), ctx);
 		}
 		catch(UnknownHostException* e)
 		{
@@ -89,14 +91,16 @@ long long RemoteCommitIdPublisher::getMaxCommitId(ThreadContext* ctx)
 			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3479(), e, ctx));
 		}
 	}
-	return 0;
+	return cmd->getCommitId(ctx);
 }
 long long RemoteCommitIdPublisher::newCommitId(ThreadContext* ctx)
 {
+	NewCommitIdCommand* cmd = (new(ctx) NewCommitIdCommand(ctx));
 	{
 		try
 		{
 			ISocketConnection* con = this->pool->getConnection(ctx);
+			cmd->sendCommand(con->getSocket(ctx), ctx);
 		}
 		catch(UnknownHostException* e)
 		{
@@ -107,7 +111,7 @@ long long RemoteCommitIdPublisher::newCommitId(ThreadContext* ctx)
 			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3479(), e, ctx));
 		}
 	}
-	return 0;
+	return cmd->getCommitId(ctx);
 }
 }}}}
 

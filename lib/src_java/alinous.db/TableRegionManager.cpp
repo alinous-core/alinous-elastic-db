@@ -66,7 +66,7 @@ TableSchemaCollection* TableRegionManager::getSchema(String* name, ThreadContext
 	}
 	return col;
 }
-void TableRegionManager::createTable(String* regionName, String* schemaName, TableMetadata* tblMeta, AlinousDatabase* database, ThreadContext* ctx)
+void TableRegionManager::commitCreateTable(String* regionName, String* schemaName, TableMetadata* tblMeta, AlinousDatabase* database, ThreadContext* ctx)
 {
 	if(regionName == nullptr)
 	{
