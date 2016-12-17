@@ -15,14 +15,14 @@ class TerminateRemoteStorageCommand;}}}}
 namespace alinous {namespace remote {namespace db {namespace command {
 class VoidRemoteStorageCommand;}}}}
 
+namespace alinous {namespace remote {namespace db {namespace command {
+class RemoteStorageConnectCommand;}}}}
+
 namespace alinous {namespace system {
 class AlinousException;}}
 
 namespace java {namespace io {
 class IOException;}}
-
-namespace alinous {namespace remote {namespace region {namespace command {
-class AbstractNodeRegionCommand;}}}}
 
 namespace alinous {namespace remote {namespace socket {
 class NetworkBinalyUtils;}}}
@@ -42,7 +42,6 @@ using namespace ::java::lang;
 using ::java::util::Iterator;
 using ::java::io::IOException;
 using ::java::io::InputStream;
-using ::alinous::remote::region::command::AbstractNodeRegionCommand;
 using ::alinous::remote::socket::NetworkBinalyUtils;
 using ::alinous::system::AlinousException;
 

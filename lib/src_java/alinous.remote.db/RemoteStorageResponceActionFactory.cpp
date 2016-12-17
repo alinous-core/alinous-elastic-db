@@ -48,7 +48,7 @@ RemoteTableStorageServer* RemoteStorageResponceActionFactory::getRemoteTableStor
 }
 IThreadAction* RemoteStorageResponceActionFactory::getAction(Socket* socket, SocketServer* server, ThreadContext* ctx) throw() 
 {
-	return (new(ctx) RemoteStorageResponceAction(socket, server, ctx));
+	return (new(ctx) RemoteStorageResponceAction(this->remoteTableStorageServer, socket, server, ctx));
 }
 }}}
 

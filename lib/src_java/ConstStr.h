@@ -2074,9 +2074,9 @@ public:
 	constexpr static StaticUnicodeString __CNST_STR_1630{L"failed in initializing cache index.",35};
 public:
 	static UnicodeStringWrapper* getCNST_STR_1630() throw();
-	constexpr static StaticUnicodeString __CNST_STR_3479{L"Port must be a number",21};
+	constexpr static StaticUnicodeString __CNST_STR_3480{L"Port must be a number",21};
 public:
-	static UnicodeStringWrapper* getCNST_STR_3479() throw();
+	static UnicodeStringWrapper* getCNST_STR_3480() throw();
 	constexpr static StaticUnicodeString __CNST_STR_3059{L"ssf",3};
 public:
 	static UnicodeStringWrapper* getCNST_STR_3059() throw();
@@ -2395,9 +2395,9 @@ public:
 	constexpr static StaticUnicodeString __CNST_STR_1779{L"Accept",6};
 public:
 	static UnicodeStringWrapper* getCNST_STR_1779() throw();
-	constexpr static StaticUnicodeString __CNST_STR_3477{L"MonitorServer",13};
+	constexpr static StaticUnicodeString __CNST_STR_3478{L"MonitorServer",13};
 public:
-	static UnicodeStringWrapper* getCNST_STR_3477() throw();
+	static UnicodeStringWrapper* getCNST_STR_3478() throw();
 	constexpr static StaticUnicodeString __CNST_STR_3359{L"xenc",4};
 public:
 	static UnicodeStringWrapper* getCNST_STR_3359() throw();
@@ -6025,9 +6025,9 @@ public:
 	constexpr static StaticUnicodeString __CNST_STR_2143{L"application/vnd.spotfire.dxp",28};
 public:
 	static UnicodeStringWrapper* getCNST_STR_2143() throw();
-	constexpr static StaticUnicodeString __CNST_STR_3478{L"The url has to contain host and port,",37};
+	constexpr static StaticUnicodeString __CNST_STR_3479{L"The url has to contain host and port,",37};
 public:
-	static UnicodeStringWrapper* getCNST_STR_3478() throw();
+	static UnicodeStringWrapper* getCNST_STR_3479() throw();
 	constexpr static StaticUnicodeString __CNST_STR_1278{L"\"*\"",3};
 public:
 	static UnicodeStringWrapper* getCNST_STR_1278() throw();
@@ -6838,9 +6838,9 @@ public:
 	constexpr static StaticUnicodeString __CNST_STR_2700{L"odt",3};
 public:
 	static UnicodeStringWrapper* getCNST_STR_2700() throw();
-	constexpr static StaticUnicodeString __CNST_STR_3481{L"Connection Failed",17};
+	constexpr static StaticUnicodeString __CNST_STR_3476{L"Connection Failed",17};
 public:
-	static UnicodeStringWrapper* getCNST_STR_3481() throw();
+	static UnicodeStringWrapper* getCNST_STR_3476() throw();
 	constexpr static StaticUnicodeString __CNST_STR_1072{L"TypedVariableArray",18};
 public:
 	static UnicodeStringWrapper* getCNST_STR_1072() throw();
@@ -8014,9 +8014,9 @@ public:
 	constexpr static StaticUnicodeString __CNST_STR_2601{L"application/vnd.ms-project",26};
 public:
 	static UnicodeStringWrapper* getCNST_STR_2601() throw();
-	constexpr static StaticUnicodeString __CNST_STR_3480{L"Connection Error",16};
+	constexpr static StaticUnicodeString __CNST_STR_3481{L"Connection Error",16};
 public:
-	static UnicodeStringWrapper* getCNST_STR_3480() throw();
+	static UnicodeStringWrapper* getCNST_STR_3481() throw();
 	constexpr static StaticUnicodeString __CNST_STR_951{L"public",6};
 public:
 	static UnicodeStringWrapper* getCNST_STR_951() throw();
@@ -10183,9 +10183,9 @@ public:
 	constexpr static StaticUnicodeString __CNST_STR_1042{L"No Join strategy",16};
 public:
 	static UnicodeStringWrapper* getCNST_STR_1042() throw();
-	constexpr static StaticUnicodeString __CNST_STR_3476{L"Wrong Command Type of Remote Table Storage Command.",51};
+	constexpr static StaticUnicodeString __CNST_STR_3477{L"Wrong Command Type of Remote Table Storage Command.",51};
 public:
-	static UnicodeStringWrapper* getCNST_STR_3476() throw();
+	static UnicodeStringWrapper* getCNST_STR_3477() throw();
 	constexpr static StaticUnicodeString __CNST_STR_1229{L"The 'region' tag's 'maxcon' attribute must be number",52};
 public:
 	static UnicodeStringWrapper* getCNST_STR_1229() throw();

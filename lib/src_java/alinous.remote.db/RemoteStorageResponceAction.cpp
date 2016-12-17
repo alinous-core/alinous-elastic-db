@@ -18,12 +18,12 @@ bool RemoteStorageResponceAction::__init_static_variables(){
 	delete ctx;
 	return true;
 }
- RemoteStorageResponceAction::RemoteStorageResponceAction(Socket* socket, SocketServer* server, ThreadContext* ctx) throw()  : IObject(ctx), IThreadAction(ctx), socket(nullptr), server(nullptr)
+ RemoteStorageResponceAction::RemoteStorageResponceAction(RemoteTableStorageServer* tableStorageServer, Socket* socket, SocketServer* server, ThreadContext* ctx) throw()  : IObject(ctx), IThreadAction(ctx), socket(nullptr), server(nullptr), tableStorageServer(nullptr)
 {
 	__GC_MV(this, &(this->socket), socket, Socket);
 	__GC_MV(this, &(this->server), server, SocketServer);
 }
-void RemoteStorageResponceAction::__construct_impl(Socket* socket, SocketServer* server, ThreadContext* ctx) throw() 
+void RemoteStorageResponceAction::__construct_impl(RemoteTableStorageServer* tableStorageServer, Socket* socket, SocketServer* server, ThreadContext* ctx) throw() 
 {
 	__GC_MV(this, &(this->socket), socket, Socket);
 	__GC_MV(this, &(this->server), server, SocketServer);
@@ -42,6 +42,8 @@ void RemoteStorageResponceAction::__releaseRegerences(bool prepare, ThreadContex
 	socket = nullptr;
 	__e_obj1.add(this->server, this);
 	server = nullptr;
+	__e_obj1.add(this->tableStorageServer, this);
+	tableStorageServer = nullptr;
 	if(!prepare){
 		return;
 	}
@@ -89,6 +91,9 @@ void RemoteStorageResponceAction::handleCommand(BufferedInputStream* stream, Buf
 			break ;
 		case AbstractRemoteStorageCommand::TYPE_TERMINATE:
 			loop = false;
+			break ;
+		case AbstractRemoteStorageCommand::TYPE_CONNECT:
+			cmd->executeOnServer(this->tableStorageServer, outStream, ctx);
 			break ;
 		case AbstractRemoteStorageCommand::TYPE_VOID:
 		default:

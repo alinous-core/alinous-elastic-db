@@ -48,7 +48,7 @@ NodeRegionServer* NodeRegionResponceActionFactory::getStorageNodeRegionServer(Th
 }
 IThreadAction* NodeRegionResponceActionFactory::getAction(Socket* socket, SocketServer* server, ThreadContext* ctx) throw() 
 {
-	return (new(ctx) NodeRegionResponceAction(socket, server, ctx));
+	return (new(ctx) NodeRegionResponceAction(this->storageNodeRegionServer, socket, server, ctx));
 }
 }}}
 

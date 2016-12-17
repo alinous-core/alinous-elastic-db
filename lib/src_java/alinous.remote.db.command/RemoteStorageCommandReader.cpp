@@ -36,17 +36,20 @@ AbstractRemoteStorageCommand* RemoteStorageCommandReader::readFromStream(InputSt
 	int type = NetworkBinalyUtils::readInt(stream, ctx);
 	AbstractRemoteStorageCommand* cmd = nullptr;
 	switch(type) {
-	case AbstractNodeRegionCommand::TYPE_FINISH:
+	case AbstractRemoteStorageCommand::TYPE_FINISH:
 		cmd = (new(ctx) FinishRemoteStorageConnectionCommand(ctx));
 		break ;
-	case AbstractNodeRegionCommand::TYPE_TERMINATE:
+	case AbstractRemoteStorageCommand::TYPE_TERMINATE:
 		cmd = (new(ctx) TerminateRemoteStorageCommand(ctx));
 		break ;
-	case AbstractNodeRegionCommand::TYPE_VOID:
+	case AbstractRemoteStorageCommand::TYPE_VOID:
 		cmd = (new(ctx) VoidRemoteStorageCommand(ctx));
 		break ;
+	case AbstractRemoteStorageCommand::TYPE_CONNECT:
+		cmd = (new(ctx) RemoteStorageConnectCommand(ctx));
+		break ;
 	default:
-		throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3476(), ctx));
+		throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3477(), ctx));
 		break;
 	}
 	cmd->readFromStream(stream, ctx);

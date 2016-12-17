@@ -43,6 +43,9 @@ void FinishRemoteStorageConnectionCommand::__releaseRegerences(bool prepare, Thr
 void FinishRemoteStorageConnectionCommand::readFromStream(InputStream* stream, ThreadContext* ctx)
 {
 }
+void FinishRemoteStorageConnectionCommand::executeOnServer(RemoteTableStorageServer* tableStorageServer, BufferedOutputStream* outStream, ThreadContext* ctx)
+{
+}
 void FinishRemoteStorageConnectionCommand::writeByteStream(OutputStream* out, ThreadContext* ctx)
 {
 	ByteBuffer* buffer = ByteBuffer::allocate(256, ctx);

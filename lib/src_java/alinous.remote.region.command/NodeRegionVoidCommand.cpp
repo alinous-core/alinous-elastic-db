@@ -43,7 +43,7 @@ void NodeRegionVoidCommand::__releaseRegerences(bool prepare, ThreadContext* ctx
 void NodeRegionVoidCommand::readFromStream(InputStream* stream, ThreadContext* ctx)
 {
 }
-void NodeRegionVoidCommand::executeOnServer(TransactionMonitorServer* monitorServer, BufferedOutputStream* outStream, ThreadContext* ctx)
+void NodeRegionVoidCommand::executeOnServer(NodeRegionServer* nodeRegionServer, BufferedOutputStream* outStream, ThreadContext* ctx)
 {
 }
 void NodeRegionVoidCommand::writeByteStream(OutputStream* out, ThreadContext* ctx)

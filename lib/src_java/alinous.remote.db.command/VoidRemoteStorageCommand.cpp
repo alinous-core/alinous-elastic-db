@@ -43,6 +43,9 @@ void VoidRemoteStorageCommand::__releaseRegerences(bool prepare, ThreadContext* 
 void VoidRemoteStorageCommand::readFromStream(InputStream* stream, ThreadContext* ctx)
 {
 }
+void VoidRemoteStorageCommand::executeOnServer(RemoteTableStorageServer* tableStorageServer, BufferedOutputStream* outStream, ThreadContext* ctx)
+{
+}
 void VoidRemoteStorageCommand::writeByteStream(OutputStream* out, ThreadContext* ctx)
 {
 	ByteBuffer* buffer = ByteBuffer::allocate(256, ctx);

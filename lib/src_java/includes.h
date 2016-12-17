@@ -255,19 +255,21 @@
 #include "alinous.remote.socket/SocketServer.h"
 #include "alinous.system.config/AlinousInitException.h"
 #include "alinous.remote.db.command/AbstractRemoteStorageCommand.h"
-#include "alinous.remote.region.command/AbstractNodeRegionCommand.h"
 #include "alinous.remote.db.command/FinishRemoteStorageConnectionCommand.h"
 #include "alinous.remote.db.command/TerminateRemoteStorageCommand.h"
 #include "alinous.remote.db.command/VoidRemoteStorageCommand.h"
+#include "alinous.remote.db.command/RemoteStorageConnectCommand.h"
 #include "alinous.remote.db.command/RemoteStorageCommandReader.h"
 #include "alinous.remote.db/RemoteStorageResponceAction.h"
 #include "alinous.remote.db/RemoteStorageResponceActionFactory.h"
 #include "alinous.remote.db/RemoteTableStorageServer.h"
 #include "alinous.remote.region/NodeReference.h"
 #include "alinous.remote.region/NodeReferenceManager.h"
+#include "alinous.remote.region.command/AbstractNodeRegionCommand.h"
 #include "alinous.remote.region.command/NodeRegionFinishConnectionCommand.h"
 #include "alinous.remote.region.command/NodeRegionTerminateCommand.h"
 #include "alinous.remote.region.command/NodeRegionVoidCommand.h"
+#include "alinous.remote.region.command/NodeRegionConnectCommand.h"
 #include "alinous.remote.region.command/NodeRegionCommandReader.h"
 #include "alinous.remote.region/NodeRegionResponceAction.h"
 #include "alinous.remote.region/NodeRegionResponceActionFactory.h"
@@ -443,7 +445,6 @@
 #include "alinous.remote.monitor.client/RemoteCommitIdPublisher.h"
 #include "alinous.db/ITableRegion.h"
 #include "alinous.remote.region.client/RegionConnectionInfo.h"
-#include "alinous.remote.region.command/NodeRegionConnectCommand.h"
 #include "alinous.remote.region.client/RegionConnection.h"
 #include "alinous.remote.region.client/RegionClientConnectionFactory.h"
 #include "alinous.remote.region.client/RemoteRegionRef.h"
@@ -809,6 +810,9 @@
 #include "alinous.server.http/HttpParamHandler.h"
 #include "alinous.server.webmodule/BinaryModuleStream.h"
 #include "alinous.server.webmodule/BinaryModule.h"
+#include "alinous.remote.db.client/RemoteStorageConnectionInfo.h"
+#include "alinous.remote.db.client/RemoteStorageConnection.h"
+#include "alinous.remote.db.client/RemoteStorageClientConnectionFactory.h"
 #include "alinous.remote.db.client/RemoteTableStorageClient.h"
 #include "alinous.remote.region.client/DatabaseTableClient.h"
 #include "alinous.remote.region.client/RemoteTableScheme.h"
@@ -1666,10 +1670,14 @@ inline static void __cleanUpStatics(alinous::ThreadContext* ctx){
 	alinous::remote::db::RemoteStorageResponceAction::__cleanUp(ctx);
 	alinous::remote::db::RemoteTableStorageServer::__cleanUp(ctx);
 	alinous::remote::db::RemoteStorageResponceActionFactory::__cleanUp(ctx);
+	alinous::remote::db::client::RemoteStorageConnection::__cleanUp(ctx);
+	alinous::remote::db::client::RemoteStorageClientConnectionFactory::__cleanUp(ctx);
 	alinous::remote::db::client::RemoteTableStorageClient::__cleanUp(ctx);
+	alinous::remote::db::client::RemoteStorageConnectionInfo::__cleanUp(ctx);
 	alinous::remote::db::command::TerminateRemoteStorageCommand::__cleanUp(ctx);
 	alinous::remote::db::command::RemoteStorageCommandReader::__cleanUp(ctx);
 	alinous::remote::db::command::AbstractRemoteStorageCommand::__cleanUp(ctx);
+	alinous::remote::db::command::RemoteStorageConnectCommand::__cleanUp(ctx);
 	alinous::remote::db::command::FinishRemoteStorageConnectionCommand::__cleanUp(ctx);
 	alinous::remote::db::command::VoidRemoteStorageCommand::__cleanUp(ctx);
 	alinous::remote::monitor::MonitorResponseActionFactory::__cleanUp(ctx);

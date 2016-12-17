@@ -9,6 +9,7 @@ namespace alinous {namespace remote {namespace db {namespace command {
 
 constexpr const int AbstractRemoteStorageCommand::TYPE_VOID;
 constexpr const int AbstractRemoteStorageCommand::TYPE_FINISH;
+constexpr const int AbstractRemoteStorageCommand::TYPE_CONNECT;
 constexpr const int AbstractRemoteStorageCommand::TYPE_TERMINATE;
 bool AbstractRemoteStorageCommand::__init_done = __init_static_variables();
 bool AbstractRemoteStorageCommand::__init_static_variables(){

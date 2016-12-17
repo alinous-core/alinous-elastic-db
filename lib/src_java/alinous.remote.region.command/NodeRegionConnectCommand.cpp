@@ -48,7 +48,7 @@ void NodeRegionConnectCommand::readFromStream(InputStream* stream, ThreadContext
 	int res = NetworkBinalyUtils::readInt(stream, ctx);
 	this->connected = (res == 1);
 }
-void NodeRegionConnectCommand::executeOnServer(TransactionMonitorServer* monitorServer, BufferedOutputStream* outStream, ThreadContext* ctx)
+void NodeRegionConnectCommand::executeOnServer(NodeRegionServer* nodeRegionServer, BufferedOutputStream* outStream, ThreadContext* ctx)
 {
 	this->connected = true;
 	writeByteStream(outStream, ctx);

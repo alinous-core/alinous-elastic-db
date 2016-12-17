@@ -43,7 +43,7 @@ void NodeRegionTerminateCommand::__releaseRegerences(bool prepare, ThreadContext
 void NodeRegionTerminateCommand::readFromStream(InputStream* stream, ThreadContext* ctx)
 {
 }
-void NodeRegionTerminateCommand::executeOnServer(TransactionMonitorServer* monitorServer, BufferedOutputStream* outStream, ThreadContext* ctx)
+void NodeRegionTerminateCommand::executeOnServer(NodeRegionServer* nodeRegionServer, BufferedOutputStream* outStream, ThreadContext* ctx)
 {
 }
 void NodeRegionTerminateCommand::writeByteStream(OutputStream* out, ThreadContext* ctx)

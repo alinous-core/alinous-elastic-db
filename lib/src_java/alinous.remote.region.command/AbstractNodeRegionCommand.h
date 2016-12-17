@@ -9,8 +9,8 @@ class OutputStream;}}
 namespace java {namespace io {
 class InputStream;}}
 
-namespace alinous {namespace remote {namespace monitor {
-class TransactionMonitorServer;}}}
+namespace alinous {namespace remote {namespace region {
+class NodeRegionServer;}}}
 
 namespace java {namespace io {
 class BufferedOutputStream;}}
@@ -36,7 +36,7 @@ using ::java::io::IOException;
 using ::java::io::InputStream;
 using ::java::io::OutputStream;
 using ::alinous::net::AlinousSocket;
-using ::alinous::remote::monitor::TransactionMonitorServer;
+using ::alinous::remote::region::NodeRegionServer;
 
 
 
@@ -62,7 +62,7 @@ public:
 public:
 	int getType(ThreadContext* ctx) throw() ;
 	void sendCommand(AlinousSocket* socket, ThreadContext* ctx);
-	virtual void executeOnServer(TransactionMonitorServer* monitorServer, BufferedOutputStream* outStream, ThreadContext* ctx) = 0;
+	virtual void executeOnServer(NodeRegionServer* nodeRegionServer, BufferedOutputStream* outStream, ThreadContext* ctx) = 0;
 	virtual void readFromStream(InputStream* stream, ThreadContext* ctx) = 0;
 	virtual void writeByteStream(OutputStream* out, ThreadContext* ctx) = 0;
 public:

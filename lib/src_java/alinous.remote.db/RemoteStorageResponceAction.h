@@ -1,5 +1,8 @@
 #ifndef ALINOUS_REMOTE_DB_REMOTESTORAGERESPONCEACTION_H_
 #define ALINOUS_REMOTE_DB_REMOTESTORAGERESPONCEACTION_H_
+namespace alinous {namespace remote {namespace db {
+class RemoteTableStorageServer;}}}
+
 namespace java {namespace net {
 class Socket;}}
 
@@ -67,13 +70,14 @@ class RemoteStorageResponceAction final : public IThreadAction, public virtual I
 public:
 	RemoteStorageResponceAction(const RemoteStorageResponceAction& base) = default;
 public:
-	RemoteStorageResponceAction(Socket* socket, SocketServer* server, ThreadContext* ctx) throw() ;
-	void __construct_impl(Socket* socket, SocketServer* server, ThreadContext* ctx) throw() ;
+	RemoteStorageResponceAction(RemoteTableStorageServer* tableStorageServer, Socket* socket, SocketServer* server, ThreadContext* ctx) throw() ;
+	void __construct_impl(RemoteTableStorageServer* tableStorageServer, Socket* socket, SocketServer* server, ThreadContext* ctx) throw() ;
 	virtual ~RemoteStorageResponceAction() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 private:
 	Socket* socket;
 	SocketServer* server;
+	RemoteTableStorageServer* tableStorageServer;
 public:
 	void execute(ThreadContext* ctx) final;
 private:

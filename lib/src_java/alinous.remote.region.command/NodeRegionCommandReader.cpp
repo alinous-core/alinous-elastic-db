@@ -45,6 +45,9 @@ AbstractNodeRegionCommand* NodeRegionCommandReader::readFromStream(InputStream* 
 	case AbstractNodeRegionCommand::TYPE_VOID:
 		cmd = (new(ctx) NodeRegionVoidCommand(ctx));
 		break ;
+	case AbstractNodeRegionCommand::TYPE_CONNECT:
+		cmd = (new(ctx) NodeRegionConnectCommand(ctx));
+		break ;
 	default:
 		throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3484(), ctx));
 		break;

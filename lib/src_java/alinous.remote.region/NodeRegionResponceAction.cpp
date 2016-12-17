@@ -18,12 +18,12 @@ bool NodeRegionResponceAction::__init_static_variables(){
 	delete ctx;
 	return true;
 }
- NodeRegionResponceAction::NodeRegionResponceAction(Socket* socket, SocketServer* server, ThreadContext* ctx) throw()  : IObject(ctx), IThreadAction(ctx), socket(nullptr), server(nullptr)
+ NodeRegionResponceAction::NodeRegionResponceAction(NodeRegionServer* nodeRegionServer, Socket* socket, SocketServer* server, ThreadContext* ctx) throw()  : IObject(ctx), IThreadAction(ctx), socket(nullptr), server(nullptr), nodeRegionServer(nullptr)
 {
 	__GC_MV(this, &(this->socket), socket, Socket);
 	__GC_MV(this, &(this->server), server, SocketServer);
 }
-void NodeRegionResponceAction::__construct_impl(Socket* socket, SocketServer* server, ThreadContext* ctx) throw() 
+void NodeRegionResponceAction::__construct_impl(NodeRegionServer* nodeRegionServer, Socket* socket, SocketServer* server, ThreadContext* ctx) throw() 
 {
 	__GC_MV(this, &(this->socket), socket, Socket);
 	__GC_MV(this, &(this->server), server, SocketServer);
@@ -42,6 +42,8 @@ void NodeRegionResponceAction::__releaseRegerences(bool prepare, ThreadContext* 
 	socket = nullptr;
 	__e_obj1.add(this->server, this);
 	server = nullptr;
+	__e_obj1.add(this->nodeRegionServer, this);
+	nodeRegionServer = nullptr;
 	if(!prepare){
 		return;
 	}
@@ -89,6 +91,9 @@ void NodeRegionResponceAction::handleCommand(BufferedInputStream* stream, Buffer
 			break ;
 		case AbstractNodeRegionCommand::TYPE_TERMINATE:
 			loop = false;
+			break ;
+		case AbstractNodeRegionCommand::TYPE_CONNECT:
+			cmd->executeOnServer(this->nodeRegionServer, outStream, ctx);
 			break ;
 		case AbstractNodeRegionCommand::TYPE_VOID:
 		default:

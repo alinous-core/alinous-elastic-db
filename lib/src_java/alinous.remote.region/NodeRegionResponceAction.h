@@ -1,5 +1,8 @@
 #ifndef ALINOUS_REMOTE_REGION_NODEREGIONRESPONCEACTION_H_
 #define ALINOUS_REMOTE_REGION_NODEREGIONRESPONCEACTION_H_
+namespace alinous {namespace remote {namespace region {
+class NodeRegionServer;}}}
+
 namespace java {namespace net {
 class Socket;}}
 
@@ -67,13 +70,14 @@ class NodeRegionResponceAction final : public IThreadAction, public virtual IObj
 public:
 	NodeRegionResponceAction(const NodeRegionResponceAction& base) = default;
 public:
-	NodeRegionResponceAction(Socket* socket, SocketServer* server, ThreadContext* ctx) throw() ;
-	void __construct_impl(Socket* socket, SocketServer* server, ThreadContext* ctx) throw() ;
+	NodeRegionResponceAction(NodeRegionServer* nodeRegionServer, Socket* socket, SocketServer* server, ThreadContext* ctx) throw() ;
+	void __construct_impl(NodeRegionServer* nodeRegionServer, Socket* socket, SocketServer* server, ThreadContext* ctx) throw() ;
 	virtual ~NodeRegionResponceAction() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 private:
 	Socket* socket;
 	SocketServer* server;
+	NodeRegionServer* nodeRegionServer;
 public:
 	void execute(ThreadContext* ctx) final;
 private:

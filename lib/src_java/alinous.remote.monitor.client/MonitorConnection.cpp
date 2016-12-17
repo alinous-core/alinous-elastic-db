@@ -55,7 +55,7 @@ void MonitorConnection::connect(ThreadContext* ctx)
 	cmd->sendCommand(this->socket, ctx);
 	if(!cmd->isConnected(ctx))
 	{
-		throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3481(), ctx));
+		throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3476(), ctx));
 	}
 }
 AlinousSocket* MonitorConnection::getSocket(ThreadContext* ctx) throw() 
