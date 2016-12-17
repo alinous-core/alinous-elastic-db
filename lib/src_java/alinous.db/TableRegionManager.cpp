@@ -58,7 +58,7 @@ TableSchemaCollection* TableRegionManager::getSchema(String* name, ThreadContext
 	for(int i = 0; i != maxLoop; ++i)
 	{
 		ITableRegion* region = this->regions->get(i, ctx);
-		TableSchema* sc = region->getSchema(name, ctx);
+		ITableSchema* sc = region->getSchema(name, ctx);
 		if(sc != nullptr)
 		{
 			col->addScheme(sc, ctx);

@@ -1,5 +1,8 @@
-#ifndef ALINOUS_DB_ITABLEREGION_H_
-#define ALINOUS_DB_ITABLEREGION_H_
+#ifndef ALINOUS_REMOTE_REGION_CLIENT_REMOTEREGIONREF_H_
+#define ALINOUS_REMOTE_REGION_CLIENT_REMOTEREGIONREF_H_
+namespace alinous {namespace system {namespace config {namespace remote {
+class RegionRef;}}}}
+
 namespace alinous {namespace db {
 class ITableSchema;}}
 
@@ -14,6 +17,9 @@ class AlinousCore;}}
 
 namespace alinous {namespace btree {
 class BTreeGlobalCache;}}
+
+namespace alinous {namespace db {
+class ITableRegion;}}
 
 namespace java {namespace io {
 class IOException;}}
@@ -35,7 +41,7 @@ namespace alinous {
 class ThreadContext;
 }
 
-namespace alinous {namespace db {
+namespace alinous {namespace remote {namespace region {namespace client {
 
 using namespace ::alinous;
 using namespace ::java::lang;
@@ -43,35 +49,34 @@ using ::java::util::Iterator;
 using ::java::io::IOException;
 using ::alinous::btree::BTreeException;
 using ::alinous::btree::BTreeGlobalCache;
+using ::alinous::db::ITableRegion;
+using ::alinous::db::ITableSchema;
 using ::alinous::db::table::DatabaseException;
 using ::alinous::db::table::TableMetadata;
 using ::alinous::runtime::parallel::ThreadPool;
 using ::alinous::system::AlinousCore;
 using ::alinous::system::AlinousException;
+using ::alinous::system::config::remote::RegionRef;
 
 
 
-class ITableRegion : public virtual IObject {
+class RemoteRegionRef final : public ITableRegion, public virtual IObject {
 public:
-	ITableRegion(const ITableRegion& base) = default;
+	RemoteRegionRef(const RemoteRegionRef& base) = default;
 public:
-	ITableRegion(ThreadContext* ctx) throw()  : IObject(ctx)
-	{
-	}
-	void __construct_impl(ThreadContext* ctx) throw() 
-	{
-	}
-	virtual ~ITableRegion() throw();
+	RemoteRegionRef(RegionRef* ref, ThreadContext* ctx) throw() ;
+	void __construct_impl(RegionRef* ref, ThreadContext* ctx) throw() ;
+	virtual ~RemoteRegionRef() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
+private:
+	RegionRef* config;
 public:
-	static int LOCAL_REGION;
-	static int REMOTE_REGION;
-public:
-	virtual int getRegionType(ThreadContext* ctx) throw()  = 0;
-	virtual String* getRegionName(ThreadContext* ctx) throw()  = 0;
-	virtual ITableSchema* getSchema(String* name, ThreadContext* ctx) throw()  = 0;
-	virtual void createSchema(String* schemaName, ThreadContext* ctx) throw()  = 0;
-	virtual void createTable(String* schemaName, TableMetadata* tblMeta, ThreadPool* threadPool, AlinousCore* core, BTreeGlobalCache* cache, ThreadContext* ctx) = 0;
+	int getRegionType(ThreadContext* ctx) throw()  final;
+	String* getRegionName(ThreadContext* ctx) throw()  final;
+	ITableSchema* getSchema(String* name, ThreadContext* ctx) throw()  final;
+	void createSchema(String* schemaName, ThreadContext* ctx) throw()  final;
+	void createTable(String* schemaName, TableMetadata* tblMeta, ThreadPool* threadPool, AlinousCore* core, BTreeGlobalCache* cache, ThreadContext* ctx) final;
+	RegionRef* getConfig(ThreadContext* ctx) throw() ;
 public:
 	static bool __init_done;
 	static bool __init_static_variables();
@@ -80,6 +85,6 @@ public:
 	}
 };
 
-}}
+}}}}
 
-#endif /* end of ALINOUS_DB_ITABLEREGION_H_ */
+#endif /* end of ALINOUS_REMOTE_REGION_CLIENT_REMOTEREGIONREF_H_ */

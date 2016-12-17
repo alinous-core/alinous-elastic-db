@@ -216,8 +216,8 @@ void AlinousCore::initDistributedParts(ThreadContext* ctx)
 		while(it->hasNext(ctx))
 		{
 			Node* n = it->next(ctx);
-			RemoteTableStorageServer* tableNode = (new(ctx) RemoteTableStorageServer(n->getPort(ctx), n->getMaxCon(ctx), ctx));
-			tableNode->start(this->logger, ctx);
+			RemoteTableStorageServer* tableNode = (new(ctx) RemoteTableStorageServer(n->getPort(ctx), n->getMaxCon(ctx), n->getDataDir(ctx), ctx));
+			tableNode->start(this, ctx);
 			this->storageServers->add(tableNode, ctx);
 		}
 	}

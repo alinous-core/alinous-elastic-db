@@ -49,9 +49,6 @@ namespace alinous {namespace db {
 class LocalTableRegion;}}
 
 namespace alinous {namespace db {
-class TableRegionManager;}}
-
-namespace alinous {namespace db {
 class SchemaManager;}}
 
 namespace alinous {namespace btree {
@@ -80,6 +77,21 @@ class AlinousThread;}}}
 
 namespace alinous {namespace db {namespace trx {
 class TrxLockManager;}}}
+
+namespace alinous {namespace db {
+class TableRegionManager;}}
+
+namespace alinous {namespace system {namespace config {namespace remote {
+class RegionsRef;}}}}
+
+namespace java {namespace util {
+template <typename  T> class List;}}
+
+namespace alinous {namespace system {namespace config {namespace remote {
+class RegionRef;}}}}
+
+namespace alinous {namespace remote {namespace region {namespace client {
+class RemoteRegionRef;}}}}
 
 namespace alinous {namespace db {
 class TableSchemaCollection;}}
@@ -130,6 +142,7 @@ using ::java::util::Iterator;
 using ::java::io::File;
 using ::java::io::IOException;
 using ::java::util::ArrayList;
+using ::java::util::List;
 using ::alinous::btree::BTree;
 using ::alinous::btree::BTreeException;
 using ::alinous::btree::BTreeGlobalCache;
@@ -145,6 +158,7 @@ using ::alinous::db::trx::TrxLockContext;
 using ::alinous::db::trx::TrxLockManager;
 using ::alinous::lock::LockObject;
 using ::alinous::remote::monitor::client::RemoteCommitIdPublisher;
+using ::alinous::remote::region::client::RemoteRegionRef;
 using ::alinous::runtime::dom::VariableException;
 using ::alinous::runtime::parallel::AlinousThread;
 using ::alinous::runtime::parallel::LaunchJoin;
@@ -153,6 +167,8 @@ using ::alinous::system::AlinousCore;
 using ::alinous::system::AlinousException;
 using ::alinous::system::config::AlinousDbInstanceInfo;
 using ::alinous::system::config::remote::MonitorRef;
+using ::alinous::system::config::remote::RegionRef;
+using ::alinous::system::config::remote::RegionsRef;
 using ::alinous::system::utils::FileUtils;
 
 
@@ -195,7 +211,7 @@ public:
 	long long getCommitId(ThreadContext* ctx);
 	long long newCommitId(ThreadContext* ctx);
 	void syncScheme(ThreadContext* ctx);
-	void open(ThreadContext* ctx);
+	void open(AlinousDbInstanceInfo* instanceConfig, ThreadContext* ctx);
 	TableSchemaCollection* getSchema(String* name, ThreadContext* ctx) throw() ;
 	IDatabaseTable* getTable(AlinousName* tableName, String* currentSchema, ThreadContext* ctx) throw() ;
 	IDatabaseTable* getTable(String* schemaName, String* tableName, ThreadContext* ctx) throw() ;
@@ -209,6 +225,7 @@ public:
 	TableRegionManager* getRegionManager(ThreadContext* ctx) throw() ;
 private:
 	File* getConfigFile(ThreadContext* ctx) throw() ;
+	void openRegions(AlinousDbInstanceInfo* instanceConfig, ThreadContext* ctx) throw() ;
 public:
 	static bool __init_done;
 	static bool __init_static_variables();

@@ -34,7 +34,7 @@ void TableSchemaCollection::__releaseRegerences(bool prepare, ThreadContext* ctx
 		return;
 	}
 }
-void TableSchemaCollection::addScheme(TableSchema* sc, ThreadContext* ctx) throw() 
+void TableSchemaCollection::addScheme(ITableSchema* sc, ThreadContext* ctx) throw() 
 {
 	this->list->add(sc, ctx);
 }
@@ -43,7 +43,7 @@ IDatabaseTable* TableSchemaCollection::getTableStore(String* tableName, ThreadCo
 	int maxLoop = this->list->size(ctx);
 	for(int i = 0; i != maxLoop; ++i)
 	{
-		TableSchema* sc = this->list->get(i, ctx);
+		ITableSchema* sc = this->list->get(i, ctx);
 		IDatabaseTable* tbl = sc->getTableStore(tableName, ctx);
 		if(tbl != nullptr)
 		{
@@ -57,7 +57,7 @@ TableMetadata* TableSchemaCollection::getDableMetadata(String* tableName, Thread
 	int maxLoop = this->list->size(ctx);
 	for(int i = 0; i != maxLoop; ++i)
 	{
-		TableSchema* sc = this->list->get(i, ctx);
+		ITableSchema* sc = this->list->get(i, ctx);
 		IDatabaseTable* tbl = sc->getTableStore(tableName, ctx);
 		if(tbl != nullptr)
 		{

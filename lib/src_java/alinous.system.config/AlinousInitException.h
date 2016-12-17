@@ -3,6 +3,9 @@
 namespace alinous{namespace annotation{
 class OneSource;
 }}
+namespace java {namespace lang {
+class Throwable;}}
+
 namespace alinous {namespace system {
 class AlinousException;}}
 
@@ -25,6 +28,8 @@ public:
 public:
 	AlinousInitException(String* msg, ThreadContext* ctx) throw() ;
 	void __construct_impl(String* msg, ThreadContext* ctx) throw() ;
+	AlinousInitException(String* msg, Throwable* e, ThreadContext* ctx) throw() ;
+	void __construct_impl(String* msg, Throwable* e, ThreadContext* ctx) throw() ;
 	virtual ~AlinousInitException() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 private:

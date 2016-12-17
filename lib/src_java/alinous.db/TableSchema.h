@@ -54,6 +54,9 @@ template <typename  T, typename V> class HashMap;}}
 namespace alinous {namespace btree {
 class IBTreeValue;}}
 
+namespace alinous {namespace db {
+class ITableSchema;}}
+
 namespace alinous {namespace db {namespace table {
 class DatabaseException;}}}
 
@@ -93,7 +96,7 @@ using ::alinous::system::AlinousException;
 
 
 
-class TableSchema final : public IBTreeValue, public virtual IObject {
+class TableSchema final : public IBTreeValue, public ITableSchema, public virtual IObject {
 public:
 	TableSchema(const TableSchema& base) = default;
 public:
@@ -114,7 +117,7 @@ public:
 	void initAfterFetched(String* dataDir, String* schemaName, ThreadPool* threadPool, IOidPublisher* oidPublisher, AlinousCore* core, BTreeGlobalCache* cache, ThreadContext* ctx);
 	String* getSchemaDir(ThreadContext* ctx) throw() ;
 	void addTableStore(IDatabaseTable* tableStore, ThreadContext* ctx) throw() ;
-	IDatabaseTable* getTableStore(String* tableName, ThreadContext* ctx) throw() ;
+	IDatabaseTable* getTableStore(String* tableName, ThreadContext* ctx) throw()  final;
 	TableMetadata* getDableMetadata(String* tableName, ThreadContext* ctx) throw() ;
 	Set<String>* getTableNames(ThreadContext* ctx) throw() ;
 	void addTableMetadata(TableMetadata* tblMetadata, ThreadContext* ctx) throw() ;

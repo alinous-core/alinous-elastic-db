@@ -42,6 +42,8 @@ public:
 private:
 	Map<String,NodeReference>* tablesDictinary;
 public:
+	Map<String,NodeReference>* getTablesDictinary(ThreadContext* ctx) throw() ;
+public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:

@@ -253,6 +253,7 @@
 #include "alinous.remote.monitor/TransactionMonitorServer.h"
 #include "alinous.remote.monitor.command/TerminateCommand.h"
 #include "alinous.remote.socket/SocketServer.h"
+#include "alinous.system.config/AlinousInitException.h"
 #include "alinous.remote.db.command/AbstractRemoteStorageCommand.h"
 #include "alinous.remote.region.command/AbstractNodeRegionCommand.h"
 #include "alinous.remote.db.command/FinishRemoteStorageConnectionCommand.h"
@@ -353,6 +354,7 @@
 #include "alinous.compile.sql.ddl/PrimaryKeys.h"
 #include "alinous.compile.sql.ddl/Unique.h"
 #include "alinous.db.table/IOidPublisher.h"
+#include "alinous.db/ITableSchema.h"
 #include "alinous.db/TableSchema.h"
 #include "alinous.compile.sql/CreateTableStatement.h"
 #include "alinous.compile.sql/DeleteStatement.h"
@@ -415,7 +417,6 @@
 #include "alinous.parser.xpath/AlinousXpathParserTokenManager.h"
 #include "alinous.parser.xpath/AlinousXpathParser.h"
 #include "alinous.html.xpath.match/Matcher.h"
-#include "alinous.system.config/AlinousInitException.h"
 #include "alinous.system.config/IAlinousConfigElement.h"
 #include "alinous.system.config.remote/MonitorRef.h"
 #include "alinous.system.config.remote/RegionRef.h"
@@ -440,8 +441,9 @@
 #include "alinous.remote.monitor.client/MonitorConnection.h"
 #include "alinous.remote.monitor.client/MonitorClientConnectionFactory.h"
 #include "alinous.remote.monitor.client/RemoteCommitIdPublisher.h"
-#include "alinous.db/LocalCommitIdPublisher.h"
 #include "alinous.db/ITableRegion.h"
+#include "alinous.remote.region.client/RemoteRegionRef.h"
+#include "alinous.db/LocalCommitIdPublisher.h"
 #include "alinous.db/LocalTableRegion.h"
 #include "alinous.db/TableSchemaCollection.h"
 #include "alinous.db/TableRegionManager.h"
@@ -1415,6 +1417,7 @@ inline static void __cleanUpStatics(alinous::ThreadContext* ctx){
 	alinous::buffer::storage::FileStorageEntryReader::__cleanUp(ctx);
 	alinous::buffer::storage::IFileStorage::__cleanUp(ctx);
 	alinous::buffer::storage::FileStorageEntryBuilder::__cleanUp(ctx);
+	alinous::db::ITableSchema::__cleanUp(ctx);
 	alinous::db::AlinousDatabase::__cleanUp(ctx);
 	alinous::db::TableSchema::__cleanUp(ctx);
 	alinous::db::ICommidIdPublisher::__cleanUp(ctx);
@@ -1685,6 +1688,7 @@ inline static void __cleanUpStatics(alinous::ThreadContext* ctx){
 	alinous::remote::region::NodeRegionResponceActionFactory::__cleanUp(ctx);
 	alinous::remote::region::NodeReferenceManager::__cleanUp(ctx);
 	alinous::remote::region::client::StorageNodeRegionClient::__cleanUp(ctx);
+	alinous::remote::region::client::RemoteRegionRef::__cleanUp(ctx);
 	alinous::remote::region::command::NodeRegionCommandReader::__cleanUp(ctx);
 	alinous::remote::region::command::AbstractNodeRegionCommand::__cleanUp(ctx);
 	alinous::remote::region::command::NodeRegionVoidCommand::__cleanUp(ctx);

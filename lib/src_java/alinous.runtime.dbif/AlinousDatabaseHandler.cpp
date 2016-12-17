@@ -65,7 +65,7 @@ void AlinousDatabaseHandler::initDriver(AlinousCore* core, AlinousDbInstanceInfo
 	{
 		this->database->initInstance(instanceConfig, ctx);
 	}
-	this->database->open(ctx);
+	this->database->open(instanceConfig, ctx);
 }
 void AlinousDatabaseHandler::dispose(ThreadContext* ctx) throw() 
 {

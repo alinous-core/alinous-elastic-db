@@ -55,7 +55,7 @@ AbstractMonitorCommand* MinitorCommandReader::readFromStream(InputStream* stream
 		cmd = (new(ctx) NewCommitIdCommand(ctx));
 		break ;
 	default:
-		throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3481(), ctx));
+		throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3482(), ctx));
 		break;
 	}
 	cmd->readFromStream(stream, ctx);

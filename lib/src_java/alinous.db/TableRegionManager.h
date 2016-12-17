@@ -10,7 +10,7 @@ namespace alinous {namespace db {
 class TableSchemaCollection;}}
 
 namespace alinous {namespace db {
-class TableSchema;}}
+class ITableSchema;}}
 
 namespace alinous {namespace db {namespace table {
 class TableMetadata;}}}

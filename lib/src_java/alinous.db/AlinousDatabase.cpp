@@ -119,8 +119,6 @@ void AlinousDatabase::initInstance(AlinousDbInstanceInfo* instanceConfig, Thread
 		__GC_MV(this, &(this->commitIdPublisher), (new(ctx) LocalCommitIdPublisher(this, ctx)), ICommidIdPublisher);
 	}
 	LocalTableRegion* localRegion = (new(ctx) LocalTableRegion(dataDir, this->core->getLogger(ctx), nullptr, core, this->btreeCache, ctx));
-	__GC_MV(this, &(this->regionManager), (new(ctx) TableRegionManager(ctx)), TableRegionManager);
-	this->regionManager->addRegion(localRegion, ctx);
 	SchemaManager* schemas = localRegion->getSchemaManager(ctx);
 	schemas->createSchema(ConstStr::getCNST_STR_951(), ctx);
 	{
@@ -178,7 +176,6 @@ void AlinousDatabase::syncScheme(ThreadContext* ctx)
 			if(trxvals->size(ctx) > 0)
 			{
 				trxvals->clear(ctx);
-				;
 				trxvals->add((new(ctx) LongValue(this->commitIdPublisher->getMaxCommitId(ctx), ctx)), ctx);
 				lvTrxIdNode->save(ctx);
 			}
@@ -221,7 +218,7 @@ void AlinousDatabase::syncScheme(ThreadContext* ctx)
 		}
 	}
 }
-void AlinousDatabase::open(ThreadContext* ctx)
+void AlinousDatabase::open(AlinousDbInstanceInfo* instanceConfig, ThreadContext* ctx)
 {
 	__GC_MV(this, &(this->workerThreadsPool), (new(ctx) ThreadPool(16, ConstStr::getCNST_STR_1592(), ctx)), ThreadPool);
 	LaunchJoin* trxLaunchJoin = (new(ctx) LaunchJoin(1, ctx));
@@ -287,6 +284,7 @@ void AlinousDatabase::open(ThreadContext* ctx)
 			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1594(), e, ctx));
 		}
 	}
+	openRegions(instanceConfig, ctx);
 }
 TableSchemaCollection* AlinousDatabase::getSchema(String* name, ThreadContext* ctx) throw() 
 {
@@ -379,6 +377,25 @@ File* AlinousDatabase::getConfigFile(ThreadContext* ctx) throw()
 		__GC_MV(this, &(this->configFile), (new(ctx) File(pathname, ctx)), File);
 	}
 	return this->configFile;
+}
+void AlinousDatabase::openRegions(AlinousDbInstanceInfo* instanceConfig, ThreadContext* ctx) throw() 
+{
+	__GC_MV(this, &(this->regionManager), (new(ctx) TableRegionManager(ctx)), TableRegionManager);
+	RegionsRef* refs = instanceConfig->getRegionsRef(ctx);
+	if(refs == nullptr)
+	{
+		LocalTableRegion* localRegion = (new(ctx) LocalTableRegion(dataDir, this->core->getLogger(ctx), this->workerThreadsPool, core, this->btreeCache, ctx));
+		this->regionManager->addRegion(localRegion, ctx);
+		return;
+	}
+	List<RegionRef>* list = refs->getList(ctx);
+	int maxLoop = list->size(ctx);
+	for(int i = 0; i != maxLoop; ++i)
+	{
+		RegionRef* ref = list->get(i, ctx);
+		RemoteRegionRef* region = (new(ctx) RemoteRegionRef(ref, ctx));
+		this->regionManager->addRegion(region, ctx);
+	}
 }
 }}
 

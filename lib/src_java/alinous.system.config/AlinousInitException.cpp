@@ -25,6 +25,12 @@ bool AlinousInitException::__init_static_variables(){
 void AlinousInitException::__construct_impl(String* msg, ThreadContext* ctx) throw() 
 {
 }
+ AlinousInitException::AlinousInitException(String* msg, Throwable* e, ThreadContext* ctx) throw()  : IObject(ctx), AlinousException(msg, e, ctx)
+{
+}
+void AlinousInitException::__construct_impl(String* msg, Throwable* e, ThreadContext* ctx) throw() 
+{
+}
  AlinousInitException::~AlinousInitException() throw() 
 {
 	ThreadContext *ctx = ThreadContext::getCurentContext();

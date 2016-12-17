@@ -1,7 +1,7 @@
 #ifndef ALINOUS_DB_TABLESCHEMACOLLECTION_H_
 #define ALINOUS_DB_TABLESCHEMACOLLECTION_H_
 namespace alinous {namespace db {
-class TableSchema;}}
+class ITableSchema;}}
 
 namespace alinous {namespace db {namespace table {
 class IDatabaseTable;}}}
@@ -36,7 +36,7 @@ class TableSchemaCollection final : public virtual IObject {
 public:
 	TableSchemaCollection(const TableSchemaCollection& base) = default;
 public:
-	TableSchemaCollection(ThreadContext* ctx) throw()  : IObject(ctx), list(GCUtils<List<TableSchema> >::ins(this, (new(ctx) ArrayList<TableSchema>(ctx)), ctx, __FILEW__, __LINE__, L""))
+	TableSchemaCollection(ThreadContext* ctx) throw()  : IObject(ctx), list(GCUtils<List<ITableSchema> >::ins(this, (new(ctx) ArrayList<ITableSchema>(ctx)), ctx, __FILEW__, __LINE__, L""))
 	{
 	}
 	void __construct_impl(ThreadContext* ctx) throw() 
@@ -45,9 +45,9 @@ public:
 	virtual ~TableSchemaCollection() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 private:
-	List<TableSchema>* list;
+	List<ITableSchema>* list;
 public:
-	void addScheme(TableSchema* sc, ThreadContext* ctx) throw() ;
+	void addScheme(ITableSchema* sc, ThreadContext* ctx) throw() ;
 	IDatabaseTable* getTableStore(String* tableName, ThreadContext* ctx) throw() ;
 	TableMetadata* getDableMetadata(String* tableName, ThreadContext* ctx) throw() ;
 public:
