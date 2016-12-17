@@ -75,11 +75,11 @@ void RemoteRegionRef::init(ThreadContext* ctx)
 }
 int RemoteRegionRef::getRegionType(ThreadContext* ctx) throw() 
 {
-	return 0;
+	return ITableRegion::REMOTE_REGION;
 }
 String* RemoteRegionRef::getRegionName(ThreadContext* ctx) throw() 
 {
-	return nullptr;
+	return this->config->getName(ctx);
 }
 ITableSchema* RemoteRegionRef::getSchema(String* name, ThreadContext* ctx) throw() 
 {
@@ -90,10 +90,6 @@ void RemoteRegionRef::createSchema(String* schemaName, ThreadContext* ctx) throw
 }
 void RemoteRegionRef::createTable(String* schemaName, TableMetadata* tblMeta, ThreadPool* threadPool, AlinousCore* core, BTreeGlobalCache* cache, ThreadContext* ctx)
 {
-}
-RegionRef* RemoteRegionRef::getConfig(ThreadContext* ctx) throw() 
-{
-	return config;
 }
 }}}}
 

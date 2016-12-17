@@ -18,6 +18,16 @@ bool NodeRegionConnectCommand::__init_static_variables(){
 	delete ctx;
 	return true;
 }
+ NodeRegionConnectCommand::NodeRegionConnectCommand(ThreadContext* ctx) throw()  : IObject(ctx), AbstractNodeRegionCommand(ctx), connected(0), size(0)
+{
+	this->type = NodeRegionConnectCommand::TYPE_CONNECT;
+	this->size = 4;
+}
+void NodeRegionConnectCommand::__construct_impl(ThreadContext* ctx) throw() 
+{
+	this->type = NodeRegionConnectCommand::TYPE_CONNECT;
+	this->size = 4;
+}
  NodeRegionConnectCommand::~NodeRegionConnectCommand() throw() 
 {
 	ThreadContext *ctx = ThreadContext::getCurentContext();
@@ -27,6 +37,7 @@ bool NodeRegionConnectCommand::__init_static_variables(){
 }
 void NodeRegionConnectCommand::__releaseRegerences(bool prepare, ThreadContext* ctx) throw() 
 {
+	ObjectEraser __e_obj1(ctx, __FILEW__, __LINE__, L"NodeRegionConnectCommand", L"~NodeRegionConnectCommand");
 	if(!prepare){
 		return;
 	}
@@ -34,9 +45,32 @@ void NodeRegionConnectCommand::__releaseRegerences(bool prepare, ThreadContext* 
 }
 void NodeRegionConnectCommand::readFromStream(InputStream* stream, ThreadContext* ctx)
 {
+	int res = NetworkBinalyUtils::readInt(stream, ctx);
+	this->connected = (res == 1);
+}
+void NodeRegionConnectCommand::executeOnServer(TransactionMonitorServer* monitorServer, BufferedOutputStream* outStream, ThreadContext* ctx)
+{
+	this->connected = true;
+	writeByteStream(outStream, ctx);
+}
+bool NodeRegionConnectCommand::isConnected(ThreadContext* ctx) throw() 
+{
+	return connected;
 }
 void NodeRegionConnectCommand::writeByteStream(OutputStream* out, ThreadContext* ctx)
 {
+	ByteBuffer* buffer = ByteBuffer::allocate(this->size, ctx);
+	if(this->connected)
+	{
+		buffer->putInt(1, ctx);
+	}
+		else 
+	{
+		buffer->putInt(0, ctx);
+	}
+	IArrayObjectPrimitive<char>* b = buffer->array(ctx);
+	out->write(b, ctx);
+	out->flush(ctx);
 }
 }}}}
 

@@ -43,6 +43,9 @@ void NodeRegionFinishConnectionCommand::__releaseRegerences(bool prepare, Thread
 void NodeRegionFinishConnectionCommand::readFromStream(InputStream* stream, ThreadContext* ctx)
 {
 }
+void NodeRegionFinishConnectionCommand::executeOnServer(TransactionMonitorServer* monitorServer, BufferedOutputStream* outStream, ThreadContext* ctx)
+{
+}
 void NodeRegionFinishConnectionCommand::writeByteStream(OutputStream* out, ThreadContext* ctx)
 {
 	ByteBuffer* buffer = ByteBuffer::allocate(256, ctx);

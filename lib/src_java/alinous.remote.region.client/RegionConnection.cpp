@@ -51,7 +51,7 @@ void RegionConnection::__releaseRegerences(bool prepare, ThreadContext* ctx) thr
 void RegionConnection::connect(ThreadContext* ctx)
 {
 	__GC_MV(this, &(this->socket), (new(ctx) AlinousSocket(info->getHost(ctx), info->getPort(ctx), ctx))->init(ctx), AlinousSocket);
-	MonitorConnectCommand* cmd = (new(ctx) MonitorConnectCommand(ctx));
+	NodeRegionConnectCommand* cmd = (new(ctx) NodeRegionConnectCommand(ctx));
 	cmd->sendCommand(this->socket, ctx);
 	if(!cmd->isConnected(ctx))
 	{

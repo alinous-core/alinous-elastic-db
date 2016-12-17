@@ -44,7 +44,9 @@ void RegionClientConnectionFactory::__releaseRegerences(bool prepare, ThreadCont
 }
 ISocketConnection* RegionClientConnectionFactory::newConnection(SocketConnectionPool* pool, ThreadContext* ctx)
 {
-	return (new(ctx) RegionConnection(pool, this->info, ctx));
+	RegionConnection* con = (new(ctx) RegionConnection(pool, this->info, ctx));
+	con->connect(ctx);
+	return con;
 }
 }}}}
 

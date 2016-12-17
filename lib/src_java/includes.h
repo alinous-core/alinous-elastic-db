@@ -443,6 +443,7 @@
 #include "alinous.remote.monitor.client/RemoteCommitIdPublisher.h"
 #include "alinous.db/ITableRegion.h"
 #include "alinous.remote.region.client/RegionConnectionInfo.h"
+#include "alinous.remote.region.command/NodeRegionConnectCommand.h"
 #include "alinous.remote.region.client/RegionConnection.h"
 #include "alinous.remote.region.client/RegionClientConnectionFactory.h"
 #include "alinous.remote.region.client/RemoteRegionRef.h"
@@ -811,7 +812,6 @@
 #include "alinous.remote.db.client/RemoteTableStorageClient.h"
 #include "alinous.remote.region.client/DatabaseTableClient.h"
 #include "alinous.remote.region.client/RemoteTableScheme.h"
-#include "alinous.remote.region.command/NodeRegionConnectCommand.h"
 
 
 inline static void __cleanUpStatics(alinous::ThreadContext* ctx){

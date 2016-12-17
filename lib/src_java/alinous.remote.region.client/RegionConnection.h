@@ -9,8 +9,8 @@ class RegionConnectionInfo;}}}}
 namespace alinous {namespace net {
 class AlinousSocket;}}
 
-namespace alinous {namespace remote {namespace monitor {namespace command {
-class MonitorConnectCommand;}}}}
+namespace alinous {namespace remote {namespace region {namespace command {
+class NodeRegionConnectCommand;}}}}
 
 namespace alinous {namespace db {
 class AlinousDbException;}}
@@ -41,7 +41,7 @@ using ::java::io::IOException;
 using ::java::net::UnknownHostException;
 using ::alinous::db::AlinousDbException;
 using ::alinous::net::AlinousSocket;
-using ::alinous::remote::monitor::command::MonitorConnectCommand;
+using ::alinous::remote::region::command::NodeRegionConnectCommand;
 using ::alinous::remote::socket::ISocketConnection;
 using ::alinous::remote::socket::SocketConnectionPool;
 

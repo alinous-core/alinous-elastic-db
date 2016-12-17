@@ -9,6 +9,7 @@ namespace alinous {namespace remote {namespace region {namespace command {
 
 constexpr const int AbstractNodeRegionCommand::TYPE_VOID;
 constexpr const int AbstractNodeRegionCommand::TYPE_FINISH;
+constexpr const int AbstractNodeRegionCommand::TYPE_CONNECT;
 constexpr const int AbstractNodeRegionCommand::TYPE_TERMINATE;
 bool AbstractNodeRegionCommand::__init_done = __init_static_variables();
 bool AbstractNodeRegionCommand::__init_static_variables(){
@@ -44,6 +45,8 @@ void AbstractNodeRegionCommand::sendCommand(AlinousSocket* socket, ThreadContext
 	OutputStream* out = socket->getOutputStream(ctx);
 	writeByteStream(out, ctx);
 	out->flush(ctx);
+	InputStream* stream = socket->getInputStream(ctx);
+	readFromStream(stream, ctx);
 }
 }}}}
 
