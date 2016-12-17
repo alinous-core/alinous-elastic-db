@@ -806,7 +806,8 @@
 #include "alinous.server.webmodule/BinaryModuleStream.h"
 #include "alinous.server.webmodule/BinaryModule.h"
 #include "alinous.remote.db.client/RemoteTableStorageClient.h"
-#include "alinous.remote.region.client/StorageNodeRegionClient.h"
+#include "alinous.remote.region.client/DatabaseTableClient.h"
+#include "alinous.remote.region.client/RemoteTableScheme.h"
 
 
 inline static void __cleanUpStatics(alinous::ThreadContext* ctx){
@@ -1687,7 +1688,8 @@ inline static void __cleanUpStatics(alinous::ThreadContext* ctx){
 	alinous::remote::region::NodeRegionResponceAction::__cleanUp(ctx);
 	alinous::remote::region::NodeRegionResponceActionFactory::__cleanUp(ctx);
 	alinous::remote::region::NodeReferenceManager::__cleanUp(ctx);
-	alinous::remote::region::client::StorageNodeRegionClient::__cleanUp(ctx);
+	alinous::remote::region::client::DatabaseTableClient::__cleanUp(ctx);
+	alinous::remote::region::client::RemoteTableScheme::__cleanUp(ctx);
 	alinous::remote::region::client::RemoteRegionRef::__cleanUp(ctx);
 	alinous::remote::region::command::NodeRegionCommandReader::__cleanUp(ctx);
 	alinous::remote::region::command::AbstractNodeRegionCommand::__cleanUp(ctx);

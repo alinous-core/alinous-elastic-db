@@ -235,6 +235,8 @@ set(srcjava
 	"src_java/alinous.system/AlinousCore.cpp"
 	"src_java/alinous.remote.region.client/StorageNodeRegionClient.cpp"
 	"src_java/alinous.remote.region.client/RemoteRegionRef.cpp"
+	"src_java/alinous.remote.region.client/DatabaseTableClient.cpp"
+	"src_java/alinous.remote.region.client/RemoteTableScheme.cpp"
 	"src_java/alinous.compile.declare.function/ReturnValueDefinition.cpp"
 	"src_java/alinous.compile.declare.function/FunctionArgumentsListDefine.cpp"
 	"src_java/alinous.compile.declare.function/ThrowsDefine.cpp"

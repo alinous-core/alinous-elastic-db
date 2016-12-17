@@ -109,15 +109,7 @@ void AlinousDatabase::initInstance(AlinousDbInstanceInfo* instanceConfig, Thread
 	{
 		file->mkdirs(ctx);
 	}
-	MonitorRef* monitorRef = instanceConfig->getMonitorRef(ctx);
-	if(monitorRef != nullptr)
-	{
-		__GC_MV(this, &(this->commitIdPublisher), (new(ctx) RemoteCommitIdPublisher(monitorRef, ctx))->init(ctx), ICommidIdPublisher);
-	}
-		else 
-	{
-		__GC_MV(this, &(this->commitIdPublisher), (new(ctx) LocalCommitIdPublisher(this, ctx)), ICommidIdPublisher);
-	}
+	__GC_MV(this, &(this->commitIdPublisher), (new(ctx) LocalCommitIdPublisher(this, ctx)), ICommidIdPublisher);
 	LocalTableRegion* localRegion = (new(ctx) LocalTableRegion(dataDir, this->core->getLogger(ctx), nullptr, core, this->btreeCache, ctx));
 	SchemaManager* schemas = localRegion->getSchemaManager(ctx);
 	schemas->createSchema(ConstStr::getCNST_STR_951(), ctx);
@@ -164,6 +156,10 @@ long long AlinousDatabase::newCommitId(ThreadContext* ctx)
 void AlinousDatabase::syncScheme(ThreadContext* ctx)
 {
 	LocalTableRegion* localRegion = this->regionManager->getLocalRegion(ctx);
+	if(localRegion == nullptr)
+	{
+		return;
+	}
 	SchemaManager* schemas = localRegion->getSchemaManager(ctx);
 	BTreeLeafNode* lvTrxIdNode = nullptr;
 	{
@@ -235,7 +231,17 @@ void AlinousDatabase::open(AlinousDbInstanceInfo* instanceConfig, ThreadContext*
 			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1593(), e, ctx));
 		}
 	}
+	MonitorRef* monitorRef = instanceConfig->getMonitorRef(ctx);
+	if(monitorRef != nullptr)
+	{
+		__GC_MV(this, &(this->commitIdPublisher), (new(ctx) RemoteCommitIdPublisher(monitorRef, ctx))->init(ctx), ICommidIdPublisher);
+	}
+		else 
+	{
+		__GC_MV(this, &(this->commitIdPublisher), (new(ctx) LocalCommitIdPublisher(this, ctx)), ICommidIdPublisher);
+	}
 	__GC_MV(this, &(this->trxLockManager), (new(ctx) TrxLockManager(ctx)), TrxLockManager);
+	__GC_MV(this, &(this->regionManager), (new(ctx) TableRegionManager(ctx)), TableRegionManager);
 	{
 		try
 		{
@@ -244,9 +250,12 @@ void AlinousDatabase::open(AlinousDbInstanceInfo* instanceConfig, ThreadContext*
 			if(schemeValue->size(ctx) > 0)
 			{
 				LocalTableRegion* localRegion = this->regionManager->getLocalRegion(ctx);
-				SchemaManager* schemas = localRegion->getSchemaManager(ctx);
-				schemas = static_cast<SchemaManager*>(schemeValue->get(0, ctx));
-				schemas->loadAfterFetch(this->dataDir, this->core->getLogger(ctx), this->workerThreadsPool, this->core, this->btreeCache, ctx);
+				if(localRegion != nullptr)
+				{
+					SchemaManager* schemas = localRegion->getSchemaManager(ctx);
+					schemas = static_cast<SchemaManager*>(schemeValue->get(0, ctx));
+					schemas->loadAfterFetch(this->dataDir, this->core->getLogger(ctx), this->workerThreadsPool, this->core, this->btreeCache, ctx);
+				}
 			}
 			ArrayList<IBTreeValue>* lvTrxIds = this->dbconfig->getValues(MAX_COMMIT_ID, ctx);
 			this->commitIdPublisher->setMaxCommitId((static_cast<LongValue*>(lvTrxIds->get(0, ctx)))->value, ctx);
@@ -380,7 +389,6 @@ File* AlinousDatabase::getConfigFile(ThreadContext* ctx) throw()
 }
 void AlinousDatabase::openRegions(AlinousDbInstanceInfo* instanceConfig, ThreadContext* ctx) throw() 
 {
-	__GC_MV(this, &(this->regionManager), (new(ctx) TableRegionManager(ctx)), TableRegionManager);
 	RegionsRef* refs = instanceConfig->getRegionsRef(ctx);
 	if(refs == nullptr)
 	{

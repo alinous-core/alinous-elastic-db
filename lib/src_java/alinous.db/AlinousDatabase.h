@@ -39,12 +39,6 @@ class TrxLockContext;}}}
 namespace alinous {namespace system {namespace config {
 class AlinousDbInstanceInfo;}}}
 
-namespace alinous {namespace system {namespace config {namespace remote {
-class MonitorRef;}}}}
-
-namespace alinous {namespace remote {namespace monitor {namespace client {
-class RemoteCommitIdPublisher;}}}}
-
 namespace alinous {namespace db {
 class LocalTableRegion;}}
 
@@ -74,6 +68,12 @@ class LaunchJoin;}}}
 
 namespace alinous {namespace runtime {namespace parallel {
 class AlinousThread;}}}
+
+namespace alinous {namespace system {namespace config {namespace remote {
+class MonitorRef;}}}}
+
+namespace alinous {namespace remote {namespace monitor {namespace client {
+class RemoteCommitIdPublisher;}}}}
 
 namespace alinous {namespace db {namespace trx {
 class TrxLockManager;}}}
