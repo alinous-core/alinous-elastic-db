@@ -4,6 +4,21 @@ namespace alinous {namespace system {namespace config {namespace remote {
 class RegionRef;}}}}
 
 namespace alinous {namespace db {
+class AlinousDbException;}}
+
+namespace java {namespace lang {
+class NumberFormatException;}}
+
+namespace alinous {namespace remote {namespace region {namespace client {
+class RegionConnectionInfo;}}}}
+
+namespace alinous {namespace remote {namespace region {namespace client {
+class RegionClientConnectionFactory;}}}}
+
+namespace alinous {namespace remote {namespace socket {
+class SocketConnectionPool;}}}
+
+namespace alinous {namespace db {
 class ITableSchema;}}
 
 namespace alinous {namespace db {namespace table {
@@ -49,10 +64,12 @@ using ::java::util::Iterator;
 using ::java::io::IOException;
 using ::alinous::btree::BTreeException;
 using ::alinous::btree::BTreeGlobalCache;
+using ::alinous::db::AlinousDbException;
 using ::alinous::db::ITableRegion;
 using ::alinous::db::ITableSchema;
 using ::alinous::db::table::DatabaseException;
 using ::alinous::db::table::TableMetadata;
+using ::alinous::remote::socket::SocketConnectionPool;
 using ::alinous::runtime::parallel::ThreadPool;
 using ::alinous::system::AlinousCore;
 using ::alinous::system::AlinousException;
@@ -70,7 +87,11 @@ public:
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 private:
 	RegionRef* config;
+	SocketConnectionPool* pool;
+	String* url;
+	RegionConnectionInfo* info;
 public:
+	void init(ThreadContext* ctx);
 	int getRegionType(ThreadContext* ctx) throw()  final;
 	String* getRegionName(ThreadContext* ctx) throw()  final;
 	ITableSchema* getSchema(String* name, ThreadContext* ctx) throw()  final;

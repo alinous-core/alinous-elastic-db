@@ -442,6 +442,9 @@
 #include "alinous.remote.monitor.client/MonitorClientConnectionFactory.h"
 #include "alinous.remote.monitor.client/RemoteCommitIdPublisher.h"
 #include "alinous.db/ITableRegion.h"
+#include "alinous.remote.region.client/RegionConnectionInfo.h"
+#include "alinous.remote.region.client/RegionConnection.h"
+#include "alinous.remote.region.client/RegionClientConnectionFactory.h"
 #include "alinous.remote.region.client/RemoteRegionRef.h"
 #include "alinous.db/LocalCommitIdPublisher.h"
 #include "alinous.db/LocalTableRegion.h"
@@ -808,6 +811,7 @@
 #include "alinous.remote.db.client/RemoteTableStorageClient.h"
 #include "alinous.remote.region.client/DatabaseTableClient.h"
 #include "alinous.remote.region.client/RemoteTableScheme.h"
+#include "alinous.remote.region.command/NodeRegionConnectCommand.h"
 
 
 inline static void __cleanUpStatics(alinous::ThreadContext* ctx){
@@ -1690,11 +1694,15 @@ inline static void __cleanUpStatics(alinous::ThreadContext* ctx){
 	alinous::remote::region::NodeReferenceManager::__cleanUp(ctx);
 	alinous::remote::region::client::DatabaseTableClient::__cleanUp(ctx);
 	alinous::remote::region::client::RemoteTableScheme::__cleanUp(ctx);
+	alinous::remote::region::client::RegionClientConnectionFactory::__cleanUp(ctx);
+	alinous::remote::region::client::RegionConnection::__cleanUp(ctx);
 	alinous::remote::region::client::RemoteRegionRef::__cleanUp(ctx);
+	alinous::remote::region::client::RegionConnectionInfo::__cleanUp(ctx);
 	alinous::remote::region::command::NodeRegionCommandReader::__cleanUp(ctx);
 	alinous::remote::region::command::AbstractNodeRegionCommand::__cleanUp(ctx);
 	alinous::remote::region::command::NodeRegionVoidCommand::__cleanUp(ctx);
 	alinous::remote::region::command::NodeRegionFinishConnectionCommand::__cleanUp(ctx);
+	alinous::remote::region::command::NodeRegionConnectCommand::__cleanUp(ctx);
 	alinous::remote::region::command::NodeRegionTerminateCommand::__cleanUp(ctx);
 	alinous::remote::socket::SocketServer::__cleanUp(ctx);
 	alinous::remote::socket::SocketConnectionPool::__cleanUp(ctx);

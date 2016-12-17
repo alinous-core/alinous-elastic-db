@@ -225,7 +225,7 @@ public:
 	TableRegionManager* getRegionManager(ThreadContext* ctx) throw() ;
 private:
 	File* getConfigFile(ThreadContext* ctx) throw() ;
-	void openRegions(AlinousDbInstanceInfo* instanceConfig, ThreadContext* ctx) throw() ;
+	void openRegions(AlinousDbInstanceInfo* instanceConfig, ThreadContext* ctx);
 public:
 	static bool __init_done;
 	static bool __init_static_variables();

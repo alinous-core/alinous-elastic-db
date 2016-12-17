@@ -387,7 +387,7 @@ File* AlinousDatabase::getConfigFile(ThreadContext* ctx) throw()
 	}
 	return this->configFile;
 }
-void AlinousDatabase::openRegions(AlinousDbInstanceInfo* instanceConfig, ThreadContext* ctx) throw() 
+void AlinousDatabase::openRegions(AlinousDbInstanceInfo* instanceConfig, ThreadContext* ctx)
 {
 	RegionsRef* refs = instanceConfig->getRegionsRef(ctx);
 	if(refs == nullptr)
@@ -402,6 +402,7 @@ void AlinousDatabase::openRegions(AlinousDbInstanceInfo* instanceConfig, ThreadC
 	{
 		RegionRef* ref = list->get(i, ctx);
 		RemoteRegionRef* region = (new(ctx) RemoteRegionRef(ref, ctx));
+		region->init(ctx);
 		this->regionManager->addRegion(region, ctx);
 	}
 }

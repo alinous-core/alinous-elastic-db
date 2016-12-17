@@ -18,13 +18,15 @@ bool RemoteRegionRef::__init_static_variables(){
 	delete ctx;
 	return true;
 }
- RemoteRegionRef::RemoteRegionRef(RegionRef* ref, ThreadContext* ctx) throw()  : IObject(ctx), ITableRegion(ctx), config(nullptr)
+ RemoteRegionRef::RemoteRegionRef(RegionRef* ref, ThreadContext* ctx) throw()  : IObject(ctx), ITableRegion(ctx), config(nullptr), pool(nullptr), url(nullptr), info(nullptr)
 {
 	__GC_MV(this, &(this->config), ref, RegionRef);
+	__GC_MV(this, &(this->url), ref->getUrl(ctx), String);
 }
 void RemoteRegionRef::__construct_impl(RegionRef* ref, ThreadContext* ctx) throw() 
 {
 	__GC_MV(this, &(this->config), ref, RegionRef);
+	__GC_MV(this, &(this->url), ref->getUrl(ctx), String);
 }
  RemoteRegionRef::~RemoteRegionRef() throw() 
 {
@@ -38,9 +40,38 @@ void RemoteRegionRef::__releaseRegerences(bool prepare, ThreadContext* ctx) thro
 	ObjectEraser __e_obj1(ctx, __FILEW__, __LINE__, L"RemoteRegionRef", L"~RemoteRegionRef");
 	__e_obj1.add(this->config, this);
 	config = nullptr;
+	__e_obj1.add(this->pool, this);
+	pool = nullptr;
+	__e_obj1.add(this->url, this);
+	url = nullptr;
+	__e_obj1.add(this->info, this);
+	info = nullptr;
 	if(!prepare){
 		return;
 	}
+}
+void RemoteRegionRef::init(ThreadContext* ctx)
+{
+	IArrayObject<String>* segs = this->url->split(ConstStr::getCNST_STR_381(), ctx);
+	if(segs->length != 2)
+	{
+		throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3478(), ctx));
+	}
+	String* host = segs->get(0);
+	int port = 0;
+	{
+		try
+		{
+			port = Integer::parseInt(segs->get(1), ctx);
+		}
+		catch(NumberFormatException* e)
+		{
+			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3479(), e, ctx));
+		}
+	}
+	__GC_MV(this, &(this->info), (new(ctx) RegionConnectionInfo(host, port, ctx)), RegionConnectionInfo);
+	RegionClientConnectionFactory* factory = (new(ctx) RegionClientConnectionFactory(info, ctx));
+	__GC_MV(this, &(this->pool), (new(ctx) SocketConnectionPool(factory, ctx)), SocketConnectionPool);
 }
 int RemoteRegionRef::getRegionType(ThreadContext* ctx) throw() 
 {
