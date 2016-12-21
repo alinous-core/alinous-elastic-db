@@ -18,6 +18,9 @@ class BTreeGlobalCache;}}
 namespace java {namespace io {
 class IOException;}}
 
+namespace alinous {namespace net {
+class UnknownHostException;}}
+
 namespace alinous {namespace btree {
 class BTreeException;}}
 
@@ -41,6 +44,7 @@ using namespace ::alinous;
 using namespace ::java::lang;
 using ::java::util::Iterator;
 using ::java::io::IOException;
+using ::java::net::UnknownHostException;
 using ::alinous::btree::BTreeException;
 using ::alinous::btree::BTreeGlobalCache;
 using ::alinous::db::table::DatabaseException;
@@ -72,7 +76,7 @@ public:
 	virtual ITableSchema* getSchema(String* name, ThreadContext* ctx) throw()  = 0;
 	virtual void createSchema(String* schemaName, ThreadContext* ctx) throw()  = 0;
 	virtual void createTable(String* schemaName, TableMetadata* tblMeta, ThreadPool* threadPool, AlinousCore* core, BTreeGlobalCache* cache, ThreadContext* ctx) = 0;
-	virtual void syncSchemes(ThreadContext* ctx) throw()  = 0;
+	virtual void syncSchemes(ThreadContext* ctx) = 0;
 public:
 	static bool __init_done;
 	static bool __init_static_variables();

@@ -65,12 +65,12 @@ void RecordCacheEngine::updateData(DatatableUpdateSupport* table, DatabaseRecord
 		}
 		catch(VariableException* e)
 		{
-			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1613(), ctx));
+			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1614(), ctx));
 		}
 		catch(Throwable* e)
 		{
 			writer->end(ctx);
-			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1613(), e, ctx));
+			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1614(), e, ctx));
 		}
 	}
 	writer->end(ctx);
@@ -101,7 +101,7 @@ void RecordCacheEngine::insertData(DatatableUpdateSupport* table, DatabaseRecord
 		}
 		catch(VariableException* e)
 		{
-			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1613(), ctx));
+			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1614(), ctx));
 		}
 		catch(Throwable* e)
 		{

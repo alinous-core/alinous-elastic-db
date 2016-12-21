@@ -323,7 +323,6 @@ set(srcjava
 	"src_java/alinous.html/DocType.cpp"
 	"src_java/alinous.html/AlinousDomEventHandler.cpp"
 	"src_java/alinous.html/IDomObject.cpp"
-	"src_java/alinous.remote.monitor.command/GetLatestRevisionCommand.cpp"
 	"src_java/alinous.remote.monitor.command/VoidCommand.cpp"
 	"src_java/alinous.remote.monitor.command/FinishConnectionCommand.cpp"
 	"src_java/alinous.remote.monitor.command/MinitorCommandReader.cpp"

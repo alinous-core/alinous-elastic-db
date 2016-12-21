@@ -58,28 +58,9 @@ void RemoteRegionRef::__releaseRegerences(bool prepare, ThreadContext* ctx) thro
 }
 void RemoteRegionRef::init(ThreadContext* ctx)
 {
-	IArrayObject<String>* segs = this->url->split(ConstStr::getCNST_STR_381(), ctx);
-	if(segs->length != 2)
-	{
-		throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3479(), ctx));
-	}
-	String* host = segs->get(0);
-	int port = 0;
-	{
-		try
-		{
-			port = Integer::parseInt(segs->get(1), ctx);
-		}
-		catch(NumberFormatException* e)
-		{
-			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3480(), e, ctx));
-		}
-	}
-	__GC_MV(this, &(this->info), (new(ctx) RegionConnectionInfo(host, port, ctx)), RegionConnectionInfo);
-	RegionClientConnectionFactory* factory = (new(ctx) RegionClientConnectionFactory(info, ctx));
-	__GC_MV(this, &(this->pool), (new(ctx) SocketConnectionPool(factory, ctx)), SocketConnectionPool);
+	initRegionServer(ctx);
 }
-void RemoteRegionRef::syncSchemes(ThreadContext* ctx) throw() 
+void RemoteRegionRef::syncSchemes(ThreadContext* ctx)
 {
 }
 int RemoteRegionRef::getRegionType(ThreadContext* ctx) throw() 
@@ -107,6 +88,29 @@ long long RemoteRegionRef::getSchemeVersion(ThreadContext* ctx) throw()
 void RemoteRegionRef::setSchemeVersion(long long schemeVersion, ThreadContext* ctx) throw() 
 {
 	this->schemeVersion = schemeVersion;
+}
+void RemoteRegionRef::initRegionServer(ThreadContext* ctx)
+{
+	IArrayObject<String>* segs = this->url->split(ConstStr::getCNST_STR_381(), ctx);
+	if(segs->length != 2)
+	{
+		throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3480(), ctx));
+	}
+	String* host = segs->get(0);
+	int port = 0;
+	{
+		try
+		{
+			port = Integer::parseInt(segs->get(1), ctx);
+		}
+		catch(NumberFormatException* e)
+		{
+			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3481(), e, ctx));
+		}
+	}
+	__GC_MV(this, &(this->info), (new(ctx) RegionConnectionInfo(host, port, ctx)), RegionConnectionInfo);
+	RegionClientConnectionFactory* factory = (new(ctx) RegionClientConnectionFactory(info, ctx));
+	__GC_MV(this, &(this->pool), (new(ctx) SocketConnectionPool(factory, ctx)), SocketConnectionPool);
 }
 }}}}
 

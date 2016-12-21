@@ -81,6 +81,9 @@ class TrxLockManager;}}}
 namespace alinous {namespace db {
 class TableRegionManager;}}
 
+namespace alinous {namespace net {
+class UnknownHostException;}}
+
 namespace alinous {namespace system {namespace config {namespace remote {
 class RegionsRef;}}}}
 
@@ -144,6 +147,7 @@ using namespace ::java::lang;
 using ::java::util::Iterator;
 using ::java::io::File;
 using ::java::io::IOException;
+using ::java::net::UnknownHostException;
 using ::java::util::ArrayList;
 using ::java::util::List;
 using ::alinous::btree::BTree;

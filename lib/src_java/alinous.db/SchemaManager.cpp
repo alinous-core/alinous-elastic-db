@@ -67,7 +67,7 @@ void SchemaManager::createTable(String* schemaName, TableMetadata* tableMetadata
 	IDatabaseTable* table = schema->getTableStore(tableMetadata->getTableName(ctx), ctx);
 	if(table != nullptr)
 	{
-		logger->logWarning(ConstStr::getCNST_STR_1596()->clone(ctx)->append(tableMetadata->getTableName(ctx), ctx)->append(ConstStr::getCNST_STR_1597(), ctx), ctx);
+		logger->logWarning(ConstStr::getCNST_STR_1597()->clone(ctx)->append(tableMetadata->getTableName(ctx), ctx)->append(ConstStr::getCNST_STR_1598(), ctx), ctx);
 		return;
 	}
 	IDatabaseTable* tableStore = (new(ctx) DatabaseTable(schemaName, tableMetadata->getTableName(ctx), schema->getSchemaDir(ctx), this->threadPool, this->oidPublisher, ctx));

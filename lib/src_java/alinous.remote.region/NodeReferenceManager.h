@@ -31,7 +31,7 @@ class NodeReferenceManager final : public virtual IObject {
 public:
 	NodeReferenceManager(const NodeReferenceManager& base) = default;
 public:
-	NodeReferenceManager(ThreadContext* ctx) throw()  : IObject(ctx), tablesDictinary(GCUtils<Map<String,NodeCluster> >::ins(this, (new(ctx) HashMap<String,NodeCluster>(ctx)), ctx, __FILEW__, __LINE__, L""))
+	NodeReferenceManager(ThreadContext* ctx) throw()  : IObject(ctx), tablesDictinary(GCUtils<Map<String,NodeCluster> >::ins(this, (new(ctx) HashMap<String,NodeCluster>(ctx)), ctx, __FILEW__, __LINE__, L"")), revision(0)
 	{
 	}
 	void __construct_impl(ThreadContext* ctx) throw() 
@@ -41,8 +41,10 @@ public:
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 private:
 	Map<String,NodeCluster>* tablesDictinary;
+	long long revision;
 public:
 	Map<String,NodeCluster>* getTablesDictinary(ThreadContext* ctx) throw() ;
+	long long getRevision(ThreadContext* ctx) throw() ;
 public:
 	static bool __init_done;
 	static bool __init_static_variables();

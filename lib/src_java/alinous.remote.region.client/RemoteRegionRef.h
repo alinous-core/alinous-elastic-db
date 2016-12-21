@@ -110,7 +110,7 @@ private:
 	long long schemeVersion;
 public:
 	void init(ThreadContext* ctx);
-	void syncSchemes(ThreadContext* ctx) throw()  final;
+	void syncSchemes(ThreadContext* ctx) final;
 	int getRegionType(ThreadContext* ctx) throw()  final;
 	String* getRegionName(ThreadContext* ctx) throw()  final;
 	ITableSchema* getSchema(String* name, ThreadContext* ctx) throw()  final;
@@ -118,6 +118,8 @@ public:
 	void createTable(String* schemaName, TableMetadata* tblMeta, ThreadPool* threadPool, AlinousCore* core, BTreeGlobalCache* cache, ThreadContext* ctx) final;
 	long long getSchemeVersion(ThreadContext* ctx) throw() ;
 	void setSchemeVersion(long long schemeVersion, ThreadContext* ctx) throw() ;
+private:
+	void initRegionServer(ThreadContext* ctx);
 public:
 	static bool __init_done;
 	static bool __init_static_variables();

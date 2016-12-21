@@ -247,7 +247,6 @@
 #include "alinous.remote.monitor.command/FinishConnectionCommand.h"
 #include "alinous.remote.monitor.command/VoidCommand.h"
 #include "alinous.remote.monitor.command/MonitorConnectCommand.h"
-#include "alinous.remote.monitor.command/GetLatestRevisionCommand.h"
 #include "alinous.remote.monitor.command/MinitorCommandReader.h"
 #include "alinous.remote.monitor/MonitorResponceAction.h"
 #include "alinous.remote.monitor/MonitorResponseActionFactory.h"
@@ -1695,7 +1694,6 @@ inline static void __cleanUpStatics(alinous::ThreadContext* ctx){
 	alinous::remote::monitor::command::FinishConnectionCommand::__cleanUp(ctx);
 	alinous::remote::monitor::command::AbstractMonitorCommand::__cleanUp(ctx);
 	alinous::remote::monitor::command::VoidCommand::__cleanUp(ctx);
-	alinous::remote::monitor::command::GetLatestRevisionCommand::__cleanUp(ctx);
 	alinous::remote::monitor::command::commitId::GetMaxCommitIdCommand::__cleanUp(ctx);
 	alinous::remote::monitor::command::commitId::NewCommitIdCommand::__cleanUp(ctx);
 	alinous::remote::region::NodeRegionServer::__cleanUp(ctx);

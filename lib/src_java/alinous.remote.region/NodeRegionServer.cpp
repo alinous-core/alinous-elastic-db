@@ -7,7 +7,7 @@ namespace alinous {namespace remote {namespace region {
 
 
 
-String* NodeRegionServer::THREAD_NAME = ConstStr::getCNST_STR_3483();
+String* NodeRegionServer::THREAD_NAME = ConstStr::getCNST_STR_3484();
 bool NodeRegionServer::__init_done = __init_static_variables();
 bool NodeRegionServer::__init_static_variables(){
 	Java2CppSystem::getSelf();

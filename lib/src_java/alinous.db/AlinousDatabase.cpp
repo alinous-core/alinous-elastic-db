@@ -293,7 +293,20 @@ void AlinousDatabase::open(AlinousDbInstanceInfo* instanceConfig, ThreadContext*
 			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1594(), e, ctx));
 		}
 	}
-	openRegions(instanceConfig, ctx);
+	{
+		try
+		{
+			openRegions(instanceConfig, ctx);
+		}
+		catch(UnknownHostException* e)
+		{
+			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1595(), e, ctx));
+		}
+		catch(IOException* e)
+		{
+			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1595(), e, ctx));
+		}
+	}
 }
 TableSchemaCollection* AlinousDatabase::getSchema(String* name, ThreadContext* ctx) throw() 
 {

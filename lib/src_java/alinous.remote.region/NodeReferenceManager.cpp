@@ -38,5 +38,9 @@ Map<String,NodeCluster>* NodeReferenceManager::getTablesDictinary(ThreadContext*
 {
 	return tablesDictinary;
 }
+long long NodeReferenceManager::getRevision(ThreadContext* ctx) throw() 
+{
+	return revision;
+}
 }}}
 

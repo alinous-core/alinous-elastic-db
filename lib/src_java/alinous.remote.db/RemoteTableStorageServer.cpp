@@ -7,7 +7,7 @@ namespace alinous {namespace remote {namespace db {
 
 
 
-String* RemoteTableStorageServer::THREAD_NAME = ConstStr::getCNST_STR_3475();
+String* RemoteTableStorageServer::THREAD_NAME = ConstStr::getCNST_STR_3476();
 bool RemoteTableStorageServer::__init_done = __init_static_variables();
 bool RemoteTableStorageServer::__init_static_variables(){
 	Java2CppSystem::getSelf();
@@ -68,7 +68,7 @@ void RemoteTableStorageServer::start(AlinousCore* core, ThreadContext* ctx)
 		catch(BTreeException* e)
 		{
 			e->printStackTrace(ctx);
-			throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_3474(), e, ctx));
+			throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_3475(), e, ctx));
 		}
 	}
 	__GC_MV(this, &(this->workerThreadsPool), (new(ctx) ThreadPool(16, ConstStr::getCNST_STR_1592(), ctx)), ThreadPool);
