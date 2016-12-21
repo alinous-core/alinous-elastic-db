@@ -72,6 +72,7 @@ public:
 	virtual ITableSchema* getSchema(String* name, ThreadContext* ctx) throw()  = 0;
 	virtual void createSchema(String* schemaName, ThreadContext* ctx) throw()  = 0;
 	virtual void createTable(String* schemaName, TableMetadata* tblMeta, ThreadPool* threadPool, AlinousCore* core, BTreeGlobalCache* cache, ThreadContext* ctx) = 0;
+	virtual void syncSchemes(ThreadContext* ctx) throw()  = 0;
 public:
 	static bool __init_done;
 	static bool __init_static_variables();

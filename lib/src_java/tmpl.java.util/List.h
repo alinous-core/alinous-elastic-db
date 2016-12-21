@@ -14,6 +14,7 @@ template class ::java::util::List<::alinous::system::config::remote::Table>;
 template class ::java::util::List<::alinous::system::config::remote::RegionRef>;
 template class ::java::util::List<::alinous::db::ITableRegion>;
 template class ::java::util::List<::alinous::db::ITableSchema>;
+template class ::java::util::List<::alinous::remote::region::NodeReference>;
 template class ::java::util::List<::alinous::compile::analyse::VariableDeclareHolder>;
 template class ::java::util::List<::alinous::compile::analyse::ExpressionStreamResult>;
 template class ::java::util::List<::alinous::compile::analyse::SubVariableDeclareHolder>;

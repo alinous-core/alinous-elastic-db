@@ -66,5 +66,8 @@ void LocalTableRegion::createTable(String* schemaName, TableMetadata* tblMeta, T
 {
 	this->schemas->createTable(schemaName, tblMeta, threadPool, core, cache, ctx);
 }
+void LocalTableRegion::syncSchemes(ThreadContext* ctx) throw() 
+{
+}
 }}
 

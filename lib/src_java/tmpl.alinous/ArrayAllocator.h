@@ -38,6 +38,7 @@ template class alinous::ArrayAllocator<::alinous::system::config::remote::Table>
 template class alinous::ArrayAllocator<::alinous::system::config::remote::RegionRef>;
 template class alinous::ArrayAllocator<::alinous::db::ITableRegion>;
 template class alinous::ArrayAllocator<::alinous::db::ITableSchema>;
+template class alinous::ArrayAllocator<::alinous::remote::region::NodeReference>;
 template class alinous::ArrayAllocator<::alinous::compile::IncludePreprocessor>;
 template class alinous::ArrayAllocator<::alinous::compile::declare::IDeclare>;
 template class alinous::ArrayAllocator<::alinous::compile::stmt::StatementList>;

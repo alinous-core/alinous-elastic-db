@@ -150,7 +150,7 @@ public:
 	AlinousScriptDebugger* getDebugger(ThreadContext* ctx) throw() ;
 	AlinousFunctionManager* getFunctionManager(ThreadContext* ctx) throw() ;
 private:
-	void initDistributedParts(ThreadContext* ctx);
+	void initDistributedServerParts(ThreadContext* ctx);
 public:
 	static bool __init_done;
 	static bool __init_static_variables();

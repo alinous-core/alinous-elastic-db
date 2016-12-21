@@ -4,7 +4,7 @@ namespace java {namespace util {
 template <typename  T, typename V> class Map;}}
 
 namespace alinous {namespace remote {namespace region {
-class NodeReference;}}}
+class NodeCluster;}}}
 
 namespace java {namespace util {
 template <typename  T, typename V> class HashMap;}}
@@ -31,7 +31,7 @@ class NodeReferenceManager final : public virtual IObject {
 public:
 	NodeReferenceManager(const NodeReferenceManager& base) = default;
 public:
-	NodeReferenceManager(ThreadContext* ctx) throw()  : IObject(ctx), tablesDictinary(GCUtils<Map<String,NodeReference> >::ins(this, (new(ctx) HashMap<String,NodeReference>(ctx)), ctx, __FILEW__, __LINE__, L""))
+	NodeReferenceManager(ThreadContext* ctx) throw()  : IObject(ctx), tablesDictinary(GCUtils<Map<String,NodeCluster> >::ins(this, (new(ctx) HashMap<String,NodeCluster>(ctx)), ctx, __FILEW__, __LINE__, L""))
 	{
 	}
 	void __construct_impl(ThreadContext* ctx) throw() 
@@ -40,9 +40,9 @@ public:
 	virtual ~NodeReferenceManager() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 private:
-	Map<String,NodeReference>* tablesDictinary;
+	Map<String,NodeCluster>* tablesDictinary;
 public:
-	Map<String,NodeReference>* getTablesDictinary(ThreadContext* ctx) throw() ;
+	Map<String,NodeCluster>* getTablesDictinary(ThreadContext* ctx) throw() ;
 public:
 	static bool __init_done;
 	static bool __init_static_variables();

@@ -100,7 +100,7 @@ void AlinousCore::init(int debugPort, ThreadContext* ctx)
 }
 void AlinousCore::initDatabase(ThreadContext* ctx)
 {
-	initDistributedParts(ctx);
+	initDistributedServerParts(ctx);
 	__GC_MV(this, &(this->databaseManager), (new(ctx) DataSourceManager(this, ctx)), DataSourceManager);
 	this->databaseManager->init(ctx);
 }
@@ -189,7 +189,7 @@ AlinousFunctionManager* AlinousCore::getFunctionManager(ThreadContext* ctx) thro
 {
 	return functionManager;
 }
-void AlinousCore::initDistributedParts(ThreadContext* ctx)
+void AlinousCore::initDistributedServerParts(ThreadContext* ctx)
 {
 	Monitor* monitorConf = this->config->getMonitor(ctx);
 	if(monitorConf != nullptr)

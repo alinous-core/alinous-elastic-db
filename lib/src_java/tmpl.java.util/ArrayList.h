@@ -103,6 +103,7 @@ template class ::java::util::ArrayList<::alinous::web::htmlxml::XHtmlAttribute>;
 template class ::java::util::ArrayList<::alinous::server::http::MimeHeader>;
 template class ::java::util::ArrayList<::alinous::server::http::MimePart>;
 template class ::java::util::ArrayList<::alinous::buffer::FifoElement<::alinous::server::webmodule::AbstractWebModule>>;
+template class ::java::util::ArrayList<::alinous::remote::region::NodeReference>;
 template class ::java::util::ArrayList<::alinous::compile::analyse::VariableDeclareHolder>;
 template class ::java::util::ArrayList<::alinous::compile::analyse::ExpressionStreamResult>;
 template class ::java::util::ArrayList<::alinous::compile::analyse::SubVariableDeclareHolder>;

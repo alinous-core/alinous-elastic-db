@@ -4,6 +4,9 @@ namespace alinous {namespace system {namespace config {namespace remote {
 class RegionRef;}}}}
 
 namespace alinous {namespace db {
+class ICommidIdPublisher;}}
+
+namespace alinous {namespace db {
 class AlinousDbException;}}
 
 namespace java {namespace lang {
@@ -32,6 +35,15 @@ class AlinousCore;}}
 
 namespace alinous {namespace btree {
 class BTreeGlobalCache;}}
+
+namespace java {namespace util {
+template <typename  T, typename V> class Map;}}
+
+namespace alinous {namespace remote {namespace region {namespace client {
+class RemoteTableScheme;}}}}
+
+namespace java {namespace util {
+template <typename  T, typename V> class HashMap;}}
 
 namespace alinous {namespace db {
 class ITableRegion;}}
@@ -62,9 +74,12 @@ using namespace ::alinous;
 using namespace ::java::lang;
 using ::java::util::Iterator;
 using ::java::io::IOException;
+using ::java::util::HashMap;
+using ::java::util::Map;
 using ::alinous::btree::BTreeException;
 using ::alinous::btree::BTreeGlobalCache;
 using ::alinous::db::AlinousDbException;
+using ::alinous::db::ICommidIdPublisher;
 using ::alinous::db::ITableRegion;
 using ::alinous::db::ITableSchema;
 using ::alinous::db::table::DatabaseException;
@@ -81,22 +96,28 @@ class RemoteRegionRef final : public ITableRegion, public virtual IObject {
 public:
 	RemoteRegionRef(const RemoteRegionRef& base) = default;
 public:
-	RemoteRegionRef(RegionRef* ref, ThreadContext* ctx) throw() ;
-	void __construct_impl(RegionRef* ref, ThreadContext* ctx) throw() ;
+	RemoteRegionRef(RegionRef* ref, ICommidIdPublisher* commitIdPublisher, ThreadContext* ctx) throw() ;
+	void __construct_impl(RegionRef* ref, ICommidIdPublisher* commitIdPublisher, ThreadContext* ctx) throw() ;
 	virtual ~RemoteRegionRef() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 private:
-	RegionRef* config;
 	SocketConnectionPool* pool;
 	String* url;
+	String* name;
 	RegionConnectionInfo* info;
+	ICommidIdPublisher* commitIdPublisher;
+	Map<String,RemoteTableScheme>* schemes;
+	long long schemeVersion;
 public:
 	void init(ThreadContext* ctx);
+	void syncSchemes(ThreadContext* ctx) throw()  final;
 	int getRegionType(ThreadContext* ctx) throw()  final;
 	String* getRegionName(ThreadContext* ctx) throw()  final;
 	ITableSchema* getSchema(String* name, ThreadContext* ctx) throw()  final;
 	void createSchema(String* schemaName, ThreadContext* ctx) throw()  final;
 	void createTable(String* schemaName, TableMetadata* tblMeta, ThreadPool* threadPool, AlinousCore* core, BTreeGlobalCache* cache, ThreadContext* ctx) final;
+	long long getSchemeVersion(ThreadContext* ctx) throw() ;
+	void setSchemeVersion(long long schemeVersion, ThreadContext* ctx) throw() ;
 public:
 	static bool __init_done;
 	static bool __init_static_variables();

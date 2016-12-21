@@ -278,6 +278,13 @@ template class alinous::ArrayObject<alinous::ArrayObject<alinous::IArrayObject<:
 template class alinous::ArrayObject<alinous::ArrayObject<::alinous::db::ITableSchema>>;
 template class alinous::ArrayObject<alinous::IArrayObject<alinous::ArrayObject<::alinous::db::ITableSchema>>>;
 template class alinous::ArrayObject<alinous::ArrayObject<alinous::ArrayObject<::alinous::db::ITableSchema>>>;
+template class alinous::ArrayObject<::alinous::remote::region::NodeReference>;
+template class alinous::ArrayObject<alinous::IArrayObject<::alinous::remote::region::NodeReference>>;
+template class alinous::ArrayObject<alinous::IArrayObject<alinous::IArrayObject<::alinous::remote::region::NodeReference>>>;
+template class alinous::ArrayObject<alinous::ArrayObject<alinous::IArrayObject<::alinous::remote::region::NodeReference>>>;
+template class alinous::ArrayObject<alinous::ArrayObject<::alinous::remote::region::NodeReference>>;
+template class alinous::ArrayObject<alinous::IArrayObject<alinous::ArrayObject<::alinous::remote::region::NodeReference>>>;
+template class alinous::ArrayObject<alinous::ArrayObject<alinous::ArrayObject<::alinous::remote::region::NodeReference>>>;
 template class alinous::ArrayObject<::alinous::compile::IncludePreprocessor>;
 template class alinous::ArrayObject<alinous::IArrayObject<::alinous::compile::IncludePreprocessor>>;
 template class alinous::ArrayObject<alinous::IArrayObject<alinous::IArrayObject<::alinous::compile::IncludePreprocessor>>>;

@@ -78,6 +78,7 @@ public:
 	TableSchema* getSchema(String* name, ThreadContext* ctx) throw()  final;
 	void createSchema(String* schemaName, ThreadContext* ctx) throw()  final;
 	void createTable(String* schemaName, TableMetadata* tblMeta, ThreadPool* threadPool, AlinousCore* core, BTreeGlobalCache* cache, ThreadContext* ctx) final;
+	void syncSchemes(ThreadContext* ctx) throw()  final;
 public:
 	static bool __init_done;
 	static bool __init_static_variables();

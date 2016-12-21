@@ -3,7 +3,8 @@ template class ::java::util::Map<::java::lang::String, ::alinous::runtime::dom::
 template class ::java::util::Map<::java::lang::String, ::java::lang::String>;
 template class ::java::util::Map<::java::lang::String, ::alinous::db::table::lockmonitor::IThreadLocker>;
 template class ::java::util::Map<::alinous::html::DomNode, ::java::util::ArrayList<::alinous::html::xpath::match::MatchCandidate>>;
-template class ::java::util::Map<::java::lang::String, ::alinous::remote::region::NodeReference>;
+template class ::java::util::Map<::java::lang::String, ::alinous::remote::region::NodeCluster>;
+template class ::java::util::Map<::java::lang::String, ::alinous::remote::region::client::RemoteTableScheme>;
 template class ::java::util::Map<::java::lang::String, ::com::google::re2j::CharGroup>;
 template class ::java::util::Map<::java::lang::String, ::java::util::TimeZone>;
 template class ::java::util::Map<::java::lang::String, ::org::alinous::charset::CharsetConverter>;

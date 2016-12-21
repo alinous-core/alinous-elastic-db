@@ -34,7 +34,7 @@ void NodeReferenceManager::__releaseRegerences(bool prepare, ThreadContext* ctx)
 		return;
 	}
 }
-Map<String,NodeReference>* NodeReferenceManager::getTablesDictinary(ThreadContext* ctx) throw() 
+Map<String,NodeCluster>* NodeReferenceManager::getTablesDictinary(ThreadContext* ctx) throw() 
 {
 	return tablesDictinary;
 }

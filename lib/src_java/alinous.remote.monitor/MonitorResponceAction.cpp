@@ -98,9 +98,8 @@ void MonitorResponceAction::handleCommand(BufferedInputStream* stream, BufferedO
 			handleCommand(cmd, outStream, ctx);
 			break ;
 		case AbstractMonitorCommand::TYPE_GET_MAX_COMMIT_ID:
-			handleCommand(cmd, outStream, ctx);
-			break ;
 		case AbstractMonitorCommand::TYPE_NEW_MAX_COMMIT_ID:
+		case AbstractMonitorCommand::TYPE_GET_LATEST_REVISION:
 			handleCommand(cmd, outStream, ctx);
 			break ;
 		case AbstractMonitorCommand::TYPE_VOID:

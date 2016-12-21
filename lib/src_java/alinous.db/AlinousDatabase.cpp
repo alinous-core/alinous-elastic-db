@@ -401,9 +401,16 @@ void AlinousDatabase::openRegions(AlinousDbInstanceInfo* instanceConfig, ThreadC
 	for(int i = 0; i != maxLoop; ++i)
 	{
 		RegionRef* ref = list->get(i, ctx);
-		RemoteRegionRef* region = (new(ctx) RemoteRegionRef(ref, ctx));
+		RemoteRegionRef* region = (new(ctx) RemoteRegionRef(ref, this->commitIdPublisher, ctx));
 		region->init(ctx);
 		this->regionManager->addRegion(region, ctx);
+	}
+	List<ITableRegion>* regions = this->regionManager->getRegions(ctx);
+	maxLoop = regions->size(ctx);
+	for(int i = 0; i != maxLoop; ++i)
+	{
+		ITableRegion* reg = regions->get(i, ctx);
+		reg->syncSchemes(ctx);
 	}
 }
 }}

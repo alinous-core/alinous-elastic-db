@@ -86,5 +86,9 @@ void TableRegionManager::commitCreateTable(String* regionName, String* schemaNam
 	region->createSchema(schemaName, ctx);
 	region->createTable(schemaName, tblMeta, database->workerThreadsPool, core, database->getBtreeCache(ctx), ctx);
 }
+List<ITableRegion>* TableRegionManager::getRegions(ThreadContext* ctx) throw() 
+{
+	return regions;
+}
 }}
 

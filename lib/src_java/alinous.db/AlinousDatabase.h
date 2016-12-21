@@ -94,6 +94,9 @@ namespace alinous {namespace remote {namespace region {namespace client {
 class RemoteRegionRef;}}}}
 
 namespace alinous {namespace db {
+class ITableRegion;}}
+
+namespace alinous {namespace db {
 class TableSchemaCollection;}}
 
 namespace alinous {namespace db {namespace table {
