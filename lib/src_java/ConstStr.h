@@ -1264,9 +1264,9 @@ public:
 	constexpr static StaticUnicodeString __CNST_STR_1134{L"CMD_STEP_RETURN",15};
 public:
 	static UnicodeStringWrapper* getCNST_STR_1134() throw();
-	constexpr static StaticUnicodeString __CNST_STR_1203{L"// document-root",16};
+	constexpr static StaticUnicodeString __CNST_STR_1204{L"// document-root",16};
 public:
-	static UnicodeStringWrapper* getCNST_STR_1203() throw();
+	static UnicodeStringWrapper* getCNST_STR_1204() throw();
 	constexpr static StaticUnicodeString __CNST_STR_1648{L"BTreeException exception occurs on adding trx cache index",57};
 public:
 	static UnicodeStringWrapper* getCNST_STR_1648() throw();
@@ -8707,9 +8707,9 @@ public:
 	constexpr static StaticUnicodeString __CNST_STR_3187{L"uri",3};
 public:
 	static UnicodeStringWrapper* getCNST_STR_3187() throw();
-	constexpr static StaticUnicodeString __CNST_STR_1204{L"url",3};
+	constexpr static StaticUnicodeString __CNST_STR_1205{L"url",3};
 public:
-	static UnicodeStringWrapper* getCNST_STR_1204() throw();
+	static UnicodeStringWrapper* getCNST_STR_1205() throw();
 	constexpr static StaticUnicodeString __CNST_STR_1297{L"\"@\"",3};
 public:
 	static UnicodeStringWrapper* getCNST_STR_1297() throw();
@@ -8935,9 +8935,9 @@ public:
 	constexpr static StaticUnicodeString __CNST_STR_1964{L"cdf",3};
 public:
 	static UnicodeStringWrapper* getCNST_STR_1964() throw();
-	constexpr static StaticUnicodeString __CNST_STR_1206{L"port",4};
+	constexpr static StaticUnicodeString __CNST_STR_1203{L"port",4};
 public:
-	static UnicodeStringWrapper* getCNST_STR_1206() throw();
+	static UnicodeStringWrapper* getCNST_STR_1203() throw();
 	constexpr static StaticUnicodeString __CNST_STR_689{L"America/Buenos_Aires",20};
 public:
 	static UnicodeStringWrapper* getCNST_STR_689() throw();
@@ -9499,9 +9499,9 @@ public:
 	constexpr static StaticUnicodeString __CNST_STR_149{L"Logical_Order_Exception",23};
 public:
 	static UnicodeStringWrapper* getCNST_STR_149() throw();
-	constexpr static StaticUnicodeString __CNST_STR_1205{L"The 'node-ref' tag requires 'url' attribute",43};
+	constexpr static StaticUnicodeString __CNST_STR_1206{L"The 'node-ref' tag requires 'url' attribute",43};
 public:
-	static UnicodeStringWrapper* getCNST_STR_1205() throw();
+	static UnicodeStringWrapper* getCNST_STR_1206() throw();
 	constexpr static StaticUnicodeString __CNST_STR_2481{L"lwp",3};
 public:
 	static UnicodeStringWrapper* getCNST_STR_2481() throw();

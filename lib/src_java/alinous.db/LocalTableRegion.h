@@ -73,6 +73,7 @@ public:
 	SchemaManager* schemas;
 public:
 	SchemaManager* getSchemaManager(ThreadContext* ctx) throw() ;
+	void setSchemaManager(SchemaManager* schemas, ThreadContext* ctx) throw() ;
 	int getRegionType(ThreadContext* ctx) throw()  final;
 	String* getRegionName(ThreadContext* ctx) throw()  final;
 	TableSchema* getSchema(String* name, ThreadContext* ctx) throw()  final;

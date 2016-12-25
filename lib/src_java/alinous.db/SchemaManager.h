@@ -112,7 +112,6 @@ private:
 	ThreadPool* threadPool;
 	IOidPublisher* oidPublisher;
 public:
-	void init(ThreadContext* ctx) throw() ;
 	void createTable(String* schemaName, TableMetadata* tableMetadata, ThreadPool* threadPool, AlinousCore* core, BTreeGlobalCache* cache, ThreadContext* ctx);
 	TableSchema* createSchema(String* name, ThreadContext* ctx) throw() ;
 	TableSchema* getSchema(String* name, ThreadContext* ctx) throw() ;

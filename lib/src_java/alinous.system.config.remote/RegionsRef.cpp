@@ -61,7 +61,7 @@ RegionsRef* RegionsRef::parseInstance(MatchCandidate* candidate, DomDocument* do
 		}
 		String* name = attr->toString(ctx)->trim(ctx);
 		ref->setName(name, ctx);
-		attr = dom->getAttributeValue(ConstStr::getCNST_STR_1204(), ctx);
+		attr = dom->getAttributeValue(ConstStr::getCNST_STR_1205(), ctx);
 		if(attr == nullptr)
 		{
 			throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_1223(), ctx));

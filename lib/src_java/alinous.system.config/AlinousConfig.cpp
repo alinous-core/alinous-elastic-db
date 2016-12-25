@@ -271,7 +271,24 @@ void AlinousConfig::handleWebSetting(MatchCandidatesCollection* result, DomDocum
 	}
 	__GC_MV(this, &(this->webHandler), (new(ctx) WebHandlerInfo(this->alinousHome->toString(ctx), ctx)), WebHandlerInfo);
 	MatchCandidate* candidateWebHandler = list->get(0, ctx);
-	String* documentRoot = ConfigFileUtiles::getText(document, candidateWebHandler->getCandidateDom(ctx), matcher, ConstStr::getCNST_STR_1203(), ctx);
+	DomNode* node = candidateWebHandler->getCandidateDom(ctx);
+	IVariableValue* attr = node->getAttributeValue(ConstStr::getCNST_STR_1203(), ctx);
+	if(attr != nullptr)
+	{
+		String* portStr = attr->toString(ctx)->trim(ctx);
+		{
+			try
+			{
+				int port = Integer::parseInt(portStr, ctx);
+				this->webHandler->setPort(port, ctx);
+			}
+			catch(NumberFormatException* e)
+			{
+				e->printStackTrace(ctx);
+			}
+		}
+	}
+	String* documentRoot = ConfigFileUtiles::getText(document, candidateWebHandler->getCandidateDom(ctx), matcher, ConstStr::getCNST_STR_1204(), ctx);
 	if(document != nullptr)
 	{
 		this->webHandler->setDocumentRoot(documentRoot, ctx);

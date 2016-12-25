@@ -33,9 +33,12 @@ public:
 private:
 	String* documentRoot;
 	String* alinousHome;
+	int port;
 public:
 	String* getDocumentRoot(ThreadContext* ctx) throw() ;
 	void setDocumentRoot(String* documentRoot, ThreadContext* ctx) throw() ;
+	int getPort(ThreadContext* ctx) throw() ;
+	void setPort(int port, ThreadContext* ctx) throw() ;
 public:
 	static bool __init_done;
 	static bool __init_static_variables();

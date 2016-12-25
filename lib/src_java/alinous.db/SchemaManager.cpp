@@ -54,9 +54,6 @@ void SchemaManager::__releaseRegerences(bool prepare, ThreadContext* ctx) throw(
 		return;
 	}
 }
-void SchemaManager::init(ThreadContext* ctx) throw() 
-{
-}
 void SchemaManager::createTable(String* schemaName, TableMetadata* tableMetadata, ThreadPool* threadPool, AlinousCore* core, BTreeGlobalCache* cache, ThreadContext* ctx)
 {
 	TableSchema* schema = this->schemas->get(schemaName, ctx);

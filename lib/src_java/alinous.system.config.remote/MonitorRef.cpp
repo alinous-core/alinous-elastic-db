@@ -46,7 +46,7 @@ MonitorRef* MonitorRef::parseInstance(MatchCandidate* candidate, DomDocument* do
 {
 	MonitorRef* monitorRef = (new(ctx) MonitorRef(ctx));
 	DomNode* selfDom = candidate->getCandidateDom(ctx);
-	IVariableValue* attr = selfDom->getAttributeValue(ConstStr::getCNST_STR_1204(), ctx);
+	IVariableValue* attr = selfDom->getAttributeValue(ConstStr::getCNST_STR_1205(), ctx);
 	if(attr == nullptr)
 	{
 		throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_1225(), ctx));

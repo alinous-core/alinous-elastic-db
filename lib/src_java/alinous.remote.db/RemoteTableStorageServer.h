@@ -24,6 +24,9 @@ class SocketServer;}}}
 namespace alinous {namespace db {
 class SchemaManager;}}
 
+namespace alinous {namespace btree {
+class IntKey;}}
+
 namespace java {namespace lang {
 class IObject;
 }}
@@ -39,6 +42,7 @@ using namespace ::java::lang;
 using ::java::util::Iterator;
 using ::alinous::btree::BTreeException;
 using ::alinous::btree::BTreeGlobalCache;
+using ::alinous::btree::IntKey;
 using ::alinous::db::SchemaManager;
 using ::alinous::remote::socket::SocketServer;
 using ::alinous::runtime::parallel::ThreadPool;
@@ -65,9 +69,13 @@ private:
 	BTreeGlobalCache* btreeCache;
 	ThreadPool* workerThreadsPool;
 	AlinousCore* core;
+public:
+	const static IntKey __SCHEMA;
+	constexpr static IntKey* SCHEMA{const_cast<IntKey*>(&__SCHEMA)};
 private:
 	static String* THREAD_NAME;
 public:
+	void init(AlinousCore* core, ThreadContext* ctx) throw() ;
 	void start(AlinousCore* core, ThreadContext* ctx);
 	void dispose(ThreadContext* ctx) throw() ;
 	AlinousCore* getCore(ThreadContext* ctx) throw() ;

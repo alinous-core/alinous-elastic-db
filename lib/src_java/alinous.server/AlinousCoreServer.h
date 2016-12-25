@@ -3,6 +3,12 @@
 namespace alinous {namespace system {
 class AlinousCore;}}
 
+namespace alinous {namespace system {namespace config {
+class AlinousConfig;}}}
+
+namespace alinous {namespace system {namespace config {
+class WebHandlerInfo;}}}
+
 namespace alinous {namespace server {namespace http {
 class AlinousHttpServer;}}}
 
@@ -25,6 +31,8 @@ using ::java::util::Iterator;
 using ::alinous::server::http::AlinousHttpServer;
 using ::alinous::system::AlinousCore;
 using ::alinous::system::AlinousException;
+using ::alinous::system::config::AlinousConfig;
+using ::alinous::system::config::WebHandlerInfo;
 
 
 
@@ -39,6 +47,7 @@ public:
 private:
 	AlinousCore* core;
 	AlinousHttpServer* httpServer;
+	int webport;
 public:
 	void startHttpServer(int maxThread, ThreadContext* ctx) throw() ;
 	void dispose(ThreadContext* ctx) throw() ;

@@ -255,6 +255,7 @@ void AlinousDatabase::open(AlinousDbInstanceInfo* instanceConfig, ThreadContext*
 					SchemaManager* schemas = localRegion->getSchemaManager(ctx);
 					schemas = static_cast<SchemaManager*>(schemeValue->get(0, ctx));
 					schemas->loadAfterFetch(this->dataDir, this->core->getLogger(ctx), this->workerThreadsPool, this->core, this->btreeCache, ctx);
+					localRegion->setSchemaManager(schemas, ctx);
 				}
 			}
 			ArrayList<IBTreeValue>* lvTrxIds = this->dbconfig->getValues(MAX_COMMIT_ID, ctx);

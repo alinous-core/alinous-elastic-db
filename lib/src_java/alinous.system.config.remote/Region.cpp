@@ -77,7 +77,7 @@ Region* Region::parseInstance(DomNode* dom, DomDocument* document, Matcher* matc
 		throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_1227(), ctx));
 	}
 	reg->setName(attr->toString(ctx)->trim(ctx), ctx);
-	attr = dom->getAttributeValue(ConstStr::getCNST_STR_1206(), ctx);
+	attr = dom->getAttributeValue(ConstStr::getCNST_STR_1203(), ctx);
 	if(attr == nullptr)
 	{
 		throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_1228(), ctx));

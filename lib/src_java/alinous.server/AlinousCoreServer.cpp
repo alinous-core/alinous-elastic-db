@@ -18,7 +18,7 @@ bool AlinousCoreServer::__init_static_variables(){
 	delete ctx;
 	return true;
 }
- AlinousCoreServer::AlinousCoreServer(String* home, bool debug, int debugPort, ThreadContext* ctx) : IObject(ctx), core(nullptr), httpServer(nullptr)
+ AlinousCoreServer::AlinousCoreServer(String* home, bool debug, int debugPort, ThreadContext* ctx) : IObject(ctx), core(nullptr), httpServer(nullptr), webport(1192)
 {
 	__GC_MV(this, &(this->core), (new(ctx) AlinousCore(home, debug, ctx)), AlinousCore);
 	this->core->init(debugPort, ctx);
@@ -50,7 +50,12 @@ void AlinousCoreServer::__releaseRegerences(bool prepare, ThreadContext* ctx) th
 }
 void AlinousCoreServer::startHttpServer(int maxThread, ThreadContext* ctx) throw() 
 {
-	__GC_MV(this, &(this->httpServer), (new(ctx) AlinousHttpServer(1192, this->core, maxThread, ctx)), AlinousHttpServer);
+	AlinousConfig* config = this->core->getConfig(ctx);
+	WebHandlerInfo* info = config->getWebHandler(ctx);
+	if(info != nullptr)
+	{
+	}
+	__GC_MV(this, &(this->httpServer), (new(ctx) AlinousHttpServer(this->webport, this->core, maxThread, ctx)), AlinousHttpServer);
 	this->httpServer->startServer(ctx);
 }
 void AlinousCoreServer::dispose(ThreadContext* ctx) throw() 

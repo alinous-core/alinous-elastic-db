@@ -61,6 +61,9 @@ namespace alinous {namespace system {namespace config {
 class WebHandlerInfo;}}}
 
 namespace java {namespace lang {
+class NumberFormatException;}}
+
+namespace java {namespace lang {
 class StringBuffer;}}
 
 namespace alinous {namespace system {namespace config {

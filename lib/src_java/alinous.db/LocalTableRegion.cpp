@@ -46,6 +46,10 @@ SchemaManager* LocalTableRegion::getSchemaManager(ThreadContext* ctx) throw()
 {
 	return this->schemas;
 }
+void LocalTableRegion::setSchemaManager(SchemaManager* schemas, ThreadContext* ctx) throw() 
+{
+	__GC_MV(this, &(this->schemas), schemas, SchemaManager);
+}
 int LocalTableRegion::getRegionType(ThreadContext* ctx) throw() 
 {
 	return ITableRegion::LOCAL_REGION;

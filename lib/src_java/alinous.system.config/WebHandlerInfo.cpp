@@ -18,7 +18,7 @@ bool WebHandlerInfo::__init_static_variables(){
 	delete ctx;
 	return true;
 }
- WebHandlerInfo::WebHandlerInfo(String* alinousHome, ThreadContext* ctx) throw()  : IObject(ctx), IAlinousConfigElement(ctx), documentRoot(nullptr), alinousHome(nullptr)
+ WebHandlerInfo::WebHandlerInfo(String* alinousHome, ThreadContext* ctx) throw()  : IObject(ctx), IAlinousConfigElement(ctx), documentRoot(nullptr), alinousHome(nullptr), port(0)
 {
 	__GC_MV(this, &(this->alinousHome), alinousHome, String);
 }
@@ -57,6 +57,14 @@ void WebHandlerInfo::setDocumentRoot(String* documentRoot, ThreadContext* ctx) t
 		return;
 	}
 	__GC_MV(this, &(this->documentRoot), documentAbsRoot, String);
+}
+int WebHandlerInfo::getPort(ThreadContext* ctx) throw() 
+{
+	return port;
+}
+void WebHandlerInfo::setPort(int port, ThreadContext* ctx) throw() 
+{
+	this->port = port;
 }
 }}}
 

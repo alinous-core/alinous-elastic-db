@@ -71,7 +71,7 @@ void Node::setMaxCon(int maxCon, ThreadContext* ctx) throw()
 Node* Node::parseInstance(DomNode* dom, DomDocument* document, Matcher* matcher, ThreadContext* ctx)
 {
 	Node* node = (new(ctx) Node(ctx));
-	IVariableValue* attr = dom->getAttributeValue(ConstStr::getCNST_STR_1206(), ctx);
+	IVariableValue* attr = dom->getAttributeValue(ConstStr::getCNST_STR_1203(), ctx);
 	if(attr == nullptr)
 	{
 		throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_1207(), ctx));
