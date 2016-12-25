@@ -3,6 +3,9 @@
 namespace alinous {namespace system {
 class AlinousCore;}}
 
+namespace java {namespace io {
+class File;}}
+
 namespace alinous {namespace btree {
 class BTreeGlobalCache;}}
 
@@ -15,17 +18,35 @@ class BTreeException;}}
 namespace alinous {namespace runtime {namespace parallel {
 class ThreadPool;}}}
 
+namespace alinous {namespace db {
+class SchemaManager;}}
+
+namespace alinous {namespace btree {
+class BTree;}}
+
+namespace alinous {namespace db {
+class AlinousDbException;}}
+
+namespace java {namespace io {
+class IOException;}}
+
+namespace java {namespace lang {
+class InterruptedException;}}
+
+namespace alinous {namespace runtime {namespace dom {
+class VariableException;}}}
+
 namespace alinous {namespace remote {namespace db {
 class RemoteStorageResponceActionFactory;}}}
 
 namespace alinous {namespace remote {namespace socket {
 class SocketServer;}}}
 
-namespace alinous {namespace db {
-class SchemaManager;}}
-
 namespace alinous {namespace btree {
 class IntKey;}}
+
+namespace alinous {namespace btree {
+class IBTreeKey;}}
 
 namespace java {namespace lang {
 class IObject;
@@ -40,11 +61,17 @@ namespace alinous {namespace remote {namespace db {
 using namespace ::alinous;
 using namespace ::java::lang;
 using ::java::util::Iterator;
+using ::java::io::File;
+using ::java::io::IOException;
+using ::alinous::btree::BTree;
 using ::alinous::btree::BTreeException;
 using ::alinous::btree::BTreeGlobalCache;
+using ::alinous::btree::IBTreeKey;
 using ::alinous::btree::IntKey;
+using ::alinous::db::AlinousDbException;
 using ::alinous::db::SchemaManager;
 using ::alinous::remote::socket::SocketServer;
+using ::alinous::runtime::dom::VariableException;
 using ::alinous::runtime::parallel::ThreadPool;
 using ::alinous::system::AlinousCore;
 using ::alinous::system::config::AlinousInitException;
@@ -64,21 +91,27 @@ public:
 private:
 	int port;
 	int maxthread;
-	String* datadir;
+	String* dataDir;
 	SocketServer* socketServer;
 	BTreeGlobalCache* btreeCache;
 	ThreadPool* workerThreadsPool;
 	AlinousCore* core;
+	BTree* dbconfig;
+	File* configFile;
 public:
 	const static IntKey __SCHEMA;
 	constexpr static IntKey* SCHEMA{const_cast<IntKey*>(&__SCHEMA)};
 private:
 	static String* THREAD_NAME;
 public:
-	void init(AlinousCore* core, ThreadContext* ctx) throw() ;
+	void init(AlinousCore* core, ThreadContext* ctx);
+	bool exists(ThreadContext* ctx) throw() ;
 	void start(AlinousCore* core, ThreadContext* ctx);
 	void dispose(ThreadContext* ctx) throw() ;
 	AlinousCore* getCore(ThreadContext* ctx) throw() ;
+private:
+	void initInstance(AlinousCore* core, ThreadContext* ctx);
+	File* getConfigFile(ThreadContext* ctx) throw() ;
 public:
 	static bool __init_done;
 	static bool __init_static_variables();

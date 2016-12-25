@@ -9,6 +9,9 @@ class LocalCommitIdPublisher;}}
 namespace alinous {namespace system {
 class AlinousCore;}}
 
+namespace alinous {namespace runtime {namespace parallel {
+class ThreadPool;}}}
+
 namespace alinous {namespace db {namespace trx {
 class DbTransactionManager;}}}
 
@@ -59,9 +62,6 @@ class IBTreeValue;}}
 
 namespace java {namespace lang {
 class Throwable;}}
-
-namespace alinous {namespace runtime {namespace parallel {
-class ThreadPool;}}}
 
 namespace alinous {namespace runtime {namespace parallel {
 class LaunchJoin;}}}

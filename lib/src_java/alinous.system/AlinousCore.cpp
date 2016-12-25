@@ -217,7 +217,17 @@ void AlinousCore::initDistributedServerParts(ThreadContext* ctx)
 		{
 			Node* n = it->next(ctx);
 			RemoteTableStorageServer* tableNode = (new(ctx) RemoteTableStorageServer(n->getPort(ctx), n->getMaxCon(ctx), n->getDataDir(ctx), ctx));
-			tableNode->init(this, ctx);
+			{
+				try
+				{
+					tableNode->init(this, ctx);
+				}
+				catch(AlinousDbException* e)
+				{
+					e->printStackTrace(ctx);
+					throw (new(ctx) AlinousInitException(e->getMessage(ctx), e, ctx));
+				}
+			}
 			tableNode->start(this, ctx);
 			this->storageServers->add(tableNode, ctx);
 		}

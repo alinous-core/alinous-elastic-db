@@ -60,6 +60,9 @@ template <typename  T> class Iterator;}}
 namespace alinous {namespace remote {namespace db {
 class RemoteTableStorageServer;}}}
 
+namespace alinous {namespace db {
+class AlinousDbException;}}
+
 namespace alinous {namespace system {namespace config {namespace remote {
 class Regions;}}}}
 
@@ -92,6 +95,7 @@ using ::java::util::ArrayList;
 using ::java::util::Iterator;
 using ::java::util::List;
 using ::alinous::compile::sql::functions::SQLFunctionManager;
+using ::alinous::db::AlinousDbException;
 using ::alinous::io::DiskCacheManager;
 using ::alinous::remote::db::RemoteTableStorageServer;
 using ::alinous::remote::monitor::TransactionMonitorServer;

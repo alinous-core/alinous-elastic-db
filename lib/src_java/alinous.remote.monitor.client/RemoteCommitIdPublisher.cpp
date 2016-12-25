@@ -51,7 +51,7 @@ RemoteCommitIdPublisher* RemoteCommitIdPublisher::init(ThreadContext* ctx)
 	IArrayObject<String>* segs = this->url->split(ConstStr::getCNST_STR_381(), ctx);
 	if(segs->length != 2)
 	{
-		throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3480(), ctx));
+		throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3481(), ctx));
 	}
 	String* host = segs->get(0);
 	int port = 0;
@@ -62,7 +62,7 @@ RemoteCommitIdPublisher* RemoteCommitIdPublisher::init(ThreadContext* ctx)
 		}
 		catch(NumberFormatException* e)
 		{
-			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3481(), e, ctx));
+			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3482(), e, ctx));
 		}
 	}
 	__GC_MV(this, &(this->info), (new(ctx) MonitorConnectionInfo(host, port, ctx)), MonitorConnectionInfo);
@@ -84,11 +84,11 @@ long long RemoteCommitIdPublisher::getMaxCommitId(ThreadContext* ctx)
 		}
 		catch(UnknownHostException* e)
 		{
-			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3482(), e, ctx));
+			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3483(), e, ctx));
 		}
 		catch(IOException* e)
 		{
-			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3482(), e, ctx));
+			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3483(), e, ctx));
 		}
 	}
 	return cmd->getCommitId(ctx);
@@ -104,11 +104,11 @@ long long RemoteCommitIdPublisher::newCommitId(ThreadContext* ctx)
 		}
 		catch(UnknownHostException* e)
 		{
-			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3482(), e, ctx));
+			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3483(), e, ctx));
 		}
 		catch(IOException* e)
 		{
-			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3482(), e, ctx));
+			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3483(), e, ctx));
 		}
 	}
 	return cmd->getCommitId(ctx);
