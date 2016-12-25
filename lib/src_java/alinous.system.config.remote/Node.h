@@ -39,6 +39,9 @@ class MatchingException;}}}}
 namespace alinous {namespace parser {namespace xpath {
 class ParseException;}}}
 
+namespace alinous {namespace system {namespace config {
+class ConfigPathUtils;}}}
+
 namespace java {namespace lang {
 class IObject;
 }}
@@ -62,6 +65,7 @@ using ::alinous::html::xpath::match::Matcher;
 using ::alinous::html::xpath::match::MatchingException;
 using ::alinous::parser::xpath::ParseException;
 using ::alinous::system::config::AlinousInitException;
+using ::alinous::system::config::ConfigPathUtils;
 using ::alinous::system::config::IAlinousConfigElement;
 
 
@@ -93,7 +97,7 @@ public:
 	int getMaxCon(ThreadContext* ctx) throw() ;
 	void setMaxCon(int maxCon, ThreadContext* ctx) throw() ;
 public:
-	static Node* parseInstance(DomNode* dom, DomDocument* document, Matcher* matcher, ThreadContext* ctx);
+	static Node* parseInstance(DomNode* dom, DomDocument* document, Matcher* matcher, String* alinousHome, ThreadContext* ctx);
 public:
 	static bool __init_done;
 	static bool __init_static_variables();

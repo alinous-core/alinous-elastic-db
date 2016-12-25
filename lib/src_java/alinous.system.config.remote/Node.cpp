@@ -68,7 +68,7 @@ void Node::setMaxCon(int maxCon, ThreadContext* ctx) throw()
 {
 	this->maxCon = maxCon;
 }
-Node* Node::parseInstance(DomNode* dom, DomDocument* document, Matcher* matcher, ThreadContext* ctx)
+Node* Node::parseInstance(DomNode* dom, DomDocument* document, Matcher* matcher, String* alinousHome, ThreadContext* ctx)
 {
 	Node* node = (new(ctx) Node(ctx));
 	IVariableValue* attr = dom->getAttributeValue(ConstStr::getCNST_STR_1203(), ctx);
@@ -92,7 +92,9 @@ Node* Node::parseInstance(DomNode* dom, DomDocument* document, Matcher* matcher,
 	{
 		throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_1210(), ctx));
 	}
-	node->setDataDir(attr->toString(ctx)->trim(ctx), ctx);
+	String* dir = attr->toString(ctx)->trim(ctx);
+	dir = ConfigPathUtils::getAbsDirPath(alinousHome, dir, ctx);
+	node->setDataDir(dir, ctx);
 	MatchCandidatesCollection* result = matcher->match(document, dom, ConstStr::getCNST_STR_1211(), ctx);
 	ArrayList<MatchCandidate>* list = result->getCandidatesList(ctx);
 	if(!list->isEmpty(ctx))

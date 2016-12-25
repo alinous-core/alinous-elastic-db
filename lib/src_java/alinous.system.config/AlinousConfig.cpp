@@ -203,7 +203,7 @@ void AlinousConfig::handleDistributedDbParts(DomDocument* document, Matcher* mat
 	if(!list->isEmpty(ctx))
 	{
 		MatchCandidate* candidate = list->get(0, ctx);
-		__GC_MV(this, &(this->nodes), Nodes::parseInstance(candidate, document, matcher, ctx), Nodes);
+		__GC_MV(this, &(this->nodes), Nodes::parseInstance(candidate, document, matcher, this->alinousHome->toString(ctx), ctx), Nodes);
 	}
 	result = matcher->match(document, document, ConstStr::getCNST_STR_1197(), ctx);
 	list = result->getCandidatesList(ctx);

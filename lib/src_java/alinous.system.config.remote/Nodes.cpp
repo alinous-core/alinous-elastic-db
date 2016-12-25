@@ -42,7 +42,7 @@ List<Node>* Nodes::getList(ThreadContext* ctx) throw()
 {
 	return list;
 }
-Nodes* Nodes::parseInstance(MatchCandidate* candidate, DomDocument* document, Matcher* matcher, ThreadContext* ctx)
+Nodes* Nodes::parseInstance(MatchCandidate* candidate, DomDocument* document, Matcher* matcher, String* alinousHome, ThreadContext* ctx)
 {
 	Nodes* ref = (new(ctx) Nodes(ctx));
 	DomNode* selfDom = candidate->getCandidateDom(ctx);
@@ -53,7 +53,7 @@ Nodes* Nodes::parseInstance(MatchCandidate* candidate, DomDocument* document, Ma
 	{
 		MatchCandidate* cnd = it->next(ctx);
 		DomNode* dom = cnd->getCandidateDom(ctx);
-		Node* node = Node::parseInstance(dom, document, matcher, ctx);
+		Node* node = Node::parseInstance(dom, document, matcher, alinousHome, ctx);
 		ref->addNode(node, ctx);
 	}
 	return ref;

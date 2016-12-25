@@ -85,7 +85,7 @@ public:
 	void addNode(Node* node, ThreadContext* ctx) throw() ;
 	List<Node>* getList(ThreadContext* ctx) throw() ;
 public:
-	static Nodes* parseInstance(MatchCandidate* candidate, DomDocument* document, Matcher* matcher, ThreadContext* ctx);
+	static Nodes* parseInstance(MatchCandidate* candidate, DomDocument* document, Matcher* matcher, String* alinousHome, ThreadContext* ctx);
 public:
 	static bool __init_done;
 	static bool __init_static_variables();
