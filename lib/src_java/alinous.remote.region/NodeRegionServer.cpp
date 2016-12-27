@@ -49,6 +49,9 @@ void NodeRegionServer::__releaseRegerences(bool prepare, ThreadContext* ctx) thr
 		return;
 	}
 }
+void NodeRegionServer::initNodes(ThreadContext* ctx) throw() 
+{
+}
 void NodeRegionServer::start(ISystemLog* logger, ThreadContext* ctx) throw() 
 {
 	NodeRegionResponceActionFactory* factory = (new(ctx) NodeRegionResponceActionFactory(this, ctx));

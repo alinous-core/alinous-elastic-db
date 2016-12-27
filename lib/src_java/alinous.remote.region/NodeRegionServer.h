@@ -46,6 +46,7 @@ private:
 private:
 	static String* THREAD_NAME;
 public:
+	void initNodes(ThreadContext* ctx) throw() ;
 	void start(ISystemLog* logger, ThreadContext* ctx) throw() ;
 	void dispose(ThreadContext* ctx) throw() ;
 	NodeReferenceManager* getRefs(ThreadContext* ctx) throw() ;

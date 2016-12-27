@@ -30,11 +30,19 @@ void Region::__releaseRegerences(bool prepare, ThreadContext* ctx) throw()
 	ObjectEraser __e_obj1(ctx, __FILEW__, __LINE__, L"Region", L"~Region");
 	__e_obj1.add(this->name, this);
 	name = nullptr;
-	__e_obj1.add(this->tables, this);
-	tables = nullptr;
+	__e_obj1.add(this->nodeRefs, this);
+	nodeRefs = nullptr;
 	if(!prepare){
 		return;
 	}
+}
+void Region::addNodeRef(NodeRef* ref, ThreadContext* ctx) throw() 
+{
+	this->nodeRefs->add(ref, ctx);
+}
+List<NodeRef>* Region::getNodeRefs(ThreadContext* ctx) throw() 
+{
+	return nodeRefs;
 }
 String* Region::getName(ThreadContext* ctx) throw() 
 {
@@ -51,14 +59,6 @@ int Region::getPort(ThreadContext* ctx) throw()
 void Region::setPort(int port, ThreadContext* ctx) throw() 
 {
 	this->port = port;
-}
-Tables* Region::getTables(ThreadContext* ctx) throw() 
-{
-	return tables;
-}
-void Region::setTables(Tables* tables, ThreadContext* ctx) throw() 
-{
-	__GC_MV(this, &(this->tables), tables, Tables);
 }
 int Region::getMaxCon(ThreadContext* ctx) throw() 
 {
@@ -108,14 +108,15 @@ Region* Region::parseInstance(DomNode* dom, DomDocument* document, Matcher* matc
 			}
 		}
 	}
-	MatchCandidatesCollection* result = matcher->match(document, dom, ConstStr::getCNST_STR_1226(), ctx);
+	MatchCandidatesCollection* result = matcher->match(document, dom, ConstStr::getCNST_STR_1216(), ctx);
 	ArrayList<MatchCandidate>* list = result->getCandidatesList(ctx);
-	if(!list->isEmpty(ctx))
+	int maxLoop = list->size(ctx);
+	for(int i = 0; i != maxLoop; ++i)
 	{
-		MatchCandidate* cand = list->get(0, ctx);
-		DomNode* tablesdom = cand->getCandidateDom(ctx);
-		Tables* tables = Tables::parseInstance(tablesdom, document, matcher, ctx);
-		reg->setTables(tables, ctx);
+		MatchCandidate* cand = list->get(i, ctx);
+		DomNode* noderefdom = cand->getCandidateDom(ctx);
+		NodeRef* noderef = NodeRef::parseInstance(noderefdom, document, matcher, ctx);
+		reg->addNodeRef(noderef, ctx);
 	}
 	return reg;
 }
