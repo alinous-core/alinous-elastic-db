@@ -4,6 +4,7 @@ template class ::java::util::HashMapKeySet<::java::lang::String, ::alinous::runt
 template class ::java::util::HashMapKeySet<::java::lang::String, ::java::lang::String>;
 template class ::java::util::HashMapKeySet<::java::lang::String, ::alinous::db::table::lockmonitor::IThreadLocker>;
 template class ::java::util::HashMapKeySet<::alinous::html::DomNode, ::java::util::ArrayList<::alinous::html::xpath::match::MatchCandidate>>;
+template class ::java::util::HashMapKeySet<::java::lang::String, ::alinous::remote::monitor::RegionNodeInfo>;
 template class ::java::util::HashMapKeySet<::java::lang::String, ::alinous::remote::region::NodeCluster>;
 template class ::java::util::HashMapKeySet<::java::lang::String, ::alinous::remote::region::client::RemoteTableScheme>;
 template class ::java::util::HashMapKeySet<::java::lang::String, ::java::util::TimeZone>;

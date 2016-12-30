@@ -19,7 +19,7 @@ bool TransactionMonitorServer::__init_static_variables(){
 	delete ctx;
 	return true;
 }
- TransactionMonitorServer::TransactionMonitorServer(int port, int maxthread, ThreadContext* ctx) throw()  : IObject(ctx), port(0), lastCommitId(0), lastOid(0), maxthread(0), socketServer(nullptr)
+ TransactionMonitorServer::TransactionMonitorServer(int port, int maxthread, ThreadContext* ctx) throw()  : IObject(ctx), port(0), lastCommitId(0), lastOid(0), maxthread(0), socketServer(nullptr), nodeInfo(nullptr)
 {
 	this->port = port;
 	this->maxthread = maxthread;
@@ -41,9 +41,16 @@ void TransactionMonitorServer::__releaseRegerences(bool prepare, ThreadContext* 
 	ObjectEraser __e_obj1(ctx, __FILEW__, __LINE__, L"TransactionMonitorServer", L"~TransactionMonitorServer");
 	__e_obj1.add(this->socketServer, this);
 	socketServer = nullptr;
+	__e_obj1.add(this->nodeInfo, this);
+	nodeInfo = nullptr;
 	if(!prepare){
 		return;
 	}
+}
+TransactionMonitorServer* TransactionMonitorServer::init(Monitor* monitorConf, ThreadContext* ctx)
+{
+	__GC_MV(this, &(this->nodeInfo), (new(ctx) RegionNodeInfoManager(ctx))->init(monitorConf, ctx), RegionNodeInfoManager);
+	return this;
 }
 void TransactionMonitorServer::start(ISystemLog* logger, ThreadContext* ctx) throw() 
 {
@@ -68,6 +75,10 @@ long long TransactionMonitorServer::getNextOid(ThreadContext* ctx) throw()
 {
 	this->lastOid ++ ;
 	return lastOid;
+}
+RegionNodeInfoManager* TransactionMonitorServer::getNodeInfo(ThreadContext* ctx) throw() 
+{
+	return nodeInfo;
 }
 }}}
 

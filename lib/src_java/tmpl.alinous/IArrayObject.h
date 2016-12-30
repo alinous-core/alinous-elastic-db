@@ -278,6 +278,13 @@ template class alinous::IArrayObject<alinous::ArrayObject<alinous::IArrayObject<
 template class alinous::IArrayObject<alinous::ArrayObject<::alinous::db::ITableSchema>>;
 template class alinous::IArrayObject<alinous::IArrayObject<alinous::ArrayObject<::alinous::db::ITableSchema>>>;
 template class alinous::IArrayObject<alinous::ArrayObject<alinous::ArrayObject<::alinous::db::ITableSchema>>>;
+template class alinous::IArrayObject<::alinous::remote::monitor::NodeInfo>;
+template class alinous::IArrayObject<alinous::IArrayObject<::alinous::remote::monitor::NodeInfo>>;
+template class alinous::IArrayObject<alinous::IArrayObject<alinous::IArrayObject<::alinous::remote::monitor::NodeInfo>>>;
+template class alinous::IArrayObject<alinous::ArrayObject<alinous::IArrayObject<::alinous::remote::monitor::NodeInfo>>>;
+template class alinous::IArrayObject<alinous::ArrayObject<::alinous::remote::monitor::NodeInfo>>;
+template class alinous::IArrayObject<alinous::IArrayObject<alinous::ArrayObject<::alinous::remote::monitor::NodeInfo>>>;
+template class alinous::IArrayObject<alinous::ArrayObject<alinous::ArrayObject<::alinous::remote::monitor::NodeInfo>>>;
 template class alinous::IArrayObject<::alinous::remote::region::NodeReference>;
 template class alinous::IArrayObject<alinous::IArrayObject<::alinous::remote::region::NodeReference>>;
 template class alinous::IArrayObject<alinous::IArrayObject<alinous::IArrayObject<::alinous::remote::region::NodeReference>>>;

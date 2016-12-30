@@ -1,5 +1,14 @@
 #ifndef ALINOUS_REMOTE_MONITOR_TRANSACTIONMONITORSERVER_H_
 #define ALINOUS_REMOTE_MONITOR_TRANSACTIONMONITORSERVER_H_
+namespace alinous {namespace remote {namespace monitor {
+class TransactionMonitorServer;}}}
+
+namespace alinous {namespace system {namespace config {namespace remote {
+class Monitor;}}}}
+
+namespace alinous {namespace remote {namespace monitor {
+class RegionNodeInfoManager;}}}
+
 namespace alinous {namespace system {
 class ISystemLog;}}
 
@@ -8,6 +17,9 @@ class MonitorResponseActionFactory;}}}
 
 namespace alinous {namespace remote {namespace socket {
 class SocketServer;}}}
+
+namespace alinous {namespace db {
+class AlinousDbException;}}
 
 namespace java {namespace lang {
 class IObject;
@@ -22,8 +34,10 @@ namespace alinous {namespace remote {namespace monitor {
 using namespace ::alinous;
 using namespace ::java::lang;
 using ::java::util::Iterator;
+using ::alinous::db::AlinousDbException;
 using ::alinous::remote::socket::SocketServer;
 using ::alinous::system::ISystemLog;
+using ::alinous::system::config::remote::Monitor;
 
 
 
@@ -41,14 +55,17 @@ private:
 	long long lastOid;
 	int maxthread;
 	SocketServer* socketServer;
+	RegionNodeInfoManager* nodeInfo;
 public:
 	static String* THREAD_NAME;
 public:
+	TransactionMonitorServer* init(Monitor* monitorConf, ThreadContext* ctx);
 	void start(ISystemLog* logger, ThreadContext* ctx) throw() ;
 	void dispose(ThreadContext* ctx) throw() ;
 	int getPort(ThreadContext* ctx) throw() ;
 	long long getNextCommitId(ThreadContext* ctx) throw() ;
 	long long getNextOid(ThreadContext* ctx) throw() ;
+	RegionNodeInfoManager* getNodeInfo(ThreadContext* ctx) throw() ;
 public:
 	static bool __init_done;
 	static bool __init_static_variables();
