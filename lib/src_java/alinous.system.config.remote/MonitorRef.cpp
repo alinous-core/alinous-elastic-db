@@ -30,8 +30,29 @@ void MonitorRef::__releaseRegerences(bool prepare, ThreadContext* ctx) throw()
 	ObjectEraser __e_obj1(ctx, __FILEW__, __LINE__, L"MonitorRef", L"~MonitorRef");
 	__e_obj1.add(this->url, this);
 	url = nullptr;
+	__e_obj1.add(this->host, this);
+	host = nullptr;
 	if(!prepare){
 		return;
+	}
+}
+void MonitorRef::parseUrl(ThreadContext* ctx)
+{
+	IArrayObject<String>* segs = this->url->split(ConstStr::getCNST_STR_381(), ctx);
+	if(segs->length != 2)
+	{
+		throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_1233(), ctx));
+	}
+	__GC_MV(this, &(this->host), segs->get(0), String);
+	{
+		try
+		{
+			this->port = Integer::parseInt(segs->get(1)->trim(ctx), ctx);
+		}
+		catch(NumberFormatException* e)
+		{
+			throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_1233(), ctx));
+		}
 	}
 }
 String* MonitorRef::getUrl(ThreadContext* ctx) throw() 
@@ -41,6 +62,22 @@ String* MonitorRef::getUrl(ThreadContext* ctx) throw()
 void MonitorRef::setUrl(String* url, ThreadContext* ctx) throw() 
 {
 	__GC_MV(this, &(this->url), url, String);
+}
+String* MonitorRef::getHost(ThreadContext* ctx) throw() 
+{
+	return host;
+}
+void MonitorRef::setHost(String* host, ThreadContext* ctx) throw() 
+{
+	__GC_MV(this, &(this->host), host, String);
+}
+int MonitorRef::getPort(ThreadContext* ctx) throw() 
+{
+	return port;
+}
+void MonitorRef::setPort(int port, ThreadContext* ctx) throw() 
+{
+	this->port = port;
 }
 MonitorRef* MonitorRef::parseInstance(MatchCandidate* candidate, DomDocument* document, Matcher* matcher, ThreadContext* ctx)
 {
@@ -52,6 +89,7 @@ MonitorRef* MonitorRef::parseInstance(MatchCandidate* candidate, DomDocument* do
 		throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_1232(), ctx));
 	}
 	monitorRef->setUrl(attr->toString(ctx)->trim(ctx), ctx);
+	monitorRef->parseUrl(ctx);
 	return monitorRef;
 }
 }}}}

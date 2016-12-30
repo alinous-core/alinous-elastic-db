@@ -57,7 +57,7 @@ void TableIndexMetadata::setupColumnMetadata(TableMetadata* meta, ThreadContext*
 		TableColumnMetadata* col = meta->getColumnByName(name, ctx);
 		if(col == nullptr)
 		{
-			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1609()->clone(ctx)->append(name, ctx)->append(ConstStr::getCNST_STR_1610(), ctx)->append(this->name, ctx), ctx));
+			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1610()->clone(ctx)->append(name, ctx)->append(ConstStr::getCNST_STR_1611(), ctx)->append(this->name, ctx), ctx));
 		}
 		this->metadata->add(col, ctx);
 	}

@@ -7,7 +7,7 @@ namespace alinous {namespace remote {namespace region {
 
 
 
-String* NodeRegionServer::THREAD_NAME = ConstStr::getCNST_STR_3491();
+String* NodeRegionServer::THREAD_NAME = ConstStr::getCNST_STR_3492();
 bool NodeRegionServer::__init_done = __init_static_variables();
 bool NodeRegionServer::__init_static_variables(){
 	Java2CppSystem::getSelf();
@@ -19,7 +19,7 @@ bool NodeRegionServer::__init_static_variables(){
 	delete ctx;
 	return true;
 }
- NodeRegionServer::NodeRegionServer(int port, int maxthread, ThreadContext* ctx) throw()  : IObject(ctx), port(0), maxthread(0), refs(nullptr), socketServer(nullptr)
+ NodeRegionServer::NodeRegionServer(int port, int maxthread, ThreadContext* ctx) throw()  : IObject(ctx), port(0), maxthread(0), refs(nullptr), socketServer(nullptr), monitorConnectionPool(nullptr)
 {
 	this->port = port;
 	this->maxthread = maxthread;
@@ -45,11 +45,19 @@ void NodeRegionServer::__releaseRegerences(bool prepare, ThreadContext* ctx) thr
 	refs = nullptr;
 	__e_obj1.add(this->socketServer, this);
 	socketServer = nullptr;
+	__e_obj1.add(this->monitorConnectionPool, this);
+	monitorConnectionPool = nullptr;
 	if(!prepare){
 		return;
 	}
 }
-void NodeRegionServer::initNodes(ThreadContext* ctx) throw() 
+void NodeRegionServer::initNodes(RegionsServer* srvconf, ThreadContext* ctx) throw() 
+{
+	MonitorRef* monRef = srvconf->getMonitorRef(ctx);
+	initMonitorRef(monRef, ctx);
+	syncNodes(ctx);
+}
+void NodeRegionServer::syncNodes(ThreadContext* ctx) throw() 
 {
 }
 void NodeRegionServer::start(ISystemLog* logger, ThreadContext* ctx) throw() 
@@ -65,6 +73,12 @@ void NodeRegionServer::dispose(ThreadContext* ctx) throw()
 NodeReferenceManager* NodeRegionServer::getRefs(ThreadContext* ctx) throw() 
 {
 	return refs;
+}
+void NodeRegionServer::initMonitorRef(MonitorRef* monRef, ThreadContext* ctx) throw() 
+{
+	MonitorConnectionInfo* monInfo = (new(ctx) MonitorConnectionInfo(monRef->getHost(ctx), monRef->getPort(ctx), ctx));
+	MonitorClientConnectionFactory* factory = (new(ctx) MonitorClientConnectionFactory(monInfo, ctx));
+	__GC_MV(this, &(this->monitorConnectionPool), (new(ctx) SocketConnectionPool(factory, ctx)), SocketConnectionPool);
 }
 }}}
 

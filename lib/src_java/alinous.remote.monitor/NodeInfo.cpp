@@ -56,7 +56,7 @@ NodeInfo* NodeInfo::parseUrl(String* url, ThreadContext* ctx)
 	IArrayObject<String>* segs = url->split(ConstStr::getCNST_STR_381(), ctx);
 	if(segs->length != 2)
 	{
-		throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3486(), ctx));
+		throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3487(), ctx));
 	}
 	info->setHost(segs->get(0), ctx);
 	{
@@ -67,7 +67,7 @@ NodeInfo* NodeInfo::parseUrl(String* url, ThreadContext* ctx)
 		}
 		catch(NumberFormatException* e)
 		{
-			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3486(), ctx));
+			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3487(), ctx));
 		}
 	}
 	return info;

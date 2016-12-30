@@ -45,7 +45,7 @@ RegionNodeInfoManager* RegionNodeInfoManager::init(Monitor* monitorConf, ThreadC
 		RegionNodeInfo* info = RegionNodeInfo::fromConfig(reg, ctx);
 		if(this->regionsMap->get(info->getName(ctx), ctx) != nullptr)
 		{
-			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3485(), ctx));
+			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3486(), ctx));
 		}
 		this->regionsMap->put(info->getName(ctx), info, ctx);
 	}

@@ -42,7 +42,7 @@ void BTree::__releaseRegerences(bool prepare, ThreadContext* ctx) throw()
 }
 BTree* BTree::init(File* file, BTreeGlobalCache* cacheEngine, DiskCacheManager* diskCache, ThreadContext* ctx)
 {
-	__GC_MV(this, &(this->storage), (new(ctx) FileStorage(diskCache, file, ConstStr::getCNST_STR_1587(), ctx)), FileStorage);
+	__GC_MV(this, &(this->storage), (new(ctx) FileStorage(diskCache, file, ConstStr::getCNST_STR_1588(), ctx)), FileStorage);
 	__GC_MV(this, &(this->loader), (new(ctx) BTreeNodeLoader(this->storage, cacheEngine, ctx)), BTreeNodeLoader);
 	this->root = 0;
 	__GC_MV(this, &(this->fetcher), (new(ctx) FileStorageEntryFetcher(ctx)), FileStorageEntryFetcher);
@@ -230,7 +230,7 @@ void BTree::open(ThreadContext* ctx)
 {
 	if(!this->storage->isCreated(ctx))
 	{
-		throw (new(ctx) BTreeException(ConstStr::getCNST_STR_1588(), ctx));
+		throw (new(ctx) BTreeException(ConstStr::getCNST_STR_1589(), ctx));
 	}
 	this->storage->open(ctx);
 	this->loader->open(ctx);

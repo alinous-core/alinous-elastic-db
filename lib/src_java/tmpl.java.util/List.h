@@ -6,6 +6,7 @@ template class ::java::util::List<::alinous::runtime::engine::debugger::server::
 template class ::java::util::List<::alinous::runtime::engine::debugger::DebugThread>;
 template class ::java::util::List<::alinous::runtime::engine::debugger::server::ServerBreakPoint>;
 template class ::java::util::List<::alinous::system::config::remote::Node>;
+template class ::java::util::List<::alinous::system::config::remote::RegionsServer>;
 template class ::java::util::List<::alinous::remote::db::RemoteTableStorageServer>;
 template class ::java::util::List<::alinous::remote::region::NodeRegionServer>;
 template class ::java::util::List<::alinous::system::config::remote::NodeRef>;

@@ -233,6 +233,16 @@ void AlinousCore::initDistributedServerParts(ThreadContext* ctx)
 			this->storageServers->add(tableNode, ctx);
 		}
 	}
+	List<RegionsServer>* regionsConfList = this->config->getRegions(ctx);
+	int maxLoop = regionsConfList->size(ctx);
+	for(int i = 0; i != maxLoop; ++i)
+	{
+		RegionsServer* srvconf = regionsConfList->get(i, ctx);
+		NodeRegionServer* server = (new(ctx) NodeRegionServer(srvconf->getPort(ctx), srvconf->getMaxCon(ctx), ctx));
+		server->initNodes(srvconf, ctx);
+		server->start(this->logger, ctx);
+		this->regionServers->add(server, ctx);
+	}
 }
 }}
 

@@ -58,7 +58,7 @@ Region* Region::parseInstance(DomNode* dom, DomDocument* document, Matcher* matc
 	IVariableValue* attr = dom->getAttributeValue(ConstStr::getCNST_STR_1061(), ctx);
 	if(attr == nullptr)
 	{
-		throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_1234(), ctx));
+		throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_1235(), ctx));
 	}
 	reg->setName(attr->toString(ctx)->trim(ctx), ctx);
 	MatchCandidatesCollection* result = matcher->match(document, dom, ConstStr::getCNST_STR_1221(), ctx);

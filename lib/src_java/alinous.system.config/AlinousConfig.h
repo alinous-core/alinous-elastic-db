@@ -36,6 +36,9 @@ class MatchCandidate;}}}}
 namespace alinous {namespace system {namespace config {
 class SystemInfo;}}}
 
+namespace alinous {namespace system {namespace config {namespace remote {
+class RegionsServer;}}}}
+
 namespace alinous {namespace system {namespace config {
 class AlinousDbInfo;}}}
 
@@ -72,8 +75,8 @@ class DataSourceInfo;}}}
 namespace alinous {namespace system {namespace config {
 class MailInfo;}}}
 
-namespace alinous {namespace system {namespace config {namespace remote {
-class RegionsServer;}}}}
+namespace java {namespace util {
+template <typename  T> class List;}}
 
 namespace alinous {namespace system {namespace config {namespace remote {
 class Nodes;}}}}
@@ -103,6 +106,7 @@ using ::java::util::Iterator;
 using ::java::io::File;
 using ::java::util::ArrayList;
 using ::java::util::Iterator;
+using ::java::util::List;
 using ::alinous::html::AlinousDomReplacer;
 using ::alinous::html::DomConverter;
 using ::alinous::html::DomDocument;
@@ -138,7 +142,7 @@ private:
 	MailInfo* mail;
 	AlinousDbInfo* alinousDb;
 	WebHandlerInfo* webHandler;
-	RegionsServer* regions;
+	List<RegionsServer>* regions;
 	Nodes* nodes;
 	Monitor* monitor;
 	String* alinousConfigPath;
@@ -154,7 +158,7 @@ public:
 	WebHandlerInfo* getWebHandler(ThreadContext* ctx) throw() ;
 	String* getAlinousConfigPath(ThreadContext* ctx) throw() ;
 	long long getFileTimestamp(ThreadContext* ctx) throw() ;
-	RegionsServer* getRegions(ThreadContext* ctx) throw() ;
+	List<RegionsServer>* getRegions(ThreadContext* ctx) throw() ;
 	Nodes* getNodes(ThreadContext* ctx) throw() ;
 	Monitor* getMonitor(ThreadContext* ctx) throw() ;
 private:

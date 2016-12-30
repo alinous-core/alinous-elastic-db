@@ -18,7 +18,7 @@ bool AlinousConfig::__init_static_variables(){
 	delete ctx;
 	return true;
 }
- AlinousConfig::AlinousConfig(String* home, ThreadContext* ctx) throw()  : IObject(ctx), alinousHome(__GC_INS(this, (new(ctx) StringBuffer(ctx)), StringBuffer)), system(nullptr), database(nullptr), mail(nullptr), alinousDb(nullptr), webHandler(nullptr), regions(nullptr), nodes(nullptr), monitor(nullptr), alinousConfigPath(nullptr), fileTimestamp(0)
+ AlinousConfig::AlinousConfig(String* home, ThreadContext* ctx) throw()  : IObject(ctx), alinousHome(__GC_INS(this, (new(ctx) StringBuffer(ctx)), StringBuffer)), system(nullptr), database(nullptr), mail(nullptr), alinousDb(nullptr), webHandler(nullptr), regions(GCUtils<List<RegionsServer> >::ins(this, (new(ctx) ArrayList<RegionsServer>(ctx)), ctx, __FILEW__, __LINE__, L"")), nodes(nullptr), monitor(nullptr), alinousConfigPath(nullptr), fileTimestamp(0)
 {
 	this->alinousHome->append(home, ctx);
 	if(!home->endsWith(ConstStr::getCNST_STR_984(), ctx))
@@ -146,7 +146,7 @@ long long AlinousConfig::getFileTimestamp(ThreadContext* ctx) throw()
 {
 	return fileTimestamp;
 }
-RegionsServer* AlinousConfig::getRegions(ThreadContext* ctx) throw() 
+List<RegionsServer>* AlinousConfig::getRegions(ThreadContext* ctx) throw() 
 {
 	return regions;
 }
@@ -193,10 +193,12 @@ void AlinousConfig::handleDistributedDbParts(DomDocument* document, Matcher* mat
 	ArrayList<MatchCandidate>* list = nullptr;
 	result = matcher->match(document, document, ConstStr::getCNST_STR_1195(), ctx);
 	list = result->getCandidatesList(ctx);
-	if(!list->isEmpty(ctx))
+	int maxLoop = list->size(ctx);
+	for(int i = 0; i != maxLoop; ++i)
 	{
-		MatchCandidate* candidate = list->get(0, ctx);
-		__GC_MV(this, &(this->regions), RegionsServer::parseInstance(candidate, document, matcher, ctx), RegionsServer);
+		MatchCandidate* candidate = list->get(i, ctx);
+		RegionsServer* regsrv = RegionsServer::parseInstance(candidate, document, matcher, ctx);
+		this->regions->add(regsrv, ctx);
 	}
 	result = matcher->match(document, document, ConstStr::getCNST_STR_1196(), ctx);
 	list = result->getCandidatesList(ctx);

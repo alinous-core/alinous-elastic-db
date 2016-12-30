@@ -229,6 +229,13 @@ template class alinous::IArrayObject<alinous::ArrayObject<alinous::IArrayObject<
 template class alinous::IArrayObject<alinous::ArrayObject<::alinous::system::config::remote::Node>>;
 template class alinous::IArrayObject<alinous::IArrayObject<alinous::ArrayObject<::alinous::system::config::remote::Node>>>;
 template class alinous::IArrayObject<alinous::ArrayObject<alinous::ArrayObject<::alinous::system::config::remote::Node>>>;
+template class alinous::IArrayObject<::alinous::system::config::remote::RegionsServer>;
+template class alinous::IArrayObject<alinous::IArrayObject<::alinous::system::config::remote::RegionsServer>>;
+template class alinous::IArrayObject<alinous::IArrayObject<alinous::IArrayObject<::alinous::system::config::remote::RegionsServer>>>;
+template class alinous::IArrayObject<alinous::ArrayObject<alinous::IArrayObject<::alinous::system::config::remote::RegionsServer>>>;
+template class alinous::IArrayObject<alinous::ArrayObject<::alinous::system::config::remote::RegionsServer>>;
+template class alinous::IArrayObject<alinous::IArrayObject<alinous::ArrayObject<::alinous::system::config::remote::RegionsServer>>>;
+template class alinous::IArrayObject<alinous::ArrayObject<alinous::ArrayObject<::alinous::system::config::remote::RegionsServer>>>;
 template class alinous::IArrayObject<::alinous::remote::db::RemoteTableStorageServer>;
 template class alinous::IArrayObject<alinous::IArrayObject<::alinous::remote::db::RemoteTableStorageServer>>;
 template class alinous::IArrayObject<alinous::IArrayObject<alinous::IArrayObject<::alinous::remote::db::RemoteTableStorageServer>>>;

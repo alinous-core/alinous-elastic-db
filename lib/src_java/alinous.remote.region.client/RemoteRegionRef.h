@@ -105,7 +105,6 @@ private:
 	String* url;
 	String* name;
 	RegionConnectionInfo* info;
-	ICommidIdPublisher* commitIdPublisher;
 	Map<String,RemoteTableScheme>* schemes;
 	long long schemeVersion;
 public:

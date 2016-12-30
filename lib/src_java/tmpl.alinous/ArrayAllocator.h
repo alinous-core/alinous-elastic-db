@@ -31,6 +31,7 @@ template class alinous::ArrayAllocator<::com::google::re2j::Inst>;
 template class alinous::ArrayAllocator<::com::google::re2j::Machine>;
 template class alinous::ArrayAllocator<::alinous::runtime::engine::debugger::server::IServerCommand>;
 template class alinous::ArrayAllocator<::alinous::system::config::remote::Node>;
+template class alinous::ArrayAllocator<::alinous::system::config::remote::RegionsServer>;
 template class alinous::ArrayAllocator<::alinous::remote::db::RemoteTableStorageServer>;
 template class alinous::ArrayAllocator<::alinous::remote::region::NodeRegionServer>;
 template class alinous::ArrayAllocator<::alinous::system::config::remote::Table>;

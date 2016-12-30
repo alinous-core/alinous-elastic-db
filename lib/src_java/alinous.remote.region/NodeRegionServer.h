@@ -3,6 +3,21 @@
 namespace alinous {namespace remote {namespace region {
 class NodeReferenceManager;}}}
 
+namespace alinous {namespace system {namespace config {namespace remote {
+class RegionsServer;}}}}
+
+namespace alinous {namespace system {namespace config {namespace remote {
+class MonitorRef;}}}}
+
+namespace alinous {namespace remote {namespace monitor {namespace client {
+class MonitorConnectionInfo;}}}}
+
+namespace alinous {namespace remote {namespace monitor {namespace client {
+class MonitorClientConnectionFactory;}}}}
+
+namespace alinous {namespace remote {namespace socket {
+class SocketConnectionPool;}}}
+
 namespace alinous {namespace system {
 class ISystemLog;}}
 
@@ -25,8 +40,13 @@ namespace alinous {namespace remote {namespace region {
 using namespace ::alinous;
 using namespace ::java::lang;
 using ::java::util::Iterator;
+using ::alinous::remote::monitor::client::MonitorClientConnectionFactory;
+using ::alinous::remote::monitor::client::MonitorConnectionInfo;
+using ::alinous::remote::socket::SocketConnectionPool;
 using ::alinous::remote::socket::SocketServer;
 using ::alinous::system::ISystemLog;
+using ::alinous::system::config::remote::MonitorRef;
+using ::alinous::system::config::remote::RegionsServer;
 
 
 
@@ -43,13 +63,17 @@ private:
 	int maxthread;
 	NodeReferenceManager* refs;
 	SocketServer* socketServer;
+	SocketConnectionPool* monitorConnectionPool;
 private:
 	static String* THREAD_NAME;
 public:
-	void initNodes(ThreadContext* ctx) throw() ;
+	void initNodes(RegionsServer* srvconf, ThreadContext* ctx) throw() ;
+	void syncNodes(ThreadContext* ctx) throw() ;
 	void start(ISystemLog* logger, ThreadContext* ctx) throw() ;
 	void dispose(ThreadContext* ctx) throw() ;
 	NodeReferenceManager* getRefs(ThreadContext* ctx) throw() ;
+private:
+	void initMonitorRef(MonitorRef* monRef, ThreadContext* ctx) throw() ;
 public:
 	static bool __init_done;
 	static bool __init_static_variables();

@@ -18,17 +18,15 @@ bool RemoteRegionRef::__init_static_variables(){
 	delete ctx;
 	return true;
 }
- RemoteRegionRef::RemoteRegionRef(RegionRef* ref, ICommidIdPublisher* commitIdPublisher, ThreadContext* ctx) throw()  : IObject(ctx), ITableRegion(ctx), pool(nullptr), url(nullptr), name(nullptr), info(nullptr), commitIdPublisher(nullptr), schemes(GCUtils<Map<String,RemoteTableScheme> >::ins(this, (new(ctx) HashMap<String,RemoteTableScheme>(ctx)), ctx, __FILEW__, __LINE__, L"")), schemeVersion(0)
+ RemoteRegionRef::RemoteRegionRef(RegionRef* ref, ICommidIdPublisher* commitIdPublisher, ThreadContext* ctx) throw()  : IObject(ctx), ITableRegion(ctx), pool(nullptr), url(nullptr), name(nullptr), info(nullptr), schemes(GCUtils<Map<String,RemoteTableScheme> >::ins(this, (new(ctx) HashMap<String,RemoteTableScheme>(ctx)), ctx, __FILEW__, __LINE__, L"")), schemeVersion(0)
 {
 	__GC_MV(this, &(this->url), ref->getUrl(ctx), String);
 	__GC_MV(this, &(this->name), ref->getName(ctx), String);
-	__GC_MV(this, &(this->commitIdPublisher), commitIdPublisher, ICommidIdPublisher);
 }
 void RemoteRegionRef::__construct_impl(RegionRef* ref, ICommidIdPublisher* commitIdPublisher, ThreadContext* ctx) throw() 
 {
 	__GC_MV(this, &(this->url), ref->getUrl(ctx), String);
 	__GC_MV(this, &(this->name), ref->getName(ctx), String);
-	__GC_MV(this, &(this->commitIdPublisher), commitIdPublisher, ICommidIdPublisher);
 }
  RemoteRegionRef::~RemoteRegionRef() throw() 
 {
@@ -48,8 +46,6 @@ void RemoteRegionRef::__releaseRegerences(bool prepare, ThreadContext* ctx) thro
 	name = nullptr;
 	__e_obj1.add(this->info, this);
 	info = nullptr;
-	__e_obj1.add(this->commitIdPublisher, this);
-	commitIdPublisher = nullptr;
 	__e_obj1.add(this->schemes, this);
 	schemes = nullptr;
 	if(!prepare){
@@ -94,7 +90,7 @@ void RemoteRegionRef::initRegionServer(ThreadContext* ctx)
 	IArrayObject<String>* segs = this->url->split(ConstStr::getCNST_STR_381(), ctx);
 	if(segs->length != 2)
 	{
-		throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3487(), ctx));
+		throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3488(), ctx));
 	}
 	String* host = segs->get(0);
 	int port = 0;
@@ -105,7 +101,7 @@ void RemoteRegionRef::initRegionServer(ThreadContext* ctx)
 		}
 		catch(NumberFormatException* e)
 		{
-			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3488(), e, ctx));
+			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3489(), e, ctx));
 		}
 	}
 	__GC_MV(this, &(this->info), (new(ctx) RegionConnectionInfo(host, port, ctx)), RegionConnectionInfo);

@@ -61,6 +61,7 @@ template class ::java::util::ArrayList<::alinous::compile::analyse::AlinousType>
 template class ::java::util::ArrayList<::alinous::remote::db::RemoteTableStorageServer>;
 template class ::java::util::ArrayList<::alinous::remote::region::NodeRegionServer>;
 template class ::java::util::ArrayList<::alinous::html::xpath::match::MatchCandidate>;
+template class ::java::util::ArrayList<::alinous::system::config::remote::RegionsServer>;
 template class ::java::util::ArrayList<::alinous::system::config::remote::NodeRef>;
 template class ::java::util::ArrayList<::alinous::system::config::remote::Table>;
 template class ::java::util::ArrayList<::alinous::system::config::remote::RegionRef>;

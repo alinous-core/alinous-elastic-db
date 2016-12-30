@@ -89,15 +89,15 @@ void ScanResultIndex::switchToDisk(AlinousDatabase* database, ThreadContext* ctx
 		}
 		catch(IOException* e)
 		{
-			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_1658(), e, ctx));
+			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_1659(), e, ctx));
 		}
 		catch(InterruptedException* e)
 		{
-			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_1658(), e, ctx));
+			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_1659(), e, ctx));
 		}
 		catch(BTreeException* e)
 		{
-			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_1658(), e, ctx));
+			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_1659(), e, ctx));
 		}
 	}
 }
@@ -155,7 +155,7 @@ String* ScanResultIndex::getOidIndexName(ThreadContext* ctx) throw()
 		{
 			buff->append(ConstStr::getCNST_STR_984(), ctx);
 		}
-		buff->append(ConstStr::getCNST_STR_1659(), ctx)->append(this->indexSerial, ctx)->append(ConstStr::getCNST_STR_1662(), ctx);
+		buff->append(ConstStr::getCNST_STR_1660(), ctx)->append(this->indexSerial, ctx)->append(ConstStr::getCNST_STR_1663(), ctx);
 		__GC_MV(this, &(this->storagePath), buff->toString(ctx), String);
 	}
 	return this->storagePath;

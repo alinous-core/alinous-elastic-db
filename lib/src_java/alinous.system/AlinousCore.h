@@ -63,6 +63,9 @@ class RemoteTableStorageServer;}}}
 namespace alinous {namespace db {
 class AlinousDbException;}}
 
+namespace alinous {namespace system {namespace config {namespace remote {
+class RegionsServer;}}}}
+
 namespace alinous {namespace remote {namespace region {
 class NodeRegionServer;}}}
 
@@ -104,6 +107,7 @@ using ::alinous::system::config::AlinousInitException;
 using ::alinous::system::config::remote::Monitor;
 using ::alinous::system::config::remote::Node;
 using ::alinous::system::config::remote::Nodes;
+using ::alinous::system::config::remote::RegionsServer;
 using ::alinous::system::functions::AlinousFunctionManager;
 
 

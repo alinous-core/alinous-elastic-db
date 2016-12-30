@@ -21,6 +21,9 @@ class IVariableValue;}}}
 namespace alinous {namespace system {namespace config {
 class AlinousInitException;}}}
 
+namespace java {namespace lang {
+class NumberFormatException;}}
+
 namespace alinous {namespace system {namespace config {
 class IAlinousConfigElement;}}}
 
@@ -59,7 +62,7 @@ class MonitorRef final : public IAlinousConfigElement, public virtual IObject {
 public:
 	MonitorRef(const MonitorRef& base) = default;
 public:
-	MonitorRef(ThreadContext* ctx) throw()  : IObject(ctx), IAlinousConfigElement(ctx), url(nullptr)
+	MonitorRef(ThreadContext* ctx) throw()  : IObject(ctx), IAlinousConfigElement(ctx), url(nullptr), host(nullptr), port(0)
 	{
 	}
 	void __construct_impl(ThreadContext* ctx) throw() 
@@ -69,9 +72,16 @@ public:
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 private:
 	String* url;
+	String* host;
+	int port;
 public:
+	void parseUrl(ThreadContext* ctx);
 	String* getUrl(ThreadContext* ctx) throw() ;
 	void setUrl(String* url, ThreadContext* ctx) throw() ;
+	String* getHost(ThreadContext* ctx) throw() ;
+	void setHost(String* host, ThreadContext* ctx) throw() ;
+	int getPort(ThreadContext* ctx) throw() ;
+	void setPort(int port, ThreadContext* ctx) throw() ;
 public:
 	static MonitorRef* parseInstance(MatchCandidate* candidate, DomDocument* document, Matcher* matcher, ThreadContext* ctx);
 public:
