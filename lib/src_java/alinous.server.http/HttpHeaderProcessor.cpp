@@ -66,11 +66,11 @@ void HttpHeaderProcessor::process(ThreadContext* ctx)
 		}
 		parseLine(line, ctx);
 	}
-	if(this->method->equals(ConstStr::getCNST_STR_3450(), ctx))
+	if(this->method->equals(ConstStr::getCNST_STR_3454(), ctx))
 	{
 		parseGetParams(ctx);
 	}
-	String* contentLength = this->requestHeaders->get(ConstStr::getCNST_STR_1794(), ctx);
+	String* contentLength = this->requestHeaders->get(ConstStr::getCNST_STR_1798(), ctx);
 	if(contentLength == nullptr)
 	{
 		return;
@@ -83,11 +83,11 @@ void HttpHeaderProcessor::process(ThreadContext* ctx)
 		}
 		catch(NumberFormatException* e)
 		{
-			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3451(), e, ctx));
+			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3455(), e, ctx));
 		}
 	}
-	String* contentType = this->requestHeaders->get(ConstStr::getCNST_STR_3443(), ctx);
-	if(contentType->startsWith(ConstStr::getCNST_STR_3452(), ctx))
+	String* contentType = this->requestHeaders->get(ConstStr::getCNST_STR_3447(), ctx);
+	if(contentType->startsWith(ConstStr::getCNST_STR_3456(), ctx))
 	{
 		HttpParamHandler::postMimeParams(this->stream, length, contentType, ctx);
 	}
@@ -132,7 +132,7 @@ void HttpHeaderProcessor::parseFirstLine(String* line, ThreadContext* ctx)
 	int pos = line->indexOf((int)L' ', ctx);
 	if(pos < 0)
 	{
-		throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3453(), ctx));
+		throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3457(), ctx));
 	}
 	int beginIndex = 0;
 	__GC_MV(this, &(this->method), line->substring(beginIndex, pos, ctx)->toUpperCase(ctx), String);
@@ -140,14 +140,14 @@ void HttpHeaderProcessor::parseFirstLine(String* line, ThreadContext* ctx)
 	pos = line->indexOf((int)L' ', beginIndex, ctx);
 	if(pos < 0)
 	{
-		throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3454(), ctx));
+		throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3458(), ctx));
 	}
 	__GC_MV(this, &(this->path), line->substring(beginIndex, pos, ctx), String);
 	beginIndex = pos + 1;
 	pos = line->length(ctx);
 	if(pos <= beginIndex)
 	{
-		throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3455(), ctx));
+		throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3459(), ctx));
 	}
 	__GC_MV(this, &(this->protocol), line->substring(beginIndex, ctx), String);
 }
@@ -156,7 +156,7 @@ void HttpHeaderProcessor::parseLine(String* line, ThreadContext* ctx)
 	int splitter = line->indexOf((int)L':', ctx);
 	if(splitter < 0)
 	{
-		throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3456(), ctx));
+		throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3460(), ctx));
 	}
 	String* header = line->substring(0, splitter, ctx);
 	String* value = line->substring(splitter + 1, line->length(ctx), ctx)->trim(ctx);

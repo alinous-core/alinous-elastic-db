@@ -94,7 +94,7 @@ void RemoteRegionRef::initRegionServer(ThreadContext* ctx)
 	IArrayObject<String>* segs = this->url->split(ConstStr::getCNST_STR_381(), ctx);
 	if(segs->length != 2)
 	{
-		throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3481(), ctx));
+		throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3485(), ctx));
 	}
 	String* host = segs->get(0);
 	int port = 0;
@@ -105,7 +105,7 @@ void RemoteRegionRef::initRegionServer(ThreadContext* ctx)
 		}
 		catch(NumberFormatException* e)
 		{
-			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3482(), e, ctx));
+			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3486(), e, ctx));
 		}
 	}
 	__GC_MV(this, &(this->info), (new(ctx) RegionConnectionInfo(host, port, ctx)), RegionConnectionInfo);

@@ -295,13 +295,6 @@ template class alinous::RawArray<alinous::ArrayObject<alinous::IArrayObject<::al
 template class alinous::RawArray<alinous::ArrayObject<::alinous::system::config::remote::Node>>;
 template class alinous::RawArray<alinous::IArrayObject<alinous::ArrayObject<::alinous::system::config::remote::Node>>>;
 template class alinous::RawArray<alinous::ArrayObject<alinous::ArrayObject<::alinous::system::config::remote::Node>>>;
-template class alinous::RawArray<::alinous::system::config::remote::Region>;
-template class alinous::RawArray<alinous::IArrayObject<::alinous::system::config::remote::Region>>;
-template class alinous::RawArray<alinous::IArrayObject<alinous::IArrayObject<::alinous::system::config::remote::Region>>>;
-template class alinous::RawArray<alinous::ArrayObject<alinous::IArrayObject<::alinous::system::config::remote::Region>>>;
-template class alinous::RawArray<alinous::ArrayObject<::alinous::system::config::remote::Region>>;
-template class alinous::RawArray<alinous::IArrayObject<alinous::ArrayObject<::alinous::system::config::remote::Region>>>;
-template class alinous::RawArray<alinous::ArrayObject<alinous::ArrayObject<::alinous::system::config::remote::Region>>>;
 template class alinous::RawArray<::alinous::remote::db::RemoteTableStorageServer>;
 template class alinous::RawArray<alinous::IArrayObject<::alinous::remote::db::RemoteTableStorageServer>>;
 template class alinous::RawArray<alinous::IArrayObject<alinous::IArrayObject<::alinous::remote::db::RemoteTableStorageServer>>>;
@@ -330,6 +323,13 @@ template class alinous::RawArray<alinous::ArrayObject<alinous::IArrayObject<::al
 template class alinous::RawArray<alinous::ArrayObject<::alinous::system::config::remote::RegionRef>>;
 template class alinous::RawArray<alinous::IArrayObject<alinous::ArrayObject<::alinous::system::config::remote::RegionRef>>>;
 template class alinous::RawArray<alinous::ArrayObject<alinous::ArrayObject<::alinous::system::config::remote::RegionRef>>>;
+template class alinous::RawArray<::alinous::system::config::remote::Region>;
+template class alinous::RawArray<alinous::IArrayObject<::alinous::system::config::remote::Region>>;
+template class alinous::RawArray<alinous::IArrayObject<alinous::IArrayObject<::alinous::system::config::remote::Region>>>;
+template class alinous::RawArray<alinous::ArrayObject<alinous::IArrayObject<::alinous::system::config::remote::Region>>>;
+template class alinous::RawArray<alinous::ArrayObject<::alinous::system::config::remote::Region>>;
+template class alinous::RawArray<alinous::IArrayObject<alinous::ArrayObject<::alinous::system::config::remote::Region>>>;
+template class alinous::RawArray<alinous::ArrayObject<alinous::ArrayObject<::alinous::system::config::remote::Region>>>;
 template class alinous::RawArray<::alinous::db::ITableRegion>;
 template class alinous::RawArray<alinous::IArrayObject<::alinous::db::ITableRegion>>;
 template class alinous::RawArray<alinous::IArrayObject<alinous::IArrayObject<::alinous::db::ITableRegion>>>;

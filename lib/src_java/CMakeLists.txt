@@ -258,6 +258,7 @@ set(srcjava
 	"src_java/alinous.system.config.remote/RegionRef.cpp"
 	"src_java/alinous.system.config.remote/MonitorRef.cpp"
 	"src_java/alinous.system.config.remote/Table.cpp"
+	"src_java/alinous.system.config.remote/RegionsServer.cpp"
 	"src_java/alinous.system.config.remote/RegionsRef.cpp"
 	"src_java/alinous.system.config.remote/NodeRef.cpp"
 	"src_java/alinous.runtime.parallel/ConcurrentTaskExexutor.cpp"

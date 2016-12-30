@@ -636,15 +636,16 @@
 #include "alinous.html/AlinousDomReplacer.h"
 #include "alinous.html/DomTokenizer.h"
 #include "alinous.html/DomConverter.h"
+#include "alinous.system.config.remote/NodeRef.h"
+#include "alinous.system.config.remote/Region.h"
+#include "alinous.system.config.remote/Regions.h"
 #include "alinous.system.config.remote/Monitor.h"
 #include "alinous.system.config/ConfigPathUtils.h"
-#include "alinous.system.config.remote/NodeRef.h"
 #include "alinous.system.config.remote/Table.h"
 #include "alinous.system.config.remote/Tables.h"
 #include "alinous.system.config.remote/Node.h"
 #include "alinous.system.config.remote/Nodes.h"
-#include "alinous.system.config.remote/Region.h"
-#include "alinous.system.config.remote/Regions.h"
+#include "alinous.system.config.remote/RegionsServer.h"
 #include "alinous.system.utils/ConfigFileUtiles.h"
 #include "alinous.system.config/DataSourceInfo.h"
 #include "alinous.system.config/MailInfo.h"
@@ -1334,6 +1335,7 @@ inline static void __cleanUpStatics(alinous::ThreadContext* ctx){
 	alinous::system::config::remote::RegionRef::__cleanUp(ctx);
 	alinous::system::config::remote::NodeRef::__cleanUp(ctx);
 	alinous::system::config::remote::Node::__cleanUp(ctx);
+	alinous::system::config::remote::RegionsServer::__cleanUp(ctx);
 	alinous::system::config::remote::Table::__cleanUp(ctx);
 	alinous::system::config::remote::Monitor::__cleanUp(ctx);
 	alinous::system::config::remote::Tables::__cleanUp(ctx);

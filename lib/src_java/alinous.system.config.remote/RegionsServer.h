@@ -1,7 +1,7 @@
-#ifndef ALINOUS_SYSTEM_CONFIG_REMOTE_MONITOR_H_
-#define ALINOUS_SYSTEM_CONFIG_REMOTE_MONITOR_H_
+#ifndef ALINOUS_SYSTEM_CONFIG_REMOTE_REGIONSSERVER_H_
+#define ALINOUS_SYSTEM_CONFIG_REMOTE_REGIONSSERVER_H_
 namespace alinous {namespace system {namespace config {namespace remote {
-class Monitor;}}}}
+class RegionsServer;}}}}
 
 namespace alinous {namespace html {namespace xpath {namespace match {
 class MatchCandidate;}}}}
@@ -28,7 +28,10 @@ namespace alinous {namespace html {namespace xpath {namespace match {
 class MatchCandidatesCollection;}}}}
 
 namespace alinous {namespace system {namespace config {namespace remote {
-class Regions;}}}}
+class MonitorRef;}}}}
+
+namespace alinous {namespace system {namespace config {
+class IAlinousConfigElement;}}}
 
 namespace alinous {namespace html {namespace xpath {namespace match {
 class MatchingException;}}}}
@@ -59,34 +62,35 @@ using ::alinous::html::xpath::match::Matcher;
 using ::alinous::html::xpath::match::MatchingException;
 using ::alinous::parser::xpath::ParseException;
 using ::alinous::system::config::AlinousInitException;
+using ::alinous::system::config::IAlinousConfigElement;
 
 
 
-class Monitor final : public virtual IObject {
+class RegionsServer final : public IAlinousConfigElement, public virtual IObject {
 public:
-	Monitor(const Monitor& base) = default;
+	RegionsServer(const RegionsServer& base) = default;
 public:
-	Monitor(ThreadContext* ctx) throw()  : IObject(ctx), port(nullptr), maxConnection(8), regions(nullptr)
+	RegionsServer(ThreadContext* ctx) throw()  : IObject(ctx), IAlinousConfigElement(ctx), port(0), maxCon(8), monitorRef(nullptr)
 	{
 	}
 	void __construct_impl(ThreadContext* ctx) throw() 
 	{
 	}
-	virtual ~Monitor() throw();
+	virtual ~RegionsServer() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 private:
-	String* port;
-	int maxConnection;
-	Regions* regions;
+	int port;
+	int maxCon;
+	MonitorRef* monitorRef;
 public:
-	String* getPort(ThreadContext* ctx) throw() ;
-	void setPort(String* port, ThreadContext* ctx) throw() ;
-	int getMaxConnection(ThreadContext* ctx) throw() ;
-	void setMaxConnection(int maxConnection, ThreadContext* ctx) throw() ;
-	Regions* getRegions(ThreadContext* ctx) throw() ;
-	void setRegions(Regions* regions, ThreadContext* ctx) throw() ;
+	int getPort(ThreadContext* ctx) throw() ;
+	void setPort(int port, ThreadContext* ctx) throw() ;
+	int getMaxCon(ThreadContext* ctx) throw() ;
+	void setMaxCon(int maxCon, ThreadContext* ctx) throw() ;
+	MonitorRef* getMonitorRef(ThreadContext* ctx) throw() ;
+	void setMonitorRef(MonitorRef* monitorRef, ThreadContext* ctx) throw() ;
 public:
-	static Monitor* parseInstance(MatchCandidate* candidate, DomDocument* document, Matcher* matcher, ThreadContext* ctx);
+	static RegionsServer* parseInstance(MatchCandidate* candidate, DomDocument* document, Matcher* matcher, ThreadContext* ctx);
 public:
 	static bool __init_done;
 	static bool __init_static_variables();
@@ -97,4 +101,4 @@ public:
 
 }}}}
 
-#endif /* end of ALINOUS_SYSTEM_CONFIG_REMOTE_MONITOR_H_ */
+#endif /* end of ALINOUS_SYSTEM_CONFIG_REMOTE_REGIONSSERVER_H_ */

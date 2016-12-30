@@ -52,63 +52,16 @@ void Region::setName(String* name, ThreadContext* ctx) throw()
 {
 	__GC_MV(this, &(this->name), name, String);
 }
-int Region::getPort(ThreadContext* ctx) throw() 
-{
-	return port;
-}
-void Region::setPort(int port, ThreadContext* ctx) throw() 
-{
-	this->port = port;
-}
-int Region::getMaxCon(ThreadContext* ctx) throw() 
-{
-	return maxCon;
-}
-void Region::setMaxCon(int maxCon, ThreadContext* ctx) throw() 
-{
-	this->maxCon = maxCon;
-}
 Region* Region::parseInstance(DomNode* dom, DomDocument* document, Matcher* matcher, ThreadContext* ctx)
 {
 	Region* reg = (new(ctx) Region(ctx));
 	IVariableValue* attr = dom->getAttributeValue(ConstStr::getCNST_STR_1061(), ctx);
 	if(attr == nullptr)
 	{
-		throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_1227(), ctx));
+		throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_1234(), ctx));
 	}
 	reg->setName(attr->toString(ctx)->trim(ctx), ctx);
-	attr = dom->getAttributeValue(ConstStr::getCNST_STR_1203(), ctx);
-	if(attr == nullptr)
-	{
-		throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_1228(), ctx));
-	}
-	{
-		try
-		{
-			int port = Integer::parseInt(attr->toString(ctx)->trim(ctx), ctx);
-			reg->setPort(port, ctx);
-		}
-		catch(Throwable* e)
-		{
-			throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_1229(), ctx));
-		}
-	}
-	attr = dom->getAttributeValue(ConstStr::getCNST_STR_1218(), ctx);
-	if(attr != nullptr)
-	{
-		{
-			try
-			{
-				int n = Integer::parseInt(attr->toString(ctx)->trim(ctx), ctx);
-				reg->setMaxCon(n, ctx);
-			}
-			catch(Throwable* e)
-			{
-				throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_1230(), ctx));
-			}
-		}
-	}
-	MatchCandidatesCollection* result = matcher->match(document, dom, ConstStr::getCNST_STR_1216(), ctx);
+	MatchCandidatesCollection* result = matcher->match(document, dom, ConstStr::getCNST_STR_1221(), ctx);
 	ArrayList<MatchCandidate>* list = result->getCandidatesList(ctx);
 	int maxLoop = list->size(ctx);
 	for(int i = 0; i != maxLoop; ++i)

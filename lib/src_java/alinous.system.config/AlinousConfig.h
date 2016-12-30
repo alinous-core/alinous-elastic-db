@@ -73,7 +73,7 @@ namespace alinous {namespace system {namespace config {
 class MailInfo;}}}
 
 namespace alinous {namespace system {namespace config {namespace remote {
-class Regions;}}}}
+class RegionsServer;}}}}
 
 namespace alinous {namespace system {namespace config {namespace remote {
 class Nodes;}}}}
@@ -116,7 +116,7 @@ using ::alinous::parser::xpath::ParseException;
 using ::alinous::system::config::remote::Monitor;
 using ::alinous::system::config::remote::MonitorRef;
 using ::alinous::system::config::remote::Nodes;
-using ::alinous::system::config::remote::Regions;
+using ::alinous::system::config::remote::RegionsServer;
 using ::alinous::system::config::remote::RegionsRef;
 using ::alinous::system::utils::ConfigFileUtiles;
 using ::alinous::system::utils::FileUtils;
@@ -138,7 +138,7 @@ private:
 	MailInfo* mail;
 	AlinousDbInfo* alinousDb;
 	WebHandlerInfo* webHandler;
-	Regions* regions;
+	RegionsServer* regions;
 	Nodes* nodes;
 	Monitor* monitor;
 	String* alinousConfigPath;
@@ -154,7 +154,7 @@ public:
 	WebHandlerInfo* getWebHandler(ThreadContext* ctx) throw() ;
 	String* getAlinousConfigPath(ThreadContext* ctx) throw() ;
 	long long getFileTimestamp(ThreadContext* ctx) throw() ;
-	Regions* getRegions(ThreadContext* ctx) throw() ;
+	RegionsServer* getRegions(ThreadContext* ctx) throw() ;
 	Nodes* getNodes(ThreadContext* ctx) throw() ;
 	Monitor* getMonitor(ThreadContext* ctx) throw() ;
 private:

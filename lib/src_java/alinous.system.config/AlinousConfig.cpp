@@ -146,7 +146,7 @@ long long AlinousConfig::getFileTimestamp(ThreadContext* ctx) throw()
 {
 	return fileTimestamp;
 }
-Regions* AlinousConfig::getRegions(ThreadContext* ctx) throw() 
+RegionsServer* AlinousConfig::getRegions(ThreadContext* ctx) throw() 
 {
 	return regions;
 }
@@ -196,7 +196,7 @@ void AlinousConfig::handleDistributedDbParts(DomDocument* document, Matcher* mat
 	if(!list->isEmpty(ctx))
 	{
 		MatchCandidate* candidate = list->get(0, ctx);
-		__GC_MV(this, &(this->regions), Regions::parseInstance(candidate, document, matcher, ctx), Regions);
+		__GC_MV(this, &(this->regions), RegionsServer::parseInstance(candidate, document, matcher, ctx), RegionsServer);
 	}
 	result = matcher->match(document, document, ConstStr::getCNST_STR_1196(), ctx);
 	list = result->getCandidatesList(ctx);

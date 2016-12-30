@@ -18,9 +18,6 @@ class IVariableValue;}}}
 namespace alinous {namespace system {namespace config {
 class AlinousInitException;}}}
 
-namespace java {namespace lang {
-class Throwable;}}
-
 namespace alinous {namespace html {namespace xpath {namespace match {
 class MatchCandidatesCollection;}}}}
 
@@ -74,7 +71,7 @@ class Region final : public IAlinousConfigElement, public virtual IObject {
 public:
 	Region(const Region& base) = default;
 public:
-	Region(ThreadContext* ctx) throw()  : IObject(ctx), IAlinousConfigElement(ctx), name(nullptr), port(0), maxCon(8), nodeRefs(GCUtils<List<NodeRef> >::ins(this, (new(ctx) ArrayList<NodeRef>(ctx)), ctx, __FILEW__, __LINE__, L""))
+	Region(ThreadContext* ctx) throw()  : IObject(ctx), IAlinousConfigElement(ctx), name(nullptr), nodeRefs(GCUtils<List<NodeRef> >::ins(this, (new(ctx) ArrayList<NodeRef>(ctx)), ctx, __FILEW__, __LINE__, L""))
 	{
 	}
 	void __construct_impl(ThreadContext* ctx) throw() 
@@ -84,18 +81,12 @@ public:
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 private:
 	String* name;
-	int port;
-	int maxCon;
 	List<NodeRef>* nodeRefs;
 public:
 	void addNodeRef(NodeRef* ref, ThreadContext* ctx) throw() ;
 	List<NodeRef>* getNodeRefs(ThreadContext* ctx) throw() ;
 	String* getName(ThreadContext* ctx) throw() ;
 	void setName(String* name, ThreadContext* ctx) throw() ;
-	int getPort(ThreadContext* ctx) throw() ;
-	void setPort(int port, ThreadContext* ctx) throw() ;
-	int getMaxCon(ThreadContext* ctx) throw() ;
-	void setMaxCon(int maxCon, ThreadContext* ctx) throw() ;
 public:
 	static Region* parseInstance(DomNode* dom, DomDocument* document, Matcher* matcher, ThreadContext* ctx);
 public:

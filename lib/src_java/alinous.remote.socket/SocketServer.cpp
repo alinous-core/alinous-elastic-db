@@ -128,7 +128,7 @@ void SocketServer::run(ThreadContext* ctx) throw()
 					return;
 				}
 				retry ++ ;
-				System::out->println(ConstStr::getCNST_STR_3448(), ctx);
+				System::out->println(ConstStr::getCNST_STR_3452(), ctx);
 				{
 					try
 					{

@@ -49,7 +49,7 @@ MonitorRef* MonitorRef::parseInstance(MatchCandidate* candidate, DomDocument* do
 	IVariableValue* attr = selfDom->getAttributeValue(ConstStr::getCNST_STR_1205(), ctx);
 	if(attr == nullptr)
 	{
-		throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_1225(), ctx));
+		throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_1232(), ctx));
 	}
 	monitorRef->setUrl(attr->toString(ctx)->trim(ctx), ctx);
 	return monitorRef;

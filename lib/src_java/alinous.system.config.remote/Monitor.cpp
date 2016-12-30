@@ -30,6 +30,8 @@ void Monitor::__releaseRegerences(bool prepare, ThreadContext* ctx) throw()
 	ObjectEraser __e_obj1(ctx, __FILEW__, __LINE__, L"Monitor", L"~Monitor");
 	__e_obj1.add(this->port, this);
 	port = nullptr;
+	__e_obj1.add(this->regions, this);
+	regions = nullptr;
 	if(!prepare){
 		return;
 	}
@@ -50,6 +52,14 @@ void Monitor::setMaxConnection(int maxConnection, ThreadContext* ctx) throw()
 {
 	this->maxConnection = maxConnection;
 }
+Regions* Monitor::getRegions(ThreadContext* ctx) throw() 
+{
+	return regions;
+}
+void Monitor::setRegions(Regions* regions, ThreadContext* ctx) throw() 
+{
+	__GC_MV(this, &(this->regions), regions, Regions);
+}
 Monitor* Monitor::parseInstance(MatchCandidate* candidate, DomDocument* document, Matcher* matcher, ThreadContext* ctx)
 {
 	Monitor* ref = (new(ctx) Monitor(ctx));
@@ -57,10 +67,10 @@ Monitor* Monitor::parseInstance(MatchCandidate* candidate, DomDocument* document
 	IVariableValue* attr = selfDom->getAttributeValue(ConstStr::getCNST_STR_1203(), ctx);
 	if(attr == nullptr)
 	{
-		throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_1217(), ctx));
+		throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_1222(), ctx));
 	}
 	ref->setPort(attr->toString(ctx)->trim(ctx), ctx);
-	attr = selfDom->getAttributeValue(ConstStr::getCNST_STR_1218(), ctx);
+	attr = selfDom->getAttributeValue(ConstStr::getCNST_STR_1214(), ctx);
 	if(attr != nullptr)
 	{
 		String* str = attr->toString(ctx)->trim(ctx);
@@ -72,10 +82,26 @@ Monitor* Monitor::parseInstance(MatchCandidate* candidate, DomDocument* document
 			}
 			catch(Throwable* e)
 			{
-				throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_1219(), ctx));
+				throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_1223(), ctx));
 			}
 		}
 	}
+	MatchCandidatesCollection* result = matcher->match(document, selfDom, ConstStr::getCNST_STR_1224(), ctx);
+	ArrayList<MatchCandidate>* list = result->getCandidatesList(ctx);
+	if(list->isEmpty(ctx))
+	{
+		throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_1225(), ctx));
+	}
+		else 
+	{
+		if(list->size(ctx) != 1)
+		{
+			throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_1226(), ctx));
+		}
+	}
+	MatchCandidate* regionsCandidate = list->get(0, ctx);
+	Regions* regions = Regions::parseInstance(regionsCandidate, document, matcher, ctx);
+	ref->setRegions(regions, ctx);
 	return ref;
 }
 }}}}

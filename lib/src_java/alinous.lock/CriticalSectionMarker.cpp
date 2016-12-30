@@ -48,7 +48,7 @@ void CriticalSectionMarker::enter(ThreadContext* ctx)
 		SynchronizedBlockObj __synchronized_2(this->lock, ctx);
 		if(this->critical == true)
 		{
-			throw (new(ctx) CriticalSectionMarkerException(ConstStr::getCNST_STR_1663(), ctx));
+			throw (new(ctx) CriticalSectionMarkerException(ConstStr::getCNST_STR_1667(), ctx));
 		}
 		this->critical = true;
 	}
@@ -59,7 +59,7 @@ void CriticalSectionMarker::exit(ThreadContext* ctx)
 		SynchronizedBlockObj __synchronized_2(this->lock, ctx);
 		if(this->critical == false)
 		{
-			throw (new(ctx) CriticalSectionMarkerException(ConstStr::getCNST_STR_1664(), ctx));
+			throw (new(ctx) CriticalSectionMarkerException(ConstStr::getCNST_STR_1668(), ctx));
 		}
 		this->critical = false;
 	}
@@ -70,7 +70,7 @@ void CriticalSectionMarker::checkCritical(ThreadContext* ctx)
 		SynchronizedBlockObj __synchronized_2(this->lock, ctx);
 		if(this->critical == true)
 		{
-			throw (new(ctx) CriticalSectionMarkerException(ConstStr::getCNST_STR_1665(), ctx));
+			throw (new(ctx) CriticalSectionMarkerException(ConstStr::getCNST_STR_1669(), ctx));
 		}
 	}
 }
