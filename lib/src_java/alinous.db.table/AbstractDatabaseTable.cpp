@@ -92,7 +92,7 @@ void AbstractDatabaseTable::open(AlinousCore* core, BTreeGlobalCache* cache, Thr
 {
 	getDataStorageName(ctx);
 	getOidIndexName(ctx);
-	__GC_MV(this, &(this->dataStorage), (new(ctx) FileStorage(core->diskCache, (new(ctx) File(dataStoragePath, ctx)), ConstStr::getCNST_STR_1588(), ctx)), FileStorage);
+	__GC_MV(this, &(this->dataStorage), (new(ctx) FileStorage(core->diskCache, (new(ctx) File(dataStoragePath, ctx)), ConstStr::getCNST_STR_1589(), ctx)), FileStorage);
 	{
 		try
 		{
@@ -100,7 +100,7 @@ void AbstractDatabaseTable::open(AlinousCore* core, BTreeGlobalCache* cache, Thr
 		}
 		catch(Throwable* e)
 		{
-			throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1605(), e, ctx));
+			throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1606(), e, ctx));
 		}
 	}
 	__GC_MV(this, &(this->updateHistoryCache), (new(ctx) DatatableUpdateCache(this, ctx)), DatatableUpdateCache);
@@ -162,15 +162,15 @@ void AbstractDatabaseTable::open(bool loadscheme, AlinousCore* core, BTreeGlobal
 		}
 		catch(IOException* e)
 		{
-			throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1612(), e, ctx));
+			throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1613(), e, ctx));
 		}
 		catch(BTreeException* e)
 		{
-			throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1612(), e, ctx));
+			throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1613(), e, ctx));
 		}
 		catch(InterruptedException* e)
 		{
-			throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1612(), e, ctx));
+			throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1613(), e, ctx));
 		}
 	}
 }
@@ -322,7 +322,7 @@ String* AbstractDatabaseTable::getDataStorageName(ThreadContext* ctx) throw()
 		{
 			buff->append(ConstStr::getCNST_STR_984(), ctx);
 		}
-		buff->append(this->name, ctx)->append(ConstStr::getCNST_STR_1613(), ctx);
+		buff->append(this->name, ctx)->append(ConstStr::getCNST_STR_1614(), ctx);
 		__GC_MV(this, &(this->dataStoragePath), buff->toString(ctx), String);
 	}
 	return this->dataStoragePath;
@@ -360,7 +360,7 @@ void AbstractDatabaseTable::loadScheme(ThreadContext* ctx)
 		}
 		catch(InterruptedException* e)
 		{
-			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1614(), e, ctx));
+			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1615(), e, ctx));
 		}
 	}
 	FileStorageEntry* entry = reader->readFirstEntry(ctx);
@@ -381,7 +381,7 @@ String* AbstractDatabaseTable::getOidIndexName(ThreadContext* ctx) throw()
 		{
 			buff->append(ConstStr::getCNST_STR_984(), ctx);
 		}
-		buff->append(ConstStr::getCNST_STR_1606(), ctx)->append(this->name, ctx)->append(ConstStr::getCNST_STR_1615(), ctx);
+		buff->append(ConstStr::getCNST_STR_1607(), ctx)->append(this->name, ctx)->append(ConstStr::getCNST_STR_1616(), ctx);
 		__GC_MV(this, &(this->oidIndexPath), buff->toString(ctx), String);
 	}
 	return this->oidIndexPath;

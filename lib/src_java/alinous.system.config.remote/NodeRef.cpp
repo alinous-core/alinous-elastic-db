@@ -45,10 +45,10 @@ void NodeRef::setUrl(String* url, ThreadContext* ctx) throw()
 NodeRef* NodeRef::parseInstance(DomNode* dom, DomDocument* document, Matcher* matcher, ThreadContext* ctx)
 {
 	NodeRef* noderef = (new(ctx) NodeRef(ctx));
-	IVariableValue* attr = dom->getAttributeValue(ConstStr::getCNST_STR_1205(), ctx);
+	IVariableValue* attr = dom->getAttributeValue(ConstStr::getCNST_STR_1206(), ctx);
 	if(attr == nullptr)
 	{
-		throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_1206(), ctx));
+		throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_1207(), ctx));
 	}
 	noderef->setUrl(attr->toString(ctx)->trim(ctx), ctx);
 	return noderef;

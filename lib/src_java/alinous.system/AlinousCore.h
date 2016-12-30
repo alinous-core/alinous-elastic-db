@@ -69,6 +69,12 @@ class RegionsServer;}}}}
 namespace alinous {namespace remote {namespace region {
 class NodeRegionServer;}}}
 
+namespace alinous {namespace net {
+class UnknownHostException;}}
+
+namespace java {namespace io {
+class IOException;}}
+
 namespace java {namespace lang {
 class InterruptedException;}}
 
@@ -88,6 +94,8 @@ namespace alinous {namespace system {
 using namespace ::alinous;
 using namespace ::java::lang;
 using ::java::util::Iterator;
+using ::java::io::IOException;
+using ::java::net::UnknownHostException;
 using ::java::util::ArrayList;
 using ::java::util::Iterator;
 using ::java::util::List;

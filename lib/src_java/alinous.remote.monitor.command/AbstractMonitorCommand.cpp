@@ -12,6 +12,7 @@ constexpr const int AbstractMonitorCommand::TYPE_FINISH;
 constexpr const int AbstractMonitorCommand::TYPE_CONNECT;
 constexpr const int AbstractMonitorCommand::TYPE_GET_MAX_COMMIT_ID;
 constexpr const int AbstractMonitorCommand::TYPE_NEW_MAX_COMMIT_ID;
+constexpr const int AbstractMonitorCommand::TYPE_GET_REGION_INFO;
 constexpr const int AbstractMonitorCommand::TYPE_TERMINATE;
 bool AbstractMonitorCommand::__init_done = __init_static_variables();
 bool AbstractMonitorCommand::__init_static_variables(){

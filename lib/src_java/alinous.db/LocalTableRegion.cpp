@@ -56,7 +56,7 @@ int LocalTableRegion::getRegionType(ThreadContext* ctx) throw()
 }
 String* LocalTableRegion::getRegionName(ThreadContext* ctx) throw() 
 {
-	return ConstStr::getCNST_STR_1601();
+	return ConstStr::getCNST_STR_1602();
 }
 TableSchema* LocalTableRegion::getSchema(String* name, ThreadContext* ctx) throw() 
 {
@@ -71,6 +71,9 @@ void LocalTableRegion::createTable(String* schemaName, TableMetadata* tblMeta, T
 	this->schemas->createTable(schemaName, tblMeta, threadPool, core, cache, ctx);
 }
 void LocalTableRegion::syncSchemes(ThreadContext* ctx) throw() 
+{
+}
+void LocalTableRegion::dispose(ThreadContext* ctx) throw() 
 {
 }
 }}

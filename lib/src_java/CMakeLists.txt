@@ -329,6 +329,7 @@ set(srcjava
 	"src_java/alinous.remote.monitor.command/MinitorCommandReader.cpp"
 	"src_java/alinous.remote.monitor.command/MonitorConnectCommand.cpp"
 	"src_java/alinous.remote.monitor.command/AbstractMonitorCommand.cpp"
+	"src_java/alinous.remote.monitor.command/GetRegionNodeInfoCommand.cpp"
 	"src_java/alinous.remote.monitor.command/TerminateCommand.cpp"
 	"src_java/alinous.remote.db/RemoteTableStorageServer.cpp"
 	"src_java/alinous.remote.db/RemoteStorageResponceActionFactory.cpp"

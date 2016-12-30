@@ -70,7 +70,7 @@ void TableRegionManager::commitCreateTable(String* regionName, String* schemaNam
 {
 	if(regionName == nullptr)
 	{
-		regionName = ConstStr::getCNST_STR_1601();
+		regionName = ConstStr::getCNST_STR_1602();
 	}
 	int maxLoop = this->regions->size(ctx);
 	ITableRegion* region = nullptr;
@@ -89,6 +89,15 @@ void TableRegionManager::commitCreateTable(String* regionName, String* schemaNam
 List<ITableRegion>* TableRegionManager::getRegions(ThreadContext* ctx) throw() 
 {
 	return regions;
+}
+void TableRegionManager::dispose(ThreadContext* ctx) throw() 
+{
+	int maxLoop = this->regions->size(ctx);
+	for(int i = 0; i != maxLoop; ++i)
+	{
+		ITableRegion* reg = this->regions->get(i, ctx);
+		reg->dispose(ctx);
+	}
 }
 }}
 

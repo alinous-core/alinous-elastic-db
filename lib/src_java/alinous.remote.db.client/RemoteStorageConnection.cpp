@@ -55,7 +55,7 @@ void RemoteStorageConnection::connect(ThreadContext* ctx)
 	cmd->sendCommand(this->socket, ctx);
 	if(!cmd->isConnected(ctx))
 	{
-		throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3483(), ctx));
+		throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3484(), ctx));
 	}
 }
 void RemoteStorageConnection::close(ThreadContext* ctx) throw() 

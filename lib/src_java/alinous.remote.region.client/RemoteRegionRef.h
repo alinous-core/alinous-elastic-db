@@ -109,6 +109,7 @@ private:
 	long long schemeVersion;
 public:
 	void init(ThreadContext* ctx);
+	void dispose(ThreadContext* ctx) throw()  final;
 	void syncSchemes(ThreadContext* ctx) final;
 	int getRegionType(ThreadContext* ctx) throw()  final;
 	String* getRegionName(ThreadContext* ctx) throw()  final;

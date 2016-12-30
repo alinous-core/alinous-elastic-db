@@ -80,6 +80,7 @@ public:
 	TableSchemaCollection* getSchema(String* name, ThreadContext* ctx) throw() ;
 	void commitCreateTable(String* regionName, String* schemaName, TableMetadata* tblMeta, AlinousDatabase* database, AlinousCore* core, ThreadContext* ctx);
 	List<ITableRegion>* getRegions(ThreadContext* ctx) throw() ;
+	void dispose(ThreadContext* ctx) throw() ;
 public:
 	static bool __init_done;
 	static bool __init_static_variables();

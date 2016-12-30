@@ -7,7 +7,7 @@ namespace alinous {namespace remote {namespace region {
 
 
 
-String* NodeRegionServer::THREAD_NAME = ConstStr::getCNST_STR_3492();
+String* NodeRegionServer::THREAD_NAME = ConstStr::getCNST_STR_3493();
 bool NodeRegionServer::__init_done = __init_static_variables();
 bool NodeRegionServer::__init_static_variables(){
 	Java2CppSystem::getSelf();
@@ -51,14 +51,30 @@ void NodeRegionServer::__releaseRegerences(bool prepare, ThreadContext* ctx) thr
 		return;
 	}
 }
-void NodeRegionServer::initNodes(RegionsServer* srvconf, ThreadContext* ctx) throw() 
+void NodeRegionServer::initNodes(RegionsServer* srvconf, ThreadContext* ctx)
 {
 	MonitorRef* monRef = srvconf->getMonitorRef(ctx);
 	initMonitorRef(monRef, ctx);
 	syncNodes(ctx);
 }
-void NodeRegionServer::syncNodes(ThreadContext* ctx) throw() 
+void NodeRegionServer::syncNodes(ThreadContext* ctx)
 {
+	GetRegionNodeInfoCommand* cmd = (new(ctx) GetRegionNodeInfoCommand(ctx));
+	ISocketConnection* con = nullptr;
+	{
+		std::function<void(void)> finallyLm2= [&, this]()
+		{
+			this->monitorConnectionPool->returnConnection(con, ctx);
+		};
+		Releaser finalyCaller2(finallyLm2);
+		try
+		{
+			con = this->monitorConnectionPool->getConnection(ctx);
+			AlinousSocket* socket = con->getSocket(ctx);
+			cmd->sendCommand(socket, ctx);
+		}
+		catch(...){throw;}
+	}
 }
 void NodeRegionServer::start(ISystemLog* logger, ThreadContext* ctx) throw() 
 {
@@ -69,6 +85,10 @@ void NodeRegionServer::start(ISystemLog* logger, ThreadContext* ctx) throw()
 void NodeRegionServer::dispose(ThreadContext* ctx) throw() 
 {
 	this->socketServer->dispose(ctx);
+	if(this->monitorConnectionPool != nullptr)
+	{
+		this->monitorConnectionPool->dispose(ctx);
+	}
 }
 NodeReferenceManager* NodeRegionServer::getRefs(ThreadContext* ctx) throw() 
 {

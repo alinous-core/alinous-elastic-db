@@ -239,7 +239,20 @@ void AlinousCore::initDistributedServerParts(ThreadContext* ctx)
 	{
 		RegionsServer* srvconf = regionsConfList->get(i, ctx);
 		NodeRegionServer* server = (new(ctx) NodeRegionServer(srvconf->getPort(ctx), srvconf->getMaxCon(ctx), ctx));
-		server->initNodes(srvconf, ctx);
+		{
+			try
+			{
+				server->initNodes(srvconf, ctx);
+			}
+			catch(UnknownHostException* e)
+			{
+				throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_1180(), e, ctx));
+			}
+			catch(IOException* e)
+			{
+				throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_1180(), e, ctx));
+			}
+		}
 		server->start(this->logger, ctx);
 		this->regionServers->add(server, ctx);
 	}

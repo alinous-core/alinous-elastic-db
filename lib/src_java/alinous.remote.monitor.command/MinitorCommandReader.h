@@ -24,6 +24,9 @@ class GetMaxCommitIdCommand;}}}}}
 namespace alinous {namespace remote {namespace monitor {namespace command {namespace commitId {
 class NewCommitIdCommand;}}}}}
 
+namespace alinous {namespace remote {namespace monitor {namespace command {
+class GetRegionNodeInfoCommand;}}}}
+
 namespace alinous {namespace system {
 class AlinousException;}}
 
