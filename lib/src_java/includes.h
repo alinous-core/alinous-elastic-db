@@ -822,6 +822,7 @@
 #include "alinous.remote.db.client/RemoteStorageClientConnectionFactory.h"
 #include "alinous.remote.db.client/RemoteTableStorageClient.h"
 #include "alinous.remote.region.client/DatabaseTableClient.h"
+#include "alinous.remote.socket/NetworkBinaryBuffer.h"
 
 
 inline static void __cleanUpStatics(alinous::ThreadContext* ctx){
@@ -1724,6 +1725,7 @@ inline static void __cleanUpStatics(alinous::ThreadContext* ctx){
 	alinous::remote::region::command::NodeRegionFinishConnectionCommand::__cleanUp(ctx);
 	alinous::remote::region::command::NodeRegionConnectCommand::__cleanUp(ctx);
 	alinous::remote::region::command::NodeRegionTerminateCommand::__cleanUp(ctx);
+	alinous::remote::socket::NetworkBinaryBuffer::__cleanUp(ctx);
 	alinous::remote::socket::SocketServer::__cleanUp(ctx);
 	alinous::remote::socket::SocketConnectionPool::__cleanUp(ctx);
 	alinous::remote::socket::NetworkBinalyUtils::__cleanUp(ctx);

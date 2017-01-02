@@ -603,6 +603,7 @@ set(srcjava
 	"src_java/alinous.db.variable.util/RecordStore.cpp"
 	"src_java/alinous.remote.socket/ISocketActionFactory.cpp"
 	"src_java/alinous.remote.socket/ISocketConnection.cpp"
+	"src_java/alinous.remote.socket/NetworkBinaryBuffer.cpp"
 	"src_java/alinous.remote.socket/NetworkBinalyUtils.cpp"
 	"src_java/alinous.remote.socket/SocketServer.cpp"
 	"src_java/alinous.remote.socket/SocketConnectionPool.cpp"

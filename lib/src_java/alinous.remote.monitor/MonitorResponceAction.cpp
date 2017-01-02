@@ -90,9 +90,11 @@ void MonitorResponceAction::handleCommand(BufferedInputStream* stream, BufferedO
 		switch(type) {
 		case AbstractMonitorCommand::TYPE_FINISH:
 			loop = false;
+			handleCommand(cmd, outStream, ctx);
 			break ;
 		case AbstractMonitorCommand::TYPE_TERMINATE:
 			loop = false;
+			handleCommand(cmd, outStream, ctx);
 			break ;
 		case AbstractMonitorCommand::TYPE_CONNECT:
 			handleCommand(cmd, outStream, ctx);
@@ -103,6 +105,7 @@ void MonitorResponceAction::handleCommand(BufferedInputStream* stream, BufferedO
 			handleCommand(cmd, outStream, ctx);
 			break ;
 		case AbstractMonitorCommand::TYPE_VOID:
+			handleCommand(cmd, outStream, ctx);
 			break ;
 		default:
 			loop = false;
