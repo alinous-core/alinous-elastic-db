@@ -63,7 +63,7 @@ public:
 	int getType(ThreadContext* ctx) throw() ;
 	void sendCommand(AlinousSocket* socket, ThreadContext* ctx);
 	virtual void executeOnServer(RemoteTableStorageServer* tableStorageServer, BufferedOutputStream* outStream, ThreadContext* ctx) = 0;
-	virtual void readFromStream(InputStream* stream, ThreadContext* ctx) = 0;
+	virtual void readFromStream(InputStream* stream, int remain, ThreadContext* ctx) = 0;
 	virtual void writeByteStream(OutputStream* out, ThreadContext* ctx) = 0;
 public:
 	static bool __init_done;

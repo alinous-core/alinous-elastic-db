@@ -6,8 +6,8 @@ class InputStream;}}
 namespace java {namespace io {
 class OutputStream;}}
 
-namespace java {namespace nio {
-class ByteBuffer;}}
+namespace alinous {namespace remote {namespace socket {
+class NetworkBinaryBuffer;}}}
 
 namespace alinous {namespace remote {namespace db {
 class RemoteTableStorageServer;}}}
@@ -37,9 +37,9 @@ using ::java::io::BufferedOutputStream;
 using ::java::io::IOException;
 using ::java::io::InputStream;
 using ::java::io::OutputStream;
-using ::java::nio::ByteBuffer;
 using ::alinous::remote::db::RemoteTableStorageServer;
 using ::alinous::remote::monitor::command::AbstractMonitorCommand;
+using ::alinous::remote::socket::NetworkBinaryBuffer;
 
 
 
@@ -52,7 +52,7 @@ public:
 	virtual ~TerminateRemoteStorageCommand() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 public:
-	void readFromStream(InputStream* stream, ThreadContext* ctx) final;
+	void readFromStream(InputStream* stream, int remain, ThreadContext* ctx) final;
 	void executeOnServer(RemoteTableStorageServer* tableStorageServer, BufferedOutputStream* outStream, ThreadContext* ctx) final;
 	void writeByteStream(OutputStream* out, ThreadContext* ctx) final;
 public:

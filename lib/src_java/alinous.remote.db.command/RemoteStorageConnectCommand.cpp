@@ -18,15 +18,13 @@ bool RemoteStorageConnectCommand::__init_static_variables(){
 	delete ctx;
 	return true;
 }
- RemoteStorageConnectCommand::RemoteStorageConnectCommand(ThreadContext* ctx) throw()  : IObject(ctx), AbstractRemoteStorageCommand(ctx), connected(0), size(0)
+ RemoteStorageConnectCommand::RemoteStorageConnectCommand(ThreadContext* ctx) throw()  : IObject(ctx), AbstractRemoteStorageCommand(ctx), connected(0)
 {
 	this->type = RemoteStorageConnectCommand::TYPE_CONNECT;
-	this->size = 4;
 }
 void RemoteStorageConnectCommand::__construct_impl(ThreadContext* ctx) throw() 
 {
 	this->type = RemoteStorageConnectCommand::TYPE_CONNECT;
-	this->size = 4;
 }
  RemoteStorageConnectCommand::~RemoteStorageConnectCommand() throw() 
 {
@@ -43,9 +41,12 @@ void RemoteStorageConnectCommand::__releaseRegerences(bool prepare, ThreadContex
 	}
 	AbstractRemoteStorageCommand::__releaseRegerences(true, ctx);
 }
-void RemoteStorageConnectCommand::readFromStream(InputStream* stream, ThreadContext* ctx)
+void RemoteStorageConnectCommand::readFromStream(InputStream* stream, int remain, ThreadContext* ctx)
 {
-	int res = NetworkBinalyUtils::readInt(stream, ctx);
+	IArrayObjectPrimitive<char>* src = ArrayAllocatorPrimitive<char>::allocatep(ctx, remain);
+	stream->read(src, ctx);
+	NetworkBinaryBuffer* buff = (new(ctx) NetworkBinaryBuffer(src, ctx));
+	int res = buff->getInt(ctx);
 	this->connected = (res == 1);
 }
 bool RemoteStorageConnectCommand::isConnected(ThreadContext* ctx) throw() 
@@ -54,20 +55,23 @@ bool RemoteStorageConnectCommand::isConnected(ThreadContext* ctx) throw()
 }
 void RemoteStorageConnectCommand::executeOnServer(RemoteTableStorageServer* tableStorageServer, BufferedOutputStream* outStream, ThreadContext* ctx)
 {
+	writeByteStream(outStream, ctx);
 }
 void RemoteStorageConnectCommand::writeByteStream(OutputStream* out, ThreadContext* ctx)
 {
-	ByteBuffer* buffer = ByteBuffer::allocate(this->size, ctx);
+	NetworkBinaryBuffer* buff = (new(ctx) NetworkBinaryBuffer(32, ctx));
+	buff->putInt(RemoteStorageConnectCommand::TYPE_CONNECT, ctx);
 	if(this->connected)
 	{
-		buffer->putInt(1, ctx);
+		buff->putInt(1, ctx);
 	}
 		else 
 	{
-		buffer->putInt(0, ctx);
+		buff->putInt(0, ctx);
 	}
-	IArrayObjectPrimitive<char>* b = buffer->array(ctx);
-	out->write(b, ctx);
+	IArrayObjectPrimitive<char>* b = buff->toBinary(ctx);
+	int pos = buff->getPutSize(ctx);
+	out->write(b, 0, pos, ctx);
 	out->flush(ctx);
 }
 }}}}

@@ -45,6 +45,7 @@ void NodeRegionVoidCommand::readFromStream(InputStream* stream, int remain, Thre
 }
 void NodeRegionVoidCommand::executeOnServer(NodeRegionServer* nodeRegionServer, BufferedOutputStream* outStream, ThreadContext* ctx)
 {
+	writeByteStream(outStream, ctx);
 }
 void NodeRegionVoidCommand::writeByteStream(OutputStream* out, ThreadContext* ctx)
 {

@@ -45,6 +45,7 @@ void NodeRegionTerminateCommand::readFromStream(InputStream* stream, int remain,
 }
 void NodeRegionTerminateCommand::executeOnServer(NodeRegionServer* nodeRegionServer, BufferedOutputStream* outStream, ThreadContext* ctx)
 {
+	writeByteStream(outStream, ctx);
 }
 void NodeRegionTerminateCommand::writeByteStream(OutputStream* out, ThreadContext* ctx)
 {

@@ -40,18 +40,21 @@ void VoidRemoteStorageCommand::__releaseRegerences(bool prepare, ThreadContext* 
 	}
 	AbstractRemoteStorageCommand::__releaseRegerences(true, ctx);
 }
-void VoidRemoteStorageCommand::readFromStream(InputStream* stream, ThreadContext* ctx)
+void VoidRemoteStorageCommand::readFromStream(InputStream* stream, int remain, ThreadContext* ctx)
 {
 }
 void VoidRemoteStorageCommand::executeOnServer(RemoteTableStorageServer* tableStorageServer, BufferedOutputStream* outStream, ThreadContext* ctx)
 {
+	writeByteStream(outStream, ctx);
 }
 void VoidRemoteStorageCommand::writeByteStream(OutputStream* out, ThreadContext* ctx)
 {
-	ByteBuffer* buffer = ByteBuffer::allocate(256, ctx);
-	buffer->putInt(this->type, ctx);
-	IArrayObjectPrimitive<char>* bytes = buffer->array(ctx);
-	out->write(bytes, ctx);
+	NetworkBinaryBuffer* buff = (new(ctx) NetworkBinaryBuffer(32, ctx));
+	buff->putInt(RemoteStorageConnectCommand::TYPE_VOID, ctx);
+	IArrayObjectPrimitive<char>* b = buff->toBinary(ctx);
+	int pos = buff->getPutSize(ctx);
+	out->write(b, 0, pos, ctx);
+	out->flush(ctx);
 }
 }}}}
 

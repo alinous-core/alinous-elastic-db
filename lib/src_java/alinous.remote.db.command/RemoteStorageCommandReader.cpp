@@ -33,6 +33,7 @@ void RemoteStorageCommandReader::__releaseRegerences(bool prepare, ThreadContext
 }
 AbstractRemoteStorageCommand* RemoteStorageCommandReader::readFromStream(InputStream* stream, ThreadContext* ctx)
 {
+	int size = NetworkBinalyUtils::readInt(stream, ctx) - 4 * 2;
 	int type = NetworkBinalyUtils::readInt(stream, ctx);
 	AbstractRemoteStorageCommand* cmd = nullptr;
 	switch(type) {
@@ -52,7 +53,7 @@ AbstractRemoteStorageCommand* RemoteStorageCommandReader::readFromStream(InputSt
 		throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3487(), ctx));
 		break;
 	}
-	cmd->readFromStream(stream, ctx);
+	cmd->readFromStream(stream, size, ctx);
 	return cmd;
 }
 }}}}
