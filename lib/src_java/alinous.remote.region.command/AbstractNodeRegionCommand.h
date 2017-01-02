@@ -1,5 +1,8 @@
 #ifndef ALINOUS_REMOTE_REGION_COMMAND_ABSTRACTNODEREGIONCOMMAND_H_
 #define ALINOUS_REMOTE_REGION_COMMAND_ABSTRACTNODEREGIONCOMMAND_H_
+namespace alinous {namespace remote {namespace region {namespace command {
+class AbstractNodeRegionCommand;}}}}
+
 namespace alinous {namespace net {
 class AlinousSocket;}}
 
@@ -17,6 +20,9 @@ class BufferedOutputStream;}}
 
 namespace java {namespace io {
 class IOException;}}
+
+namespace alinous {namespace system {
+class AlinousException;}}
 
 namespace java {namespace lang {
 class IObject;
@@ -37,6 +43,7 @@ using ::java::io::InputStream;
 using ::java::io::OutputStream;
 using ::alinous::net::AlinousSocket;
 using ::alinous::remote::region::NodeRegionServer;
+using ::alinous::system::AlinousException;
 
 
 
@@ -61,9 +68,9 @@ public:
 	constexpr static const int TYPE_TERMINATE{404};
 public:
 	int getType(ThreadContext* ctx) throw() ;
-	void sendCommand(AlinousSocket* socket, ThreadContext* ctx);
+	AbstractNodeRegionCommand* sendCommand(AlinousSocket* socket, ThreadContext* ctx);
 	virtual void executeOnServer(NodeRegionServer* nodeRegionServer, BufferedOutputStream* outStream, ThreadContext* ctx) = 0;
-	virtual void readFromStream(InputStream* stream, ThreadContext* ctx) = 0;
+	virtual void readFromStream(InputStream* stream, int remain, ThreadContext* ctx) = 0;
 	virtual void writeByteStream(OutputStream* out, ThreadContext* ctx) = 0;
 public:
 	static bool __init_done;

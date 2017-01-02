@@ -40,13 +40,14 @@ int AbstractNodeRegionCommand::getType(ThreadContext* ctx) throw()
 {
 	return type;
 }
-void AbstractNodeRegionCommand::sendCommand(AlinousSocket* socket, ThreadContext* ctx)
+AbstractNodeRegionCommand* AbstractNodeRegionCommand::sendCommand(AlinousSocket* socket, ThreadContext* ctx)
 {
 	OutputStream* out = socket->getOutputStream(ctx);
 	writeByteStream(out, ctx);
 	out->flush(ctx);
 	InputStream* stream = socket->getInputStream(ctx);
-	readFromStream(stream, ctx);
+	AbstractNodeRegionCommand* cmd = NodeRegionCommandReader::readFromStream(stream, ctx);
+	return cmd;
 }
 }}}}
 

@@ -52,7 +52,11 @@ void RegionConnection::connect(ThreadContext* ctx)
 {
 	__GC_MV(this, &(this->socket), (new(ctx) AlinousSocket(info->getHost(ctx), info->getPort(ctx), ctx))->init(ctx), AlinousSocket);
 	NodeRegionConnectCommand* cmd = (new(ctx) NodeRegionConnectCommand(ctx));
-	cmd->sendCommand(this->socket, ctx);
+	AbstractNodeRegionCommand* retcmd = cmd->sendCommand(this->socket, ctx);
+	if(retcmd->getType(ctx) != AbstractNodeRegionCommand::TYPE_CONNECT)
+	{
+		throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3486(), ctx));
+	}
 	if(!cmd->isConnected(ctx))
 	{
 		throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3486(), ctx));

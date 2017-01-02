@@ -18,15 +18,13 @@ bool NodeRegionConnectCommand::__init_static_variables(){
 	delete ctx;
 	return true;
 }
- NodeRegionConnectCommand::NodeRegionConnectCommand(ThreadContext* ctx) throw()  : IObject(ctx), AbstractNodeRegionCommand(ctx), connected(0), size(0)
+ NodeRegionConnectCommand::NodeRegionConnectCommand(ThreadContext* ctx) throw()  : IObject(ctx), AbstractNodeRegionCommand(ctx), connected(0)
 {
 	this->type = NodeRegionConnectCommand::TYPE_CONNECT;
-	this->size = 4;
 }
 void NodeRegionConnectCommand::__construct_impl(ThreadContext* ctx) throw() 
 {
 	this->type = NodeRegionConnectCommand::TYPE_CONNECT;
-	this->size = 4;
 }
  NodeRegionConnectCommand::~NodeRegionConnectCommand() throw() 
 {
@@ -43,9 +41,12 @@ void NodeRegionConnectCommand::__releaseRegerences(bool prepare, ThreadContext* 
 	}
 	AbstractNodeRegionCommand::__releaseRegerences(true, ctx);
 }
-void NodeRegionConnectCommand::readFromStream(InputStream* stream, ThreadContext* ctx)
+void NodeRegionConnectCommand::readFromStream(InputStream* stream, int remain, ThreadContext* ctx)
 {
-	int res = NetworkBinalyUtils::readInt(stream, ctx);
+	IArrayObjectPrimitive<char>* src = ArrayAllocatorPrimitive<char>::allocatep(ctx, remain);
+	stream->read(src, ctx);
+	NetworkBinaryBuffer* buff = (new(ctx) NetworkBinaryBuffer(src, ctx));
+	int res = buff->getInt(ctx);
 	this->connected = (res == 1);
 }
 void NodeRegionConnectCommand::executeOnServer(NodeRegionServer* nodeRegionServer, BufferedOutputStream* outStream, ThreadContext* ctx)
@@ -59,17 +60,19 @@ bool NodeRegionConnectCommand::isConnected(ThreadContext* ctx) throw()
 }
 void NodeRegionConnectCommand::writeByteStream(OutputStream* out, ThreadContext* ctx)
 {
-	ByteBuffer* buffer = ByteBuffer::allocate(this->size, ctx);
+	NetworkBinaryBuffer* buff = (new(ctx) NetworkBinaryBuffer(32, ctx));
+	buff->putInt(NodeRegionConnectCommand::TYPE_CONNECT, ctx);
 	if(this->connected)
 	{
-		buffer->putInt(1, ctx);
+		buff->putInt(1, ctx);
 	}
 		else 
 	{
-		buffer->putInt(0, ctx);
+		buff->putInt(0, ctx);
 	}
-	IArrayObjectPrimitive<char>* b = buffer->array(ctx);
-	out->write(b, ctx);
+	IArrayObjectPrimitive<char>* b = buff->toBinary(ctx);
+	int pos = buff->getPutSize(ctx);
+	out->write(b, 0, pos, ctx);
 	out->flush(ctx);
 }
 }}}}

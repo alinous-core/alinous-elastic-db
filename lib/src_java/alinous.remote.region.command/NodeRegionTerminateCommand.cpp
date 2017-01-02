@@ -40,7 +40,7 @@ void NodeRegionTerminateCommand::__releaseRegerences(bool prepare, ThreadContext
 	}
 	AbstractNodeRegionCommand::__releaseRegerences(true, ctx);
 }
-void NodeRegionTerminateCommand::readFromStream(InputStream* stream, ThreadContext* ctx)
+void NodeRegionTerminateCommand::readFromStream(InputStream* stream, int remain, ThreadContext* ctx)
 {
 }
 void NodeRegionTerminateCommand::executeOnServer(NodeRegionServer* nodeRegionServer, BufferedOutputStream* outStream, ThreadContext* ctx)
@@ -48,10 +48,12 @@ void NodeRegionTerminateCommand::executeOnServer(NodeRegionServer* nodeRegionSer
 }
 void NodeRegionTerminateCommand::writeByteStream(OutputStream* out, ThreadContext* ctx)
 {
-	ByteBuffer* buffer = ByteBuffer::allocate(256, ctx);
-	buffer->putInt(this->type, ctx);
-	IArrayObjectPrimitive<char>* bytes = buffer->array(ctx);
-	out->write(bytes, ctx);
+	NetworkBinaryBuffer* buff = (new(ctx) NetworkBinaryBuffer(32, ctx));
+	buff->putInt(NodeRegionConnectCommand::TYPE_TERMINATE, ctx);
+	IArrayObjectPrimitive<char>* b = buff->toBinary(ctx);
+	int pos = buff->getPutSize(ctx);
+	out->write(b, 0, pos, ctx);
+	out->flush(ctx);
 }
 }}}}
 
