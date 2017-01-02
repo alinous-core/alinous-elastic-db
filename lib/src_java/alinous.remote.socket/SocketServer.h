@@ -27,6 +27,9 @@ class TerminateCommand;}}}}
 namespace java {namespace io {
 class IOException;}}
 
+namespace alinous {namespace system {
+class AlinousException;}}
+
 namespace alinous {namespace net {
 class AlinousServerSocket;}}
 
@@ -70,6 +73,7 @@ using ::alinous::remote::monitor::command::TerminateCommand;
 using ::alinous::runtime::parallel::AlinousThread;
 using ::alinous::runtime::parallel::IThreadAction;
 using ::alinous::runtime::parallel::ThreadPool;
+using ::alinous::system::AlinousException;
 using ::alinous::system::ISystemLog;
 
 

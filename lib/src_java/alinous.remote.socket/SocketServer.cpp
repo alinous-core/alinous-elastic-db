@@ -95,6 +95,11 @@ void SocketServer::dispose(ThreadContext* ctx) throw()
 			e->printStackTrace(ctx);
 			this->logger->logError(e, ctx);
 		}
+		catch(AlinousException* e)
+		{
+			e->printStackTrace(ctx);
+			this->logger->logError(e, ctx);
+		}
 	}
 	{
 		try
@@ -128,7 +133,7 @@ void SocketServer::run(ThreadContext* ctx) throw()
 					return;
 				}
 				retry ++ ;
-				System::out->println(ConstStr::getCNST_STR_3454(), ctx);
+				System::out->println(ConstStr::getCNST_STR_3456(), ctx);
 				{
 					try
 					{

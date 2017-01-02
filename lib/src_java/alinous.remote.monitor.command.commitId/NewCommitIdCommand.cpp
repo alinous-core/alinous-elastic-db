@@ -44,7 +44,7 @@ void NewCommitIdCommand::__releaseRegerences(bool prepare, ThreadContext* ctx) t
 void NewCommitIdCommand::executeOnServer(TransactionMonitorServer* monitorServer, BufferedOutputStream* outStream, ThreadContext* ctx)
 {
 }
-void NewCommitIdCommand::readFromStream(InputStream* stream, ThreadContext* ctx)
+void NewCommitIdCommand::readFromStream(InputStream* stream, int remain, ThreadContext* ctx)
 {
 }
 long long NewCommitIdCommand::getCommitId(ThreadContext* ctx) throw() 

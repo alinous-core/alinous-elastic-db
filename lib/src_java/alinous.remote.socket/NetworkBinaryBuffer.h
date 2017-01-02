@@ -29,12 +29,16 @@ public:
 public:
 	NetworkBinaryBuffer(int capacity, ThreadContext* ctx) throw() ;
 	void __construct_impl(int capacity, ThreadContext* ctx) throw() ;
+	NetworkBinaryBuffer(IArrayObjectPrimitive<char>* src, ThreadContext* ctx) throw() ;
+	void __construct_impl(IArrayObjectPrimitive<char>* src, ThreadContext* ctx) throw() ;
 	virtual ~NetworkBinaryBuffer() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 private:
 	ByteBuffer* buff;
+	int lastPos;
 public:
 	IArrayObjectPrimitive<char>* toBinary(ThreadContext* ctx) throw() ;
+	int getPutSize(ThreadContext* ctx) throw() ;
 	void putByte(char b, ThreadContext* ctx) throw() ;
 	char getByte(ThreadContext* ctx) throw() ;
 	void putBytes(IArrayObjectPrimitive<char>* src, int start, int count, ThreadContext* ctx) throw() ;

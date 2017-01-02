@@ -39,6 +39,9 @@ class NewCommitIdCommand;}}}}}
 namespace alinous {namespace db {
 class ICommidIdPublisher;}}
 
+namespace alinous {namespace system {
+class AlinousException;}}
+
 namespace java {namespace lang {
 class IObject;
 }}
@@ -60,6 +63,7 @@ using ::alinous::remote::monitor::command::commitId::GetMaxCommitIdCommand;
 using ::alinous::remote::monitor::command::commitId::NewCommitIdCommand;
 using ::alinous::remote::socket::ISocketConnection;
 using ::alinous::remote::socket::SocketConnectionPool;
+using ::alinous::system::AlinousException;
 using ::alinous::system::config::remote::MonitorRef;
 
 

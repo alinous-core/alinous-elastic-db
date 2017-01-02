@@ -54,6 +54,9 @@ class LongValue;}}
 namespace alinous {namespace runtime {namespace dom {
 class VariableException;}}}
 
+namespace alinous {namespace system {
+class AlinousException;}}
+
 namespace alinous {namespace btree {
 class BTreeLeafNode;}}
 
@@ -125,9 +128,6 @@ class ICommidIdPublisher;}}
 
 namespace alinous {namespace btree {
 class IBTreeKey;}}
-
-namespace alinous {namespace system {
-class AlinousException;}}
 
 namespace alinous {namespace system {namespace utils {
 class FileUtils;}}}

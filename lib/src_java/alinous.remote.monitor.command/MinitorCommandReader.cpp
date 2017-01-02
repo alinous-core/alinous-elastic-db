@@ -33,6 +33,7 @@ void MinitorCommandReader::__releaseRegerences(bool prepare, ThreadContext* ctx)
 }
 AbstractMonitorCommand* MinitorCommandReader::readFromStream(InputStream* stream, ThreadContext* ctx)
 {
+	int size = NetworkBinalyUtils::readInt(stream, ctx) - 4 * 2;
 	int type = NetworkBinalyUtils::readInt(stream, ctx);
 	AbstractMonitorCommand* cmd = nullptr;
 	switch(type) {
@@ -58,10 +59,10 @@ AbstractMonitorCommand* MinitorCommandReader::readFromStream(InputStream* stream
 		cmd = (new(ctx) GetRegionNodeInfoCommand(ctx));
 		break ;
 	default:
-		throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3492(), ctx));
+		throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3494(), ctx));
 		break;
 	}
-	cmd->readFromStream(stream, ctx);
+	cmd->readFromStream(stream, size, ctx);
 	return cmd;
 }
 }}}}

@@ -18,7 +18,7 @@ bool NetworkBinaryBuffer::__init_static_variables(){
 	delete ctx;
 	return true;
 }
- NetworkBinaryBuffer::NetworkBinaryBuffer(int capacity, ThreadContext* ctx) throw()  : IObject(ctx), buff(nullptr)
+ NetworkBinaryBuffer::NetworkBinaryBuffer(int capacity, ThreadContext* ctx) throw()  : IObject(ctx), buff(nullptr), lastPos(0)
 {
 	__GC_MV(this, &(this->buff), ByteBuffer::allocate(capacity, ctx), ByteBuffer);
 	this->buff->clear(ctx);
@@ -31,6 +31,16 @@ void NetworkBinaryBuffer::__construct_impl(int capacity, ThreadContext* ctx) thr
 	this->buff->clear(ctx);
 	int tmp = 0;
 	this->buff->putInt(tmp, ctx);
+}
+ NetworkBinaryBuffer::NetworkBinaryBuffer(IArrayObjectPrimitive<char>* src, ThreadContext* ctx) throw()  : IObject(ctx), buff(nullptr), lastPos(0)
+{
+	__GC_MV(this, &(this->buff), ByteBuffer::wrap(src, ctx), ByteBuffer);
+	this->buff->clear(ctx);
+}
+void NetworkBinaryBuffer::__construct_impl(IArrayObjectPrimitive<char>* src, ThreadContext* ctx) throw() 
+{
+	__GC_MV(this, &(this->buff), ByteBuffer::wrap(src, ctx), ByteBuffer);
+	this->buff->clear(ctx);
 }
  NetworkBinaryBuffer::~NetworkBinaryBuffer() throw() 
 {
@@ -54,7 +64,12 @@ IArrayObjectPrimitive<char>* NetworkBinaryBuffer::toBinary(ThreadContext* ctx) t
 	this->buff->position(0, ctx);
 	this->buff->putInt(pos, ctx);
 	this->buff->position(0, ctx);
+	this->lastPos = pos;
 	return buff->array(ctx);
+}
+int NetworkBinaryBuffer::getPutSize(ThreadContext* ctx) throw() 
+{
+	return this->lastPos;
 }
 void NetworkBinaryBuffer::putByte(char b, ThreadContext* ctx) throw() 
 {

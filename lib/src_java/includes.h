@@ -296,6 +296,7 @@
 #include "alinous.remote.monitor.command.commitId/NewCommitIdCommand.h"
 #include "alinous.remote.socket/NetworkBinalyUtils.h"
 #include "alinous.remote.monitor.command/FinishConnectionCommand.h"
+#include "alinous.remote.socket/NetworkBinaryBuffer.h"
 #include "alinous.remote.monitor.command/VoidCommand.h"
 #include "alinous.remote.monitor.command/MonitorConnectCommand.h"
 #include "alinous.remote.monitor.command/GetRegionNodeInfoCommand.h"
@@ -822,7 +823,6 @@
 #include "alinous.remote.db.client/RemoteStorageClientConnectionFactory.h"
 #include "alinous.remote.db.client/RemoteTableStorageClient.h"
 #include "alinous.remote.region.client/DatabaseTableClient.h"
-#include "alinous.remote.socket/NetworkBinaryBuffer.h"
 
 
 inline static void __cleanUpStatics(alinous::ThreadContext* ctx){

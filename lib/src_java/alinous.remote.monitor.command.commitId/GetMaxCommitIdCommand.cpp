@@ -47,7 +47,7 @@ void GetMaxCommitIdCommand::executeOnServer(TransactionMonitorServer* monitorSer
 void GetMaxCommitIdCommand::writeByteStream(OutputStream* out, ThreadContext* ctx)
 {
 }
-void GetMaxCommitIdCommand::readFromStream(InputStream* stream, ThreadContext* ctx)
+void GetMaxCommitIdCommand::readFromStream(InputStream* stream, int remain, ThreadContext* ctx)
 {
 }
 long long GetMaxCommitIdCommand::getCommitId(ThreadContext* ctx) throw() 

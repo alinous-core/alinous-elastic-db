@@ -12,6 +12,9 @@ class AlinousSocket;}}
 namespace alinous {namespace remote {namespace monitor {namespace command {
 class MonitorConnectCommand;}}}}
 
+namespace alinous {namespace remote {namespace monitor {namespace command {
+class AbstractMonitorCommand;}}}}
+
 namespace alinous {namespace db {
 class AlinousDbException;}}
 
@@ -23,6 +26,9 @@ class ISocketConnection;}}}
 
 namespace alinous {namespace net {
 class UnknownHostException;}}
+
+namespace alinous {namespace system {
+class AlinousException;}}
 
 namespace java {namespace lang {
 class IObject;
@@ -41,9 +47,11 @@ using ::java::io::IOException;
 using ::java::net::UnknownHostException;
 using ::alinous::db::AlinousDbException;
 using ::alinous::net::AlinousSocket;
+using ::alinous::remote::monitor::command::AbstractMonitorCommand;
 using ::alinous::remote::monitor::command::MonitorConnectCommand;
 using ::alinous::remote::socket::ISocketConnection;
 using ::alinous::remote::socket::SocketConnectionPool;
+using ::alinous::system::AlinousException;
 
 
 

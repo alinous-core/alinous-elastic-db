@@ -3,8 +3,8 @@
 namespace java {namespace io {
 class OutputStream;}}
 
-namespace java {namespace nio {
-class ByteBuffer;}}
+namespace alinous {namespace remote {namespace socket {
+class NetworkBinaryBuffer;}}}
 
 namespace java {namespace io {
 class InputStream;}}
@@ -21,9 +21,6 @@ class AbstractMonitorCommand;}}}}
 namespace java {namespace io {
 class IOException;}}
 
-namespace alinous {namespace remote {namespace socket {
-class NetworkBinalyUtils;}}}
-
 namespace alinous {
 class ThreadContext;
 }
@@ -37,9 +34,8 @@ using ::java::io::BufferedOutputStream;
 using ::java::io::IOException;
 using ::java::io::InputStream;
 using ::java::io::OutputStream;
-using ::java::nio::ByteBuffer;
 using ::alinous::remote::monitor::TransactionMonitorServer;
-using ::alinous::remote::socket::NetworkBinalyUtils;
+using ::alinous::remote::socket::NetworkBinaryBuffer;
 
 
 
@@ -53,9 +49,8 @@ public:
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 private:
 	bool connected;
-	int size;
 public:
-	void readFromStream(InputStream* stream, ThreadContext* ctx) final;
+	void readFromStream(InputStream* stream, int remain, ThreadContext* ctx) final;
 	void executeOnServer(TransactionMonitorServer* monitorServer, BufferedOutputStream* outStream, ThreadContext* ctx) final;
 	bool isConnected(ThreadContext* ctx) throw() ;
 	void writeByteStream(OutputStream* out, ThreadContext* ctx) final;

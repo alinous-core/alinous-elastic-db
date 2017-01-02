@@ -55,7 +55,7 @@ void RegionConnection::connect(ThreadContext* ctx)
 	cmd->sendCommand(this->socket, ctx);
 	if(!cmd->isConnected(ctx))
 	{
-		throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3484(), ctx));
+		throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3486(), ctx));
 	}
 }
 void RegionConnection::close(ThreadContext* ctx) throw() 

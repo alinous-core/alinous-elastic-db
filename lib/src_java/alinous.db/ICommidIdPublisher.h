@@ -1,5 +1,8 @@
 #ifndef ALINOUS_DB_ICOMMIDIDPUBLISHER_H_
 #define ALINOUS_DB_ICOMMIDIDPUBLISHER_H_
+namespace alinous {namespace system {
+class AlinousException;}}
+
 namespace java {namespace lang {
 class IObject;
 }}
@@ -13,6 +16,7 @@ namespace alinous {namespace db {
 using namespace ::alinous;
 using namespace ::java::lang;
 using ::java::util::Iterator;
+using ::alinous::system::AlinousException;
 
 
 

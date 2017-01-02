@@ -18,8 +18,8 @@ class IOException;}}
 namespace alinous {namespace net {
 class UnknownHostException;}}
 
-namespace alinous {namespace db {
-class AlinousDbException;}}
+namespace alinous {namespace system {
+class AlinousException;}}
 
 namespace java {namespace lang {
 class IObject;
@@ -37,8 +37,8 @@ using ::java::util::Iterator;
 using ::java::io::IOException;
 using ::java::net::UnknownHostException;
 using ::java::util::Stack;
-using ::alinous::db::AlinousDbException;
 using ::alinous::lock::LockObject;
+using ::alinous::system::AlinousException;
 
 
 

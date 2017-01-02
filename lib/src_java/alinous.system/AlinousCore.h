@@ -75,6 +75,9 @@ class UnknownHostException;}}
 namespace java {namespace io {
 class IOException;}}
 
+namespace alinous {namespace system {
+class AlinousException;}}
+
 namespace java {namespace lang {
 class InterruptedException;}}
 

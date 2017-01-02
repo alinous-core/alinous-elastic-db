@@ -48,7 +48,7 @@ public:
 	virtual ~TerminateCommand() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 public:
-	void readFromStream(InputStream* stream, ThreadContext* ctx) final;
+	void readFromStream(InputStream* stream, int remain, ThreadContext* ctx) final;
 	void executeOnServer(TransactionMonitorServer* monitorServer, BufferedOutputStream* outStream, ThreadContext* ctx) final;
 	void writeByteStream(OutputStream* out, ThreadContext* ctx) final;
 public:

@@ -40,7 +40,7 @@ void FinishConnectionCommand::__releaseRegerences(bool prepare, ThreadContext* c
 	}
 	AbstractMonitorCommand::__releaseRegerences(true, ctx);
 }
-void FinishConnectionCommand::readFromStream(InputStream* stream, ThreadContext* ctx)
+void FinishConnectionCommand::readFromStream(InputStream* stream, int remain, ThreadContext* ctx)
 {
 }
 void FinishConnectionCommand::executeOnServer(TransactionMonitorServer* monitorServer, BufferedOutputStream* outStream, ThreadContext* ctx)

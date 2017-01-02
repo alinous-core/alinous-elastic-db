@@ -252,6 +252,10 @@ void AlinousCore::initDistributedServerParts(ThreadContext* ctx)
 			{
 				throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_1180(), e, ctx));
 			}
+			catch(AlinousException* e)
+			{
+				throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_1180(), e, ctx));
+			}
 		}
 		server->start(this->logger, ctx);
 		this->regionServers->add(server, ctx);

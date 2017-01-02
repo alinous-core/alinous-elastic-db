@@ -40,7 +40,7 @@ void TerminateCommand::__releaseRegerences(bool prepare, ThreadContext* ctx) thr
 	}
 	AbstractMonitorCommand::__releaseRegerences(true, ctx);
 }
-void TerminateCommand::readFromStream(InputStream* stream, ThreadContext* ctx)
+void TerminateCommand::readFromStream(InputStream* stream, int remain, ThreadContext* ctx)
 {
 }
 void TerminateCommand::executeOnServer(TransactionMonitorServer* monitorServer, BufferedOutputStream* outStream, ThreadContext* ctx)

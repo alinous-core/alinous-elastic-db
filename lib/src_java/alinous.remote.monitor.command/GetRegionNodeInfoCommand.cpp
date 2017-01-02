@@ -43,7 +43,7 @@ void GetRegionNodeInfoCommand::__releaseRegerences(bool prepare, ThreadContext* 
 void GetRegionNodeInfoCommand::executeOnServer(TransactionMonitorServer* monitorServer, BufferedOutputStream* outStream, ThreadContext* ctx)
 {
 }
-void GetRegionNodeInfoCommand::readFromStream(InputStream* stream, ThreadContext* ctx)
+void GetRegionNodeInfoCommand::readFromStream(InputStream* stream, int remain, ThreadContext* ctx)
 {
 }
 void GetRegionNodeInfoCommand::writeByteStream(OutputStream* out, ThreadContext* ctx)
