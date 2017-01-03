@@ -3112,6 +3112,9 @@ public:
 	constexpr static StaticUnicodeString __CNST_STR_288{L"No",2};
 public:
 	static UnicodeStringWrapper* getCNST_STR_288() throw();
+	constexpr static StaticUnicodeString __CNST_STR_3497{L"Socket factory is not activated.",32};
+public:
+	static UnicodeStringWrapper* getCNST_STR_3497() throw();
 	constexpr static StaticUnicodeString __CNST_STR_1027{L"OR",2};
 public:
 	static UnicodeStringWrapper* getCNST_STR_1027() throw();

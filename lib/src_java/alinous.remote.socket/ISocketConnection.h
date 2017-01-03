@@ -49,6 +49,7 @@ public:
 	virtual void close(ThreadContext* ctx) throw()  = 0;
 	virtual void dispose(ThreadContext* ctx) throw()  = 0;
 	virtual AlinousSocket* getSocket(ThreadContext* ctx) throw()  = 0;
+	virtual void shutdown(ThreadContext* ctx) throw()  = 0;
 public:
 	static bool __init_done;
 	static bool __init_static_variables();

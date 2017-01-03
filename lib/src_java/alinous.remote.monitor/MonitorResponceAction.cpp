@@ -94,6 +94,7 @@ void MonitorResponceAction::handleCommand(BufferedInputStream* stream, BufferedO
 			break ;
 		case AbstractMonitorCommand::TYPE_TERMINATE:
 			loop = false;
+			handleCommand(cmd, outStream, ctx);
 			break ;
 		case AbstractMonitorCommand::TYPE_CONNECT:
 		case AbstractMonitorCommand::TYPE_GET_MAX_COMMIT_ID:

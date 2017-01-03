@@ -6,6 +6,9 @@ class ISocketConnectionFactory;}}}
 namespace alinous {namespace remote {namespace socket {
 class ISocketConnection;}}}
 
+namespace alinous {namespace system {
+class AlinousException;}}
+
 namespace java {namespace util {
 template <typename  T> class Stack;}}
 
@@ -17,9 +20,6 @@ class IOException;}}
 
 namespace alinous {namespace net {
 class UnknownHostException;}}
-
-namespace alinous {namespace system {
-class AlinousException;}}
 
 namespace java {namespace lang {
 class IObject;
@@ -54,6 +54,7 @@ private:
 	Stack<ISocketConnection>* connections;
 	LockObject* lockObject;
 	ISocketConnectionFactory* factory;
+	bool active;
 public:
 	ISocketConnection* getConnection(ThreadContext* ctx);
 	void returnConnection(ISocketConnection* con, ThreadContext* ctx) throw() ;

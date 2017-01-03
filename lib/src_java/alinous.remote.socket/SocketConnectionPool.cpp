@@ -18,13 +18,15 @@ bool SocketConnectionPool::__init_static_variables(){
 	delete ctx;
 	return true;
 }
- SocketConnectionPool::SocketConnectionPool(ISocketConnectionFactory* factory, ThreadContext* ctx) throw()  : IObject(ctx), connections(GCUtils<Stack<ISocketConnection> >::ins(this, (new(ctx) Stack<ISocketConnection>(ctx)), ctx, __FILEW__, __LINE__, L"")), lockObject(__GC_INS(this, (new(ctx) LockObject(ctx)), LockObject)), factory(nullptr)
+ SocketConnectionPool::SocketConnectionPool(ISocketConnectionFactory* factory, ThreadContext* ctx) throw()  : IObject(ctx), connections(GCUtils<Stack<ISocketConnection> >::ins(this, (new(ctx) Stack<ISocketConnection>(ctx)), ctx, __FILEW__, __LINE__, L"")), lockObject(__GC_INS(this, (new(ctx) LockObject(ctx)), LockObject)), factory(nullptr), active(0)
 {
 	__GC_MV(this, &(this->factory), factory, ISocketConnectionFactory);
+	this->active = true;
 }
 void SocketConnectionPool::__construct_impl(ISocketConnectionFactory* factory, ThreadContext* ctx) throw() 
 {
 	__GC_MV(this, &(this->factory), factory, ISocketConnectionFactory);
+	this->active = true;
 }
  SocketConnectionPool::~SocketConnectionPool() throw() 
 {
@@ -48,6 +50,10 @@ void SocketConnectionPool::__releaseRegerences(bool prepare, ThreadContext* ctx)
 }
 ISocketConnection* SocketConnectionPool::getConnection(ThreadContext* ctx)
 {
+	if(!active)
+	{
+		throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3497(), ctx));
+	}
 	ISocketConnection* con = nullptr;
 	{
 		SynchronizedBlockObj __synchronized_2(this->lockObject, ctx);
@@ -71,6 +77,16 @@ void SocketConnectionPool::returnConnection(ISocketConnection* con, ThreadContex
 }
 void SocketConnectionPool::dispose(ThreadContext* ctx) throw() 
 {
+	this->active = false;
+	{
+		SynchronizedBlockObj __synchronized_2(this->lockObject, ctx);
+		while(!this->connections->isEmpty(ctx))
+		{
+			ISocketConnection* con = this->connections->pop(ctx);
+			con->shutdown(ctx);
+			con->dispose(ctx);
+		}
+	}
 }
 }}}
 

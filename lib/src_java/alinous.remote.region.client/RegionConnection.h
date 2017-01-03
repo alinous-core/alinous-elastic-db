@@ -18,17 +18,20 @@ class AbstractNodeRegionCommand;}}}}
 namespace alinous {namespace db {
 class AlinousDbException;}}
 
-namespace alinous {namespace remote {namespace socket {
-class ISocketConnection;}}}
-
 namespace java {namespace io {
 class IOException;}}
 
-namespace alinous {namespace net {
-class UnknownHostException;}}
+namespace alinous {namespace remote {namespace region {namespace command {
+class NodeRegionFinishConnectionCommand;}}}}
 
 namespace alinous {namespace system {
 class AlinousException;}}
+
+namespace alinous {namespace remote {namespace socket {
+class ISocketConnection;}}}
+
+namespace alinous {namespace net {
+class UnknownHostException;}}
 
 namespace java {namespace lang {
 class IObject;
@@ -49,6 +52,7 @@ using ::alinous::db::AlinousDbException;
 using ::alinous::net::AlinousSocket;
 using ::alinous::remote::region::command::AbstractNodeRegionCommand;
 using ::alinous::remote::region::command::NodeRegionConnectCommand;
+using ::alinous::remote::region::command::NodeRegionFinishConnectionCommand;
 using ::alinous::remote::socket::ISocketConnection;
 using ::alinous::remote::socket::SocketConnectionPool;
 using ::alinous::system::AlinousException;
@@ -72,6 +76,7 @@ public:
 	void close(ThreadContext* ctx) throw()  final;
 	void dispose(ThreadContext* ctx) throw()  final;
 	AlinousSocket* getSocket(ThreadContext* ctx) throw()  final;
+	void shutdown(ThreadContext* ctx) throw()  final;
 public:
 	static bool __init_done;
 	static bool __init_static_variables();

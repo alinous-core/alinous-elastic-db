@@ -68,10 +68,38 @@ void RegionConnection::close(ThreadContext* ctx) throw()
 }
 void RegionConnection::dispose(ThreadContext* ctx) throw() 
 {
+	{
+		try
+		{
+			this->socket->close(ctx);
+		}
+		catch(IOException* e)
+		{
+			e->printStackTrace(ctx);
+		}
+	}
 }
 AlinousSocket* RegionConnection::getSocket(ThreadContext* ctx) throw() 
 {
 	return socket;
+}
+void RegionConnection::shutdown(ThreadContext* ctx) throw() 
+{
+	NodeRegionFinishConnectionCommand* cmd = (new(ctx) NodeRegionFinishConnectionCommand(ctx));
+	{
+		try
+		{
+			cmd->sendCommand(this->socket, ctx);
+		}
+		catch(IOException* e)
+		{
+			e->printStackTrace(ctx);
+		}
+		catch(AlinousException* e)
+		{
+			e->printStackTrace(ctx);
+		}
+	}
 }
 }}}}
 

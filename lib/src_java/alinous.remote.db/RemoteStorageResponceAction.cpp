@@ -88,9 +88,11 @@ void RemoteStorageResponceAction::handleCommand(BufferedInputStream* stream, Buf
 		switch(type) {
 		case AbstractRemoteStorageCommand::TYPE_FINISH:
 			loop = false;
+			cmd->executeOnServer(this->tableStorageServer, outStream, ctx);
 			break ;
 		case AbstractRemoteStorageCommand::TYPE_TERMINATE:
 			loop = false;
+			cmd->executeOnServer(this->tableStorageServer, outStream, ctx);
 			break ;
 		case AbstractRemoteStorageCommand::TYPE_CONNECT:
 			cmd->executeOnServer(this->tableStorageServer, outStream, ctx);

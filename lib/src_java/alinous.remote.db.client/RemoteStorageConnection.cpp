@@ -79,5 +79,19 @@ AlinousSocket* RemoteStorageConnection::getSocket(ThreadContext* ctx) throw()
 {
 	return socket;
 }
+void RemoteStorageConnection::shutdown(ThreadContext* ctx) throw() 
+{
+	FinishRemoteStorageConnectionCommand* cmd = (new(ctx) FinishRemoteStorageConnectionCommand(ctx));
+	{
+		try
+		{
+			cmd->sendCommand(this->socket, ctx);
+		}
+		catch(IOException* e)
+		{
+			e->printStackTrace(ctx);
+		}
+	}
+}
 }}}}
 

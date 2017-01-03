@@ -21,14 +21,17 @@ class AlinousDbException;}}
 namespace java {namespace io {
 class IOException;}}
 
+namespace alinous {namespace remote {namespace monitor {namespace command {
+class FinishConnectionCommand;}}}}
+
+namespace alinous {namespace system {
+class AlinousException;}}
+
 namespace alinous {namespace remote {namespace socket {
 class ISocketConnection;}}}
 
 namespace alinous {namespace net {
 class UnknownHostException;}}
-
-namespace alinous {namespace system {
-class AlinousException;}}
 
 namespace java {namespace lang {
 class IObject;
@@ -48,6 +51,7 @@ using ::java::net::UnknownHostException;
 using ::alinous::db::AlinousDbException;
 using ::alinous::net::AlinousSocket;
 using ::alinous::remote::monitor::command::AbstractMonitorCommand;
+using ::alinous::remote::monitor::command::FinishConnectionCommand;
 using ::alinous::remote::monitor::command::MonitorConnectCommand;
 using ::alinous::remote::socket::ISocketConnection;
 using ::alinous::remote::socket::SocketConnectionPool;
@@ -72,6 +76,7 @@ public:
 	AlinousSocket* getSocket(ThreadContext* ctx) throw()  final;
 	void close(ThreadContext* ctx) throw()  final;
 	void dispose(ThreadContext* ctx) throw()  final;
+	void shutdown(ThreadContext* ctx) throw()  final;
 public:
 	static bool __init_done;
 	static bool __init_static_variables();

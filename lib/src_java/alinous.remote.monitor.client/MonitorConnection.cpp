@@ -84,5 +84,23 @@ void MonitorConnection::dispose(ThreadContext* ctx) throw()
 		}
 	}
 }
+void MonitorConnection::shutdown(ThreadContext* ctx) throw() 
+{
+	FinishConnectionCommand* cmd = (new(ctx) FinishConnectionCommand(ctx));
+	{
+		try
+		{
+			cmd->sendCommand(this->socket, ctx);
+		}
+		catch(IOException* e)
+		{
+			e->printStackTrace(ctx);
+		}
+		catch(AlinousException* e)
+		{
+			e->printStackTrace(ctx);
+		}
+	}
+}
 }}}}
 

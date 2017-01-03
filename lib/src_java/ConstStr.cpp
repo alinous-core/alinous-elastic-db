@@ -5178,6 +5178,11 @@ UnicodeStringWrapper* ConstStr::getCNST_STR_288() throw() {
 	static UnicodeStringWrapper CNST_STR_288{__CNST_STR_288};
 	return &CNST_STR_288;
 };
+constexpr StaticUnicodeString ConstStr::__CNST_STR_3497;
+UnicodeStringWrapper* ConstStr::getCNST_STR_3497() throw() {
+	static UnicodeStringWrapper CNST_STR_3497{__CNST_STR_3497};
+	return &CNST_STR_3497;
+};
 constexpr StaticUnicodeString ConstStr::__CNST_STR_1027;
 UnicodeStringWrapper* ConstStr::getCNST_STR_1027() throw() {
 	static UnicodeStringWrapper CNST_STR_1027{__CNST_STR_1027};

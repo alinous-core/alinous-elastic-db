@@ -95,7 +95,6 @@ bool RemoteTableStorageServer::exists(ThreadContext* ctx) throw()
 void RemoteTableStorageServer::start(AlinousCore* core, ThreadContext* ctx)
 {
 	__GC_MV(this, &(this->core), core, AlinousCore);
-	__GC_MV(this, &(this->workerThreadsPool), (new(ctx) ThreadPool(16, ConstStr::getCNST_STR_1594(), ctx)), ThreadPool);
 	RemoteStorageResponceActionFactory* factory = (new(ctx) RemoteStorageResponceActionFactory(this, ctx));
 	__GC_MV(this, &(this->socketServer), (new(ctx) SocketServer(this->port, core->getLogger(ctx), factory, ctx)), SocketServer);
 	this->socketServer->start(this->maxthread, RemoteTableStorageServer::THREAD_NAME, ctx);

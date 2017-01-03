@@ -6,8 +6,8 @@ class InputStream;}}
 namespace java {namespace io {
 class OutputStream;}}
 
-namespace java {namespace nio {
-class ByteBuffer;}}
+namespace alinous {namespace remote {namespace socket {
+class NetworkBinaryBuffer;}}}
 
 namespace alinous {namespace remote {namespace monitor {
 class TransactionMonitorServer;}}}
@@ -34,8 +34,8 @@ using ::java::io::BufferedOutputStream;
 using ::java::io::IOException;
 using ::java::io::InputStream;
 using ::java::io::OutputStream;
-using ::java::nio::ByteBuffer;
 using ::alinous::remote::monitor::TransactionMonitorServer;
+using ::alinous::remote::socket::NetworkBinaryBuffer;
 
 
 
