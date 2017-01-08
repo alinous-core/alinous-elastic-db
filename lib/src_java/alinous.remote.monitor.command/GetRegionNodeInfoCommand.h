@@ -15,6 +15,9 @@ class NetworkBinaryBuffer;}}}
 namespace java {namespace io {
 class InputStream;}}
 
+namespace alinous {namespace remote {namespace monitor {namespace command {namespace data {
+class RegionInfoData;}}}}}
+
 namespace alinous {namespace remote {namespace monitor {namespace command {
 class AbstractMonitorCommand;}}}}
 
@@ -35,6 +38,7 @@ using ::java::io::IOException;
 using ::java::io::InputStream;
 using ::java::io::OutputStream;
 using ::alinous::remote::monitor::TransactionMonitorServer;
+using ::alinous::remote::monitor::command::data::RegionInfoData;
 using ::alinous::remote::socket::NetworkBinaryBuffer;
 
 
@@ -47,6 +51,8 @@ public:
 	void __construct_impl(ThreadContext* ctx) throw() ;
 	virtual ~GetRegionNodeInfoCommand() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
+private:
+	RegionInfoData* regionData;
 public:
 	void executeOnServer(TransactionMonitorServer* monitorServer, BufferedOutputStream* outStream, ThreadContext* ctx) final;
 	void readFromStream(InputStream* stream, int remain, ThreadContext* ctx) final;

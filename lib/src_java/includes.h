@@ -242,13 +242,14 @@
 #include "alinous.btree/IBTree.h"
 #include "alinous.btree/BTree.h"
 #include "alinous.btree/IntKey.h"
-#include "alinous.system/ISystemLog.h"
+#include "alinous.remote.socket/NetworkBinaryBuffer.h"
+#include "alinous.remote.socket/ICommandData.h"
 #include "alinous.html/DomDocument.h"
+#include "alinous.html.xpath.match/MatchingException.h"
 #include "alinous.html.xpath/IXpathElement.h"
+#include "alinous.html.xpath/IXpathStatement.h"
 #include "alinous.html.xpath.match/MatchCursor.h"
 #include "alinous.html.xpath.match/MatchCandidate.h"
-#include "alinous.html.xpath.match/MatchingException.h"
-#include "alinous.html.xpath/IXpathStatement.h"
 #include "alinous.html.xpath/NumberValue.h"
 #include "alinous.html.xpath/XpathFunctionArgument.h"
 #include "alinous.html.xpath/IXpathFunction.h"
@@ -285,17 +286,18 @@
 #include "alinous.system.config/IAlinousConfigElement.h"
 #include "alinous.system.config.remote/NodeRef.h"
 #include "alinous.system.config.remote/Region.h"
-#include "alinous.system.config.remote/Regions.h"
-#include "alinous.system.config.remote/Monitor.h"
 #include "alinous.remote.monitor/NodeInfo.h"
 #include "alinous.remote.monitor/RegionNodeInfo.h"
+#include "alinous.remote.monitor.command.data/RegionInfoData.h"
+#include "alinous.system/ISystemLog.h"
+#include "alinous.system.config.remote/Regions.h"
+#include "alinous.system.config.remote/Monitor.h"
 #include "alinous.remote.monitor/RegionNodeInfoManager.h"
 #include "alinous.remote.socket/ISocketActionFactory.h"
 #include "alinous.remote.monitor.command/AbstractMonitorCommand.h"
 #include "alinous.remote.monitor.command.commitId/GetMaxCommitIdCommand.h"
 #include "alinous.remote.monitor.command.commitId/NewCommitIdCommand.h"
 #include "alinous.remote.socket/NetworkBinalyUtils.h"
-#include "alinous.remote.socket/NetworkBinaryBuffer.h"
 #include "alinous.remote.monitor.command/FinishConnectionCommand.h"
 #include "alinous.remote.monitor.command/VoidCommand.h"
 #include "alinous.remote.monitor.command/MonitorConnectCommand.h"
@@ -1707,6 +1709,7 @@ inline static void __cleanUpStatics(alinous::ThreadContext* ctx){
 	alinous::remote::monitor::command::VoidCommand::__cleanUp(ctx);
 	alinous::remote::monitor::command::commitId::GetMaxCommitIdCommand::__cleanUp(ctx);
 	alinous::remote::monitor::command::commitId::NewCommitIdCommand::__cleanUp(ctx);
+	alinous::remote::monitor::command::data::RegionInfoData::__cleanUp(ctx);
 	alinous::remote::region::NodeRegionServer::__cleanUp(ctx);
 	alinous::remote::region::NodeReference::__cleanUp(ctx);
 	alinous::remote::region::NodeRegionResponceAction::__cleanUp(ctx);
@@ -1730,6 +1733,7 @@ inline static void __cleanUpStatics(alinous::ThreadContext* ctx){
 	alinous::remote::socket::SocketConnectionPool::__cleanUp(ctx);
 	alinous::remote::socket::NetworkBinalyUtils::__cleanUp(ctx);
 	alinous::remote::socket::ISocketConnection::__cleanUp(ctx);
+	alinous::remote::socket::ICommandData::__cleanUp(ctx);
 	alinous::remote::socket::ISocketActionFactory::__cleanUp(ctx);
 	alinous::remote::socket::ISocketConnectionFactory::__cleanUp(ctx);
 	java::io::File::__cleanUp(ctx);

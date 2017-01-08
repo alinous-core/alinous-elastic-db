@@ -30,8 +30,23 @@ void RegionNodeInfoManager::__releaseRegerences(bool prepare, ThreadContext* ctx
 	ObjectEraser __e_obj1(ctx, __FILEW__, __LINE__, L"RegionNodeInfoManager", L"~RegionNodeInfoManager");
 	__e_obj1.add(this->regionsMap, this);
 	regionsMap = nullptr;
+	__e_obj1.add(this->lock, this);
+	lock = nullptr;
 	if(!prepare){
 		return;
+	}
+}
+void RegionNodeInfoManager::getRegionInfoData(RegionInfoData* data, ThreadContext* ctx) throw() 
+{
+	{
+		SynchronizedBlockObj __synchronized_2(this->lock, ctx);
+		Iterator<String>* it = this->regionsMap->keySet(ctx)->iterator(ctx);
+		while(it->hasNext(ctx))
+		{
+			String* key = it->next(ctx);
+			RegionNodeInfo* info = this->regionsMap->get(key, ctx);
+			data->putNodeInfo(key, info, ctx);
+		}
 	}
 }
 RegionNodeInfoManager* RegionNodeInfoManager::init(Monitor* monitorConf, ThreadContext* ctx)

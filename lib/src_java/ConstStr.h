@@ -2458,6 +2458,9 @@ public:
 	constexpr static StaticUnicodeString __CNST_STR_334{L"[:ascii:]",9};
 public:
 	static UnicodeStringWrapper* getCNST_STR_334() throw();
+	constexpr static StaticUnicodeString __CNST_STR_3495{L"Get Region info command failed",30};
+public:
+	static UnicodeStringWrapper* getCNST_STR_3495() throw();
 	constexpr static StaticUnicodeString __CNST_STR_987{L"<=",2};
 public:
 	static UnicodeStringWrapper* getCNST_STR_987() throw();
@@ -3112,9 +3115,9 @@ public:
 	constexpr static StaticUnicodeString __CNST_STR_288{L"No",2};
 public:
 	static UnicodeStringWrapper* getCNST_STR_288() throw();
-	constexpr static StaticUnicodeString __CNST_STR_3497{L"Socket factory is not activated.",32};
+	constexpr static StaticUnicodeString __CNST_STR_3498{L"Socket factory is not activated.",32};
 public:
-	static UnicodeStringWrapper* getCNST_STR_3497() throw();
+	static UnicodeStringWrapper* getCNST_STR_3498() throw();
 	constexpr static StaticUnicodeString __CNST_STR_1027{L"OR",2};
 public:
 	static UnicodeStringWrapper* getCNST_STR_1027() throw();
@@ -4888,9 +4891,9 @@ public:
 	constexpr static StaticUnicodeString __CNST_STR_826{L"Asia/Thimphu",12};
 public:
 	static UnicodeStringWrapper* getCNST_STR_826() throw();
-	constexpr static StaticUnicodeString __CNST_STR_3496{L"Wrong Command Type of Node Region Command.",42};
+	constexpr static StaticUnicodeString __CNST_STR_3497{L"Wrong Command Type of Node Region Command.",42};
 public:
-	static UnicodeStringWrapper* getCNST_STR_3496() throw();
+	static UnicodeStringWrapper* getCNST_STR_3497() throw();
 	constexpr static StaticUnicodeString __CNST_STR_53{L"Zero length BigInteger",22};
 public:
 	static UnicodeStringWrapper* getCNST_STR_53() throw();
@@ -6634,9 +6637,9 @@ public:
 	constexpr static StaticUnicodeString __CNST_STR_1063{L"CLASS_VARIABLE",14};
 public:
 	static UnicodeStringWrapper* getCNST_STR_1063() throw();
-	constexpr static StaticUnicodeString __CNST_STR_3495{L"NodeRegionServer",16};
+	constexpr static StaticUnicodeString __CNST_STR_3496{L"NodeRegionServer",16};
 public:
-	static UnicodeStringWrapper* getCNST_STR_3495() throw();
+	static UnicodeStringWrapper* getCNST_STR_3496() throw();
 	constexpr static StaticUnicodeString __CNST_STR_3478{L"Html format is wrong",20};
 public:
 	static UnicodeStringWrapper* getCNST_STR_3478() throw();

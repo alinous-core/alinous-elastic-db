@@ -36,6 +36,19 @@ void RegionNodeInfo::__releaseRegerences(bool prepare, ThreadContext* ctx) throw
 		return;
 	}
 }
+RegionNodeInfo* RegionNodeInfo::copy(ThreadContext* ctx) throw() 
+{
+	RegionNodeInfo* info = (new(ctx) RegionNodeInfo(ctx));
+	info->setName(this->name, ctx);
+	int maxLoop = this->nodes->size(ctx);
+	for(int i = 0; i != maxLoop; ++i)
+	{
+		NodeInfo* node = this->nodes->get(i, ctx);
+		NodeInfo* cnode = node->copy(ctx);
+		info->addNode(cnode, ctx);
+	}
+	return info;
+}
 void RegionNodeInfo::addNode(NodeInfo* node, ThreadContext* ctx) throw() 
 {
 	this->nodes->add(node, ctx);
@@ -51,6 +64,28 @@ String* RegionNodeInfo::getName(ThreadContext* ctx) throw()
 void RegionNodeInfo::setName(String* name, ThreadContext* ctx) throw() 
 {
 	__GC_MV(this, &(this->name), name, String);
+}
+void RegionNodeInfo::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+{
+	__GC_MV(this, &(this->name), buff->getString(ctx), String);
+	int maxLoop = buff->getInt(ctx);
+	for(int i = 0; i != maxLoop; ++i)
+	{
+		NodeInfo* info = (new(ctx) NodeInfo(ctx));
+		info->readData(buff, ctx);
+		this->nodes->add(info, ctx);
+	}
+}
+void RegionNodeInfo::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+{
+	buff->putString(this->name, ctx);
+	int maxLoop = this->nodes->size(ctx);
+	buff->putInt(maxLoop, ctx);
+	for(int i = 0; i != maxLoop; ++i)
+	{
+		NodeInfo* info = this->nodes->get(i, ctx);
+		info->writeData(buff, ctx);
+	}
 }
 RegionNodeInfo* RegionNodeInfo::fromConfig(Region* reg, ThreadContext* ctx)
 {

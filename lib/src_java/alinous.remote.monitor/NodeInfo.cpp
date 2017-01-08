@@ -50,6 +50,23 @@ void NodeInfo::setPort(int port, ThreadContext* ctx) throw()
 {
 	this->port = port;
 }
+NodeInfo* NodeInfo::copy(ThreadContext* ctx) throw() 
+{
+	NodeInfo* info = (new(ctx) NodeInfo(ctx));
+	info->setHost(this->host, ctx);
+	info->setPort(this->port, ctx);
+	return info;
+}
+void NodeInfo::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+{
+	__GC_MV(this, &(this->host), buff->getString(ctx), String);
+	this->port = buff->getInt(ctx);
+}
+void NodeInfo::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+{
+	buff->putString(this->host, ctx);
+	buff->putInt(this->port, ctx);
+}
 NodeInfo* NodeInfo::parseUrl(String* url, ThreadContext* ctx)
 {
 	NodeInfo* info = (new(ctx) NodeInfo(ctx));

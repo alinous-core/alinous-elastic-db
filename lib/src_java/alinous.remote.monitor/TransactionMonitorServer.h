@@ -1,5 +1,8 @@
 #ifndef ALINOUS_REMOTE_MONITOR_TRANSACTIONMONITORSERVER_H_
 #define ALINOUS_REMOTE_MONITOR_TRANSACTIONMONITORSERVER_H_
+namespace alinous {namespace remote {namespace monitor {namespace command {namespace data {
+class RegionInfoData;}}}}}
+
 namespace alinous {namespace remote {namespace monitor {
 class TransactionMonitorServer;}}}
 
@@ -35,6 +38,7 @@ using namespace ::alinous;
 using namespace ::java::lang;
 using ::java::util::Iterator;
 using ::alinous::db::AlinousDbException;
+using ::alinous::remote::monitor::command::data::RegionInfoData;
 using ::alinous::remote::socket::SocketServer;
 using ::alinous::system::ISystemLog;
 using ::alinous::system::config::remote::Monitor;
@@ -59,6 +63,7 @@ private:
 public:
 	static String* THREAD_NAME;
 public:
+	void getRegionInfo(RegionInfoData* data, ThreadContext* ctx) throw() ;
 	TransactionMonitorServer* init(Monitor* monitorConf, ThreadContext* ctx);
 	void start(ISystemLog* logger, ThreadContext* ctx) throw() ;
 	void dispose(ThreadContext* ctx) throw() ;

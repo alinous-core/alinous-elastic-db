@@ -47,6 +47,10 @@ void TransactionMonitorServer::__releaseRegerences(bool prepare, ThreadContext* 
 		return;
 	}
 }
+void TransactionMonitorServer::getRegionInfo(RegionInfoData* data, ThreadContext* ctx) throw() 
+{
+	this->nodeInfo->getRegionInfoData(data, ctx);
+}
 TransactionMonitorServer* TransactionMonitorServer::init(Monitor* monitorConf, ThreadContext* ctx)
 {
 	__GC_MV(this, &(this->nodeInfo), (new(ctx) RegionNodeInfoManager(ctx))->init(monitorConf, ctx), RegionNodeInfoManager);

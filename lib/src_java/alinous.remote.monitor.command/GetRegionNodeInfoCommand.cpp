@@ -18,7 +18,7 @@ bool GetRegionNodeInfoCommand::__init_static_variables(){
 	delete ctx;
 	return true;
 }
- GetRegionNodeInfoCommand::GetRegionNodeInfoCommand(ThreadContext* ctx) throw()  : IObject(ctx), AbstractMonitorCommand(ctx)
+ GetRegionNodeInfoCommand::GetRegionNodeInfoCommand(ThreadContext* ctx) throw()  : IObject(ctx), AbstractMonitorCommand(ctx), regionData(__GC_INS(this, (new(ctx) RegionInfoData(ctx)), RegionInfoData))
 {
 	this->type = AbstractMonitorCommand::TYPE_GET_REGION_INFO;
 }
@@ -35,6 +35,9 @@ void GetRegionNodeInfoCommand::__construct_impl(ThreadContext* ctx) throw()
 }
 void GetRegionNodeInfoCommand::__releaseRegerences(bool prepare, ThreadContext* ctx) throw() 
 {
+	ObjectEraser __e_obj1(ctx, __FILEW__, __LINE__, L"GetRegionNodeInfoCommand", L"~GetRegionNodeInfoCommand");
+	__e_obj1.add(this->regionData, this);
+	regionData = nullptr;
 	if(!prepare){
 		return;
 	}
@@ -42,15 +45,20 @@ void GetRegionNodeInfoCommand::__releaseRegerences(bool prepare, ThreadContext* 
 }
 void GetRegionNodeInfoCommand::executeOnServer(TransactionMonitorServer* monitorServer, BufferedOutputStream* outStream, ThreadContext* ctx)
 {
+	monitorServer->getRegionInfo(this->regionData, ctx);
 	writeByteStream(outStream, ctx);
 }
 void GetRegionNodeInfoCommand::readFromStream(InputStream* stream, int remain, ThreadContext* ctx)
 {
+	IArrayObjectPrimitive<char>* src = ArrayAllocatorPrimitive<char>::allocatep(ctx, remain);
+	NetworkBinaryBuffer* buff = (new(ctx) NetworkBinaryBuffer(src, ctx));
+	this->regionData->readData(buff, ctx);
 }
 void GetRegionNodeInfoCommand::writeByteStream(OutputStream* out, ThreadContext* ctx)
 {
 	NetworkBinaryBuffer* buff = (new(ctx) NetworkBinaryBuffer(32, ctx));
 	buff->putInt(AbstractMonitorCommand::TYPE_GET_REGION_INFO, ctx);
+	this->regionData->writeData(buff, ctx);
 	IArrayObjectPrimitive<char>* b = buff->toBinary(ctx);
 	int pos = buff->getPutSize(ctx);
 	out->write(b, 0, pos, ctx);

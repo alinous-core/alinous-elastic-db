@@ -18,6 +18,12 @@ class ISocketConnection;}}}
 namespace alinous {namespace net {
 class AlinousSocket;}}
 
+namespace alinous {namespace remote {namespace monitor {namespace command {
+class AbstractMonitorCommand;}}}}
+
+namespace alinous {namespace system {
+class AlinousException;}}
+
 namespace alinous {namespace remote {namespace monitor {namespace client {
 class MonitorConnectionInfo;}}}}
 
@@ -42,9 +48,6 @@ class IOException;}}
 namespace alinous {namespace net {
 class UnknownHostException;}}
 
-namespace alinous {namespace system {
-class AlinousException;}}
-
 namespace java {namespace lang {
 class IObject;
 }}
@@ -63,6 +66,7 @@ using ::java::net::UnknownHostException;
 using ::alinous::net::AlinousSocket;
 using ::alinous::remote::monitor::client::MonitorClientConnectionFactory;
 using ::alinous::remote::monitor::client::MonitorConnectionInfo;
+using ::alinous::remote::monitor::command::AbstractMonitorCommand;
 using ::alinous::remote::monitor::command::GetRegionNodeInfoCommand;
 using ::alinous::remote::socket::ISocketConnection;
 using ::alinous::remote::socket::SocketConnectionPool;
