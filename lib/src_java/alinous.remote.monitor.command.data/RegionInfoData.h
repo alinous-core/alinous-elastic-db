@@ -1,5 +1,8 @@
 #ifndef ALINOUS_REMOTE_MONITOR_COMMAND_DATA_REGIONINFODATA_H_
 #define ALINOUS_REMOTE_MONITOR_COMMAND_DATA_REGIONINFODATA_H_
+namespace java {namespace util {
+template <typename  T, typename V> class Map;}}
+
 namespace alinous {namespace remote {namespace monitor {
 class RegionNodeInfo;}}}
 
@@ -8,9 +11,6 @@ class NetworkBinaryBuffer;}}}
 
 namespace java {namespace util {
 template <typename  T> class Iterator;}}
-
-namespace java {namespace util {
-template <typename  T, typename V> class Map;}}
 
 namespace java {namespace util {
 template <typename  T, typename V> class HashMap;}}
@@ -55,6 +55,7 @@ public:
 private:
 	Map<String,RegionNodeInfo>* regionsMap;
 public:
+	Map<String,RegionNodeInfo>* getRegionsMap(ThreadContext* ctx) throw() ;
 	void putNodeInfo(String* key, RegionNodeInfo* info, ThreadContext* ctx) throw() ;
 	void readData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw()  final;
 	void writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw()  final;

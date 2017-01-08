@@ -41,7 +41,7 @@ void DocType::__releaseRegerences(bool prepare, ThreadContext* ctx) throw()
 String* DocType::toString(ThreadContext* ctx) throw() 
 {
 	StringBuffer* buff = (new(ctx) StringBuffer(ctx));
-	buff->append(ConstStr::getCNST_STR_1682(), ctx);
+	buff->append(ConstStr::getCNST_STR_1683(), ctx);
 	Iterator<Attribute>* it = this->attributes->iterator(ctx);
 	while(it->hasNext(ctx))
 	{

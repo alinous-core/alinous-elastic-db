@@ -60,7 +60,7 @@ IBTreeNode* MBTreeMaxNode::getNodeAtInsertPosition(IBTreeKey* key, ThreadContext
 }
 IBTreeNode* MBTreeMaxNode::addLeafNode(IBTreeNode* newNode, ThreadContext* ctx)
 {
-	throw (new(ctx) BTreeException(ConstStr::getCNST_STR_1575(), ctx));
+	throw (new(ctx) BTreeException(ConstStr::getCNST_STR_1576(), ctx));
 }
 IBTreeKey* MBTreeMaxNode::getKey(ThreadContext* ctx) throw() 
 {
@@ -69,7 +69,7 @@ IBTreeKey* MBTreeMaxNode::getKey(ThreadContext* ctx) throw()
 void MBTreeMaxNode::printNode(StringBuffer* buff, int level, ThreadContext* ctx)
 {
 	printTab(buff, level, ctx);
-	buff->append(ConstStr::getCNST_STR_1576(), ctx)->append(ConstStr::getCNST_STR_1577(), ctx)->append(ConstStr::getCNST_STR_1573(), ctx);
+	buff->append(ConstStr::getCNST_STR_1577(), ctx)->append(ConstStr::getCNST_STR_1578(), ctx)->append(ConstStr::getCNST_STR_1574(), ctx);
 	int nextLevel = level + 1;
 	int maxLoop = this->nodeUsed;
 	IBTreeNode* node = 0;
@@ -81,7 +81,7 @@ void MBTreeMaxNode::printNode(StringBuffer* buff, int level, ThreadContext* ctx)
 	node = this->max;
 	node->printNode(buff, nextLevel, ctx);
 	printTab(buff, level, ctx);
-	buff->append(ConstStr::getCNST_STR_1578(), ctx);
+	buff->append(ConstStr::getCNST_STR_1579(), ctx);
 }
 bool MBTreeMaxNode::removeChild(IBTreeKey* key, ThreadContext* ctx)
 {
@@ -99,7 +99,7 @@ bool MBTreeMaxNode::isEmpty(ThreadContext* ctx) throw()
 }
 void MBTreeMaxNode::setKey(IBTreeKey* key, ThreadContext* ctx)
 {
-	throw (new(ctx) BTreeException(ConstStr::getCNST_STR_1579(), ctx));
+	throw (new(ctx) BTreeException(ConstStr::getCNST_STR_1580(), ctx));
 }
 bool MBTreeMaxNode::hasMaxNode(ThreadContext* ctx) throw() 
 {

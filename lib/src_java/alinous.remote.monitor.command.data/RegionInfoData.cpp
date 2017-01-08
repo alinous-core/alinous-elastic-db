@@ -34,6 +34,10 @@ void RegionInfoData::__releaseRegerences(bool prepare, ThreadContext* ctx) throw
 		return;
 	}
 }
+Map<String,RegionNodeInfo>* RegionInfoData::getRegionsMap(ThreadContext* ctx) throw() 
+{
+	return regionsMap;
+}
 void RegionInfoData::putNodeInfo(String* key, RegionNodeInfo* info, ThreadContext* ctx) throw() 
 {
 	this->regionsMap->put(key, info, ctx);
@@ -57,7 +61,7 @@ void RegionInfoData::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) th
 	while(it->hasNext(ctx))
 	{
 		String* key = it->next(ctx);
-		RegionNodeInfo* node = (new(ctx) RegionNodeInfo(ctx));
+		RegionNodeInfo* node = this->regionsMap->get(key, ctx);
 		buff->putString(key, ctx);
 		node->writeData(buff, ctx);
 	}

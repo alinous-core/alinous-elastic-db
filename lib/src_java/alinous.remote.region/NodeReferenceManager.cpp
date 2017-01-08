@@ -30,17 +30,65 @@ void NodeReferenceManager::__releaseRegerences(bool prepare, ThreadContext* ctx)
 	ObjectEraser __e_obj1(ctx, __FILEW__, __LINE__, L"NodeReferenceManager", L"~NodeReferenceManager");
 	__e_obj1.add(this->tablesDictinary, this);
 	tablesDictinary = nullptr;
+	__e_obj1.add(this->nodeReferences, this);
+	nodeReferences = nullptr;
+	__e_obj1.add(this->lock, this);
+	lock = nullptr;
 	if(!prepare){
 		return;
 	}
 }
-Map<String,NodeCluster>* NodeReferenceManager::getTablesDictinary(ThreadContext* ctx) throw() 
+void NodeReferenceManager::syncNodeReference(RegionInfoData* data, ThreadContext* ctx) throw() 
+{
+	{
+		SynchronizedBlockObj __synchronized_2(this->lock, ctx);
+		Map<String,RegionNodeInfo>* regionsMap = data->getRegionsMap(ctx);
+		doSyncRegionNodes(regionsMap, ctx);
+	}
+}
+Map<String,NodeTableClaster>* NodeReferenceManager::getTablesDictinary(ThreadContext* ctx) throw() 
 {
 	return tablesDictinary;
 }
 long long NodeReferenceManager::getRevision(ThreadContext* ctx) throw() 
 {
-	return revision;
+	{
+		SynchronizedBlockObj __synchronized_2(this->lock, ctx);
+		return revision;
+	}
+}
+void NodeReferenceManager::doSyncRegionNodes(Map<String,RegionNodeInfo>* regionsMap, ThreadContext* ctx) throw() 
+{
+	Iterator<String>* it = regionsMap->keySet(ctx)->iterator(ctx);
+	while(it->hasNext(ctx))
+	{
+		String* regName = it->next(ctx);
+		RegionNodeInfo* refinfo = regionsMap->get(regName, ctx);
+		NodeCluster* last = this->nodeReferences->get(regName, ctx);
+		if(last == nullptr)
+		{
+			last = (new(ctx) NodeCluster(ctx));
+			this->nodeReferences->put(regName, last, ctx);
+		}
+		last->update(refinfo, ctx);
+	}
+	List<String>* delList = (new(ctx) ArrayList<String>(ctx));
+	it = this->nodeReferences->keySet(ctx)->iterator(ctx);
+	while(it->hasNext(ctx))
+	{
+		String* regName = it->next(ctx);
+		RegionNodeInfo* reginfo = regionsMap->get(regName, ctx);
+		if(reginfo == nullptr)
+		{
+			delList->add(regName, ctx);
+		}
+	}
+	int maxLoop = delList->size(ctx);
+	for(int i = 0; i != maxLoop; ++i)
+	{
+		String* regName = delList->get(i, ctx);
+		this->nodeReferences->remove(regName, ctx);
+	}
 }
 }}}
 

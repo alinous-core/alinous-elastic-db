@@ -7,7 +7,7 @@ namespace alinous {namespace remote {namespace db {
 
 
 
-String* RemoteTableStorageServer::THREAD_NAME = ConstStr::getCNST_STR_3485();
+String* RemoteTableStorageServer::THREAD_NAME = ConstStr::getCNST_STR_3486();
 const IntKey RemoteTableStorageServer:: __SCHEMA = (IntKey(10, nullptr));
 bool RemoteTableStorageServer::__init_done = __init_static_variables();
 bool RemoteTableStorageServer::__init_static_variables(){
@@ -77,10 +77,10 @@ void RemoteTableStorageServer::init(AlinousCore* core, ThreadContext* ctx)
 		catch(BTreeException* e)
 		{
 			e->printStackTrace(ctx);
-			throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_3483(), e, ctx));
+			throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_3484(), e, ctx));
 		}
 	}
-	__GC_MV(this, &(this->workerThreadsPool), (new(ctx) ThreadPool(16, ConstStr::getCNST_STR_3484(), ctx)), ThreadPool);
+	__GC_MV(this, &(this->workerThreadsPool), (new(ctx) ThreadPool(16, ConstStr::getCNST_STR_3485(), ctx)), ThreadPool);
 	if(exists(ctx))
 	{
 		return;
@@ -152,19 +152,19 @@ void RemoteTableStorageServer::initInstance(AlinousCore* core, ThreadContext* ct
 		}
 		catch(IOException* e)
 		{
-			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1596(), e, ctx));
+			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1597(), e, ctx));
 		}
 		catch(InterruptedException* e)
 		{
-			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1596(), e, ctx));
+			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1597(), e, ctx));
 		}
 		catch(BTreeException* e)
 		{
-			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1596(), e, ctx));
+			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1597(), e, ctx));
 		}
 		catch(VariableException* e)
 		{
-			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1596(), e, ctx));
+			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1597(), e, ctx));
 		}
 	}
 }
@@ -172,7 +172,7 @@ File* RemoteTableStorageServer::getConfigFile(ThreadContext* ctx) throw()
 {
 	if(this->configFile == nullptr)
 	{
-		String* pathname = this->dataDir->clone(ctx)->append(ConstStr::getCNST_STR_1600(), ctx);
+		String* pathname = this->dataDir->clone(ctx)->append(ConstStr::getCNST_STR_1601(), ctx);
 		__GC_MV(this, &(this->configFile), (new(ctx) File(pathname, ctx)), File);
 	}
 	return this->configFile;

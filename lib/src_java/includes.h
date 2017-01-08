@@ -327,6 +327,8 @@
 #include "alinous.system.config.remote/RegionsServer.h"
 #include "alinous.remote.region/NodeReference.h"
 #include "alinous.remote.region/NodeCluster.h"
+#include "alinous.remote.region/NodeTableReference.h"
+#include "alinous.remote.region/NodeTableClaster.h"
 #include "alinous.remote.region/NodeReferenceManager.h"
 #include "alinous.remote.region.command/AbstractNodeRegionCommand.h"
 #include "alinous.remote.region.command/NodeRegionFinishConnectionCommand.h"
@@ -1710,8 +1712,10 @@ inline static void __cleanUpStatics(alinous::ThreadContext* ctx){
 	alinous::remote::monitor::command::commitId::GetMaxCommitIdCommand::__cleanUp(ctx);
 	alinous::remote::monitor::command::commitId::NewCommitIdCommand::__cleanUp(ctx);
 	alinous::remote::monitor::command::data::RegionInfoData::__cleanUp(ctx);
+	alinous::remote::region::NodeTableReference::__cleanUp(ctx);
 	alinous::remote::region::NodeRegionServer::__cleanUp(ctx);
 	alinous::remote::region::NodeReference::__cleanUp(ctx);
+	alinous::remote::region::NodeTableClaster::__cleanUp(ctx);
 	alinous::remote::region::NodeRegionResponceAction::__cleanUp(ctx);
 	alinous::remote::region::NodeRegionResponceActionFactory::__cleanUp(ctx);
 	alinous::remote::region::NodeReferenceManager::__cleanUp(ctx);

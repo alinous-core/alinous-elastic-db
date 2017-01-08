@@ -69,7 +69,7 @@ void AlinousDomReplacer::startTag(String* tag, bool endTag, ThreadContext* ctx) 
 		this->processingTagIsEnd = true;
 		return;
 	}
-	if(tag->equals(ConstStr::getCNST_STR_1691(), ctx))
+	if(tag->equals(ConstStr::getCNST_STR_1692(), ctx))
 	{
 		__GC_MV(this, &(this->currentTag), (new(ctx) DocType(tag, ctx)), DomNode);
 		this->processingTagIsEnd = false;

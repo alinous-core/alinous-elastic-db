@@ -34,6 +34,37 @@ void NodeCluster::__releaseRegerences(bool prepare, ThreadContext* ctx) throw()
 		return;
 	}
 }
+void NodeCluster::update(RegionNodeInfo* refinfo, ThreadContext* ctx) throw() 
+{
+	List<NodeInfo>* list = refinfo->getNodes(ctx);
+	int maxLoop = list->size(ctx);
+	for(int i = 0; i != maxLoop; ++i)
+	{
+		NodeInfo* info = list->get(i, ctx);
+		NodeReference* ref = getNode(info->getHost(ctx), info->getPort(ctx), info->isIpv6(ctx), ctx);
+		if(ref == nullptr)
+		{
+			ref = (new(ctx) NodeReference(info->getHost(ctx), info->getPort(ctx), info->isIpv6(ctx), ctx));
+			this->nodes->add(ref, ctx);
+		}
+	}
+	List<NodeReference>* dellist = (new(ctx) ArrayList<NodeReference>(ctx));
+	maxLoop = this->nodes->size(ctx);
+	for(int i = 0; i != maxLoop; ++i)
+	{
+		NodeReference* ref = this->nodes->get(i, ctx);
+		if(!refinfo->containsNode(ref->getHost(ctx), ref->getPort(ctx), ref->isIpv6(ctx), ctx))
+		{
+			dellist->add(ref, ctx);
+		}
+	}
+	maxLoop = dellist->size(ctx);
+	for(int i = 0; i != maxLoop; ++i)
+	{
+		NodeReference* ref = dellist->get(i, ctx);
+		this->nodes->remove(ref, ctx);
+	}
+}
 void NodeCluster::addNode(NodeReference* nodeRef, ThreadContext* ctx) throw() 
 {
 	this->nodes->add(nodeRef, ctx);
@@ -41,6 +72,19 @@ void NodeCluster::addNode(NodeReference* nodeRef, ThreadContext* ctx) throw()
 List<NodeReference>* NodeCluster::getNodes(ThreadContext* ctx) throw() 
 {
 	return nodes;
+}
+NodeReference* NodeCluster::getNode(String* host, int port, bool ipv6, ThreadContext* ctx) throw() 
+{
+	int maxLoop = this->nodes->size(ctx);
+	for(int i = 0; i != maxLoop; ++i)
+	{
+		NodeReference* ref = this->nodes->get(i, ctx);
+		if(ref->getHost(ctx)->equals(host, ctx) && ref->getPort(ctx) == port && ref->isIpv6(ctx) == ipv6)
+		{
+			return ref;
+		}
+	}
+	return nullptr;
 }
 }}}
 

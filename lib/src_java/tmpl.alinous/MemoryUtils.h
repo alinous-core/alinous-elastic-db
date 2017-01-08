@@ -5,7 +5,7 @@ template class alinous::MemoryUtils<::alinous::HashMapInternalElement<::java::la
 template class alinous::MemoryUtils<::alinous::HashMapInternalElement<::java::lang::String, ::alinous::db::table::lockmonitor::IThreadLocker>>;
 template class alinous::MemoryUtils<::alinous::HashMapInternalElement<::alinous::html::DomNode, ::java::util::ArrayList<::alinous::html::xpath::match::MatchCandidate>>>;
 template class alinous::MemoryUtils<::alinous::HashMapInternalElement<::java::lang::String, ::alinous::remote::monitor::RegionNodeInfo>>;
-template class alinous::MemoryUtils<::alinous::HashMapInternalElement<::java::lang::String, ::alinous::remote::region::NodeCluster>>;
+template class alinous::MemoryUtils<::alinous::HashMapInternalElement<::java::lang::String, ::alinous::remote::region::NodeTableClaster>>;
 template class alinous::MemoryUtils<::alinous::HashMapInternalElement<::java::lang::String, ::alinous::remote::region::client::RemoteTableScheme>>;
 template class alinous::MemoryUtils<::alinous::HashMapInternalElement<::java::lang::String, ::java::util::TimeZone>>;
 template class alinous::MemoryUtils<::alinous::HashMapInternalElement<::java::lang::String, ::org::alinous::charset::CharsetConverter>>;
@@ -32,6 +32,7 @@ template class alinous::MemoryUtils<::alinous::HashMapInternalElement<::java::la
 template class alinous::MemoryUtils<::alinous::HashMapInternalElement<::java::lang::String, ::alinous::db::table::TableColumnMetadata>>;
 template class alinous::MemoryUtils<::alinous::HashMapInternalElement<::java::lang::String, ::alinous::db::trx::cache::TrxRecordsCache>>;
 template class alinous::MemoryUtils<::alinous::HashMapInternalElement<::java::lang::String, ::java::util::HashMap<::java::lang::String, ::alinous::db::trx::cache::TrxRecordsCache>>>;
+template class alinous::MemoryUtils<::alinous::HashMapInternalElement<::java::lang::String, ::alinous::remote::region::NodeCluster>>;
 template class alinous::MemoryUtils<::alinous::HashMapRawArray<::java::lang::String, ::com::google::re2j::CharGroup>>;
 template class alinous::MemoryUtils<::alinous::HashMapRawArray<::java::lang::String, ::alinous::runtime::dom::IDomVariable>>;
 template class alinous::MemoryUtils<::alinous::HashMapRawArray<::java::lang::String, ::alinous::runtime::dom::typed::ITypedVariable>>;
@@ -39,7 +40,7 @@ template class alinous::MemoryUtils<::alinous::HashMapRawArray<::java::lang::Str
 template class alinous::MemoryUtils<::alinous::HashMapRawArray<::java::lang::String, ::alinous::db::table::lockmonitor::IThreadLocker>>;
 template class alinous::MemoryUtils<::alinous::HashMapRawArray<::alinous::html::DomNode, ::java::util::ArrayList<::alinous::html::xpath::match::MatchCandidate>>>;
 template class alinous::MemoryUtils<::alinous::HashMapRawArray<::java::lang::String, ::alinous::remote::monitor::RegionNodeInfo>>;
-template class alinous::MemoryUtils<::alinous::HashMapRawArray<::java::lang::String, ::alinous::remote::region::NodeCluster>>;
+template class alinous::MemoryUtils<::alinous::HashMapRawArray<::java::lang::String, ::alinous::remote::region::NodeTableClaster>>;
 template class alinous::MemoryUtils<::alinous::HashMapRawArray<::java::lang::String, ::alinous::remote::region::client::RemoteTableScheme>>;
 template class alinous::MemoryUtils<::alinous::HashMapRawArray<::java::lang::String, ::java::util::TimeZone>>;
 template class alinous::MemoryUtils<::alinous::HashMapRawArray<::java::lang::String, ::org::alinous::charset::CharsetConverter>>;
@@ -66,6 +67,7 @@ template class alinous::MemoryUtils<::alinous::HashMapRawArray<::java::lang::Str
 template class alinous::MemoryUtils<::alinous::HashMapRawArray<::java::lang::String, ::alinous::db::table::TableColumnMetadata>>;
 template class alinous::MemoryUtils<::alinous::HashMapRawArray<::java::lang::String, ::alinous::db::trx::cache::TrxRecordsCache>>;
 template class alinous::MemoryUtils<::alinous::HashMapRawArray<::java::lang::String, ::java::util::HashMap<::java::lang::String, ::alinous::db::trx::cache::TrxRecordsCache>>>;
+template class alinous::MemoryUtils<::alinous::HashMapRawArray<::java::lang::String, ::alinous::remote::region::NodeCluster>>;
 template class alinous::MemoryUtils<::com::google::re2j::Regexp>;
 template class alinous::MemoryUtils<alinous::IArrayObject<::com::google::re2j::Regexp>>;
 template class alinous::MemoryUtils<alinous::IArrayObject<alinous::IArrayObject<::com::google::re2j::Regexp>>>;
@@ -360,6 +362,13 @@ template class alinous::MemoryUtils<alinous::ArrayObject<alinous::IArrayObject<:
 template class alinous::MemoryUtils<alinous::ArrayObject<::alinous::remote::monitor::NodeInfo>>;
 template class alinous::MemoryUtils<alinous::IArrayObject<alinous::ArrayObject<::alinous::remote::monitor::NodeInfo>>>;
 template class alinous::MemoryUtils<alinous::ArrayObject<alinous::ArrayObject<::alinous::remote::monitor::NodeInfo>>>;
+template class alinous::MemoryUtils<::alinous::remote::region::NodeTableReference>;
+template class alinous::MemoryUtils<alinous::IArrayObject<::alinous::remote::region::NodeTableReference>>;
+template class alinous::MemoryUtils<alinous::IArrayObject<alinous::IArrayObject<::alinous::remote::region::NodeTableReference>>>;
+template class alinous::MemoryUtils<alinous::ArrayObject<alinous::IArrayObject<::alinous::remote::region::NodeTableReference>>>;
+template class alinous::MemoryUtils<alinous::ArrayObject<::alinous::remote::region::NodeTableReference>>;
+template class alinous::MemoryUtils<alinous::IArrayObject<alinous::ArrayObject<::alinous::remote::region::NodeTableReference>>>;
+template class alinous::MemoryUtils<alinous::ArrayObject<alinous::ArrayObject<::alinous::remote::region::NodeTableReference>>>;
 template class alinous::MemoryUtils<::alinous::remote::region::NodeReference>;
 template class alinous::MemoryUtils<alinous::IArrayObject<::alinous::remote::region::NodeReference>>;
 template class alinous::MemoryUtils<alinous::IArrayObject<alinous::IArrayObject<::alinous::remote::region::NodeReference>>>;

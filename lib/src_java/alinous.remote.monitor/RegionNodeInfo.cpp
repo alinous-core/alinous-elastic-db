@@ -36,6 +36,19 @@ void RegionNodeInfo::__releaseRegerences(bool prepare, ThreadContext* ctx) throw
 		return;
 	}
 }
+bool RegionNodeInfo::containsNode(String* host, int port, bool ipv6, ThreadContext* ctx) throw() 
+{
+	int maxLoop = this->nodes->size(ctx);
+	for(int i = 0; i != maxLoop; ++i)
+	{
+		NodeInfo* node = this->nodes->get(i, ctx);
+		if(node->getHost(ctx)->equals(host, ctx) && node->getPort(ctx) == port && node->isIpv6(ctx) == ipv6)
+		{
+			return true;
+		}
+	}
+	return false;
+}
 RegionNodeInfo* RegionNodeInfo::copy(ThreadContext* ctx) throw() 
 {
 	RegionNodeInfo* info = (new(ctx) RegionNodeInfo(ctx));
@@ -96,7 +109,7 @@ RegionNodeInfo* RegionNodeInfo::fromConfig(Region* reg, ThreadContext* ctx)
 	for(int i = 0; i != maxLoop; ++i)
 	{
 		NodeRef* n = list->get(i, ctx);
-		NodeInfo* nodeInfo = NodeInfo::parseUrl(n->getUrl(ctx), ctx);
+		NodeInfo* nodeInfo = NodeInfo::parseUrl(n->getUrl(ctx), n->isIpv6(ctx), ctx);
 		info->addNode(nodeInfo, ctx);
 	}
 	return info;

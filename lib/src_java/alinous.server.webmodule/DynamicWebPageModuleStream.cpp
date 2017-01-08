@@ -79,7 +79,7 @@ void DynamicWebPageModuleStream::prepare(AlinousCore* core, bool debug, ThreadCo
 }
 String* DynamicWebPageModuleStream::getContentType(ThreadContext* ctx) throw() 
 {
-	return ConstStr::getCNST_STR_1806();
+	return ConstStr::getCNST_STR_1807();
 }
 }}}
 

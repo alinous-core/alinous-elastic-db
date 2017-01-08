@@ -1,10 +1,16 @@
 #ifndef ALINOUS_REMOTE_REGION_NODECLUSTER_H_
 #define ALINOUS_REMOTE_REGION_NODECLUSTER_H_
-namespace alinous {namespace remote {namespace region {
-class NodeReference;}}}
+namespace alinous {namespace remote {namespace monitor {
+class RegionNodeInfo;}}}
 
 namespace java {namespace util {
 template <typename  T> class List;}}
+
+namespace alinous {namespace remote {namespace monitor {
+class NodeInfo;}}}
+
+namespace alinous {namespace remote {namespace region {
+class NodeReference;}}}
 
 namespace java {namespace lang {
 class IObject;
@@ -21,6 +27,8 @@ using namespace ::java::lang;
 using ::java::util::Iterator;
 using ::java::util::ArrayList;
 using ::java::util::List;
+using ::alinous::remote::monitor::NodeInfo;
+using ::alinous::remote::monitor::RegionNodeInfo;
 
 
 
@@ -39,8 +47,11 @@ public:
 private:
 	List<NodeReference>* nodes;
 public:
+	void update(RegionNodeInfo* refinfo, ThreadContext* ctx) throw() ;
 	void addNode(NodeReference* nodeRef, ThreadContext* ctx) throw() ;
 	List<NodeReference>* getNodes(ThreadContext* ctx) throw() ;
+private:
+	NodeReference* getNode(String* host, int port, bool ipv6, ThreadContext* ctx) throw() ;
 public:
 	static bool __init_done;
 	static bool __init_static_variables();

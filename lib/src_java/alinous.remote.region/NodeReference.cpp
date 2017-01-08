@@ -18,15 +18,17 @@ bool NodeReference::__init_static_variables(){
 	delete ctx;
 	return true;
 }
- NodeReference::NodeReference(String* host, int port, ThreadContext* ctx) throw()  : IObject(ctx), host(nullptr), port(0)
+ NodeReference::NodeReference(String* host, int port, bool ipv6, ThreadContext* ctx) throw()  : IObject(ctx), host(nullptr), port(0), ipv6(0)
 {
 	__GC_MV(this, &(this->host), host, String);
 	this->port = port;
+	this->ipv6 = ipv6;
 }
-void NodeReference::__construct_impl(String* host, int port, ThreadContext* ctx) throw() 
+void NodeReference::__construct_impl(String* host, int port, bool ipv6, ThreadContext* ctx) throw() 
 {
 	__GC_MV(this, &(this->host), host, String);
 	this->port = port;
+	this->ipv6 = ipv6;
 }
  NodeReference::~NodeReference() throw() 
 {
@@ -51,6 +53,19 @@ String* NodeReference::getHost(ThreadContext* ctx) throw()
 int NodeReference::getPort(ThreadContext* ctx) throw() 
 {
 	return port;
+}
+bool NodeReference::isIpv6(ThreadContext* ctx) throw() 
+{
+	return ipv6;
+}
+bool NodeReference::equals(String* host, int port, bool ipv6, ThreadContext* ctx) throw() 
+{
+	return this->ipv6 == ipv6 && this->port == port && this->host->equals(host, ctx);
+}
+bool NodeReference::equals(IObject* obj, ThreadContext* ctx) throw() 
+{
+	NodeReference* ref = dynamic_cast<NodeReference*>(obj);
+	return this->ipv6 == ref->isIpv6(ctx) && this->port == ref->getPort(ctx) && this->host->equals(ref->getHost(ctx), ctx);
 }
 }}}
 

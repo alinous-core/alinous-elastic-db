@@ -45,7 +45,7 @@ List<Table>* Tables::getList(ThreadContext* ctx) throw()
 Tables* Tables::parseInstance(DomNode* dom, DomDocument* document, Matcher* matcher, ThreadContext* ctx)
 {
 	Tables* tables = (new(ctx) Tables(ctx));
-	MatchCandidatesCollection* result = matcher->match(document, dom, ConstStr::getCNST_STR_1228(), ctx);
+	MatchCandidatesCollection* result = matcher->match(document, dom, ConstStr::getCNST_STR_1229(), ctx);
 	ArrayList<MatchCandidate>* list = result->getCandidatesList(ctx);
 	Iterator<MatchCandidate>* it = list->iterator(ctx);
 	while(it->hasNext(ctx))

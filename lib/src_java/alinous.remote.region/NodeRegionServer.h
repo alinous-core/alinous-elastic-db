@@ -24,6 +24,9 @@ class AbstractMonitorCommand;}}}}
 namespace alinous {namespace system {
 class AlinousException;}}
 
+namespace alinous {namespace remote {namespace monitor {namespace command {namespace data {
+class RegionInfoData;}}}}}
+
 namespace alinous {namespace remote {namespace monitor {namespace client {
 class MonitorConnectionInfo;}}}}
 
@@ -68,6 +71,7 @@ using ::alinous::remote::monitor::client::MonitorClientConnectionFactory;
 using ::alinous::remote::monitor::client::MonitorConnectionInfo;
 using ::alinous::remote::monitor::command::AbstractMonitorCommand;
 using ::alinous::remote::monitor::command::GetRegionNodeInfoCommand;
+using ::alinous::remote::monitor::command::data::RegionInfoData;
 using ::alinous::remote::socket::ISocketConnection;
 using ::alinous::remote::socket::SocketConnectionPool;
 using ::alinous::remote::socket::SocketServer;

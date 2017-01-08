@@ -38,7 +38,7 @@ class NodeInfo final : public ICommandData, public virtual IObject {
 public:
 	NodeInfo(const NodeInfo& base) = default;
 public:
-	NodeInfo(ThreadContext* ctx) throw()  : IObject(ctx), ICommandData(ctx), host(nullptr), port(0)
+	NodeInfo(ThreadContext* ctx) throw()  : IObject(ctx), ICommandData(ctx), host(nullptr), port(0), ipv6(0)
 	{
 	}
 	void __construct_impl(ThreadContext* ctx) throw() 
@@ -49,16 +49,19 @@ public:
 private:
 	String* host;
 	int port;
+	bool ipv6;
 public:
 	String* getHost(ThreadContext* ctx) throw() ;
 	void setHost(String* host, ThreadContext* ctx) throw() ;
 	int getPort(ThreadContext* ctx) throw() ;
 	void setPort(int port, ThreadContext* ctx) throw() ;
+	bool isIpv6(ThreadContext* ctx) throw() ;
+	void setIpv6(bool ipv6, ThreadContext* ctx) throw() ;
 	NodeInfo* copy(ThreadContext* ctx) throw() ;
 	void readData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw()  final;
 	void writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw()  final;
 public:
-	static NodeInfo* parseUrl(String* url, ThreadContext* ctx);
+	static NodeInfo* parseUrl(String* url, bool ipv6, ThreadContext* ctx);
 public:
 	static bool __init_done;
 	static bool __init_static_variables();

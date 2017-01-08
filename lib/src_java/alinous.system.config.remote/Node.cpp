@@ -74,7 +74,7 @@ Node* Node::parseInstance(DomNode* dom, DomDocument* document, Matcher* matcher,
 	IVariableValue* attr = dom->getAttributeValue(ConstStr::getCNST_STR_1204(), ctx);
 	if(attr == nullptr)
 	{
-		throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_1208(), ctx));
+		throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_1209(), ctx));
 	}
 	{
 		try
@@ -84,18 +84,18 @@ Node* Node::parseInstance(DomNode* dom, DomDocument* document, Matcher* matcher,
 		}
 		catch(Throwable* e)
 		{
-			throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_1209(), ctx));
+			throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_1210(), ctx));
 		}
 	}
-	attr = dom->getAttributeValue(ConstStr::getCNST_STR_1210(), ctx);
+	attr = dom->getAttributeValue(ConstStr::getCNST_STR_1211(), ctx);
 	if(attr == nullptr)
 	{
-		throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_1211(), ctx));
+		throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_1212(), ctx));
 	}
 	String* dir = attr->toString(ctx)->trim(ctx);
 	dir = ConfigPathUtils::getAbsDirPath(alinousHome, dir, ctx);
 	node->setDataDir(dir, ctx);
-	MatchCandidatesCollection* result = matcher->match(document, dom, ConstStr::getCNST_STR_1212(), ctx);
+	MatchCandidatesCollection* result = matcher->match(document, dom, ConstStr::getCNST_STR_1213(), ctx);
 	ArrayList<MatchCandidate>* list = result->getCandidatesList(ctx);
 	if(!list->isEmpty(ctx))
 	{

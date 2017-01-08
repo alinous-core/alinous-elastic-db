@@ -50,6 +50,14 @@ void NodeInfo::setPort(int port, ThreadContext* ctx) throw()
 {
 	this->port = port;
 }
+bool NodeInfo::isIpv6(ThreadContext* ctx) throw() 
+{
+	return ipv6;
+}
+void NodeInfo::setIpv6(bool ipv6, ThreadContext* ctx) throw() 
+{
+	this->ipv6 = ipv6;
+}
 NodeInfo* NodeInfo::copy(ThreadContext* ctx) throw() 
 {
 	NodeInfo* info = (new(ctx) NodeInfo(ctx));
@@ -67,13 +75,13 @@ void NodeInfo::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw()
 	buff->putString(this->host, ctx);
 	buff->putInt(this->port, ctx);
 }
-NodeInfo* NodeInfo::parseUrl(String* url, ThreadContext* ctx)
+NodeInfo* NodeInfo::parseUrl(String* url, bool ipv6, ThreadContext* ctx)
 {
 	NodeInfo* info = (new(ctx) NodeInfo(ctx));
 	IArrayObject<String>* segs = url->split(ConstStr::getCNST_STR_381(), ctx);
 	if(segs->length != 2)
 	{
-		throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3490(), ctx));
+		throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3491(), ctx));
 	}
 	info->setHost(segs->get(0), ctx);
 	{
@@ -84,9 +92,10 @@ NodeInfo* NodeInfo::parseUrl(String* url, ThreadContext* ctx)
 		}
 		catch(NumberFormatException* e)
 		{
-			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3490(), ctx));
+			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3491(), ctx));
 		}
 	}
+	info->setIpv6(ipv6, ctx);
 	return info;
 }
 }}}

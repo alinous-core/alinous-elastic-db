@@ -56,6 +56,7 @@ private:
 public:
 	void executeOnServer(TransactionMonitorServer* monitorServer, BufferedOutputStream* outStream, ThreadContext* ctx) final;
 	void readFromStream(InputStream* stream, int remain, ThreadContext* ctx) final;
+	RegionInfoData* getRegionData(ThreadContext* ctx) throw() ;
 	void writeByteStream(OutputStream* out, ThreadContext* ctx) final;
 public:
 	static bool __init_done;

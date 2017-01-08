@@ -55,7 +55,7 @@ class NodeRef final : public IAlinousConfigElement, public virtual IObject {
 public:
 	NodeRef(const NodeRef& base) = default;
 public:
-	NodeRef(ThreadContext* ctx) throw()  : IObject(ctx), IAlinousConfigElement(ctx), url(nullptr)
+	NodeRef(ThreadContext* ctx) throw()  : IObject(ctx), IAlinousConfigElement(ctx), url(nullptr), ipv6(false)
 	{
 	}
 	void __construct_impl(ThreadContext* ctx) throw() 
@@ -65,9 +65,12 @@ public:
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 private:
 	String* url;
+	bool ipv6;
 public:
 	String* getUrl(ThreadContext* ctx) throw() ;
 	void setUrl(String* url, ThreadContext* ctx) throw() ;
+	bool isIpv6(ThreadContext* ctx) throw() ;
+	void setIpv6(bool ipv6, ThreadContext* ctx) throw() ;
 public:
 	static NodeRef* parseInstance(DomNode* dom, DomDocument* document, Matcher* matcher, ThreadContext* ctx);
 public:

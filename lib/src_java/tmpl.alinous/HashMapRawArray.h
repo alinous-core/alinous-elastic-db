@@ -5,7 +5,7 @@ template class ::alinous::HashMapRawArray<::java::lang::String, ::java::lang::St
 template class ::alinous::HashMapRawArray<::java::lang::String, ::alinous::db::table::lockmonitor::IThreadLocker>;
 template class ::alinous::HashMapRawArray<::alinous::html::DomNode, ::java::util::ArrayList<::alinous::html::xpath::match::MatchCandidate>>;
 template class ::alinous::HashMapRawArray<::java::lang::String, ::alinous::remote::monitor::RegionNodeInfo>;
-template class ::alinous::HashMapRawArray<::java::lang::String, ::alinous::remote::region::NodeCluster>;
+template class ::alinous::HashMapRawArray<::java::lang::String, ::alinous::remote::region::NodeTableClaster>;
 template class ::alinous::HashMapRawArray<::java::lang::String, ::alinous::remote::region::client::RemoteTableScheme>;
 template class ::alinous::HashMapRawArray<::java::lang::String, ::java::util::TimeZone>;
 template class ::alinous::HashMapRawArray<::java::lang::String, ::org::alinous::charset::CharsetConverter>;
@@ -32,3 +32,4 @@ template class ::alinous::HashMapRawArray<::java::lang::String, ::java::lang::In
 template class ::alinous::HashMapRawArray<::java::lang::String, ::alinous::db::table::TableColumnMetadata>;
 template class ::alinous::HashMapRawArray<::java::lang::String, ::alinous::db::trx::cache::TrxRecordsCache>;
 template class ::alinous::HashMapRawArray<::java::lang::String, ::java::util::HashMap<::java::lang::String, ::alinous::db::trx::cache::TrxRecordsCache>>;
+template class ::alinous::HashMapRawArray<::java::lang::String, ::alinous::remote::region::NodeCluster>;

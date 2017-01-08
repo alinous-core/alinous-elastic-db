@@ -65,7 +65,7 @@ RegionsServer* RegionsServer::parseInstance(MatchCandidate* candidate, DomDocume
 	IVariableValue* attr = selfDom->getAttributeValue(ConstStr::getCNST_STR_1204(), ctx);
 	if(attr == nullptr)
 	{
-		throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_1213(), ctx));
+		throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_1214(), ctx));
 	}
 	{
 		try
@@ -75,10 +75,10 @@ RegionsServer* RegionsServer::parseInstance(MatchCandidate* candidate, DomDocume
 		}
 		catch(Throwable* e)
 		{
-			throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_1214(), ctx));
+			throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_1215(), ctx));
 		}
 	}
-	attr = selfDom->getAttributeValue(ConstStr::getCNST_STR_1215(), ctx);
+	attr = selfDom->getAttributeValue(ConstStr::getCNST_STR_1216(), ctx);
 	if(attr != nullptr)
 	{
 		{
@@ -89,7 +89,7 @@ RegionsServer* RegionsServer::parseInstance(MatchCandidate* candidate, DomDocume
 			}
 			catch(Throwable* e)
 			{
-				throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_1214(), ctx));
+				throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_1215(), ctx));
 			}
 		}
 	}
@@ -97,13 +97,13 @@ RegionsServer* RegionsServer::parseInstance(MatchCandidate* candidate, DomDocume
 	ArrayList<MatchCandidate>* list = result->getCandidatesList(ctx);
 	if(list->isEmpty(ctx))
 	{
-		throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_1216(), ctx));
+		throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_1217(), ctx));
 	}
 		else 
 	{
 		if(list->size(ctx) != 1)
 		{
-			throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_1217(), ctx));
+			throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_1218(), ctx));
 		}
 	}
 	MatchCandidate* moncandidate = list->get(0, ctx);

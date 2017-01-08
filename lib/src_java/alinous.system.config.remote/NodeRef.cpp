@@ -42,6 +42,14 @@ void NodeRef::setUrl(String* url, ThreadContext* ctx) throw()
 {
 	__GC_MV(this, &(this->url), url, String);
 }
+bool NodeRef::isIpv6(ThreadContext* ctx) throw() 
+{
+	return ipv6;
+}
+void NodeRef::setIpv6(bool ipv6, ThreadContext* ctx) throw() 
+{
+	this->ipv6 = ipv6;
+}
 NodeRef* NodeRef::parseInstance(DomNode* dom, DomDocument* document, Matcher* matcher, ThreadContext* ctx)
 {
 	NodeRef* noderef = (new(ctx) NodeRef(ctx));
@@ -51,6 +59,12 @@ NodeRef* NodeRef::parseInstance(DomNode* dom, DomDocument* document, Matcher* ma
 		throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_1207(), ctx));
 	}
 	noderef->setUrl(attr->toString(ctx)->trim(ctx), ctx);
+	attr = dom->getAttributeValue(ConstStr::getCNST_STR_1208(), ctx);
+	if(attr != nullptr)
+	{
+		String* ipv6 = attr->toString(ctx)->trim(ctx);
+		noderef->setIpv6(!ipv6->equalsIgnoreCase(ConstStr::getCNST_STR_1081(), ctx), ctx);
+	}
 	return noderef;
 }
 }}}}

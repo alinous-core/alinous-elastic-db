@@ -63,6 +63,7 @@ private:
 	String* name;
 	List<NodeInfo>* nodes;
 public:
+	bool containsNode(String* host, int port, bool ipv6, ThreadContext* ctx) throw() ;
 	RegionNodeInfo* copy(ThreadContext* ctx) throw() ;
 	void addNode(NodeInfo* node, ThreadContext* ctx) throw() ;
 	List<NodeInfo>* getNodes(ThreadContext* ctx) throw() ;

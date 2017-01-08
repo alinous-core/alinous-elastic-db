@@ -51,8 +51,13 @@ void GetRegionNodeInfoCommand::executeOnServer(TransactionMonitorServer* monitor
 void GetRegionNodeInfoCommand::readFromStream(InputStream* stream, int remain, ThreadContext* ctx)
 {
 	IArrayObjectPrimitive<char>* src = ArrayAllocatorPrimitive<char>::allocatep(ctx, remain);
+	stream->read(src, ctx);
 	NetworkBinaryBuffer* buff = (new(ctx) NetworkBinaryBuffer(src, ctx));
 	this->regionData->readData(buff, ctx);
+}
+RegionInfoData* GetRegionNodeInfoCommand::getRegionData(ThreadContext* ctx) throw() 
+{
+	return regionData;
 }
 void GetRegionNodeInfoCommand::writeByteStream(OutputStream* out, ThreadContext* ctx)
 {

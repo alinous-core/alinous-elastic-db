@@ -1,5 +1,5 @@
-#ifndef ALINOUS_REMOTE_REGION_NODEREFERENCE_H_
-#define ALINOUS_REMOTE_REGION_NODEREFERENCE_H_
+#ifndef ALINOUS_REMOTE_REGION_NODETABLEREFERENCE_H_
+#define ALINOUS_REMOTE_REGION_NODETABLEREFERENCE_H_
 namespace alinous {namespace remote {namespace region {
 class NodeReference;}}}
 
@@ -19,23 +19,20 @@ using ::java::util::Iterator;
 
 
 
-class NodeReference final : public virtual IObject {
+class NodeTableReference final : public virtual IObject {
 public:
-	NodeReference(const NodeReference& base) = default;
+	NodeTableReference(const NodeTableReference& base) = default;
 public:
-	NodeReference(String* host, int port, bool ipv6, ThreadContext* ctx) throw() ;
-	void __construct_impl(String* host, int port, bool ipv6, ThreadContext* ctx) throw() ;
-	virtual ~NodeReference() throw();
+	NodeTableReference(String* host, int port, ThreadContext* ctx) throw() ;
+	void __construct_impl(String* host, int port, ThreadContext* ctx) throw() ;
+	virtual ~NodeTableReference() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 private:
 	String* host;
 	int port;
-	bool ipv6;
 public:
 	String* getHost(ThreadContext* ctx) throw() ;
 	int getPort(ThreadContext* ctx) throw() ;
-	bool isIpv6(ThreadContext* ctx) throw() ;
-	bool equals(String* host, int port, bool ipv6, ThreadContext* ctx) throw() ;
 	bool equals(IObject* obj, ThreadContext* ctx) throw() ;
 public:
 	static bool __init_done;
@@ -47,4 +44,4 @@ public:
 
 }}}
 
-#endif /* end of ALINOUS_REMOTE_REGION_NODEREFERENCE_H_ */
+#endif /* end of ALINOUS_REMOTE_REGION_NODETABLEREFERENCE_H_ */
