@@ -50,6 +50,7 @@ public:
 	void update(RegionNodeInfo* refinfo, ThreadContext* ctx) throw() ;
 	void addNode(NodeReference* nodeRef, ThreadContext* ctx) throw() ;
 	List<NodeReference>* getNodes(ThreadContext* ctx) throw() ;
+	void dispose(ThreadContext* ctx) throw() ;
 private:
 	NodeReference* getNode(String* host, int port, bool ipv6, ThreadContext* ctx) throw() ;
 public:

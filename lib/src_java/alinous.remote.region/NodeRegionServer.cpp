@@ -56,6 +56,10 @@ void NodeRegionServer::initNodes(RegionsServer* srvconf, ThreadContext* ctx)
 	MonitorRef* monRef = srvconf->getMonitorRef(ctx);
 	initMonitorRef(monRef, ctx);
 	syncNodes(ctx);
+	syncScheme(ctx);
+}
+void NodeRegionServer::syncScheme(ThreadContext* ctx) throw() 
+{
 }
 void NodeRegionServer::syncNodes(ThreadContext* ctx)
 {
@@ -98,6 +102,7 @@ void NodeRegionServer::dispose(ThreadContext* ctx) throw()
 	{
 		this->monitorConnectionPool->dispose(ctx);
 	}
+	this->refs->dispose(ctx);
 }
 NodeReferenceManager* NodeRegionServer::getRefs(ThreadContext* ctx) throw() 
 {

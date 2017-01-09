@@ -46,6 +46,16 @@ void NodeReferenceManager::syncNodeReference(RegionInfoData* data, ThreadContext
 		doSyncRegionNodes(regionsMap, ctx);
 	}
 }
+void NodeReferenceManager::dispose(ThreadContext* ctx) throw() 
+{
+	Iterator<String>* it = this->nodeReferences->keySet(ctx)->iterator(ctx);
+	while(it->hasNext(ctx))
+	{
+		String* key = it->next(ctx);
+		NodeCluster* cluster = this->nodeReferences->get(key, ctx);
+		cluster->dispose(ctx);
+	}
+}
 Map<String,NodeTableClaster>* NodeReferenceManager::getTablesDictinary(ThreadContext* ctx) throw() 
 {
 	return tablesDictinary;

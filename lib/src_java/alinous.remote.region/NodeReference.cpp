@@ -18,7 +18,7 @@ bool NodeReference::__init_static_variables(){
 	delete ctx;
 	return true;
 }
- NodeReference::NodeReference(String* host, int port, bool ipv6, ThreadContext* ctx) throw()  : IObject(ctx), host(nullptr), port(0), ipv6(0)
+ NodeReference::NodeReference(String* host, int port, bool ipv6, ThreadContext* ctx) throw()  : IObject(ctx), host(nullptr), port(0), ipv6(0), nodeConnectionPool(nullptr)
 {
 	__GC_MV(this, &(this->host), host, String);
 	this->port = port;
@@ -42,8 +42,23 @@ void NodeReference::__releaseRegerences(bool prepare, ThreadContext* ctx) throw(
 	ObjectEraser __e_obj1(ctx, __FILEW__, __LINE__, L"NodeReference", L"~NodeReference");
 	__e_obj1.add(this->host, this);
 	host = nullptr;
+	__e_obj1.add(this->nodeConnectionPool, this);
+	nodeConnectionPool = nullptr;
 	if(!prepare){
 		return;
+	}
+}
+void NodeReference::initConnectionPool(ThreadContext* ctx) throw() 
+{
+	RemoteStorageConnectionInfo* info = (new(ctx) RemoteStorageConnectionInfo(this->host, this->port, ctx));
+	RemoteStorageClientConnectionFactory* factory = (new(ctx) RemoteStorageClientConnectionFactory(info, ctx));
+	__GC_MV(this, &(this->nodeConnectionPool), (new(ctx) SocketConnectionPool(factory, ctx)), SocketConnectionPool);
+}
+void NodeReference::dispose(ThreadContext* ctx) throw() 
+{
+	if(this->nodeConnectionPool != nullptr)
+	{
+		this->nodeConnectionPool->dispose(ctx);
 	}
 }
 String* NodeReference::getHost(ThreadContext* ctx) throw() 

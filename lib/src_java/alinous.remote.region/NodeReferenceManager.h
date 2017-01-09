@@ -70,6 +70,7 @@ private:
 	LockObject* lock;
 public:
 	void syncNodeReference(RegionInfoData* data, ThreadContext* ctx) throw() ;
+	void dispose(ThreadContext* ctx) throw() ;
 	Map<String,NodeTableClaster>* getTablesDictinary(ThreadContext* ctx) throw() ;
 	long long getRevision(ThreadContext* ctx) throw() ;
 private:

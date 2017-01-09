@@ -101,6 +101,7 @@ private:
 	static String* THREAD_NAME;
 public:
 	void initNodes(RegionsServer* srvconf, ThreadContext* ctx);
+	void syncScheme(ThreadContext* ctx) throw() ;
 	void syncNodes(ThreadContext* ctx);
 	void start(ISystemLog* logger, ThreadContext* ctx) throw() ;
 	void dispose(ThreadContext* ctx) throw() ;
