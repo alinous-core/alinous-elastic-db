@@ -4,6 +4,8 @@ template class alinous::MemoryUtils<::alinous::HashMapInternalElement<::java::la
 template class alinous::MemoryUtils<::alinous::HashMapInternalElement<::java::lang::String, ::java::lang::String>>;
 template class alinous::MemoryUtils<::alinous::HashMapInternalElement<::java::lang::String, ::alinous::db::table::lockmonitor::IThreadLocker>>;
 template class alinous::MemoryUtils<::alinous::HashMapInternalElement<::alinous::html::DomNode, ::java::util::ArrayList<::alinous::html::xpath::match::MatchCandidate>>>;
+template class alinous::MemoryUtils<::alinous::HashMapInternalElement<::java::lang::String, ::alinous::remote::db::command::data::TableClusterData>>;
+template class alinous::MemoryUtils<::alinous::HashMapInternalElement<::java::lang::String, ::alinous::remote::db::command::data::SchemaData>>;
 template class alinous::MemoryUtils<::alinous::HashMapInternalElement<::java::lang::String, ::alinous::remote::monitor::RegionNodeInfo>>;
 template class alinous::MemoryUtils<::alinous::HashMapInternalElement<::java::lang::String, ::alinous::remote::region::NodeTableClaster>>;
 template class alinous::MemoryUtils<::alinous::HashMapInternalElement<::java::lang::String, ::alinous::remote::region::client::RemoteTableScheme>>;
@@ -39,6 +41,8 @@ template class alinous::MemoryUtils<::alinous::HashMapRawArray<::java::lang::Str
 template class alinous::MemoryUtils<::alinous::HashMapRawArray<::java::lang::String, ::java::lang::String>>;
 template class alinous::MemoryUtils<::alinous::HashMapRawArray<::java::lang::String, ::alinous::db::table::lockmonitor::IThreadLocker>>;
 template class alinous::MemoryUtils<::alinous::HashMapRawArray<::alinous::html::DomNode, ::java::util::ArrayList<::alinous::html::xpath::match::MatchCandidate>>>;
+template class alinous::MemoryUtils<::alinous::HashMapRawArray<::java::lang::String, ::alinous::remote::db::command::data::TableClusterData>>;
+template class alinous::MemoryUtils<::alinous::HashMapRawArray<::java::lang::String, ::alinous::remote::db::command::data::SchemaData>>;
 template class alinous::MemoryUtils<::alinous::HashMapRawArray<::java::lang::String, ::alinous::remote::monitor::RegionNodeInfo>>;
 template class alinous::MemoryUtils<::alinous::HashMapRawArray<::java::lang::String, ::alinous::remote::region::NodeTableClaster>>;
 template class alinous::MemoryUtils<::alinous::HashMapRawArray<::java::lang::String, ::alinous::remote::region::client::RemoteTableScheme>>;
@@ -978,6 +982,13 @@ template class alinous::MemoryUtils<alinous::ArrayObject<alinous::IArrayObject<:
 template class alinous::MemoryUtils<alinous::ArrayObject<::alinous::buffer::FifoElement<::alinous::server::webmodule::AbstractWebModule>>>;
 template class alinous::MemoryUtils<alinous::IArrayObject<alinous::ArrayObject<::alinous::buffer::FifoElement<::alinous::server::webmodule::AbstractWebModule>>>>;
 template class alinous::MemoryUtils<alinous::ArrayObject<alinous::ArrayObject<::alinous::buffer::FifoElement<::alinous::server::webmodule::AbstractWebModule>>>>;
+template class alinous::MemoryUtils<::alinous::remote::db::command::data::StorageNodeData>;
+template class alinous::MemoryUtils<alinous::IArrayObject<::alinous::remote::db::command::data::StorageNodeData>>;
+template class alinous::MemoryUtils<alinous::IArrayObject<alinous::IArrayObject<::alinous::remote::db::command::data::StorageNodeData>>>;
+template class alinous::MemoryUtils<alinous::ArrayObject<alinous::IArrayObject<::alinous::remote::db::command::data::StorageNodeData>>>;
+template class alinous::MemoryUtils<alinous::ArrayObject<::alinous::remote::db::command::data::StorageNodeData>>;
+template class alinous::MemoryUtils<alinous::IArrayObject<alinous::ArrayObject<::alinous::remote::db::command::data::StorageNodeData>>>;
+template class alinous::MemoryUtils<alinous::ArrayObject<alinous::ArrayObject<::alinous::remote::db::command::data::StorageNodeData>>>;
 template class alinous::MemoryUtils<::alinous::runtime::parallel::ConcurrentTaskQueue>;
 template class alinous::MemoryUtils<alinous::IArrayObject<::alinous::runtime::parallel::ConcurrentTaskQueue>>;
 template class alinous::MemoryUtils<alinous::IArrayObject<alinous::IArrayObject<::alinous::runtime::parallel::ConcurrentTaskQueue>>>;

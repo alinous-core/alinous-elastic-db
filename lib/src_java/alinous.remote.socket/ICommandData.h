@@ -32,6 +32,8 @@ public:
 	virtual ~ICommandData() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 public:
+	constexpr static const int IdentifierVariable{1};
+public:
 	virtual void readData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw()  = 0;
 	virtual void writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw()  = 0;
 public:

@@ -34,6 +34,9 @@ void NodeCluster::__releaseRegerences(bool prepare, ThreadContext* ctx) throw()
 		return;
 	}
 }
+void NodeCluster::getSchemeInfo(ThreadContext* ctx) throw() 
+{
+}
 void NodeCluster::update(RegionNodeInfo* refinfo, ThreadContext* ctx) throw() 
 {
 	List<NodeInfo>* list = refinfo->getNodes(ctx);

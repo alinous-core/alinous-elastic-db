@@ -104,6 +104,7 @@ template class ::java::util::ArrayList<::alinous::web::htmlxml::XHtmlAttribute>;
 template class ::java::util::ArrayList<::alinous::server::http::MimeHeader>;
 template class ::java::util::ArrayList<::alinous::server::http::MimePart>;
 template class ::java::util::ArrayList<::alinous::buffer::FifoElement<::alinous::server::webmodule::AbstractWebModule>>;
+template class ::java::util::ArrayList<::alinous::remote::db::command::data::StorageNodeData>;
 template class ::java::util::ArrayList<::alinous::remote::monitor::NodeInfo>;
 template class ::java::util::ArrayList<::alinous::remote::region::NodeTableReference>;
 template class ::java::util::ArrayList<::alinous::remote::region::NodeReference>;

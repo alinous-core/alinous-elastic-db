@@ -60,6 +60,7 @@ void NodeRegionServer::initNodes(RegionsServer* srvconf, ThreadContext* ctx)
 }
 void NodeRegionServer::syncScheme(ThreadContext* ctx) throw() 
 {
+	this->refs->syncSchemeTables(ctx);
 }
 void NodeRegionServer::syncNodes(ThreadContext* ctx)
 {

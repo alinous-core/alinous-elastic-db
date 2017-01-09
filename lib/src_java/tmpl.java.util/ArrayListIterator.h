@@ -115,6 +115,7 @@ template class ::java::util::ArrayListIterator<::alinous::web::htmlxml::XHtmlAtt
 template class ::java::util::ArrayListIterator<::alinous::server::http::MimeHeader>;
 template class ::java::util::ArrayListIterator<::alinous::server::http::MimePart>;
 template class ::java::util::ArrayListIterator<::alinous::buffer::FifoElement<::alinous::server::webmodule::AbstractWebModule>>;
+template class ::java::util::ArrayListIterator<::alinous::remote::db::command::data::StorageNodeData>;
 template class ::java::util::ArrayListIterator<::alinous::remote::monitor::NodeInfo>;
 template class ::java::util::ArrayListIterator<::alinous::remote::region::NodeTableReference>;
 template class ::java::util::ArrayListIterator<::alinous::remote::region::NodeReference>;

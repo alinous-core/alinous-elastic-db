@@ -47,6 +47,7 @@ public:
 private:
 	List<NodeReference>* nodes;
 public:
+	void getSchemeInfo(ThreadContext* ctx) throw() ;
 	void update(RegionNodeInfo* refinfo, ThreadContext* ctx) throw() ;
 	void addNode(NodeReference* nodeRef, ThreadContext* ctx) throw() ;
 	List<NodeReference>* getNodes(ThreadContext* ctx) throw() ;

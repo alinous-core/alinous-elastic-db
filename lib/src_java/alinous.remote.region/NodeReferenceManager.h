@@ -1,5 +1,11 @@
 #ifndef ALINOUS_REMOTE_REGION_NODEREFERENCEMANAGER_H_
 #define ALINOUS_REMOTE_REGION_NODEREFERENCEMANAGER_H_
+namespace java {namespace util {
+template <typename  T> class Iterator;}}
+
+namespace alinous {namespace remote {namespace region {
+class NodeCluster;}}}
+
 namespace alinous {namespace remote {namespace monitor {namespace command {namespace data {
 class RegionInfoData;}}}}}
 
@@ -8,12 +14,6 @@ template <typename  T, typename V> class Map;}}
 
 namespace alinous {namespace remote {namespace monitor {
 class RegionNodeInfo;}}}
-
-namespace java {namespace util {
-template <typename  T> class Iterator;}}
-
-namespace alinous {namespace remote {namespace region {
-class NodeCluster;}}}
 
 namespace java {namespace util {
 template <typename  T> class List;}}
@@ -69,11 +69,13 @@ private:
 	HashMap<String,NodeCluster>* nodeReferences;
 	LockObject* lock;
 public:
+	void syncSchemeTables(ThreadContext* ctx) throw() ;
 	void syncNodeReference(RegionInfoData* data, ThreadContext* ctx) throw() ;
 	void dispose(ThreadContext* ctx) throw() ;
 	Map<String,NodeTableClaster>* getTablesDictinary(ThreadContext* ctx) throw() ;
 	long long getRevision(ThreadContext* ctx) throw() ;
 private:
+	void doSyncSchemeTables(ThreadContext* ctx) throw() ;
 	void doSyncRegionNodes(Map<String,RegionNodeInfo>* regionsMap, ThreadContext* ctx) throw() ;
 public:
 	static bool __init_done;

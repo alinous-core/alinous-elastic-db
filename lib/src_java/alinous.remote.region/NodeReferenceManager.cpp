@@ -38,6 +38,13 @@ void NodeReferenceManager::__releaseRegerences(bool prepare, ThreadContext* ctx)
 		return;
 	}
 }
+void NodeReferenceManager::syncSchemeTables(ThreadContext* ctx) throw() 
+{
+	{
+		SynchronizedBlockObj __synchronized_2(this->lock, ctx);
+		doSyncSchemeTables(ctx);
+	}
+}
 void NodeReferenceManager::syncNodeReference(RegionInfoData* data, ThreadContext* ctx) throw() 
 {
 	{
@@ -65,6 +72,16 @@ long long NodeReferenceManager::getRevision(ThreadContext* ctx) throw()
 	{
 		SynchronizedBlockObj __synchronized_2(this->lock, ctx);
 		return revision;
+	}
+}
+void NodeReferenceManager::doSyncSchemeTables(ThreadContext* ctx) throw() 
+{
+	Iterator<String>* it = this->nodeReferences->keySet(ctx)->iterator(ctx);
+	while(it->hasNext(ctx))
+	{
+		String* regionName = it->next(ctx);
+		NodeCluster* region = this->nodeReferences->get(regionName, ctx);
+		region->getSchemeInfo(ctx);
 	}
 }
 void NodeReferenceManager::doSyncRegionNodes(Map<String,RegionNodeInfo>* regionsMap, ThreadContext* ctx) throw() 

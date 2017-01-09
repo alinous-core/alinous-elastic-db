@@ -908,6 +908,13 @@ template class alinous::IArrayObject<alinous::ArrayObject<alinous::IArrayObject<
 template class alinous::IArrayObject<alinous::ArrayObject<::alinous::buffer::FifoElement<::alinous::server::webmodule::AbstractWebModule>>>;
 template class alinous::IArrayObject<alinous::IArrayObject<alinous::ArrayObject<::alinous::buffer::FifoElement<::alinous::server::webmodule::AbstractWebModule>>>>;
 template class alinous::IArrayObject<alinous::ArrayObject<alinous::ArrayObject<::alinous::buffer::FifoElement<::alinous::server::webmodule::AbstractWebModule>>>>;
+template class alinous::IArrayObject<::alinous::remote::db::command::data::StorageNodeData>;
+template class alinous::IArrayObject<alinous::IArrayObject<::alinous::remote::db::command::data::StorageNodeData>>;
+template class alinous::IArrayObject<alinous::IArrayObject<alinous::IArrayObject<::alinous::remote::db::command::data::StorageNodeData>>>;
+template class alinous::IArrayObject<alinous::ArrayObject<alinous::IArrayObject<::alinous::remote::db::command::data::StorageNodeData>>>;
+template class alinous::IArrayObject<alinous::ArrayObject<::alinous::remote::db::command::data::StorageNodeData>>;
+template class alinous::IArrayObject<alinous::IArrayObject<alinous::ArrayObject<::alinous::remote::db::command::data::StorageNodeData>>>;
+template class alinous::IArrayObject<alinous::ArrayObject<alinous::ArrayObject<::alinous::remote::db::command::data::StorageNodeData>>>;
 template class alinous::IArrayObject<::alinous::runtime::parallel::ConcurrentTaskQueue>;
 template class alinous::IArrayObject<alinous::IArrayObject<::alinous::runtime::parallel::ConcurrentTaskQueue>>;
 template class alinous::IArrayObject<alinous::IArrayObject<alinous::IArrayObject<::alinous::runtime::parallel::ConcurrentTaskQueue>>>;

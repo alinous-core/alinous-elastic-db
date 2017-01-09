@@ -6,6 +6,7 @@ namespace alinous {namespace remote {namespace socket {
 
 
 
+constexpr const int ICommandData::IdentifierVariable;
 bool ICommandData::__init_done = __init_static_variables();
 bool ICommandData::__init_static_variables(){
 	Java2CppSystem::getSelf();

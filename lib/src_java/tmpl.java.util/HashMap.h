@@ -28,6 +28,8 @@ template class ::java::util::HashMap<::java::lang::String, ::alinous::db::table:
 template class ::java::util::HashMap<::java::lang::String, ::alinous::db::trx::cache::TrxRecordsCache>;
 template class ::java::util::HashMap<::java::lang::String, ::java::util::HashMap<::java::lang::String, ::alinous::db::trx::cache::TrxRecordsCache>>;
 template class ::java::util::HashMap<::alinous::html::DomNode, ::java::util::ArrayList<::alinous::html::xpath::match::MatchCandidate>>;
+template class ::java::util::HashMap<::java::lang::String, ::alinous::remote::db::command::data::TableClusterData>;
+template class ::java::util::HashMap<::java::lang::String, ::alinous::remote::db::command::data::SchemaData>;
 template class ::java::util::HashMap<::java::lang::String, ::alinous::remote::monitor::RegionNodeInfo>;
 template class ::java::util::HashMap<::java::lang::String, ::alinous::remote::region::NodeTableClaster>;
 template class ::java::util::HashMap<::java::lang::String, ::alinous::remote::region::NodeCluster>;

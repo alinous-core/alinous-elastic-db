@@ -826,6 +826,10 @@
 #include "alinous.server.webmodule/BinaryModuleStream.h"
 #include "alinous.server.webmodule/BinaryModule.h"
 #include "alinous.remote.db.client/RemoteTableStorageClient.h"
+#include "alinous.remote.db.command.data/StorageNodeData.h"
+#include "alinous.remote.db.command.data/TableClusterData.h"
+#include "alinous.remote.db.command.data/SchemaData.h"
+#include "alinous.remote.db.command.data/SchemasStructureInfoData.h"
 #include "alinous.remote.region.client/DatabaseTableClient.h"
 
 
@@ -1692,6 +1696,10 @@ inline static void __cleanUpStatics(alinous::ThreadContext* ctx){
 	alinous::remote::db::command::RemoteStorageConnectCommand::__cleanUp(ctx);
 	alinous::remote::db::command::FinishRemoteStorageConnectionCommand::__cleanUp(ctx);
 	alinous::remote::db::command::VoidRemoteStorageCommand::__cleanUp(ctx);
+	alinous::remote::db::command::data::StorageNodeData::__cleanUp(ctx);
+	alinous::remote::db::command::data::TableClusterData::__cleanUp(ctx);
+	alinous::remote::db::command::data::SchemaData::__cleanUp(ctx);
+	alinous::remote::db::command::data::SchemasStructureInfoData::__cleanUp(ctx);
 	alinous::remote::monitor::MonitorResponseActionFactory::__cleanUp(ctx);
 	alinous::remote::monitor::TransactionMonitorServer::__cleanUp(ctx);
 	alinous::remote::monitor::MonitorResponceAction::__cleanUp(ctx);
