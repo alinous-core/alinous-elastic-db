@@ -66,5 +66,30 @@ RegionNodeInfoManager* RegionNodeInfoManager::init(Monitor* monitorConf, ThreadC
 	}
 	return this;
 }
+long long RegionNodeInfoManager::updateNodeClusterRevision(long long nodeClusterRevision, ThreadContext* ctx) throw() 
+{
+	{
+		SynchronizedBlockObj __synchronized_2(this->lock, ctx);
+		if(this->nodeClusterRevision < nodeClusterRevision)
+		{
+			this->nodeClusterRevision = nodeClusterRevision;
+		}
+		return this->nodeClusterRevision;
+	}
+}
+long long RegionNodeInfoManager::getNodeClusterRevision(ThreadContext* ctx) throw() 
+{
+	{
+		SynchronizedBlockObj __synchronized_2(this->lock, ctx);
+		return nodeClusterRevision;
+	}
+}
+void RegionNodeInfoManager::setNodeClusterRevision(long long nodeClusterRevision, ThreadContext* ctx) throw() 
+{
+	{
+		SynchronizedBlockObj __synchronized_2(this->lock, ctx);
+		this->nodeClusterRevision = nodeClusterRevision;
+	}
+}
 }}}
 

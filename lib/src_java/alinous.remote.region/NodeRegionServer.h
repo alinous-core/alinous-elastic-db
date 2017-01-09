@@ -96,6 +96,7 @@ private:
 	NodeReferenceManager* refs;
 	SocketServer* socketServer;
 	SocketConnectionPool* monitorConnectionPool;
+	long long nodeClusterRevision;
 private:
 	static String* THREAD_NAME;
 public:

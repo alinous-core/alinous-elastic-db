@@ -70,6 +70,10 @@ int TransactionMonitorServer::getPort(ThreadContext* ctx) throw()
 {
 	return port;
 }
+long long TransactionMonitorServer::updateNodeClusterRevision(long long nodeClusterRevision, ThreadContext* ctx) throw() 
+{
+	return this->nodeInfo->updateNodeClusterRevision(nodeClusterRevision, ctx);
+}
 long long TransactionMonitorServer::getNextCommitId(ThreadContext* ctx) throw() 
 {
 	this->lastCommitId ++ ;

@@ -18,7 +18,7 @@ bool GetRegionNodeInfoCommand::__init_static_variables(){
 	delete ctx;
 	return true;
 }
- GetRegionNodeInfoCommand::GetRegionNodeInfoCommand(ThreadContext* ctx) throw()  : IObject(ctx), AbstractMonitorCommand(ctx), regionData(__GC_INS(this, (new(ctx) RegionInfoData(ctx)), RegionInfoData))
+ GetRegionNodeInfoCommand::GetRegionNodeInfoCommand(ThreadContext* ctx) throw()  : IObject(ctx), AbstractMonitorCommand(ctx), regionData(__GC_INS(this, (new(ctx) RegionInfoData(ctx)), RegionInfoData)), nodeClusterRevision(0)
 {
 	this->type = AbstractMonitorCommand::TYPE_GET_REGION_INFO;
 }
@@ -46,6 +46,7 @@ void GetRegionNodeInfoCommand::__releaseRegerences(bool prepare, ThreadContext* 
 void GetRegionNodeInfoCommand::executeOnServer(TransactionMonitorServer* monitorServer, BufferedOutputStream* outStream, ThreadContext* ctx)
 {
 	monitorServer->getRegionInfo(this->regionData, ctx);
+	this->nodeClusterRevision = monitorServer->updateNodeClusterRevision(this->nodeClusterRevision, ctx);
 	writeByteStream(outStream, ctx);
 }
 void GetRegionNodeInfoCommand::readFromStream(InputStream* stream, int remain, ThreadContext* ctx)
@@ -53,16 +54,26 @@ void GetRegionNodeInfoCommand::readFromStream(InputStream* stream, int remain, T
 	IArrayObjectPrimitive<char>* src = ArrayAllocatorPrimitive<char>::allocatep(ctx, remain);
 	stream->read(src, ctx);
 	NetworkBinaryBuffer* buff = (new(ctx) NetworkBinaryBuffer(src, ctx));
+	this->nodeClusterRevision = buff->getLong(ctx);
 	this->regionData->readData(buff, ctx);
 }
 RegionInfoData* GetRegionNodeInfoCommand::getRegionData(ThreadContext* ctx) throw() 
 {
 	return regionData;
 }
+long long GetRegionNodeInfoCommand::getNodeClusterRevision(ThreadContext* ctx) throw() 
+{
+	return nodeClusterRevision;
+}
+void GetRegionNodeInfoCommand::setNodeClusterRevision(long long nodeClusterRevision, ThreadContext* ctx) throw() 
+{
+	this->nodeClusterRevision = nodeClusterRevision;
+}
 void GetRegionNodeInfoCommand::writeByteStream(OutputStream* out, ThreadContext* ctx)
 {
 	NetworkBinaryBuffer* buff = (new(ctx) NetworkBinaryBuffer(32, ctx));
 	buff->putInt(AbstractMonitorCommand::TYPE_GET_REGION_INFO, ctx);
+	buff->putLong(this->nodeClusterRevision, ctx);
 	this->regionData->writeData(buff, ctx);
 	IArrayObjectPrimitive<char>* b = buff->toBinary(ctx);
 	int pos = buff->getPutSize(ctx);

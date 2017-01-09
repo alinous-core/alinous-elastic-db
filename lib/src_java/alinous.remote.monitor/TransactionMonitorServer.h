@@ -68,6 +68,7 @@ public:
 	void start(ISystemLog* logger, ThreadContext* ctx) throw() ;
 	void dispose(ThreadContext* ctx) throw() ;
 	int getPort(ThreadContext* ctx) throw() ;
+	long long updateNodeClusterRevision(long long nodeClusterRevision, ThreadContext* ctx) throw() ;
 	long long getNextCommitId(ThreadContext* ctx) throw() ;
 	long long getNextOid(ThreadContext* ctx) throw() ;
 	RegionNodeInfoManager* getNodeInfo(ThreadContext* ctx) throw() ;

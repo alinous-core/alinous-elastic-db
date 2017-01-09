@@ -19,7 +19,7 @@ bool NodeRegionServer::__init_static_variables(){
 	delete ctx;
 	return true;
 }
- NodeRegionServer::NodeRegionServer(int port, int maxthread, ThreadContext* ctx) throw()  : IObject(ctx), port(0), maxthread(0), refs(nullptr), socketServer(nullptr), monitorConnectionPool(nullptr)
+ NodeRegionServer::NodeRegionServer(int port, int maxthread, ThreadContext* ctx) throw()  : IObject(ctx), port(0), maxthread(0), refs(nullptr), socketServer(nullptr), monitorConnectionPool(nullptr), nodeClusterRevision(0)
 {
 	this->port = port;
 	this->maxthread = maxthread;
@@ -60,6 +60,7 @@ void NodeRegionServer::initNodes(RegionsServer* srvconf, ThreadContext* ctx)
 void NodeRegionServer::syncNodes(ThreadContext* ctx)
 {
 	GetRegionNodeInfoCommand* cmd = (new(ctx) GetRegionNodeInfoCommand(ctx));
+	cmd->setNodeClusterRevision(this->nodeClusterRevision, ctx);
 	ISocketConnection* con = nullptr;
 	{
 		std::function<void(void)> finallyLm2= [&, this]()
@@ -79,6 +80,7 @@ void NodeRegionServer::syncNodes(ThreadContext* ctx)
 			cmd = static_cast<GetRegionNodeInfoCommand*>(retcmd);
 			RegionInfoData* data = cmd->getRegionData(ctx);
 			this->refs->syncNodeReference(data, ctx);
+			this->nodeClusterRevision = cmd->getNodeClusterRevision(ctx);
 		}
 		catch(...){throw;}
 	}

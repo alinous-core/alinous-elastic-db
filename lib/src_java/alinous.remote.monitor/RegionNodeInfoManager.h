@@ -66,7 +66,7 @@ class RegionNodeInfoManager final : public virtual IObject {
 public:
 	RegionNodeInfoManager(const RegionNodeInfoManager& base) = default;
 public:
-	RegionNodeInfoManager(ThreadContext* ctx) throw()  : IObject(ctx), regionsMap(GCUtils<Map<String,RegionNodeInfo> >::ins(this, (new(ctx) HashMap<String,RegionNodeInfo>(ctx)), ctx, __FILEW__, __LINE__, L"")), lock(__GC_INS(this, (new(ctx) LockObject(ctx)), LockObject))
+	RegionNodeInfoManager(ThreadContext* ctx) throw()  : IObject(ctx), regionsMap(GCUtils<Map<String,RegionNodeInfo> >::ins(this, (new(ctx) HashMap<String,RegionNodeInfo>(ctx)), ctx, __FILEW__, __LINE__, L"")), lock(__GC_INS(this, (new(ctx) LockObject(ctx)), LockObject)), nodeClusterRevision(0)
 	{
 	}
 	void __construct_impl(ThreadContext* ctx) throw() 
@@ -77,9 +77,13 @@ public:
 private:
 	Map<String,RegionNodeInfo>* regionsMap;
 	LockObject* lock;
+	long long nodeClusterRevision;
 public:
 	void getRegionInfoData(RegionInfoData* data, ThreadContext* ctx) throw() ;
 	RegionNodeInfoManager* init(Monitor* monitorConf, ThreadContext* ctx);
+	long long updateNodeClusterRevision(long long nodeClusterRevision, ThreadContext* ctx) throw() ;
+	long long getNodeClusterRevision(ThreadContext* ctx) throw() ;
+	void setNodeClusterRevision(long long nodeClusterRevision, ThreadContext* ctx) throw() ;
 public:
 	static bool __init_done;
 	static bool __init_static_variables();
