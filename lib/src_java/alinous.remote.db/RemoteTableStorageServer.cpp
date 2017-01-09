@@ -7,8 +7,9 @@ namespace alinous {namespace remote {namespace db {
 
 
 
-String* RemoteTableStorageServer::THREAD_NAME = ConstStr::getCNST_STR_3486();
+String* RemoteTableStorageServer::THREAD_NAME = ConstStr::getCNST_STR_3487();
 const IntKey RemoteTableStorageServer:: __SCHEMA = (IntKey(10, nullptr));
+const IntKey RemoteTableStorageServer:: __SCHEMA_VERSION = (IntKey(11, nullptr));
 bool RemoteTableStorageServer::__init_done = __init_static_variables();
 bool RemoteTableStorageServer::__init_static_variables(){
 	Java2CppSystem::getSelf();
@@ -20,7 +21,7 @@ bool RemoteTableStorageServer::__init_static_variables(){
 	delete ctx;
 	return true;
 }
- RemoteTableStorageServer::RemoteTableStorageServer(int port, int maxthread, String* datadir, ThreadContext* ctx) throw()  : IObject(ctx), schemas(nullptr), port(0), maxthread(0), dataDir(nullptr), socketServer(nullptr), btreeCache(nullptr), workerThreadsPool(nullptr), core(nullptr), dbconfig(nullptr), configFile(nullptr)
+ RemoteTableStorageServer::RemoteTableStorageServer(int port, int maxthread, String* datadir, ThreadContext* ctx) throw()  : IObject(ctx), schemas(nullptr), BLOCK_SIZE(256), nodeCapacity(8), capacity(1024), port(0), maxthread(0), dataDir(nullptr), socketServer(nullptr), btreeCache(nullptr), workerThreadsPool(nullptr), core(nullptr), dbconfig(nullptr), configFile(nullptr), schemaVersion(0)
 {
 	this->port = port;
 	this->maxthread = maxthread;
@@ -95,15 +96,69 @@ bool RemoteTableStorageServer::exists(ThreadContext* ctx) throw()
 void RemoteTableStorageServer::start(AlinousCore* core, ThreadContext* ctx)
 {
 	__GC_MV(this, &(this->core), core, AlinousCore);
+	File* file = getConfigFile(ctx);
+	{
+		try
+		{
+			__GC_MV(this, &(this->dbconfig), (new(ctx) BTree(ctx))->init(file, this->btreeCache, core->diskCache, ctx), BTree);
+			this->dbconfig->open(ctx);
+			ArrayList<IBTreeValue>* schemeValue = this->dbconfig->getValues(SCHEMA, ctx);
+			__GC_MV(this, &(this->schemas), static_cast<SchemaManager*>(schemeValue->get(0, ctx)), SchemaManager);
+			this->schemas->loadAfterFetch(this->dataDir, this->core->getLogger(ctx), this->workerThreadsPool, this->core, this->btreeCache, ctx);
+			ArrayList<IBTreeValue>* schemeVersionValue = this->dbconfig->getValues(SCHEMA_VERSION, ctx);
+			LongValue* lv = static_cast<LongValue*>(schemeVersionValue->get(0, ctx));
+			this->schemaVersion = lv->value;
+		}
+		catch(IOException* e)
+		{
+			throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_3486(), ctx));
+		}
+		catch(InterruptedException* e)
+		{
+			throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_3486(), ctx));
+		}
+		catch(BTreeException* e)
+		{
+			throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_3486(), ctx));
+		}
+		catch(VariableException* e)
+		{
+			throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_3486(), ctx));
+		}
+		catch(DatabaseException* e)
+		{
+			throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_3486(), ctx));
+		}
+		catch(AlinousException* e)
+		{
+			throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_3486(), ctx));
+		}
+	}
 	RemoteStorageResponceActionFactory* factory = (new(ctx) RemoteStorageResponceActionFactory(this, ctx));
 	__GC_MV(this, &(this->socketServer), (new(ctx) SocketServer(this->port, core->getLogger(ctx), factory, ctx)), SocketServer);
 	this->socketServer->start(this->maxthread, RemoteTableStorageServer::THREAD_NAME, ctx);
-	__GC_MV(this, &(this->schemas), (new(ctx) SchemaManager(this->dataDir, core->getLogger(ctx), this->workerThreadsPool, core, this->btreeCache, ctx)), SchemaManager);
 }
 void RemoteTableStorageServer::dispose(ThreadContext* ctx) throw() 
 {
 	this->socketServer->dispose(ctx);
 	this->workerThreadsPool->dispose(ctx);
+	if(this->dbconfig != nullptr)
+	{
+		{
+			try
+			{
+				this->dbconfig->close(ctx);
+			}
+			catch(IOException* e)
+			{
+				this->core->getLogger(ctx)->logError(e, ctx);
+			}
+			catch(InterruptedException* e)
+			{
+				this->core->getLogger(ctx)->logError(e, ctx);
+			}
+		}
+	}
 }
 AlinousCore* RemoteTableStorageServer::getCore(ThreadContext* ctx) throw() 
 {
@@ -111,9 +166,6 @@ AlinousCore* RemoteTableStorageServer::getCore(ThreadContext* ctx) throw()
 }
 void RemoteTableStorageServer::initInstance(AlinousCore* core, ThreadContext* ctx)
 {
-	int BLOCK_SIZE = 256;
-	int nodeCapacity = 8;
-	long long capacity = 1024;
 	{
 		std::function<void(void)> finallyLm2= [&, this]()
 		{
@@ -149,6 +201,9 @@ void RemoteTableStorageServer::initInstance(AlinousCore* core, ThreadContext* ct
 			this->dbconfig->initTreeStorage(nodeCapacity, IBTreeKey::TYPE_INT, IBTreeKey::TYPE_INT, capacity, (long long)BLOCK_SIZE, ctx);
 			this->dbconfig->open(ctx);
 			this->dbconfig->putKeyValue(SCHEMA, schemas, ctx);
+			this->schemaVersion = 1;
+			IBTreeValue* schemeValue = (new(ctx) LongValue(this->schemaVersion, ctx));
+			this->dbconfig->putKeyValue(SCHEMA_VERSION, schemeValue, ctx);
 		}
 		catch(IOException* e)
 		{

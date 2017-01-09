@@ -24,6 +24,12 @@ class SchemaManager;}}
 namespace alinous {namespace btree {
 class BTree;}}
 
+namespace alinous {namespace btree {
+class IBTreeValue;}}
+
+namespace alinous {namespace btree {
+class LongValue;}}
+
 namespace alinous {namespace db {
 class AlinousDbException;}}
 
@@ -35,6 +41,12 @@ class InterruptedException;}}
 
 namespace alinous {namespace runtime {namespace dom {
 class VariableException;}}}
+
+namespace alinous {namespace db {namespace table {
+class DatabaseException;}}}
+
+namespace alinous {namespace system {
+class AlinousException;}}
 
 namespace alinous {namespace remote {namespace db {
 class RemoteStorageResponceActionFactory;}}}
@@ -63,17 +75,22 @@ using namespace ::java::lang;
 using ::java::util::Iterator;
 using ::java::io::File;
 using ::java::io::IOException;
+using ::java::util::ArrayList;
 using ::alinous::btree::BTree;
 using ::alinous::btree::BTreeException;
 using ::alinous::btree::BTreeGlobalCache;
 using ::alinous::btree::IBTreeKey;
+using ::alinous::btree::IBTreeValue;
 using ::alinous::btree::IntKey;
+using ::alinous::btree::LongValue;
 using ::alinous::db::AlinousDbException;
 using ::alinous::db::SchemaManager;
+using ::alinous::db::table::DatabaseException;
 using ::alinous::remote::socket::SocketServer;
 using ::alinous::runtime::dom::VariableException;
 using ::alinous::runtime::parallel::ThreadPool;
 using ::alinous::system::AlinousCore;
+using ::alinous::system::AlinousException;
 using ::alinous::system::config::AlinousInitException;
 
 
@@ -89,6 +106,9 @@ public:
 public:
 	SchemaManager* schemas;
 private:
+	int BLOCK_SIZE;
+	int nodeCapacity;
+	long long capacity;
 	int port;
 	int maxthread;
 	String* dataDir;
@@ -98,9 +118,12 @@ private:
 	AlinousCore* core;
 	BTree* dbconfig;
 	File* configFile;
+	long long schemaVersion;
 public:
 	const static IntKey __SCHEMA;
 	constexpr static IntKey* SCHEMA{const_cast<IntKey*>(&__SCHEMA)};
+	const static IntKey __SCHEMA_VERSION;
+	constexpr static IntKey* SCHEMA_VERSION{const_cast<IntKey*>(&__SCHEMA_VERSION)};
 private:
 	static String* THREAD_NAME;
 public:
