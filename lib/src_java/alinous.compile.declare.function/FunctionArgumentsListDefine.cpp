@@ -81,7 +81,7 @@ bool FunctionArgumentsListDefine::analyse(SrcAnalyseContext* context, bool leftV
 String* FunctionArgumentsListDefine::toString(ThreadContext* ctx) throw() 
 {
 	StringBuffer* buff = (new(ctx) StringBuffer(ctx));
-	buff->append(ConstStr::getCNST_STR_972(), ctx);
+	buff->append(ConstStr::getCNST_STR_991(), ctx);
 	int maxLoop = this->list->size(ctx);
 	for(int i = 0; i != maxLoop; ++i)
 	{
@@ -126,6 +126,30 @@ AbstractSrcElement* FunctionArgumentsListDefine::getParent(ThreadContext* ctx) t
 void FunctionArgumentsListDefine::setParent(AbstractSrcElement* parent, ThreadContext* ctx) throw() 
 {
 	IDeclare::setParent(parent, ctx);
+}
+void FunctionArgumentsListDefine::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
+{
+	int maxLoop = buff->getInt(ctx);
+	for(int i = 0; i < maxLoop; ++i)
+	{
+		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
+		if(el == nullptr || !((dynamic_cast<FunctionArgumentDefine*>(el) != 0)))
+		{
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_992(), ctx));
+		}
+		this->list->add(static_cast<FunctionArgumentDefine*>(el), ctx);
+	}
+}
+void FunctionArgumentsListDefine::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+{
+	buff->putInt(ICommandData::__FunctionArgumentsListDefine, ctx);
+	int maxLoop = this->list->size(ctx);
+	buff->putInt(maxLoop, ctx);
+	for(int i = 0; i < maxLoop; ++i)
+	{
+		FunctionArgumentDefine* exp = this->list->get(i, ctx);
+		exp->writeData(buff, ctx);
+	}
 }
 }}}}
 

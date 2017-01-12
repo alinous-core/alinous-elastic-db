@@ -96,5 +96,29 @@ int FunctionArguments::getExpressionType(ThreadContext* ctx) throw()
 {
 	return IExpression::functionArguments;
 }
+void FunctionArguments::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
+{
+	int maxLoop = buff->getInt(ctx);
+	for(int i = 0; i < maxLoop; ++i)
+	{
+		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
+		if(el == nullptr || !((dynamic_cast<IExpression*>(el) != 0)))
+		{
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_980(), ctx));
+		}
+		this->arguments->add(static_cast<IExpression*>(el), ctx);
+	}
+}
+void FunctionArguments::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+{
+	buff->putInt(ICommandData::__FunctionArguments, ctx);
+	int maxLoop = this->arguments->size(ctx);
+	buff->putInt(maxLoop, ctx);
+	for(int i = 0; i < maxLoop; ++i)
+	{
+		IExpression* exp = this->arguments->get(i, ctx);
+		exp->writeData(buff, ctx);
+	}
+}
 }}}
 

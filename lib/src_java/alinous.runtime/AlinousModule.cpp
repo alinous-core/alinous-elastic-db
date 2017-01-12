@@ -18,7 +18,7 @@ bool AlinousModule::__init_static_variables(){
 	delete ctx;
 	return true;
 }
- AlinousModule::AlinousModule(String* path, File* file, AlinousSrc* moduleSource, AlinousCore* core, ThreadContext* ctx) : IObject(ctx), packageName(nullptr), path(nullptr), debugPath(nullptr), file(nullptr), compiledTime(0), moduleSource(nullptr), setupper(nullptr), core(nullptr), parent(nullptr), includedModules(GCUtils<ArrayList<AlinousModule> >::ins(this, (new(ctx) ArrayList<AlinousModule>(ctx)), ctx, __FILEW__, __LINE__, L"")), functionMap(GCUtils<HashMap<String,AlinousFunction> >::ins(this, (new(ctx) HashMap<String,AlinousFunction>(ctx)), ctx, __FILEW__, __LINE__, L""))
+ AlinousModule::AlinousModule(String* path, File* file, AlinousSrc* moduleSource, AlinousCore* core, ThreadContext* ctx) : IObject(ctx), IAlinousElement(ctx), packageName(nullptr), path(nullptr), debugPath(nullptr), file(nullptr), compiledTime(0), moduleSource(nullptr), setupper(nullptr), core(nullptr), parent(nullptr), includedModules(GCUtils<ArrayList<AlinousModule> >::ins(this, (new(ctx) ArrayList<AlinousModule>(ctx)), ctx, __FILEW__, __LINE__, L"")), functionMap(GCUtils<HashMap<String,AlinousFunction> >::ins(this, (new(ctx) HashMap<String,AlinousFunction>(ctx)), ctx, __FILEW__, __LINE__, L""))
 {
 	__GC_MV(this, &(this->debugPath), file->getAbsolutePath(ctx), String);
 	__GC_MV(this, &(this->debugPath), FileUtils::formatAfterAbsolutePath(this->debugPath, ctx), String);
@@ -77,6 +77,7 @@ void AlinousModule::__releaseRegerences(bool prepare, ThreadContext* ctx) throw(
 	if(!prepare){
 		return;
 	}
+	IAlinousElement::__releaseRegerences(true, ctx);
 }
 IAlinousVariable* AlinousModule::execute(ScriptMachine* machine, bool degug, ThreadContext* ctx)
 {
@@ -92,7 +93,7 @@ AlinousType* AlinousModule::getFunctionReturnType(String* prefix, String* name, 
 	StringBuffer* buff = (new(ctx) StringBuffer(ctx));
 	if(prefix != nullptr)
 	{
-		buff->append(prefix, ctx)->append(ConstStr::getCNST_STR_947(), ctx);
+		buff->append(prefix, ctx)->append(ConstStr::getCNST_STR_950(), ctx);
 	}
 	buff->append(name, ctx);
 	AlinousFunction* func = this->functionMap->get(buff->toString(ctx), ctx);
@@ -115,7 +116,7 @@ AlinousType* AlinousModule::getFunctionReturnType(String* prefix, String* name, 
 }
 bool AlinousModule::isfunctionPrefix(String* name, ThreadContext* ctx) throw() 
 {
-	String* prefix = name->clone(ctx)->append(ConstStr::getCNST_STR_947(), ctx);
+	String* prefix = name->clone(ctx)->append(ConstStr::getCNST_STR_950(), ctx);
 	Iterator<String>* it = functionMap->keySet(ctx)->iterator(ctx);
 	while(it->hasNext(ctx))
 	{
@@ -232,6 +233,50 @@ AlinousModule* AlinousModule::getParent(ThreadContext* ctx) throw()
 void AlinousModule::setParent(AlinousModule* parent, ThreadContext* ctx) throw() 
 {
 	__GC_MV(this, &(this->parent), parent, AlinousModule);
+}
+void AlinousModule::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
+{
+	bool isnull = buff->getBoolean(ctx);
+	if(!isnull)
+	{
+		String* str = buff->getString(ctx);
+		__GC_MV(this, &(this->packageName), (new(ctx) AlinousModulePackage(str, ctx)), AlinousModulePackage);
+	}
+	isnull = buff->getBoolean(ctx);
+	if(!isnull)
+	{
+		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
+		if(el == nullptr || !((dynamic_cast<AlinousSrc*>(el) != 0)))
+		{
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1094(), ctx));
+		}
+		__GC_MV(this, &(this->moduleSource), static_cast<AlinousSrc*>(el), AlinousSrc);
+	}
+}
+void AlinousModule::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+{
+	buff->putInt(ICommandData::__AlinousModule, ctx);
+	bool isnull = (this->packageName == nullptr);
+	buff->putBoolean(isnull, ctx);
+	if(!isnull)
+	{
+		String* str = this->packageName->toString(ctx);
+		buff->putString(str, ctx);
+	}
+	isnull = (this->moduleSource == nullptr);
+	buff->putBoolean(isnull, ctx);
+	if(!isnull)
+	{
+		this->moduleSource->writeData(buff, ctx);
+	}
+}
+bool AlinousModule::analyse(SrcAnalyseContext* context, bool leftValue, ThreadContext* ctx) throw() 
+{
+	if(this->moduleSource != nullptr)
+	{
+		this->moduleSource->analyse(context, false, ctx);
+	}
+	return true;
 }
 IAlinousVariable* AlinousModule::executeAsScript(ScriptMachine* machine, bool degug, ThreadContext* ctx)
 {

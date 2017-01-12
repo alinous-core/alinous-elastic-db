@@ -27,8 +27,23 @@ class IJoinTarget;}}}}}
 namespace alinous {namespace compile {namespace sql {namespace analyze {
 class SQLAnalyseContext;}}}}
 
+namespace alinous {namespace remote {namespace socket {
+class NetworkBinaryBuffer;}}}
+
+namespace alinous {namespace compile {
+class IAlinousElement;}}
+
+namespace alinous {namespace runtime {namespace dom {
+class VariableException;}}}
+
 namespace alinous {namespace compile {namespace sql {
 class AbstractSQLStatement;}}}
+
+namespace alinous {namespace compile {
+class AlinousElementNetworkFactory;}}
+
+namespace alinous {namespace remote {namespace socket {
+class ICommandData;}}}
 
 namespace alinous {
 class ThreadContext;
@@ -41,12 +56,17 @@ using namespace ::java::lang;
 using ::java::util::Iterator;
 using ::java::util::ArrayList;
 using ::alinous::compile::AbstractSrcElement;
+using ::alinous::compile::AlinousElementNetworkFactory;
+using ::alinous::compile::IAlinousElement;
 using ::alinous::compile::IAlinousElementVisitor;
 using ::alinous::compile::analyse::SourceValidator;
 using ::alinous::compile::analyse::SrcAnalyseContext;
 using ::alinous::compile::sql::analyze::SQLAnalyseContext;
 using ::alinous::compile::sql::select::join::IJoinTarget;
 using ::alinous::compile::sql::select::join::TableJoinTarget;
+using ::alinous::remote::socket::ICommandData;
+using ::alinous::remote::socket::NetworkBinaryBuffer;
+using ::alinous::runtime::dom::VariableException;
 
 
 
@@ -80,6 +100,8 @@ public:
 	void setTable(IJoinTarget* table, ThreadContext* ctx) throw() ;
 	ArrayList<String>* getColumns(ThreadContext* ctx) throw() ;
 	void analyzeSQL(SQLAnalyseContext* context, bool debug, ThreadContext* ctx) throw()  final;
+	void readData(NetworkBinaryBuffer* buff, ThreadContext* ctx) final;
+	void writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw()  final;
 public:
 	static bool __init_done;
 	static bool __init_static_variables();

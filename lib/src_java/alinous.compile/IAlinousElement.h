@@ -9,6 +9,9 @@ class SrcAnalyseContext;}}}
 namespace alinous {namespace compile {
 class AbstractSrcElement;}}
 
+namespace alinous {namespace remote {namespace socket {
+class ICommandData;}}}
+
 namespace alinous {
 class ThreadContext;
 }
@@ -19,14 +22,15 @@ using namespace ::alinous;
 using namespace ::java::lang;
 using ::java::util::Iterator;
 using ::alinous::compile::analyse::SrcAnalyseContext;
+using ::alinous::remote::socket::ICommandData;
 
 
 
-class IAlinousElement : public AbstractSrcElement {
+class IAlinousElement : public AbstractSrcElement, public ICommandData {
 public:
 	IAlinousElement(const IAlinousElement& base) = default;
 public:
-	IAlinousElement(ThreadContext* ctx) throw()  : IObject(ctx), AbstractSrcElement(ctx)
+	IAlinousElement(ThreadContext* ctx) throw()  : IObject(ctx), AbstractSrcElement(ctx), ICommandData(ctx)
 	{
 	}
 	void __construct_impl(ThreadContext* ctx) throw() 

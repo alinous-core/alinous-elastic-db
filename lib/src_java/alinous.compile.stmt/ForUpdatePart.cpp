@@ -98,5 +98,55 @@ void ForUpdatePart::setOpe(String* ope, ThreadContext* ctx) throw()
 {
 	__GC_MV(this, &(this->ope), ope, String);
 }
+void ForUpdatePart::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
+{
+	bool isnull = buff->getBoolean(ctx);
+	if(!isnull)
+	{
+		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
+		if(el == nullptr || !((dynamic_cast<IExpression*>(el) != 0)))
+		{
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_980(), ctx));
+		}
+		__GC_MV(this, &(this->left), static_cast<IExpression*>(el), IExpression);
+	}
+	isnull = buff->getBoolean(ctx);
+	if(!isnull)
+	{
+		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
+		if(el == nullptr || !((dynamic_cast<IExpression*>(el) != 0)))
+		{
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_980(), ctx));
+		}
+		__GC_MV(this, &(this->right), static_cast<IExpression*>(el), IExpression);
+	}
+	isnull = buff->getBoolean(ctx);
+	if(!isnull)
+	{
+		__GC_MV(this, &(this->ope), buff->getString(ctx), String);
+	}
+}
+void ForUpdatePart::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+{
+	buff->putInt(ICommandData::__ForUpdatePart, ctx);
+	bool isnull = (this->left == nullptr);
+	buff->putBoolean(isnull, ctx);
+	if(!isnull)
+	{
+		this->left->writeData(buff, ctx);
+	}
+	isnull = (this->right == nullptr);
+	buff->putBoolean(isnull, ctx);
+	if(!isnull)
+	{
+		this->right->writeData(buff, ctx);
+	}
+	isnull = (this->ope == nullptr);
+	buff->putBoolean(isnull, ctx);
+	if(!isnull)
+	{
+		buff->putString(this->ope, ctx);
+	}
+}
 }}}
 

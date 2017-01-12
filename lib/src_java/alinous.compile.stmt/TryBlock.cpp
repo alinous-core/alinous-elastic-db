@@ -51,5 +51,12 @@ IStatement::StatementType TryBlock::getType(ThreadContext* ctx) throw()
 {
 	return StatementType::TRY_STATEMENT;
 }
+void TryBlock::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
+{
+}
+void TryBlock::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+{
+	buff->putInt(ICommandData::__TryBlock, ctx);
+}
 }}}
 

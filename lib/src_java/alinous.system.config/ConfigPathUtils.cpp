@@ -33,14 +33,14 @@ void ConfigPathUtils::__releaseRegerences(bool prepare, ThreadContext* ctx) thro
 }
 String* ConfigPathUtils::getAbsDirPath(String* base, String* path, ThreadContext* ctx) throw() 
 {
-	if(path->startsWith(ConstStr::getCNST_STR_984(), ctx))
+	if(path->startsWith(ConstStr::getCNST_STR_1007(), ctx))
 	{
 		return path;
 	}
-	bool baseAbsolute = base->startsWith(ConstStr::getCNST_STR_984(), ctx);
+	bool baseAbsolute = base->startsWith(ConstStr::getCNST_STR_1007(), ctx);
 	Stack<String>* baseList = toList(base, ctx);
 	Stack<String>* ref = toList(path, ctx);
-	if(!base->endsWith(ConstStr::getCNST_STR_984(), ctx))
+	if(!base->endsWith(ConstStr::getCNST_STR_1007(), ctx))
 	{
 		baseList->pop(ctx);
 	}
@@ -48,13 +48,13 @@ String* ConfigPathUtils::getAbsDirPath(String* base, String* path, ThreadContext
 	while(it->hasNext(ctx))
 	{
 		String* pa = it->next(ctx);
-		if(pa->equals(ConstStr::getCNST_STR_1181(), ctx))
+		if(pa->equals(ConstStr::getCNST_STR_1232(), ctx))
 		{
 			baseList->pop(ctx);
 		}
 				else 
 		{
-			if(pa->equals(ConstStr::getCNST_STR_947(), ctx))
+			if(pa->equals(ConstStr::getCNST_STR_950(), ctx))
 			{
 				continue;
 			}
@@ -67,20 +67,20 @@ String* ConfigPathUtils::getAbsDirPath(String* base, String* path, ThreadContext
 	StringBuffer* buffer = (new(ctx) StringBuffer(ctx));
 	if(baseAbsolute)
 	{
-		buffer->append(ConstStr::getCNST_STR_984(), ctx);
+		buffer->append(ConstStr::getCNST_STR_1007(), ctx);
 	}
 	it = baseList->iterator(ctx);
 	while(it->hasNext(ctx))
 	{
 		String* pa = it->next(ctx);
 		buffer->append(pa, ctx);
-		buffer->append(ConstStr::getCNST_STR_984(), ctx);
+		buffer->append(ConstStr::getCNST_STR_1007(), ctx);
 	}
 	return buffer->toString(ctx);
 }
 Stack<String>* ConfigPathUtils::toList(String* path, ThreadContext* ctx) throw() 
 {
-	IArrayObject<String>* elements = path->split(ConstStr::getCNST_STR_984(), ctx);
+	IArrayObject<String>* elements = path->split(ConstStr::getCNST_STR_1007(), ctx);
 	Stack<String>* baseList = (new(ctx) Stack<String>(ctx));
 	for(int i = 0; i < elements->length; i ++ )
 	{

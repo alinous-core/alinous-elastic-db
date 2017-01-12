@@ -7,7 +7,7 @@ namespace alinous {namespace runtime {namespace variant {
 
 
 
-String* TimeData::TAG_NAME = ConstStr::getCNST_STR_1158();
+String* TimeData::TAG_NAME = ConstStr::getCNST_STR_1209();
 bool TimeData::__init_done = __init_static_variables();
 bool TimeData::__init_static_variables(){
 	Java2CppSystem::getSelf();
@@ -120,6 +120,32 @@ bool TimeData::isNull(ThreadContext* ctx) throw()
 int TimeData::compareTo(VariantValue* variant, ThreadContext* ctx) throw() 
 {
 	return this->data->compareTo(variant->getTime(ctx), ctx);
+}
+void TimeData::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+{
+	char nullb = buff->getByte(ctx);
+	if(nullb == (char)0)
+	{
+		__GC_MV(this, &(this->data), nullptr, TimeOnlyTimestamp);
+		return;
+	}
+	long long value = buff->getLong(ctx);
+	__GC_MV(this, &(this->data), (new(ctx) TimeOnlyTimestamp(value, ctx)), TimeOnlyTimestamp);
+}
+void TimeData::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+{
+	buff->putInt(IVariantData::TYPE_TIME, ctx);
+	if(isNull(ctx))
+	{
+		buff->putByte(((char)0), ctx);
+		return;
+	}
+		else 
+	{
+		buff->putByte(((char)1), ctx);
+	}
+	long long val = this->data->getTime(ctx);
+	buff->putLong(val, ctx);
 }
 TimeData* TimeData::importFromXml(DomNode* node, ThreadContext* ctx) throw() 
 {

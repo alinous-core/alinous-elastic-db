@@ -57,12 +57,11 @@ class DomVariable;}}}
 namespace alinous {namespace runtime {namespace dom {namespace typed {
 class TypedVariableArray;}}}}
 
+namespace alinous {namespace remote {namespace socket {
+class ICommandData;}}}
+
 namespace alinous {namespace system {
 class AlinousException;}}
-
-namespace java {namespace lang {
-class IObject;
-}}
 
 namespace alinous {
 class ThreadContext;
@@ -74,6 +73,7 @@ using namespace ::alinous;
 using namespace ::java::lang;
 using ::java::util::Iterator;
 using ::alinous::html::DomNode;
+using ::alinous::remote::socket::ICommandData;
 using ::alinous::runtime::dom::typed::BigDecimalVariable;
 using ::alinous::runtime::dom::typed::BoolVariable;
 using ::alinous::runtime::dom::typed::ByteVariable;
@@ -92,11 +92,11 @@ using ::alinous::system::AlinousException;
 
 
 
-class IAlinousVariable : public virtual IObject {
+class IAlinousVariable : public virtual IObject, public ICommandData {
 public:
 	IAlinousVariable(const IAlinousVariable& base) = default;
 public:
-	IAlinousVariable(ThreadContext* ctx) throw()  : IObject(ctx)
+	IAlinousVariable(ThreadContext* ctx) throw()  : IObject(ctx), ICommandData(ctx)
 	{
 	}
 	void __construct_impl(ThreadContext* ctx) throw() 

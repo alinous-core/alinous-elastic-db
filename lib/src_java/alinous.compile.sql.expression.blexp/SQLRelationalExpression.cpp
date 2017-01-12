@@ -102,7 +102,7 @@ int SQLRelationalExpression::getOpe(ThreadContext* ctx) throw()
 }
 void SQLRelationalExpression::setOpe(String* opeStr, ThreadContext* ctx) throw() 
 {
-	if(opeStr->equals(ConstStr::getCNST_STR_986(), ctx))
+	if(opeStr->equals(ConstStr::getCNST_STR_1010(), ctx))
 	{
 		this->ope = LT;
 	}
@@ -114,13 +114,13 @@ void SQLRelationalExpression::setOpe(String* opeStr, ThreadContext* ctx) throw()
 		}
 				else 
 		{
-			if(opeStr->equals(ConstStr::getCNST_STR_987(), ctx))
+			if(opeStr->equals(ConstStr::getCNST_STR_1011(), ctx))
 			{
 				this->ope = LT_EQ;
 			}
 						else 
 			{
-				if(opeStr->equals(ConstStr::getCNST_STR_988(), ctx))
+				if(opeStr->equals(ConstStr::getCNST_STR_1012(), ctx))
 				{
 					this->ope = GT_EQ;
 				}
@@ -249,11 +249,54 @@ bool SQLRelationalExpression::hasArrayResult(ThreadContext* ctx) throw()
 }
 ArrayList<VariantValue>* SQLRelationalExpression::resolveSQLExpressionAsArray(ScanResultRecord* record, ScriptMachine* machine, bool debug, ThreadContext* ctx)
 {
-	throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1006(), ctx));
+	throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1036(), ctx));
 }
 int SQLRelationalExpression::getExpressionType(ThreadContext* ctx) throw() 
 {
 	return IExpression::sQLRelationalExpression;
+}
+void SQLRelationalExpression::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
+{
+	__readData(buff, ctx);
+	bool isnull = buff->getBoolean(ctx);
+	if(!isnull)
+	{
+		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
+		if(el == nullptr || !((dynamic_cast<ISQLExpression*>(el) != 0)))
+		{
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1044(), ctx));
+		}
+		__GC_MV(this, &(this->left), static_cast<ISQLExpression*>(el), ISQLExpression);
+	}
+	this->ope = buff->getInt(ctx);
+	isnull = buff->getBoolean(ctx);
+	if(!isnull)
+	{
+		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
+		if(el == nullptr || !((dynamic_cast<ISQLExpression*>(el) != 0)))
+		{
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1044(), ctx));
+		}
+		__GC_MV(this, &(this->right), static_cast<ISQLExpression*>(el), ISQLExpression);
+	}
+}
+void SQLRelationalExpression::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+{
+	buff->putInt(ICommandData::__SQLRelationalExpression, ctx);
+	__writeData(buff, ctx);
+	bool isnull = (this->left == nullptr);
+	buff->putBoolean(isnull, ctx);
+	if(!isnull)
+	{
+		this->left->writeData(buff, ctx);
+	}
+	buff->putInt(this->ope, ctx);
+	isnull = (this->right == nullptr);
+	buff->putBoolean(isnull, ctx);
+	if(!isnull)
+	{
+		this->right->writeData(buff, ctx);
+	}
 }
 }}}}}
 

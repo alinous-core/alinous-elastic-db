@@ -53,7 +53,7 @@ TableSchema* CreateTableStatement::createMetadata(ScriptMachine* machine, bool d
 	String* tblName = nullptr;
 	if(segments->size(ctx) == 1)
 	{
-		schemeName = ConstStr::getCNST_STR_951();
+		schemeName = ConstStr::getCNST_STR_955();
 		tblName = segments->get(0, ctx);
 	}
 		else 
@@ -88,7 +88,7 @@ void CreateTableStatement::validate(SourceValidator* validator, ThreadContext* c
 {
 	if(!((dynamic_cast<TableJoinTarget*>(this->table) != 0)))
 	{
-		validator->addError(ConstStr::getCNST_STR_1003(), this, ctx);
+		validator->addError(ConstStr::getCNST_STR_1028(), this, ctx);
 	}
 		else 
 	{
@@ -96,7 +96,7 @@ void CreateTableStatement::validate(SourceValidator* validator, ThreadContext* c
 		ArrayList<String>* segments = tbl->getName(ctx)->getSegments(ctx);
 		if(segments->size(ctx) > 2)
 		{
-			validator->addError(ConstStr::getCNST_STR_1003(), this, ctx);
+			validator->addError(ConstStr::getCNST_STR_1028(), this, ctx);
 		}
 	}
 	int maxLoop = this->columns->size(ctx);
@@ -107,7 +107,7 @@ void CreateTableStatement::validate(SourceValidator* validator, ThreadContext* c
 	}
 	if(this->primaryKeys == nullptr)
 	{
-		validator->addError(ConstStr::getCNST_STR_1004(), this, ctx);
+		validator->addError(ConstStr::getCNST_STR_1029(), this, ctx);
 	}
 }
 TableMetadata* CreateTableStatement::getMetadata(ThreadContext* ctx) throw() 
@@ -227,6 +227,96 @@ IStatement::StatementType CreateTableStatement::getType(ThreadContext* ctx) thro
 }
 void CreateTableStatement::analyzeSQL(SQLAnalyseContext* context, bool debug, ThreadContext* ctx) throw() 
 {
+}
+void CreateTableStatement::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
+{
+	bool isnull = buff->getBoolean(ctx);
+	if(!isnull)
+	{
+		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
+		if(el == nullptr || !((dynamic_cast<IJoinTarget*>(el) != 0)))
+		{
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1030(), ctx));
+		}
+		__GC_MV(this, &(this->table), static_cast<IJoinTarget*>(el), IJoinTarget);
+	}
+	int maxLoop = buff->getInt(ctx);
+	for(int i = 0; i < maxLoop; ++i)
+	{
+		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
+		if(el == nullptr || !((dynamic_cast<DdlColumnDescriptor*>(el) != 0)))
+		{
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1031(), ctx));
+		}
+		this->columns->add(static_cast<DdlColumnDescriptor*>(el), ctx);
+	}
+	maxLoop = buff->getInt(ctx);
+	for(int i = 0; i < maxLoop; ++i)
+	{
+		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
+		if(el == nullptr || !((dynamic_cast<Unique*>(el) != 0)))
+		{
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1032(), ctx));
+		}
+		this->uniques->add(static_cast<Unique*>(el), ctx);
+	}
+	maxLoop = buff->getInt(ctx);
+	for(int i = 0; i < maxLoop; ++i)
+	{
+		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
+		if(el == nullptr || !((dynamic_cast<CheckDefinition*>(el) != 0)))
+		{
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1033(), ctx));
+		}
+		this->checks->add(static_cast<CheckDefinition*>(el), ctx);
+	}
+	isnull = buff->getBoolean(ctx);
+	if(!isnull)
+	{
+		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
+		if(el == nullptr || !((dynamic_cast<PrimaryKeys*>(el) != 0)))
+		{
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1034(), ctx));
+		}
+		__GC_MV(this, &(this->primaryKeys), static_cast<PrimaryKeys*>(el), PrimaryKeys);
+	}
+}
+void CreateTableStatement::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+{
+	buff->putInt(ICommandData::__CreateTableStatement, ctx);
+	bool isnull = (this->table == nullptr);
+	buff->putBoolean(isnull, ctx);
+	if(!isnull)
+	{
+		this->table->writeData(buff, ctx);
+	}
+	int maxLoop = this->columns->size(ctx);
+	buff->putInt(maxLoop, ctx);
+	for(int i = 0; i < maxLoop; ++i)
+	{
+		DdlColumnDescriptor* exp = this->columns->get(i, ctx);
+		exp->writeData(buff, ctx);
+	}
+	maxLoop = this->uniques->size(ctx);
+	buff->putInt(maxLoop, ctx);
+	for(int i = 0; i < maxLoop; ++i)
+	{
+		Unique* exp = this->uniques->get(i, ctx);
+		exp->writeData(buff, ctx);
+	}
+	maxLoop = this->checks->size(ctx);
+	buff->putInt(maxLoop, ctx);
+	for(int i = 0; i < maxLoop; ++i)
+	{
+		CheckDefinition* exp = this->checks->get(i, ctx);
+		exp->writeData(buff, ctx);
+	}
+	isnull = (this->primaryKeys == nullptr);
+	buff->putBoolean(isnull, ctx);
+	if(!isnull)
+	{
+		this->primaryKeys->writeData(buff, ctx);
+	}
 }
 }}}
 

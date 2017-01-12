@@ -161,6 +161,77 @@ int Literal::getExpressionType(ThreadContext* ctx) throw()
 {
 	return IExpression::literalType;
 }
+void Literal::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
+{
+	int num = buff->getInt(ctx);
+	toEnum(num, ctx);
+	bool isnull = buff->getBoolean(ctx);
+	if(!isnull)
+	{
+		__GC_MV(this, &(this->value), buff->getString(ctx), String);
+	}
+}
+void Literal::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+{
+	buff->putInt(ICommandData::__Literal, ctx);
+	int type = fromEnum(ctx);
+	buff->putInt(type, ctx);
+	bool isnull = (this->value == nullptr);
+	buff->putBoolean(isnull, ctx);
+	if(!isnull)
+	{
+		buff->putString(this->value, ctx);
+	}
+}
+int Literal::fromEnum(ThreadContext* ctx) throw() 
+{
+	switch(this->litType) {
+	case Literal::literalTypes::INTEGER_LITERAL:
+		return 1;
+	case Literal::literalTypes::FLOATING_POINT_LITERAL:
+		return 2;
+	case Literal::literalTypes::CHARACTER_LITERAL:
+		return 3;
+	case Literal::literalTypes::STRING_LITERAL:
+		return 4;
+	case Literal::literalTypes::SQL_STRING_LITERAL:
+		return 5;
+	case Literal::literalTypes::BOOLEAN:
+		return 6;
+	case Literal::literalTypes::NULL_LITERAL:
+		return 7;
+	default:
+		break ;
+	}
+	return 7;
+}
+void Literal::toEnum(int num, ThreadContext* ctx) throw() 
+{
+	switch(num) {
+	case 1:
+		this->litType = literalTypes::INTEGER_LITERAL;
+		break ;
+	case 2:
+		this->litType = literalTypes::FLOATING_POINT_LITERAL;
+		break ;
+	case 3:
+		this->litType = literalTypes::CHARACTER_LITERAL;
+		break ;
+	case 4:
+		this->litType = literalTypes::STRING_LITERAL;
+		break ;
+	case 5:
+		this->litType = literalTypes::SQL_STRING_LITERAL;
+		break ;
+	case 6:
+		this->litType = literalTypes::BOOLEAN;
+		break ;
+	case 7:
+	default:
+		this->litType = literalTypes::NULL_LITERAL;
+		break ;
+	}
+}
 Literal* Literal::intLiteral(int value, ThreadContext* ctx) throw() 
 {
 	Literal* lit = (new(ctx) Literal(literalTypes::INTEGER_LITERAL, ctx));

@@ -24,8 +24,23 @@ class IExpression;}}}
 namespace alinous {namespace compile {namespace stmt {
 class LabeledStatement;}}}
 
+namespace alinous {namespace remote {namespace socket {
+class NetworkBinaryBuffer;}}}
+
+namespace alinous {namespace compile {
+class IAlinousElement;}}
+
+namespace alinous {namespace runtime {namespace dom {
+class VariableException;}}}
+
 namespace alinous {namespace compile {namespace stmt {
 class AbstractAlinousStatement;}}}
+
+namespace alinous {namespace compile {
+class AlinousElementNetworkFactory;}}
+
+namespace alinous {namespace remote {namespace socket {
+class ICommandData;}}}
 
 namespace alinous {
 class ThreadContext;
@@ -38,10 +53,15 @@ using namespace ::java::lang;
 using ::java::util::Iterator;
 using ::java::util::ArrayList;
 using ::alinous::compile::AbstractSrcElement;
+using ::alinous::compile::AlinousElementNetworkFactory;
+using ::alinous::compile::IAlinousElement;
 using ::alinous::compile::IAlinousElementVisitor;
 using ::alinous::compile::analyse::SourceValidator;
 using ::alinous::compile::analyse::SrcAnalyseContext;
 using ::alinous::compile::expression::IExpression;
+using ::alinous::remote::socket::ICommandData;
+using ::alinous::remote::socket::NetworkBinaryBuffer;
+using ::alinous::runtime::dom::VariableException;
 
 
 
@@ -72,6 +92,8 @@ public:
 	void setExp(IExpression* exp, ThreadContext* ctx) throw() ;
 	LabeledStatement* getLabel(ThreadContext* ctx) throw() ;
 	void setLabel(LabeledStatement* label, ThreadContext* ctx) throw() ;
+	void readData(NetworkBinaryBuffer* buff, ThreadContext* ctx) final;
+	void writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw()  final;
 public:
 	static bool __init_done;
 	static bool __init_static_variables();

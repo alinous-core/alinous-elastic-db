@@ -54,5 +54,12 @@ void CommitStatement::validate(SourceValidator* validator, ThreadContext* ctx) t
 void CommitStatement::analyzeSQL(SQLAnalyseContext* context, bool debug, ThreadContext* ctx) throw() 
 {
 }
+void CommitStatement::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
+{
+}
+void CommitStatement::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+{
+	buff->putInt(ICommandData::__CommitStatement, ctx);
+}
 }}}
 

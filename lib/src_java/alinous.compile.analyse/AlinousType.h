@@ -78,6 +78,18 @@ class Timestamp;}}
 namespace alinous {namespace numeric {
 class BigDecimal;}}
 
+namespace alinous {namespace remote {namespace socket {
+class NetworkBinaryBuffer;}}}
+
+namespace alinous {namespace compile {
+class IAlinousElement;}}
+
+namespace alinous {namespace remote {namespace socket {
+class ICommandData;}}}
+
+namespace alinous {namespace compile {
+class AlinousElementNetworkFactory;}}
+
 namespace alinous {namespace db {namespace table {
 class DatabaseException;}}}
 
@@ -99,11 +111,15 @@ using namespace ::java::lang;
 using ::java::util::Iterator;
 using ::java::sql::Timestamp;
 using ::java::util::ArrayList;
+using ::alinous::compile::AlinousElementNetworkFactory;
+using ::alinous::compile::IAlinousElement;
 using ::alinous::compile::declare::AlinousClass;
 using ::alinous::compile::expression::IExpression;
 using ::alinous::db::table::DatabaseException;
 using ::alinous::numeric::BigDecimal;
 using ::alinous::numeric::TimeOnlyTimestamp;
+using ::alinous::remote::socket::ICommandData;
+using ::alinous::remote::socket::NetworkBinaryBuffer;
 using ::alinous::runtime::dom::DocumentVariable;
 using ::alinous::runtime::dom::IAlinousVariable;
 using ::alinous::runtime::dom::VariableException;
@@ -127,7 +143,7 @@ using ::alinous::system::AlinousException;
 
 
 
-class AlinousType final : public virtual IObject {
+class AlinousType final : public ICommandData, public virtual IObject {
 public:
 	AlinousType(const AlinousType& base) = default;
 public:
@@ -171,6 +187,8 @@ public:
 	IAlinousVariable* makeDefault(ThreadContext* ctx) throw() ;
 	int getDimension(ThreadContext* ctx) throw() ;
 	void setDimension(int dimension, ThreadContext* ctx) throw() ;
+	void readData(NetworkBinaryBuffer* buff, ThreadContext* ctx) final;
+	void writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw()  final;
 private:
 	IAlinousVariable* returnClasssVariable(ThreadContext* ctx) throw() ;
 	IAlinousVariable* returnStandardVariable(ThreadContext* ctx) throw() ;

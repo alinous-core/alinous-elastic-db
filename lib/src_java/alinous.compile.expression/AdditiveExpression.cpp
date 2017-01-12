@@ -37,7 +37,7 @@ IAlinousVariable* AdditiveExpression::resolveExpression(ScriptMachine* machine, 
 	IAlinousVariable* variable = machine->resolveExpression(this->first, debug, ctx);
 	if(variable == nullptr || variable->isArray(ctx))
 	{
-		throw (new(ctx) VariableException(ConstStr::getCNST_STR_978(), ctx));
+		throw (new(ctx) VariableException(ConstStr::getCNST_STR_1001(), ctx));
 	}
 	if(variable->isNull(ctx))
 	{
@@ -67,6 +67,15 @@ bool AdditiveExpression::isSQLExp(ThreadContext* ctx) throw()
 int AdditiveExpression::getExpressionType(ThreadContext* ctx) throw() 
 {
 	return IExpression::additiveExpression;
+}
+void AdditiveExpression::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
+{
+	__readData(buff, ctx);
+}
+void AdditiveExpression::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+{
+	buff->putInt(ICommandData::__AdditiveExpression, ctx);
+	__writeData(buff, ctx);
 }
 }}}
 

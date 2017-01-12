@@ -36,8 +36,20 @@ class ScanTableIdentifier;}}}}
 namespace alinous {namespace compile {namespace sql {namespace analyze {
 class ScanTableColumnIdentifier;}}}}
 
+namespace alinous {namespace remote {namespace socket {
+class NetworkBinaryBuffer;}}}
+
+namespace alinous {namespace compile {
+class IAlinousElement;}}
+
+namespace alinous {namespace runtime {namespace dom {
+class VariableException;}}}
+
 namespace alinous {namespace compile {namespace sql {namespace expression {namespace blexp {
 class ISQLBoolExpression;}}}}}
+
+namespace alinous {namespace compile {
+class AlinousElementNetworkFactory;}}
 
 namespace alinous {namespace db {namespace table {
 class DatabaseException;}}}
@@ -56,7 +68,9 @@ using namespace ::java::lang;
 using ::java::util::Iterator;
 using ::java::util::ArrayList;
 using ::alinous::compile::AbstractSrcElement;
+using ::alinous::compile::AlinousElementNetworkFactory;
 using ::alinous::compile::ExpressionSourceId;
+using ::alinous::compile::IAlinousElement;
 using ::alinous::compile::IAlinousElementVisitor;
 using ::alinous::compile::analyse::AlinousType;
 using ::alinous::compile::analyse::SrcAnalyseContext;
@@ -65,6 +79,8 @@ using ::alinous::compile::sql::analyze::ScanTableIdentifier;
 using ::alinous::compile::sql::analyze::ScanTableColumnIdentifier;
 using ::alinous::compile::sql::expression::ISQLExpression;
 using ::alinous::db::table::DatabaseException;
+using ::alinous::remote::socket::NetworkBinaryBuffer;
+using ::alinous::runtime::dom::VariableException;
 using ::alinous::system::AlinousException;
 
 
@@ -82,7 +98,6 @@ public:
 public:
 	ISQLExpression* first;
 	ArrayList<SQLBoolSubExpression>* expressions;
-private:
 	String* asName;
 public:
 	constexpr static const int AND_EXP{1};
@@ -110,6 +125,8 @@ public:
 	bool isSQLExp(ThreadContext* ctx) throw()  final;
 	String* getAsName(ThreadContext* ctx) throw()  final;
 	void setAsName(String* name, ThreadContext* ctx) throw()  final;
+	void __readData(NetworkBinaryBuffer* buff, ThreadContext* ctx);
+	void __writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() ;
 public:
 	static bool __init_done;
 	static bool __init_static_variables();

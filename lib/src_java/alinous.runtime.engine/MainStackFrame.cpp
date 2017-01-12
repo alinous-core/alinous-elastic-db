@@ -7,14 +7,14 @@ namespace alinous {namespace runtime {namespace engine {
 
 
 
-String* MainStackFrame::TAG_STACKFRAME = ConstStr::getCNST_STR_1102();
-String* MainStackFrame::ATTR_LINE = ConstStr::getCNST_STR_1103();
-String* MainStackFrame::ATTR_FILENAME = ConstStr::getCNST_STR_1104();
-String* MainStackFrame::ATTR_PEEK = ConstStr::getCNST_STR_1105();
-String* MainStackFrame::ATTR_NAME = ConstStr::getCNST_STR_1061();
-String* MainStackFrame::ATTR_STACKID = ConstStr::getCNST_STR_1106();
-String* MainStackFrame::ATTR_STEPIN_CANDIDATES = ConstStr::getCNST_STR_1107();
-String* MainStackFrame::ATTR_STEPIN_EXECUTED = ConstStr::getCNST_STR_1108();
+String* MainStackFrame::TAG_STACKFRAME = ConstStr::getCNST_STR_1153();
+String* MainStackFrame::ATTR_LINE = ConstStr::getCNST_STR_1154();
+String* MainStackFrame::ATTR_FILENAME = ConstStr::getCNST_STR_1155();
+String* MainStackFrame::ATTR_PEEK = ConstStr::getCNST_STR_1156();
+String* MainStackFrame::ATTR_NAME = ConstStr::getCNST_STR_1111();
+String* MainStackFrame::ATTR_STACKID = ConstStr::getCNST_STR_1157();
+String* MainStackFrame::ATTR_STEPIN_CANDIDATES = ConstStr::getCNST_STR_1158();
+String* MainStackFrame::ATTR_STEPIN_EXECUTED = ConstStr::getCNST_STR_1159();
 bool MainStackFrame::__init_done = __init_static_variables();
 bool MainStackFrame::__init_static_variables(){
 	Java2CppSystem::getSelf();

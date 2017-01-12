@@ -51,7 +51,7 @@ TrxRecordsCache* InsertStatement::getCache(ScriptMachine* machine, TrxStorageMan
 		ArrayList<String>* segments = tbl->getName(ctx)->getSegments(ctx);
 		if(segments->size(ctx) == 1)
 		{
-			__GC_MV(this, &(schemeName), ConstStr::getCNST_STR_951(), String);
+			__GC_MV(this, &(schemeName), ConstStr::getCNST_STR_955(), String);
 			__GC_MV(this, &(tblName), segments->get(0, ctx), String);
 		}
 				else 
@@ -98,7 +98,7 @@ void InsertStatement::validate(SourceValidator* validator, ThreadContext* ctx) t
 {
 	if(!((dynamic_cast<TableJoinTarget*>(this->table) != 0)))
 	{
-		validator->addError(ConstStr::getCNST_STR_1010(), this->table, ctx);
+		validator->addError(ConstStr::getCNST_STR_1046(), this->table, ctx);
 	}
 }
 bool InsertStatement::visit(IAlinousElementVisitor* visitor, AbstractSrcElement* parent, ThreadContext* ctx) throw() 
@@ -188,6 +188,62 @@ void InsertStatement::analyzeSQL(SQLAnalyseContext* context, bool debug, ThreadC
 		{
 			this->values->get(i, ctx)->analyseSQL(context, false, debug, ctx);
 		}
+	}
+}
+void InsertStatement::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
+{
+	bool isnull = buff->getBoolean(ctx);
+	if(!isnull)
+	{
+		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
+		if(el == nullptr || !((dynamic_cast<IJoinTarget*>(el) != 0)))
+		{
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1030(), ctx));
+		}
+		__GC_MV(this, &(this->table), static_cast<IJoinTarget*>(el), IJoinTarget);
+	}
+	isnull = buff->getBoolean(ctx);
+	if(!isnull)
+	{
+		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
+		if(el == nullptr || !((dynamic_cast<SQLExpressionList*>(el) != 0)))
+		{
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1037(), ctx));
+		}
+		__GC_MV(this, &(this->list), static_cast<SQLExpressionList*>(el), SQLExpressionList);
+	}
+	int maxLoop = buff->getInt(ctx);
+	for(int i = 0; i < maxLoop; ++i)
+	{
+		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
+		if(el == nullptr || !((dynamic_cast<InsertValues*>(el) != 0)))
+		{
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1047(), ctx));
+		}
+		this->values->add(static_cast<InsertValues*>(el), ctx);
+	}
+}
+void InsertStatement::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+{
+	buff->putInt(ICommandData::__InsertStatement, ctx);
+	bool isnull = (this->table == nullptr);
+	buff->putBoolean(isnull, ctx);
+	if(!isnull)
+	{
+		this->table->writeData(buff, ctx);
+	}
+	isnull = (this->list == nullptr);
+	buff->putBoolean(isnull, ctx);
+	if(!isnull)
+	{
+		this->list->writeData(buff, ctx);
+	}
+	int maxLoop = this->values->size(ctx);
+	buff->putInt(maxLoop, ctx);
+	for(int i = 0; i < maxLoop; ++i)
+	{
+		InsertValues* exp = this->values->get(i, ctx);
+		exp->writeData(buff, ctx);
 	}
 }
 }}}

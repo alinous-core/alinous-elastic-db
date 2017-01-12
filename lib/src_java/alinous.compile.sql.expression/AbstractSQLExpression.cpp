@@ -78,7 +78,7 @@ void AbstractSQLExpression::setAsName(String* name, ThreadContext* ctx) throw()
 }
 int AbstractSQLExpression::operatorFromString(String* opStr, ThreadContext* ctx) throw() 
 {
-	if(opStr->equals(ConstStr::getCNST_STR_982(), ctx))
+	if(opStr->equals(ConstStr::getCNST_STR_1005(), ctx))
 	{
 		return AbstractBooleanExpression::PLUS;
 	}
@@ -90,19 +90,19 @@ int AbstractSQLExpression::operatorFromString(String* opStr, ThreadContext* ctx)
 		}
 				else 
 		{
-			if(opStr->equals(ConstStr::getCNST_STR_983(), ctx))
+			if(opStr->equals(ConstStr::getCNST_STR_1006(), ctx))
 			{
 				return AbstractBooleanExpression::MUL;
 			}
 						else 
 			{
-				if(opStr->equals(ConstStr::getCNST_STR_984(), ctx))
+				if(opStr->equals(ConstStr::getCNST_STR_1007(), ctx))
 				{
 					return AbstractBooleanExpression::DIV;
 				}
 								else 
 				{
-					if(opStr->equals(ConstStr::getCNST_STR_985(), ctx))
+					if(opStr->equals(ConstStr::getCNST_STR_1008(), ctx))
 					{
 						return AbstractBooleanExpression::MOD;
 					}

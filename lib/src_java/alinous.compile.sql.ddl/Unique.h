@@ -12,11 +12,20 @@ class AbstractSrcElement;}}
 namespace alinous {namespace compile {namespace analyse {
 class SrcAnalyseContext;}}}
 
+namespace alinous {namespace remote {namespace socket {
+class NetworkBinaryBuffer;}}}
+
 namespace alinous {namespace compile {
 class IAlinousElement;}}
 
 namespace alinous {namespace compile {
 class IAlinousVisitorContainer;}}
+
+namespace alinous {namespace remote {namespace socket {
+class ICommandData;}}}
+
+namespace alinous {namespace runtime {namespace dom {
+class VariableException;}}}
 
 namespace alinous {
 class ThreadContext;
@@ -33,6 +42,9 @@ using ::alinous::compile::IAlinousElement;
 using ::alinous::compile::IAlinousElementVisitor;
 using ::alinous::compile::IAlinousVisitorContainer;
 using ::alinous::compile::analyse::SrcAnalyseContext;
+using ::alinous::remote::socket::ICommandData;
+using ::alinous::remote::socket::NetworkBinaryBuffer;
+using ::alinous::runtime::dom::VariableException;
 
 
 
@@ -61,6 +73,8 @@ public:
 	int getEndPosition(ThreadContext* ctx) throw()  final;
 	AbstractSrcElement* getParent(ThreadContext* ctx) throw()  final;
 	void setParent(AbstractSrcElement* parent, ThreadContext* ctx) throw()  final;
+	void readData(NetworkBinaryBuffer* buff, ThreadContext* ctx) final;
+	void writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw()  final;
 public:
 	static bool __init_done;
 	static bool __init_static_variables();

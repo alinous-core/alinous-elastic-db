@@ -94,5 +94,45 @@ void SwitchCasePart::setStmtlist(StatementList* stmtlist, ThreadContext* ctx) th
 {
 	__GC_MV(this, &(this->stmtlist), stmtlist, StatementList);
 }
+void SwitchCasePart::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
+{
+	int maxLoop = buff->getInt(ctx);
+	for(int i = 0; i < maxLoop; ++i)
+	{
+		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
+		if(el == nullptr || !((dynamic_cast<CaseStatement*>(el) != 0)))
+		{
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1093(), ctx));
+		}
+		this->casesList->add(static_cast<CaseStatement*>(el), ctx);
+	}
+	bool isnull = buff->getBoolean(ctx);
+	if(!isnull)
+	{
+		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
+		if(el == nullptr || !((dynamic_cast<StatementList*>(el) != 0)))
+		{
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1091(), ctx));
+		}
+		__GC_MV(this, &(this->stmtlist), static_cast<StatementList*>(el), StatementList);
+	}
+}
+void SwitchCasePart::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+{
+	buff->putInt(ICommandData::__SwitchCasePart, ctx);
+	int maxLoop = this->casesList->size(ctx);
+	buff->putInt(maxLoop, ctx);
+	for(int i = 0; i < maxLoop; ++i)
+	{
+		CaseStatement* exp = this->casesList->get(i, ctx);
+		exp->writeData(buff, ctx);
+	}
+	bool isnull = (this->stmtlist == nullptr);
+	buff->putBoolean(isnull, ctx);
+	if(!isnull)
+	{
+		this->stmtlist->writeData(buff, ctx);
+	}
+}
 }}}
 

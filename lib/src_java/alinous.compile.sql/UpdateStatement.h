@@ -36,11 +36,20 @@ class SQLWhere;}}}}
 namespace alinous {namespace compile {namespace sql {namespace analyze {
 class SQLAnalyseContext;}}}}
 
+namespace alinous {namespace remote {namespace socket {
+class NetworkBinaryBuffer;}}}
+
 namespace alinous {namespace compile {namespace sql {
 class AbstractSQLStatement;}}}
 
 namespace alinous {namespace db {namespace table {
 class DatabaseException;}}}
+
+namespace alinous {namespace remote {namespace socket {
+class ICommandData;}}}
+
+namespace alinous {namespace runtime {namespace dom {
+class VariableException;}}}
 
 namespace alinous {namespace system {
 class AlinousException;}}
@@ -65,6 +74,9 @@ using ::alinous::compile::sql::select::SQLWhere;
 using ::alinous::compile::sql::select::join::IJoinTarget;
 using ::alinous::compile::sql::select::join::TableJoinTarget;
 using ::alinous::db::table::DatabaseException;
+using ::alinous::remote::socket::ICommandData;
+using ::alinous::remote::socket::NetworkBinaryBuffer;
+using ::alinous::runtime::dom::VariableException;
 using ::alinous::system::AlinousException;
 
 
@@ -99,6 +111,8 @@ public:
 	void setWhere(SQLWhere* where, ThreadContext* ctx) throw() ;
 	IStatement::StatementType getType(ThreadContext* ctx) throw()  final;
 	void analyzeSQL(SQLAnalyseContext* context, bool debug, ThreadContext* ctx) final;
+	void readData(NetworkBinaryBuffer* buff, ThreadContext* ctx) final;
+	void writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw()  final;
 public:
 	static bool __init_done;
 	static bool __init_static_variables();

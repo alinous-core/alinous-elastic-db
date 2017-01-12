@@ -76,7 +76,7 @@ IAlinousVariable* PreDecrementExpression::resolveExpression(ScriptMachine* machi
 	IAlinousVariable* variable = machine->resolveExpression(this->exp, debug, ctx);
 	if(variable == nullptr || variable->isArray(ctx))
 	{
-		throw (new(ctx) VariableException(ConstStr::getCNST_STR_973(), ctx));
+		throw (new(ctx) VariableException(ConstStr::getCNST_STR_995(), ctx));
 	}
 	if(variable->isNull(ctx))
 	{
@@ -98,6 +98,29 @@ bool PreDecrementExpression::isSQLExp(ThreadContext* ctx) throw()
 int PreDecrementExpression::getExpressionType(ThreadContext* ctx) throw() 
 {
 	return IExpression::preDecrementExpression;
+}
+void PreDecrementExpression::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
+{
+	bool isnull = buff->getBoolean(ctx);
+	if(!isnull)
+	{
+		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
+		if(el == nullptr || !((dynamic_cast<IExpression*>(el) != 0)))
+		{
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_980(), ctx));
+		}
+		__GC_MV(this, &(this->exp), static_cast<IExpression*>(el), IExpression);
+	}
+}
+void PreDecrementExpression::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+{
+	buff->putInt(ICommandData::__PreDecrementExpression, ctx);
+	bool isnull = (this->exp == nullptr);
+	buff->putBoolean(isnull, ctx);
+	if(!isnull)
+	{
+		this->exp->writeData(buff, ctx);
+	}
 }
 }}}
 

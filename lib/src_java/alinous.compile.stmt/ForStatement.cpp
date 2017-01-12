@@ -142,5 +142,92 @@ void ForStatement::setExec(IStatement* exec, ThreadContext* ctx) throw()
 {
 	__GC_MV(this, &(this->exec), exec, IStatement);
 }
+void ForStatement::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
+{
+	bool isnull = buff->getBoolean(ctx);
+	if(!isnull)
+	{
+		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
+		if(el == nullptr || !((dynamic_cast<LabeledStatement*>(el) != 0)))
+		{
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1088(), ctx));
+		}
+		__GC_MV(this, &(this->label), static_cast<LabeledStatement*>(el), LabeledStatement);
+	}
+	isnull = buff->getBoolean(ctx);
+	if(!isnull)
+	{
+		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
+		if(el == nullptr || !((dynamic_cast<IStatement*>(el) != 0)))
+		{
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1089(), ctx));
+		}
+		__GC_MV(this, &(this->initStatement), static_cast<IStatement*>(el), IStatement);
+	}
+	isnull = buff->getBoolean(ctx);
+	if(!isnull)
+	{
+		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
+		if(el == nullptr || !((dynamic_cast<IExpression*>(el) != 0)))
+		{
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_980(), ctx));
+		}
+		__GC_MV(this, &(this->condition), static_cast<IExpression*>(el), IExpression);
+	}
+	isnull = buff->getBoolean(ctx);
+	if(!isnull)
+	{
+		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
+		if(el == nullptr || !((dynamic_cast<ForUpdatePart*>(el) != 0)))
+		{
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1090(), ctx));
+		}
+		__GC_MV(this, &(this->updatePart), static_cast<ForUpdatePart*>(el), ForUpdatePart);
+	}
+	isnull = buff->getBoolean(ctx);
+	if(!isnull)
+	{
+		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
+		if(el == nullptr || !((dynamic_cast<IStatement*>(el) != 0)))
+		{
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1089(), ctx));
+		}
+		__GC_MV(this, &(this->exec), static_cast<IStatement*>(el), IStatement);
+	}
+}
+void ForStatement::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+{
+	buff->putInt(ICommandData::__ForStatement, ctx);
+	bool isnull = (this->label == nullptr);
+	buff->putBoolean(isnull, ctx);
+	if(!isnull)
+	{
+		this->label->writeData(buff, ctx);
+	}
+	isnull = (this->initStatement == nullptr);
+	buff->putBoolean(isnull, ctx);
+	if(!isnull)
+	{
+		this->initStatement->writeData(buff, ctx);
+	}
+	isnull = (this->condition == nullptr);
+	buff->putBoolean(isnull, ctx);
+	if(!isnull)
+	{
+		this->condition->writeData(buff, ctx);
+	}
+	isnull = (this->updatePart == nullptr);
+	buff->putBoolean(isnull, ctx);
+	if(!isnull)
+	{
+		this->updatePart->writeData(buff, ctx);
+	}
+	isnull = (this->exec == nullptr);
+	buff->putBoolean(isnull, ctx);
+	if(!isnull)
+	{
+		this->exec->writeData(buff, ctx);
+	}
+}
 }}}
 

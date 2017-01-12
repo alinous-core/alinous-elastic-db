@@ -96,7 +96,7 @@ void AbstractMemoryNode::printTab(StringBuffer* buff, int level, ThreadContext* 
 {
 	for(int i = 0; i != level; ++i)
 	{
-		buff->append(ConstStr::getCNST_STR_1586(), ctx);
+		buff->append(ConstStr::getCNST_STR_1637(), ctx);
 	}
 }
 int AbstractMemoryNode::ValueCompare::operator() (IBTreeNode* _this, IBTreeNode* another, ThreadContext* ctx) const throw()

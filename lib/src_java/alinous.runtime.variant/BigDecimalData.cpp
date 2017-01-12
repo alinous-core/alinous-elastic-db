@@ -7,7 +7,7 @@ namespace alinous {namespace runtime {namespace variant {
 
 
 
-String* BigDecimalData::TAG_NAME = ConstStr::getCNST_STR_1178();
+String* BigDecimalData::TAG_NAME = ConstStr::getCNST_STR_1229();
 bool BigDecimalData::__init_done = __init_static_variables();
 bool BigDecimalData::__init_static_variables(){
 	Java2CppSystem::getSelf();
@@ -120,6 +120,32 @@ bool BigDecimalData::isNull(ThreadContext* ctx) throw()
 int BigDecimalData::compareTo(VariantValue* variant, ThreadContext* ctx) throw() 
 {
 	return this->data->compareTo(variant->getBigDecimal(ctx), ctx);
+}
+void BigDecimalData::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+{
+	char nullb = buff->getByte(ctx);
+	if(nullb == (char)0)
+	{
+		__GC_MV(this, &(this->data), nullptr, BigDecimal);
+		return;
+	}
+	String* value = buff->getString(ctx);
+	__GC_MV(this, &(this->data), (new(ctx) BigDecimal(value, ctx)), BigDecimal);
+}
+void BigDecimalData::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+{
+	buff->putInt(IVariantData::TYPE_BIG_DECIMAL, ctx);
+	if(isNull(ctx))
+	{
+		buff->putByte(((char)0), ctx);
+		return;
+	}
+		else 
+	{
+		buff->putByte(((char)1), ctx);
+	}
+	String* val = this->data->toPlainString(ctx);
+	buff->putString(val, ctx);
 }
 BigDecimalData* BigDecimalData::importFromXml(DomNode* node, ThreadContext* ctx) throw() 
 {

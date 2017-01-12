@@ -70,5 +70,28 @@ IStatement::StatementType ReturnStatement::getType(ThreadContext* ctx) throw()
 {
 	return StatementType::RETURN;
 }
+void ReturnStatement::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
+{
+	bool isnull = buff->getBoolean(ctx);
+	if(!isnull)
+	{
+		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
+		if(el == nullptr || !((dynamic_cast<IExpression*>(el) != 0)))
+		{
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_980(), ctx));
+		}
+		__GC_MV(this, &(this->exp), static_cast<IExpression*>(el), IExpression);
+	}
+}
+void ReturnStatement::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+{
+	buff->putInt(ICommandData::__ReturnStatement, ctx);
+	bool isnull = (this->exp == nullptr);
+	buff->putBoolean(isnull, ctx);
+	if(!isnull)
+	{
+		this->exp->writeData(buff, ctx);
+	}
+}
 }}}
 

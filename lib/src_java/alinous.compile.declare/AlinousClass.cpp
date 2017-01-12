@@ -369,7 +369,7 @@ void AlinousClass::analyseDependency(SrcAnalyseContext* context, ThreadContext* 
 		if(baseClass == nullptr)
 		{
 			AlinousName* className = this->extendsClasses->getClassName(ctx);
-			context->getSourceValidator(ctx)->addError(className->toString(ctx)->clone(ctx)->append(ConstStr::getCNST_STR_966(), ctx), this, ctx);
+			context->getSourceValidator(ctx)->addError(className->toString(ctx)->clone(ctx)->append(ConstStr::getCNST_STR_972(), ctx), this, ctx);
 			return;
 		}
 		baseClass->delivedClasses->add(this, ctx);
@@ -385,7 +385,7 @@ void AlinousClass::analyseDependency(SrcAnalyseContext* context, ThreadContext* 
 			if(baseClass == nullptr)
 			{
 				AlinousName* className = impl->getClassName(ctx);
-				context->getSourceValidator(ctx)->addError(className->toString(ctx)->clone(ctx)->append(ConstStr::getCNST_STR_966(), ctx), this, ctx);
+				context->getSourceValidator(ctx)->addError(className->toString(ctx)->clone(ctx)->append(ConstStr::getCNST_STR_972(), ctx), this, ctx);
 				return;
 			}
 			baseClass->delivedClasses->add(this, ctx);
@@ -515,7 +515,7 @@ String* AlinousClass::toString(ThreadContext* ctx) throw()
 	StringBuffer* buff = (new(ctx) StringBuffer(ctx));
 	if(this->packageName != nullptr)
 	{
-		buff->append(this->packageName->toString(ctx), ctx)->append(ConstStr::getCNST_STR_947(), ctx);
+		buff->append(this->packageName->toString(ctx), ctx)->append(ConstStr::getCNST_STR_950(), ctx);
 	}
 	buff->append(this->name->toString(ctx), ctx);
 	return buff->toString(ctx);
@@ -559,6 +559,174 @@ ArrayList<ClassImplements>* AlinousClass::getImplementsClass(ThreadContext* ctx)
 void AlinousClass::setImplementsClass(ArrayList<ClassImplements>* implementsClass, ThreadContext* ctx) throw() 
 {
 	GCUtils<ArrayList<ClassImplements> >::mv(this, &(this->implementsClass), implementsClass, ctx);
+}
+void AlinousClass::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
+{
+	bool isnull = buff->getBoolean(ctx);
+	if(!isnull)
+	{
+		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
+		if(el == nullptr || !((dynamic_cast<AlinousModulePackage*>(el) != 0)))
+		{
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_973(), ctx));
+		}
+		__GC_MV(this, &(this->packageName), static_cast<AlinousModulePackage*>(el), AlinousModulePackage);
+	}
+	isnull = buff->getBoolean(ctx);
+	if(!isnull)
+	{
+		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
+		if(el == nullptr || !((dynamic_cast<AlinousName*>(el) != 0)))
+		{
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_970(), ctx));
+		}
+		__GC_MV(this, &(this->name), static_cast<AlinousName*>(el), AlinousName);
+	}
+	isnull = buff->getBoolean(ctx);
+	if(!isnull)
+	{
+		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
+		if(el == nullptr || !((dynamic_cast<ClassExtends*>(el) != 0)))
+		{
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_974(), ctx));
+		}
+		__GC_MV(this, &(this->extendsClasses), static_cast<ClassExtends*>(el), ClassExtends);
+	}
+	isnull = buff->getBoolean(ctx);
+	if(!isnull)
+	{
+		int maxLoop = buff->getInt(ctx);
+		for(int i = 0; i < maxLoop; ++i)
+		{
+			IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
+			if(el == nullptr || !((dynamic_cast<ClassImplements*>(el) != 0)))
+			{
+				throw (new(ctx) VariableException(ConstStr::getCNST_STR_975(), ctx));
+			}
+			this->implementsClass->add(static_cast<ClassImplements*>(el), ctx);
+		}
+	}
+	this->interfaceClass = buff->getBoolean(ctx);
+	int maxLoop = buff->getInt(ctx);
+	for(int i = 0; i < maxLoop; ++i)
+	{
+		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
+		if(el == nullptr || !((dynamic_cast<ClassMethodFunction*>(el) != 0)))
+		{
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_971(), ctx));
+		}
+		this->constructors->add(static_cast<ClassMethodFunction*>(el), ctx);
+	}
+	maxLoop = buff->getInt(ctx);
+	for(int i = 0; i < maxLoop; ++i)
+	{
+		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
+		if(el == nullptr || !((dynamic_cast<ClassMemberVariable*>(el) != 0)))
+		{
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_976(), ctx));
+		}
+		this->members->add(static_cast<ClassMemberVariable*>(el), ctx);
+	}
+	maxLoop = buff->getInt(ctx);
+	for(int i = 0; i < maxLoop; ++i)
+	{
+		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
+		if(el == nullptr || !((dynamic_cast<ClassMethodFunction*>(el) != 0)))
+		{
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_971(), ctx));
+		}
+		this->methods->add(static_cast<ClassMethodFunction*>(el), ctx);
+	}
+	maxLoop = buff->getInt(ctx);
+	for(int i = 0; i < maxLoop; ++i)
+	{
+		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
+		if(el == nullptr || !((dynamic_cast<ClassMemberVariable*>(el) != 0)))
+		{
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_976(), ctx));
+		}
+		this->staticMembers->add(static_cast<ClassMemberVariable*>(el), ctx);
+	}
+	maxLoop = buff->getInt(ctx);
+	for(int i = 0; i < maxLoop; ++i)
+	{
+		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
+		if(el == nullptr || !((dynamic_cast<ClassMethodFunction*>(el) != 0)))
+		{
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_971(), ctx));
+		}
+		this->staticMethods->add(static_cast<ClassMethodFunction*>(el), ctx);
+	}
+}
+void AlinousClass::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+{
+	buff->putInt(ICommandData::__AlinousClass, ctx);
+	bool isnull = (this->packageName == nullptr);
+	buff->putBoolean(isnull, ctx);
+	if(!isnull)
+	{
+		this->packageName->writeData(buff, ctx);
+	}
+	isnull = (this->name == nullptr);
+	buff->putBoolean(isnull, ctx);
+	if(!isnull)
+	{
+		this->name->writeData(buff, ctx);
+	}
+	isnull = (this->extendsClasses == nullptr);
+	buff->putBoolean(isnull, ctx);
+	if(!isnull)
+	{
+		this->extendsClasses->writeData(buff, ctx);
+	}
+	isnull = (this->implementsClass == nullptr);
+	buff->putBoolean(isnull, ctx);
+	if(!isnull)
+	{
+		int maxLoop = this->implementsClass->size(ctx);
+		buff->putInt(maxLoop, ctx);
+		for(int i = 0; i < maxLoop; ++i)
+		{
+			ClassImplements* exp = this->implementsClass->get(i, ctx);
+			exp->writeData(buff, ctx);
+		}
+	}
+	buff->putBoolean(this->interfaceClass, ctx);
+	int maxLoop = this->constructors->size(ctx);
+	buff->putInt(maxLoop, ctx);
+	for(int i = 0; i < maxLoop; ++i)
+	{
+		ClassMethodFunction* exp = this->constructors->get(i, ctx);
+		exp->writeData(buff, ctx);
+	}
+	maxLoop = this->members->size(ctx);
+	buff->putInt(maxLoop, ctx);
+	for(int i = 0; i < maxLoop; ++i)
+	{
+		ClassMemberVariable* exp = this->members->get(i, ctx);
+		exp->writeData(buff, ctx);
+	}
+	maxLoop = this->methods->size(ctx);
+	buff->putInt(maxLoop, ctx);
+	for(int i = 0; i < maxLoop; ++i)
+	{
+		ClassMethodFunction* exp = this->methods->get(i, ctx);
+		exp->writeData(buff, ctx);
+	}
+	maxLoop = this->staticMembers->size(ctx);
+	buff->putInt(maxLoop, ctx);
+	for(int i = 0; i < maxLoop; ++i)
+	{
+		ClassMemberVariable* exp = this->staticMembers->get(i, ctx);
+		exp->writeData(buff, ctx);
+	}
+	maxLoop = this->staticMethods->size(ctx);
+	buff->putInt(maxLoop, ctx);
+	for(int i = 0; i < maxLoop; ++i)
+	{
+		ClassMethodFunction* exp = this->staticMethods->get(i, ctx);
+		exp->writeData(buff, ctx);
+	}
 }
 void AlinousClass::initMembers(AlinousClassVariable* obj, ScriptMachine* machine, bool debug, ThreadContext* ctx)
 {

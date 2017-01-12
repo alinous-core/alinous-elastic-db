@@ -18,6 +18,9 @@ template <typename  T, typename V> class HashMap;}}
 namespace alinous {namespace remote {namespace socket {
 class ICommandData;}}}
 
+namespace alinous {namespace runtime {namespace dom {
+class VariableException;}}}
+
 namespace java {namespace lang {
 class IObject;
 }}
@@ -36,6 +39,7 @@ using ::java::util::Iterator;
 using ::java::util::Map;
 using ::alinous::remote::socket::ICommandData;
 using ::alinous::remote::socket::NetworkBinaryBuffer;
+using ::alinous::runtime::dom::VariableException;
 
 
 
@@ -58,7 +62,7 @@ public:
 	void addTable(TableClusterData* value, ThreadContext* ctx) throw() ;
 	String* getName(ThreadContext* ctx) throw() ;
 	void setName(String* name, ThreadContext* ctx) throw() ;
-	void readData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw()  final;
+	void readData(NetworkBinaryBuffer* buff, ThreadContext* ctx) final;
 	void writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw()  final;
 public:
 	static bool __init_done;

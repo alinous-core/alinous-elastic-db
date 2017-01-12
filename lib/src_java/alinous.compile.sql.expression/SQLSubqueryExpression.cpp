@@ -86,5 +86,30 @@ int SQLSubqueryExpression::getExpressionType(ThreadContext* ctx) throw()
 {
 	return IExpression::sQLSubqueryExpression;
 }
+void SQLSubqueryExpression::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
+{
+	__readData(buff, ctx);
+	bool isnull = buff->getBoolean(ctx);
+	if(!isnull)
+	{
+		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
+		if(el == nullptr || !((dynamic_cast<SelectStatement*>(el) != 0)))
+		{
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1066(), ctx));
+		}
+		__GC_MV(this, &(this->selectStatement), static_cast<SelectStatement*>(el), SelectStatement);
+	}
+}
+void SQLSubqueryExpression::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+{
+	buff->putInt(ICommandData::__SQLSubqueryExpression, ctx);
+	__writeData(buff, ctx);
+	bool isnull = (this->selectStatement == nullptr);
+	buff->putBoolean(isnull, ctx);
+	if(!isnull)
+	{
+		this->selectStatement->writeData(buff, ctx);
+	}
+}
 }}}}
 

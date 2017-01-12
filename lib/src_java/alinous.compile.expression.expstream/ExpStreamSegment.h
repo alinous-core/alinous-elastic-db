@@ -87,6 +87,12 @@ class AlinousName;}}}
 namespace java {namespace lang {
 class StringBuffer;}}
 
+namespace alinous {namespace remote {namespace socket {
+class NetworkBinaryBuffer;}}}
+
+namespace alinous {namespace compile {
+class IAlinousElement;}}
+
 namespace alinous {namespace compile {namespace stmt {
 class TypedVariableDeclare;}}}
 
@@ -96,11 +102,17 @@ class FunctionArgumentDefine;}}}}
 namespace alinous {namespace compile {namespace expression {
 class AbstractExpression;}}}
 
+namespace alinous {namespace compile {
+class AlinousElementNetworkFactory;}}
+
 namespace alinous {namespace compile {namespace expression {
 class Literal;}}}
 
 namespace alinous {namespace db {namespace table {
 class DatabaseException;}}}
+
+namespace alinous {namespace remote {namespace socket {
+class ICommandData;}}}
 
 namespace alinous {namespace system {
 class AlinousException;}}
@@ -116,7 +128,9 @@ using namespace ::java::lang;
 using ::java::util::Iterator;
 using ::java::util::ArrayList;
 using ::alinous::compile::AbstractSrcElement;
+using ::alinous::compile::AlinousElementNetworkFactory;
 using ::alinous::compile::ExpressionSourceId;
+using ::alinous::compile::IAlinousElement;
 using ::alinous::compile::IAlinousElementVisitor;
 using ::alinous::compile::analyse::AlinousType;
 using ::alinous::compile::analyse::DomVariableDeclareSource;
@@ -137,6 +151,8 @@ using ::alinous::compile::expression::IExpression;
 using ::alinous::compile::expression::Literal;
 using ::alinous::compile::stmt::TypedVariableDeclare;
 using ::alinous::db::table::DatabaseException;
+using ::alinous::remote::socket::ICommandData;
+using ::alinous::remote::socket::NetworkBinaryBuffer;
 using ::alinous::runtime::dom::DocumentVariable;
 using ::alinous::runtime::dom::IAlinousVariable;
 using ::alinous::runtime::dom::IDomVariable;
@@ -211,6 +227,8 @@ public:
 	String* toString(ThreadContext* ctx) throw() ;
 	ClassMemberVariable* getMemberVariableDef(ThreadContext* ctx) throw() ;
 	int getExpressionType(ThreadContext* ctx) throw()  final;
+	void readData(NetworkBinaryBuffer* buff, ThreadContext* ctx) final;
+	void writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw()  final;
 private:
 	IAlinousVariable* returnMemberDomVariable(ScriptMachine* machine, bool debug, ThreadContext* ctx);
 	IAlinousVariable* returnMemberDomVariableArray(ScriptMachine* machine, bool debug, ThreadContext* ctx);

@@ -180,11 +180,77 @@ bool SQLLiteral::hasArrayResult(ThreadContext* ctx) throw()
 }
 ArrayList<VariantValue>* SQLLiteral::resolveSQLExpressionAsArray(ScanResultRecord* record, ScriptMachine* machine, bool debug, ThreadContext* ctx)
 {
-	throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1006(), ctx));
+	throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1036(), ctx));
 }
 int SQLLiteral::getExpressionType(ThreadContext* ctx) throw() 
 {
 	return IExpression::sQLLiteralType;
+}
+void SQLLiteral::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
+{
+	int num = buff->getInt(ctx);
+	toEnum(num, ctx);
+	bool isnull = buff->getBoolean(ctx);
+	if(!isnull)
+	{
+		__GC_MV(this, &(this->value), buff->getString(ctx), String);
+	}
+}
+void SQLLiteral::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+{
+	buff->putInt(ICommandData::__SQLLiteral, ctx);
+	int type = fromEnum(ctx);
+	buff->putInt(type, ctx);
+	bool isnull = (this->value == nullptr);
+	buff->putBoolean(isnull, ctx);
+	if(!isnull)
+	{
+		buff->putString(this->value, ctx);
+	}
+}
+int SQLLiteral::fromEnum(ThreadContext* ctx) throw() 
+{
+	switch(this->litType) {
+	case SQLLiteral::sqlliteralType::INTEGER_LITERAL:
+		return 1;
+	case SQLLiteral::sqlliteralType::FLOATING_POINT_LITERAL:
+		return 2;
+	case SQLLiteral::sqlliteralType::CHARACTER_LITERAL:
+		return 3;
+	case SQLLiteral::sqlliteralType::STRING_LITERAL:
+		return 4;
+	case SQLLiteral::sqlliteralType::BOOLEAN:
+		return 6;
+	case SQLLiteral::sqlliteralType::NULL_LITERAL:
+		return 7;
+	default:
+		break ;
+	}
+	return 7;
+}
+void SQLLiteral::toEnum(int num, ThreadContext* ctx) throw() 
+{
+	switch(num) {
+	case 1:
+		this->litType = sqlliteralType::INTEGER_LITERAL;
+		break ;
+	case 2:
+		this->litType = sqlliteralType::FLOATING_POINT_LITERAL;
+		break ;
+	case 3:
+		this->litType = sqlliteralType::CHARACTER_LITERAL;
+		break ;
+	case 4:
+		this->litType = sqlliteralType::STRING_LITERAL;
+		break ;
+	case 6:
+		this->litType = sqlliteralType::BOOLEAN;
+		break ;
+	case 7:
+	default:
+		this->litType = sqlliteralType::NULL_LITERAL;
+		break ;
+	}
 }
 }}}}
 

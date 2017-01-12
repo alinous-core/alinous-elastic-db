@@ -34,7 +34,7 @@ void ParamFactory::__releaseRegerences(bool prepare, ThreadContext* ctx) throw()
 AbstractHttpParameter* ParamFactory::getParam(String* enckey, String* encvalue, String* encode, ThreadContext* ctx)
 {
 	String* key = URLDecoder::decode(enckey, encode, ctx);
-	int index = key->indexOf(ConstStr::getCNST_STR_977(), ctx);
+	int index = key->indexOf(ConstStr::getCNST_STR_1000(), ctx);
 	if(key->endsWith(ConstStr::getCNST_STR_564(), ctx) && index > 0)
 	{
 		String* name = key->substring(0, index, ctx);

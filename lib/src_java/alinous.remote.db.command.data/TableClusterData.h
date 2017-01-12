@@ -9,6 +9,9 @@ class NetworkBinaryBuffer;}}}
 namespace alinous {namespace remote {namespace socket {
 class ICommandData;}}}
 
+namespace alinous {namespace runtime {namespace dom {
+class VariableException;}}}
+
 namespace java {namespace lang {
 class IObject;
 }}
@@ -25,6 +28,7 @@ using ::java::util::Iterator;
 using ::java::util::ArrayList;
 using ::alinous::remote::socket::ICommandData;
 using ::alinous::remote::socket::NetworkBinaryBuffer;
+using ::alinous::runtime::dom::VariableException;
 
 
 
@@ -53,7 +57,7 @@ public:
 	void setName(String* name, ThreadContext* ctx) throw() ;
 	String* getRegion(ThreadContext* ctx) throw() ;
 	void setRegion(String* region, ThreadContext* ctx) throw() ;
-	void readData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw()  final;
+	void readData(NetworkBinaryBuffer* buff, ThreadContext* ctx) final;
 	void writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw()  final;
 public:
 	static bool __init_done;

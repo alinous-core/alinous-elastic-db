@@ -37,7 +37,7 @@ bool AlinousType::__init_static_variables(){
 	delete ctx;
 	return true;
 }
- AlinousType::AlinousType(AlinousClass* clazz, ThreadContext* ctx) throw()  : IObject(ctx), typeClass(0), clazz(nullptr), type(0), dimension(0)
+ AlinousType::AlinousType(AlinousClass* clazz, ThreadContext* ctx) throw()  : IObject(ctx), ICommandData(ctx), typeClass(0), clazz(nullptr), type(0), dimension(0)
 {
 	__GC_MV(this, &(this->clazz), clazz, AlinousClass);
 	this->typeClass = TYPE_CLASS_OBJ;
@@ -47,7 +47,7 @@ void AlinousType::__construct_impl(AlinousClass* clazz, ThreadContext* ctx) thro
 	__GC_MV(this, &(this->clazz), clazz, AlinousClass);
 	this->typeClass = TYPE_CLASS_OBJ;
 }
- AlinousType::AlinousType(int type, int typeClass, ThreadContext* ctx) throw()  : IObject(ctx), typeClass(0), clazz(nullptr), type(0), dimension(0)
+ AlinousType::AlinousType(int type, int typeClass, ThreadContext* ctx) throw()  : IObject(ctx), ICommandData(ctx), typeClass(0), clazz(nullptr), type(0), dimension(0)
 {
 	this->type = type;
 	this->typeClass = typeClass;
@@ -57,7 +57,7 @@ void AlinousType::__construct_impl(int type, int typeClass, ThreadContext* ctx) 
 	this->type = type;
 	this->typeClass = typeClass;
 }
- AlinousType::AlinousType(ThreadContext* ctx) throw()  : IObject(ctx), typeClass(0), clazz(nullptr), type(0), dimension(0)
+ AlinousType::AlinousType(ThreadContext* ctx) throw()  : IObject(ctx), ICommandData(ctx), typeClass(0), clazz(nullptr), type(0), dimension(0)
 {
 	this->typeClass = TYPE_DOM;
 	this->type = -1;
@@ -123,6 +123,34 @@ int AlinousType::getDimension(ThreadContext* ctx) throw()
 void AlinousType::setDimension(int dimension, ThreadContext* ctx) throw() 
 {
 	this->dimension = dimension;
+}
+void AlinousType::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
+{
+	this->typeClass = buff->getInt(ctx);
+	bool isnull = buff->getBoolean(ctx);
+	if(!isnull)
+	{
+		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
+		if(el == nullptr || !((dynamic_cast<AlinousClass*>(el) != 0)))
+		{
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_952(), ctx));
+		}
+		__GC_MV(this, &(this->clazz), static_cast<AlinousClass*>(el), AlinousClass);
+	}
+	this->type = buff->getInt(ctx);
+	this->dimension = buff->getInt(ctx);
+}
+void AlinousType::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+{
+	buff->putInt(this->typeClass, ctx);
+	bool isnull = (this->clazz == nullptr);
+	buff->putBoolean(isnull, ctx);
+	if(!isnull)
+	{
+		this->clazz->writeData(buff, ctx);
+	}
+	buff->putInt(this->type, ctx);
+	buff->putInt(this->dimension, ctx);
 }
 IAlinousVariable* AlinousType::returnClasssVariable(ThreadContext* ctx) throw() 
 {
@@ -242,7 +270,7 @@ ITypedVariable* AlinousType::newBlankVariable(AlinousType* analysedType, ThreadC
 	default:
 		break ;
 	}
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_948(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_951(), ctx));
 }
 }}}
 

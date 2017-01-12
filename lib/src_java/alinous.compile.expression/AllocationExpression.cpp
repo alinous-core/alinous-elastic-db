@@ -67,7 +67,7 @@ IAlinousVariable* AllocationExpression::resolveExpression(ScriptMachine* machine
 		break ;
 	case AlinousType::TYPE_PRIMITIVE:
 	default:
-		throw (new(ctx) VariableException(ConstStr::getCNST_STR_974(), ctx));
+		throw (new(ctx) VariableException(ConstStr::getCNST_STR_996(), ctx));
 		break;
 	}
 	return returnValue;
@@ -85,7 +85,7 @@ bool AllocationExpression::analyse(SrcAnalyseContext* context, bool leftValue, T
 	__GC_MV(this, &(this->analysedType), this->objectClassName->toAlinousType(context, ctx), AlinousType);
 	if(this->analysedType == nullptr)
 	{
-		context->getSourceValidator(ctx)->addError(this->objectClassName->toString(ctx)->clone(ctx)->append(ConstStr::getCNST_STR_965(), ctx), this, ctx);
+		context->getSourceValidator(ctx)->addError(this->objectClassName->toString(ctx)->clone(ctx)->append(ConstStr::getCNST_STR_969(), ctx), this, ctx);
 		return false;
 	}
 	switch(this->analysedType->getTypeClass(ctx)) {
@@ -94,25 +94,25 @@ bool AllocationExpression::analyse(SrcAnalyseContext* context, bool leftValue, T
 		case AlinousType::STRING_TYPE:
 			if(this->arguments->getArgumentSize(ctx) != 1)
 			{
-				context->getSourceValidator(ctx)->addError(ConstStr::getCNST_STR_975(), this, ctx);
+				context->getSourceValidator(ctx)->addError(ConstStr::getCNST_STR_997(), this, ctx);
 			}
 			break ;
 		case AlinousType::TIME:
 			if(this->arguments->getArgumentSize(ctx) != 1)
 			{
-				context->getSourceValidator(ctx)->addError(ConstStr::getCNST_STR_975(), this, ctx);
+				context->getSourceValidator(ctx)->addError(ConstStr::getCNST_STR_997(), this, ctx);
 			}
 			break ;
 		case AlinousType::TIMESTAMP:
 			if(this->arguments->getArgumentSize(ctx) != 1)
 			{
-				context->getSourceValidator(ctx)->addError(ConstStr::getCNST_STR_975(), this, ctx);
+				context->getSourceValidator(ctx)->addError(ConstStr::getCNST_STR_997(), this, ctx);
 			}
 			break ;
 		case AlinousType::BIGDECIMAL:
 			if(this->arguments->getArgumentSize(ctx) != 1)
 			{
-				context->getSourceValidator(ctx)->addError(ConstStr::getCNST_STR_975(), this, ctx);
+				context->getSourceValidator(ctx)->addError(ConstStr::getCNST_STR_997(), this, ctx);
 			}
 			break ;
 		default:
@@ -127,7 +127,7 @@ bool AllocationExpression::analyse(SrcAnalyseContext* context, bool leftValue, T
 		break ;
 	case AlinousType::TYPE_PRIMITIVE:
 	default:
-		context->getSourceValidator(ctx)->addError(ConstStr::getCNST_STR_974(), this, ctx);
+		context->getSourceValidator(ctx)->addError(ConstStr::getCNST_STR_996(), this, ctx);
 		break;
 	}
 	return true;
@@ -196,6 +196,62 @@ bool AllocationExpression::isSQLExp(ThreadContext* ctx) throw()
 int AllocationExpression::getExpressionType(ThreadContext* ctx) throw() 
 {
 	return IExpression::allocationExpressionType;
+}
+void AllocationExpression::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
+{
+	bool isnull = buff->getBoolean(ctx);
+	if(!isnull)
+	{
+		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
+		if(el == nullptr || !((dynamic_cast<AlinousName*>(el) != 0)))
+		{
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_970(), ctx));
+		}
+		__GC_MV(this, &(this->objectClassName), static_cast<AlinousName*>(el), AlinousName);
+	}
+	isnull = buff->getBoolean(ctx);
+	if(!isnull)
+	{
+		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
+		if(el == nullptr || !((dynamic_cast<FunctionArguments*>(el) != 0)))
+		{
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_998(), ctx));
+		}
+		__GC_MV(this, &(this->arguments), static_cast<FunctionArguments*>(el), FunctionArguments);
+	}
+	int maxLoop = buff->getInt(ctx);
+	for(int i = 0; i < maxLoop; ++i)
+	{
+		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
+		if(el == nullptr || !((dynamic_cast<IExpression*>(el) != 0)))
+		{
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_980(), ctx));
+		}
+		this->arrayCapacity->add(static_cast<IExpression*>(el), ctx);
+	}
+}
+void AllocationExpression::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+{
+	buff->putInt(ICommandData::__AllocationExpression, ctx);
+	bool isnull = (this->objectClassName == nullptr);
+	buff->putBoolean(isnull, ctx);
+	if(!isnull)
+	{
+		this->objectClassName->writeData(buff, ctx);
+	}
+	isnull = (this->arguments == nullptr);
+	buff->putBoolean(isnull, ctx);
+	if(!isnull)
+	{
+		this->arguments->writeData(buff, ctx);
+	}
+	int maxLoop = this->arrayCapacity->size(ctx);
+	buff->putInt(maxLoop, ctx);
+	for(int i = 0; i < maxLoop; ++i)
+	{
+		IExpression* exp = this->arrayCapacity->get(i, ctx);
+		exp->writeData(buff, ctx);
+	}
 }
 IAlinousVariable* AllocationExpression::newClassObject(ScriptMachine* machine, bool debug, ThreadContext* ctx)
 {

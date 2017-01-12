@@ -43,7 +43,7 @@ void UpdateStatement::validate(SourceValidator* validator, ThreadContext* ctx) t
 {
 	if(!((dynamic_cast<TableJoinTarget*>(this->table) != 0)))
 	{
-		validator->addError(ConstStr::getCNST_STR_1009(), this->table, ctx);
+		validator->addError(ConstStr::getCNST_STR_1045(), this->table, ctx);
 	}
 }
 AlinousName* UpdateStatement::getTableName(ThreadContext* ctx) throw() 
@@ -141,6 +141,32 @@ void UpdateStatement::analyzeSQL(SQLAnalyseContext* context, bool debug, ThreadC
 			this->where->getCondition(ctx)->analyseSQL(context, false, debug, ctx);
 		}
 		this->table->optimizeScan(context, this->where, nullptr, nullptr, nullptr, debug, ctx);
+	}
+}
+void UpdateStatement::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
+{
+}
+void UpdateStatement::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+{
+	buff->putInt(ICommandData::__UpdateStatement, ctx);
+	bool isnull = (this->table == nullptr);
+	buff->putBoolean(isnull, ctx);
+	if(!isnull)
+	{
+		this->table->writeData(buff, ctx);
+	}
+	int maxLoop = this->sets->size(ctx);
+	buff->putInt(maxLoop, ctx);
+	for(int i = 0; i < maxLoop; ++i)
+	{
+		UpdateSet* exp = this->sets->get(i, ctx);
+		exp->writeData(buff, ctx);
+	}
+	isnull = (this->where == nullptr);
+	buff->putBoolean(isnull, ctx);
+	if(!isnull)
+	{
+		this->where->writeData(buff, ctx);
 	}
 }
 }}}

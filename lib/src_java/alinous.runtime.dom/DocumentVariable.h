@@ -69,6 +69,12 @@ class VariantValue;}}}
 namespace alinous {namespace runtime {namespace dom {namespace typed {
 class TypedVariableArray;}}}}
 
+namespace alinous {namespace remote {namespace socket {
+class NetworkBinaryBuffer;}}}
+
+namespace alinous {namespace remote {namespace socket {
+class ICommandData;}}}
+
 namespace alinous {namespace system {
 class AlinousException;}}
 
@@ -87,6 +93,8 @@ using namespace ::java::lang;
 using ::java::util::Iterator;
 using ::alinous::compile::expression::DomVariableDescriptor;
 using ::alinous::html::DomNode;
+using ::alinous::remote::socket::ICommandData;
+using ::alinous::remote::socket::NetworkBinaryBuffer;
 using ::alinous::runtime::dom::typed::BigDecimalVariable;
 using ::alinous::runtime::dom::typed::BoolVariable;
 using ::alinous::runtime::dom::typed::ByteVariable;
@@ -345,6 +353,8 @@ public:
 	bool isTrue(ThreadContext* ctx) final;
 	int getDomType(ThreadContext* ctx) throw()  final;
 	IDomVariable* toDom(ThreadContext* ctx) throw()  final;
+	void readData(NetworkBinaryBuffer* buff, ThreadContext* ctx) final;
+	void writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw()  final;
 public:
 	static bool __init_done;
 	static bool __init_static_variables();

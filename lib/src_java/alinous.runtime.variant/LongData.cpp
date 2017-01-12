@@ -7,7 +7,7 @@ namespace alinous {namespace runtime {namespace variant {
 
 
 
-String* LongData::TAG_NAME = ConstStr::getCNST_STR_1177();
+String* LongData::TAG_NAME = ConstStr::getCNST_STR_1228();
 bool LongData::__init_done = __init_static_variables();
 bool LongData::__init_static_variables(){
 	Java2CppSystem::getSelf();
@@ -116,6 +116,15 @@ int LongData::compareTo(VariantValue* variant, ThreadContext* ctx) throw()
 {
 	long long sub = this->data - variant->getLong(ctx);
 	return sub >= (long long)0 ? ((int)sub) : -1;
+}
+void LongData::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+{
+	this->data = buff->getLong(ctx);
+}
+void LongData::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+{
+	buff->putInt(IVariantData::TYPE_LONG, ctx);
+	buff->putLong(this->data, ctx);
 }
 LongData* LongData::importFromXml(DomNode* node, ThreadContext* ctx) throw() 
 {

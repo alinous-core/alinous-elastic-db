@@ -177,5 +177,94 @@ void ClassMemberVariable::setDimension(int dimension, ThreadContext* ctx) throw(
 {
 	this->dimension = dimension;
 }
+void ClassMemberVariable::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
+{
+	bool isnull = buff->getBoolean(ctx);
+	if(!isnull)
+	{
+		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
+		if(el == nullptr || !((dynamic_cast<AlinousName*>(el) != 0)))
+		{
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_970(), ctx));
+		}
+		__GC_MV(this, &(this->type), static_cast<AlinousName*>(el), AlinousName);
+	}
+	this->dimension = buff->getInt(ctx);
+	isnull = buff->getBoolean(ctx);
+	if(!isnull)
+	{
+		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
+		if(el == nullptr || !((dynamic_cast<AlinousName*>(el) != 0)))
+		{
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_970(), ctx));
+		}
+		__GC_MV(this, &(this->name), static_cast<AlinousName*>(el), AlinousName);
+	}
+	isnull = buff->getBoolean(ctx);
+	if(!isnull)
+	{
+		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
+		if(el == nullptr || !((dynamic_cast<DomVariableDescriptor*>(el) != 0)))
+		{
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_979(), ctx));
+		}
+		__GC_MV(this, &(this->domDescriptor), static_cast<DomVariableDescriptor*>(el), DomVariableDescriptor);
+	}
+	isnull = buff->getBoolean(ctx);
+	if(!isnull)
+	{
+		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
+		if(el == nullptr || !((dynamic_cast<IExpression*>(el) != 0)))
+		{
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_980(), ctx));
+		}
+		__GC_MV(this, &(this->init), static_cast<IExpression*>(el), IExpression);
+	}
+	isnull = buff->getBoolean(ctx);
+	if(!isnull)
+	{
+		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
+		if(el == nullptr || !((dynamic_cast<IAlinousVariable*>(el) != 0)))
+		{
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_981(), ctx));
+		}
+		__GC_MV(this, &(this->staticValue), static_cast<IAlinousVariable*>(el), IAlinousVariable);
+	}
+}
+void ClassMemberVariable::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+{
+	buff->putInt(ICommandData::__ClassMemberVariable, ctx);
+	bool isnull = (this->type == nullptr);
+	buff->putBoolean(isnull, ctx);
+	if(!isnull)
+	{
+		this->type->writeData(buff, ctx);
+	}
+	buff->putInt(dimension, ctx);
+	isnull = (this->name == nullptr);
+	buff->putBoolean(isnull, ctx);
+	if(!isnull)
+	{
+		this->name->writeData(buff, ctx);
+	}
+	isnull = (this->domDescriptor == nullptr);
+	buff->putBoolean(isnull, ctx);
+	if(!isnull)
+	{
+		this->domDescriptor->writeData(buff, ctx);
+	}
+	isnull = (this->init == nullptr);
+	buff->putBoolean(isnull, ctx);
+	if(!isnull)
+	{
+		this->init->writeData(buff, ctx);
+	}
+	isnull = (this->staticValue == nullptr);
+	buff->putBoolean(isnull, ctx);
+	if(!isnull)
+	{
+		this->staticValue->writeData(buff, ctx);
+	}
+}
 }}}
 

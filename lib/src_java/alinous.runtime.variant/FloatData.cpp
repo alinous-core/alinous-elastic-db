@@ -7,7 +7,7 @@ namespace alinous {namespace runtime {namespace variant {
 
 
 
-String* FloatData::TAG_NAME = ConstStr::getCNST_STR_1160();
+String* FloatData::TAG_NAME = ConstStr::getCNST_STR_1211();
 bool FloatData::__init_done = __init_static_variables();
 bool FloatData::__init_static_variables(){
 	Java2CppSystem::getSelf();
@@ -116,6 +116,15 @@ int FloatData::compareTo(VariantValue* variant, ThreadContext* ctx) throw()
 {
 	float sub = this->data - variant->getFloat(ctx);
 	return sub >= (float)0 ? ((int)sub) : -1;
+}
+void FloatData::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+{
+	this->data = buff->getFloat(ctx);
+}
+void FloatData::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+{
+	buff->putInt(IVariantData::TYPE_FLOAT, ctx);
+	buff->putFloat(this->data, ctx);
 }
 FloatData* FloatData::importFromXml(DomNode* node, ThreadContext* ctx) throw() 
 {

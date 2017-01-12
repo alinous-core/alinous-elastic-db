@@ -78,11 +78,26 @@ class AlinousModulePackage;}}
 namespace java {namespace lang {
 class StringBuffer;}}
 
+namespace alinous {namespace remote {namespace socket {
+class NetworkBinaryBuffer;}}}
+
+namespace alinous {namespace compile {
+class IAlinousElement;}}
+
+namespace alinous {namespace runtime {namespace dom {
+class VariableException;}}}
+
 namespace alinous {namespace compile {namespace declare {
 class IDeclare;}}}
 
+namespace alinous {namespace compile {
+class AlinousElementNetworkFactory;}}
+
 namespace alinous {namespace db {namespace table {
 class DatabaseException;}}}
+
+namespace alinous {namespace remote {namespace socket {
+class ICommandData;}}}
 
 namespace alinous {namespace runtime {namespace engine {
 class ScriptRunner;}}}
@@ -102,6 +117,8 @@ using ::java::util::Iterator;
 using ::java::util::ArrayList;
 using ::java::util::Iterator;
 using ::alinous::compile::AbstractSrcElement;
+using ::alinous::compile::AlinousElementNetworkFactory;
+using ::alinous::compile::IAlinousElement;
 using ::alinous::compile::IAlinousElementVisitor;
 using ::alinous::compile::analyse::SrcAnalyseContext;
 using ::alinous::compile::analyse::tools::ClassMethodArgumentMatcher;
@@ -112,8 +129,11 @@ using ::alinous::compile::expression::FunctionArguments;
 using ::alinous::compile::expression::IExpression;
 using ::alinous::compile::stmt::StatementList;
 using ::alinous::db::table::DatabaseException;
+using ::alinous::remote::socket::ICommandData;
+using ::alinous::remote::socket::NetworkBinaryBuffer;
 using ::alinous::runtime::AlinousModulePackage;
 using ::alinous::runtime::dom::IAlinousVariable;
+using ::alinous::runtime::dom::VariableException;
 using ::alinous::runtime::dom::clazz::AlinousClassVariable;
 using ::alinous::runtime::engine::MainStackFrame;
 using ::alinous::runtime::engine::ScriptMachine;
@@ -188,6 +208,8 @@ public:
 	void setInterfaceClass(bool interfaceClass, ThreadContext* ctx) throw() ;
 	ArrayList<ClassImplements>* getImplementsClass(ThreadContext* ctx) throw() ;
 	void setImplementsClass(ArrayList<ClassImplements>* implementsClass, ThreadContext* ctx) throw() ;
+	void readData(NetworkBinaryBuffer* buff, ThreadContext* ctx) final;
+	void writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw()  final;
 private:
 	void initMembers(AlinousClassVariable* obj, ScriptMachine* machine, bool debug, ThreadContext* ctx);
 	void analyzeMethodVirtual(SrcAnalyseContext* context, ClassMethodFunction* method, ThreadContext* ctx) throw() ;

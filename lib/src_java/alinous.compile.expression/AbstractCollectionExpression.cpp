@@ -114,5 +114,44 @@ ExpressionSourceId* AbstractCollectionExpression::getSourceId(ThreadContext* ctx
 	}
 	return (new(ctx) ExpressionSourceId(nullptr, this, type, ctx));
 }
+void AbstractCollectionExpression::__readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
+{
+	bool isnull = buff->getBoolean(ctx);
+	if(!isnull)
+	{
+		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
+		if(el == nullptr || !((dynamic_cast<IExpression*>(el) != 0)))
+		{
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_980(), ctx));
+		}
+		__GC_MV(this, &(this->first), static_cast<IExpression*>(el), IExpression);
+	}
+	int maxLoop = buff->getInt(ctx);
+	for(int i = 0; i < maxLoop; ++i)
+	{
+		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
+		if(el == nullptr || !((dynamic_cast<SubExpression*>(el) != 0)))
+		{
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_994(), ctx));
+		}
+		this->expressions->add(static_cast<SubExpression*>(el), ctx);
+	}
+}
+void AbstractCollectionExpression::__writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+{
+	bool isnull = (this->first == nullptr);
+	buff->putBoolean(isnull, ctx);
+	if(!isnull)
+	{
+		this->first->writeData(buff, ctx);
+	}
+	int maxLoop = this->expressions->size(ctx);
+	buff->putInt(maxLoop, ctx);
+	for(int i = 0; i < maxLoop; ++i)
+	{
+		SubExpression* exp = this->expressions->get(i, ctx);
+		exp->writeData(buff, ctx);
+	}
+}
 }}}
 

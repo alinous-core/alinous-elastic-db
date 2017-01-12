@@ -107,5 +107,25 @@ void DomNameSegment::position(Token* start, Token* end, ThreadContext* ctx) thro
 {
 	IDomSegment::position(start, end, ctx);
 }
+void DomNameSegment::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
+{
+	bool isnull = buff->getBoolean(ctx);
+	if(!isnull)
+	{
+		__GC_MV(this, &(this->name), buff->getString(ctx), String);
+	}
+	this->segmentVariableType = buff->getInt(ctx);
+}
+void DomNameSegment::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+{
+	buff->putInt(ICommandData::__DomNameSegment, ctx);
+	bool isnull = (this->name == nullptr);
+	buff->putBoolean(isnull, ctx);
+	if(!isnull)
+	{
+		buff->putString(this->name, ctx);
+	}
+	buff->putInt(this->segmentVariableType, ctx);
+}
 }}}
 

@@ -40,5 +40,14 @@ void RightJoin::setRight(IJoin* right, ThreadContext* ctx) throw()
 {
 	__GC_MV(this, &(this->left), right, IJoin);
 }
+void RightJoin::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
+{
+	__readData(buff, ctx);
+}
+void RightJoin::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+{
+	buff->putInt(ICommandData::__RightJoin, ctx);
+	__writeData(buff, ctx);
+}
 }}}}}
 

@@ -45,11 +45,20 @@ class ScanResultRecord;}}}}
 namespace alinous {namespace db {namespace table {
 class DatabaseException;}}}
 
+namespace alinous {namespace remote {namespace socket {
+class NetworkBinaryBuffer;}}}
+
 namespace alinous {namespace compile {namespace sql {namespace expression {
 class AbstractSQLExpression;}}}}
 
 namespace alinous {namespace compile {namespace expression {
 class IExpression;}}}
+
+namespace alinous {namespace remote {namespace socket {
+class ICommandData;}}}
+
+namespace alinous {namespace runtime {namespace dom {
+class VariableException;}}}
 
 namespace alinous {namespace system {
 class AlinousException;}}
@@ -74,8 +83,11 @@ using ::alinous::compile::sql::analyze::SQLAnalyseContext;
 using ::alinous::compile::sql::analyze::ScanTableIdentifier;
 using ::alinous::db::table::DatabaseException;
 using ::alinous::db::trx::scan::ScanResultRecord;
+using ::alinous::remote::socket::ICommandData;
+using ::alinous::remote::socket::NetworkBinaryBuffer;
 using ::alinous::compile::sql::analyze::ScanTableColumnIdentifier;
 using ::alinous::runtime::dom::IAlinousVariable;
+using ::alinous::runtime::dom::VariableException;
 using ::alinous::runtime::engine::ScriptMachine;
 using ::alinous::runtime::variant::VariantValue;
 using ::alinous::system::AlinousException;
@@ -107,6 +119,12 @@ public:
 public:
 	SQLLiteral(SQLLiteral::sqlliteralType type, ThreadContext* ctx) throw() ;
 	void __construct_impl(SQLLiteral::sqlliteralType type, ThreadContext* ctx) throw() ;
+	SQLLiteral(ThreadContext* ctx) throw()  : IObject(ctx), AbstractSQLExpression(ctx), vvalue(nullptr), value(nullptr)
+	{
+	}
+	void __construct_impl(ThreadContext* ctx) throw() 
+	{
+	}
 	virtual ~SQLLiteral() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 public:
@@ -135,6 +153,11 @@ public:
 	bool hasArrayResult(ThreadContext* ctx) throw()  final;
 	ArrayList<VariantValue>* resolveSQLExpressionAsArray(ScanResultRecord* record, ScriptMachine* machine, bool debug, ThreadContext* ctx) final;
 	int getExpressionType(ThreadContext* ctx) throw()  final;
+	void readData(NetworkBinaryBuffer* buff, ThreadContext* ctx) final;
+	void writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw()  final;
+private:
+	int fromEnum(ThreadContext* ctx) throw() ;
+	void toEnum(int num, ThreadContext* ctx) throw() ;
 public:
 	static bool __init_done;
 	static bool __init_static_variables();

@@ -7,7 +7,7 @@ namespace alinous {namespace runtime {namespace variant {
 
 
 
-String* ShortData::TAG_NAME = ConstStr::getCNST_STR_1173();
+String* ShortData::TAG_NAME = ConstStr::getCNST_STR_1224();
 bool ShortData::__init_done = __init_static_variables();
 bool ShortData::__init_static_variables(){
 	Java2CppSystem::getSelf();
@@ -115,6 +115,15 @@ bool ShortData::isNull(ThreadContext* ctx) throw()
 int ShortData::compareTo(VariantValue* variant, ThreadContext* ctx) throw() 
 {
 	return this->data - variant->getShort(ctx);
+}
+void ShortData::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+{
+	this->data = buff->getShort(ctx);
+}
+void ShortData::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+{
+	buff->putInt(IVariantData::TYPE_SHORT, ctx);
+	buff->putShort(this->data, ctx);
 }
 ShortData* ShortData::importFromXml(DomNode* node, ThreadContext* ctx) throw() 
 {

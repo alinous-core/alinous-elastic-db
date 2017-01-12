@@ -49,5 +49,14 @@ int AndExpression::getExpressionType(ThreadContext* ctx) throw()
 {
 	return IExpression::andExpression;
 }
+void AndExpression::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
+{
+	__readData(buff, ctx);
+}
+void AndExpression::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+{
+	buff->putInt(ICommandData::__AndExpression, ctx);
+	__writeData(buff, ctx);
+}
 }}}}
 

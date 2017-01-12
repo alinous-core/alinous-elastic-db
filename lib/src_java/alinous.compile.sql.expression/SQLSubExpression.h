@@ -45,11 +45,26 @@ class ScanResultRecord;}}}}
 namespace alinous {namespace db {namespace table {
 class DatabaseException;}}}
 
+namespace alinous {namespace remote {namespace socket {
+class NetworkBinaryBuffer;}}}
+
+namespace alinous {namespace compile {
+class IAlinousElement;}}
+
+namespace alinous {namespace runtime {namespace dom {
+class VariableException;}}}
+
 namespace alinous {namespace compile {namespace sql {namespace expression {namespace blexp {
 class AbstractSQLBooleanExpression;}}}}}
 
+namespace alinous {namespace compile {
+class AlinousElementNetworkFactory;}}
+
 namespace alinous {namespace compile {namespace expression {
 class IExpression;}}}
+
+namespace alinous {namespace remote {namespace socket {
+class ICommandData;}}}
 
 namespace alinous {namespace system {
 class AlinousException;}}
@@ -65,7 +80,9 @@ using namespace ::java::lang;
 using ::java::util::Iterator;
 using ::java::util::ArrayList;
 using ::alinous::compile::AbstractSrcElement;
+using ::alinous::compile::AlinousElementNetworkFactory;
 using ::alinous::compile::ExpressionSourceId;
+using ::alinous::compile::IAlinousElement;
 using ::alinous::compile::IAlinousElementVisitor;
 using ::alinous::compile::analyse::SrcAnalyseContext;
 using ::alinous::compile::expression::IExpression;
@@ -76,7 +93,10 @@ using ::alinous::compile::sql::analyze::ScanTableColumnIdentifier;
 using ::alinous::compile::sql::expression::blexp::AbstractSQLBooleanExpression;
 using ::alinous::db::table::DatabaseException;
 using ::alinous::db::trx::scan::ScanResultRecord;
+using ::alinous::remote::socket::ICommandData;
+using ::alinous::remote::socket::NetworkBinaryBuffer;
 using ::alinous::runtime::dom::IAlinousVariable;
+using ::alinous::runtime::dom::VariableException;
 using ::alinous::runtime::engine::ScriptMachine;
 using ::alinous::runtime::variant::VariantValue;
 using ::alinous::system::AlinousException;
@@ -89,6 +109,12 @@ public:
 public:
 	SQLSubExpression(String* opStr, ISQLExpression* exp, ThreadContext* ctx) throw() ;
 	void __construct_impl(String* opStr, ISQLExpression* exp, ThreadContext* ctx) throw() ;
+	SQLSubExpression(ThreadContext* ctx) throw()  : IObject(ctx), AbstractSQLBooleanExpression(ctx), op(0), exp(nullptr)
+	{
+	}
+	void __construct_impl(ThreadContext* ctx) throw() 
+	{
+	}
 	virtual ~SQLSubExpression() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 private:
@@ -119,6 +145,8 @@ public:
 	ArrayList<VariantValue>* resolveSQLExpressionAsArray(ScanResultRecord* record, ScriptMachine* machine, bool debug, ThreadContext* ctx) final;
 	bool isSQLExp(ThreadContext* ctx) throw()  final;
 	int getExpressionType(ThreadContext* ctx) throw()  final;
+	void readData(NetworkBinaryBuffer* buff, ThreadContext* ctx) final;
+	void writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw()  final;
 public:
 	static bool __init_done;
 	static bool __init_static_variables();

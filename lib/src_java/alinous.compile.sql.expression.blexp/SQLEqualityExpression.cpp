@@ -107,7 +107,7 @@ void SQLEqualityExpression::setCheckEquals(bool checkEquals, ThreadContext* ctx)
 }
 void SQLEqualityExpression::setCheckEquals(String* strEq, ThreadContext* ctx) throw() 
 {
-	if(strEq->equals(ConstStr::getCNST_STR_1030(), ctx))
+	if(strEq->equals(ConstStr::getCNST_STR_1071(), ctx))
 	{
 		this->checkEquals = true;
 	}
@@ -232,11 +232,54 @@ bool SQLEqualityExpression::hasArrayResult(ThreadContext* ctx) throw()
 }
 ArrayList<VariantValue>* SQLEqualityExpression::resolveSQLExpressionAsArray(ScanResultRecord* record, ScriptMachine* machine, bool debug, ThreadContext* ctx)
 {
-	throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1006(), ctx));
+	throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1036(), ctx));
 }
 int SQLEqualityExpression::getExpressionType(ThreadContext* ctx) throw() 
 {
 	return IExpression::sQLEqualityExpression;
+}
+void SQLEqualityExpression::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
+{
+	__readData(buff, ctx);
+	bool isnull = buff->getBoolean(ctx);
+	if(!isnull)
+	{
+		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
+		if(el == nullptr || !((dynamic_cast<ISQLExpression*>(el) != 0)))
+		{
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1044(), ctx));
+		}
+		__GC_MV(this, &(this->left), static_cast<ISQLExpression*>(el), ISQLExpression);
+	}
+	isnull = buff->getBoolean(ctx);
+	if(!isnull)
+	{
+		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
+		if(el == nullptr || !((dynamic_cast<ISQLExpression*>(el) != 0)))
+		{
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1044(), ctx));
+		}
+		__GC_MV(this, &(this->right), static_cast<ISQLExpression*>(el), ISQLExpression);
+	}
+	this->checkEquals = buff->getBoolean(ctx);
+}
+void SQLEqualityExpression::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+{
+	buff->putInt(ICommandData::__SQLEqualityExpression, ctx);
+	__writeData(buff, ctx);
+	bool isnull = (this->left == nullptr);
+	buff->putBoolean(isnull, ctx);
+	if(!isnull)
+	{
+		this->left->writeData(buff, ctx);
+	}
+	isnull = (this->right == nullptr);
+	buff->putBoolean(isnull, ctx);
+	if(!isnull)
+	{
+		this->right->writeData(buff, ctx);
+	}
+	buff->putBoolean(this->checkEquals, ctx);
 }
 }}}}}
 

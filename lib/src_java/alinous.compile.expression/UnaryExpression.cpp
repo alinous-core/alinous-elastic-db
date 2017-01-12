@@ -64,5 +64,12 @@ int UnaryExpression::getExpressionType(ThreadContext* ctx) throw()
 {
 	return IExpression::unaryExpression;
 }
+void UnaryExpression::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
+{
+}
+void UnaryExpression::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+{
+	buff->putInt(ICommandData::__UnaryExpression, ctx);
+}
 }}}
 

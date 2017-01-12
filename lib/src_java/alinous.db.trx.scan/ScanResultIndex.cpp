@@ -89,15 +89,15 @@ void ScanResultIndex::switchToDisk(AlinousDatabase* database, ThreadContext* ctx
 		}
 		catch(IOException* e)
 		{
-			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_1663(), e, ctx));
+			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_1714(), e, ctx));
 		}
 		catch(InterruptedException* e)
 		{
-			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_1663(), e, ctx));
+			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_1714(), e, ctx));
 		}
 		catch(BTreeException* e)
 		{
-			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_1663(), e, ctx));
+			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_1714(), e, ctx));
 		}
 	}
 }
@@ -151,11 +151,11 @@ String* ScanResultIndex::getOidIndexName(ThreadContext* ctx) throw()
 	{
 		StringBuilder* buff = (new(ctx) StringBuilder(ctx));
 		buff->append(this->trxDir, ctx);
-		if(!this->trxDir->endsWith(ConstStr::getCNST_STR_984(), ctx))
+		if(!this->trxDir->endsWith(ConstStr::getCNST_STR_1007(), ctx))
 		{
-			buff->append(ConstStr::getCNST_STR_984(), ctx);
+			buff->append(ConstStr::getCNST_STR_1007(), ctx);
 		}
-		buff->append(ConstStr::getCNST_STR_1664(), ctx)->append(this->indexSerial, ctx)->append(ConstStr::getCNST_STR_1667(), ctx);
+		buff->append(ConstStr::getCNST_STR_1715(), ctx)->append(this->indexSerial, ctx)->append(ConstStr::getCNST_STR_1718(), ctx);
 		__GC_MV(this, &(this->storagePath), buff->toString(ctx), String);
 	}
 	return this->storagePath;

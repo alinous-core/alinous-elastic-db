@@ -72,6 +72,12 @@ class TimestampVariable;}}}}
 namespace alinous {namespace runtime {namespace dom {namespace typed {
 class TypedVariableArray;}}}}
 
+namespace alinous {namespace remote {namespace socket {
+class NetworkBinaryBuffer;}}}
+
+namespace alinous {namespace remote {namespace socket {
+class ICommandData;}}}
+
 namespace alinous {namespace system {
 class AlinousException;}}
 
@@ -91,6 +97,8 @@ using ::java::util::Iterator;
 using ::java::util::ArrayList;
 using ::alinous::compile::expression::DomVariableDescriptor;
 using ::alinous::html::DomNode;
+using ::alinous::remote::socket::ICommandData;
+using ::alinous::remote::socket::NetworkBinaryBuffer;
 using ::alinous::runtime::dom::typed::BigDecimalVariable;
 using ::alinous::runtime::dom::typed::BoolVariable;
 using ::alinous::runtime::dom::typed::ByteVariable;
@@ -354,6 +362,8 @@ public:
 	int compareTo(TimeVariable* variable, ThreadContext* ctx) final;
 	int compareTo(TimestampVariable* variable, ThreadContext* ctx) final;
 	IAlinousVariable* substitute(TypedVariableArray* variable, ThreadContext* ctx) final;
+	void readData(NetworkBinaryBuffer* buff, ThreadContext* ctx) final;
+	void writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw()  final;
 public:
 	static DomArray* importFromDebugXml(DomNode* node, ThreadContext* ctx) throw() ;
 public:

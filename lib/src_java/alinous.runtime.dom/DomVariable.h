@@ -96,11 +96,17 @@ class FileStorageEntryFetcher;}}}
 namespace alinous {namespace btree {
 class IValueFetcher;}}
 
+namespace alinous {namespace remote {namespace socket {
+class NetworkBinaryBuffer;}}}
+
 namespace alinous {namespace db {namespace table {
 class IDatabaseRecord;}}}
 
 namespace alinous {namespace btree {
 class IBTreeValue;}}
+
+namespace alinous {namespace remote {namespace socket {
+class ICommandData;}}}
 
 namespace alinous {namespace system {
 class AlinousException;}}
@@ -132,6 +138,8 @@ using ::alinous::html::DomNode;
 using ::alinous::html::xpath::IVariableValue;
 using ::alinous::numeric::BigDecimal;
 using ::alinous::numeric::TimeOnlyTimestamp;
+using ::alinous::remote::socket::ICommandData;
+using ::alinous::remote::socket::NetworkBinaryBuffer;
 using ::alinous::runtime::dom::typed::BigDecimalVariable;
 using ::alinous::runtime::dom::typed::BoolVariable;
 using ::alinous::runtime::dom::typed::ByteVariable;
@@ -439,6 +447,8 @@ public:
 	IValueFetcher* getFetcher(ThreadContext* ctx) throw()  final;
 	bool equals(IObject* other, ThreadContext* ctx) throw()  final;
 	long long getMaxCommitId(ThreadContext* ctx) throw()  final;
+	void readData(NetworkBinaryBuffer* buff, ThreadContext* ctx) final;
+	void writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw()  final;
 public:
 	static DomVariable* importFromDebugXml(DomNode* node, ThreadContext* ctx) throw() ;
 	static DomVariable* valueFromFetcher(FileStorageEntryFetcher* fetcher, ThreadContext* ctx);

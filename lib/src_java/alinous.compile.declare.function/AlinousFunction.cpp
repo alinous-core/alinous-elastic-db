@@ -128,7 +128,7 @@ FunctionCallExpression* AlinousFunction::callSuperConstructor(ThreadContext* ctx
 	for(int i = 0; i != maxLoop; ++i)
 	{
 		FunctionCallExpression* func = visitor->getList(ctx)->get(i, ctx);
-		if(func->body->equals(ConstStr::getCNST_STR_967(), ctx))
+		if(func->body->equals(ConstStr::getCNST_STR_982(), ctx))
 		{
 			return func;
 		}
@@ -149,7 +149,7 @@ String* AlinousFunction::toString(ThreadContext* ctx) throw()
 	}
 		else 
 	{
-		buff->append(ConstStr::getCNST_STR_968(), ctx);
+		buff->append(ConstStr::getCNST_STR_983(), ctx);
 	}
 	return buff->toString(ctx);
 }
@@ -220,6 +220,93 @@ AbstractSrcElement* AlinousFunction::getParent(ThreadContext* ctx) throw()
 void AlinousFunction::setParent(AbstractSrcElement* parent, ThreadContext* ctx) throw() 
 {
 	IDeclare::setParent(parent, ctx);
+}
+void AlinousFunction::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
+{
+	bool isnull = buff->getBoolean(ctx);
+	if(!isnull)
+	{
+		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
+		if(el == nullptr || !((dynamic_cast<AlinousName*>(el) != 0)))
+		{
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_970(), ctx));
+		}
+		__GC_MV(this, &(this->name), static_cast<AlinousName*>(el), AlinousName);
+	}
+	isnull = buff->getBoolean(ctx);
+	if(!isnull)
+	{
+		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
+		if(el == nullptr || !((dynamic_cast<ReturnValueDefinition*>(el) != 0)))
+		{
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_984(), ctx));
+		}
+		__GC_MV(this, &(this->returnType), static_cast<ReturnValueDefinition*>(el), ReturnValueDefinition);
+	}
+	isnull = buff->getBoolean(ctx);
+	if(!isnull)
+	{
+		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
+		if(el == nullptr || !((dynamic_cast<FunctionArgumentsListDefine*>(el) != 0)))
+		{
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_985(), ctx));
+		}
+		__GC_MV(this, &(this->arguments), static_cast<FunctionArgumentsListDefine*>(el), FunctionArgumentsListDefine);
+	}
+	isnull = buff->getBoolean(ctx);
+	if(!isnull)
+	{
+		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
+		if(el == nullptr || !((dynamic_cast<ThrowsDefine*>(el) != 0)))
+		{
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_986(), ctx));
+		}
+		__GC_MV(this, &(this->throwsDefine), static_cast<ThrowsDefine*>(el), ThrowsDefine);
+	}
+	isnull = buff->getBoolean(ctx);
+	if(!isnull)
+	{
+		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
+		if(el == nullptr || !((dynamic_cast<StatementBlock*>(el) != 0)))
+		{
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_987(), ctx));
+		}
+		__GC_MV(this, &(this->block), static_cast<StatementBlock*>(el), StatementBlock);
+	}
+}
+void AlinousFunction::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+{
+	buff->putInt(ICommandData::__AlinousFunction, ctx);
+	bool isnull = (this->name == nullptr);
+	buff->putBoolean(isnull, ctx);
+	if(!isnull)
+	{
+		this->name->writeData(buff, ctx);
+	}
+	isnull = (this->returnType == nullptr);
+	buff->putBoolean(isnull, ctx);
+	if(!isnull)
+	{
+		this->returnType->writeData(buff, ctx);
+	}
+	isnull = (this->arguments == nullptr);
+	buff->putBoolean(isnull, ctx);
+	if(!isnull)
+	{
+		this->arguments->writeData(buff, ctx);
+	}
+	isnull = (this->throwsDefine == nullptr);
+	buff->putBoolean(isnull, ctx);
+	if(!isnull)
+	{
+		this->throwsDefine->writeData(buff, ctx);
+	}
+	isnull = (this->block == nullptr);
+	buff->putBoolean(isnull, ctx);
+	if(!isnull)
+	{
+		this->block->writeData(buff, ctx);
+	}
 }
 }}}}
 

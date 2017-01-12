@@ -49,5 +49,14 @@ int InclusiveOrExpression::getExpressionType(ThreadContext* ctx) throw()
 {
 	return IExpression::inclusiveOrExpression;
 }
+void InclusiveOrExpression::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
+{
+	__readData(buff, ctx);
+}
+void InclusiveOrExpression::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+{
+	buff->putInt(ICommandData::__InclusiveOrExpression, ctx);
+	__writeData(buff, ctx);
+}
 }}}}
 

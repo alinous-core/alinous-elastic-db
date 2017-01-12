@@ -21,8 +21,17 @@ class IAlinousElementVisitor;}}
 namespace alinous {namespace compile {
 class AlinousSrc;}}
 
+namespace alinous {namespace remote {namespace socket {
+class NetworkBinaryBuffer;}}}
+
 namespace alinous {namespace compile {
 class IAlinousElement;}}
+
+namespace alinous {namespace remote {namespace socket {
+class ICommandData;}}}
+
+namespace alinous {namespace runtime {namespace dom {
+class VariableException;}}}
 
 namespace alinous {
 class ThreadContext;
@@ -35,7 +44,10 @@ using namespace ::java::lang;
 using ::java::util::Iterator;
 using ::alinous::compile::analyse::SrcAnalyseContext;
 using ::alinous::compile::expression::Literal;
+using ::alinous::remote::socket::ICommandData;
+using ::alinous::remote::socket::NetworkBinaryBuffer;
 using ::alinous::runtime::AlinousModule;
+using ::alinous::runtime::dom::VariableException;
 
 
 
@@ -68,6 +80,8 @@ public:
 	AlinousModule* getModule(ThreadContext* ctx) throw() ;
 	void setModule(AlinousModule* module, ThreadContext* ctx) throw() ;
 	bool visit(IAlinousElementVisitor* visitor, AlinousSrc* alinousSrc, ThreadContext* ctx) throw() ;
+	void readData(NetworkBinaryBuffer* buff, ThreadContext* ctx) final;
+	void writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw()  final;
 public:
 	static bool __init_done;
 	static bool __init_static_variables();

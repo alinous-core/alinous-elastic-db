@@ -104,5 +104,28 @@ void ReturnValueDefinition::setParent(AbstractSrcElement* parent, ThreadContext*
 {
 	IDeclare::setParent(parent, ctx);
 }
+void ReturnValueDefinition::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
+{
+	bool isnull = buff->getBoolean(ctx);
+	if(!isnull)
+	{
+		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
+		if(el == nullptr || !((dynamic_cast<AlinousName*>(el) != 0)))
+		{
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_970(), ctx));
+		}
+		__GC_MV(this, &(this->type), static_cast<AlinousName*>(el), AlinousName);
+	}
+}
+void ReturnValueDefinition::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+{
+	buff->putInt(ICommandData::__ReturnValueDefinition, ctx);
+	bool isnull = (this->type == nullptr);
+	buff->putBoolean(isnull, ctx);
+	if(!isnull)
+	{
+		this->type->writeData(buff, ctx);
+	}
+}
 }}}}
 

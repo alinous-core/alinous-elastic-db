@@ -89,5 +89,36 @@ bool IncludePreprocessor::visit(IAlinousElementVisitor* visitor, AlinousSrc* ali
 {
 	return this->module->getModuleSource(ctx)->visit(visitor, alinousSrc, ctx);
 }
+void IncludePreprocessor::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
+{
+	bool isnull = buff->getBoolean(ctx);
+	if(!isnull)
+	{
+		__GC_MV(this, &(this->path), (new(ctx) Literal(ctx)), Literal);
+		this->path->readData(buff, ctx);
+	}
+	isnull = buff->getBoolean(ctx);
+	if(!isnull)
+	{
+		__GC_MV(this, &(this->module), (new(ctx) AlinousModule(ctx)), AlinousModule);
+		this->module->readData(buff, ctx);
+	}
+}
+void IncludePreprocessor::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+{
+	buff->putInt(ICommandData::__IncludePreprocessor, ctx);
+	bool isnull = (this->path == nullptr);
+	buff->putBoolean(isnull, ctx);
+	if(!isnull)
+	{
+		this->path->writeData(buff, ctx);
+	}
+	isnull = (this->module == nullptr);
+	buff->putBoolean(isnull, ctx);
+	if(!isnull)
+	{
+		this->module->writeData(buff, ctx);
+	}
+}
 }}
 

@@ -9,9 +9,9 @@ namespace alinous {namespace parser {namespace xpath {
 
 const StaticArrayObjectPrimitive<long long> AlinousXpathParserTokenManager::__jjnextStates = {3, 4, 5};
 IArrayObjectPrimitive<long long>* AlinousXpathParserTokenManager::jjnextStates = (IArrayObjectPrimitive<long long>*)const_cast<StaticArrayObjectPrimitive<long long>*>(&__jjnextStates);
-const StaticArrayObject<UnicodeStringWrapper> AlinousXpathParserTokenManager::__jjstrLiteralImages = {ConstStr::getCNST_STR_4(), (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, ConstStr::getCNST_STR_1474(), ConstStr::getCNST_STR_1475(), ConstStr::getCNST_STR_1476(), ConstStr::getCNST_STR_1477(), ConstStr::getCNST_STR_1478(), ConstStr::getCNST_STR_1479(), ConstStr::getCNST_STR_1480(), ConstStr::getCNST_STR_1481(), ConstStr::getCNST_STR_1482(), ConstStr::getCNST_STR_1483(), ConstStr::getCNST_STR_1484(), ConstStr::getCNST_STR_1485(), ConstStr::getCNST_STR_1486(), ConstStr::getCNST_STR_1487(), ConstStr::getCNST_STR_1488(), ConstStr::getCNST_STR_1489(), ConstStr::getCNST_STR_1490(), ConstStr::getCNST_STR_1491(), ConstStr::getCNST_STR_1492(), ConstStr::getCNST_STR_1493(), ConstStr::getCNST_STR_1569(), ConstStr::getCNST_STR_1494(), ConstStr::getCNST_STR_1495(), ConstStr::getCNST_STR_1496(), ConstStr::getCNST_STR_1497(), ConstStr::getCNST_STR_1498(), ConstStr::getCNST_STR_1499(), ConstStr::getCNST_STR_1500(), ConstStr::getCNST_STR_1501(), ConstStr::getCNST_STR_1502(), ConstStr::getCNST_STR_1503(), ConstStr::getCNST_STR_1504(), ConstStr::getCNST_STR_1505(), (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr};
+const StaticArrayObject<UnicodeStringWrapper> AlinousXpathParserTokenManager::__jjstrLiteralImages = {ConstStr::getCNST_STR_4(), (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, ConstStr::getCNST_STR_1525(), ConstStr::getCNST_STR_1526(), ConstStr::getCNST_STR_1527(), ConstStr::getCNST_STR_1528(), ConstStr::getCNST_STR_1529(), ConstStr::getCNST_STR_1530(), ConstStr::getCNST_STR_1531(), ConstStr::getCNST_STR_1532(), ConstStr::getCNST_STR_1533(), ConstStr::getCNST_STR_1534(), ConstStr::getCNST_STR_1535(), ConstStr::getCNST_STR_1536(), ConstStr::getCNST_STR_1537(), ConstStr::getCNST_STR_1538(), ConstStr::getCNST_STR_1539(), ConstStr::getCNST_STR_1540(), ConstStr::getCNST_STR_1541(), ConstStr::getCNST_STR_1542(), ConstStr::getCNST_STR_1543(), ConstStr::getCNST_STR_1544(), ConstStr::getCNST_STR_1620(), ConstStr::getCNST_STR_1545(), ConstStr::getCNST_STR_1546(), ConstStr::getCNST_STR_1547(), ConstStr::getCNST_STR_1548(), ConstStr::getCNST_STR_1549(), ConstStr::getCNST_STR_1550(), ConstStr::getCNST_STR_1551(), ConstStr::getCNST_STR_1552(), ConstStr::getCNST_STR_1553(), ConstStr::getCNST_STR_1554(), ConstStr::getCNST_STR_1555(), ConstStr::getCNST_STR_1556(), (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr};
 IArrayObject<String>* AlinousXpathParserTokenManager::jjstrLiteralImages = (IArrayObject<String>*)const_cast<StaticArrayObject<UnicodeStringWrapper>*>(&__jjstrLiteralImages);
-const StaticArrayObject<UnicodeStringWrapper> AlinousXpathParserTokenManager::__lexStateNames = {ConstStr::getCNST_STR_1570(), ConstStr::getCNST_STR_1719(), ConstStr::getCNST_STR_1720()};
+const StaticArrayObject<UnicodeStringWrapper> AlinousXpathParserTokenManager::__lexStateNames = {ConstStr::getCNST_STR_1621(), ConstStr::getCNST_STR_1770(), ConstStr::getCNST_STR_1771()};
 IArrayObject<String>* AlinousXpathParserTokenManager::lexStateNames = (IArrayObject<String>*)const_cast<StaticArrayObject<UnicodeStringWrapper>*>(&__lexStateNames);
 const StaticArrayObjectPrimitive<long long> AlinousXpathParserTokenManager::__jjnewLexState = {-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 2, 1, 0, -1, -1, -1, 0, -1, -1, -1, -1};
 IArrayObjectPrimitive<long long>* AlinousXpathParserTokenManager::jjnewLexState = (IArrayObjectPrimitive<long long>*)const_cast<StaticArrayObjectPrimitive<long long>*>(&__jjnewLexState);
@@ -36,7 +36,7 @@ bool AlinousXpathParserTokenManager::__init_static_variables(){
 {
 	if(JavaCharStream::staticFlag)
 	{
-		throw (new(ctx) Error(ConstStr::getCNST_STR_1471(), ctx));
+		throw (new(ctx) Error(ConstStr::getCNST_STR_1522(), ctx));
 	}
 	__GC_MV(this, &(input_stream), stream, JavaCharStream);
 }
@@ -44,7 +44,7 @@ void AlinousXpathParserTokenManager::__construct_impl(JavaCharStream* stream, Th
 {
 	if(JavaCharStream::staticFlag)
 	{
-		throw (new(ctx) Error(ConstStr::getCNST_STR_1471(), ctx));
+		throw (new(ctx) Error(ConstStr::getCNST_STR_1522(), ctx));
 	}
 	__GC_MV(this, &(input_stream), stream, JavaCharStream);
 }
@@ -233,7 +233,7 @@ void AlinousXpathParserTokenManager::SwitchTo(long long lexState, ThreadContext*
 {
 	if(lexState >= (long long)3 || lexState < (long long)0)
 	{
-		throw (new(ctx) TokenMgrError(ConstStr::getCNST_STR_1472()->clone(ctx)->append(lexState, ctx)->append(ConstStr::getCNST_STR_1473(), ctx), TokenMgrError::INVALID_LEXICAL_STATE, ctx));
+		throw (new(ctx) TokenMgrError(ConstStr::getCNST_STR_1523()->clone(ctx)->append(lexState, ctx)->append(ConstStr::getCNST_STR_1524(), ctx), TokenMgrError::INVALID_LEXICAL_STATE, ctx));
 	}
 		else 
 	{
@@ -274,7 +274,7 @@ void AlinousXpathParserTokenManager::TokenLexicalActions(Token* matchedToken, Th
 		lengthOfMatch = jjmatchedPos + 1;
 		image->append(input_stream->GetSuffix((int)jjimageLen + (lengthOfMatch), ctx), ctx);
 		String* img = image->substring(1, image->length(ctx) - 1, ctx);
-		__GC_MV(matchedToken, &(matchedToken->image), img->replaceAll(ConstStr::getCNST_STR_1718(), ConstStr::getCNST_STR_1678(), ctx), String);
+		__GC_MV(matchedToken, &(matchedToken->image), img->replaceAll(ConstStr::getCNST_STR_1769(), ConstStr::getCNST_STR_1729(), ctx), String);
 		break ;
 		}
 	default:
@@ -572,7 +572,7 @@ long long AlinousXpathParserTokenManager::jjMoveNfa_0(long long startState, long
 		}
 		catch(java::io::IOException* e)
 		{
-			throw (new(ctx) Error(ConstStr::getCNST_STR_1469(), ctx));
+			throw (new(ctx) Error(ConstStr::getCNST_STR_1520(), ctx));
 		}
 	}
 	curPos = 0;
@@ -784,7 +784,7 @@ long long AlinousXpathParserTokenManager::jjMoveNfa_0(long long startState, long
 			}
 			catch(java::io::IOException* e)
 			{
-				throw (new(ctx) Error(ConstStr::getCNST_STR_1470(), ctx));
+				throw (new(ctx) Error(ConstStr::getCNST_STR_1521(), ctx));
 			}
 		}
 	}

@@ -69,7 +69,7 @@ bool ClassExtends::analyse(SrcAnalyseContext* context, bool leftValue, ThreadCon
 	__GC_MV(this, &(this->analysedClazz), context->findClassDeclare(this->className, ctx), AlinousClass);
 	if(this->analysedClazz == nullptr)
 	{
-		context->getSourceValidator(ctx)->addError(toString(ctx)->clone(ctx)->append(ConstStr::getCNST_STR_965(), ctx), this, ctx);
+		context->getSourceValidator(ctx)->addError(toString(ctx)->clone(ctx)->append(ConstStr::getCNST_STR_969(), ctx), this, ctx);
 	}
 	return true;
 }
@@ -96,6 +96,29 @@ AbstractSrcElement* ClassExtends::getParent(ThreadContext* ctx) throw()
 void ClassExtends::setParent(AbstractSrcElement* parent, ThreadContext* ctx) throw() 
 {
 	IDeclare::setParent(parent, ctx);
+}
+void ClassExtends::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
+{
+	bool isnull = buff->getBoolean(ctx);
+	if(!isnull)
+	{
+		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
+		if(el == nullptr || !((dynamic_cast<AlinousName*>(el) != 0)))
+		{
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_970(), ctx));
+		}
+		__GC_MV(this, &(this->className), static_cast<AlinousName*>(el), AlinousName);
+	}
+}
+void ClassExtends::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+{
+	buff->putInt(ICommandData::__ClassExtends, ctx);
+	bool isnull = (this->className == nullptr);
+	buff->putBoolean(isnull, ctx);
+	if(!isnull)
+	{
+		this->className->writeData(buff, ctx);
+	}
 }
 }}}
 

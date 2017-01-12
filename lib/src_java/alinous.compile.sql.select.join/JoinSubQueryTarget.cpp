@@ -117,5 +117,39 @@ IStatement::StatementType JoinSubQueryTarget::getType(ThreadContext* ctx) throw(
 void JoinSubQueryTarget::validate(SourceValidator* validator, ThreadContext* ctx) throw() 
 {
 }
+void JoinSubQueryTarget::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
+{
+	bool isnull = buff->getBoolean(ctx);
+	if(!isnull)
+	{
+		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
+		if(el == nullptr || !((dynamic_cast<SelectStatement*>(el) != 0)))
+		{
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1066(), ctx));
+		}
+		__GC_MV(this, &(this->selectStatement), static_cast<SelectStatement*>(el), SelectStatement);
+	}
+	isnull = buff->getBoolean(ctx);
+	if(!isnull)
+	{
+		__GC_MV(this, &(this->asName), buff->getString(ctx), String);
+	}
+}
+void JoinSubQueryTarget::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+{
+	buff->putInt(ICommandData::__JoinSubQueryTarget, ctx);
+	bool isnull = (this->selectStatement == nullptr);
+	buff->putBoolean(isnull, ctx);
+	if(!isnull)
+	{
+		this->selectStatement->writeData(buff, ctx);
+	}
+	isnull = (this->asName == nullptr);
+	buff->putBoolean(isnull, ctx);
+	if(!isnull)
+	{
+		buff->putString(this->asName, ctx);
+	}
+}
 }}}}}
 

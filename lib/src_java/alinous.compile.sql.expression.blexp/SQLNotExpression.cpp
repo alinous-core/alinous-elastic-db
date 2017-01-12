@@ -143,11 +143,36 @@ bool SQLNotExpression::hasArrayResult(ThreadContext* ctx) throw()
 }
 ArrayList<VariantValue>* SQLNotExpression::resolveSQLExpressionAsArray(ScanResultRecord* record, ScriptMachine* machine, bool debug, ThreadContext* ctx)
 {
-	throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1006(), ctx));
+	throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1036(), ctx));
 }
 int SQLNotExpression::getExpressionType(ThreadContext* ctx) throw() 
 {
 	return IExpression::sQLNotExpression;
+}
+void SQLNotExpression::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
+{
+	__readData(buff, ctx);
+	bool isnull = buff->getBoolean(ctx);
+	if(!isnull)
+	{
+		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
+		if(el == nullptr || !((dynamic_cast<ISQLExpression*>(el) != 0)))
+		{
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1044(), ctx));
+		}
+		__GC_MV(this, &(this->first), static_cast<ISQLExpression*>(el), ISQLExpression);
+	}
+}
+void SQLNotExpression::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+{
+	buff->putInt(ICommandData::__SQLNotExpression, ctx);
+	__writeData(buff, ctx);
+	bool isnull = (this->first == nullptr);
+	buff->putBoolean(isnull, ctx);
+	if(!isnull)
+	{
+		this->first->writeData(buff, ctx);
+	}
 }
 }}}}}
 

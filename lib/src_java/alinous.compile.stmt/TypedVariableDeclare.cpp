@@ -59,73 +59,73 @@ void TypedVariableDeclare::setTypeName(AlinousName* typeName, ThreadContext* ctx
 {
 	__GC_MV(this, &(this->typeName), typeName, AlinousName);
 	String* strName = this->typeName->toString(ctx);
-	if(strName->equals(ConstStr::getCNST_STR_953(), ctx))
+	if(strName->equals(ConstStr::getCNST_STR_957(), ctx))
 	{
 		this->typeEnum = VariableType::BOOL_TYPE;
 	}
 		else 
 	{
-		if(strName->equals(ConstStr::getCNST_STR_957(), ctx))
+		if(strName->equals(ConstStr::getCNST_STR_961(), ctx))
 		{
 			this->typeEnum = VariableType::INT_TYPE;
 		}
 				else 
 		{
-			if(strName->equals(ConstStr::getCNST_STR_961(), ctx))
+			if(strName->equals(ConstStr::getCNST_STR_965(), ctx))
 			{
 				this->typeEnum = VariableType::STRING_TYPE;
 			}
 						else 
 			{
-				if(strName->equals(ConstStr::getCNST_STR_954(), ctx))
+				if(strName->equals(ConstStr::getCNST_STR_958(), ctx))
 				{
 					this->typeEnum = VariableType::BYTE_TYPE;
 				}
 								else 
 				{
-					if(strName->equals(ConstStr::getCNST_STR_955(), ctx))
+					if(strName->equals(ConstStr::getCNST_STR_959(), ctx))
 					{
 						this->typeEnum = VariableType::SHORT_TYPE;
 					}
 										else 
 					{
-						if(strName->equals(ConstStr::getCNST_STR_956(), ctx))
+						if(strName->equals(ConstStr::getCNST_STR_960(), ctx))
 						{
 							this->typeEnum = VariableType::CHAR_TYPE;
 						}
 												else 
 						{
-							if(strName->equals(ConstStr::getCNST_STR_958(), ctx))
+							if(strName->equals(ConstStr::getCNST_STR_962(), ctx))
 							{
 								this->typeEnum = VariableType::LONG_TYPE;
 							}
 														else 
 							{
-								if(strName->equals(ConstStr::getCNST_STR_960(), ctx))
+								if(strName->equals(ConstStr::getCNST_STR_964(), ctx))
 								{
 									this->typeEnum = VariableType::FLOAT_TYPE;
 								}
 																else 
 								{
-									if(strName->equals(ConstStr::getCNST_STR_959(), ctx))
+									if(strName->equals(ConstStr::getCNST_STR_963(), ctx))
 									{
 										this->typeEnum = VariableType::DOUBLE_TYPE;
 									}
 																		else 
 									{
-										if(strName->equals(ConstStr::getCNST_STR_963(), ctx))
+										if(strName->equals(ConstStr::getCNST_STR_967(), ctx))
 										{
 											this->typeEnum = VariableType::TIMESTAMP;
 										}
 																				else 
 										{
-											if(strName->equals(ConstStr::getCNST_STR_962(), ctx))
+											if(strName->equals(ConstStr::getCNST_STR_966(), ctx))
 											{
 												this->typeEnum = VariableType::TIME;
 											}
 																						else 
 											{
-												if(strName->equals(ConstStr::getCNST_STR_964(), ctx))
+												if(strName->equals(ConstStr::getCNST_STR_968(), ctx))
 												{
 													this->typeEnum = VariableType::BIGDECIMAL;
 												}
@@ -157,7 +157,7 @@ void TypedVariableDeclare::validate(SourceValidator* validator, ThreadContext* c
 {
 	if(this->name->getSegments(ctx)->size(ctx) != 1)
 	{
-		validator->addError(ConstStr::getCNST_STR_1045(), this->name, ctx);
+		validator->addError(ConstStr::getCNST_STR_1092(), this->name, ctx);
 	}
 }
 bool TypedVariableDeclare::visit(IAlinousElementVisitor* visitor, AbstractSrcElement* parent, ThreadContext* ctx) throw() 
@@ -228,7 +228,7 @@ bool TypedVariableDeclare::analyse(SrcAnalyseContext* context, bool leftValue, T
 		clazz = context->findClassDeclare(this->typeName, ctx);
 		if(clazz == nullptr)
 		{
-			context->getSourceValidator(ctx)->addError(this->typeName->toString(ctx)->clone(ctx)->append(ConstStr::getCNST_STR_965(), ctx), this, ctx);
+			context->getSourceValidator(ctx)->addError(this->typeName->toString(ctx)->clone(ctx)->append(ConstStr::getCNST_STR_969(), ctx), this, ctx);
 		}
 				else 
 		{
@@ -274,6 +274,130 @@ int TypedVariableDeclare::getDimension(ThreadContext* ctx) throw()
 void TypedVariableDeclare::setDimension(int dimension, ThreadContext* ctx) throw() 
 {
 	this->dimension = dimension;
+}
+void TypedVariableDeclare::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
+{
+	bool isnull = buff->getBoolean(ctx);
+	if(!isnull)
+	{
+		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
+		if(el == nullptr || !((dynamic_cast<AlinousName*>(el) != 0)))
+		{
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_970(), ctx));
+		}
+		__GC_MV(this, &(this->typeName), static_cast<AlinousName*>(el), AlinousName);
+	}
+	this->dimension = buff->getInt(ctx);
+	isnull = buff->getBoolean(ctx);
+	if(!isnull)
+	{
+		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
+		if(el == nullptr || !((dynamic_cast<IExpression*>(el) != 0)))
+		{
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_980(), ctx));
+		}
+		__GC_MV(this, &(this->initExp), static_cast<IExpression*>(el), IExpression);
+	}
+	int typeNum = buff->getInt(ctx);
+	int2enum(typeNum, ctx);
+}
+void TypedVariableDeclare::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+{
+	buff->putInt(ICommandData::__TypedVariableDeclare, ctx);
+	bool isnull = (this->typeName == nullptr);
+	buff->putBoolean(isnull, ctx);
+	if(!isnull)
+	{
+		this->typeName->writeData(buff, ctx);
+	}
+	buff->putInt(this->dimension, ctx);
+	isnull = (this->initExp == nullptr);
+	buff->putBoolean(isnull, ctx);
+	if(!isnull)
+	{
+		this->initExp->writeData(buff, ctx);
+	}
+	int typeNum = enum2Int(ctx);
+	buff->putInt(typeNum, ctx);
+}
+int TypedVariableDeclare::enum2Int(ThreadContext* ctx) throw() 
+{
+	switch(this->typeEnum) {
+	case TypedVariableDeclare::VariableType::BOOL_TYPE:
+		return 1;
+	case TypedVariableDeclare::VariableType::BYTE_TYPE:
+		return 2;
+	case TypedVariableDeclare::VariableType::SHORT_TYPE:
+		return 3;
+	case TypedVariableDeclare::VariableType::CHAR_TYPE:
+		return 4;
+	case TypedVariableDeclare::VariableType::INT_TYPE:
+		return 5;
+	case TypedVariableDeclare::VariableType::LONG_TYPE:
+		return 6;
+	case TypedVariableDeclare::VariableType::FLOAT_TYPE:
+		return 7;
+	case TypedVariableDeclare::VariableType::DOUBLE_TYPE:
+		return 8;
+	case TypedVariableDeclare::VariableType::STRING_TYPE:
+		return 9;
+	case TypedVariableDeclare::VariableType::TIMESTAMP:
+		return 10;
+	case TypedVariableDeclare::VariableType::TIME:
+		return 11;
+	case TypedVariableDeclare::VariableType::BIGDECIMAL:
+		return 12;
+	case TypedVariableDeclare::VariableType::OBJECT_TYPE:
+		return 13;
+	default:
+		break ;
+	}
+	return 13;
+}
+void TypedVariableDeclare::int2enum(int num, ThreadContext* ctx) throw() 
+{
+	switch(num) {
+	case 1:
+		this->typeEnum = VariableType::BOOL_TYPE;
+		break ;
+	case 2:
+		this->typeEnum = VariableType::BYTE_TYPE;
+		break ;
+	case 3:
+		this->typeEnum = VariableType::SHORT_TYPE;
+		break ;
+	case 4:
+		this->typeEnum = VariableType::CHAR_TYPE;
+		break ;
+	case 5:
+		this->typeEnum = VariableType::INT_TYPE;
+		break ;
+	case 6:
+		this->typeEnum = VariableType::LONG_TYPE;
+		break ;
+	case 7:
+		this->typeEnum = VariableType::FLOAT_TYPE;
+		break ;
+	case 8:
+		this->typeEnum = VariableType::DOUBLE_TYPE;
+		break ;
+	case 9:
+		this->typeEnum = VariableType::STRING_TYPE;
+		break ;
+	case 10:
+		this->typeEnum = VariableType::TIMESTAMP;
+		break ;
+	case 11:
+		this->typeEnum = VariableType::TIME;
+		break ;
+	case 12:
+		this->typeEnum = VariableType::BIGDECIMAL;
+		break ;
+	case 13:
+	default:
+		this->typeEnum = VariableType::OBJECT_TYPE;
+		break ;
+	}
 }
 }}}
 

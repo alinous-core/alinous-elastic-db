@@ -7,7 +7,7 @@ namespace alinous {namespace server {namespace http {
 
 
 
-String* ProcessRequestAction::endStr = ConstStr::getCNST_STR_3472();
+String* ProcessRequestAction::endStr = ConstStr::getCNST_STR_3523();
 bool ProcessRequestAction::__init_done = __init_static_variables();
 bool ProcessRequestAction::__init_static_variables(){
 	Java2CppSystem::getSelf();
@@ -103,30 +103,30 @@ void ProcessRequestAction::outCodeResult(ContentResult* result, OutputStream* ou
 void ProcessRequestAction::outResponse(int contentLength, OutputStream* outStream, ThreadContext* ctx)
 {
 	StringBuffer* buff = (new(ctx) StringBuffer(ctx));
-	buff->append(ConstStr::getCNST_STR_3467(), ctx);
-	buff->append(ConstStr::getCNST_STR_3468(), ctx);
+	buff->append(ConstStr::getCNST_STR_3518(), ctx);
+	buff->append(ConstStr::getCNST_STR_3519(), ctx);
 	if(contentLength > 0)
 	{
-		buff->append(ConstStr::getCNST_STR_3469(), ctx)->append(contentLength, ctx)->append(ConstStr::getCNST_STR_1797(), ctx);
+		buff->append(ConstStr::getCNST_STR_3520(), ctx)->append(contentLength, ctx)->append(ConstStr::getCNST_STR_1848(), ctx);
 	}
-	buff->append(ConstStr::getCNST_STR_3470(), ctx);
-	buff->append(ConstStr::getCNST_STR_1797(), ctx);
+	buff->append(ConstStr::getCNST_STR_3521(), ctx);
+	buff->append(ConstStr::getCNST_STR_1848(), ctx);
 	String* byteStr = buff->toString(ctx);
-	IArrayObjectPrimitive<char>* byteData = byteStr->getBytes(ConstStr::getCNST_STR_1047(), ctx);
+	IArrayObjectPrimitive<char>* byteData = byteStr->getBytes(ConstStr::getCNST_STR_1096(), ctx);
 	outStream->write(byteData, ctx);
 }
 void ProcessRequestAction::out404ResponceHeader(ContentResult* result, OutputStream* outStream, ThreadContext* ctx)
 {
 	StringBuffer* buff = (new(ctx) StringBuffer(ctx));
-	buff->append(ConstStr::getCNST_STR_3471(), ctx);
-	buff->append(ConstStr::getCNST_STR_3468(), ctx);
-	buff->append(ConstStr::getCNST_STR_3470(), ctx);
-	buff->append(ConstStr::getCNST_STR_1797(), ctx);
+	buff->append(ConstStr::getCNST_STR_3522(), ctx);
+	buff->append(ConstStr::getCNST_STR_3519(), ctx);
+	buff->append(ConstStr::getCNST_STR_3521(), ctx);
+	buff->append(ConstStr::getCNST_STR_1848(), ctx);
 	if(!result->head)
 	{
 	}
 	String* byteStr = buff->toString(ctx);
-	IArrayObjectPrimitive<char>* byteData = byteStr->getBytes(ConstStr::getCNST_STR_1047(), ctx);
+	IArrayObjectPrimitive<char>* byteData = byteStr->getBytes(ConstStr::getCNST_STR_1096(), ctx);
 	outStream->write(byteData, ctx);
 }
 }}}

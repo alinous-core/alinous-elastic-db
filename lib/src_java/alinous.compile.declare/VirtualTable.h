@@ -9,9 +9,23 @@ class AlinousClass;}}}
 namespace alinous {namespace compile {namespace declare {
 class ClassMethodFunction;}}}
 
-namespace java {namespace lang {
-class IObject;
-}}
+namespace alinous {namespace remote {namespace socket {
+class NetworkBinaryBuffer;}}}
+
+namespace alinous {namespace compile {
+class IAlinousElement;}}
+
+namespace alinous {namespace runtime {namespace dom {
+class VariableException;}}}
+
+namespace alinous {namespace compile {namespace analyse {
+class SrcAnalyseContext;}}}
+
+namespace alinous {namespace compile {
+class AlinousElementNetworkFactory;}}
+
+namespace alinous {namespace remote {namespace socket {
+class ICommandData;}}}
 
 namespace alinous {
 class ThreadContext;
@@ -23,15 +37,21 @@ using namespace ::alinous;
 using namespace ::java::lang;
 using ::java::util::Iterator;
 using ::java::util::ArrayList;
+using ::alinous::compile::AlinousElementNetworkFactory;
+using ::alinous::compile::IAlinousElement;
+using ::alinous::compile::analyse::SrcAnalyseContext;
+using ::alinous::remote::socket::ICommandData;
+using ::alinous::remote::socket::NetworkBinaryBuffer;
+using ::alinous::runtime::dom::VariableException;
 
 
 
-class VirtualTable final : public virtual IObject {
+class VirtualTable final : public IAlinousElement {
 public:
 	class MethodPair;
 	VirtualTable(const VirtualTable& base) = default;
 public:
-	VirtualTable(ThreadContext* ctx) throw()  : IObject(ctx), list(GCUtils<ArrayList<VirtualTable::MethodPair> >::ins(this, (new(ctx) ArrayList<VirtualTable::MethodPair>(ctx)), ctx, __FILEW__, __LINE__, L""))
+	VirtualTable(ThreadContext* ctx) throw()  : IObject(ctx), IAlinousElement(ctx), list(GCUtils<ArrayList<VirtualTable::MethodPair> >::ins(this, (new(ctx) ArrayList<VirtualTable::MethodPair>(ctx)), ctx, __FILEW__, __LINE__, L""))
 	{
 	}
 	void __construct_impl(ThreadContext* ctx) throw() 
@@ -44,6 +64,9 @@ private:
 public:
 	void addVirtualFunction(AlinousClass* clazz, ClassMethodFunction* method, ThreadContext* ctx) throw() ;
 	ClassMethodFunction* getMethod(AlinousClass* clazz, ThreadContext* ctx) throw() ;
+	void readData(NetworkBinaryBuffer* buff, ThreadContext* ctx) final;
+	void writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw()  final;
+	bool analyse(SrcAnalyseContext* context, bool leftValue, ThreadContext* ctx) throw()  final;
 public:
 
 

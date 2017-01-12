@@ -43,7 +43,7 @@ void DropIndexStatement::validate(SourceValidator* validator, ThreadContext* ctx
 {
 	if(!((dynamic_cast<TableJoinTarget*>(indexName) != 0)))
 	{
-		validator->addError(ConstStr::getCNST_STR_1005(), this, ctx);
+		validator->addError(ConstStr::getCNST_STR_1035(), this, ctx);
 	}
 }
 bool DropIndexStatement::visit(IAlinousElementVisitor* visitor, AbstractSrcElement* parent, ThreadContext* ctx) throw() 
@@ -76,6 +76,29 @@ void DropIndexStatement::setIndexName(IJoinTarget* indexName, ThreadContext* ctx
 }
 void DropIndexStatement::analyzeSQL(SQLAnalyseContext* context, bool debug, ThreadContext* ctx) throw() 
 {
+}
+void DropIndexStatement::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
+{
+	bool isnull = buff->getBoolean(ctx);
+	if(!isnull)
+	{
+		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
+		if(el == nullptr || !((dynamic_cast<IJoinTarget*>(el) != 0)))
+		{
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1030(), ctx));
+		}
+		__GC_MV(this, &(this->indexName), static_cast<IJoinTarget*>(el), IJoinTarget);
+	}
+}
+void DropIndexStatement::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+{
+	buff->putInt(ICommandData::__DropIndexStatement, ctx);
+	bool isnull = (this->indexName == nullptr);
+	buff->putBoolean(isnull, ctx);
+	if(!isnull)
+	{
+		this->indexName->writeData(buff, ctx);
+	}
 }
 }}}
 

@@ -215,7 +215,7 @@ bool InsertValues::hasArrayResult(ThreadContext* ctx) throw()
 }
 ArrayList<VariantValue>* InsertValues::resolveSQLExpressionAsArray(ScanResultRecord* record, ScriptMachine* machine, bool debug, ThreadContext* ctx)
 {
-	throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1006(), ctx));
+	throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1036(), ctx));
 }
 bool InsertValues::isSQLExp(ThreadContext* ctx) throw() 
 {
@@ -231,6 +231,45 @@ void InsertValues::setAsName(String* name, ThreadContext* ctx) throw()
 int InsertValues::getExpressionType(ThreadContext* ctx) throw() 
 {
 	return IExpression::insertValues;
+}
+void InsertValues::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
+{
+	bool isnull = buff->getBoolean(ctx);
+	if(!isnull)
+	{
+		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
+		if(el == nullptr || !((dynamic_cast<SQLExpressionList*>(el) != 0)))
+		{
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1037(), ctx));
+		}
+		__GC_MV(this, &(this->vlist), static_cast<SQLExpressionList*>(el), SQLExpressionList);
+	}
+	isnull = buff->getBoolean(ctx);
+	if(!isnull)
+	{
+		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
+		if(el == nullptr || !((dynamic_cast<SQLExpressionStream*>(el) != 0)))
+		{
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1038(), ctx));
+		}
+		__GC_MV(this, &(this->domDesc), static_cast<SQLExpressionStream*>(el), SQLExpressionStream);
+	}
+}
+void InsertValues::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+{
+	buff->putInt(ICommandData::__InsertValues, ctx);
+	bool isnull = (this->vlist == nullptr);
+	buff->putBoolean(isnull, ctx);
+	if(!isnull)
+	{
+		this->vlist->writeData(buff, ctx);
+	}
+	isnull = (this->domDesc == nullptr);
+	buff->putBoolean(isnull, ctx);
+	if(!isnull)
+	{
+		this->domDesc->writeData(buff, ctx);
+	}
 }
 }}}
 

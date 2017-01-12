@@ -6,8 +6,17 @@ class OneSource;
 namespace alinous {namespace compile {namespace sql {namespace select {namespace join {
 class IJoin;}}}}}
 
+namespace alinous {namespace remote {namespace socket {
+class NetworkBinaryBuffer;}}}
+
 namespace alinous {namespace compile {namespace sql {namespace select {namespace join {
 class LeftJoin;}}}}}
+
+namespace alinous {namespace remote {namespace socket {
+class ICommandData;}}}
+
+namespace alinous {namespace runtime {namespace dom {
+class VariableException;}}}
 
 namespace alinous {
 class ThreadContext;
@@ -18,6 +27,9 @@ namespace alinous {namespace compile {namespace sql {namespace select {namespace
 using namespace ::alinous;
 using namespace ::java::lang;
 using ::java::util::Iterator;
+using ::alinous::remote::socket::ICommandData;
+using ::alinous::remote::socket::NetworkBinaryBuffer;
+using ::alinous::runtime::dom::VariableException;
 
 
 
@@ -36,6 +48,8 @@ public:
 public:
 	void setLeft(IJoin* left, ThreadContext* ctx) throw()  final;
 	void setRight(IJoin* right, ThreadContext* ctx) throw()  final;
+	void readData(NetworkBinaryBuffer* buff, ThreadContext* ctx) final;
+	void writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw()  final;
 public:
 	static bool __init_done;
 	static bool __init_static_variables();

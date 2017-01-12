@@ -70,7 +70,7 @@ bool ScanTableColumnIdentifier::equals(IObject* obj, ThreadContext* ctx) throw()
 String* ScanTableColumnIdentifier::toString(ThreadContext* ctx) throw() 
 {
 	StringBuffer* buff = (new(ctx) StringBuffer(ctx));
-	buff->append(this->table->toString(ctx), ctx)->append(ConstStr::getCNST_STR_947(), ctx)->append(this->column, ctx);
+	buff->append(this->table->toString(ctx), ctx)->append(ConstStr::getCNST_STR_950(), ctx)->append(this->column, ctx);
 	return buff->toString(ctx);
 }
 }}}}

@@ -30,8 +30,17 @@ class ExpressionSourceId;}}
 namespace alinous {namespace compile {namespace analyse {
 class AlinousType;}}}
 
+namespace alinous {namespace remote {namespace socket {
+class NetworkBinaryBuffer;}}}
+
 namespace alinous {namespace compile {namespace expression {
 class AbstractExpression;}}}
+
+namespace alinous {namespace remote {namespace socket {
+class ICommandData;}}}
+
+namespace alinous {namespace runtime {namespace dom {
+class VariableException;}}}
 
 namespace alinous {namespace system {
 class AlinousException;}}
@@ -50,7 +59,10 @@ using ::alinous::compile::ExpressionSourceId;
 using ::alinous::compile::IAlinousElementVisitor;
 using ::alinous::compile::analyse::AlinousType;
 using ::alinous::compile::analyse::SrcAnalyseContext;
+using ::alinous::remote::socket::ICommandData;
+using ::alinous::remote::socket::NetworkBinaryBuffer;
 using ::alinous::runtime::dom::IAlinousVariable;
+using ::alinous::runtime::dom::VariableException;
 using ::alinous::runtime::engine::ScriptMachine;
 using ::alinous::runtime::variant::VariantValue;
 using ::alinous::system::AlinousException;
@@ -83,6 +95,12 @@ public:
 public:
 	Literal(Literal::literalTypes type, ThreadContext* ctx) throw() ;
 	void __construct_impl(Literal::literalTypes type, ThreadContext* ctx) throw() ;
+	Literal(ThreadContext* ctx) throw()  : IObject(ctx), AbstractExpression(ctx), value(nullptr)
+	{
+	}
+	void __construct_impl(ThreadContext* ctx) throw() 
+	{
+	}
 	virtual ~Literal() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 public:
@@ -100,6 +118,11 @@ public:
 	ExpressionSourceId* getSourceId(ThreadContext* ctx) throw()  final;
 	bool isSQLExp(ThreadContext* ctx) throw()  final;
 	virtual int getExpressionType(ThreadContext* ctx) throw() ;
+	void readData(NetworkBinaryBuffer* buff, ThreadContext* ctx) final;
+	void writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw()  final;
+private:
+	int fromEnum(ThreadContext* ctx) throw() ;
+	void toEnum(int num, ThreadContext* ctx) throw() ;
 public:
 	static Literal* intLiteral(int value, ThreadContext* ctx) throw() ;
 public:

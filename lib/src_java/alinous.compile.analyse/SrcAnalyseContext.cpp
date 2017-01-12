@@ -89,14 +89,14 @@ bool SrcAnalyseContext::isNativeFunction(String* prefix, String* funcName, Threa
 bool SrcAnalyseContext::isSourceFunction(String* prefix, String* funcName, ThreadContext* ctx) throw() 
 {
 	StringBuffer* buff = (new(ctx) StringBuffer(ctx));
-	buff->append(prefix, ctx)->append(ConstStr::getCNST_STR_947(), ctx)->append(funcName, ctx);
+	buff->append(prefix, ctx)->append(ConstStr::getCNST_STR_950(), ctx)->append(funcName, ctx);
 	AlinousFunction* func = this->module->findFunction(buff->toString(ctx), ctx);
 	return func != nullptr;
 }
 AlinousFunction* SrcAnalyseContext::getSourceFunction(String* prefix, String* funcName, ThreadContext* ctx) throw() 
 {
 	StringBuffer* buff = (new(ctx) StringBuffer(ctx));
-	buff->append(prefix, ctx)->append(ConstStr::getCNST_STR_947(), ctx)->append(funcName, ctx);
+	buff->append(prefix, ctx)->append(ConstStr::getCNST_STR_950(), ctx)->append(funcName, ctx);
 	return this->module->findFunction(buff->toString(ctx), ctx);
 }
 bool SrcAnalyseContext::isFunctionPrefix(String* name, ThreadContext* ctx) throw() 

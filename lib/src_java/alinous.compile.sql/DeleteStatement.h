@@ -27,11 +27,26 @@ class SQLWhere;}}}}
 namespace alinous {namespace compile {namespace sql {namespace analyze {
 class SQLAnalyseContext;}}}}
 
+namespace alinous {namespace remote {namespace socket {
+class NetworkBinaryBuffer;}}}
+
+namespace alinous {namespace compile {
+class IAlinousElement;}}
+
+namespace alinous {namespace runtime {namespace dom {
+class VariableException;}}}
+
 namespace alinous {namespace compile {namespace sql {
 class AbstractSQLStatement;}}}
 
+namespace alinous {namespace compile {
+class AlinousElementNetworkFactory;}}
+
 namespace alinous {namespace db {namespace table {
 class DatabaseException;}}}
+
+namespace alinous {namespace remote {namespace socket {
+class ICommandData;}}}
 
 namespace alinous {namespace system {
 class AlinousException;}}
@@ -46,6 +61,8 @@ using namespace ::alinous;
 using namespace ::java::lang;
 using ::java::util::Iterator;
 using ::alinous::compile::AbstractSrcElement;
+using ::alinous::compile::AlinousElementNetworkFactory;
+using ::alinous::compile::IAlinousElement;
 using ::alinous::compile::IAlinousElementVisitor;
 using ::alinous::compile::analyse::SourceValidator;
 using ::alinous::compile::analyse::SrcAnalyseContext;
@@ -53,6 +70,9 @@ using ::alinous::compile::sql::analyze::SQLAnalyseContext;
 using ::alinous::compile::sql::select::SQLWhere;
 using ::alinous::compile::sql::select::join::IJoinTarget;
 using ::alinous::db::table::DatabaseException;
+using ::alinous::remote::socket::ICommandData;
+using ::alinous::remote::socket::NetworkBinaryBuffer;
+using ::alinous::runtime::dom::VariableException;
 using ::alinous::system::AlinousException;
 
 
@@ -82,6 +102,8 @@ public:
 	void setWhere(SQLWhere* where, ThreadContext* ctx) throw() ;
 	IStatement::StatementType getType(ThreadContext* ctx) throw()  final;
 	void analyzeSQL(SQLAnalyseContext* context, bool debug, ThreadContext* ctx) final;
+	void readData(NetworkBinaryBuffer* buff, ThreadContext* ctx) final;
+	void writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw()  final;
 public:
 	static bool __init_done;
 	static bool __init_static_variables();

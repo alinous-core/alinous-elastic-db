@@ -994,6 +994,26 @@ IDomVariable* DocumentVariable::toDom(ThreadContext* ctx) throw()
 {
 	return this->value->toDom(ctx);
 }
+void DocumentVariable::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
+{
+	char nullbl = buff->getByte(ctx);
+	if(nullbl == (char)0)
+	{
+		return;
+	}
+	this->value->readData(buff, ctx);
+}
+void DocumentVariable::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+{
+	buff->putInt(ICommandData::__DocumentVariable, ctx);
+	char nullbl = ((char)(isNull(ctx) ? 0 : 1));
+	buff->putByte(nullbl, ctx);
+	if(nullbl == (char)0)
+	{
+		return;
+	}
+	this->value->writeData(buff, ctx);
+}
 int DocumentVariable::ValueCompare::operator() (IAlinousVariable* _this, IAlinousVariable* variable, ThreadContext* ctx) const throw()
 {
 	return _this->compareTo(variable, ctx);

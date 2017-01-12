@@ -54,5 +54,12 @@ IStatement::StatementType BeginStatement::getType(ThreadContext* ctx) throw()
 void BeginStatement::analyzeSQL(SQLAnalyseContext* context, bool debug, ThreadContext* ctx) throw() 
 {
 }
+void BeginStatement::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
+{
+}
+void BeginStatement::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+{
+	buff->putInt(ICommandData::__BeginStatement, ctx);
+}
 }}}
 

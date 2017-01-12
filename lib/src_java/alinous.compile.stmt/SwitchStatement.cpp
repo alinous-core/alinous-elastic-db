@@ -113,5 +113,61 @@ void SwitchStatement::setLabel(LabeledStatement* label, ThreadContext* ctx) thro
 {
 	__GC_MV(this, &(this->label), label, LabeledStatement);
 }
+void SwitchStatement::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
+{
+	bool isnull = buff->getBoolean(ctx);
+	if(!isnull)
+	{
+		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
+		if(el == nullptr || !((dynamic_cast<LabeledStatement*>(el) != 0)))
+		{
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1088(), ctx));
+		}
+		__GC_MV(this, &(this->label), static_cast<LabeledStatement*>(el), LabeledStatement);
+	}
+	isnull = buff->getBoolean(ctx);
+	if(!isnull)
+	{
+		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
+		if(el == nullptr || !((dynamic_cast<IExpression*>(el) != 0)))
+		{
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_980(), ctx));
+		}
+		__GC_MV(this, &(this->exp), static_cast<IExpression*>(el), IExpression);
+	}
+	int maxLoop = buff->getInt(ctx);
+	for(int i = 0; i < maxLoop; ++i)
+	{
+		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
+		if(el == nullptr || !((dynamic_cast<SwitchCasePart*>(el) != 0)))
+		{
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1009(), ctx));
+		}
+		this->caseParts->add(static_cast<SwitchCasePart*>(el), ctx);
+	}
+}
+void SwitchStatement::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+{
+	buff->putInt(ICommandData::__SwitchStatement, ctx);
+	bool isnull = (this->label == nullptr);
+	buff->putBoolean(isnull, ctx);
+	if(!isnull)
+	{
+		this->label->writeData(buff, ctx);
+	}
+	isnull = (this->exp == nullptr);
+	buff->putBoolean(isnull, ctx);
+	if(!isnull)
+	{
+		this->exp->writeData(buff, ctx);
+	}
+	int maxLoop = this->caseParts->size(ctx);
+	buff->putInt(maxLoop, ctx);
+	for(int i = 0; i < maxLoop; ++i)
+	{
+		SwitchCasePart* exp = this->caseParts->get(i, ctx);
+		exp->writeData(buff, ctx);
+	}
+}
 }}}
 

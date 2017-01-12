@@ -100,5 +100,44 @@ void DeleteStatement::analyzeSQL(SQLAnalyseContext* context, bool debug, ThreadC
 		}
 	}
 }
+void DeleteStatement::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
+{
+	bool isnull = buff->getBoolean(ctx);
+	if(!isnull)
+	{
+		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
+		if(el == nullptr || !((dynamic_cast<IJoinTarget*>(el) != 0)))
+		{
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1030(), ctx));
+		}
+		__GC_MV(this, &(this->table), static_cast<IJoinTarget*>(el), IJoinTarget);
+	}
+	isnull = buff->getBoolean(ctx);
+	if(!isnull)
+	{
+		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
+		if(el == nullptr || !((dynamic_cast<SQLWhere*>(el) != 0)))
+		{
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1039(), ctx));
+		}
+		__GC_MV(this, &(this->where), static_cast<SQLWhere*>(el), SQLWhere);
+	}
+}
+void DeleteStatement::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+{
+	buff->putInt(ICommandData::__DeleteStatement, ctx);
+	bool isnull = (this->table == nullptr);
+	buff->putBoolean(isnull, ctx);
+	if(!isnull)
+	{
+		this->table->writeData(buff, ctx);
+	}
+	isnull = (this->where == nullptr);
+	buff->putBoolean(isnull, ctx);
+	if(!isnull)
+	{
+		this->where->writeData(buff, ctx);
+	}
+}
 }}}
 

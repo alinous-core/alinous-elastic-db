@@ -89,13 +89,13 @@ bool Xpath2Compare::getBooleanValue(DomDocument* document, DomNode* currentNode,
 	{
 		int l = (static_cast<NumberValue*>(leftValue))->getValue(ctx);
 		int r = (static_cast<NumberValue*>(rightValue))->getValue(ctx);
-		if(this->ope->equals(ConstStr::getCNST_STR_1030(), ctx))
+		if(this->ope->equals(ConstStr::getCNST_STR_1071(), ctx))
 		{
 			return l == r;
 		}
 				else 
 		{
-			if(this->ope->equals(ConstStr::getCNST_STR_1698(), ctx))
+			if(this->ope->equals(ConstStr::getCNST_STR_1749(), ctx))
 			{
 				return l != r;
 			}
@@ -107,19 +107,19 @@ bool Xpath2Compare::getBooleanValue(DomDocument* document, DomNode* currentNode,
 				}
 								else 
 				{
-					if(this->ope->equals(ConstStr::getCNST_STR_988(), ctx))
+					if(this->ope->equals(ConstStr::getCNST_STR_1012(), ctx))
 					{
 						return l >= r;
 					}
 										else 
 					{
-						if(this->ope->equals(ConstStr::getCNST_STR_986(), ctx))
+						if(this->ope->equals(ConstStr::getCNST_STR_1010(), ctx))
 						{
 							return l < r;
 						}
 												else 
 						{
-							if(this->ope->equals(ConstStr::getCNST_STR_987(), ctx))
+							if(this->ope->equals(ConstStr::getCNST_STR_1011(), ctx))
 							{
 								return l <= r;
 							}
@@ -133,13 +133,13 @@ bool Xpath2Compare::getBooleanValue(DomDocument* document, DomNode* currentNode,
 	{
 		String* l = leftValue->toString(ctx);
 		String* r = rightValue->toString(ctx);
-		if(this->ope->equals(ConstStr::getCNST_STR_1030(), ctx))
+		if(this->ope->equals(ConstStr::getCNST_STR_1071(), ctx))
 		{
 			return l->equals(r, ctx);
 		}
 				else 
 		{
-			if(this->ope->equals(ConstStr::getCNST_STR_1698(), ctx))
+			if(this->ope->equals(ConstStr::getCNST_STR_1749(), ctx))
 			{
 				return !l->equals(r, ctx);
 			}
@@ -151,19 +151,19 @@ bool Xpath2Compare::getBooleanValue(DomDocument* document, DomNode* currentNode,
 				}
 								else 
 				{
-					if(this->ope->equals(ConstStr::getCNST_STR_988(), ctx))
+					if(this->ope->equals(ConstStr::getCNST_STR_1012(), ctx))
 					{
 						return l->compareTo(r, ctx) >= 0;
 					}
 										else 
 					{
-						if(this->ope->equals(ConstStr::getCNST_STR_986(), ctx))
+						if(this->ope->equals(ConstStr::getCNST_STR_1010(), ctx))
 						{
 							return l->compareTo(r, ctx) < 0;
 						}
 												else 
 						{
-							if(this->ope->equals(ConstStr::getCNST_STR_987(), ctx))
+							if(this->ope->equals(ConstStr::getCNST_STR_1011(), ctx))
 							{
 								return l->compareTo(r, ctx) <= 0;
 							}
@@ -179,7 +179,7 @@ bool Xpath2Compare::checkExists(DomDocument* document, DomNode* currentNode, Thr
 {
 	if(!((dynamic_cast<XpathReference*>(this->lparam) != 0)))
 	{
-		throw (new(ctx) MatchingException(ConstStr::getCNST_STR_1699(), ctx));
+		throw (new(ctx) MatchingException(ConstStr::getCNST_STR_1750(), ctx));
 	}
 	Xpath* xpath = (static_cast<XpathReference*>(this->lparam))->getXpath(ctx);
 	Matcher* matcher = (new(ctx) Matcher(ctx));

@@ -152,6 +152,65 @@ void ClassMethodFunction::setVtable(VirtualTable* vtable, ThreadContext* ctx) th
 {
 	__GC_MV(this, &(this->vtable), vtable, VirtualTable);
 }
+void ClassMethodFunction::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
+{
+	bool isnull = buff->getBoolean(ctx);
+	if(!isnull)
+	{
+		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
+		if(el == nullptr || !((dynamic_cast<AlinousFunction*>(el) != 0)))
+		{
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_977(), ctx));
+		}
+		__GC_MV(this, &(this->func), static_cast<AlinousFunction*>(el), AlinousFunction);
+	}
+	this->constructorMethod = buff->getBoolean(ctx);
+	this->virtualMethod = buff->getBoolean(ctx);
+	isnull = buff->getBoolean(ctx);
+	if(!isnull)
+	{
+		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
+		if(el == nullptr || !((dynamic_cast<VirtualTable*>(el) != 0)))
+		{
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_978(), ctx));
+		}
+		__GC_MV(this, &(this->vtable), static_cast<VirtualTable*>(el), VirtualTable);
+	}
+	isnull = buff->getBoolean(ctx);
+	if(!isnull)
+	{
+		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
+		if(el == nullptr || !((dynamic_cast<ClassMethodFunction*>(el) != 0)))
+		{
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_971(), ctx));
+		}
+		__GC_MV(this, &(this->superConstructor), static_cast<ClassMethodFunction*>(el), ClassMethodFunction);
+	}
+}
+void ClassMethodFunction::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+{
+	buff->putInt(ICommandData::__ClassMethodFunction, ctx);
+	bool isnull = (this->func == nullptr);
+	buff->putBoolean(isnull, ctx);
+	if(!isnull)
+	{
+		this->func->writeData(buff, ctx);
+	}
+	buff->putBoolean(this->constructorMethod, ctx);
+	buff->putBoolean(this->virtualMethod, ctx);
+	isnull = (this->vtable == nullptr);
+	buff->putBoolean(isnull, ctx);
+	if(!isnull)
+	{
+		this->vtable->writeData(buff, ctx);
+	}
+	isnull = (this->superConstructor == nullptr);
+	buff->putBoolean(isnull, ctx);
+	if(!isnull)
+	{
+		this->superConstructor->writeData(buff, ctx);
+	}
+}
 bool ClassMethodFunction::analyseConstructorMethod(SrcAnalyseContext* context, ThreadContext* ctx) throw() 
 {
 	__GC_MV(this, &(this->superConstructor), nullptr, ClassMethodFunction);

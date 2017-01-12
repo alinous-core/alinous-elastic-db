@@ -27,14 +27,29 @@ class ExpressionSourceId;}}
 namespace alinous {namespace compile {namespace sql {
 class SelectStatement;}}}
 
+namespace alinous {namespace remote {namespace socket {
+class NetworkBinaryBuffer;}}}
+
+namespace alinous {namespace compile {
+class IAlinousElement;}}
+
+namespace alinous {namespace runtime {namespace dom {
+class VariableException;}}}
+
 namespace alinous {namespace compile {namespace sql {namespace expression {
 class AbstractSQLCollectionExpression;}}}}
+
+namespace alinous {namespace compile {
+class AlinousElementNetworkFactory;}}
 
 namespace alinous {namespace compile {namespace expression {
 class IExpression;}}}
 
 namespace alinous {namespace db {namespace table {
 class DatabaseException;}}}
+
+namespace alinous {namespace remote {namespace socket {
+class ICommandData;}}}
 
 namespace alinous {namespace system {
 class AlinousException;}}
@@ -49,13 +64,18 @@ using namespace ::alinous;
 using namespace ::java::lang;
 using ::java::util::Iterator;
 using ::java::util::ArrayList;
+using ::alinous::compile::AlinousElementNetworkFactory;
 using ::alinous::compile::ExpressionSourceId;
+using ::alinous::compile::IAlinousElement;
 using ::alinous::compile::expression::IExpression;
 using ::alinous::compile::sql::SelectStatement;
 using ::alinous::compile::sql::analyze::ScanTableColumnIdentifier;
 using ::alinous::db::table::DatabaseException;
 using ::alinous::db::trx::scan::ScanResultRecord;
+using ::alinous::remote::socket::ICommandData;
+using ::alinous::remote::socket::NetworkBinaryBuffer;
 using ::alinous::runtime::dom::IAlinousVariable;
+using ::alinous::runtime::dom::VariableException;
 using ::alinous::runtime::engine::ScriptMachine;
 using ::alinous::runtime::variant::VariantValue;
 using ::alinous::system::AlinousException;
@@ -90,6 +110,8 @@ public:
 	bool hasArrayResult(ThreadContext* ctx) throw()  final;
 	ArrayList<VariantValue>* resolveSQLExpressionAsArray(ScanResultRecord* record, ScriptMachine* machine, bool debug, ThreadContext* ctx) final;
 	int getExpressionType(ThreadContext* ctx) throw()  final;
+	void readData(NetworkBinaryBuffer* buff, ThreadContext* ctx) final;
+	void writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw()  final;
 public:
 	static bool __init_done;
 	static bool __init_static_variables();

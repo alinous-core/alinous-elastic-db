@@ -39,6 +39,8 @@ private:
 public:
 	IArrayObjectPrimitive<char>* toBinary(ThreadContext* ctx) throw() ;
 	int getPutSize(ThreadContext* ctx) throw() ;
+	void putBoolean(bool value, ThreadContext* ctx) throw() ;
+	bool getBoolean(ThreadContext* ctx) throw() ;
 	void putByte(char b, ThreadContext* ctx) throw() ;
 	char getByte(ThreadContext* ctx) throw() ;
 	void putBytes(IArrayObjectPrimitive<char>* src, int start, int count, ThreadContext* ctx) throw() ;
@@ -52,6 +54,10 @@ public:
 	int getInt(ThreadContext* ctx) throw() ;
 	void putLong(long long value, ThreadContext* ctx) throw() ;
 	long long getLong(ThreadContext* ctx) throw() ;
+	void putFloat(float value, ThreadContext* ctx) throw() ;
+	float getFloat(ThreadContext* ctx) throw() ;
+	void putDouble(double value, ThreadContext* ctx) throw() ;
+	double getDouble(ThreadContext* ctx) throw() ;
 	void putString(String* str, ThreadContext* ctx) throw() ;
 	String* getString(ThreadContext* ctx) throw() ;
 	void clear(ThreadContext* ctx) throw() ;

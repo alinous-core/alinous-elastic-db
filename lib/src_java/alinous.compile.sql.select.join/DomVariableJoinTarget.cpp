@@ -59,7 +59,7 @@ bool DomVariableJoinTarget::analyse(SrcAnalyseContext* context, bool leftValue, 
 	}
 	if(this->asName == nullptr)
 	{
-		context->getSourceValidator(ctx)->addError(ConstStr::getCNST_STR_1038(), this, ctx);
+		context->getSourceValidator(ctx)->addError(ConstStr::getCNST_STR_1080(), this, ctx);
 	}
 	return true;
 }
@@ -84,7 +84,7 @@ bool DomVariableJoinTarget::analyseSQLTables(SQLAnalyseContext* context, bool le
 	IAlinousVariable* val = context->getMachine(ctx)->resolveExpression(this->domDesc, debug, ctx);
 	if(val->getVariableClass(ctx) != IAlinousVariable::CLASS_DOM)
 	{
-		throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1039(), ctx));
+		throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1081(), ctx));
 	}
 	IDomVariable* domvariable = static_cast<IDomVariable*>(val);
 	if(domvariable->getDomType(ctx) == IDomVariable::TYPE_DOM)
@@ -98,7 +98,7 @@ bool DomVariableJoinTarget::analyseSQLTables(SQLAnalyseContext* context, bool le
 			DomArray* array = static_cast<DomArray*>(domvariable);
 			if(array->size(ctx) == 0 || !((dynamic_cast<DomVariable*>(array->get(0, ctx)) != 0)))
 			{
-				throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1040(), ctx));
+				throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1082(), ctx));
 			}
 			analyseDomTable(context, static_cast<DomVariable*>(array->get(0, ctx)), ctx);
 		}
@@ -137,6 +137,40 @@ IStatement::StatementType DomVariableJoinTarget::getType(ThreadContext* ctx) thr
 }
 void DomVariableJoinTarget::validate(SourceValidator* validator, ThreadContext* ctx) throw() 
 {
+}
+void DomVariableJoinTarget::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
+{
+	bool isnull = buff->getBoolean(ctx);
+	if(!isnull)
+	{
+		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
+		if(el == nullptr || !((dynamic_cast<DomVariableDescriptor*>(el) != 0)))
+		{
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_979(), ctx));
+		}
+		__GC_MV(this, &(this->domDesc), static_cast<DomVariableDescriptor*>(el), DomVariableDescriptor);
+	}
+	isnull = buff->getBoolean(ctx);
+	if(!isnull)
+	{
+		__GC_MV(this, &(this->asName), buff->getString(ctx), String);
+	}
+}
+void DomVariableJoinTarget::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+{
+	buff->putInt(ICommandData::__DomVariableJoinTarget, ctx);
+	bool isnull = (this->domDesc == nullptr);
+	buff->putBoolean(isnull, ctx);
+	if(!isnull)
+	{
+		this->domDesc->writeData(buff, ctx);
+	}
+	isnull = (this->asName == nullptr);
+	buff->putBoolean(isnull, ctx);
+	if(!isnull)
+	{
+		buff->putString(this->asName, ctx);
+	}
 }
 void DomVariableJoinTarget::analyseDomTable(SQLAnalyseContext* context, DomVariable* variable, ThreadContext* ctx) throw() 
 {

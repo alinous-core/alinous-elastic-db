@@ -7,8 +7,8 @@ namespace alinous {namespace runtime {namespace dom {
 
 
 
-String* DomVariable::VAL_TYPE = ConstStr::getCNST_STR_1059();
-String* DomVariable::PROPS = ConstStr::getCNST_STR_1060();
+String* DomVariable::VAL_TYPE = ConstStr::getCNST_STR_1109();
+String* DomVariable::PROPS = ConstStr::getCNST_STR_1110();
 bool DomVariable::__init_done = __init_static_variables();
 bool DomVariable::__init_static_variables(){
 	Java2CppSystem::getSelf();
@@ -200,7 +200,7 @@ String* DomVariable::toString(ThreadContext* ctx) throw()
 {
 	StringBuffer* buff = (new(ctx) StringBuffer(ctx));
 	buff->append(this->value->toString(ctx), ctx);
-	buff->append(ConstStr::getCNST_STR_1056(), ctx);
+	buff->append(ConstStr::getCNST_STR_1106(), ctx);
 	int cnt = 0;
 	Iterator<IDomVariable>* it = this->properties->iterator(ctx);
 	while(it->hasNext(ctx))
@@ -213,7 +213,7 @@ String* DomVariable::toString(ThreadContext* ctx) throw()
 		cnt ++ ;
 		buff->append(value->toString(ctx), ctx);
 	}
-	buff->append(ConstStr::getCNST_STR_1057(), ctx);
+	buff->append(ConstStr::getCNST_STR_1107(), ctx);
 	return buff->toString(ctx);
 }
 IDomVariable* DomVariable::get(int index, ThreadContext* ctx) throw() 
@@ -1184,7 +1184,7 @@ int DomVariable::getKind(ThreadContext* ctx) throw()
 }
 void DomVariable::addValue(VariantValue* vv, ThreadContext* ctx) throw() 
 {
-	throw (new(ctx) RuntimeException(ConstStr::getCNST_STR_1058(), ctx));
+	throw (new(ctx) RuntimeException(ConstStr::getCNST_STR_1108(), ctx));
 }
 long long DomVariable::getOid(ThreadContext* ctx) throw() 
 {
@@ -1232,6 +1232,26 @@ bool DomVariable::equals(IObject* other, ThreadContext* ctx) throw()
 long long DomVariable::getMaxCommitId(ThreadContext* ctx) throw() 
 {
 	return 0;
+}
+void DomVariable::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
+{
+	char nullbl = buff->getByte(ctx);
+	if(nullbl == (char)0)
+	{
+		return;
+	}
+	this->value->readData(buff, ctx);
+}
+void DomVariable::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+{
+	buff->putInt(ICommandData::__DomVariable, ctx);
+	char nullbl = ((char)(isNull(ctx) ? 0 : 1));
+	buff->putByte(nullbl, ctx);
+	if(nullbl == (char)0)
+	{
+		return;
+	}
+	this->value->writeData(buff, ctx);
 }
 DomVariable* DomVariable::importFromDebugXml(DomNode* node, ThreadContext* ctx) throw() 
 {

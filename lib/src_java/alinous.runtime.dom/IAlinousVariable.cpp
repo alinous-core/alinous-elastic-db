@@ -11,7 +11,7 @@ constexpr const int IAlinousVariable::CLASS_DOM;
 constexpr const int IAlinousVariable::CLASS_OBJECT;
 constexpr const int IAlinousVariable::CLASS_TYPED;
 constexpr const int IAlinousVariable::CLASS_IDENTIFIER;
-String* IAlinousVariable::ATTR_NAME = ConstStr::getCNST_STR_1061();
+String* IAlinousVariable::ATTR_NAME = ConstStr::getCNST_STR_1111();
 bool IAlinousVariable::__init_done = __init_static_variables();
 bool IAlinousVariable::__init_static_variables(){
 	Java2CppSystem::getSelf();
@@ -35,6 +35,7 @@ void IAlinousVariable::__releaseRegerences(bool prepare, ThreadContext* ctx) thr
 	if(!prepare){
 		return;
 	}
+	ICommandData::__releaseRegerences(true, ctx);
 }
 }}}
 

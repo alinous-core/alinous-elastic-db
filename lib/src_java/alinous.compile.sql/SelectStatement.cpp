@@ -252,5 +252,98 @@ void SelectStatement::setParent(AbstractSrcElement* parent, ThreadContext* ctx) 
 {
 	IJoinTarget::setParent(parent, ctx);
 }
+void SelectStatement::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
+{
+	bool isnull = buff->getBoolean(ctx);
+	if(!isnull)
+	{
+		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
+		if(el == nullptr || !((dynamic_cast<SQLExpressionList*>(el) != 0)))
+		{
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1037(), ctx));
+		}
+		__GC_MV(this, &(this->list), static_cast<SQLExpressionList*>(el), SQLExpressionList);
+	}
+	isnull = buff->getBoolean(ctx);
+	if(!isnull)
+	{
+		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
+		if(el == nullptr || !((dynamic_cast<AlinousName*>(el) != 0)))
+		{
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_970(), ctx));
+		}
+		__GC_MV(this, &(this->into), static_cast<AlinousName*>(el), AlinousName);
+	}
+	isnull = buff->getBoolean(ctx);
+	if(!isnull)
+	{
+		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
+		if(el == nullptr || !((dynamic_cast<SQLWhere*>(el) != 0)))
+		{
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1039(), ctx));
+		}
+		__GC_MV(this, &(this->where), static_cast<SQLWhere*>(el), SQLWhere);
+	}
+	isnull = buff->getBoolean(ctx);
+	if(!isnull)
+	{
+		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
+		if(el == nullptr || !((dynamic_cast<SQLGroupBy*>(el) != 0)))
+		{
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1040(), ctx));
+		}
+		__GC_MV(this, &(this->groupBy), static_cast<SQLGroupBy*>(el), SQLGroupBy);
+	}
+	isnull = buff->getBoolean(ctx);
+	if(!isnull)
+	{
+		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
+		if(el == nullptr || !((dynamic_cast<SQLLimitOffset*>(el) != 0)))
+		{
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1041(), ctx));
+		}
+		__GC_MV(this, &(this->limitOffset), static_cast<SQLLimitOffset*>(el), SQLLimitOffset);
+	}
+}
+void SelectStatement::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+{
+	buff->putInt(ICommandData::__SelectStatement, ctx);
+	bool isnull = (this->list == nullptr);
+	buff->putBoolean(isnull, ctx);
+	if(!isnull)
+	{
+		this->list->writeData(buff, ctx);
+	}
+	isnull = (this->into == nullptr);
+	buff->putBoolean(isnull, ctx);
+	if(!isnull)
+	{
+		this->into->writeData(buff, ctx);
+	}
+	isnull = (this->from == nullptr);
+	buff->putBoolean(isnull, ctx);
+	if(!isnull)
+	{
+		this->from->writeData(buff, ctx);
+	}
+	isnull = (this->where == nullptr);
+	buff->putBoolean(isnull, ctx);
+	if(!isnull)
+	{
+		this->where->writeData(buff, ctx);
+	}
+	isnull = (this->groupBy == nullptr);
+	buff->putBoolean(isnull, ctx);
+	if(!isnull)
+	{
+		this->groupBy->writeData(buff, ctx);
+	}
+	isnull = (this->limitOffset == nullptr);
+	buff->putBoolean(isnull, ctx);
+	if(!isnull)
+	{
+		this->limitOffset->writeData(buff, ctx);
+	}
+}
 }}}
 

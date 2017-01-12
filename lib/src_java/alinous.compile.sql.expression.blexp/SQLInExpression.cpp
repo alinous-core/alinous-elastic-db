@@ -120,7 +120,7 @@ bool SQLInExpression::analyseSQL(SQLAnalyseContext* context, bool leftValue, boo
 	ArrayList<ScanTableColumnIdentifier>* colList = this->first->getColumns(ctx);
 	if(colList == nullptr || colList->isEmpty(ctx))
 	{
-		throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1029(), ctx));
+		throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1070(), ctx));
 	}
 	return true;
 }
@@ -201,11 +201,52 @@ bool SQLInExpression::hasArrayResult(ThreadContext* ctx) throw()
 }
 ArrayList<VariantValue>* SQLInExpression::resolveSQLExpressionAsArray(ScanResultRecord* record, ScriptMachine* machine, bool debug, ThreadContext* ctx)
 {
-	throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1006(), ctx));
+	throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1036(), ctx));
 }
 int SQLInExpression::getExpressionType(ThreadContext* ctx) throw() 
 {
 	return IExpression::sQLInExpression;
+}
+void SQLInExpression::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
+{
+	__readData(buff, ctx);
+	bool isnull = buff->getBoolean(ctx);
+	if(!isnull)
+	{
+		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
+		if(el == nullptr || !((dynamic_cast<ISQLExpression*>(el) != 0)))
+		{
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1044(), ctx));
+		}
+		__GC_MV(this, &(this->first), static_cast<ISQLExpression*>(el), ISQLExpression);
+	}
+	isnull = buff->getBoolean(ctx);
+	if(!isnull)
+	{
+		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
+		if(el == nullptr || !((dynamic_cast<SQLExpressionList*>(el) != 0)))
+		{
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1037(), ctx));
+		}
+		__GC_MV(this, &(this->list), static_cast<SQLExpressionList*>(el), SQLExpressionList);
+	}
+}
+void SQLInExpression::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+{
+	buff->putInt(ICommandData::__SQLInExpression, ctx);
+	__writeData(buff, ctx);
+	bool isnull = (this->first == nullptr);
+	buff->putBoolean(isnull, ctx);
+	if(!isnull)
+	{
+		this->first->writeData(buff, ctx);
+	}
+	isnull = (this->list == nullptr);
+	buff->putBoolean(isnull, ctx);
+	if(!isnull)
+	{
+		this->list->writeData(buff, ctx);
+	}
 }
 }}}}}
 

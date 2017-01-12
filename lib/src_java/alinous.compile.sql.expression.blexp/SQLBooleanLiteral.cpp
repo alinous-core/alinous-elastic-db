@@ -118,11 +118,22 @@ bool SQLBooleanLiteral::hasArrayResult(ThreadContext* ctx) throw()
 }
 ArrayList<VariantValue>* SQLBooleanLiteral::resolveSQLExpressionAsArray(ScanResultRecord* record, ScriptMachine* machine, bool debug, ThreadContext* ctx)
 {
-	throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1006(), ctx));
+	throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1036(), ctx));
 }
 int SQLBooleanLiteral::getExpressionType(ThreadContext* ctx) throw() 
 {
 	return IExpression::sQLBooleanLiteral;
+}
+void SQLBooleanLiteral::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
+{
+	__readData(buff, ctx);
+	this->value = buff->getBoolean(ctx);
+}
+void SQLBooleanLiteral::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+{
+	buff->putInt(ICommandData::__SQLBooleanLiteral, ctx);
+	__writeData(buff, ctx);
+	buff->putBoolean(this->value, ctx);
 }
 }}}}}
 

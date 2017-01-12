@@ -22,13 +22,13 @@ bool TableSchema::__init_static_variables(){
 {
 	__GC_MV(this, &(this->dataDir), dataDir, String);
 	__GC_MV(this, &(this->name), name, String);
-	__GC_MV(this, &(this->regionName), ConstStr::getCNST_STR_1605(), String);
+	__GC_MV(this, &(this->regionName), ConstStr::getCNST_STR_1656(), String);
 }
 void TableSchema::__construct_impl(String* name, String* dataDir, ThreadContext* ctx) throw() 
 {
 	__GC_MV(this, &(this->dataDir), dataDir, String);
 	__GC_MV(this, &(this->name), name, String);
-	__GC_MV(this, &(this->regionName), ConstStr::getCNST_STR_1605(), String);
+	__GC_MV(this, &(this->regionName), ConstStr::getCNST_STR_1656(), String);
 }
  TableSchema::~TableSchema() throw() 
 {
@@ -69,7 +69,7 @@ void TableSchema::initAfterFetched(String* dataDir, String* schemaName, ThreadPo
 {
 	__GC_MV(this, &(this->dataDir), dataDir, String);
 	StringBuilder* buff = (new(ctx) StringBuilder(ctx));
-	buff->append(this->dataDir, ctx)->append(schemaName, ctx)->append(ConstStr::getCNST_STR_984(), ctx);
+	buff->append(this->dataDir, ctx)->append(schemaName, ctx)->append(ConstStr::getCNST_STR_1007(), ctx);
 	String* baseDir = buff->toString(ctx);
 	Iterator<String>* it = this->tables->keySet(ctx)->iterator(ctx);
 	while(it->hasNext(ctx))
@@ -84,7 +84,7 @@ String* TableSchema::getSchemaDir(ThreadContext* ctx) throw()
 {
 	if(this->schemaDir == nullptr)
 	{
-		__GC_MV(this, &(this->schemaDir), this->dataDir->clone(ctx)->append(this->name, ctx)->append(ConstStr::getCNST_STR_984(), ctx), String);
+		__GC_MV(this, &(this->schemaDir), this->dataDir->clone(ctx)->append(this->name, ctx)->append(ConstStr::getCNST_STR_1007(), ctx), String);
 	}
 	return this->schemaDir;
 }

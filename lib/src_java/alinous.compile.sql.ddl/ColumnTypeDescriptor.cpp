@@ -113,29 +113,65 @@ void ColumnTypeDescriptor::setParent(AbstractSrcElement* parent, ThreadContext* 
 {
 	IAlinousElement::setParent(parent, ctx);
 }
+void ColumnTypeDescriptor::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
+{
+	bool isnull = buff->getBoolean(ctx);
+	if(!isnull)
+	{
+		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
+		if(el == nullptr || !((dynamic_cast<ISQLExpression*>(el) != 0)))
+		{
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1044(), ctx));
+		}
+		__GC_MV(this, &(this->length), static_cast<ISQLExpression*>(el), ISQLExpression);
+	}
+	isnull = buff->getBoolean(ctx);
+	if(!isnull)
+	{
+		__GC_MV(this, &(this->typeName), buff->getString(ctx), String);
+	}
+	this->typeNum = buff->getInt(ctx);
+}
+void ColumnTypeDescriptor::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+{
+	buff->putInt(ICommandData::__Unique, ctx);
+	bool isnull = (this->length == nullptr);
+	buff->putBoolean(isnull, ctx);
+	if(!isnull)
+	{
+		this->length->writeData(buff, ctx);
+	}
+	isnull = (this->typeName == nullptr);
+	buff->putBoolean(isnull, ctx);
+	if(!isnull)
+	{
+		buff->putString(this->typeName, ctx);
+	}
+	buff->putInt(this->typeNum, ctx);
+}
 int ColumnTypeDescriptor::toTypeNum(String* str, ThreadContext* ctx) throw() 
 {
-	if(str->equalsIgnoreCase(ConstStr::getCNST_STR_1016(), ctx) || str->equalsIgnoreCase(ConstStr::getCNST_STR_1017(), ctx))
+	if(str->equalsIgnoreCase(ConstStr::getCNST_STR_1053(), ctx) || str->equalsIgnoreCase(ConstStr::getCNST_STR_1054(), ctx))
 	{
 		return INT;
 	}
-	if(str->equalsIgnoreCase(ConstStr::getCNST_STR_1018(), ctx) || str->equalsIgnoreCase(ConstStr::getCNST_STR_1019(), ctx))
+	if(str->equalsIgnoreCase(ConstStr::getCNST_STR_1055(), ctx) || str->equalsIgnoreCase(ConstStr::getCNST_STR_1056(), ctx))
 	{
 		return VARCHAR;
 	}
-	if(str->equalsIgnoreCase(ConstStr::getCNST_STR_1020(), ctx) || str->equalsIgnoreCase(ConstStr::getCNST_STR_1021(), ctx))
+	if(str->equalsIgnoreCase(ConstStr::getCNST_STR_1057(), ctx) || str->equalsIgnoreCase(ConstStr::getCNST_STR_1058(), ctx))
 	{
 		return TEXT;
 	}
-	if(str->equalsIgnoreCase(ConstStr::getCNST_STR_1022(), ctx) || str->equalsIgnoreCase(ConstStr::getCNST_STR_1023(), ctx))
+	if(str->equalsIgnoreCase(ConstStr::getCNST_STR_1059(), ctx) || str->equalsIgnoreCase(ConstStr::getCNST_STR_1060(), ctx))
 	{
 		return DOUBLE;
 	}
-	if(str->equalsIgnoreCase(ConstStr::getCNST_STR_1024(), ctx))
+	if(str->equalsIgnoreCase(ConstStr::getCNST_STR_1061(), ctx))
 	{
 		return DOUBLE;
 	}
-	if(str->equalsIgnoreCase(ConstStr::getCNST_STR_1025(), ctx))
+	if(str->equalsIgnoreCase(ConstStr::getCNST_STR_1062(), ctx))
 	{
 		return TIMESTAMP;
 	}

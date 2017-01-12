@@ -77,7 +77,7 @@ void ConcurrentTaskExexutor::begin(ThreadContext* ctx)
 	__GC_MV(this, &(this->launcher), this->pool->borrow(false, ctx), AlinousThread);
 	this->launcher->execute(launcherLoopEntryPoint, ctx);
 	this->launcherLaunchJoin->parentJoin(ctx);
-	System::out->println(ConstStr::getCNST_STR_1155(), ctx);
+	System::out->println(ConstStr::getCNST_STR_1206(), ctx);
 }
 void ConcurrentTaskExexutor::startTask(IParallelTask* task, ThreadContext* ctx) throw() 
 {

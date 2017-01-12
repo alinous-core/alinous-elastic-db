@@ -62,5 +62,23 @@ void ContinueStatement::setLabel(String* label, ThreadContext* ctx) throw()
 {
 	__GC_MV(this, &(this->label), label, String);
 }
+void ContinueStatement::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
+{
+	bool isnull = buff->getBoolean(ctx);
+	if(!isnull)
+	{
+		__GC_MV(this, &(this->label), buff->getString(ctx), String);
+	}
+}
+void ContinueStatement::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+{
+	buff->putInt(ICommandData::__ContinueStatement, ctx);
+	bool isnull = (this->label == nullptr);
+	buff->putBoolean(isnull, ctx);
+	if(!isnull)
+	{
+		buff->putString(this->label, ctx);
+	}
+}
 }}}
 

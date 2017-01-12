@@ -51,7 +51,7 @@ String* WebHandlerInfo::getDocumentRoot(ThreadContext* ctx) throw()
 void WebHandlerInfo::setDocumentRoot(String* documentRoot, ThreadContext* ctx) throw() 
 {
 	String* documentAbsRoot = ConfigPathUtils::getAbsDirPath(this->alinousHome, documentRoot, ctx);
-	if(documentAbsRoot->endsWith(ConstStr::getCNST_STR_984(), ctx))
+	if(documentAbsRoot->endsWith(ConstStr::getCNST_STR_1007(), ctx))
 	{
 		__GC_MV(this, &(this->documentRoot), documentAbsRoot->substring(0, documentAbsRoot->length(ctx) - 1, ctx), String);
 		return;

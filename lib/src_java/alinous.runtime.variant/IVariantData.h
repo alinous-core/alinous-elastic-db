@@ -21,12 +21,11 @@ class VariantValue;}}}
 namespace alinous {namespace buffer {namespace storage {
 class FileStorageEntryBuilder;}}}
 
+namespace alinous {namespace remote {namespace socket {
+class ICommandData;}}}
+
 namespace alinous {namespace runtime {namespace dom {
 class VariableException;}}}
-
-namespace java {namespace lang {
-class IObject;
-}}
 
 namespace alinous {
 class ThreadContext;
@@ -42,15 +41,16 @@ using ::alinous::buffer::storage::FileStorageEntryBuilder;
 using ::alinous::html::DomNode;
 using ::alinous::numeric::BigDecimal;
 using ::alinous::numeric::TimeOnlyTimestamp;
+using ::alinous::remote::socket::ICommandData;
 using ::alinous::runtime::dom::VariableException;
 
 
 
-class IVariantData : public virtual IObject {
+class IVariantData : public virtual IObject, public ICommandData {
 public:
 	IVariantData(const IVariantData& base) = default;
 public:
-	IVariantData(ThreadContext* ctx) throw()  : IObject(ctx)
+	IVariantData(ThreadContext* ctx) throw()  : IObject(ctx), ICommandData(ctx)
 	{
 	}
 	void __construct_impl(ThreadContext* ctx) throw() 

@@ -27,8 +27,20 @@ class ExpressionSourceId;}}
 namespace alinous {namespace compile {namespace analyse {
 class AlinousType;}}}
 
+namespace alinous {namespace remote {namespace socket {
+class NetworkBinaryBuffer;}}}
+
+namespace alinous {namespace compile {
+class IAlinousElement;}}
+
+namespace alinous {namespace runtime {namespace dom {
+class VariableException;}}}
+
 namespace alinous {namespace compile {namespace expression {
 class AbstractExpression;}}}
+
+namespace alinous {namespace compile {
+class AlinousElementNetworkFactory;}}
 
 namespace alinous {
 class ThreadContext;
@@ -41,12 +53,16 @@ using namespace ::java::lang;
 using ::java::util::Iterator;
 using ::java::util::ArrayList;
 using ::alinous::compile::AbstractSrcElement;
+using ::alinous::compile::AlinousElementNetworkFactory;
 using ::alinous::compile::ExpressionSourceId;
+using ::alinous::compile::IAlinousElement;
 using ::alinous::compile::IAlinousElementVisitor;
 using ::alinous::compile::analyse::AlinousType;
 using ::alinous::compile::analyse::SrcAnalyseContext;
 using ::alinous::compile::expression::AbstractExpression;
 using ::alinous::compile::expression::IExpression;
+using ::alinous::remote::socket::NetworkBinaryBuffer;
+using ::alinous::runtime::dom::VariableException;
 
 
 
@@ -71,6 +87,8 @@ public:
 	bool analyse(SrcAnalyseContext* context, bool leftValue, ThreadContext* ctx) throw()  final;
 	ExpressionSourceId* getSourceId(ThreadContext* ctx) throw()  final;
 	bool isSQLExp(ThreadContext* ctx) throw()  final;
+	void __readData(NetworkBinaryBuffer* buff, ThreadContext* ctx);
+	void __writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() ;
 public:
 	static bool __init_done;
 	static bool __init_static_variables();

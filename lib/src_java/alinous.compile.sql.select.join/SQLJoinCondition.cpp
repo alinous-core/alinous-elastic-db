@@ -145,7 +145,7 @@ bool SQLJoinCondition::hasArrayResult(ThreadContext* ctx) throw()
 }
 ArrayList<VariantValue>* SQLJoinCondition::resolveSQLExpressionAsArray(ScanResultRecord* record, ScriptMachine* machine, bool debug, ThreadContext* ctx)
 {
-	throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1006(), ctx));
+	throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1036(), ctx));
 }
 String* SQLJoinCondition::getAsName(ThreadContext* ctx) throw() 
 {
@@ -157,6 +157,31 @@ void SQLJoinCondition::setAsName(String* name, ThreadContext* ctx) throw()
 int SQLJoinCondition::getExpressionType(ThreadContext* ctx) throw() 
 {
 	return IExpression::sQLJoinCondition;
+}
+void SQLJoinCondition::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
+{
+	__readData(buff, ctx);
+	bool isnull = buff->getBoolean(ctx);
+	if(!isnull)
+	{
+		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
+		if(el == nullptr || !((dynamic_cast<ISQLExpression*>(el) != 0)))
+		{
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1044(), ctx));
+		}
+		__GC_MV(this, &(this->condition), static_cast<ISQLExpression*>(el), ISQLExpression);
+	}
+}
+void SQLJoinCondition::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+{
+	buff->putInt(ICommandData::__SQLJoinCondition, ctx);
+	__writeData(buff, ctx);
+	bool isnull = (this->condition == nullptr);
+	buff->putBoolean(isnull, ctx);
+	if(!isnull)
+	{
+		this->condition->writeData(buff, ctx);
+	}
 }
 }}}}}
 

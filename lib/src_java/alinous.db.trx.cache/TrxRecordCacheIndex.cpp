@@ -78,15 +78,15 @@ void TrxRecordCacheIndex::switchToDisk(AlinousDatabase* database, ThreadContext*
 		}
 		catch(IOException* e)
 		{
-			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1620(), e, ctx));
+			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1671(), e, ctx));
 		}
 		catch(InterruptedException* e)
 		{
-			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1620(), e, ctx));
+			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1671(), e, ctx));
 		}
 		catch(BTreeException* e)
 		{
-			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1620(), e, ctx));
+			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1671(), e, ctx));
 		}
 	}
 }
@@ -150,7 +150,7 @@ IBTree* TrxRecordCacheIndex::getStorage(ThreadContext* ctx) throw()
 void TrxRecordCacheIndex::setPath(ThreadContext* ctx) throw() 
 {
 	StringBuilder* buff = (new(ctx) StringBuilder(ctx));
-	buff->append(this->baseDir, ctx)->append(name, ctx)->append(ConstStr::getCNST_STR_1621(), ctx);
+	buff->append(this->baseDir, ctx)->append(name, ctx)->append(ConstStr::getCNST_STR_1672(), ctx);
 	__GC_MV(this, &(this->filePath), buff->toString(ctx), String);
 }
 }}}}

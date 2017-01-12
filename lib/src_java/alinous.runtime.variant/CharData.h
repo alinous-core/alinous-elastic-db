@@ -33,6 +33,9 @@ class FileStorageEntryBuilder;}}}
 namespace alinous {namespace runtime {namespace variant {
 class VariantValue;}}}
 
+namespace alinous {namespace remote {namespace socket {
+class NetworkBinaryBuffer;}}}
+
 namespace alinous {namespace runtime {namespace variant {
 class IVariantData;}}}
 
@@ -59,6 +62,7 @@ using ::alinous::html::DomNode;
 using ::alinous::html::xpath::IVariableValue;
 using ::alinous::numeric::BigDecimal;
 using ::alinous::numeric::TimeOnlyTimestamp;
+using ::alinous::remote::socket::NetworkBinaryBuffer;
 using ::alinous::runtime::dom::VariableException;
 
 
@@ -69,6 +73,12 @@ public:
 public:
 	CharData(wchar_t data, ThreadContext* ctx) throw() ;
 	void __construct_impl(wchar_t data, ThreadContext* ctx) throw() ;
+	CharData(ThreadContext* ctx) throw()  : IObject(ctx), IVariantData(ctx), data(0)
+	{
+	}
+	void __construct_impl(ThreadContext* ctx) throw() 
+	{
+	}
 	virtual ~CharData() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 private:
@@ -94,6 +104,8 @@ public:
 	void appendToEntry(FileStorageEntryBuilder* builder, ThreadContext* ctx) final;
 	bool isNull(ThreadContext* ctx) throw()  final;
 	int compareTo(VariantValue* variant, ThreadContext* ctx) throw()  final;
+	void readData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw()  final;
+	void writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw()  final;
 public:
 	static CharData* importFromXml(DomNode* node, ThreadContext* ctx) throw() ;
 public:

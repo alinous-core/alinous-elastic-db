@@ -33,7 +33,7 @@ void Count::__releaseRegerences(bool prepare, ThreadContext* ctx) throw()
 }
 String* Count::getName(ThreadContext* ctx) throw() 
 {
-	return ConstStr::getCNST_STR_1034();
+	return ConstStr::getCNST_STR_1075();
 }
 VariantValue* Count::resolveSQLExpression(ScanResultRecord* record, ScriptMachine* machine, FunctionArguments* args, bool debug, ThreadContext* ctx)
 {

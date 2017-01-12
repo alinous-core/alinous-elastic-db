@@ -81,7 +81,7 @@ void SocketServer::start(int maxthread, String* threadName, ThreadContext* ctx) 
 void SocketServer::dispose(ThreadContext* ctx) throw() 
 {
 	this->running = false;
-	AlinousSocket* socket = (new(ctx) AlinousSocket(ConstStr::getCNST_STR_1121(), this->port, ctx));
+	AlinousSocket* socket = (new(ctx) AlinousSocket(ConstStr::getCNST_STR_1172(), this->port, ctx));
 	{
 		try
 		{
@@ -133,7 +133,7 @@ void SocketServer::run(ThreadContext* ctx) throw()
 					return;
 				}
 				retry ++ ;
-				System::out->println(ConstStr::getCNST_STR_3457(), ctx);
+				System::out->println(ConstStr::getCNST_STR_3508(), ctx);
 				{
 					try
 					{

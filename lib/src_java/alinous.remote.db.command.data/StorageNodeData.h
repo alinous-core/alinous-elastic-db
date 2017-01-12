@@ -1,5 +1,8 @@
 #ifndef ALINOUS_REMOTE_DB_COMMAND_DATA_STORAGENODEDATA_H_
 #define ALINOUS_REMOTE_DB_COMMAND_DATA_STORAGENODEDATA_H_
+namespace alinous {namespace remote {namespace db {namespace command {namespace data {
+class StorageNodeData;}}}}}
+
 namespace alinous {namespace remote {namespace socket {
 class NetworkBinaryBuffer;}}}
 
@@ -8,6 +11,9 @@ class VariantValue;}}}
 
 namespace alinous {namespace remote {namespace socket {
 class ICommandData;}}}
+
+namespace alinous {namespace runtime {namespace dom {
+class VariableException;}}}
 
 namespace java {namespace lang {
 class IObject;
@@ -24,6 +30,7 @@ using namespace ::java::lang;
 using ::java::util::Iterator;
 using ::alinous::remote::socket::ICommandData;
 using ::alinous::remote::socket::NetworkBinaryBuffer;
+using ::alinous::runtime::dom::VariableException;
 using ::alinous::runtime::variant::VariantValue;
 
 
@@ -52,7 +59,8 @@ public:
 	int getPort(ThreadContext* ctx) throw() ;
 	bool isIpv6(ThreadContext* ctx) throw() ;
 	bool equals(String* host, int port, bool ipv6, ThreadContext* ctx) throw() ;
-	void readData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw()  final;
+	bool equals(StorageNodeData* another, ThreadContext* ctx) throw() ;
+	void readData(NetworkBinaryBuffer* buff, ThreadContext* ctx) final;
 	void writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw()  final;
 public:
 	static bool __init_done;

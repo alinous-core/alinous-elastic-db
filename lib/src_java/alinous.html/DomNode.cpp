@@ -222,9 +222,9 @@ bool DomNode::isSingleEnd(ThreadContext* ctx) throw()
 }
 void DomNode::setSingleEnd(bool singleEnd, ThreadContext* ctx) throw() 
 {
-	if(this->name->equals(ConstStr::getCNST_STR_1685(), ctx) && singleEnd)
+	if(this->name->equals(ConstStr::getCNST_STR_1736(), ctx) && singleEnd)
 	{
-		throw (new(ctx) RuntimeException(ConstStr::getCNST_STR_1686(), ctx));
+		throw (new(ctx) RuntimeException(ConstStr::getCNST_STR_1737(), ctx));
 	}
 	this->singleEnd = singleEnd;
 }
@@ -256,7 +256,7 @@ String* DomNode::getPathString(ThreadContext* ctx) throw()
 	{
 		buff->append(this->parent->getPathString(ctx), ctx);
 	}
-	buff->append(ConstStr::getCNST_STR_984(), ctx);
+	buff->append(ConstStr::getCNST_STR_1007(), ctx);
 	buff->append(this->name, ctx);
 	return buff->toString(ctx);
 }
@@ -279,7 +279,7 @@ String* DomNode::toString(ThreadContext* ctx) throw()
 	StringBuffer* buff = (new(ctx) StringBuffer(ctx));
 	if(this->singleEnd)
 	{
-		buff->append(ConstStr::getCNST_STR_986(), ctx);
+		buff->append(ConstStr::getCNST_STR_1010(), ctx);
 		buff->append(this->name, ctx);
 		Iterator<Attribute>* it = this->attributes->iterator(ctx);
 		while(it->hasNext(ctx))
@@ -294,12 +294,12 @@ String* DomNode::toString(ThreadContext* ctx) throw()
 		}
 				else 
 		{
-			buff->append(ConstStr::getCNST_STR_1687(), ctx);
+			buff->append(ConstStr::getCNST_STR_1738(), ctx);
 		}
 	}
 		else 
 	{
-		buff->append(ConstStr::getCNST_STR_986(), ctx);
+		buff->append(ConstStr::getCNST_STR_1010(), ctx);
 		buff->append(this->name, ctx);
 		Iterator<Attribute>* it = this->attributes->iterator(ctx);
 		while(it->hasNext(ctx))
@@ -314,7 +314,7 @@ String* DomNode::toString(ThreadContext* ctx) throw()
 		{
 			buff->append(childrenIt->next(ctx)->toString(ctx), ctx);
 		}
-		buff->append(ConstStr::getCNST_STR_1688(), ctx);
+		buff->append(ConstStr::getCNST_STR_1739(), ctx);
 		buff->append(this->name, ctx);
 		buff->append(ConstStr::getCNST_STR_82(), ctx);
 	}

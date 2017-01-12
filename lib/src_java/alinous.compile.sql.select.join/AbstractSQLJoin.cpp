@@ -243,6 +243,60 @@ void AbstractSQLJoin::setParent(AbstractSrcElement* parent, ThreadContext* ctx) 
 {
 	IJoin::setParent(parent, ctx);
 }
+void AbstractSQLJoin::__readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
+{
+	bool isnull = buff->getBoolean(ctx);
+	if(!isnull)
+	{
+		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
+		if(el == nullptr || !((dynamic_cast<IJoin*>(el) != 0)))
+		{
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1078(), ctx));
+		}
+		__GC_MV(this, &(this->left), static_cast<IJoin*>(el), IJoin);
+	}
+	isnull = buff->getBoolean(ctx);
+	if(!isnull)
+	{
+		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
+		if(el == nullptr || !((dynamic_cast<IJoin*>(el) != 0)))
+		{
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1078(), ctx));
+		}
+		__GC_MV(this, &(this->right), static_cast<IJoin*>(el), IJoin);
+	}
+	isnull = buff->getBoolean(ctx);
+	if(!isnull)
+	{
+		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
+		if(el == nullptr || !((dynamic_cast<SQLJoinCondition*>(el) != 0)))
+		{
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1085(), ctx));
+		}
+		__GC_MV(this, &(this->condition), static_cast<SQLJoinCondition*>(el), SQLJoinCondition);
+	}
+}
+void AbstractSQLJoin::__writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+{
+	bool isnull = (this->left == nullptr);
+	buff->putBoolean(isnull, ctx);
+	if(!isnull)
+	{
+		this->left->writeData(buff, ctx);
+	}
+	isnull = (this->right == nullptr);
+	buff->putBoolean(isnull, ctx);
+	if(!isnull)
+	{
+		this->right->writeData(buff, ctx);
+	}
+	isnull = (this->condition == nullptr);
+	buff->putBoolean(isnull, ctx);
+	if(!isnull)
+	{
+		this->condition->writeData(buff, ctx);
+	}
+}
 ITableTargetScanner* AbstractSQLJoin::getCrossJoinsScanner(DbTransaction* trx, ScriptMachine* machine, ArrayList<ScanTableColumnIdentifier>* joinRequest, bool debug, ThreadContext* ctx)
 {
 	ITableTargetScanner* leftScanner = this->left->getScanner(trx, machine, nullptr, debug, ctx);
@@ -272,7 +326,7 @@ ScannedResultIndexScanner* AbstractSQLJoin::toResultScanner(DbTransaction* trx, 
 					}
 					catch(Throwable* e)
 					{
-						throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1041(), ctx));
+						throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1083(), ctx));
 					}
 				}
 			}
@@ -322,7 +376,7 @@ ITableTargetScanner* AbstractSQLJoin::getJoinStrategyScanner(DbTransaction* trx,
 		rightScanner = this->right->getScanner(trx, machine, nullptr, debug, ctx);
 		return (new(ctx) ReverseIndexScanner(trx, leftScanner, rightScanner, left->getScanTableMetadata(ctx), right->getScanTableMetadata(ctx), inner, exp, this->condition, machine, ctx));
 	}
-	throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1042(), ctx));
+	throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1084(), ctx));
 }
 }}}}}
 

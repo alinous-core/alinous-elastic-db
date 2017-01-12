@@ -73,15 +73,32 @@ void AbstractSQLBooleanExpression::setAsName(String* name, ThreadContext* ctx) t
 {
 	__GC_MV(this, &(this->asName), name, String);
 }
+void AbstractSQLBooleanExpression::__readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
+{
+	bool isnull = buff->getBoolean(ctx);
+	if(!isnull)
+	{
+		__GC_MV(this, &(this->asName), buff->getString(ctx), String);
+	}
+}
+void AbstractSQLBooleanExpression::__writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+{
+	bool isnull = (this->asName == nullptr);
+	buff->putBoolean(isnull, ctx);
+	if(!isnull)
+	{
+		buff->putString(this->asName, ctx);
+	}
+}
 int AbstractSQLBooleanExpression::operatorFromString(String* opStr, ThreadContext* ctx) throw() 
 {
-	if(opStr->equalsIgnoreCase(ConstStr::getCNST_STR_1027(), ctx))
+	if(opStr->equalsIgnoreCase(ConstStr::getCNST_STR_1068(), ctx))
 	{
 		return AbstractSQLBooleanExpression::SQL_OR;
 	}
 		else 
 	{
-		if(opStr->equalsIgnoreCase(ConstStr::getCNST_STR_1028(), ctx))
+		if(opStr->equalsIgnoreCase(ConstStr::getCNST_STR_1069(), ctx))
 		{
 			return AbstractSQLBooleanExpression::SQL_AND;
 		}

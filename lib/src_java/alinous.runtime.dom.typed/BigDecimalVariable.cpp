@@ -7,7 +7,7 @@ namespace alinous {namespace runtime {namespace dom {namespace typed {
 
 
 
-String* BigDecimalVariable::VAL_TYPE = ConstStr::getCNST_STR_1095();
+String* BigDecimalVariable::VAL_TYPE = ConstStr::getCNST_STR_1146();
 bool BigDecimalVariable::__init_done = __init_static_variables();
 bool BigDecimalVariable::__init_static_variables(){
 	Java2CppSystem::getSelf();
@@ -387,343 +387,343 @@ IAlinousVariable* BigDecimalVariable::div(BigDecimalVariable* variable, ThreadCo
 }
 IAlinousVariable* BigDecimalVariable::shiftLeft(VariantValue* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1094(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1145(), ctx));
 }
 IAlinousVariable* BigDecimalVariable::shiftLeft(DomVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1094(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1145(), ctx));
 }
 IAlinousVariable* BigDecimalVariable::shiftLeft(BoolVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1094(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1145(), ctx));
 }
 IAlinousVariable* BigDecimalVariable::shiftLeft(ByteVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1094(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1145(), ctx));
 }
 IAlinousVariable* BigDecimalVariable::shiftLeft(CharVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1094(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1145(), ctx));
 }
 IAlinousVariable* BigDecimalVariable::shiftLeft(DoubleVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1094(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1145(), ctx));
 }
 IAlinousVariable* BigDecimalVariable::shiftLeft(FloatVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1094(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1145(), ctx));
 }
 IAlinousVariable* BigDecimalVariable::shiftLeft(IntegerVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1094(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1145(), ctx));
 }
 IAlinousVariable* BigDecimalVariable::shiftLeft(LongVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1094(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1145(), ctx));
 }
 IAlinousVariable* BigDecimalVariable::shiftLeft(ShortVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1094(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1145(), ctx));
 }
 IAlinousVariable* BigDecimalVariable::shiftLeft(StringVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1094(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1145(), ctx));
 }
 IAlinousVariable* BigDecimalVariable::shiftLeft(BigDecimalVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1094(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1145(), ctx));
 }
 IAlinousVariable* BigDecimalVariable::shiftRight(VariantValue* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1094(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1145(), ctx));
 }
 IAlinousVariable* BigDecimalVariable::shiftRight(DomVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1094(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1145(), ctx));
 }
 IAlinousVariable* BigDecimalVariable::shiftRight(BoolVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1094(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1145(), ctx));
 }
 IAlinousVariable* BigDecimalVariable::shiftRight(ByteVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1094(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1145(), ctx));
 }
 IAlinousVariable* BigDecimalVariable::shiftRight(CharVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1094(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1145(), ctx));
 }
 IAlinousVariable* BigDecimalVariable::shiftRight(DoubleVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1094(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1145(), ctx));
 }
 IAlinousVariable* BigDecimalVariable::shiftRight(FloatVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1094(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1145(), ctx));
 }
 IAlinousVariable* BigDecimalVariable::shiftRight(IntegerVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1094(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1145(), ctx));
 }
 IAlinousVariable* BigDecimalVariable::shiftRight(LongVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1094(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1145(), ctx));
 }
 IAlinousVariable* BigDecimalVariable::shiftRight(ShortVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1094(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1145(), ctx));
 }
 IAlinousVariable* BigDecimalVariable::shiftRight(StringVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1094(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1145(), ctx));
 }
 IAlinousVariable* BigDecimalVariable::shiftRight(BigDecimalVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1094(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1145(), ctx));
 }
 IAlinousVariable* BigDecimalVariable::shiftRightUnsigned(VariantValue* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1094(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1145(), ctx));
 }
 IAlinousVariable* BigDecimalVariable::shiftRightUnsigned(DomVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1094(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1145(), ctx));
 }
 IAlinousVariable* BigDecimalVariable::shiftRightUnsigned(BoolVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1094(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1145(), ctx));
 }
 IAlinousVariable* BigDecimalVariable::shiftRightUnsigned(ByteVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1094(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1145(), ctx));
 }
 IAlinousVariable* BigDecimalVariable::shiftRightUnsigned(CharVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1094(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1145(), ctx));
 }
 IAlinousVariable* BigDecimalVariable::shiftRightUnsigned(DoubleVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1094(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1145(), ctx));
 }
 IAlinousVariable* BigDecimalVariable::shiftRightUnsigned(FloatVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1094(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1145(), ctx));
 }
 IAlinousVariable* BigDecimalVariable::shiftRightUnsigned(IntegerVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1094(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1145(), ctx));
 }
 IAlinousVariable* BigDecimalVariable::shiftRightUnsigned(LongVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1094(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1145(), ctx));
 }
 IAlinousVariable* BigDecimalVariable::shiftRightUnsigned(ShortVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1094(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1145(), ctx));
 }
 IAlinousVariable* BigDecimalVariable::shiftRightUnsigned(StringVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1094(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1145(), ctx));
 }
 IAlinousVariable* BigDecimalVariable::shiftRightUnsigned(BigDecimalVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1094(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1145(), ctx));
 }
 IAlinousVariable* BigDecimalVariable::modulo(VariantValue* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1094(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1145(), ctx));
 }
 IAlinousVariable* BigDecimalVariable::modulo(DomVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1094(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1145(), ctx));
 }
 IAlinousVariable* BigDecimalVariable::modulo(BoolVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1094(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1145(), ctx));
 }
 IAlinousVariable* BigDecimalVariable::modulo(ByteVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1094(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1145(), ctx));
 }
 IAlinousVariable* BigDecimalVariable::modulo(CharVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1094(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1145(), ctx));
 }
 IAlinousVariable* BigDecimalVariable::modulo(DoubleVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1094(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1145(), ctx));
 }
 IAlinousVariable* BigDecimalVariable::modulo(FloatVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1094(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1145(), ctx));
 }
 IAlinousVariable* BigDecimalVariable::modulo(IntegerVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1094(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1145(), ctx));
 }
 IAlinousVariable* BigDecimalVariable::modulo(LongVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1094(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1145(), ctx));
 }
 IAlinousVariable* BigDecimalVariable::modulo(ShortVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1094(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1145(), ctx));
 }
 IAlinousVariable* BigDecimalVariable::modulo(StringVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1094(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1145(), ctx));
 }
 IAlinousVariable* BigDecimalVariable::modulo(BigDecimalVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1094(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1145(), ctx));
 }
 IAlinousVariable* BigDecimalVariable::bitOr(VariantValue* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1094(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1145(), ctx));
 }
 IAlinousVariable* BigDecimalVariable::bitOr(DomVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1094(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1145(), ctx));
 }
 IAlinousVariable* BigDecimalVariable::bitOr(BoolVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1094(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1145(), ctx));
 }
 IAlinousVariable* BigDecimalVariable::bitOr(ByteVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1094(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1145(), ctx));
 }
 IAlinousVariable* BigDecimalVariable::bitOr(CharVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1094(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1145(), ctx));
 }
 IAlinousVariable* BigDecimalVariable::bitOr(DoubleVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1094(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1145(), ctx));
 }
 IAlinousVariable* BigDecimalVariable::bitOr(FloatVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1094(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1145(), ctx));
 }
 IAlinousVariable* BigDecimalVariable::bitOr(IntegerVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1094(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1145(), ctx));
 }
 IAlinousVariable* BigDecimalVariable::bitOr(LongVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1094(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1145(), ctx));
 }
 IAlinousVariable* BigDecimalVariable::bitOr(ShortVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1094(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1145(), ctx));
 }
 IAlinousVariable* BigDecimalVariable::bitOr(StringVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1094(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1145(), ctx));
 }
 IAlinousVariable* BigDecimalVariable::bitOr(BigDecimalVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1094(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1145(), ctx));
 }
 IAlinousVariable* BigDecimalVariable::bitAnd(VariantValue* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1094(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1145(), ctx));
 }
 IAlinousVariable* BigDecimalVariable::bitAnd(DomVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1094(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1145(), ctx));
 }
 IAlinousVariable* BigDecimalVariable::bitAnd(BoolVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1094(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1145(), ctx));
 }
 IAlinousVariable* BigDecimalVariable::bitAnd(ByteVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1094(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1145(), ctx));
 }
 IAlinousVariable* BigDecimalVariable::bitAnd(CharVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1094(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1145(), ctx));
 }
 IAlinousVariable* BigDecimalVariable::bitAnd(DoubleVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1094(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1145(), ctx));
 }
 IAlinousVariable* BigDecimalVariable::bitAnd(FloatVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1094(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1145(), ctx));
 }
 IAlinousVariable* BigDecimalVariable::bitAnd(IntegerVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1094(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1145(), ctx));
 }
 IAlinousVariable* BigDecimalVariable::bitAnd(LongVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1094(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1145(), ctx));
 }
 IAlinousVariable* BigDecimalVariable::bitAnd(ShortVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1094(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1145(), ctx));
 }
 IAlinousVariable* BigDecimalVariable::bitAnd(StringVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1094(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1145(), ctx));
 }
 IAlinousVariable* BigDecimalVariable::bitAnd(BigDecimalVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1094(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1145(), ctx));
 }
 IAlinousVariable* BigDecimalVariable::bitExor(VariantValue* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1094(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1145(), ctx));
 }
 IAlinousVariable* BigDecimalVariable::bitExor(DomVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1094(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1145(), ctx));
 }
 IAlinousVariable* BigDecimalVariable::bitExor(BoolVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1094(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1145(), ctx));
 }
 IAlinousVariable* BigDecimalVariable::bitExor(ByteVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1094(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1145(), ctx));
 }
 IAlinousVariable* BigDecimalVariable::bitExor(CharVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1094(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1145(), ctx));
 }
 IAlinousVariable* BigDecimalVariable::bitExor(DoubleVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1094(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1145(), ctx));
 }
 IAlinousVariable* BigDecimalVariable::bitExor(FloatVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1094(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1145(), ctx));
 }
 IAlinousVariable* BigDecimalVariable::bitExor(IntegerVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1094(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1145(), ctx));
 }
 IAlinousVariable* BigDecimalVariable::bitExor(LongVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1094(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1145(), ctx));
 }
 IAlinousVariable* BigDecimalVariable::bitExor(ShortVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1094(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1145(), ctx));
 }
 IAlinousVariable* BigDecimalVariable::bitExor(StringVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1094(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1145(), ctx));
 }
 IAlinousVariable* BigDecimalVariable::bitExor(BigDecimalVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1094(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1145(), ctx));
 }
 IAlinousVariable* BigDecimalVariable::bitReverse(ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1094(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1145(), ctx));
 }
 IAlinousVariable* BigDecimalVariable::substitute(VariantValue* variable, ThreadContext* ctx)
 {
@@ -889,59 +889,59 @@ IAlinousVariable* BigDecimalVariable::div(TimestampVariable* variable, ThreadCon
 }
 IAlinousVariable* BigDecimalVariable::shiftLeft(TimeVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1094(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1145(), ctx));
 }
 IAlinousVariable* BigDecimalVariable::shiftLeft(TimestampVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1094(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1145(), ctx));
 }
 IAlinousVariable* BigDecimalVariable::shiftRight(TimeVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1094(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1145(), ctx));
 }
 IAlinousVariable* BigDecimalVariable::shiftRight(TimestampVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1094(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1145(), ctx));
 }
 IAlinousVariable* BigDecimalVariable::shiftRightUnsigned(TimeVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1094(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1145(), ctx));
 }
 IAlinousVariable* BigDecimalVariable::shiftRightUnsigned(TimestampVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1094(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1145(), ctx));
 }
 IAlinousVariable* BigDecimalVariable::modulo(TimeVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1094(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1145(), ctx));
 }
 IAlinousVariable* BigDecimalVariable::modulo(TimestampVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1094(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1145(), ctx));
 }
 IAlinousVariable* BigDecimalVariable::bitOr(TimeVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1094(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1145(), ctx));
 }
 IAlinousVariable* BigDecimalVariable::bitOr(TimestampVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1094(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1145(), ctx));
 }
 IAlinousVariable* BigDecimalVariable::bitAnd(TimeVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1094(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1145(), ctx));
 }
 IAlinousVariable* BigDecimalVariable::bitAnd(TimestampVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1094(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1145(), ctx));
 }
 IAlinousVariable* BigDecimalVariable::bitExor(TimeVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1094(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1145(), ctx));
 }
 IAlinousVariable* BigDecimalVariable::bitExor(TimestampVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1094(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1145(), ctx));
 }
 IAlinousVariable* BigDecimalVariable::substitute(TimeVariable* variable, ThreadContext* ctx)
 {
@@ -963,7 +963,28 @@ int BigDecimalVariable::compareTo(TimestampVariable* variable, ThreadContext* ct
 }
 IAlinousVariable* BigDecimalVariable::substitute(TypedVariableArray* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1069(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1119(), ctx));
+}
+void BigDecimalVariable::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+{
+	char nullbl = buff->getByte(ctx);
+	if(nullbl == (char)0)
+	{
+		return;
+	}
+	String* str = buff->getString(ctx);
+	__GC_MV(this, &(this->value), (new(ctx) BigDecimal(str, ctx)), BigDecimal);
+}
+void BigDecimalVariable::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+{
+	buff->putInt(ICommandData::__BigDecimalVariable, ctx);
+	char nullbl = ((char)(isNull(ctx) ? 0 : 1));
+	buff->putByte(nullbl, ctx);
+	if(nullbl == (char)0)
+	{
+		return;
+	}
+	buff->putString(this->value->toPlainString(ctx), ctx);
 }
 BigDecimalVariable* BigDecimalVariable::fromDebugXml(DomNode* node, ThreadContext* ctx) throw() 
 {

@@ -190,11 +190,11 @@ HttpParamHandler::ParamResult* HttpParamHandler::handleAlinousType(String* strVa
 	HttpParamHandler::ParamResult* result = (new(ctx) HttpParamHandler::ParamResult(ctx));
 	result->type = HttpParamHandler::STRING_VALUE;
 	__GC_MV(result, &(result->str), strValue, String);
-	if(typeValue->equals(ConstStr::getCNST_STR_1111(), ctx))
+	if(typeValue->equals(ConstStr::getCNST_STR_1162(), ctx))
 	{
 		return result;
 	}
-	if(typeValue->equals(ConstStr::getCNST_STR_954(), ctx))
+	if(typeValue->equals(ConstStr::getCNST_STR_958(), ctx))
 	{
 		char value = 0;
 		{
@@ -213,7 +213,7 @@ HttpParamHandler::ParamResult* HttpParamHandler::handleAlinousType(String* strVa
 	}
 		else 
 	{
-		if(typeValue->equals(ConstStr::getCNST_STR_955(), ctx))
+		if(typeValue->equals(ConstStr::getCNST_STR_959(), ctx))
 		{
 			short value = 0;
 			{
@@ -232,7 +232,7 @@ HttpParamHandler::ParamResult* HttpParamHandler::handleAlinousType(String* strVa
 		}
 				else 
 		{
-			if(typeValue->equals(ConstStr::getCNST_STR_956(), ctx))
+			if(typeValue->equals(ConstStr::getCNST_STR_960(), ctx))
 			{
 				short value = 0;
 				{
@@ -251,7 +251,7 @@ HttpParamHandler::ParamResult* HttpParamHandler::handleAlinousType(String* strVa
 			}
 						else 
 			{
-				if(typeValue->equals(ConstStr::getCNST_STR_957(), ctx))
+				if(typeValue->equals(ConstStr::getCNST_STR_961(), ctx))
 				{
 					int value = 0;
 					{
@@ -270,7 +270,7 @@ HttpParamHandler::ParamResult* HttpParamHandler::handleAlinousType(String* strVa
 				}
 								else 
 				{
-					if(typeValue->equals(ConstStr::getCNST_STR_958(), ctx))
+					if(typeValue->equals(ConstStr::getCNST_STR_962(), ctx))
 					{
 						long long value = 0;
 						{
@@ -289,7 +289,7 @@ HttpParamHandler::ParamResult* HttpParamHandler::handleAlinousType(String* strVa
 					}
 										else 
 					{
-						if(typeValue->equals(ConstStr::getCNST_STR_960(), ctx))
+						if(typeValue->equals(ConstStr::getCNST_STR_964(), ctx))
 						{
 							float value = 0;
 							{
@@ -308,7 +308,7 @@ HttpParamHandler::ParamResult* HttpParamHandler::handleAlinousType(String* strVa
 						}
 												else 
 						{
-							if(typeValue->equals(ConstStr::getCNST_STR_959(), ctx))
+							if(typeValue->equals(ConstStr::getCNST_STR_963(), ctx))
 							{
 								double value = 0;
 								{
@@ -449,47 +449,47 @@ IDomVariable* HttpParamHandler::toVariable(int alnsType, String* valStr, ThreadC
 }
 int HttpParamHandler::handleAlinousTypeOnly(String* typeValue, ThreadContext* ctx) throw() 
 {
-	if(typeValue->equals(ConstStr::getCNST_STR_1111(), ctx))
+	if(typeValue->equals(ConstStr::getCNST_STR_1162(), ctx))
 	{
 		return HttpParamHandler::STRING_VALUE;
 	}
-	if(typeValue->equals(ConstStr::getCNST_STR_954(), ctx))
+	if(typeValue->equals(ConstStr::getCNST_STR_958(), ctx))
 	{
 		return HttpParamHandler::BYTE_VALUE;
 	}
 		else 
 	{
-		if(typeValue->equals(ConstStr::getCNST_STR_955(), ctx))
+		if(typeValue->equals(ConstStr::getCNST_STR_959(), ctx))
 		{
 			return HttpParamHandler::SHORT_VALUE;
 		}
 				else 
 		{
-			if(typeValue->equals(ConstStr::getCNST_STR_956(), ctx))
+			if(typeValue->equals(ConstStr::getCNST_STR_960(), ctx))
 			{
 				return HttpParamHandler::CHAR_VALUE;
 			}
 						else 
 			{
-				if(typeValue->equals(ConstStr::getCNST_STR_957(), ctx))
+				if(typeValue->equals(ConstStr::getCNST_STR_961(), ctx))
 				{
 					return HttpParamHandler::INT_VALUE;
 				}
 								else 
 				{
-					if(typeValue->equals(ConstStr::getCNST_STR_958(), ctx))
+					if(typeValue->equals(ConstStr::getCNST_STR_962(), ctx))
 					{
 						return HttpParamHandler::LONG_VALUE;
 					}
 										else 
 					{
-						if(typeValue->equals(ConstStr::getCNST_STR_960(), ctx))
+						if(typeValue->equals(ConstStr::getCNST_STR_964(), ctx))
 						{
 							return HttpParamHandler::FLOAT_VALUE;
 						}
 												else 
 						{
-							if(typeValue->equals(ConstStr::getCNST_STR_959(), ctx))
+							if(typeValue->equals(ConstStr::getCNST_STR_963(), ctx))
 							{
 								return HttpParamHandler::DOUBLE_VALUE;
 							}

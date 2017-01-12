@@ -106,5 +106,60 @@ void DoWhileStatement::setExec(IStatement* exec, ThreadContext* ctx) throw()
 {
 	__GC_MV(this, &(this->exec), exec, IStatement);
 }
+void DoWhileStatement::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
+{
+	bool isnull = buff->getBoolean(ctx);
+	if(!isnull)
+	{
+		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
+		if(el == nullptr || !((dynamic_cast<LabeledStatement*>(el) != 0)))
+		{
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1088(), ctx));
+		}
+		__GC_MV(this, &(this->label), static_cast<LabeledStatement*>(el), LabeledStatement);
+	}
+	isnull = buff->getBoolean(ctx);
+	if(!isnull)
+	{
+		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
+		if(el == nullptr || !((dynamic_cast<IExpression*>(el) != 0)))
+		{
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_980(), ctx));
+		}
+		__GC_MV(this, &(this->exp), static_cast<IExpression*>(el), IExpression);
+	}
+	isnull = buff->getBoolean(ctx);
+	if(!isnull)
+	{
+		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
+		if(el == nullptr || !((dynamic_cast<IStatement*>(el) != 0)))
+		{
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1089(), ctx));
+		}
+		__GC_MV(this, &(this->exec), static_cast<IStatement*>(el), IStatement);
+	}
+}
+void DoWhileStatement::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+{
+	buff->putInt(ICommandData::__DoWhileStatement, ctx);
+	bool isnull = (this->label == nullptr);
+	buff->putBoolean(isnull, ctx);
+	if(!isnull)
+	{
+		this->label->writeData(buff, ctx);
+	}
+	isnull = (this->exp == nullptr);
+	buff->putBoolean(isnull, ctx);
+	if(!isnull)
+	{
+		this->exp->writeData(buff, ctx);
+	}
+	isnull = (this->exec == nullptr);
+	buff->putBoolean(isnull, ctx);
+	if(!isnull)
+	{
+		this->exec->writeData(buff, ctx);
+	}
+}
 }}}
 

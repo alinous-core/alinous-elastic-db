@@ -37,7 +37,7 @@ IAlinousVariable* MultiplicativeExpression::resolveExpression(ScriptMachine* mac
 	IAlinousVariable* variable = machine->resolveExpression(this->first, debug, ctx);
 	if(variable == nullptr || variable->isArray(ctx))
 	{
-		throw (new(ctx) VariableException(ConstStr::getCNST_STR_978(), ctx));
+		throw (new(ctx) VariableException(ConstStr::getCNST_STR_1001(), ctx));
 	}
 	if(variable->isNull(ctx))
 	{
@@ -67,6 +67,15 @@ bool MultiplicativeExpression::isSQLExp(ThreadContext* ctx) throw()
 int MultiplicativeExpression::getExpressionType(ThreadContext* ctx) throw() 
 {
 	return IExpression::multiplicativeExpression;
+}
+void MultiplicativeExpression::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
+{
+	__readData(buff, ctx);
+}
+void MultiplicativeExpression::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+{
+	buff->putInt(ICommandData::__MultiplicativeExpression, ctx);
+	__writeData(buff, ctx);
 }
 }}}
 

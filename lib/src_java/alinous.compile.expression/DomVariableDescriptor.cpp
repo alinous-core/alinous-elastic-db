@@ -142,7 +142,7 @@ ExpressionSourceId* DomVariableDescriptor::getSourceId(ThreadContext* ctx) throw
 		case IDomSegment::TYPE_NORMAL:
 			if(i != 0)
 			{
-				buff->append(ConstStr::getCNST_STR_947(), ctx);
+				buff->append(ConstStr::getCNST_STR_950(), ctx);
 			}
 			buff->append(seg->toString(ctx), ctx);
 			break ;
@@ -188,6 +188,41 @@ bool DomVariableDescriptor::isSQLExp(ThreadContext* ctx) throw()
 int DomVariableDescriptor::getExpressionType(ThreadContext* ctx) throw() 
 {
 	return IExpression::domVariableDescriptor;
+}
+void DomVariableDescriptor::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
+{
+	int maxLoop = buff->getInt(ctx);
+	for(int i = 0; i < maxLoop; ++i)
+	{
+		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
+		if(el == nullptr || !((dynamic_cast<IDomSegment*>(el) != 0)))
+		{
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_993(), ctx));
+		}
+		this->segments->add(static_cast<IDomSegment*>(el), ctx);
+	}
+	bool isnull = buff->getBoolean(ctx);
+	if(!isnull)
+	{
+		__GC_MV(this, &(this->prefix), buff->getString(ctx), String);
+	}
+}
+void DomVariableDescriptor::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+{
+	buff->putInt(ICommandData::__DomVariableDescriptor, ctx);
+	int maxLoop = this->segments->size(ctx);
+	buff->putInt(maxLoop, ctx);
+	for(int i = 0; i < maxLoop; ++i)
+	{
+		IDomSegment* exp = this->segments->get(i, ctx);
+		exp->writeData(buff, ctx);
+	}
+	bool isnull = (this->prefix == nullptr);
+	buff->putBoolean(isnull, ctx);
+	if(!isnull)
+	{
+		buff->putString(this->prefix, ctx);
+	}
 }
 }}}
 

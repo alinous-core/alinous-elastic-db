@@ -70,5 +70,14 @@ IStatement::StatementType InnerJoin::getType(ThreadContext* ctx) throw()
 void InnerJoin::validate(SourceValidator* validator, ThreadContext* ctx) throw() 
 {
 }
+void InnerJoin::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
+{
+	__readData(buff, ctx);
+}
+void InnerJoin::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+{
+	buff->putInt(ICommandData::__InnerJoin, ctx);
+	__writeData(buff, ctx);
+}
 }}}}}
 

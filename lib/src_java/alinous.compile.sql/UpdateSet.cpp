@@ -109,16 +109,16 @@ bool UpdateSet::analyseSQL(SQLAnalyseContext* context, bool leftValue, bool debu
 	String* column = nullptr;
 	switch(size) {
 	case 1:
-		schema = ConstStr::getCNST_STR_951();
+		schema = ConstStr::getCNST_STR_955();
 		column = segments->get(0, ctx);
 		table = SQLAnalyseContext::findTable(context, schema, column, ctx);
 		if(table == nullptr)
 		{
-			throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1007()->clone(ctx)->append(this->name->toString(ctx), ctx), ctx));
+			throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1042()->clone(ctx)->append(this->name->toString(ctx), ctx), ctx));
 		}
 		break ;
 	case 2:
-		schema = ConstStr::getCNST_STR_951();
+		schema = ConstStr::getCNST_STR_955();
 		table = segments->get(0, ctx);
 		column = segments->get(1, ctx);
 		break ;
@@ -128,13 +128,13 @@ bool UpdateSet::analyseSQL(SQLAnalyseContext* context, bool leftValue, bool debu
 		column = segments->get(2, ctx);
 		break ;
 	default:
-		throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1007()->clone(ctx)->append(this->name->toString(ctx), ctx), ctx));
+		throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1042()->clone(ctx)->append(this->name->toString(ctx), ctx), ctx));
 		break;
 	}
 	IDatabaseTable* dataStore = context->getDatabase(ctx)->getTable(schema, table, ctx);
 	if(dataStore == nullptr)
 	{
-		throw (new(ctx) DatabaseException(schema->clone(ctx)->append(ConstStr::getCNST_STR_947(), ctx)->append(table, ctx)->append(ConstStr::getCNST_STR_1008(), ctx), ctx));
+		throw (new(ctx) DatabaseException(schema->clone(ctx)->append(ConstStr::getCNST_STR_950(), ctx)->append(table, ctx)->append(ConstStr::getCNST_STR_1043(), ctx), ctx));
 	}
 	TableAndSchema* tableSc = (new(ctx) TableAndSchema(schema, table, ctx));
 	ScanTableIdentifier* tableId = (new(ctx) ScanTableIdentifier(tableSc, nullptr, dataStore->getColumnCount(ctx), ctx));
@@ -213,7 +213,7 @@ bool UpdateSet::hasArrayResult(ThreadContext* ctx) throw()
 }
 ArrayList<VariantValue>* UpdateSet::resolveSQLExpressionAsArray(ScanResultRecord* record, ScriptMachine* machine, bool debug, ThreadContext* ctx)
 {
-	throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1006(), ctx));
+	throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1036(), ctx));
 }
 bool UpdateSet::isSQLExp(ThreadContext* ctx) throw() 
 {
@@ -229,6 +229,45 @@ void UpdateSet::setAsName(String* name, ThreadContext* ctx) throw()
 int UpdateSet::getExpressionType(ThreadContext* ctx) throw() 
 {
 	return IExpression::updateSet;
+}
+void UpdateSet::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
+{
+	bool isnull = buff->getBoolean(ctx);
+	if(!isnull)
+	{
+		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
+		if(el == nullptr || !((dynamic_cast<AlinousName*>(el) != 0)))
+		{
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_970(), ctx));
+		}
+		__GC_MV(this, &(this->name), static_cast<AlinousName*>(el), AlinousName);
+	}
+	isnull = buff->getBoolean(ctx);
+	if(!isnull)
+	{
+		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
+		if(el == nullptr || !((dynamic_cast<ISQLExpression*>(el) != 0)))
+		{
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1044(), ctx));
+		}
+		__GC_MV(this, &(this->value), static_cast<ISQLExpression*>(el), ISQLExpression);
+	}
+}
+void UpdateSet::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+{
+	buff->putInt(ICommandData::__UpdateSet, ctx);
+	bool isnull = (this->name == nullptr);
+	buff->putBoolean(isnull, ctx);
+	if(!isnull)
+	{
+		this->name->writeData(buff, ctx);
+	}
+	isnull = (this->value == nullptr);
+	buff->putBoolean(isnull, ctx);
+	if(!isnull)
+	{
+		this->value->writeData(buff, ctx);
+	}
 }
 void UpdateSet::analyseColumnOrder(TableAndSchema* tableSc, SQLAnalyseContext* context, ThreadContext* ctx) throw() 
 {

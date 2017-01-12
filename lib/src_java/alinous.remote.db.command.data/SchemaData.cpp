@@ -48,7 +48,7 @@ void SchemaData::setName(String* name, ThreadContext* ctx) throw()
 {
 	__GC_MV(this, &(this->name), name, String);
 }
-void SchemaData::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+void SchemaData::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 {
 	__GC_MV(this, &(this->name), buff->getString(ctx), String);
 	int maxLoop = buff->getInt(ctx);

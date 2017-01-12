@@ -81,5 +81,28 @@ int ExpStreamParenthesis::getExpressionType(ThreadContext* ctx) throw()
 {
 	return IExpression::expStreamParenthesis;
 }
+void ExpStreamParenthesis::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
+{
+	bool isnull = buff->getBoolean(ctx);
+	if(!isnull)
+	{
+		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
+		if(el == nullptr || !((dynamic_cast<ExpressionStream*>(el) != 0)))
+		{
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1018(), ctx));
+		}
+		__GC_MV(this, &(this->exp), static_cast<ExpressionStream*>(el), ExpressionStream);
+	}
+}
+void ExpStreamParenthesis::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+{
+	buff->putInt(ICommandData::__ExpStreamParenthesis, ctx);
+	bool isnull = (this->exp == nullptr);
+	buff->putBoolean(isnull, ctx);
+	if(!isnull)
+	{
+		this->exp->writeData(buff, ctx);
+	}
+}
 }}}}
 

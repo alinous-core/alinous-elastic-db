@@ -185,5 +185,29 @@ int SQLExpressionList::getExpressionType(ThreadContext* ctx) throw()
 {
 	return IExpression::sQLExpressionList;
 }
+void SQLExpressionList::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
+{
+	int maxLoop = buff->getInt(ctx);
+	for(int i = 0; i < maxLoop; ++i)
+	{
+		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
+		if(el == nullptr || !((dynamic_cast<ISQLExpression*>(el) != 0)))
+		{
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1044(), ctx));
+		}
+		this->list->add(static_cast<ISQLExpression*>(el), ctx);
+	}
+}
+void SQLExpressionList::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+{
+	buff->putInt(ICommandData::__SQLExpressionList, ctx);
+	int maxLoop = this->list->size(ctx);
+	buff->putInt(maxLoop, ctx);
+	for(int i = 0; i < maxLoop; ++i)
+	{
+		ISQLExpression* exp = this->list->get(i, ctx);
+		exp->writeData(buff, ctx);
+	}
+}
 }}}}
 

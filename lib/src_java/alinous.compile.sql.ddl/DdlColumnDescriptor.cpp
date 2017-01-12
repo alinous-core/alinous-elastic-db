@@ -167,5 +167,69 @@ void DdlColumnDescriptor::setParent(AbstractSrcElement* parent, ThreadContext* c
 {
 	IAlinousElement::setParent(parent, ctx);
 }
+void DdlColumnDescriptor::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
+{
+	bool isnull = buff->getBoolean(ctx);
+	if(!isnull)
+	{
+		__GC_MV(this, &(this->name), buff->getString(ctx), String);
+	}
+	isnull = buff->getBoolean(ctx);
+	if(!isnull)
+	{
+		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
+		if(el == nullptr || !((dynamic_cast<ColumnTypeDescriptor*>(el) != 0)))
+		{
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1063(), ctx));
+		}
+		__GC_MV(this, &(this->typeDescriptor), static_cast<ColumnTypeDescriptor*>(el), ColumnTypeDescriptor);
+	}
+	isnull = buff->getBoolean(ctx);
+	if(!isnull)
+	{
+		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
+		if(el == nullptr || !((dynamic_cast<ISQLExpression*>(el) != 0)))
+		{
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1044(), ctx));
+		}
+		__GC_MV(this, &(this->defaultValue), static_cast<ISQLExpression*>(el), ISQLExpression);
+	}
+	this->notnull = buff->getBoolean(ctx);
+	this->unique = buff->getBoolean(ctx);
+	isnull = buff->getBoolean(ctx);
+	if(!isnull)
+	{
+		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
+		if(el == nullptr || !((dynamic_cast<CheckDefinition*>(el) != 0)))
+		{
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1033(), ctx));
+		}
+		__GC_MV(this, &(this->check), static_cast<CheckDefinition*>(el), CheckDefinition);
+	}
+}
+void DdlColumnDescriptor::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+{
+	buff->putInt(ICommandData::__DdlColumnDescriptor, ctx);
+	bool isnull = (this->name == nullptr);
+	buff->putBoolean(isnull, ctx);
+	if(!isnull)
+	{
+		buff->putString(this->name, ctx);
+	}
+	isnull = (this->typeDescriptor == nullptr);
+	buff->putBoolean(isnull, ctx);
+	if(!isnull)
+	{
+		this->typeDescriptor->writeData(buff, ctx);
+	}
+	buff->putBoolean(this->notnull, ctx);
+	buff->putBoolean(this->unique, ctx);
+	isnull = (this->check == nullptr);
+	buff->putBoolean(isnull, ctx);
+	if(!isnull)
+	{
+		this->check->writeData(buff, ctx);
+	}
+}
 }}}}
 

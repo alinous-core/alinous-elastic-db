@@ -72,6 +72,18 @@ class DomVariable;}}}
 namespace alinous {namespace runtime {namespace dom {namespace typed {
 class TypedVariableArray;}}}}
 
+namespace alinous {namespace remote {namespace socket {
+class NetworkBinaryBuffer;}}}
+
+namespace alinous {namespace compile {
+class IAlinousElement;}}
+
+namespace alinous {namespace compile {
+class AlinousElementNetworkFactory;}}
+
+namespace alinous {namespace remote {namespace socket {
+class ICommandData;}}}
+
 namespace alinous {namespace system {
 class AlinousException;}}
 
@@ -89,11 +101,15 @@ using namespace ::alinous;
 using namespace ::java::lang;
 using ::java::util::Iterator;
 using ::java::util::ArrayList;
+using ::alinous::compile::AlinousElementNetworkFactory;
+using ::alinous::compile::IAlinousElement;
 using ::alinous::compile::expression::DomIndexSegment;
 using ::alinous::compile::expression::DomVariableDescriptor;
 using ::alinous::compile::expression::IExpression;
 using ::alinous::compile::expression::Literal;
 using ::alinous::html::DomNode;
+using ::alinous::remote::socket::ICommandData;
+using ::alinous::remote::socket::NetworkBinaryBuffer;
 using ::alinous::runtime::dom::DomVariable;
 using ::alinous::runtime::dom::IAlinousVariable;
 using ::alinous::runtime::dom::IDomVariable;
@@ -126,6 +142,12 @@ public:
 	void __construct_impl(String* id, ThreadContext* ctx) throw() ;
 	IdentifierVariable(String* id, ArrayList<IExpression>* arrayIndexes, ThreadContext* ctx) throw() ;
 	void __construct_impl(String* id, ArrayList<IExpression>* arrayIndexes, ThreadContext* ctx) throw() ;
+	IdentifierVariable(ThreadContext* ctx) throw()  : IObject(ctx), IAlinousVariable(ctx), id(nullptr), arrayIndexes(nullptr), domDescriptor(nullptr)
+	{
+	}
+	void __construct_impl(ThreadContext* ctx) throw() 
+	{
+	}
 	virtual ~IdentifierVariable() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 private:
@@ -358,6 +380,8 @@ public:
 	int compareTo(TimestampVariable* variable, ThreadContext* ctx) final;
 	bool isTrue(ThreadContext* ctx) final;
 	IAlinousVariable* substitute(TypedVariableArray* variable, ThreadContext* ctx) final;
+	void readData(NetworkBinaryBuffer* buff, ThreadContext* ctx) final;
+	void writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw()  final;
 public:
 	static bool __init_done;
 	static bool __init_static_variables();

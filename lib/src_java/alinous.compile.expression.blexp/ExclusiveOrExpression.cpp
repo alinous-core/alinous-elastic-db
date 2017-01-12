@@ -49,5 +49,14 @@ int ExclusiveOrExpression::getExpressionType(ThreadContext* ctx) throw()
 {
 	return IExpression::exclusiveOrExpression;
 }
+void ExclusiveOrExpression::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
+{
+	__readData(buff, ctx);
+}
+void ExclusiveOrExpression::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+{
+	buff->putInt(ICommandData::__ExclusiveOrExpression, ctx);
+	__writeData(buff, ctx);
+}
 }}}}
 

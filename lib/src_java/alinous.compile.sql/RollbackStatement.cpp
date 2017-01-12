@@ -54,5 +54,12 @@ IStatement::StatementType RollbackStatement::getType(ThreadContext* ctx) throw()
 void RollbackStatement::analyzeSQL(SQLAnalyseContext* context, bool debug, ThreadContext* ctx) throw() 
 {
 }
+void RollbackStatement::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
+{
+}
+void RollbackStatement::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+{
+	buff->putInt(ICommandData::__RollbackStatement, ctx);
+}
 }}}
 

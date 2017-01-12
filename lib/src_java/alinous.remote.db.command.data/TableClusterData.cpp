@@ -72,7 +72,7 @@ void TableClusterData::setRegion(String* region, ThreadContext* ctx) throw()
 {
 	__GC_MV(this, &(this->region), region, String);
 }
-void TableClusterData::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+void TableClusterData::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 {
 	__GC_MV(this, &(this->name), buff->getString(ctx), String);
 	__GC_MV(this, &(this->region), buff->getString(ctx), String);

@@ -57,6 +57,15 @@ class SrcAnalyseContext;}}}
 namespace alinous {namespace compile {namespace declare {
 class AlinousClass;}}}
 
+namespace alinous {namespace remote {namespace socket {
+class NetworkBinaryBuffer;}}}
+
+namespace alinous {namespace compile {
+class IAlinousElement;}}
+
+namespace alinous {namespace runtime {namespace dom {
+class VariableException;}}}
+
 namespace java {namespace util {
 template <typename  T, typename V> class HashMap;}}
 
@@ -66,8 +75,14 @@ class AbstractSrcElement;}}
 namespace alinous {namespace compile {
 class IAlinousElementVisitor;}}
 
+namespace alinous {namespace compile {
+class AlinousElementNetworkFactory;}}
+
 namespace alinous {namespace db {namespace table {
 class DatabaseException;}}}
+
+namespace alinous {namespace remote {namespace socket {
+class ICommandData;}}}
 
 namespace alinous {namespace system {
 class AlinousException;}}
@@ -77,10 +92,6 @@ class AlinousInitException;}}}
 
 namespace alinous {namespace system {namespace utils {
 class FileUtils;}}}
-
-namespace java {namespace lang {
-class IObject;
-}}
 
 namespace alinous {
 class ThreadContext;
@@ -96,7 +107,9 @@ using ::java::util::ArrayList;
 using ::java::util::HashMap;
 using ::java::util::Iterator;
 using ::alinous::compile::AbstractSrcElement;
+using ::alinous::compile::AlinousElementNetworkFactory;
 using ::alinous::compile::AlinousSrc;
+using ::alinous::compile::IAlinousElement;
 using ::alinous::compile::IAlinousElementVisitor;
 using ::alinous::compile::IncludePreprocessor;
 using ::alinous::compile::analyse::AlinousType;
@@ -104,7 +117,10 @@ using ::alinous::compile::analyse::SrcAnalyseContext;
 using ::alinous::compile::declare::AlinousClass;
 using ::alinous::compile::declare::function::AlinousFunction;
 using ::alinous::db::table::DatabaseException;
+using ::alinous::remote::socket::ICommandData;
+using ::alinous::remote::socket::NetworkBinaryBuffer;
 using ::alinous::runtime::dom::IAlinousVariable;
+using ::alinous::runtime::dom::VariableException;
 using ::alinous::runtime::engine::AlinousNullPointerException;
 using ::alinous::runtime::engine::ScriptMachine;
 using ::alinous::runtime::engine::ScriptRunner;
@@ -116,7 +132,7 @@ using ::alinous::system::utils::FileUtils;
 
 
 
-class AlinousModule final : public virtual IObject {
+class AlinousModule final : public IAlinousElement {
 public:
 	class SetUpper;
 	class ClassCollector;
@@ -124,6 +140,12 @@ public:
 public:
 	AlinousModule(String* path, File* file, AlinousSrc* moduleSource, AlinousCore* core, ThreadContext* ctx);
 	void __construct_impl(String* path, File* file, AlinousSrc* moduleSource, AlinousCore* core, ThreadContext* ctx);
+	AlinousModule(ThreadContext* ctx) throw()  : IObject(ctx), IAlinousElement(ctx), packageName(nullptr), path(nullptr), debugPath(nullptr), file(nullptr), compiledTime(0), moduleSource(nullptr), setupper(nullptr), core(nullptr), parent(nullptr), includedModules(GCUtils<ArrayList<AlinousModule> >::ins(this, (new(ctx) ArrayList<AlinousModule>(ctx)), ctx, __FILEW__, __LINE__, L"")), functionMap(GCUtils<HashMap<String,AlinousFunction> >::ins(this, (new(ctx) HashMap<String,AlinousFunction>(ctx)), ctx, __FILEW__, __LINE__, L""))
+	{
+	}
+	void __construct_impl(ThreadContext* ctx) throw() 
+	{
+	}
 	virtual ~AlinousModule() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 private:
@@ -150,8 +172,11 @@ public:
 	File* getFile(ThreadContext* ctx) throw() ;
 	String* getPath(ThreadContext* ctx) throw() ;
 	AlinousSrc* getModuleSource(ThreadContext* ctx) throw() ;
-	AlinousModule* getParent(ThreadContext* ctx) throw() ;
+	AlinousModule* getParent(ThreadContext* ctx) throw()  final;
 	void setParent(AlinousModule* parent, ThreadContext* ctx) throw() ;
+	void readData(NetworkBinaryBuffer* buff, ThreadContext* ctx) final;
+	void writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw()  final;
+	bool analyse(SrcAnalyseContext* context, bool leftValue, ThreadContext* ctx) throw()  final;
 private:
 	IAlinousVariable* executeAsScript(ScriptMachine* machine, bool degug, ThreadContext* ctx);
 	void analyzeVirtualMethods(SrcAnalyseContext* context, ThreadContext* ctx) throw() ;

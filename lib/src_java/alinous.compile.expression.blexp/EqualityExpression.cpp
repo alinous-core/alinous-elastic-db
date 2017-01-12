@@ -101,7 +101,7 @@ int EqualityExpression::getOpe(ThreadContext* ctx) throw()
 }
 void EqualityExpression::setOpe(String* opeStr, ThreadContext* ctx) throw() 
 {
-	if(opeStr->equals(ConstStr::getCNST_STR_993(), ctx))
+	if(opeStr->equals(ConstStr::getCNST_STR_1017(), ctx))
 	{
 		this->ope = EQ;
 	}
@@ -128,6 +128,47 @@ ExpressionSourceId* EqualityExpression::getSourceId(ThreadContext* ctx) throw()
 int EqualityExpression::getExpressionType(ThreadContext* ctx) throw() 
 {
 	return IExpression::equalityExpression;
+}
+void EqualityExpression::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
+{
+	bool isnull = buff->getBoolean(ctx);
+	if(!isnull)
+	{
+		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
+		if(el == nullptr || !((dynamic_cast<IExpression*>(el) != 0)))
+		{
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_980(), ctx));
+		}
+		__GC_MV(this, &(this->left), static_cast<IExpression*>(el), IExpression);
+	}
+	this->ope = buff->getInt(ctx);
+	isnull = buff->getBoolean(ctx);
+	if(!isnull)
+	{
+		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
+		if(el == nullptr || !((dynamic_cast<IExpression*>(el) != 0)))
+		{
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_980(), ctx));
+		}
+		__GC_MV(this, &(this->right), static_cast<IExpression*>(el), IExpression);
+	}
+}
+void EqualityExpression::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+{
+	buff->putInt(ICommandData::__EqualityExpression, ctx);
+	bool isnull = (this->left == nullptr);
+	buff->putBoolean(isnull, ctx);
+	if(!isnull)
+	{
+		this->left->writeData(buff, ctx);
+	}
+	buff->putInt(this->ope, ctx);
+	isnull = (this->right == nullptr);
+	buff->putBoolean(isnull, ctx);
+	if(!isnull)
+	{
+		this->right->writeData(buff, ctx);
+	}
 }
 }}}}
 

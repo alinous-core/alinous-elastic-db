@@ -49,7 +49,7 @@ IBTreeKey* MBTreeLeafContainer::getKey(ThreadContext* ctx) throw()
 }
 void MBTreeLeafContainer::addNode(IBTreeNode* newNode, ThreadContext* ctx)
 {
-	throw (new(ctx) BTreeException(ConstStr::getCNST_STR_998(), ctx));
+	throw (new(ctx) BTreeException(ConstStr::getCNST_STR_1023(), ctx));
 }
 char MBTreeLeafContainer::getNodeType(ThreadContext* ctx) throw() 
 {
@@ -58,7 +58,7 @@ char MBTreeLeafContainer::getNodeType(ThreadContext* ctx) throw()
 void MBTreeLeafContainer::printNode(StringBuffer* buff, int level, ThreadContext* ctx)
 {
 	printTab(buff, level, ctx);
-	buff->append(ConstStr::getCNST_STR_1573(), ctx)->append(getKey(ctx)->toString(ctx), ctx)->append(ConstStr::getCNST_STR_1574(), ctx);
+	buff->append(ConstStr::getCNST_STR_1624(), ctx)->append(getKey(ctx)->toString(ctx), ctx)->append(ConstStr::getCNST_STR_1625(), ctx);
 	int nextLevel = level + 1;
 	int maxLoop = this->nodeUsed;
 	IArrayObject<IBTreeNode>* nodes = this->nodes;
@@ -69,7 +69,7 @@ void MBTreeLeafContainer::printNode(StringBuffer* buff, int level, ThreadContext
 		node->printNode(buff, nextLevel, ctx);
 	}
 	printTab(buff, level, ctx);
-	buff->append(ConstStr::getCNST_STR_1575(), ctx);
+	buff->append(ConstStr::getCNST_STR_1626(), ctx);
 }
 bool MBTreeLeafContainer::removeChild(IBTreeKey* key, ThreadContext* ctx)
 {

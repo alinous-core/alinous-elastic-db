@@ -96,14 +96,14 @@ DbTransaction* DbTransactionManager::borrowTransaction(int acid, ThreadContext* 
 				catch(InterruptedException* e)
 				{
 					e->printStackTrace(ctx);
-					throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1630(), e, ctx));
+					throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1681(), e, ctx));
 				}
 			}
 		}
 	}
 	long long commitId = this->database->getCommitId(ctx);
 	long long trxId = commitId++;
-	String* tmpDir = this->trxTmpDir->clone(ctx)->append(trxId, ctx)->append(ConstStr::getCNST_STR_984(), ctx);
+	String* tmpDir = this->trxTmpDir->clone(ctx)->append(trxId, ctx)->append(ConstStr::getCNST_STR_1007(), ctx);
 	DbTransaction* trx = nullptr;
 	switch(acid) {
 	case IDatabaseDriver::READ_COMMITTED:

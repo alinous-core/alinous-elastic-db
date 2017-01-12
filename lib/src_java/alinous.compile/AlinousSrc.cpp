@@ -121,6 +121,64 @@ bool AlinousSrc::analyse(SrcAnalyseContext* context, bool leftValue, ThreadConte
 	}
 	return true;
 }
+void AlinousSrc::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
+{
+	int maxLoop = buff->getInt(ctx);
+	for(int i = 0; i != maxLoop; ++i)
+	{
+		IAlinousElement* element = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
+		if(element == nullptr || !((dynamic_cast<IncludePreprocessor*>(element) != 0)))
+		{
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_945(), ctx));
+		}
+		this->includes->add(static_cast<IncludePreprocessor*>(element), ctx);
+	}
+	maxLoop = buff->getInt(ctx);
+	for(int i = 0; i != maxLoop; ++i)
+	{
+		IAlinousElement* element = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
+		if(element == nullptr || !((dynamic_cast<IDeclare*>(element) != 0)))
+		{
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_946(), ctx));
+		}
+		this->declares->add(static_cast<IDeclare*>(element), ctx);
+	}
+	maxLoop = buff->getInt(ctx);
+	for(int i = 0; i != maxLoop; ++i)
+	{
+		IAlinousElement* element = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
+		if(element == nullptr || !((dynamic_cast<StatementList*>(element) != 0)))
+		{
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_947(), ctx));
+		}
+		this->statements->add(static_cast<StatementList*>(element), ctx);
+	}
+}
+void AlinousSrc::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+{
+	buff->putInt(ICommandData::__AlinousSrc, ctx);
+	int maxLoop = this->includes->size(ctx);
+	buff->putInt(maxLoop, ctx);
+	for(int i = 0; i != maxLoop; ++i)
+	{
+		IncludePreprocessor* inc = this->includes->get(i, ctx);
+		inc->writeData(buff, ctx);
+	}
+	maxLoop = this->declares->size(ctx);
+	buff->putInt(maxLoop, ctx);
+	for(int i = 0; i != maxLoop; ++i)
+	{
+		IDeclare* dec = this->declares->get(i, ctx);
+		dec->writeData(buff, ctx);
+	}
+	maxLoop = this->statements->size(ctx);
+	buff->putInt(maxLoop, ctx);
+	for(int i = 0; i != maxLoop; ++i)
+	{
+		StatementList* list = this->statements->get(i, ctx);
+		list->writeData(buff, ctx);
+	}
+}
 int AlinousSrc::getLine(ThreadContext* ctx) throw() 
 {
 	return IAlinousElement::getLine(ctx);

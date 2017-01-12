@@ -21,8 +21,20 @@ class AbstractSrcElement;}}
 namespace alinous {namespace compile {
 class Token;}}
 
+namespace alinous {namespace remote {namespace socket {
+class NetworkBinaryBuffer;}}}
+
+namespace alinous {namespace compile {
+class IAlinousElement;}}
+
 namespace alinous {namespace compile {namespace expression {
 class IDomSegment;}}}
+
+namespace alinous {namespace compile {
+class AlinousElementNetworkFactory;}}
+
+namespace alinous {namespace remote {namespace socket {
+class ICommandData;}}}
 
 namespace alinous {namespace runtime {namespace dom {
 class IDomVariable;}}}
@@ -37,8 +49,12 @@ using namespace ::alinous;
 using namespace ::java::lang;
 using ::java::util::Iterator;
 using ::alinous::compile::AbstractSrcElement;
+using ::alinous::compile::AlinousElementNetworkFactory;
+using ::alinous::compile::IAlinousElement;
 using ::alinous::compile::Token;
 using ::alinous::compile::analyse::SrcAnalyseContext;
+using ::alinous::remote::socket::ICommandData;
+using ::alinous::remote::socket::NetworkBinaryBuffer;
 using ::alinous::runtime::dom::IDomVariable;
 using ::alinous::runtime::dom::VariableException;
 
@@ -78,6 +94,8 @@ public:
 	void setParent(AbstractSrcElement* parent, ThreadContext* ctx) throw()  final;
 	void position(Token* t2, AbstractSrcElement* segment, ThreadContext* ctx) throw()  final;
 	void position(Token* start, Token* end, ThreadContext* ctx) throw()  final;
+	void readData(NetworkBinaryBuffer* buff, ThreadContext* ctx) final;
+	void writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw()  final;
 public:
 	static bool __init_done;
 	static bool __init_static_variables();

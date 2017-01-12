@@ -57,7 +57,7 @@ TableAndSchema* CreateIndexStatement::getTableAndSchema(ThreadContext* ctx) thro
 	String* tblName = nullptr;
 	if(segments->size(ctx) == 1)
 	{
-		schemeName = ConstStr::getCNST_STR_951();
+		schemeName = ConstStr::getCNST_STR_955();
 		tblName = segments->get(0, ctx);
 	}
 		else 
@@ -78,7 +78,7 @@ void CreateIndexStatement::validate(SourceValidator* validator, ThreadContext* c
 {
 	if(!((dynamic_cast<TableJoinTarget*>(table) != 0)))
 	{
-		validator->addError(ConstStr::getCNST_STR_1011(), this, ctx);
+		validator->addError(ConstStr::getCNST_STR_1048(), this, ctx);
 	}
 }
 bool CreateIndexStatement::visit(IAlinousElementVisitor* visitor, AbstractSrcElement* parent, ThreadContext* ctx) throw() 
@@ -135,6 +135,58 @@ ArrayList<String>* CreateIndexStatement::getColumns(ThreadContext* ctx) throw()
 }
 void CreateIndexStatement::analyzeSQL(SQLAnalyseContext* context, bool debug, ThreadContext* ctx) throw() 
 {
+}
+void CreateIndexStatement::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
+{
+	bool isnull = buff->getBoolean(ctx);
+	if(!isnull)
+	{
+		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
+		if(el == nullptr || !((dynamic_cast<IJoinTarget*>(el) != 0)))
+		{
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1030(), ctx));
+		}
+		__GC_MV(this, &(this->name), static_cast<IJoinTarget*>(el), IJoinTarget);
+	}
+	isnull = buff->getBoolean(ctx);
+	if(!isnull)
+	{
+		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
+		if(el == nullptr || !((dynamic_cast<IJoinTarget*>(el) != 0)))
+		{
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1030(), ctx));
+		}
+		__GC_MV(this, &(this->table), static_cast<IJoinTarget*>(el), IJoinTarget);
+	}
+	int maxLoop = buff->getInt(ctx);
+	for(int i = 0; i < maxLoop; ++i)
+	{
+		String* str = buff->getString(ctx);
+		this->columns->add(str, ctx);
+	}
+}
+void CreateIndexStatement::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+{
+	buff->putInt(ICommandData::__CreateIndexStatement, ctx);
+	bool isnull = (this->name == nullptr);
+	buff->putBoolean(isnull, ctx);
+	if(!isnull)
+	{
+		this->name->writeData(buff, ctx);
+	}
+	isnull = (this->table == nullptr);
+	buff->putBoolean(isnull, ctx);
+	if(!isnull)
+	{
+		this->table->writeData(buff, ctx);
+	}
+	int maxLoop = this->columns->size(ctx);
+	buff->putInt(maxLoop, ctx);
+	for(int i = 0; i < maxLoop; ++i)
+	{
+		String* str = this->columns->get(i, ctx);
+		buff->putString(str, ctx);
+	}
 }
 }}}
 

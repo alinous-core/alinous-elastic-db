@@ -116,5 +116,44 @@ bool AbstractBooleanCollectionExpression::isSQLExp(ThreadContext* ctx) throw()
 {
 	return false;
 }
+void AbstractBooleanCollectionExpression::__readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
+{
+	bool isnull = buff->getBoolean(ctx);
+	if(!isnull)
+	{
+		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
+		if(el == nullptr || !((dynamic_cast<IExpression*>(el) != 0)))
+		{
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_980(), ctx));
+		}
+		__GC_MV(this, &(this->first), static_cast<IExpression*>(el), IExpression);
+	}
+	int maxLoop = buff->getInt(ctx);
+	for(int i = 0; i < maxLoop; ++i)
+	{
+		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
+		if(el == nullptr || !((dynamic_cast<BooleanSubExpression*>(el) != 0)))
+		{
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1009(), ctx));
+		}
+		this->expressions->add(static_cast<BooleanSubExpression*>(el), ctx);
+	}
+}
+void AbstractBooleanCollectionExpression::__writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+{
+	bool isnull = (this->first == nullptr);
+	buff->putBoolean(isnull, ctx);
+	if(!isnull)
+	{
+		this->first->writeData(buff, ctx);
+	}
+	int maxLoop = this->expressions->size(ctx);
+	buff->putInt(maxLoop, ctx);
+	for(int i = 0; i < maxLoop; ++i)
+	{
+		BooleanSubExpression* exp = this->expressions->get(i, ctx);
+		exp->writeData(buff, ctx);
+	}
+}
 }}}}
 

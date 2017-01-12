@@ -143,15 +143,15 @@ void TableIndex::createIndex(AlinousCore* core, BTreeGlobalCache* cache, ThreadC
 		}
 		catch(IOException* e)
 		{
-			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1620(), e, ctx));
+			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1671(), e, ctx));
 		}
 		catch(InterruptedException* e)
 		{
-			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1620(), e, ctx));
+			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1671(), e, ctx));
 		}
 		catch(BTreeException* e)
 		{
-			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1620(), e, ctx));
+			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1671(), e, ctx));
 		}
 	}
 }
@@ -199,7 +199,7 @@ ArrayList<TableColumnMetadata>* TableIndex::getColumns(ThreadContext* ctx) throw
 void TableIndex::setPath(ThreadContext* ctx) throw() 
 {
 	StringBuilder* buff = (new(ctx) StringBuilder(ctx));
-	buff->append(this->baseDir, ctx)->append(name, ctx)->append(ConstStr::getCNST_STR_1621(), ctx);
+	buff->append(this->baseDir, ctx)->append(name, ctx)->append(ConstStr::getCNST_STR_1672(), ctx);
 	__GC_MV(this, &(this->filePath), buff->toString(ctx), String);
 }
 TableIndex* TableIndex::valueFromFetcher(FileStorageEntryFetcher* fetcher, String* baseDir, ThreadContext* ctx) throw() 

@@ -100,7 +100,7 @@ bool SQLExpressionListAll::hasArrayResult(ThreadContext* ctx) throw()
 }
 ArrayList<VariantValue>* SQLExpressionListAll::resolveSQLExpressionAsArray(ScanResultRecord* record, ScriptMachine* machine, bool debug, ThreadContext* ctx)
 {
-	throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1006(), ctx));
+	throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1036(), ctx));
 }
 String* SQLExpressionListAll::getAsName(ThreadContext* ctx) throw() 
 {
@@ -113,6 +113,24 @@ void SQLExpressionListAll::setAsName(String* name, ThreadContext* ctx) throw()
 int SQLExpressionListAll::getExpressionType(ThreadContext* ctx) throw() 
 {
 	return IExpression::sQLExpressionListAll;
+}
+void SQLExpressionListAll::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
+{
+	bool isnull = buff->getBoolean(ctx);
+	if(!isnull)
+	{
+		__GC_MV(this, &(this->asName), buff->getString(ctx), String);
+	}
+}
+void SQLExpressionListAll::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+{
+	buff->putInt(ICommandData::__SQLExpressionListAll, ctx);
+	bool isnull = (this->asName == nullptr);
+	buff->putBoolean(isnull, ctx);
+	if(!isnull)
+	{
+		buff->putString(this->asName, ctx);
+	}
 }
 }}}}
 

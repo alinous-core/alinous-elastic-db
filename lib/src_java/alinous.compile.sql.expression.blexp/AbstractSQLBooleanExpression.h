@@ -12,8 +12,14 @@ class IndexColumnMatchCondition;}}}}
 namespace alinous {namespace compile {
 class AbstractSrcElement;}}
 
+namespace alinous {namespace remote {namespace socket {
+class NetworkBinaryBuffer;}}}
+
 namespace alinous {namespace compile {namespace sql {namespace expression {namespace blexp {
 class ISQLBoolExpression;}}}}}
+
+namespace alinous {namespace runtime {namespace dom {
+class VariableException;}}}
 
 namespace alinous {
 class ThreadContext;
@@ -28,6 +34,8 @@ using ::java::util::ArrayList;
 using ::alinous::compile::AbstractSrcElement;
 using ::alinous::compile::sql::analyze::IndexColumnMatchCondition;
 using ::alinous::compile::sql::analyze::ScanTableColumnIdentifier;
+using ::alinous::remote::socket::NetworkBinaryBuffer;
+using ::alinous::runtime::dom::VariableException;
 
 
 
@@ -60,6 +68,8 @@ public:
 	virtual bool isSQLExp(ThreadContext* ctx) throw() ;
 	virtual String* getAsName(ThreadContext* ctx) throw() ;
 	virtual void setAsName(String* name, ThreadContext* ctx) throw() ;
+	void __readData(NetworkBinaryBuffer* buff, ThreadContext* ctx);
+	void __writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() ;
 public:
 	static int operatorFromString(String* opStr, ThreadContext* ctx) throw() ;
 public:

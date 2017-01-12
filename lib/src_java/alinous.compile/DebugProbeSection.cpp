@@ -44,7 +44,7 @@ void DebugProbeSection::__releaseRegerences(bool prepare, ThreadContext* ctx) th
 }
 void DebugProbeSection::print(ThreadContext* ctx) throw() 
 {
-	System::out->println(this->name->clone(ctx)->append(ConstStr::getCNST_STR_945(), ctx)->append((this->_end - this->_start), ctx)->append(ConstStr::getCNST_STR_946(), ctx), ctx);
+	System::out->println(this->name->clone(ctx)->append(ConstStr::getCNST_STR_948(), ctx)->append((this->_end - this->_start), ctx)->append(ConstStr::getCNST_STR_949(), ctx), ctx);
 }
 void DebugProbeSection::start(ThreadContext* ctx) throw() 
 {

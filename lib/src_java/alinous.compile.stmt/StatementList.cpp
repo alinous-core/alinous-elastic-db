@@ -93,5 +93,28 @@ IStatement::StatementType StatementList::getType(ThreadContext* ctx) throw()
 void StatementList::validate(SourceValidator* validator, ThreadContext* ctx) throw() 
 {
 }
+void StatementList::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
+{
+	int maxLoop = buff->getInt(ctx);
+	for(int i = 0; i != maxLoop; ++i)
+	{
+		IAlinousElement* element = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
+		if(element == nullptr || !((dynamic_cast<IStatement*>(element) != 0)))
+		{
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1089(), ctx));
+		}
+		this->list->add(static_cast<IStatement*>(element), ctx);
+	}
+}
+void StatementList::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+{
+	buff->putInt(ICommandData::__StatementList, ctx);
+	int maxLoop = this->list->size(ctx);
+	for(int i = 0; i != maxLoop; ++i)
+	{
+		IStatement* stmt = this->list->get(i, ctx);
+		stmt->writeData(buff, ctx);
+	}
+}
 }}}
 

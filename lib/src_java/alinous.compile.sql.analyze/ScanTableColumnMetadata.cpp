@@ -75,7 +75,7 @@ bool ScanTableColumnMetadata::equals(IObject* obj, ThreadContext* ctx) throw()
 String* ScanTableColumnMetadata::toString(ThreadContext* ctx) throw() 
 {
 	StringBuffer* buff = (new(ctx) StringBuffer(ctx));
-	buff->append(this->table->toString(ctx), ctx)->append(ConstStr::getCNST_STR_947(), ctx)->append(this->name, ctx);
+	buff->append(this->table->toString(ctx), ctx)->append(ConstStr::getCNST_STR_950(), ctx)->append(this->name, ctx);
 	return buff->toString(ctx);
 }
 }}}}

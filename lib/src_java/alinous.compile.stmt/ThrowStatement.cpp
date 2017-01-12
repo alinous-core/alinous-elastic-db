@@ -51,5 +51,12 @@ IStatement::StatementType ThrowStatement::getType(ThreadContext* ctx) throw()
 {
 	return StatementType::THROW_STATEMENT;
 }
+void ThrowStatement::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
+{
+}
+void ThrowStatement::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+{
+	buff->putInt(ICommandData::__ThrowStatement, ctx);
+}
 }}}
 

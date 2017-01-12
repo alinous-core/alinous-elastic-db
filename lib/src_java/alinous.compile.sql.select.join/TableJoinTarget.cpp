@@ -83,7 +83,7 @@ bool TableJoinTarget::analyseSQLTables(SQLAnalyseContext* context, bool leftValu
 	String* table = nullptr;
 	switch(size) {
 	case 1:
-		schema = ConstStr::getCNST_STR_951();
+		schema = ConstStr::getCNST_STR_955();
 		table = segments->get(0, ctx);
 		break ;
 	case 2:
@@ -91,14 +91,14 @@ bool TableJoinTarget::analyseSQLTables(SQLAnalyseContext* context, bool leftValu
 		table = segments->get(1, ctx);
 		break ;
 	default:
-		throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1037()->clone(ctx)->append(this->name->toString(ctx), ctx), ctx));
+		throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1079()->clone(ctx)->append(this->name->toString(ctx), ctx), ctx));
 		break;
 	}
 	AlinousDatabase* db = context->getDatabase(ctx);
 	IDatabaseTable* tableStore = db->getTable(schema, table, ctx);
 	if(tableStore == nullptr)
 	{
-		throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1037()->clone(ctx)->append(this->name->toString(ctx), ctx), ctx));
+		throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1079()->clone(ctx)->append(this->name->toString(ctx), ctx), ctx));
 	}
 	__GC_MV(this, &(this->scanMeta), (new(ctx) ScanTableMetadata(tableStore->getMetadata(ctx), this->asName, ctx)), ScanTableMetadata);
 	__GC_MV(this, &(this->tableId), (new(ctx) ScanTableIdentifier((new(ctx) TableAndSchema(schema, table, ctx)), this->asName, this->scanMeta->getColumns(ctx)->size(ctx), ctx)), ScanTableIdentifier);
@@ -142,6 +142,40 @@ IStatement::StatementType TableJoinTarget::getType(ThreadContext* ctx) throw()
 }
 void TableJoinTarget::validate(SourceValidator* validator, ThreadContext* ctx) throw() 
 {
+}
+void TableJoinTarget::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
+{
+	bool isnull = buff->getBoolean(ctx);
+	if(!isnull)
+	{
+		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
+		if(el == nullptr || !((dynamic_cast<AlinousName*>(el) != 0)))
+		{
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_970(), ctx));
+		}
+		__GC_MV(this, &(this->name), static_cast<AlinousName*>(el), AlinousName);
+	}
+	isnull = buff->getBoolean(ctx);
+	if(!isnull)
+	{
+		__GC_MV(this, &(this->asName), buff->getString(ctx), String);
+	}
+}
+void TableJoinTarget::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+{
+	buff->putInt(ICommandData::__TableJoinTarget, ctx);
+	bool isnull = (this->name == nullptr);
+	buff->putBoolean(isnull, ctx);
+	if(!isnull)
+	{
+		this->name->writeData(buff, ctx);
+	}
+	isnull = (this->asName == nullptr);
+	buff->putBoolean(isnull, ctx);
+	if(!isnull)
+	{
+		buff->putString(this->asName, ctx);
+	}
 }
 }}}}}
 

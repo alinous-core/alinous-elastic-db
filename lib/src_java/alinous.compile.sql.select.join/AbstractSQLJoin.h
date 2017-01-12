@@ -90,6 +90,18 @@ class RightindexJoinScanner;}}}}}}
 namespace alinous {namespace compile {namespace sql {namespace select {namespace join {namespace scan {
 class ReverseIndexScanner;}}}}}}
 
+namespace alinous {namespace remote {namespace socket {
+class NetworkBinaryBuffer;}}}
+
+namespace alinous {namespace compile {
+class IAlinousElement;}}
+
+namespace alinous {namespace runtime {namespace dom {
+class VariableException;}}}
+
+namespace alinous {namespace compile {
+class AlinousElementNetworkFactory;}}
+
 namespace alinous {namespace system {
 class AlinousException;}}
 
@@ -104,6 +116,8 @@ using namespace ::java::lang;
 using ::java::util::Iterator;
 using ::java::util::ArrayList;
 using ::alinous::compile::AbstractSrcElement;
+using ::alinous::compile::AlinousElementNetworkFactory;
+using ::alinous::compile::IAlinousElement;
 using ::alinous::compile::IAlinousElementVisitor;
 using ::alinous::compile::analyse::SrcAnalyseContext;
 using ::alinous::compile::sql::analyze::JoinMatchExpression;
@@ -128,6 +142,8 @@ using ::alinous::db::trx::scan::ITableTargetScanner;
 using ::alinous::db::trx::scan::ScanResult;
 using ::alinous::db::trx::scan::ScanResultRecord;
 using ::alinous::db::trx::scan::ScannedResultIndexScanner;
+using ::alinous::remote::socket::NetworkBinaryBuffer;
+using ::alinous::runtime::dom::VariableException;
 using ::alinous::runtime::engine::ScriptMachine;
 using ::alinous::system::AlinousException;
 
@@ -174,6 +190,8 @@ public:
 	int getEndPosition(ThreadContext* ctx) throw()  final;
 	AbstractSrcElement* getParent(ThreadContext* ctx) throw()  final;
 	void setParent(AbstractSrcElement* parent, ThreadContext* ctx) throw()  final;
+	void __readData(NetworkBinaryBuffer* buff, ThreadContext* ctx);
+	void __writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() ;
 	ITableTargetScanner* getCrossJoinsScanner(DbTransaction* trx, ScriptMachine* machine, ArrayList<ScanTableColumnIdentifier>* joinRequest, bool debug, ThreadContext* ctx);
 	ScannedResultIndexScanner* toResultScanner(DbTransaction* trx, ITableTargetScanner* scanner, ArrayList<ScanTableColumnIdentifier>* joinRequest, ScanTableMetadata* tableMeta, bool debug, ThreadContext* ctx);
 	ITableTargetScanner* getJoinStrategyScanner(DbTransaction* trx, ScriptMachine* machine, JoinStrategyPart* part, bool inner, bool debug, ThreadContext* ctx);

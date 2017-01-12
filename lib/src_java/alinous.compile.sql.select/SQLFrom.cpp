@@ -142,7 +142,7 @@ bool SQLFrom::hasArrayResult(ThreadContext* ctx) throw()
 }
 ArrayList<VariantValue>* SQLFrom::resolveSQLExpressionAsArray(ScanResultRecord* record, ScriptMachine* machine, bool debug, ThreadContext* ctx)
 {
-	throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1006(), ctx));
+	throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1036(), ctx));
 }
 bool SQLFrom::isSQLExp(ThreadContext* ctx) throw() 
 {
@@ -158,6 +158,29 @@ void SQLFrom::setAsName(String* name, ThreadContext* ctx) throw()
 int SQLFrom::getExpressionType(ThreadContext* ctx) throw() 
 {
 	return IExpression::sQLFrom;
+}
+void SQLFrom::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
+{
+	bool isnull = buff->getBoolean(ctx);
+	if(!isnull)
+	{
+		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
+		if(el == nullptr || !((dynamic_cast<IJoin*>(el) != 0)))
+		{
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1078(), ctx));
+		}
+		__GC_MV(this, &(this->join), static_cast<IJoin*>(el), IJoin);
+	}
+}
+void SQLFrom::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+{
+	buff->putInt(ICommandData::__SQLFrom, ctx);
+	bool isnull = (this->join == nullptr);
+	buff->putBoolean(isnull, ctx);
+	if(!isnull)
+	{
+		this->join->writeData(buff, ctx);
+	}
 }
 }}}}
 

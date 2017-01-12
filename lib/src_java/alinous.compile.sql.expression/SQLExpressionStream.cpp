@@ -241,7 +241,7 @@ bool SQLExpressionStream::hasArrayResult(ThreadContext* ctx) throw()
 }
 ArrayList<VariantValue>* SQLExpressionStream::resolveSQLExpressionAsArray(ScanResultRecord* record, ScriptMachine* machine, bool debug, ThreadContext* ctx)
 {
-	throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1006(), ctx));
+	throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1036(), ctx));
 }
 bool SQLExpressionStream::isSQLExp(ThreadContext* ctx) throw() 
 {
@@ -258,6 +258,40 @@ void SQLExpressionStream::setAsName(String* name, ThreadContext* ctx) throw()
 int SQLExpressionStream::getExpressionType(ThreadContext* ctx) throw() 
 {
 	return IExpression::sQLExpressionStream;
+}
+void SQLExpressionStream::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
+{
+	bool isnull = buff->getBoolean(ctx);
+	if(!isnull)
+	{
+		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
+		if(el == nullptr || !((dynamic_cast<ExpressionStream*>(el) != 0)))
+		{
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1018(), ctx));
+		}
+		__GC_MV(this, &(this->exp), static_cast<ExpressionStream*>(el), ExpressionStream);
+	}
+	isnull = buff->getBoolean(ctx);
+	if(!isnull)
+	{
+		__GC_MV(this, &(this->asName), buff->getString(ctx), String);
+	}
+}
+void SQLExpressionStream::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+{
+	buff->putInt(ICommandData::__SQLEqualityExpression, ctx);
+	bool isnull = (this->exp == nullptr);
+	buff->putBoolean(isnull, ctx);
+	if(!isnull)
+	{
+		this->exp->writeData(buff, ctx);
+	}
+	isnull = (this->asName == nullptr);
+	buff->putBoolean(isnull, ctx);
+	if(!isnull)
+	{
+		buff->putString(this->asName, ctx);
+	}
 }
 }}}}
 

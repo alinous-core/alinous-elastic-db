@@ -100,6 +100,29 @@ IStatement::StatementType StatementBlock::getType(ThreadContext* ctx) throw()
 void StatementBlock::validate(SourceValidator* validator, ThreadContext* ctx) throw() 
 {
 }
+void StatementBlock::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
+{
+	bool isnull = buff->getBoolean(ctx);
+	if(!isnull)
+	{
+		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
+		if(el == nullptr || !((dynamic_cast<StatementList*>(el) != 0)))
+		{
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1091(), ctx));
+		}
+		__GC_MV(this, &(this->list), static_cast<StatementList*>(el), StatementList);
+	}
+}
+void StatementBlock::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+{
+	buff->putInt(ICommandData::__StatementBlock, ctx);
+	bool isnull = (this->list == nullptr);
+	buff->putBoolean(isnull, ctx);
+	if(!isnull)
+	{
+		this->list->writeData(buff, ctx);
+	}
+}
 void StatementBlock::addArgumentsToAnalysingStack(AlinousFunction* func, SrcAnalyseContext* context, ThreadContext* ctx) throw() 
 {
 	FunctionArgumentsListDefine* argDef = func->getArguments(ctx);

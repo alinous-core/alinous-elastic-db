@@ -157,5 +157,29 @@ IStatement::StatementType TableList::getType(ThreadContext* ctx) throw()
 void TableList::validate(SourceValidator* validator, ThreadContext* ctx) throw() 
 {
 }
+void TableList::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
+{
+	int maxLoop = buff->getInt(ctx);
+	for(int i = 0; i < maxLoop; ++i)
+	{
+		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
+		if(el == nullptr || !((dynamic_cast<IJoin*>(el) != 0)))
+		{
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1078(), ctx));
+		}
+		this->list->add(static_cast<IJoin*>(el), ctx);
+	}
+}
+void TableList::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+{
+	buff->putInt(ICommandData::__TableList, ctx);
+	int maxLoop = this->list->size(ctx);
+	buff->putInt(maxLoop, ctx);
+	for(int i = 0; i < maxLoop; ++i)
+	{
+		IJoin* exp = this->list->get(i, ctx);
+		exp->writeData(buff, ctx);
+	}
+}
 }}}}}
 

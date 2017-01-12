@@ -47,5 +47,14 @@ IStatement::StatementType NaturalJoin::getType(ThreadContext* ctx) throw()
 void NaturalJoin::validate(SourceValidator* validator, ThreadContext* ctx) throw() 
 {
 }
+void NaturalJoin::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
+{
+	__readData(buff, ctx);
+}
+void NaturalJoin::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+{
+	buff->putInt(ICommandData::__NaturalJoin, ctx);
+	__writeData(buff, ctx);
+}
 }}}}}
 

@@ -38,20 +38,20 @@ void ClassMemberModifiers::__releaseRegerences(bool prepare, ThreadContext* ctx)
 void ClassMemberModifiers::addModifier(String* mod, ThreadContext* ctx) throw() 
 {
 	this->list->add(mod, ctx);
-	if(mod->equals(ConstStr::getCNST_STR_949(), ctx))
+	if(mod->equals(ConstStr::getCNST_STR_953(), ctx))
 	{
 		this->staticMod = true;
 	}
 		else 
 	{
-		if(mod->equals(ConstStr::getCNST_STR_950(), ctx))
+		if(mod->equals(ConstStr::getCNST_STR_954(), ctx))
 		{
 			protectedMod = false;
 			privateMod = true;
 		}
 				else 
 		{
-			if(mod->equals(ConstStr::getCNST_STR_951(), ctx))
+			if(mod->equals(ConstStr::getCNST_STR_955(), ctx))
 			{
 				protectedMod = false;
 				publicMod = true;
@@ -129,6 +129,34 @@ AbstractSrcElement* ClassMemberModifiers::getParent(ThreadContext* ctx) throw()
 void ClassMemberModifiers::setParent(AbstractSrcElement* parent, ThreadContext* ctx) throw() 
 {
 	IDeclare::setParent(parent, ctx);
+}
+void ClassMemberModifiers::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
+{
+	int maxLoop = buff->getInt(ctx);
+	for(int i = 0; i < maxLoop; ++i)
+	{
+		String* str = buff->getString(ctx);
+		this->list->add(str, ctx);
+	}
+	this->staticMod = buff->getBoolean(ctx);
+	this->privateMod = buff->getBoolean(ctx);
+	this->protectedMod = buff->getBoolean(ctx);
+	this->publicMod = buff->getBoolean(ctx);
+}
+void ClassMemberModifiers::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+{
+	buff->putInt(ICommandData::__ClassMemberModifiers, ctx);
+	int maxLoop = this->list->size(ctx);
+	buff->putInt(maxLoop, ctx);
+	for(int i = 0; i < maxLoop; ++i)
+	{
+		String* str = this->list->get(i, ctx);
+		buff->putString(str, ctx);
+	}
+	buff->putBoolean(this->staticMod, ctx);
+	buff->putBoolean(this->privateMod, ctx);
+	buff->putBoolean(this->protectedMod, ctx);
+	buff->putBoolean(this->publicMod, ctx);
 }
 }}}
 

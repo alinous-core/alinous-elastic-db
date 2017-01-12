@@ -37,7 +37,7 @@ IAlinousVariable* ShiftExpression::resolveExpression(ScriptMachine* machine, boo
 	IAlinousVariable* variable = machine->resolveExpression(this->first, debug, ctx);
 	if(variable == nullptr || variable->isArray(ctx))
 	{
-		throw (new(ctx) VariableException(ConstStr::getCNST_STR_976(), ctx));
+		throw (new(ctx) VariableException(ConstStr::getCNST_STR_999(), ctx));
 	}
 	if(variable->isNull(ctx))
 	{
@@ -71,6 +71,15 @@ bool ShiftExpression::isSQLExp(ThreadContext* ctx) throw()
 int ShiftExpression::getExpressionType(ThreadContext* ctx) throw() 
 {
 	return IExpression::shiftExpression;
+}
+void ShiftExpression::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
+{
+	__readData(buff, ctx);
+}
+void ShiftExpression::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+{
+	buff->putInt(ICommandData::__ShiftExpression, ctx);
+	__writeData(buff, ctx);
 }
 }}}
 

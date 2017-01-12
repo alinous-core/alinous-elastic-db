@@ -55,5 +55,14 @@ int ConditionalOrExpression::getExpressionType(ThreadContext* ctx) throw()
 {
 	return IExpression::andExpression;
 }
+void ConditionalOrExpression::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
+{
+	__readData(buff, ctx);
+}
+void ConditionalOrExpression::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+{
+	buff->putInt(ICommandData::__ConditionalOrExpression, ctx);
+	__writeData(buff, ctx);
+}
 }}}}
 

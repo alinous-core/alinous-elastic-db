@@ -44,7 +44,7 @@ IAlinousVariable* SQLMultiplicativeExpression::resolveExpression(ScriptMachine* 
 		{
 			if(operand->toIntVariable(ctx)->getIntValue(ctx) == 0)
 			{
-				throw (new(ctx) AlinousException(ConstStr::getCNST_STR_1026(), ctx));
+				throw (new(ctx) AlinousException(ConstStr::getCNST_STR_1064(), ctx));
 			}
 			val = val->div(operand, ctx);
 		}
@@ -67,7 +67,7 @@ VariantValue* SQLMultiplicativeExpression::resolveSQLExpression(ScanResultRecord
 		{
 			if(operand->toIntVariable(ctx)->getIntValue(ctx) == 0)
 			{
-				throw (new(ctx) AlinousException(ConstStr::getCNST_STR_1026(), ctx));
+				throw (new(ctx) AlinousException(ConstStr::getCNST_STR_1064(), ctx));
 			}
 			val = val->div(operand, ctx)->toVariantValue(ctx);
 		}
@@ -107,11 +107,20 @@ bool SQLMultiplicativeExpression::hasArrayResult(ThreadContext* ctx) throw()
 }
 ArrayList<VariantValue>* SQLMultiplicativeExpression::resolveSQLExpressionAsArray(ScanResultRecord* record, ScriptMachine* machine, bool debug, ThreadContext* ctx)
 {
-	throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1006(), ctx));
+	throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1036(), ctx));
 }
 int SQLMultiplicativeExpression::getExpressionType(ThreadContext* ctx) throw() 
 {
 	return IExpression::sQLMultiplicativeExpression;
+}
+void SQLMultiplicativeExpression::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
+{
+	__readData(buff, ctx);
+}
+void SQLMultiplicativeExpression::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+{
+	buff->putInt(ICommandData::__SQLMultiplicativeExpression, ctx);
+	__writeData(buff, ctx);
 }
 }}}}
 

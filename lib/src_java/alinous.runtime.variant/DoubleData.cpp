@@ -7,7 +7,7 @@ namespace alinous {namespace runtime {namespace variant {
 
 
 
-String* DoubleData::TAG_NAME = ConstStr::getCNST_STR_1159();
+String* DoubleData::TAG_NAME = ConstStr::getCNST_STR_1210();
 bool DoubleData::__init_done = __init_static_variables();
 bool DoubleData::__init_static_variables(){
 	Java2CppSystem::getSelf();
@@ -116,6 +116,15 @@ int DoubleData::compareTo(VariantValue* variant, ThreadContext* ctx) throw()
 {
 	double sub = this->data - variant->getDouble(ctx);
 	return sub >= (double)0 ? ((int)sub) : -1;
+}
+void DoubleData::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+{
+	this->data = buff->getDouble(ctx);
+}
+void DoubleData::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+{
+	buff->putInt(IVariantData::TYPE_DOUBLE, ctx);
+	buff->putDouble(this->data, ctx);
 }
 DoubleData* DoubleData::importFromXml(DomNode* node, ThreadContext* ctx) throw() 
 {

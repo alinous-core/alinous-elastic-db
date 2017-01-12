@@ -51,5 +51,12 @@ IStatement::StatementType FinallyBlock::getType(ThreadContext* ctx) throw()
 {
 	return StatementType::FINALLY_STATEMENT;
 }
+void FinallyBlock::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
+{
+}
+void FinallyBlock::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+{
+	buff->putInt(ICommandData::__FinallyBlock, ctx);
+}
 }}}
 

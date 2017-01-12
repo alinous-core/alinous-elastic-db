@@ -79,5 +79,25 @@ void Unique::setParent(AbstractSrcElement* parent, ThreadContext* ctx) throw()
 {
 	IAlinousElement::setParent(parent, ctx);
 }
+void Unique::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
+{
+	int maxLoop = buff->getInt(ctx);
+	for(int i = 0; i < maxLoop; ++i)
+	{
+		String* s = buff->getString(ctx);
+		this->columns->add(s, ctx);
+	}
+}
+void Unique::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+{
+	buff->putInt(ICommandData::__Unique, ctx);
+	int maxLoop = this->columns->size(ctx);
+	buff->putInt(maxLoop, ctx);
+	for(int i = 0; i < maxLoop; ++i)
+	{
+		String* s = this->columns->get(i, ctx);
+		buff->putString(s, ctx);
+	}
+}
 }}}}
 

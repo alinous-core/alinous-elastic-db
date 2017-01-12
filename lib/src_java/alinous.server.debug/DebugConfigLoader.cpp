@@ -33,13 +33,13 @@ bool DebugConfigLoader::__init_static_variables(){
 		{
 			tmpPath = file->getAbsolutePath(ctx);
 		}
-		if(tmpPath->endsWith(ConstStr::getCNST_STR_984(), ctx))
+		if(tmpPath->endsWith(ConstStr::getCNST_STR_1007(), ctx))
 		{
 			tmpPath = tmpPath->substring(0, tmpPath->length(ctx) - 1, ctx);
 		}
 				else 
 		{
-			if(tmpPath->endsWith(ConstStr::getCNST_STR_1682(), ctx))
+			if(tmpPath->endsWith(ConstStr::getCNST_STR_1733(), ctx))
 			{
 				tmpPath = tmpPath->substring(0, tmpPath->length(ctx) - 1, ctx);
 			}
@@ -59,13 +59,13 @@ bool DebugConfigLoader::__init_static_variables(){
 		{
 			tmpPath = file->getAbsolutePath(ctx);
 		}
-		if(tmpPath->endsWith(ConstStr::getCNST_STR_984(), ctx))
+		if(tmpPath->endsWith(ConstStr::getCNST_STR_1007(), ctx))
 		{
 			tmpPath = tmpPath->substring(0, tmpPath->length(ctx) - 1, ctx);
 		}
 				else 
 		{
-			if(tmpPath->endsWith(ConstStr::getCNST_STR_1682(), ctx))
+			if(tmpPath->endsWith(ConstStr::getCNST_STR_1733(), ctx))
 			{
 				tmpPath = tmpPath->substring(0, tmpPath->length(ctx) - 1, ctx);
 			}
@@ -86,13 +86,13 @@ void DebugConfigLoader::__construct_impl(AlinousConfig* config, ThreadContext* c
 		{
 			tmpPath = file->getAbsolutePath(ctx);
 		}
-		if(tmpPath->endsWith(ConstStr::getCNST_STR_984(), ctx))
+		if(tmpPath->endsWith(ConstStr::getCNST_STR_1007(), ctx))
 		{
 			tmpPath = tmpPath->substring(0, tmpPath->length(ctx) - 1, ctx);
 		}
 				else 
 		{
-			if(tmpPath->endsWith(ConstStr::getCNST_STR_1682(), ctx))
+			if(tmpPath->endsWith(ConstStr::getCNST_STR_1733(), ctx))
 			{
 				tmpPath = tmpPath->substring(0, tmpPath->length(ctx) - 1, ctx);
 			}
@@ -112,13 +112,13 @@ void DebugConfigLoader::__construct_impl(AlinousConfig* config, ThreadContext* c
 		{
 			tmpPath = file->getAbsolutePath(ctx);
 		}
-		if(tmpPath->endsWith(ConstStr::getCNST_STR_984(), ctx))
+		if(tmpPath->endsWith(ConstStr::getCNST_STR_1007(), ctx))
 		{
 			tmpPath = tmpPath->substring(0, tmpPath->length(ctx) - 1, ctx);
 		}
 				else 
 		{
-			if(tmpPath->endsWith(ConstStr::getCNST_STR_1682(), ctx))
+			if(tmpPath->endsWith(ConstStr::getCNST_STR_1733(), ctx))
 			{
 				tmpPath = tmpPath->substring(0, tmpPath->length(ctx) - 1, ctx);
 			}
@@ -159,7 +159,7 @@ String* DebugConfigLoader::getAbsFromDebugPath(String* dpath, ThreadContext* ctx
 {
 	String* path = dpath->substring(1, ctx);
 	StringBuffer* buff = (new(ctx) StringBuffer(ctx));
-	if(dpath->startsWith(ConstStr::getCNST_STR_3448(), ctx))
+	if(dpath->startsWith(ConstStr::getCNST_STR_3499(), ctx))
 	{
 		buff->append(this->webDir, ctx);
 	}
@@ -186,7 +186,7 @@ String* DebugConfigLoader::getDebugFilePath(String* absPath, ThreadContext* ctx)
 		buff->append(tmpStr, ctx);
 		break ;
 	case DebugConfigLoader::WEB_DIR:
-		buff->append(ConstStr::getCNST_STR_3448(), ctx);
+		buff->append(ConstStr::getCNST_STR_3499(), ctx);
 		tmpStr = absPath->substring(this->webDir->length(ctx), ctx);
 		buff->append(tmpStr, ctx);
 		break ;
@@ -219,13 +219,13 @@ void DebugConfigLoader::load(ThreadContext* ctx)
 		{
 			tmpPath = file->getAbsolutePath(ctx);
 		}
-		if(tmpPath->endsWith(ConstStr::getCNST_STR_984(), ctx))
+		if(tmpPath->endsWith(ConstStr::getCNST_STR_1007(), ctx))
 		{
 			tmpPath = tmpPath->substring(0, tmpPath->length(ctx) - 1, ctx);
 		}
 				else 
 		{
-			if(tmpPath->endsWith(ConstStr::getCNST_STR_1682(), ctx))
+			if(tmpPath->endsWith(ConstStr::getCNST_STR_1733(), ctx))
 			{
 				tmpPath = tmpPath->substring(0, tmpPath->length(ctx) - 1, ctx);
 			}
@@ -245,13 +245,13 @@ void DebugConfigLoader::load(ThreadContext* ctx)
 		{
 			tmpPath = file->getAbsolutePath(ctx);
 		}
-		if(tmpPath->endsWith(ConstStr::getCNST_STR_984(), ctx))
+		if(tmpPath->endsWith(ConstStr::getCNST_STR_1007(), ctx))
 		{
 			tmpPath = tmpPath->substring(0, tmpPath->length(ctx) - 1, ctx);
 		}
 				else 
 		{
-			if(tmpPath->endsWith(ConstStr::getCNST_STR_1682(), ctx))
+			if(tmpPath->endsWith(ConstStr::getCNST_STR_1733(), ctx))
 			{
 				tmpPath = tmpPath->substring(0, tmpPath->length(ctx) - 1, ctx);
 			}

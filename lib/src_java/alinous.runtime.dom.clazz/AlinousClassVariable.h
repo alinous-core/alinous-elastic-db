@@ -78,11 +78,26 @@ class DomVariable;}}}
 namespace alinous {namespace runtime {namespace dom {namespace typed {
 class TypedVariableArray;}}}}
 
+namespace alinous {namespace remote {namespace socket {
+class NetworkBinaryBuffer;}}}
+
+namespace alinous {namespace compile {
+class IAlinousElement;}}
+
 namespace java {namespace util {
 template <typename  T, typename V> class HashMap;}}
 
 namespace alinous {namespace runtime {namespace dom {namespace clazz {
 class IAlinousClassVariable;}}}}
+
+namespace alinous {namespace compile {
+class AlinousElementNetworkFactory;}}
+
+namespace alinous {namespace remote {namespace socket {
+class ICommandData;}}}
+
+namespace alinous {namespace runtime {namespace dom {
+class NetworkAlinousVariableFactory;}}}
 
 namespace alinous {namespace runtime {namespace dom {namespace typed {
 class ITypedVariable;}}}}
@@ -105,13 +120,18 @@ using namespace ::java::lang;
 using ::java::util::Iterator;
 using ::java::util::HashMap;
 using ::java::util::Iterator;
+using ::alinous::compile::AlinousElementNetworkFactory;
+using ::alinous::compile::IAlinousElement;
 using ::alinous::compile::declare::AlinousClass;
 using ::alinous::compile::declare::AlinousName;
 using ::alinous::html::Attribute;
 using ::alinous::html::DomNode;
+using ::alinous::remote::socket::ICommandData;
+using ::alinous::remote::socket::NetworkBinaryBuffer;
 using ::alinous::runtime::dom::DomVariable;
 using ::alinous::runtime::dom::IAlinousVariable;
 using ::alinous::runtime::dom::IDomVariable;
+using ::alinous::runtime::dom::NetworkAlinousVariableFactory;
 using ::alinous::runtime::dom::VariableException;
 using ::alinous::runtime::dom::typed::BigDecimalVariable;
 using ::alinous::runtime::dom::typed::BoolVariable;
@@ -138,6 +158,8 @@ public:
 public:
 	AlinousClassVariable(AlinousClass* classDeclare, ThreadContext* ctx) throw() ;
 	void __construct_impl(AlinousClass* classDeclare, ThreadContext* ctx) throw() ;
+	AlinousClassVariable(ThreadContext* ctx) throw() ;
+	void __construct_impl(ThreadContext* ctx) throw() ;
 	virtual ~AlinousClassVariable() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 private:
@@ -374,6 +396,8 @@ public:
 	int compareTo(TimestampVariable* variable, ThreadContext* ctx) final;
 	bool isTrue(ThreadContext* ctx) final;
 	VariantValue* toVariantValue(ThreadContext* ctx) final;
+	void readData(NetworkBinaryBuffer* buff, ThreadContext* ctx) final;
+	void writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw()  final;
 public:
 	static bool __init_done;
 	static bool __init_static_variables();

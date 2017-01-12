@@ -99,11 +99,20 @@ bool SQLAdditiveExpression::hasArrayResult(ThreadContext* ctx) throw()
 }
 ArrayList<VariantValue>* SQLAdditiveExpression::resolveSQLExpressionAsArray(ScanResultRecord* record, ScriptMachine* machine, bool debug, ThreadContext* ctx)
 {
-	throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1006(), ctx));
+	throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1036(), ctx));
 }
 int SQLAdditiveExpression::getExpressionType(ThreadContext* ctx) throw() 
 {
 	return IExpression::sQLAdditiveExpression;
+}
+void SQLAdditiveExpression::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
+{
+	__readData(buff, ctx);
+}
+void SQLAdditiveExpression::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+{
+	buff->putInt(ICommandData::__SQLAdditiveExpression, ctx);
+	__writeData(buff, ctx);
 }
 }}}}
 

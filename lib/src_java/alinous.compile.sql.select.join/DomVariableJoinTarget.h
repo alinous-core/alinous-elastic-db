@@ -72,8 +72,23 @@ class SQLJoinCondition;}}}}}
 namespace alinous {namespace compile {namespace analyse {
 class SourceValidator;}}}
 
+namespace alinous {namespace remote {namespace socket {
+class NetworkBinaryBuffer;}}}
+
+namespace alinous {namespace compile {
+class IAlinousElement;}}
+
+namespace alinous {namespace runtime {namespace dom {
+class VariableException;}}}
+
 namespace alinous {namespace compile {namespace sql {namespace select {namespace join {
 class AbstractJoinTarget;}}}}}
+
+namespace alinous {namespace compile {
+class AlinousElementNetworkFactory;}}
+
+namespace alinous {namespace remote {namespace socket {
+class ICommandData;}}}
 
 namespace alinous {namespace system {
 class AlinousException;}}
@@ -90,6 +105,8 @@ using ::java::util::Iterator;
 using ::java::util::ArrayList;
 using ::java::util::Iterator;
 using ::alinous::compile::AbstractSrcElement;
+using ::alinous::compile::AlinousElementNetworkFactory;
+using ::alinous::compile::IAlinousElement;
 using ::alinous::compile::IAlinousElementVisitor;
 using ::alinous::compile::analyse::SourceValidator;
 using ::alinous::compile::analyse::SrcAnalyseContext;
@@ -105,10 +122,13 @@ using ::alinous::compile::sql::select::SQLWhere;
 using ::alinous::db::table::DatabaseException;
 using ::alinous::db::trx::DbTransaction;
 using ::alinous::db::trx::scan::ITableTargetScanner;
+using ::alinous::remote::socket::ICommandData;
+using ::alinous::remote::socket::NetworkBinaryBuffer;
 using ::alinous::runtime::dom::DomArray;
 using ::alinous::runtime::dom::DomVariable;
 using ::alinous::runtime::dom::IAlinousVariable;
 using ::alinous::runtime::dom::IDomVariable;
+using ::alinous::runtime::dom::VariableException;
 using ::alinous::runtime::engine::ScriptMachine;
 using ::alinous::system::AlinousException;
 
@@ -147,6 +167,8 @@ public:
 	SQLJoinCondition* getCondition(ThreadContext* ctx) throw()  final;
 	IStatement::StatementType getType(ThreadContext* ctx) throw()  final;
 	void validate(SourceValidator* validator, ThreadContext* ctx) throw()  final;
+	void readData(NetworkBinaryBuffer* buff, ThreadContext* ctx) final;
+	void writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw()  final;
 private:
 	void analyseDomTable(SQLAnalyseContext* context, DomVariable* variable, ThreadContext* ctx) throw() ;
 public:

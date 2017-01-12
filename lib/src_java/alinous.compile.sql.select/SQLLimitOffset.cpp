@@ -105,5 +105,44 @@ void SQLLimitOffset::setParent(AbstractSrcElement* parent, ThreadContext* ctx) t
 {
 	IAlinousElement::setParent(parent, ctx);
 }
+void SQLLimitOffset::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
+{
+	bool isnull = buff->getBoolean(ctx);
+	if(!isnull)
+	{
+		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
+		if(el == nullptr || !((dynamic_cast<ISQLExpression*>(el) != 0)))
+		{
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1044(), ctx));
+		}
+		__GC_MV(this, &(this->limit), static_cast<ISQLExpression*>(el), ISQLExpression);
+	}
+	isnull = buff->getBoolean(ctx);
+	if(!isnull)
+	{
+		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
+		if(el == nullptr || !((dynamic_cast<ISQLExpression*>(el) != 0)))
+		{
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1044(), ctx));
+		}
+		__GC_MV(this, &(this->offset), static_cast<ISQLExpression*>(el), ISQLExpression);
+	}
+}
+void SQLLimitOffset::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+{
+	buff->putInt(ICommandData::__SQLLimitOffset, ctx);
+	bool isnull = (this->limit == nullptr);
+	buff->putBoolean(isnull, ctx);
+	if(!isnull)
+	{
+		this->limit->writeData(buff, ctx);
+	}
+	isnull = (this->offset == nullptr);
+	buff->putBoolean(isnull, ctx);
+	if(!isnull)
+	{
+		this->offset->writeData(buff, ctx);
+	}
+}
 }}}}
 

@@ -46,7 +46,7 @@ void DomIndexSegment::__releaseRegerences(bool prepare, ThreadContext* ctx) thro
 String* DomIndexSegment::toString(ThreadContext* ctx) throw() 
 {
 	StringBuffer* buff = (new(ctx) StringBuffer(ctx));
-	buff->append(ConstStr::getCNST_STR_977(), ctx)->append(ConstStr::getCNST_STR_564(), ctx);
+	buff->append(ConstStr::getCNST_STR_1000(), ctx)->append(ConstStr::getCNST_STR_564(), ctx);
 	return buff->toString(ctx);
 }
 IExpression* DomIndexSegment::getIndex(ThreadContext* ctx) throw() 
@@ -108,6 +108,31 @@ void DomIndexSegment::position(Token* t2, AbstractSrcElement* segment, ThreadCon
 void DomIndexSegment::position(Token* start, Token* end, ThreadContext* ctx) throw() 
 {
 	IDomSegment::position(start, end, ctx);
+}
+void DomIndexSegment::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
+{
+	bool isnull = buff->getBoolean(ctx);
+	if(!isnull)
+	{
+		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
+		if(el == nullptr || !((dynamic_cast<IExpression*>(el) != 0)))
+		{
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_980(), ctx));
+		}
+		__GC_MV(this, &(this->index), static_cast<IExpression*>(el), IExpression);
+	}
+	this->segmentVariableType = buff->getInt(ctx);
+}
+void DomIndexSegment::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+{
+	buff->putInt(ICommandData::__DomIndexSegment, ctx);
+	bool isnull = (this->index == nullptr);
+	buff->putBoolean(isnull, ctx);
+	if(!isnull)
+	{
+		this->index->writeData(buff, ctx);
+	}
+	buff->putInt(this->segmentVariableType, ctx);
 }
 }}}
 

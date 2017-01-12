@@ -39,8 +39,23 @@ class StringBuffer;}}
 namespace alinous {namespace compile {namespace declare {
 class VirtualTable;}}}
 
+namespace alinous {namespace remote {namespace socket {
+class NetworkBinaryBuffer;}}}
+
+namespace alinous {namespace compile {
+class IAlinousElement;}}
+
+namespace alinous {namespace runtime {namespace dom {
+class VariableException;}}}
+
 namespace alinous {namespace compile {namespace declare {
 class AbstractClassMember;}}}
+
+namespace alinous {namespace compile {
+class AlinousElementNetworkFactory;}}
+
+namespace alinous {namespace remote {namespace socket {
+class ICommandData;}}}
 
 namespace alinous {
 class ThreadContext;
@@ -53,6 +68,8 @@ using namespace ::java::lang;
 using ::java::util::Iterator;
 using ::java::util::ArrayList;
 using ::alinous::compile::AbstractSrcElement;
+using ::alinous::compile::AlinousElementNetworkFactory;
+using ::alinous::compile::IAlinousElement;
 using ::alinous::compile::IAlinousElementVisitor;
 using ::alinous::compile::analyse::SrcAnalyseContext;
 using ::alinous::compile::declare::function::AlinousFunction;
@@ -60,6 +77,9 @@ using ::alinous::compile::declare::function::FunctionArgumentDefine;
 using ::alinous::compile::declare::function::FunctionArgumentsListDefine;
 using ::alinous::compile::expression::FunctionArguments;
 using ::alinous::compile::expression::expstream::FunctionCallExpression;
+using ::alinous::remote::socket::ICommandData;
+using ::alinous::remote::socket::NetworkBinaryBuffer;
+using ::alinous::runtime::dom::VariableException;
 
 
 
@@ -101,6 +121,8 @@ public:
 	ClassMethodFunction* resolveVirtual(AlinousClass* clazz, ThreadContext* ctx) throw() ;
 	VirtualTable* getVtable(ThreadContext* ctx) throw() ;
 	void setVtable(VirtualTable* vtable, ThreadContext* ctx) throw() ;
+	void readData(NetworkBinaryBuffer* buff, ThreadContext* ctx) final;
+	void writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw()  final;
 private:
 	bool analyseConstructorMethod(SrcAnalyseContext* context, ThreadContext* ctx) throw() ;
 public:

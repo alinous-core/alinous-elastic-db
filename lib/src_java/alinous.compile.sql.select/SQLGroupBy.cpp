@@ -180,7 +180,7 @@ bool SQLGroupBy::hasArrayResult(ThreadContext* ctx) throw()
 }
 ArrayList<VariantValue>* SQLGroupBy::resolveSQLExpressionAsArray(ScanResultRecord* record, ScriptMachine* machine, bool debug, ThreadContext* ctx)
 {
-	throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1006(), ctx));
+	throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1036(), ctx));
 }
 bool SQLGroupBy::isSQLExp(ThreadContext* ctx) throw() 
 {
@@ -196,6 +196,45 @@ void SQLGroupBy::setAsName(String* name, ThreadContext* ctx) throw()
 int SQLGroupBy::getExpressionType(ThreadContext* ctx) throw() 
 {
 	return IExpression::sQLGroupBy;
+}
+void SQLGroupBy::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
+{
+	bool isnull = buff->getBoolean(ctx);
+	if(!isnull)
+	{
+		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
+		if(el == nullptr || !((dynamic_cast<SQLExpressionList*>(el) != 0)))
+		{
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1037(), ctx));
+		}
+		__GC_MV(this, &(this->groupList), static_cast<SQLExpressionList*>(el), SQLExpressionList);
+	}
+	isnull = buff->getBoolean(ctx);
+	if(!isnull)
+	{
+		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
+		if(el == nullptr || !((dynamic_cast<ISQLExpression*>(el) != 0)))
+		{
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1044(), ctx));
+		}
+		__GC_MV(this, &(this->havingCondition), static_cast<ISQLExpression*>(el), ISQLExpression);
+	}
+}
+void SQLGroupBy::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+{
+	buff->putInt(ICommandData::__SQLGroupBy, ctx);
+	bool isnull = (this->groupList == nullptr);
+	buff->putBoolean(isnull, ctx);
+	if(!isnull)
+	{
+		this->groupList->writeData(buff, ctx);
+	}
+	isnull = (this->havingCondition == nullptr);
+	buff->putBoolean(isnull, ctx);
+	if(!isnull)
+	{
+		this->havingCondition->writeData(buff, ctx);
+	}
 }
 }}}}
 

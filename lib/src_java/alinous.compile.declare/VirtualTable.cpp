@@ -33,6 +33,7 @@ void VirtualTable::__releaseRegerences(bool prepare, ThreadContext* ctx) throw()
 	if(!prepare){
 		return;
 	}
+	IAlinousElement::__releaseRegerences(true, ctx);
 }
 void VirtualTable::addVirtualFunction(AlinousClass* clazz, ClassMethodFunction* method, ThreadContext* ctx) throw() 
 {
@@ -51,6 +52,41 @@ ClassMethodFunction* VirtualTable::getMethod(AlinousClass* clazz, ThreadContext*
 		}
 	}
 	return nullptr;
+}
+void VirtualTable::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
+{
+	int maxLoop = buff->getInt(ctx);
+	for(int i = 0; i != maxLoop; ++i)
+	{
+		IAlinousElement* clazz = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
+		if(clazz == nullptr || !((dynamic_cast<AlinousClass*>(clazz) != 0)))
+		{
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_952(), ctx));
+		}
+		IAlinousElement* func = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
+		if(func == nullptr || !((dynamic_cast<ClassMethodFunction*>(func) != 0)))
+		{
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_971(), ctx));
+		}
+		VirtualTable::MethodPair* pair = (new(ctx) VirtualTable::MethodPair(static_cast<AlinousClass*>(clazz), static_cast<ClassMethodFunction*>(func), ctx));
+		this->list->add(pair, ctx);
+	}
+}
+void VirtualTable::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+{
+	buff->putInt(ICommandData::__VirtualTable, ctx);
+	int maxLoop = this->list->size(ctx);
+	buff->putInt(maxLoop, ctx);
+	for(int i = 0; i != maxLoop; ++i)
+	{
+		VirtualTable::MethodPair* pair = this->list->get(i, ctx);
+		pair->clazz->writeData(buff, ctx);
+		pair->func->writeData(buff, ctx);
+	}
+}
+bool VirtualTable::analyse(SrcAnalyseContext* context, bool leftValue, ThreadContext* ctx) throw() 
+{
+	return true;
 }
 }}}
 

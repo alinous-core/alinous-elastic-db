@@ -49,7 +49,7 @@ void ScanTableIndexMetadata::__releaseRegerences(bool prepare, ThreadContext* ct
 String* ScanTableIndexMetadata::toString(ThreadContext* ctx) throw() 
 {
 	StringBuffer* buff = (new(ctx) StringBuffer(ctx));
-	buff->append(this->tableId->toString(ctx), ctx)->append(ConstStr::getCNST_STR_977(), ctx);
+	buff->append(this->tableId->toString(ctx), ctx)->append(ConstStr::getCNST_STR_1000(), ctx);
 	int maxLoop = this->columns->size(ctx);
 	for(int i = 0; i != maxLoop; ++i)
 	{

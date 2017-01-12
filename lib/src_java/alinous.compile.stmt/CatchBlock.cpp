@@ -51,5 +51,12 @@ IStatement::StatementType CatchBlock::getType(ThreadContext* ctx) throw()
 {
 	return StatementType::CATCH_STATEMENT;
 }
+void CatchBlock::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
+{
+}
+void CatchBlock::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+{
+	buff->putInt(ICommandData::__CatchBlock, ctx);
+}
 }}}
 

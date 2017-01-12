@@ -92,5 +92,29 @@ void ThrowsDefine::setParent(AbstractSrcElement* parent, ThreadContext* ctx) thr
 {
 	IDeclare::setParent(parent, ctx);
 }
+void ThrowsDefine::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
+{
+	int maxLoop = buff->getInt(ctx);
+	for(int i = 0; i < maxLoop; ++i)
+	{
+		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
+		if(el == nullptr || !((dynamic_cast<AlinousName*>(el) != 0)))
+		{
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_970(), ctx));
+		}
+		this->exceptions->add(static_cast<AlinousName*>(el), ctx);
+	}
+}
+void ThrowsDefine::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+{
+	buff->putInt(ICommandData::__ThrowsDefine, ctx);
+	int maxLoop = this->exceptions->size(ctx);
+	buff->putInt(maxLoop, ctx);
+	for(int i = 0; i < maxLoop; ++i)
+	{
+		AlinousName* exp = this->exceptions->get(i, ctx);
+		exp->writeData(buff, ctx);
+	}
+}
 }}}}
 

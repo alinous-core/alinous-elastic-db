@@ -103,5 +103,28 @@ IStatement::StatementType WrappedJoinTarget::getType(ThreadContext* ctx) throw()
 void WrappedJoinTarget::validate(SourceValidator* validator, ThreadContext* ctx) throw() 
 {
 }
+void WrappedJoinTarget::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
+{
+	bool isnull = buff->getBoolean(ctx);
+	if(!isnull)
+	{
+		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
+		if(el == nullptr || !((dynamic_cast<IJoin*>(el) != 0)))
+		{
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1078(), ctx));
+		}
+		__GC_MV(this, &(this->join), static_cast<IJoin*>(el), IJoin);
+	}
+}
+void WrappedJoinTarget::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+{
+	buff->putInt(ICommandData::__WrappedJoinTarget, ctx);
+	bool isnull = (this->join == nullptr);
+	buff->putBoolean(isnull, ctx);
+	if(!isnull)
+	{
+		this->join->writeData(buff, ctx);
+	}
+}
 }}}}}
 

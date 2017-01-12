@@ -7,7 +7,7 @@ namespace alinous {namespace runtime {namespace variant {
 
 
 
-String* CharData::TAG_NAME = ConstStr::getCNST_STR_1156();
+String* CharData::TAG_NAME = ConstStr::getCNST_STR_1207();
 bool CharData::__init_done = __init_static_variables();
 bool CharData::__init_static_variables(){
 	Java2CppSystem::getSelf();
@@ -115,6 +115,15 @@ bool CharData::isNull(ThreadContext* ctx) throw()
 int CharData::compareTo(VariantValue* variant, ThreadContext* ctx) throw() 
 {
 	return this->data - variant->getChar(ctx);
+}
+void CharData::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+{
+	this->data = buff->getChar(ctx);
+}
+void CharData::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+{
+	buff->putInt(IVariantData::TYPE_CHAR, ctx);
+	buff->putChar(this->data, ctx);
 }
 CharData* CharData::importFromXml(DomNode* node, ThreadContext* ctx) throw() 
 {

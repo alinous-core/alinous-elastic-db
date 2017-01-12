@@ -64,11 +64,16 @@ bool StorageNodeData::equals(String* host, int port, bool ipv6, ThreadContext* c
 {
 	return this->ipv6 == ipv6 && this->port == port && this->host->equals(host, ctx);
 }
-void StorageNodeData::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+bool StorageNodeData::equals(StorageNodeData* another, ThreadContext* ctx) throw() 
+{
+	return equals(another->getHost(ctx), another->getPort(ctx), another->isIpv6(ctx), ctx);
+}
+void StorageNodeData::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 {
 	__GC_MV(this, &(this->host), buff->getString(ctx), String);
 	this->port = buff->getInt(ctx);
 	this->ipv6 = buff->getByte(ctx) == (char)1;
+	this->maxValue->readData(buff, ctx);
 }
 void StorageNodeData::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
 {
@@ -76,6 +81,7 @@ void StorageNodeData::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) t
 	buff->putInt(this->port, ctx);
 	char bl = ((char)(this->ipv6 ? 1 : 0));
 	buff->putByte(bl, ctx);
+	this->maxValue->writeData(buff, ctx);
 }
 }}}}}
 

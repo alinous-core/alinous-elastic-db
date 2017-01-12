@@ -47,5 +47,14 @@ IStatement::StatementType CrossJoin::getType(ThreadContext* ctx) throw()
 void CrossJoin::validate(SourceValidator* validator, ThreadContext* ctx) throw() 
 {
 }
+void CrossJoin::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
+{
+	__readData(buff, ctx);
+}
+void CrossJoin::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+{
+	buff->putInt(ICommandData::__CrossJoin, ctx);
+	__writeData(buff, ctx);
+}
 }}}}}
 

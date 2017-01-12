@@ -70,5 +70,14 @@ IStatement::StatementType LeftJoin::getType(ThreadContext* ctx) throw()
 void LeftJoin::validate(SourceValidator* validator, ThreadContext* ctx) throw() 
 {
 }
+void LeftJoin::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
+{
+	__readData(buff, ctx);
+}
+void LeftJoin::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+{
+	buff->putInt(ICommandData::__LeftJoin, ctx);
+	__writeData(buff, ctx);
+}
 }}}}}
 

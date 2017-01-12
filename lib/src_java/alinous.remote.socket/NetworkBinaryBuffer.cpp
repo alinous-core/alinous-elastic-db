@@ -71,6 +71,22 @@ int NetworkBinaryBuffer::getPutSize(ThreadContext* ctx) throw()
 {
 	return this->lastPos;
 }
+void NetworkBinaryBuffer::putBoolean(bool value, ThreadContext* ctx) throw() 
+{
+	if(value)
+	{
+		this->buff->put(((char)1), ctx);
+	}
+		else 
+	{
+		this->buff->put(((char)0), ctx);
+	}
+}
+bool NetworkBinaryBuffer::getBoolean(ThreadContext* ctx) throw() 
+{
+	char bl = this->buff->get(ctx);
+	return bl == (char)0 ? false : true;
+}
 void NetworkBinaryBuffer::putByte(char b, ThreadContext* ctx) throw() 
 {
 	extend(1, ctx);
@@ -130,6 +146,24 @@ void NetworkBinaryBuffer::putLong(long long value, ThreadContext* ctx) throw()
 long long NetworkBinaryBuffer::getLong(ThreadContext* ctx) throw() 
 {
 	return this->buff->getLong(ctx);
+}
+void NetworkBinaryBuffer::putFloat(float value, ThreadContext* ctx) throw() 
+{
+	extend(4, ctx);
+	this->buff->putFloat(value, ctx);
+}
+float NetworkBinaryBuffer::getFloat(ThreadContext* ctx) throw() 
+{
+	return this->buff->getFloat(ctx);
+}
+void NetworkBinaryBuffer::putDouble(double value, ThreadContext* ctx) throw() 
+{
+	extend(8, ctx);
+	this->buff->putDouble(value, ctx);
+}
+double NetworkBinaryBuffer::getDouble(ThreadContext* ctx) throw() 
+{
+	return this->buff->getDouble(ctx);
 }
 void NetworkBinaryBuffer::putString(String* str, ThreadContext* ctx) throw() 
 {

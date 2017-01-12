@@ -82,7 +82,7 @@ void RemoteStorageResponceAction::handleCommand(BufferedInputStream* stream, Buf
 		cmd = RemoteStorageCommandReader::readFromStream(stream, ctx);
 		if(cmd == nullptr)
 		{
-			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3483(), ctx));
+			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3534(), ctx));
 		}
 		int type = cmd->getType(ctx);
 		switch(type) {

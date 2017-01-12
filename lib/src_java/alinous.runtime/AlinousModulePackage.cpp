@@ -18,9 +18,9 @@ bool AlinousModulePackage::__init_static_variables(){
 	delete ctx;
 	return true;
 }
- AlinousModulePackage::AlinousModulePackage(String* path, ThreadContext* ctx) throw()  : IObject(ctx), segments(GCUtils<ArrayList<String> >::ins(this, (new(ctx) ArrayList<String>(ctx)), ctx, __FILEW__, __LINE__, L""))
+ AlinousModulePackage::AlinousModulePackage(String* path, ThreadContext* ctx) throw()  : IObject(ctx), IAlinousElement(ctx), segments(GCUtils<ArrayList<String> >::ins(this, (new(ctx) ArrayList<String>(ctx)), ctx, __FILEW__, __LINE__, L""))
 {
-	IArrayObject<String>* segments = path->split(ConstStr::getCNST_STR_984(), ctx);
+	IArrayObject<String>* segments = path->split(ConstStr::getCNST_STR_1007(), ctx);
 	int maxLoop = segments->length;
 	for(int i = 0; i != maxLoop; ++i)
 	{
@@ -39,7 +39,7 @@ bool AlinousModulePackage::__init_static_variables(){
 }
 void AlinousModulePackage::__construct_impl(String* path, ThreadContext* ctx) throw() 
 {
-	IArrayObject<String>* segments = path->split(ConstStr::getCNST_STR_984(), ctx);
+	IArrayObject<String>* segments = path->split(ConstStr::getCNST_STR_1007(), ctx);
 	int maxLoop = segments->length;
 	for(int i = 0; i != maxLoop; ++i)
 	{
@@ -71,6 +71,7 @@ void AlinousModulePackage::__releaseRegerences(bool prepare, ThreadContext* ctx)
 	if(!prepare){
 		return;
 	}
+	IAlinousElement::__releaseRegerences(true, ctx);
 }
 bool AlinousModulePackage::equals(IObject* obj, ThreadContext* ctx) throw() 
 {
@@ -102,11 +103,35 @@ String* AlinousModulePackage::toString(ThreadContext* ctx) throw()
 		String* seg = this->segments->get(i, ctx);
 		if(i != 0)
 		{
-			buff->append(ConstStr::getCNST_STR_947(), ctx);
+			buff->append(ConstStr::getCNST_STR_950(), ctx);
 		}
 		buff->append(seg, ctx);
 	}
 	return buff->toString(ctx);
+}
+void AlinousModulePackage::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
+{
+	int maxLoop = buff->getInt(ctx);
+	for(int i = 0; i < maxLoop; ++i)
+	{
+		String* str = buff->getString(ctx);
+		this->segments->add(str, ctx);
+	}
+}
+void AlinousModulePackage::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+{
+	buff->putInt(ICommandData::__AlinousModulePackage, ctx);
+	int maxLoop = this->segments->size(ctx);
+	buff->putInt(maxLoop, ctx);
+	for(int i = 0; i < maxLoop; ++i)
+	{
+		String* str = this->segments->get(i, ctx);
+		buff->putString(str, ctx);
+	}
+}
+bool AlinousModulePackage::analyse(SrcAnalyseContext* context, bool leftValue, ThreadContext* ctx) throw() 
+{
+	return true;
 }
 }}
 
