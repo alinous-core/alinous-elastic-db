@@ -373,6 +373,13 @@ template class alinous::MemoryUtils<alinous::ArrayObject<alinous::IArrayObject<:
 template class alinous::MemoryUtils<alinous::ArrayObject<::alinous::remote::region::NodeTableReference>>;
 template class alinous::MemoryUtils<alinous::IArrayObject<alinous::ArrayObject<::alinous::remote::region::NodeTableReference>>>;
 template class alinous::MemoryUtils<alinous::ArrayObject<alinous::ArrayObject<::alinous::remote::region::NodeTableReference>>>;
+template class alinous::MemoryUtils<::alinous::remote::db::command::data::SchemasStructureInfoData>;
+template class alinous::MemoryUtils<alinous::IArrayObject<::alinous::remote::db::command::data::SchemasStructureInfoData>>;
+template class alinous::MemoryUtils<alinous::IArrayObject<alinous::IArrayObject<::alinous::remote::db::command::data::SchemasStructureInfoData>>>;
+template class alinous::MemoryUtils<alinous::ArrayObject<alinous::IArrayObject<::alinous::remote::db::command::data::SchemasStructureInfoData>>>;
+template class alinous::MemoryUtils<alinous::ArrayObject<::alinous::remote::db::command::data::SchemasStructureInfoData>>;
+template class alinous::MemoryUtils<alinous::IArrayObject<alinous::ArrayObject<::alinous::remote::db::command::data::SchemasStructureInfoData>>>;
+template class alinous::MemoryUtils<alinous::ArrayObject<alinous::ArrayObject<::alinous::remote::db::command::data::SchemasStructureInfoData>>>;
 template class alinous::MemoryUtils<::alinous::remote::region::NodeReference>;
 template class alinous::MemoryUtils<alinous::IArrayObject<::alinous::remote::region::NodeReference>>;
 template class alinous::MemoryUtils<alinous::IArrayObject<alinous::IArrayObject<::alinous::remote::region::NodeReference>>>;

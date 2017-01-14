@@ -95,9 +95,10 @@ void RemoteStorageResponceAction::handleCommand(BufferedInputStream* stream, Buf
 			cmd->executeOnServer(this->tableStorageServer, outStream, ctx);
 			break ;
 		case AbstractRemoteStorageCommand::TYPE_CONNECT:
+		case AbstractRemoteStorageCommand::TYPE_VOID:
+		case AbstractRemoteStorageCommand::TYPE_GET_TABLE_SCHEME:
 			cmd->executeOnServer(this->tableStorageServer, outStream, ctx);
 			break ;
-		case AbstractRemoteStorageCommand::TYPE_VOID:
 		default:
 			break ;
 		}

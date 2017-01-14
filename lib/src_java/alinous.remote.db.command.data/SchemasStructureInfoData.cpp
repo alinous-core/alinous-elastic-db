@@ -34,9 +34,35 @@ void SchemasStructureInfoData::__releaseRegerences(bool prepare, ThreadContext* 
 		return;
 	}
 }
+void SchemasStructureInfoData::join(SchemasStructureInfoData* data, ThreadContext* ctx) throw() 
+{
+}
 void SchemasStructureInfoData::addScheme(SchemaData* value, ThreadContext* ctx) throw() 
 {
 	this->schemas->put(value->getName(ctx), value, ctx);
+}
+void SchemasStructureInfoData::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
+{
+	int maxLoop = buff->getInt(ctx);
+	for(int i = 0; i != maxLoop; ++i)
+	{
+		SchemaData* data = (new(ctx) SchemaData(ctx));
+		data->readData(buff, ctx);
+		this->schemas->put(data->getName(ctx), data, ctx);
+	}
+}
+void SchemasStructureInfoData::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+{
+	int maxLoop = this->schemas->size(ctx);
+	buff->putInt(maxLoop, ctx);
+	Iterator<String>* it = this->schemas->keySet(ctx)->iterator(ctx);
+	while(it->hasNext(ctx))
+	{
+		String* schemeName = it->next(ctx);
+		SchemaData* data = this->schemas->get(schemeName, ctx);
+		buff->putString(schemeName, ctx);
+		data->writeData(buff, ctx);
+	}
 }
 }}}}}
 

@@ -18,6 +18,9 @@ class VoidRemoteStorageCommand;}}}}
 namespace alinous {namespace remote {namespace db {namespace command {
 class RemoteStorageConnectCommand;}}}}
 
+namespace alinous {namespace remote {namespace db {namespace command {
+class GetTableSchemeCommand;}}}}
+
 namespace alinous {namespace system {
 class AlinousException;}}
 

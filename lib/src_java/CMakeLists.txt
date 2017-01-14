@@ -127,6 +127,7 @@ set(srcjava
 	"src_java/alinous.remote.region.command/NodeRegionCommandReader.cpp"
 	"src_java/alinous.remote.region.command/NodeRegionConnectCommand.cpp"
 	"src_java/alinous.remote.db.command/RemoteStorageCommandReader.cpp"
+	"src_java/alinous.remote.db.command/GetTableSchemeCommand.cpp"
 	"src_java/alinous.remote.db.command/VoidRemoteStorageCommand.cpp"
 	"src_java/alinous.remote.db.command/FinishRemoteStorageConnectionCommand.cpp"
 	"src_java/alinous.remote.db.command/TerminateRemoteStorageCommand.cpp"

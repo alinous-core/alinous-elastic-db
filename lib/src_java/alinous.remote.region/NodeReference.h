@@ -9,6 +9,30 @@ class RemoteStorageClientConnectionFactory;}}}}
 namespace alinous {namespace remote {namespace socket {
 class SocketConnectionPool;}}}
 
+namespace alinous {namespace remote {namespace db {namespace command {namespace data {
+class SchemasStructureInfoData;}}}}}
+
+namespace alinous {namespace remote {namespace db {namespace command {
+class GetTableSchemeCommand;}}}}
+
+namespace alinous {namespace remote {namespace socket {
+class ISocketConnection;}}}
+
+namespace alinous {namespace net {
+class AlinousSocket;}}
+
+namespace alinous {namespace remote {namespace db {namespace command {
+class AbstractRemoteStorageCommand;}}}}
+
+namespace alinous {namespace system {
+class AlinousException;}}
+
+namespace alinous {namespace net {
+class UnknownHostException;}}
+
+namespace java {namespace io {
+class IOException;}}
+
 namespace alinous {namespace remote {namespace region {
 class NodeReference;}}}
 
@@ -25,9 +49,17 @@ namespace alinous {namespace remote {namespace region {
 using namespace ::alinous;
 using namespace ::java::lang;
 using ::java::util::Iterator;
+using ::java::io::IOException;
+using ::java::net::UnknownHostException;
+using ::alinous::net::AlinousSocket;
 using ::alinous::remote::db::client::RemoteStorageClientConnectionFactory;
 using ::alinous::remote::db::client::RemoteStorageConnectionInfo;
+using ::alinous::remote::db::command::AbstractRemoteStorageCommand;
+using ::alinous::remote::db::command::GetTableSchemeCommand;
+using ::alinous::remote::db::command::data::SchemasStructureInfoData;
+using ::alinous::remote::socket::ISocketConnection;
 using ::alinous::remote::socket::SocketConnectionPool;
+using ::alinous::system::AlinousException;
 
 
 
@@ -47,6 +79,7 @@ private:
 public:
 	void initConnectionPool(ThreadContext* ctx) throw() ;
 	void dispose(ThreadContext* ctx) throw() ;
+	SchemasStructureInfoData* getSchemeInfo(ThreadContext* ctx);
 	String* getHost(ThreadContext* ctx) throw() ;
 	int getPort(ThreadContext* ctx) throw() ;
 	bool isIpv6(ThreadContext* ctx) throw() ;

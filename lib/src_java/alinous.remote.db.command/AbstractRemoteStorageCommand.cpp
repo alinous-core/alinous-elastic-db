@@ -11,6 +11,7 @@ constexpr const int AbstractRemoteStorageCommand::TYPE_VOID;
 constexpr const int AbstractRemoteStorageCommand::TYPE_FINISH;
 constexpr const int AbstractRemoteStorageCommand::TYPE_CONNECT;
 constexpr const int AbstractRemoteStorageCommand::TYPE_TERMINATE;
+constexpr const int AbstractRemoteStorageCommand::TYPE_GET_TABLE_SCHEME;
 bool AbstractRemoteStorageCommand::__init_done = __init_static_variables();
 bool AbstractRemoteStorageCommand::__init_static_variables(){
 	Java2CppSystem::getSelf();
@@ -40,11 +41,14 @@ int AbstractRemoteStorageCommand::getType(ThreadContext* ctx) throw()
 {
 	return type;
 }
-void AbstractRemoteStorageCommand::sendCommand(AlinousSocket* socket, ThreadContext* ctx)
+AbstractRemoteStorageCommand* AbstractRemoteStorageCommand::sendCommand(AlinousSocket* socket, ThreadContext* ctx)
 {
 	OutputStream* out = socket->getOutputStream(ctx);
 	writeByteStream(out, ctx);
 	out->flush(ctx);
+	InputStream* stream = socket->getInputStream(ctx);
+	AbstractRemoteStorageCommand* cmd = RemoteStorageCommandReader::readFromStream(stream, ctx);
+	return cmd;
 }
 }}}}
 

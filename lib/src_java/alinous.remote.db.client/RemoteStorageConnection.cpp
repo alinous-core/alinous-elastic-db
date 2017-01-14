@@ -91,6 +91,10 @@ void RemoteStorageConnection::shutdown(ThreadContext* ctx) throw()
 		{
 			e->printStackTrace(ctx);
 		}
+		catch(AlinousException* e)
+		{
+			e->printStackTrace(ctx);
+		}
 	}
 }
 }}}}

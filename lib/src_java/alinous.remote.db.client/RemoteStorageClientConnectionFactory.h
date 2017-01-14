@@ -21,8 +21,8 @@ class IOException;}}
 namespace alinous {namespace net {
 class UnknownHostException;}}
 
-namespace alinous {namespace db {
-class AlinousDbException;}}
+namespace alinous {namespace system {
+class AlinousException;}}
 
 namespace java {namespace lang {
 class IObject;
@@ -39,10 +39,10 @@ using namespace ::java::lang;
 using ::java::util::Iterator;
 using ::java::io::IOException;
 using ::java::net::UnknownHostException;
-using ::alinous::db::AlinousDbException;
 using ::alinous::remote::socket::ISocketConnection;
 using ::alinous::remote::socket::ISocketConnectionFactory;
 using ::alinous::remote::socket::SocketConnectionPool;
+using ::alinous::system::AlinousException;
 
 
 

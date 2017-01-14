@@ -54,6 +54,9 @@ class DatabaseException;}}}
 namespace alinous {namespace remote {namespace socket {
 class ICommandData;}}}
 
+namespace alinous {namespace runtime {namespace dom {
+class NetworkAlinousVariableFactory;}}}
+
 namespace alinous {namespace system {
 class AlinousException;}}
 
@@ -78,6 +81,7 @@ using ::alinous::db::table::DatabaseException;
 using ::alinous::remote::socket::ICommandData;
 using ::alinous::remote::socket::NetworkBinaryBuffer;
 using ::alinous::runtime::dom::IAlinousVariable;
+using ::alinous::runtime::dom::NetworkAlinousVariableFactory;
 using ::alinous::runtime::dom::VariableException;
 using ::alinous::runtime::dom::clazz::AlinousClassVariable;
 using ::alinous::runtime::engine::ScriptMachine;

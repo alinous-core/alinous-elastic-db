@@ -107,6 +107,7 @@ template class ::java::util::ArrayList<::alinous::buffer::FifoElement<::alinous:
 template class ::java::util::ArrayList<::alinous::remote::db::command::data::StorageNodeData>;
 template class ::java::util::ArrayList<::alinous::remote::monitor::NodeInfo>;
 template class ::java::util::ArrayList<::alinous::remote::region::NodeTableReference>;
+template class ::java::util::ArrayList<::alinous::remote::db::command::data::SchemasStructureInfoData>;
 template class ::java::util::ArrayList<::alinous::remote::region::NodeReference>;
 template class ::java::util::ArrayList<::alinous::compile::analyse::VariableDeclareHolder>;
 template class ::java::util::ArrayList<::alinous::compile::analyse::ExpressionStreamResult>;

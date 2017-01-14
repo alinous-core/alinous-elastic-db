@@ -38,7 +38,7 @@ void NodeReferenceManager::__releaseRegerences(bool prepare, ThreadContext* ctx)
 		return;
 	}
 }
-void NodeReferenceManager::syncSchemeTables(ThreadContext* ctx) throw() 
+void NodeReferenceManager::syncSchemeTables(ThreadContext* ctx)
 {
 	{
 		SynchronizedBlockObj __synchronized_2(this->lock, ctx);
@@ -74,14 +74,16 @@ long long NodeReferenceManager::getRevision(ThreadContext* ctx) throw()
 		return revision;
 	}
 }
-void NodeReferenceManager::doSyncSchemeTables(ThreadContext* ctx) throw() 
+void NodeReferenceManager::doSyncSchemeTables(ThreadContext* ctx)
 {
+	List<SchemasStructureInfoData>* list = (new(ctx) ArrayList<SchemasStructureInfoData>(ctx));
 	Iterator<String>* it = this->nodeReferences->keySet(ctx)->iterator(ctx);
 	while(it->hasNext(ctx))
 	{
 		String* regionName = it->next(ctx);
 		NodeCluster* region = this->nodeReferences->get(regionName, ctx);
-		region->getSchemeInfo(ctx);
+		SchemasStructureInfoData* data = region->getSchemeInfo(ctx);
+		list->add(data, ctx);
 	}
 }
 void NodeReferenceManager::doSyncRegionNodes(Map<String,RegionNodeInfo>* regionsMap, ThreadContext* ctx) throw() 

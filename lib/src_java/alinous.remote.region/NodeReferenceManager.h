@@ -1,6 +1,12 @@
 #ifndef ALINOUS_REMOTE_REGION_NODEREFERENCEMANAGER_H_
 #define ALINOUS_REMOTE_REGION_NODEREFERENCEMANAGER_H_
 namespace java {namespace util {
+template <typename  T> class List;}}
+
+namespace alinous {namespace remote {namespace db {namespace command {namespace data {
+class SchemasStructureInfoData;}}}}}
+
+namespace java {namespace util {
 template <typename  T> class Iterator;}}
 
 namespace alinous {namespace remote {namespace region {
@@ -15,9 +21,6 @@ template <typename  T, typename V> class Map;}}
 namespace alinous {namespace remote {namespace monitor {
 class RegionNodeInfo;}}}
 
-namespace java {namespace util {
-template <typename  T> class List;}}
-
 namespace alinous {namespace remote {namespace region {
 class NodeTableClaster;}}}
 
@@ -26,6 +29,9 @@ template <typename  T, typename V> class HashMap;}}
 
 namespace alinous {namespace lock {
 class LockObject;}}
+
+namespace alinous {namespace system {
+class AlinousException;}}
 
 namespace java {namespace lang {
 class IObject;
@@ -46,8 +52,10 @@ using ::java::util::Iterator;
 using ::java::util::List;
 using ::java::util::Map;
 using ::alinous::lock::LockObject;
+using ::alinous::remote::db::command::data::SchemasStructureInfoData;
 using ::alinous::remote::monitor::RegionNodeInfo;
 using ::alinous::remote::monitor::command::data::RegionInfoData;
+using ::alinous::system::AlinousException;
 
 
 
@@ -69,13 +77,13 @@ private:
 	HashMap<String,NodeCluster>* nodeReferences;
 	LockObject* lock;
 public:
-	void syncSchemeTables(ThreadContext* ctx) throw() ;
+	void syncSchemeTables(ThreadContext* ctx);
 	void syncNodeReference(RegionInfoData* data, ThreadContext* ctx) throw() ;
 	void dispose(ThreadContext* ctx) throw() ;
 	Map<String,NodeTableClaster>* getTablesDictinary(ThreadContext* ctx) throw() ;
 	long long getRevision(ThreadContext* ctx) throw() ;
 private:
-	void doSyncSchemeTables(ThreadContext* ctx) throw() ;
+	void doSyncSchemeTables(ThreadContext* ctx);
 	void doSyncRegionNodes(Map<String,RegionNodeInfo>* regionsMap, ThreadContext* ctx) throw() ;
 public:
 	static bool __init_done;

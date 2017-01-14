@@ -21,6 +21,9 @@ class IOException;}}
 namespace alinous {namespace remote {namespace db {namespace command {
 class FinishRemoteStorageConnectionCommand;}}}}
 
+namespace alinous {namespace system {
+class AlinousException;}}
+
 namespace alinous {namespace remote {namespace socket {
 class ISocketConnection;}}}
 
@@ -48,6 +51,7 @@ using ::alinous::remote::db::command::FinishRemoteStorageConnectionCommand;
 using ::alinous::remote::db::command::RemoteStorageConnectCommand;
 using ::alinous::remote::socket::ISocketConnection;
 using ::alinous::remote::socket::SocketConnectionPool;
+using ::alinous::system::AlinousException;
 
 
 

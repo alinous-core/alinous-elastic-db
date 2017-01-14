@@ -49,6 +49,9 @@ AbstractRemoteStorageCommand* RemoteStorageCommandReader::readFromStream(InputSt
 	case AbstractRemoteStorageCommand::TYPE_CONNECT:
 		cmd = (new(ctx) RemoteStorageConnectCommand(ctx));
 		break ;
+	case AbstractRemoteStorageCommand::TYPE_GET_TABLE_SCHEME:
+		cmd = (new(ctx) GetTableSchemeCommand(ctx));
+		break ;
 	default:
 		throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3540(), ctx));
 		break;

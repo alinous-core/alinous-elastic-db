@@ -52,7 +52,7 @@ ISocketConnection* SocketConnectionPool::getConnection(ThreadContext* ctx)
 {
 	if(!active)
 	{
-		throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3551(), ctx));
+		throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3554(), ctx));
 	}
 	ISocketConnection* con = nullptr;
 	{
@@ -70,6 +70,10 @@ ISocketConnection* SocketConnectionPool::getConnection(ThreadContext* ctx)
 }
 void SocketConnectionPool::returnConnection(ISocketConnection* con, ThreadContext* ctx) throw() 
 {
+	if(con == nullptr)
+	{
+		return;
+	}
 	{
 		SynchronizedBlockObj __synchronized_2(this->lockObject, ctx);
 		this->connections->push(con, ctx);

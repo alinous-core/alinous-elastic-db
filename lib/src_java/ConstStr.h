@@ -2080,6 +2080,9 @@ public:
 	constexpr static StaticUnicodeString __CNST_STR_3334{L"audio/x-ms-wax",14};
 public:
 	static UnicodeStringWrapper* getCNST_STR_3334() throw();
+	constexpr static StaticUnicodeString __CNST_STR_3550{L"Returning command is wrong",26};
+public:
+	static UnicodeStringWrapper* getCNST_STR_3550() throw();
 	constexpr static StaticUnicodeString __CNST_STR_1690{L"VariableException occured",25};
 public:
 	static UnicodeStringWrapper* getCNST_STR_1690() throw();
@@ -3172,9 +3175,9 @@ public:
 	constexpr static StaticUnicodeString __CNST_STR_288{L"No",2};
 public:
 	static UnicodeStringWrapper* getCNST_STR_288() throw();
-	constexpr static StaticUnicodeString __CNST_STR_3551{L"Socket factory is not activated.",32};
+	constexpr static StaticUnicodeString __CNST_STR_3554{L"Socket factory is not activated.",32};
 public:
-	static UnicodeStringWrapper* getCNST_STR_3551() throw();
+	static UnicodeStringWrapper* getCNST_STR_3554() throw();
 	constexpr static StaticUnicodeString __CNST_STR_1068{L"OR",2};
 public:
 	static UnicodeStringWrapper* getCNST_STR_1068() throw();
@@ -4978,9 +4981,9 @@ public:
 	constexpr static StaticUnicodeString __CNST_STR_826{L"Asia/Thimphu",12};
 public:
 	static UnicodeStringWrapper* getCNST_STR_826() throw();
-	constexpr static StaticUnicodeString __CNST_STR_3550{L"Wrong Command Type of Node Region Command.",42};
+	constexpr static StaticUnicodeString __CNST_STR_3553{L"Wrong Command Type of Node Region Command.",42};
 public:
-	static UnicodeStringWrapper* getCNST_STR_3550() throw();
+	static UnicodeStringWrapper* getCNST_STR_3553() throw();
 	constexpr static StaticUnicodeString __CNST_STR_53{L"Zero length BigInteger",22};
 public:
 	static UnicodeStringWrapper* getCNST_STR_53() throw();
@@ -5932,6 +5935,9 @@ public:
 	constexpr static StaticUnicodeString __CNST_STR_2782{L"application/vnd.yamaha.openscoreformat",38};
 public:
 	static UnicodeStringWrapper* getCNST_STR_2782() throw();
+	constexpr static StaticUnicodeString __CNST_STR_3551{L"UnknownHostException",20};
+public:
+	static UnicodeStringWrapper* getCNST_STR_3551() throw();
 	constexpr static StaticUnicodeString __CNST_STR_878{L"Pacific/Funafuti",16};
 public:
 	static UnicodeStringWrapper* getCNST_STR_878() throw();
@@ -8908,6 +8914,9 @@ public:
 	constexpr static StaticUnicodeString __CNST_STR_3060{L"text/sgml",9};
 public:
 	static UnicodeStringWrapper* getCNST_STR_3060() throw();
+	constexpr static StaticUnicodeString __CNST_STR_3552{L"IOException",11};
+public:
+	static UnicodeStringWrapper* getCNST_STR_3552() throw();
 	constexpr static StaticUnicodeString __CNST_STR_2534{L"lrf",3};
 public:
 	static UnicodeStringWrapper* getCNST_STR_2534() throw();

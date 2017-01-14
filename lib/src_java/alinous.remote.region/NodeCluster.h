@@ -1,5 +1,11 @@
 #ifndef ALINOUS_REMOTE_REGION_NODECLUSTER_H_
 #define ALINOUS_REMOTE_REGION_NODECLUSTER_H_
+namespace alinous {namespace remote {namespace db {namespace command {namespace data {
+class SchemasStructureInfoData;}}}}}
+
+namespace alinous {namespace remote {namespace region {
+class NodeReference;}}}
+
 namespace alinous {namespace remote {namespace monitor {
 class RegionNodeInfo;}}}
 
@@ -9,8 +15,8 @@ template <typename  T> class List;}}
 namespace alinous {namespace remote {namespace monitor {
 class NodeInfo;}}}
 
-namespace alinous {namespace remote {namespace region {
-class NodeReference;}}}
+namespace alinous {namespace system {
+class AlinousException;}}
 
 namespace java {namespace lang {
 class IObject;
@@ -27,8 +33,10 @@ using namespace ::java::lang;
 using ::java::util::Iterator;
 using ::java::util::ArrayList;
 using ::java::util::List;
+using ::alinous::remote::db::command::data::SchemasStructureInfoData;
 using ::alinous::remote::monitor::NodeInfo;
 using ::alinous::remote::monitor::RegionNodeInfo;
+using ::alinous::system::AlinousException;
 
 
 
@@ -47,7 +55,7 @@ public:
 private:
 	List<NodeReference>* nodes;
 public:
-	void getSchemeInfo(ThreadContext* ctx) throw() ;
+	SchemasStructureInfoData* getSchemeInfo(ThreadContext* ctx);
 	void update(RegionNodeInfo* refinfo, ThreadContext* ctx) throw() ;
 	void addNode(NodeReference* nodeRef, ThreadContext* ctx) throw() ;
 	List<NodeReference>* getNodes(ThreadContext* ctx) throw() ;

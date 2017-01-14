@@ -223,12 +223,12 @@ void ClassMemberVariable::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx
 	isnull = buff->getBoolean(ctx);
 	if(!isnull)
 	{
-		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
-		if(el == nullptr || !((dynamic_cast<IAlinousVariable*>(el) != 0)))
+		IAlinousVariable* el = NetworkAlinousVariableFactory::fromNetworkData(buff, ctx);
+		if(el == nullptr)
 		{
 			throw (new(ctx) VariableException(ConstStr::getCNST_STR_981(), ctx));
 		}
-		__GC_MV(this, &(this->staticValue), static_cast<IAlinousVariable*>(el), IAlinousVariable);
+		__GC_MV(this, &(this->staticValue), el, IAlinousVariable);
 	}
 }
 void ClassMemberVariable::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 

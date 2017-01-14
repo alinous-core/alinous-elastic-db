@@ -373,6 +373,13 @@ template class alinous::RawArray<alinous::ArrayObject<alinous::IArrayObject<::al
 template class alinous::RawArray<alinous::ArrayObject<::alinous::remote::region::NodeTableReference>>;
 template class alinous::RawArray<alinous::IArrayObject<alinous::ArrayObject<::alinous::remote::region::NodeTableReference>>>;
 template class alinous::RawArray<alinous::ArrayObject<alinous::ArrayObject<::alinous::remote::region::NodeTableReference>>>;
+template class alinous::RawArray<::alinous::remote::db::command::data::SchemasStructureInfoData>;
+template class alinous::RawArray<alinous::IArrayObject<::alinous::remote::db::command::data::SchemasStructureInfoData>>;
+template class alinous::RawArray<alinous::IArrayObject<alinous::IArrayObject<::alinous::remote::db::command::data::SchemasStructureInfoData>>>;
+template class alinous::RawArray<alinous::ArrayObject<alinous::IArrayObject<::alinous::remote::db::command::data::SchemasStructureInfoData>>>;
+template class alinous::RawArray<alinous::ArrayObject<::alinous::remote::db::command::data::SchemasStructureInfoData>>;
+template class alinous::RawArray<alinous::IArrayObject<alinous::ArrayObject<::alinous::remote::db::command::data::SchemasStructureInfoData>>>;
+template class alinous::RawArray<alinous::ArrayObject<alinous::ArrayObject<::alinous::remote::db::command::data::SchemasStructureInfoData>>>;
 template class alinous::RawArray<::alinous::remote::region::NodeReference>;
 template class alinous::RawArray<alinous::IArrayObject<::alinous::remote::region::NodeReference>>;
 template class alinous::RawArray<alinous::IArrayObject<alinous::IArrayObject<::alinous::remote::region::NodeReference>>>;

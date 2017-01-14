@@ -34,8 +34,24 @@ void NodeCluster::__releaseRegerences(bool prepare, ThreadContext* ctx) throw()
 		return;
 	}
 }
-void NodeCluster::getSchemeInfo(ThreadContext* ctx) throw() 
+SchemasStructureInfoData* NodeCluster::getSchemeInfo(ThreadContext* ctx)
 {
+	SchemasStructureInfoData* last = nullptr;
+	int maxLoop = this->nodes->size(ctx);
+	for(int i = 0; i != maxLoop; ++i)
+	{
+		NodeReference* noderef = this->nodes->get(i, ctx);
+		SchemasStructureInfoData* data = noderef->getSchemeInfo(ctx);
+		if(last == nullptr)
+		{
+			last = data;
+		}
+				else 
+		{
+			last->join(data, ctx);
+		}
+	}
+	return last;
 }
 void NodeCluster::update(RegionNodeInfo* refinfo, ThreadContext* ctx) throw() 
 {

@@ -315,6 +315,11 @@
 #include "alinous.remote.db.command/TerminateRemoteStorageCommand.h"
 #include "alinous.remote.db.command/VoidRemoteStorageCommand.h"
 #include "alinous.remote.db.command/RemoteStorageConnectCommand.h"
+#include "alinous.remote.db.command.data/StorageNodeData.h"
+#include "alinous.remote.db.command.data/TableClusterData.h"
+#include "alinous.remote.db.command.data/SchemaData.h"
+#include "alinous.remote.db.command.data/SchemasStructureInfoData.h"
+#include "alinous.remote.db.command/GetTableSchemeCommand.h"
 #include "alinous.remote.db.command/RemoteStorageCommandReader.h"
 #include "alinous.remote.db/RemoteStorageResponceAction.h"
 #include "alinous.remote.db/RemoteStorageResponceActionFactory.h"
@@ -829,10 +834,6 @@
 #include "alinous.server.webmodule/BinaryModuleStream.h"
 #include "alinous.server.webmodule/BinaryModule.h"
 #include "alinous.remote.db.client/RemoteTableStorageClient.h"
-#include "alinous.remote.db.command.data/StorageNodeData.h"
-#include "alinous.remote.db.command.data/TableClusterData.h"
-#include "alinous.remote.db.command.data/SchemaData.h"
-#include "alinous.remote.db.command.data/SchemasStructureInfoData.h"
 #include "alinous.remote.region.client/DatabaseTableClient.h"
 
 
@@ -1696,6 +1697,7 @@ inline static void __cleanUpStatics(alinous::ThreadContext* ctx){
 	alinous::remote::db::client::RemoteStorageClientConnectionFactory::__cleanUp(ctx);
 	alinous::remote::db::client::RemoteTableStorageClient::__cleanUp(ctx);
 	alinous::remote::db::client::RemoteStorageConnectionInfo::__cleanUp(ctx);
+	alinous::remote::db::command::GetTableSchemeCommand::__cleanUp(ctx);
 	alinous::remote::db::command::TerminateRemoteStorageCommand::__cleanUp(ctx);
 	alinous::remote::db::command::RemoteStorageCommandReader::__cleanUp(ctx);
 	alinous::remote::db::command::AbstractRemoteStorageCommand::__cleanUp(ctx);
