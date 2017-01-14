@@ -12,6 +12,9 @@ class AlinousSocket;}}
 namespace alinous {namespace remote {namespace db {namespace command {
 class RemoteStorageConnectCommand;}}}}
 
+namespace alinous {namespace remote {namespace db {namespace command {
+class AbstractRemoteStorageCommand;}}}}
+
 namespace alinous {namespace db {
 class AlinousDbException;}}
 
@@ -47,6 +50,7 @@ using ::java::io::IOException;
 using ::java::net::UnknownHostException;
 using ::alinous::db::AlinousDbException;
 using ::alinous::net::AlinousSocket;
+using ::alinous::remote::db::command::AbstractRemoteStorageCommand;
 using ::alinous::remote::db::command::FinishRemoteStorageConnectionCommand;
 using ::alinous::remote::db::command::RemoteStorageConnectCommand;
 using ::alinous::remote::socket::ISocketConnection;

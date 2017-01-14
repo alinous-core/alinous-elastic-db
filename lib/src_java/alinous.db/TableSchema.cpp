@@ -56,6 +56,12 @@ void TableSchema::__releaseRegerences(bool prepare, ThreadContext* ctx) throw()
 		return;
 	}
 }
+SchemaData* TableSchema::toCommandData(ThreadContext* ctx) throw() 
+{
+	SchemaData* data = (new(ctx) SchemaData(ctx));
+	data->setName(name, ctx);
+	return data;
+}
 void TableSchema::create(ThreadContext* ctx) throw() 
 {
 	String* path = getSchemaDir(ctx);
@@ -110,7 +116,7 @@ void TableSchema::addTableMetadata(TableMetadata* tblMetadata, ThreadContext* ct
 {
 	this->tables->put(tblMetadata->getTableName(ctx), tblMetadata, ctx);
 }
-void TableSchema::appendToEntry(FileStorageEntryBuilder* builder, ThreadContext* ctx) throw() 
+void TableSchema::appendToEntry(FileStorageEntryBuilder* builder, ThreadContext* ctx)
 {
 	builder->putString(this->name, ctx);
 	builder->putInt(this->tables->keySet(ctx)->size(ctx), ctx);

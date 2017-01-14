@@ -55,6 +55,7 @@ bool RemoteStorageConnectCommand::isConnected(ThreadContext* ctx) throw()
 }
 void RemoteStorageConnectCommand::executeOnServer(RemoteTableStorageServer* tableStorageServer, BufferedOutputStream* outStream, ThreadContext* ctx)
 {
+	this->connected = true;
 	writeByteStream(outStream, ctx);
 }
 void RemoteStorageConnectCommand::writeByteStream(OutputStream* out, ThreadContext* ctx)

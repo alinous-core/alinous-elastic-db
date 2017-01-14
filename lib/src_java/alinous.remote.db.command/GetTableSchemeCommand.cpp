@@ -18,6 +18,14 @@ bool GetTableSchemeCommand::__init_static_variables(){
 	delete ctx;
 	return true;
 }
+ GetTableSchemeCommand::GetTableSchemeCommand(ThreadContext* ctx) throw()  : IObject(ctx), AbstractRemoteStorageCommand(ctx), data(__GC_INS(this, (new(ctx) SchemasStructureInfoData(ctx)), SchemasStructureInfoData))
+{
+	this->type = AbstractRemoteStorageCommand::TYPE_GET_TABLE_SCHEME;
+}
+void GetTableSchemeCommand::__construct_impl(ThreadContext* ctx) throw() 
+{
+	this->type = AbstractRemoteStorageCommand::TYPE_GET_TABLE_SCHEME;
+}
  GetTableSchemeCommand::~GetTableSchemeCommand() throw() 
 {
 	ThreadContext *ctx = ThreadContext::getCurentContext();
@@ -41,12 +49,25 @@ SchemasStructureInfoData* GetTableSchemeCommand::getData(ThreadContext* ctx) thr
 }
 void GetTableSchemeCommand::executeOnServer(RemoteTableStorageServer* tableStorageServer, BufferedOutputStream* outStream, ThreadContext* ctx)
 {
+	tableStorageServer->getSchemeInfo(data, ctx);
+	writeByteStream(outStream, ctx);
 }
 void GetTableSchemeCommand::readFromStream(InputStream* stream, int remain, ThreadContext* ctx)
 {
+	IArrayObjectPrimitive<char>* src = ArrayAllocatorPrimitive<char>::allocatep(ctx, remain);
+	stream->read(src, ctx);
+	NetworkBinaryBuffer* buff = (new(ctx) NetworkBinaryBuffer(src, ctx));
+	this->data->readData(buff, ctx);
 }
 void GetTableSchemeCommand::writeByteStream(OutputStream* out, ThreadContext* ctx)
 {
+	NetworkBinaryBuffer* buff = (new(ctx) NetworkBinaryBuffer(32, ctx));
+	buff->putInt(AbstractRemoteStorageCommand::TYPE_GET_TABLE_SCHEME, ctx);
+	this->data->writeData(buff, ctx);
+	IArrayObjectPrimitive<char>* b = buff->toBinary(ctx);
+	int pos = buff->getPutSize(ctx);
+	out->write(b, 0, pos, ctx);
+	out->flush(ctx);
 }
 }}}}
 

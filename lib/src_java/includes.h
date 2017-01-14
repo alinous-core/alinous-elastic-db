@@ -246,6 +246,10 @@
 #include "alinous.btree/IBTree.h"
 #include "alinous.btree/BTree.h"
 #include "alinous.btree/IntKey.h"
+#include "alinous.remote.db.command.data/StorageNodeData.h"
+#include "alinous.remote.db.command.data/TableClusterData.h"
+#include "alinous.remote.db.command.data/SchemaData.h"
+#include "alinous.remote.db.command.data/SchemasStructureInfoData.h"
 #include "alinous.html/DomDocument.h"
 #include "alinous.html.xpath.match/MatchingException.h"
 #include "alinous.html.xpath/IXpathElement.h"
@@ -315,10 +319,6 @@
 #include "alinous.remote.db.command/TerminateRemoteStorageCommand.h"
 #include "alinous.remote.db.command/VoidRemoteStorageCommand.h"
 #include "alinous.remote.db.command/RemoteStorageConnectCommand.h"
-#include "alinous.remote.db.command.data/StorageNodeData.h"
-#include "alinous.remote.db.command.data/TableClusterData.h"
-#include "alinous.remote.db.command.data/SchemaData.h"
-#include "alinous.remote.db.command.data/SchemasStructureInfoData.h"
 #include "alinous.remote.db.command/GetTableSchemeCommand.h"
 #include "alinous.remote.db.command/RemoteStorageCommandReader.h"
 #include "alinous.remote.db/RemoteStorageResponceAction.h"
@@ -397,6 +397,7 @@
 #include "alinous.compile.sql/CommitStatement.h"
 #include "alinous.compile.sql.ddl/CheckDefinition.h"
 #include "alinous.db.table/TableColumnMetadata.h"
+#include "alinous.db.table/TablePartitionMaxValue.h"
 #include "alinous.db.table/TableMetadata.h"
 #include "alinous.db.table/TableIndexMetadata.h"
 #include "alinous.compile.sql.analyze/ScanTableColumnMetadata.h"
@@ -1475,6 +1476,7 @@ inline static void __cleanUpStatics(alinous::ThreadContext* ctx){
 	alinous::db::table::AbstractDatabaseTable::__cleanUp(ctx);
 	alinous::db::table::IDatabaseTable::__cleanUp(ctx);
 	alinous::db::table::IOidPublisher::__cleanUp(ctx);
+	alinous::db::table::TablePartitionMaxValue::__cleanUp(ctx);
 	alinous::db::table::DatatableLockSupport::__cleanUp(ctx);
 	alinous::db::table::DatabaseException::__cleanUp(ctx);
 	alinous::db::table::TableIndexValue::__cleanUp(ctx);

@@ -359,6 +359,13 @@ template class alinous::RawArray<alinous::ArrayObject<alinous::IArrayObject<::al
 template class alinous::RawArray<alinous::ArrayObject<::alinous::db::ITableSchema>>;
 template class alinous::RawArray<alinous::IArrayObject<alinous::ArrayObject<::alinous::db::ITableSchema>>>;
 template class alinous::RawArray<alinous::ArrayObject<alinous::ArrayObject<::alinous::db::ITableSchema>>>;
+template class alinous::RawArray<::alinous::runtime::variant::VariantValue>;
+template class alinous::RawArray<alinous::IArrayObject<::alinous::runtime::variant::VariantValue>>;
+template class alinous::RawArray<alinous::IArrayObject<alinous::IArrayObject<::alinous::runtime::variant::VariantValue>>>;
+template class alinous::RawArray<alinous::ArrayObject<alinous::IArrayObject<::alinous::runtime::variant::VariantValue>>>;
+template class alinous::RawArray<alinous::ArrayObject<::alinous::runtime::variant::VariantValue>>;
+template class alinous::RawArray<alinous::IArrayObject<alinous::ArrayObject<::alinous::runtime::variant::VariantValue>>>;
+template class alinous::RawArray<alinous::ArrayObject<alinous::ArrayObject<::alinous::runtime::variant::VariantValue>>>;
 template class alinous::RawArray<::alinous::remote::monitor::NodeInfo>;
 template class alinous::RawArray<alinous::IArrayObject<::alinous::remote::monitor::NodeInfo>>;
 template class alinous::RawArray<alinous::IArrayObject<alinous::IArrayObject<::alinous::remote::monitor::NodeInfo>>>;
@@ -555,13 +562,6 @@ template class alinous::RawArray<alinous::ArrayObject<alinous::IArrayObject<::al
 template class alinous::RawArray<alinous::ArrayObject<::alinous::compile::sql::analyze::ScanTableColumnIdentifier>>;
 template class alinous::RawArray<alinous::IArrayObject<alinous::ArrayObject<::alinous::compile::sql::analyze::ScanTableColumnIdentifier>>>;
 template class alinous::RawArray<alinous::ArrayObject<alinous::ArrayObject<::alinous::compile::sql::analyze::ScanTableColumnIdentifier>>>;
-template class alinous::RawArray<::alinous::runtime::variant::VariantValue>;
-template class alinous::RawArray<alinous::IArrayObject<::alinous::runtime::variant::VariantValue>>;
-template class alinous::RawArray<alinous::IArrayObject<alinous::IArrayObject<::alinous::runtime::variant::VariantValue>>>;
-template class alinous::RawArray<alinous::ArrayObject<alinous::IArrayObject<::alinous::runtime::variant::VariantValue>>>;
-template class alinous::RawArray<alinous::ArrayObject<::alinous::runtime::variant::VariantValue>>;
-template class alinous::RawArray<alinous::IArrayObject<alinous::ArrayObject<::alinous::runtime::variant::VariantValue>>>;
-template class alinous::RawArray<alinous::ArrayObject<alinous::ArrayObject<::alinous::runtime::variant::VariantValue>>>;
 template class alinous::RawArray<::alinous::compile::sql::UpdateSet>;
 template class alinous::RawArray<alinous::IArrayObject<::alinous::compile::sql::UpdateSet>>;
 template class alinous::RawArray<alinous::IArrayObject<alinous::IArrayObject<::alinous::compile::sql::UpdateSet>>>;

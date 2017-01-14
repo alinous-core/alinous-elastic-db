@@ -54,6 +54,9 @@ class RemoteStorageResponceActionFactory;}}}
 namespace alinous {namespace remote {namespace socket {
 class SocketServer;}}}
 
+namespace alinous {namespace remote {namespace db {namespace command {namespace data {
+class SchemasStructureInfoData;}}}}}
+
 namespace alinous {namespace btree {
 class IntKey;}}
 
@@ -86,6 +89,7 @@ using ::alinous::btree::LongValue;
 using ::alinous::db::AlinousDbException;
 using ::alinous::db::SchemaManager;
 using ::alinous::db::table::DatabaseException;
+using ::alinous::remote::db::command::data::SchemasStructureInfoData;
 using ::alinous::remote::socket::SocketServer;
 using ::alinous::runtime::dom::VariableException;
 using ::alinous::runtime::parallel::ThreadPool;
@@ -132,6 +136,7 @@ public:
 	void start(AlinousCore* core, ThreadContext* ctx);
 	void dispose(ThreadContext* ctx) throw() ;
 	AlinousCore* getCore(ThreadContext* ctx) throw() ;
+	void getSchemeInfo(SchemasStructureInfoData* data, ThreadContext* ctx) throw() ;
 private:
 	void initInstance(AlinousCore* core, ThreadContext* ctx);
 	File* getConfigFile(ThreadContext* ctx) throw() ;

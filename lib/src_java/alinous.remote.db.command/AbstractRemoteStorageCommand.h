@@ -21,6 +21,9 @@ class BufferedOutputStream;}}
 namespace java {namespace io {
 class IOException;}}
 
+namespace alinous {namespace runtime {namespace dom {
+class VariableException;}}}
+
 namespace alinous {namespace system {
 class AlinousException;}}
 
@@ -43,6 +46,7 @@ using ::java::io::InputStream;
 using ::java::io::OutputStream;
 using ::alinous::net::AlinousSocket;
 using ::alinous::remote::db::RemoteTableStorageServer;
+using ::alinous::runtime::dom::VariableException;
 using ::alinous::system::AlinousException;
 
 

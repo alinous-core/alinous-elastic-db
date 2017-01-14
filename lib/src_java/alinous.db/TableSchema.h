@@ -3,6 +3,9 @@
 namespace alinous{namespace annotation{
 class OneSource;
 }}
+namespace alinous {namespace remote {namespace db {namespace command {namespace data {
+class SchemaData;}}}}}
+
 namespace java {namespace io {
 class File;}}
 
@@ -60,6 +63,9 @@ class ITableSchema;}}
 namespace alinous {namespace db {namespace table {
 class DatabaseException;}}}
 
+namespace alinous {namespace runtime {namespace dom {
+class VariableException;}}}
+
 namespace alinous {namespace system {
 class AlinousException;}}
 
@@ -90,6 +96,8 @@ using ::alinous::db::table::DatabaseTable;
 using ::alinous::db::table::IDatabaseTable;
 using ::alinous::db::table::IOidPublisher;
 using ::alinous::db::table::TableMetadata;
+using ::alinous::remote::db::command::data::SchemaData;
+using ::alinous::runtime::dom::VariableException;
 using ::alinous::runtime::parallel::ThreadPool;
 using ::alinous::system::AlinousCore;
 using ::alinous::system::AlinousException;
@@ -113,6 +121,7 @@ private:
 	HashMap<String,IDatabaseTable>* tableStores;
 	String* regionName;
 public:
+	SchemaData* toCommandData(ThreadContext* ctx) throw() ;
 	void create(ThreadContext* ctx) throw() ;
 	void initAfterFetched(String* dataDir, String* schemaName, ThreadPool* threadPool, IOidPublisher* oidPublisher, AlinousCore* core, BTreeGlobalCache* cache, ThreadContext* ctx);
 	String* getSchemaDir(ThreadContext* ctx) throw() ;
@@ -121,7 +130,7 @@ public:
 	TableMetadata* getDableMetadata(String* tableName, ThreadContext* ctx) throw() ;
 	Set<String>* getTableNames(ThreadContext* ctx) throw() ;
 	void addTableMetadata(TableMetadata* tblMetadata, ThreadContext* ctx) throw() ;
-	void appendToEntry(FileStorageEntryBuilder* builder, ThreadContext* ctx) throw()  final;
+	void appendToEntry(FileStorageEntryBuilder* builder, ThreadContext* ctx) final;
 	int diskSize(ThreadContext* ctx) throw()  final;
 	bool equals(IObject* obj, ThreadContext* ctx) throw()  final;
 	bool equals(TableSchema* other, ThreadContext* ctx) throw() ;

@@ -42,8 +42,17 @@ class FileStorageEntryBuilder;}}}
 namespace alinous {namespace btree {
 class IValueFetcher;}}
 
+namespace alinous {namespace remote {namespace db {namespace command {namespace data {
+class SchemasStructureInfoData;}}}}}
+
+namespace alinous {namespace remote {namespace db {namespace command {namespace data {
+class SchemaData;}}}}}
+
 namespace java {namespace util {
 template <typename  T, typename V> class HashMap;}}
+
+namespace alinous {namespace lock {
+class LockObject;}}
 
 namespace alinous {namespace db {namespace table {
 class IOidPublisher;}}}
@@ -59,6 +68,9 @@ class BTreeException;}}
 
 namespace alinous {namespace db {namespace table {
 class DatabaseException;}}}
+
+namespace alinous {namespace runtime {namespace dom {
+class VariableException;}}}
 
 namespace alinous {namespace system {
 class AlinousException;}}
@@ -90,6 +102,10 @@ using ::alinous::db::table::DatabaseTable;
 using ::alinous::db::table::IDatabaseTable;
 using ::alinous::db::table::IOidPublisher;
 using ::alinous::db::table::TableMetadata;
+using ::alinous::lock::LockObject;
+using ::alinous::remote::db::command::data::SchemaData;
+using ::alinous::remote::db::command::data::SchemasStructureInfoData;
+using ::alinous::runtime::dom::VariableException;
 using ::alinous::runtime::parallel::ThreadPool;
 using ::alinous::system::AlinousCore;
 using ::alinous::system::AlinousException;
@@ -108,6 +124,7 @@ public:
 private:
 	String* dataDir;
 	HashMap<String,TableSchema>* schemas;
+	LockObject* schemeLock;
 	ISystemLog* logger;
 	ThreadPool* threadPool;
 	IOidPublisher* oidPublisher;
@@ -116,10 +133,13 @@ public:
 	TableSchema* createSchema(String* name, ThreadContext* ctx) throw() ;
 	TableSchema* getSchema(String* name, ThreadContext* ctx) throw() ;
 	void loadAfterFetch(String* dataDir, ISystemLog* logger, ThreadPool* threadPool, AlinousCore* core, BTreeGlobalCache* cache, ThreadContext* ctx);
-	void appendToEntry(FileStorageEntryBuilder* builder, ThreadContext* ctx) throw()  final;
+	void appendToEntry(FileStorageEntryBuilder* builder, ThreadContext* ctx) final;
 	int diskSize(ThreadContext* ctx) throw()  final;
 	bool equals(IObject* obj, ThreadContext* ctx) throw()  final;
 	IValueFetcher* getFetcher(ThreadContext* ctx) throw()  final;
+	void getSchemaData(SchemasStructureInfoData* data, ThreadContext* ctx) throw() ;
+private:
+	void doCreateTable(String* schemaName, TableMetadata* tableMetadata, ThreadPool* threadPool, AlinousCore* core, BTreeGlobalCache* cache, ThreadContext* ctx);
 public:
 	static SchemaManager* valueFromFetcher(FileStorageEntryFetcher* fetcher, ThreadContext* ctx);
 public:

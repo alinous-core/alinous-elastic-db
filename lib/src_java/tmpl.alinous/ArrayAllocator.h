@@ -39,6 +39,7 @@ template class alinous::ArrayAllocator<::alinous::system::config::remote::Region
 template class alinous::ArrayAllocator<::alinous::system::config::remote::Region>;
 template class alinous::ArrayAllocator<::alinous::db::ITableRegion>;
 template class alinous::ArrayAllocator<::alinous::db::ITableSchema>;
+template class alinous::ArrayAllocator<::alinous::runtime::variant::VariantValue>;
 template class alinous::ArrayAllocator<::alinous::remote::monitor::NodeInfo>;
 template class alinous::ArrayAllocator<::alinous::remote::region::NodeTableReference>;
 template class alinous::ArrayAllocator<::alinous::remote::db::command::data::SchemasStructureInfoData>;
@@ -67,7 +68,6 @@ template class alinous::ArrayAllocator<::alinous::compile::sql::ddl::Unique>;
 template class alinous::ArrayAllocator<::alinous::compile::sql::ddl::CheckDefinition>;
 template class alinous::ArrayAllocator<::alinous::compile::sql::expression::ISQLExpression>;
 template class alinous::ArrayAllocator<::alinous::compile::sql::analyze::ScanTableColumnIdentifier>;
-template class alinous::ArrayAllocator<::alinous::runtime::variant::VariantValue>;
 template class alinous::ArrayAllocator<::alinous::compile::sql::UpdateSet>;
 template class alinous::ArrayAllocator<::alinous::db::trx::cache::CulumnOrder>;
 template class alinous::ArrayAllocator<::alinous::runtime::dom::IDomVariable>;

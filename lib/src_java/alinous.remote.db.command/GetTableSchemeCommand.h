@@ -12,6 +12,9 @@ class BufferedOutputStream;}}
 namespace java {namespace io {
 class OutputStream;}}
 
+namespace alinous {namespace remote {namespace socket {
+class NetworkBinaryBuffer;}}}
+
 namespace java {namespace io {
 class InputStream;}}
 
@@ -20,6 +23,9 @@ class AbstractRemoteStorageCommand;}}}}
 
 namespace java {namespace io {
 class IOException;}}
+
+namespace alinous {namespace runtime {namespace dom {
+class VariableException;}}}
 
 namespace alinous {
 class ThreadContext;
@@ -36,6 +42,8 @@ using ::java::io::InputStream;
 using ::java::io::OutputStream;
 using ::alinous::remote::db::RemoteTableStorageServer;
 using ::alinous::remote::db::command::data::SchemasStructureInfoData;
+using ::alinous::remote::socket::NetworkBinaryBuffer;
+using ::alinous::runtime::dom::VariableException;
 
 
 
@@ -43,12 +51,8 @@ class GetTableSchemeCommand final : public AbstractRemoteStorageCommand {
 public:
 	GetTableSchemeCommand(const GetTableSchemeCommand& base) = default;
 public:
-	GetTableSchemeCommand(ThreadContext* ctx) throw()  : IObject(ctx), AbstractRemoteStorageCommand(ctx), data(__GC_INS(this, (new(ctx) SchemasStructureInfoData(ctx)), SchemasStructureInfoData))
-	{
-	}
-	void __construct_impl(ThreadContext* ctx) throw() 
-	{
-	}
+	GetTableSchemeCommand(ThreadContext* ctx) throw() ;
+	void __construct_impl(ThreadContext* ctx) throw() ;
 	virtual ~GetTableSchemeCommand() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 private:

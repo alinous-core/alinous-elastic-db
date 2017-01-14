@@ -147,6 +147,10 @@ void AbstractDatabaseTable::open(bool loadscheme, AlinousCore* core, BTreeGlobal
 			{
 				throw (new(ctx) DatabaseException(e, ctx));
 			}
+			catch(VariableException* e)
+			{
+				throw (new(ctx) DatabaseException(e, ctx));
+			}
 		}
 	}
 	{

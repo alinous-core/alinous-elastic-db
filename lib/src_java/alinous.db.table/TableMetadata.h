@@ -33,6 +33,12 @@ class CheckDefinition;}}}}
 namespace java {namespace util {
 template <typename  T, typename V> class HashMap;}}
 
+namespace alinous {namespace db {namespace table {
+class TablePartitionMaxValue;}}}
+
+namespace alinous {namespace runtime {namespace dom {
+class VariableException;}}}
+
 namespace java {namespace lang {
 class IObject;
 }}
@@ -54,6 +60,7 @@ using ::alinous::buffer::storage::FileStorageEntryBuilder;
 using ::alinous::buffer::storage::FileStorageEntryFetcher;
 using ::alinous::compile::sql::ddl::CheckDefinition;
 using ::alinous::db::AlinousDbException;
+using ::alinous::runtime::dom::VariableException;
 
 
 
@@ -75,9 +82,10 @@ private:
 	String* schema;
 	String* tableName;
 	ArrayList<CheckDefinition>* checks;
+	TablePartitionMaxValue* maxPartitionValue;
 public:
 	int fileSize(ThreadContext* ctx) throw() ;
-	void toFileEntry(FileStorageEntryBuilder* builder, ThreadContext* ctx) throw() ;
+	void toFileEntry(FileStorageEntryBuilder* builder, ThreadContext* ctx);
 	void addindex(TableIndexMetadata* indexMeta, ThreadContext* ctx) throw() ;
 	void addColumn(String* name, int type, int length, ThreadContext* ctx) throw() ;
 	void addColumn(TableColumnMetadata* meta, ThreadContext* ctx) throw() ;
