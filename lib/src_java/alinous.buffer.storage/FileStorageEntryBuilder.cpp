@@ -109,6 +109,17 @@ void FileStorageEntryBuilder::putDouble(double dbl, ThreadContext* ctx) throw()
 	}
 	this->buff->putDouble(dbl, ctx);
 }
+void FileStorageEntryBuilder::putBoolean(bool value, ThreadContext* ctx) throw() 
+{
+	if(value)
+	{
+		putByte(((char)1), ctx);
+	}
+		else 
+	{
+		putByte(((char)0), ctx);
+	}
+}
 void FileStorageEntryBuilder::putByte(char value, ThreadContext* ctx) throw() 
 {
 	if(this->buff->remaining(ctx) < 1)

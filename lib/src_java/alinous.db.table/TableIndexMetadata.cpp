@@ -18,7 +18,7 @@ bool TableIndexMetadata::__init_static_variables(){
 	delete ctx;
 	return true;
 }
- TableIndexMetadata::TableIndexMetadata(String* name, ArrayList<String>* columns, ThreadContext* ctx) throw()  : IObject(ctx), name(nullptr), columns(nullptr), metadata(GCUtils<ArrayList<TableColumnMetadata> >::ins(this, (new(ctx) ArrayList<TableColumnMetadata>(ctx)), ctx, __FILEW__, __LINE__, L""))
+ TableIndexMetadata::TableIndexMetadata(String* name, ArrayList<String>* columns, ThreadContext* ctx) throw()  : IObject(ctx), ICommandData(ctx), name(nullptr), columns(nullptr), metadata(GCUtils<ArrayList<TableColumnMetadata> >::ins(this, (new(ctx) ArrayList<TableColumnMetadata>(ctx)), ctx, __FILEW__, __LINE__, L""))
 {
 	__GC_MV(this, &(this->name), name, String);
 	GCUtils<ArrayList<String> >::mv(this, &(this->columns), columns, ctx);
@@ -57,9 +57,46 @@ void TableIndexMetadata::setupColumnMetadata(TableMetadata* meta, ThreadContext*
 		TableColumnMetadata* col = meta->getColumnByName(name, ctx);
 		if(col == nullptr)
 		{
-			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1665()->clone(ctx)->append(name, ctx)->append(ConstStr::getCNST_STR_1666(), ctx)->append(this->name, ctx), ctx));
+			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1668()->clone(ctx)->append(name, ctx)->append(ConstStr::getCNST_STR_1669(), ctx)->append(this->name, ctx), ctx));
 		}
 		this->metadata->add(col, ctx);
+	}
+}
+void TableIndexMetadata::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
+{
+	if(this->columns == nullptr)
+	{
+		GCUtils<ArrayList<String> >::mv(this, &(this->columns), (new(ctx) ArrayList<String>(ctx)), ctx);
+	}
+	__GC_MV(this, &(this->name), buff->getString(ctx), String);
+	int maxLoop = buff->getInt(ctx);
+	for(int i = 0; i != maxLoop; ++i)
+	{
+		String* col = buff->getString(ctx);
+		this->columns->add(col, ctx);
+	}
+	maxLoop = buff->getInt(ctx);
+	for(int i = 0; i != maxLoop; ++i)
+	{
+		TableColumnMetadata* meta = (new(ctx) TableColumnMetadata(ctx));
+		meta->readData(buff, ctx);
+	}
+}
+void TableIndexMetadata::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+{
+	buff->putString(this->name, ctx);
+	int maxLoop = this->columns->size(ctx);
+	buff->putInt(maxLoop, ctx);
+	for(int i = 0; i != maxLoop; ++i)
+	{
+		String* col = this->columns->get(i, ctx);
+		buff->putString(col, ctx);
+	}
+	maxLoop = this->metadata->size(ctx);
+	for(int i = 0; i != maxLoop; ++i)
+	{
+		TableColumnMetadata* meta = this->metadata->get(i, ctx);
+		meta->writeData(buff, ctx);
 	}
 }
 int TableIndexMetadata::fileSize(ThreadContext* ctx) throw() 

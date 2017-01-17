@@ -61,9 +61,10 @@ void NodeReference::dispose(ThreadContext* ctx) throw()
 		this->nodeConnectionPool->dispose(ctx);
 	}
 }
-SchemasStructureInfoData* NodeReference::getSchemeInfo(ThreadContext* ctx)
+SchemasStructureInfoData* NodeReference::getSchemeInfo(String* region, ThreadContext* ctx)
 {
 	GetTableSchemeCommand* cmd = (new(ctx) GetTableSchemeCommand(ctx));
+	cmd->setRegion(region, ctx);
 	ISocketConnection* con = nullptr;
 	{
 		std::function<void(void)> finallyLm2= [&, this]()
@@ -78,17 +79,17 @@ SchemasStructureInfoData* NodeReference::getSchemeInfo(ThreadContext* ctx)
 			AbstractRemoteStorageCommand* retcmd = cmd->sendCommand(socket, ctx);
 			if(retcmd->getType(ctx) != AbstractRemoteStorageCommand::TYPE_GET_TABLE_SCHEME)
 			{
-				throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3550(), ctx));
+				throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3553(), ctx));
 			}
 			cmd = static_cast<GetTableSchemeCommand*>(retcmd);
 		}
 		catch(UnknownHostException* e)
 		{
-			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3551(), e, ctx));
+			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3554(), e, ctx));
 		}
 		catch(IOException* e)
 		{
-			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3552(), e, ctx));
+			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3555(), e, ctx));
 		}
 	}
 	return cmd->getData(ctx);

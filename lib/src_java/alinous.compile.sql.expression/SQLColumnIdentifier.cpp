@@ -245,6 +245,60 @@ void SQLColumnIdentifier::writeData(NetworkBinaryBuffer* buff, ThreadContext* ct
 		buff->putString(this->asName, ctx);
 	}
 }
+int SQLColumnIdentifier::fileSize(ThreadContext* ctx) throw() 
+{
+	int total = 4;
+	total += 1;
+	bool isnull = (this->id == nullptr);
+	total += 1;
+	if(!isnull)
+	{
+		total += this->id->fileSize(ctx);
+	}
+	isnull = (this->asName == nullptr);
+	total += 1;
+	if(!isnull)
+	{
+		total += this->asName->length(ctx) * 2 + 4;
+	}
+	return total;
+}
+void SQLColumnIdentifier::toFileEntry(FileStorageEntryBuilder* builder, ThreadContext* ctx) throw() 
+{
+	builder->putInt(IExpressionFactory::__SQLColumnIdentifier, ctx);
+	builder->putBoolean(this->distinct, ctx);
+	bool isnull = (this->id == nullptr);
+	builder->putBoolean(isnull, ctx);
+	if(!isnull)
+	{
+		this->id->toFileEntry(builder, ctx);
+	}
+	isnull = (this->asName == nullptr);
+	builder->putBoolean(isnull, ctx);
+	if(!isnull)
+	{
+		builder->putString(this->asName, ctx);
+	}
+}
+void SQLColumnIdentifier::fromFileEntry(FileStorageEntryFetcher* fetcher, ThreadContext* ctx)
+{
+	this->distinct = fetcher->fetchBoolean(ctx);
+	bool isnull = fetcher->fetchBoolean(ctx);
+	if(!isnull)
+	{
+		AlinousName* exp = AlinousName::fromFileEntry(fetcher, ctx);
+		if(exp != nullptr)
+		{
+			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_970(), ctx));
+		}
+		__GC_MV(this, &(this->id), exp, AlinousName);
+	}
+	isnull = fetcher->fetchBoolean(ctx);
+	if(!isnull)
+	{
+		__GC_MV(this, &(this->asName), fetcher->fetchString(ctx), String);
+	}
+}
 void SQLColumnIdentifier::analyseColumnOrder(TableAndSchema* tableSc, SQLAnalyseContext* context, ThreadContext* ctx) throw() 
 {
 	int maxLoop = context->getTables(ctx)->size(ctx);

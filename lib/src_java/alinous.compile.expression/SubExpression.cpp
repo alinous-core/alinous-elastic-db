@@ -130,5 +130,42 @@ void SubExpression::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) thr
 		this->exp->writeData(buff, ctx);
 	}
 }
+int SubExpression::fileSize(ThreadContext* ctx)
+{
+	int total = 4;
+	total += 4;
+	bool isnull = (this->exp == nullptr);
+	total += 1;
+	if(!isnull)
+	{
+		total += this->exp->fileSize(ctx);
+	}
+	return total;
+}
+void SubExpression::toFileEntry(FileStorageEntryBuilder* builder, ThreadContext* ctx)
+{
+	builder->putInt(IExpressionFactory::__SubExpression, ctx);
+	builder->putInt(this->op, ctx);
+	bool isnull = (this->exp == nullptr);
+	builder->putBoolean(isnull, ctx);
+	if(!isnull)
+	{
+		this->exp->toFileEntry(builder, ctx);
+	}
+}
+void SubExpression::fromFileEntry(FileStorageEntryFetcher* fetcher, ThreadContext* ctx)
+{
+	this->op = fetcher->fetchInt(ctx);
+	bool isnull = fetcher->fetchBoolean(ctx);
+	if(!isnull)
+	{
+		IExpression* el = IExpressionFactory::fromFetcher(fetcher, ctx);
+		if(el == nullptr || !((dynamic_cast<IExpression*>(el) != 0)))
+		{
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_980(), ctx));
+		}
+		__GC_MV(this, &(this->exp), static_cast<IExpression*>(el), IExpression);
+	}
+}
 }}}
 

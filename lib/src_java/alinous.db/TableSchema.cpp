@@ -22,13 +22,13 @@ bool TableSchema::__init_static_variables(){
 {
 	__GC_MV(this, &(this->dataDir), dataDir, String);
 	__GC_MV(this, &(this->name), name, String);
-	__GC_MV(this, &(this->regionName), ConstStr::getCNST_STR_1656(), String);
+	__GC_MV(this, &(this->regionName), ConstStr::getCNST_STR_1659(), String);
 }
 void TableSchema::__construct_impl(String* name, String* dataDir, ThreadContext* ctx) throw() 
 {
 	__GC_MV(this, &(this->dataDir), dataDir, String);
 	__GC_MV(this, &(this->name), name, String);
-	__GC_MV(this, &(this->regionName), ConstStr::getCNST_STR_1656(), String);
+	__GC_MV(this, &(this->regionName), ConstStr::getCNST_STR_1659(), String);
 }
  TableSchema::~TableSchema() throw() 
 {
@@ -56,10 +56,18 @@ void TableSchema::__releaseRegerences(bool prepare, ThreadContext* ctx) throw()
 		return;
 	}
 }
-SchemaData* TableSchema::toCommandData(ThreadContext* ctx) throw() 
+SchemaData* TableSchema::toCommandData(String* region, ThreadContext* ctx) throw() 
 {
 	SchemaData* data = (new(ctx) SchemaData(ctx));
 	data->setName(name, ctx);
+	Iterator<String>* it = this->tables->keySet(ctx)->iterator(ctx);
+	while(it->hasNext(ctx))
+	{
+		String* tableName = it->next(ctx);
+		TableMetadata* table = this->tables->get(tableName, ctx);
+		TableClusterData* tabledata = table->toCommandData(region, ctx);
+		data->addTable(tabledata, ctx);
+	}
 	return data;
 }
 void TableSchema::create(ThreadContext* ctx) throw() 

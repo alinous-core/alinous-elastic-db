@@ -6,6 +6,15 @@ class OneSource;
 namespace alinous {namespace remote {namespace db {namespace command {namespace data {
 class SchemaData;}}}}}
 
+namespace java {namespace util {
+template <typename  T> class Iterator;}}
+
+namespace alinous {namespace db {namespace table {
+class TableMetadata;}}}
+
+namespace alinous {namespace remote {namespace db {namespace command {namespace data {
+class TableClusterData;}}}}}
+
 namespace java {namespace io {
 class File;}}
 
@@ -24,17 +33,11 @@ class BTreeGlobalCache;}}
 namespace java {namespace lang {
 class StringBuilder;}}
 
-namespace java {namespace util {
-template <typename  T> class Iterator;}}
-
 namespace alinous {namespace db {namespace table {
 class IDatabaseTable;}}}
 
 namespace alinous {namespace db {namespace table {
 class DatabaseTable;}}}
-
-namespace alinous {namespace db {namespace table {
-class TableMetadata;}}}
 
 namespace java {namespace util {
 template <typename  T> class Set;}}
@@ -97,6 +100,7 @@ using ::alinous::db::table::IDatabaseTable;
 using ::alinous::db::table::IOidPublisher;
 using ::alinous::db::table::TableMetadata;
 using ::alinous::remote::db::command::data::SchemaData;
+using ::alinous::remote::db::command::data::TableClusterData;
 using ::alinous::runtime::dom::VariableException;
 using ::alinous::runtime::parallel::ThreadPool;
 using ::alinous::system::AlinousCore;
@@ -121,7 +125,7 @@ private:
 	HashMap<String,IDatabaseTable>* tableStores;
 	String* regionName;
 public:
-	SchemaData* toCommandData(ThreadContext* ctx) throw() ;
+	SchemaData* toCommandData(String* region, ThreadContext* ctx) throw() ;
 	void create(ThreadContext* ctx) throw() ;
 	void initAfterFetched(String* dataDir, String* schemaName, ThreadPool* threadPool, IOidPublisher* oidPublisher, AlinousCore* core, BTreeGlobalCache* cache, ThreadContext* ctx);
 	String* getSchemaDir(ThreadContext* ctx) throw() ;

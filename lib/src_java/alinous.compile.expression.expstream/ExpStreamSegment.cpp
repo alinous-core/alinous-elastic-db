@@ -265,6 +265,76 @@ void ExpStreamSegment::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) 
 		exp->writeData(buff, ctx);
 	}
 }
+int ExpStreamSegment::fileSize(ThreadContext* ctx)
+{
+	int total = 4;
+	bool isnull = (this->prefix == nullptr);
+	total += 1;
+	if(!isnull)
+	{
+		total += this->prefix->length(ctx) * 2 + 4;
+	}
+	isnull = (this->name == nullptr);
+	total += 1;
+	if(!isnull)
+	{
+		total += this->name->length(ctx) * 2 + 4;
+	}
+	int maxLoop = this->arrayIndexes->size(ctx);
+	total += 4;
+	for(int i = 0; i < maxLoop; ++i)
+	{
+		IExpression* exp = this->arrayIndexes->get(i, ctx);
+		exp->fileSize(ctx);
+	}
+	return total;
+}
+void ExpStreamSegment::toFileEntry(FileStorageEntryBuilder* builder, ThreadContext* ctx)
+{
+	builder->putInt(IExpressionFactory::__ExpStreamSegment, ctx);
+	bool isnull = (this->prefix == nullptr);
+	builder->putBoolean(isnull, ctx);
+	if(!isnull)
+	{
+		builder->putString(this->prefix, ctx);
+	}
+	isnull = (this->name == nullptr);
+	builder->putBoolean(isnull, ctx);
+	if(!isnull)
+	{
+		builder->putString(this->name, ctx);
+	}
+	int maxLoop = this->arrayIndexes->size(ctx);
+	builder->putInt(maxLoop, ctx);
+	for(int i = 0; i < maxLoop; ++i)
+	{
+		IExpression* exp = this->arrayIndexes->get(i, ctx);
+		exp->toFileEntry(builder, ctx);
+	}
+}
+void ExpStreamSegment::fromFileEntry(FileStorageEntryFetcher* fetcher, ThreadContext* ctx)
+{
+	bool isnull = fetcher->fetchBoolean(ctx);
+	if(!isnull)
+	{
+		__GC_MV(this, &(this->prefix), fetcher->fetchString(ctx), String);
+	}
+	isnull = fetcher->fetchBoolean(ctx);
+	if(!isnull)
+	{
+		__GC_MV(this, &(this->name), fetcher->fetchString(ctx), String);
+	}
+	int maxLoop = fetcher->fetchInt(ctx);
+	for(int i = 0; i < maxLoop; ++i)
+	{
+		IExpression* el = IExpressionFactory::fromFetcher(fetcher, ctx);
+		if(el == nullptr || !((dynamic_cast<IExpression*>(el) != 0)))
+		{
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_980(), ctx));
+		}
+		this->arrayIndexes->add(static_cast<IExpression*>(el), ctx);
+	}
+}
 IAlinousVariable* ExpStreamSegment::returnMemberDomVariable(ScriptMachine* machine, bool debug, ThreadContext* ctx)
 {
 	if(!this->arrayIndexes->isEmpty(ctx))

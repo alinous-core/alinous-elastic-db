@@ -291,6 +291,42 @@ void ExpressionStream::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) 
 		exp->writeData(buff, ctx);
 	}
 }
+int ExpressionStream::fileSize(ThreadContext* ctx)
+{
+	int total = 4;
+	int maxLoop = this->segments->size(ctx);
+	total += 4;
+	for(int i = 0; i < maxLoop; ++i)
+	{
+		IExpression* exp = this->segments->get(i, ctx);
+		total += exp->fileSize(ctx);
+	}
+	return total;
+}
+void ExpressionStream::toFileEntry(FileStorageEntryBuilder* builder, ThreadContext* ctx)
+{
+	builder->putInt(IExpressionFactory::__ExpressionStream, ctx);
+	int maxLoop = this->segments->size(ctx);
+	builder->putInt(maxLoop, ctx);
+	for(int i = 0; i < maxLoop; ++i)
+	{
+		IExpression* exp = this->segments->get(i, ctx);
+		exp->toFileEntry(builder, ctx);
+	}
+}
+void ExpressionStream::fromFileEntry(FileStorageEntryFetcher* fetcher, ThreadContext* ctx)
+{
+	int maxLoop = fetcher->fetchInt(ctx);
+	for(int i = 0; i < maxLoop; ++i)
+	{
+		IExpression* el = IExpressionFactory::fromFetcher(fetcher, ctx);
+		if(el == nullptr || !((dynamic_cast<IExpression*>(el) != 0)))
+		{
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_980(), ctx));
+		}
+		this->segments->add(static_cast<IExpression*>(el), ctx);
+	}
+}
 bool ExpressionStream::isDom(int currentPosition, ThreadContext* ctx) throw() 
 {
 	int pos = currentPosition;

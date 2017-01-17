@@ -33,6 +33,9 @@ class AlinousDbException;}}
 namespace alinous {namespace runtime {namespace dom {
 class VariableException;}}}
 
+namespace alinous {namespace system {
+class AlinousException;}}
+
 namespace java {namespace lang {
 class IObject;
 }}
@@ -56,6 +59,7 @@ using ::alinous::compile::sql::analyze::ScanTableColumnIdentifier;
 using ::alinous::db::AlinousDbException;
 using ::alinous::runtime::dom::VariableException;
 using ::alinous::system::AlinousCore;
+using ::alinous::system::AlinousException;
 
 
 
@@ -84,7 +88,7 @@ public:
 	virtual void open(AlinousCore* core, BTreeGlobalCache* cache, ThreadContext* ctx) = 0;
 	virtual void close(ThreadContext* ctx) = 0;
 	virtual void appendToEntry(FileStorageEntryBuilder* builder, ThreadContext* ctx) = 0;
-	virtual int archiveSize(ThreadContext* ctx) throw()  = 0;
+	virtual int archiveSize(ThreadContext* ctx) = 0;
 public:
 	static bool __init_done;
 	static bool __init_static_variables();

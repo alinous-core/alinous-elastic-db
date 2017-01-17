@@ -54,6 +54,7 @@ public:
 	short fetchShort(ThreadContext* ctx) throw() ;
 	wchar_t fetchChar(ThreadContext* ctx) throw() ;
 	char fetchByte(ThreadContext* ctx) throw() ;
+	bool fetchBoolean(ThreadContext* ctx) throw() ;
 	float fetchFloat(ThreadContext* ctx) throw() ;
 	double fetchDouble(ThreadContext* ctx) throw() ;
 	String* fetchString(ThreadContext* ctx) throw() ;

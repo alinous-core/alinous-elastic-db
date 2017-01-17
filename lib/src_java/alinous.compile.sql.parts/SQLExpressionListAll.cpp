@@ -132,5 +132,34 @@ void SQLExpressionListAll::writeData(NetworkBinaryBuffer* buff, ThreadContext* c
 		buff->putString(this->asName, ctx);
 	}
 }
+int SQLExpressionListAll::fileSize(ThreadContext* ctx)
+{
+	int total = 4;
+	bool isnull = (this->asName == nullptr);
+	total += 1;
+	if(!isnull)
+	{
+		total += this->asName->length(ctx) * 2 + 4;
+	}
+	return total;
+}
+void SQLExpressionListAll::toFileEntry(FileStorageEntryBuilder* builder, ThreadContext* ctx)
+{
+	builder->putInt(IExpressionFactory::__SQLExpressionListAll, ctx);
+	bool isnull = (this->asName == nullptr);
+	builder->putBoolean(isnull, ctx);
+	if(!isnull)
+	{
+		builder->putString(this->asName, ctx);
+	}
+}
+void SQLExpressionListAll::fromFileEntry(FileStorageEntryFetcher* fetcher, ThreadContext* ctx)
+{
+	bool isnull = fetcher->fetchBoolean(ctx);
+	if(!isnull)
+	{
+		__GC_MV(this, &(this->asName), fetcher->fetchString(ctx), String);
+	}
+}
 }}}}
 

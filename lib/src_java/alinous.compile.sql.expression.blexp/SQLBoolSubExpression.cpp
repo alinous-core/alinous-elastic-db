@@ -197,5 +197,44 @@ void SQLBoolSubExpression::writeData(NetworkBinaryBuffer* buff, ThreadContext* c
 		this->exp->writeData(buff, ctx);
 	}
 }
+int SQLBoolSubExpression::fileSize(ThreadContext* ctx)
+{
+	int total = __fileSize(ctx);
+	total += 4;
+	bool isnull = (this->exp == nullptr);
+	total += 1;
+	if(!isnull)
+	{
+		total += this->exp->fileSize(ctx);
+	}
+	return total;
+}
+void SQLBoolSubExpression::toFileEntry(FileStorageEntryBuilder* builder, ThreadContext* ctx)
+{
+	builder->putInt(IExpressionFactory::__SQLBoolSubExpression, ctx);
+	__toFileEntry(builder, ctx);
+	builder->putInt(this->op, ctx);
+	bool isnull = (this->exp == nullptr);
+	builder->putBoolean(isnull, ctx);
+	if(!isnull)
+	{
+		this->exp->toFileEntry(builder, ctx);
+	}
+}
+void SQLBoolSubExpression::fromFileEntry(FileStorageEntryFetcher* fetcher, ThreadContext* ctx)
+{
+	__fromFileEntry(fetcher, ctx);
+	this->op = fetcher->fetchInt(ctx);
+	bool isnull = fetcher->fetchBoolean(ctx);
+	if(!isnull)
+	{
+		IExpression* el = IExpressionFactory::fromFetcher(fetcher, ctx);
+		if(el == nullptr || !((dynamic_cast<ISQLExpression*>(el) != 0)))
+		{
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1044(), ctx));
+		}
+		__GC_MV(this, &(this->exp), static_cast<ISQLExpression*>(el), ISQLExpression);
+	}
+}
 }}}}}
 

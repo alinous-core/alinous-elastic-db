@@ -36,6 +36,12 @@ class IAlinousElement;}}
 namespace alinous {namespace runtime {namespace dom {
 class VariableException;}}}
 
+namespace alinous {namespace buffer {namespace storage {
+class FileStorageEntryBuilder;}}}
+
+namespace alinous {namespace system {
+class AlinousNotSupportedException;}}
+
 namespace alinous {namespace compile {namespace sql {namespace expression {
 class AbstractSQLCollectionExpression;}}}}
 
@@ -64,6 +70,7 @@ using namespace ::alinous;
 using namespace ::java::lang;
 using ::java::util::Iterator;
 using ::java::util::ArrayList;
+using ::alinous::buffer::storage::FileStorageEntryBuilder;
 using ::alinous::compile::AlinousElementNetworkFactory;
 using ::alinous::compile::ExpressionSourceId;
 using ::alinous::compile::IAlinousElement;
@@ -79,6 +86,7 @@ using ::alinous::runtime::dom::VariableException;
 using ::alinous::runtime::engine::ScriptMachine;
 using ::alinous::runtime::variant::VariantValue;
 using ::alinous::system::AlinousException;
+using ::alinous::system::AlinousNotSupportedException;
 
 
 
@@ -112,6 +120,7 @@ public:
 	int getExpressionType(ThreadContext* ctx) throw()  final;
 	void readData(NetworkBinaryBuffer* buff, ThreadContext* ctx) final;
 	void writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw()  final;
+	void toFileEntry(FileStorageEntryBuilder* builder, ThreadContext* ctx) final;
 public:
 	static bool __init_done;
 	static bool __init_static_variables();

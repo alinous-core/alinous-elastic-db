@@ -71,10 +71,10 @@ void Node::setMaxCon(int maxCon, ThreadContext* ctx) throw()
 Node* Node::parseInstance(DomNode* dom, DomDocument* document, Matcher* matcher, String* alinousHome, ThreadContext* ctx)
 {
 	Node* node = (new(ctx) Node(ctx));
-	IVariableValue* attr = dom->getAttributeValue(ConstStr::getCNST_STR_1255(), ctx);
+	IVariableValue* attr = dom->getAttributeValue(ConstStr::getCNST_STR_1258(), ctx);
 	if(attr == nullptr)
 	{
-		throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_1260(), ctx));
+		throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_1263(), ctx));
 	}
 	{
 		try
@@ -84,18 +84,18 @@ Node* Node::parseInstance(DomNode* dom, DomDocument* document, Matcher* matcher,
 		}
 		catch(Throwable* e)
 		{
-			throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_1261(), ctx));
+			throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_1264(), ctx));
 		}
 	}
-	attr = dom->getAttributeValue(ConstStr::getCNST_STR_1262(), ctx);
+	attr = dom->getAttributeValue(ConstStr::getCNST_STR_1265(), ctx);
 	if(attr == nullptr)
 	{
-		throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_1263(), ctx));
+		throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_1266(), ctx));
 	}
 	String* dir = attr->toString(ctx)->trim(ctx);
 	dir = ConfigPathUtils::getAbsDirPath(alinousHome, dir, ctx);
 	node->setDataDir(dir, ctx);
-	MatchCandidatesCollection* result = matcher->match(document, dom, ConstStr::getCNST_STR_1264(), ctx);
+	MatchCandidatesCollection* result = matcher->match(document, dom, ConstStr::getCNST_STR_1267(), ctx);
 	ArrayList<MatchCandidate>* list = result->getCandidatesList(ctx);
 	if(!list->isEmpty(ctx))
 	{

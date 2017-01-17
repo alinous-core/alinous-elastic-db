@@ -42,5 +42,19 @@ int NullLiteral::getExpressionType(ThreadContext* ctx) throw()
 {
 	return IExpression::nullLiteral;
 }
+void NullLiteral::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
+{
+	__readData(buff, ctx);
+}
+void NullLiteral::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+{
+	buff->putInt(ICommandData::__NullLiteral, ctx);
+	__writeData(buff, ctx);
+}
+void NullLiteral::toFileEntry(FileStorageEntryBuilder* builder, ThreadContext* ctx)
+{
+	builder->putInt(IExpressionFactory::__NullLiteral, ctx);
+	__toFileEntry(builder, ctx);
+}
 }}}
 

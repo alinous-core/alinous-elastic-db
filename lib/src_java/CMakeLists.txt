@@ -694,6 +694,7 @@ set(srcjava
 	"src_java/alinous.compile.expression/SubExpression.cpp"
 	"src_java/alinous.compile.expression/ConditionalExpression.cpp"
 	"src_java/alinous.compile.expression/ParenthesisExpression.cpp"
+	"src_java/alinous.compile.expression/IExpressionFactory.cpp"
 	"src_java/alinous.compile.expression/DomNameSegment.cpp"
 	"src_java/alinous.compile.expression/DomIndexSegment.cpp"
 	"src_java/alinous.compile.expression/IExpression.cpp"

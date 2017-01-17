@@ -22,11 +22,13 @@ bool RemoteStorageResponceAction::__init_static_variables(){
 {
 	__GC_MV(this, &(this->socket), socket, Socket);
 	__GC_MV(this, &(this->server), server, SocketServer);
+	__GC_MV(this, &(this->tableStorageServer), tableStorageServer, RemoteTableStorageServer);
 }
 void RemoteStorageResponceAction::__construct_impl(RemoteTableStorageServer* tableStorageServer, Socket* socket, SocketServer* server, ThreadContext* ctx) throw() 
 {
 	__GC_MV(this, &(this->socket), socket, Socket);
 	__GC_MV(this, &(this->server), server, SocketServer);
+	__GC_MV(this, &(this->tableStorageServer), tableStorageServer, RemoteTableStorageServer);
 }
  RemoteStorageResponceAction::~RemoteStorageResponceAction() throw() 
 {
@@ -82,7 +84,7 @@ void RemoteStorageResponceAction::handleCommand(BufferedInputStream* stream, Buf
 		cmd = RemoteStorageCommandReader::readFromStream(stream, ctx);
 		if(cmd == nullptr)
 		{
-			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3534(), ctx));
+			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3537(), ctx));
 		}
 		int type = cmd->getType(ctx);
 		switch(type) {

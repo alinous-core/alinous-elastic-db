@@ -174,5 +174,41 @@ void SQLNotExpression::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) 
 		this->first->writeData(buff, ctx);
 	}
 }
+int SQLNotExpression::fileSize(ThreadContext* ctx)
+{
+	int total = __fileSize(ctx);
+	bool isnull = (this->first == nullptr);
+	total += 1;
+	if(!isnull)
+	{
+		total += this->first->fileSize(ctx);
+	}
+	return total;
+}
+void SQLNotExpression::toFileEntry(FileStorageEntryBuilder* builder, ThreadContext* ctx)
+{
+	builder->putInt(IExpressionFactory::__SQLNotExpression, ctx);
+	__toFileEntry(builder, ctx);
+	bool isnull = (this->first == nullptr);
+	builder->putBoolean(isnull, ctx);
+	if(!isnull)
+	{
+		this->first->toFileEntry(builder, ctx);
+	}
+}
+void SQLNotExpression::fromFileEntry(FileStorageEntryFetcher* fetcher, ThreadContext* ctx)
+{
+	__fromFileEntry(fetcher, ctx);
+	bool isnull = fetcher->fetchBoolean(ctx);
+	if(!isnull)
+	{
+		IExpression* el = IExpressionFactory::fromFetcher(fetcher, ctx);
+		if(el == nullptr || !((dynamic_cast<ISQLExpression*>(el) != 0)))
+		{
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1044(), ctx));
+		}
+		__GC_MV(this, &(this->first), static_cast<ISQLExpression*>(el), ISQLExpression);
+	}
+}
 }}}}}
 

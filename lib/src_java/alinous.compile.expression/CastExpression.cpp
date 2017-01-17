@@ -143,5 +143,61 @@ void CastExpression::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) th
 		this->exp->writeData(buff, ctx);
 	}
 }
+int CastExpression::fileSize(ThreadContext* ctx)
+{
+	int total = 4;
+	bool isnull = (this->type == nullptr);
+	total += 1;
+	if(!isnull)
+	{
+		this->type->fileSize(ctx);
+	}
+	isnull = (this->exp == nullptr);
+	total += 1;
+	if(!isnull)
+	{
+		this->exp->fileSize(ctx);
+	}
+	return total;
+}
+void CastExpression::toFileEntry(FileStorageEntryBuilder* builder, ThreadContext* ctx)
+{
+	builder->putInt(IExpressionFactory::__CastExpression, ctx);
+	bool isnull = (this->type == nullptr);
+	builder->putBoolean(isnull, ctx);
+	if(!isnull)
+	{
+		this->type->toFileEntry(builder, ctx);
+	}
+	isnull = (this->exp == nullptr);
+	builder->putBoolean(isnull, ctx);
+	if(!isnull)
+	{
+		this->exp->toFileEntry(builder, ctx);
+	}
+}
+void CastExpression::fromFileEntry(FileStorageEntryFetcher* fetcher, ThreadContext* ctx)
+{
+	bool isnull = fetcher->fetchBoolean(ctx);
+	if(!isnull)
+	{
+		IAlinousElement* el = AlinousName::fromFileEntry(fetcher, ctx);
+		if(el == nullptr || !((dynamic_cast<AlinousName*>(el) != 0)))
+		{
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_970(), ctx));
+		}
+		__GC_MV(this, &(this->type), static_cast<AlinousName*>(el), AlinousName);
+	}
+	isnull = fetcher->fetchBoolean(ctx);
+	if(!isnull)
+	{
+		IExpression* el = IExpressionFactory::fromFetcher(fetcher, ctx);
+		if(el == nullptr || !((dynamic_cast<IExpression*>(el) != 0)))
+		{
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_980(), ctx));
+		}
+		__GC_MV(this, &(this->exp), static_cast<IExpression*>(el), IExpression);
+	}
+}
 }}}
 

@@ -163,6 +163,53 @@ int Literal::getExpressionType(ThreadContext* ctx) throw()
 }
 void Literal::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 {
+	__readData(buff, ctx);
+}
+void Literal::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+{
+	buff->putInt(ICommandData::__Literal, ctx);
+	__writeData(buff, ctx);
+}
+int Literal::fileSize(ThreadContext* ctx)
+{
+	int total = 4;
+	total += 4;
+	bool isnull = (this->value == nullptr);
+	total += 1;
+	if(!isnull)
+	{
+		total += this->value->length(ctx) * 2 + 1;
+	}
+	return total;
+}
+void Literal::toFileEntry(FileStorageEntryBuilder* builder, ThreadContext* ctx)
+{
+	builder->putInt(IExpressionFactory::__Literal, ctx);
+	__toFileEntry(builder, ctx);
+}
+void Literal::__toFileEntry(FileStorageEntryBuilder* builder, ThreadContext* ctx)
+{
+	int type = fromEnum(ctx);
+	builder->putInt(type, ctx);
+	bool isnull = (this->value == nullptr);
+	builder->putBoolean(isnull, ctx);
+	if(!isnull)
+	{
+		builder->putString(this->value, ctx);
+	}
+}
+void Literal::fromFileEntry(FileStorageEntryFetcher* fetcher, ThreadContext* ctx)
+{
+	int num = fetcher->fetchInt(ctx);
+	toEnum(num, ctx);
+	bool isnull = fetcher->fetchBoolean(ctx);
+	if(!isnull)
+	{
+		__GC_MV(this, &(this->value), fetcher->fetchString(ctx), String);
+	}
+}
+void Literal::__readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
+{
 	int num = buff->getInt(ctx);
 	toEnum(num, ctx);
 	bool isnull = buff->getBoolean(ctx);
@@ -171,9 +218,8 @@ void Literal::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 		__GC_MV(this, &(this->value), buff->getString(ctx), String);
 	}
 }
-void Literal::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+void Literal::__writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
 {
-	buff->putInt(ICommandData::__Literal, ctx);
 	int type = fromEnum(ctx);
 	buff->putInt(type, ctx);
 	bool isnull = (this->value == nullptr);

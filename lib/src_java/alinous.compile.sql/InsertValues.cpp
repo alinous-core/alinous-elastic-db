@@ -271,5 +271,61 @@ void InsertValues::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) thro
 		this->domDesc->writeData(buff, ctx);
 	}
 }
+int InsertValues::fileSize(ThreadContext* ctx)
+{
+	int total = 4;
+	bool isnull = (this->vlist == nullptr);
+	total += 1;
+	if(!isnull)
+	{
+		total += this->vlist->fileSize(ctx);
+	}
+	isnull = (this->domDesc == nullptr);
+	total += 1;
+	if(!isnull)
+	{
+		total += this->domDesc->fileSize(ctx);
+	}
+	return total;
+}
+void InsertValues::toFileEntry(FileStorageEntryBuilder* builder, ThreadContext* ctx)
+{
+	builder->putInt(IExpressionFactory::__InsertValues, ctx);
+	bool isnull = (this->vlist == nullptr);
+	builder->putBoolean(isnull, ctx);
+	if(!isnull)
+	{
+		this->vlist->toFileEntry(builder, ctx);
+	}
+	isnull = (this->domDesc == nullptr);
+	builder->putBoolean(isnull, ctx);
+	if(!isnull)
+	{
+		this->domDesc->toFileEntry(builder, ctx);
+	}
+}
+void InsertValues::fromFileEntry(FileStorageEntryFetcher* fetcher, ThreadContext* ctx)
+{
+	bool isnull = fetcher->fetchBoolean(ctx);
+	if(!isnull)
+	{
+		IExpression* exp = IExpressionFactory::fromFetcher(fetcher, ctx);
+		if(exp != nullptr || !((dynamic_cast<SQLExpressionList*>(exp) != 0)))
+		{
+			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_1038(), ctx));
+		}
+		__GC_MV(this, &(this->vlist), static_cast<SQLExpressionList*>(exp), SQLExpressionList);
+	}
+	isnull = fetcher->fetchBoolean(ctx);
+	if(!isnull)
+	{
+		IExpression* exp = IExpressionFactory::fromFetcher(fetcher, ctx);
+		if(exp != nullptr || !((dynamic_cast<SQLExpressionStream*>(exp) != 0)))
+		{
+			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_1038(), ctx));
+		}
+		__GC_MV(this, &(this->domDesc), static_cast<SQLExpressionStream*>(exp), SQLExpressionStream);
+	}
+}
 }}}
 

@@ -90,15 +90,43 @@ void AbstractSQLBooleanExpression::__writeData(NetworkBinaryBuffer* buff, Thread
 		buff->putString(this->asName, ctx);
 	}
 }
+int AbstractSQLBooleanExpression::__fileSize(ThreadContext* ctx)
+{
+	int total = 4;
+	bool isnull = (this->asName == nullptr);
+	total += 1;
+	if(!isnull)
+	{
+		total += this->asName->length(ctx) * 2 + 4;
+	}
+	return total;
+}
+void AbstractSQLBooleanExpression::__toFileEntry(FileStorageEntryBuilder* builder, ThreadContext* ctx)
+{
+	bool isnull = (this->asName == nullptr);
+	builder->putBoolean(isnull, ctx);
+	if(!isnull)
+	{
+		builder->putString(this->asName, ctx);
+	}
+}
+void AbstractSQLBooleanExpression::__fromFileEntry(FileStorageEntryFetcher* fetcher, ThreadContext* ctx)
+{
+	bool isnull = fetcher->fetchBoolean(ctx);
+	if(!isnull)
+	{
+		__GC_MV(this, &(this->asName), fetcher->fetchString(ctx), String);
+	}
+}
 int AbstractSQLBooleanExpression::operatorFromString(String* opStr, ThreadContext* ctx) throw() 
 {
-	if(opStr->equalsIgnoreCase(ConstStr::getCNST_STR_1068(), ctx))
+	if(opStr->equalsIgnoreCase(ConstStr::getCNST_STR_1069(), ctx))
 	{
 		return AbstractSQLBooleanExpression::SQL_OR;
 	}
 		else 
 	{
-		if(opStr->equalsIgnoreCase(ConstStr::getCNST_STR_1069(), ctx))
+		if(opStr->equalsIgnoreCase(ConstStr::getCNST_STR_1070(), ctx))
 		{
 			return AbstractSQLBooleanExpression::SQL_AND;
 		}

@@ -66,6 +66,9 @@ class IBTreeValue;}}
 namespace alinous {namespace runtime {namespace dom {
 class VariableException;}}}
 
+namespace alinous {namespace system {
+class AlinousException;}}
+
 namespace java {namespace lang {
 class IObject;
 }}
@@ -92,6 +95,7 @@ using ::alinous::compile::sql::analyze::ScanTableColumnIdentifier;
 using ::alinous::db::AlinousDbException;
 using ::alinous::runtime::dom::VariableException;
 using ::alinous::system::AlinousCore;
+using ::alinous::system::AlinousException;
 
 
 
@@ -122,7 +126,7 @@ public:
 	bool isAvailableByScanId(ArrayList<ScanTableColumnIdentifier>* columnIds, ThreadContext* ctx) throw()  final;
 	void addIndexValue(DatabaseRecord* record, ThreadContext* ctx) final;
 	void createIndex(AlinousCore* core, BTreeGlobalCache* cache, ThreadContext* ctx) final;
-	int archiveSize(ThreadContext* ctx) throw()  final;
+	int archiveSize(ThreadContext* ctx) final;
 	void appendToEntry(FileStorageEntryBuilder* builder, ThreadContext* ctx) final;
 	BTree* getStorage(ThreadContext* ctx) throw()  final;
 	String* getName(ThreadContext* ctx) throw()  final;

@@ -60,7 +60,6 @@ void SchemasStructureInfoData::writeData(NetworkBinaryBuffer* buff, ThreadContex
 	{
 		String* schemeName = it->next(ctx);
 		SchemaData* data = this->schemas->get(schemeName, ctx);
-		buff->putString(schemeName, ctx);
 		data->writeData(buff, ctx);
 	}
 }

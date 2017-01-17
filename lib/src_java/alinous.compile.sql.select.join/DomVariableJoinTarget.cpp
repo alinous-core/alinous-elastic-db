@@ -59,7 +59,7 @@ bool DomVariableJoinTarget::analyse(SrcAnalyseContext* context, bool leftValue, 
 	}
 	if(this->asName == nullptr)
 	{
-		context->getSourceValidator(ctx)->addError(ConstStr::getCNST_STR_1080(), this, ctx);
+		context->getSourceValidator(ctx)->addError(ConstStr::getCNST_STR_1083(), this, ctx);
 	}
 	return true;
 }
@@ -84,7 +84,7 @@ bool DomVariableJoinTarget::analyseSQLTables(SQLAnalyseContext* context, bool le
 	IAlinousVariable* val = context->getMachine(ctx)->resolveExpression(this->domDesc, debug, ctx);
 	if(val->getVariableClass(ctx) != IAlinousVariable::CLASS_DOM)
 	{
-		throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1081(), ctx));
+		throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1084(), ctx));
 	}
 	IDomVariable* domvariable = static_cast<IDomVariable*>(val);
 	if(domvariable->getDomType(ctx) == IDomVariable::TYPE_DOM)
@@ -98,7 +98,7 @@ bool DomVariableJoinTarget::analyseSQLTables(SQLAnalyseContext* context, bool le
 			DomArray* array = static_cast<DomArray*>(domvariable);
 			if(array->size(ctx) == 0 || !((dynamic_cast<DomVariable*>(array->get(0, ctx)) != 0)))
 			{
-				throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1082(), ctx));
+				throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1085(), ctx));
 			}
 			analyseDomTable(context, static_cast<DomVariable*>(array->get(0, ctx)), ctx);
 		}

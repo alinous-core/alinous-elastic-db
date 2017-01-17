@@ -58,5 +58,10 @@ void InclusiveOrExpression::writeData(NetworkBinaryBuffer* buff, ThreadContext* 
 	buff->putInt(ICommandData::__InclusiveOrExpression, ctx);
 	__writeData(buff, ctx);
 }
+void InclusiveOrExpression::toFileEntry(FileStorageEntryBuilder* builder, ThreadContext* ctx)
+{
+	builder->putInt(IExpressionFactory::__InclusiveOrExpression, ctx);
+	__toFileEntry(builder, ctx);
+}
 }}}}
 

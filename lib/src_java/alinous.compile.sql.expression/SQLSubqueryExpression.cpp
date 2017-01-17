@@ -111,5 +111,9 @@ void SQLSubqueryExpression::writeData(NetworkBinaryBuffer* buff, ThreadContext* 
 		this->selectStatement->writeData(buff, ctx);
 	}
 }
+void SQLSubqueryExpression::toFileEntry(FileStorageEntryBuilder* builder, ThreadContext* ctx)
+{
+	throw (new(ctx) AlinousNotSupportedException(ConstStr::getCNST_STR_1067(), ctx));
+}
 }}}}
 

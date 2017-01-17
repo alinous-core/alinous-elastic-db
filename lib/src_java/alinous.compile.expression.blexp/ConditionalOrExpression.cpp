@@ -64,5 +64,10 @@ void ConditionalOrExpression::writeData(NetworkBinaryBuffer* buff, ThreadContext
 	buff->putInt(ICommandData::__ConditionalOrExpression, ctx);
 	__writeData(buff, ctx);
 }
+void ConditionalOrExpression::toFileEntry(FileStorageEntryBuilder* builder, ThreadContext* ctx)
+{
+	builder->putInt(IExpressionFactory::__ConditionalOrExpression, ctx);
+	__toFileEntry(builder, ctx);
+}
 }}}}
 

@@ -55,13 +55,13 @@ void Region::setName(String* name, ThreadContext* ctx) throw()
 Region* Region::parseInstance(DomNode* dom, DomDocument* document, Matcher* matcher, ThreadContext* ctx)
 {
 	Region* reg = (new(ctx) Region(ctx));
-	IVariableValue* attr = dom->getAttributeValue(ConstStr::getCNST_STR_1111(), ctx);
+	IVariableValue* attr = dom->getAttributeValue(ConstStr::getCNST_STR_1114(), ctx);
 	if(attr == nullptr)
 	{
-		throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_1288(), ctx));
+		throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_1291(), ctx));
 	}
 	reg->setName(attr->toString(ctx)->trim(ctx), ctx);
-	MatchCandidatesCollection* result = matcher->match(document, dom, ConstStr::getCNST_STR_1274(), ctx);
+	MatchCandidatesCollection* result = matcher->match(document, dom, ConstStr::getCNST_STR_1277(), ctx);
 	ArrayList<MatchCandidate>* list = result->getCandidatesList(ctx);
 	int maxLoop = list->size(ctx);
 	for(int i = 0; i != maxLoop; ++i)

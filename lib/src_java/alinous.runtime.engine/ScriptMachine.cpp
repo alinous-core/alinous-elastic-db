@@ -29,7 +29,7 @@ bool ScriptMachine::__init_static_variables(){
 	IDatabaseDriver* driver = this->core->getDatabaseManager(ctx)->get(defaultSrc, ctx);
 	if(driver == nullptr)
 	{
-		throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1160()->clone(ctx)->append(defaultSrc, ctx)->append(ConstStr::getCNST_STR_1161(), ctx), ctx));
+		throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1163()->clone(ctx)->append(defaultSrc, ctx)->append(ConstStr::getCNST_STR_1164(), ctx), ctx));
 	}
 	IDatabaseConnection* con = driver->connect(ctx);
 	__GC_MV(this, &(this->currentDbHandle), (new(ctx) DatabaseHandle(driver, con, ctx)), DatabaseHandle);
@@ -46,7 +46,7 @@ void ScriptMachine::__construct_impl(AlinousModule* module, AlinousCore* core, T
 	IDatabaseDriver* driver = this->core->getDatabaseManager(ctx)->get(defaultSrc, ctx);
 	if(driver == nullptr)
 	{
-		throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1160()->clone(ctx)->append(defaultSrc, ctx)->append(ConstStr::getCNST_STR_1161(), ctx), ctx));
+		throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1163()->clone(ctx)->append(defaultSrc, ctx)->append(ConstStr::getCNST_STR_1164(), ctx), ctx));
 	}
 	IDatabaseConnection* con = driver->connect(ctx);
 	__GC_MV(this, &(this->currentDbHandle), (new(ctx) DatabaseHandle(driver, con, ctx)), DatabaseHandle);

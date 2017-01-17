@@ -36,6 +36,12 @@ class AbstractSrcElement;}}
 namespace alinous {namespace remote {namespace socket {
 class NetworkBinaryBuffer;}}}
 
+namespace alinous {namespace buffer {namespace storage {
+class FileStorageEntryBuilder;}}}
+
+namespace alinous {namespace buffer {namespace storage {
+class FileStorageEntryFetcher;}}}
+
 namespace alinous {namespace compile {
 class IAlinousElement;}}
 
@@ -58,6 +64,8 @@ using namespace ::alinous;
 using namespace ::java::lang;
 using ::java::util::Iterator;
 using ::java::util::ArrayList;
+using ::alinous::buffer::storage::FileStorageEntryBuilder;
+using ::alinous::buffer::storage::FileStorageEntryFetcher;
 using ::alinous::compile::AbstractSrcElement;
 using ::alinous::compile::IAlinousElement;
 using ::alinous::compile::IAlinousElementVisitor;
@@ -112,6 +120,10 @@ public:
 	void setParent(AbstractSrcElement* parent, ThreadContext* ctx) throw()  final;
 	void readData(NetworkBinaryBuffer* buff, ThreadContext* ctx) final;
 	void writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw()  final;
+	int fileSize(ThreadContext* ctx) throw() ;
+	void toFileEntry(FileStorageEntryBuilder* builder, ThreadContext* ctx) throw() ;
+public:
+	static AlinousName* fromFileEntry(FileStorageEntryFetcher* fetcher, ThreadContext* ctx) throw() ;
 public:
 	static bool __init_done;
 	static bool __init_static_variables();

@@ -224,5 +224,58 @@ void DomVariableDescriptor::writeData(NetworkBinaryBuffer* buff, ThreadContext* 
 		buff->putString(this->prefix, ctx);
 	}
 }
+int DomVariableDescriptor::fileSize(ThreadContext* ctx)
+{
+	int total = 4;
+	int maxLoop = this->segments->size(ctx);
+	total += 4;
+	for(int i = 0; i < maxLoop; ++i)
+	{
+		IDomSegment* exp = this->segments->get(i, ctx);
+		total += exp->fileSize(ctx);
+	}
+	bool isnull = (this->prefix == nullptr);
+	total += 1;
+	if(!isnull)
+	{
+		total += this->prefix->length(ctx) * 2 + 4;
+	}
+	return total;
+}
+void DomVariableDescriptor::toFileEntry(FileStorageEntryBuilder* builder, ThreadContext* ctx)
+{
+	builder->putInt(IExpressionFactory::__DomVariableDescriptor, ctx);
+	int maxLoop = this->segments->size(ctx);
+	builder->putInt(maxLoop, ctx);
+	for(int i = 0; i < maxLoop; ++i)
+	{
+		IDomSegment* exp = this->segments->get(i, ctx);
+		exp->toFileEntry(builder, ctx);
+	}
+	bool isnull = (this->prefix == nullptr);
+	builder->putBoolean(isnull, ctx);
+	if(!isnull)
+	{
+		builder->putString(this->prefix, ctx);
+	}
+}
+void DomVariableDescriptor::fromFileEntry(FileStorageEntryFetcher* fetcher, ThreadContext* ctx)
+{
+	int maxLoop = fetcher->fetchInt(ctx);
+	for(int i = 0; i < maxLoop; ++i)
+	{
+		IDomSegment* el = IDomSegment::fromFetcher(fetcher, ctx);
+		if(el == nullptr)
+		{
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_993(), ctx));
+		}
+		this->segments->add(el, ctx);
+	}
+	bool isnull = fetcher->fetchBoolean(ctx);
+	if(!isnull)
+	{
+		__GC_MV(this, &(this->prefix), fetcher->fetchString(ctx), String);
+	}
+}
 }}}
 

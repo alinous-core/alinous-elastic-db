@@ -298,5 +298,66 @@ void SQLRelationalExpression::writeData(NetworkBinaryBuffer* buff, ThreadContext
 		this->right->writeData(buff, ctx);
 	}
 }
+int SQLRelationalExpression::fileSize(ThreadContext* ctx)
+{
+	int total = __fileSize(ctx);
+	bool isnull = (this->left == nullptr);
+	total += 1;
+	if(!isnull)
+	{
+		total += this->left->fileSize(ctx);
+	}
+	total += 4;
+	isnull = (this->right == nullptr);
+	total += 1;
+	if(!isnull)
+	{
+		total += this->right->fileSize(ctx);
+	}
+	return total;
+}
+void SQLRelationalExpression::toFileEntry(FileStorageEntryBuilder* builder, ThreadContext* ctx)
+{
+	builder->putInt(IExpressionFactory::__SQLRelationalExpression, ctx);
+	__toFileEntry(builder, ctx);
+	bool isnull = (this->left == nullptr);
+	builder->putBoolean(isnull, ctx);
+	if(!isnull)
+	{
+		this->left->toFileEntry(builder, ctx);
+	}
+	builder->putInt(this->ope, ctx);
+	isnull = (this->right == nullptr);
+	builder->putBoolean(isnull, ctx);
+	if(!isnull)
+	{
+		this->right->toFileEntry(builder, ctx);
+	}
+}
+void SQLRelationalExpression::fromFileEntry(FileStorageEntryFetcher* fetcher, ThreadContext* ctx)
+{
+	__fromFileEntry(fetcher, ctx);
+	bool isnull = fetcher->fetchBoolean(ctx);
+	if(!isnull)
+	{
+		IExpression* el = IExpressionFactory::fromFetcher(fetcher, ctx);
+		if(el == nullptr || !((dynamic_cast<ISQLExpression*>(el) != 0)))
+		{
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1044(), ctx));
+		}
+		__GC_MV(this, &(this->left), static_cast<ISQLExpression*>(el), ISQLExpression);
+	}
+	this->ope = fetcher->fetchInt(ctx);
+	isnull = fetcher->fetchBoolean(ctx);
+	if(!isnull)
+	{
+		IExpression* el = IExpressionFactory::fromFetcher(fetcher, ctx);
+		if(el == nullptr || !((dynamic_cast<ISQLExpression*>(el) != 0)))
+		{
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1044(), ctx));
+		}
+		__GC_MV(this, &(this->right), static_cast<ISQLExpression*>(el), ISQLExpression);
+	}
+}
 }}}}}
 

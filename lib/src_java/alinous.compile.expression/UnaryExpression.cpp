@@ -71,5 +71,16 @@ void UnaryExpression::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) t
 {
 	buff->putInt(ICommandData::__UnaryExpression, ctx);
 }
+int UnaryExpression::fileSize(ThreadContext* ctx)
+{
+	return 4;
+}
+void UnaryExpression::toFileEntry(FileStorageEntryBuilder* builder, ThreadContext* ctx)
+{
+	builder->putInt(IExpressionFactory::__UnaryExpression, ctx);
+}
+void UnaryExpression::fromFileEntry(FileStorageEntryFetcher* fetcher, ThreadContext* ctx)
+{
+}
 }}}
 

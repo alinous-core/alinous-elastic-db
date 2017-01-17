@@ -76,7 +76,7 @@ void AlinousDatabase::construct(AlinousCore* core, String* dataDir, String* trxT
 {
 	__GC_MV(this, &(this->core), core, AlinousCore);
 	__GC_MV(this, &(this->dataDir), dataDir, String);
-	__GC_MV(this, &(this->workerThreadsPool), (new(ctx) ThreadPool(16, ConstStr::getCNST_STR_1646(), ctx)), ThreadPool);
+	__GC_MV(this, &(this->workerThreadsPool), (new(ctx) ThreadPool(16, ConstStr::getCNST_STR_1649(), ctx)), ThreadPool);
 	__GC_MV(this, &(this->trxManager), (new(ctx) DbTransactionManager(this, trxTmpDir, maxConnection, core, this->workerThreadsPool, ctx)), DbTransactionManager);
 	File* file = getConfigFile(ctx);
 	{
@@ -87,15 +87,15 @@ void AlinousDatabase::construct(AlinousCore* core, String* dataDir, String* trxT
 		}
 		catch(IOException* e)
 		{
-			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1647(), e, ctx));
+			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1650(), e, ctx));
 		}
 		catch(InterruptedException* e)
 		{
-			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1647(), e, ctx));
+			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1650(), e, ctx));
 		}
 		catch(BTreeException* e)
 		{
-			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1647(), e, ctx));
+			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1650(), e, ctx));
 		}
 	}
 }
@@ -130,23 +130,23 @@ void AlinousDatabase::initInstance(AlinousDbInstanceInfo* instanceConfig, Thread
 		catch(IOException* e)
 		{
 			e->printStackTrace(ctx);
-			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1648(), e, ctx));
+			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1651(), e, ctx));
 		}
 		catch(InterruptedException* e)
 		{
-			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1648(), e, ctx));
+			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1651(), e, ctx));
 		}
 		catch(BTreeException* e)
 		{
-			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1648(), e, ctx));
+			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1651(), e, ctx));
 		}
 		catch(VariableException* e)
 		{
-			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1648(), e, ctx));
+			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1651(), e, ctx));
 		}
 		catch(AlinousException* e)
 		{
-			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1648(), e, ctx));
+			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1651(), e, ctx));
 		}
 	}
 }
@@ -159,7 +159,7 @@ long long AlinousDatabase::getCommitId(ThreadContext* ctx)
 		}
 		catch(AlinousException* e)
 		{
-			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1649(), e, ctx));
+			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1652(), e, ctx));
 		}
 	}
 }
@@ -172,7 +172,7 @@ long long AlinousDatabase::newCommitId(ThreadContext* ctx)
 		}
 		catch(AlinousException* e)
 		{
-			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1650(), e, ctx));
+			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1653(), e, ctx));
 		}
 	}
 }
@@ -222,7 +222,7 @@ void AlinousDatabase::syncScheme(ThreadContext* ctx)
 				}
 			}
 			e->printStackTrace(ctx);
-			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1651(), e, ctx));
+			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1654(), e, ctx));
 		}
 	}
 	{
@@ -250,7 +250,7 @@ void AlinousDatabase::open(AlinousDbInstanceInfo* instanceConfig, ThreadContext*
 		{
 			this->workerThreadsPool->dispose(ctx);
 			__GC_MV(this, &(this->workerThreadsPool), nullptr, ThreadPool);
-			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1653(), e, ctx));
+			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1656(), e, ctx));
 		}
 	}
 	MonitorRef* monitorRef = instanceConfig->getMonitorRef(ctx);
@@ -292,14 +292,14 @@ void AlinousDatabase::open(AlinousDbInstanceInfo* instanceConfig, ThreadContext*
 				}
 				catch(IOException* e2)
 				{
-					throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1654(), e2, ctx));
+					throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1657(), e2, ctx));
 				}
 				catch(InterruptedException* e2)
 				{
-					throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1654(), e2, ctx));
+					throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1657(), e2, ctx));
 				}
 			}
-			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1654(), e, ctx));
+			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1657(), e, ctx));
 		}
 	}
 	{
@@ -309,11 +309,11 @@ void AlinousDatabase::open(AlinousDbInstanceInfo* instanceConfig, ThreadContext*
 		}
 		catch(IOException* e)
 		{
-			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1654(), e, ctx));
+			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1657(), e, ctx));
 		}
 		catch(InterruptedException* e)
 		{
-			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1654(), e, ctx));
+			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1657(), e, ctx));
 		}
 	}
 	{
@@ -323,11 +323,11 @@ void AlinousDatabase::open(AlinousDbInstanceInfo* instanceConfig, ThreadContext*
 		}
 		catch(UnknownHostException* e)
 		{
-			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1655(), e, ctx));
+			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1658(), e, ctx));
 		}
 		catch(IOException* e)
 		{
-			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1655(), e, ctx));
+			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1658(), e, ctx));
 		}
 	}
 }
@@ -419,7 +419,7 @@ File* AlinousDatabase::getConfigFile(ThreadContext* ctx) throw()
 {
 	if(this->configFile == nullptr)
 	{
-		String* pathname = this->dataDir->clone(ctx)->append(ConstStr::getCNST_STR_1652(), ctx);
+		String* pathname = this->dataDir->clone(ctx)->append(ConstStr::getCNST_STR_1655(), ctx);
 		__GC_MV(this, &(this->configFile), (new(ctx) File(pathname, ctx)), File);
 	}
 	return this->configFile;

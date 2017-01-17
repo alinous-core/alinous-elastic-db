@@ -197,5 +197,83 @@ void ConditionalExpression::writeData(NetworkBinaryBuffer* buff, ThreadContext* 
 		this->altexp->writeData(buff, ctx);
 	}
 }
+int ConditionalExpression::fileSize(ThreadContext* ctx)
+{
+	int total = 4;
+	bool isnull = (this->first == nullptr);
+	total += 1;
+	if(!isnull)
+	{
+		total += this->first->fileSize(ctx);
+	}
+	isnull = (this->exp == nullptr);
+	total += 1;
+	if(!isnull)
+	{
+		total += this->exp->fileSize(ctx);
+	}
+	isnull = (this->altexp == nullptr);
+	total += 1;
+	if(!isnull)
+	{
+		total += this->altexp->fileSize(ctx);
+	}
+	return total;
+}
+void ConditionalExpression::toFileEntry(FileStorageEntryBuilder* builder, ThreadContext* ctx)
+{
+	builder->putInt(IExpressionFactory::__ConditionalExpression, ctx);
+	bool isnull = (this->first == nullptr);
+	builder->putBoolean(isnull, ctx);
+	if(!isnull)
+	{
+		this->first->toFileEntry(builder, ctx);
+	}
+	isnull = (this->exp == nullptr);
+	builder->putBoolean(isnull, ctx);
+	if(!isnull)
+	{
+		this->exp->toFileEntry(builder, ctx);
+	}
+	isnull = (this->altexp == nullptr);
+	builder->putBoolean(isnull, ctx);
+	if(!isnull)
+	{
+		this->altexp->toFileEntry(builder, ctx);
+	}
+}
+void ConditionalExpression::fromFileEntry(FileStorageEntryFetcher* fetcher, ThreadContext* ctx)
+{
+	bool isnull = fetcher->fetchBoolean(ctx);
+	if(!isnull)
+	{
+		IExpression* el = IExpressionFactory::fromFetcher(fetcher, ctx);
+		if(el == nullptr || !((dynamic_cast<IExpression*>(el) != 0)))
+		{
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_980(), ctx));
+		}
+		__GC_MV(this, &(this->first), static_cast<IExpression*>(el), IExpression);
+	}
+	isnull = fetcher->fetchBoolean(ctx);
+	if(!isnull)
+	{
+		IExpression* el = IExpressionFactory::fromFetcher(fetcher, ctx);
+		if(el == nullptr || !((dynamic_cast<IExpression*>(el) != 0)))
+		{
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_980(), ctx));
+		}
+		__GC_MV(this, &(this->exp), static_cast<IExpression*>(el), IExpression);
+	}
+	isnull = fetcher->fetchBoolean(ctx);
+	if(!isnull)
+	{
+		IExpression* el = IExpressionFactory::fromFetcher(fetcher, ctx);
+		if(el == nullptr || !((dynamic_cast<IExpression*>(el) != 0)))
+		{
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_980(), ctx));
+		}
+		__GC_MV(this, &(this->altexp), static_cast<IExpression*>(el), IExpression);
+	}
+}
 }}}
 

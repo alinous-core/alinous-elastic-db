@@ -57,10 +57,13 @@ public:
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 private:
 	SchemasStructureInfoData* data;
+	String* region;
 public:
 	SchemasStructureInfoData* getData(ThreadContext* ctx) throw() ;
 	void executeOnServer(RemoteTableStorageServer* tableStorageServer, BufferedOutputStream* outStream, ThreadContext* ctx) final;
 	void readFromStream(InputStream* stream, int remain, ThreadContext* ctx) final;
+	String* getRegion(ThreadContext* ctx) throw() ;
+	void setRegion(String* region, ThreadContext* ctx) throw() ;
 	void writeByteStream(OutputStream* out, ThreadContext* ctx) final;
 public:
 	static bool __init_done;

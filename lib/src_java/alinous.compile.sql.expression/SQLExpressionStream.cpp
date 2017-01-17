@@ -293,5 +293,28 @@ void SQLExpressionStream::writeData(NetworkBinaryBuffer* buff, ThreadContext* ct
 		buff->putString(this->asName, ctx);
 	}
 }
+int SQLExpressionStream::fileSize(ThreadContext* ctx)
+{
+	int total = 4;
+	bool isnull = (this->exp == nullptr);
+	total += 1;
+	if(!isnull)
+	{
+		total += this->exp->fileSize(ctx);
+	}
+	isnull = (this->asName == nullptr);
+	total += 1;
+	if(!isnull)
+	{
+		total += asName->length(ctx) * 2 + 4;
+	}
+	return total;
+}
+void SQLExpressionStream::toFileEntry(FileStorageEntryBuilder* builder, ThreadContext* ctx) throw() 
+{
+}
+void SQLExpressionStream::fromFileEntry(FileStorageEntryFetcher* fetcher, ThreadContext* ctx)
+{
+}
 }}}}
 

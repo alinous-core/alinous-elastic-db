@@ -136,7 +136,7 @@ public:
 	void start(AlinousCore* core, ThreadContext* ctx);
 	void dispose(ThreadContext* ctx) throw() ;
 	AlinousCore* getCore(ThreadContext* ctx) throw() ;
-	void getSchemeInfo(SchemasStructureInfoData* data, ThreadContext* ctx) throw() ;
+	void getSchemeInfo(SchemasStructureInfoData* data, String* region, ThreadContext* ctx) throw() ;
 private:
 	void initInstance(AlinousCore* core, ThreadContext* ctx);
 	File* getConfigFile(ThreadContext* ctx) throw() ;

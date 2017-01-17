@@ -81,5 +81,10 @@ void ShiftExpression::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) t
 	buff->putInt(ICommandData::__ShiftExpression, ctx);
 	__writeData(buff, ctx);
 }
+void ShiftExpression::toFileEntry(FileStorageEntryBuilder* builder, ThreadContext* ctx)
+{
+	builder->putInt(IExpressionFactory::__ShiftExpression, ctx);
+	__toFileEntry(builder, ctx);
+}
 }}}
 

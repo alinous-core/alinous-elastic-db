@@ -104,5 +104,39 @@ void ExpStreamParenthesis::writeData(NetworkBinaryBuffer* buff, ThreadContext* c
 		this->exp->writeData(buff, ctx);
 	}
 }
+int ExpStreamParenthesis::fileSize(ThreadContext* ctx)
+{
+	int total = 4;
+	bool isnull = (this->exp == nullptr);
+	total += 1;
+	if(!isnull)
+	{
+		total += this->exp->fileSize(ctx);
+	}
+	return total;
+}
+void ExpStreamParenthesis::toFileEntry(FileStorageEntryBuilder* builder, ThreadContext* ctx)
+{
+	builder->putInt(IExpressionFactory::__ExpStreamParenthesis, ctx);
+	bool isnull = (this->exp == nullptr);
+	builder->putBoolean(isnull, ctx);
+	if(!isnull)
+	{
+		this->exp->toFileEntry(builder, ctx);
+	}
+}
+void ExpStreamParenthesis::fromFileEntry(FileStorageEntryFetcher* fetcher, ThreadContext* ctx)
+{
+	bool isnull = fetcher->fetchBoolean(ctx);
+	if(!isnull)
+	{
+		IExpression* el = IExpressionFactory::fromFetcher(fetcher, ctx);
+		if(el == nullptr || !((dynamic_cast<ExpressionStream*>(el) != 0)))
+		{
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1018(), ctx));
+		}
+		__GC_MV(this, &(this->exp), static_cast<ExpressionStream*>(el), ExpressionStream);
+	}
+}
 }}}}
 

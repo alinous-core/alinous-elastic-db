@@ -236,5 +236,61 @@ void SQLGroupBy::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw(
 		this->havingCondition->writeData(buff, ctx);
 	}
 }
+int SQLGroupBy::fileSize(ThreadContext* ctx)
+{
+	int total = 4;
+	bool isnull = (this->groupList == nullptr);
+	total += 1;
+	if(!isnull)
+	{
+		total += this->groupList->fileSize(ctx);
+	}
+	isnull = (this->havingCondition == nullptr);
+	total += 1;
+	if(!isnull)
+	{
+		total += this->havingCondition->fileSize(ctx);
+	}
+	return total;
+}
+void SQLGroupBy::toFileEntry(FileStorageEntryBuilder* builder, ThreadContext* ctx)
+{
+	builder->putInt(IExpressionFactory::__InsertValues, ctx);
+	bool isnull = (this->groupList == nullptr);
+	builder->putBoolean(isnull, ctx);
+	if(!isnull)
+	{
+		this->groupList->toFileEntry(builder, ctx);
+	}
+	isnull = (this->havingCondition == nullptr);
+	builder->putBoolean(isnull, ctx);
+	if(!isnull)
+	{
+		this->havingCondition->toFileEntry(builder, ctx);
+	}
+}
+void SQLGroupBy::fromFileEntry(FileStorageEntryFetcher* fetcher, ThreadContext* ctx)
+{
+	bool isnull = fetcher->fetchBoolean(ctx);
+	if(!isnull)
+	{
+		IExpression* exp = IExpressionFactory::fromFetcher(fetcher, ctx);
+		if(exp != nullptr || !((dynamic_cast<SQLExpressionList*>(exp) != 0)))
+		{
+			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_1037(), ctx));
+		}
+		__GC_MV(this, &(this->groupList), static_cast<SQLExpressionList*>(exp), SQLExpressionList);
+	}
+	isnull = fetcher->fetchBoolean(ctx);
+	if(!isnull)
+	{
+		IExpression* exp = IExpressionFactory::fromFetcher(fetcher, ctx);
+		if(exp != nullptr)
+		{
+			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_1038(), ctx));
+		}
+		__GC_MV(this, &(this->havingCondition), static_cast<ISQLExpression*>(exp), ISQLExpression);
+	}
+}
 }}}}
 

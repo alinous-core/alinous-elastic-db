@@ -70,7 +70,7 @@ IBTreeValue* KeyValueFactory::valueFromFetcher(FileStorageEntryFetcher* fetcher,
 			}
 			catch(AlinousDbException* e)
 			{
-				throw (new(ctx) VariableException(ConstStr::getCNST_STR_1632(), e, ctx));
+				throw (new(ctx) VariableException(ConstStr::getCNST_STR_1635(), e, ctx));
 			}
 		}
 		break ;

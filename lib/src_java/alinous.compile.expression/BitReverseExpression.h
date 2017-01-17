@@ -42,6 +42,12 @@ class NetworkBinaryBuffer;}}}
 namespace alinous {namespace compile {
 class IAlinousElement;}}
 
+namespace alinous {namespace buffer {namespace storage {
+class FileStorageEntryBuilder;}}}
+
+namespace alinous {namespace buffer {namespace storage {
+class FileStorageEntryFetcher;}}}
+
 namespace alinous {namespace compile {namespace expression {
 class AbstractExpression;}}}
 
@@ -66,6 +72,8 @@ namespace alinous {namespace compile {namespace expression {
 using namespace ::alinous;
 using namespace ::java::lang;
 using ::java::util::Iterator;
+using ::alinous::buffer::storage::FileStorageEntryBuilder;
+using ::alinous::buffer::storage::FileStorageEntryFetcher;
 using ::alinous::compile::AbstractSrcElement;
 using ::alinous::compile::AlinousElementNetworkFactory;
 using ::alinous::compile::ExpressionSourceId;
@@ -111,6 +119,9 @@ public:
 	int getExpressionType(ThreadContext* ctx) throw()  final;
 	void readData(NetworkBinaryBuffer* buff, ThreadContext* ctx) final;
 	void writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw()  final;
+	int fileSize(ThreadContext* ctx) final;
+	void toFileEntry(FileStorageEntryBuilder* builder, ThreadContext* ctx) final;
+	void fromFileEntry(FileStorageEntryFetcher* fetcher, ThreadContext* ctx) final;
 public:
 	static bool __init_done;
 	static bool __init_static_variables();

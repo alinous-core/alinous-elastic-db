@@ -120,5 +120,41 @@ void FunctionArguments::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 		exp->writeData(buff, ctx);
 	}
 }
+int FunctionArguments::fileSize(ThreadContext* ctx)
+{
+	int total = 4;
+	int maxLoop = this->arguments->size(ctx);
+	total += 4;
+	for(int i = 0; i < maxLoop; ++i)
+	{
+		IExpression* exp = this->arguments->get(i, ctx);
+		total += exp->fileSize(ctx);
+	}
+	return total;
+}
+void FunctionArguments::toFileEntry(FileStorageEntryBuilder* builder, ThreadContext* ctx)
+{
+	builder->putInt(IExpressionFactory::__FunctionArguments, ctx);
+	int maxLoop = this->arguments->size(ctx);
+	builder->putInt(maxLoop, ctx);
+	for(int i = 0; i < maxLoop; ++i)
+	{
+		IExpression* exp = this->arguments->get(i, ctx);
+		exp->toFileEntry(builder, ctx);
+	}
+}
+void FunctionArguments::fromFileEntry(FileStorageEntryFetcher* fetcher, ThreadContext* ctx)
+{
+	int maxLoop = fetcher->fetchInt(ctx);
+	for(int i = 0; i < maxLoop; ++i)
+	{
+		IExpression* el = IExpressionFactory::fromFetcher(fetcher, ctx);
+		if(el == nullptr || !((dynamic_cast<IExpression*>(el) != 0)))
+		{
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_980(), ctx));
+		}
+		this->arguments->add(static_cast<IExpression*>(el), ctx);
+	}
+}
 }}}
 

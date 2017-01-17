@@ -171,7 +171,7 @@ bool ScriptRunner::executeStatement(IStatement* stmt, ScriptMachine* machine, bo
 	default:
 		break ;
 	}
-	throw (new(ctx) AlinousException(ConstStr::getCNST_STR_1152(), ctx));
+	throw (new(ctx) AlinousException(ConstStr::getCNST_STR_1155(), ctx));
 }
 }}}
 

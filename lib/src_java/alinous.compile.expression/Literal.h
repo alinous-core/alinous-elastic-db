@@ -33,6 +33,12 @@ class AlinousType;}}}
 namespace alinous {namespace remote {namespace socket {
 class NetworkBinaryBuffer;}}}
 
+namespace alinous {namespace buffer {namespace storage {
+class FileStorageEntryBuilder;}}}
+
+namespace alinous {namespace buffer {namespace storage {
+class FileStorageEntryFetcher;}}}
+
 namespace alinous {namespace compile {namespace expression {
 class AbstractExpression;}}}
 
@@ -54,6 +60,8 @@ namespace alinous {namespace compile {namespace expression {
 using namespace ::alinous;
 using namespace ::java::lang;
 using ::java::util::Iterator;
+using ::alinous::buffer::storage::FileStorageEntryBuilder;
+using ::alinous::buffer::storage::FileStorageEntryFetcher;
 using ::alinous::compile::AbstractSrcElement;
 using ::alinous::compile::ExpressionSourceId;
 using ::alinous::compile::IAlinousElementVisitor;
@@ -118,8 +126,14 @@ public:
 	ExpressionSourceId* getSourceId(ThreadContext* ctx) throw()  final;
 	bool isSQLExp(ThreadContext* ctx) throw()  final;
 	virtual int getExpressionType(ThreadContext* ctx) throw() ;
-	void readData(NetworkBinaryBuffer* buff, ThreadContext* ctx) final;
-	void writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw()  final;
+	virtual void readData(NetworkBinaryBuffer* buff, ThreadContext* ctx);
+	virtual void writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() ;
+	int fileSize(ThreadContext* ctx) final;
+	virtual void toFileEntry(FileStorageEntryBuilder* builder, ThreadContext* ctx);
+	void __toFileEntry(FileStorageEntryBuilder* builder, ThreadContext* ctx);
+	void fromFileEntry(FileStorageEntryFetcher* fetcher, ThreadContext* ctx) final;
+	void __readData(NetworkBinaryBuffer* buff, ThreadContext* ctx);
+	void __writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() ;
 private:
 	int fromEnum(ThreadContext* ctx) throw() ;
 	void toEnum(int num, ThreadContext* ctx) throw() ;

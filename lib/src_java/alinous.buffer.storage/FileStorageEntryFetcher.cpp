@@ -93,6 +93,10 @@ char FileStorageEntryFetcher::fetchByte(ThreadContext* ctx) throw()
 {
 	return this->buff->get(ctx);
 }
+bool FileStorageEntryFetcher::fetchBoolean(ThreadContext* ctx) throw() 
+{
+	return !(fetchByte(ctx) == (char)0);
+}
 float FileStorageEntryFetcher::fetchFloat(ThreadContext* ctx) throw() 
 {
 	return this->buff->getFloat(ctx);

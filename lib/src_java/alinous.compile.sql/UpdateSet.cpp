@@ -269,6 +269,57 @@ void UpdateSet::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw()
 		this->value->writeData(buff, ctx);
 	}
 }
+int UpdateSet::fileSize(ThreadContext* ctx)
+{
+	int total = 4;
+	bool isnull = (this->name == nullptr);
+	total += 1;
+	if(!isnull)
+	{
+		total += this->name->fileSize(ctx);
+	}
+	isnull = (this->value == nullptr);
+	total += 1;
+	if(!isnull)
+	{
+		total += this->value->fileSize(ctx);
+	}
+	return total;
+}
+void UpdateSet::toFileEntry(FileStorageEntryBuilder* builder, ThreadContext* ctx)
+{
+	builder->putInt(IExpressionFactory::__UpdateSet, ctx);
+	bool isnull = (this->name == nullptr);
+	builder->putBoolean(isnull, ctx);
+	if(!isnull)
+	{
+		this->name->toFileEntry(builder, ctx);
+	}
+	isnull = (this->value == nullptr);
+	builder->putBoolean(isnull, ctx);
+	if(!isnull)
+	{
+		this->value->toFileEntry(builder, ctx);
+	}
+}
+void UpdateSet::fromFileEntry(FileStorageEntryFetcher* fetcher, ThreadContext* ctx)
+{
+	bool isnull = fetcher->fetchBoolean(ctx);
+	if(!isnull)
+	{
+		__GC_MV(this, &(this->name), AlinousName::fromFileEntry(fetcher, ctx), AlinousName);
+	}
+	isnull = fetcher->fetchBoolean(ctx);
+	if(!isnull)
+	{
+		IExpression* exp = IExpressionFactory::fromFetcher(fetcher, ctx);
+		if(exp != nullptr || !((dynamic_cast<ISQLExpression*>(exp) != 0)))
+		{
+			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_1044(), ctx));
+		}
+		__GC_MV(this, &(this->value), static_cast<ISQLExpression*>(exp), ISQLExpression);
+	}
+}
 void UpdateSet::analyseColumnOrder(TableAndSchema* tableSc, SQLAnalyseContext* context, ThreadContext* ctx) throw() 
 {
 	int maxLoop = context->getTables(ctx)->size(ctx);

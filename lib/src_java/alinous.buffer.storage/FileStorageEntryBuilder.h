@@ -47,6 +47,7 @@ public:
 	void putChar(wchar_t value, ThreadContext* ctx) throw() ;
 	void putFloat(float fl, ThreadContext* ctx) throw() ;
 	void putDouble(double dbl, ThreadContext* ctx) throw() ;
+	void putBoolean(bool value, ThreadContext* ctx) throw() ;
 	void putByte(char value, ThreadContext* ctx) throw() ;
 	void putString(String* value, ThreadContext* ctx) throw() ;
 	FileStorageEntry* toEntry(ThreadContext* ctx) throw() ;

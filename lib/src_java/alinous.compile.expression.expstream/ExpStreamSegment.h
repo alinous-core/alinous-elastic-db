@@ -93,6 +93,12 @@ class NetworkBinaryBuffer;}}}
 namespace alinous {namespace compile {
 class IAlinousElement;}}
 
+namespace alinous {namespace buffer {namespace storage {
+class FileStorageEntryBuilder;}}}
+
+namespace alinous {namespace buffer {namespace storage {
+class FileStorageEntryFetcher;}}}
+
 namespace alinous {namespace compile {namespace stmt {
 class TypedVariableDeclare;}}}
 
@@ -104,6 +110,9 @@ class AbstractExpression;}}}
 
 namespace alinous {namespace compile {
 class AlinousElementNetworkFactory;}}
+
+namespace alinous {namespace compile {namespace expression {
+class IExpressionFactory;}}}
 
 namespace alinous {namespace compile {namespace expression {
 class Literal;}}}
@@ -127,6 +136,8 @@ using namespace ::alinous;
 using namespace ::java::lang;
 using ::java::util::Iterator;
 using ::java::util::ArrayList;
+using ::alinous::buffer::storage::FileStorageEntryBuilder;
+using ::alinous::buffer::storage::FileStorageEntryFetcher;
 using ::alinous::compile::AbstractSrcElement;
 using ::alinous::compile::AlinousElementNetworkFactory;
 using ::alinous::compile::ExpressionSourceId;
@@ -148,6 +159,7 @@ using ::alinous::compile::expression::DomIndexSegment;
 using ::alinous::compile::expression::DomNameSegment;
 using ::alinous::compile::expression::DomVariableDescriptor;
 using ::alinous::compile::expression::IExpression;
+using ::alinous::compile::expression::IExpressionFactory;
 using ::alinous::compile::expression::Literal;
 using ::alinous::compile::stmt::TypedVariableDeclare;
 using ::alinous::db::table::DatabaseException;
@@ -229,6 +241,9 @@ public:
 	int getExpressionType(ThreadContext* ctx) throw()  final;
 	void readData(NetworkBinaryBuffer* buff, ThreadContext* ctx) final;
 	void writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw()  final;
+	int fileSize(ThreadContext* ctx) final;
+	void toFileEntry(FileStorageEntryBuilder* builder, ThreadContext* ctx) final;
+	void fromFileEntry(FileStorageEntryFetcher* fetcher, ThreadContext* ctx) final;
 private:
 	IAlinousVariable* returnMemberDomVariable(ScriptMachine* machine, bool debug, ThreadContext* ctx);
 	IAlinousVariable* returnMemberDomVariableArray(ScriptMachine* machine, bool debug, ThreadContext* ctx);

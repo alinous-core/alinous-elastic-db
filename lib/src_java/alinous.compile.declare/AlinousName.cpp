@@ -313,5 +313,37 @@ void AlinousName::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw
 		buff->putString(s, ctx);
 	}
 }
+int AlinousName::fileSize(ThreadContext* ctx) throw() 
+{
+	int total = 4;
+	int maxLoop = this->segments->size(ctx);
+	for(int i = 0; i != maxLoop; ++i)
+	{
+		String* str = this->segments->get(i, ctx);
+		total += str->length(ctx) * 2 + 4;
+	}
+	return total;
+}
+void AlinousName::toFileEntry(FileStorageEntryBuilder* builder, ThreadContext* ctx) throw() 
+{
+	int maxLoop = this->segments->size(ctx);
+	builder->putInt(maxLoop, ctx);
+	for(int i = 0; i != maxLoop; ++i)
+	{
+		String* str = this->segments->get(i, ctx);
+		builder->putString(str, ctx);
+	}
+}
+AlinousName* AlinousName::fromFileEntry(FileStorageEntryFetcher* fetcher, ThreadContext* ctx) throw() 
+{
+	AlinousName* name = (new(ctx) AlinousName(ctx));
+	int maxLoop = fetcher->fetchInt(ctx);
+	for(int i = 0; i != maxLoop; ++i)
+	{
+		String* str = fetcher->fetchString(ctx);
+		name->segments->add(str, ctx);
+	}
+	return name;
+}
 }}}
 

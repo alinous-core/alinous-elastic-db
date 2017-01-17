@@ -18,7 +18,7 @@ bool TableColumnMetadata::__init_static_variables(){
 	delete ctx;
 	return true;
 }
- TableColumnMetadata::TableColumnMetadata(String* name, int type, int length, ThreadContext* ctx) throw()  : IObject(ctx), name(nullptr), notnull(0), unique(0), primaryKey(0), defaultValue(nullptr), columnOrder(0), type(0), length(0), check(nullptr)
+ TableColumnMetadata::TableColumnMetadata(String* name, int type, int length, ThreadContext* ctx) throw()  : IObject(ctx), ICommandData(ctx), name(nullptr), notnull(0), unique(0), primaryKey(0), defaultValue(nullptr), columnOrder(0), type(0), length(0), check(nullptr)
 {
 	__GC_MV(this, &(this->name), name, String);
 	this->type = type;
@@ -50,12 +50,22 @@ void TableColumnMetadata::__releaseRegerences(bool prepare, ThreadContext* ctx) 
 		return;
 	}
 }
-int TableColumnMetadata::fileSize(ThreadContext* ctx) throw() 
+int TableColumnMetadata::fileSize(ThreadContext* ctx)
 {
 	int total = 4 + 4;
 	total += name->length(ctx) * 2 + 4;
 	total += 1 * 3;
 	total += 4;
+	total += 1;
+	if(this->defaultValue != nullptr)
+	{
+		total += defaultValue->length(ctx) * 2 + 4;
+	}
+	total += 1;
+	if(this->check != nullptr)
+	{
+		total += check->getExp(ctx)->fileSize(ctx);
+	}
 	return total;
 }
 void TableColumnMetadata::toFileEntry(FileStorageEntryBuilder* builder, ThreadContext* ctx) throw() 
@@ -86,6 +96,49 @@ bool TableColumnMetadata::isPrimaryKey(ThreadContext* ctx) throw()
 void TableColumnMetadata::setPrimaryKey(bool primaryKey, ThreadContext* ctx) throw() 
 {
 	this->primaryKey = primaryKey;
+}
+void TableColumnMetadata::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
+{
+	this->type = buff->getInt(ctx);
+	this->length = buff->getInt(ctx);
+	__GC_MV(this, &(this->name), buff->getString(ctx), String);
+	this->notnull = buff->getBoolean(ctx);
+	this->unique = buff->getBoolean(ctx);
+	this->primaryKey = buff->getBoolean(ctx);
+	this->columnOrder = buff->getInt(ctx);
+	bool isnull = buff->getBoolean(ctx);
+	if(!isnull)
+	{
+		__GC_MV(this, &(this->defaultValue), buff->getString(ctx), String);
+	}
+	isnull = buff->getBoolean(ctx);
+	if(!isnull)
+	{
+		__GC_MV(this, &(this->check), (new(ctx) CheckDefinition(ctx)), CheckDefinition);
+		this->check->readData(buff, ctx);
+	}
+}
+void TableColumnMetadata::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+{
+	buff->putInt(this->type, ctx);
+	buff->putInt(this->length, ctx);
+	buff->putString(this->name, ctx);
+	buff->putBoolean(this->notnull, ctx);
+	buff->putBoolean(this->unique, ctx);
+	buff->putBoolean(this->primaryKey, ctx);
+	buff->putInt(this->columnOrder, ctx);
+	bool isnull = (this->defaultValue == nullptr);
+	buff->putBoolean(isnull, ctx);
+	if(!isnull)
+	{
+		__GC_MV(this, &(this->defaultValue), buff->getString(ctx), String);
+	}
+	isnull = (this->check == nullptr);
+	buff->putBoolean(isnull, ctx);
+	if(!isnull)
+	{
+		this->check->writeData(buff, ctx);
+	}
 }
 TableColumnMetadata* TableColumnMetadata::loadFromFetcher(FileStorageEntryFetcher* fetcher, ThreadContext* ctx) throw() 
 {

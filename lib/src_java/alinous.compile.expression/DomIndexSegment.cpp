@@ -134,5 +134,42 @@ void DomIndexSegment::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) t
 	}
 	buff->putInt(this->segmentVariableType, ctx);
 }
+void DomIndexSegment::toFileEntry(FileStorageEntryBuilder* builder, ThreadContext* ctx)
+{
+	builder->putInt(IDomSegment::TYPE_INDEX, ctx);
+	bool isnull = (this->index == nullptr);
+	builder->putBoolean(isnull, ctx);
+	if(!isnull)
+	{
+		this->index->toFileEntry(builder, ctx);
+	}
+	builder->putInt(this->segmentVariableType, ctx);
+}
+int DomIndexSegment::fileSize(ThreadContext* ctx)
+{
+	int total = 4;
+	bool isnull = (this->index == nullptr);
+	total += 1;
+	if(!isnull)
+	{
+		total += this->index->fileSize(ctx);
+	}
+	total += 4;
+	return total;
+}
+void DomIndexSegment::fromFileEntry(FileStorageEntryFetcher* fetcher, ThreadContext* ctx)
+{
+	bool isnull = fetcher->fetchBoolean(ctx);
+	if(!isnull)
+	{
+		IExpression* el = IExpressionFactory::fromFetcher(fetcher, ctx);
+		if(el == nullptr || !((dynamic_cast<IExpression*>(el) != 0)))
+		{
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_980(), ctx));
+		}
+		__GC_MV(this, &(this->index), static_cast<IExpression*>(el), IExpression);
+	}
+	this->segmentVariableType = fetcher->fetchInt(ctx);
+}
 }}}
 

@@ -102,7 +102,7 @@ void SwitchCasePart::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
 		if(el == nullptr || !((dynamic_cast<CaseStatement*>(el) != 0)))
 		{
-			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1093(), ctx));
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1096(), ctx));
 		}
 		this->casesList->add(static_cast<CaseStatement*>(el), ctx);
 	}
@@ -112,7 +112,7 @@ void SwitchCasePart::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
 		if(el == nullptr || !((dynamic_cast<StatementList*>(el) != 0)))
 		{
-			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1091(), ctx));
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1094(), ctx));
 		}
 		__GC_MV(this, &(this->stmtlist), static_cast<StatementList*>(el), StatementList);
 	}

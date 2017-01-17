@@ -66,6 +66,15 @@ class IAlinousElement;}}
 namespace alinous {namespace runtime {namespace dom {
 class VariableException;}}}
 
+namespace alinous {namespace buffer {namespace storage {
+class FileStorageEntryBuilder;}}}
+
+namespace alinous {namespace buffer {namespace storage {
+class FileStorageEntryFetcher;}}}
+
+namespace alinous {namespace system {
+class AlinousException;}}
+
 namespace alinous {namespace compile {namespace sql {namespace expression {
 class AbstractSQLExpression;}}}}
 
@@ -75,11 +84,11 @@ class AlinousElementNetworkFactory;}}
 namespace alinous {namespace compile {namespace expression {
 class IExpression;}}}
 
+namespace alinous {namespace compile {namespace expression {
+class IExpressionFactory;}}}
+
 namespace alinous {namespace remote {namespace socket {
 class ICommandData;}}}
-
-namespace alinous {namespace system {
-class AlinousException;}}
 
 namespace alinous {
 class ThreadContext;
@@ -91,6 +100,8 @@ using namespace ::alinous;
 using namespace ::java::lang;
 using ::java::util::Iterator;
 using ::java::util::ArrayList;
+using ::alinous::buffer::storage::FileStorageEntryBuilder;
+using ::alinous::buffer::storage::FileStorageEntryFetcher;
 using ::alinous::compile::AbstractSrcElement;
 using ::alinous::compile::AlinousElementNetworkFactory;
 using ::alinous::compile::ExpressionSourceId;
@@ -99,6 +110,7 @@ using ::alinous::compile::IAlinousElementVisitor;
 using ::alinous::compile::analyse::SrcAnalyseContext;
 using ::alinous::compile::declare::AlinousName;
 using ::alinous::compile::expression::IExpression;
+using ::alinous::compile::expression::IExpressionFactory;
 using ::alinous::compile::sql::TableAndSchema;
 using ::alinous::compile::sql::analyze::SQLAnalyseContext;
 using ::alinous::compile::sql::analyze::ScanTableIdentifier;
@@ -166,6 +178,9 @@ public:
 	int getExpressionType(ThreadContext* ctx) throw()  final;
 	void readData(NetworkBinaryBuffer* buff, ThreadContext* ctx) final;
 	void writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw()  final;
+	int fileSize(ThreadContext* ctx) throw()  final;
+	void toFileEntry(FileStorageEntryBuilder* builder, ThreadContext* ctx) throw()  final;
+	void fromFileEntry(FileStorageEntryFetcher* fetcher, ThreadContext* ctx) final;
 private:
 	void analyseColumnOrder(TableAndSchema* tableSc, SQLAnalyseContext* context, ThreadContext* ctx) throw() ;
 	bool analyzeAsName(SQLAnalyseContext* context, ArrayList<String>* segments, ThreadContext* ctx) throw() ;

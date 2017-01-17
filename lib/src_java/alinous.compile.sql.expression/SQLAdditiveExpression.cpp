@@ -114,5 +114,10 @@ void SQLAdditiveExpression::writeData(NetworkBinaryBuffer* buff, ThreadContext* 
 	buff->putInt(ICommandData::__SQLAdditiveExpression, ctx);
 	__writeData(buff, ctx);
 }
+void SQLAdditiveExpression::toFileEntry(FileStorageEntryBuilder* builder, ThreadContext* ctx)
+{
+	builder->putInt(IExpressionFactory::__SQLMultiplicativeExpression, ctx);
+	__toFileEntry(builder, ctx);
+}
 }}}}
 

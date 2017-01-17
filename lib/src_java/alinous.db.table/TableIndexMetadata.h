@@ -12,6 +12,9 @@ class TableColumnMetadata;}}}
 namespace alinous {namespace db {
 class AlinousDbException;}}
 
+namespace alinous {namespace remote {namespace socket {
+class NetworkBinaryBuffer;}}}
+
 namespace alinous {namespace buffer {namespace storage {
 class FileStorageEntryBuilder;}}}
 
@@ -20,6 +23,12 @@ class TableIndexMetadata;}}}
 
 namespace alinous {namespace buffer {namespace storage {
 class FileStorageEntryFetcher;}}}
+
+namespace alinous {namespace remote {namespace socket {
+class ICommandData;}}}
+
+namespace alinous {namespace runtime {namespace dom {
+class VariableException;}}}
 
 namespace java {namespace lang {
 class IObject;
@@ -38,10 +47,13 @@ using ::java::util::ArrayList;
 using ::alinous::buffer::storage::FileStorageEntryBuilder;
 using ::alinous::buffer::storage::FileStorageEntryFetcher;
 using ::alinous::db::AlinousDbException;
+using ::alinous::remote::socket::ICommandData;
+using ::alinous::remote::socket::NetworkBinaryBuffer;
+using ::alinous::runtime::dom::VariableException;
 
 
 
-class TableIndexMetadata final : public virtual IObject {
+class TableIndexMetadata final : public ICommandData, public virtual IObject {
 public:
 	TableIndexMetadata(const TableIndexMetadata& base) = default;
 public:
@@ -55,6 +67,8 @@ private:
 	ArrayList<TableColumnMetadata>* metadata;
 public:
 	void setupColumnMetadata(TableMetadata* meta, ThreadContext* ctx);
+	void readData(NetworkBinaryBuffer* buff, ThreadContext* ctx) final;
+	void writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw()  final;
 	int fileSize(ThreadContext* ctx) throw() ;
 	void toFileEntry(FileStorageEntryBuilder* builder, ThreadContext* ctx) throw() ;
 	String* getName(ThreadContext* ctx) throw() ;

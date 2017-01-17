@@ -77,5 +77,10 @@ void AdditiveExpression::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx
 	buff->putInt(ICommandData::__AdditiveExpression, ctx);
 	__writeData(buff, ctx);
 }
+void AdditiveExpression::toFileEntry(FileStorageEntryBuilder* builder, ThreadContext* ctx)
+{
+	builder->putInt(IExpressionFactory::__AdditiveExpression, ctx);
+	__toFileEntry(builder, ctx);
+}
 }}}
 

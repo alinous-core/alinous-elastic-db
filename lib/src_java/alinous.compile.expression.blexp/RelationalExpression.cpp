@@ -230,5 +230,64 @@ void RelationalExpression::writeData(NetworkBinaryBuffer* buff, ThreadContext* c
 		this->right->writeData(buff, ctx);
 	}
 }
+int RelationalExpression::fileSize(ThreadContext* ctx)
+{
+	int total = 4;
+	bool isnull = (this->left == nullptr);
+	total += 1;
+	if(!isnull)
+	{
+		total += this->left->fileSize(ctx);
+	}
+	total += 4;
+	isnull = (this->right == nullptr);
+	total += 1;
+	if(!isnull)
+	{
+		total += this->right->fileSize(ctx);
+	}
+	return total;
+}
+void RelationalExpression::toFileEntry(FileStorageEntryBuilder* builder, ThreadContext* ctx)
+{
+	builder->putInt(IExpressionFactory::__RelationalExpression, ctx);
+	bool isnull = (this->left == nullptr);
+	builder->putBoolean(isnull, ctx);
+	if(!isnull)
+	{
+		this->left->toFileEntry(builder, ctx);
+	}
+	builder->putInt(this->ope, ctx);
+	isnull = (this->right == nullptr);
+	builder->putBoolean(isnull, ctx);
+	if(!isnull)
+	{
+		this->right->toFileEntry(builder, ctx);
+	}
+}
+void RelationalExpression::fromFileEntry(FileStorageEntryFetcher* fetcher, ThreadContext* ctx)
+{
+	bool isnull = fetcher->fetchBoolean(ctx);
+	if(!isnull)
+	{
+		IExpression* el = IExpressionFactory::fromFetcher(fetcher, ctx);
+		if(el == nullptr || !((dynamic_cast<IExpression*>(el) != 0)))
+		{
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_980(), ctx));
+		}
+		__GC_MV(this, &(this->left), static_cast<IExpression*>(el), IExpression);
+	}
+	this->ope = fetcher->fetchInt(ctx);
+	isnull = fetcher->fetchBoolean(ctx);
+	if(!isnull)
+	{
+		IExpression* el = IExpressionFactory::fromFetcher(fetcher, ctx);
+		if(el == nullptr || !((dynamic_cast<IExpression*>(el) != 0)))
+		{
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_980(), ctx));
+		}
+		__GC_MV(this, &(this->right), static_cast<IExpression*>(el), IExpression);
+	}
+}
 }}}}
 

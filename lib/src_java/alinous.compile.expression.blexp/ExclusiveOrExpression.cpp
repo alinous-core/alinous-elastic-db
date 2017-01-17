@@ -58,5 +58,10 @@ void ExclusiveOrExpression::writeData(NetworkBinaryBuffer* buff, ThreadContext* 
 	buff->putInt(ICommandData::__ExclusiveOrExpression, ctx);
 	__writeData(buff, ctx);
 }
+void ExclusiveOrExpression::toFileEntry(FileStorageEntryBuilder* builder, ThreadContext* ctx)
+{
+	builder->putInt(IExpressionFactory::__ExclusiveOrExpression, ctx);
+	__toFileEntry(builder, ctx);
+}
 }}}}
 

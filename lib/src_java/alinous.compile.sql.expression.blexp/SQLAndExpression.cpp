@@ -18,7 +18,7 @@ bool SQLAndExpression::__init_static_variables(){
 	delete ctx;
 	return true;
 }
- SQLAndExpression::SQLAndExpression(ArrayList<ISQLExpression>* result, ThreadContext* ctx) throw()  : IObject(ctx), AbstractSQLBooleanCollectionExpression(result, ConstStr::getCNST_STR_1069(), ctx)
+ SQLAndExpression::SQLAndExpression(ArrayList<ISQLExpression>* result, ThreadContext* ctx) throw()  : IObject(ctx), AbstractSQLBooleanCollectionExpression(result, ConstStr::getCNST_STR_1070(), ctx)
 {
 }
 void SQLAndExpression::__construct_impl(ArrayList<ISQLExpression>* result, ThreadContext* ctx) throw() 
@@ -122,6 +122,11 @@ void SQLAndExpression::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) 
 {
 	buff->putInt(ICommandData::__SQLAdditiveExpression, ctx);
 	__writeData(buff, ctx);
+}
+void SQLAndExpression::toFileEntry(FileStorageEntryBuilder* builder, ThreadContext* ctx)
+{
+	builder->putInt(IExpressionFactory::__SQLAndExpression, ctx);
+	__toFileEntry(builder, ctx);
 }
 }}}}}
 

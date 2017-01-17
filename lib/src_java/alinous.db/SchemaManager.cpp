@@ -124,7 +124,7 @@ IValueFetcher* SchemaManager::getFetcher(ThreadContext* ctx) throw()
 {
 	return nullptr;
 }
-void SchemaManager::getSchemaData(SchemasStructureInfoData* data, ThreadContext* ctx) throw() 
+void SchemaManager::getSchemaData(SchemasStructureInfoData* data, String* region, ThreadContext* ctx) throw() 
 {
 	{
 		SynchronizedBlockObj __synchronized_2(this->schemeLock, ctx);
@@ -133,7 +133,7 @@ void SchemaManager::getSchemaData(SchemasStructureInfoData* data, ThreadContext*
 		{
 			String* key = it->next(ctx);
 			TableSchema* sc = this->schemas->get(key, ctx);
-			SchemaData* scdata = sc->toCommandData(ctx);
+			SchemaData* scdata = sc->toCommandData(region, ctx);
 			data->addScheme(scdata, ctx);
 		}
 	}
@@ -148,7 +148,7 @@ void SchemaManager::doCreateTable(String* schemaName, TableMetadata* tableMetada
 	IDatabaseTable* table = schema->getTableStore(tableMetadata->getTableName(ctx), ctx);
 	if(table != nullptr)
 	{
-		logger->logWarning(ConstStr::getCNST_STR_1657()->clone(ctx)->append(tableMetadata->getTableName(ctx), ctx)->append(ConstStr::getCNST_STR_1658(), ctx), ctx);
+		logger->logWarning(ConstStr::getCNST_STR_1660()->clone(ctx)->append(tableMetadata->getTableName(ctx), ctx)->append(ConstStr::getCNST_STR_1661(), ctx), ctx);
 		return;
 	}
 	IDatabaseTable* tableStore = (new(ctx) DatabaseTable(schemaName, tableMetadata->getTableName(ctx), schema->getSchemaDir(ctx), this->threadPool, this->oidPublisher, ctx));

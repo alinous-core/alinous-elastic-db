@@ -21,6 +21,9 @@ class SubExpression;}}}
 namespace alinous {namespace remote {namespace socket {
 class NetworkBinaryBuffer;}}}
 
+namespace alinous {namespace buffer {namespace storage {
+class FileStorageEntryBuilder;}}}
+
 namespace alinous {namespace compile {namespace expression {
 class AbstractCollectionExpression;}}}
 
@@ -42,6 +45,7 @@ namespace alinous {namespace compile {namespace expression {
 using namespace ::alinous;
 using namespace ::java::lang;
 using ::java::util::Iterator;
+using ::alinous::buffer::storage::FileStorageEntryBuilder;
 using ::alinous::db::table::DatabaseException;
 using ::alinous::remote::socket::ICommandData;
 using ::alinous::remote::socket::NetworkBinaryBuffer;
@@ -71,6 +75,7 @@ public:
 	int getExpressionType(ThreadContext* ctx) throw()  final;
 	void readData(NetworkBinaryBuffer* buff, ThreadContext* ctx) final;
 	void writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw()  final;
+	void toFileEntry(FileStorageEntryBuilder* builder, ThreadContext* ctx) final;
 public:
 	static bool __init_done;
 	static bool __init_static_variables();

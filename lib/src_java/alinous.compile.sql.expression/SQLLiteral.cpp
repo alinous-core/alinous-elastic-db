@@ -208,6 +208,40 @@ void SQLLiteral::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw(
 		buff->putString(this->value, ctx);
 	}
 }
+int SQLLiteral::fileSize(ThreadContext* ctx)
+{
+	int total = 4;
+	total += 4;
+	bool isnull = (this->value == nullptr);
+	total += 1;
+	if(!isnull)
+	{
+		total += this->value->length(ctx) * 2 + 4;
+	}
+	return total;
+}
+void SQLLiteral::toFileEntry(FileStorageEntryBuilder* builder, ThreadContext* ctx)
+{
+	builder->putInt(IExpressionFactory::__SQLLiteral, ctx);
+	int type = fromEnum(ctx);
+	builder->putInt(type, ctx);
+	bool isnull = (this->value == nullptr);
+	builder->putBoolean(isnull, ctx);
+	if(!isnull)
+	{
+		builder->putString(this->value, ctx);
+	}
+}
+void SQLLiteral::fromFileEntry(FileStorageEntryFetcher* fetcher, ThreadContext* ctx)
+{
+	int num = fetcher->fetchInt(ctx);
+	toEnum(num, ctx);
+	bool isnull = fetcher->fetchBoolean(ctx);
+	if(!isnull)
+	{
+		__GC_MV(this, &(this->value), fetcher->fetchString(ctx), String);
+	}
+}
 int SQLLiteral::fromEnum(ThreadContext* ctx) throw() 
 {
 	switch(this->litType) {

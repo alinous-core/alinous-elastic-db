@@ -79,7 +79,7 @@ private:
 public:
 	void initConnectionPool(ThreadContext* ctx) throw() ;
 	void dispose(ThreadContext* ctx) throw() ;
-	SchemasStructureInfoData* getSchemeInfo(ThreadContext* ctx);
+	SchemasStructureInfoData* getSchemeInfo(String* region, ThreadContext* ctx);
 	String* getHost(ThreadContext* ctx) throw() ;
 	int getPort(ThreadContext* ctx) throw() ;
 	bool isIpv6(ThreadContext* ctx) throw() ;

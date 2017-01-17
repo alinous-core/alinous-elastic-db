@@ -12,6 +12,12 @@ class ScriptMachine;}}}
 namespace alinous {namespace compile {
 class ExpressionSourceId;}}
 
+namespace alinous {namespace buffer {namespace storage {
+class FileStorageEntryBuilder;}}}
+
+namespace alinous {namespace buffer {namespace storage {
+class FileStorageEntryFetcher;}}}
+
 namespace alinous {namespace compile {
 class IAlinousElement;}}
 
@@ -33,6 +39,8 @@ namespace alinous {namespace compile {namespace expression {
 using namespace ::alinous;
 using namespace ::java::lang;
 using ::java::util::Iterator;
+using ::alinous::buffer::storage::FileStorageEntryBuilder;
+using ::alinous::buffer::storage::FileStorageEntryFetcher;
 using ::alinous::compile::ExpressionSourceId;
 using ::alinous::compile::IAlinousElement;
 using ::alinous::compile::IAlinousVisitorContainer;
@@ -118,6 +126,9 @@ public:
 	virtual ExpressionSourceId* getSourceId(ThreadContext* ctx) throw()  = 0;
 	virtual bool isConstant(ThreadContext* ctx) throw()  = 0;
 	virtual bool isSQLExp(ThreadContext* ctx) throw()  = 0;
+	virtual int fileSize(ThreadContext* ctx) = 0;
+	virtual void toFileEntry(FileStorageEntryBuilder* builder, ThreadContext* ctx) = 0;
+	virtual void fromFileEntry(FileStorageEntryFetcher* fetcher, ThreadContext* ctx) = 0;
 public:
 	static bool __init_done;
 	static bool __init_static_variables();

@@ -209,5 +209,41 @@ void SQLExpressionList::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 		exp->writeData(buff, ctx);
 	}
 }
+int SQLExpressionList::fileSize(ThreadContext* ctx)
+{
+	int total = 4;
+	int maxLoop = this->list->size(ctx);
+	total += 1;
+	for(int i = 0; i < maxLoop; ++i)
+	{
+		ISQLExpression* exp = this->list->get(i, ctx);
+		total += exp->fileSize(ctx);
+	}
+	return total;
+}
+void SQLExpressionList::toFileEntry(FileStorageEntryBuilder* builder, ThreadContext* ctx)
+{
+	builder->putInt(IExpressionFactory::__SQLExpressionList, ctx);
+	int maxLoop = this->list->size(ctx);
+	builder->putInt(maxLoop, ctx);
+	for(int i = 0; i < maxLoop; ++i)
+	{
+		ISQLExpression* exp = this->list->get(i, ctx);
+		exp->toFileEntry(builder, ctx);
+	}
+}
+void SQLExpressionList::fromFileEntry(FileStorageEntryFetcher* fetcher, ThreadContext* ctx)
+{
+	int maxLoop = fetcher->fetchInt(ctx);
+	for(int i = 0; i < maxLoop; ++i)
+	{
+		IExpression* el = IExpressionFactory::fromFetcher(fetcher, ctx);
+		if(el == nullptr || !((dynamic_cast<ISQLExpression*>(el) != 0)))
+		{
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1044(), ctx));
+		}
+		this->list->add(static_cast<ISQLExpression*>(el), ctx);
+	}
+}
 }}}}
 

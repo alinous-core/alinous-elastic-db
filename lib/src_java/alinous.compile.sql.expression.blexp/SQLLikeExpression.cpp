@@ -141,7 +141,7 @@ bool SQLLikeExpression::analyseSQL(SQLAnalyseContext* context, bool leftValue, b
 			catch(AlinousException* e)
 			{
 				e->printStackTrace(ctx);
-				throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1072(), ctx));
+				throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1073(), ctx));
 			}
 		}
 	}
@@ -286,6 +286,103 @@ void SQLLikeExpression::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 	if(!isnull)
 	{
 		buff->putString(this->escapeStr, ctx);
+	}
+}
+int SQLLikeExpression::fileSize(ThreadContext* ctx)
+{
+	int total = __fileSize(ctx);
+	bool isnull = (this->first == nullptr);
+	total += 1;
+	if(!isnull)
+	{
+		total += this->first->fileSize(ctx);
+	}
+	isnull = (this->exp == nullptr);
+	total += 1;
+	if(!isnull)
+	{
+		total += this->exp->fileSize(ctx);
+	}
+	isnull = (this->esc == nullptr);
+	total += 1;
+	if(!isnull)
+	{
+		total += this->esc->fileSize(ctx);
+	}
+	isnull = (this->escapeStr == nullptr);
+	total += 1;
+	if(!isnull)
+	{
+		total += this->escapeStr->length(ctx) * 2 + 4;
+	}
+	return total;
+}
+void SQLLikeExpression::toFileEntry(FileStorageEntryBuilder* builder, ThreadContext* ctx)
+{
+	builder->putInt(IExpressionFactory::__SQLLikeExpression, ctx);
+	__toFileEntry(builder, ctx);
+	bool isnull = (this->first == nullptr);
+	builder->putBoolean(isnull, ctx);
+	if(!isnull)
+	{
+		this->first->toFileEntry(builder, ctx);
+	}
+	isnull = (this->exp == nullptr);
+	builder->putBoolean(isnull, ctx);
+	if(!isnull)
+	{
+		this->exp->toFileEntry(builder, ctx);
+	}
+	isnull = (this->esc == nullptr);
+	builder->putBoolean(isnull, ctx);
+	if(!isnull)
+	{
+		this->esc->toFileEntry(builder, ctx);
+	}
+	isnull = (this->escapeStr == nullptr);
+	builder->putBoolean(isnull, ctx);
+	if(!isnull)
+	{
+		builder->putString(this->escapeStr, ctx);
+	}
+}
+void SQLLikeExpression::fromFileEntry(FileStorageEntryFetcher* fetcher, ThreadContext* ctx)
+{
+	__fromFileEntry(fetcher, ctx);
+	bool isnull = fetcher->fetchBoolean(ctx);
+	if(!isnull)
+	{
+		IExpression* el = IExpressionFactory::fromFetcher(fetcher, ctx);
+		if(el == nullptr || !((dynamic_cast<ISQLExpression*>(el) != 0)))
+		{
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1044(), ctx));
+		}
+		__GC_MV(this, &(this->first), static_cast<ISQLExpression*>(el), ISQLExpression);
+	}
+	isnull = fetcher->fetchBoolean(ctx);
+	if(!isnull)
+	{
+		IExpression* el = IExpressionFactory::fromFetcher(fetcher, ctx);
+		if(el == nullptr || !((dynamic_cast<ISQLExpression*>(el) != 0)))
+		{
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1044(), ctx));
+		}
+		__GC_MV(this, &(this->exp), static_cast<ISQLExpression*>(el), ISQLExpression);
+	}
+	isnull = fetcher->fetchBoolean(ctx);
+	if(!isnull)
+	{
+		IExpression* el = IExpressionFactory::fromFetcher(fetcher, ctx);
+		if(el == nullptr || !((dynamic_cast<ISQLExpression*>(el) != 0)))
+		{
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1044(), ctx));
+		}
+		__GC_MV(this, &(this->esc), static_cast<ISQLExpression*>(el), ISQLExpression);
+	}
+	isnull = fetcher->fetchBoolean(ctx);
+	if(!isnull)
+	{
+		__GC_MV(this, &(this->escapeStr), fetcher->fetchString(ctx), String);
 	}
 }
 }}}}}

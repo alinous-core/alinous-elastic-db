@@ -15,11 +15,20 @@ class AbstractSrcElement;}}
 namespace alinous {namespace remote {namespace socket {
 class NetworkBinaryBuffer;}}}
 
+namespace alinous {namespace buffer {namespace storage {
+class FileStorageEntryBuilder;}}}
+
+namespace alinous {namespace buffer {namespace storage {
+class FileStorageEntryFetcher;}}}
+
 namespace alinous {namespace compile {namespace sql {namespace expression {namespace blexp {
 class ISQLBoolExpression;}}}}}
 
 namespace alinous {namespace runtime {namespace dom {
 class VariableException;}}}
+
+namespace alinous {namespace system {
+class AlinousException;}}
 
 namespace alinous {
 class ThreadContext;
@@ -31,11 +40,14 @@ using namespace ::alinous;
 using namespace ::java::lang;
 using ::java::util::Iterator;
 using ::java::util::ArrayList;
+using ::alinous::buffer::storage::FileStorageEntryBuilder;
+using ::alinous::buffer::storage::FileStorageEntryFetcher;
 using ::alinous::compile::AbstractSrcElement;
 using ::alinous::compile::sql::analyze::IndexColumnMatchCondition;
 using ::alinous::compile::sql::analyze::ScanTableColumnIdentifier;
 using ::alinous::remote::socket::NetworkBinaryBuffer;
 using ::alinous::runtime::dom::VariableException;
+using ::alinous::system::AlinousException;
 
 
 
@@ -70,6 +82,9 @@ public:
 	virtual void setAsName(String* name, ThreadContext* ctx) throw() ;
 	void __readData(NetworkBinaryBuffer* buff, ThreadContext* ctx);
 	void __writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() ;
+	int __fileSize(ThreadContext* ctx);
+	void __toFileEntry(FileStorageEntryBuilder* builder, ThreadContext* ctx);
+	void __fromFileEntry(FileStorageEntryFetcher* fetcher, ThreadContext* ctx);
 public:
 	static int operatorFromString(String* opStr, ThreadContext* ctx) throw() ;
 public:

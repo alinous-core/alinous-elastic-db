@@ -96,7 +96,7 @@ void MBTreeLeafNode::printNode(StringBuffer* buff, int level, ThreadContext* ctx
 {
 	printTab(buff, level, ctx);
 	printTab(buff, level, ctx);
-	buff->append(ConstStr::getCNST_STR_1633(), ctx)->append(getKey(ctx)->toString(ctx), ctx)->append(ConstStr::getCNST_STR_1634(), ctx);
+	buff->append(ConstStr::getCNST_STR_1636(), ctx)->append(getKey(ctx)->toString(ctx), ctx)->append(ConstStr::getCNST_STR_1637(), ctx);
 }
 bool MBTreeLeafNode::removeChild(IBTreeKey* key, ThreadContext* ctx)
 {

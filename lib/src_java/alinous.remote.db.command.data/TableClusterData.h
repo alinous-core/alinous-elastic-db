@@ -6,6 +6,9 @@ class StorageNodeData;}}}}}
 namespace alinous {namespace remote {namespace socket {
 class NetworkBinaryBuffer;}}}
 
+namespace alinous {namespace db {namespace table {
+class TableMetadata;}}}
+
 namespace alinous {namespace remote {namespace socket {
 class ICommandData;}}}
 
@@ -26,6 +29,7 @@ using namespace ::alinous;
 using namespace ::java::lang;
 using ::java::util::Iterator;
 using ::java::util::ArrayList;
+using ::alinous::db::table::TableMetadata;
 using ::alinous::remote::socket::ICommandData;
 using ::alinous::remote::socket::NetworkBinaryBuffer;
 using ::alinous::runtime::dom::VariableException;
@@ -38,7 +42,7 @@ public:
 public:
 	TableClusterData(String* name, String* region, ThreadContext* ctx) throw() ;
 	void __construct_impl(String* name, String* region, ThreadContext* ctx) throw() ;
-	TableClusterData(ThreadContext* ctx) throw()  : IObject(ctx), ICommandData(ctx), name(nullptr), region(nullptr), nodesList(GCUtils<ArrayList<StorageNodeData> >::ins(this, (new(ctx) ArrayList<StorageNodeData>(ctx)), ctx, __FILEW__, __LINE__, L""))
+	TableClusterData(ThreadContext* ctx) throw()  : IObject(ctx), ICommandData(ctx), name(nullptr), region(nullptr), metadata(nullptr), nodesList(GCUtils<ArrayList<StorageNodeData> >::ins(this, (new(ctx) ArrayList<StorageNodeData>(ctx)), ctx, __FILEW__, __LINE__, L""))
 	{
 	}
 	void __construct_impl(ThreadContext* ctx) throw() 
@@ -49,6 +53,7 @@ public:
 private:
 	String* name;
 	String* region;
+	TableMetadata* metadata;
 	ArrayList<StorageNodeData>* nodesList;
 public:
 	void addNode(StorageNodeData* node, ThreadContext* ctx) throw() ;
@@ -59,6 +64,8 @@ public:
 	void setRegion(String* region, ThreadContext* ctx) throw() ;
 	void readData(NetworkBinaryBuffer* buff, ThreadContext* ctx) final;
 	void writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw()  final;
+	TableMetadata* getMetadata(ThreadContext* ctx) throw() ;
+	void setMetadata(TableMetadata* metadata, ThreadContext* ctx) throw() ;
 public:
 	static bool __init_done;
 	static bool __init_static_variables();

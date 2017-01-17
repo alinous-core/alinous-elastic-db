@@ -58,5 +58,10 @@ void AndExpression::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) thr
 	buff->putInt(ICommandData::__AndExpression, ctx);
 	__writeData(buff, ctx);
 }
+void AndExpression::toFileEntry(FileStorageEntryBuilder* builder, ThreadContext* ctx)
+{
+	builder->putInt(IExpressionFactory::__AndExpression, ctx);
+	__toFileEntry(builder, ctx);
+}
 }}}}
 

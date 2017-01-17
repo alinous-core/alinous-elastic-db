@@ -36,6 +36,15 @@ class IAlinousElement;}}
 namespace alinous {namespace runtime {namespace dom {
 class VariableException;}}}
 
+namespace alinous {namespace buffer {namespace storage {
+class FileStorageEntryBuilder;}}}
+
+namespace alinous {namespace buffer {namespace storage {
+class FileStorageEntryFetcher;}}}
+
+namespace alinous {namespace compile {namespace expression {
+class IExpression;}}}
+
 namespace alinous {namespace compile {namespace expression {
 class AbstractExpression;}}}
 
@@ -43,7 +52,7 @@ namespace alinous {namespace compile {
 class AlinousElementNetworkFactory;}}
 
 namespace alinous {namespace compile {namespace expression {
-class IExpression;}}}
+class IExpressionFactory;}}}
 
 namespace alinous {namespace db {namespace table {
 class DatabaseException;}}}
@@ -63,6 +72,8 @@ namespace alinous {namespace compile {namespace expression {namespace expstream 
 using namespace ::alinous;
 using namespace ::java::lang;
 using ::java::util::Iterator;
+using ::alinous::buffer::storage::FileStorageEntryBuilder;
+using ::alinous::buffer::storage::FileStorageEntryFetcher;
 using ::alinous::compile::AbstractSrcElement;
 using ::alinous::compile::AlinousElementNetworkFactory;
 using ::alinous::compile::ExpressionSourceId;
@@ -71,6 +82,7 @@ using ::alinous::compile::IAlinousElementVisitor;
 using ::alinous::compile::analyse::SrcAnalyseContext;
 using ::alinous::compile::expression::AbstractExpression;
 using ::alinous::compile::expression::IExpression;
+using ::alinous::compile::expression::IExpressionFactory;
 using ::alinous::db::table::DatabaseException;
 using ::alinous::remote::socket::ICommandData;
 using ::alinous::remote::socket::NetworkBinaryBuffer;
@@ -102,6 +114,9 @@ public:
 	int getExpressionType(ThreadContext* ctx) throw()  final;
 	void readData(NetworkBinaryBuffer* buff, ThreadContext* ctx) final;
 	void writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw()  final;
+	int fileSize(ThreadContext* ctx) final;
+	void toFileEntry(FileStorageEntryBuilder* builder, ThreadContext* ctx) final;
+	void fromFileEntry(FileStorageEntryFetcher* fetcher, ThreadContext* ctx) final;
 public:
 	static bool __init_done;
 	static bool __init_static_variables();

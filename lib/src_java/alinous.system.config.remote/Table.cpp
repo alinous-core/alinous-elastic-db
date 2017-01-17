@@ -75,16 +75,16 @@ void Table::setMax(String* max, ThreadContext* ctx) throw()
 Table* Table::parseInstance(DomNode* dom, DomDocument* document, Matcher* matcher, ThreadContext* ctx)
 {
 	Table* tbl = (new(ctx) Table(ctx));
-	IVariableValue* attr = dom->getAttributeValue(ConstStr::getCNST_STR_1111(), ctx);
+	IVariableValue* attr = dom->getAttributeValue(ConstStr::getCNST_STR_1114(), ctx);
 	if(attr == nullptr)
 	{
-		throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_1270(), ctx));
+		throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_1273(), ctx));
 	}
 	tbl->setName(attr->toString(ctx)->trim(ctx), ctx);
-	attr = dom->getAttributeValue(ConstStr::getCNST_STR_1271(), ctx);
+	attr = dom->getAttributeValue(ConstStr::getCNST_STR_1274(), ctx);
 	if(attr == nullptr)
 	{
-		throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_1272(), ctx));
+		throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_1275(), ctx));
 	}
 	String* keysstr = attr->toString(ctx)->trim(ctx);
 	IArrayObject<String>* keyar = keysstr->split(ConstStr::getCNST_STR_888(), ctx);
@@ -94,12 +94,12 @@ Table* Table::parseInstance(DomNode* dom, DomDocument* document, Matcher* matche
 		String* key = keyar->get(i);
 		tbl->addKey(key, ctx);
 	}
-	attr = dom->getAttributeValue(ConstStr::getCNST_STR_1273(), ctx);
+	attr = dom->getAttributeValue(ConstStr::getCNST_STR_1276(), ctx);
 	if(attr != nullptr)
 	{
 		tbl->setMax(attr->toString(ctx)->trim(ctx), ctx);
 	}
-	MatchCandidatesCollection* result = matcher->match(document, dom, ConstStr::getCNST_STR_1274(), ctx);
+	MatchCandidatesCollection* result = matcher->match(document, dom, ConstStr::getCNST_STR_1277(), ctx);
 	ArrayList<MatchCandidate>* list = result->getCandidatesList(ctx);
 	Iterator<MatchCandidate>* it = list->iterator(ctx);
 	while(it->hasNext(ctx))

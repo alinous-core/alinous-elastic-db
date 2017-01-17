@@ -74,12 +74,12 @@ void DynamicWebPageModuleStream::prepare(AlinousCore* core, bool debug, ThreadCo
 	}
 	StringWriter* writer = (new(ctx) StringWriter(ctx));
 	this->htmlModule->execute(machine, this->alnsModule, writer, debug, ctx);
-	__GC_MV(this, &(this->outString), writer->toString(ctx)->getBytes(ConstStr::getCNST_STR_1096(), ctx), IArrayObjectPrimitive<char>);
+	__GC_MV(this, &(this->outString), writer->toString(ctx)->getBytes(ConstStr::getCNST_STR_1099(), ctx), IArrayObjectPrimitive<char>);
 	writer->close(ctx);
 }
 String* DynamicWebPageModuleStream::getContentType(ThreadContext* ctx) throw() 
 {
-	return ConstStr::getCNST_STR_1858();
+	return ConstStr::getCNST_STR_1861();
 }
 }}}
 

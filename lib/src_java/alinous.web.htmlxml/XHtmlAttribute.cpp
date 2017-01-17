@@ -70,7 +70,7 @@ void XHtmlAttribute::serialize(SerializeContext* context, ThreadContext* ctx)
 	}
 	if(this->value != nullptr)
 	{
-		context->addStaticString(ConstStr::getCNST_STR_1071(), ctx);
+		context->addStaticString(ConstStr::getCNST_STR_1072(), ctx);
 		this->value->serialize(context, ctx);
 	}
 }
@@ -92,7 +92,7 @@ String* XHtmlAttribute::execute(ScriptMachine* machine, bool debug, ThreadContex
 	}
 	if(this->parts != nullptr)
 	{
-		buff->append(ConstStr::getCNST_STR_1071(), ctx);
+		buff->append(ConstStr::getCNST_STR_1072(), ctx);
 	}
 	buff->append(this->value->execute(machine, debug, ctx), ctx);
 	return buff->toString(ctx);
@@ -135,7 +135,7 @@ String* XHtmlAttribute::toString(ThreadContext* ctx) throw()
 	buff->append(this->name, ctx);
 	if(this->value != nullptr)
 	{
-		buff->append(ConstStr::getCNST_STR_1071(), ctx)->append(this->value->toString(ctx), ctx);
+		buff->append(ConstStr::getCNST_STR_1072(), ctx)->append(this->value->toString(ctx), ctx);
 	}
 	return buff->toString(ctx);
 }

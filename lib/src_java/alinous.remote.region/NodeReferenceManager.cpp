@@ -82,7 +82,7 @@ void NodeReferenceManager::doSyncSchemeTables(ThreadContext* ctx)
 	{
 		String* regionName = it->next(ctx);
 		NodeCluster* region = this->nodeReferences->get(regionName, ctx);
-		SchemasStructureInfoData* data = region->getSchemeInfo(ctx);
+		SchemasStructureInfoData* data = region->getSchemeInfo(regionName, ctx);
 		list->add(data, ctx);
 	}
 }

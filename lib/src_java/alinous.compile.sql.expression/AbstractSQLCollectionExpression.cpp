@@ -244,5 +244,54 @@ void AbstractSQLCollectionExpression::__writeData(NetworkBinaryBuffer* buff, Thr
 		buff->putString(this->asName, ctx);
 	}
 }
+int AbstractSQLCollectionExpression::fileSize(ThreadContext* ctx)
+{
+	int total = 4;
+	bool isnull = (this->first == nullptr);
+	total += 1;
+	if(!isnull)
+	{
+		total += this->first->fileSize(ctx);
+	}
+	int maxLoop = this->expressions->size(ctx);
+	total += 4;
+	for(int i = 0; i < maxLoop; ++i)
+	{
+		ISQLExpression* exp = this->expressions->get(i, ctx);
+		total += exp->fileSize(ctx);
+	}
+	isnull = (this->asName == nullptr);
+	total += 1;
+	if(!isnull)
+	{
+		total += this->asName->length(ctx) * 2 + 4;
+	}
+	return total;
+}
+void AbstractSQLCollectionExpression::__toFileEntry(FileStorageEntryBuilder* builder, ThreadContext* ctx)
+{
+	bool isnull = (this->first == nullptr);
+	builder->putBoolean(isnull, ctx);
+	if(!isnull)
+	{
+		this->first->toFileEntry(builder, ctx);
+	}
+	int maxLoop = this->expressions->size(ctx);
+	builder->putInt(maxLoop, ctx);
+	for(int i = 0; i < maxLoop; ++i)
+	{
+		ISQLExpression* exp = this->expressions->get(i, ctx);
+		exp->toFileEntry(builder, ctx);
+	}
+	isnull = (this->asName == nullptr);
+	builder->putBoolean(isnull, ctx);
+	if(!isnull)
+	{
+		builder->putString(this->asName, ctx);
+	}
+}
+void AbstractSQLCollectionExpression::fromFileEntry(FileStorageEntryFetcher* fetcher, ThreadContext* ctx)
+{
+}
 }}}}
 

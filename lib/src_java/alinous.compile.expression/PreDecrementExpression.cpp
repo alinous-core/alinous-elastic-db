@@ -122,5 +122,39 @@ void PreDecrementExpression::writeData(NetworkBinaryBuffer* buff, ThreadContext*
 		this->exp->writeData(buff, ctx);
 	}
 }
+int PreDecrementExpression::fileSize(ThreadContext* ctx)
+{
+	int total = 4;
+	bool isnull = (this->exp == nullptr);
+	total += 1;
+	if(!isnull)
+	{
+		total += this->exp->fileSize(ctx);
+	}
+	return total;
+}
+void PreDecrementExpression::toFileEntry(FileStorageEntryBuilder* builder, ThreadContext* ctx)
+{
+	builder->putInt(IExpressionFactory::__PreDecrementExpression, ctx);
+	bool isnull = (this->exp == nullptr);
+	builder->putBoolean(isnull, ctx);
+	if(!isnull)
+	{
+		this->exp->toFileEntry(builder, ctx);
+	}
+}
+void PreDecrementExpression::fromFileEntry(FileStorageEntryFetcher* fetcher, ThreadContext* ctx)
+{
+	bool isnull = fetcher->fetchBoolean(ctx);
+	if(!isnull)
+	{
+		IExpression* el = IExpressionFactory::fromFetcher(fetcher, ctx);
+		if(el == nullptr || !((dynamic_cast<IExpression*>(el) != 0)))
+		{
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_980(), ctx));
+		}
+		__GC_MV(this, &(this->exp), static_cast<IExpression*>(el), IExpression);
+	}
+}
 }}}
 

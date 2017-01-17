@@ -57,6 +57,9 @@ class VariableException;}}}
 namespace alinous {namespace db {namespace table {
 class IScannableIndex;}}}
 
+namespace alinous {namespace system {
+class AlinousException;}}
+
 namespace alinous {namespace buffer {namespace storage {
 class FileStorageEntryWriter;}}}
 
@@ -114,6 +117,7 @@ using ::alinous::db::AlinousDbException;
 using ::alinous::lock::ConcurrentGate;
 using ::alinous::runtime::dom::VariableException;
 using ::alinous::system::AlinousCore;
+using ::alinous::system::AlinousException;
 
 
 
@@ -161,7 +165,7 @@ public:
 	String* getFullName(ThreadContext* ctx) throw()  final;
 	void syncScheme(ThreadContext* ctx);
 	String* getDataStorageName(ThreadContext* ctx) throw() ;
-	int indexSchemeSize(ThreadContext* ctx) throw() ;
+	int indexSchemeSize(ThreadContext* ctx);
 	void syncIndexScheme(FileStorageEntryBuilder* builder, ThreadContext* ctx);
 	void loadScheme(ThreadContext* ctx);
 	String* getOidIndexName(ThreadContext* ctx) throw() ;

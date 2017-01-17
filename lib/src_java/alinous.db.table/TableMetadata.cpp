@@ -18,7 +18,7 @@ bool TableMetadata::__init_static_variables(){
 	delete ctx;
 	return true;
 }
- TableMetadata::TableMetadata(String* tableName, ThreadContext* ctx) throw()  : IObject(ctx), columns(GCUtils<HashMap<String,TableColumnMetadata> >::ins(this, (new(ctx) HashMap<String,TableColumnMetadata>(ctx)), ctx, __FILEW__, __LINE__, L"")), columnsList(GCUtils<ArrayList<TableColumnMetadata> >::ins(this, (new(ctx) ArrayList<TableColumnMetadata>(ctx)), ctx, __FILEW__, __LINE__, L"")), primaryKeys(GCUtils<ArrayList<TableColumnMetadata> >::ins(this, (new(ctx) ArrayList<TableColumnMetadata>(ctx)), ctx, __FILEW__, __LINE__, L"")), indexes(GCUtils<ArrayList<TableIndexMetadata> >::ins(this, (new(ctx) ArrayList<TableIndexMetadata>(ctx)), ctx, __FILEW__, __LINE__, L"")), schema(nullptr), tableName(nullptr), checks(GCUtils<ArrayList<CheckDefinition> >::ins(this, (new(ctx) ArrayList<CheckDefinition>(ctx)), ctx, __FILEW__, __LINE__, L"")), maxPartitionValue(nullptr)
+ TableMetadata::TableMetadata(String* tableName, ThreadContext* ctx) throw()  : IObject(ctx), ICommandData(ctx), columns(GCUtils<HashMap<String,TableColumnMetadata> >::ins(this, (new(ctx) HashMap<String,TableColumnMetadata>(ctx)), ctx, __FILEW__, __LINE__, L"")), columnsList(GCUtils<ArrayList<TableColumnMetadata> >::ins(this, (new(ctx) ArrayList<TableColumnMetadata>(ctx)), ctx, __FILEW__, __LINE__, L"")), primaryKeys(GCUtils<ArrayList<TableColumnMetadata> >::ins(this, (new(ctx) ArrayList<TableColumnMetadata>(ctx)), ctx, __FILEW__, __LINE__, L"")), indexes(GCUtils<ArrayList<TableIndexMetadata> >::ins(this, (new(ctx) ArrayList<TableIndexMetadata>(ctx)), ctx, __FILEW__, __LINE__, L"")), schema(nullptr), tableName(nullptr), checks(GCUtils<ArrayList<CheckDefinition> >::ins(this, (new(ctx) ArrayList<CheckDefinition>(ctx)), ctx, __FILEW__, __LINE__, L"")), maxPartitionValue(nullptr)
 {
 	__GC_MV(this, &(this->schema), ConstStr::getCNST_STR_955(), String);
 	__GC_MV(this, &(this->tableName), tableName, String);
@@ -28,7 +28,7 @@ void TableMetadata::__construct_impl(String* tableName, ThreadContext* ctx) thro
 	__GC_MV(this, &(this->schema), ConstStr::getCNST_STR_955(), String);
 	__GC_MV(this, &(this->tableName), tableName, String);
 }
- TableMetadata::TableMetadata(String* schema, String* tableName, ThreadContext* ctx) throw()  : IObject(ctx), columns(GCUtils<HashMap<String,TableColumnMetadata> >::ins(this, (new(ctx) HashMap<String,TableColumnMetadata>(ctx)), ctx, __FILEW__, __LINE__, L"")), columnsList(GCUtils<ArrayList<TableColumnMetadata> >::ins(this, (new(ctx) ArrayList<TableColumnMetadata>(ctx)), ctx, __FILEW__, __LINE__, L"")), primaryKeys(GCUtils<ArrayList<TableColumnMetadata> >::ins(this, (new(ctx) ArrayList<TableColumnMetadata>(ctx)), ctx, __FILEW__, __LINE__, L"")), indexes(GCUtils<ArrayList<TableIndexMetadata> >::ins(this, (new(ctx) ArrayList<TableIndexMetadata>(ctx)), ctx, __FILEW__, __LINE__, L"")), schema(nullptr), tableName(nullptr), checks(GCUtils<ArrayList<CheckDefinition> >::ins(this, (new(ctx) ArrayList<CheckDefinition>(ctx)), ctx, __FILEW__, __LINE__, L"")), maxPartitionValue(nullptr)
+ TableMetadata::TableMetadata(String* schema, String* tableName, ThreadContext* ctx) throw()  : IObject(ctx), ICommandData(ctx), columns(GCUtils<HashMap<String,TableColumnMetadata> >::ins(this, (new(ctx) HashMap<String,TableColumnMetadata>(ctx)), ctx, __FILEW__, __LINE__, L"")), columnsList(GCUtils<ArrayList<TableColumnMetadata> >::ins(this, (new(ctx) ArrayList<TableColumnMetadata>(ctx)), ctx, __FILEW__, __LINE__, L"")), primaryKeys(GCUtils<ArrayList<TableColumnMetadata> >::ins(this, (new(ctx) ArrayList<TableColumnMetadata>(ctx)), ctx, __FILEW__, __LINE__, L"")), indexes(GCUtils<ArrayList<TableIndexMetadata> >::ins(this, (new(ctx) ArrayList<TableIndexMetadata>(ctx)), ctx, __FILEW__, __LINE__, L"")), schema(nullptr), tableName(nullptr), checks(GCUtils<ArrayList<CheckDefinition> >::ins(this, (new(ctx) ArrayList<CheckDefinition>(ctx)), ctx, __FILEW__, __LINE__, L"")), maxPartitionValue(nullptr)
 {
 	__GC_MV(this, &(this->schema), schema, String);
 	__GC_MV(this, &(this->tableName), tableName, String);
@@ -68,7 +68,14 @@ void TableMetadata::__releaseRegerences(bool prepare, ThreadContext* ctx) throw(
 		return;
 	}
 }
-int TableMetadata::fileSize(ThreadContext* ctx) throw() 
+TableClusterData* TableMetadata::toCommandData(String* region, ThreadContext* ctx) throw() 
+{
+	TableClusterData* data = (new(ctx) TableClusterData(ctx));
+	data->setRegion(region, ctx);
+	data->setName(this->tableName, ctx);
+	return data;
+}
+int TableMetadata::fileSize(ThreadContext* ctx)
 {
 	int total = this->schema->length(ctx) * 2 + 4;
 	total += this->tableName->length(ctx) * 2 + 4;
@@ -125,6 +132,12 @@ void TableMetadata::toFileEntry(FileStorageEntryBuilder* builder, ThreadContext*
 		builder->putByte(((char)0), ctx);
 		this->maxPartitionValue->toFileEntry(builder, ctx);
 	}
+}
+void TableMetadata::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
+{
+}
+void TableMetadata::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+{
 }
 void TableMetadata::addindex(TableIndexMetadata* indexMeta, ThreadContext* ctx) throw() 
 {
@@ -194,7 +207,7 @@ void TableMetadata::addPrimaryKey(String* col, ThreadContext* ctx)
 	TableColumnMetadata* colmeta = this->columns->get(col->toLowerCase(ctx), ctx);
 	if(colmeta == nullptr)
 	{
-		throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1673(), ctx));
+		throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1676(), ctx));
 	}
 	this->primaryKeys->add(colmeta, ctx);
 	colmeta->setPrimaryKey(true, ctx);

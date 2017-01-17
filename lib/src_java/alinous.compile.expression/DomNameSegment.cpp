@@ -127,5 +127,37 @@ void DomNameSegment::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) th
 	}
 	buff->putInt(this->segmentVariableType, ctx);
 }
+void DomNameSegment::toFileEntry(FileStorageEntryBuilder* builder, ThreadContext* ctx)
+{
+	builder->putInt(IDomSegment::TYPE_NORMAL, ctx);
+	bool isnull = (this->name == nullptr);
+	builder->putBoolean(isnull, ctx);
+	if(!isnull)
+	{
+		builder->putString(this->name, ctx);
+	}
+	builder->putInt(this->segmentVariableType, ctx);
+}
+void DomNameSegment::fromFileEntry(FileStorageEntryFetcher* fetcher, ThreadContext* ctx)
+{
+	bool isnull = fetcher->fetchBoolean(ctx);
+	if(!isnull)
+	{
+		__GC_MV(this, &(this->name), fetcher->fetchString(ctx), String);
+	}
+	this->segmentVariableType = fetcher->fetchInt(ctx);
+}
+int DomNameSegment::fileSize(ThreadContext* ctx)
+{
+	int total = 4;
+	bool isnull = (this->name == nullptr);
+	total += 1;
+	if(!isnull)
+	{
+		total += this->name->length(ctx) * 2 + 4;
+	}
+	total += 4;
+	return total;
+}
 }}}
 

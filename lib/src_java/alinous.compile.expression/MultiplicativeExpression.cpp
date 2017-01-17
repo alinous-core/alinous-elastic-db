@@ -77,5 +77,10 @@ void MultiplicativeExpression::writeData(NetworkBinaryBuffer* buff, ThreadContex
 	buff->putInt(ICommandData::__MultiplicativeExpression, ctx);
 	__writeData(buff, ctx);
 }
+void MultiplicativeExpression::toFileEntry(FileStorageEntryBuilder* builder, ThreadContext* ctx)
+{
+	builder->putInt(IExpressionFactory::__MultiplicativeExpression, ctx);
+	__toFileEntry(builder, ctx);
+}
 }}}
 

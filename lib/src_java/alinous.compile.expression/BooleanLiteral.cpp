@@ -42,5 +42,19 @@ int BooleanLiteral::getExpressionType(ThreadContext* ctx) throw()
 {
 	return IExpression::booleanLiteral;
 }
+void BooleanLiteral::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
+{
+	__readData(buff, ctx);
+}
+void BooleanLiteral::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+{
+	buff->putInt(ICommandData::__BooleanLiteral, ctx);
+	__writeData(buff, ctx);
+}
+void BooleanLiteral::toFileEntry(FileStorageEntryBuilder* builder, ThreadContext* ctx)
+{
+	builder->putInt(IExpressionFactory::__BooleanLiteral, ctx);
+	__toFileEntry(builder, ctx);
+}
 }}}
 

@@ -253,6 +253,86 @@ void AllocationExpression::writeData(NetworkBinaryBuffer* buff, ThreadContext* c
 		exp->writeData(buff, ctx);
 	}
 }
+int AllocationExpression::fileSize(ThreadContext* ctx)
+{
+	int total = 4;
+	bool isnull = (this->objectClassName == nullptr);
+	total += 1;
+	if(!isnull)
+	{
+		total += this->objectClassName->fileSize(ctx);
+	}
+	isnull = (this->arguments == nullptr);
+	total += 1;
+	if(!isnull)
+	{
+		total += this->arguments->fileSize(ctx);
+	}
+	int maxLoop = this->arrayCapacity->size(ctx);
+	total += 4;
+	for(int i = 0; i < maxLoop; ++i)
+	{
+		IExpression* exp = this->arrayCapacity->get(i, ctx);
+		total += exp->fileSize(ctx);
+	}
+	return total;
+}
+void AllocationExpression::toFileEntry(FileStorageEntryBuilder* builder, ThreadContext* ctx)
+{
+	builder->putInt(IExpressionFactory::__BitReverseExpression, ctx);
+	bool isnull = (this->objectClassName == nullptr);
+	builder->putBoolean(isnull, ctx);
+	if(!isnull)
+	{
+		this->objectClassName->toFileEntry(builder, ctx);
+	}
+	isnull = (this->arguments == nullptr);
+	builder->putBoolean(isnull, ctx);
+	if(!isnull)
+	{
+		this->arguments->toFileEntry(builder, ctx);
+	}
+	int maxLoop = this->arrayCapacity->size(ctx);
+	builder->putInt(maxLoop, ctx);
+	for(int i = 0; i < maxLoop; ++i)
+	{
+		IExpression* exp = this->arrayCapacity->get(i, ctx);
+		exp->toFileEntry(builder, ctx);
+	}
+}
+void AllocationExpression::fromFileEntry(FileStorageEntryFetcher* fetcher, ThreadContext* ctx)
+{
+	bool isnull = fetcher->fetchBoolean(ctx);
+	if(!isnull)
+	{
+		AlinousName* el = AlinousName::fromFileEntry(fetcher, ctx);
+		if(el == nullptr)
+		{
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_970(), ctx));
+		}
+		__GC_MV(this, &(this->objectClassName), el, AlinousName);
+	}
+	isnull = fetcher->fetchBoolean(ctx);
+	if(!isnull)
+	{
+		IExpression* el = IExpressionFactory::fromFetcher(fetcher, ctx);
+		if(el == nullptr || !((dynamic_cast<FunctionArguments*>(el) != 0)))
+		{
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_998(), ctx));
+		}
+		__GC_MV(this, &(this->arguments), static_cast<FunctionArguments*>(el), FunctionArguments);
+	}
+	int maxLoop = fetcher->fetchInt(ctx);
+	for(int i = 0; i < maxLoop; ++i)
+	{
+		IExpression* el = IExpressionFactory::fromFetcher(fetcher, ctx);
+		if(el == nullptr || !((dynamic_cast<IExpression*>(el) != 0)))
+		{
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_980(), ctx));
+		}
+		this->arrayCapacity->add(static_cast<IExpression*>(el), ctx);
+	}
+}
 IAlinousVariable* AllocationExpression::newClassObject(ScriptMachine* machine, bool debug, ThreadContext* ctx)
 {
 	AlinousClass* clazz = this->analysedType->getClazz(ctx);

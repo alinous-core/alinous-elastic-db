@@ -165,7 +165,7 @@ void TableList::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
 		if(el == nullptr || !((dynamic_cast<IJoin*>(el) != 0)))
 		{
-			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1078(), ctx));
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1079(), ctx));
 		}
 		this->list->add(static_cast<IJoin*>(el), ctx);
 	}

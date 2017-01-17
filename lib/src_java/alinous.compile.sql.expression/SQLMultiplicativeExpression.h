@@ -36,11 +36,17 @@ class DatabaseException;}}}
 namespace alinous {namespace remote {namespace socket {
 class NetworkBinaryBuffer;}}}
 
+namespace alinous {namespace buffer {namespace storage {
+class FileStorageEntryBuilder;}}}
+
 namespace alinous {namespace compile {namespace sql {namespace expression {
 class AbstractSQLCollectionExpression;}}}}
 
 namespace alinous {namespace compile {namespace expression {
 class IExpression;}}}
+
+namespace alinous {namespace compile {namespace expression {
+class IExpressionFactory;}}}
 
 namespace alinous {namespace compile {namespace expression {namespace blexp {
 class AbstractBooleanExpression;}}}}
@@ -61,8 +67,10 @@ using namespace ::alinous;
 using namespace ::java::lang;
 using ::java::util::Iterator;
 using ::java::util::ArrayList;
+using ::alinous::buffer::storage::FileStorageEntryBuilder;
 using ::alinous::compile::ExpressionSourceId;
 using ::alinous::compile::expression::IExpression;
+using ::alinous::compile::expression::IExpressionFactory;
 using ::alinous::compile::expression::blexp::AbstractBooleanExpression;
 using ::alinous::compile::sql::analyze::ScanTableColumnIdentifier;
 using ::alinous::db::table::DatabaseException;
@@ -103,6 +111,7 @@ public:
 	int getExpressionType(ThreadContext* ctx) throw()  final;
 	void readData(NetworkBinaryBuffer* buff, ThreadContext* ctx) final;
 	void writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw()  final;
+	void toFileEntry(FileStorageEntryBuilder* builder, ThreadContext* ctx) final;
 public:
 	static bool __init_done;
 	static bool __init_static_variables();

@@ -187,6 +187,57 @@ void FunctionCallExpression::writeData(NetworkBinaryBuffer* buff, ThreadContext*
 		this->arguments->writeData(buff, ctx);
 	}
 }
+int FunctionCallExpression::fileSize(ThreadContext* ctx)
+{
+	int total = 4;
+	bool isnull = (this->body == nullptr);
+	total += 1;
+	if(!isnull)
+	{
+		total += this->body->length(ctx) * 2 + 4;
+	}
+	isnull = (this->arguments == nullptr);
+	total += 1;
+	if(!isnull)
+	{
+		total += this->arguments->fileSize(ctx);
+	}
+	return total;
+}
+void FunctionCallExpression::toFileEntry(FileStorageEntryBuilder* builder, ThreadContext* ctx)
+{
+	builder->putInt(IExpressionFactory::__FunctionCallExpression, ctx);
+	bool isnull = (this->body == nullptr);
+	builder->putBoolean(isnull, ctx);
+	if(!isnull)
+	{
+		builder->putString(this->body, ctx);
+	}
+	isnull = (this->arguments == nullptr);
+	builder->putBoolean(isnull, ctx);
+	if(!isnull)
+	{
+		this->arguments->toFileEntry(builder, ctx);
+	}
+}
+void FunctionCallExpression::fromFileEntry(FileStorageEntryFetcher* fetcher, ThreadContext* ctx)
+{
+	bool isnull = fetcher->fetchBoolean(ctx);
+	if(!isnull)
+	{
+		__GC_MV(this, &(this->body), fetcher->fetchString(ctx), String);
+	}
+	isnull = fetcher->fetchBoolean(ctx);
+	if(!isnull)
+	{
+		IExpression* el = IExpressionFactory::fromFetcher(fetcher, ctx);
+		if(el == nullptr || !((dynamic_cast<FunctionArguments*>(el) != 0)))
+		{
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_998(), ctx));
+		}
+		__GC_MV(this, &(this->arguments), static_cast<FunctionArguments*>(el), FunctionArguments);
+	}
+}
 bool FunctionCallExpression::analyseSourceAndJavaFunction(String* prefix, SrcAnalyseContext* context, ThreadContext* ctx) throw() 
 {
 	if(prefix != nullptr && context->isJavaFunction(prefix, this->body, ctx))

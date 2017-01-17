@@ -3,6 +3,9 @@
 namespace alinous{namespace annotation{
 class OneSource;
 }}
+namespace alinous {namespace remote {namespace db {namespace command {namespace data {
+class TableClusterData;}}}}}
+
 namespace java {namespace util {
 template <typename  T> class Set;}}
 
@@ -24,6 +27,9 @@ class TableMetadata;}}}
 namespace alinous {namespace buffer {namespace storage {
 class FileStorageEntryFetcher;}}}
 
+namespace alinous {namespace remote {namespace socket {
+class NetworkBinaryBuffer;}}}
+
 namespace alinous {namespace db {
 class AlinousDbException;}}
 
@@ -36,8 +42,14 @@ template <typename  T, typename V> class HashMap;}}
 namespace alinous {namespace db {namespace table {
 class TablePartitionMaxValue;}}}
 
+namespace alinous {namespace remote {namespace socket {
+class ICommandData;}}}
+
 namespace alinous {namespace runtime {namespace dom {
 class VariableException;}}}
+
+namespace alinous {namespace system {
+class AlinousException;}}
 
 namespace java {namespace lang {
 class IObject;
@@ -60,11 +72,15 @@ using ::alinous::buffer::storage::FileStorageEntryBuilder;
 using ::alinous::buffer::storage::FileStorageEntryFetcher;
 using ::alinous::compile::sql::ddl::CheckDefinition;
 using ::alinous::db::AlinousDbException;
+using ::alinous::remote::db::command::data::TableClusterData;
+using ::alinous::remote::socket::ICommandData;
+using ::alinous::remote::socket::NetworkBinaryBuffer;
 using ::alinous::runtime::dom::VariableException;
+using ::alinous::system::AlinousException;
 
 
 
-class TableMetadata final : public virtual IObject {
+class TableMetadata final : public ICommandData, public virtual IObject {
 public:
 	TableMetadata(const TableMetadata& base) = default;
 public:
@@ -84,8 +100,11 @@ private:
 	ArrayList<CheckDefinition>* checks;
 	TablePartitionMaxValue* maxPartitionValue;
 public:
-	int fileSize(ThreadContext* ctx) throw() ;
+	TableClusterData* toCommandData(String* region, ThreadContext* ctx) throw() ;
+	int fileSize(ThreadContext* ctx);
 	void toFileEntry(FileStorageEntryBuilder* builder, ThreadContext* ctx);
+	void readData(NetworkBinaryBuffer* buff, ThreadContext* ctx) final;
+	void writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw()  final;
 	void addindex(TableIndexMetadata* indexMeta, ThreadContext* ctx) throw() ;
 	void addColumn(String* name, int type, int length, ThreadContext* ctx) throw() ;
 	void addColumn(TableColumnMetadata* meta, ThreadContext* ctx) throw() ;

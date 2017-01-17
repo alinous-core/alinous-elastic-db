@@ -36,11 +36,23 @@ class IAlinousElement;}}
 namespace alinous {namespace runtime {namespace dom {
 class VariableException;}}}
 
+namespace alinous {namespace buffer {namespace storage {
+class FileStorageEntryBuilder;}}}
+
+namespace alinous {namespace buffer {namespace storage {
+class FileStorageEntryFetcher;}}}
+
 namespace alinous {namespace compile {namespace expression {
 class AbstractExpression;}}}
 
 namespace alinous {namespace compile {
 class AlinousElementNetworkFactory;}}
+
+namespace alinous {namespace compile {namespace expression {
+class IExpressionFactory;}}}
+
+namespace alinous {namespace system {
+class AlinousException;}}
 
 namespace alinous {
 class ThreadContext;
@@ -52,6 +64,8 @@ using namespace ::alinous;
 using namespace ::java::lang;
 using ::java::util::Iterator;
 using ::java::util::ArrayList;
+using ::alinous::buffer::storage::FileStorageEntryBuilder;
+using ::alinous::buffer::storage::FileStorageEntryFetcher;
 using ::alinous::compile::AbstractSrcElement;
 using ::alinous::compile::AlinousElementNetworkFactory;
 using ::alinous::compile::ExpressionSourceId;
@@ -61,8 +75,10 @@ using ::alinous::compile::analyse::AlinousType;
 using ::alinous::compile::analyse::SrcAnalyseContext;
 using ::alinous::compile::expression::AbstractExpression;
 using ::alinous::compile::expression::IExpression;
+using ::alinous::compile::expression::IExpressionFactory;
 using ::alinous::remote::socket::NetworkBinaryBuffer;
 using ::alinous::runtime::dom::VariableException;
+using ::alinous::system::AlinousException;
 
 
 
@@ -89,6 +105,9 @@ public:
 	bool isSQLExp(ThreadContext* ctx) throw()  final;
 	void __readData(NetworkBinaryBuffer* buff, ThreadContext* ctx);
 	void __writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() ;
+	int fileSize(ThreadContext* ctx) final;
+	void __toFileEntry(FileStorageEntryBuilder* builder, ThreadContext* ctx);
+	void fromFileEntry(FileStorageEntryFetcher* fetcher, ThreadContext* ctx) final;
 public:
 	static bool __init_done;
 	static bool __init_static_variables();

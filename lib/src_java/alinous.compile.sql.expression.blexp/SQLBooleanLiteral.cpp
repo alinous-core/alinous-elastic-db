@@ -135,5 +135,22 @@ void SQLBooleanLiteral::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 	__writeData(buff, ctx);
 	buff->putBoolean(this->value, ctx);
 }
+int SQLBooleanLiteral::fileSize(ThreadContext* ctx)
+{
+	int total = __fileSize(ctx);
+	total += 1;
+	return total;
+}
+void SQLBooleanLiteral::toFileEntry(FileStorageEntryBuilder* builder, ThreadContext* ctx)
+{
+	builder->putInt(IExpressionFactory::__BooleanLiteral, ctx);
+	__toFileEntry(builder, ctx);
+	builder->putBoolean(this->value, ctx);
+}
+void SQLBooleanLiteral::fromFileEntry(FileStorageEntryFetcher* fetcher, ThreadContext* ctx)
+{
+	__fromFileEntry(fetcher, ctx);
+	this->value = fetcher->fetchBoolean(ctx);
+}
 }}}}}
 

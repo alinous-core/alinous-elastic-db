@@ -7,8 +7,8 @@ namespace alinous {namespace runtime {namespace engine {namespace debugger {name
 
 
 
-String* AddBreakpointsRequest::LINE = ConstStr::getCNST_STR_1188();
-String* AddBreakpointsRequest::FILE_PATH = ConstStr::getCNST_STR_1189();
+String* AddBreakpointsRequest::LINE = ConstStr::getCNST_STR_1191();
+String* AddBreakpointsRequest::FILE_PATH = ConstStr::getCNST_STR_1192();
 bool AddBreakpointsRequest::__init_done = __init_static_variables();
 bool AddBreakpointsRequest::__init_static_variables(){
 	Java2CppSystem::getSelf();

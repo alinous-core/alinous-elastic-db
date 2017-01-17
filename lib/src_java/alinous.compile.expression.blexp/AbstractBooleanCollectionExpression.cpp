@@ -155,5 +155,62 @@ void AbstractBooleanCollectionExpression::__writeData(NetworkBinaryBuffer* buff,
 		exp->writeData(buff, ctx);
 	}
 }
+int AbstractBooleanCollectionExpression::fileSize(ThreadContext* ctx)
+{
+	int total = 4;
+	bool isnull = (this->first == nullptr);
+	total += 1;
+	if(!isnull)
+	{
+		total += this->first->fileSize(ctx);
+	}
+	int maxLoop = this->expressions->size(ctx);
+	total += 4;
+	for(int i = 0; i < maxLoop; ++i)
+	{
+		BooleanSubExpression* exp = this->expressions->get(i, ctx);
+		total += exp->fileSize(ctx);
+	}
+	return total;
+}
+void AbstractBooleanCollectionExpression::__toFileEntry(FileStorageEntryBuilder* builder, ThreadContext* ctx)
+{
+	bool isnull = (this->first == nullptr);
+	builder->putBoolean(isnull, ctx);
+	if(!isnull)
+	{
+		this->first->toFileEntry(builder, ctx);
+	}
+	int maxLoop = this->expressions->size(ctx);
+	builder->putInt(maxLoop, ctx);
+	for(int i = 0; i < maxLoop; ++i)
+	{
+		BooleanSubExpression* exp = this->expressions->get(i, ctx);
+		exp->toFileEntry(builder, ctx);
+	}
+}
+void AbstractBooleanCollectionExpression::fromFileEntry(FileStorageEntryFetcher* fetcher, ThreadContext* ctx)
+{
+	bool isnull = fetcher->fetchBoolean(ctx);
+	if(!isnull)
+	{
+		IExpression* el = IExpressionFactory::fromFetcher(fetcher, ctx);
+		if(el == nullptr || !((dynamic_cast<IExpression*>(el) != 0)))
+		{
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_980(), ctx));
+		}
+		__GC_MV(this, &(this->first), static_cast<IExpression*>(el), IExpression);
+	}
+	int maxLoop = fetcher->fetchInt(ctx);
+	for(int i = 0; i < maxLoop; ++i)
+	{
+		IExpression* el = IExpressionFactory::fromFetcher(fetcher, ctx);
+		if(el == nullptr || !((dynamic_cast<BooleanSubExpression*>(el) != 0)))
+		{
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1009(), ctx));
+		}
+		this->expressions->add(static_cast<BooleanSubExpression*>(el), ctx);
+	}
+}
 }}}}
 

@@ -55,12 +55,12 @@ void RemoteStorageConnection::connect(ThreadContext* ctx)
 	AbstractRemoteStorageCommand* retcmd = cmd->sendCommand(this->socket, ctx);
 	if(retcmd->getType(ctx) != AbstractRemoteStorageCommand::TYPE_CONNECT)
 	{
-		throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3539(), ctx));
+		throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3542(), ctx));
 	}
 	cmd = static_cast<RemoteStorageConnectCommand*>(retcmd);
 	if(!cmd->isConnected(ctx))
 	{
-		throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3539(), ctx));
+		throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3542(), ctx));
 	}
 }
 void RemoteStorageConnection::close(ThreadContext* ctx) throw() 

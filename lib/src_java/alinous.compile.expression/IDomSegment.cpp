@@ -34,5 +34,23 @@ void IDomSegment::__releaseRegerences(bool prepare, ThreadContext* ctx) throw()
 	}
 	IAlinousElement::__releaseRegerences(true, ctx);
 }
+IDomSegment* IDomSegment::fromFetcher(FileStorageEntryFetcher* fetcher, ThreadContext* ctx)
+{
+	int type = fetcher->fetchInt(ctx);
+	IDomSegment* seg = nullptr;
+	switch(type) {
+	case TYPE_NORMAL:
+		seg = (new(ctx) DomNameSegment(ctx));
+		break ;
+	case TYPE_INDEX:
+		seg = (new(ctx) DomIndexSegment(ctx));
+		break ;
+	default:
+		return nullptr;
+		break;
+	}
+	seg->fromFileEntry(fetcher, ctx);
+	return seg;
+}
 }}}
 

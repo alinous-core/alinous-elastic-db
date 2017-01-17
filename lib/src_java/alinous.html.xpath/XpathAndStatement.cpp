@@ -46,7 +46,7 @@ String* XpathAndStatement::toString(ThreadContext* ctx) throw()
 		}
 				else 
 		{
-			buffer->append(ConstStr::getCNST_STR_1753(), ctx);
+			buffer->append(ConstStr::getCNST_STR_1756(), ctx);
 		}
 		buffer->append(stmt, ctx);
 	}

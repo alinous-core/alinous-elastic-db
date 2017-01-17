@@ -107,7 +107,7 @@ void SQLEqualityExpression::setCheckEquals(bool checkEquals, ThreadContext* ctx)
 }
 void SQLEqualityExpression::setCheckEquals(String* strEq, ThreadContext* ctx) throw() 
 {
-	if(strEq->equals(ConstStr::getCNST_STR_1071(), ctx))
+	if(strEq->equals(ConstStr::getCNST_STR_1072(), ctx))
 	{
 		this->checkEquals = true;
 	}
@@ -280,6 +280,67 @@ void SQLEqualityExpression::writeData(NetworkBinaryBuffer* buff, ThreadContext* 
 		this->right->writeData(buff, ctx);
 	}
 	buff->putBoolean(this->checkEquals, ctx);
+}
+int SQLEqualityExpression::fileSize(ThreadContext* ctx)
+{
+	int total = __fileSize(ctx);
+	bool isnull = (this->left == nullptr);
+	total += 1;
+	if(!isnull)
+	{
+		total += this->left->fileSize(ctx);
+	}
+	isnull = (this->right == nullptr);
+	total += 1;
+	if(!isnull)
+	{
+		total += this->right->fileSize(ctx);
+	}
+	total += 1;
+	return total;
+}
+void SQLEqualityExpression::toFileEntry(FileStorageEntryBuilder* builder, ThreadContext* ctx)
+{
+	builder->putInt(IExpressionFactory::__SQLEqualityExpression, ctx);
+	__toFileEntry(builder, ctx);
+	bool isnull = (this->left == nullptr);
+	builder->putBoolean(isnull, ctx);
+	if(!isnull)
+	{
+		this->left->toFileEntry(builder, ctx);
+	}
+	isnull = (this->right == nullptr);
+	builder->putBoolean(isnull, ctx);
+	if(!isnull)
+	{
+		this->right->toFileEntry(builder, ctx);
+	}
+	builder->putBoolean(this->checkEquals, ctx);
+}
+void SQLEqualityExpression::fromFileEntry(FileStorageEntryFetcher* fetcher, ThreadContext* ctx)
+{
+	__fromFileEntry(fetcher, ctx);
+	bool isnull = fetcher->fetchBoolean(ctx);
+	if(!isnull)
+	{
+		IExpression* el = IExpressionFactory::fromFetcher(fetcher, ctx);
+		if(el == nullptr || !((dynamic_cast<ISQLExpression*>(el) != 0)))
+		{
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1044(), ctx));
+		}
+		__GC_MV(this, &(this->left), static_cast<ISQLExpression*>(el), ISQLExpression);
+	}
+	isnull = fetcher->fetchBoolean(ctx);
+	if(!isnull)
+	{
+		IExpression* el = IExpressionFactory::fromFetcher(fetcher, ctx);
+		if(el == nullptr || !((dynamic_cast<ISQLExpression*>(el) != 0)))
+		{
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1044(), ctx));
+		}
+		__GC_MV(this, &(this->right), static_cast<ISQLExpression*>(el), ISQLExpression);
+	}
+	this->checkEquals = fetcher->fetchBoolean(ctx);
 }
 }}}}}
 
