@@ -106,6 +106,7 @@ public:
 	void readData(NetworkBinaryBuffer* buff, ThreadContext* ctx) final;
 	void writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw()  final;
 	void toFileEntry(FileStorageEntryBuilder* builder, ThreadContext* ctx);
+	int fileSize(ThreadContext* ctx);
 public:
 	static CheckDefinition* fromFileEntry(FileStorageEntryFetcher* fetcher, ThreadContext* ctx);
 public:

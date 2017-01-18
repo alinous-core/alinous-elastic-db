@@ -77,7 +77,7 @@ void RowLock::lock(ThreadContext* ctx)
 		}
 		catch(InterruptedException* e)
 		{
-			throw (new(ctx) DatabaseLockException(ConstStr::getCNST_STR_1679(), e, ctx));
+			throw (new(ctx) DatabaseLockException(ConstStr::getCNST_STR_1680(), e, ctx));
 		}
 	}
 	count ++ ;
@@ -107,7 +107,7 @@ void RowLock::unlock(ConcurrentGatePool* gatePool, ThreadContext* ctx)
 			{
 				gatePool->pushBack(gate, ctx);
 			}
-			throw (new(ctx) DatabaseLockException(ConstStr::getCNST_STR_1679(), e, ctx));
+			throw (new(ctx) DatabaseLockException(ConstStr::getCNST_STR_1680(), e, ctx));
 		}
 	}
 	if(this->pushBack)

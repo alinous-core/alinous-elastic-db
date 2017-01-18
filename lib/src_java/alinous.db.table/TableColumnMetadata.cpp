@@ -155,5 +155,11 @@ TableColumnMetadata* TableColumnMetadata::loadFromFetcher(FileStorageEntryFetche
 	col->columnOrder = fetcher->fetchInt(ctx);
 	return col;
 }
+TableColumnMetadata* TableColumnMetadata::fromNetwork(NetworkBinaryBuffer* buff, ThreadContext* ctx)
+{
+	TableColumnMetadata* meta = (new(ctx) TableColumnMetadata(ctx));
+	meta->readData(buff, ctx);
+	return meta;
+}
 }}}
 

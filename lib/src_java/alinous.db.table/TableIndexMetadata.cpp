@@ -75,12 +75,6 @@ void TableIndexMetadata::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 		String* col = buff->getString(ctx);
 		this->columns->add(col, ctx);
 	}
-	maxLoop = buff->getInt(ctx);
-	for(int i = 0; i != maxLoop; ++i)
-	{
-		TableColumnMetadata* meta = (new(ctx) TableColumnMetadata(ctx));
-		meta->readData(buff, ctx);
-	}
 }
 void TableIndexMetadata::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
 {
@@ -91,12 +85,6 @@ void TableIndexMetadata::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx
 	{
 		String* col = this->columns->get(i, ctx);
 		buff->putString(col, ctx);
-	}
-	maxLoop = this->metadata->size(ctx);
-	for(int i = 0; i != maxLoop; ++i)
-	{
-		TableColumnMetadata* meta = this->metadata->get(i, ctx);
-		meta->writeData(buff, ctx);
 	}
 }
 int TableIndexMetadata::fileSize(ThreadContext* ctx) throw() 
@@ -141,6 +129,12 @@ void TableIndexMetadata::setColumns(ArrayList<String>* columns, ThreadContext* c
 ArrayList<TableColumnMetadata>* TableIndexMetadata::getMetadata(ThreadContext* ctx) throw() 
 {
 	return metadata;
+}
+TableIndexMetadata* TableIndexMetadata::fromNetwork(NetworkBinaryBuffer* buff, ThreadContext* ctx)
+{
+	TableIndexMetadata* meta = (new(ctx) TableIndexMetadata(ctx));
+	meta->readData(buff, ctx);
+	return meta;
 }
 TableIndexMetadata* TableIndexMetadata::loadFromFetcher(FileStorageEntryFetcher* fetcher, ThreadContext* ctx) throw() 
 {

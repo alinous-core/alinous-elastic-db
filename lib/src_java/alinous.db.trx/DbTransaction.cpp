@@ -152,7 +152,7 @@ void DbTransaction::update(UpdateStatement* update, ScriptMachine* machine, bool
 		}
 		catch(DatabaseLockException* e)
 		{
-			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_1682()->clone(ctx)->append(tableName->toString(ctx), ctx), e, ctx));
+			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_1683()->clone(ctx)->append(tableName->toString(ctx), ctx), e, ctx));
 		}
 	}
 	{
@@ -213,12 +213,12 @@ void DbTransaction::createIndex(CreateIndexStatement* stmt, ScriptMachine* machi
 		catch(IOException* e)
 		{
 			e->printStackTrace(ctx);
-			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1683(), e, ctx));
+			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1684(), e, ctx));
 		}
 		catch(BTreeException* e)
 		{
 			e->printStackTrace(ctx);
-			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1683(), e, ctx));
+			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1684(), e, ctx));
 		}
 	}
 }
@@ -262,19 +262,19 @@ void DbTransaction::commit(ThreadContext* ctx)
 			}
 			catch(IOException* e)
 			{
-				(new(ctx) AlinousDbException(ConstStr::getCNST_STR_1684(), e, ctx));
+				(new(ctx) AlinousDbException(ConstStr::getCNST_STR_1685(), e, ctx));
 			}
 			catch(InterruptedException* e)
 			{
-				(new(ctx) AlinousDbException(ConstStr::getCNST_STR_1684(), e, ctx));
+				(new(ctx) AlinousDbException(ConstStr::getCNST_STR_1685(), e, ctx));
 			}
 			catch(VariableException* e)
 			{
-				(new(ctx) AlinousDbException(ConstStr::getCNST_STR_1684(), e, ctx));
+				(new(ctx) AlinousDbException(ConstStr::getCNST_STR_1685(), e, ctx));
 			}
 			catch(BTreeException* e)
 			{
-				(new(ctx) AlinousDbException(ConstStr::getCNST_STR_1684(), e, ctx));
+				(new(ctx) AlinousDbException(ConstStr::getCNST_STR_1685(), e, ctx));
 			}
 		}
 		this->trxStorageManager->reset(ctx);

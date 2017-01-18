@@ -86,6 +86,7 @@ public:
 	void writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw()  final;
 public:
 	static TableColumnMetadata* loadFromFetcher(FileStorageEntryFetcher* fetcher, ThreadContext* ctx) throw() ;
+	static TableColumnMetadata* fromNetwork(NetworkBinaryBuffer* buff, ThreadContext* ctx);
 public:
 	static bool __init_done;
 	static bool __init_static_variables();

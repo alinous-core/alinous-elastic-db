@@ -73,6 +73,7 @@ TableClusterData* TableMetadata::toCommandData(String* region, ThreadContext* ct
 	TableClusterData* data = (new(ctx) TableClusterData(ctx));
 	data->setRegion(region, ctx);
 	data->setName(this->tableName, ctx);
+	data->setMetadata(this, ctx);
 	return data;
 }
 int TableMetadata::fileSize(ThreadContext* ctx)
@@ -88,7 +89,14 @@ int TableMetadata::fileSize(ThreadContext* ctx)
 		TableColumnMetadata* col = this->columns->get(key, ctx);
 		total += col->fileSize(ctx);
 	}
-	int maxLoop = this->indexes->size(ctx);
+	int maxLoop = this->primaryKeys->size(ctx);
+	total += 4;
+	for(int i = 0; i != maxLoop; ++i)
+	{
+		TableColumnMetadata* col = this->primaryKeys->get(i, ctx);
+		total += col->fileSize(ctx);
+	}
+	maxLoop = this->indexes->size(ctx);
 	total += 4;
 	for(int i = 0; i != maxLoop; ++i)
 	{
@@ -99,6 +107,13 @@ int TableMetadata::fileSize(ThreadContext* ctx)
 	if(this->maxPartitionValue != nullptr)
 	{
 		total += this->maxPartitionValue->fileSize(ctx);
+	}
+	maxLoop = this->checks->size(ctx);
+	total += 4;
+	for(int i = 0; i != maxLoop; ++i)
+	{
+		CheckDefinition* checkdef = this->checks->get(i, ctx);
+		total += checkdef->fileSize(ctx);
 	}
 	return total;
 }
@@ -115,7 +130,14 @@ void TableMetadata::toFileEntry(FileStorageEntryBuilder* builder, ThreadContext*
 		TableColumnMetadata* col = this->columns->get(key, ctx);
 		col->toFileEntry(builder, ctx);
 	}
-	int maxLoop = this->indexes->size(ctx);
+	int maxLoop = this->primaryKeys->size(ctx);
+	builder->putInt(maxLoop, ctx);
+	for(int i = 0; i != maxLoop; ++i)
+	{
+		TableColumnMetadata* col = this->primaryKeys->get(i, ctx);
+		col->toFileEntry(builder, ctx);
+	}
+	maxLoop = this->indexes->size(ctx);
 	builder->putInt(maxLoop, ctx);
 	for(int i = 0; i != maxLoop; ++i)
 	{
@@ -141,6 +163,62 @@ void TableMetadata::toFileEntry(FileStorageEntryBuilder* builder, ThreadContext*
 }
 void TableMetadata::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 {
+	String* sc = buff->getString(ctx);
+	String* tableName = buff->getString(ctx);
+	TableMetadata* metadata = (new(ctx) TableMetadata(sc, tableName, ctx));
+	int maxLoop = buff->getInt(ctx);
+	for(int i = 0; i != maxLoop; ++i)
+	{
+		TableColumnMetadata* col = TableColumnMetadata::fromNetwork(buff, ctx);
+		metadata->addColumn(col, ctx);
+	}
+	maxLoop = buff->getInt(ctx);
+	for(int i = 0; i != maxLoop; ++i)
+	{
+		TableColumnMetadata* col = TableColumnMetadata::fromNetwork(buff, ctx);
+		{
+			try
+			{
+				metadata->addPrimaryKey(col, ctx);
+			}
+			catch(AlinousDbException* e)
+			{
+				throw (new(ctx) VariableException(ConstStr::getCNST_STR_1677(), e, ctx));
+			}
+		}
+	}
+	maxLoop = buff->getInt(ctx);
+	for(int i = 0; i != maxLoop; ++i)
+	{
+		TableIndexMetadata* idx = TableIndexMetadata::fromNetwork(buff, ctx);
+		{
+			try
+			{
+				idx->setupColumnMetadata(metadata, ctx);
+			}
+			catch(AlinousDbException* e)
+			{
+				throw (new(ctx) VariableException(ConstStr::getCNST_STR_1677(), e, ctx));
+			}
+		}
+		metadata->indexes->add(idx, ctx);
+	}
+	bool isnull = buff->getBoolean(ctx);
+	if(!isnull)
+	{
+		__GC_MV(metadata, &(metadata->maxPartitionValue), TablePartitionMaxValue::fromNetwork(buff, ctx), TablePartitionMaxValue);
+	}
+	maxLoop = buff->getInt(ctx);
+	for(int i = 0; i != maxLoop; ++i)
+	{
+		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
+		if(el == nullptr || !((dynamic_cast<CheckDefinition*>(el) != 0)))
+		{
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1033(), ctx));
+		}
+		CheckDefinition* def = static_cast<CheckDefinition*>(el);
+		metadata->checks->add(def, ctx);
+	}
 }
 void TableMetadata::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
 {
@@ -213,8 +291,13 @@ void TableMetadata::addPrimaryKey(String* col, ThreadContext* ctx)
 	TableColumnMetadata* colmeta = this->columns->get(col->toLowerCase(ctx), ctx);
 	if(colmeta == nullptr)
 	{
-		throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1677(), ctx));
+		throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1678(), ctx));
 	}
+	this->primaryKeys->add(colmeta, ctx);
+	colmeta->setPrimaryKey(true, ctx);
+}
+void TableMetadata::addPrimaryKey(TableColumnMetadata* colmeta, ThreadContext* ctx)
+{
 	this->primaryKeys->add(colmeta, ctx);
 	colmeta->setPrimaryKey(true, ctx);
 }
@@ -236,6 +319,12 @@ TableMetadata* TableMetadata::loadFromFetcher(FileStorageEntryFetcher* fetcher, 
 	{
 		TableColumnMetadata* col = TableColumnMetadata::loadFromFetcher(fetcher, ctx);
 		metadata->addColumn(col, ctx);
+	}
+	maxLoop = fetcher->fetchInt(ctx);
+	for(int i = 0; i != maxLoop; ++i)
+	{
+		TableColumnMetadata* col = TableColumnMetadata::loadFromFetcher(fetcher, ctx);
+		metadata->addPrimaryKey(col, ctx);
 	}
 	maxLoop = fetcher->fetchInt(ctx);
 	for(int i = 0; i != maxLoop; ++i)

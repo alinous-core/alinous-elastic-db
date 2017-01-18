@@ -119,6 +119,17 @@ void CheckDefinition::toFileEntry(FileStorageEntryBuilder* builder, ThreadContex
 		this->exp->toFileEntry(builder, ctx);
 	}
 }
+int CheckDefinition::fileSize(ThreadContext* ctx)
+{
+	int total = 0;
+	bool isnull = (this->exp == nullptr);
+	total += 1;
+	if(!isnull)
+	{
+		total += this->exp->fileSize(ctx);
+	}
+	return total;
+}
 CheckDefinition* CheckDefinition::fromFileEntry(FileStorageEntryFetcher* fetcher, ThreadContext* ctx)
 {
 	CheckDefinition* def = (new(ctx) CheckDefinition(ctx));

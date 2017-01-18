@@ -18,11 +18,11 @@ class TableColumnMetadata;}}}
 namespace alinous {namespace db {namespace table {
 class TableIndexMetadata;}}}
 
-namespace alinous {namespace buffer {namespace storage {
-class FileStorageEntryBuilder;}}}
-
 namespace alinous {namespace compile {namespace sql {namespace ddl {
 class CheckDefinition;}}}}
+
+namespace alinous {namespace buffer {namespace storage {
+class FileStorageEntryBuilder;}}}
 
 namespace alinous {namespace db {namespace table {
 class TableMetadata;}}}
@@ -33,8 +33,14 @@ class FileStorageEntryFetcher;}}}
 namespace alinous {namespace remote {namespace socket {
 class NetworkBinaryBuffer;}}}
 
+namespace alinous {namespace runtime {namespace dom {
+class VariableException;}}}
+
 namespace alinous {namespace db {
 class AlinousDbException;}}
+
+namespace alinous {namespace compile {
+class IAlinousElement;}}
 
 namespace java {namespace util {
 template <typename  T, typename V> class HashMap;}}
@@ -45,8 +51,8 @@ class TablePartitionMaxValue;}}}
 namespace alinous {namespace remote {namespace socket {
 class ICommandData;}}}
 
-namespace alinous {namespace runtime {namespace dom {
-class VariableException;}}}
+namespace alinous {namespace compile {
+class AlinousElementNetworkFactory;}}
 
 namespace alinous {namespace system {
 class AlinousException;}}
@@ -70,6 +76,8 @@ using ::java::util::Iterator;
 using ::java::util::Set;
 using ::alinous::buffer::storage::FileStorageEntryBuilder;
 using ::alinous::buffer::storage::FileStorageEntryFetcher;
+using ::alinous::compile::AlinousElementNetworkFactory;
+using ::alinous::compile::IAlinousElement;
 using ::alinous::compile::sql::ddl::CheckDefinition;
 using ::alinous::db::AlinousDbException;
 using ::alinous::remote::db::command::data::TableClusterData;
@@ -119,6 +127,7 @@ public:
 	String* getTableName(ThreadContext* ctx) throw() ;
 	ArrayList<TableColumnMetadata>* getPrimaryKeys(ThreadContext* ctx) throw() ;
 	void addPrimaryKey(String* col, ThreadContext* ctx);
+	void addPrimaryKey(TableColumnMetadata* colmeta, ThreadContext* ctx);
 	ArrayList<CheckDefinition>* getChecks(ThreadContext* ctx) throw() ;
 	void setChecks(ArrayList<CheckDefinition>* checks, ThreadContext* ctx) throw() ;
 public:
