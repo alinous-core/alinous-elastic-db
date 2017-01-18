@@ -39,11 +39,11 @@ class InterruptedException;}}
 namespace alinous {namespace btree {
 class BTreeException;}}
 
-namespace alinous {namespace db {namespace table {
-class BTreeIndexKey;}}}
-
 namespace alinous {namespace system {
 class AlinousException;}}
+
+namespace alinous {namespace db {namespace table {
+class BTreeIndexKey;}}}
 
 namespace alinous {namespace db {namespace trx {
 class TrxLockContext;}}}

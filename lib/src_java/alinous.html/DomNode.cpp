@@ -222,9 +222,9 @@ bool DomNode::isSingleEnd(ThreadContext* ctx) throw()
 }
 void DomNode::setSingleEnd(bool singleEnd, ThreadContext* ctx) throw() 
 {
-	if(this->name->equals(ConstStr::getCNST_STR_1739(), ctx) && singleEnd)
+	if(this->name->equals(ConstStr::getCNST_STR_1741(), ctx) && singleEnd)
 	{
-		throw (new(ctx) RuntimeException(ConstStr::getCNST_STR_1740(), ctx));
+		throw (new(ctx) RuntimeException(ConstStr::getCNST_STR_1742(), ctx));
 	}
 	this->singleEnd = singleEnd;
 }
@@ -294,7 +294,7 @@ String* DomNode::toString(ThreadContext* ctx) throw()
 		}
 				else 
 		{
-			buff->append(ConstStr::getCNST_STR_1741(), ctx);
+			buff->append(ConstStr::getCNST_STR_1743(), ctx);
 		}
 	}
 		else 
@@ -314,7 +314,7 @@ String* DomNode::toString(ThreadContext* ctx) throw()
 		{
 			buff->append(childrenIt->next(ctx)->toString(ctx), ctx);
 		}
-		buff->append(ConstStr::getCNST_STR_1742(), ctx);
+		buff->append(ConstStr::getCNST_STR_1744(), ctx);
 		buff->append(this->name, ctx);
 		buff->append(ConstStr::getCNST_STR_82(), ctx);
 	}

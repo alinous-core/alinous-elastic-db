@@ -66,9 +66,6 @@ class ITableSchema;}}
 namespace alinous {namespace db {namespace table {
 class DatabaseException;}}}
 
-namespace alinous {namespace runtime {namespace dom {
-class VariableException;}}}
-
 namespace alinous {namespace system {
 class AlinousException;}}
 
@@ -101,7 +98,6 @@ using ::alinous::db::table::IOidPublisher;
 using ::alinous::db::table::TableMetadata;
 using ::alinous::remote::db::command::data::SchemaData;
 using ::alinous::remote::db::command::data::TableClusterData;
-using ::alinous::runtime::dom::VariableException;
 using ::alinous::runtime::parallel::ThreadPool;
 using ::alinous::system::AlinousCore;
 using ::alinous::system::AlinousException;

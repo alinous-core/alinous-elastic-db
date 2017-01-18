@@ -39,8 +39,8 @@ class AbstractNode;}}
 namespace java {namespace io {
 class IOException;}}
 
-namespace alinous {namespace runtime {namespace dom {
-class VariableException;}}}
+namespace alinous {namespace system {
+class AlinousException;}}
 
 namespace alinous {
 class ThreadContext;
@@ -56,7 +56,7 @@ using ::alinous::btree::scan::INodeIterator;
 using ::alinous::btree::scan::LeafContainerIterator;
 using ::alinous::buffer::FifoElement;
 using ::alinous::lock::LockObject;
-using ::alinous::runtime::dom::VariableException;
+using ::alinous::system::AlinousException;
 
 
 

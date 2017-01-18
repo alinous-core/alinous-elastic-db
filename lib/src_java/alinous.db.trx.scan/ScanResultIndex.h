@@ -63,9 +63,6 @@ class IBTreeValue;}}
 namespace alinous {namespace db {namespace table {
 class DatatableConstants;}}}
 
-namespace alinous {namespace runtime {namespace dom {
-class VariableException;}}}
-
 namespace java {namespace lang {
 class IObject;
 }}
@@ -92,7 +89,6 @@ using ::alinous::compile::sql::analyze::ScanTableColumnIdentifier;
 using ::alinous::compile::sql::analyze::ScanTableMetadata;
 using ::alinous::db::AlinousDatabase;
 using ::alinous::db::table::DatatableConstants;
-using ::alinous::runtime::dom::VariableException;
 using ::alinous::runtime::variant::VariantValue;
 using ::alinous::system::AlinousException;
 using ::alinous::system::ISystemLog;

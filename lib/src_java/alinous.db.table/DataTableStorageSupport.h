@@ -42,6 +42,9 @@ class BTreeException;}}
 namespace alinous {namespace runtime {namespace dom {
 class VariableException;}}}
 
+namespace alinous {namespace system {
+class AlinousException;}}
+
 namespace alinous {
 class ThreadContext;
 }
@@ -60,6 +63,7 @@ using ::alinous::btree::LongValue;
 using ::alinous::db::table::cache::RecordCacheEngine;
 using ::alinous::runtime::dom::VariableException;
 using ::alinous::runtime::variant::VariantValue;
+using ::alinous::system::AlinousException;
 
 
 

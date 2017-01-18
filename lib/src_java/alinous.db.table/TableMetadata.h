@@ -21,6 +21,9 @@ class TableIndexMetadata;}}}
 namespace alinous {namespace buffer {namespace storage {
 class FileStorageEntryBuilder;}}}
 
+namespace alinous {namespace compile {namespace sql {namespace ddl {
+class CheckDefinition;}}}}
+
 namespace alinous {namespace db {namespace table {
 class TableMetadata;}}}
 
@@ -32,9 +35,6 @@ class NetworkBinaryBuffer;}}}
 
 namespace alinous {namespace db {
 class AlinousDbException;}}
-
-namespace alinous {namespace compile {namespace sql {namespace ddl {
-class CheckDefinition;}}}}
 
 namespace java {namespace util {
 template <typename  T, typename V> class HashMap;}}

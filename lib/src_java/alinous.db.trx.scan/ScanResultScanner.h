@@ -27,6 +27,9 @@ class InterruptedException;}}
 namespace alinous {namespace btree {
 class BTreeException;}}
 
+namespace alinous {namespace system {
+class AlinousException;}}
+
 namespace alinous {namespace btree {
 class IBTreeNode;}}
 
@@ -35,9 +38,6 @@ class ScanResultRecord;}}}}
 
 namespace alinous {namespace system {
 class ISystemLog;}}
-
-namespace alinous {namespace system {
-class AlinousException;}}
 
 namespace alinous {namespace btree {
 class IBTree;}}

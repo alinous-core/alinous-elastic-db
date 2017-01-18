@@ -72,6 +72,9 @@ class IOException;}}
 namespace alinous {namespace runtime {namespace dom {
 class VariableException;}}}
 
+namespace alinous {namespace system {
+class AlinousException;}}
+
 namespace java {namespace lang {
 class IObject;
 }}
@@ -97,6 +100,7 @@ using ::alinous::buffer::storage::FileStorageEntryWriter;
 using ::alinous::io::DiskCacheManager;
 using ::alinous::lock::ConcurrentGate;
 using ::alinous::runtime::dom::VariableException;
+using ::alinous::system::AlinousException;
 
 
 

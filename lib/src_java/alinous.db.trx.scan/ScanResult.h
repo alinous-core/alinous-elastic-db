@@ -84,9 +84,6 @@ class IDatabaseRecord;}}}
 namespace alinous {namespace db {namespace table {namespace scan {
 class IndexScannerLockRequirement;}}}}
 
-namespace alinous {namespace runtime {namespace dom {
-class VariableException;}}}
-
 namespace java {namespace lang {
 class IObject;
 }}
@@ -121,7 +118,6 @@ using ::alinous::db::table::scan::IndexScannerLockRequirement;
 using ::alinous::db::trx::DbTransaction;
 using ::alinous::db::trx::TrxLockContext;
 using ::alinous::runtime::dom::DomVariable;
-using ::alinous::runtime::dom::VariableException;
 using ::alinous::system::AlinousException;
 using ::alinous::system::ISystemLog;
 

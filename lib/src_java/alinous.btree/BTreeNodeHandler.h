@@ -24,8 +24,8 @@ class LockObject;}}
 namespace java {namespace io {
 class IOException;}}
 
-namespace alinous {namespace runtime {namespace dom {
-class VariableException;}}}
+namespace alinous {namespace system {
+class AlinousException;}}
 
 namespace java {namespace lang {
 class IObject;
@@ -42,7 +42,7 @@ using namespace ::java::lang;
 using ::java::util::Iterator;
 using ::java::io::IOException;
 using ::alinous::lock::LockObject;
-using ::alinous::runtime::dom::VariableException;
+using ::alinous::system::AlinousException;
 
 
 

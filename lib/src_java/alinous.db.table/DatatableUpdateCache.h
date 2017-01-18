@@ -60,8 +60,8 @@ class BTreeException;}}
 namespace alinous {namespace btree {
 class IBTreeValue;}}
 
-namespace alinous {namespace runtime {namespace dom {
-class VariableException;}}}
+namespace alinous {namespace system {
+class AlinousException;}}
 
 namespace java {namespace lang {
 class IObject;
@@ -88,8 +88,8 @@ using ::alinous::compile::sql::analyze::ScanTableIdentifier;
 using ::alinous::db::table::scan::UpdateHistoryBTreeIndexScanner;
 using ::alinous::db::trx::DbTransaction;
 using ::alinous::db::trx::scan::ITableTargetScanner;
-using ::alinous::runtime::dom::VariableException;
 using ::alinous::system::AlinousCore;
+using ::alinous::system::AlinousException;
 
 
 

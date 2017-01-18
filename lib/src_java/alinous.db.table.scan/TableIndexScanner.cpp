@@ -84,6 +84,10 @@ void TableIndexScanner::startScan(ScanResultIndexKey* indexKeyValue, ThreadConte
 			{
 				throw (new(ctx) ScanException(e, ctx));
 			}
+			catch(AlinousException* e)
+			{
+				throw (new(ctx) ScanException(e, ctx));
+			}
 		}
 	}
 		else 
@@ -107,6 +111,10 @@ void TableIndexScanner::startScan(ScanResultIndexKey* indexKeyValue, ThreadConte
 				throw (new(ctx) ScanException(e, ctx));
 			}
 			catch(BTreeException* e)
+			{
+				throw (new(ctx) ScanException(e, ctx));
+			}
+			catch(AlinousException* e)
 			{
 				throw (new(ctx) ScanException(e, ctx));
 			}
@@ -259,7 +267,7 @@ IDatabaseRecord* TableIndexScanner::nextIndexValue(ThreadContext* ctx)
 				locker->shareUnlockRow(this->tableStore, oid, ctx);
 				break ;
 			}
-			throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1679(), e, ctx));
+			throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1680(), e, ctx));
 		}
 	}
 	switch(this->lockMode) {

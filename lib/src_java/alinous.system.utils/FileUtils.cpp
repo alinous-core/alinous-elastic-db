@@ -71,7 +71,7 @@ String* FileUtils::formatAfterAbsolutePath(String* path, ThreadContext* ctx) thr
 		{
 			continue;
 		}
-		if(str->equals(ConstStr::getCNST_STR_1235(), ctx))
+		if(str->equals(ConstStr::getCNST_STR_1236(), ctx))
 		{
 			stack->pop(ctx);
 			continue;

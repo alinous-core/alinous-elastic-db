@@ -33,6 +33,9 @@ class InterruptedException;}}
 namespace alinous {namespace btree {
 class BTreeException;}}
 
+namespace alinous {namespace system {
+class AlinousException;}}
+
 namespace alinous {namespace btree {
 class IBTreeNode;}}
 
@@ -84,6 +87,7 @@ using ::alinous::btree::scan::BTreeScanner;
 using ::alinous::compile::sql::analyze::ScanTableColumnIdentifier;
 using ::alinous::db::table::DatabaseException;
 using ::alinous::runtime::dom::VariableException;
+using ::alinous::system::AlinousException;
 using ::alinous::system::ISystemLog;
 
 

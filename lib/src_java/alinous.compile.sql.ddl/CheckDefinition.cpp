@@ -110,5 +110,29 @@ void CheckDefinition::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) t
 		this->exp->writeData(buff, ctx);
 	}
 }
+void CheckDefinition::toFileEntry(FileStorageEntryBuilder* builder, ThreadContext* ctx)
+{
+	bool isnull = (this->exp == nullptr);
+	builder->putBoolean(isnull, ctx);
+	if(!isnull)
+	{
+		this->exp->toFileEntry(builder, ctx);
+	}
+}
+CheckDefinition* CheckDefinition::fromFileEntry(FileStorageEntryFetcher* fetcher, ThreadContext* ctx)
+{
+	CheckDefinition* def = (new(ctx) CheckDefinition(ctx));
+	bool isnull = fetcher->fetchBoolean(ctx);
+	if(!isnull)
+	{
+		IExpression* el = IExpressionFactory::fromFetcher(fetcher, ctx);
+		if(el == nullptr || !((dynamic_cast<ISQLExpression*>(el) != 0)))
+		{
+			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_1063(), ctx));
+		}
+		def->setExp(static_cast<ISQLExpression*>(el), ctx);
+	}
+	return def;
+}
 }}}}
 

@@ -107,7 +107,7 @@ void SQLEqualityExpression::setCheckEquals(bool checkEquals, ThreadContext* ctx)
 }
 void SQLEqualityExpression::setCheckEquals(String* strEq, ThreadContext* ctx) throw() 
 {
-	if(strEq->equals(ConstStr::getCNST_STR_1072(), ctx))
+	if(strEq->equals(ConstStr::getCNST_STR_1073(), ctx))
 	{
 		this->checkEquals = true;
 	}

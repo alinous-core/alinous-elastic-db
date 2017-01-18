@@ -132,6 +132,12 @@ void TableMetadata::toFileEntry(FileStorageEntryBuilder* builder, ThreadContext*
 		builder->putByte(((char)0), ctx);
 		this->maxPartitionValue->toFileEntry(builder, ctx);
 	}
+	maxLoop = this->checks->size(ctx);
+	for(int i = 0; i != maxLoop; ++i)
+	{
+		CheckDefinition* checkdef = this->checks->get(i, ctx);
+		checkdef->toFileEntry(builder, ctx);
+	}
 }
 void TableMetadata::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 {
@@ -207,7 +213,7 @@ void TableMetadata::addPrimaryKey(String* col, ThreadContext* ctx)
 	TableColumnMetadata* colmeta = this->columns->get(col->toLowerCase(ctx), ctx);
 	if(colmeta == nullptr)
 	{
-		throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1676(), ctx));
+		throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1677(), ctx));
 	}
 	this->primaryKeys->add(colmeta, ctx);
 	colmeta->setPrimaryKey(true, ctx);
@@ -242,6 +248,12 @@ TableMetadata* TableMetadata::loadFromFetcher(FileStorageEntryFetcher* fetcher, 
 	if(isnull == (char)0)
 	{
 		__GC_MV(metadata, &(metadata->maxPartitionValue), TablePartitionMaxValue::loadFromFetcher(fetcher, ctx), TablePartitionMaxValue);
+	}
+	maxLoop = fetcher->fetchInt(ctx);
+	for(int i = 0; i != maxLoop; ++i)
+	{
+		CheckDefinition* def = CheckDefinition::fromFileEntry(fetcher, ctx);
+		metadata->checks->add(def, ctx);
 	}
 	return metadata;
 }

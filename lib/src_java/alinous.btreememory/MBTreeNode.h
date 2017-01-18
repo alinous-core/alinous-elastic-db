@@ -36,6 +36,9 @@ class IOException;}}
 namespace alinous {namespace runtime {namespace dom {
 class VariableException;}}}
 
+namespace alinous {namespace system {
+class AlinousException;}}
+
 namespace alinous {
 class ThreadContext;
 }
@@ -55,6 +58,7 @@ using ::alinous::btree::scan::INodeIterator;
 using ::alinous::btreememory::scan::MemoryNodeIterator;
 using ::alinous::buffer::storage::FileStorage;
 using ::alinous::runtime::dom::VariableException;
+using ::alinous::system::AlinousException;
 
 
 

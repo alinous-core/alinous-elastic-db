@@ -27,8 +27,8 @@ class IOException;}}
 namespace alinous {namespace btree {
 class BTreeException;}}
 
-namespace alinous {namespace runtime {namespace dom {
-class VariableException;}}}
+namespace alinous {namespace system {
+class AlinousException;}}
 
 namespace alinous {namespace util {
 class Builtin;}}
@@ -51,7 +51,7 @@ using ::java::util::Stack;
 using ::alinous::btree::BTreeException;
 using ::alinous::btree::IBTreeKey;
 using ::alinous::btree::IBTreeNode;
-using ::alinous::runtime::dom::VariableException;
+using ::alinous::system::AlinousException;
 using ::alinous::util::Builtin;
 
 

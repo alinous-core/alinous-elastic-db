@@ -74,6 +74,10 @@ void UpdateHistoryBTreeIndexScanner::startScan(ScanResultIndexKey* indexKeyValue
 		{
 			throw (new(ctx) ScanException(e, ctx));
 		}
+		catch(AlinousException* e)
+		{
+			throw (new(ctx) ScanException(e, ctx));
+		}
 	}
 }
 void UpdateHistoryBTreeIndexScanner::endScan(ThreadContext* ctx)
@@ -118,6 +122,10 @@ bool UpdateHistoryBTreeIndexScanner::hasNext(bool debug, ThreadContext* ctx)
 			throw (new(ctx) ScanException(e, ctx));
 		}
 		catch(BTreeException* e)
+		{
+			throw (new(ctx) ScanException(e, ctx));
+		}
+		catch(AlinousException* e)
 		{
 			throw (new(ctx) ScanException(e, ctx));
 		}

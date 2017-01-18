@@ -185,15 +185,15 @@ void SQLJoinCondition::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) 
 }
 int SQLJoinCondition::fileSize(ThreadContext* ctx)
 {
-	throw (new(ctx) AlinousNotSupportedException(ConstStr::getCNST_STR_1081(), ctx));
+	throw (new(ctx) AlinousNotSupportedException(ConstStr::getCNST_STR_1082(), ctx));
 }
 void SQLJoinCondition::toFileEntry(FileStorageEntryBuilder* builder, ThreadContext* ctx)
 {
-	throw (new(ctx) AlinousNotSupportedException(ConstStr::getCNST_STR_1081(), ctx));
+	throw (new(ctx) AlinousNotSupportedException(ConstStr::getCNST_STR_1082(), ctx));
 }
 void SQLJoinCondition::fromFileEntry(FileStorageEntryFetcher* fetcher, ThreadContext* ctx)
 {
-	throw (new(ctx) AlinousNotSupportedException(ConstStr::getCNST_STR_1081(), ctx));
+	throw (new(ctx) AlinousNotSupportedException(ConstStr::getCNST_STR_1082(), ctx));
 }
 }}}}}
 

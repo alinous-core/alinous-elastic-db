@@ -36,6 +36,9 @@ class BTreeException;}}
 namespace alinous {namespace db {namespace trx {
 class DbTransaction;}}}
 
+namespace alinous {namespace system {
+class AlinousException;}}
+
 namespace alinous {
 class ThreadContext;
 }
@@ -53,6 +56,7 @@ using ::alinous::db::table::IDatabaseRecord;
 using ::alinous::db::table::IDatabaseTable;
 using ::alinous::runtime::dom::VariableException;
 using ::alinous::system::AlinousCore;
+using ::alinous::system::AlinousException;
 
 
 

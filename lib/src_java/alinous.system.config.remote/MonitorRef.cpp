@@ -41,7 +41,7 @@ void MonitorRef::parseUrl(ThreadContext* ctx)
 	IArrayObject<String>* segs = this->url->split(ConstStr::getCNST_STR_381(), ctx);
 	if(segs->length != 2)
 	{
-		throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_1289(), ctx));
+		throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_1290(), ctx));
 	}
 	__GC_MV(this, &(this->host), segs->get(0), String);
 	{
@@ -51,7 +51,7 @@ void MonitorRef::parseUrl(ThreadContext* ctx)
 		}
 		catch(NumberFormatException* e)
 		{
-			throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_1289(), ctx));
+			throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_1290(), ctx));
 		}
 	}
 }
@@ -83,10 +83,10 @@ MonitorRef* MonitorRef::parseInstance(MatchCandidate* candidate, DomDocument* do
 {
 	MonitorRef* monitorRef = (new(ctx) MonitorRef(ctx));
 	DomNode* selfDom = candidate->getCandidateDom(ctx);
-	IVariableValue* attr = selfDom->getAttributeValue(ConstStr::getCNST_STR_1260(), ctx);
+	IVariableValue* attr = selfDom->getAttributeValue(ConstStr::getCNST_STR_1261(), ctx);
 	if(attr == nullptr)
 	{
-		throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_1288(), ctx));
+		throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_1289(), ctx));
 	}
 	monitorRef->setUrl(attr->toString(ctx)->trim(ctx), ctx);
 	monitorRef->parseUrl(ctx);

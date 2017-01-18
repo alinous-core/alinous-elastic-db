@@ -33,6 +33,9 @@ class BTreeException;}}
 namespace alinous {namespace runtime {namespace dom {
 class VariableException;}}}
 
+namespace alinous {namespace system {
+class AlinousException;}}
+
 namespace alinous {namespace util {
 class Builtin;}}
 
@@ -57,6 +60,7 @@ using ::alinous::btree::IBTreeKey;
 using ::alinous::btree::IBTreeNode;
 using ::alinous::btree::IBTreeValue;
 using ::alinous::runtime::dom::VariableException;
+using ::alinous::system::AlinousException;
 using ::alinous::util::Builtin;
 
 

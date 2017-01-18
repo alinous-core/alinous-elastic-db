@@ -33,6 +33,9 @@ class IOException;}}
 namespace alinous {namespace btree {
 class BTreeException;}}
 
+namespace alinous {namespace system {
+class AlinousException;}}
+
 namespace alinous {namespace db {
 class AlinousDatabase;}}
 
@@ -44,9 +47,6 @@ class BTree;}}
 
 namespace alinous {namespace db {namespace trx {namespace cache {
 class TrxRecordCacheIndex;}}}}
-
-namespace alinous {namespace system {
-class AlinousException;}}
 
 namespace java {namespace lang {
 class StringBuilder;}}

@@ -42,11 +42,11 @@ class InterruptedException;}}
 namespace alinous {namespace runtime {namespace dom {
 class VariableException;}}}
 
-namespace alinous {namespace db {namespace table {
-class DatabaseException;}}}
-
 namespace alinous {namespace system {
 class AlinousException;}}
+
+namespace alinous {namespace db {namespace table {
+class DatabaseException;}}}
 
 namespace alinous {namespace remote {namespace db {
 class RemoteStorageResponceActionFactory;}}}

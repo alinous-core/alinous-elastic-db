@@ -63,14 +63,14 @@ BinaryContentByteStream* DebugProcessor::process(AlinousCore* core, HttpHeaderPr
 			long long hotThread = core->getDebugger(ctx)->getHotThreadId(ctx);
 			responce->setHotThread(hotThread, ctx);
 			strXml = responce->exportAsXml(ctx);
-			binstream = (new(ctx) BinaryContentByteStream(strXml->getBytes(ConstStr::getCNST_STR_1099(), ctx), ctx));
+			binstream = (new(ctx) BinaryContentByteStream(strXml->getBytes(ConstStr::getCNST_STR_1100(), ctx), ctx));
 		}
 		catch(Throwable* e)
 		{
 			e->printStackTrace(ctx);
 		}
 	}
-	System::out->println(ConstStr::getCNST_STR_3503(), ctx);
+	System::out->println(ConstStr::getCNST_STR_3505(), ctx);
 	System::out->println(strXml, ctx);
 	return binstream;
 }

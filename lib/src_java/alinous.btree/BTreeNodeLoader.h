@@ -57,8 +57,8 @@ class FileStorageEntryWriter;}}}
 namespace java {namespace io {
 class IOException;}}
 
-namespace alinous {namespace runtime {namespace dom {
-class VariableException;}}}
+namespace alinous {namespace system {
+class AlinousException;}}
 
 namespace java {namespace lang {
 class IObject;
@@ -83,7 +83,7 @@ using ::alinous::buffer::storage::FileStorageEntryFetcher;
 using ::alinous::buffer::storage::FileStorageEntryReader;
 using ::alinous::buffer::storage::FileStorageEntryWriter;
 using ::alinous::lock::LockObject;
-using ::alinous::runtime::dom::VariableException;
+using ::alinous::system::AlinousException;
 
 
 

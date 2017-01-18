@@ -30,8 +30,8 @@ class BTreeException;}}
 namespace alinous {namespace db {
 class AlinousDbException;}}
 
-namespace alinous {namespace runtime {namespace dom {
-class VariableException;}}}
+namespace alinous {namespace system {
+class AlinousException;}}
 
 namespace alinous {
 class ThreadContext;
@@ -46,8 +46,8 @@ using ::java::io::IOException;
 using ::alinous::btree::BTreeException;
 using ::alinous::db::AlinousDbException;
 using ::alinous::db::trx::cache::CachedRecord;
-using ::alinous::runtime::dom::VariableException;
 using ::alinous::runtime::parallel::SequentialBackgroundJob;
+using ::alinous::system::AlinousException;
 using ::alinous::system::ISystemLog;
 
 

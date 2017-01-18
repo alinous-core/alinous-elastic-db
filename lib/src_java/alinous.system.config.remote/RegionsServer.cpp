@@ -62,10 +62,10 @@ RegionsServer* RegionsServer::parseInstance(MatchCandidate* candidate, DomDocume
 {
 	RegionsServer* regions = (new(ctx) RegionsServer(ctx));
 	DomNode* selfDom = candidate->getCandidateDom(ctx);
-	IVariableValue* attr = selfDom->getAttributeValue(ConstStr::getCNST_STR_1258(), ctx);
+	IVariableValue* attr = selfDom->getAttributeValue(ConstStr::getCNST_STR_1259(), ctx);
 	if(attr == nullptr)
 	{
-		throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_1268(), ctx));
+		throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_1269(), ctx));
 	}
 	{
 		try
@@ -75,10 +75,10 @@ RegionsServer* RegionsServer::parseInstance(MatchCandidate* candidate, DomDocume
 		}
 		catch(Throwable* e)
 		{
-			throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_1269(), ctx));
+			throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_1270(), ctx));
 		}
 	}
-	attr = selfDom->getAttributeValue(ConstStr::getCNST_STR_1270(), ctx);
+	attr = selfDom->getAttributeValue(ConstStr::getCNST_STR_1271(), ctx);
 	if(attr != nullptr)
 	{
 		{
@@ -89,21 +89,21 @@ RegionsServer* RegionsServer::parseInstance(MatchCandidate* candidate, DomDocume
 			}
 			catch(Throwable* e)
 			{
-				throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_1269(), ctx));
+				throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_1270(), ctx));
 			}
 		}
 	}
-	MatchCandidatesCollection* result = matcher->match(document, selfDom, ConstStr::getCNST_STR_1257(), ctx);
+	MatchCandidatesCollection* result = matcher->match(document, selfDom, ConstStr::getCNST_STR_1258(), ctx);
 	ArrayList<MatchCandidate>* list = result->getCandidatesList(ctx);
 	if(list->isEmpty(ctx))
 	{
-		throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_1271(), ctx));
+		throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_1272(), ctx));
 	}
 		else 
 	{
 		if(list->size(ctx) != 1)
 		{
-			throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_1272(), ctx));
+			throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_1273(), ctx));
 		}
 	}
 	MatchCandidate* moncandidate = list->get(0, ctx);

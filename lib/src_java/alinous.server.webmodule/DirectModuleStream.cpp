@@ -51,7 +51,7 @@ void DirectModuleStream::prepare(AlinousCore* core, bool debug, ThreadContext* c
 	{
 		try
 		{
-			__GC_MV(this, &(this->buffer), str->getBytes(ConstStr::getCNST_STR_1099(), ctx), IArrayObjectPrimitive<char>);
+			__GC_MV(this, &(this->buffer), str->getBytes(ConstStr::getCNST_STR_1100(), ctx), IArrayObjectPrimitive<char>);
 		}
 		catch(UnsupportedEncodingException* e)
 		{

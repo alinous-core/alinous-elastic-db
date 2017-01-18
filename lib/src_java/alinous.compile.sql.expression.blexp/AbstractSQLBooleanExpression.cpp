@@ -120,13 +120,13 @@ void AbstractSQLBooleanExpression::__fromFileEntry(FileStorageEntryFetcher* fetc
 }
 int AbstractSQLBooleanExpression::operatorFromString(String* opStr, ThreadContext* ctx) throw() 
 {
-	if(opStr->equalsIgnoreCase(ConstStr::getCNST_STR_1069(), ctx))
+	if(opStr->equalsIgnoreCase(ConstStr::getCNST_STR_1070(), ctx))
 	{
 		return AbstractSQLBooleanExpression::SQL_OR;
 	}
 		else 
 	{
-		if(opStr->equalsIgnoreCase(ConstStr::getCNST_STR_1070(), ctx))
+		if(opStr->equalsIgnoreCase(ConstStr::getCNST_STR_1071(), ctx))
 		{
 			return AbstractSQLBooleanExpression::SQL_AND;
 		}

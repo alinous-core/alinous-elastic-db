@@ -33,6 +33,9 @@ class InterruptedException;}}
 namespace java {namespace io {
 class IOException;}}
 
+namespace alinous {namespace system {
+class AlinousException;}}
+
 namespace java {namespace util {
 template <typename  T> class Iterator;}}
 
@@ -59,6 +62,7 @@ using ::alinous::btree::scan::INodeIterator;
 using ::alinous::btreememory::BTreeOnMemory;
 using ::alinous::btreememory::MBTreeLeafNode;
 using ::alinous::runtime::dom::VariableException;
+using ::alinous::system::AlinousException;
 
 
 

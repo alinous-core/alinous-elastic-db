@@ -57,6 +57,9 @@ class IOException;}}
 namespace alinous {namespace runtime {namespace dom {
 class VariableException;}}}
 
+namespace alinous {namespace system {
+class AlinousException;}}
+
 namespace alinous {
 class ThreadContext;
 }
@@ -76,6 +79,7 @@ using ::alinous::buffer::storage::FileStorageEntryBuilder;
 using ::alinous::buffer::storage::FileStorageEntryFetcher;
 using ::alinous::lock::LockObject;
 using ::alinous::runtime::dom::VariableException;
+using ::alinous::system::AlinousException;
 
 
 

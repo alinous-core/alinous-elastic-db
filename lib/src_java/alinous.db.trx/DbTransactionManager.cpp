@@ -96,7 +96,7 @@ DbTransaction* DbTransactionManager::borrowTransaction(int acid, ThreadContext* 
 				catch(InterruptedException* e)
 				{
 					e->printStackTrace(ctx);
-					throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1684(), e, ctx));
+					throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1685(), e, ctx));
 				}
 			}
 		}

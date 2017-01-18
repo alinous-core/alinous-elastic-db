@@ -40,7 +40,7 @@ WebModuleHashList* WebModuleHashList::init(int MAX_HASH, ThreadContext* ctx)
 {
 	if((MAX_HASH & 1) != 0)
 	{
-		throw (new(ctx) AlinousException(ConstStr::getCNST_STR_1647(), ctx));
+		throw (new(ctx) AlinousException(ConstStr::getCNST_STR_1648(), ctx));
 	}
 	this->MAX_HASH = MAX_HASH;
 	this->MAX_HASH_MASK = MAX_HASH - 1;

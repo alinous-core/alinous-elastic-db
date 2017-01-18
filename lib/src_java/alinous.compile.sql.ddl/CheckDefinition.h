@@ -24,11 +24,29 @@ class IAlinousElement;}}
 namespace alinous {namespace runtime {namespace dom {
 class VariableException;}}}
 
+namespace alinous {namespace buffer {namespace storage {
+class FileStorageEntryBuilder;}}}
+
+namespace alinous {namespace compile {namespace sql {namespace ddl {
+class CheckDefinition;}}}}
+
+namespace alinous {namespace buffer {namespace storage {
+class FileStorageEntryFetcher;}}}
+
+namespace alinous {namespace compile {namespace expression {
+class IExpression;}}}
+
+namespace alinous {namespace system {
+class AlinousException;}}
+
 namespace alinous {namespace compile {
 class IAlinousVisitorContainer;}}
 
 namespace alinous {namespace compile {
 class AlinousElementNetworkFactory;}}
+
+namespace alinous {namespace compile {namespace expression {
+class IExpressionFactory;}}}
 
 namespace alinous {namespace remote {namespace socket {
 class ICommandData;}}}
@@ -42,16 +60,21 @@ namespace alinous {namespace compile {namespace sql {namespace ddl {
 using namespace ::alinous;
 using namespace ::java::lang;
 using ::java::util::Iterator;
+using ::alinous::buffer::storage::FileStorageEntryBuilder;
+using ::alinous::buffer::storage::FileStorageEntryFetcher;
 using ::alinous::compile::AbstractSrcElement;
 using ::alinous::compile::AlinousElementNetworkFactory;
 using ::alinous::compile::IAlinousElement;
 using ::alinous::compile::IAlinousElementVisitor;
 using ::alinous::compile::IAlinousVisitorContainer;
 using ::alinous::compile::analyse::SrcAnalyseContext;
+using ::alinous::compile::expression::IExpression;
+using ::alinous::compile::expression::IExpressionFactory;
 using ::alinous::compile::sql::expression::ISQLExpression;
 using ::alinous::remote::socket::ICommandData;
 using ::alinous::remote::socket::NetworkBinaryBuffer;
 using ::alinous::runtime::dom::VariableException;
+using ::alinous::system::AlinousException;
 
 
 
@@ -82,6 +105,9 @@ public:
 	void setParent(AbstractSrcElement* parent, ThreadContext* ctx) throw()  final;
 	void readData(NetworkBinaryBuffer* buff, ThreadContext* ctx) final;
 	void writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw()  final;
+	void toFileEntry(FileStorageEntryBuilder* builder, ThreadContext* ctx);
+public:
+	static CheckDefinition* fromFileEntry(FileStorageEntryFetcher* fetcher, ThreadContext* ctx);
 public:
 	static bool __init_done;
 	static bool __init_static_variables();

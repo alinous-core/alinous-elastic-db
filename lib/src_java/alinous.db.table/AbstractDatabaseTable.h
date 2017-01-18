@@ -54,11 +54,11 @@ class AlinousDbException;}}
 namespace alinous {namespace runtime {namespace dom {
 class VariableException;}}}
 
-namespace alinous {namespace db {namespace table {
-class IScannableIndex;}}}
-
 namespace alinous {namespace system {
 class AlinousException;}}
+
+namespace alinous {namespace db {namespace table {
+class IScannableIndex;}}}
 
 namespace alinous {namespace buffer {namespace storage {
 class FileStorageEntryWriter;}}}

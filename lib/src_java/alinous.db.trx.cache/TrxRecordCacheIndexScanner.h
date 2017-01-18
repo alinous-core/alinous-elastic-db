@@ -39,6 +39,9 @@ class VariableException;}}}
 namespace alinous {namespace btree {
 class BTreeException;}}
 
+namespace alinous {namespace system {
+class AlinousException;}}
+
 namespace alinous {namespace db {namespace trx {namespace scan {
 class ScanException;}}}}
 
@@ -50,9 +53,6 @@ class ScanResultRecord;}}}}
 
 namespace alinous {namespace btree {
 class LongValue;}}
-
-namespace alinous {namespace system {
-class AlinousException;}}
 
 namespace alinous {namespace btree {
 class LongKey;}}

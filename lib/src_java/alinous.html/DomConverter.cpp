@@ -38,17 +38,17 @@ bool DomConverter::__init_static_variables(){
 		GCNotifier __refobj1(ctx, __FILEW__, __LINE__, L"DomConverter", L"__init_static_variables");
 		__GC_MV(nullptr, &(GT), ConstStr::getCNST_STR_82(), String);
 		__GC_MV(nullptr, &(LT), ConstStr::getCNST_STR_1010(), String);
-		__GC_MV(nullptr, &(QUOTE), ConstStr::getCNST_STR_1732(), String);
-		__GC_MV(nullptr, &(DOUBLE_QUOTE), ConstStr::getCNST_STR_1301(), String);
-		__GC_MV(nullptr, &(SRC), ConstStr::getCNST_STR_1733(), String);
-		__GC_MV(nullptr, &(EQUALS), ConstStr::getCNST_STR_1072(), String);
-		__GC_MV(nullptr, &(A), ConstStr::getCNST_STR_1734(), String);
-		__GC_MV(nullptr, &(IMG), ConstStr::getCNST_STR_1735(), String);
+		__GC_MV(nullptr, &(QUOTE), ConstStr::getCNST_STR_1734(), String);
+		__GC_MV(nullptr, &(DOUBLE_QUOTE), ConstStr::getCNST_STR_1302(), String);
+		__GC_MV(nullptr, &(SRC), ConstStr::getCNST_STR_1735(), String);
+		__GC_MV(nullptr, &(EQUALS), ConstStr::getCNST_STR_1073(), String);
+		__GC_MV(nullptr, &(A), ConstStr::getCNST_STR_1736(), String);
+		__GC_MV(nullptr, &(IMG), ConstStr::getCNST_STR_1737(), String);
 		__GC_MV(nullptr, &(SPACE), ConstStr::getCNST_STR_380(), String);
 		__GC_MV(nullptr, &(TAB), ConstStr::getCNST_STR_380(), String);
-		__GC_MV(nullptr, &(NEW_LINE), ConstStr::getCNST_STR_1205(), String);
+		__GC_MV(nullptr, &(NEW_LINE), ConstStr::getCNST_STR_1206(), String);
 		__GC_MV(nullptr, &(SLASH), ConstStr::getCNST_STR_1007(), String);
-		__GC_MV(nullptr, &(BACK_SLASH), ConstStr::getCNST_STR_1736(), String);
+		__GC_MV(nullptr, &(BACK_SLASH), ConstStr::getCNST_STR_1738(), String);
 	}
 	ctx->localGC();
 	delete ctx;
@@ -137,7 +137,7 @@ void DomConverter::parse(ThreadContext* ctx) throw()
 }
 void DomConverter::handleIncomment(String* token, ThreadContext* ctx) throw() 
 {
-	if(token->endsWith(ConstStr::getCNST_STR_1729(), ctx))
+	if(token->endsWith(ConstStr::getCNST_STR_1731(), ctx))
 	{
 		String* next = this->tokenizer->lookAhead(ctx);
 		if(next->equals(ConstStr::getCNST_STR_82(), ctx))
@@ -284,7 +284,7 @@ void DomConverter::handleIntag(String* token, ThreadContext* ctx) throw()
 			this->endingTag = true;
 			return;
 		}
-		if(token->startsWith(ConstStr::getCNST_STR_1730(), ctx))
+		if(token->startsWith(ConstStr::getCNST_STR_1732(), ctx))
 		{
 			changeStatus(Status::incomment, ctx);
 			this->replacer->startComment(ctx);
@@ -367,7 +367,7 @@ void DomConverter::handleJavaScriptCode(String* token, ThreadContext* ctx) throw
 			ahead ++ ;
 			tagName = this->tokenizer->lookAhead(ahead, ctx);
 		}
-		if(tagEnds->equals(ConstStr::getCNST_STR_1007(), ctx) && tagName->toLowerCase(ctx)->equals(ConstStr::getCNST_STR_1731(), ctx))
+		if(tagEnds->equals(ConstStr::getCNST_STR_1007(), ctx) && tagName->toLowerCase(ctx)->equals(ConstStr::getCNST_STR_1733(), ctx))
 		{
 			this->replacer->addBodyString(this->buffer->toString(ctx), ctx);
 			changeStatus(Status::intag, ctx);
@@ -403,7 +403,7 @@ bool DomConverter::isJavaScript(ThreadContext* ctx) throw()
 	{
 		return false;
 	}
-	if(this->replacer->getCurrentTag(ctx)->getName(ctx)->toLowerCase(ctx)->equals(ConstStr::getCNST_STR_1731(), ctx))
+	if(this->replacer->getCurrentTag(ctx)->getName(ctx)->toLowerCase(ctx)->equals(ConstStr::getCNST_STR_1733(), ctx))
 	{
 		return true;
 	}

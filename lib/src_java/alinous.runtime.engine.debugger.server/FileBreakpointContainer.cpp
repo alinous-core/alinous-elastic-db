@@ -68,7 +68,7 @@ String* FileBreakpointContainer::toString(ThreadContext* ctx) throw()
 		buff->append(p->getFilePath(ctx), ctx);
 		buff->append(ConstStr::getCNST_STR_381(), ctx);
 		buff->append(p->getLine(ctx), ctx);
-		buff->append(ConstStr::getCNST_STR_1205(), ctx);
+		buff->append(ConstStr::getCNST_STR_1206(), ctx);
 	}
 	return buff->toString(ctx);
 }

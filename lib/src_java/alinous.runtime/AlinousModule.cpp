@@ -248,7 +248,7 @@ void AlinousModule::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
 		if(el == nullptr || !((dynamic_cast<AlinousSrc*>(el) != 0)))
 		{
-			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1097(), ctx));
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1098(), ctx));
 		}
 		__GC_MV(this, &(this->moduleSource), static_cast<AlinousSrc*>(el), AlinousSrc);
 	}

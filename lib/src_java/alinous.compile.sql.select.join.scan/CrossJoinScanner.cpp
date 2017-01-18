@@ -99,7 +99,7 @@ bool CrossJoinScanner::hasNext(bool debug, ThreadContext* ctx)
 			}
 			catch(VariableException* e)
 			{
-				throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1089(), e, ctx));
+				throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1090(), e, ctx));
 			}
 		}
 		return true;

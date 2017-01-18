@@ -72,6 +72,9 @@ class ScanResultRecord;}}}}
 namespace alinous {namespace runtime {namespace dom {
 class DomVariable;}}}
 
+namespace alinous {namespace system {
+class AlinousException;}}
+
 namespace java {namespace lang {
 class IObject;
 }}
@@ -95,6 +98,7 @@ using ::alinous::db::trx::cache::CachedRecord;
 using ::alinous::db::trx::scan::ScanResultRecord;
 using ::alinous::runtime::dom::DomVariable;
 using ::alinous::runtime::dom::VariableException;
+using ::alinous::system::AlinousException;
 
 
 

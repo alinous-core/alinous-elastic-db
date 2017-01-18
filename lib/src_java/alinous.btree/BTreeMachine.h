@@ -27,8 +27,8 @@ template <typename  T> class Stack;}}
 namespace java {namespace io {
 class IOException;}}
 
-namespace alinous {namespace runtime {namespace dom {
-class VariableException;}}}
+namespace alinous {namespace system {
+class AlinousException;}}
 
 namespace java {namespace lang {
 class IObject;
@@ -46,7 +46,7 @@ using ::java::util::Iterator;
 using ::java::io::IOException;
 using ::java::util::Iterator;
 using ::java::util::Stack;
-using ::alinous::runtime::dom::VariableException;
+using ::alinous::system::AlinousException;
 
 
 

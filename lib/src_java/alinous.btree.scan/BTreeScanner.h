@@ -27,6 +27,9 @@ class InterruptedException;}}
 namespace java {namespace io {
 class IOException;}}
 
+namespace alinous {namespace system {
+class AlinousException;}}
+
 namespace java {namespace util {
 template <typename  T> class Iterator;}}
 
@@ -54,6 +57,7 @@ using ::alinous::btree::IBTree;
 using ::alinous::btree::IBTreeKey;
 using ::alinous::btree::IBTreeNode;
 using ::alinous::runtime::dom::VariableException;
+using ::alinous::system::AlinousException;
 
 
 

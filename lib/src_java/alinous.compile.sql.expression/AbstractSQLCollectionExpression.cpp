@@ -212,7 +212,7 @@ void AbstractSQLCollectionExpression::__readData(NetworkBinaryBuffer* buff, Thre
 		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
 		if(el == nullptr || !((dynamic_cast<SQLSubExpression*>(el) != 0)))
 		{
-			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1065(), ctx));
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1066(), ctx));
 		}
 		this->expressions->add(static_cast<SQLSubExpression*>(el), ctx);
 	}
