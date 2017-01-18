@@ -6,6 +6,12 @@ class OneSource;
 namespace alinous {namespace remote {namespace db {namespace command {namespace data {
 class TableClusterData;}}}}}
 
+namespace alinous {namespace remote {namespace db {namespace command {namespace data {
+class StorageNodeData;}}}}}
+
+namespace alinous {namespace db {namespace table {
+class TableMetadata;}}}
+
 namespace java {namespace util {
 template <typename  T> class Set;}}
 
@@ -23,9 +29,6 @@ class CheckDefinition;}}}}
 
 namespace alinous {namespace buffer {namespace storage {
 class FileStorageEntryBuilder;}}}
-
-namespace alinous {namespace db {namespace table {
-class TableMetadata;}}}
 
 namespace alinous {namespace buffer {namespace storage {
 class FileStorageEntryFetcher;}}}
@@ -80,6 +83,7 @@ using ::alinous::compile::AlinousElementNetworkFactory;
 using ::alinous::compile::IAlinousElement;
 using ::alinous::compile::sql::ddl::CheckDefinition;
 using ::alinous::db::AlinousDbException;
+using ::alinous::remote::db::command::data::StorageNodeData;
 using ::alinous::remote::db::command::data::TableClusterData;
 using ::alinous::remote::socket::ICommandData;
 using ::alinous::remote::socket::NetworkBinaryBuffer;
@@ -108,7 +112,8 @@ private:
 	ArrayList<CheckDefinition>* checks;
 	TablePartitionMaxValue* maxPartitionValue;
 public:
-	TableClusterData* toCommandData(String* region, ThreadContext* ctx) throw() ;
+	TableClusterData* toCommandData(String* region, String* host, int port, bool ipv6, ThreadContext* ctx) throw() ;
+	bool checkEquals(TableMetadata* metadata, ThreadContext* ctx) throw() ;
 	int fileSize(ThreadContext* ctx);
 	void toFileEntry(FileStorageEntryBuilder* builder, ThreadContext* ctx);
 	void readData(NetworkBinaryBuffer* buff, ThreadContext* ctx) final;
@@ -132,6 +137,7 @@ public:
 	void setChecks(ArrayList<CheckDefinition>* checks, ThreadContext* ctx) throw() ;
 public:
 	static TableMetadata* loadFromFetcher(FileStorageEntryFetcher* fetcher, ThreadContext* ctx);
+	static TableMetadata* fromNetwork(NetworkBinaryBuffer* buff, ThreadContext* ctx);
 public:
 	static bool __init_done;
 	static bool __init_static_variables();

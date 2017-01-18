@@ -6,8 +6,8 @@ class StorageNodeData;}}}}}
 namespace alinous {namespace remote {namespace socket {
 class NetworkBinaryBuffer;}}}
 
-namespace alinous {namespace runtime {namespace variant {
-class VariantValue;}}}
+namespace alinous {namespace db {namespace table {
+class TableMetadata;}}}
 
 namespace alinous {namespace remote {namespace socket {
 class ICommandData;}}}
@@ -28,10 +28,10 @@ namespace alinous {namespace remote {namespace db {namespace command {namespace 
 using namespace ::alinous;
 using namespace ::java::lang;
 using ::java::util::Iterator;
+using ::alinous::db::table::TableMetadata;
 using ::alinous::remote::socket::ICommandData;
 using ::alinous::remote::socket::NetworkBinaryBuffer;
 using ::alinous::runtime::dom::VariableException;
-using ::alinous::runtime::variant::VariantValue;
 
 
 
@@ -39,7 +39,7 @@ class StorageNodeData final : public ICommandData, public virtual IObject {
 public:
 	StorageNodeData(const StorageNodeData& base) = default;
 public:
-	StorageNodeData(ThreadContext* ctx) throw()  : IObject(ctx), ICommandData(ctx), host(nullptr), port(0), ipv6(0), maxValue(__GC_INS(this, (new(ctx) VariantValue(ctx)), VariantValue))
+	StorageNodeData(ThreadContext* ctx) throw()  : IObject(ctx), ICommandData(ctx), host(nullptr), port(0), ipv6(0), metadata(nullptr)
 	{
 	}
 	void __construct_impl(ThreadContext* ctx) throw() 
@@ -53,7 +53,7 @@ private:
 	String* host;
 	int port;
 	bool ipv6;
-	VariantValue* maxValue;
+	TableMetadata* metadata;
 public:
 	String* getHost(ThreadContext* ctx) throw() ;
 	int getPort(ThreadContext* ctx) throw() ;

@@ -121,7 +121,7 @@ private:
 	HashMap<String,IDatabaseTable>* tableStores;
 	String* regionName;
 public:
-	SchemaData* toCommandData(String* region, ThreadContext* ctx) throw() ;
+	SchemaData* toCommandData(String* region, String* host, int port, bool ipv6, ThreadContext* ctx) throw() ;
 	void create(ThreadContext* ctx) throw() ;
 	void initAfterFetched(String* dataDir, String* schemaName, ThreadPool* threadPool, IOidPublisher* oidPublisher, AlinousCore* core, BTreeGlobalCache* cache, ThreadContext* ctx);
 	String* getSchemaDir(ThreadContext* ctx) throw() ;

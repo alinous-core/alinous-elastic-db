@@ -18,7 +18,7 @@ bool GetTableSchemeCommand::__init_static_variables(){
 	delete ctx;
 	return true;
 }
- GetTableSchemeCommand::GetTableSchemeCommand(ThreadContext* ctx) throw()  : IObject(ctx), AbstractRemoteStorageCommand(ctx), data(__GC_INS(this, (new(ctx) SchemasStructureInfoData(ctx)), SchemasStructureInfoData)), region(nullptr)
+ GetTableSchemeCommand::GetTableSchemeCommand(ThreadContext* ctx) throw()  : IObject(ctx), AbstractRemoteStorageCommand(ctx), data(__GC_INS(this, (new(ctx) SchemasStructureInfoData(ctx)), SchemasStructureInfoData)), region(nullptr), host(nullptr), port(0), ipv6(0)
 {
 	this->type = AbstractRemoteStorageCommand::TYPE_GET_TABLE_SCHEME;
 }
@@ -40,6 +40,8 @@ void GetTableSchemeCommand::__releaseRegerences(bool prepare, ThreadContext* ctx
 	data = nullptr;
 	__e_obj1.add(this->region, this);
 	region = nullptr;
+	__e_obj1.add(this->host, this);
+	host = nullptr;
 	if(!prepare){
 		return;
 	}
@@ -51,7 +53,7 @@ SchemasStructureInfoData* GetTableSchemeCommand::getData(ThreadContext* ctx) thr
 }
 void GetTableSchemeCommand::executeOnServer(RemoteTableStorageServer* tableStorageServer, BufferedOutputStream* outStream, ThreadContext* ctx)
 {
-	tableStorageServer->getSchemeInfo(this->data, this->region, ctx);
+	tableStorageServer->getSchemeInfo(this->data, this->region, this->host, this->port, this->ipv6, ctx);
 	writeByteStream(outStream, ctx);
 }
 void GetTableSchemeCommand::readFromStream(InputStream* stream, int remain, ThreadContext* ctx)
@@ -61,6 +63,9 @@ void GetTableSchemeCommand::readFromStream(InputStream* stream, int remain, Thre
 	NetworkBinaryBuffer* buff = (new(ctx) NetworkBinaryBuffer(src, ctx));
 	this->data->readData(buff, ctx);
 	__GC_MV(this, &(this->region), buff->getString(ctx), String);
+	__GC_MV(this, &(this->host), buff->getString(ctx), String);
+	this->port = buff->getInt(ctx);
+	this->ipv6 = buff->getBoolean(ctx);
 }
 String* GetTableSchemeCommand::getRegion(ThreadContext* ctx) throw() 
 {
@@ -70,12 +75,39 @@ void GetTableSchemeCommand::setRegion(String* region, ThreadContext* ctx) throw(
 {
 	__GC_MV(this, &(this->region), region, String);
 }
+String* GetTableSchemeCommand::getHost(ThreadContext* ctx) throw() 
+{
+	return host;
+}
+void GetTableSchemeCommand::setHost(String* host, ThreadContext* ctx) throw() 
+{
+	__GC_MV(this, &(this->host), host, String);
+}
+int GetTableSchemeCommand::getPort(ThreadContext* ctx) throw() 
+{
+	return port;
+}
+void GetTableSchemeCommand::setPort(int port, ThreadContext* ctx) throw() 
+{
+	this->port = port;
+}
+bool GetTableSchemeCommand::isIpv6(ThreadContext* ctx) throw() 
+{
+	return ipv6;
+}
+void GetTableSchemeCommand::setIpv6(bool ipv6, ThreadContext* ctx) throw() 
+{
+	this->ipv6 = ipv6;
+}
 void GetTableSchemeCommand::writeByteStream(OutputStream* out, ThreadContext* ctx)
 {
 	NetworkBinaryBuffer* buff = (new(ctx) NetworkBinaryBuffer(256, ctx));
 	buff->putInt(AbstractRemoteStorageCommand::TYPE_GET_TABLE_SCHEME, ctx);
 	this->data->writeData(buff, ctx);
 	buff->putString(this->region, ctx);
+	buff->putString(this->host, ctx);
+	buff->putInt(this->port, ctx);
+	buff->putBoolean(this->ipv6, ctx);
 	IArrayObjectPrimitive<char>* b = buff->toBinary(ctx);
 	int pos = buff->getPutSize(ctx);
 	out->write(b, 0, pos, ctx);

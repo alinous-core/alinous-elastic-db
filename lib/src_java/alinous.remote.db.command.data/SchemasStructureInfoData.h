@@ -3,17 +3,17 @@
 namespace alinous {namespace remote {namespace db {namespace command {namespace data {
 class SchemasStructureInfoData;}}}}}
 
+namespace java {namespace util {
+template <typename  T, typename V> class Map;}}
+
 namespace alinous {namespace remote {namespace db {namespace command {namespace data {
 class SchemaData;}}}}}
-
-namespace alinous {namespace remote {namespace socket {
-class NetworkBinaryBuffer;}}}
 
 namespace java {namespace util {
 template <typename  T> class Iterator;}}
 
-namespace java {namespace util {
-template <typename  T, typename V> class Map;}}
+namespace alinous {namespace remote {namespace socket {
+class NetworkBinaryBuffer;}}}
 
 namespace java {namespace util {
 template <typename  T, typename V> class HashMap;}}
@@ -65,6 +65,8 @@ public:
 	void addScheme(SchemaData* value, ThreadContext* ctx) throw() ;
 	void readData(NetworkBinaryBuffer* buff, ThreadContext* ctx) final;
 	void writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw()  final;
+private:
+	SchemaData* findLocalSchema(String* name, SchemaData* schemaData, ThreadContext* ctx) throw() ;
 public:
 	static bool __init_done;
 	static bool __init_static_variables();

@@ -124,7 +124,7 @@ IValueFetcher* SchemaManager::getFetcher(ThreadContext* ctx) throw()
 {
 	return nullptr;
 }
-void SchemaManager::getSchemaData(SchemasStructureInfoData* data, String* region, ThreadContext* ctx) throw() 
+void SchemaManager::getSchemaData(SchemasStructureInfoData* data, String* region, String* host, int port, bool ipv6, ThreadContext* ctx) throw() 
 {
 	{
 		SynchronizedBlockObj __synchronized_2(this->schemeLock, ctx);
@@ -133,7 +133,7 @@ void SchemaManager::getSchemaData(SchemasStructureInfoData* data, String* region
 		{
 			String* key = it->next(ctx);
 			TableSchema* sc = this->schemas->get(key, ctx);
-			SchemaData* scdata = sc->toCommandData(region, ctx);
+			SchemaData* scdata = sc->toCommandData(region, host, port, ipv6, ctx);
 			data->addScheme(scdata, ctx);
 		}
 	}

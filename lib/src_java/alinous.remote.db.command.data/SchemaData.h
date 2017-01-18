@@ -3,14 +3,17 @@
 namespace alinous {namespace remote {namespace db {namespace command {namespace data {
 class TableClusterData;}}}}}
 
-namespace alinous {namespace remote {namespace socket {
-class NetworkBinaryBuffer;}}}
+namespace alinous {namespace remote {namespace db {namespace command {namespace data {
+class SchemaData;}}}}}
+
+namespace java {namespace util {
+template <typename  T, typename V> class Map;}}
 
 namespace java {namespace util {
 template <typename  T> class Iterator;}}
 
-namespace java {namespace util {
-template <typename  T, typename V> class Map;}}
+namespace alinous {namespace remote {namespace socket {
+class NetworkBinaryBuffer;}}}
 
 namespace java {namespace util {
 template <typename  T, typename V> class HashMap;}}
@@ -60,10 +63,14 @@ private:
 	Map<String,TableClusterData>* tablesMap;
 public:
 	void addTable(TableClusterData* value, ThreadContext* ctx) throw() ;
+	void join(SchemaData* schemaData, ThreadContext* ctx) throw() ;
 	String* getName(ThreadContext* ctx) throw() ;
 	void setName(String* name, ThreadContext* ctx) throw() ;
+	Map<String,TableClusterData>* getTablesMap(ThreadContext* ctx) throw() ;
 	void readData(NetworkBinaryBuffer* buff, ThreadContext* ctx) final;
 	void writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw()  final;
+private:
+	TableClusterData* findTableCluster(String* tableName, TableClusterData* cluster, ThreadContext* ctx) throw() ;
 public:
 	static bool __init_done;
 	static bool __init_static_variables();

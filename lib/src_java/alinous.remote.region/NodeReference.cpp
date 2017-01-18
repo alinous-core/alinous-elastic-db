@@ -65,6 +65,9 @@ SchemasStructureInfoData* NodeReference::getSchemeInfo(String* region, ThreadCon
 {
 	GetTableSchemeCommand* cmd = (new(ctx) GetTableSchemeCommand(ctx));
 	cmd->setRegion(region, ctx);
+	cmd->setHost(this->host, ctx);
+	cmd->setPort(this->port, ctx);
+	cmd->setIpv6(this->ipv6, ctx);
 	ISocketConnection* con = nullptr;
 	{
 		std::function<void(void)> finallyLm2= [&, this]()

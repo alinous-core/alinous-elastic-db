@@ -40,6 +40,22 @@ void SchemaData::addTable(TableClusterData* value, ThreadContext* ctx) throw()
 {
 	this->tablesMap->put(value->getName(ctx), value, ctx);
 }
+void SchemaData::join(SchemaData* schemaData, ThreadContext* ctx) throw() 
+{
+	Map<String,TableClusterData>* tablesMap = schemaData->tablesMap;
+	Iterator<String>* it = tablesMap->keySet(ctx)->iterator(ctx);
+	while(it->hasNext(ctx))
+	{
+		String* tableName = it->next(ctx);
+		TableClusterData* cluster = tablesMap->get(tableName, ctx);
+		TableClusterData* lastCluster = findTableCluster(tableName, cluster, ctx);
+		if(cluster == lastCluster)
+		{
+			continue;
+		}
+		lastCluster->join(cluster, ctx);
+	}
+}
 String* SchemaData::getName(ThreadContext* ctx) throw() 
 {
 	return name;
@@ -47,6 +63,10 @@ String* SchemaData::getName(ThreadContext* ctx) throw()
 void SchemaData::setName(String* name, ThreadContext* ctx) throw() 
 {
 	__GC_MV(this, &(this->name), name, String);
+}
+Map<String,TableClusterData>* SchemaData::getTablesMap(ThreadContext* ctx) throw() 
+{
+	return tablesMap;
 }
 void SchemaData::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 {
@@ -71,6 +91,16 @@ void SchemaData::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw(
 		TableClusterData* table = this->tablesMap->get(tableName, ctx);
 		table->writeData(buff, ctx);
 	}
+}
+TableClusterData* SchemaData::findTableCluster(String* tableName, TableClusterData* cluster, ThreadContext* ctx) throw() 
+{
+	TableClusterData* data = this->tablesMap->get(tableName, ctx);
+	if(data == nullptr)
+	{
+		this->tablesMap->put(tableName, cluster, ctx);
+		data = cluster;
+	}
+	return data;
 }
 }}}}}
 

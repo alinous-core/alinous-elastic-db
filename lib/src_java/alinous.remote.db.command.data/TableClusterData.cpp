@@ -18,7 +18,7 @@ bool TableClusterData::__init_static_variables(){
 	delete ctx;
 	return true;
 }
- TableClusterData::TableClusterData(String* name, String* region, ThreadContext* ctx) throw()  : IObject(ctx), ICommandData(ctx), name(nullptr), region(nullptr), metadata(nullptr), nodesList(GCUtils<ArrayList<StorageNodeData> >::ins(this, (new(ctx) ArrayList<StorageNodeData>(ctx)), ctx, __FILEW__, __LINE__, L""))
+ TableClusterData::TableClusterData(String* name, String* region, ThreadContext* ctx) throw()  : IObject(ctx), ICommandData(ctx), name(nullptr), region(nullptr), nodesList(GCUtils<ArrayList<StorageNodeData> >::ins(this, (new(ctx) ArrayList<StorageNodeData>(ctx)), ctx, __FILEW__, __LINE__, L""))
 {
 	__GC_MV(this, &(this->name), name, String);
 	__GC_MV(this, &(this->region), region, String);
@@ -42,12 +42,19 @@ void TableClusterData::__releaseRegerences(bool prepare, ThreadContext* ctx) thr
 	name = nullptr;
 	__e_obj1.add(this->region, this);
 	region = nullptr;
-	__e_obj1.add(this->metadata, this);
-	metadata = nullptr;
 	__e_obj1.add(this->nodesList, this);
 	nodesList = nullptr;
 	if(!prepare){
 		return;
+	}
+}
+void TableClusterData::join(TableClusterData* data, ThreadContext* ctx) throw() 
+{
+	int maxLoop = data->nodesList->size(ctx);
+	for(int i = 0; i != maxLoop; ++i)
+	{
+		StorageNodeData* node = data->nodesList->get(i, ctx);
+		this->nodesList->add(node, ctx);
 	}
 }
 void TableClusterData::addNode(StorageNodeData* node, ThreadContext* ctx) throw() 
@@ -84,12 +91,6 @@ void TableClusterData::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 		StorageNodeData* node = (new(ctx) StorageNodeData(ctx));
 		node->readData(buff, ctx);
 	}
-	bool isnull = buff->getBoolean(ctx);
-	if(!isnull)
-	{
-		__GC_MV(this, &(this->metadata), (new(ctx) TableMetadata(this->name, ctx)), TableMetadata);
-		this->metadata->readData(buff, ctx);
-	}
 }
 void TableClusterData::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
 {
@@ -102,20 +103,6 @@ void TableClusterData::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) 
 		StorageNodeData* node = this->nodesList->get(i, ctx);
 		node->writeData(buff, ctx);
 	}
-	bool isnull = (this->metadata == nullptr);
-	buff->putBoolean(isnull, ctx);
-	if(!isnull)
-	{
-		this->metadata->writeData(buff, ctx);
-	}
-}
-TableMetadata* TableClusterData::getMetadata(ThreadContext* ctx) throw() 
-{
-	return metadata;
-}
-void TableClusterData::setMetadata(TableMetadata* metadata, ThreadContext* ctx) throw() 
-{
-	__GC_MV(this, &(this->metadata), metadata, TableMetadata);
 }
 }}}}}
 

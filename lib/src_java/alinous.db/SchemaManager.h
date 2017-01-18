@@ -133,7 +133,7 @@ public:
 	int diskSize(ThreadContext* ctx) throw()  final;
 	bool equals(IObject* obj, ThreadContext* ctx) throw()  final;
 	IValueFetcher* getFetcher(ThreadContext* ctx) throw()  final;
-	void getSchemaData(SchemasStructureInfoData* data, String* region, ThreadContext* ctx) throw() ;
+	void getSchemaData(SchemasStructureInfoData* data, String* region, String* host, int port, bool ipv6, ThreadContext* ctx) throw() ;
 private:
 	void doCreateTable(String* schemaName, TableMetadata* tableMetadata, ThreadPool* threadPool, AlinousCore* core, BTreeGlobalCache* cache, ThreadContext* ctx);
 public:

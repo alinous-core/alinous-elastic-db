@@ -36,6 +36,19 @@ void SchemasStructureInfoData::__releaseRegerences(bool prepare, ThreadContext* 
 }
 void SchemasStructureInfoData::join(SchemasStructureInfoData* data, ThreadContext* ctx) throw() 
 {
+	Map<String,SchemaData>* dataSchemas = data->schemas;
+	Iterator<String>* it = dataSchemas->keySet(ctx)->iterator(ctx);
+	while(it->hasNext(ctx))
+	{
+		String* name = it->next(ctx);
+		SchemaData* schemaData = dataSchemas->get(name, ctx);
+		SchemaData* lastSchemaData = findLocalSchema(name, schemaData, ctx);
+		if(lastSchemaData == schemaData)
+		{
+			continue;
+		}
+		lastSchemaData->join(schemaData, ctx);
+	}
 }
 void SchemasStructureInfoData::addScheme(SchemaData* value, ThreadContext* ctx) throw() 
 {
@@ -62,6 +75,16 @@ void SchemasStructureInfoData::writeData(NetworkBinaryBuffer* buff, ThreadContex
 		SchemaData* data = this->schemas->get(schemeName, ctx);
 		data->writeData(buff, ctx);
 	}
+}
+SchemaData* SchemasStructureInfoData::findLocalSchema(String* name, SchemaData* schemaData, ThreadContext* ctx) throw() 
+{
+	SchemaData* data = this->schemas->get(name, ctx);
+	if(data == nullptr)
+	{
+		data = schemaData;
+		this->schemas->put(name, schemaData, ctx);
+	}
+	return data;
 }
 }}}}}
 

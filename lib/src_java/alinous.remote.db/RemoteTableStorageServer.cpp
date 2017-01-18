@@ -164,9 +164,9 @@ AlinousCore* RemoteTableStorageServer::getCore(ThreadContext* ctx) throw()
 {
 	return core;
 }
-void RemoteTableStorageServer::getSchemeInfo(SchemasStructureInfoData* data, String* region, ThreadContext* ctx) throw() 
+void RemoteTableStorageServer::getSchemeInfo(SchemasStructureInfoData* data, String* region, String* host, int port, bool ipv6, ThreadContext* ctx) throw() 
 {
-	this->schemas->getSchemaData(data, region, ctx);
+	this->schemas->getSchemaData(data, region, host, port, ipv6, ctx);
 }
 void RemoteTableStorageServer::initInstance(AlinousCore* core, ThreadContext* ctx)
 {

@@ -18,7 +18,7 @@ bool StorageNodeData::__init_static_variables(){
 	delete ctx;
 	return true;
 }
- StorageNodeData::StorageNodeData(String* host, int port, bool ipv6, ThreadContext* ctx) throw()  : IObject(ctx), ICommandData(ctx), host(nullptr), port(0), ipv6(0), maxValue(__GC_INS(this, (new(ctx) VariantValue(ctx)), VariantValue))
+ StorageNodeData::StorageNodeData(String* host, int port, bool ipv6, ThreadContext* ctx) throw()  : IObject(ctx), ICommandData(ctx), host(nullptr), port(0), ipv6(0), metadata(nullptr)
 {
 	__GC_MV(this, &(this->host), host, String);
 	this->port = port;
@@ -42,8 +42,8 @@ void StorageNodeData::__releaseRegerences(bool prepare, ThreadContext* ctx) thro
 	ObjectEraser __e_obj1(ctx, __FILEW__, __LINE__, L"StorageNodeData", L"~StorageNodeData");
 	__e_obj1.add(this->host, this);
 	host = nullptr;
-	__e_obj1.add(this->maxValue, this);
-	maxValue = nullptr;
+	__e_obj1.add(this->metadata, this);
+	metadata = nullptr;
 	if(!prepare){
 		return;
 	}
@@ -73,7 +73,11 @@ void StorageNodeData::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 	__GC_MV(this, &(this->host), buff->getString(ctx), String);
 	this->port = buff->getInt(ctx);
 	this->ipv6 = buff->getByte(ctx) == (char)1;
-	this->maxValue->readData(buff, ctx);
+	bool isnull = buff->getBoolean(ctx);
+	if(!isnull)
+	{
+		__GC_MV(this, &(this->metadata), TableMetadata::fromNetwork(buff, ctx), TableMetadata);
+	}
 }
 void StorageNodeData::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
 {
@@ -81,7 +85,11 @@ void StorageNodeData::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) t
 	buff->putInt(this->port, ctx);
 	char bl = ((char)(this->ipv6 ? 1 : 0));
 	buff->putByte(bl, ctx);
-	this->maxValue->writeData(buff, ctx);
+	bool isnull = (this->metadata == nullptr);
+	if(!isnull)
+	{
+		this->metadata->writeData(buff, ctx);
+	}
 }
 }}}}}
 

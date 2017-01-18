@@ -58,12 +58,21 @@ public:
 private:
 	SchemasStructureInfoData* data;
 	String* region;
+	String* host;
+	int port;
+	bool ipv6;
 public:
 	SchemasStructureInfoData* getData(ThreadContext* ctx) throw() ;
 	void executeOnServer(RemoteTableStorageServer* tableStorageServer, BufferedOutputStream* outStream, ThreadContext* ctx) final;
 	void readFromStream(InputStream* stream, int remain, ThreadContext* ctx) final;
 	String* getRegion(ThreadContext* ctx) throw() ;
 	void setRegion(String* region, ThreadContext* ctx) throw() ;
+	String* getHost(ThreadContext* ctx) throw() ;
+	void setHost(String* host, ThreadContext* ctx) throw() ;
+	int getPort(ThreadContext* ctx) throw() ;
+	void setPort(int port, ThreadContext* ctx) throw() ;
+	bool isIpv6(ThreadContext* ctx) throw() ;
+	void setIpv6(bool ipv6, ThreadContext* ctx) throw() ;
 	void writeByteStream(OutputStream* out, ThreadContext* ctx) final;
 public:
 	static bool __init_done;

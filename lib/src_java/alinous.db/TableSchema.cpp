@@ -56,7 +56,7 @@ void TableSchema::__releaseRegerences(bool prepare, ThreadContext* ctx) throw()
 		return;
 	}
 }
-SchemaData* TableSchema::toCommandData(String* region, ThreadContext* ctx) throw() 
+SchemaData* TableSchema::toCommandData(String* region, String* host, int port, bool ipv6, ThreadContext* ctx) throw() 
 {
 	SchemaData* data = (new(ctx) SchemaData(ctx));
 	data->setName(name, ctx);
@@ -65,7 +65,7 @@ SchemaData* TableSchema::toCommandData(String* region, ThreadContext* ctx) throw
 	{
 		String* tableName = it->next(ctx);
 		TableMetadata* table = this->tables->get(tableName, ctx);
-		TableClusterData* tabledata = table->toCommandData(region, ctx);
+		TableClusterData* tabledata = table->toCommandData(region, host, port, ipv6, ctx);
 		data->addTable(tabledata, ctx);
 	}
 	return data;
