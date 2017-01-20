@@ -66,7 +66,7 @@ void XHtmlComment::setComment(String* comment, ThreadContext* ctx) throw()
 String* XHtmlComment::toString(ThreadContext* ctx) throw() 
 {
 	StringBuffer* buff = (new(ctx) StringBuffer(ctx));
-	buff->append(ConstStr::getCNST_STR_1778(), ctx)->append(this->comment, ctx)->append(ConstStr::getCNST_STR_1779(), ctx);
+	buff->append(ConstStr::getCNST_STR_1781(), ctx)->append(this->comment, ctx)->append(ConstStr::getCNST_STR_1782(), ctx);
 	return buff->toString(ctx);
 }
 AbstractXHtmlElement::ElementType XHtmlComment::getElementType(ThreadContext* ctx) throw() 

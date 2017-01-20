@@ -313,6 +313,7 @@ set(srcjava
 	"src_java/alinous.remote.region/NodeRegionServer.cpp"
 	"src_java/alinous.remote.region/NodeReferenceManager.cpp"
 	"src_java/alinous.remote.region/NodeTableReference.cpp"
+	"src_java/alinous.remote.region/NodeRegionSchema.cpp"
 	"src_java/alinous.remote.region/NodeRegionResponceAction.cpp"
 	"src_java/alinous.remote.region/NodeReference.cpp"
 	"src_java/alinous.remote.region/NodeTableClaster.cpp"

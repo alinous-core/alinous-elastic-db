@@ -54,12 +54,15 @@ public:
 private:
 	RegionInfoData* regionData;
 	long long nodeClusterRevision;
+	String* region;
 public:
 	void executeOnServer(TransactionMonitorServer* monitorServer, BufferedOutputStream* outStream, ThreadContext* ctx) final;
 	void readFromStream(InputStream* stream, int remain, ThreadContext* ctx) final;
 	RegionInfoData* getRegionData(ThreadContext* ctx) throw() ;
 	long long getNodeClusterRevision(ThreadContext* ctx) throw() ;
 	void setNodeClusterRevision(long long nodeClusterRevision, ThreadContext* ctx) throw() ;
+	String* getRegion(ThreadContext* ctx) throw() ;
+	void setRegion(String* region, ThreadContext* ctx) throw() ;
 	void writeByteStream(OutputStream* out, ThreadContext* ctx) final;
 public:
 	static bool __init_done;

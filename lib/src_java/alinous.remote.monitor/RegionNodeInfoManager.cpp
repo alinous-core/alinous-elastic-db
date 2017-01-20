@@ -36,17 +36,12 @@ void RegionNodeInfoManager::__releaseRegerences(bool prepare, ThreadContext* ctx
 		return;
 	}
 }
-void RegionNodeInfoManager::getRegionInfoData(RegionInfoData* data, ThreadContext* ctx) throw() 
+void RegionNodeInfoManager::getRegionInfoData(RegionInfoData* data, String* region, ThreadContext* ctx) throw() 
 {
 	{
 		SynchronizedBlockObj __synchronized_2(this->lock, ctx);
-		Iterator<String>* it = this->regionsMap->keySet(ctx)->iterator(ctx);
-		while(it->hasNext(ctx))
-		{
-			String* key = it->next(ctx);
-			RegionNodeInfo* info = this->regionsMap->get(key, ctx);
-			data->putNodeInfo(key, info, ctx);
-		}
+		RegionNodeInfo* info = this->regionsMap->get(region, ctx);
+		data->setNodeInfo(info, ctx);
 	}
 }
 RegionNodeInfoManager* RegionNodeInfoManager::init(Monitor* monitorConf, ThreadContext* ctx)
@@ -60,7 +55,7 @@ RegionNodeInfoManager* RegionNodeInfoManager::init(Monitor* monitorConf, ThreadC
 		RegionNodeInfo* info = RegionNodeInfo::fromConfig(reg, ctx);
 		if(this->regionsMap->get(info->getName(ctx), ctx) != nullptr)
 		{
-			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3548(), ctx));
+			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3551(), ctx));
 		}
 		this->regionsMap->put(info->getName(ctx), info, ctx);
 	}

@@ -7,7 +7,7 @@ namespace alinous {namespace remote {namespace region {
 
 
 
-String* NodeRegionServer::THREAD_NAME = ConstStr::getCNST_STR_3555();
+String* NodeRegionServer::THREAD_NAME = ConstStr::getCNST_STR_3558();
 bool NodeRegionServer::__init_done = __init_static_variables();
 bool NodeRegionServer::__init_static_variables(){
 	Java2CppSystem::getSelf();
@@ -19,7 +19,7 @@ bool NodeRegionServer::__init_static_variables(){
 	delete ctx;
 	return true;
 }
- NodeRegionServer::NodeRegionServer(int port, int maxthread, ThreadContext* ctx) throw()  : IObject(ctx), port(0), maxthread(0), refs(nullptr), socketServer(nullptr), monitorConnectionPool(nullptr), nodeClusterRevision(0)
+ NodeRegionServer::NodeRegionServer(int port, int maxthread, ThreadContext* ctx) throw()  : IObject(ctx), port(0), maxthread(0), refs(nullptr), socketServer(nullptr), monitorConnectionPool(nullptr), nodeClusterRevision(0), region(nullptr)
 {
 	this->port = port;
 	this->maxthread = maxthread;
@@ -47,12 +47,15 @@ void NodeRegionServer::__releaseRegerences(bool prepare, ThreadContext* ctx) thr
 	socketServer = nullptr;
 	__e_obj1.add(this->monitorConnectionPool, this);
 	monitorConnectionPool = nullptr;
+	__e_obj1.add(this->region, this);
+	region = nullptr;
 	if(!prepare){
 		return;
 	}
 }
 void NodeRegionServer::initNodes(RegionsServer* srvconf, ThreadContext* ctx)
 {
+	__GC_MV(this, &(this->region), srvconf->getRegion(ctx), String);
 	MonitorRef* monRef = srvconf->getMonitorRef(ctx);
 	initMonitorRef(monRef, ctx);
 	syncNodes(ctx);
@@ -60,11 +63,12 @@ void NodeRegionServer::initNodes(RegionsServer* srvconf, ThreadContext* ctx)
 }
 void NodeRegionServer::syncScheme(ThreadContext* ctx)
 {
-	this->refs->syncSchemeTables(ctx);
+	this->refs->syncSchemeTables(this->region, ctx);
 }
 void NodeRegionServer::syncNodes(ThreadContext* ctx)
 {
 	GetRegionNodeInfoCommand* cmd = (new(ctx) GetRegionNodeInfoCommand(ctx));
+	cmd->setRegion(this->region, ctx);
 	cmd->setNodeClusterRevision(this->nodeClusterRevision, ctx);
 	ISocketConnection* con = nullptr;
 	{
@@ -80,7 +84,7 @@ void NodeRegionServer::syncNodes(ThreadContext* ctx)
 			AbstractMonitorCommand* retcmd = cmd->sendCommand(socket, ctx);
 			if(retcmd->getType(ctx) != AbstractMonitorCommand::TYPE_GET_REGION_INFO)
 			{
-				throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3554(), ctx));
+				throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3557(), ctx));
 			}
 			cmd = static_cast<GetRegionNodeInfoCommand*>(retcmd);
 			RegionInfoData* data = cmd->getRegionData(ctx);

@@ -8,6 +8,7 @@ template class alinous::RawArray<::alinous::HashMapInternalElement<::java::lang:
 template class alinous::RawArray<::alinous::HashMapInternalElement<::java::lang::String, ::alinous::remote::db::command::data::SchemaData>, ::alinous::HashMapInternalElement<::java::lang::String, ::alinous::remote::db::command::data::SchemaData>::ValueCompare>;
 template class alinous::RawArray<::alinous::HashMapInternalElement<::java::lang::String, ::alinous::remote::monitor::RegionNodeInfo>, ::alinous::HashMapInternalElement<::java::lang::String, ::alinous::remote::monitor::RegionNodeInfo>::ValueCompare>;
 template class alinous::RawArray<::alinous::HashMapInternalElement<::java::lang::String, ::alinous::remote::region::NodeTableClaster>, ::alinous::HashMapInternalElement<::java::lang::String, ::alinous::remote::region::NodeTableClaster>::ValueCompare>;
+template class alinous::RawArray<::alinous::HashMapInternalElement<::java::lang::String, ::alinous::remote::region::NodeRegionSchema>, ::alinous::HashMapInternalElement<::java::lang::String, ::alinous::remote::region::NodeRegionSchema>::ValueCompare>;
 template class alinous::RawArray<::alinous::HashMapInternalElement<::java::lang::String, ::alinous::remote::region::client::RemoteTableScheme>, ::alinous::HashMapInternalElement<::java::lang::String, ::alinous::remote::region::client::RemoteTableScheme>::ValueCompare>;
 template class alinous::RawArray<::alinous::HashMapInternalElement<::java::lang::String, ::java::util::TimeZone>, ::alinous::HashMapInternalElement<::java::lang::String, ::java::util::TimeZone>::ValueCompare>;
 template class alinous::RawArray<::alinous::HashMapInternalElement<::java::lang::String, ::org::alinous::charset::CharsetConverter>, ::alinous::HashMapInternalElement<::java::lang::String, ::org::alinous::charset::CharsetConverter>::ValueCompare>;
@@ -34,7 +35,6 @@ template class alinous::RawArray<::alinous::HashMapInternalElement<::java::lang:
 template class alinous::RawArray<::alinous::HashMapInternalElement<::java::lang::String, ::alinous::db::table::TableColumnMetadata>, ::alinous::HashMapInternalElement<::java::lang::String, ::alinous::db::table::TableColumnMetadata>::ValueCompare>;
 template class alinous::RawArray<::alinous::HashMapInternalElement<::java::lang::String, ::alinous::db::trx::cache::TrxRecordsCache>, ::alinous::HashMapInternalElement<::java::lang::String, ::alinous::db::trx::cache::TrxRecordsCache>::ValueCompare>;
 template class alinous::RawArray<::alinous::HashMapInternalElement<::java::lang::String, ::java::util::HashMap<::java::lang::String, ::alinous::db::trx::cache::TrxRecordsCache>>, ::alinous::HashMapInternalElement<::java::lang::String, ::java::util::HashMap<::java::lang::String, ::alinous::db::trx::cache::TrxRecordsCache>>::ValueCompare>;
-template class alinous::RawArray<::alinous::HashMapInternalElement<::java::lang::String, ::alinous::remote::region::NodeCluster>, ::alinous::HashMapInternalElement<::java::lang::String, ::alinous::remote::region::NodeCluster>::ValueCompare>;
 template class alinous::RawArray<::alinous::HashMapRawArray<::java::lang::String, ::com::google::re2j::CharGroup>>;
 template class alinous::RawArray<::alinous::HashMapRawArray<::java::lang::String, ::alinous::runtime::dom::IDomVariable>>;
 template class alinous::RawArray<::alinous::HashMapRawArray<::java::lang::String, ::alinous::runtime::dom::typed::ITypedVariable>>;
@@ -45,6 +45,7 @@ template class alinous::RawArray<::alinous::HashMapRawArray<::java::lang::String
 template class alinous::RawArray<::alinous::HashMapRawArray<::java::lang::String, ::alinous::remote::db::command::data::SchemaData>>;
 template class alinous::RawArray<::alinous::HashMapRawArray<::java::lang::String, ::alinous::remote::monitor::RegionNodeInfo>>;
 template class alinous::RawArray<::alinous::HashMapRawArray<::java::lang::String, ::alinous::remote::region::NodeTableClaster>>;
+template class alinous::RawArray<::alinous::HashMapRawArray<::java::lang::String, ::alinous::remote::region::NodeRegionSchema>>;
 template class alinous::RawArray<::alinous::HashMapRawArray<::java::lang::String, ::alinous::remote::region::client::RemoteTableScheme>>;
 template class alinous::RawArray<::alinous::HashMapRawArray<::java::lang::String, ::java::util::TimeZone>>;
 template class alinous::RawArray<::alinous::HashMapRawArray<::java::lang::String, ::org::alinous::charset::CharsetConverter>>;
@@ -71,7 +72,6 @@ template class alinous::RawArray<::alinous::HashMapRawArray<::java::lang::String
 template class alinous::RawArray<::alinous::HashMapRawArray<::java::lang::String, ::alinous::db::table::TableColumnMetadata>>;
 template class alinous::RawArray<::alinous::HashMapRawArray<::java::lang::String, ::alinous::db::trx::cache::TrxRecordsCache>>;
 template class alinous::RawArray<::alinous::HashMapRawArray<::java::lang::String, ::java::util::HashMap<::java::lang::String, ::alinous::db::trx::cache::TrxRecordsCache>>>;
-template class alinous::RawArray<::alinous::HashMapRawArray<::java::lang::String, ::alinous::remote::region::NodeCluster>>;
 template class alinous::RawArray<::com::google::re2j::Regexp>;
 template class alinous::RawArray<alinous::IArrayObject<::com::google::re2j::Regexp>>;
 template class alinous::RawArray<alinous::IArrayObject<alinous::IArrayObject<::com::google::re2j::Regexp>>>;
@@ -380,13 +380,6 @@ template class alinous::RawArray<alinous::ArrayObject<alinous::IArrayObject<::al
 template class alinous::RawArray<alinous::ArrayObject<::alinous::remote::region::NodeTableReference>>;
 template class alinous::RawArray<alinous::IArrayObject<alinous::ArrayObject<::alinous::remote::region::NodeTableReference>>>;
 template class alinous::RawArray<alinous::ArrayObject<alinous::ArrayObject<::alinous::remote::region::NodeTableReference>>>;
-template class alinous::RawArray<::alinous::remote::db::command::data::SchemasStructureInfoData>;
-template class alinous::RawArray<alinous::IArrayObject<::alinous::remote::db::command::data::SchemasStructureInfoData>>;
-template class alinous::RawArray<alinous::IArrayObject<alinous::IArrayObject<::alinous::remote::db::command::data::SchemasStructureInfoData>>>;
-template class alinous::RawArray<alinous::ArrayObject<alinous::IArrayObject<::alinous::remote::db::command::data::SchemasStructureInfoData>>>;
-template class alinous::RawArray<alinous::ArrayObject<::alinous::remote::db::command::data::SchemasStructureInfoData>>;
-template class alinous::RawArray<alinous::IArrayObject<alinous::ArrayObject<::alinous::remote::db::command::data::SchemasStructureInfoData>>>;
-template class alinous::RawArray<alinous::ArrayObject<alinous::ArrayObject<::alinous::remote::db::command::data::SchemasStructureInfoData>>>;
 template class alinous::RawArray<::alinous::remote::region::NodeReference>;
 template class alinous::RawArray<alinous::IArrayObject<::alinous::remote::region::NodeReference>>;
 template class alinous::RawArray<alinous::IArrayObject<alinous::IArrayObject<::alinous::remote::region::NodeReference>>>;

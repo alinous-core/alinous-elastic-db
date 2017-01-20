@@ -8,6 +8,7 @@ template class ::java::util::HashMapKeySet<::java::lang::String, ::alinous::remo
 template class ::java::util::HashMapKeySet<::java::lang::String, ::alinous::remote::db::command::data::SchemaData>;
 template class ::java::util::HashMapKeySet<::java::lang::String, ::alinous::remote::monitor::RegionNodeInfo>;
 template class ::java::util::HashMapKeySet<::java::lang::String, ::alinous::remote::region::NodeTableClaster>;
+template class ::java::util::HashMapKeySet<::java::lang::String, ::alinous::remote::region::NodeRegionSchema>;
 template class ::java::util::HashMapKeySet<::java::lang::String, ::alinous::remote::region::client::RemoteTableScheme>;
 template class ::java::util::HashMapKeySet<::java::lang::String, ::java::util::TimeZone>;
 template class ::java::util::HashMapKeySet<::java::lang::String, ::org::alinous::charset::CharsetConverter>;
@@ -34,4 +35,3 @@ template class ::java::util::HashMapKeySet<::java::lang::String, ::java::lang::I
 template class ::java::util::HashMapKeySet<::java::lang::String, ::alinous::db::table::TableColumnMetadata>;
 template class ::java::util::HashMapKeySet<::java::lang::String, ::alinous::db::trx::cache::TrxRecordsCache>;
 template class ::java::util::HashMapKeySet<::java::lang::String, ::java::util::HashMap<::java::lang::String, ::alinous::db::trx::cache::TrxRecordsCache>>;
-template class ::java::util::HashMapKeySet<::java::lang::String, ::alinous::remote::region::NodeCluster>;

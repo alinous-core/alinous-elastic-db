@@ -97,6 +97,7 @@ private:
 	SocketServer* socketServer;
 	SocketConnectionPool* monitorConnectionPool;
 	long long nodeClusterRevision;
+	String* region;
 private:
 	static String* THREAD_NAME;
 public:

@@ -118,5 +118,4 @@ template class ::java::util::ArrayListIterator<::alinous::buffer::FifoElement<::
 template class ::java::util::ArrayListIterator<::alinous::remote::db::command::data::StorageNodeData>;
 template class ::java::util::ArrayListIterator<::alinous::remote::monitor::NodeInfo>;
 template class ::java::util::ArrayListIterator<::alinous::remote::region::NodeTableReference>;
-template class ::java::util::ArrayListIterator<::alinous::remote::db::command::data::SchemasStructureInfoData>;
 template class ::java::util::ArrayListIterator<::alinous::remote::region::NodeReference>;

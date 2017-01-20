@@ -7,7 +7,7 @@ namespace alinous {namespace remote {namespace monitor {
 
 
 
-String* TransactionMonitorServer::THREAD_NAME = ConstStr::getCNST_STR_3547();
+String* TransactionMonitorServer::THREAD_NAME = ConstStr::getCNST_STR_3550();
 bool TransactionMonitorServer::__init_done = __init_static_variables();
 bool TransactionMonitorServer::__init_static_variables(){
 	Java2CppSystem::getSelf();
@@ -47,9 +47,9 @@ void TransactionMonitorServer::__releaseRegerences(bool prepare, ThreadContext* 
 		return;
 	}
 }
-void TransactionMonitorServer::getRegionInfo(RegionInfoData* data, ThreadContext* ctx) throw() 
+void TransactionMonitorServer::getRegionInfo(RegionInfoData* data, String* region, ThreadContext* ctx) throw() 
 {
-	this->nodeInfo->getRegionInfoData(data, ctx);
+	this->nodeInfo->getRegionInfoData(data, region, ctx);
 }
 TransactionMonitorServer* TransactionMonitorServer::init(Monitor* monitorConf, ThreadContext* ctx)
 {

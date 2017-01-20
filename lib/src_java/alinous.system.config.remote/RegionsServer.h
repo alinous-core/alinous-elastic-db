@@ -70,7 +70,7 @@ class RegionsServer final : public IAlinousConfigElement, public virtual IObject
 public:
 	RegionsServer(const RegionsServer& base) = default;
 public:
-	RegionsServer(ThreadContext* ctx) throw()  : IObject(ctx), IAlinousConfigElement(ctx), port(0), maxCon(8), monitorRef(nullptr)
+	RegionsServer(ThreadContext* ctx) throw()  : IObject(ctx), IAlinousConfigElement(ctx), port(0), maxCon(8), monitorRef(nullptr), region(nullptr)
 	{
 	}
 	void __construct_impl(ThreadContext* ctx) throw() 
@@ -82,6 +82,7 @@ private:
 	int port;
 	int maxCon;
 	MonitorRef* monitorRef;
+	String* region;
 public:
 	int getPort(ThreadContext* ctx) throw() ;
 	void setPort(int port, ThreadContext* ctx) throw() ;
@@ -89,6 +90,7 @@ public:
 	void setMaxCon(int maxCon, ThreadContext* ctx) throw() ;
 	MonitorRef* getMonitorRef(ThreadContext* ctx) throw() ;
 	void setMonitorRef(MonitorRef* monitorRef, ThreadContext* ctx) throw() ;
+	String* getRegion(ThreadContext* ctx) throw() ;
 public:
 	static RegionsServer* parseInstance(MatchCandidate* candidate, DomDocument* document, Matcher* matcher, ThreadContext* ctx);
 public:

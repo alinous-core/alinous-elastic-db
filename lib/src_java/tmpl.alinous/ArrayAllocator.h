@@ -42,7 +42,6 @@ template class alinous::ArrayAllocator<::alinous::db::ITableSchema>;
 template class alinous::ArrayAllocator<::alinous::runtime::variant::VariantValue>;
 template class alinous::ArrayAllocator<::alinous::remote::monitor::NodeInfo>;
 template class alinous::ArrayAllocator<::alinous::remote::region::NodeTableReference>;
-template class alinous::ArrayAllocator<::alinous::remote::db::command::data::SchemasStructureInfoData>;
 template class alinous::ArrayAllocator<::alinous::remote::region::NodeReference>;
 template class alinous::ArrayAllocator<::alinous::compile::IncludePreprocessor>;
 template class alinous::ArrayAllocator<::alinous::compile::declare::IDeclare>;

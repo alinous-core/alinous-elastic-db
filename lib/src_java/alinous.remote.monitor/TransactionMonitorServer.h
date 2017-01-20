@@ -63,7 +63,7 @@ private:
 public:
 	static String* THREAD_NAME;
 public:
-	void getRegionInfo(RegionInfoData* data, ThreadContext* ctx) throw() ;
+	void getRegionInfo(RegionInfoData* data, String* region, ThreadContext* ctx) throw() ;
 	TransactionMonitorServer* init(Monitor* monitorConf, ThreadContext* ctx);
 	void start(ISystemLog* logger, ThreadContext* ctx) throw() ;
 	void dispose(ThreadContext* ctx) throw() ;

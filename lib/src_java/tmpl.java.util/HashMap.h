@@ -32,6 +32,6 @@ template class ::java::util::HashMap<::java::lang::String, ::alinous::remote::db
 template class ::java::util::HashMap<::java::lang::String, ::alinous::remote::db::command::data::SchemaData>;
 template class ::java::util::HashMap<::java::lang::String, ::alinous::remote::monitor::RegionNodeInfo>;
 template class ::java::util::HashMap<::java::lang::String, ::alinous::remote::region::NodeTableClaster>;
-template class ::java::util::HashMap<::java::lang::String, ::alinous::remote::region::NodeCluster>;
+template class ::java::util::HashMap<::java::lang::String, ::alinous::remote::region::NodeRegionSchema>;
 template class ::java::util::HashMap<::java::lang::String, ::alinous::remote::region::client::RemoteTableScheme>;
 template class ::java::util::HashMap<::java::lang::String, ::com::google::re2j::CharGroup>;

@@ -62,7 +62,9 @@ private:
 	Map<String,SchemaData>* schemas;
 public:
 	void join(SchemasStructureInfoData* data, ThreadContext* ctx) throw() ;
+	bool hasSchema(String* name, ThreadContext* ctx) throw() ;
 	void addScheme(SchemaData* value, ThreadContext* ctx) throw() ;
+	Map<String,SchemaData>* getSchemas(ThreadContext* ctx) throw() ;
 	void readData(NetworkBinaryBuffer* buff, ThreadContext* ctx) final;
 	void writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw()  final;
 private:

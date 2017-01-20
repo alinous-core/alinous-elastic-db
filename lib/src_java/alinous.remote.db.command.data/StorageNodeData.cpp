@@ -91,5 +91,9 @@ void StorageNodeData::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) t
 		this->metadata->writeData(buff, ctx);
 	}
 }
+TableMetadata* StorageNodeData::getMetadata(ThreadContext* ctx) throw() 
+{
+	return metadata;
+}
 }}}}}
 

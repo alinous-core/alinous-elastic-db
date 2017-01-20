@@ -201,7 +201,7 @@ void TableMetadata::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 			}
 			catch(AlinousDbException* e)
 			{
-				throw (new(ctx) VariableException(ConstStr::getCNST_STR_1677(), e, ctx));
+				throw (new(ctx) VariableException(ConstStr::getCNST_STR_1680(), e, ctx));
 			}
 		}
 	}
@@ -216,7 +216,7 @@ void TableMetadata::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 			}
 			catch(AlinousDbException* e)
 			{
-				throw (new(ctx) VariableException(ConstStr::getCNST_STR_1677(), e, ctx));
+				throw (new(ctx) VariableException(ConstStr::getCNST_STR_1680(), e, ctx));
 			}
 		}
 		indexes->add(idx, ctx);
@@ -350,7 +350,7 @@ void TableMetadata::addPrimaryKey(String* col, ThreadContext* ctx)
 	TableColumnMetadata* colmeta = this->columns->get(col->toLowerCase(ctx), ctx);
 	if(colmeta == nullptr)
 	{
-		throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1678(), ctx));
+		throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1681(), ctx));
 	}
 	this->primaryKeys->add(colmeta, ctx);
 	colmeta->setPrimaryKey(true, ctx);
@@ -367,6 +367,10 @@ ArrayList<CheckDefinition>* TableMetadata::getChecks(ThreadContext* ctx) throw()
 void TableMetadata::setChecks(ArrayList<CheckDefinition>* checks, ThreadContext* ctx) throw() 
 {
 	GCUtils<ArrayList<CheckDefinition> >::mv(this, &(this->checks), checks, ctx);
+}
+TablePartitionMaxValue* TableMetadata::getMaxPartitionValue(ThreadContext* ctx) throw() 
+{
+	return maxPartitionValue;
 }
 TableMetadata* TableMetadata::loadFromFetcher(FileStorageEntryFetcher* fetcher, ThreadContext* ctx)
 {

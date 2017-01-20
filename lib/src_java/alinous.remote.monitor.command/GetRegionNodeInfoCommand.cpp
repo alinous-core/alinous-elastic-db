@@ -18,7 +18,7 @@ bool GetRegionNodeInfoCommand::__init_static_variables(){
 	delete ctx;
 	return true;
 }
- GetRegionNodeInfoCommand::GetRegionNodeInfoCommand(ThreadContext* ctx) throw()  : IObject(ctx), AbstractMonitorCommand(ctx), regionData(__GC_INS(this, (new(ctx) RegionInfoData(ctx)), RegionInfoData)), nodeClusterRevision(0)
+ GetRegionNodeInfoCommand::GetRegionNodeInfoCommand(ThreadContext* ctx) throw()  : IObject(ctx), AbstractMonitorCommand(ctx), regionData(__GC_INS(this, (new(ctx) RegionInfoData(ctx)), RegionInfoData)), nodeClusterRevision(0), region(nullptr)
 {
 	this->type = AbstractMonitorCommand::TYPE_GET_REGION_INFO;
 }
@@ -38,6 +38,8 @@ void GetRegionNodeInfoCommand::__releaseRegerences(bool prepare, ThreadContext* 
 	ObjectEraser __e_obj1(ctx, __FILEW__, __LINE__, L"GetRegionNodeInfoCommand", L"~GetRegionNodeInfoCommand");
 	__e_obj1.add(this->regionData, this);
 	regionData = nullptr;
+	__e_obj1.add(this->region, this);
+	region = nullptr;
 	if(!prepare){
 		return;
 	}
@@ -45,7 +47,7 @@ void GetRegionNodeInfoCommand::__releaseRegerences(bool prepare, ThreadContext* 
 }
 void GetRegionNodeInfoCommand::executeOnServer(TransactionMonitorServer* monitorServer, BufferedOutputStream* outStream, ThreadContext* ctx)
 {
-	monitorServer->getRegionInfo(this->regionData, ctx);
+	monitorServer->getRegionInfo(this->regionData, this->region, ctx);
 	this->nodeClusterRevision = monitorServer->updateNodeClusterRevision(this->nodeClusterRevision, ctx);
 	writeByteStream(outStream, ctx);
 }
@@ -56,6 +58,11 @@ void GetRegionNodeInfoCommand::readFromStream(InputStream* stream, int remain, T
 	NetworkBinaryBuffer* buff = (new(ctx) NetworkBinaryBuffer(src, ctx));
 	this->nodeClusterRevision = buff->getLong(ctx);
 	this->regionData->readData(buff, ctx);
+	bool isnull = buff->getBoolean(ctx);
+	if(!isnull)
+	{
+		__GC_MV(this, &(this->region), buff->getString(ctx), String);
+	}
 }
 RegionInfoData* GetRegionNodeInfoCommand::getRegionData(ThreadContext* ctx) throw() 
 {
@@ -69,12 +76,26 @@ void GetRegionNodeInfoCommand::setNodeClusterRevision(long long nodeClusterRevis
 {
 	this->nodeClusterRevision = nodeClusterRevision;
 }
+String* GetRegionNodeInfoCommand::getRegion(ThreadContext* ctx) throw() 
+{
+	return region;
+}
+void GetRegionNodeInfoCommand::setRegion(String* region, ThreadContext* ctx) throw() 
+{
+	__GC_MV(this, &(this->region), region, String);
+}
 void GetRegionNodeInfoCommand::writeByteStream(OutputStream* out, ThreadContext* ctx)
 {
 	NetworkBinaryBuffer* buff = (new(ctx) NetworkBinaryBuffer(32, ctx));
 	buff->putInt(AbstractMonitorCommand::TYPE_GET_REGION_INFO, ctx);
 	buff->putLong(this->nodeClusterRevision, ctx);
 	this->regionData->writeData(buff, ctx);
+	bool isnull = (this->region == nullptr);
+	buff->putBoolean(isnull, ctx);
+	if(!isnull)
+	{
+		buff->putString(this->region, ctx);
+	}
 	IArrayObjectPrimitive<char>* b = buff->toBinary(ctx);
 	int pos = buff->getPutSize(ctx);
 	out->write(b, 0, pos, ctx);

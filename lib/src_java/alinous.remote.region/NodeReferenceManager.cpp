@@ -28,8 +28,8 @@ bool NodeReferenceManager::__init_static_variables(){
 void NodeReferenceManager::__releaseRegerences(bool prepare, ThreadContext* ctx) throw() 
 {
 	ObjectEraser __e_obj1(ctx, __FILEW__, __LINE__, L"NodeReferenceManager", L"~NodeReferenceManager");
-	__e_obj1.add(this->tablesDictinary, this);
-	tablesDictinary = nullptr;
+	__e_obj1.add(this->schemaDictinary, this);
+	schemaDictinary = nullptr;
 	__e_obj1.add(this->nodeReferences, this);
 	nodeReferences = nullptr;
 	__e_obj1.add(this->lock, this);
@@ -38,34 +38,32 @@ void NodeReferenceManager::__releaseRegerences(bool prepare, ThreadContext* ctx)
 		return;
 	}
 }
-void NodeReferenceManager::syncSchemeTables(ThreadContext* ctx)
+void NodeReferenceManager::syncSchemeTables(String* regionName, ThreadContext* ctx)
 {
+	if(this->nodeReferences == nullptr)
+	{
+		throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3562(), ctx));
+	}
+	SchemasStructureInfoData* data = this->nodeReferences->getSchemeInfo(regionName, ctx);
 	{
 		SynchronizedBlockObj __synchronized_2(this->lock, ctx);
-		doSyncSchemeTables(ctx);
+		this->schemaDictinary->clear(ctx);
+		doSyncScmema(data, ctx);
 	}
 }
 void NodeReferenceManager::syncNodeReference(RegionInfoData* data, ThreadContext* ctx) throw() 
 {
 	{
 		SynchronizedBlockObj __synchronized_2(this->lock, ctx);
-		Map<String,RegionNodeInfo>* regionsMap = data->getRegionsMap(ctx);
-		doSyncRegionNodes(regionsMap, ctx);
+		doSyncRegionNodes(data->getNodeInfo(ctx), ctx);
 	}
 }
 void NodeReferenceManager::dispose(ThreadContext* ctx) throw() 
 {
-	Iterator<String>* it = this->nodeReferences->keySet(ctx)->iterator(ctx);
-	while(it->hasNext(ctx))
+	if(this->nodeReferences != nullptr)
 	{
-		String* key = it->next(ctx);
-		NodeCluster* cluster = this->nodeReferences->get(key, ctx);
-		cluster->dispose(ctx);
+		this->nodeReferences->dispose(ctx);
 	}
-}
-Map<String,NodeTableClaster>* NodeReferenceManager::getTablesDictinary(ThreadContext* ctx) throw() 
-{
-	return tablesDictinary;
 }
 long long NodeReferenceManager::getRevision(ThreadContext* ctx) throw() 
 {
@@ -74,50 +72,32 @@ long long NodeReferenceManager::getRevision(ThreadContext* ctx) throw()
 		return revision;
 	}
 }
-void NodeReferenceManager::doSyncSchemeTables(ThreadContext* ctx)
+void NodeReferenceManager::doSyncScmema(SchemasStructureInfoData* data, ThreadContext* ctx) throw() 
 {
-	List<SchemasStructureInfoData>* list = (new(ctx) ArrayList<SchemasStructureInfoData>(ctx));
-	Iterator<String>* it = this->nodeReferences->keySet(ctx)->iterator(ctx);
+	Map<String,SchemaData>* schemaMap = data->getSchemas(ctx);
+	Iterator<String>* it = schemaMap->keySet(ctx)->iterator(ctx);
 	while(it->hasNext(ctx))
 	{
-		String* regionName = it->next(ctx);
-		NodeCluster* region = this->nodeReferences->get(regionName, ctx);
-		SchemasStructureInfoData* data = region->getSchemeInfo(regionName, ctx);
-		list->add(data, ctx);
+		String* schemaName = it->next(ctx);
+		SchemaData* scdata = schemaMap->get(schemaName, ctx);
+		NodeRegionSchema* sc = getNodeRegionSchema(schemaName, ctx);
+		sc->updateTableClusters(scdata, this->nodeReferences, ctx);
 	}
 }
-void NodeReferenceManager::doSyncRegionNodes(Map<String,RegionNodeInfo>* regionsMap, ThreadContext* ctx) throw() 
+NodeRegionSchema* NodeReferenceManager::getNodeRegionSchema(String* schemaName, ThreadContext* ctx) throw() 
 {
-	Iterator<String>* it = regionsMap->keySet(ctx)->iterator(ctx);
-	while(it->hasNext(ctx))
+	NodeRegionSchema* sc = this->schemaDictinary->get(schemaName, ctx);
+	if(sc == nullptr)
 	{
-		String* regName = it->next(ctx);
-		RegionNodeInfo* refinfo = regionsMap->get(regName, ctx);
-		NodeCluster* last = this->nodeReferences->get(regName, ctx);
-		if(last == nullptr)
-		{
-			last = (new(ctx) NodeCluster(ctx));
-			this->nodeReferences->put(regName, last, ctx);
-		}
-		last->update(refinfo, ctx);
+		sc = (new(ctx) NodeRegionSchema(schemaName, ctx));
+		this->schemaDictinary->put(schemaName, sc, ctx);
 	}
-	List<String>* delList = (new(ctx) ArrayList<String>(ctx));
-	it = this->nodeReferences->keySet(ctx)->iterator(ctx);
-	while(it->hasNext(ctx))
-	{
-		String* regName = it->next(ctx);
-		RegionNodeInfo* reginfo = regionsMap->get(regName, ctx);
-		if(reginfo == nullptr)
-		{
-			delList->add(regName, ctx);
-		}
-	}
-	int maxLoop = delList->size(ctx);
-	for(int i = 0; i != maxLoop; ++i)
-	{
-		String* regName = delList->get(i, ctx);
-		this->nodeReferences->remove(regName, ctx);
-	}
+	return sc;
+}
+void NodeReferenceManager::doSyncRegionNodes(RegionNodeInfo* nodeInfo, ThreadContext* ctx) throw() 
+{
+	__GC_MV(this, &(this->nodeReferences), (new(ctx) NodeCluster(ctx)), NodeCluster);
+	this->nodeReferences->update(nodeInfo, ctx);
 }
 }}}
 

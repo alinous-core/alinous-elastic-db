@@ -86,6 +86,19 @@ void NodeCluster::update(RegionNodeInfo* refinfo, ThreadContext* ctx) throw()
 		ref->dispose(ctx);
 	}
 }
+NodeReference* NodeCluster::getNode(String* host, int port, bool ipv6, ThreadContext* ctx) throw() 
+{
+	int maxLoop = this->nodes->size(ctx);
+	for(int i = 0; i != maxLoop; ++i)
+	{
+		NodeReference* ref = this->nodes->get(i, ctx);
+		if(ref->getHost(ctx)->equals(host, ctx) && ref->getPort(ctx) == port && ref->isIpv6(ctx) == ipv6)
+		{
+			return ref;
+		}
+	}
+	return nullptr;
+}
 void NodeCluster::addNode(NodeReference* nodeRef, ThreadContext* ctx) throw() 
 {
 	this->nodes->add(nodeRef, ctx);
@@ -102,19 +115,6 @@ void NodeCluster::dispose(ThreadContext* ctx) throw()
 		NodeReference* node = this->nodes->get(i, ctx);
 		node->dispose(ctx);
 	}
-}
-NodeReference* NodeCluster::getNode(String* host, int port, bool ipv6, ThreadContext* ctx) throw() 
-{
-	int maxLoop = this->nodes->size(ctx);
-	for(int i = 0; i != maxLoop; ++i)
-	{
-		NodeReference* ref = this->nodes->get(i, ctx);
-		if(ref->getHost(ctx)->equals(host, ctx) && ref->getPort(ctx) == port && ref->isIpv6(ctx) == ipv6)
-		{
-			return ref;
-		}
-	}
-	return nullptr;
 }
 }}}
 

@@ -8,6 +8,7 @@ template class ::alinous::HashMapInternalElement<::java::lang::String, ::alinous
 template class ::alinous::HashMapInternalElement<::java::lang::String, ::alinous::remote::db::command::data::SchemaData>;
 template class ::alinous::HashMapInternalElement<::java::lang::String, ::alinous::remote::monitor::RegionNodeInfo>;
 template class ::alinous::HashMapInternalElement<::java::lang::String, ::alinous::remote::region::NodeTableClaster>;
+template class ::alinous::HashMapInternalElement<::java::lang::String, ::alinous::remote::region::NodeRegionSchema>;
 template class ::alinous::HashMapInternalElement<::java::lang::String, ::alinous::remote::region::client::RemoteTableScheme>;
 template class ::alinous::HashMapInternalElement<::java::lang::String, ::java::util::TimeZone>;
 template class ::alinous::HashMapInternalElement<::java::lang::String, ::org::alinous::charset::CharsetConverter>;
@@ -34,4 +35,3 @@ template class ::alinous::HashMapInternalElement<::java::lang::String, ::java::l
 template class ::alinous::HashMapInternalElement<::java::lang::String, ::alinous::db::table::TableColumnMetadata>;
 template class ::alinous::HashMapInternalElement<::java::lang::String, ::alinous::db::trx::cache::TrxRecordsCache>;
 template class ::alinous::HashMapInternalElement<::java::lang::String, ::java::util::HashMap<::java::lang::String, ::alinous::db::trx::cache::TrxRecordsCache>>;
-template class ::alinous::HashMapInternalElement<::java::lang::String, ::alinous::remote::region::NodeCluster>;

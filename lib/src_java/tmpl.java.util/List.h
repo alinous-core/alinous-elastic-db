@@ -18,7 +18,6 @@ template class ::java::util::List<::alinous::db::ITableSchema>;
 template class ::java::util::List<::alinous::runtime::variant::VariantValue>;
 template class ::java::util::List<::alinous::remote::monitor::NodeInfo>;
 template class ::java::util::List<::alinous::remote::region::NodeTableReference>;
-template class ::java::util::List<::alinous::remote::db::command::data::SchemasStructureInfoData>;
 template class ::java::util::List<::alinous::remote::region::NodeReference>;
 template class ::java::util::List<::alinous::compile::analyse::VariableDeclareHolder>;
 template class ::java::util::List<::alinous::compile::analyse::ExpressionStreamResult>;

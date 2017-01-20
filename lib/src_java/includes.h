@@ -367,6 +367,7 @@
 #include "alinous.remote.region/NodeCluster.h"
 #include "alinous.remote.region/NodeTableReference.h"
 #include "alinous.remote.region/NodeTableClaster.h"
+#include "alinous.remote.region/NodeRegionSchema.h"
 #include "alinous.remote.region/NodeReferenceManager.h"
 #include "alinous.remote.region.command/AbstractNodeRegionCommand.h"
 #include "alinous.remote.region.command/NodeRegionFinishConnectionCommand.h"
@@ -1737,6 +1738,7 @@ inline static void __cleanUpStatics(alinous::ThreadContext* ctx){
 	alinous::remote::region::NodeReference::__cleanUp(ctx);
 	alinous::remote::region::NodeTableClaster::__cleanUp(ctx);
 	alinous::remote::region::NodeRegionResponceAction::__cleanUp(ctx);
+	alinous::remote::region::NodeRegionSchema::__cleanUp(ctx);
 	alinous::remote::region::NodeRegionResponceActionFactory::__cleanUp(ctx);
 	alinous::remote::region::NodeReferenceManager::__cleanUp(ctx);
 	alinous::remote::region::NodeCluster::__cleanUp(ctx);

@@ -1,19 +1,10 @@
 #ifndef ALINOUS_REMOTE_MONITOR_COMMAND_DATA_REGIONINFODATA_H_
 #define ALINOUS_REMOTE_MONITOR_COMMAND_DATA_REGIONINFODATA_H_
-namespace java {namespace util {
-template <typename  T, typename V> class Map;}}
-
-namespace alinous {namespace remote {namespace monitor {
-class RegionNodeInfo;}}}
-
 namespace alinous {namespace remote {namespace socket {
 class NetworkBinaryBuffer;}}}
 
-namespace java {namespace util {
-template <typename  T> class Iterator;}}
-
-namespace java {namespace util {
-template <typename  T, typename V> class HashMap;}}
+namespace alinous {namespace remote {namespace monitor {
+class RegionNodeInfo;}}}
 
 namespace alinous {namespace remote {namespace socket {
 class ICommandData;}}}
@@ -31,9 +22,6 @@ namespace alinous {namespace remote {namespace monitor {namespace command {names
 using namespace ::alinous;
 using namespace ::java::lang;
 using ::java::util::Iterator;
-using ::java::util::HashMap;
-using ::java::util::Iterator;
-using ::java::util::Map;
 using ::alinous::remote::monitor::RegionNodeInfo;
 using ::alinous::remote::socket::ICommandData;
 using ::alinous::remote::socket::NetworkBinaryBuffer;
@@ -44,7 +32,7 @@ class RegionInfoData final : public ICommandData, public virtual IObject {
 public:
 	RegionInfoData(const RegionInfoData& base) = default;
 public:
-	RegionInfoData(ThreadContext* ctx) throw()  : IObject(ctx), ICommandData(ctx), regionsMap(GCUtils<Map<String,RegionNodeInfo> >::ins(this, (new(ctx) HashMap<String,RegionNodeInfo>(ctx)), ctx, __FILEW__, __LINE__, L""))
+	RegionInfoData(ThreadContext* ctx) throw()  : IObject(ctx), ICommandData(ctx), nodeInfo(nullptr)
 	{
 	}
 	void __construct_impl(ThreadContext* ctx) throw() 
@@ -53,12 +41,12 @@ public:
 	virtual ~RegionInfoData() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 private:
-	Map<String,RegionNodeInfo>* regionsMap;
+	RegionNodeInfo* nodeInfo;
 public:
-	Map<String,RegionNodeInfo>* getRegionsMap(ThreadContext* ctx) throw() ;
-	void putNodeInfo(String* key, RegionNodeInfo* info, ThreadContext* ctx) throw() ;
 	void readData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw()  final;
 	void writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw()  final;
+	RegionNodeInfo* getNodeInfo(ThreadContext* ctx) throw() ;
+	void setNodeInfo(RegionNodeInfo* nodeInfo, ThreadContext* ctx) throw() ;
 public:
 	static bool __init_done;
 	static bool __init_static_variables();

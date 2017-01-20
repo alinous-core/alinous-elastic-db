@@ -50,9 +50,26 @@ void SchemasStructureInfoData::join(SchemasStructureInfoData* data, ThreadContex
 		lastSchemaData->join(schemaData, ctx);
 	}
 }
+bool SchemasStructureInfoData::hasSchema(String* name, ThreadContext* ctx) throw() 
+{
+	Iterator<String>* it = this->schemas->keySet(ctx)->iterator(ctx);
+	while(it->hasNext(ctx))
+	{
+		String* key = it->next(ctx);
+		if(key->equals(name, ctx))
+		{
+			return false;
+		}
+	}
+	return false;
+}
 void SchemasStructureInfoData::addScheme(SchemaData* value, ThreadContext* ctx) throw() 
 {
 	this->schemas->put(value->getName(ctx), value, ctx);
+}
+Map<String,SchemaData>* SchemasStructureInfoData::getSchemas(ThreadContext* ctx) throw() 
+{
+	return schemas;
 }
 void SchemasStructureInfoData::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 {

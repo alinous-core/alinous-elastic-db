@@ -45,11 +45,11 @@ class AlinousDbException;}}
 namespace alinous {namespace compile {
 class IAlinousElement;}}
 
-namespace java {namespace util {
-template <typename  T, typename V> class HashMap;}}
-
 namespace alinous {namespace db {namespace table {
 class TablePartitionMaxValue;}}}
+
+namespace java {namespace util {
+template <typename  T, typename V> class HashMap;}}
 
 namespace alinous {namespace remote {namespace socket {
 class ICommandData;}}}
@@ -135,6 +135,7 @@ public:
 	void addPrimaryKey(TableColumnMetadata* colmeta, ThreadContext* ctx);
 	ArrayList<CheckDefinition>* getChecks(ThreadContext* ctx) throw() ;
 	void setChecks(ArrayList<CheckDefinition>* checks, ThreadContext* ctx) throw() ;
+	TablePartitionMaxValue* getMaxPartitionValue(ThreadContext* ctx) throw() ;
 public:
 	static TableMetadata* loadFromFetcher(FileStorageEntryFetcher* fetcher, ThreadContext* ctx);
 	static TableMetadata* fromNetwork(NetworkBinaryBuffer* buff, ThreadContext* ctx);

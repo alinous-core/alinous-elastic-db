@@ -3,9 +3,6 @@
 namespace alinous {namespace remote {namespace monitor {namespace command {namespace data {
 class RegionInfoData;}}}}}
 
-namespace java {namespace util {
-template <typename  T> class Iterator;}}
-
 namespace alinous {namespace remote {namespace monitor {
 class RegionNodeInfo;}}}
 
@@ -50,7 +47,6 @@ using namespace ::alinous;
 using namespace ::java::lang;
 using ::java::util::Iterator;
 using ::java::util::HashMap;
-using ::java::util::Iterator;
 using ::java::util::List;
 using ::java::util::Map;
 using ::alinous::db::AlinousDbException;
@@ -79,7 +75,7 @@ private:
 	LockObject* lock;
 	long long nodeClusterRevision;
 public:
-	void getRegionInfoData(RegionInfoData* data, ThreadContext* ctx) throw() ;
+	void getRegionInfoData(RegionInfoData* data, String* region, ThreadContext* ctx) throw() ;
 	RegionNodeInfoManager* init(Monitor* monitorConf, ThreadContext* ctx);
 	long long updateNodeClusterRevision(long long nodeClusterRevision, ThreadContext* ctx) throw() ;
 	long long getNodeClusterRevision(ThreadContext* ctx) throw() ;

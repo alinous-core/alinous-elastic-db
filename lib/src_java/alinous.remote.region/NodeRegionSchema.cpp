@@ -1,0 +1,84 @@
+#include "includes.h"
+
+
+namespace alinous {namespace remote {namespace region {
+
+
+
+
+
+bool NodeRegionSchema::__init_done = __init_static_variables();
+bool NodeRegionSchema::__init_static_variables(){
+	Java2CppSystem::getSelf();
+	ThreadContext* ctx = ThreadContext::newThreadContext();
+	{
+		GCNotifier __refobj1(ctx, __FILEW__, __LINE__, L"NodeRegionSchema", L"__init_static_variables");
+	}
+	ctx->localGC();
+	delete ctx;
+	return true;
+}
+ NodeRegionSchema::NodeRegionSchema(String* schemaName, ThreadContext* ctx) throw()  : IObject(ctx), tablesDictinary(GCUtils<Map<String,NodeTableClaster> >::ins(this, (new(ctx) HashMap<String,NodeTableClaster>(ctx)), ctx, __FILEW__, __LINE__, L"")), schemaName(nullptr)
+{
+	__GC_MV(this, &(this->schemaName), schemaName, String);
+}
+void NodeRegionSchema::__construct_impl(String* schemaName, ThreadContext* ctx) throw() 
+{
+	__GC_MV(this, &(this->schemaName), schemaName, String);
+}
+ NodeRegionSchema::~NodeRegionSchema() throw() 
+{
+	ThreadContext *ctx = ThreadContext::getCurentContext();
+	if(ctx != nullptr){ctx->incGcDenial();}
+	__releaseRegerences(false, ctx);
+	if(ctx != nullptr){ctx->decGcDenial();}
+}
+void NodeRegionSchema::__releaseRegerences(bool prepare, ThreadContext* ctx) throw() 
+{
+	ObjectEraser __e_obj1(ctx, __FILEW__, __LINE__, L"NodeRegionSchema", L"~NodeRegionSchema");
+	__e_obj1.add(this->tablesDictinary, this);
+	tablesDictinary = nullptr;
+	__e_obj1.add(this->schemaName, this);
+	schemaName = nullptr;
+	if(!prepare){
+		return;
+	}
+}
+void NodeRegionSchema::updateTableClusters(SchemaData* scdata, NodeCluster* nodeAccessRefs, ThreadContext* ctx) throw() 
+{
+	Map<String,TableClusterData>* clusterMap = scdata->getTablesMap(ctx);
+	Iterator<String>* it = clusterMap->keySet(ctx)->iterator(ctx);
+	while(it->hasNext(ctx))
+	{
+		String* clusterName = it->next(ctx);
+		TableClusterData* clusterData = clusterMap->get(clusterName, ctx);
+		NodeTableClaster* cluster = getNodeClusterOrInit(clusterName, ctx);
+		cluster->updateClusterNodes(clusterData, nodeAccessRefs, ctx);
+	}
+}
+void NodeRegionSchema::dispose(ThreadContext* ctx) throw() 
+{
+	Iterator<String>* it = this->tablesDictinary->keySet(ctx)->iterator(ctx);
+	while(it->hasNext(ctx))
+	{
+		String* key = it->next(ctx);
+		NodeTableClaster* cluster = this->tablesDictinary->get(key, ctx);
+		cluster->dispose(ctx);
+	}
+}
+String* NodeRegionSchema::getSchemaName(ThreadContext* ctx) throw() 
+{
+	return schemaName;
+}
+NodeTableClaster* NodeRegionSchema::getNodeClusterOrInit(String* clusterName, ThreadContext* ctx) throw() 
+{
+	NodeTableClaster* cluster = this->tablesDictinary->get(clusterName, ctx);
+	if(cluster == nullptr)
+	{
+		cluster = (new(ctx) NodeTableClaster(clusterName, ctx));
+		this->tablesDictinary->put(clusterName, cluster, ctx);
+	}
+	return cluster;
+}
+}}}
+
