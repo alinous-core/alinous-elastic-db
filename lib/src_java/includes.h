@@ -358,6 +358,9 @@
 #include "alinous.remote.monitor.client/MonitorConnectionInfo.h"
 #include "alinous.remote.monitor.client/MonitorConnection.h"
 #include "alinous.remote.monitor.client/MonitorClientConnectionFactory.h"
+#include "alinous.remote.region.command.data/ClientTableData.h"
+#include "alinous.remote.region.command.data/ClientSchemaData.h"
+#include "alinous.remote.region.command.data/ClientStructureMetadata.h"
 #include "alinous.system.config.remote/MonitorRef.h"
 #include "alinous.system.config.remote/RegionsServer.h"
 #include "alinous.remote.db.client/RemoteStorageConnectionInfo.h"
@@ -374,6 +377,7 @@
 #include "alinous.remote.region.command/NodeRegionTerminateCommand.h"
 #include "alinous.remote.region.command/NodeRegionVoidCommand.h"
 #include "alinous.remote.region.command/NodeRegionConnectCommand.h"
+#include "alinous.remote.region.command/GetSchemaFromRegionCommand.h"
 #include "alinous.remote.region.command/NodeRegionCommandReader.h"
 #include "alinous.remote.region/NodeRegionResponceAction.h"
 #include "alinous.remote.region/NodeRegionResponceActionFactory.h"
@@ -1751,9 +1755,13 @@ inline static void __cleanUpStatics(alinous::ThreadContext* ctx){
 	alinous::remote::region::command::NodeRegionCommandReader::__cleanUp(ctx);
 	alinous::remote::region::command::AbstractNodeRegionCommand::__cleanUp(ctx);
 	alinous::remote::region::command::NodeRegionVoidCommand::__cleanUp(ctx);
+	alinous::remote::region::command::GetSchemaFromRegionCommand::__cleanUp(ctx);
 	alinous::remote::region::command::NodeRegionFinishConnectionCommand::__cleanUp(ctx);
 	alinous::remote::region::command::NodeRegionConnectCommand::__cleanUp(ctx);
 	alinous::remote::region::command::NodeRegionTerminateCommand::__cleanUp(ctx);
+	alinous::remote::region::command::data::ClientStructureMetadata::__cleanUp(ctx);
+	alinous::remote::region::command::data::ClientTableData::__cleanUp(ctx);
+	alinous::remote::region::command::data::ClientSchemaData::__cleanUp(ctx);
 	alinous::remote::socket::NetworkBinaryBuffer::__cleanUp(ctx);
 	alinous::remote::socket::SocketServer::__cleanUp(ctx);
 	alinous::remote::socket::SocketConnectionPool::__cleanUp(ctx);

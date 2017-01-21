@@ -61,6 +61,10 @@ void NodeRegionServer::initNodes(RegionsServer* srvconf, ThreadContext* ctx)
 	syncNodes(ctx);
 	syncScheme(ctx);
 }
+long long NodeRegionServer::getClientData(ClientStructureMetadata* data, ThreadContext* ctx)
+{
+	return this->refs->getClientData(data, ctx);
+}
 void NodeRegionServer::syncScheme(ThreadContext* ctx)
 {
 	this->refs->syncSchemeTables(this->region, ctx);

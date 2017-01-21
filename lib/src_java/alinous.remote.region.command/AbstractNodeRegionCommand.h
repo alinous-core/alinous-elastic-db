@@ -21,6 +21,12 @@ class BufferedOutputStream;}}
 namespace java {namespace io {
 class IOException;}}
 
+namespace alinous {namespace remote {namespace region {
+class NodeRegionResponceAction;}}}
+
+namespace alinous {namespace runtime {namespace dom {
+class VariableException;}}}
+
 namespace alinous {namespace system {
 class AlinousException;}}
 
@@ -42,7 +48,9 @@ using ::java::io::IOException;
 using ::java::io::InputStream;
 using ::java::io::OutputStream;
 using ::alinous::net::AlinousSocket;
+using ::alinous::remote::region::NodeRegionResponceAction;
 using ::alinous::remote::region::NodeRegionServer;
+using ::alinous::runtime::dom::VariableException;
 using ::alinous::system::AlinousException;
 
 
@@ -66,6 +74,7 @@ public:
 	constexpr static const int TYPE_FINISH{1};
 	constexpr static const int TYPE_CONNECT{2};
 	constexpr static const int TYPE_TERMINATE{404};
+	constexpr static const int TYPE_GET_SCHEMA_FROM_REGION{1001};
 public:
 	int getType(ThreadContext* ctx) throw() ;
 	AbstractNodeRegionCommand* sendCommand(AlinousSocket* socket, ThreadContext* ctx);

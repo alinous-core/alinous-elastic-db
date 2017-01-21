@@ -1,7 +1,19 @@
 #ifndef ALINOUS_REMOTE_REGION_NODEREFERENCEMANAGER_H_
 #define ALINOUS_REMOTE_REGION_NODEREFERENCEMANAGER_H_
+namespace alinous {namespace remote {namespace region {namespace command {namespace data {
+class ClientStructureMetadata;}}}}}
+
 namespace alinous {namespace system {
 class AlinousException;}}
+
+namespace java {namespace util {
+template <typename  T> class Iterator;}}
+
+namespace alinous {namespace remote {namespace region {
+class NodeRegionSchema;}}}
+
+namespace alinous {namespace remote {namespace region {namespace command {namespace data {
+class ClientSchemaData;}}}}}
 
 namespace alinous {namespace remote {namespace db {namespace command {namespace data {
 class SchemasStructureInfoData;}}}}}
@@ -11,12 +23,6 @@ template <typename  T, typename V> class Map;}}
 
 namespace alinous {namespace remote {namespace db {namespace command {namespace data {
 class SchemaData;}}}}}
-
-namespace java {namespace util {
-template <typename  T> class Iterator;}}
-
-namespace alinous {namespace remote {namespace region {
-class NodeRegionSchema;}}}
 
 namespace alinous {namespace remote {namespace monitor {namespace command {namespace data {
 class RegionInfoData;}}}}}
@@ -54,6 +60,8 @@ using ::alinous::remote::db::command::data::SchemaData;
 using ::alinous::remote::db::command::data::SchemasStructureInfoData;
 using ::alinous::remote::monitor::RegionNodeInfo;
 using ::alinous::remote::monitor::command::data::RegionInfoData;
+using ::alinous::remote::region::command::data::ClientSchemaData;
+using ::alinous::remote::region::command::data::ClientStructureMetadata;
 using ::alinous::system::AlinousException;
 
 
@@ -76,6 +84,7 @@ private:
 	NodeCluster* nodeReferences;
 	LockObject* lock;
 public:
+	long long getClientData(ClientStructureMetadata* data, ThreadContext* ctx);
 	void syncSchemeTables(String* regionName, ThreadContext* ctx);
 	void syncNodeReference(RegionInfoData* data, ThreadContext* ctx) throw() ;
 	void dispose(ThreadContext* ctx) throw() ;

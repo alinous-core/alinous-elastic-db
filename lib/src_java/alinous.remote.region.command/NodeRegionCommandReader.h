@@ -18,6 +18,9 @@ class NodeRegionVoidCommand;}}}}
 namespace alinous {namespace remote {namespace region {namespace command {
 class NodeRegionConnectCommand;}}}}
 
+namespace alinous {namespace remote {namespace region {namespace command {
+class GetSchemaFromRegionCommand;}}}}
+
 namespace alinous {namespace system {
 class AlinousException;}}
 

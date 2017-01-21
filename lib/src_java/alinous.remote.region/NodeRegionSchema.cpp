@@ -44,6 +44,19 @@ void NodeRegionSchema::__releaseRegerences(bool prepare, ThreadContext* ctx) thr
 		return;
 	}
 }
+ClientSchemaData* NodeRegionSchema::toClientData(ThreadContext* ctx) throw() 
+{
+	ClientSchemaData* data = (new(ctx) ClientSchemaData(ctx));
+	data->setName(this->schemaName, ctx);
+	Iterator<String>* it = this->tablesDictinary->keySet(ctx)->iterator(ctx);
+	while(it->hasNext(ctx))
+	{
+		String* tableName = it->next(ctx);
+		NodeTableClaster* tableCluster = this->tablesDictinary->get(tableName, ctx);
+		TableMetadata* metadata = tableCluster->getMetadata(ctx);
+	}
+	return data;
+}
 void NodeRegionSchema::updateTableClusters(SchemaData* scdata, NodeCluster* nodeAccessRefs, ThreadContext* ctx) throw() 
 {
 	Map<String,TableClusterData>* clusterMap = scdata->getTablesMap(ctx);

@@ -18,7 +18,7 @@ bool RemoteRegionRef::__init_static_variables(){
 	delete ctx;
 	return true;
 }
- RemoteRegionRef::RemoteRegionRef(RegionRef* ref, ICommidIdPublisher* commitIdPublisher, ThreadContext* ctx) throw()  : IObject(ctx), ITableRegion(ctx), pool(nullptr), url(nullptr), name(nullptr), info(nullptr), schemes(GCUtils<Map<String,RemoteTableScheme> >::ins(this, (new(ctx) HashMap<String,RemoteTableScheme>(ctx)), ctx, __FILEW__, __LINE__, L"")), schemeVersion(0)
+ RemoteRegionRef::RemoteRegionRef(RegionRef* ref, ICommidIdPublisher* commitIdPublisher, ThreadContext* ctx) throw()  : IObject(ctx), ITableRegion(ctx), regionAccessPool(nullptr), url(nullptr), name(nullptr), info(nullptr), schemes(GCUtils<Map<String,RemoteTableScheme> >::ins(this, (new(ctx) HashMap<String,RemoteTableScheme>(ctx)), ctx, __FILEW__, __LINE__, L"")), schemeVersion(0)
 {
 	__GC_MV(this, &(this->url), ref->getUrl(ctx), String);
 	__GC_MV(this, &(this->name), ref->getName(ctx), String);
@@ -38,8 +38,8 @@ void RemoteRegionRef::__construct_impl(RegionRef* ref, ICommidIdPublisher* commi
 void RemoteRegionRef::__releaseRegerences(bool prepare, ThreadContext* ctx) throw() 
 {
 	ObjectEraser __e_obj1(ctx, __FILEW__, __LINE__, L"RemoteRegionRef", L"~RemoteRegionRef");
-	__e_obj1.add(this->pool, this);
-	pool = nullptr;
+	__e_obj1.add(this->regionAccessPool, this);
+	regionAccessPool = nullptr;
 	__e_obj1.add(this->url, this);
 	url = nullptr;
 	__e_obj1.add(this->name, this);
@@ -54,17 +54,42 @@ void RemoteRegionRef::__releaseRegerences(bool prepare, ThreadContext* ctx) thro
 }
 void RemoteRegionRef::init(ThreadContext* ctx)
 {
-	initRegionServer(ctx);
+	initRegionServerAcess(ctx);
 }
 void RemoteRegionRef::dispose(ThreadContext* ctx) throw() 
 {
-	if(this->pool != nullptr)
+	if(this->regionAccessPool != nullptr)
 	{
-		this->pool->dispose(ctx);
+		this->regionAccessPool->dispose(ctx);
 	}
 }
 void RemoteRegionRef::syncSchemes(ThreadContext* ctx)
 {
+	GetSchemaFromRegionCommand* cmd = (new(ctx) GetSchemaFromRegionCommand(ctx));
+	cmd->setSchemeVersion(this->schemeVersion, ctx);
+	ISocketConnection* con = nullptr;
+	{
+		std::function<void(void)> finallyLm2= [&, this]()
+		{
+			this->regionAccessPool->returnConnection(con, ctx);
+		};
+		Releaser finalyCaller2(finallyLm2);
+		try
+		{
+			con = this->regionAccessPool->getConnection(ctx);
+			AlinousSocket* socket = con->getSocket(ctx);
+			AbstractNodeRegionCommand* retcmd = cmd->sendCommand(socket, ctx);
+			if(retcmd->getType(ctx) != AbstractNodeRegionCommand::TYPE_GET_SCHEMA_FROM_REGION)
+			{
+				throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3563(), ctx));
+			}
+			cmd = static_cast<GetSchemaFromRegionCommand*>(retcmd);
+		}
+		catch(AlinousException* e)
+		{
+			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3564(), e, ctx));
+		}
+	}
 }
 int RemoteRegionRef::getRegionType(ThreadContext* ctx) throw() 
 {
@@ -92,7 +117,7 @@ void RemoteRegionRef::setSchemeVersion(long long schemeVersion, ThreadContext* c
 {
 	this->schemeVersion = schemeVersion;
 }
-void RemoteRegionRef::initRegionServer(ThreadContext* ctx)
+void RemoteRegionRef::initRegionServerAcess(ThreadContext* ctx)
 {
 	IArrayObject<String>* segs = this->url->split(ConstStr::getCNST_STR_381(), ctx);
 	if(segs->length != 2)
@@ -113,7 +138,7 @@ void RemoteRegionRef::initRegionServer(ThreadContext* ctx)
 	}
 	__GC_MV(this, &(this->info), (new(ctx) RegionConnectionInfo(host, port, ctx)), RegionConnectionInfo);
 	RegionClientConnectionFactory* factory = (new(ctx) RegionClientConnectionFactory(info, ctx));
-	__GC_MV(this, &(this->pool), (new(ctx) SocketConnectionPool(factory, ctx)), SocketConnectionPool);
+	__GC_MV(this, &(this->regionAccessPool), (new(ctx) SocketConnectionPool(factory, ctx)), SocketConnectionPool);
 }
 }}}}
 

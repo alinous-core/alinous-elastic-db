@@ -49,8 +49,11 @@ AbstractNodeRegionCommand* NodeRegionCommandReader::readFromStream(InputStream* 
 	case AbstractNodeRegionCommand::TYPE_CONNECT:
 		cmd = (new(ctx) NodeRegionConnectCommand(ctx));
 		break ;
+	case AbstractNodeRegionCommand::TYPE_GET_SCHEMA_FROM_REGION:
+		cmd = (new(ctx) GetSchemaFromRegionCommand(ctx));
+		break ;
 	default:
-		throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3563(), ctx));
+		throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3565(), ctx));
 		break;
 	}
 	cmd->readFromStream(stream, size, ctx);

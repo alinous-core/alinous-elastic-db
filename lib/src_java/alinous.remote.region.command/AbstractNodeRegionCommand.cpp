@@ -11,6 +11,7 @@ constexpr const int AbstractNodeRegionCommand::TYPE_VOID;
 constexpr const int AbstractNodeRegionCommand::TYPE_FINISH;
 constexpr const int AbstractNodeRegionCommand::TYPE_CONNECT;
 constexpr const int AbstractNodeRegionCommand::TYPE_TERMINATE;
+constexpr const int AbstractNodeRegionCommand::TYPE_GET_SCHEMA_FROM_REGION;
 bool AbstractNodeRegionCommand::__init_done = __init_static_variables();
 bool AbstractNodeRegionCommand::__init_static_variables(){
 	Java2CppSystem::getSelf();

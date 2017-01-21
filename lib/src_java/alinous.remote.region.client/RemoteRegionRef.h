@@ -21,6 +21,21 @@ class RegionClientConnectionFactory;}}}}
 namespace alinous {namespace remote {namespace socket {
 class SocketConnectionPool;}}}
 
+namespace alinous {namespace remote {namespace region {namespace command {
+class GetSchemaFromRegionCommand;}}}}
+
+namespace alinous {namespace remote {namespace socket {
+class ISocketConnection;}}}
+
+namespace alinous {namespace net {
+class AlinousSocket;}}
+
+namespace alinous {namespace remote {namespace region {namespace command {
+class AbstractNodeRegionCommand;}}}}
+
+namespace alinous {namespace system {
+class AlinousException;}}
+
 namespace alinous {namespace db {
 class ITableSchema;}}
 
@@ -57,9 +72,6 @@ class BTreeException;}}
 namespace alinous {namespace db {namespace table {
 class DatabaseException;}}}
 
-namespace alinous {namespace system {
-class AlinousException;}}
-
 namespace java {namespace lang {
 class IObject;
 }}
@@ -84,6 +96,10 @@ using ::alinous::db::ITableRegion;
 using ::alinous::db::ITableSchema;
 using ::alinous::db::table::DatabaseException;
 using ::alinous::db::table::TableMetadata;
+using ::alinous::net::AlinousSocket;
+using ::alinous::remote::region::command::AbstractNodeRegionCommand;
+using ::alinous::remote::region::command::GetSchemaFromRegionCommand;
+using ::alinous::remote::socket::ISocketConnection;
 using ::alinous::remote::socket::SocketConnectionPool;
 using ::alinous::runtime::parallel::ThreadPool;
 using ::alinous::system::AlinousCore;
@@ -101,7 +117,7 @@ public:
 	virtual ~RemoteRegionRef() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 private:
-	SocketConnectionPool* pool;
+	SocketConnectionPool* regionAccessPool;
 	String* url;
 	String* name;
 	RegionConnectionInfo* info;
@@ -119,7 +135,7 @@ public:
 	long long getSchemeVersion(ThreadContext* ctx) throw() ;
 	void setSchemeVersion(long long schemeVersion, ThreadContext* ctx) throw() ;
 private:
-	void initRegionServer(ThreadContext* ctx);
+	void initRegionServerAcess(ThreadContext* ctx);
 public:
 	static bool __init_done;
 	static bool __init_static_variables();

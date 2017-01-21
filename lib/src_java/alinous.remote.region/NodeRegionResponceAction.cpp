@@ -96,7 +96,9 @@ void NodeRegionResponceAction::handleCommand(BufferedInputStream* stream, Buffer
 			cmd->executeOnServer(this->nodeRegionServer, outStream, ctx);
 			break ;
 		case AbstractNodeRegionCommand::TYPE_VOID:
+		case AbstractNodeRegionCommand::TYPE_GET_SCHEMA_FROM_REGION:
 		default:
+			cmd->executeOnServer(this->nodeRegionServer, outStream, ctx);
 			break ;
 		}
 	}

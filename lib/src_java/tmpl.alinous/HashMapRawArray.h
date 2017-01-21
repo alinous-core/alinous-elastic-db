@@ -10,6 +10,8 @@ template class ::alinous::HashMapRawArray<::java::lang::String, ::alinous::remot
 template class ::alinous::HashMapRawArray<::java::lang::String, ::alinous::remote::region::NodeTableClaster>;
 template class ::alinous::HashMapRawArray<::java::lang::String, ::alinous::remote::region::NodeRegionSchema>;
 template class ::alinous::HashMapRawArray<::java::lang::String, ::alinous::remote::region::client::RemoteTableScheme>;
+template class ::alinous::HashMapRawArray<::java::lang::String, ::alinous::remote::region::command::data::ClientSchemaData>;
+template class ::alinous::HashMapRawArray<::java::lang::String, ::alinous::remote::region::command::data::ClientTableData>;
 template class ::alinous::HashMapRawArray<::java::lang::String, ::java::util::TimeZone>;
 template class ::alinous::HashMapRawArray<::java::lang::String, ::org::alinous::charset::CharsetConverter>;
 template class ::alinous::HashMapRawArray<::java::lang::String, ::alinous::compile::analyse::DomVariableDeclareSource>;

@@ -38,6 +38,25 @@ void NodeReferenceManager::__releaseRegerences(bool prepare, ThreadContext* ctx)
 		return;
 	}
 }
+long long NodeReferenceManager::getClientData(ClientStructureMetadata* data, ThreadContext* ctx)
+{
+	if(this->nodeReferences == nullptr)
+	{
+		throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3562(), ctx));
+	}
+	{
+		SynchronizedBlockObj __synchronized_2(this->lock, ctx);
+		Iterator<String>* it = this->schemaDictinary->keySet(ctx)->iterator(ctx);
+		while(it->hasNext(ctx))
+		{
+			String* schemeName = it->next(ctx);
+			NodeRegionSchema* scheme = this->schemaDictinary->get(schemeName, ctx);
+			ClientSchemaData* schemadata = scheme->toClientData(ctx);
+			data->addSchema(schemeName, schemadata, ctx);
+		}
+	}
+	return revision;
+}
 void NodeReferenceManager::syncSchemeTables(String* regionName, ThreadContext* ctx)
 {
 	if(this->nodeReferences == nullptr)

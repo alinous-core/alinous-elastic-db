@@ -1747,6 +1747,9 @@ public:
 	constexpr static StaticUnicodeString __CNST_STR_632{L"America/Mazatlan",16};
 public:
 	static UnicodeStringWrapper* getCNST_STR_632() throw();
+	constexpr static StaticUnicodeString __CNST_STR_3563{L"Failed in getting scheme info from region server",48};
+public:
+	static UnicodeStringWrapper* getCNST_STR_3563() throw();
 	constexpr static StaticUnicodeString __CNST_STR_3476{L"application/vnd.intercon.formnet",32};
 public:
 	static UnicodeStringWrapper* getCNST_STR_3476() throw();
@@ -3184,9 +3187,9 @@ public:
 	constexpr static StaticUnicodeString __CNST_STR_288{L"No",2};
 public:
 	static UnicodeStringWrapper* getCNST_STR_288() throw();
-	constexpr static StaticUnicodeString __CNST_STR_3564{L"Socket factory is not activated.",32};
+	constexpr static StaticUnicodeString __CNST_STR_3566{L"Socket factory is not activated.",32};
 public:
-	static UnicodeStringWrapper* getCNST_STR_3564() throw();
+	static UnicodeStringWrapper* getCNST_STR_3566() throw();
 	constexpr static StaticUnicodeString __CNST_STR_1070{L"OR",2};
 public:
 	static UnicodeStringWrapper* getCNST_STR_1070() throw();
@@ -4999,9 +5002,9 @@ public:
 	constexpr static StaticUnicodeString __CNST_STR_826{L"Asia/Thimphu",12};
 public:
 	static UnicodeStringWrapper* getCNST_STR_826() throw();
-	constexpr static StaticUnicodeString __CNST_STR_3563{L"Wrong Command Type of Node Region Command.",42};
+	constexpr static StaticUnicodeString __CNST_STR_3565{L"Wrong Command Type of Node Region Command.",42};
 public:
-	static UnicodeStringWrapper* getCNST_STR_3563() throw();
+	static UnicodeStringWrapper* getCNST_STR_3565() throw();
 	constexpr static StaticUnicodeString __CNST_STR_53{L"Zero length BigInteger",22};
 public:
 	static UnicodeStringWrapper* getCNST_STR_53() throw();
@@ -10120,6 +10123,9 @@ public:
 	constexpr static StaticUnicodeString __CNST_STR_3233{L"ttf",3};
 public:
 	static UnicodeStringWrapper* getCNST_STR_3233() throw();
+	constexpr static StaticUnicodeString __CNST_STR_3564{L"Failed in getting scheme info",29};
+public:
+	static UnicodeStringWrapper* getCNST_STR_3564() throw();
 	constexpr static StaticUnicodeString __CNST_STR_3420{L"application/xcap-diff+xml",25};
 public:
 	static UnicodeStringWrapper* getCNST_STR_3420() throw();

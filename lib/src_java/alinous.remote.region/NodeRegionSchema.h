@@ -1,5 +1,17 @@
 #ifndef ALINOUS_REMOTE_REGION_NODEREGIONSCHEMA_H_
 #define ALINOUS_REMOTE_REGION_NODEREGIONSCHEMA_H_
+namespace alinous {namespace remote {namespace region {namespace command {namespace data {
+class ClientSchemaData;}}}}}
+
+namespace java {namespace util {
+template <typename  T> class Iterator;}}
+
+namespace alinous {namespace remote {namespace region {
+class NodeTableClaster;}}}
+
+namespace alinous {namespace db {namespace table {
+class TableMetadata;}}}
+
 namespace alinous {namespace remote {namespace db {namespace command {namespace data {
 class SchemaData;}}}}}
 
@@ -11,12 +23,6 @@ template <typename  T, typename V> class Map;}}
 
 namespace alinous {namespace remote {namespace db {namespace command {namespace data {
 class TableClusterData;}}}}}
-
-namespace java {namespace util {
-template <typename  T> class Iterator;}}
-
-namespace alinous {namespace remote {namespace region {
-class NodeTableClaster;}}}
 
 namespace java {namespace util {
 template <typename  T, typename V> class HashMap;}}
@@ -37,8 +43,10 @@ using ::java::util::Iterator;
 using ::java::util::HashMap;
 using ::java::util::Iterator;
 using ::java::util::Map;
+using ::alinous::db::table::TableMetadata;
 using ::alinous::remote::db::command::data::SchemaData;
 using ::alinous::remote::db::command::data::TableClusterData;
+using ::alinous::remote::region::command::data::ClientSchemaData;
 
 
 
@@ -54,6 +62,7 @@ private:
 	Map<String,NodeTableClaster>* tablesDictinary;
 	String* schemaName;
 public:
+	ClientSchemaData* toClientData(ThreadContext* ctx) throw() ;
 	void updateTableClusters(SchemaData* scdata, NodeCluster* nodeAccessRefs, ThreadContext* ctx) throw() ;
 	void dispose(ThreadContext* ctx) throw() ;
 	String* getSchemaName(ThreadContext* ctx) throw() ;

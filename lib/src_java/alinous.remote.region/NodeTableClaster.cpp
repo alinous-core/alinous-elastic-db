@@ -55,13 +55,14 @@ void NodeTableClaster::updateClusterNodes(TableClusterData* clusterData, NodeClu
 		StorageNodeData* nodeData = list->get(i, ctx);
 		NodeReference* ref = nodeAccessRef->getNode(nodeData->getHost(ctx), nodeData->getPort(ctx), nodeData->isIpv6(ctx), ctx);
 		TableMetadata* metadata = nodeData->getMetadata(ctx);
-		if(this->metadata == nullptr)
-		{
-			__GC_MV(this, &(this->metadata), metadata, TableMetadata);
-		}
 		TablePartitionMaxValue* maxPartitionValue = metadata->getMaxPartitionValue(ctx);
 		NodeTableReference* nodeRef = (new(ctx) NodeTableReference(nodeData->getHost(ctx), nodeData->getPort(ctx), nodeData->isIpv6(ctx), ref, maxPartitionValue, ctx));
 		this->nodes->add(nodeRef, ctx);
+		if(this->metadata == nullptr)
+		{
+			__GC_MV(this, &(this->metadata), metadata, TableMetadata);
+			this->metadata->setMaxPartitionValue(nullptr, ctx);
+		}
 	}
 }
 void NodeTableClaster::addNode(NodeTableReference* nodeRef, ThreadContext* ctx) throw() 
@@ -84,6 +85,10 @@ void NodeTableClaster::dispose(ThreadContext* ctx) throw()
 String* NodeTableClaster::getClusterName(ThreadContext* ctx) throw() 
 {
 	return clusterName;
+}
+TableMetadata* NodeTableClaster::getMetadata(ThreadContext* ctx) throw() 
+{
+	return metadata;
 }
 }}}
 

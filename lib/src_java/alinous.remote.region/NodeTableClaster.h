@@ -64,6 +64,7 @@ public:
 	List<NodeTableReference>* getNodes(ThreadContext* ctx) throw() ;
 	void dispose(ThreadContext* ctx) throw() ;
 	String* getClusterName(ThreadContext* ctx) throw() ;
+	TableMetadata* getMetadata(ThreadContext* ctx) throw() ;
 public:
 	static bool __init_done;
 	static bool __init_static_variables();

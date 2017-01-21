@@ -57,6 +57,7 @@ void RegionConnection::connect(ThreadContext* ctx)
 	{
 		throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3548(), ctx));
 	}
+	cmd = static_cast<NodeRegionConnectCommand*>(retcmd);
 	if(!cmd->isConnected(ctx))
 	{
 		throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3548(), ctx));

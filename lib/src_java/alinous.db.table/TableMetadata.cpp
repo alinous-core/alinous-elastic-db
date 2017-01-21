@@ -372,6 +372,10 @@ TablePartitionMaxValue* TableMetadata::getMaxPartitionValue(ThreadContext* ctx) 
 {
 	return maxPartitionValue;
 }
+void TableMetadata::setMaxPartitionValue(TablePartitionMaxValue* maxPartitionValue, ThreadContext* ctx) throw() 
+{
+	__GC_MV(this, &(this->maxPartitionValue), maxPartitionValue, TablePartitionMaxValue);
+}
 TableMetadata* TableMetadata::loadFromFetcher(FileStorageEntryFetcher* fetcher, ThreadContext* ctx)
 {
 	String* sc = fetcher->fetchString(ctx);

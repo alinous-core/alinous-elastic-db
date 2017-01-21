@@ -106,6 +106,10 @@ void AlinousCore::initDatabase(ThreadContext* ctx)
 }
 void AlinousCore::dispose(ThreadContext* ctx) throw() 
 {
+	if(this->databaseManager != nullptr)
+	{
+		this->databaseManager->dispose(ctx);
+	}
 	if(!this->regionServers->isEmpty(ctx))
 	{
 		Iterator<NodeRegionServer>* it = this->regionServers->iterator(ctx);
@@ -138,10 +142,6 @@ void AlinousCore::dispose(ThreadContext* ctx) throw()
 	if(this->config != nullptr)
 	{
 		__GC_MV(this, &(this->config), nullptr, AlinousConfig);
-	}
-	if(this->databaseManager != nullptr)
-	{
-		this->databaseManager->dispose(ctx);
 	}
 	if(this->debugger != nullptr)
 	{

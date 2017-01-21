@@ -9,6 +9,9 @@ class RegionsServer;}}}}
 namespace alinous {namespace system {namespace config {namespace remote {
 class MonitorRef;}}}}
 
+namespace alinous {namespace remote {namespace region {namespace command {namespace data {
+class ClientStructureMetadata;}}}}}
+
 namespace alinous {namespace remote {namespace monitor {namespace command {
 class GetRegionNodeInfoCommand;}}}}
 
@@ -72,6 +75,7 @@ using ::alinous::remote::monitor::client::MonitorConnectionInfo;
 using ::alinous::remote::monitor::command::AbstractMonitorCommand;
 using ::alinous::remote::monitor::command::GetRegionNodeInfoCommand;
 using ::alinous::remote::monitor::command::data::RegionInfoData;
+using ::alinous::remote::region::command::data::ClientStructureMetadata;
 using ::alinous::remote::socket::ISocketConnection;
 using ::alinous::remote::socket::SocketConnectionPool;
 using ::alinous::remote::socket::SocketServer;
@@ -102,6 +106,7 @@ private:
 	static String* THREAD_NAME;
 public:
 	void initNodes(RegionsServer* srvconf, ThreadContext* ctx);
+	long long getClientData(ClientStructureMetadata* data, ThreadContext* ctx);
 	void syncScheme(ThreadContext* ctx);
 	void syncNodes(ThreadContext* ctx);
 	void start(ISystemLog* logger, ThreadContext* ctx) throw() ;

@@ -9,6 +9,8 @@ template class ::java::util::Map<::java::lang::String, ::alinous::remote::monito
 template class ::java::util::Map<::java::lang::String, ::alinous::remote::region::NodeTableClaster>;
 template class ::java::util::Map<::java::lang::String, ::alinous::remote::region::NodeRegionSchema>;
 template class ::java::util::Map<::java::lang::String, ::alinous::remote::region::client::RemoteTableScheme>;
+template class ::java::util::Map<::java::lang::String, ::alinous::remote::region::command::data::ClientSchemaData>;
+template class ::java::util::Map<::java::lang::String, ::alinous::remote::region::command::data::ClientTableData>;
 template class ::java::util::Map<::java::lang::String, ::com::google::re2j::CharGroup>;
 template class ::java::util::Map<::java::lang::String, ::java::util::TimeZone>;
 template class ::java::util::Map<::java::lang::String, ::org::alinous::charset::CharsetConverter>;
