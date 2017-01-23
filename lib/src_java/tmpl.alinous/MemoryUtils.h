@@ -9,8 +9,9 @@ template class alinous::MemoryUtils<::alinous::HashMapInternalElement<::java::la
 template class alinous::MemoryUtils<::alinous::HashMapInternalElement<::java::lang::String, ::alinous::remote::monitor::RegionNodeInfo>>;
 template class alinous::MemoryUtils<::alinous::HashMapInternalElement<::java::lang::String, ::alinous::remote::region::NodeTableClaster>>;
 template class alinous::MemoryUtils<::alinous::HashMapInternalElement<::java::lang::String, ::alinous::remote::region::NodeRegionSchema>>;
-template class alinous::MemoryUtils<::alinous::HashMapInternalElement<::java::lang::String, ::alinous::remote::region::client::RemoteTableScheme>>;
+template class alinous::MemoryUtils<::alinous::HashMapInternalElement<::java::lang::String, ::alinous::remote::region::client::DatabaseTableClient>>;
 template class alinous::MemoryUtils<::alinous::HashMapInternalElement<::java::lang::String, ::alinous::remote::region::command::data::ClientSchemaData>>;
+template class alinous::MemoryUtils<::alinous::HashMapInternalElement<::java::lang::String, ::alinous::remote::region::client::RemoteTableScheme>>;
 template class alinous::MemoryUtils<::alinous::HashMapInternalElement<::java::lang::String, ::alinous::remote::region::command::data::ClientTableData>>;
 template class alinous::MemoryUtils<::alinous::HashMapInternalElement<::java::lang::String, ::java::util::TimeZone>>;
 template class alinous::MemoryUtils<::alinous::HashMapInternalElement<::java::lang::String, ::org::alinous::charset::CharsetConverter>>;
@@ -48,8 +49,9 @@ template class alinous::MemoryUtils<::alinous::HashMapRawArray<::java::lang::Str
 template class alinous::MemoryUtils<::alinous::HashMapRawArray<::java::lang::String, ::alinous::remote::monitor::RegionNodeInfo>>;
 template class alinous::MemoryUtils<::alinous::HashMapRawArray<::java::lang::String, ::alinous::remote::region::NodeTableClaster>>;
 template class alinous::MemoryUtils<::alinous::HashMapRawArray<::java::lang::String, ::alinous::remote::region::NodeRegionSchema>>;
-template class alinous::MemoryUtils<::alinous::HashMapRawArray<::java::lang::String, ::alinous::remote::region::client::RemoteTableScheme>>;
+template class alinous::MemoryUtils<::alinous::HashMapRawArray<::java::lang::String, ::alinous::remote::region::client::DatabaseTableClient>>;
 template class alinous::MemoryUtils<::alinous::HashMapRawArray<::java::lang::String, ::alinous::remote::region::command::data::ClientSchemaData>>;
+template class alinous::MemoryUtils<::alinous::HashMapRawArray<::java::lang::String, ::alinous::remote::region::client::RemoteTableScheme>>;
 template class alinous::MemoryUtils<::alinous::HashMapRawArray<::java::lang::String, ::alinous::remote::region::command::data::ClientTableData>>;
 template class alinous::MemoryUtils<::alinous::HashMapRawArray<::java::lang::String, ::java::util::TimeZone>>;
 template class alinous::MemoryUtils<::alinous::HashMapRawArray<::java::lang::String, ::org::alinous::charset::CharsetConverter>>;
@@ -790,13 +792,6 @@ template class alinous::MemoryUtils<alinous::ArrayObject<alinous::IArrayObject<:
 template class alinous::MemoryUtils<alinous::ArrayObject<::alinous::db::table::lockmonitor::RowLock>>;
 template class alinous::MemoryUtils<alinous::IArrayObject<alinous::ArrayObject<::alinous::db::table::lockmonitor::RowLock>>>;
 template class alinous::MemoryUtils<alinous::ArrayObject<alinous::ArrayObject<::alinous::db::table::lockmonitor::RowLock>>>;
-template class alinous::MemoryUtils<::alinous::db::table::lockmonitor::ThreadLocker>;
-template class alinous::MemoryUtils<alinous::IArrayObject<::alinous::db::table::lockmonitor::ThreadLocker>>;
-template class alinous::MemoryUtils<alinous::IArrayObject<alinous::IArrayObject<::alinous::db::table::lockmonitor::ThreadLocker>>>;
-template class alinous::MemoryUtils<alinous::ArrayObject<alinous::IArrayObject<::alinous::db::table::lockmonitor::ThreadLocker>>>;
-template class alinous::MemoryUtils<alinous::ArrayObject<::alinous::db::table::lockmonitor::ThreadLocker>>;
-template class alinous::MemoryUtils<alinous::IArrayObject<alinous::ArrayObject<::alinous::db::table::lockmonitor::ThreadLocker>>>;
-template class alinous::MemoryUtils<alinous::ArrayObject<alinous::ArrayObject<::alinous::db::table::lockmonitor::ThreadLocker>>>;
 template class alinous::MemoryUtils<::alinous::db::table::lockmonitor::db::TableLockMamager>;
 template class alinous::MemoryUtils<alinous::IArrayObject<::alinous::db::table::lockmonitor::db::TableLockMamager>>;
 template class alinous::MemoryUtils<alinous::IArrayObject<alinous::IArrayObject<::alinous::db::table::lockmonitor::db::TableLockMamager>>>;

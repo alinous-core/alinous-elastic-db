@@ -712,13 +712,6 @@ template class alinous::IArrayObject<alinous::ArrayObject<alinous::IArrayObject<
 template class alinous::IArrayObject<alinous::ArrayObject<::alinous::db::table::lockmonitor::RowLock>>;
 template class alinous::IArrayObject<alinous::IArrayObject<alinous::ArrayObject<::alinous::db::table::lockmonitor::RowLock>>>;
 template class alinous::IArrayObject<alinous::ArrayObject<alinous::ArrayObject<::alinous::db::table::lockmonitor::RowLock>>>;
-template class alinous::IArrayObject<::alinous::db::table::lockmonitor::ThreadLocker>;
-template class alinous::IArrayObject<alinous::IArrayObject<::alinous::db::table::lockmonitor::ThreadLocker>>;
-template class alinous::IArrayObject<alinous::IArrayObject<alinous::IArrayObject<::alinous::db::table::lockmonitor::ThreadLocker>>>;
-template class alinous::IArrayObject<alinous::ArrayObject<alinous::IArrayObject<::alinous::db::table::lockmonitor::ThreadLocker>>>;
-template class alinous::IArrayObject<alinous::ArrayObject<::alinous::db::table::lockmonitor::ThreadLocker>>;
-template class alinous::IArrayObject<alinous::IArrayObject<alinous::ArrayObject<::alinous::db::table::lockmonitor::ThreadLocker>>>;
-template class alinous::IArrayObject<alinous::ArrayObject<alinous::ArrayObject<::alinous::db::table::lockmonitor::ThreadLocker>>>;
 template class alinous::IArrayObject<::alinous::db::table::lockmonitor::db::TableLockMamager>;
 template class alinous::IArrayObject<alinous::IArrayObject<::alinous::db::table::lockmonitor::db::TableLockMamager>>;
 template class alinous::IArrayObject<alinous::IArrayObject<alinous::IArrayObject<::alinous::db::table::lockmonitor::db::TableLockMamager>>>;

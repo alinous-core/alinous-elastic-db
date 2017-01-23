@@ -3,14 +3,14 @@
 namespace alinous {namespace remote {namespace region {namespace command {namespace data {
 class ClientSchemaData;}}}}}
 
+namespace java {namespace util {
+template <typename  T, typename V> class Map;}}
+
 namespace alinous {namespace remote {namespace socket {
 class NetworkBinaryBuffer;}}}
 
 namespace java {namespace util {
 template <typename  T> class Iterator;}}
-
-namespace java {namespace util {
-template <typename  T, typename V> class Map;}}
 
 namespace java {namespace util {
 template <typename  T, typename V> class HashMap;}}
@@ -59,6 +59,7 @@ private:
 	Map<String,ClientSchemaData>* map;
 public:
 	void addSchema(String* name, ClientSchemaData* data, ThreadContext* ctx) throw() ;
+	Map<String,ClientSchemaData>* getMap(ThreadContext* ctx) throw() ;
 	void readData(NetworkBinaryBuffer* buff, ThreadContext* ctx) final;
 	void writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw()  final;
 public:

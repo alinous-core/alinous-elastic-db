@@ -18,7 +18,7 @@ bool RemoteRegionRef::__init_static_variables(){
 	delete ctx;
 	return true;
 }
- RemoteRegionRef::RemoteRegionRef(RegionRef* ref, ICommidIdPublisher* commitIdPublisher, ThreadContext* ctx) throw()  : IObject(ctx), ITableRegion(ctx), regionAccessPool(nullptr), url(nullptr), name(nullptr), info(nullptr), schemes(GCUtils<Map<String,RemoteTableScheme> >::ins(this, (new(ctx) HashMap<String,RemoteTableScheme>(ctx)), ctx, __FILEW__, __LINE__, L"")), schemeVersion(0)
+ RemoteRegionRef::RemoteRegionRef(RegionRef* ref, ICommidIdPublisher* commitIdPublisher, ThreadContext* ctx) throw()  : IObject(ctx), ITableRegion(ctx), regionAccessPool(nullptr), url(nullptr), name(nullptr), info(nullptr), schemeLock(__GC_INS(this, (new(ctx) LockObject(ctx)), LockObject)), schemes(GCUtils<Map<String,RemoteTableScheme> >::ins(this, (new(ctx) HashMap<String,RemoteTableScheme>(ctx)), ctx, __FILEW__, __LINE__, L"")), schemeVersion(0)
 {
 	__GC_MV(this, &(this->url), ref->getUrl(ctx), String);
 	__GC_MV(this, &(this->name), ref->getName(ctx), String);
@@ -46,6 +46,8 @@ void RemoteRegionRef::__releaseRegerences(bool prepare, ThreadContext* ctx) thro
 	name = nullptr;
 	__e_obj1.add(this->info, this);
 	info = nullptr;
+	__e_obj1.add(this->schemeLock, this);
+	schemeLock = nullptr;
 	__e_obj1.add(this->schemes, this);
 	schemes = nullptr;
 	if(!prepare){
@@ -81,14 +83,19 @@ void RemoteRegionRef::syncSchemes(ThreadContext* ctx)
 			AbstractNodeRegionCommand* retcmd = cmd->sendCommand(socket, ctx);
 			if(retcmd->getType(ctx) != AbstractNodeRegionCommand::TYPE_GET_SCHEMA_FROM_REGION)
 			{
-				throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3563(), ctx));
+				throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3564(), ctx));
 			}
 			cmd = static_cast<GetSchemaFromRegionCommand*>(retcmd);
 		}
 		catch(AlinousException* e)
 		{
-			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3564(), e, ctx));
+			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3565(), e, ctx));
 		}
+	}
+	{
+		SynchronizedBlockObj __synchronized_2(this->schemeLock, ctx);
+		ClientStructureMetadata* data = cmd->getData(ctx);
+		synschemeData(data, ctx);
 	}
 }
 int RemoteRegionRef::getRegionType(ThreadContext* ctx) throw() 
@@ -101,7 +108,10 @@ String* RemoteRegionRef::getRegionName(ThreadContext* ctx) throw()
 }
 ITableSchema* RemoteRegionRef::getSchema(String* name, ThreadContext* ctx) throw() 
 {
-	return nullptr;
+	{
+		SynchronizedBlockObj __synchronized_2(this->schemeLock, ctx);
+		return this->schemes->get(name, ctx);
+	}
 }
 void RemoteRegionRef::createSchema(String* schemaName, ThreadContext* ctx) throw() 
 {
@@ -122,7 +132,7 @@ void RemoteRegionRef::initRegionServerAcess(ThreadContext* ctx)
 	IArrayObject<String>* segs = this->url->split(ConstStr::getCNST_STR_381(), ctx);
 	if(segs->length != 2)
 	{
-		throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3553(), ctx));
+		throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3554(), ctx));
 	}
 	String* host = segs->get(0);
 	int port = 0;
@@ -133,12 +143,34 @@ void RemoteRegionRef::initRegionServerAcess(ThreadContext* ctx)
 		}
 		catch(NumberFormatException* e)
 		{
-			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3554(), e, ctx));
+			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3555(), e, ctx));
 		}
 	}
 	__GC_MV(this, &(this->info), (new(ctx) RegionConnectionInfo(host, port, ctx)), RegionConnectionInfo);
 	RegionClientConnectionFactory* factory = (new(ctx) RegionClientConnectionFactory(info, ctx));
 	__GC_MV(this, &(this->regionAccessPool), (new(ctx) SocketConnectionPool(factory, ctx)), SocketConnectionPool);
+}
+void RemoteRegionRef::synschemeData(ClientStructureMetadata* data, ThreadContext* ctx) throw() 
+{
+	Map<String,ClientSchemaData>* map = data->getMap(ctx);
+	Iterator<String>* it = map->keySet(ctx)->iterator(ctx);
+	while(it->hasNext(ctx))
+	{
+		String* schemaName = it->next(ctx);
+		ClientSchemaData* scdata = map->get(schemaName, ctx);
+		RemoteTableScheme* schema = findOrCreateSchema(schemaName, ctx);
+		schema->updateInfo(scdata, ctx);
+	}
+}
+RemoteTableScheme* RemoteRegionRef::findOrCreateSchema(String* schemaName, ThreadContext* ctx) throw() 
+{
+	RemoteTableScheme* schema = this->schemes->get(schemaName, ctx);
+	if(schema == nullptr)
+	{
+		schema = (new(ctx) RemoteTableScheme(schemaName, ctx));
+		this->schemes->put(schemaName, schema, ctx);
+	}
+	return schema;
 }
 }}}}
 

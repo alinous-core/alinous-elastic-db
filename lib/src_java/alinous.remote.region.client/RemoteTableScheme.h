@@ -1,7 +1,22 @@
 #ifndef ALINOUS_REMOTE_REGION_CLIENT_REMOTETABLESCHEME_H_
 #define ALINOUS_REMOTE_REGION_CLIENT_REMOTETABLESCHEME_H_
+namespace alinous {namespace remote {namespace region {namespace command {namespace data {
+class ClientSchemaData;}}}}}
+
 namespace alinous {namespace db {namespace table {
 class IDatabaseTable;}}}
+
+namespace alinous {namespace lock {
+class LockObject;}}
+
+namespace java {namespace util {
+template <typename  T, typename V> class Map;}}
+
+namespace alinous {namespace remote {namespace region {namespace client {
+class DatabaseTableClient;}}}}
+
+namespace java {namespace util {
+template <typename  T, typename V> class HashMap;}}
 
 namespace alinous {namespace db {
 class ITableSchema;}}
@@ -19,8 +34,12 @@ namespace alinous {namespace remote {namespace region {namespace client {
 using namespace ::alinous;
 using namespace ::java::lang;
 using ::java::util::Iterator;
+using ::java::util::HashMap;
+using ::java::util::Map;
 using ::alinous::db::ITableSchema;
 using ::alinous::db::table::IDatabaseTable;
+using ::alinous::lock::LockObject;
+using ::alinous::remote::region::command::data::ClientSchemaData;
 
 
 
@@ -28,16 +47,18 @@ class RemoteTableScheme final : public ITableSchema, public virtual IObject {
 public:
 	RemoteTableScheme(const RemoteTableScheme& base) = default;
 public:
-	RemoteTableScheme(ThreadContext* ctx) throw()  : IObject(ctx), ITableSchema(ctx)
-	{
-	}
-	void __construct_impl(ThreadContext* ctx) throw() 
-	{
-	}
+	RemoteTableScheme(String* name, ThreadContext* ctx) throw() ;
+	void __construct_impl(String* name, ThreadContext* ctx) throw() ;
 	virtual ~RemoteTableScheme() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
+private:
+	String* name;
+	LockObject* lock;
+	Map<String,DatabaseTableClient>* tables;
 public:
+	void updateInfo(ClientSchemaData* scdata, ThreadContext* ctx) throw() ;
 	IDatabaseTable* getTableStore(String* tableName, ThreadContext* ctx) throw()  final;
+	String* getName(ThreadContext* ctx) throw() ;
 public:
 	static bool __init_done;
 	static bool __init_static_variables();

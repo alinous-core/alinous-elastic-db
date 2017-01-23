@@ -54,6 +54,8 @@ ClientSchemaData* NodeRegionSchema::toClientData(ThreadContext* ctx) throw()
 		String* tableName = it->next(ctx);
 		NodeTableClaster* tableCluster = this->tablesDictinary->get(tableName, ctx);
 		TableMetadata* metadata = tableCluster->getMetadata(ctx);
+		ClientTableData* tableData = (new(ctx) ClientTableData(tableName, metadata, ctx));
+		data->addTable(tableName, tableData, ctx);
 	}
 	return data;
 }

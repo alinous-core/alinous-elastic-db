@@ -20,7 +20,7 @@ constexpr const int ITypedVariable::TYPE_TIME;
 constexpr const int ITypedVariable::TYPE_TIMESTAMP;
 constexpr const int ITypedVariable::TYPE_ARRAY;
 constexpr const int ITypedVariable::TYPE_CLASS_OBJECT;
-String* ITypedVariable::TYPED_VARIABLE = ConstStr::getCNST_STR_1143();
+String* ITypedVariable::TYPED_VARIABLE = ConstStr::getCNST_STR_1144();
 bool ITypedVariable::__init_done = __init_static_variables();
 bool ITypedVariable::__init_static_variables(){
 	Java2CppSystem::getSelf();

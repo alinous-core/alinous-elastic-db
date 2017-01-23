@@ -74,12 +74,12 @@ void SetupAllBreakPointsRequest::importParams(Map<String,String>* params, Thread
 	while(it->hasNext(ctx))
 	{
 		String* key = it->next(ctx);
-		if(key->equals(ConstStr::getCNST_STR_1168(), ctx))
+		if(key->equals(ConstStr::getCNST_STR_1169(), ctx))
 		{
 			break ;
 		}
 		String* source = params->get(key, ctx);
-		IArrayObject<String>* tmp = source->split(ConstStr::getCNST_STR_1073(), ctx);
+		IArrayObject<String>* tmp = source->split(ConstStr::getCNST_STR_1074(), ctx);
 		if(tmp->length != 2)
 		{
 			continue;

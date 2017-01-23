@@ -145,6 +145,37 @@ void UpdateStatement::analyzeSQL(SQLAnalyseContext* context, bool debug, ThreadC
 }
 void UpdateStatement::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 {
+	bool isnull = buff->getBoolean(ctx);
+	if(!isnull)
+	{
+		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
+		if(el == nullptr || !((dynamic_cast<IJoinTarget*>(el) != 0)))
+		{
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1030(), ctx));
+		}
+		__GC_MV(this, &(this->table), static_cast<IJoinTarget*>(el), IJoinTarget);
+	}
+	int maxLoop = buff->getInt(ctx);
+	for(int i = 0; i < maxLoop; ++i)
+	{
+		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
+		if(el == nullptr || !((dynamic_cast<UpdateSet*>(el) != 0)))
+		{
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1046(), ctx));
+		}
+		UpdateSet* set = static_cast<UpdateSet*>(el);
+		this->sets->add(set, ctx);
+	}
+	isnull = buff->getBoolean(ctx);
+	if(!isnull)
+	{
+		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
+		if(el == nullptr || !((dynamic_cast<SQLWhere*>(el) != 0)))
+		{
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1039(), ctx));
+		}
+		__GC_MV(this, &(this->where), static_cast<SQLWhere*>(el), SQLWhere);
+	}
 }
 void UpdateStatement::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
 {

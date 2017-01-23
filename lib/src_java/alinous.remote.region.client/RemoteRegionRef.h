@@ -36,6 +36,21 @@ class AbstractNodeRegionCommand;}}}}
 namespace alinous {namespace system {
 class AlinousException;}}
 
+namespace alinous {namespace remote {namespace region {namespace command {namespace data {
+class ClientStructureMetadata;}}}}}
+
+namespace java {namespace util {
+template <typename  T, typename V> class Map;}}
+
+namespace alinous {namespace remote {namespace region {namespace command {namespace data {
+class ClientSchemaData;}}}}}
+
+namespace java {namespace util {
+template <typename  T> class Iterator;}}
+
+namespace alinous {namespace remote {namespace region {namespace client {
+class RemoteTableScheme;}}}}
+
 namespace alinous {namespace db {
 class ITableSchema;}}
 
@@ -51,11 +66,8 @@ class AlinousCore;}}
 namespace alinous {namespace btree {
 class BTreeGlobalCache;}}
 
-namespace java {namespace util {
-template <typename  T, typename V> class Map;}}
-
-namespace alinous {namespace remote {namespace region {namespace client {
-class RemoteTableScheme;}}}}
+namespace alinous {namespace lock {
+class LockObject;}}
 
 namespace java {namespace util {
 template <typename  T, typename V> class HashMap;}}
@@ -87,6 +99,7 @@ using namespace ::java::lang;
 using ::java::util::Iterator;
 using ::java::io::IOException;
 using ::java::util::HashMap;
+using ::java::util::Iterator;
 using ::java::util::Map;
 using ::alinous::btree::BTreeException;
 using ::alinous::btree::BTreeGlobalCache;
@@ -96,9 +109,12 @@ using ::alinous::db::ITableRegion;
 using ::alinous::db::ITableSchema;
 using ::alinous::db::table::DatabaseException;
 using ::alinous::db::table::TableMetadata;
+using ::alinous::lock::LockObject;
 using ::alinous::net::AlinousSocket;
 using ::alinous::remote::region::command::AbstractNodeRegionCommand;
 using ::alinous::remote::region::command::GetSchemaFromRegionCommand;
+using ::alinous::remote::region::command::data::ClientSchemaData;
+using ::alinous::remote::region::command::data::ClientStructureMetadata;
 using ::alinous::remote::socket::ISocketConnection;
 using ::alinous::remote::socket::SocketConnectionPool;
 using ::alinous::runtime::parallel::ThreadPool;
@@ -121,6 +137,7 @@ private:
 	String* url;
 	String* name;
 	RegionConnectionInfo* info;
+	LockObject* schemeLock;
 	Map<String,RemoteTableScheme>* schemes;
 	long long schemeVersion;
 public:
@@ -136,6 +153,8 @@ public:
 	void setSchemeVersion(long long schemeVersion, ThreadContext* ctx) throw() ;
 private:
 	void initRegionServerAcess(ThreadContext* ctx);
+	void synschemeData(ClientStructureMetadata* data, ThreadContext* ctx) throw() ;
+	RemoteTableScheme* findOrCreateSchema(String* schemaName, ThreadContext* ctx) throw() ;
 public:
 	static bool __init_done;
 	static bool __init_static_variables();

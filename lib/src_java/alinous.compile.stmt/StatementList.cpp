@@ -101,7 +101,7 @@ void StatementList::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 		IAlinousElement* element = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
 		if(element == nullptr || !((dynamic_cast<IStatement*>(element) != 0)))
 		{
-			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1093(), ctx));
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1094(), ctx));
 		}
 		this->list->add(static_cast<IStatement*>(element), ctx);
 	}

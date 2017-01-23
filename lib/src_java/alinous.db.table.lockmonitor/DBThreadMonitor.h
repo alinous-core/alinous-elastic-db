@@ -36,9 +36,6 @@ class RowLock;}}}}
 namespace alinous {namespace db {namespace table {namespace lockmonitor {namespace db {
 class RowLockManager;}}}}}
 
-namespace alinous {namespace lock {
-class LockObject;}}
-
 namespace alinous {namespace concurrent {
 class SpinMutex;}}
 
@@ -55,14 +52,12 @@ namespace alinous {namespace db {namespace table {namespace lockmonitor {
 using namespace ::alinous;
 using namespace ::java::lang;
 using ::java::util::Iterator;
-using ::java::util::ArrayList;
 using ::alinous::concurrent::SpinMutex;
 using ::alinous::db::table::IDatabaseTable;
 using ::alinous::db::table::lockmonitor::db::RowLockDb;
 using ::alinous::db::table::lockmonitor::db::RowLockManager;
 using ::alinous::db::table::lockmonitor::db::TableLockHashDb;
 using ::alinous::db::table::lockmonitor::db::TableLockMamager;
-using ::alinous::lock::LockObject;
 using ::alinous::runtime::parallel::ThreadPool;
 
 
@@ -76,8 +71,6 @@ public:
 	virtual ~DBThreadMonitor() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 private:
-	ArrayList<ThreadLocker>* threads;
-	LockObject* threadLock;
 	TableLockHashDb* tableLockDb;
 	RowLockDb* rowLockDb;
 	ConcurrentGatePool* gatePool;

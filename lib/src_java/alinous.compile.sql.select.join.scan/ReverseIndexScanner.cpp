@@ -181,7 +181,7 @@ bool ReverseIndexScanner::firstHasNext(bool debug, ThreadContext* ctx)
 			}
 			catch(VariableException* e)
 			{
-				throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1090(), e, ctx));
+				throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1091(), e, ctx));
 			}
 		}
 		{
@@ -204,7 +204,7 @@ bool ReverseIndexScanner::firstHasNext(bool debug, ThreadContext* ctx)
 			}
 			catch(AlinousException* e)
 			{
-				throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1091(), e, ctx));
+				throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1092(), e, ctx));
 			}
 		}
 	}

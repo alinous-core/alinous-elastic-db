@@ -59,7 +59,7 @@ AbstractMonitorCommand* MinitorCommandReader::readFromStream(InputStream* stream
 		cmd = (new(ctx) GetRegionNodeInfoCommand(ctx));
 		break ;
 	default:
-		throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3556(), ctx));
+		throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3557(), ctx));
 		break;
 	}
 	cmd->readFromStream(stream, size, ctx);

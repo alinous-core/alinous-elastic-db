@@ -18,7 +18,7 @@ bool DBThreadMonitor::__init_static_variables(){
 	delete ctx;
 	return true;
 }
- DBThreadMonitor::DBThreadMonitor(ThreadPool* threadPool, ThreadContext* ctx) throw()  : IObject(ctx), threads(GCUtils<ArrayList<ThreadLocker> >::ins(this, (new(ctx) ArrayList<ThreadLocker>(ctx)), ctx, __FILEW__, __LINE__, L"")), threadLock(__GC_INS(this, (new(ctx) LockObject(ctx)), LockObject)), tableLockDb(nullptr), rowLockDb(nullptr), gatePool(nullptr), threadPool(nullptr), globalLock(__GC_INS(this, (new(ctx) SpinMutex(ctx)), SpinMutex))
+ DBThreadMonitor::DBThreadMonitor(ThreadPool* threadPool, ThreadContext* ctx) throw()  : IObject(ctx), tableLockDb(nullptr), rowLockDb(nullptr), gatePool(nullptr), threadPool(nullptr), globalLock(__GC_INS(this, (new(ctx) SpinMutex(ctx)), SpinMutex))
 {
 	__GC_MV(this, &(this->tableLockDb), (new(ctx) TableLockHashDb(64, ctx)), TableLockHashDb);
 	__GC_MV(this, &(this->rowLockDb), (new(ctx) RowLockDb(1024 * 64, ctx)), RowLockDb);
@@ -42,10 +42,6 @@ void DBThreadMonitor::__construct_impl(ThreadPool* threadPool, ThreadContext* ct
 void DBThreadMonitor::__releaseRegerences(bool prepare, ThreadContext* ctx) throw() 
 {
 	ObjectEraser __e_obj1(ctx, __FILEW__, __LINE__, L"DBThreadMonitor", L"~DBThreadMonitor");
-	__e_obj1.add(this->threads, this);
-	threads = nullptr;
-	__e_obj1.add(this->threadLock, this);
-	threadLock = nullptr;
 	__e_obj1.add(this->tableLockDb, this);
 	tableLockDb = nullptr;
 	__e_obj1.add(this->rowLockDb, this);
@@ -62,13 +58,7 @@ void DBThreadMonitor::__releaseRegerences(bool prepare, ThreadContext* ctx) thro
 }
 IThreadLocker* DBThreadMonitor::newThread(String* fullName, ThreadContext* ctx) throw() 
 {
-	ThreadLocker* thread = 0;
-	{
-		SynchronizedBlockObj __synchronized_2(this->threadLock, ctx);
-		thread = (new(ctx) ThreadLocker(fullName, ctx));
-		this->threads->add(thread, ctx);
-	}
-	return thread;
+	return (new(ctx) ThreadLocker(fullName, ctx));
 }
 void DBThreadMonitor::lockTable(IDatabaseTable* table, IThreadLocker* locker, bool update, ThreadContext* ctx)
 {

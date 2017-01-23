@@ -44,7 +44,7 @@ IAlinousVariable* SQLMultiplicativeExpression::resolveExpression(ScriptMachine* 
 		{
 			if(operand->toIntVariable(ctx)->getIntValue(ctx) == 0)
 			{
-				throw (new(ctx) AlinousException(ConstStr::getCNST_STR_1065(), ctx));
+				throw (new(ctx) AlinousException(ConstStr::getCNST_STR_1066(), ctx));
 			}
 			val = val->div(operand, ctx);
 		}
@@ -67,7 +67,7 @@ VariantValue* SQLMultiplicativeExpression::resolveSQLExpression(ScanResultRecord
 		{
 			if(operand->toIntVariable(ctx)->getIntValue(ctx) == 0)
 			{
-				throw (new(ctx) AlinousException(ConstStr::getCNST_STR_1065(), ctx));
+				throw (new(ctx) AlinousException(ConstStr::getCNST_STR_1066(), ctx));
 			}
 			val = val->div(operand, ctx)->toVariantValue(ctx);
 		}

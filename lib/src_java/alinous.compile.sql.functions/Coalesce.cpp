@@ -33,7 +33,7 @@ void Coalesce::__releaseRegerences(bool prepare, ThreadContext* ctx) throw()
 }
 String* Coalesce::getName(ThreadContext* ctx) throw() 
 {
-	return ConstStr::getCNST_STR_1076();
+	return ConstStr::getCNST_STR_1077();
 }
 VariantValue* Coalesce::resolveSQLExpression(ScanResultRecord* record, ScriptMachine* machine, FunctionArguments* args, bool debug, ThreadContext* ctx)
 {

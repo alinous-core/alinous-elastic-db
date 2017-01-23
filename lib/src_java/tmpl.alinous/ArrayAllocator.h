@@ -100,7 +100,6 @@ template class alinous::ArrayAllocator<::alinous::db::table::IScannableIndex>;
 template class alinous::ArrayAllocator<::alinous::db::table::DatabaseRecord>;
 template class alinous::ArrayAllocator<::alinous::db::table::lockmonitor::TableLock>;
 template class alinous::ArrayAllocator<::alinous::db::table::lockmonitor::RowLock>;
-template class alinous::ArrayAllocator<::alinous::db::table::lockmonitor::ThreadLocker>;
 template class alinous::ArrayAllocator<::alinous::db::table::lockmonitor::db::TableLockMamager>;
 template class alinous::ArrayAllocator<::alinous::db::table::lockmonitor::db::RowLockManager>;
 template class alinous::ArrayAllocator<::alinous::db::trx::scan::ScanResultIndexKey>;

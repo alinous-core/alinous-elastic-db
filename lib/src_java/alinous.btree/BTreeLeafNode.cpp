@@ -124,7 +124,7 @@ void BTreeLeafNode::printNode(StringBuffer* buff, int level, ThreadContext* ctx)
 {
 	printTab(buff, level, ctx);
 	printTab(buff, level, ctx);
-	buff->append(ConstStr::getCNST_STR_1640(), ctx)->append(getKey(ctx)->toString(ctx), ctx)->append(ConstStr::getCNST_STR_1641(), ctx);
+	buff->append(ConstStr::getCNST_STR_1641(), ctx)->append(getKey(ctx)->toString(ctx), ctx)->append(ConstStr::getCNST_STR_1642(), ctx);
 }
 bool BTreeLeafNode::removeChild(IBTreeKey* key, ThreadContext* ctx)
 {

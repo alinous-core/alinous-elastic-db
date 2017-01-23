@@ -55,12 +55,12 @@ void MonitorConnection::connect(ThreadContext* ctx)
 	AbstractMonitorCommand* retcmd = cmd->sendCommand(this->socket, ctx);
 	if(retcmd->getType(ctx) != AbstractMonitorCommand::TYPE_CONNECT)
 	{
-		throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3548(), ctx));
+		throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3549(), ctx));
 	}
 	cmd = static_cast<MonitorConnectCommand*>(retcmd);
 	if(!cmd->isConnected(ctx))
 	{
-		throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3548(), ctx));
+		throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3549(), ctx));
 	}
 }
 AlinousSocket* MonitorConnection::getSocket(ThreadContext* ctx) throw() 

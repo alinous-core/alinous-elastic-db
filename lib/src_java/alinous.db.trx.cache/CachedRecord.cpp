@@ -159,7 +159,8 @@ void CachedRecord::addValue(VariantValue* vv, ThreadContext* ctx) throw()
 }
 long long CachedRecord::getMaxCommitId(ThreadContext* ctx) throw() 
 {
-	return 0;
+	long long commitId = this->lastUpdateCommitId < this->insertedCommitId ? this->insertedCommitId : this->lastUpdateCommitId;
+	return commitId > this->deletedCommitId ? commitId : this->deletedCommitId;
 }
 CachedRecord* CachedRecord::valueFromFetcher(FileStorageEntryFetcher* fetcher, ThreadContext* ctx)
 {

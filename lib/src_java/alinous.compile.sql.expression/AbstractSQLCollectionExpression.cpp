@@ -212,7 +212,7 @@ void AbstractSQLCollectionExpression::__readData(NetworkBinaryBuffer* buff, Thre
 		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
 		if(el == nullptr || !((dynamic_cast<SQLSubExpression*>(el) != 0)))
 		{
-			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1066(), ctx));
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1067(), ctx));
 		}
 		this->expressions->add(static_cast<SQLSubExpression*>(el), ctx);
 	}
@@ -292,6 +292,31 @@ void AbstractSQLCollectionExpression::__toFileEntry(FileStorageEntryBuilder* bui
 }
 void AbstractSQLCollectionExpression::fromFileEntry(FileStorageEntryFetcher* fetcher, ThreadContext* ctx)
 {
+	bool isnull = fetcher->fetchBoolean(ctx);
+	if(!isnull)
+	{
+		IExpression* el = IExpressionFactory::fromFetcher(fetcher, ctx);
+		if(el == nullptr || !((dynamic_cast<ISQLExpression*>(el) != 0)))
+		{
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1044(), ctx));
+		}
+		__GC_MV(this, &(this->first), static_cast<ISQLExpression*>(el), ISQLExpression);
+	}
+	int maxLoop = fetcher->fetchInt(ctx);
+	for(int i = 0; i < maxLoop; ++i)
+	{
+		IExpression* el = IExpressionFactory::fromFetcher(fetcher, ctx);
+		if(el == nullptr || !((dynamic_cast<SQLSubExpression*>(el) != 0)))
+		{
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1067(), ctx));
+		}
+		this->expressions->add(static_cast<SQLSubExpression*>(el), ctx);
+	}
+	isnull = fetcher->fetchBoolean(ctx);
+	if(!isnull)
+	{
+		__GC_MV(this, &(this->asName), fetcher->fetchString(ctx), String);
+	}
 }
 }}}}
 

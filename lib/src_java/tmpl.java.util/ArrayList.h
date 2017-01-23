@@ -75,7 +75,6 @@ template class ::java::util::ArrayList<::alinous::db::table::IScannableIndex>;
 template class ::java::util::ArrayList<::alinous::db::table::DatabaseRecord>;
 template class ::java::util::ArrayList<::alinous::db::table::lockmonitor::TableLock>;
 template class ::java::util::ArrayList<::alinous::db::table::lockmonitor::RowLock>;
-template class ::java::util::ArrayList<::alinous::db::table::lockmonitor::ThreadLocker>;
 template class ::java::util::ArrayList<::alinous::db::table::lockmonitor::db::TableLockMamager>;
 template class ::java::util::ArrayList<::alinous::db::table::lockmonitor::db::RowLockManager>;
 template class ::java::util::ArrayList<::alinous::db::trx::scan::ScanResultIndexKey>;

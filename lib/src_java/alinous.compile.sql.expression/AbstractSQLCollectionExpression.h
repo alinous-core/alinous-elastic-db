@@ -45,8 +45,14 @@ class FileStorageEntryBuilder;}}}
 namespace alinous {namespace buffer {namespace storage {
 class FileStorageEntryFetcher;}}}
 
+namespace alinous {namespace compile {namespace expression {
+class IExpression;}}}
+
 namespace alinous {namespace compile {
 class AlinousElementNetworkFactory;}}
+
+namespace alinous {namespace compile {namespace expression {
+class IExpressionFactory;}}}
 
 namespace alinous {namespace db {namespace table {
 class DatabaseException;}}}
@@ -71,6 +77,8 @@ using ::alinous::compile::AlinousElementNetworkFactory;
 using ::alinous::compile::IAlinousElement;
 using ::alinous::compile::IAlinousElementVisitor;
 using ::alinous::compile::analyse::SrcAnalyseContext;
+using ::alinous::compile::expression::IExpression;
+using ::alinous::compile::expression::IExpressionFactory;
 using ::alinous::compile::sql::analyze::SQLAnalyseContext;
 using ::alinous::compile::sql::analyze::ScanTableIdentifier;
 using ::alinous::compile::sql::analyze::ScanTableColumnIdentifier;

@@ -151,27 +151,27 @@ void ColumnTypeDescriptor::writeData(NetworkBinaryBuffer* buff, ThreadContext* c
 }
 int ColumnTypeDescriptor::toTypeNum(String* str, ThreadContext* ctx) throw() 
 {
-	if(str->equalsIgnoreCase(ConstStr::getCNST_STR_1053(), ctx) || str->equalsIgnoreCase(ConstStr::getCNST_STR_1054(), ctx))
+	if(str->equalsIgnoreCase(ConstStr::getCNST_STR_1054(), ctx) || str->equalsIgnoreCase(ConstStr::getCNST_STR_1055(), ctx))
 	{
 		return INT;
 	}
-	if(str->equalsIgnoreCase(ConstStr::getCNST_STR_1055(), ctx) || str->equalsIgnoreCase(ConstStr::getCNST_STR_1056(), ctx))
+	if(str->equalsIgnoreCase(ConstStr::getCNST_STR_1056(), ctx) || str->equalsIgnoreCase(ConstStr::getCNST_STR_1057(), ctx))
 	{
 		return VARCHAR;
 	}
-	if(str->equalsIgnoreCase(ConstStr::getCNST_STR_1057(), ctx) || str->equalsIgnoreCase(ConstStr::getCNST_STR_1058(), ctx))
+	if(str->equalsIgnoreCase(ConstStr::getCNST_STR_1058(), ctx) || str->equalsIgnoreCase(ConstStr::getCNST_STR_1059(), ctx))
 	{
 		return TEXT;
 	}
-	if(str->equalsIgnoreCase(ConstStr::getCNST_STR_1059(), ctx) || str->equalsIgnoreCase(ConstStr::getCNST_STR_1060(), ctx))
-	{
-		return DOUBLE;
-	}
-	if(str->equalsIgnoreCase(ConstStr::getCNST_STR_1061(), ctx))
+	if(str->equalsIgnoreCase(ConstStr::getCNST_STR_1060(), ctx) || str->equalsIgnoreCase(ConstStr::getCNST_STR_1061(), ctx))
 	{
 		return DOUBLE;
 	}
 	if(str->equalsIgnoreCase(ConstStr::getCNST_STR_1062(), ctx))
+	{
+		return DOUBLE;
+	}
+	if(str->equalsIgnoreCase(ConstStr::getCNST_STR_1063(), ctx))
 	{
 		return TIMESTAMP;
 	}

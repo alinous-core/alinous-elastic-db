@@ -38,6 +38,10 @@ void ClientStructureMetadata::addSchema(String* name, ClientSchemaData* data, Th
 {
 	this->map->put(name, data, ctx);
 }
+Map<String,ClientSchemaData>* ClientStructureMetadata::getMap(ThreadContext* ctx) throw() 
+{
+	return map;
+}
 void ClientStructureMetadata::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 {
 	int maxLoop = this->map->size(ctx);

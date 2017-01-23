@@ -45,9 +45,9 @@ void XpathString::setText(String* text, ThreadContext* ctx) throw()
 String* XpathString::toString(ThreadContext* ctx) throw() 
 {
 	StringBuffer* buffer = (new(ctx) StringBuffer(ctx));
-	buffer->append(ConstStr::getCNST_STR_1738(), ctx);
+	buffer->append(ConstStr::getCNST_STR_1739(), ctx);
 	buffer->append(this->text, ctx);
-	buffer->append(ConstStr::getCNST_STR_1738(), ctx);
+	buffer->append(ConstStr::getCNST_STR_1739(), ctx);
 	return buffer->toString(ctx);
 }
 IVariableValue* XpathString::getValue(DomDocument* document, DomNode* currentNode, ThreadContext* ctx) throw() 

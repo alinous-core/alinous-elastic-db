@@ -1,5 +1,11 @@
 #ifndef ALINOUS_REMOTE_REGION_CLIENT_DATABASETABLECLIENT_H_
 #define ALINOUS_REMOTE_REGION_CLIENT_DATABASETABLECLIENT_H_
+namespace alinous {namespace db {namespace table {
+class TableMetadata;}}}
+
+namespace alinous {namespace remote {namespace socket {
+class SocketConnectionPool;}}}
+
 namespace java {namespace lang {
 class Integer;}}
 
@@ -10,13 +16,16 @@ namespace alinous {namespace compile {namespace sql {namespace analyze {
 class ScanTableColumnIdentifier;}}}}
 
 namespace alinous {namespace db {namespace table {
-class TableMetadata;}}}
+class TableColumnMetadata;}}}
 
 namespace alinous {namespace db {namespace table {
 class IDatabaseRecord;}}}
 
 namespace alinous {namespace db {namespace table {namespace lockmonitor {
 class IThreadLocker;}}}}
+
+namespace alinous {namespace db {namespace table {namespace lockmonitor {
+class ThreadLocker;}}}}
 
 namespace alinous {namespace system {
 class AlinousCore;}}
@@ -51,6 +60,9 @@ class AlinousDbException;}}
 namespace alinous {namespace db {namespace table {
 class DatabaseException;}}}
 
+namespace alinous {namespace db {namespace table {
+class DatabaseTableIdPublisher;}}}
+
 namespace alinous {namespace db {namespace table {namespace lockmonitor {
 class DatabaseLockException;}}}}
 
@@ -80,13 +92,17 @@ using ::alinous::btree::BTreeGlobalCache;
 using ::alinous::compile::sql::analyze::ScanTableColumnIdentifier;
 using ::alinous::db::AlinousDbException;
 using ::alinous::db::table::DatabaseException;
+using ::alinous::db::table::DatabaseTableIdPublisher;
 using ::alinous::db::table::IDatabaseRecord;
 using ::alinous::db::table::IDatabaseTable;
 using ::alinous::db::table::IScannableIndex;
+using ::alinous::db::table::TableColumnMetadata;
 using ::alinous::db::table::TableMetadata;
 using ::alinous::db::table::lockmonitor::DatabaseLockException;
 using ::alinous::db::table::lockmonitor::IThreadLocker;
+using ::alinous::db::table::lockmonitor::ThreadLocker;
 using ::alinous::db::trx::cache::CachedRecord;
+using ::alinous::remote::socket::SocketConnectionPool;
 using ::alinous::runtime::dom::VariableException;
 using ::alinous::runtime::parallel::SequentialBackgroundJob;
 using ::alinous::runtime::parallel::ThreadPool;
@@ -100,23 +116,29 @@ class DatabaseTableClient final : public IDatabaseTable, public virtual IObject 
 public:
 	DatabaseTableClient(const DatabaseTableClient& base) = default;
 public:
-	DatabaseTableClient(ThreadContext* ctx) throw()  : IObject(ctx), IDatabaseTable(ctx)
-	{
-	}
-	void __construct_impl(ThreadContext* ctx) throw() 
-	{
-	}
+	DatabaseTableClient(String* schema, String* name, TableMetadata* metadata, SocketConnectionPool* regionAccessPool, ThreadContext* ctx) throw() ;
+	void __construct_impl(String* schema, String* name, TableMetadata* metadata, SocketConnectionPool* regionAccessPool, ThreadContext* ctx) throw() ;
 	virtual ~DatabaseTableClient() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 public:
+	Integer* tableId;
+	SocketConnectionPool* regionAccessPool;
+private:
+	TableMetadata* metadata;
+	String* schema;
+	String* name;
+	String* fullName;
+	ArrayList<IScannableIndex>* indexes;
+	IScannableIndex* primaryIndex;
+public:
 	Integer* getTableId(ThreadContext* ctx) throw()  final;
 	int getColumnCount(ThreadContext* ctx) throw()  final;
-	IScannableIndex* getTableIndexByColIds(ArrayList<ScanTableColumnIdentifier>* colIdList, ThreadContext* ctx) throw()  final;
+	IScannableIndex* getTableIndexByColIds(ArrayList<ScanTableColumnIdentifier>* columns, ThreadContext* ctx) throw()  final;
 	IScannableIndex* getPrimaryIndex(ThreadContext* ctx) throw()  final;
 	TableMetadata* getMetadata(ThreadContext* ctx) throw()  final;
 	IDatabaseRecord* loadRecord(long long position, ThreadContext* ctx) final;
-	IScannableIndex* getAbailableIndex(ArrayList<String>* columnsStr, ThreadContext* ctx) throw()  final;
-	IScannableIndex* getAbailableIndexByScanColId(ArrayList<ScanTableColumnIdentifier>* joinRequest, ThreadContext* ctx) throw()  final;
+	IScannableIndex* getAbailableIndex(ArrayList<String>* columns, ThreadContext* ctx) throw()  final;
+	IScannableIndex* getAbailableIndexByScanColId(ArrayList<ScanTableColumnIdentifier>* columns, ThreadContext* ctx) throw()  final;
 	IScannableIndex* getTableIndex(ArrayList<String>* columns, ThreadContext* ctx) throw()  final;
 	IThreadLocker* newThreadLocker(String* fullName, ThreadContext* ctx) throw()  final;
 	void updateUnlockRow(long long oid, IThreadLocker* locker, ThreadContext* ctx) final;
@@ -140,6 +162,9 @@ public:
 	void createIndex(String* getindexName, ArrayList<String>* columns, AlinousCore* core, BTreeGlobalCache* cache, ThreadContext* ctx) final;
 	void close(ThreadContext* ctx) throw()  final;
 	String* getFullName(ThreadContext* ctx) throw()  final;
+private:
+	bool matchIndexByIdList(ArrayList<TableColumnMetadata>* columnsMetadataList, ArrayList<ScanTableColumnIdentifier>* columns, ThreadContext* ctx) throw() ;
+	bool matchIndexByStrList(ArrayList<TableColumnMetadata>* columnsMetadataList, ArrayList<String>* columns, ThreadContext* ctx) throw() ;
 public:
 	static bool __init_done;
 	static bool __init_static_variables();

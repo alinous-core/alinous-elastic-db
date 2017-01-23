@@ -12,6 +12,9 @@ class NodeTableClaster;}}}
 namespace alinous {namespace db {namespace table {
 class TableMetadata;}}}
 
+namespace alinous {namespace remote {namespace region {namespace command {namespace data {
+class ClientTableData;}}}}}
+
 namespace alinous {namespace remote {namespace db {namespace command {namespace data {
 class SchemaData;}}}}}
 
@@ -47,6 +50,7 @@ using ::alinous::db::table::TableMetadata;
 using ::alinous::remote::db::command::data::SchemaData;
 using ::alinous::remote::db::command::data::TableClusterData;
 using ::alinous::remote::region::command::data::ClientSchemaData;
+using ::alinous::remote::region::command::data::ClientTableData;
 
 
 

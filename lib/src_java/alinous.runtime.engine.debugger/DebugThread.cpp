@@ -10,9 +10,9 @@ namespace alinous {namespace runtime {namespace engine {namespace debugger {
 constexpr const int DebugThread::STATUS_NONE;
 constexpr const int DebugThread::STATUS_RUNNING;
 constexpr const int DebugThread::STATUS_SUSPEND;
-String* DebugThread::TAG_THREAD = ConstStr::getCNST_STR_1169();
-String* DebugThread::ATTR_THREAD_ID = ConstStr::getCNST_STR_1170();
-String* DebugThread::ATTR_STATUS = ConstStr::getCNST_STR_1171();
+String* DebugThread::TAG_THREAD = ConstStr::getCNST_STR_1170();
+String* DebugThread::ATTR_THREAD_ID = ConstStr::getCNST_STR_1171();
+String* DebugThread::ATTR_STATUS = ConstStr::getCNST_STR_1172();
 bool DebugThread::__init_done = __init_static_variables();
 bool DebugThread::__init_static_variables(){
 	Java2CppSystem::getSelf();

@@ -78,7 +78,7 @@ void CreateIndexStatement::validate(SourceValidator* validator, ThreadContext* c
 {
 	if(!((dynamic_cast<TableJoinTarget*>(table) != 0)))
 	{
-		validator->addError(ConstStr::getCNST_STR_1048(), this, ctx);
+		validator->addError(ConstStr::getCNST_STR_1049(), this, ctx);
 	}
 }
 bool CreateIndexStatement::visit(IAlinousElementVisitor* visitor, AbstractSrcElement* parent, ThreadContext* ctx) throw() 

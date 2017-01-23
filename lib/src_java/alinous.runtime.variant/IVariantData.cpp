@@ -19,7 +19,7 @@ constexpr const int IVariantData::TYPE_BIG_DECIMAL;
 constexpr const int IVariantData::TYPE_TIME;
 constexpr const int IVariantData::TYPE_TIMESTAMP;
 constexpr const int IVariantData::TYPE_NULL;
-String* IVariantData::ATTR_VALUE = ConstStr::getCNST_STR_1151();
+String* IVariantData::ATTR_VALUE = ConstStr::getCNST_STR_1152();
 bool IVariantData::__init_done = __init_static_variables();
 bool IVariantData::__init_static_variables(){
 	Java2CppSystem::getSelf();

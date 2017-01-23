@@ -18,7 +18,7 @@ bool SQLOrExpression::__init_static_variables(){
 	delete ctx;
 	return true;
 }
- SQLOrExpression::SQLOrExpression(ArrayList<ISQLExpression>* result, ThreadContext* ctx) throw()  : IObject(ctx), AbstractSQLBooleanCollectionExpression(result, ConstStr::getCNST_STR_1070(), ctx)
+ SQLOrExpression::SQLOrExpression(ArrayList<ISQLExpression>* result, ThreadContext* ctx) throw()  : IObject(ctx), AbstractSQLBooleanCollectionExpression(result, ConstStr::getCNST_STR_1071(), ctx)
 {
 }
 void SQLOrExpression::__construct_impl(ArrayList<ISQLExpression>* result, ThreadContext* ctx) throw() 

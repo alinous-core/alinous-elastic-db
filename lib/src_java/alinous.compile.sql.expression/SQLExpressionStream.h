@@ -69,6 +69,9 @@ class FileStorageEntryBuilder;}}}
 namespace alinous {namespace buffer {namespace storage {
 class FileStorageEntryFetcher;}}}
 
+namespace alinous {namespace compile {namespace expression {
+class IExpression;}}}
+
 namespace alinous {namespace compile {namespace sql {namespace functions {
 class ISQLFunctionBody;}}}}
 
@@ -79,7 +82,7 @@ namespace alinous {namespace compile {
 class AlinousElementNetworkFactory;}}
 
 namespace alinous {namespace compile {namespace expression {
-class IExpression;}}}
+class IExpressionFactory;}}}
 
 namespace alinous {namespace remote {namespace socket {
 class ICommandData;}}}
@@ -108,6 +111,7 @@ using ::alinous::compile::analyse::SrcAnalyseContext;
 using ::alinous::compile::declare::AlinousName;
 using ::alinous::compile::expression::FunctionArguments;
 using ::alinous::compile::expression::IExpression;
+using ::alinous::compile::expression::IExpressionFactory;
 using ::alinous::compile::expression::expstream::ExpressionStream;
 using ::alinous::compile::sql::analyze::SQLAnalyseContext;
 using ::alinous::compile::sql::analyze::ScanTableIdentifier;
@@ -177,7 +181,7 @@ public:
 	void readData(NetworkBinaryBuffer* buff, ThreadContext* ctx) final;
 	void writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw()  final;
 	int fileSize(ThreadContext* ctx) final;
-	void toFileEntry(FileStorageEntryBuilder* builder, ThreadContext* ctx) throw()  final;
+	void toFileEntry(FileStorageEntryBuilder* builder, ThreadContext* ctx) final;
 	void fromFileEntry(FileStorageEntryFetcher* fetcher, ThreadContext* ctx) final;
 public:
 	static bool __init_done;

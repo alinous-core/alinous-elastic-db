@@ -62,11 +62,11 @@ int ServerBreakPoint::getLine(ThreadContext* ctx) throw()
 }
 String* ServerBreakPoint::toString(ThreadContext* ctx) throw() 
 {
-	return this->filePath->clone(ctx)->append(ConstStr::getCNST_STR_1073(), ctx)->append(Integer::toString(this->line, ctx), ctx);
+	return this->filePath->clone(ctx)->append(ConstStr::getCNST_STR_1074(), ctx)->append(Integer::toString(this->line, ctx), ctx);
 }
 void ServerBreakPoint::setupFromString(String* source, ThreadContext* ctx) throw() 
 {
-	IArrayObject<String>* elements = source->split(ConstStr::getCNST_STR_1073(), ctx);
+	IArrayObject<String>* elements = source->split(ConstStr::getCNST_STR_1074(), ctx);
 	__GC_MV(this, &(this->filePath), elements->get(0), String);
 	this->line = Integer::parseInt(elements->get(1), ctx);
 }

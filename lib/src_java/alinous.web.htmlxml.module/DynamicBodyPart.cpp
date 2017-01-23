@@ -69,7 +69,7 @@ void DynamicBodyPart::__releaseRegerences(bool prepare, ThreadContext* ctx) thro
 }
 String* DynamicBodyPart::toString(ThreadContext* ctx) throw() 
 {
-	return ConstStr::getCNST_STR_1813();
+	return ConstStr::getCNST_STR_1814();
 }
 void DynamicBodyPart::prepare(SrcAnalyseContext* context, ThreadContext* ctx) throw() 
 {

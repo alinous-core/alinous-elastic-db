@@ -91,14 +91,14 @@ bool TableJoinTarget::analyseSQLTables(SQLAnalyseContext* context, bool leftValu
 		table = segments->get(1, ctx);
 		break ;
 	default:
-		throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1083()->clone(ctx)->append(this->name->toString(ctx), ctx), ctx));
+		throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1084()->clone(ctx)->append(this->name->toString(ctx), ctx), ctx));
 		break;
 	}
 	AlinousDatabase* db = context->getDatabase(ctx);
 	IDatabaseTable* tableStore = db->getTable(schema, table, ctx);
 	if(tableStore == nullptr)
 	{
-		throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1083()->clone(ctx)->append(this->name->toString(ctx), ctx), ctx));
+		throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1084()->clone(ctx)->append(this->name->toString(ctx), ctx), ctx));
 	}
 	__GC_MV(this, &(this->scanMeta), (new(ctx) ScanTableMetadata(tableStore->getMetadata(ctx), this->asName, ctx)), ScanTableMetadata);
 	__GC_MV(this, &(this->tableId), (new(ctx) ScanTableIdentifier((new(ctx) TableAndSchema(schema, table, ctx)), this->asName, this->scanMeta->getColumns(ctx)->size(ctx), ctx)), ScanTableIdentifier);

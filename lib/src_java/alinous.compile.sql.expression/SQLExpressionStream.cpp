@@ -310,11 +310,39 @@ int SQLExpressionStream::fileSize(ThreadContext* ctx)
 	}
 	return total;
 }
-void SQLExpressionStream::toFileEntry(FileStorageEntryBuilder* builder, ThreadContext* ctx) throw() 
+void SQLExpressionStream::toFileEntry(FileStorageEntryBuilder* builder, ThreadContext* ctx)
 {
+	builder->putInt(ICommandData::__SQLEqualityExpression, ctx);
+	bool isnull = (this->exp == nullptr);
+	builder->putBoolean(isnull, ctx);
+	if(!isnull)
+	{
+		this->exp->toFileEntry(builder, ctx);
+	}
+	isnull = (this->asName == nullptr);
+	builder->putBoolean(isnull, ctx);
+	if(!isnull)
+	{
+		builder->putString(this->asName, ctx);
+	}
 }
 void SQLExpressionStream::fromFileEntry(FileStorageEntryFetcher* fetcher, ThreadContext* ctx)
 {
+	bool isnull = fetcher->fetchBoolean(ctx);
+	if(!isnull)
+	{
+		IExpression* el = IExpressionFactory::fromFetcher(fetcher, ctx);
+		if(el == nullptr || !((dynamic_cast<ExpressionStream*>(el) != 0)))
+		{
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1018(), ctx));
+		}
+		__GC_MV(this, &(this->exp), static_cast<ExpressionStream*>(el), ExpressionStream);
+	}
+	isnull = fetcher->fetchBoolean(ctx);
+	if(!isnull)
+	{
+		__GC_MV(this, &(this->asName), fetcher->fetchString(ctx), String);
+	}
 }
 }}}}
 
