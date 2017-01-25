@@ -131,6 +131,7 @@ private:
 	ArrayList<IScannableIndex>* indexes;
 	IScannableIndex* primaryIndex;
 public:
+	void updateMetadata(TableMetadata* metadata, ThreadContext* ctx) throw() ;
 	Integer* getTableId(ThreadContext* ctx) throw()  final;
 	int getColumnCount(ThreadContext* ctx) throw()  final;
 	IScannableIndex* getTableIndexByColIds(ArrayList<ScanTableColumnIdentifier>* columns, ThreadContext* ctx) throw()  final;

@@ -66,6 +66,10 @@ void DatabaseTableClient::__releaseRegerences(bool prepare, ThreadContext* ctx) 
 		return;
 	}
 }
+void DatabaseTableClient::updateMetadata(TableMetadata* metadata, ThreadContext* ctx) throw() 
+{
+	__GC_MV(this, &(this->metadata), metadata, TableMetadata);
+}
 Integer* DatabaseTableClient::getTableId(ThreadContext* ctx) throw() 
 {
 	return this->tableId;

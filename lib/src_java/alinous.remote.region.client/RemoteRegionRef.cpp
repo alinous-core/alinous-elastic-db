@@ -159,7 +159,7 @@ void RemoteRegionRef::synschemeData(ClientStructureMetadata* data, ThreadContext
 		String* schemaName = it->next(ctx);
 		ClientSchemaData* scdata = map->get(schemaName, ctx);
 		RemoteTableScheme* schema = findOrCreateSchema(schemaName, ctx);
-		schema->updateInfo(scdata, ctx);
+		schema->updateInfo(scdata, this->regionAccessPool, ctx);
 	}
 }
 RemoteTableScheme* RemoteRegionRef::findOrCreateSchema(String* schemaName, ThreadContext* ctx) throw() 

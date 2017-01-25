@@ -46,10 +46,12 @@ void RemoteTableScheme::__releaseRegerences(bool prepare, ThreadContext* ctx) th
 		return;
 	}
 }
-void RemoteTableScheme::updateInfo(ClientSchemaData* scdata, ThreadContext* ctx) throw() 
+void RemoteTableScheme::updateInfo(ClientSchemaData* scdata, SocketConnectionPool* regionAccessPool, ThreadContext* ctx) throw() 
 {
 	{
 		SynchronizedBlockObj __synchronized_2(this->lock, ctx);
+		Map<String,ClientTableData>* map = scdata->getMap(ctx);
+		doUpdateInfo(map, regionAccessPool, ctx);
 	}
 }
 IDatabaseTable* RemoteTableScheme::getTableStore(String* tableName, ThreadContext* ctx) throw() 
@@ -62,6 +64,44 @@ IDatabaseTable* RemoteTableScheme::getTableStore(String* tableName, ThreadContex
 String* RemoteTableScheme::getName(ThreadContext* ctx) throw() 
 {
 	return name;
+}
+void RemoteTableScheme::doUpdateInfo(Map<String,ClientTableData>* map, SocketConnectionPool* regionAccessPool, ThreadContext* ctx) throw() 
+{
+	Iterator<String>* it = map->keySet(ctx)->iterator(ctx);
+	while(it->hasNext(ctx))
+	{
+		String* tableName = it->next(ctx);
+		ClientTableData* tableData = map->get(tableName, ctx);
+		DatabaseTableClient* table = getOrInitDatabaseTableClient(tableName, tableData, regionAccessPool, ctx);
+		table->updateMetadata(tableData->getMetadata(ctx), ctx);
+	}
+	ArrayList<String>* delList = (new(ctx) ArrayList<String>(ctx));
+	it = this->tables->keySet(ctx)->iterator(ctx);
+	while(it->hasNext(ctx))
+	{
+		String* tableName = it->next(ctx);
+		DatabaseTableClient* table = this->tables->get(tableName, ctx);
+		if(table == nullptr)
+		{
+			delList->add(tableName, ctx);
+		}
+	}
+	int maxLoop = delList->size(ctx);
+	for(int i = 0; i != maxLoop; ++i)
+	{
+		String* tableName = delList->get(i, ctx);
+		this->tables->remove(tableName, ctx);
+	}
+}
+DatabaseTableClient* RemoteTableScheme::getOrInitDatabaseTableClient(String* tableName, ClientTableData* tableData, SocketConnectionPool* regionAccessPool, ThreadContext* ctx) throw() 
+{
+	DatabaseTableClient* client = this->tables->get(tableName, ctx);
+	if(client == nullptr)
+	{
+		client = (new(ctx) DatabaseTableClient(this->name, tableName, tableData->getMetadata(ctx), regionAccessPool, ctx));
+		this->tables->put(tableName, client, ctx);
+	}
+	return client;
 }
 }}}}
 
