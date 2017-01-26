@@ -200,6 +200,7 @@ public:
 	ThreadPool* workerThreadsPool;
 private:
 	AlinousCore* core;
+	bool remote;
 	String* dataDir;
 	BTree* dbconfig;
 	File* configFile;
@@ -235,6 +236,7 @@ public:
 	AlinousCore* getCore(ThreadContext* ctx) throw() ;
 	BTreeGlobalCache* getBtreeCache(ThreadContext* ctx) throw() ;
 	TableRegionManager* getRegionManager(ThreadContext* ctx) throw() ;
+	bool isRemote(ThreadContext* ctx) throw() ;
 private:
 	File* getConfigFile(ThreadContext* ctx) throw() ;
 	void openRegions(AlinousDbInstanceInfo* instanceConfig, ThreadContext* ctx);

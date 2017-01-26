@@ -105,19 +105,7 @@ DbTransaction* DbTransactionManager::borrowTransaction(int acid, ThreadContext* 
 	long long commitId = vctx->getCommitId(ctx);
 	long long trxId = vctx->getTrxId(ctx);
 	String* tmpDir = this->trxTmpDir->clone(ctx)->append(trxId, ctx)->append(ConstStr::getCNST_STR_1007(), ctx);
-	DbTransaction* trx = nullptr;
-	switch(acid) {
-	case IDatabaseDriver::READ_COMMITTED:
-		trx = (new(ctx) ReadCommittedTransaction(this, tmpDir, database, core, commitId, ctx));
-		break ;
-	case IDatabaseDriver::REPEATABLE_READ:
-		trx = (new(ctx) RepeatableReadTransaction(this, tmpDir, database, core, commitId, ctx));
-		break ;
-	case IDatabaseDriver::SERIALIZABLE:
-	default:
-		trx = (new(ctx) SerializableTransaction(this, tmpDir, database, this->core, commitId, ctx));
-		break ;
-	}
+	DbTransaction* trx = DbTransactionFactory::newTransaction(acid, this, tmpDir, this->database, this->core, commitId, vctx, ctx);
 	{
 		SynchronizedBlockObj __synchronized_2(this->lock, ctx);
 		this->trxReady->add(trx, ctx);

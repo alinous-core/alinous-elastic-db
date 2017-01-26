@@ -27,20 +27,8 @@ class InterruptedException;}}
 namespace alinous {namespace db {namespace trx {
 class DbVersionContext;}}}
 
-namespace alinous {namespace db {namespace trx {
-class ReadCommittedTransaction;}}}
-
-namespace alinous {namespace db {namespace trx {
-class RepeatableReadTransaction;}}}
-
-namespace alinous {namespace db {namespace trx {
-class SerializableTransaction;}}}
-
 namespace alinous {namespace lock {
 class LockObject;}}
-
-namespace alinous {namespace runtime {namespace dbif {
-class IDatabaseDriver;}}}
 
 namespace alinous {namespace system {namespace utils {
 class FileUtils;}}}
@@ -63,7 +51,6 @@ using ::java::util::ArrayList;
 using ::alinous::db::AlinousDatabase;
 using ::alinous::db::AlinousDbException;
 using ::alinous::lock::LockObject;
-using ::alinous::runtime::dbif::IDatabaseDriver;
 using ::alinous::runtime::parallel::ThreadPool;
 using ::alinous::system::AlinousCore;
 using ::alinous::system::utils::FileUtils;

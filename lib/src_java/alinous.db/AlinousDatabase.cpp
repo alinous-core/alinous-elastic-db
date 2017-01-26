@@ -22,7 +22,7 @@ bool AlinousDatabase::__init_static_variables(){
 	delete ctx;
 	return true;
 }
- AlinousDatabase::AlinousDatabase(ThreadContext* ctx) throw()  : IObject(ctx), instanceConfigLock(__GC_INS(this, (new(ctx) LockObject(ctx)), LockObject)), trxManager(nullptr), trxLockManager(nullptr), commitIdPublisher(nullptr), workerThreadsPool(nullptr), core(nullptr), dataDir(nullptr), dbconfig(nullptr), configFile(nullptr), trxWriterThread(nullptr), btreeCache(nullptr), regionManager(nullptr)
+ AlinousDatabase::AlinousDatabase(ThreadContext* ctx) throw()  : IObject(ctx), instanceConfigLock(__GC_INS(this, (new(ctx) LockObject(ctx)), LockObject)), trxManager(nullptr), trxLockManager(nullptr), commitIdPublisher(nullptr), workerThreadsPool(nullptr), core(nullptr), remote(false), dataDir(nullptr), dbconfig(nullptr), configFile(nullptr), trxWriterThread(nullptr), btreeCache(nullptr), regionManager(nullptr)
 {
 	__GC_MV(this, &(this->trxWriterThread), nullptr, AlinousThread);
 	__GC_MV(this, &(this->workerThreadsPool), nullptr, ThreadPool);
@@ -270,10 +270,12 @@ void AlinousDatabase::open(AlinousDbInstanceInfo* instanceConfig, ThreadContext*
 	if(monitorRef != nullptr)
 	{
 		__GC_MV(this, &(this->commitIdPublisher), (new(ctx) RemoteCommitIdPublisher(monitorRef, ctx))->init(ctx), ICommidIdPublisher);
+		this->remote = true;
 	}
 		else 
 	{
 		__GC_MV(this, &(this->commitIdPublisher), (new(ctx) LocalCommitIdPublisher(this, ctx)), ICommidIdPublisher);
+		this->remote = false;
 	}
 	__GC_MV(this, &(this->trxLockManager), (new(ctx) TrxLockManager(ctx)), TrxLockManager);
 	__GC_MV(this, &(this->regionManager), (new(ctx) TableRegionManager(ctx)), TableRegionManager);
@@ -428,6 +430,10 @@ BTreeGlobalCache* AlinousDatabase::getBtreeCache(ThreadContext* ctx) throw()
 TableRegionManager* AlinousDatabase::getRegionManager(ThreadContext* ctx) throw() 
 {
 	return regionManager;
+}
+bool AlinousDatabase::isRemote(ThreadContext* ctx) throw() 
+{
+	return remote;
 }
 File* AlinousDatabase::getConfigFile(ThreadContext* ctx) throw() 
 {
