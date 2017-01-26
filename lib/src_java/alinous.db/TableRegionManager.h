@@ -21,6 +21,9 @@ class AlinousDatabase;}}
 namespace alinous {namespace system {
 class AlinousCore;}}
 
+namespace alinous {namespace db {namespace table {
+class DatabaseException;}}}
+
 namespace java {namespace util {
 template <typename  T> class List;}}
 
@@ -29,9 +32,6 @@ class IOException;}}
 
 namespace alinous {namespace btree {
 class BTreeException;}}
-
-namespace alinous {namespace db {namespace table {
-class DatabaseException;}}}
 
 namespace alinous {namespace system {
 class AlinousException;}}

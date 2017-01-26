@@ -21,7 +21,7 @@ bool DynamicExecutableAttributeValue::__init_static_variables(){
  DynamicExecutableAttributeValue::DynamicExecutableAttributeValue(String* value, ThreadContext* ctx) : IObject(ctx), exp(nullptr)
 {
 	String* prog = value->trim(ctx);
-	if(prog->startsWith(ConstStr::getCNST_STR_1816(), ctx) && prog->endsWith(ConstStr::getCNST_STR_1112(), ctx))
+	if(prog->startsWith(ConstStr::getCNST_STR_1817(), ctx) && prog->endsWith(ConstStr::getCNST_STR_1112(), ctx))
 	{
 		prog = prog->substring(1, prog->length(ctx) - 1, ctx);
 		StringReader* reader = (new(ctx) StringReader(prog, ctx));
@@ -41,7 +41,7 @@ bool DynamicExecutableAttributeValue::__init_static_variables(){
 void DynamicExecutableAttributeValue::__construct_impl(String* value, ThreadContext* ctx)
 {
 	String* prog = value->trim(ctx);
-	if(prog->startsWith(ConstStr::getCNST_STR_1816(), ctx) && prog->endsWith(ConstStr::getCNST_STR_1112(), ctx))
+	if(prog->startsWith(ConstStr::getCNST_STR_1817(), ctx) && prog->endsWith(ConstStr::getCNST_STR_1112(), ctx))
 	{
 		prog = prog->substring(1, prog->length(ctx) - 1, ctx);
 		StringReader* reader = (new(ctx) StringReader(prog, ctx));

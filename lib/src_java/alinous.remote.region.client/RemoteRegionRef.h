@@ -54,6 +54,15 @@ class RemoteTableScheme;}}}}
 namespace alinous {namespace db {
 class ITableSchema;}}
 
+namespace alinous {namespace remote {namespace region {namespace command {namespace ddl {
+class RegionCreateSchemaCommand;}}}}}
+
+namespace alinous {namespace net {
+class UnknownHostException;}}
+
+namespace java {namespace io {
+class IOException;}}
+
 namespace alinous {namespace db {namespace table {
 class TableMetadata;}}}
 
@@ -75,9 +84,6 @@ template <typename  T, typename V> class HashMap;}}
 namespace alinous {namespace db {
 class ITableRegion;}}
 
-namespace java {namespace io {
-class IOException;}}
-
 namespace alinous {namespace btree {
 class BTreeException;}}
 
@@ -98,6 +104,7 @@ using namespace ::alinous;
 using namespace ::java::lang;
 using ::java::util::Iterator;
 using ::java::io::IOException;
+using ::java::net::UnknownHostException;
 using ::java::util::HashMap;
 using ::java::util::Iterator;
 using ::java::util::Map;
@@ -115,6 +122,7 @@ using ::alinous::remote::region::command::AbstractNodeRegionCommand;
 using ::alinous::remote::region::command::GetSchemaFromRegionCommand;
 using ::alinous::remote::region::command::data::ClientSchemaData;
 using ::alinous::remote::region::command::data::ClientStructureMetadata;
+using ::alinous::remote::region::command::ddl::RegionCreateSchemaCommand;
 using ::alinous::remote::socket::ISocketConnection;
 using ::alinous::remote::socket::SocketConnectionPool;
 using ::alinous::runtime::parallel::ThreadPool;
@@ -147,7 +155,7 @@ public:
 	int getRegionType(ThreadContext* ctx) throw()  final;
 	String* getRegionName(ThreadContext* ctx) throw()  final;
 	ITableSchema* getSchema(String* name, ThreadContext* ctx) throw()  final;
-	void createSchema(String* schemaName, ThreadContext* ctx) throw()  final;
+	void createSchema(String* schemaName, ThreadContext* ctx) final;
 	void createTable(String* schemaName, TableMetadata* tblMeta, ThreadPool* threadPool, AlinousCore* core, BTreeGlobalCache* cache, ThreadContext* ctx) final;
 	long long getSchemeVersion(ThreadContext* ctx) throw() ;
 	void setSchemeVersion(long long schemeVersion, ThreadContext* ctx) throw() ;

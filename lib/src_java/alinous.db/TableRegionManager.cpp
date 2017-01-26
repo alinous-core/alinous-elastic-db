@@ -83,6 +83,10 @@ void TableRegionManager::commitCreateTable(String* regionName, String* schemaNam
 			break ;
 		}
 	}
+	if(region == nullptr)
+	{
+		throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1668(), ctx));
+	}
 	region->createSchema(schemaName, ctx);
 	region->createTable(schemaName, tblMeta, database->workerThreadsPool, core, database->getBtreeCache(ctx), ctx);
 }

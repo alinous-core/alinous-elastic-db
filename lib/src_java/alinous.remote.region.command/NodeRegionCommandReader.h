@@ -21,6 +21,12 @@ class NodeRegionConnectCommand;}}}}
 namespace alinous {namespace remote {namespace region {namespace command {
 class GetSchemaFromRegionCommand;}}}}
 
+namespace alinous {namespace remote {namespace region {namespace command {namespace ddl {
+class RegionCreateSchemaCommand;}}}}}
+
+namespace alinous {namespace remote {namespace region {namespace command {namespace ddl {
+class RegionCreateTableCommand;}}}}}
+
 namespace alinous {namespace system {
 class AlinousException;}}
 
@@ -45,6 +51,8 @@ using namespace ::java::lang;
 using ::java::util::Iterator;
 using ::java::io::IOException;
 using ::java::io::InputStream;
+using ::alinous::remote::region::command::ddl::RegionCreateSchemaCommand;
+using ::alinous::remote::region::command::ddl::RegionCreateTableCommand;
 using ::alinous::remote::socket::NetworkBinalyUtils;
 using ::alinous::system::AlinousException;
 

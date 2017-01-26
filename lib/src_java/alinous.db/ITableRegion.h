@@ -74,7 +74,7 @@ public:
 	virtual int getRegionType(ThreadContext* ctx) throw()  = 0;
 	virtual String* getRegionName(ThreadContext* ctx) throw()  = 0;
 	virtual ITableSchema* getSchema(String* name, ThreadContext* ctx) throw()  = 0;
-	virtual void createSchema(String* schemaName, ThreadContext* ctx) throw()  = 0;
+	virtual void createSchema(String* schemaName, ThreadContext* ctx) = 0;
 	virtual void createTable(String* schemaName, TableMetadata* tblMeta, ThreadPool* threadPool, AlinousCore* core, BTreeGlobalCache* cache, ThreadContext* ctx) = 0;
 	virtual void syncSchemes(ThreadContext* ctx) = 0;
 	virtual void dispose(ThreadContext* ctx) throw()  = 0;

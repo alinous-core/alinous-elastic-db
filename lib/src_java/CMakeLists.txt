@@ -16,6 +16,8 @@ set(srcjava
 	"src_java/alinous.compile.analyse/SubVariableDeclareHolder.cpp"
 	"src_java/alinous.compile.analyse/VariableDeclareHolder.cpp"
 	"src_java/alinous.compile.analyse/SourceValidator.cpp"
+	"src_java/alinous.remote.region.command.ddl/RegionCreateSchemaCommand.cpp"
+	"src_java/alinous.remote.region.command.ddl/RegionCreateTableCommand.cpp"
 	"src_java/alinous.remote.db.command.data/StorageNodeData.cpp"
 	"src_java/alinous.remote.db.command.data/SchemaData.cpp"
 	"src_java/alinous.remote.db.command.data/SchemasStructureInfoData.cpp"

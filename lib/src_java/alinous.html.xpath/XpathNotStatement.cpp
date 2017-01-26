@@ -55,7 +55,7 @@ String* XpathNotStatement::toString(ThreadContext* ctx) throw()
 	StringBuffer* buffer = (new(ctx) StringBuffer(ctx));
 	if(notFlag)
 	{
-		buffer->append(ConstStr::getCNST_STR_1763(), ctx);
+		buffer->append(ConstStr::getCNST_STR_1764(), ctx);
 	}
 	buffer->append(ConstStr::getCNST_STR_991(), ctx);
 	buffer->append(stmt->toString(ctx), ctx);

@@ -169,9 +169,9 @@ String* TableSchema::getregionName(ThreadContext* ctx) throw()
 {
 	return regionName;
 }
-void TableSchema::setRegionName(String* name, ThreadContext* ctx) throw() 
+void TableSchema::setRegionName(String* regionName, ThreadContext* ctx) throw() 
 {
-	__GC_MV(this, &(this->name), name, String);
+	__GC_MV(this, &(this->regionName), regionName, String);
 }
 TableSchema* TableSchema::valueFromFetcher(FileStorageEntryFetcher* fetcher, ThreadContext* ctx)
 {

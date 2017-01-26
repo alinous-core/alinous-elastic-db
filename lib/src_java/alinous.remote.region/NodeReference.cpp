@@ -82,17 +82,17 @@ SchemasStructureInfoData* NodeReference::getSchemeInfo(String* region, ThreadCon
 			AbstractRemoteStorageCommand* retcmd = cmd->sendCommand(socket, ctx);
 			if(retcmd->getType(ctx) != AbstractRemoteStorageCommand::TYPE_GET_TABLE_SCHEME)
 			{
-				throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3562(), ctx));
+				throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3563(), ctx));
 			}
 			cmd = static_cast<GetTableSchemeCommand*>(retcmd);
 		}
 		catch(UnknownHostException* e)
 		{
-			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3563(), e, ctx));
+			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3564(), e, ctx));
 		}
 		catch(IOException* e)
 		{
-			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3564(), e, ctx));
+			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3565(), e, ctx));
 		}
 	}
 	return cmd->getData(ctx);

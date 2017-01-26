@@ -7,7 +7,7 @@ namespace alinous {namespace remote {namespace region {
 
 
 
-String* NodeRegionServer::THREAD_NAME = ConstStr::getCNST_STR_3561();
+String* NodeRegionServer::THREAD_NAME = ConstStr::getCNST_STR_3562();
 bool NodeRegionServer::__init_done = __init_static_variables();
 bool NodeRegionServer::__init_static_variables(){
 	Java2CppSystem::getSelf();
@@ -19,7 +19,7 @@ bool NodeRegionServer::__init_static_variables(){
 	delete ctx;
 	return true;
 }
- NodeRegionServer::NodeRegionServer(int port, int maxthread, ThreadContext* ctx) throw()  : IObject(ctx), port(0), maxthread(0), refs(nullptr), socketServer(nullptr), monitorConnectionPool(nullptr), nodeClusterRevision(0), region(nullptr)
+ NodeRegionServer::NodeRegionServer(int port, int maxthread, ThreadContext* ctx) throw()  : IObject(ctx), port(0), maxthread(0), refs(nullptr), socketServer(nullptr), monitorConnectionPool(nullptr), nodeClusterRevision(0), region(nullptr), core(nullptr)
 {
 	this->port = port;
 	this->maxthread = maxthread;
@@ -49,9 +49,15 @@ void NodeRegionServer::__releaseRegerences(bool prepare, ThreadContext* ctx) thr
 	monitorConnectionPool = nullptr;
 	__e_obj1.add(this->region, this);
 	region = nullptr;
+	__e_obj1.add(this->core, this);
+	core = nullptr;
 	if(!prepare){
 		return;
 	}
+}
+AlinousCore* NodeRegionServer::getCore(ThreadContext* ctx) throw() 
+{
+	return core;
 }
 void NodeRegionServer::initNodes(RegionsServer* srvconf, ThreadContext* ctx)
 {
@@ -88,7 +94,7 @@ void NodeRegionServer::syncNodes(ThreadContext* ctx)
 			AbstractMonitorCommand* retcmd = cmd->sendCommand(socket, ctx);
 			if(retcmd->getType(ctx) != AbstractMonitorCommand::TYPE_GET_REGION_INFO)
 			{
-				throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3560(), ctx));
+				throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3561(), ctx));
 			}
 			cmd = static_cast<GetRegionNodeInfoCommand*>(retcmd);
 			RegionInfoData* data = cmd->getRegionData(ctx);

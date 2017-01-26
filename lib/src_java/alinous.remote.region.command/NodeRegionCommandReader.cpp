@@ -52,8 +52,14 @@ AbstractNodeRegionCommand* NodeRegionCommandReader::readFromStream(InputStream* 
 	case AbstractNodeRegionCommand::TYPE_GET_SCHEMA_FROM_REGION:
 		cmd = (new(ctx) GetSchemaFromRegionCommand(ctx));
 		break ;
+	case AbstractNodeRegionCommand::TYPE_CREATE_SCHEMA:
+		cmd = (new(ctx) RegionCreateSchemaCommand(ctx));
+		break ;
+	case AbstractNodeRegionCommand::TYPE_CREATE_TABLE:
+		cmd = (new(ctx) RegionCreateTableCommand(ctx));
+		break ;
 	default:
-		throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3569(), ctx));
+		throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3571(), ctx));
 		break;
 	}
 	cmd->readFromStream(stream, size, ctx);

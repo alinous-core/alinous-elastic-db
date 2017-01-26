@@ -3,6 +3,9 @@
 namespace alinous {namespace remote {namespace region {
 class NodeReferenceManager;}}}
 
+namespace alinous {namespace system {
+class AlinousCore;}}
+
 namespace alinous {namespace system {namespace config {namespace remote {
 class RegionsServer;}}}}
 
@@ -79,6 +82,7 @@ using ::alinous::remote::region::command::data::ClientStructureMetadata;
 using ::alinous::remote::socket::ISocketConnection;
 using ::alinous::remote::socket::SocketConnectionPool;
 using ::alinous::remote::socket::SocketServer;
+using ::alinous::system::AlinousCore;
 using ::alinous::system::AlinousException;
 using ::alinous::system::ISystemLog;
 using ::alinous::system::config::remote::MonitorRef;
@@ -102,9 +106,11 @@ private:
 	SocketConnectionPool* monitorConnectionPool;
 	long long nodeClusterRevision;
 	String* region;
+	AlinousCore* core;
 private:
 	static String* THREAD_NAME;
 public:
+	AlinousCore* getCore(ThreadContext* ctx) throw() ;
 	void initNodes(RegionsServer* srvconf, ThreadContext* ctx);
 	long long getClientData(ClientStructureMetadata* data, ThreadContext* ctx);
 	void syncScheme(ThreadContext* ctx);

@@ -52,7 +52,8 @@ void GetSchemaFromRegionCommand::executeOnServer(NodeRegionServer* nodeRegionSer
 		}
 		catch(AlinousException* e)
 		{
-			e->printStackTrace(ctx);
+			handleError(e, ctx);
+			nodeRegionServer->getCore(ctx)->getLogger(ctx)->logError(e, ctx);
 		}
 	}
 	writeByteStream(outStream, ctx);
@@ -64,6 +65,7 @@ void GetSchemaFromRegionCommand::readFromStream(InputStream* stream, int remain,
 	NetworkBinaryBuffer* buff = (new(ctx) NetworkBinaryBuffer(src, ctx));
 	this->schemeVersion = buff->getLong(ctx);
 	this->data->readData(buff, ctx);
+	readErrorFromStream(buff, ctx);
 }
 long long GetSchemaFromRegionCommand::getSchemeVersion(ThreadContext* ctx) throw() 
 {
@@ -83,6 +85,7 @@ void GetSchemaFromRegionCommand::writeByteStream(OutputStream* out, ThreadContex
 	buff->putInt(NodeRegionConnectCommand::TYPE_GET_SCHEMA_FROM_REGION, ctx);
 	buff->putLong(this->schemeVersion, ctx);
 	this->data->writeData(buff, ctx);
+	writeErrorByteStream(buff, ctx);
 	IArrayObjectPrimitive<char>* b = buff->toBinary(ctx);
 	int pos = buff->getPutSize(ctx);
 	out->write(b, 0, pos, ctx);

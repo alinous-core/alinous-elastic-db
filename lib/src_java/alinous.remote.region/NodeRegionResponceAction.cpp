@@ -84,7 +84,7 @@ void NodeRegionResponceAction::handleCommand(BufferedInputStream* stream, Buffer
 		cmd = NodeRegionCommandReader::readFromStream(stream, ctx);
 		if(cmd == nullptr)
 		{
-			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3545(), ctx));
+			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3546(), ctx));
 		}
 		int type = cmd->getType(ctx);
 		switch(type) {
@@ -99,6 +99,8 @@ void NodeRegionResponceAction::handleCommand(BufferedInputStream* stream, Buffer
 			break ;
 		case AbstractNodeRegionCommand::TYPE_VOID:
 		case AbstractNodeRegionCommand::TYPE_GET_SCHEMA_FROM_REGION:
+		case AbstractNodeRegionCommand::TYPE_CREATE_SCHEMA:
+		case AbstractNodeRegionCommand::TYPE_CREATE_TABLE:
 		default:
 			cmd->executeOnServer(this->nodeRegionServer, outStream, ctx);
 			break ;

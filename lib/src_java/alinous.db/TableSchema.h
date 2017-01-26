@@ -136,7 +136,7 @@ public:
 	bool equals(TableSchema* other, ThreadContext* ctx) throw() ;
 	IValueFetcher* getFetcher(ThreadContext* ctx) throw()  final;
 	String* getregionName(ThreadContext* ctx) throw() ;
-	void setRegionName(String* name, ThreadContext* ctx) throw() ;
+	void setRegionName(String* regionName, ThreadContext* ctx) throw() ;
 public:
 	static TableSchema* valueFromFetcher(FileStorageEntryFetcher* fetcher, ThreadContext* ctx);
 public:
