@@ -43,12 +43,25 @@ void GetMaxCommitIdCommand::__releaseRegerences(bool prepare, ThreadContext* ctx
 }
 void GetMaxCommitIdCommand::executeOnServer(TransactionMonitorServer* monitorServer, BufferedOutputStream* outStream, ThreadContext* ctx)
 {
+	this->commitId = monitorServer->getCommitId(ctx);
+	writeByteStream(outStream, ctx);
 }
 void GetMaxCommitIdCommand::writeByteStream(OutputStream* out, ThreadContext* ctx)
 {
+	NetworkBinaryBuffer* buff = (new(ctx) NetworkBinaryBuffer(32, ctx));
+	buff->putInt(AbstractMonitorCommand::TYPE_GET_MAX_COMMIT_ID, ctx);
+	buff->putLong(this->commitId, ctx);
+	IArrayObjectPrimitive<char>* b = buff->toBinary(ctx);
+	int pos = buff->getPutSize(ctx);
+	out->write(b, 0, pos, ctx);
+	out->flush(ctx);
 }
 void GetMaxCommitIdCommand::readFromStream(InputStream* stream, int remain, ThreadContext* ctx)
 {
+	IArrayObjectPrimitive<char>* src = ArrayAllocatorPrimitive<char>::allocatep(ctx, remain);
+	stream->read(src, ctx);
+	NetworkBinaryBuffer* buff = (new(ctx) NetworkBinaryBuffer(src, ctx));
+	this->commitId = buff->getLong(ctx);
 }
 long long GetMaxCommitIdCommand::getCommitId(ThreadContext* ctx) throw() 
 {

@@ -83,18 +83,19 @@ void RemoteRegionRef::syncSchemes(ThreadContext* ctx)
 			AbstractNodeRegionCommand* retcmd = cmd->sendCommand(socket, ctx);
 			if(retcmd->getType(ctx) != AbstractNodeRegionCommand::TYPE_GET_SCHEMA_FROM_REGION)
 			{
-				throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3564(), ctx));
+				throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3565(), ctx));
 			}
 			cmd = static_cast<GetSchemaFromRegionCommand*>(retcmd);
 		}
 		catch(AlinousException* e)
 		{
-			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3565(), e, ctx));
+			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3566(), e, ctx));
 		}
 	}
 	{
 		SynchronizedBlockObj __synchronized_2(this->schemeLock, ctx);
 		ClientStructureMetadata* data = cmd->getData(ctx);
+		this->schemeVersion = cmd->getSchemeVersion(ctx);
 		synschemeData(data, ctx);
 	}
 }

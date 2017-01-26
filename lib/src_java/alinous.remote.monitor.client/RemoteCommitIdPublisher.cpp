@@ -76,19 +76,31 @@ void RemoteCommitIdPublisher::setMaxCommitId(long long maxCommitId, ThreadContex
 long long RemoteCommitIdPublisher::getMaxCommitId(ThreadContext* ctx)
 {
 	GetMaxCommitIdCommand* cmd = (new(ctx) GetMaxCommitIdCommand(ctx));
+	ISocketConnection* con = nullptr;
 	{
+		std::function<void(void)> finallyLm2= [&, this]()
+		{
+			this->pool->returnConnection(con, ctx);
+		};
+		Releaser finalyCaller2(finallyLm2);
 		try
 		{
-			ISocketConnection* con = this->pool->getConnection(ctx);
+			con = this->pool->getConnection(ctx);
 			cmd->sendCommand(con->getSocket(ctx), ctx);
+			AbstractMonitorCommand* retcmd = cmd->sendCommand(con->getSocket(ctx), ctx);
+			if(retcmd->getType(ctx) != AbstractMonitorCommand::TYPE_GET_MAX_COMMIT_ID)
+			{
+				throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3556(), ctx));
+			}
+			cmd = static_cast<GetMaxCommitIdCommand*>(retcmd);
 		}
 		catch(UnknownHostException* e)
 		{
-			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3556(), e, ctx));
+			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3557(), e, ctx));
 		}
 		catch(IOException* e)
 		{
-			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3556(), e, ctx));
+			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3557(), e, ctx));
 		}
 	}
 	return cmd->getCommitId(ctx);
@@ -96,22 +108,80 @@ long long RemoteCommitIdPublisher::getMaxCommitId(ThreadContext* ctx)
 long long RemoteCommitIdPublisher::newCommitId(ThreadContext* ctx)
 {
 	NewCommitIdCommand* cmd = (new(ctx) NewCommitIdCommand(ctx));
+	ISocketConnection* con = nullptr;
 	{
+		std::function<void(void)> finallyLm2= [&, this]()
+		{
+			this->pool->returnConnection(con, ctx);
+		};
+		Releaser finalyCaller2(finallyLm2);
 		try
 		{
-			ISocketConnection* con = this->pool->getConnection(ctx);
-			cmd->sendCommand(con->getSocket(ctx), ctx);
+			con = this->pool->getConnection(ctx);
+			AbstractMonitorCommand* retcmd = cmd->sendCommand(con->getSocket(ctx), ctx);
+			if(retcmd->getType(ctx) != AbstractMonitorCommand::TYPE_NEW_MAX_COMMIT_ID)
+			{
+				throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3556(), ctx));
+			}
+			cmd = static_cast<NewCommitIdCommand*>(retcmd);
 		}
 		catch(UnknownHostException* e)
 		{
-			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3556(), e, ctx));
+			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3557(), e, ctx));
 		}
 		catch(IOException* e)
 		{
-			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3556(), e, ctx));
+			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3557(), e, ctx));
 		}
 	}
 	return cmd->getCommitId(ctx);
+}
+DbVersionContext* RemoteCommitIdPublisher::newTransactionContext(ThreadContext* ctx)
+{
+	DbVersionContext* vctx = (new(ctx) DbVersionContext(ctx));
+	NewTransactionCommand* cmd = (new(ctx) NewTransactionCommand(ctx));
+	ISocketConnection* con = nullptr;
+	{
+		std::function<void(void)> finallyLm2= [&, this]()
+		{
+			this->pool->returnConnection(con, ctx);
+		};
+		Releaser finalyCaller2(finallyLm2);
+		try
+		{
+			con = this->pool->getConnection(ctx);
+			AbstractMonitorCommand* retcmd = cmd->sendCommand(con->getSocket(ctx), ctx);
+			if(retcmd->getType(ctx) != AbstractMonitorCommand::TYPE_NEW_TRANSACTION)
+			{
+				throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3556(), ctx));
+			}
+			cmd = static_cast<NewTransactionCommand*>(retcmd);
+		}
+		catch(UnknownHostException* e)
+		{
+			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3557(), e, ctx));
+		}
+		catch(IOException* e)
+		{
+			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3557(), e, ctx));
+		}
+	}
+	long long trxId = cmd->getTrxId(ctx);
+	long long commitId = cmd->getCommitId(ctx);
+	long long nodeClusterVersion = cmd->getNodeClusterVersion(ctx);
+	long long schemaVersion = cmd->getSchemaVersion(ctx);
+	vctx->setTrxId(trxId, ctx);
+	vctx->setCommitId(commitId, ctx);
+	vctx->setNodeClusterVersion(nodeClusterVersion, ctx);
+	vctx->setSchemaVersion(schemaVersion, ctx);
+	return vctx;
+}
+void RemoteCommitIdPublisher::dispose(ThreadContext* ctx) throw() 
+{
+	if(this->pool != nullptr)
+	{
+		this->pool->dispose(ctx);
+	}
 }
 }}}}
 

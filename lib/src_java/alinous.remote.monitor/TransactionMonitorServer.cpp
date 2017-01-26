@@ -19,7 +19,7 @@ bool TransactionMonitorServer::__init_static_variables(){
 	delete ctx;
 	return true;
 }
- TransactionMonitorServer::TransactionMonitorServer(int port, int maxthread, ThreadContext* ctx) throw()  : IObject(ctx), port(0), lastCommitId(0), lastOid(0), maxthread(0), socketServer(nullptr), nodeInfo(nullptr)
+ TransactionMonitorServer::TransactionMonitorServer(int port, int maxthread, ThreadContext* ctx) throw()  : IObject(ctx), port(0), trxLock(__GC_INS(this, (new(ctx) LockObject(ctx)), LockObject)), trxId(1), commitIdLock(__GC_INS(this, (new(ctx) LockObject(ctx)), LockObject)), lastCommitId(0), lastOid(0), maxthread(0), socketServer(nullptr), nodeInfo(nullptr), schemaVersionLock(__GC_INS(this, (new(ctx) LockObject(ctx)), LockObject)), schemaVersion(1)
 {
 	this->port = port;
 	this->maxthread = maxthread;
@@ -39,10 +39,16 @@ void TransactionMonitorServer::__construct_impl(int port, int maxthread, ThreadC
 void TransactionMonitorServer::__releaseRegerences(bool prepare, ThreadContext* ctx) throw() 
 {
 	ObjectEraser __e_obj1(ctx, __FILEW__, __LINE__, L"TransactionMonitorServer", L"~TransactionMonitorServer");
+	__e_obj1.add(this->trxLock, this);
+	trxLock = nullptr;
+	__e_obj1.add(this->commitIdLock, this);
+	commitIdLock = nullptr;
 	__e_obj1.add(this->socketServer, this);
 	socketServer = nullptr;
 	__e_obj1.add(this->nodeInfo, this);
 	nodeInfo = nullptr;
+	__e_obj1.add(this->schemaVersionLock, this);
+	schemaVersionLock = nullptr;
 	if(!prepare){
 		return;
 	}
@@ -76,8 +82,38 @@ long long TransactionMonitorServer::updateNodeClusterRevision(long long nodeClus
 }
 long long TransactionMonitorServer::getNextCommitId(ThreadContext* ctx) throw() 
 {
-	this->lastCommitId ++ ;
-	return lastCommitId;
+	{
+		SynchronizedBlockObj __synchronized_2(this->commitIdLock, ctx);
+		this->lastCommitId ++ ;
+		return lastCommitId;
+	}
+}
+long long TransactionMonitorServer::getCommitId(ThreadContext* ctx) throw() 
+{
+	{
+		SynchronizedBlockObj __synchronized_2(this->commitIdLock, ctx);
+		return lastCommitId;
+	}
+}
+long long TransactionMonitorServer::newTransactionId(ThreadContext* ctx) throw() 
+{
+	{
+		SynchronizedBlockObj __synchronized_2(this->trxLock, ctx);
+		long long cur = this->trxId;
+		this->trxId ++ ;
+		return cur;
+	}
+}
+long long TransactionMonitorServer::getNodeClusterVersion(ThreadContext* ctx) throw() 
+{
+	return this->nodeInfo->getNodeClusterRevision(ctx);
+}
+long long TransactionMonitorServer::getSchemaVersion(ThreadContext* ctx) throw() 
+{
+	{
+		SynchronizedBlockObj __synchronized_2(this->schemaVersionLock, ctx);
+		return this->schemaVersion;
+	}
 }
 long long TransactionMonitorServer::getNextOid(ThreadContext* ctx) throw() 
 {

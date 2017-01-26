@@ -25,6 +25,9 @@ namespace java {namespace lang {
 class InterruptedException;}}
 
 namespace alinous {namespace db {namespace trx {
+class DbVersionContext;}}}
+
+namespace alinous {namespace db {namespace trx {
 class ReadCommittedTransaction;}}}
 
 namespace alinous {namespace db {namespace trx {

@@ -3,6 +3,9 @@
 namespace alinous {namespace db {
 class AlinousDatabase;}}
 
+namespace alinous {namespace db {namespace trx {
+class DbVersionContext;}}}
+
 namespace alinous {namespace lock {
 class LockObject;}}
 
@@ -22,6 +25,7 @@ namespace alinous {namespace db {
 using namespace ::alinous;
 using namespace ::java::lang;
 using ::java::util::Iterator;
+using ::alinous::db::trx::DbVersionContext;
 using ::alinous::lock::LockObject;
 
 
@@ -38,10 +42,15 @@ private:
 	long long maxCommitId;
 	LockObject* lock;
 	AlinousDatabase* database;
+	long long trxId;
 public:
 	void setMaxCommitId(long long maxCommitId, ThreadContext* ctx) throw()  final;
 	long long getMaxCommitId(ThreadContext* ctx) throw()  final;
 	long long newCommitId(ThreadContext* ctx) final;
+	DbVersionContext* newTransactionContext(ThreadContext* ctx) throw()  final;
+	void dispose(ThreadContext* ctx) throw()  final;
+private:
+	long long getNextTrxId(ThreadContext* ctx) throw() ;
 public:
 	static bool __init_done;
 	static bool __init_static_variables();

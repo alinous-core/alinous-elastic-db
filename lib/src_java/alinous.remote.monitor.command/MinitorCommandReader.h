@@ -27,6 +27,9 @@ class NewCommitIdCommand;}}}}}
 namespace alinous {namespace remote {namespace monitor {namespace command {
 class GetRegionNodeInfoCommand;}}}}
 
+namespace alinous {namespace remote {namespace monitor {namespace command {namespace commitId {
+class NewTransactionCommand;}}}}}
+
 namespace alinous {namespace system {
 class AlinousException;}}
 
@@ -53,6 +56,7 @@ using ::java::io::IOException;
 using ::java::io::InputStream;
 using ::alinous::remote::monitor::command::commitId::GetMaxCommitIdCommand;
 using ::alinous::remote::monitor::command::commitId::NewCommitIdCommand;
+using ::alinous::remote::monitor::command::commitId::NewTransactionCommand;
 using ::alinous::remote::socket::NetworkBinalyUtils;
 using ::alinous::system::AlinousException;
 

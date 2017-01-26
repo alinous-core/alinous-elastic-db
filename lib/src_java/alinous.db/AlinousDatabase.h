@@ -57,6 +57,9 @@ class VariableException;}}}
 namespace alinous {namespace system {
 class AlinousException;}}
 
+namespace alinous {namespace db {namespace trx {
+class DbVersionContext;}}}
+
 namespace alinous {namespace btree {
 class BTreeLeafNode;}}
 
@@ -161,6 +164,7 @@ using ::alinous::btree::LongValue;
 using ::alinous::compile::declare::AlinousName;
 using ::alinous::db::table::IDatabaseTable;
 using ::alinous::db::trx::DbTransactionManager;
+using ::alinous::db::trx::DbVersionContext;
 using ::alinous::db::trx::TrxLockContext;
 using ::alinous::db::trx::TrxLockManager;
 using ::alinous::lock::LockObject;
@@ -217,6 +221,7 @@ public:
 	void initInstance(AlinousDbInstanceInfo* instanceConfig, ThreadContext* ctx);
 	long long getCommitId(ThreadContext* ctx);
 	long long newCommitId(ThreadContext* ctx);
+	DbVersionContext* newTransactionContext(ThreadContext* ctx);
 	void syncScheme(ThreadContext* ctx);
 	void open(AlinousDbInstanceInfo* instanceConfig, ThreadContext* ctx);
 	TableSchemaCollection* getSchema(String* name, ThreadContext* ctx) throw() ;

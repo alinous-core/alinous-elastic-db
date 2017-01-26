@@ -22,11 +22,13 @@ bool NodeRegionResponceAction::__init_static_variables(){
 {
 	__GC_MV(this, &(this->socket), socket, Socket);
 	__GC_MV(this, &(this->server), server, SocketServer);
+	__GC_MV(this, &(this->nodeRegionServer), nodeRegionServer, NodeRegionServer);
 }
 void NodeRegionResponceAction::__construct_impl(NodeRegionServer* nodeRegionServer, Socket* socket, SocketServer* server, ThreadContext* ctx) throw() 
 {
 	__GC_MV(this, &(this->socket), socket, Socket);
 	__GC_MV(this, &(this->server), server, SocketServer);
+	__GC_MV(this, &(this->nodeRegionServer), nodeRegionServer, NodeRegionServer);
 }
  NodeRegionResponceAction::~NodeRegionResponceAction() throw() 
 {

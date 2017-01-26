@@ -1,5 +1,8 @@
 #ifndef ALINOUS_DB_ICOMMIDIDPUBLISHER_H_
 #define ALINOUS_DB_ICOMMIDIDPUBLISHER_H_
+namespace alinous {namespace db {namespace trx {
+class DbVersionContext;}}}
+
 namespace alinous {namespace system {
 class AlinousException;}}
 
@@ -16,6 +19,7 @@ namespace alinous {namespace db {
 using namespace ::alinous;
 using namespace ::java::lang;
 using ::java::util::Iterator;
+using ::alinous::db::trx::DbVersionContext;
 using ::alinous::system::AlinousException;
 
 
@@ -36,6 +40,8 @@ public:
 	virtual void setMaxCommitId(long long maxCommitId, ThreadContext* ctx) throw()  = 0;
 	virtual long long getMaxCommitId(ThreadContext* ctx) = 0;
 	virtual long long newCommitId(ThreadContext* ctx) = 0;
+	virtual DbVersionContext* newTransactionContext(ThreadContext* ctx) = 0;
+	virtual void dispose(ThreadContext* ctx) throw()  = 0;
 public:
 	static bool __init_done;
 	static bool __init_static_variables();

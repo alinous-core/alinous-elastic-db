@@ -101,8 +101,9 @@ DbTransaction* DbTransactionManager::borrowTransaction(int acid, ThreadContext* 
 			}
 		}
 	}
-	long long commitId = this->database->getCommitId(ctx);
-	long long trxId = commitId++;
+	DbVersionContext* vctx = this->database->newTransactionContext(ctx);
+	long long commitId = vctx->getCommitId(ctx);
+	long long trxId = vctx->getTrxId(ctx);
 	String* tmpDir = this->trxTmpDir->clone(ctx)->append(trxId, ctx)->append(ConstStr::getCNST_STR_1007(), ctx);
 	DbTransaction* trx = nullptr;
 	switch(acid) {

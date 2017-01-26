@@ -60,7 +60,7 @@ void ClientStructureMetadata::writeData(NetworkBinaryBuffer* buff, ThreadContext
 	Iterator<String>* it = this->map->keySet(ctx)->iterator(ctx);
 	while(it->hasNext(ctx))
 	{
-		String* schemeName = buff->getString(ctx);
+		String* schemeName = it->next(ctx);
 		ClientSchemaData* data = this->map->get(schemeName, ctx);
 		buff->putString(schemeName, ctx);
 		data->writeData(buff, ctx);

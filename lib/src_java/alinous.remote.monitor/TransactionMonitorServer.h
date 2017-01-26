@@ -21,6 +21,9 @@ class MonitorResponseActionFactory;}}}
 namespace alinous {namespace remote {namespace socket {
 class SocketServer;}}}
 
+namespace alinous {namespace lock {
+class LockObject;}}
+
 namespace alinous {namespace db {
 class AlinousDbException;}}
 
@@ -38,6 +41,7 @@ using namespace ::alinous;
 using namespace ::java::lang;
 using ::java::util::Iterator;
 using ::alinous::db::AlinousDbException;
+using ::alinous::lock::LockObject;
 using ::alinous::remote::monitor::command::data::RegionInfoData;
 using ::alinous::remote::socket::SocketServer;
 using ::alinous::system::ISystemLog;
@@ -55,11 +59,16 @@ public:
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 private:
 	int port;
+	LockObject* trxLock;
+	long long trxId;
+	LockObject* commitIdLock;
 	long long lastCommitId;
 	long long lastOid;
 	int maxthread;
 	SocketServer* socketServer;
 	RegionNodeInfoManager* nodeInfo;
+	LockObject* schemaVersionLock;
+	long long schemaVersion;
 public:
 	static String* THREAD_NAME;
 public:
@@ -70,6 +79,10 @@ public:
 	int getPort(ThreadContext* ctx) throw() ;
 	long long updateNodeClusterRevision(long long nodeClusterRevision, ThreadContext* ctx) throw() ;
 	long long getNextCommitId(ThreadContext* ctx) throw() ;
+	long long getCommitId(ThreadContext* ctx) throw() ;
+	long long newTransactionId(ThreadContext* ctx) throw() ;
+	long long getNodeClusterVersion(ThreadContext* ctx) throw() ;
+	long long getSchemaVersion(ThreadContext* ctx) throw() ;
 	long long getNextOid(ThreadContext* ctx) throw() ;
 	RegionNodeInfoManager* getNodeInfo(ThreadContext* ctx) throw() ;
 public:

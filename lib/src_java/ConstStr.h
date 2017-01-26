@@ -1747,9 +1747,9 @@ public:
 	constexpr static StaticUnicodeString __CNST_STR_632{L"America/Mazatlan",16};
 public:
 	static UnicodeStringWrapper* getCNST_STR_632() throw();
-	constexpr static StaticUnicodeString __CNST_STR_3564{L"Failed in getting scheme info from region server",48};
+	constexpr static StaticUnicodeString __CNST_STR_3565{L"Failed in getting scheme info from region server",48};
 public:
-	static UnicodeStringWrapper* getCNST_STR_3564() throw();
+	static UnicodeStringWrapper* getCNST_STR_3565() throw();
 	constexpr static StaticUnicodeString __CNST_STR_3477{L"application/vnd.intercon.formnet",32};
 public:
 	static UnicodeStringWrapper* getCNST_STR_3477() throw();
@@ -2089,9 +2089,9 @@ public:
 	constexpr static StaticUnicodeString __CNST_STR_3344{L"audio/x-ms-wax",14};
 public:
 	static UnicodeStringWrapper* getCNST_STR_3344() throw();
-	constexpr static StaticUnicodeString __CNST_STR_3560{L"Returning command is wrong",26};
+	constexpr static StaticUnicodeString __CNST_STR_3561{L"Returning command is wrong",26};
 public:
-	static UnicodeStringWrapper* getCNST_STR_3560() throw();
+	static UnicodeStringWrapper* getCNST_STR_3561() throw();
 	constexpr static StaticUnicodeString __CNST_STR_1699{L"VariableException occured",25};
 public:
 	static UnicodeStringWrapper* getCNST_STR_1699() throw();
@@ -2521,9 +2521,9 @@ public:
 	constexpr static StaticUnicodeString __CNST_STR_334{L"[:ascii:]",9};
 public:
 	static UnicodeStringWrapper* getCNST_STR_334() throw();
-	constexpr static StaticUnicodeString __CNST_STR_3558{L"Get Region info command failed",30};
+	constexpr static StaticUnicodeString __CNST_STR_3559{L"Get Region info command failed",30};
 public:
-	static UnicodeStringWrapper* getCNST_STR_3558() throw();
+	static UnicodeStringWrapper* getCNST_STR_3559() throw();
 	constexpr static StaticUnicodeString __CNST_STR_1011{L"<=",2};
 public:
 	static UnicodeStringWrapper* getCNST_STR_1011() throw();
@@ -3187,9 +3187,9 @@ public:
 	constexpr static StaticUnicodeString __CNST_STR_288{L"No",2};
 public:
 	static UnicodeStringWrapper* getCNST_STR_288() throw();
-	constexpr static StaticUnicodeString __CNST_STR_3567{L"Socket factory is not activated.",32};
+	constexpr static StaticUnicodeString __CNST_STR_3568{L"Socket factory is not activated.",32};
 public:
-	static UnicodeStringWrapper* getCNST_STR_3567() throw();
+	static UnicodeStringWrapper* getCNST_STR_3568() throw();
 	constexpr static StaticUnicodeString __CNST_STR_1071{L"OR",2};
 public:
 	static UnicodeStringWrapper* getCNST_STR_1071() throw();
@@ -5002,9 +5002,9 @@ public:
 	constexpr static StaticUnicodeString __CNST_STR_826{L"Asia/Thimphu",12};
 public:
 	static UnicodeStringWrapper* getCNST_STR_826() throw();
-	constexpr static StaticUnicodeString __CNST_STR_3566{L"Wrong Command Type of Node Region Command.",42};
+	constexpr static StaticUnicodeString __CNST_STR_3567{L"Wrong Command Type of Node Region Command.",42};
 public:
-	static UnicodeStringWrapper* getCNST_STR_3566() throw();
+	static UnicodeStringWrapper* getCNST_STR_3567() throw();
 	constexpr static StaticUnicodeString __CNST_STR_53{L"Zero length BigInteger",22};
 public:
 	static UnicodeStringWrapper* getCNST_STR_53() throw();
@@ -5962,9 +5962,9 @@ public:
 	constexpr static StaticUnicodeString __CNST_STR_2792{L"application/vnd.yamaha.openscoreformat",38};
 public:
 	static UnicodeStringWrapper* getCNST_STR_2792() throw();
-	constexpr static StaticUnicodeString __CNST_STR_3561{L"UnknownHostException",20};
+	constexpr static StaticUnicodeString __CNST_STR_3562{L"UnknownHostException",20};
 public:
-	static UnicodeStringWrapper* getCNST_STR_3561() throw();
+	static UnicodeStringWrapper* getCNST_STR_3562() throw();
 	constexpr static StaticUnicodeString __CNST_STR_878{L"Pacific/Funafuti",16};
 public:
 	static UnicodeStringWrapper* getCNST_STR_878() throw();
@@ -6292,9 +6292,9 @@ public:
 	constexpr static StaticUnicodeString __CNST_STR_2604{L"image/vnd.ms-modi",17};
 public:
 	static UnicodeStringWrapper* getCNST_STR_2604() throw();
-	constexpr static StaticUnicodeString __CNST_STR_3557{L"Wrong Command Type of Monitor Command.",38};
+	constexpr static StaticUnicodeString __CNST_STR_3558{L"Wrong Command Type of Monitor Command.",38};
 public:
-	static UnicodeStringWrapper* getCNST_STR_3557() throw();
+	static UnicodeStringWrapper* getCNST_STR_3558() throw();
 	constexpr static StaticUnicodeString __CNST_STR_2249{L"etx",3};
 public:
 	static UnicodeStringWrapper* getCNST_STR_2249() throw();
@@ -6319,9 +6319,9 @@ public:
 	constexpr static StaticUnicodeString __CNST_STR_1419{L"\"parallel\"",10};
 public:
 	static UnicodeStringWrapper* getCNST_STR_1419() throw();
-	constexpr static StaticUnicodeString __CNST_STR_3563{L"Node info is not initialized",28};
+	constexpr static StaticUnicodeString __CNST_STR_3564{L"Node info is not initialized",28};
 public:
-	static UnicodeStringWrapper* getCNST_STR_3563() throw();
+	static UnicodeStringWrapper* getCNST_STR_3564() throw();
 	constexpr static StaticUnicodeString __CNST_STR_1136{L"DoubleVariable",14};
 public:
 	static UnicodeStringWrapper* getCNST_STR_1136() throw();
@@ -6790,9 +6790,9 @@ public:
 	constexpr static StaticUnicodeString __CNST_STR_1118{L"CLASS_VARIABLE",14};
 public:
 	static UnicodeStringWrapper* getCNST_STR_1118() throw();
-	constexpr static StaticUnicodeString __CNST_STR_3559{L"NodeRegionServer",16};
+	constexpr static StaticUnicodeString __CNST_STR_3560{L"NodeRegionServer",16};
 public:
-	static UnicodeStringWrapper* getCNST_STR_3559() throw();
+	static UnicodeStringWrapper* getCNST_STR_3560() throw();
 	constexpr static StaticUnicodeString __CNST_STR_3540{L"Html format is wrong",20};
 public:
 	static UnicodeStringWrapper* getCNST_STR_3540() throw();
@@ -8218,9 +8218,9 @@ public:
 	constexpr static StaticUnicodeString __CNST_STR_2672{L"application/vnd.ms-project",26};
 public:
 	static UnicodeStringWrapper* getCNST_STR_2672() throw();
-	constexpr static StaticUnicodeString __CNST_STR_3556{L"Connection Error",16};
+	constexpr static StaticUnicodeString __CNST_STR_3557{L"Connection Error",16};
 public:
-	static UnicodeStringWrapper* getCNST_STR_3556() throw();
+	static UnicodeStringWrapper* getCNST_STR_3557() throw();
 	constexpr static StaticUnicodeString __CNST_STR_955{L"public",6};
 public:
 	static UnicodeStringWrapper* getCNST_STR_955() throw();
@@ -8950,9 +8950,9 @@ public:
 	constexpr static StaticUnicodeString __CNST_STR_3070{L"text/sgml",9};
 public:
 	static UnicodeStringWrapper* getCNST_STR_3070() throw();
-	constexpr static StaticUnicodeString __CNST_STR_3562{L"IOException",11};
+	constexpr static StaticUnicodeString __CNST_STR_3563{L"IOException",11};
 public:
-	static UnicodeStringWrapper* getCNST_STR_3562() throw();
+	static UnicodeStringWrapper* getCNST_STR_3563() throw();
 	constexpr static StaticUnicodeString __CNST_STR_2544{L"lrf",3};
 public:
 	static UnicodeStringWrapper* getCNST_STR_2544() throw();
@@ -9991,6 +9991,9 @@ public:
 	constexpr static StaticUnicodeString __CNST_STR_1666{L" is ignored",11};
 public:
 	static UnicodeStringWrapper* getCNST_STR_1666() throw();
+	constexpr static StaticUnicodeString __CNST_STR_3556{L"Returned Command is wrong",25};
+public:
+	static UnicodeStringWrapper* getCNST_STR_3556() throw();
 	constexpr static StaticUnicodeString __CNST_STR_2673{L"mpt",3};
 public:
 	static UnicodeStringWrapper* getCNST_STR_2673() throw();
@@ -10126,9 +10129,9 @@ public:
 	constexpr static StaticUnicodeString __CNST_STR_3234{L"ttf",3};
 public:
 	static UnicodeStringWrapper* getCNST_STR_3234() throw();
-	constexpr static StaticUnicodeString __CNST_STR_3565{L"Failed in getting scheme info",29};
+	constexpr static StaticUnicodeString __CNST_STR_3566{L"Failed in getting scheme info",29};
 public:
-	static UnicodeStringWrapper* getCNST_STR_3565() throw();
+	static UnicodeStringWrapper* getCNST_STR_3566() throw();
 	constexpr static StaticUnicodeString __CNST_STR_3421{L"application/xcap-diff+xml",25};
 public:
 	static UnicodeStringWrapper* getCNST_STR_3421() throw();

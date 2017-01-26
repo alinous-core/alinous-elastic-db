@@ -100,6 +100,7 @@ void MonitorResponceAction::handleCommand(BufferedInputStream* stream, BufferedO
 		case AbstractMonitorCommand::TYPE_GET_MAX_COMMIT_ID:
 		case AbstractMonitorCommand::TYPE_NEW_MAX_COMMIT_ID:
 		case AbstractMonitorCommand::TYPE_GET_REGION_INFO:
+		case AbstractMonitorCommand::TYPE_NEW_TRANSACTION:
 		case AbstractMonitorCommand::TYPE_VOID:
 			handleCommand(cmd, outStream, ctx);
 			break ;

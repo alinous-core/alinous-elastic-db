@@ -69,6 +69,7 @@ public:
 	constexpr static const int TYPE_GET_MAX_COMMIT_ID{101};
 	constexpr static const int TYPE_NEW_MAX_COMMIT_ID{102};
 	constexpr static const int TYPE_GET_REGION_INFO{103};
+	constexpr static const int TYPE_NEW_TRANSACTION{104};
 	constexpr static const int TYPE_TERMINATE{404};
 public:
 	int getType(ThreadContext* ctx) throw() ;

@@ -58,8 +58,11 @@ AbstractMonitorCommand* MinitorCommandReader::readFromStream(InputStream* stream
 	case AbstractMonitorCommand::TYPE_GET_REGION_INFO:
 		cmd = (new(ctx) GetRegionNodeInfoCommand(ctx));
 		break ;
+	case AbstractMonitorCommand::TYPE_NEW_TRANSACTION:
+		cmd = (new(ctx) NewTransactionCommand(ctx));
+		break ;
 	default:
-		throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3557(), ctx));
+		throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3558(), ctx));
 		break;
 	}
 	cmd->readFromStream(stream, size, ctx);

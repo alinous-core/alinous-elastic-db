@@ -27,6 +27,12 @@ class GetMaxCommitIdCommand;}}}}}
 namespace alinous {namespace remote {namespace socket {
 class ISocketConnection;}}}
 
+namespace alinous {namespace remote {namespace monitor {namespace command {
+class AbstractMonitorCommand;}}}}
+
+namespace alinous {namespace system {
+class AlinousException;}}
+
 namespace alinous {namespace net {
 class UnknownHostException;}}
 
@@ -36,11 +42,14 @@ class IOException;}}
 namespace alinous {namespace remote {namespace monitor {namespace command {namespace commitId {
 class NewCommitIdCommand;}}}}}
 
+namespace alinous {namespace db {namespace trx {
+class DbVersionContext;}}}
+
+namespace alinous {namespace remote {namespace monitor {namespace command {namespace commitId {
+class NewTransactionCommand;}}}}}
+
 namespace alinous {namespace db {
 class ICommidIdPublisher;}}
-
-namespace alinous {namespace system {
-class AlinousException;}}
 
 namespace java {namespace lang {
 class IObject;
@@ -59,8 +68,11 @@ using ::java::io::IOException;
 using ::java::net::UnknownHostException;
 using ::alinous::db::AlinousDbException;
 using ::alinous::db::ICommidIdPublisher;
+using ::alinous::db::trx::DbVersionContext;
+using ::alinous::remote::monitor::command::AbstractMonitorCommand;
 using ::alinous::remote::monitor::command::commitId::GetMaxCommitIdCommand;
 using ::alinous::remote::monitor::command::commitId::NewCommitIdCommand;
+using ::alinous::remote::monitor::command::commitId::NewTransactionCommand;
 using ::alinous::remote::socket::ISocketConnection;
 using ::alinous::remote::socket::SocketConnectionPool;
 using ::alinous::system::AlinousException;
@@ -85,6 +97,8 @@ public:
 	void setMaxCommitId(long long maxCommitId, ThreadContext* ctx) throw()  final;
 	long long getMaxCommitId(ThreadContext* ctx) final;
 	long long newCommitId(ThreadContext* ctx) final;
+	DbVersionContext* newTransactionContext(ThreadContext* ctx) final;
+	void dispose(ThreadContext* ctx) throw()  final;
 public:
 	static bool __init_done;
 	static bool __init_static_variables();

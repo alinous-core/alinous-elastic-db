@@ -7,7 +7,7 @@ namespace alinous {namespace remote {namespace region {
 
 
 
-String* NodeRegionServer::THREAD_NAME = ConstStr::getCNST_STR_3559();
+String* NodeRegionServer::THREAD_NAME = ConstStr::getCNST_STR_3560();
 bool NodeRegionServer::__init_done = __init_static_variables();
 bool NodeRegionServer::__init_static_variables(){
 	Java2CppSystem::getSelf();
@@ -88,7 +88,7 @@ void NodeRegionServer::syncNodes(ThreadContext* ctx)
 			AbstractMonitorCommand* retcmd = cmd->sendCommand(socket, ctx);
 			if(retcmd->getType(ctx) != AbstractMonitorCommand::TYPE_GET_REGION_INFO)
 			{
-				throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3558(), ctx));
+				throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3559(), ctx));
 			}
 			cmd = static_cast<GetRegionNodeInfoCommand*>(retcmd);
 			RegionInfoData* data = cmd->getRegionData(ctx);

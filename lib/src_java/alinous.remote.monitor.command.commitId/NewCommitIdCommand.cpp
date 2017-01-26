@@ -43,9 +43,15 @@ void NewCommitIdCommand::__releaseRegerences(bool prepare, ThreadContext* ctx) t
 }
 void NewCommitIdCommand::executeOnServer(TransactionMonitorServer* monitorServer, BufferedOutputStream* outStream, ThreadContext* ctx)
 {
+	this->commitId = monitorServer->getCommitId(ctx);
+	writeByteStream(outStream, ctx);
 }
 void NewCommitIdCommand::readFromStream(InputStream* stream, int remain, ThreadContext* ctx)
 {
+	IArrayObjectPrimitive<char>* src = ArrayAllocatorPrimitive<char>::allocatep(ctx, remain);
+	stream->read(src, ctx);
+	NetworkBinaryBuffer* buff = (new(ctx) NetworkBinaryBuffer(src, ctx));
+	this->commitId = buff->getLong(ctx);
 }
 long long NewCommitIdCommand::getCommitId(ThreadContext* ctx) throw() 
 {
@@ -53,6 +59,13 @@ long long NewCommitIdCommand::getCommitId(ThreadContext* ctx) throw()
 }
 void NewCommitIdCommand::writeByteStream(OutputStream* out, ThreadContext* ctx)
 {
+	NetworkBinaryBuffer* buff = (new(ctx) NetworkBinaryBuffer(32, ctx));
+	buff->putInt(AbstractMonitorCommand::TYPE_NEW_MAX_COMMIT_ID, ctx);
+	buff->putLong(this->commitId, ctx);
+	IArrayObjectPrimitive<char>* b = buff->toBinary(ctx);
+	int pos = buff->getPutSize(ctx);
+	out->write(b, 0, pos, ctx);
+	out->flush(ctx);
 }
 }}}}}
 

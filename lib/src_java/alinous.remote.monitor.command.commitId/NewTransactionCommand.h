@@ -1,5 +1,5 @@
-#ifndef ALINOUS_REMOTE_MONITOR_COMMAND_COMMITID_NEWCOMMITIDCOMMAND_H_
-#define ALINOUS_REMOTE_MONITOR_COMMAND_COMMITID_NEWCOMMITIDCOMMAND_H_
+#ifndef ALINOUS_REMOTE_MONITOR_COMMAND_COMMITID_NEWTRANSACTIONCOMMAND_H_
+#define ALINOUS_REMOTE_MONITOR_COMMAND_COMMITID_NEWTRANSACTIONCOMMAND_H_
 namespace alinous {namespace remote {namespace monitor {
 class TransactionMonitorServer;}}}
 
@@ -40,20 +40,30 @@ using ::alinous::remote::socket::NetworkBinaryBuffer;
 
 
 
-class NewCommitIdCommand final : public AbstractMonitorCommand {
+class NewTransactionCommand final : public AbstractMonitorCommand {
 public:
-	NewCommitIdCommand(const NewCommitIdCommand& base) = default;
+	NewTransactionCommand(const NewTransactionCommand& base) = default;
 public:
-	NewCommitIdCommand(ThreadContext* ctx) throw() ;
+	NewTransactionCommand(ThreadContext* ctx) throw() ;
 	void __construct_impl(ThreadContext* ctx) throw() ;
-	virtual ~NewCommitIdCommand() throw();
+	virtual ~NewTransactionCommand() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 private:
 	long long commitId;
+	long long trxId;
+	long long schemaVersion;
+	long long nodeClusterVersion;
 public:
 	void executeOnServer(TransactionMonitorServer* monitorServer, BufferedOutputStream* outStream, ThreadContext* ctx) final;
 	void readFromStream(InputStream* stream, int remain, ThreadContext* ctx) final;
 	long long getCommitId(ThreadContext* ctx) throw() ;
+	void setCommitId(long long commitId, ThreadContext* ctx) throw() ;
+	long long getTrxId(ThreadContext* ctx) throw() ;
+	void setTrxId(long long trxId, ThreadContext* ctx) throw() ;
+	long long getSchemaVersion(ThreadContext* ctx) throw() ;
+	void setSchemaVersion(long long schemaVersion, ThreadContext* ctx) throw() ;
+	long long getNodeClusterVersion(ThreadContext* ctx) throw() ;
+	void setNodeClusterVersion(long long nodeClusterVersion, ThreadContext* ctx) throw() ;
 	void writeByteStream(OutputStream* out, ThreadContext* ctx) final;
 public:
 	static bool __init_done;
@@ -65,4 +75,4 @@ public:
 
 }}}}}
 
-#endif /* end of ALINOUS_REMOTE_MONITOR_COMMAND_COMMITID_NEWCOMMITIDCOMMAND_H_ */
+#endif /* end of ALINOUS_REMOTE_MONITOR_COMMAND_COMMITID_NEWTRANSACTIONCOMMAND_H_ */

@@ -331,6 +331,7 @@
 #include "alinous.remote.monitor.command/AbstractMonitorCommand.h"
 #include "alinous.remote.monitor.command.commitId/GetMaxCommitIdCommand.h"
 #include "alinous.remote.monitor.command.commitId/NewCommitIdCommand.h"
+#include "alinous.remote.monitor.command.commitId/NewTransactionCommand.h"
 #include "alinous.remote.socket/NetworkBinalyUtils.h"
 #include "alinous.remote.monitor.command/FinishConnectionCommand.h"
 #include "alinous.remote.monitor.command/VoidCommand.h"
@@ -458,6 +459,7 @@
 #include "alinous.runtime.dbif/IDatabaseConnection.h"
 #include "alinous.runtime.dbif/IDatabaseDriver.h"
 #include "alinous.system.utils/FileUtils.h"
+#include "alinous.db.trx/DbVersionContext.h"
 #include "alinous.db.trx/DbTransaction.h"
 #include "alinous.db.trx/ReadCommittedTransaction.h"
 #include "alinous.db.trx/RepeatableReadTransaction.h"
@@ -1537,6 +1539,7 @@ inline static void __cleanUpStatics(alinous::ThreadContext* ctx){
 	alinous::db::trx::CreateIndexMetadata::__cleanUp(ctx);
 	alinous::db::trx::SerializableTransaction::__cleanUp(ctx);
 	alinous::db::trx::ReadCommittedTransaction::__cleanUp(ctx);
+	alinous::db::trx::DbVersionContext::__cleanUp(ctx);
 	alinous::db::trx::RepeatableReadTransaction::__cleanUp(ctx);
 	alinous::db::trx::cache::CachedRecord::__cleanUp(ctx);
 	alinous::db::trx::cache::CachedRecord::ValueFetcher::__cleanUp(ctx);
@@ -1736,6 +1739,7 @@ inline static void __cleanUpStatics(alinous::ThreadContext* ctx){
 	alinous::remote::monitor::command::VoidCommand::__cleanUp(ctx);
 	alinous::remote::monitor::command::commitId::GetMaxCommitIdCommand::__cleanUp(ctx);
 	alinous::remote::monitor::command::commitId::NewCommitIdCommand::__cleanUp(ctx);
+	alinous::remote::monitor::command::commitId::NewTransactionCommand::__cleanUp(ctx);
 	alinous::remote::monitor::command::data::RegionInfoData::__cleanUp(ctx);
 	alinous::remote::region::NodeTableReference::__cleanUp(ctx);
 	alinous::remote::region::NodeRegionServer::__cleanUp(ctx);

@@ -176,6 +176,19 @@ long long AlinousDatabase::newCommitId(ThreadContext* ctx)
 		}
 	}
 }
+DbVersionContext* AlinousDatabase::newTransactionContext(ThreadContext* ctx)
+{
+	{
+		try
+		{
+			return this->commitIdPublisher->newTransactionContext(ctx);
+		}
+		catch(AlinousException* e)
+		{
+			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1658(), e, ctx));
+		}
+	}
+}
 void AlinousDatabase::syncScheme(ThreadContext* ctx)
 {
 	LocalTableRegion* localRegion = this->regionManager->getLocalRegion(ctx);
@@ -381,6 +394,7 @@ void AlinousDatabase::closeDatabase(ThreadContext* ctx) throw()
 		__GC_MV(this, &(this->trxWriterThread), nullptr, AlinousThread);
 	}
 	this->regionManager->dispose(ctx);
+	this->commitIdPublisher->dispose(ctx);
 }
 AlinousDbConnection* AlinousDatabase::connect(ConnectInfo* info, ThreadContext* ctx) throw() 
 {
