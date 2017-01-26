@@ -621,7 +621,7 @@ private:
 	long long jjMoveStringLiteralDfa11_0(long long old1, long long active1, long long old2, long long active2, ThreadContext* ctx);
 	long long jjMoveNfa_0(long long startState, long long curPos, ThreadContext* ctx);
 	long long jjMoveStringLiteralDfa0_1(ThreadContext* ctx);
-	long long jjMoveStringLiteralDfa1_1(long long active2, ThreadContext* ctx);
+	long long jjMoveStringLiteralDfa1_1(long long active3, ThreadContext* ctx);
 	void jjCheckNAdd(long long state, ThreadContext* ctx);
 	void jjAddStates(long long start, long long end, ThreadContext* ctx);
 	void jjCheckNAddTwoStates(long long state1, long long state2, ThreadContext* ctx);

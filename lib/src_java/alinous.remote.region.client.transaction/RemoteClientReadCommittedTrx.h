@@ -15,8 +15,8 @@ class IDatabaseRecord;}}}
 namespace alinous {namespace db {namespace table {
 class IDatabaseTable;}}}
 
-namespace alinous {namespace db {namespace trx {
-class DbTransaction;}}}
+namespace alinous {namespace remote {namespace region {namespace client {namespace transaction {
+class AbstractRemoteClientTransaction;}}}}}
 
 namespace alinous {namespace db {namespace table {
 class DatabaseException;}}}
@@ -37,14 +37,13 @@ using ::alinous::db::AlinousDatabase;
 using ::alinous::db::table::DatabaseException;
 using ::alinous::db::table::IDatabaseRecord;
 using ::alinous::db::table::IDatabaseTable;
-using ::alinous::db::trx::DbTransaction;
 using ::alinous::db::trx::DbTransactionManager;
 using ::alinous::system::AlinousCore;
 using ::alinous::system::AlinousException;
 
 
 
-class RemoteClientReadCommittedTrx final : public DbTransaction {
+class RemoteClientReadCommittedTrx final : public AbstractRemoteClientTransaction {
 public:
 	RemoteClientReadCommittedTrx(const RemoteClientReadCommittedTrx& base) = default;
 public:

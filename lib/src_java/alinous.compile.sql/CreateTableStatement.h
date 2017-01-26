@@ -111,7 +111,7 @@ class CreateTableStatement final : public AbstractSQLStatement {
 public:
 	CreateTableStatement(const CreateTableStatement& base) = default;
 public:
-	CreateTableStatement(ThreadContext* ctx) throw()  : IObject(ctx), AbstractSQLStatement(ctx), table(nullptr), columns(GCUtils<ArrayList<DdlColumnDescriptor> >::ins(this, (new(ctx) ArrayList<DdlColumnDescriptor>(ctx)), ctx, __FILEW__, __LINE__, L"")), uniques(GCUtils<ArrayList<Unique> >::ins(this, (new(ctx) ArrayList<Unique>(ctx)), ctx, __FILEW__, __LINE__, L"")), checks(GCUtils<ArrayList<CheckDefinition> >::ins(this, (new(ctx) ArrayList<CheckDefinition>(ctx)), ctx, __FILEW__, __LINE__, L"")), primaryKeys(nullptr), metadata(nullptr)
+	CreateTableStatement(ThreadContext* ctx) throw()  : IObject(ctx), AbstractSQLStatement(ctx), table(nullptr), columns(GCUtils<ArrayList<DdlColumnDescriptor> >::ins(this, (new(ctx) ArrayList<DdlColumnDescriptor>(ctx)), ctx, __FILEW__, __LINE__, L"")), uniques(GCUtils<ArrayList<Unique> >::ins(this, (new(ctx) ArrayList<Unique>(ctx)), ctx, __FILEW__, __LINE__, L"")), checks(GCUtils<ArrayList<CheckDefinition> >::ins(this, (new(ctx) ArrayList<CheckDefinition>(ctx)), ctx, __FILEW__, __LINE__, L"")), primaryKeys(nullptr), region(nullptr), metadata(nullptr)
 	{
 	}
 	void __construct_impl(ThreadContext* ctx) throw() 
@@ -125,6 +125,7 @@ private:
 	ArrayList<Unique>* uniques;
 	ArrayList<CheckDefinition>* checks;
 	PrimaryKeys* primaryKeys;
+	String* region;
 	TableMetadata* metadata;
 public:
 	TableSchema* createMetadata(ScriptMachine* machine, bool debug, ThreadContext* ctx);
@@ -142,6 +143,8 @@ public:
 	ArrayList<DdlColumnDescriptor>* getColumns(ThreadContext* ctx) throw() ;
 	ArrayList<Unique>* getUniques(ThreadContext* ctx) throw() ;
 	ArrayList<CheckDefinition>* getChecks(ThreadContext* ctx) throw() ;
+	String* getRegion(ThreadContext* ctx) throw() ;
+	void setRegion(String* region, ThreadContext* ctx) throw() ;
 	IStatement::StatementType getType(ThreadContext* ctx) throw()  final;
 	void analyzeSQL(SQLAnalyseContext* context, bool debug, ThreadContext* ctx) throw()  final;
 	void readData(NetworkBinaryBuffer* buff, ThreadContext* ctx) final;

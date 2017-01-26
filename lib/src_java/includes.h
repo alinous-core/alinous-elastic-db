@@ -802,6 +802,7 @@
 #include "alinous.db.table/OidPublisherFactory.h"
 #include "alinous.db.table/LocalOidPublisher.h"
 #include "alinous.db.table.lockmonitor/RowLockReleaser.h"
+#include "alinous.remote.region.client.transaction/AbstractRemoteClientTransaction.h"
 #include "alinous.remote.region.client.transaction/RemoteClientReadCommittedTrx.h"
 #include "alinous.remote.region.client.transaction/RemoteClientRepeatableReadTrx.h"
 #include "alinous.remote.region.client.transaction/RemoteClientSerializableTrx.h"
@@ -1761,6 +1762,7 @@ inline static void __cleanUpStatics(alinous::ThreadContext* ctx){
 	alinous::remote::region::client::RegionConnection::__cleanUp(ctx);
 	alinous::remote::region::client::RemoteRegionRef::__cleanUp(ctx);
 	alinous::remote::region::client::RegionConnectionInfo::__cleanUp(ctx);
+	alinous::remote::region::client::transaction::AbstractRemoteClientTransaction::__cleanUp(ctx);
 	alinous::remote::region::client::transaction::RemoteClientReadCommittedTrx::__cleanUp(ctx);
 	alinous::remote::region::client::transaction::RemoteClientSerializableTrx::__cleanUp(ctx);
 	alinous::remote::region::client::transaction::RemoteClientRepeatableReadTrx::__cleanUp(ctx);

@@ -257,7 +257,7 @@ public:
 	void update(UpdateStatement* update, ScriptMachine* machine, bool debug, ThreadContext* ctx);
 	void insert(InsertStatement* stmt, ScriptMachine* machine, bool debug, ThreadContext* ctx);
 	void createIndex(CreateIndexStatement* stmt, ScriptMachine* machine, ThreadContext* ctx);
-	void createTable(TableSchema* schema, ThreadContext* ctx) throw() ;
+	virtual void createTable(TableSchema* schema, ThreadContext* ctx);
 	TableMetadata* getMetadata(String* schemaName, String* tableName, ThreadContext* ctx) throw() ;
 	void commit(ThreadContext* ctx);
 	void close(ThreadContext* ctx);

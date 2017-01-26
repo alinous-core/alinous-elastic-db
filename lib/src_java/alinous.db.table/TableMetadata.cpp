@@ -201,7 +201,7 @@ void TableMetadata::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 			}
 			catch(AlinousDbException* e)
 			{
-				throw (new(ctx) VariableException(ConstStr::getCNST_STR_1681(), e, ctx));
+				throw (new(ctx) VariableException(ConstStr::getCNST_STR_1682(), e, ctx));
 			}
 		}
 	}
@@ -216,7 +216,7 @@ void TableMetadata::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 			}
 			catch(AlinousDbException* e)
 			{
-				throw (new(ctx) VariableException(ConstStr::getCNST_STR_1681(), e, ctx));
+				throw (new(ctx) VariableException(ConstStr::getCNST_STR_1682(), e, ctx));
 			}
 		}
 		indexes->add(idx, ctx);
@@ -350,7 +350,7 @@ void TableMetadata::addPrimaryKey(String* col, ThreadContext* ctx)
 	TableColumnMetadata* colmeta = this->columns->get(col->toLowerCase(ctx), ctx);
 	if(colmeta == nullptr)
 	{
-		throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1682(), ctx));
+		throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1683(), ctx));
 	}
 	this->primaryKeys->add(colmeta, ctx);
 	colmeta->setPrimaryKey(true, ctx);

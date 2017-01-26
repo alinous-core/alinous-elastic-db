@@ -7,7 +7,7 @@ namespace alinous {namespace server {namespace http {
 
 
 
-String* ProcessRequestAction::endStr = ConstStr::getCNST_STR_3533();
+String* ProcessRequestAction::endStr = ConstStr::getCNST_STR_3534();
 bool ProcessRequestAction::__init_done = __init_static_variables();
 bool ProcessRequestAction::__init_static_variables(){
 	Java2CppSystem::getSelf();
@@ -103,14 +103,14 @@ void ProcessRequestAction::outCodeResult(ContentResult* result, OutputStream* ou
 void ProcessRequestAction::outResponse(int contentLength, OutputStream* outStream, ThreadContext* ctx)
 {
 	StringBuffer* buff = (new(ctx) StringBuffer(ctx));
-	buff->append(ConstStr::getCNST_STR_3528(), ctx);
 	buff->append(ConstStr::getCNST_STR_3529(), ctx);
+	buff->append(ConstStr::getCNST_STR_3530(), ctx);
 	if(contentLength > 0)
 	{
-		buff->append(ConstStr::getCNST_STR_3530(), ctx)->append(contentLength, ctx)->append(ConstStr::getCNST_STR_1858(), ctx);
+		buff->append(ConstStr::getCNST_STR_3531(), ctx)->append(contentLength, ctx)->append(ConstStr::getCNST_STR_1859(), ctx);
 	}
-	buff->append(ConstStr::getCNST_STR_3531(), ctx);
-	buff->append(ConstStr::getCNST_STR_1858(), ctx);
+	buff->append(ConstStr::getCNST_STR_3532(), ctx);
+	buff->append(ConstStr::getCNST_STR_1859(), ctx);
 	String* byteStr = buff->toString(ctx);
 	IArrayObjectPrimitive<char>* byteData = byteStr->getBytes(ConstStr::getCNST_STR_1101(), ctx);
 	outStream->write(byteData, ctx);
@@ -118,10 +118,10 @@ void ProcessRequestAction::outResponse(int contentLength, OutputStream* outStrea
 void ProcessRequestAction::out404ResponceHeader(ContentResult* result, OutputStream* outStream, ThreadContext* ctx)
 {
 	StringBuffer* buff = (new(ctx) StringBuffer(ctx));
+	buff->append(ConstStr::getCNST_STR_3533(), ctx);
+	buff->append(ConstStr::getCNST_STR_3530(), ctx);
 	buff->append(ConstStr::getCNST_STR_3532(), ctx);
-	buff->append(ConstStr::getCNST_STR_3529(), ctx);
-	buff->append(ConstStr::getCNST_STR_3531(), ctx);
-	buff->append(ConstStr::getCNST_STR_1858(), ctx);
+	buff->append(ConstStr::getCNST_STR_1859(), ctx);
 	if(!result->head)
 	{
 	}

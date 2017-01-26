@@ -24,7 +24,7 @@ bool ContentResult::__init_static_variables(){
 	this->head = head;
 	if(ext == nullptr)
 	{
-		ext = ConstStr::getCNST_STR_1868();
+		ext = ConstStr::getCNST_STR_1869();
 	}
 	String* content = mimeResolver->getContentType(ext, ctx);
 	String* streamContent = nullptr;
@@ -40,7 +40,7 @@ void ContentResult::__construct_impl(IContentByteStream* byteData, String* ext, 
 	this->head = head;
 	if(ext == nullptr)
 	{
-		ext = ConstStr::getCNST_STR_1868();
+		ext = ConstStr::getCNST_STR_1869();
 	}
 	String* content = mimeResolver->getContentType(ext, ctx);
 	String* streamContent = nullptr;

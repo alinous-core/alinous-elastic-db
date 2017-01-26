@@ -53,23 +53,23 @@ bool SerializableTransaction::isVisible(IDatabaseRecord* record, IDatabaseTable*
 		}
 		catch(VariableException* e)
 		{
-			throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1691(), e, ctx));
+			throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1692(), e, ctx));
 		}
 		catch(InterruptedException* e)
 		{
-			throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1691(), e, ctx));
+			throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1692(), e, ctx));
 		}
 		catch(IOException* e)
 		{
-			throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1691(), e, ctx));
+			throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1692(), e, ctx));
 		}
 		catch(BTreeException* e)
 		{
-			throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1691(), e, ctx));
+			throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1692(), e, ctx));
 		}
 		catch(AlinousException* e)
 		{
-			throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1691(), e, ctx));
+			throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1692(), e, ctx));
 		}
 	}
 	return true;

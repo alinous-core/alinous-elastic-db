@@ -664,6 +664,7 @@ set(srcjava
 	"src_java/alinous.remote.region.client.transaction/RemoteClientSerializableTrx.cpp"
 	"src_java/alinous.remote.region.client.transaction/RemoteClientRepeatableReadTrx.cpp"
 	"src_java/alinous.remote.region.client.transaction/RemoteClientReadCommittedTrx.cpp"
+	"src_java/alinous.remote.region.client.transaction/AbstractRemoteClientTransaction.cpp"
 	"src_java/alinous.remote.region.command.data/ClientSchemaData.cpp"
 	"src_java/alinous.remote.region.command.data/ClientTableData.cpp"
 	"src_java/alinous.remote.region.command.data/ClientStructureMetadata.cpp"

@@ -13,19 +13,19 @@ const StaticArrayObjectPrimitive<uint64_t> AlinousPlusParserTokenManager::__jjbi
 IArrayObjectPrimitive<uint64_t>* AlinousPlusParserTokenManager::jjbitVec2 = (IArrayObjectPrimitive<uint64_t>*)const_cast<StaticArrayObjectPrimitive<uint64_t>*>(&__jjbitVec2);
 const StaticArrayObjectPrimitive<uint64_t> AlinousPlusParserTokenManager::__jjnextStates = {21, 22, 8, 25, 26, 29, 30, 36, 38, 46, 47, 49, 10, 11, 13, 57, 59, 2, 60, 67, 4, 5, 8, 10, 11, 15, 13, 21, 22, 8, 31, 32, 8, 46, 47, 49, 46, 47, 51, 49, 46, 47, 55, 49, 61, 62, 68, 69, 70, 6, 7, 12, 14, 16, 23, 24, 27, 28, 33, 34, 39, 40, 42, 44, 48, 50, 52, 54, 63, 64, 65, 66, 71, 72};
 IArrayObjectPrimitive<uint64_t>* AlinousPlusParserTokenManager::jjnextStates = (IArrayObjectPrimitive<uint64_t>*)const_cast<StaticArrayObjectPrimitive<uint64_t>*>(&__jjnextStates);
-const StaticArrayObject<UnicodeStringWrapper> AlinousPlusParserTokenManager::__jjstrLiteralImages = {ConstStr::getCNST_STR_4(), (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, ConstStr::getCNST_STR_1533(), ConstStr::getCNST_STR_1534(), ConstStr::getCNST_STR_1535(), ConstStr::getCNST_STR_1536(), ConstStr::getCNST_STR_1537(), ConstStr::getCNST_STR_1538(), ConstStr::getCNST_STR_1539(), ConstStr::getCNST_STR_1540(), ConstStr::getCNST_STR_1541(), ConstStr::getCNST_STR_1542(), ConstStr::getCNST_STR_1543(), ConstStr::getCNST_STR_1544(), ConstStr::getCNST_STR_1545(), ConstStr::getCNST_STR_1546(), ConstStr::getCNST_STR_1547(), ConstStr::getCNST_STR_1548(), ConstStr::getCNST_STR_1549(), ConstStr::getCNST_STR_1550(), ConstStr::getCNST_STR_1551(), ConstStr::getCNST_STR_1552(), ConstStr::getCNST_STR_1553(), ConstStr::getCNST_STR_1554(), ConstStr::getCNST_STR_1555(), ConstStr::getCNST_STR_1556(), ConstStr::getCNST_STR_1557(), ConstStr::getCNST_STR_1558(), ConstStr::getCNST_STR_1559(), ConstStr::getCNST_STR_1560(), ConstStr::getCNST_STR_1561(), ConstStr::getCNST_STR_1562(), ConstStr::getCNST_STR_1563(), ConstStr::getCNST_STR_1564(), ConstStr::getCNST_STR_1565(), ConstStr::getCNST_STR_1566(), ConstStr::getCNST_STR_1567(), ConstStr::getCNST_STR_1568(), ConstStr::getCNST_STR_1569(), ConstStr::getCNST_STR_1570(), ConstStr::getCNST_STR_1571(), ConstStr::getCNST_STR_1572(), ConstStr::getCNST_STR_1573(), ConstStr::getCNST_STR_1574(), ConstStr::getCNST_STR_1575(), ConstStr::getCNST_STR_1576(), ConstStr::getCNST_STR_1577(), ConstStr::getCNST_STR_1578(), ConstStr::getCNST_STR_1579(), ConstStr::getCNST_STR_1580(), ConstStr::getCNST_STR_1581(), ConstStr::getCNST_STR_1582(), ConstStr::getCNST_STR_1583(), ConstStr::getCNST_STR_1584(), ConstStr::getCNST_STR_1585(), ConstStr::getCNST_STR_1586(), ConstStr::getCNST_STR_1587(), ConstStr::getCNST_STR_1588(), ConstStr::getCNST_STR_1589(), ConstStr::getCNST_STR_1590(), ConstStr::getCNST_STR_1591(), ConstStr::getCNST_STR_1592(), ConstStr::getCNST_STR_1593(), ConstStr::getCNST_STR_1594(), ConstStr::getCNST_STR_1595(), ConstStr::getCNST_STR_1596(), ConstStr::getCNST_STR_1597(), ConstStr::getCNST_STR_1598(), ConstStr::getCNST_STR_1599(), ConstStr::getCNST_STR_1600(), ConstStr::getCNST_STR_1601(), ConstStr::getCNST_STR_1602(), ConstStr::getCNST_STR_1603(), ConstStr::getCNST_STR_1604(), ConstStr::getCNST_STR_1605(), ConstStr::getCNST_STR_1606(), ConstStr::getCNST_STR_1607(), ConstStr::getCNST_STR_1608(), ConstStr::getCNST_STR_1609(), ConstStr::getCNST_STR_1610(), ConstStr::getCNST_STR_1611(), ConstStr::getCNST_STR_1612(), ConstStr::getCNST_STR_1613(), (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, ConstStr::getCNST_STR_1614(), ConstStr::getCNST_STR_1615(), ConstStr::getCNST_STR_1616(), ConstStr::getCNST_STR_1617(), ConstStr::getCNST_STR_1618(), ConstStr::getCNST_STR_1619(), ConstStr::getCNST_STR_1620(), ConstStr::getCNST_STR_1621(), ConstStr::getCNST_STR_1622(), ConstStr::getCNST_STR_1623(), ConstStr::getCNST_STR_1624(), ConstStr::getCNST_STR_1625(), ConstStr::getCNST_STR_1626(), ConstStr::getCNST_STR_1627(), ConstStr::getCNST_STR_1628()};
+const StaticArrayObject<UnicodeStringWrapper> AlinousPlusParserTokenManager::__jjstrLiteralImages = {ConstStr::getCNST_STR_4(), (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, ConstStr::getCNST_STR_1534(), ConstStr::getCNST_STR_1535(), ConstStr::getCNST_STR_1536(), ConstStr::getCNST_STR_1537(), ConstStr::getCNST_STR_1538(), ConstStr::getCNST_STR_1539(), ConstStr::getCNST_STR_1540(), ConstStr::getCNST_STR_1541(), ConstStr::getCNST_STR_1542(), ConstStr::getCNST_STR_1543(), ConstStr::getCNST_STR_1544(), ConstStr::getCNST_STR_1545(), ConstStr::getCNST_STR_1546(), ConstStr::getCNST_STR_1547(), ConstStr::getCNST_STR_1548(), ConstStr::getCNST_STR_1549(), ConstStr::getCNST_STR_1550(), ConstStr::getCNST_STR_1551(), ConstStr::getCNST_STR_1552(), ConstStr::getCNST_STR_1553(), ConstStr::getCNST_STR_1554(), ConstStr::getCNST_STR_1555(), ConstStr::getCNST_STR_1556(), ConstStr::getCNST_STR_1557(), ConstStr::getCNST_STR_1558(), ConstStr::getCNST_STR_1559(), ConstStr::getCNST_STR_1560(), ConstStr::getCNST_STR_1561(), ConstStr::getCNST_STR_1562(), ConstStr::getCNST_STR_1563(), ConstStr::getCNST_STR_1564(), ConstStr::getCNST_STR_1565(), ConstStr::getCNST_STR_1566(), ConstStr::getCNST_STR_1567(), ConstStr::getCNST_STR_1568(), ConstStr::getCNST_STR_1569(), ConstStr::getCNST_STR_1570(), ConstStr::getCNST_STR_1571(), ConstStr::getCNST_STR_1572(), ConstStr::getCNST_STR_1573(), ConstStr::getCNST_STR_1574(), ConstStr::getCNST_STR_1575(), ConstStr::getCNST_STR_1576(), ConstStr::getCNST_STR_1577(), ConstStr::getCNST_STR_1578(), ConstStr::getCNST_STR_1579(), ConstStr::getCNST_STR_1580(), ConstStr::getCNST_STR_1581(), ConstStr::getCNST_STR_1582(), ConstStr::getCNST_STR_1583(), ConstStr::getCNST_STR_1584(), ConstStr::getCNST_STR_1585(), ConstStr::getCNST_STR_1586(), ConstStr::getCNST_STR_1587(), ConstStr::getCNST_STR_1588(), ConstStr::getCNST_STR_1589(), ConstStr::getCNST_STR_1590(), ConstStr::getCNST_STR_1591(), ConstStr::getCNST_STR_1592(), ConstStr::getCNST_STR_1593(), ConstStr::getCNST_STR_1594(), ConstStr::getCNST_STR_1595(), ConstStr::getCNST_STR_1596(), ConstStr::getCNST_STR_1597(), ConstStr::getCNST_STR_1598(), ConstStr::getCNST_STR_1599(), ConstStr::getCNST_STR_1600(), ConstStr::getCNST_STR_1601(), ConstStr::getCNST_STR_1602(), ConstStr::getCNST_STR_1603(), ConstStr::getCNST_STR_1604(), ConstStr::getCNST_STR_1605(), ConstStr::getCNST_STR_1606(), ConstStr::getCNST_STR_1607(), ConstStr::getCNST_STR_1608(), ConstStr::getCNST_STR_1609(), ConstStr::getCNST_STR_1610(), ConstStr::getCNST_STR_1611(), ConstStr::getCNST_STR_1612(), ConstStr::getCNST_STR_1613(), ConstStr::getCNST_STR_1614(), (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, (UnicodeStringWrapper*)nullptr, ConstStr::getCNST_STR_1615(), ConstStr::getCNST_STR_1616(), ConstStr::getCNST_STR_1617(), ConstStr::getCNST_STR_1618(), ConstStr::getCNST_STR_1619(), ConstStr::getCNST_STR_1620(), ConstStr::getCNST_STR_1621(), ConstStr::getCNST_STR_1622(), ConstStr::getCNST_STR_1623(), ConstStr::getCNST_STR_1624(), ConstStr::getCNST_STR_1625(), ConstStr::getCNST_STR_1626(), ConstStr::getCNST_STR_1627(), ConstStr::getCNST_STR_1628(), ConstStr::getCNST_STR_1629()};
 IArrayObject<String>* AlinousPlusParserTokenManager::jjstrLiteralImages = (IArrayObject<String>*)const_cast<StaticArrayObject<UnicodeStringWrapper>*>(&__jjstrLiteralImages);
-const StaticArrayObject<UnicodeStringWrapper> AlinousPlusParserTokenManager::__lexStateNames = {ConstStr::getCNST_STR_1629(), ConstStr::getCNST_STR_1630(), ConstStr::getCNST_STR_1631()};
+const StaticArrayObject<UnicodeStringWrapper> AlinousPlusParserTokenManager::__lexStateNames = {ConstStr::getCNST_STR_1630(), ConstStr::getCNST_STR_1631(), ConstStr::getCNST_STR_1632()};
 IArrayObject<String>* AlinousPlusParserTokenManager::lexStateNames = (IArrayObject<String>*)const_cast<StaticArrayObject<UnicodeStringWrapper>*>(&__lexStateNames);
-const StaticArrayObjectPrimitive<long long> AlinousPlusParserTokenManager::__jjnewLexState = {-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 1, 2, 0, -1, 0, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1};
+const StaticArrayObjectPrimitive<long long> AlinousPlusParserTokenManager::__jjnewLexState = {-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 1, 2, 0, -1, 0, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1};
 IArrayObjectPrimitive<long long>* AlinousPlusParserTokenManager::jjnewLexState = (IArrayObjectPrimitive<long long>*)const_cast<StaticArrayObjectPrimitive<long long>*>(&__jjnewLexState);
-const StaticArrayObjectPrimitive<uint64_t> AlinousPlusParserTokenManager::__jjtoToken = {0xfffffffffffc2201L, 0xffffffffffffffffL, 0x7ffffffffffffffL, 0xfffeL};
+const StaticArrayObjectPrimitive<uint64_t> AlinousPlusParserTokenManager::__jjtoToken = {0xfffffffffffc2201L, 0xffffffffffffffffL, 0xfffffffffffffffL, 0x1fffcL};
 IArrayObjectPrimitive<uint64_t>* AlinousPlusParserTokenManager::jjtoToken = (IArrayObjectPrimitive<uint64_t>*)const_cast<StaticArrayObjectPrimitive<uint64_t>*>(&__jjtoToken);
-const StaticArrayObjectPrimitive<uint64_t> AlinousPlusParserTokenManager::__jjtoSkip = {0x1eL, 0x0L, 0xa000000000000000L, 0x0L};
+const StaticArrayObjectPrimitive<uint64_t> AlinousPlusParserTokenManager::__jjtoSkip = {0x1eL, 0x0L, 0x4000000000000000L, 0x1L};
 IArrayObjectPrimitive<uint64_t>* AlinousPlusParserTokenManager::jjtoSkip = (IArrayObjectPrimitive<uint64_t>*)const_cast<StaticArrayObjectPrimitive<uint64_t>*>(&__jjtoSkip);
-const StaticArrayObjectPrimitive<uint64_t> AlinousPlusParserTokenManager::__jjtoSpecial = {0x0L, 0x0L, 0xa000000000000000L, 0x0L};
+const StaticArrayObjectPrimitive<uint64_t> AlinousPlusParserTokenManager::__jjtoSpecial = {0x0L, 0x0L, 0x4000000000000000L, 0x1L};
 IArrayObjectPrimitive<uint64_t>* AlinousPlusParserTokenManager::jjtoSpecial = (IArrayObjectPrimitive<uint64_t>*)const_cast<StaticArrayObjectPrimitive<uint64_t>*>(&__jjtoSpecial);
-const StaticArrayObjectPrimitive<uint64_t> AlinousPlusParserTokenManager::__jjtoMore = {0x0L, 0x0L, 0x5800000000000000L, 0x1L};
+const StaticArrayObjectPrimitive<uint64_t> AlinousPlusParserTokenManager::__jjtoMore = {0x0L, 0x0L, 0xb000000000000000L, 0x2L};
 IArrayObjectPrimitive<uint64_t>* AlinousPlusParserTokenManager::jjtoMore = (IArrayObjectPrimitive<uint64_t>*)const_cast<StaticArrayObjectPrimitive<uint64_t>*>(&__jjtoMore);
 bool AlinousPlusParserTokenManager::__init_done = __init_static_variables();
 bool AlinousPlusParserTokenManager::__init_static_variables(){
@@ -42,7 +42,7 @@ bool AlinousPlusParserTokenManager::__init_static_variables(){
 {
 	if(JavaCharStream::staticFlag)
 	{
-		throw (new(ctx) Error(ConstStr::getCNST_STR_1530(), ctx));
+		throw (new(ctx) Error(ConstStr::getCNST_STR_1531(), ctx));
 	}
 	__GC_MV(this, &(input_stream), stream, JavaCharStream);
 }
@@ -50,7 +50,7 @@ void AlinousPlusParserTokenManager::__construct_impl(JavaCharStream* stream, Thr
 {
 	if(JavaCharStream::staticFlag)
 	{
-		throw (new(ctx) Error(ConstStr::getCNST_STR_1530(), ctx));
+		throw (new(ctx) Error(ConstStr::getCNST_STR_1531(), ctx));
 	}
 	__GC_MV(this, &(input_stream), stream, JavaCharStream);
 }
@@ -131,18 +131,18 @@ Token* AlinousPlusParserTokenManager::getNextToken(ThreadContext* ctx)
 				jjmatchedKind = 0x7fffffff;
 				jjmatchedPos = 0;
 				curPos = jjMoveStringLiteralDfa0_1(ctx);
-				if(jjmatchedPos == (long long)0 && jjmatchedKind > (long long)192)
+				if(jjmatchedPos == (long long)0 && jjmatchedKind > (long long)193)
 				{
-					jjmatchedKind = 192;
+					jjmatchedKind = 193;
 				}
 				break ;
 			case 2:
 				jjmatchedKind = 0x7fffffff;
 				jjmatchedPos = 0;
 				curPos = jjMoveStringLiteralDfa0_2(ctx);
-				if(jjmatchedPos == (long long)0 && jjmatchedKind > (long long)190)
+				if(jjmatchedPos == (long long)0 && jjmatchedKind > (long long)191)
 				{
-					jjmatchedKind = 190;
+					jjmatchedKind = 191;
 				}
 				break ;
 			}
@@ -259,7 +259,7 @@ void AlinousPlusParserTokenManager::SwitchTo(long long lexState, ThreadContext* 
 {
 	if(lexState >= (long long)3 || lexState < (long long)0)
 	{
-		throw (new(ctx) TokenMgrError(ConstStr::getCNST_STR_1531()->clone(ctx)->append(lexState, ctx)->append(ConstStr::getCNST_STR_1532(), ctx), TokenMgrError::INVALID_LEXICAL_STATE, ctx));
+		throw (new(ctx) TokenMgrError(ConstStr::getCNST_STR_1532()->clone(ctx)->append(lexState, ctx)->append(ConstStr::getCNST_STR_1533(), ctx), TokenMgrError::INVALID_LEXICAL_STATE, ctx));
 	}
 		else 
 	{
@@ -304,7 +304,7 @@ long long AlinousPlusParserTokenManager::jjMoveStringLiteralDfa0_2(ThreadContext
 {
 	switch(curChar) {
 	case 10:
-		return jjStopAtPos((long long)0, (long long)189, ctx);
+		return jjStopAtPos((long long)0, (long long)190, ctx);
 	default:
 		return 1;
 		break;
@@ -333,10 +333,10 @@ long long AlinousPlusParserTokenManager::jjMoveStringLiteralDfa0_0(ThreadContext
 		return jjMoveNfa_0((long long)0, (long long)0, ctx);
 	case 37:
 		jjmatchedKind = 29;
-		return jjMoveStringLiteralDfa1_0((long long)0x0L, (long long)0x0L, (long long)0x0L, (long long)0x80L, ctx);
+		return jjMoveStringLiteralDfa1_0((long long)0x0L, (long long)0x0L, (long long)0x0L, (long long)0x100L, ctx);
 	case 38:
 		jjmatchedKind = 32;
-		return jjMoveStringLiteralDfa1_0((long long)0x40000000L, (long long)0x0L, (long long)0x0L, (long long)0x1000L, ctx);
+		return jjMoveStringLiteralDfa1_0((long long)0x40000000L, (long long)0x0L, (long long)0x0L, (long long)0x2000L, ctx);
 	case 40:
 		jjmatchedKind = 34;
 		return jjMoveNfa_0((long long)0, (long long)0, ctx);
@@ -345,22 +345,22 @@ long long AlinousPlusParserTokenManager::jjMoveStringLiteralDfa0_0(ThreadContext
 		return jjMoveNfa_0((long long)0, (long long)0, ctx);
 	case 42:
 		jjmatchedKind = 23;
-		return jjMoveStringLiteralDfa1_0((long long)0x0L, (long long)0x0L, (long long)0x0L, (long long)0x20L, ctx);
+		return jjMoveStringLiteralDfa1_0((long long)0x0L, (long long)0x0L, (long long)0x0L, (long long)0x40L, ctx);
 	case 43:
 		jjmatchedKind = 25;
-		return jjMoveStringLiteralDfa1_0((long long)0x1000000L, (long long)0x0L, (long long)0x0L, (long long)0x100L, ctx);
+		return jjMoveStringLiteralDfa1_0((long long)0x1000000L, (long long)0x0L, (long long)0x0L, (long long)0x200L, ctx);
 	case 44:
 		jjmatchedKind = 40;
 		return jjMoveNfa_0((long long)0, (long long)0, ctx);
 	case 45:
 		jjmatchedKind = 27;
-		return jjMoveStringLiteralDfa1_0((long long)0x4000000L, (long long)0x0L, (long long)0x0L, (long long)0x200L, ctx);
+		return jjMoveStringLiteralDfa1_0((long long)0x4000000L, (long long)0x0L, (long long)0x0L, (long long)0x400L, ctx);
 	case 46:
 		jjmatchedKind = 39;
 		return jjMoveNfa_0((long long)0, (long long)0, ctx);
 	case 47:
 		jjmatchedKind = 28;
-		return jjMoveStringLiteralDfa1_0((long long)0x0L, (long long)0x0L, (long long)0x1800000000000000L, (long long)0x40L, ctx);
+		return jjMoveStringLiteralDfa1_0((long long)0x0L, (long long)0x0L, (long long)0x3000000000000000L, (long long)0x80L, ctx);
 	case 58:
 		jjmatchedKind = 52;
 		return jjMoveNfa_0((long long)0, (long long)0, ctx);
@@ -369,15 +369,15 @@ long long AlinousPlusParserTokenManager::jjMoveStringLiteralDfa0_0(ThreadContext
 		return jjMoveNfa_0((long long)0, (long long)0, ctx);
 	case 60:
 		jjmatchedKind = 49;
-		return jjMoveStringLiteralDfa1_0((long long)0x4000000000000L, (long long)0x1000000000000L, (long long)0x0L, (long long)0x8408L, ctx);
+		return jjMoveStringLiteralDfa1_0((long long)0x4000000000000L, (long long)0x1000000000000L, (long long)0x0L, (long long)0x10810L, ctx);
 	case 61:
 		jjmatchedKind = 22;
 		return jjMoveStringLiteralDfa1_0((long long)0x200000000000L, (long long)0x0L, (long long)0x0L, (long long)0x0L, ctx);
 	case 62:
 		jjmatchedKind = 47;
-		return jjMoveStringLiteralDfa1_0((long long)0x61000000000000L, (long long)0x0L, (long long)0x0L, (long long)0x800L, ctx);
+		return jjMoveStringLiteralDfa1_0((long long)0x61000000000000L, (long long)0x0L, (long long)0x0L, (long long)0x1000L, ctx);
 	case 63:
-		jjmatchedKind = 193;
+		jjmatchedKind = 194;
 		return jjMoveNfa_0((long long)0, (long long)0, ctx);
 	case 64:
 		jjmatchedKind = 42;
@@ -413,7 +413,7 @@ long long AlinousPlusParserTokenManager::jjMoveStringLiteralDfa0_0(ThreadContext
 	case 80:
 		return jjMoveStringLiteralDfa1_0((long long)0x0L, (long long)0x0L, (long long)0x200080084000L, (long long)0x0L, ctx);
 	case 82:
-		return jjMoveStringLiteralDfa1_0((long long)0x0L, (long long)0x4000000000000L, (long long)0x8044810200000L, (long long)0x0L, ctx);
+		return jjMoveStringLiteralDfa1_0((long long)0x0L, (long long)0x4000000000000L, (long long)0x408044810200000L, (long long)0x0L, ctx);
 	case 83:
 		return jjMoveStringLiteralDfa1_0((long long)0x0L, (long long)0x200004000000000L, (long long)0x81000000080L, (long long)0x0L, ctx);
 	case 84:
@@ -431,8 +431,8 @@ long long AlinousPlusParserTokenManager::jjMoveStringLiteralDfa0_0(ThreadContext
 		jjmatchedKind = 37;
 		return jjMoveNfa_0((long long)0, (long long)0, ctx);
 	case 94:
-		jjmatchedKind = 194;
-		return jjMoveStringLiteralDfa1_0((long long)0x0L, (long long)0x0L, (long long)0x0L, (long long)0x2000L, ctx);
+		jjmatchedKind = 195;
+		return jjMoveStringLiteralDfa1_0((long long)0x0L, (long long)0x0L, (long long)0x0L, (long long)0x4000L, ctx);
 	case 97:
 		return jjMoveStringLiteralDfa1_0((long long)0x800000000000000L, (long long)0x8000400000000000L, (long long)0x32000009000020L, (long long)0x0L, ctx);
 	case 98:
@@ -464,7 +464,7 @@ long long AlinousPlusParserTokenManager::jjMoveStringLiteralDfa0_0(ThreadContext
 	case 112:
 		return jjMoveStringLiteralDfa1_0((long long)0x100000000000000L, (long long)0x400038000L, (long long)0x200080084000L, (long long)0x0L, ctx);
 	case 114:
-		return jjMoveStringLiteralDfa1_0((long long)0x0L, (long long)0x4000180040000L, (long long)0x8044810200000L, (long long)0x0L, ctx);
+		return jjMoveStringLiteralDfa1_0((long long)0x0L, (long long)0x4000180040000L, (long long)0x408044810200000L, (long long)0x0L, ctx);
 	case 115:
 		return jjMoveStringLiteralDfa1_0((long long)0x0L, (long long)0x200004000780000L, (long long)0x81000000080L, (long long)0x0L, ctx);
 	case 116:
@@ -480,12 +480,12 @@ long long AlinousPlusParserTokenManager::jjMoveStringLiteralDfa0_0(ThreadContext
 		return jjMoveNfa_0((long long)0, (long long)0, ctx);
 	case 124:
 		jjmatchedKind = 33;
-		return jjMoveStringLiteralDfa1_0((long long)0x80000000L, (long long)0x0L, (long long)0x0L, (long long)0x4000L, ctx);
+		return jjMoveStringLiteralDfa1_0((long long)0x80000000L, (long long)0x0L, (long long)0x0L, (long long)0x8000L, ctx);
 	case 125:
 		jjmatchedKind = 44;
 		return jjMoveNfa_0((long long)0, (long long)0, ctx);
 	case 126:
-		jjmatchedKind = 196;
+		jjmatchedKind = 197;
 		return jjMoveNfa_0((long long)0, (long long)0, ctx);
 	default:
 		return jjMoveNfa_0((long long)0, (long long)0, ctx);
@@ -513,9 +513,9 @@ long long AlinousPlusParserTokenManager::jjMoveStringLiteralDfa1_0(long long act
 		}
 		break ;
 	case 42:
-		if((active2 & 0x800000000000000L) != (long long)0L)
+		if((active2 & 0x1000000000000000L) != (long long)0L)
 		{
-			jjmatchedKind = 187;
+			jjmatchedKind = 188;
 			jjmatchedPos = 1;
 		}
 		break ;
@@ -534,19 +534,19 @@ long long AlinousPlusParserTokenManager::jjMoveStringLiteralDfa1_0(long long act
 		}
 		break ;
 	case 47:
-		if((active2 & 0x1000000000000000L) != (long long)0L)
+		if((active2 & 0x2000000000000000L) != (long long)0L)
 		{
-			jjmatchedKind = 188;
+			jjmatchedKind = 189;
 			jjmatchedPos = 1;
 		}
 		break ;
 	case 60:
-		if((active3 & 0x8L) != (long long)0L)
+		if((active3 & 0x10L) != (long long)0L)
 		{
-			jjmatchedKind = 195;
+			jjmatchedKind = 196;
 			jjmatchedPos = 1;
 		}
-		return jjMoveStringLiteralDfa2_0(active0, (long long)0L, active1, (long long)0L, active2, (long long)0L, active3, (long long)0x400L, ctx);
+		return jjMoveStringLiteralDfa2_0(active0, (long long)0L, active1, (long long)0L, active2, (long long)0L, active3, (long long)0x800L, ctx);
 	case 61:
 		if((active0 & 0x200000000000L) != (long long)0L)
 		{
@@ -576,58 +576,58 @@ long long AlinousPlusParserTokenManager::jjMoveStringLiteralDfa1_0(long long act
 					}
 										else 
 					{
-						if((active3 & 0x20L) != (long long)0L)
+						if((active3 & 0x40L) != (long long)0L)
 						{
-							jjmatchedKind = 197;
+							jjmatchedKind = 198;
 							jjmatchedPos = 1;
 						}
 												else 
 						{
-							if((active3 & 0x40L) != (long long)0L)
+							if((active3 & 0x80L) != (long long)0L)
 							{
-								jjmatchedKind = 198;
+								jjmatchedKind = 199;
 								jjmatchedPos = 1;
 							}
 														else 
 							{
-								if((active3 & 0x80L) != (long long)0L)
+								if((active3 & 0x100L) != (long long)0L)
 								{
-									jjmatchedKind = 199;
+									jjmatchedKind = 200;
 									jjmatchedPos = 1;
 								}
 																else 
 								{
-									if((active3 & 0x100L) != (long long)0L)
+									if((active3 & 0x200L) != (long long)0L)
 									{
-										jjmatchedKind = 200;
+										jjmatchedKind = 201;
 										jjmatchedPos = 1;
 									}
 																		else 
 									{
-										if((active3 & 0x200L) != (long long)0L)
+										if((active3 & 0x400L) != (long long)0L)
 										{
-											jjmatchedKind = 201;
+											jjmatchedKind = 202;
 											jjmatchedPos = 1;
 										}
 																				else 
 										{
-											if((active3 & 0x1000L) != (long long)0L)
+											if((active3 & 0x2000L) != (long long)0L)
 											{
-												jjmatchedKind = 204;
+												jjmatchedKind = 205;
 												jjmatchedPos = 1;
 											}
 																						else 
 											{
-												if((active3 & 0x2000L) != (long long)0L)
+												if((active3 & 0x4000L) != (long long)0L)
 												{
-													jjmatchedKind = 205;
+													jjmatchedKind = 206;
 													jjmatchedPos = 1;
 												}
 																								else 
 												{
-													if((active3 & 0x4000L) != (long long)0L)
+													if((active3 & 0x8000L) != (long long)0L)
 													{
-														jjmatchedKind = 206;
+														jjmatchedKind = 207;
 														jjmatchedPos = 1;
 													}
 												}
@@ -650,13 +650,13 @@ long long AlinousPlusParserTokenManager::jjMoveStringLiteralDfa1_0(long long act
 		}
 				else 
 		{
-			if((active3 & 0x8000L) != (long long)0L)
+			if((active3 & 0x10000L) != (long long)0L)
 			{
-				jjmatchedKind = 207;
+				jjmatchedKind = 208;
 				jjmatchedPos = 1;
 			}
 		}
-		return jjMoveStringLiteralDfa2_0(active0, (long long)0x40000000000000L, active1, (long long)0L, active2, (long long)0L, active3, (long long)0x800L, ctx);
+		return jjMoveStringLiteralDfa2_0(active0, (long long)0x40000000000000L, active1, (long long)0L, active2, (long long)0L, active3, (long long)0x1000L, ctx);
 	case 64:
 		if((active0 & 0x20000000000L) != (long long)0L)
 		{
@@ -669,7 +669,7 @@ long long AlinousPlusParserTokenManager::jjMoveStringLiteralDfa1_0(long long act
 	case 68:
 		return jjMoveStringLiteralDfa2_0(active0, (long long)0L, active1, (long long)0L, active2, (long long)0x30000008000000L, active3, (long long)0L, ctx);
 	case 69:
-		return jjMoveStringLiteralDfa2_0(active0, (long long)0L, active1, (long long)0x203024000000000L, active2, (long long)0x9005914022801L, active3, (long long)0L, ctx);
+		return jjMoveStringLiteralDfa2_0(active0, (long long)0L, active1, (long long)0x203024000000000L, active2, (long long)0x409005914022801L, active3, (long long)0L, ctx);
 	case 70:
 		if((active2 & 0x200L) != (long long)0L)
 		{
@@ -749,7 +749,7 @@ long long AlinousPlusParserTokenManager::jjMoveStringLiteralDfa1_0(long long act
 	case 100:
 		return jjMoveStringLiteralDfa2_0(active0, (long long)0L, active1, (long long)0L, active2, (long long)0x30000008000000L, active3, (long long)0L, ctx);
 	case 101:
-		return jjMoveStringLiteralDfa2_0(active0, (long long)0L, active1, (long long)0x203024180044000L, active2, (long long)0x9005914022801L, active3, (long long)0L, ctx);
+		return jjMoveStringLiteralDfa2_0(active0, (long long)0L, active1, (long long)0x203024180044000L, active2, (long long)0x409005914022801L, active3, (long long)0L, ctx);
 	case 102:
 		if((active1 & 0x400L) != (long long)0L)
 		{
@@ -876,16 +876,16 @@ long long AlinousPlusParserTokenManager::jjMoveStringLiteralDfa2_0(long long old
 	}
 	switch(curChar) {
 	case 61:
-		if((active3 & 0x400L) != (long long)0L)
+		if((active3 & 0x800L) != (long long)0L)
 		{
-			jjmatchedKind = 202;
+			jjmatchedKind = 203;
 			jjmatchedPos = 2;
 		}
 				else 
 		{
-			if((active3 & 0x800L) != (long long)0L)
+			if((active3 & 0x1000L) != (long long)0L)
 			{
-				jjmatchedKind = 203;
+				jjmatchedKind = 204;
 				jjmatchedPos = 2;
 			}
 		}
@@ -941,7 +941,7 @@ long long AlinousPlusParserTokenManager::jjMoveStringLiteralDfa2_0(long long old
 	case 70:
 		return jjMoveStringLiteralDfa3_0(active0, (long long)0L, active1, (long long)0x2000000000000L, active2, (long long)0x9000004000004L, active3, (long long)0L, ctx);
 	case 71:
-		return jjMoveStringLiteralDfa3_0(active0, (long long)0L, active1, (long long)0x4000000000000L, active2, (long long)0x2000L, active3, (long long)0L, ctx);
+		return jjMoveStringLiteralDfa3_0(active0, (long long)0L, active1, (long long)0x4000000000000L, active2, (long long)0x400000000002000L, active3, (long long)0L, ctx);
 	case 73:
 		return jjMoveStringLiteralDfa3_0(active0, (long long)0L, active1, (long long)0x80000000000000L, active2, (long long)0xc10280000000L, active3, (long long)0L, ctx);
 	case 74:
@@ -1037,7 +1037,7 @@ long long AlinousPlusParserTokenManager::jjMoveStringLiteralDfa2_0(long long old
 	case 102:
 		return jjMoveStringLiteralDfa3_0(active0, (long long)0L, active1, (long long)0x2000100000000L, active2, (long long)0x9000004000004L, active3, (long long)0L, ctx);
 	case 103:
-		return jjMoveStringLiteralDfa3_0(active0, (long long)0L, active1, (long long)0x4000000000000L, active2, (long long)0x2000L, active3, (long long)0L, ctx);
+		return jjMoveStringLiteralDfa3_0(active0, (long long)0L, active1, (long long)0x4000000000000L, active2, (long long)0x400000000002000L, active3, (long long)0L, ctx);
 	case 105:
 		return jjMoveStringLiteralDfa3_0(active0, (long long)0L, active1, (long long)0x80000018a08000L, active2, (long long)0xc10280000000L, active3, (long long)0L, ctx);
 	case 106:
@@ -1164,7 +1164,7 @@ long long AlinousPlusParserTokenManager::jjMoveStringLiteralDfa3_0(long long old
 		}
 		return jjMoveStringLiteralDfa4_0(active0, (long long)0L, active1, (long long)0x4000000000000L, active2, (long long)0L, ctx);
 	case 73:
-		return jjMoveStringLiteralDfa4_0(active0, (long long)0L, active1, (long long)0x2000000000000000L, active2, (long long)0x2002L, ctx);
+		return jjMoveStringLiteralDfa4_0(active0, (long long)0L, active1, (long long)0x2000000000000000L, active2, (long long)0x400000000002002L, ctx);
 	case 76:
 		if((active1 & 0x40000000000000L) != (long long)0L)
 		{
@@ -1298,7 +1298,7 @@ long long AlinousPlusParserTokenManager::jjMoveStringLiteralDfa3_0(long long old
 		}
 		return jjMoveStringLiteralDfa4_0(active0, (long long)0L, active1, (long long)0x4000000000000L, active2, (long long)0L, ctx);
 	case 105:
-		return jjMoveStringLiteralDfa4_0(active0, (long long)0L, active1, (long long)0x2000000280002000L, active2, (long long)0x2002L, ctx);
+		return jjMoveStringLiteralDfa4_0(active0, (long long)0L, active1, (long long)0x2000000280002000L, active2, (long long)0x400000000002002L, ctx);
 	case 107:
 		return jjMoveStringLiteralDfa4_0(active0, (long long)0x100000000000000L, active1, (long long)0L, active2, (long long)0L, ctx);
 	case 108:
@@ -1485,6 +1485,8 @@ long long AlinousPlusParserTokenManager::jjMoveStringLiteralDfa4_0(long long old
 			jjmatchedPos = 4;
 		}
 		return jjMoveStringLiteralDfa5_0(active0, (long long)0L, active1, (long long)0x2000000000000000L, active2, (long long)0L, ctx);
+	case 79:
+		return jjMoveStringLiteralDfa5_0(active0, (long long)0L, active1, (long long)0L, active2, (long long)0x400000000000000L, ctx);
 	case 80:
 		if((active1 & 0x800000000000000L) != (long long)0L)
 		{
@@ -1679,6 +1681,8 @@ long long AlinousPlusParserTokenManager::jjMoveStringLiteralDfa4_0(long long old
 			jjmatchedPos = 4;
 		}
 		return jjMoveStringLiteralDfa5_0(active0, (long long)0L, active1, (long long)0x2000000000000020L, active2, (long long)0L, ctx);
+	case 111:
+		return jjMoveStringLiteralDfa5_0(active0, (long long)0L, active1, (long long)0L, active2, (long long)0x400000000000000L, ctx);
 	case 112:
 		if((active1 & 0x800000000000000L) != (long long)0L)
 		{
@@ -1886,6 +1890,14 @@ long long AlinousPlusParserTokenManager::jjMoveStringLiteralDfa5_0(long long old
 			jjmatchedKind = 157;
 			jjmatchedPos = 5;
 		}
+				else 
+		{
+			if((active2 & 0x400000000000000L) != (long long)0L)
+			{
+				jjmatchedKind = 186;
+				jjmatchedPos = 5;
+			}
+		}
 		return jjMoveStringLiteralDfa6_0(active0, (long long)0L, active1, (long long)0L, active2, (long long)0x800000040L, ctx);
 	case 80:
 		return jjMoveStringLiteralDfa6_0(active0, (long long)0L, active1, (long long)0x1000000000000L, active2, (long long)0L, ctx);
@@ -2055,6 +2067,14 @@ long long AlinousPlusParserTokenManager::jjMoveStringLiteralDfa5_0(long long old
 			{
 				jjmatchedKind = 157;
 				jjmatchedPos = 5;
+			}
+						else 
+			{
+				if((active2 & 0x400000000000000L) != (long long)0L)
+				{
+					jjmatchedKind = 186;
+					jjmatchedPos = 5;
+				}
 			}
 		}
 		return jjMoveStringLiteralDfa6_0(active0, (long long)0L, active1, (long long)0x1002L, active2, (long long)0x800000040L, ctx);
@@ -2824,7 +2844,7 @@ long long AlinousPlusParserTokenManager::jjMoveNfa_0(long long startState, long 
 		}
 		catch(java::io::IOException* e)
 		{
-			throw (new(ctx) Error(ConstStr::getCNST_STR_1528(), ctx));
+			throw (new(ctx) Error(ConstStr::getCNST_STR_1529(), ctx));
 		}
 	}
 	curPos = 0;
@@ -2999,9 +3019,9 @@ long long AlinousPlusParserTokenManager::jjMoveNfa_0(long long startState, long 
 					{
 						break ;
 					}
-					if(kind > (long long)186)
+					if(kind > (long long)187)
 					{
-						kind = 186;
+						kind = 187;
 					}
 					jjstateSet->set(19,jjnewStateCnt++, ctx);
 					break ;
@@ -3334,9 +3354,9 @@ long long AlinousPlusParserTokenManager::jjMoveNfa_0(long long startState, long 
 						{
 							break ;
 						}
-						if(kind > (long long)186)
+						if(kind > (long long)187)
 						{
-							kind = 186;
+							kind = 187;
 						}
 						{
 							jjCheckNAdd((long long)19, ctx);
@@ -3605,7 +3625,7 @@ long long AlinousPlusParserTokenManager::jjMoveNfa_0(long long startState, long 
 			}
 			catch(java::io::IOException* e)
 			{
-				throw (new(ctx) Error(ConstStr::getCNST_STR_1529(), ctx));
+				throw (new(ctx) Error(ConstStr::getCNST_STR_1530(), ctx));
 			}
 		}
 	}
@@ -3627,13 +3647,13 @@ long long AlinousPlusParserTokenManager::jjMoveStringLiteralDfa0_1(ThreadContext
 {
 	switch(curChar) {
 	case 42:
-		return jjMoveStringLiteralDfa1_1((long long)0x8000000000000000L, ctx);
+		return jjMoveStringLiteralDfa1_1((long long)0x1L, ctx);
 	default:
 		return 1;
 		break;
 	}
 }
-long long AlinousPlusParserTokenManager::jjMoveStringLiteralDfa1_1(long long active2, ThreadContext* ctx)
+long long AlinousPlusParserTokenManager::jjMoveStringLiteralDfa1_1(long long active3, ThreadContext* ctx)
 {
 	{
 		try
@@ -3647,9 +3667,9 @@ long long AlinousPlusParserTokenManager::jjMoveStringLiteralDfa1_1(long long act
 	}
 	switch(curChar) {
 	case 47:
-		if((active2 & 0x8000000000000000L) != (long long)0L)
+		if((active3 & 0x1L) != (long long)0L)
 		{
-			return jjStopAtPos((long long)1, (long long)191, ctx);
+			return jjStopAtPos((long long)1, (long long)192, ctx);
 		}
 		break ;
 	default:

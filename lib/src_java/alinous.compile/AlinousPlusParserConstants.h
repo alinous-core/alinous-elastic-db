@@ -211,7 +211,8 @@ public:
 	constexpr static const long long _NULL{183};
 	constexpr static const long long FUNCTION{184};
 	constexpr static const long long USE{185};
-	constexpr static const long long IDENTIFIER{186};
+	constexpr static const long long REGION{186};
+	constexpr static const long long IDENTIFIER{187};
 	constexpr static const long long DEFAULT{0};
 	constexpr static const long long COMM{1};
 	constexpr static const long long L_COMM{2};

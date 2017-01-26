@@ -18,7 +18,7 @@ bool RemoteClientRepeatableReadTrx::__init_static_variables(){
 	delete ctx;
 	return true;
 }
- RemoteClientRepeatableReadTrx::RemoteClientRepeatableReadTrx(DbTransactionManager* mgr, String* tmpDir, AlinousDatabase* database, AlinousCore* core, long long commitId, ThreadContext* ctx) throw()  : IObject(ctx), DbTransaction(mgr, tmpDir, database, core, commitId, ctx)
+ RemoteClientRepeatableReadTrx::RemoteClientRepeatableReadTrx(DbTransactionManager* mgr, String* tmpDir, AlinousDatabase* database, AlinousCore* core, long long commitId, ThreadContext* ctx) throw()  : IObject(ctx), AbstractRemoteClientTransaction(mgr, tmpDir, database, core, commitId, ctx)
 {
 }
 void RemoteClientRepeatableReadTrx::__construct_impl(DbTransactionManager* mgr, String* tmpDir, AlinousDatabase* database, AlinousCore* core, long long commitId, ThreadContext* ctx) throw() 
@@ -36,7 +36,7 @@ void RemoteClientRepeatableReadTrx::__releaseRegerences(bool prepare, ThreadCont
 	if(!prepare){
 		return;
 	}
-	DbTransaction::__releaseRegerences(true, ctx);
+	AbstractRemoteClientTransaction::__releaseRegerences(true, ctx);
 }
 bool RemoteClientRepeatableReadTrx::isVisible(IDatabaseRecord* record, IDatabaseTable* tableStore, ThreadContext* ctx)
 {

@@ -7,10 +7,10 @@ namespace alinous {namespace server {
 
 
 
-String* AlinousWebContentProcessor::PING_TO_SERVER = ConstStr::getCNST_STR_1870();
-String* AlinousWebContentProcessor::PING_RETURN = ConstStr::getCNST_STR_1870();
-String* AlinousWebContentProcessor::DEBUG_CMD_ACCESS = ConstStr::getCNST_STR_1871();
-String* AlinousWebContentProcessor::HEAD_METHOD = ConstStr::getCNST_STR_1872();
+String* AlinousWebContentProcessor::PING_TO_SERVER = ConstStr::getCNST_STR_1871();
+String* AlinousWebContentProcessor::PING_RETURN = ConstStr::getCNST_STR_1871();
+String* AlinousWebContentProcessor::DEBUG_CMD_ACCESS = ConstStr::getCNST_STR_1872();
+String* AlinousWebContentProcessor::HEAD_METHOD = ConstStr::getCNST_STR_1873();
 bool AlinousWebContentProcessor::__init_done = __init_static_variables();
 bool AlinousWebContentProcessor::__init_static_variables(){
 	Java2CppSystem::getSelf();
@@ -83,7 +83,7 @@ ContentResult* AlinousWebContentProcessor::proccess(HttpHeaderProcessor* request
 	{
 		if(core->debug && path->equals(AlinousWebContentProcessor::DEBUG_CMD_ACCESS, ctx))
 		{
-			return (new(ctx) ContentResult(DebugProcessor::process(this->core, request, ctx), ConstStr::getCNST_STR_1869(), this->mimeResolver, head, ctx));
+			return (new(ctx) ContentResult(DebugProcessor::process(this->core, request, ctx), ConstStr::getCNST_STR_1870(), this->mimeResolver, head, ctx));
 		}
 	}
 	AbstractWebModule* module = this->webModuleManager->getModule(path, core->debug, ctx);

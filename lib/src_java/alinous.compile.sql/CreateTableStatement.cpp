@@ -38,6 +38,8 @@ void CreateTableStatement::__releaseRegerences(bool prepare, ThreadContext* ctx)
 	checks = nullptr;
 	__e_obj1.add(this->primaryKeys, this);
 	primaryKeys = nullptr;
+	__e_obj1.add(this->region, this);
+	region = nullptr;
 	__e_obj1.add(this->metadata, this);
 	metadata = nullptr;
 	if(!prepare){
@@ -82,6 +84,7 @@ TableSchema* CreateTableStatement::createMetadata(ScriptMachine* machine, bool d
 		tblMetadata->addPrimaryKey(prim, ctx);
 	}
 	tblMetadata->setChecks(this->checks, ctx);
+	schema->setRegionName(this->region, ctx);
 	return schema;
 }
 void CreateTableStatement::validate(SourceValidator* validator, ThreadContext* ctx) throw() 
@@ -221,6 +224,14 @@ ArrayList<CheckDefinition>* CreateTableStatement::getChecks(ThreadContext* ctx) 
 {
 	return checks;
 }
+String* CreateTableStatement::getRegion(ThreadContext* ctx) throw() 
+{
+	return region;
+}
+void CreateTableStatement::setRegion(String* region, ThreadContext* ctx) throw() 
+{
+	__GC_MV(this, &(this->region), region, String);
+}
 IStatement::StatementType CreateTableStatement::getType(ThreadContext* ctx) throw() 
 {
 	return StatementType::CREATE_TABLE;
@@ -280,6 +291,11 @@ void CreateTableStatement::readData(NetworkBinaryBuffer* buff, ThreadContext* ct
 		}
 		__GC_MV(this, &(this->primaryKeys), static_cast<PrimaryKeys*>(el), PrimaryKeys);
 	}
+	isnull = buff->getBoolean(ctx);
+	if(!isnull)
+	{
+		__GC_MV(this, &(this->region), buff->getString(ctx), String);
+	}
 }
 void CreateTableStatement::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
 {
@@ -316,6 +332,12 @@ void CreateTableStatement::writeData(NetworkBinaryBuffer* buff, ThreadContext* c
 	if(!isnull)
 	{
 		this->primaryKeys->writeData(buff, ctx);
+	}
+	isnull = (this->region == nullptr);
+	buff->putBoolean(isnull, ctx);
+	if(!isnull)
+	{
+		buff->putString(this->region, ctx);
 	}
 }
 }}}
