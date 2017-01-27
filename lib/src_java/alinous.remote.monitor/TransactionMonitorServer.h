@@ -83,6 +83,7 @@ public:
 	long long newTransactionId(ThreadContext* ctx) throw() ;
 	long long getNodeClusterVersion(ThreadContext* ctx) throw() ;
 	long long getSchemaVersion(ThreadContext* ctx) throw() ;
+	void updateSchemaVersion(ThreadContext* ctx) throw() ;
 	long long getNextOid(ThreadContext* ctx) throw() ;
 	RegionNodeInfoManager* getNodeInfo(ThreadContext* ctx) throw() ;
 public:

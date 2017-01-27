@@ -22,13 +22,13 @@ bool TableSchema::__init_static_variables(){
 {
 	__GC_MV(this, &(this->dataDir), dataDir, String);
 	__GC_MV(this, &(this->name), name, String);
-	__GC_MV(this, &(this->regionName), ConstStr::getCNST_STR_1665(), String);
+	__GC_MV(this, &(this->regionName), ConstStr::getCNST_STR_1667(), String);
 }
 void TableSchema::__construct_impl(String* name, String* dataDir, ThreadContext* ctx) throw() 
 {
 	__GC_MV(this, &(this->dataDir), dataDir, String);
 	__GC_MV(this, &(this->name), name, String);
-	__GC_MV(this, &(this->regionName), ConstStr::getCNST_STR_1665(), String);
+	__GC_MV(this, &(this->regionName), ConstStr::getCNST_STR_1667(), String);
 }
  TableSchema::~TableSchema() throw() 
 {

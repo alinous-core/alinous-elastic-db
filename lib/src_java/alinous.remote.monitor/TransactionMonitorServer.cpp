@@ -7,7 +7,7 @@ namespace alinous {namespace remote {namespace monitor {
 
 
 
-String* TransactionMonitorServer::THREAD_NAME = ConstStr::getCNST_STR_3553();
+String* TransactionMonitorServer::THREAD_NAME = ConstStr::getCNST_STR_3556();
 bool TransactionMonitorServer::__init_done = __init_static_variables();
 bool TransactionMonitorServer::__init_static_variables(){
 	Java2CppSystem::getSelf();
@@ -113,6 +113,13 @@ long long TransactionMonitorServer::getSchemaVersion(ThreadContext* ctx) throw()
 	{
 		SynchronizedBlockObj __synchronized_2(this->schemaVersionLock, ctx);
 		return this->schemaVersion;
+	}
+}
+void TransactionMonitorServer::updateSchemaVersion(ThreadContext* ctx) throw() 
+{
+	{
+		SynchronizedBlockObj __synchronized_2(this->schemaVersionLock, ctx);
+		this->schemaVersion ++ ;
 	}
 }
 long long TransactionMonitorServer::getNextOid(ThreadContext* ctx) throw() 

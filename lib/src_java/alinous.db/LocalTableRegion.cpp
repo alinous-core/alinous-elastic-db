@@ -56,7 +56,7 @@ int LocalTableRegion::getRegionType(ThreadContext* ctx) throw()
 }
 String* LocalTableRegion::getRegionName(ThreadContext* ctx) throw() 
 {
-	return ConstStr::getCNST_STR_1665();
+	return ConstStr::getCNST_STR_1667();
 }
 TableSchema* LocalTableRegion::getSchema(String* name, ThreadContext* ctx) throw() 
 {

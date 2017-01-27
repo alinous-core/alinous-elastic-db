@@ -7,7 +7,7 @@ namespace alinous {namespace remote {namespace db {
 
 
 
-String* RemoteTableStorageServer::THREAD_NAME = ConstStr::getCNST_STR_3550();
+String* RemoteTableStorageServer::THREAD_NAME = ConstStr::getCNST_STR_3552();
 const IntKey RemoteTableStorageServer:: __SCHEMA = (IntKey(10, nullptr));
 const IntKey RemoteTableStorageServer:: __SCHEMA_VERSION = (IntKey(11, nullptr));
 bool RemoteTableStorageServer::__init_done = __init_static_variables();
@@ -21,7 +21,7 @@ bool RemoteTableStorageServer::__init_static_variables(){
 	delete ctx;
 	return true;
 }
- RemoteTableStorageServer::RemoteTableStorageServer(int port, int maxthread, String* datadir, ThreadContext* ctx) throw()  : IObject(ctx), schemas(nullptr), BLOCK_SIZE(256), nodeCapacity(8), capacity(1024), port(0), maxthread(0), dataDir(nullptr), socketServer(nullptr), btreeCache(nullptr), workerThreadsPool(nullptr), core(nullptr), dbconfig(nullptr), configFile(nullptr), schemaVersion(0)
+ RemoteTableStorageServer::RemoteTableStorageServer(int port, int maxthread, String* datadir, ThreadContext* ctx) throw()  : IObject(ctx), schemas(nullptr), BLOCK_SIZE(256), nodeCapacity(8), capacity(1024), port(0), maxthread(0), dataDir(nullptr), socketServer(nullptr), btreeCache(nullptr), workerThreadsPool(nullptr), core(nullptr), dbconfig(nullptr), configFile(nullptr), schemaVersionLock(__GC_INS(this, (new(ctx) LockObject(ctx)), LockObject)), schemaVersion(0), monitorAccess(nullptr)
 {
 	this->port = port;
 	this->maxthread = maxthread;
@@ -59,11 +59,15 @@ void RemoteTableStorageServer::__releaseRegerences(bool prepare, ThreadContext* 
 	dbconfig = nullptr;
 	__e_obj1.add(this->configFile, this);
 	configFile = nullptr;
+	__e_obj1.add(this->schemaVersionLock, this);
+	schemaVersionLock = nullptr;
+	__e_obj1.add(this->monitorAccess, this);
+	monitorAccess = nullptr;
 	if(!prepare){
 		return;
 	}
 }
-void RemoteTableStorageServer::init(AlinousCore* core, ThreadContext* ctx)
+void RemoteTableStorageServer::init(AlinousCore* core, MonitorRef* monitorRef, ThreadContext* ctx)
 {
 	File* file = (new(ctx) File(this->dataDir, ctx));
 	if(!file->exists(ctx))
@@ -78,10 +82,12 @@ void RemoteTableStorageServer::init(AlinousCore* core, ThreadContext* ctx)
 		catch(BTreeException* e)
 		{
 			e->printStackTrace(ctx);
-			throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_3547(), e, ctx));
+			throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_3549(), e, ctx));
 		}
 	}
-	__GC_MV(this, &(this->workerThreadsPool), (new(ctx) ThreadPool(16, ConstStr::getCNST_STR_3548(), ctx)), ThreadPool);
+	__GC_MV(this, &(this->workerThreadsPool), (new(ctx) ThreadPool(16, ConstStr::getCNST_STR_3550(), ctx)), ThreadPool);
+	__GC_MV(this, &(this->monitorAccess), (new(ctx) MonitorAccess(monitorRef, ctx)), MonitorAccess);
+	this->monitorAccess->init(ctx);
 	if(exists(ctx))
 	{
 		return;
@@ -111,27 +117,27 @@ void RemoteTableStorageServer::start(AlinousCore* core, ThreadContext* ctx)
 		}
 		catch(IOException* e)
 		{
-			throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_3549(), ctx));
+			throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_3551(), ctx));
 		}
 		catch(InterruptedException* e)
 		{
-			throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_3549(), ctx));
+			throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_3551(), ctx));
 		}
 		catch(BTreeException* e)
 		{
-			throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_3549(), ctx));
+			throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_3551(), ctx));
 		}
 		catch(VariableException* e)
 		{
-			throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_3549(), ctx));
+			throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_3551(), ctx));
 		}
 		catch(DatabaseException* e)
 		{
-			throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_3549(), ctx));
+			throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_3551(), ctx));
 		}
 		catch(AlinousException* e)
 		{
-			throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_3549(), ctx));
+			throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_3551(), ctx));
 		}
 	}
 	RemoteStorageResponceActionFactory* factory = (new(ctx) RemoteStorageResponceActionFactory(this, ctx));
@@ -159,14 +165,32 @@ void RemoteTableStorageServer::dispose(ThreadContext* ctx) throw()
 			}
 		}
 	}
+	if(this->monitorAccess != nullptr)
+	{
+		this->monitorAccess->dispose(ctx);
+	}
 }
 AlinousCore* RemoteTableStorageServer::getCore(ThreadContext* ctx) throw() 
 {
 	return core;
 }
-void RemoteTableStorageServer::getSchemeInfo(SchemasStructureInfoData* data, String* region, String* host, int port, bool ipv6, ThreadContext* ctx) throw() 
+long long RemoteTableStorageServer::getSchemeInfo(SchemasStructureInfoData* data, String* region, String* host, int port, bool ipv6, ThreadContext* ctx) throw() 
 {
 	this->schemas->getSchemaData(data, region, host, port, ipv6, ctx);
+	{
+		SynchronizedBlockObj __synchronized_2(this->schemaVersionLock, ctx);
+		data->setSchemaVersion(this->schemaVersion, ctx);
+		return this->schemaVersion;
+	}
+}
+void RemoteTableStorageServer::createSchema(String* schemaName, ThreadContext* ctx)
+{
+	{
+		SynchronizedBlockObj __synchronized_2(this->schemaVersionLock, ctx);
+		this->schemas->createSchema(schemaName, ctx);
+		this->schemaVersion ++ ;
+		this->monitorAccess->reportSchemaUpdated(ctx);
+	}
 }
 void RemoteTableStorageServer::initInstance(AlinousCore* core, ThreadContext* ctx)
 {
@@ -211,23 +235,23 @@ void RemoteTableStorageServer::initInstance(AlinousCore* core, ThreadContext* ct
 		}
 		catch(IOException* e)
 		{
-			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1657(), e, ctx));
+			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1659(), e, ctx));
 		}
 		catch(InterruptedException* e)
 		{
-			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1657(), e, ctx));
+			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1659(), e, ctx));
 		}
 		catch(BTreeException* e)
 		{
-			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1657(), e, ctx));
+			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1659(), e, ctx));
 		}
 		catch(VariableException* e)
 		{
-			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1657(), e, ctx));
+			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1659(), e, ctx));
 		}
 		catch(AlinousException* e)
 		{
-			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1657(), e, ctx));
+			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1659(), e, ctx));
 		}
 	}
 }
@@ -235,7 +259,7 @@ File* RemoteTableStorageServer::getConfigFile(ThreadContext* ctx) throw()
 {
 	if(this->configFile == nullptr)
 	{
-		String* pathname = this->dataDir->clone(ctx)->append(ConstStr::getCNST_STR_1661(), ctx);
+		String* pathname = this->dataDir->clone(ctx)->append(ConstStr::getCNST_STR_1663(), ctx);
 		__GC_MV(this, &(this->configFile), (new(ctx) File(pathname, ctx)), File);
 	}
 	return this->configFile;

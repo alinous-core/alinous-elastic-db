@@ -42,7 +42,7 @@ long long NodeReferenceManager::getClientData(ClientStructureMetadata* data, Thr
 {
 	if(this->nodeReferences == nullptr)
 	{
-		throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3566(), ctx));
+		throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3570(), ctx));
 	}
 	{
 		SynchronizedBlockObj __synchronized_2(this->lock, ctx);
@@ -54,20 +54,21 @@ long long NodeReferenceManager::getClientData(ClientStructureMetadata* data, Thr
 			ClientSchemaData* schemadata = scheme->toClientData(ctx);
 			data->addSchema(schemeName, schemadata, ctx);
 		}
+		return this->schemaVersion;
 	}
-	return revision;
 }
 void NodeReferenceManager::syncSchemeTables(String* regionName, ThreadContext* ctx)
 {
 	if(this->nodeReferences == nullptr)
 	{
-		throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3566(), ctx));
+		throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3570(), ctx));
 	}
 	SchemasStructureInfoData* data = this->nodeReferences->getSchemeInfo(regionName, ctx);
 	{
 		SynchronizedBlockObj __synchronized_2(this->lock, ctx);
 		this->schemaDictinary->clear(ctx);
 		doSyncScmema(data, ctx);
+		this->schemaVersion = data->getSchemaVersion(ctx);
 	}
 }
 void NodeReferenceManager::syncNodeReference(RegionInfoData* data, ThreadContext* ctx) throw() 
@@ -84,11 +85,31 @@ void NodeReferenceManager::dispose(ThreadContext* ctx) throw()
 		this->nodeReferences->dispose(ctx);
 	}
 }
-long long NodeReferenceManager::getRevision(ThreadContext* ctx) throw() 
+long long NodeReferenceManager::getSchemaVersion(ThreadContext* ctx) throw() 
 {
 	{
 		SynchronizedBlockObj __synchronized_2(this->lock, ctx);
-		return revision;
+		return this->schemaVersion;
+	}
+}
+void NodeReferenceManager::createSchema(String* schemaName, ThreadContext* ctx)
+{
+	{
+		SynchronizedBlockObj __synchronized_2(this->lock, ctx);
+		NodeRegionSchema* schema = this->schemaDictinary->get(schemaName, ctx);
+		if(schema != nullptr)
+		{
+			return;
+		}
+		schema = (new(ctx) NodeRegionSchema(schemaName, ctx));
+		this->schemaDictinary->put(schemaName, schema, ctx);
+		List<NodeReference>* list = this->nodeReferences->getNodes(ctx);
+		int maxLoop = list->size(ctx);
+		for(int i = 0; i != maxLoop; ++i)
+		{
+			NodeReference* node = list->get(i, ctx);
+			node->createSchema(schemaName, ctx);
+		}
 	}
 }
 void NodeReferenceManager::doSyncScmema(SchemasStructureInfoData* data, ThreadContext* ctx) throw() 

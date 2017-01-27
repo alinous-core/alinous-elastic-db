@@ -14,6 +14,7 @@ constexpr const int AbstractMonitorCommand::TYPE_GET_MAX_COMMIT_ID;
 constexpr const int AbstractMonitorCommand::TYPE_NEW_MAX_COMMIT_ID;
 constexpr const int AbstractMonitorCommand::TYPE_GET_REGION_INFO;
 constexpr const int AbstractMonitorCommand::TYPE_NEW_TRANSACTION;
+constexpr const int AbstractMonitorCommand::TYPE_REPORT_SCHEMA_UPDATED;
 constexpr const int AbstractMonitorCommand::TYPE_TERMINATE;
 bool AbstractMonitorCommand::__init_done = __init_static_variables();
 bool AbstractMonitorCommand::__init_static_variables(){
@@ -36,6 +37,8 @@ bool AbstractMonitorCommand::__init_static_variables(){
 void AbstractMonitorCommand::__releaseRegerences(bool prepare, ThreadContext* ctx) throw() 
 {
 	ObjectEraser __e_obj1(ctx, __FILEW__, __LINE__, L"AbstractMonitorCommand", L"~AbstractMonitorCommand");
+	__e_obj1.add(this->errorMessage, this);
+	errorMessage = nullptr;
 	if(!prepare){
 		return;
 	}
@@ -52,6 +55,54 @@ AbstractMonitorCommand* AbstractMonitorCommand::sendCommand(AlinousSocket* socke
 	InputStream* stream = socket->getInputStream(ctx);
 	AbstractMonitorCommand* cmd = MinitorCommandReader::readFromStream(stream, ctx);
 	return cmd;
+}
+bool AbstractMonitorCommand::hasError(ThreadContext* ctx) throw() 
+{
+	return this->errorMessage != nullptr;
+}
+List<String>* AbstractMonitorCommand::getErrorMessage(ThreadContext* ctx) throw() 
+{
+	return errorMessage;
+}
+void AbstractMonitorCommand::handleError(Throwable* e, ThreadContext* ctx) throw() 
+{
+	GCUtils<List<String> >::mv(this, &(this->errorMessage), (new(ctx) ArrayList<String>(ctx)), ctx);
+	Throwable* cur = e;
+	while(cur != nullptr)
+	{
+		String* msg = e->getMessage(ctx);
+		this->errorMessage->add(msg, ctx);
+		cur = cur->getCause(ctx);
+	}
+}
+void AbstractMonitorCommand::writeErrorByteStream(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+{
+	bool er = hasError(ctx);
+	buff->putBoolean(er, ctx);
+	if(er)
+	{
+		int maxLoop = this->errorMessage->size(ctx);
+		buff->putInt(maxLoop, ctx);
+		for(int i = 0; i != maxLoop; ++i)
+		{
+			String* msg = this->errorMessage->get(i, ctx);
+			buff->putString(msg, ctx);
+		}
+	}
+}
+void AbstractMonitorCommand::readErrorFromStream(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+{
+	GCUtils<List<String> >::mv(this, &(this->errorMessage), (new(ctx) ArrayList<String>(ctx)), ctx);
+	bool er = buff->getBoolean(ctx);
+	if(er)
+	{
+		int maxLoop = buff->getInt(ctx);
+		for(int i = 0; i != maxLoop; ++i)
+		{
+			String* msg = buff->getString(ctx);
+			this->errorMessage->add(msg, ctx);
+		}
+	}
 }
 }}}}
 

@@ -84,7 +84,7 @@ void RemoteStorageResponceAction::handleCommand(BufferedInputStream* stream, Buf
 		cmd = RemoteStorageCommandReader::readFromStream(stream, ctx);
 		if(cmd == nullptr)
 		{
-			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3546(), ctx));
+			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3548(), ctx));
 		}
 		int type = cmd->getType(ctx);
 		switch(type) {
@@ -99,6 +99,7 @@ void RemoteStorageResponceAction::handleCommand(BufferedInputStream* stream, Buf
 		case AbstractRemoteStorageCommand::TYPE_CONNECT:
 		case AbstractRemoteStorageCommand::TYPE_VOID:
 		case AbstractRemoteStorageCommand::TYPE_GET_TABLE_SCHEME:
+		case AbstractRemoteStorageCommand::TYPE_CREATE_SCHEMA:
 			cmd->executeOnServer(this->tableStorageServer, outStream, ctx);
 			break ;
 		default:

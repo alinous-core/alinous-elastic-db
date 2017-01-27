@@ -45,6 +45,17 @@ void RegionCreateSchemaCommand::__releaseRegerences(bool prepare, ThreadContext*
 }
 void RegionCreateSchemaCommand::executeOnServer(NodeRegionServer* nodeRegionServer, BufferedOutputStream* outStream, ThreadContext* ctx)
 {
+	{
+		try
+		{
+			nodeRegionServer->createSchema(this->schemaName, ctx);
+		}
+		catch(AlinousException* e)
+		{
+			handleError(e, ctx);
+			nodeRegionServer->getCore(ctx)->getLogger(ctx)->logError(e, ctx);
+		}
+	}
 	writeByteStream(outStream, ctx);
 }
 void RegionCreateSchemaCommand::readFromStream(InputStream* stream, int remain, ThreadContext* ctx)
@@ -53,6 +64,7 @@ void RegionCreateSchemaCommand::readFromStream(InputStream* stream, int remain, 
 	stream->read(src, ctx);
 	NetworkBinaryBuffer* buff = (new(ctx) NetworkBinaryBuffer(src, ctx));
 	__GC_MV(this, &(this->schemaName), buff->getString(ctx), String);
+	readErrorFromStream(buff, ctx);
 }
 String* RegionCreateSchemaCommand::getSchemaName(ThreadContext* ctx) throw() 
 {
@@ -67,6 +79,7 @@ void RegionCreateSchemaCommand::writeByteStream(OutputStream* out, ThreadContext
 	NetworkBinaryBuffer* buff = (new(ctx) NetworkBinaryBuffer(256, ctx));
 	buff->putInt(NodeRegionConnectCommand::TYPE_CREATE_SCHEMA, ctx);
 	buff->putString(this->schemaName, ctx);
+	writeErrorByteStream(buff, ctx);
 	IArrayObjectPrimitive<char>* b = buff->toBinary(ctx);
 	int pos = buff->getPutSize(ctx);
 	out->write(b, 0, pos, ctx);

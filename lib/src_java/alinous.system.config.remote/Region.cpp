@@ -58,10 +58,10 @@ Region* Region::parseInstance(DomNode* dom, DomDocument* document, Matcher* matc
 	IVariableValue* attr = dom->getAttributeValue(ConstStr::getCNST_STR_1116(), ctx);
 	if(attr == nullptr)
 	{
-		throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_1296(), ctx));
+		throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_1298(), ctx));
 	}
 	reg->setName(attr->toString(ctx)->trim(ctx), ctx);
-	MatchCandidatesCollection* result = matcher->match(document, dom, ConstStr::getCNST_STR_1283(), ctx);
+	MatchCandidatesCollection* result = matcher->match(document, dom, ConstStr::getCNST_STR_1285(), ctx);
 	ArrayList<MatchCandidate>* list = result->getCandidatesList(ctx);
 	int maxLoop = list->size(ctx);
 	for(int i = 0; i != maxLoop; ++i)

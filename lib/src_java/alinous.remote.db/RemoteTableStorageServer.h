@@ -3,6 +3,9 @@
 namespace alinous {namespace system {
 class AlinousCore;}}
 
+namespace alinous {namespace system {namespace config {namespace remote {
+class MonitorRef;}}}}
+
 namespace java {namespace io {
 class File;}}
 
@@ -17,6 +20,9 @@ class BTreeException;}}
 
 namespace alinous {namespace runtime {namespace parallel {
 class ThreadPool;}}}
+
+namespace alinous {namespace remote {namespace db {
+class MonitorAccess;}}}
 
 namespace alinous {namespace db {
 class SchemaManager;}}
@@ -60,6 +66,9 @@ class SchemasStructureInfoData;}}}}}
 namespace alinous {namespace btree {
 class IntKey;}}
 
+namespace alinous {namespace lock {
+class LockObject;}}
+
 namespace alinous {namespace btree {
 class IBTreeKey;}}
 
@@ -89,6 +98,7 @@ using ::alinous::btree::LongValue;
 using ::alinous::db::AlinousDbException;
 using ::alinous::db::SchemaManager;
 using ::alinous::db::table::DatabaseException;
+using ::alinous::lock::LockObject;
 using ::alinous::remote::db::command::data::SchemasStructureInfoData;
 using ::alinous::remote::socket::SocketServer;
 using ::alinous::runtime::dom::VariableException;
@@ -96,6 +106,7 @@ using ::alinous::runtime::parallel::ThreadPool;
 using ::alinous::system::AlinousCore;
 using ::alinous::system::AlinousException;
 using ::alinous::system::config::AlinousInitException;
+using ::alinous::system::config::remote::MonitorRef;
 
 
 
@@ -122,7 +133,9 @@ private:
 	AlinousCore* core;
 	BTree* dbconfig;
 	File* configFile;
+	LockObject* schemaVersionLock;
 	long long schemaVersion;
+	MonitorAccess* monitorAccess;
 public:
 	const static IntKey __SCHEMA;
 	constexpr static IntKey* SCHEMA{const_cast<IntKey*>(&__SCHEMA)};
@@ -131,12 +144,13 @@ public:
 private:
 	static String* THREAD_NAME;
 public:
-	void init(AlinousCore* core, ThreadContext* ctx);
+	void init(AlinousCore* core, MonitorRef* monitorRef, ThreadContext* ctx);
 	bool exists(ThreadContext* ctx) throw() ;
 	void start(AlinousCore* core, ThreadContext* ctx);
 	void dispose(ThreadContext* ctx) throw() ;
 	AlinousCore* getCore(ThreadContext* ctx) throw() ;
-	void getSchemeInfo(SchemasStructureInfoData* data, String* region, String* host, int port, bool ipv6, ThreadContext* ctx) throw() ;
+	long long getSchemeInfo(SchemasStructureInfoData* data, String* region, String* host, int port, bool ipv6, ThreadContext* ctx) throw() ;
+	void createSchema(String* schemaName, ThreadContext* ctx);
 private:
 	void initInstance(AlinousCore* core, ThreadContext* ctx);
 	File* getConfigFile(ThreadContext* ctx) throw() ;

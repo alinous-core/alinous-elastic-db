@@ -49,6 +49,11 @@ void SchemasStructureInfoData::join(SchemasStructureInfoData* data, ThreadContex
 		}
 		lastSchemaData->join(schemaData, ctx);
 	}
+	long long ver = data->getSchemaVersion(ctx);
+	if(this->schemaVersion < ver)
+	{
+		this->schemaVersion = ver;
+	}
 }
 bool SchemasStructureInfoData::hasSchema(String* name, ThreadContext* ctx) throw() 
 {
@@ -80,6 +85,7 @@ void SchemasStructureInfoData::readData(NetworkBinaryBuffer* buff, ThreadContext
 		data->readData(buff, ctx);
 		this->schemas->put(data->getName(ctx), data, ctx);
 	}
+	this->schemaVersion = buff->getLong(ctx);
 }
 void SchemasStructureInfoData::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
 {
@@ -92,6 +98,15 @@ void SchemasStructureInfoData::writeData(NetworkBinaryBuffer* buff, ThreadContex
 		SchemaData* data = this->schemas->get(schemeName, ctx);
 		data->writeData(buff, ctx);
 	}
+	buff->putLong(this->schemaVersion, ctx);
+}
+long long SchemasStructureInfoData::getSchemaVersion(ThreadContext* ctx) throw() 
+{
+	return schemaVersion;
+}
+void SchemasStructureInfoData::setSchemaVersion(long long schemaVersion, ThreadContext* ctx) throw() 
+{
+	this->schemaVersion = schemaVersion;
 }
 SchemaData* SchemasStructureInfoData::findLocalSchema(String* name, SchemaData* schemaData, ThreadContext* ctx) throw() 
 {

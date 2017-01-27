@@ -221,7 +221,7 @@ void AlinousCore::initDistributedServerParts(ThreadContext* ctx)
 			{
 				try
 				{
-					tableNode->init(this, ctx);
+					tableNode->init(this, n->getMonitorRef(ctx), ctx);
 				}
 				catch(AlinousDbException* e)
 				{

@@ -85,7 +85,7 @@ char BTreeLeafContainer::getNodeType(ThreadContext* ctx) throw()
 void BTreeLeafContainer::printNode(StringBuffer* buff, int level, ThreadContext* ctx)
 {
 	printTab(buff, level, ctx);
-	buff->append(ConstStr::getCNST_STR_1633(), ctx)->append(getKey(ctx)->toString(ctx), ctx)->append(ConstStr::getCNST_STR_1634(), ctx);
+	buff->append(ConstStr::getCNST_STR_1635(), ctx)->append(getKey(ctx)->toString(ctx), ctx)->append(ConstStr::getCNST_STR_1636(), ctx);
 	int nextLevel = level + 1;
 	int maxLoop = this->nodeUsed;
 	for(int i = 0; i != maxLoop; ++i)
@@ -96,7 +96,7 @@ void BTreeLeafContainer::printNode(StringBuffer* buff, int level, ThreadContext*
 		node->endUse(ctx);
 	}
 	printTab(buff, level, ctx);
-	buff->append(ConstStr::getCNST_STR_1635(), ctx);
+	buff->append(ConstStr::getCNST_STR_1637(), ctx);
 }
 bool BTreeLeafContainer::removeChild(IBTreeKey* key, ThreadContext* ctx)
 {

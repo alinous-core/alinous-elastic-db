@@ -52,8 +52,11 @@ AbstractRemoteStorageCommand* RemoteStorageCommandReader::readFromStream(InputSt
 	case AbstractRemoteStorageCommand::TYPE_GET_TABLE_SCHEME:
 		cmd = (new(ctx) GetTableSchemeCommand(ctx));
 		break ;
+	case AbstractRemoteStorageCommand::TYPE_CREATE_SCHEMA:
+		cmd = (new(ctx) CreateSchemaCommand(ctx));
+		break ;
 	default:
-		throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3552(), ctx));
+		throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3555(), ctx));
 		break;
 	}
 	cmd->readFromStream(stream, size, ctx);

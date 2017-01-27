@@ -20,12 +20,12 @@ bool AlinousDomEventHandler::__init_static_variables(){
 }
  AlinousDomEventHandler::AlinousDomEventHandler(ThreadContext* ctx) throw()  : IObject(ctx), topObject(nullptr), tagStack(GCUtils<Stack<DomNode> >::ins(this, (new(ctx) Stack<DomNode>(ctx)), ctx, __FILEW__, __LINE__, L""))
 {
-	__GC_MV(this, &(this->topObject), (new(ctx) DomDocument(ConstStr::getCNST_STR_1747(), ctx)), DomNode);
+	__GC_MV(this, &(this->topObject), (new(ctx) DomDocument(ConstStr::getCNST_STR_1749(), ctx)), DomNode);
 	this->tagStack->push(this->topObject, ctx);
 }
 void AlinousDomEventHandler::__construct_impl(ThreadContext* ctx) throw() 
 {
-	__GC_MV(this, &(this->topObject), (new(ctx) DomDocument(ConstStr::getCNST_STR_1747(), ctx)), DomNode);
+	__GC_MV(this, &(this->topObject), (new(ctx) DomDocument(ConstStr::getCNST_STR_1749(), ctx)), DomNode);
 	this->tagStack->push(this->topObject, ctx);
 }
  AlinousDomEventHandler::~AlinousDomEventHandler() throw() 

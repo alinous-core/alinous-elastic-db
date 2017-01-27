@@ -90,19 +90,19 @@ IBTreeNode* BTreeScanner::next(ThreadContext* ctx)
 		}
 		catch(VariableException* e)
 		{
-			throw (new(ctx) BTreeException(ConstStr::getCNST_STR_1652(), e, ctx));
+			throw (new(ctx) BTreeException(ConstStr::getCNST_STR_1654(), e, ctx));
 		}
 		catch(InterruptedException* e)
 		{
-			throw (new(ctx) BTreeException(ConstStr::getCNST_STR_1652(), e, ctx));
+			throw (new(ctx) BTreeException(ConstStr::getCNST_STR_1654(), e, ctx));
 		}
 		catch(IOException* e)
 		{
-			throw (new(ctx) BTreeException(ConstStr::getCNST_STR_1652(), e, ctx));
+			throw (new(ctx) BTreeException(ConstStr::getCNST_STR_1654(), e, ctx));
 		}
 		catch(AlinousException* e)
 		{
-			throw (new(ctx) BTreeException(ConstStr::getCNST_STR_1652(), e, ctx));
+			throw (new(ctx) BTreeException(ConstStr::getCNST_STR_1654(), e, ctx));
 		}
 	}
 }

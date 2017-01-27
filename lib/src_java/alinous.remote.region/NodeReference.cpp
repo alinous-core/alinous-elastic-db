@@ -82,20 +82,55 @@ SchemasStructureInfoData* NodeReference::getSchemeInfo(String* region, ThreadCon
 			AbstractRemoteStorageCommand* retcmd = cmd->sendCommand(socket, ctx);
 			if(retcmd->getType(ctx) != AbstractRemoteStorageCommand::TYPE_GET_TABLE_SCHEME)
 			{
-				throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3563(), ctx));
+				throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3566(), ctx));
 			}
 			cmd = static_cast<GetTableSchemeCommand*>(retcmd);
 		}
 		catch(UnknownHostException* e)
 		{
-			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3564(), e, ctx));
+			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3567(), e, ctx));
 		}
 		catch(IOException* e)
 		{
-			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3565(), e, ctx));
+			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3568(), e, ctx));
 		}
 	}
 	return cmd->getData(ctx);
+}
+void NodeReference::createSchema(String* schemaName, ThreadContext* ctx)
+{
+	CreateSchemaCommand* cmd = (new(ctx) CreateSchemaCommand(ctx));
+	ISocketConnection* con = nullptr;
+	{
+		std::function<void(void)> finallyLm2= [&, this]()
+		{
+			this->nodeConnectionPool->returnConnection(con, ctx);
+		};
+		Releaser finalyCaller2(finallyLm2);
+		try
+		{
+			con = this->nodeConnectionPool->getConnection(ctx);
+			AlinousSocket* socket = con->getSocket(ctx);
+			AbstractRemoteStorageCommand* retcmd = cmd->sendCommand(socket, ctx);
+			if(retcmd->getType(ctx) != AbstractRemoteStorageCommand::TYPE_CREATE_SCHEMA)
+			{
+				throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3566(), ctx));
+			}
+			cmd = static_cast<CreateSchemaCommand*>(retcmd);
+		}
+		catch(UnknownHostException* e)
+		{
+			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3569(), e, ctx));
+		}
+		catch(IOException* e)
+		{
+			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3569(), e, ctx));
+		}
+		catch(AlinousException* e)
+		{
+			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3569(), e, ctx));
+		}
+	}
 }
 String* NodeReference::getHost(ThreadContext* ctx) throw() 
 {

@@ -118,6 +118,7 @@ public:
 	void start(ISystemLog* logger, ThreadContext* ctx) throw() ;
 	void dispose(ThreadContext* ctx) throw() ;
 	NodeReferenceManager* getRefs(ThreadContext* ctx) throw() ;
+	void createSchema(String* schemaName, ThreadContext* ctx);
 private:
 	void initMonitorRef(MonitorRef* monRef, ThreadContext* ctx) throw() ;
 public:

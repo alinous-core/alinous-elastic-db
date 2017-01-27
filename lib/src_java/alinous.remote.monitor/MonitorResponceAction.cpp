@@ -84,7 +84,7 @@ void MonitorResponceAction::handleCommand(BufferedInputStream* stream, BufferedO
 		cmd = parseCommand(stream, ctx);
 		if(cmd == nullptr)
 		{
-			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3546(), ctx));
+			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3548(), ctx));
 		}
 		int type = cmd->getType(ctx);
 		switch(type) {
@@ -101,6 +101,7 @@ void MonitorResponceAction::handleCommand(BufferedInputStream* stream, BufferedO
 		case AbstractMonitorCommand::TYPE_NEW_MAX_COMMIT_ID:
 		case AbstractMonitorCommand::TYPE_GET_REGION_INFO:
 		case AbstractMonitorCommand::TYPE_NEW_TRANSACTION:
+		case AbstractMonitorCommand::TYPE_REPORT_SCHEMA_UPDATED:
 		case AbstractMonitorCommand::TYPE_VOID:
 			handleCommand(cmd, outStream, ctx);
 			break ;

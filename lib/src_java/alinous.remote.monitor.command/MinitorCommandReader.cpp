@@ -61,8 +61,11 @@ AbstractMonitorCommand* MinitorCommandReader::readFromStream(InputStream* stream
 	case AbstractMonitorCommand::TYPE_NEW_TRANSACTION:
 		cmd = (new(ctx) NewTransactionCommand(ctx));
 		break ;
+	case AbstractMonitorCommand::TYPE_REPORT_SCHEMA_UPDATED:
+		cmd = (new(ctx) ReportSchemaVersionCommand(ctx));
+		break ;
 	default:
-		throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3560(), ctx));
+		throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3563(), ctx));
 		break;
 	}
 	cmd->readFromStream(stream, size, ctx);

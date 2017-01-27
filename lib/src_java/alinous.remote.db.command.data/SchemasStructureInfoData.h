@@ -50,7 +50,7 @@ class SchemasStructureInfoData final : public ICommandData, public virtual IObje
 public:
 	SchemasStructureInfoData(const SchemasStructureInfoData& base) = default;
 public:
-	SchemasStructureInfoData(ThreadContext* ctx) throw()  : IObject(ctx), ICommandData(ctx), schemas(GCUtils<Map<String,SchemaData> >::ins(this, (new(ctx) HashMap<String,SchemaData>(ctx)), ctx, __FILEW__, __LINE__, L""))
+	SchemasStructureInfoData(ThreadContext* ctx) throw()  : IObject(ctx), ICommandData(ctx), schemas(GCUtils<Map<String,SchemaData> >::ins(this, (new(ctx) HashMap<String,SchemaData>(ctx)), ctx, __FILEW__, __LINE__, L"")), schemaVersion(0)
 	{
 	}
 	void __construct_impl(ThreadContext* ctx) throw() 
@@ -60,6 +60,7 @@ public:
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 private:
 	Map<String,SchemaData>* schemas;
+	long long schemaVersion;
 public:
 	void join(SchemasStructureInfoData* data, ThreadContext* ctx) throw() ;
 	bool hasSchema(String* name, ThreadContext* ctx) throw() ;
@@ -67,6 +68,8 @@ public:
 	Map<String,SchemaData>* getSchemas(ThreadContext* ctx) throw() ;
 	void readData(NetworkBinaryBuffer* buff, ThreadContext* ctx) final;
 	void writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw()  final;
+	long long getSchemaVersion(ThreadContext* ctx) throw() ;
+	void setSchemaVersion(long long schemaVersion, ThreadContext* ctx) throw() ;
 private:
 	SchemaData* findLocalSchema(String* name, SchemaData* schemaData, ThreadContext* ctx) throw() ;
 public:

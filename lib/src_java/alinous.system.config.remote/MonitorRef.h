@@ -62,7 +62,7 @@ class MonitorRef final : public IAlinousConfigElement, public virtual IObject {
 public:
 	MonitorRef(const MonitorRef& base) = default;
 public:
-	MonitorRef(ThreadContext* ctx) throw()  : IObject(ctx), IAlinousConfigElement(ctx), url(nullptr), host(nullptr), port(0)
+	MonitorRef(ThreadContext* ctx) throw()  : IObject(ctx), IAlinousConfigElement(ctx), url(nullptr), host(nullptr), port(0), ipv6(false)
 	{
 	}
 	void __construct_impl(ThreadContext* ctx) throw() 
@@ -74,6 +74,7 @@ private:
 	String* url;
 	String* host;
 	int port;
+	bool ipv6;
 public:
 	void parseUrl(ThreadContext* ctx);
 	String* getUrl(ThreadContext* ctx) throw() ;
@@ -82,6 +83,8 @@ public:
 	void setHost(String* host, ThreadContext* ctx) throw() ;
 	int getPort(ThreadContext* ctx) throw() ;
 	void setPort(int port, ThreadContext* ctx) throw() ;
+	bool isIpv6(ThreadContext* ctx) throw() ;
+	void setIpv6(bool ipv6, ThreadContext* ctx) throw() ;
 public:
 	static MonitorRef* parseInstance(MatchCandidate* candidate, DomDocument* document, Matcher* matcher, ThreadContext* ctx);
 public:

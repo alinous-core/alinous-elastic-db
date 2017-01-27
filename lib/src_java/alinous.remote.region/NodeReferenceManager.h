@@ -34,6 +34,12 @@ namespace alinous {namespace remote {namespace region {
 class NodeCluster;}}}
 
 namespace java {namespace util {
+template <typename  T> class List;}}
+
+namespace alinous {namespace remote {namespace region {
+class NodeReference;}}}
+
+namespace java {namespace util {
 template <typename  T, typename V> class HashMap;}}
 
 namespace alinous {namespace lock {
@@ -54,6 +60,7 @@ using namespace ::java::lang;
 using ::java::util::Iterator;
 using ::java::util::HashMap;
 using ::java::util::Iterator;
+using ::java::util::List;
 using ::java::util::Map;
 using ::alinous::lock::LockObject;
 using ::alinous::remote::db::command::data::SchemaData;
@@ -70,7 +77,7 @@ class NodeReferenceManager final : public virtual IObject {
 public:
 	NodeReferenceManager(const NodeReferenceManager& base) = default;
 public:
-	NodeReferenceManager(ThreadContext* ctx) throw()  : IObject(ctx), schemaDictinary(GCUtils<Map<String,NodeRegionSchema> >::ins(this, (new(ctx) HashMap<String,NodeRegionSchema>(ctx)), ctx, __FILEW__, __LINE__, L"")), revision(0), nodeReferences(nullptr), lock(__GC_INS(this, (new(ctx) LockObject(ctx)), LockObject))
+	NodeReferenceManager(ThreadContext* ctx) throw()  : IObject(ctx), schemaDictinary(GCUtils<Map<String,NodeRegionSchema> >::ins(this, (new(ctx) HashMap<String,NodeRegionSchema>(ctx)), ctx, __FILEW__, __LINE__, L"")), schemaVersion(0), nodeReferences(nullptr), lock(__GC_INS(this, (new(ctx) LockObject(ctx)), LockObject))
 	{
 	}
 	void __construct_impl(ThreadContext* ctx) throw() 
@@ -80,7 +87,7 @@ public:
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 private:
 	Map<String,NodeRegionSchema>* schemaDictinary;
-	long long revision;
+	long long schemaVersion;
 	NodeCluster* nodeReferences;
 	LockObject* lock;
 public:
@@ -88,7 +95,8 @@ public:
 	void syncSchemeTables(String* regionName, ThreadContext* ctx);
 	void syncNodeReference(RegionInfoData* data, ThreadContext* ctx) throw() ;
 	void dispose(ThreadContext* ctx) throw() ;
-	long long getRevision(ThreadContext* ctx) throw() ;
+	long long getSchemaVersion(ThreadContext* ctx) throw() ;
+	void createSchema(String* schemaName, ThreadContext* ctx);
 private:
 	void doSyncScmema(SchemasStructureInfoData* data, ThreadContext* ctx) throw() ;
 	NodeRegionSchema* getNodeRegionSchema(String* schemaName, ThreadContext* ctx) throw() ;

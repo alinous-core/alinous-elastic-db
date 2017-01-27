@@ -6,6 +6,9 @@ class NodeRegionServer;}}}
 namespace java {namespace io {
 class BufferedOutputStream;}}
 
+namespace alinous {namespace system {
+class AlinousException;}}
+
 namespace java {namespace io {
 class OutputStream;}}
 
@@ -45,6 +48,7 @@ using ::alinous::remote::region::command::AbstractNodeRegionCommand;
 using ::alinous::remote::region::command::NodeRegionConnectCommand;
 using ::alinous::remote::socket::NetworkBinaryBuffer;
 using ::alinous::runtime::dom::VariableException;
+using ::alinous::system::AlinousException;
 
 
 

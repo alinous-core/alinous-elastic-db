@@ -30,6 +30,9 @@ class MatchCandidate;}}}}
 namespace alinous {namespace system {namespace config {namespace remote {
 class Tables;}}}}
 
+namespace alinous {namespace system {namespace config {namespace remote {
+class MonitorRef;}}}}
+
 namespace alinous {namespace system {namespace config {
 class IAlinousConfigElement;}}}
 
@@ -74,7 +77,7 @@ class Node final : public IAlinousConfigElement, public virtual IObject {
 public:
 	Node(const Node& base) = default;
 public:
-	Node(ThreadContext* ctx) throw()  : IObject(ctx), IAlinousConfigElement(ctx), port(0), tables(nullptr), dataDir(nullptr), maxCon(8)
+	Node(ThreadContext* ctx) throw()  : IObject(ctx), IAlinousConfigElement(ctx), port(0), tables(nullptr), dataDir(nullptr), maxCon(8), monitorRef(nullptr)
 	{
 	}
 	void __construct_impl(ThreadContext* ctx) throw() 
@@ -87,6 +90,7 @@ private:
 	Tables* tables;
 	String* dataDir;
 	int maxCon;
+	MonitorRef* monitorRef;
 public:
 	int getPort(ThreadContext* ctx) throw() ;
 	void setPort(int port, ThreadContext* ctx) throw() ;
@@ -96,6 +100,8 @@ public:
 	void setDataDir(String* dataDir, ThreadContext* ctx) throw() ;
 	int getMaxCon(ThreadContext* ctx) throw() ;
 	void setMaxCon(int maxCon, ThreadContext* ctx) throw() ;
+	MonitorRef* getMonitorRef(ThreadContext* ctx) throw() ;
+	void setMonitorRef(MonitorRef* monitorRef, ThreadContext* ctx) throw() ;
 public:
 	static Node* parseInstance(DomNode* dom, DomDocument* document, Matcher* matcher, String* alinousHome, ThreadContext* ctx);
 public:

@@ -32,6 +32,8 @@ void Node::__releaseRegerences(bool prepare, ThreadContext* ctx) throw()
 	tables = nullptr;
 	__e_obj1.add(this->dataDir, this);
 	dataDir = nullptr;
+	__e_obj1.add(this->monitorRef, this);
+	monitorRef = nullptr;
 	if(!prepare){
 		return;
 	}
@@ -67,6 +69,14 @@ int Node::getMaxCon(ThreadContext* ctx) throw()
 void Node::setMaxCon(int maxCon, ThreadContext* ctx) throw() 
 {
 	this->maxCon = maxCon;
+}
+MonitorRef* Node::getMonitorRef(ThreadContext* ctx) throw() 
+{
+	return monitorRef;
+}
+void Node::setMonitorRef(MonitorRef* monitorRef, ThreadContext* ctx) throw() 
+{
+	__GC_MV(this, &(this->monitorRef), monitorRef, MonitorRef);
 }
 Node* Node::parseInstance(DomNode* dom, DomDocument* document, Matcher* matcher, String* alinousHome, ThreadContext* ctx)
 {
@@ -104,6 +114,18 @@ Node* Node::parseInstance(DomNode* dom, DomDocument* document, Matcher* matcher,
 		Tables* tables = Tables::parseInstance(tablesdom, document, matcher, ctx);
 		node->setTables(tables, ctx);
 	}
+	result = matcher->match(document, dom, ConstStr::getCNST_STR_1259(), ctx);
+	list = result->getCandidatesList(ctx);
+	if(list->isEmpty(ctx))
+	{
+		throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_1270(), ctx));
+	}
+	if(list->size(ctx) != 1)
+	{
+		throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_1271(), ctx));
+	}
+	MatchCandidate* candidate = list->get(0, ctx);
+	__GC_MV(node, &(node->monitorRef), MonitorRef::parseInstance(candidate, document, matcher, ctx), MonitorRef);
 	return node;
 }
 }}}}
