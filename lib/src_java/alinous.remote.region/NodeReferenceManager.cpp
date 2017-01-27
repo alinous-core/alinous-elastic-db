@@ -112,6 +112,9 @@ void NodeReferenceManager::createSchema(String* schemaName, ThreadContext* ctx)
 		}
 	}
 }
+void NodeReferenceManager::createTable(TableMetadata* meta, ThreadContext* ctx) throw() 
+{
+}
 void NodeReferenceManager::doSyncScmema(SchemasStructureInfoData* data, ThreadContext* ctx) throw() 
 {
 	Map<String,SchemaData>* schemaMap = data->getSchemas(ctx);

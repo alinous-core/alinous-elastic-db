@@ -59,7 +59,7 @@ AbstractNodeRegionCommand* NodeRegionCommandReader::readFromStream(InputStream* 
 		cmd = (new(ctx) RegionCreateTableCommand(ctx));
 		break ;
 	default:
-		throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3575(), ctx));
+		throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3576(), ctx));
 		break;
 	}
 	cmd->readFromStream(stream, size, ctx);

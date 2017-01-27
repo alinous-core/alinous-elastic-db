@@ -157,6 +157,28 @@ void RemoteRegionRef::createSchema(String* schemaName, ThreadContext* ctx)
 }
 void RemoteRegionRef::createTable(String* schemaName, TableMetadata* tblMeta, ThreadPool* threadPool, AlinousCore* core, BTreeGlobalCache* cache, ThreadContext* ctx)
 {
+	RegionCreateTableCommand* cmd = (new(ctx) RegionCreateTableCommand(ctx));
+	cmd->setMetadata(tblMeta, ctx);
+	ISocketConnection* con = nullptr;
+	{
+		std::function<void(void)> finallyLm2= [&, this]()
+		{
+			this->regionAccessPool->returnConnection(con, ctx);
+		};
+		Releaser finalyCaller2(finallyLm2);
+		try
+		{
+			con = this->regionAccessPool->getConnection(ctx);
+			AlinousSocket* socket = con->getSocket(ctx);
+			AbstractNodeRegionCommand* retcmd = cmd->sendCommand(socket, ctx);
+			if(retcmd->getType(ctx) != AbstractNodeRegionCommand::TYPE_CREATE_SCHEMA)
+			{
+				throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3574(), ctx));
+			}
+			syncSchemes(ctx);
+		}
+		catch(...){throw;}
+	}
 }
 long long RemoteRegionRef::getSchemeVersion(ThreadContext* ctx) throw() 
 {

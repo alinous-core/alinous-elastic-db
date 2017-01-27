@@ -19,7 +19,7 @@ bool NodeRegionServer::__init_static_variables(){
 	delete ctx;
 	return true;
 }
- NodeRegionServer::NodeRegionServer(int port, int maxthread, ThreadContext* ctx) throw()  : IObject(ctx), port(0), maxthread(0), refs(nullptr), socketServer(nullptr), monitorConnectionPool(nullptr), nodeClusterRevision(0), region(nullptr), core(nullptr)
+ NodeRegionServer::NodeRegionServer(int port, int maxthread, ThreadContext* ctx) throw()  : IObject(ctx), port(0), maxthread(0), refs(nullptr), socketServer(nullptr), monitorConnectionPool(nullptr), nodeClusterRevisionLock(__GC_INS(this, (new(ctx) LockObject(ctx)), LockObject)), nodeClusterRevision(0), region(nullptr), core(nullptr)
 {
 	this->port = port;
 	this->maxthread = maxthread;
@@ -47,6 +47,8 @@ void NodeRegionServer::__releaseRegerences(bool prepare, ThreadContext* ctx) thr
 	socketServer = nullptr;
 	__e_obj1.add(this->monitorConnectionPool, this);
 	monitorConnectionPool = nullptr;
+	__e_obj1.add(this->nodeClusterRevisionLock, this);
+	nodeClusterRevisionLock = nullptr;
 	__e_obj1.add(this->region, this);
 	region = nullptr;
 	__e_obj1.add(this->core, this);
@@ -126,6 +128,15 @@ NodeReferenceManager* NodeRegionServer::getRefs(ThreadContext* ctx) throw()
 void NodeRegionServer::createSchema(String* schemaName, ThreadContext* ctx)
 {
 	this->refs->createSchema(schemaName, ctx);
+}
+void NodeRegionServer::createTable(TableMetadata* metadata, ThreadContext* ctx)
+{
+	{
+		SynchronizedBlockObj __synchronized_2(this->nodeClusterRevisionLock, ctx);
+		this->refs->createTable(metadata, ctx);
+		this->nodeClusterRevision ++ ;
+	}
+	syncScheme(ctx);
 }
 void NodeRegionServer::initMonitorRef(MonitorRef* monRef, ThreadContext* ctx) throw() 
 {

@@ -39,6 +39,9 @@ template <typename  T> class List;}}
 namespace alinous {namespace remote {namespace region {
 class NodeReference;}}}
 
+namespace alinous {namespace db {namespace table {
+class TableMetadata;}}}
+
 namespace java {namespace util {
 template <typename  T, typename V> class HashMap;}}
 
@@ -62,6 +65,7 @@ using ::java::util::HashMap;
 using ::java::util::Iterator;
 using ::java::util::List;
 using ::java::util::Map;
+using ::alinous::db::table::TableMetadata;
 using ::alinous::lock::LockObject;
 using ::alinous::remote::db::command::data::SchemaData;
 using ::alinous::remote::db::command::data::SchemasStructureInfoData;
@@ -97,6 +101,7 @@ public:
 	void dispose(ThreadContext* ctx) throw() ;
 	long long getSchemaVersion(ThreadContext* ctx) throw() ;
 	void createSchema(String* schemaName, ThreadContext* ctx);
+	void createTable(TableMetadata* meta, ThreadContext* ctx) throw() ;
 private:
 	void doSyncScmema(SchemasStructureInfoData* data, ThreadContext* ctx) throw() ;
 	NodeRegionSchema* getNodeRegionSchema(String* schemaName, ThreadContext* ctx) throw() ;

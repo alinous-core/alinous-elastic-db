@@ -75,6 +75,9 @@ class AlinousCore;}}
 namespace alinous {namespace btree {
 class BTreeGlobalCache;}}
 
+namespace alinous {namespace remote {namespace region {namespace command {namespace ddl {
+class RegionCreateTableCommand;}}}}}
+
 namespace alinous {namespace lock {
 class LockObject;}}
 
@@ -123,6 +126,7 @@ using ::alinous::remote::region::command::GetSchemaFromRegionCommand;
 using ::alinous::remote::region::command::data::ClientSchemaData;
 using ::alinous::remote::region::command::data::ClientStructureMetadata;
 using ::alinous::remote::region::command::ddl::RegionCreateSchemaCommand;
+using ::alinous::remote::region::command::ddl::RegionCreateTableCommand;
 using ::alinous::remote::socket::ISocketConnection;
 using ::alinous::remote::socket::SocketConnectionPool;
 using ::alinous::runtime::parallel::ThreadPool;

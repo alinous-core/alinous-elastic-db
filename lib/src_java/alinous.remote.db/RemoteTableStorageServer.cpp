@@ -192,6 +192,16 @@ void RemoteTableStorageServer::createSchema(String* schemaName, ThreadContext* c
 		this->monitorAccess->reportSchemaUpdated(ctx);
 	}
 }
+void RemoteTableStorageServer::createTable(TableMetadata* metadata, ThreadContext* ctx)
+{
+	{
+		SynchronizedBlockObj __synchronized_2(this->schemaVersionLock, ctx);
+		String* schemaName = metadata->getSchema(ctx);
+		this->schemas->createTable(schemaName, metadata, this->workerThreadsPool, this->core, this->btreeCache, ctx);
+		this->schemaVersion ++ ;
+		this->monitorAccess->reportSchemaUpdated(ctx);
+	}
+}
 void RemoteTableStorageServer::initInstance(AlinousCore* core, ThreadContext* ctx)
 {
 	{

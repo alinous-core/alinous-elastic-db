@@ -3196,9 +3196,9 @@ public:
 	constexpr static StaticUnicodeString __CNST_STR_288{L"No",2};
 public:
 	static UnicodeStringWrapper* getCNST_STR_288() throw();
-	constexpr static StaticUnicodeString __CNST_STR_3576{L"Socket factory is not activated.",32};
+	constexpr static StaticUnicodeString __CNST_STR_3577{L"Socket factory is not activated.",32};
 public:
-	static UnicodeStringWrapper* getCNST_STR_3576() throw();
+	static UnicodeStringWrapper* getCNST_STR_3577() throw();
 	constexpr static StaticUnicodeString __CNST_STR_1071{L"OR",2};
 public:
 	static UnicodeStringWrapper* getCNST_STR_1071() throw();
@@ -3616,9 +3616,9 @@ public:
 	constexpr static StaticUnicodeString __CNST_STR_2050{L"cdmiq",5};
 public:
 	static UnicodeStringWrapper* getCNST_STR_2050() throw();
-	constexpr static StaticUnicodeString __CNST_STR_3574{L"Region name is necessary on Remote Mode.",40};
+	constexpr static StaticUnicodeString __CNST_STR_3575{L"Region name is necessary on Remote Mode.",40};
 public:
-	static UnicodeStringWrapper* getCNST_STR_3574() throw();
+	static UnicodeStringWrapper* getCNST_STR_3575() throw();
 	constexpr static StaticUnicodeString __CNST_STR_3318{L"application/vnd.groove-vcard",28};
 public:
 	static UnicodeStringWrapper* getCNST_STR_3318() throw();
@@ -5014,9 +5014,9 @@ public:
 	constexpr static StaticUnicodeString __CNST_STR_826{L"Asia/Thimphu",12};
 public:
 	static UnicodeStringWrapper* getCNST_STR_826() throw();
-	constexpr static StaticUnicodeString __CNST_STR_3575{L"Wrong Command Type of Node Region Command.",42};
+	constexpr static StaticUnicodeString __CNST_STR_3576{L"Wrong Command Type of Node Region Command.",42};
 public:
-	static UnicodeStringWrapper* getCNST_STR_3575() throw();
+	static UnicodeStringWrapper* getCNST_STR_3576() throw();
 	constexpr static StaticUnicodeString __CNST_STR_53{L"Zero length BigInteger",22};
 public:
 	static UnicodeStringWrapper* getCNST_STR_53() throw();
@@ -5665,6 +5665,9 @@ public:
 	constexpr static StaticUnicodeString __CNST_STR_778{L"Europe/Simferopol",17};
 public:
 	static UnicodeStringWrapper* getCNST_STR_778() throw();
+	constexpr static StaticUnicodeString __CNST_STR_3574{L"Failed in creating table fo from region server",46};
+public:
+	static UnicodeStringWrapper* getCNST_STR_3574() throw();
 	constexpr static StaticUnicodeString __CNST_STR_1046{L"UpdateSet is required",21};
 public:
 	static UnicodeStringWrapper* getCNST_STR_1046() throw();

@@ -51,6 +51,12 @@ class NodeRegionResponceActionFactory;}}}
 namespace alinous {namespace remote {namespace socket {
 class SocketServer;}}}
 
+namespace alinous {namespace db {namespace table {
+class TableMetadata;}}}
+
+namespace alinous {namespace lock {
+class LockObject;}}
+
 namespace java {namespace io {
 class IOException;}}
 
@@ -72,6 +78,8 @@ using namespace ::java::lang;
 using ::java::util::Iterator;
 using ::java::io::IOException;
 using ::java::net::UnknownHostException;
+using ::alinous::db::table::TableMetadata;
+using ::alinous::lock::LockObject;
 using ::alinous::net::AlinousSocket;
 using ::alinous::remote::monitor::client::MonitorClientConnectionFactory;
 using ::alinous::remote::monitor::client::MonitorConnectionInfo;
@@ -104,6 +112,7 @@ private:
 	NodeReferenceManager* refs;
 	SocketServer* socketServer;
 	SocketConnectionPool* monitorConnectionPool;
+	LockObject* nodeClusterRevisionLock;
 	long long nodeClusterRevision;
 	String* region;
 	AlinousCore* core;
@@ -119,6 +128,7 @@ public:
 	void dispose(ThreadContext* ctx) throw() ;
 	NodeReferenceManager* getRefs(ThreadContext* ctx) throw() ;
 	void createSchema(String* schemaName, ThreadContext* ctx);
+	void createTable(TableMetadata* metadata, ThreadContext* ctx);
 private:
 	void initMonitorRef(MonitorRef* monRef, ThreadContext* ctx) throw() ;
 public:

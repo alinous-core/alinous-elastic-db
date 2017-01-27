@@ -63,6 +63,9 @@ class SocketServer;}}}
 namespace alinous {namespace remote {namespace db {namespace command {namespace data {
 class SchemasStructureInfoData;}}}}}
 
+namespace alinous {namespace db {namespace table {
+class TableMetadata;}}}
+
 namespace alinous {namespace btree {
 class IntKey;}}
 
@@ -98,6 +101,7 @@ using ::alinous::btree::LongValue;
 using ::alinous::db::AlinousDbException;
 using ::alinous::db::SchemaManager;
 using ::alinous::db::table::DatabaseException;
+using ::alinous::db::table::TableMetadata;
 using ::alinous::lock::LockObject;
 using ::alinous::remote::db::command::data::SchemasStructureInfoData;
 using ::alinous::remote::socket::SocketServer;
@@ -151,6 +155,7 @@ public:
 	AlinousCore* getCore(ThreadContext* ctx) throw() ;
 	long long getSchemeInfo(SchemasStructureInfoData* data, String* region, String* host, int port, bool ipv6, ThreadContext* ctx) throw() ;
 	void createSchema(String* schemaName, ThreadContext* ctx);
+	void createTable(TableMetadata* metadata, ThreadContext* ctx);
 private:
 	void initInstance(AlinousCore* core, ThreadContext* ctx);
 	File* getConfigFile(ThreadContext* ctx) throw() ;
