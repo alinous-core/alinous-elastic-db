@@ -85,6 +85,7 @@ public:
 	constexpr static const int TYPE_TERMINATE{404};
 	constexpr static const int TYPE_GET_TABLE_SCHEME{1001};
 	constexpr static const int TYPE_CREATE_SCHEMA{1002};
+	constexpr static const int TYPE_CREATE_TABLE{1003};
 public:
 	int getType(ThreadContext* ctx) throw() ;
 	AbstractRemoteStorageCommand* sendCommand(AlinousSocket* socket, ThreadContext* ctx);

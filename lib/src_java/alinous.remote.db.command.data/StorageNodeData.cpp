@@ -86,6 +86,7 @@ void StorageNodeData::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) t
 	char bl = ((char)(this->ipv6 ? 1 : 0));
 	buff->putByte(bl, ctx);
 	bool isnull = (this->metadata == nullptr);
+	buff->putBoolean(isnull, ctx);
 	if(!isnull)
 	{
 		this->metadata->writeData(buff, ctx);

@@ -16,13 +16,13 @@ namespace alinous {namespace remote {namespace socket {
 class NetworkBinaryBuffer;}}}
 
 namespace java {namespace io {
+class InputStream;}}
+
+namespace java {namespace io {
 class IOException;}}
 
 namespace alinous {namespace runtime {namespace dom {
 class VariableException;}}}
-
-namespace java {namespace io {
-class InputStream;}}
 
 namespace alinous {namespace db {namespace table {
 class TableMetadata;}}}

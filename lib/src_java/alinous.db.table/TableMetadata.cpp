@@ -176,6 +176,7 @@ void TableMetadata::toFileEntry(FileStorageEntryBuilder* builder, ThreadContext*
 		this->maxPartitionValue->toFileEntry(builder, ctx);
 	}
 	maxLoop = this->checks->size(ctx);
+	builder->putInt(maxLoop, ctx);
 	for(int i = 0; i != maxLoop; ++i)
 	{
 		CheckDefinition* checkdef = this->checks->get(i, ctx);
@@ -276,6 +277,7 @@ void TableMetadata::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) thr
 		this->maxPartitionValue->writeData(buff, ctx);
 	}
 	maxLoop = this->checks->size(ctx);
+	buff->putInt(maxLoop, ctx);
 	for(int i = 0; i != maxLoop; ++i)
 	{
 		CheckDefinition* checkdef = this->checks->get(i, ctx);

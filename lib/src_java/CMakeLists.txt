@@ -174,6 +174,7 @@ set(srcjava
 	"src_java/alinous.db.table.scan/IndexRangeScannerParam.cpp"
 	"src_java/alinous.db.table.scan/IndexListScannerParam.cpp"
 	"src_java/alinous.db.table.scan/SingleTableIndexScanner.cpp"
+	"src_java/alinous.remote.db.command.ddl/CreateTableCommand.cpp"
 	"src_java/alinous.remote.db.command.ddl/CreateSchemaCommand.cpp"
 	"src_java/alinous.web.parse.htmlxml/HtmlXmlParserTokenManager.cpp"
 	"src_java/alinous.web.parse.htmlxml/HtmlXmlParserConstants.cpp"

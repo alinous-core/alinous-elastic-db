@@ -13,6 +13,7 @@ constexpr const int AbstractRemoteStorageCommand::TYPE_CONNECT;
 constexpr const int AbstractRemoteStorageCommand::TYPE_TERMINATE;
 constexpr const int AbstractRemoteStorageCommand::TYPE_GET_TABLE_SCHEME;
 constexpr const int AbstractRemoteStorageCommand::TYPE_CREATE_SCHEMA;
+constexpr const int AbstractRemoteStorageCommand::TYPE_CREATE_TABLE;
 bool AbstractRemoteStorageCommand::__init_done = __init_static_variables();
 bool AbstractRemoteStorageCommand::__init_static_variables(){
 	Java2CppSystem::getSelf();
@@ -89,10 +90,10 @@ void AbstractRemoteStorageCommand::writeErrorByteStream(NetworkBinaryBuffer* buf
 }
 void AbstractRemoteStorageCommand::readErrorFromStream(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
 {
-	GCUtils<List<String> >::mv(this, &(this->errorMessage), (new(ctx) ArrayList<String>(ctx)), ctx);
 	bool er = buff->getBoolean(ctx);
 	if(er)
 	{
+		GCUtils<List<String> >::mv(this, &(this->errorMessage), (new(ctx) ArrayList<String>(ctx)), ctx);
 		int maxLoop = buff->getInt(ctx);
 		for(int i = 0; i != maxLoop; ++i)
 		{

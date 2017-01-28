@@ -355,6 +355,7 @@
 #include "alinous.remote.db.command/AbstractRemoteStorageCommand.h"
 #include "alinous.remote.db.command/RemoteStorageConnectCommand.h"
 #include "alinous.remote.db.command.ddl/CreateSchemaCommand.h"
+#include "alinous.remote.db.command.ddl/CreateTableCommand.h"
 #include "alinous.remote.db.command/FinishRemoteStorageConnectionCommand.h"
 #include "alinous.remote.db.command/TerminateRemoteStorageCommand.h"
 #include "alinous.remote.db.command/VoidRemoteStorageCommand.h"
@@ -1732,6 +1733,7 @@ inline static void __cleanUpStatics(alinous::ThreadContext* ctx){
 	alinous::remote::db::command::data::TableClusterData::__cleanUp(ctx);
 	alinous::remote::db::command::data::SchemaData::__cleanUp(ctx);
 	alinous::remote::db::command::data::SchemasStructureInfoData::__cleanUp(ctx);
+	alinous::remote::db::command::ddl::CreateTableCommand::__cleanUp(ctx);
 	alinous::remote::db::command::ddl::CreateSchemaCommand::__cleanUp(ctx);
 	alinous::remote::monitor::MonitorResponseActionFactory::__cleanUp(ctx);
 	alinous::remote::monitor::TransactionMonitorServer::__cleanUp(ctx);

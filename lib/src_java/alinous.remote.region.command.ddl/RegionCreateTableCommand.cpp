@@ -63,11 +63,19 @@ void RegionCreateTableCommand::readFromStream(InputStream* stream, int remain, T
 	IArrayObjectPrimitive<char>* src = ArrayAllocatorPrimitive<char>::allocatep(ctx, remain);
 	stream->read(src, ctx);
 	NetworkBinaryBuffer* buff = (new(ctx) NetworkBinaryBuffer(src, ctx));
-	bool isnull = (this->metadata == nullptr);
-	buff->putBoolean(isnull, ctx);
+	bool isnull = buff->getBoolean(ctx);
 	if(!isnull)
 	{
-		this->metadata->writeData(buff, ctx);
+		{
+			try
+			{
+				__GC_MV(this, &(this->metadata), TableMetadata::fromNetwork(buff, ctx), TableMetadata);
+			}
+			catch(VariableException* e)
+			{
+				throw (new(ctx) IOException(e, ctx));
+			}
+		}
 	}
 	readErrorFromStream(buff, ctx);
 }
@@ -83,19 +91,11 @@ void RegionCreateTableCommand::writeByteStream(OutputStream* out, ThreadContext*
 {
 	NetworkBinaryBuffer* buff = (new(ctx) NetworkBinaryBuffer(256, ctx));
 	buff->putInt(NodeRegionConnectCommand::TYPE_CREATE_TABLE, ctx);
-	bool isnull = buff->getBoolean(ctx);
+	bool isnull = (this->metadata == nullptr);
+	buff->putBoolean(isnull, ctx);
 	if(!isnull)
 	{
-		{
-			try
-			{
-				__GC_MV(this, &(this->metadata), TableMetadata::fromNetwork(buff, ctx), TableMetadata);
-			}
-			catch(VariableException* e)
-			{
-				throw (new(ctx) IOException(e, ctx));
-			}
-		}
+		this->metadata->writeData(buff, ctx);
 	}
 	writeErrorByteStream(buff, ctx);
 	IArrayObjectPrimitive<char>* b = buff->toBinary(ctx);

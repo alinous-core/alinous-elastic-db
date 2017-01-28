@@ -24,6 +24,9 @@ class GetTableSchemeCommand;}}}}
 namespace alinous {namespace remote {namespace db {namespace command {namespace ddl {
 class CreateSchemaCommand;}}}}}
 
+namespace alinous {namespace remote {namespace db {namespace command {namespace ddl {
+class CreateTableCommand;}}}}}
+
 namespace alinous {namespace system {
 class AlinousException;}}
 
@@ -49,6 +52,7 @@ using ::java::util::Iterator;
 using ::java::io::IOException;
 using ::java::io::InputStream;
 using ::alinous::remote::db::command::ddl::CreateSchemaCommand;
+using ::alinous::remote::db::command::ddl::CreateTableCommand;
 using ::alinous::remote::socket::NetworkBinalyUtils;
 using ::alinous::system::AlinousException;
 

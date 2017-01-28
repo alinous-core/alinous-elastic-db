@@ -36,6 +36,12 @@ class IOException;}}
 namespace alinous {namespace remote {namespace db {namespace command {namespace ddl {
 class CreateSchemaCommand;}}}}}
 
+namespace alinous {namespace db {namespace table {
+class TableMetadata;}}}
+
+namespace alinous {namespace remote {namespace db {namespace command {namespace ddl {
+class CreateTableCommand;}}}}}
+
 namespace alinous {namespace remote {namespace region {
 class NodeReference;}}}
 
@@ -54,6 +60,7 @@ using namespace ::java::lang;
 using ::java::util::Iterator;
 using ::java::io::IOException;
 using ::java::net::UnknownHostException;
+using ::alinous::db::table::TableMetadata;
 using ::alinous::net::AlinousSocket;
 using ::alinous::remote::db::client::RemoteStorageClientConnectionFactory;
 using ::alinous::remote::db::client::RemoteStorageConnectionInfo;
@@ -61,6 +68,7 @@ using ::alinous::remote::db::command::AbstractRemoteStorageCommand;
 using ::alinous::remote::db::command::GetTableSchemeCommand;
 using ::alinous::remote::db::command::data::SchemasStructureInfoData;
 using ::alinous::remote::db::command::ddl::CreateSchemaCommand;
+using ::alinous::remote::db::command::ddl::CreateTableCommand;
 using ::alinous::remote::socket::ISocketConnection;
 using ::alinous::remote::socket::SocketConnectionPool;
 using ::alinous::system::AlinousException;
@@ -85,6 +93,7 @@ public:
 	void dispose(ThreadContext* ctx) throw() ;
 	SchemasStructureInfoData* getSchemeInfo(String* region, ThreadContext* ctx);
 	void createSchema(String* schemaName, ThreadContext* ctx);
+	void createTable(TableMetadata* meta, ThreadContext* ctx);
 	String* getHost(ThreadContext* ctx) throw() ;
 	int getPort(ThreadContext* ctx) throw() ;
 	bool isIpv6(ThreadContext* ctx) throw() ;

@@ -42,7 +42,7 @@ long long NodeReferenceManager::getClientData(ClientStructureMetadata* data, Thr
 {
 	if(this->nodeReferences == nullptr)
 	{
-		throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3570(), ctx));
+		throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3571(), ctx));
 	}
 	{
 		SynchronizedBlockObj __synchronized_2(this->lock, ctx);
@@ -61,7 +61,7 @@ void NodeReferenceManager::syncSchemeTables(String* regionName, ThreadContext* c
 {
 	if(this->nodeReferences == nullptr)
 	{
-		throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3570(), ctx));
+		throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3571(), ctx));
 	}
 	SchemasStructureInfoData* data = this->nodeReferences->getSchemeInfo(regionName, ctx);
 	{
@@ -112,8 +112,15 @@ void NodeReferenceManager::createSchema(String* schemaName, ThreadContext* ctx)
 		}
 	}
 }
-void NodeReferenceManager::createTable(TableMetadata* meta, ThreadContext* ctx) throw() 
+void NodeReferenceManager::createTable(TableMetadata* meta, ThreadContext* ctx)
 {
+	List<NodeReference>* list = this->nodeReferences->getNodes(ctx);
+	if(list->isEmpty(ctx))
+	{
+		throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3572(), ctx));
+	}
+	NodeReference* nodeRef = list->get(0, ctx);
+	nodeRef->createTable(meta, ctx);
 }
 void NodeReferenceManager::doSyncScmema(SchemasStructureInfoData* data, ThreadContext* ctx) throw() 
 {

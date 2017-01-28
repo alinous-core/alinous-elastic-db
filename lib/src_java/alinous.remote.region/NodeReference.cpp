@@ -132,6 +132,41 @@ void NodeReference::createSchema(String* schemaName, ThreadContext* ctx)
 		}
 	}
 }
+void NodeReference::createTable(TableMetadata* meta, ThreadContext* ctx)
+{
+	CreateTableCommand* cmd = (new(ctx) CreateTableCommand(ctx));
+	cmd->setMetadaata(meta, ctx);
+	ISocketConnection* con = nullptr;
+	{
+		std::function<void(void)> finallyLm2= [&, this]()
+		{
+			this->nodeConnectionPool->returnConnection(con, ctx);
+		};
+		Releaser finalyCaller2(finallyLm2);
+		try
+		{
+			con = this->nodeConnectionPool->getConnection(ctx);
+			AlinousSocket* socket = con->getSocket(ctx);
+			AbstractRemoteStorageCommand* retcmd = cmd->sendCommand(socket, ctx);
+			if(retcmd->getType(ctx) != AbstractRemoteStorageCommand::TYPE_CREATE_TABLE)
+			{
+				throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3566(), ctx));
+			}
+		}
+		catch(UnknownHostException* e)
+		{
+			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3570(), e, ctx));
+		}
+		catch(IOException* e)
+		{
+			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3570(), e, ctx));
+		}
+		catch(AlinousException* e)
+		{
+			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3570(), e, ctx));
+		}
+	}
+}
 String* NodeReference::getHost(ThreadContext* ctx) throw() 
 {
 	return host;
