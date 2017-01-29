@@ -76,10 +76,6 @@ int TransactionMonitorServer::getPort(ThreadContext* ctx) throw()
 {
 	return port;
 }
-long long TransactionMonitorServer::updateNodeClusterRevision(long long nodeClusterRevision, ThreadContext* ctx) throw() 
-{
-	return this->nodeInfo->updateNodeClusterRevision(nodeClusterRevision, ctx);
-}
 long long TransactionMonitorServer::getNextCommitId(ThreadContext* ctx) throw() 
 {
 	{
@@ -130,6 +126,10 @@ long long TransactionMonitorServer::getNextOid(ThreadContext* ctx) throw()
 RegionNodeInfoManager* TransactionMonitorServer::getNodeInfo(ThreadContext* ctx) throw() 
 {
 	return nodeInfo;
+}
+long long TransactionMonitorServer::updateNodeClusterVersion(long long nodeClusterRevision, ThreadContext* ctx) throw() 
+{
+	return this->nodeInfo->updateNodeClusterRevision(nodeClusterRevision, ctx);
 }
 }}}
 

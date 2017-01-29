@@ -73,7 +73,7 @@ TableClusterData* TableMetadata::toCommandData(String* region, String* host, int
 	TableClusterData* data = (new(ctx) TableClusterData(ctx));
 	data->setRegion(region, ctx);
 	data->setName(this->tableName, ctx);
-	StorageNodeData* node = (new(ctx) StorageNodeData(host, port, ipv6, ctx));
+	StorageNodeData* node = (new(ctx) StorageNodeData(host, port, ipv6, this, ctx));
 	data->addNode(node, ctx);
 	return data;
 }

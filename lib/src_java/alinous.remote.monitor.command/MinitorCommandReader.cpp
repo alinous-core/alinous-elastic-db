@@ -64,6 +64,9 @@ AbstractMonitorCommand* MinitorCommandReader::readFromStream(InputStream* stream
 	case AbstractMonitorCommand::TYPE_REPORT_SCHEMA_UPDATED:
 		cmd = (new(ctx) ReportSchemaVersionCommand(ctx));
 		break ;
+	case AbstractMonitorCommand::TYPE_REPORT_CLUSTER_UPDATED:
+		cmd = (new(ctx) ReportClusterVersionUpCommand(ctx));
+		break ;
 	default:
 		throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3563(), ctx));
 		break;

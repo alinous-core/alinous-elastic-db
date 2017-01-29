@@ -90,6 +90,7 @@ void TableClusterData::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 	{
 		StorageNodeData* node = (new(ctx) StorageNodeData(ctx));
 		node->readData(buff, ctx);
+		this->nodesList->add(node, ctx);
 	}
 }
 void TableClusterData::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 

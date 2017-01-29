@@ -1,13 +1,13 @@
 #ifndef ALINOUS_REMOTE_DB_COMMAND_DATA_STORAGENODEDATA_H_
 #define ALINOUS_REMOTE_DB_COMMAND_DATA_STORAGENODEDATA_H_
+namespace alinous {namespace db {namespace table {
+class TableMetadata;}}}
+
 namespace alinous {namespace remote {namespace db {namespace command {namespace data {
 class StorageNodeData;}}}}}
 
 namespace alinous {namespace remote {namespace socket {
 class NetworkBinaryBuffer;}}}
-
-namespace alinous {namespace db {namespace table {
-class TableMetadata;}}}
 
 namespace alinous {namespace remote {namespace socket {
 class ICommandData;}}}
@@ -45,8 +45,8 @@ public:
 	void __construct_impl(ThreadContext* ctx) throw() 
 	{
 	}
-	StorageNodeData(String* host, int port, bool ipv6, ThreadContext* ctx) throw() ;
-	void __construct_impl(String* host, int port, bool ipv6, ThreadContext* ctx) throw() ;
+	StorageNodeData(String* host, int port, bool ipv6, TableMetadata* medatada, ThreadContext* ctx) throw() ;
+	void __construct_impl(String* host, int port, bool ipv6, TableMetadata* medatada, ThreadContext* ctx) throw() ;
 	virtual ~StorageNodeData() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 private:

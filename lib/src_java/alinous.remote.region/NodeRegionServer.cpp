@@ -19,17 +19,19 @@ bool NodeRegionServer::__init_static_variables(){
 	delete ctx;
 	return true;
 }
- NodeRegionServer::NodeRegionServer(int port, int maxthread, ThreadContext* ctx) throw()  : IObject(ctx), port(0), maxthread(0), refs(nullptr), socketServer(nullptr), monitorConnectionPool(nullptr), nodeClusterRevisionLock(__GC_INS(this, (new(ctx) LockObject(ctx)), LockObject)), nodeClusterRevision(1), region(nullptr), core(nullptr)
+ NodeRegionServer::NodeRegionServer(int port, int maxthread, AlinousCore* core, ThreadContext* ctx) throw()  : IObject(ctx), port(0), maxthread(0), refs(nullptr), socketServer(nullptr), monitorConnectionPool(nullptr), nodeClusterRevisionLock(__GC_INS(this, (new(ctx) LockObject(ctx)), LockObject)), nodeClusterRevision(1), region(nullptr), core(nullptr)
 {
 	this->port = port;
 	this->maxthread = maxthread;
 	__GC_MV(this, &(this->refs), (new(ctx) NodeReferenceManager(ctx)), NodeReferenceManager);
+	__GC_MV(this, &(this->core), core, AlinousCore);
 }
-void NodeRegionServer::__construct_impl(int port, int maxthread, ThreadContext* ctx) throw() 
+void NodeRegionServer::__construct_impl(int port, int maxthread, AlinousCore* core, ThreadContext* ctx) throw() 
 {
 	this->port = port;
 	this->maxthread = maxthread;
 	__GC_MV(this, &(this->refs), (new(ctx) NodeReferenceManager(ctx)), NodeReferenceManager);
+	__GC_MV(this, &(this->core), core, AlinousCore);
 }
  NodeRegionServer::~NodeRegionServer() throw() 
 {
@@ -135,6 +137,7 @@ void NodeRegionServer::createTable(TableMetadata* metadata, ThreadContext* ctx)
 		SynchronizedBlockObj __synchronized_2(this->nodeClusterRevisionLock, ctx);
 		this->refs->createTable(metadata, ctx);
 		this->nodeClusterRevision ++ ;
+		reportClusterUpdate(ctx);
 	}
 	syncScheme(ctx);
 }
@@ -143,6 +146,38 @@ void NodeRegionServer::initMonitorRef(MonitorRef* monRef, ThreadContext* ctx) th
 	MonitorConnectionInfo* monInfo = (new(ctx) MonitorConnectionInfo(monRef->getHost(ctx), monRef->getPort(ctx), ctx));
 	MonitorClientConnectionFactory* factory = (new(ctx) MonitorClientConnectionFactory(monInfo, ctx));
 	__GC_MV(this, &(this->monitorConnectionPool), (new(ctx) SocketConnectionPool(factory, ctx)), SocketConnectionPool);
+}
+void NodeRegionServer::reportClusterUpdate(ThreadContext* ctx)
+{
+	ReportClusterVersionUpCommand* cmd = (new(ctx) ReportClusterVersionUpCommand(ctx));
+	cmd->setNodeClusterRevision(this->nodeClusterRevision, ctx);
+	ISocketConnection* con = nullptr;
+	{
+		std::function<void(void)> finallyLm2= [&, this]()
+		{
+			this->monitorConnectionPool->returnConnection(con, ctx);
+		};
+		Releaser finalyCaller2(finallyLm2);
+		try
+		{
+			con = this->monitorConnectionPool->getConnection(ctx);
+			AlinousSocket* socket = con->getSocket(ctx);
+			AbstractMonitorCommand* retcmd = cmd->sendCommand(socket, ctx);
+			if(retcmd->getType(ctx) != AbstractMonitorCommand::TYPE_REPORT_CLUSTER_UPDATED)
+			{
+				throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3564(), ctx));
+			}
+			cmd = static_cast<ReportClusterVersionUpCommand*>(retcmd);
+		}
+		catch(UnknownHostException* e)
+		{
+			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3564(), ctx));
+		}
+		catch(IOException* e)
+		{
+			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3564(), ctx));
+		}
+	}
 }
 }}}
 

@@ -18,17 +18,19 @@ bool StorageNodeData::__init_static_variables(){
 	delete ctx;
 	return true;
 }
- StorageNodeData::StorageNodeData(String* host, int port, bool ipv6, ThreadContext* ctx) throw()  : IObject(ctx), ICommandData(ctx), host(nullptr), port(0), ipv6(0), metadata(nullptr)
+ StorageNodeData::StorageNodeData(String* host, int port, bool ipv6, TableMetadata* medatada, ThreadContext* ctx) throw()  : IObject(ctx), ICommandData(ctx), host(nullptr), port(0), ipv6(0), metadata(nullptr)
 {
 	__GC_MV(this, &(this->host), host, String);
 	this->port = port;
 	this->ipv6 = ipv6;
+	__GC_MV(this, &(this->metadata), medatada, TableMetadata);
 }
-void StorageNodeData::__construct_impl(String* host, int port, bool ipv6, ThreadContext* ctx) throw() 
+void StorageNodeData::__construct_impl(String* host, int port, bool ipv6, TableMetadata* medatada, ThreadContext* ctx) throw() 
 {
 	__GC_MV(this, &(this->host), host, String);
 	this->port = port;
 	this->ipv6 = ipv6;
+	__GC_MV(this, &(this->metadata), medatada, TableMetadata);
 }
  StorageNodeData::~StorageNodeData() throw() 
 {

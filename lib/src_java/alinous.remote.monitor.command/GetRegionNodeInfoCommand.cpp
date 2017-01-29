@@ -48,7 +48,7 @@ void GetRegionNodeInfoCommand::__releaseRegerences(bool prepare, ThreadContext* 
 void GetRegionNodeInfoCommand::executeOnServer(TransactionMonitorServer* monitorServer, BufferedOutputStream* outStream, ThreadContext* ctx)
 {
 	monitorServer->getRegionInfo(this->regionData, this->region, ctx);
-	this->nodeClusterRevision = monitorServer->updateNodeClusterRevision(this->nodeClusterRevision, ctx);
+	this->nodeClusterRevision = monitorServer->updateNodeClusterVersion(this->nodeClusterRevision, ctx);
 	writeByteStream(outStream, ctx);
 }
 void GetRegionNodeInfoCommand::readFromStream(InputStream* stream, int remain, ThreadContext* ctx)

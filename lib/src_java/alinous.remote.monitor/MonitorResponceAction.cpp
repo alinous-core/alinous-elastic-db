@@ -102,6 +102,7 @@ void MonitorResponceAction::handleCommand(BufferedInputStream* stream, BufferedO
 		case AbstractMonitorCommand::TYPE_GET_REGION_INFO:
 		case AbstractMonitorCommand::TYPE_NEW_TRANSACTION:
 		case AbstractMonitorCommand::TYPE_REPORT_SCHEMA_UPDATED:
+		case AbstractMonitorCommand::TYPE_REPORT_CLUSTER_UPDATED:
 		case AbstractMonitorCommand::TYPE_VOID:
 			handleCommand(cmd, outStream, ctx);
 			break ;

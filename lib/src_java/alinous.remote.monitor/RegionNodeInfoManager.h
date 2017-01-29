@@ -62,7 +62,7 @@ class RegionNodeInfoManager final : public virtual IObject {
 public:
 	RegionNodeInfoManager(const RegionNodeInfoManager& base) = default;
 public:
-	RegionNodeInfoManager(ThreadContext* ctx) throw()  : IObject(ctx), regionsMap(GCUtils<Map<String,RegionNodeInfo> >::ins(this, (new(ctx) HashMap<String,RegionNodeInfo>(ctx)), ctx, __FILEW__, __LINE__, L"")), lock(__GC_INS(this, (new(ctx) LockObject(ctx)), LockObject)), nodeClusterRevision(0)
+	RegionNodeInfoManager(ThreadContext* ctx) throw()  : IObject(ctx), regionsMap(GCUtils<Map<String,RegionNodeInfo> >::ins(this, (new(ctx) HashMap<String,RegionNodeInfo>(ctx)), ctx, __FILEW__, __LINE__, L"")), lock(__GC_INS(this, (new(ctx) LockObject(ctx)), LockObject)), nodeClusterRevision(1)
 	{
 	}
 	void __construct_impl(ThreadContext* ctx) throw() 

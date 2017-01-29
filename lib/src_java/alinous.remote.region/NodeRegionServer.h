@@ -1,10 +1,10 @@
 #ifndef ALINOUS_REMOTE_REGION_NODEREGIONSERVER_H_
 #define ALINOUS_REMOTE_REGION_NODEREGIONSERVER_H_
-namespace alinous {namespace remote {namespace region {
-class NodeReferenceManager;}}}
-
 namespace alinous {namespace system {
 class AlinousCore;}}
+
+namespace alinous {namespace remote {namespace region {
+class NodeReferenceManager;}}}
 
 namespace alinous {namespace system {namespace config {namespace remote {
 class RegionsServer;}}}}
@@ -54,14 +54,17 @@ class SocketServer;}}}
 namespace alinous {namespace db {namespace table {
 class TableMetadata;}}}
 
-namespace alinous {namespace lock {
-class LockObject;}}
+namespace alinous {namespace remote {namespace monitor {namespace command {namespace commitId {
+class ReportClusterVersionUpCommand;}}}}}
+
+namespace alinous {namespace net {
+class UnknownHostException;}}
 
 namespace java {namespace io {
 class IOException;}}
 
-namespace alinous {namespace net {
-class UnknownHostException;}}
+namespace alinous {namespace lock {
+class LockObject;}}
 
 namespace java {namespace lang {
 class IObject;
@@ -85,6 +88,7 @@ using ::alinous::remote::monitor::client::MonitorClientConnectionFactory;
 using ::alinous::remote::monitor::client::MonitorConnectionInfo;
 using ::alinous::remote::monitor::command::AbstractMonitorCommand;
 using ::alinous::remote::monitor::command::GetRegionNodeInfoCommand;
+using ::alinous::remote::monitor::command::commitId::ReportClusterVersionUpCommand;
 using ::alinous::remote::monitor::command::data::RegionInfoData;
 using ::alinous::remote::region::command::data::ClientStructureMetadata;
 using ::alinous::remote::socket::ISocketConnection;
@@ -102,8 +106,8 @@ class NodeRegionServer final : public virtual IObject {
 public:
 	NodeRegionServer(const NodeRegionServer& base) = default;
 public:
-	NodeRegionServer(int port, int maxthread, ThreadContext* ctx) throw() ;
-	void __construct_impl(int port, int maxthread, ThreadContext* ctx) throw() ;
+	NodeRegionServer(int port, int maxthread, AlinousCore* core, ThreadContext* ctx) throw() ;
+	void __construct_impl(int port, int maxthread, AlinousCore* core, ThreadContext* ctx) throw() ;
 	virtual ~NodeRegionServer() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 private:
@@ -131,6 +135,7 @@ public:
 	void createTable(TableMetadata* metadata, ThreadContext* ctx);
 private:
 	void initMonitorRef(MonitorRef* monRef, ThreadContext* ctx) throw() ;
+	void reportClusterUpdate(ThreadContext* ctx);
 public:
 	static bool __init_done;
 	static bool __init_static_variables();

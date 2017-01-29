@@ -238,7 +238,7 @@ void AlinousCore::initDistributedServerParts(ThreadContext* ctx)
 	for(int i = 0; i != maxLoop; ++i)
 	{
 		RegionsServer* srvconf = regionsConfList->get(i, ctx);
-		NodeRegionServer* server = (new(ctx) NodeRegionServer(srvconf->getPort(ctx), srvconf->getMaxCon(ctx), ctx));
+		NodeRegionServer* server = (new(ctx) NodeRegionServer(srvconf->getPort(ctx), srvconf->getMaxCon(ctx), this, ctx));
 		{
 			try
 			{

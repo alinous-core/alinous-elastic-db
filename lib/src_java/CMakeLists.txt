@@ -615,6 +615,7 @@ set(srcjava
 	"src_java/alinous.btree.scan/AbstractNodeIterator.cpp"
 	"src_java/alinous.btree.scan/LeafContainerIterator.cpp"
 	"src_java/alinous.remote.monitor.command.commitId/GetMaxCommitIdCommand.cpp"
+	"src_java/alinous.remote.monitor.command.commitId/ReportClusterVersionUpCommand.cpp"
 	"src_java/alinous.remote.monitor.command.commitId/NewTransactionCommand.cpp"
 	"src_java/alinous.remote.monitor.command.commitId/NewCommitIdCommand.cpp"
 	"src_java/alinous.remote.monitor.command.commitId/ReportSchemaVersionCommand.cpp"
