@@ -70,7 +70,7 @@ void TableRegionManager::commitCreateTable(String* regionName, String* schemaNam
 {
 	if(regionName == nullptr)
 	{
-		regionName = ConstStr::getCNST_STR_1667();
+		regionName = ConstStr::getCNST_STR_1668();
 	}
 	int maxLoop = this->regions->size(ctx);
 	ITableRegion* region = nullptr;
@@ -85,7 +85,7 @@ void TableRegionManager::commitCreateTable(String* regionName, String* schemaNam
 	}
 	if(region == nullptr)
 	{
-		throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1670(), ctx));
+		throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1671(), ctx));
 	}
 	region->createSchema(schemaName, ctx);
 	region->createTable(schemaName, tblMeta, database->workerThreadsPool, core, database->getBtreeCache(ctx), ctx);
@@ -101,6 +101,19 @@ void TableRegionManager::dispose(ThreadContext* ctx) throw()
 	{
 		ITableRegion* reg = this->regions->get(i, ctx);
 		reg->dispose(ctx);
+	}
+}
+void TableRegionManager::syncSchemaVersion(DbVersionContext* vctx, ThreadContext* ctx)
+{
+	int maxLoop = this->regions->size(ctx);
+	for(int i = 0; i != maxLoop; ++i)
+	{
+		ITableRegion* region = this->regions->get(i, ctx);
+		long long schemaVer = region->getSchemeVersion(ctx);
+		if(schemaVer < vctx->getSchemaVersion(ctx))
+		{
+			region->syncSchemes(ctx);
+		}
 	}
 }
 }}

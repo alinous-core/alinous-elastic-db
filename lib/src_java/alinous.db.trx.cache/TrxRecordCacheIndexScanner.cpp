@@ -84,23 +84,23 @@ void TrxRecordCacheIndexScanner::startScan(ScanResultIndexKey* indexKeyValue, Th
 		}
 		catch(IOException* e)
 		{
-			throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1696(), e, ctx));
+			throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1697(), e, ctx));
 		}
 		catch(InterruptedException* e)
 		{
-			throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1696(), e, ctx));
+			throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1697(), e, ctx));
 		}
 		catch(VariableException* e)
 		{
-			throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1696(), e, ctx));
+			throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1697(), e, ctx));
 		}
 		catch(BTreeException* e)
 		{
-			throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1696(), e, ctx));
+			throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1697(), e, ctx));
 		}
 		catch(AlinousException* e)
 		{
-			throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1696(), e, ctx));
+			throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1697(), e, ctx));
 		}
 	}
 }
@@ -113,7 +113,7 @@ void TrxRecordCacheIndexScanner::endScan(ThreadContext* ctx)
 		}
 		catch(InterruptedException* e)
 		{
-			throw (new(ctx) ScanException(ConstStr::getCNST_STR_1697(), e, ctx));
+			throw (new(ctx) ScanException(ConstStr::getCNST_STR_1698(), e, ctx));
 		}
 	}
 }
@@ -133,23 +133,23 @@ bool TrxRecordCacheIndexScanner::hasNext(bool debug, ThreadContext* ctx)
 		}
 		catch(VariableException* e)
 		{
-			throw (new(ctx) ScanException(ConstStr::getCNST_STR_1698(), e, ctx));
+			throw (new(ctx) ScanException(ConstStr::getCNST_STR_1699(), e, ctx));
 		}
 		catch(InterruptedException* e)
 		{
-			throw (new(ctx) ScanException(ConstStr::getCNST_STR_1698(), e, ctx));
+			throw (new(ctx) ScanException(ConstStr::getCNST_STR_1699(), e, ctx));
 		}
 		catch(IOException* e)
 		{
-			throw (new(ctx) ScanException(ConstStr::getCNST_STR_1698(), e, ctx));
+			throw (new(ctx) ScanException(ConstStr::getCNST_STR_1699(), e, ctx));
 		}
 		catch(BTreeException* e)
 		{
-			throw (new(ctx) ScanException(ConstStr::getCNST_STR_1698(), e, ctx));
+			throw (new(ctx) ScanException(ConstStr::getCNST_STR_1699(), e, ctx));
 		}
 		catch(AlinousException* e)
 		{
-			throw (new(ctx) ScanException(ConstStr::getCNST_STR_1698(), e, ctx));
+			throw (new(ctx) ScanException(ConstStr::getCNST_STR_1699(), e, ctx));
 		}
 	}
 	IBTreeNode* leafNode = nullptr;
@@ -177,23 +177,23 @@ ScanResultRecord* TrxRecordCacheIndexScanner::next(bool debug, ThreadContext* ct
 		}
 		catch(VariableException* e)
 		{
-			throw (new(ctx) ScanException(ConstStr::getCNST_STR_1698(), e, ctx));
+			throw (new(ctx) ScanException(ConstStr::getCNST_STR_1699(), e, ctx));
 		}
 		catch(IOException* e)
 		{
-			throw (new(ctx) ScanException(ConstStr::getCNST_STR_1698(), e, ctx));
+			throw (new(ctx) ScanException(ConstStr::getCNST_STR_1699(), e, ctx));
 		}
 		catch(InterruptedException* e)
 		{
-			throw (new(ctx) ScanException(ConstStr::getCNST_STR_1698(), e, ctx));
+			throw (new(ctx) ScanException(ConstStr::getCNST_STR_1699(), e, ctx));
 		}
 		catch(BTreeException* e)
 		{
-			throw (new(ctx) ScanException(ConstStr::getCNST_STR_1698(), e, ctx));
+			throw (new(ctx) ScanException(ConstStr::getCNST_STR_1699(), e, ctx));
 		}
 		catch(AlinousException* e)
 		{
-			throw (new(ctx) ScanException(ConstStr::getCNST_STR_1698(), e, ctx));
+			throw (new(ctx) ScanException(ConstStr::getCNST_STR_1699(), e, ctx));
 		}
 	}
 }
@@ -218,19 +218,19 @@ ArrayList<ScanResultRecord>* TrxRecordCacheIndexScanner::searchByIndexValue(Scan
 		}
 		catch(VariableException* e)
 		{
-			throw (new(ctx) ScanException(ConstStr::getCNST_STR_1700(), e, ctx));
+			throw (new(ctx) ScanException(ConstStr::getCNST_STR_1701(), e, ctx));
 		}
 		catch(IOException* e)
 		{
-			throw (new(ctx) ScanException(ConstStr::getCNST_STR_1700(), e, ctx));
+			throw (new(ctx) ScanException(ConstStr::getCNST_STR_1701(), e, ctx));
 		}
 		catch(InterruptedException* e)
 		{
-			throw (new(ctx) ScanException(ConstStr::getCNST_STR_1700(), e, ctx));
+			throw (new(ctx) ScanException(ConstStr::getCNST_STR_1701(), e, ctx));
 		}
 		catch(BTreeException* e)
 		{
-			throw (new(ctx) ScanException(ConstStr::getCNST_STR_1700(), e, ctx));
+			throw (new(ctx) ScanException(ConstStr::getCNST_STR_1701(), e, ctx));
 		}
 	}
 	return list;
@@ -245,7 +245,7 @@ ScanResultRecord* TrxRecordCacheIndexScanner::toScanResultRecord(long long oid, 
 	ArrayList<IBTreeValue>* values = node->getValues(ctx);
 	if(values->size(ctx) == 0)
 	{
-		throw (new(ctx) ScanException(ConstStr::getCNST_STR_1699(), ctx));
+		throw (new(ctx) ScanException(ConstStr::getCNST_STR_1700(), ctx));
 	}
 	CachedRecord* record = static_cast<CachedRecord*>(values->get(0, ctx));
 	ScanResultRecord* srecord = (new(ctx) ScanResultRecord(this->tableId, this->kindOfCache, record->getOid(ctx), this->trx, record, IndexScannerLockRequirement::NO_LOCK, ctx));

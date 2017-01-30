@@ -111,7 +111,7 @@ void AlinousDatabase::initInstance(AlinousDbInstanceInfo* instanceConfig, Thread
 		file->mkdirs(ctx);
 	}
 	__GC_MV(this, &(this->commitIdPublisher), (new(ctx) LocalCommitIdPublisher(this, ctx)), ICommidIdPublisher);
-	LocalTableRegion* localRegion = (new(ctx) LocalTableRegion(dataDir, this->core->getLogger(ctx), nullptr, core, this->btreeCache, ctx));
+	LocalTableRegion* localRegion = (new(ctx) LocalTableRegion(dataDir, this->core->getLogger(ctx), nullptr, core, this->btreeCache, static_cast<LocalCommitIdPublisher*>(this->commitIdPublisher), ctx));
 	SchemaManager* schemas = localRegion->getSchemaManager(ctx);
 	schemas->createSchema(ConstStr::getCNST_STR_955(), ctx);
 	{
@@ -435,6 +435,23 @@ bool AlinousDatabase::isRemote(ThreadContext* ctx) throw()
 {
 	return remote;
 }
+void AlinousDatabase::syncSchemaVersion(DbVersionContext* vctx, ThreadContext* ctx)
+{
+	{
+		try
+		{
+			this->regionManager->syncSchemaVersion(vctx, ctx);
+		}
+		catch(UnknownHostException* e)
+		{
+			(new(ctx) AlinousDbException(ConstStr::getCNST_STR_1667(), e, ctx));
+		}
+		catch(IOException* e)
+		{
+			(new(ctx) AlinousDbException(ConstStr::getCNST_STR_1667(), e, ctx));
+		}
+	}
+}
 File* AlinousDatabase::getConfigFile(ThreadContext* ctx) throw() 
 {
 	if(this->configFile == nullptr)
@@ -449,7 +466,7 @@ void AlinousDatabase::openRegions(AlinousDbInstanceInfo* instanceConfig, ThreadC
 	RegionsRef* refs = instanceConfig->getRegionsRef(ctx);
 	if(refs == nullptr)
 	{
-		LocalTableRegion* localRegion = (new(ctx) LocalTableRegion(dataDir, this->core->getLogger(ctx), this->workerThreadsPool, core, this->btreeCache, ctx));
+		LocalTableRegion* localRegion = (new(ctx) LocalTableRegion(dataDir, this->core->getLogger(ctx), this->workerThreadsPool, core, this->btreeCache, static_cast<LocalCommitIdPublisher*>(this->commitIdPublisher), ctx));
 		this->regionManager->addRegion(localRegion, ctx);
 		return;
 	}

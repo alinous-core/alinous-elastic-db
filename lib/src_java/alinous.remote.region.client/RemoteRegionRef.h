@@ -161,7 +161,7 @@ public:
 	ITableSchema* getSchema(String* name, ThreadContext* ctx) throw()  final;
 	void createSchema(String* schemaName, ThreadContext* ctx) final;
 	void createTable(String* schemaName, TableMetadata* tblMeta, ThreadPool* threadPool, AlinousCore* core, BTreeGlobalCache* cache, ThreadContext* ctx) final;
-	long long getSchemeVersion(ThreadContext* ctx) throw() ;
+	long long getSchemeVersion(ThreadContext* ctx) throw()  final;
 	void setSchemeVersion(long long schemeVersion, ThreadContext* ctx) throw() ;
 private:
 	void initRegionServerAcess(ThreadContext* ctx);

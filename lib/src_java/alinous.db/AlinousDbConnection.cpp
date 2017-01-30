@@ -62,12 +62,14 @@ void AlinousDbConnection::begin(int acid, ThreadContext* ctx)
 	}
 	__GC_MV(this, &(this->trx), this->database->trxManager->borrowTransaction(acid, ctx), DbTransaction);
 	this->autoCommit = false;
+	DbVersionContext* vctx = this->trx->getVersionContext(ctx);
+	this->database->syncSchemaVersion(vctx, ctx);
 }
 void AlinousDbConnection::commit(ThreadContext* ctx)
 {
 	if(this->autoCommit)
 	{
-		throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1671(), ctx));
+		throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1672(), ctx));
 	}
 	if(this->trx != nullptr)
 	{
@@ -168,8 +170,13 @@ ISQLSelectResult* AlinousDbConnection::selectSQL(SelectStatement* stmt, ScriptMa
 }
 void AlinousDbConnection::insertSQL(InsertStatement* stmt, ScriptMachine* machine, bool debug, ThreadContext* ctx)
 {
-	SQLAnalyseContext* context = (new(ctx) SQLAnalyseContext(this->database, machine, ctx));
-	stmt->analyzeSQL(context, debug, ctx);
+	DbVersionContext* vctx = this->trx->getVersionContext(ctx);
+	if(stmt->needsAnalyse(vctx, ctx))
+	{
+		SQLAnalyseContext* context = (new(ctx) SQLAnalyseContext(this->database, machine, ctx));
+		stmt->analyzeSQL(context, debug, ctx);
+		stmt->setVctx(vctx, ctx);
+	}
 	this->trx->insert(stmt, machine, debug, ctx);
 	if(this->autoCommit)
 	{

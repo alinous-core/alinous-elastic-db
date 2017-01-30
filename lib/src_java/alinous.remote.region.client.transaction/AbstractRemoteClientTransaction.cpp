@@ -18,10 +18,10 @@ bool AbstractRemoteClientTransaction::__init_static_variables(){
 	delete ctx;
 	return true;
 }
- AbstractRemoteClientTransaction::AbstractRemoteClientTransaction(DbTransactionManager* mgr, String* tmpDir, AlinousDatabase* database, AlinousCore* core, long long commitId, ThreadContext* ctx) throw()  : IObject(ctx), DbTransaction(mgr, tmpDir, database, core, commitId, ctx)
+ AbstractRemoteClientTransaction::AbstractRemoteClientTransaction(DbTransactionManager* mgr, String* tmpDir, AlinousDatabase* database, AlinousCore* core, long long commitId, DbVersionContext* vctx, ThreadContext* ctx) throw()  : IObject(ctx), DbTransaction(mgr, tmpDir, database, core, commitId, vctx, ctx)
 {
 }
-void AbstractRemoteClientTransaction::__construct_impl(DbTransactionManager* mgr, String* tmpDir, AlinousDatabase* database, AlinousCore* core, long long commitId, ThreadContext* ctx) throw() 
+void AbstractRemoteClientTransaction::__construct_impl(DbTransactionManager* mgr, String* tmpDir, AlinousDatabase* database, AlinousCore* core, long long commitId, DbVersionContext* vctx, ThreadContext* ctx) throw() 
 {
 }
  AbstractRemoteClientTransaction::~AbstractRemoteClientTransaction() throw() 
@@ -42,7 +42,7 @@ void AbstractRemoteClientTransaction::createTable(TableSchema* schema, ThreadCon
 {
 	if(schema->getregionName(ctx) == nullptr)
 	{
-		throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3577(), ctx));
+		throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3578(), ctx));
 	}
 	DbTransaction::createTable(schema, ctx);
 }

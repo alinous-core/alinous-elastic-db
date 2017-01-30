@@ -18,7 +18,7 @@ bool LocalCommitIdPublisher::__init_static_variables(){
 	delete ctx;
 	return true;
 }
- LocalCommitIdPublisher::LocalCommitIdPublisher(AlinousDatabase* database, ThreadContext* ctx) throw()  : IObject(ctx), ICommidIdPublisher(ctx), maxCommitId(0), lock(__GC_INS(this, (new(ctx) LockObject(ctx)), LockObject)), database(nullptr), trxId(1)
+ LocalCommitIdPublisher::LocalCommitIdPublisher(AlinousDatabase* database, ThreadContext* ctx) throw()  : IObject(ctx), ICommidIdPublisher(ctx), maxCommitId(0), lock(__GC_INS(this, (new(ctx) LockObject(ctx)), LockObject)), database(nullptr), trxId(1), schemaVersion(1)
 {
 	__GC_MV(this, &(this->database), database, AlinousDatabase);
 }
@@ -67,11 +67,27 @@ long long LocalCommitIdPublisher::newCommitId(ThreadContext* ctx)
 		return this->maxCommitId;
 	}
 }
+void LocalCommitIdPublisher::addSchemaVersion(ThreadContext* ctx) throw() 
+{
+	{
+		SynchronizedBlockObj __synchronized_2(this->lock, ctx);
+		this->schemaVersion ++ ;
+	}
+}
+long long LocalCommitIdPublisher::getSchemaVersion(ThreadContext* ctx) throw() 
+{
+	{
+		SynchronizedBlockObj __synchronized_2(this->lock, ctx);
+		return this->schemaVersion;
+	}
+}
 DbVersionContext* LocalCommitIdPublisher::newTransactionContext(ThreadContext* ctx) throw() 
 {
 	DbVersionContext* context = (new(ctx) DbVersionContext(ctx));
 	context->setCommitId(getMaxCommitId(ctx), ctx);
 	context->setTrxId(getNextTrxId(ctx), ctx);
+	context->setSchemaVersion(this->schemaVersion, ctx);
+	context->setNodeClusterVersion((long long)1, ctx);
 	return context;
 }
 void LocalCommitIdPublisher::dispose(ThreadContext* ctx) throw() 

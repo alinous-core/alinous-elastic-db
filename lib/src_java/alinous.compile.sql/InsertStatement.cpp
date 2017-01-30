@@ -38,6 +38,8 @@ void InsertStatement::__releaseRegerences(bool prepare, ThreadContext* ctx) thro
 	schemeName = nullptr;
 	__e_obj1.add(this->tblName, this);
 	tblName = nullptr;
+	__e_obj1.add(this->vctx, this);
+	vctx = nullptr;
 	if(!prepare){
 		return;
 	}
@@ -170,6 +172,19 @@ IStatement::StatementType InsertStatement::getType(ThreadContext* ctx) throw()
 {
 	return StatementType::INSERT;
 }
+bool InsertStatement::needsAnalyse(DbVersionContext* vctx, ThreadContext* ctx) throw() 
+{
+	if(this->vctx == nullptr)
+	{
+		return true;
+	}
+	long long lastSchemaVer = this->vctx->getSchemaVersion(ctx);
+	if(lastSchemaVer < vctx->getSchemaVersion(ctx))
+	{
+		return true;
+	}
+	return true;
+}
 void InsertStatement::analyzeSQL(SQLAnalyseContext* context, bool debug, ThreadContext* ctx)
 {
 	{
@@ -245,6 +260,14 @@ void InsertStatement::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) t
 		InsertValues* exp = this->values->get(i, ctx);
 		exp->writeData(buff, ctx);
 	}
+}
+DbVersionContext* InsertStatement::getVctx(ThreadContext* ctx) throw() 
+{
+	return vctx;
+}
+void InsertStatement::setVctx(DbVersionContext* vctx, ThreadContext* ctx) throw() 
+{
+	__GC_MV(this, &(this->vctx), vctx, DbVersionContext);
 }
 }}}
 

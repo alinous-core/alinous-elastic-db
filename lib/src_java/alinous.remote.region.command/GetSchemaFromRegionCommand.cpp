@@ -48,7 +48,7 @@ void GetSchemaFromRegionCommand::executeOnServer(NodeRegionServer* nodeRegionSer
 	{
 		try
 		{
-			this->schemeVersion = nodeRegionServer->getClientData(data, ctx);
+			this->schemeVersion = nodeRegionServer->getClientData(this->data, ctx);
 		}
 		catch(AlinousException* e)
 		{

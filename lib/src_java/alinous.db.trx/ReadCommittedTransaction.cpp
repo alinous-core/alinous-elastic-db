@@ -18,10 +18,10 @@ bool ReadCommittedTransaction::__init_static_variables(){
 	delete ctx;
 	return true;
 }
- ReadCommittedTransaction::ReadCommittedTransaction(DbTransactionManager* mgr, String* tmpDir, AlinousDatabase* database, AlinousCore* core, long long commitId, ThreadContext* ctx) throw()  : IObject(ctx), DbTransaction(mgr, tmpDir, database, core, commitId, ctx)
+ ReadCommittedTransaction::ReadCommittedTransaction(DbTransactionManager* mgr, String* tmpDir, AlinousDatabase* database, AlinousCore* core, long long commitId, DbVersionContext* vctx, ThreadContext* ctx) throw()  : IObject(ctx), DbTransaction(mgr, tmpDir, database, core, commitId, vctx, ctx)
 {
 }
-void ReadCommittedTransaction::__construct_impl(DbTransactionManager* mgr, String* tmpDir, AlinousDatabase* database, AlinousCore* core, long long commitId, ThreadContext* ctx) throw() 
+void ReadCommittedTransaction::__construct_impl(DbTransactionManager* mgr, String* tmpDir, AlinousDatabase* database, AlinousCore* core, long long commitId, DbVersionContext* vctx, ThreadContext* ctx) throw() 
 {
 }
  ReadCommittedTransaction::~ReadCommittedTransaction() throw() 
@@ -51,19 +51,19 @@ bool ReadCommittedTransaction::isVisible(IDatabaseRecord* record, IDatabaseTable
 		}
 		catch(VariableException* e)
 		{
-			throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1695(), e, ctx));
+			throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1696(), e, ctx));
 		}
 		catch(InterruptedException* e)
 		{
-			throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1695(), e, ctx));
+			throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1696(), e, ctx));
 		}
 		catch(IOException* e)
 		{
-			throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1695(), e, ctx));
+			throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1696(), e, ctx));
 		}
 		catch(BTreeException* e)
 		{
-			throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1695(), e, ctx));
+			throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1696(), e, ctx));
 		}
 	}
 	return true;

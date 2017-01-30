@@ -18,10 +18,10 @@ bool RemoteClientSerializableTrx::__init_static_variables(){
 	delete ctx;
 	return true;
 }
- RemoteClientSerializableTrx::RemoteClientSerializableTrx(DbTransactionManager* mgr, String* tmpDir, AlinousDatabase* database, AlinousCore* core, long long commitId, ThreadContext* ctx) throw()  : IObject(ctx), AbstractRemoteClientTransaction(mgr, tmpDir, database, core, commitId, ctx)
+ RemoteClientSerializableTrx::RemoteClientSerializableTrx(DbTransactionManager* mgr, String* tmpDir, AlinousDatabase* database, AlinousCore* core, long long commitId, DbVersionContext* vctx, ThreadContext* ctx) throw()  : IObject(ctx), AbstractRemoteClientTransaction(mgr, tmpDir, database, core, commitId, vctx, ctx)
 {
 }
-void RemoteClientSerializableTrx::__construct_impl(DbTransactionManager* mgr, String* tmpDir, AlinousDatabase* database, AlinousCore* core, long long commitId, ThreadContext* ctx) throw() 
+void RemoteClientSerializableTrx::__construct_impl(DbTransactionManager* mgr, String* tmpDir, AlinousDatabase* database, AlinousCore* core, long long commitId, DbVersionContext* vctx, ThreadContext* ctx) throw() 
 {
 }
  RemoteClientSerializableTrx::~RemoteClientSerializableTrx() throw() 

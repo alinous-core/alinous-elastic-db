@@ -237,6 +237,7 @@ public:
 	BTreeGlobalCache* getBtreeCache(ThreadContext* ctx) throw() ;
 	TableRegionManager* getRegionManager(ThreadContext* ctx) throw() ;
 	bool isRemote(ThreadContext* ctx) throw() ;
+	void syncSchemaVersion(DbVersionContext* vctx, ThreadContext* ctx);
 private:
 	File* getConfigFile(ThreadContext* ctx) throw() ;
 	void openRegions(AlinousDbInstanceInfo* instanceConfig, ThreadContext* ctx);

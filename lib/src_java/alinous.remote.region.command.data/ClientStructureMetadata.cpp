@@ -44,7 +44,7 @@ Map<String,ClientSchemaData>* ClientStructureMetadata::getMap(ThreadContext* ctx
 }
 void ClientStructureMetadata::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 {
-	int maxLoop = this->map->size(ctx);
+	int maxLoop = buff->getInt(ctx);
 	for(int i = 0; i != maxLoop; ++i)
 	{
 		String* schemeName = buff->getString(ctx);

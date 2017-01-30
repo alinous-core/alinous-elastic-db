@@ -18,13 +18,15 @@ bool LocalTableRegion::__init_static_variables(){
 	delete ctx;
 	return true;
 }
- LocalTableRegion::LocalTableRegion(String* dataDir, ISystemLog* logger, ThreadPool* threadPool, AlinousCore* core, BTreeGlobalCache* cache, ThreadContext* ctx) throw()  : IObject(ctx), ITableRegion(ctx), schemas(nullptr)
+ LocalTableRegion::LocalTableRegion(String* dataDir, ISystemLog* logger, ThreadPool* threadPool, AlinousCore* core, BTreeGlobalCache* cache, LocalCommitIdPublisher* publisher, ThreadContext* ctx) throw()  : IObject(ctx), ITableRegion(ctx), schemas(nullptr), publisher(nullptr)
 {
 	__GC_MV(this, &(this->schemas), (new(ctx) SchemaManager(dataDir, logger, threadPool, core, cache, ctx)), SchemaManager);
+	__GC_MV(this, &(this->publisher), publisher, LocalCommitIdPublisher);
 }
-void LocalTableRegion::__construct_impl(String* dataDir, ISystemLog* logger, ThreadPool* threadPool, AlinousCore* core, BTreeGlobalCache* cache, ThreadContext* ctx) throw() 
+void LocalTableRegion::__construct_impl(String* dataDir, ISystemLog* logger, ThreadPool* threadPool, AlinousCore* core, BTreeGlobalCache* cache, LocalCommitIdPublisher* publisher, ThreadContext* ctx) throw() 
 {
 	__GC_MV(this, &(this->schemas), (new(ctx) SchemaManager(dataDir, logger, threadPool, core, cache, ctx)), SchemaManager);
+	__GC_MV(this, &(this->publisher), publisher, LocalCommitIdPublisher);
 }
  LocalTableRegion::~LocalTableRegion() throw() 
 {
@@ -38,6 +40,8 @@ void LocalTableRegion::__releaseRegerences(bool prepare, ThreadContext* ctx) thr
 	ObjectEraser __e_obj1(ctx, __FILEW__, __LINE__, L"LocalTableRegion", L"~LocalTableRegion");
 	__e_obj1.add(this->schemas, this);
 	schemas = nullptr;
+	__e_obj1.add(this->publisher, this);
+	publisher = nullptr;
 	if(!prepare){
 		return;
 	}
@@ -56,7 +60,7 @@ int LocalTableRegion::getRegionType(ThreadContext* ctx) throw()
 }
 String* LocalTableRegion::getRegionName(ThreadContext* ctx) throw() 
 {
-	return ConstStr::getCNST_STR_1667();
+	return ConstStr::getCNST_STR_1668();
 }
 TableSchema* LocalTableRegion::getSchema(String* name, ThreadContext* ctx) throw() 
 {
@@ -68,6 +72,7 @@ void LocalTableRegion::createSchema(String* schemaName, ThreadContext* ctx) thro
 }
 void LocalTableRegion::createTable(String* schemaName, TableMetadata* tblMeta, ThreadPool* threadPool, AlinousCore* core, BTreeGlobalCache* cache, ThreadContext* ctx)
 {
+	this->publisher->addSchemaVersion(ctx);
 	this->schemas->createTable(schemaName, tblMeta, threadPool, core, cache, ctx);
 }
 void LocalTableRegion::syncSchemes(ThreadContext* ctx) throw() 
@@ -75,6 +80,10 @@ void LocalTableRegion::syncSchemes(ThreadContext* ctx) throw()
 }
 void LocalTableRegion::dispose(ThreadContext* ctx) throw() 
 {
+}
+long long LocalTableRegion::getSchemeVersion(ThreadContext* ctx) throw() 
+{
+	return this->publisher->getSchemaVersion(ctx);
 }
 }}
 

@@ -43,10 +43,13 @@ private:
 	LockObject* lock;
 	AlinousDatabase* database;
 	long long trxId;
+	long long schemaVersion;
 public:
 	void setMaxCommitId(long long maxCommitId, ThreadContext* ctx) throw()  final;
 	long long getMaxCommitId(ThreadContext* ctx) throw()  final;
 	long long newCommitId(ThreadContext* ctx) final;
+	void addSchemaVersion(ThreadContext* ctx) throw() ;
+	long long getSchemaVersion(ThreadContext* ctx) throw() ;
 	DbVersionContext* newTransactionContext(ThreadContext* ctx) throw()  final;
 	void dispose(ThreadContext* ctx) throw()  final;
 private:

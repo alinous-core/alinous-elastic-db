@@ -18,10 +18,10 @@ bool RepeatableReadTransaction::__init_static_variables(){
 	delete ctx;
 	return true;
 }
- RepeatableReadTransaction::RepeatableReadTransaction(DbTransactionManager* mgr, String* tmpDir, AlinousDatabase* database, AlinousCore* core, long long commitId, ThreadContext* ctx) throw()  : IObject(ctx), DbTransaction(mgr, tmpDir, database, core, commitId, ctx)
+ RepeatableReadTransaction::RepeatableReadTransaction(DbTransactionManager* mgr, String* tmpDir, AlinousDatabase* database, AlinousCore* core, long long commitId, DbVersionContext* vctx, ThreadContext* ctx) throw()  : IObject(ctx), DbTransaction(mgr, tmpDir, database, core, commitId, vctx, ctx)
 {
 }
-void RepeatableReadTransaction::__construct_impl(DbTransactionManager* mgr, String* tmpDir, AlinousDatabase* database, AlinousCore* core, long long commitId, ThreadContext* ctx) throw() 
+void RepeatableReadTransaction::__construct_impl(DbTransactionManager* mgr, String* tmpDir, AlinousDatabase* database, AlinousCore* core, long long commitId, DbVersionContext* vctx, ThreadContext* ctx) throw() 
 {
 }
  RepeatableReadTransaction::~RepeatableReadTransaction() throw() 
@@ -53,23 +53,23 @@ bool RepeatableReadTransaction::isVisible(IDatabaseRecord* record, IDatabaseTabl
 		}
 		catch(VariableException* e)
 		{
-			throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1695(), e, ctx));
+			throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1696(), e, ctx));
 		}
 		catch(InterruptedException* e)
 		{
-			throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1695(), e, ctx));
+			throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1696(), e, ctx));
 		}
 		catch(IOException* e)
 		{
-			throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1695(), e, ctx));
+			throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1696(), e, ctx));
 		}
 		catch(BTreeException* e)
 		{
-			throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1695(), e, ctx));
+			throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1696(), e, ctx));
 		}
 		catch(AlinousException* e)
 		{
-			throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1695(), e, ctx));
+			throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1696(), e, ctx));
 		}
 	}
 	return true;

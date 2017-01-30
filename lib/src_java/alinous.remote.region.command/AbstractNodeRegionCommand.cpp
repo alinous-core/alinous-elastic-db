@@ -90,10 +90,10 @@ void AbstractNodeRegionCommand::writeErrorByteStream(NetworkBinaryBuffer* buff, 
 }
 void AbstractNodeRegionCommand::readErrorFromStream(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
 {
-	GCUtils<List<String> >::mv(this, &(this->errorMessage), (new(ctx) ArrayList<String>(ctx)), ctx);
 	bool er = buff->getBoolean(ctx);
 	if(er)
 	{
+		GCUtils<List<String> >::mv(this, &(this->errorMessage), (new(ctx) ArrayList<String>(ctx)), ctx);
 		int maxLoop = buff->getInt(ctx);
 		for(int i = 0; i != maxLoop; ++i)
 		{

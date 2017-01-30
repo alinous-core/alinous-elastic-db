@@ -9,6 +9,9 @@ class AlinousDatabase;}}
 namespace alinous {namespace db {
 class ConnectInfo;}}
 
+namespace alinous {namespace db {namespace trx {
+class DbVersionContext;}}}
+
 namespace alinous {namespace db {
 class AlinousDbException;}}
 
@@ -95,6 +98,7 @@ using ::alinous::compile::sql::analyze::SQLAnalyseContext;
 using ::alinous::db::table::DatabaseException;
 using ::alinous::db::table::lockmonitor::DatabaseLockException;
 using ::alinous::db::trx::DbTransaction;
+using ::alinous::db::trx::DbVersionContext;
 using ::alinous::runtime::dbif::IDatabaseConnection;
 using ::alinous::runtime::dbif::IDatabaseDriver;
 using ::alinous::runtime::dbif::ISQLSelectResult;

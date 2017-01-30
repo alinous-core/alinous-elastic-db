@@ -18,7 +18,7 @@ bool DbTransaction::__init_static_variables(){
 	delete ctx;
 	return true;
 }
- DbTransaction::DbTransaction(DbTransactionManager* mgr, String* tmpDir, AlinousDatabase* database, AlinousCore* core, long long commitId, ThreadContext* ctx) throw()  : IObject(ctx), lockContext(nullptr), lockMode(0), commitId(0), trxManager(nullptr), trxSchema(nullptr), trxStorageManager(nullptr), database(nullptr), logger(nullptr), subTransaction(nullptr), resultSerial(0), trxDir(nullptr), soidSerial(0), core(nullptr)
+ DbTransaction::DbTransaction(DbTransactionManager* mgr, String* tmpDir, AlinousDatabase* database, AlinousCore* core, long long commitId, DbVersionContext* vctx, ThreadContext* ctx) throw()  : IObject(ctx), lockContext(nullptr), lockMode(0), commitId(0), trxManager(nullptr), trxSchema(nullptr), trxStorageManager(nullptr), database(nullptr), logger(nullptr), subTransaction(nullptr), resultSerial(0), trxDir(nullptr), vctx(nullptr), soidSerial(0), core(nullptr)
 {
 	__GC_MV(this, &(this->trxManager), mgr, DbTransactionManager);
 	__GC_MV(this, &(this->trxSchema), (new(ctx) TrxSchemeManager(database, logger, ctx)), TrxSchemeManager);
@@ -32,8 +32,9 @@ bool DbTransaction::__init_static_variables(){
 	this->resultSerial = 1;
 	__GC_MV(this, &(this->trxDir), tmpDir, String);
 	this->soidSerial = 1;
+	__GC_MV(this, &(this->vctx), vctx, DbVersionContext);
 }
-void DbTransaction::__construct_impl(DbTransactionManager* mgr, String* tmpDir, AlinousDatabase* database, AlinousCore* core, long long commitId, ThreadContext* ctx) throw() 
+void DbTransaction::__construct_impl(DbTransactionManager* mgr, String* tmpDir, AlinousDatabase* database, AlinousCore* core, long long commitId, DbVersionContext* vctx, ThreadContext* ctx) throw() 
 {
 	__GC_MV(this, &(this->trxManager), mgr, DbTransactionManager);
 	__GC_MV(this, &(this->trxSchema), (new(ctx) TrxSchemeManager(database, logger, ctx)), TrxSchemeManager);
@@ -47,6 +48,7 @@ void DbTransaction::__construct_impl(DbTransactionManager* mgr, String* tmpDir, 
 	this->resultSerial = 1;
 	__GC_MV(this, &(this->trxDir), tmpDir, String);
 	this->soidSerial = 1;
+	__GC_MV(this, &(this->vctx), vctx, DbVersionContext);
 }
  DbTransaction::~DbTransaction() throw() 
 {
@@ -74,6 +76,8 @@ void DbTransaction::__releaseRegerences(bool prepare, ThreadContext* ctx) throw(
 	subTransaction = nullptr;
 	__e_obj1.add(this->trxDir, this);
 	trxDir = nullptr;
+	__e_obj1.add(this->vctx, this);
+	vctx = nullptr;
 	__e_obj1.add(this->core, this);
 	core = nullptr;
 	if(!prepare){
@@ -152,7 +156,7 @@ void DbTransaction::update(UpdateStatement* update, ScriptMachine* machine, bool
 		}
 		catch(DatabaseLockException* e)
 		{
-			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_1691()->clone(ctx)->append(tableName->toString(ctx), ctx), e, ctx));
+			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_1692()->clone(ctx)->append(tableName->toString(ctx), ctx), e, ctx));
 		}
 	}
 	{
@@ -213,12 +217,12 @@ void DbTransaction::createIndex(CreateIndexStatement* stmt, ScriptMachine* machi
 		catch(IOException* e)
 		{
 			e->printStackTrace(ctx);
-			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1692(), e, ctx));
+			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1693(), e, ctx));
 		}
 		catch(BTreeException* e)
 		{
 			e->printStackTrace(ctx);
-			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1692(), e, ctx));
+			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1693(), e, ctx));
 		}
 	}
 }
@@ -262,19 +266,19 @@ void DbTransaction::commit(ThreadContext* ctx)
 			}
 			catch(IOException* e)
 			{
-				(new(ctx) AlinousDbException(ConstStr::getCNST_STR_1693(), e, ctx));
+				(new(ctx) AlinousDbException(ConstStr::getCNST_STR_1694(), e, ctx));
 			}
 			catch(InterruptedException* e)
 			{
-				(new(ctx) AlinousDbException(ConstStr::getCNST_STR_1693(), e, ctx));
+				(new(ctx) AlinousDbException(ConstStr::getCNST_STR_1694(), e, ctx));
 			}
 			catch(VariableException* e)
 			{
-				(new(ctx) AlinousDbException(ConstStr::getCNST_STR_1693(), e, ctx));
+				(new(ctx) AlinousDbException(ConstStr::getCNST_STR_1694(), e, ctx));
 			}
 			catch(BTreeException* e)
 			{
-				(new(ctx) AlinousDbException(ConstStr::getCNST_STR_1693(), e, ctx));
+				(new(ctx) AlinousDbException(ConstStr::getCNST_STR_1694(), e, ctx));
 			}
 		}
 		this->trxStorageManager->reset(ctx);
@@ -323,6 +327,10 @@ ThreadPool* DbTransaction::getThreadPool(ThreadContext* ctx) throw()
 bool DbTransaction::equals(IObject* obj, ThreadContext* ctx) throw() 
 {
 	return this == obj;
+}
+DbVersionContext* DbTransaction::getVersionContext(ThreadContext* ctx) throw() 
+{
+	return this->vctx;
 }
 void DbTransaction::noGroupBySelect(SelectStatement* selectStmt, ScriptMachine* machine, bool debug, ThreadContext* ctx)
 {

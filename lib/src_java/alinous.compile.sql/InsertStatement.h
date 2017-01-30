@@ -51,6 +51,9 @@ class IJoinTarget;}}}}}
 namespace alinous {namespace compile {namespace sql {namespace parts {
 class SQLExpressionList;}}}}
 
+namespace alinous {namespace db {namespace trx {
+class DbVersionContext;}}}
+
 namespace alinous {namespace compile {namespace sql {namespace analyze {
 class SQLAnalyseContext;}}}}
 
@@ -104,6 +107,7 @@ using ::alinous::compile::sql::select::join::IJoinTarget;
 using ::alinous::compile::sql::select::join::TableJoinTarget;
 using ::alinous::db::AlinousDbException;
 using ::alinous::db::table::DatabaseException;
+using ::alinous::db::trx::DbVersionContext;
 using ::alinous::db::trx::cache::CulumnOrder;
 using ::alinous::db::trx::cache::TrxRecordsCache;
 using ::alinous::db::trx::cache::TrxStorageManager;
@@ -121,7 +125,7 @@ class InsertStatement final : public AbstractSQLStatement, public ThreadMonitor 
 public:
 	InsertStatement(const InsertStatement& base) = default;
 public:
-	InsertStatement(ThreadContext* ctx) throw()  : IObject(ctx), AbstractSQLStatement(ctx), ThreadMonitor(ctx), table(nullptr), list(nullptr), values(GCUtils<ArrayList<InsertValues> >::ins(this, (new(ctx) ArrayList<InsertValues>(ctx)), ctx, __FILEW__, __LINE__, L"")), schemeName(nullptr), tblName(nullptr)
+	InsertStatement(ThreadContext* ctx) throw()  : IObject(ctx), AbstractSQLStatement(ctx), ThreadMonitor(ctx), table(nullptr), list(nullptr), values(GCUtils<ArrayList<InsertValues> >::ins(this, (new(ctx) ArrayList<InsertValues>(ctx)), ctx, __FILEW__, __LINE__, L"")), schemeName(nullptr), tblName(nullptr), vctx(nullptr)
 	{
 	}
 	void __construct_impl(ThreadContext* ctx) throw() 
@@ -135,6 +139,7 @@ private:
 	ArrayList<InsertValues>* values;
 	String* schemeName;
 	String* tblName;
+	DbVersionContext* vctx;
 public:
 	TrxRecordsCache* getCache(ScriptMachine* machine, TrxStorageManager* trxStorageManager, ThreadContext* ctx);
 	ArrayList<CulumnOrder>* getColumnOrder(ScriptMachine* machine, bool debug, ThreadContext* ctx);
@@ -149,9 +154,12 @@ public:
 	void setList(SQLExpressionList* list, ThreadContext* ctx) throw() ;
 	ArrayList<InsertValues>* getValues(ThreadContext* ctx) throw() ;
 	IStatement::StatementType getType(ThreadContext* ctx) throw()  final;
+	bool needsAnalyse(DbVersionContext* vctx, ThreadContext* ctx) throw() ;
 	void analyzeSQL(SQLAnalyseContext* context, bool debug, ThreadContext* ctx) final;
 	void readData(NetworkBinaryBuffer* buff, ThreadContext* ctx) final;
 	void writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw()  final;
+	DbVersionContext* getVctx(ThreadContext* ctx) throw() ;
+	void setVctx(DbVersionContext* vctx, ThreadContext* ctx) throw() ;
 public:
 	static bool __init_done;
 	static bool __init_static_variables();

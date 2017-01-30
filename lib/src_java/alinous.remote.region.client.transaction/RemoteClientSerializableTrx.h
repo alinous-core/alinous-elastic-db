@@ -9,6 +9,9 @@ class AlinousDatabase;}}
 namespace alinous {namespace system {
 class AlinousCore;}}
 
+namespace alinous {namespace db {namespace trx {
+class DbVersionContext;}}}
+
 namespace alinous {namespace db {namespace table {
 class IDatabaseRecord;}}}
 
@@ -38,6 +41,7 @@ using ::alinous::db::table::DatabaseException;
 using ::alinous::db::table::IDatabaseRecord;
 using ::alinous::db::table::IDatabaseTable;
 using ::alinous::db::trx::DbTransactionManager;
+using ::alinous::db::trx::DbVersionContext;
 using ::alinous::system::AlinousCore;
 using ::alinous::system::AlinousException;
 
@@ -47,8 +51,8 @@ class RemoteClientSerializableTrx final : public AbstractRemoteClientTransaction
 public:
 	RemoteClientSerializableTrx(const RemoteClientSerializableTrx& base) = default;
 public:
-	RemoteClientSerializableTrx(DbTransactionManager* mgr, String* tmpDir, AlinousDatabase* database, AlinousCore* core, long long commitId, ThreadContext* ctx) throw() ;
-	void __construct_impl(DbTransactionManager* mgr, String* tmpDir, AlinousDatabase* database, AlinousCore* core, long long commitId, ThreadContext* ctx) throw() ;
+	RemoteClientSerializableTrx(DbTransactionManager* mgr, String* tmpDir, AlinousDatabase* database, AlinousCore* core, long long commitId, DbVersionContext* vctx, ThreadContext* ctx) throw() ;
+	void __construct_impl(DbTransactionManager* mgr, String* tmpDir, AlinousDatabase* database, AlinousCore* core, long long commitId, DbVersionContext* vctx, ThreadContext* ctx) throw() ;
 	virtual ~RemoteClientSerializableTrx() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 public:

@@ -40,14 +40,14 @@ DbTransaction* DbTransactionFactory::newTransaction(int acid, DbTransactionManag
 	DbTransaction* trx = nullptr;
 	switch(acid) {
 	case IDatabaseDriver::READ_COMMITTED:
-		trx = (new(ctx) ReadCommittedTransaction(mgr, tmpDir, database, core, commitId, ctx));
+		trx = (new(ctx) ReadCommittedTransaction(mgr, tmpDir, database, core, commitId, vctx, ctx));
 		break ;
 	case IDatabaseDriver::REPEATABLE_READ:
-		trx = (new(ctx) RepeatableReadTransaction(mgr, tmpDir, database, core, commitId, ctx));
+		trx = (new(ctx) RepeatableReadTransaction(mgr, tmpDir, database, core, commitId, vctx, ctx));
 		break ;
 	case IDatabaseDriver::SERIALIZABLE:
 	default:
-		trx = (new(ctx) SerializableTransaction(mgr, tmpDir, database, core, commitId, ctx));
+		trx = (new(ctx) SerializableTransaction(mgr, tmpDir, database, core, commitId, vctx, ctx));
 		break ;
 	}
 	return trx;
@@ -57,14 +57,14 @@ DbTransaction* DbTransactionFactory::newRemoteTransaction(int acid, DbTransactio
 	DbTransaction* trx = nullptr;
 	switch(acid) {
 	case IDatabaseDriver::READ_COMMITTED:
-		trx = (new(ctx) RemoteClientReadCommittedTrx(mgr, tmpDir, database, core, commitId, ctx));
+		trx = (new(ctx) RemoteClientReadCommittedTrx(mgr, tmpDir, database, core, commitId, vctx, ctx));
 		break ;
 	case IDatabaseDriver::REPEATABLE_READ:
-		trx = (new(ctx) RemoteClientRepeatableReadTrx(mgr, tmpDir, database, core, commitId, ctx));
+		trx = (new(ctx) RemoteClientRepeatableReadTrx(mgr, tmpDir, database, core, commitId, vctx, ctx));
 		break ;
 	case IDatabaseDriver::SERIALIZABLE:
 	default:
-		trx = (new(ctx) RemoteClientSerializableTrx(mgr, tmpDir, database, core, commitId, ctx));
+		trx = (new(ctx) RemoteClientSerializableTrx(mgr, tmpDir, database, core, commitId, vctx, ctx));
 		break ;
 	}
 	return trx;

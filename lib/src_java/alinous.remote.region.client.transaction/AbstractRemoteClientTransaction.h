@@ -9,6 +9,9 @@ class AlinousDatabase;}}
 namespace alinous {namespace system {
 class AlinousCore;}}
 
+namespace alinous {namespace db {namespace trx {
+class DbVersionContext;}}}
+
 namespace alinous {namespace db {
 class TableSchema;}}
 
@@ -32,6 +35,7 @@ using ::alinous::db::AlinousDbException;
 using ::alinous::db::TableSchema;
 using ::alinous::db::trx::DbTransaction;
 using ::alinous::db::trx::DbTransactionManager;
+using ::alinous::db::trx::DbVersionContext;
 using ::alinous::system::AlinousCore;
 
 
@@ -40,8 +44,8 @@ class AbstractRemoteClientTransaction : public DbTransaction {
 public:
 	AbstractRemoteClientTransaction(const AbstractRemoteClientTransaction& base) = default;
 public:
-	AbstractRemoteClientTransaction(DbTransactionManager* mgr, String* tmpDir, AlinousDatabase* database, AlinousCore* core, long long commitId, ThreadContext* ctx) throw() ;
-	void __construct_impl(DbTransactionManager* mgr, String* tmpDir, AlinousDatabase* database, AlinousCore* core, long long commitId, ThreadContext* ctx) throw() ;
+	AbstractRemoteClientTransaction(DbTransactionManager* mgr, String* tmpDir, AlinousDatabase* database, AlinousCore* core, long long commitId, DbVersionContext* vctx, ThreadContext* ctx) throw() ;
+	void __construct_impl(DbTransactionManager* mgr, String* tmpDir, AlinousDatabase* database, AlinousCore* core, long long commitId, DbVersionContext* vctx, ThreadContext* ctx) throw() ;
 	virtual ~AbstractRemoteClientTransaction() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 public:

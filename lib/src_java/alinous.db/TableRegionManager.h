@@ -27,8 +27,14 @@ class DatabaseException;}}}
 namespace java {namespace util {
 template <typename  T> class List;}}
 
+namespace alinous {namespace db {namespace trx {
+class DbVersionContext;}}}
+
 namespace java {namespace io {
 class IOException;}}
+
+namespace alinous {namespace net {
+class UnknownHostException;}}
 
 namespace alinous {namespace btree {
 class BTreeException;}}
@@ -50,11 +56,13 @@ using namespace ::alinous;
 using namespace ::java::lang;
 using ::java::util::Iterator;
 using ::java::io::IOException;
+using ::java::net::UnknownHostException;
 using ::java::util::ArrayList;
 using ::java::util::List;
 using ::alinous::btree::BTreeException;
 using ::alinous::db::table::DatabaseException;
 using ::alinous::db::table::TableMetadata;
+using ::alinous::db::trx::DbVersionContext;
 using ::alinous::system::AlinousCore;
 using ::alinous::system::AlinousException;
 
@@ -81,6 +89,7 @@ public:
 	void commitCreateTable(String* regionName, String* schemaName, TableMetadata* tblMeta, AlinousDatabase* database, AlinousCore* core, ThreadContext* ctx);
 	List<ITableRegion>* getRegions(ThreadContext* ctx) throw() ;
 	void dispose(ThreadContext* ctx) throw() ;
+	void syncSchemaVersion(DbVersionContext* vctx, ThreadContext* ctx);
 public:
 	static bool __init_done;
 	static bool __init_static_variables();

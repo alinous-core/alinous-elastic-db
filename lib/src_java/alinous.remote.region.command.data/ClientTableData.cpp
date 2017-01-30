@@ -49,10 +49,21 @@ void ClientTableData::__releaseRegerences(bool prepare, ThreadContext* ctx) thro
 void ClientTableData::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 {
 	__GC_MV(this, &(this->name), buff->getString(ctx), String);
+	bool isnull = buff->getBoolean(ctx);
+	if(!isnull)
+	{
+		__GC_MV(this, &(this->metadata), TableMetadata::fromNetwork(buff, ctx), TableMetadata);
+	}
 }
 void ClientTableData::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
 {
 	buff->putString(this->name, ctx);
+	bool isnull = (this->metadata == nullptr);
+	buff->putBoolean(isnull, ctx);
+	if(!isnull)
+	{
+		this->metadata->writeData(buff, ctx);
+	}
 }
 String* ClientTableData::getName(ThreadContext* ctx) throw() 
 {

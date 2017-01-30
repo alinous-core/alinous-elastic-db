@@ -18,6 +18,9 @@ class AlinousDatabase;}}
 namespace alinous {namespace system {
 class AlinousCore;}}
 
+namespace alinous {namespace db {namespace trx {
+class DbVersionContext;}}}
+
 namespace alinous {namespace db {namespace trx {namespace ddl {
 class TrxSchemeManager;}}}}
 
@@ -230,8 +233,8 @@ class DbTransaction : public virtual IObject {
 public:
 	DbTransaction(const DbTransaction& base) = default;
 public:
-	DbTransaction(DbTransactionManager* mgr, String* tmpDir, AlinousDatabase* database, AlinousCore* core, long long commitId, ThreadContext* ctx) throw() ;
-	void __construct_impl(DbTransactionManager* mgr, String* tmpDir, AlinousDatabase* database, AlinousCore* core, long long commitId, ThreadContext* ctx) throw() ;
+	DbTransaction(DbTransactionManager* mgr, String* tmpDir, AlinousDatabase* database, AlinousCore* core, long long commitId, DbVersionContext* vctx, ThreadContext* ctx) throw() ;
+	void __construct_impl(DbTransactionManager* mgr, String* tmpDir, AlinousDatabase* database, AlinousCore* core, long long commitId, DbVersionContext* vctx, ThreadContext* ctx) throw() ;
 	virtual ~DbTransaction() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 public:
@@ -246,6 +249,7 @@ public:
 	DbTransaction* subTransaction;
 	int resultSerial;
 	String* trxDir;
+	DbVersionContext* vctx;
 private:
 	long long soidSerial;
 	AlinousCore* core;
@@ -269,6 +273,7 @@ public:
 	AlinousDatabase* getDatabase(ThreadContext* ctx) throw() ;
 	ThreadPool* getThreadPool(ThreadContext* ctx) throw() ;
 	bool equals(IObject* obj, ThreadContext* ctx) throw() ;
+	DbVersionContext* getVersionContext(ThreadContext* ctx) throw() ;
 private:
 	void noGroupBySelect(SelectStatement* selectStmt, ScriptMachine* machine, bool debug, ThreadContext* ctx);
 	void doUpdate(ScanResultRecord* record, UpdateStatement* update, ScriptMachine* machine, bool debug, ThreadContext* ctx);

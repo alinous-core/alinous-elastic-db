@@ -13,6 +13,9 @@ namespace alinous {namespace btree {
 class BTreeGlobalCache;}}
 
 namespace alinous {namespace db {
+class LocalCommitIdPublisher;}}
+
+namespace alinous {namespace db {
 class SchemaManager;}}
 
 namespace alinous {namespace db {
@@ -65,12 +68,14 @@ class LocalTableRegion final : public ITableRegion, public virtual IObject {
 public:
 	LocalTableRegion(const LocalTableRegion& base) = default;
 public:
-	LocalTableRegion(String* dataDir, ISystemLog* logger, ThreadPool* threadPool, AlinousCore* core, BTreeGlobalCache* cache, ThreadContext* ctx) throw() ;
-	void __construct_impl(String* dataDir, ISystemLog* logger, ThreadPool* threadPool, AlinousCore* core, BTreeGlobalCache* cache, ThreadContext* ctx) throw() ;
+	LocalTableRegion(String* dataDir, ISystemLog* logger, ThreadPool* threadPool, AlinousCore* core, BTreeGlobalCache* cache, LocalCommitIdPublisher* publisher, ThreadContext* ctx) throw() ;
+	void __construct_impl(String* dataDir, ISystemLog* logger, ThreadPool* threadPool, AlinousCore* core, BTreeGlobalCache* cache, LocalCommitIdPublisher* publisher, ThreadContext* ctx) throw() ;
 	virtual ~LocalTableRegion() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 public:
 	SchemaManager* schemas;
+private:
+	LocalCommitIdPublisher* publisher;
 public:
 	SchemaManager* getSchemaManager(ThreadContext* ctx) throw() ;
 	void setSchemaManager(SchemaManager* schemas, ThreadContext* ctx) throw() ;
@@ -81,6 +86,7 @@ public:
 	void createTable(String* schemaName, TableMetadata* tblMeta, ThreadPool* threadPool, AlinousCore* core, BTreeGlobalCache* cache, ThreadContext* ctx) final;
 	void syncSchemes(ThreadContext* ctx) throw()  final;
 	void dispose(ThreadContext* ctx) throw()  final;
+	long long getSchemeVersion(ThreadContext* ctx) throw()  final;
 public:
 	static bool __init_done;
 	static bool __init_static_variables();

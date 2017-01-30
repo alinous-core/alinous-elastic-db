@@ -27,7 +27,7 @@ class HttpRequestHeaders final : public virtual IObject {
 public:
 	HttpRequestHeaders(const HttpRequestHeaders& base) = default;
 public:
-	HttpRequestHeaders(ThreadContext* ctx) throw()  : IObject(ctx), userAgent(nullptr), accept(__GC_INS(this, ConstStr::getCNST_STR_1863(), String)), acceptLanguage(nullptr), acceptEncoding(nullptr), acceptCharset(nullptr), keepAlive(nullptr), connection(nullptr), cookie(nullptr)
+	HttpRequestHeaders(ThreadContext* ctx) throw()  : IObject(ctx), userAgent(nullptr), accept(__GC_INS(this, ConstStr::getCNST_STR_1864(), String)), acceptLanguage(nullptr), acceptEncoding(nullptr), acceptCharset(nullptr), keepAlive(nullptr), connection(nullptr), cookie(nullptr)
 	{
 	}
 	void __construct_impl(ThreadContext* ctx) throw() 
