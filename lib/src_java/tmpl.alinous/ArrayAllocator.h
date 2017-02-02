@@ -39,6 +39,7 @@ template class alinous::ArrayAllocator<::alinous::system::config::remote::Region
 template class alinous::ArrayAllocator<::alinous::system::config::remote::Region>;
 template class alinous::ArrayAllocator<::alinous::db::ITableRegion>;
 template class alinous::ArrayAllocator<::alinous::db::ITableSchema>;
+template class alinous::ArrayAllocator<::alinous::db::table::IDatabaseRecord>;
 template class alinous::ArrayAllocator<::alinous::runtime::variant::VariantValue>;
 template class alinous::ArrayAllocator<::alinous::remote::monitor::NodeInfo>;
 template class alinous::ArrayAllocator<::alinous::remote::region::NodeTableReference>;
@@ -109,7 +110,6 @@ template class alinous::ArrayAllocator<::alinous::db::trx::cache::TrxRecordCache
 template class alinous::ArrayAllocator<::alinous::db::TableSchema>;
 template class alinous::ArrayAllocator<::alinous::db::trx::CreateIndexMetadata>;
 template class alinous::ArrayAllocator<::alinous::db::trx::scan::ScanResultIndex>;
-template class alinous::ArrayAllocator<::alinous::db::table::IDatabaseRecord>;
 template class alinous::ArrayAllocator<::java::lang::Integer>;
 template class alinous::ArrayAllocator<::alinous::db::trx::scan::ScannedOids::Oids>;
 template class alinous::ArrayAllocator<::java::lang::Thread>;

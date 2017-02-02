@@ -255,6 +255,7 @@ private:
 	AlinousCore* core;
 public:
 	virtual bool isVisible(IDatabaseRecord* record, IDatabaseTable* tableStore, ThreadContext* ctx) = 0;
+	virtual bool isRemote(ThreadContext* ctx) throw() ;
 	long long newSoid(ThreadContext* ctx) throw() ;
 	ScanResult* newResult(ScanTableMetadata* metadata, ThreadContext* ctx);
 	void select(SelectStatement* selectStmt, ScriptMachine* machine, bool debug, ThreadContext* ctx);
@@ -274,6 +275,7 @@ public:
 	ThreadPool* getThreadPool(ThreadContext* ctx) throw() ;
 	bool equals(IObject* obj, ThreadContext* ctx) throw() ;
 	DbVersionContext* getVersionContext(ThreadContext* ctx) throw() ;
+	void commitUpdateInsert(long long newCommitId, ThreadContext* ctx);
 private:
 	void noGroupBySelect(SelectStatement* selectStmt, ScriptMachine* machine, bool debug, ThreadContext* ctx);
 	void doUpdate(ScanResultRecord* record, UpdateStatement* update, ScriptMachine* machine, bool debug, ThreadContext* ctx);

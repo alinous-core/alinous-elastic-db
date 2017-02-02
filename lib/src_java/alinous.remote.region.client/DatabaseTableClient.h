@@ -36,14 +36,14 @@ class BTreeGlobalCache;}}
 namespace alinous {namespace runtime {namespace parallel {
 class ThreadPool;}}}
 
-namespace alinous {namespace db {namespace trx {namespace cache {
-class CachedRecord;}}}}
-
 namespace alinous {namespace runtime {namespace parallel {
 class SequentialBackgroundJob;}}}
 
 namespace alinous {namespace system {
 class ISystemLog;}}
+
+namespace java {namespace util {
+template <typename  T> class List;}}
 
 namespace alinous {namespace db {namespace table {
 class IDatabaseTable;}}}
@@ -87,6 +87,7 @@ using namespace ::java::lang;
 using ::java::util::Iterator;
 using ::java::io::IOException;
 using ::java::util::ArrayList;
+using ::java::util::List;
 using ::alinous::btree::BTreeException;
 using ::alinous::btree::BTreeGlobalCache;
 using ::alinous::compile::sql::analyze::ScanTableColumnIdentifier;
@@ -101,7 +102,6 @@ using ::alinous::db::table::TableMetadata;
 using ::alinous::db::table::lockmonitor::DatabaseLockException;
 using ::alinous::db::table::lockmonitor::IThreadLocker;
 using ::alinous::db::table::lockmonitor::ThreadLocker;
-using ::alinous::db::trx::cache::CachedRecord;
 using ::alinous::remote::socket::SocketConnectionPool;
 using ::alinous::runtime::dom::VariableException;
 using ::alinous::runtime::parallel::SequentialBackgroundJob;
@@ -158,8 +158,9 @@ public:
 	void lockStorage(ThreadContext* ctx) final;
 	void unlockStorage(ThreadContext* ctx) final;
 	ArrayList<IScannableIndex>* getIndexes(ThreadContext* ctx) throw()  final;
-	void insertData(CachedRecord* record, long long newCommitId, IArrayObject<SequentialBackgroundJob>* jobs, ISystemLog* logger, ThreadContext* ctx) final;
-	void updateData(CachedRecord* record, long long newCommitId, IArrayObject<SequentialBackgroundJob>* jobs, ISystemLog* logger, ThreadContext* ctx) final;
+	void insertData(IDatabaseRecord* record, long long newCommitId, IArrayObject<SequentialBackgroundJob>* jobs, ISystemLog* logger, ThreadContext* ctx) final;
+	void insertData(List<IDatabaseRecord>* records, long long newCommitId, IArrayObject<SequentialBackgroundJob>* jobs, ISystemLog* logger, ThreadContext* ctx) final;
+	void updateData(IDatabaseRecord* record, long long newCommitId, IArrayObject<SequentialBackgroundJob>* jobs, ISystemLog* logger, ThreadContext* ctx) final;
 	void createIndex(String* getindexName, ArrayList<String>* columns, AlinousCore* core, BTreeGlobalCache* cache, ThreadContext* ctx) final;
 	void close(ThreadContext* ctx) throw()  final;
 	String* getFullName(ThreadContext* ctx) throw()  final;

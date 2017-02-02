@@ -6,8 +6,8 @@ class OneSource;
 namespace alinous {namespace runtime {namespace variant {
 class VariantValue;}}}
 
-namespace alinous {namespace db {namespace trx {namespace cache {
-class CachedRecord;}}}}
+namespace alinous {namespace db {namespace table {
+class IDatabaseRecord;}}}
 
 namespace alinous {namespace buffer {namespace storage {
 class FileStorageEntryBuilder;}}}
@@ -27,11 +27,11 @@ class StringBuilder;}}
 namespace alinous {namespace db {namespace table {
 class IDatabaseTable;}}}
 
-namespace alinous {namespace db {namespace table {
-class IDatabaseRecord;}}}
-
 namespace alinous {namespace btree {
 class IBTreeValue;}}
+
+namespace alinous {namespace db {namespace trx {namespace cache {
+class CachedRecord;}}}}
 
 namespace alinous {namespace runtime {namespace dom {
 class VariableException;}}}
@@ -67,8 +67,8 @@ public:
 public:
 	DatabaseRecord(long long oid, int numColumn, long long CommitId, ThreadContext* ctx) throw() ;
 	void __construct_impl(long long oid, int numColumn, long long CommitId, ThreadContext* ctx) throw() ;
-	DatabaseRecord(long long oid, int numColumn, long long CommitId, CachedRecord* data, ThreadContext* ctx) throw() ;
-	void __construct_impl(long long oid, int numColumn, long long CommitId, CachedRecord* data, ThreadContext* ctx) throw() ;
+	DatabaseRecord(long long oid, int numColumn, long long CommitId, IDatabaseRecord* data, ThreadContext* ctx) throw() ;
+	void __construct_impl(long long oid, int numColumn, long long CommitId, IDatabaseRecord* data, ThreadContext* ctx) throw() ;
 	virtual ~DatabaseRecord() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 private:
@@ -91,9 +91,9 @@ public:
 	long long getOid(ThreadContext* ctx) throw()  final;
 	void setOid(long long oid, ThreadContext* ctx) throw() ;
 	long long getLastUpdateCommitId(ThreadContext* ctx) throw()  final;
-	void setLastUpdateCommitId(long long lastUpdateCommitId, ThreadContext* ctx) throw() ;
+	void setLastUpdateCommitId(long long lastUpdateCommitId, ThreadContext* ctx) throw()  final;
 	long long getInsertedCommitId(ThreadContext* ctx) throw()  final;
-	void setInsertedCommitId(long long insertedCommitId, ThreadContext* ctx) throw() ;
+	void setInsertedCommitId(long long insertedCommitId, ThreadContext* ctx) throw()  final;
 	long long getDeletedCommitId(ThreadContext* ctx) throw()  final;
 	void setDeletedCommitId(long long deletedCommitId, ThreadContext* ctx) throw() ;
 	long long getMaxCommitId(ThreadContext* ctx) throw()  final;
@@ -106,6 +106,7 @@ public:
 	void setStorageForCache(IDatabaseTable* storageForCache, ThreadContext* ctx) throw() ;
 	ArrayList<VariantValue>* getValues(ThreadContext* ctx) throw()  final;
 	int getKind(ThreadContext* ctx) throw()  final;
+	int getNumColumn(ThreadContext* ctx) throw()  final;
 public:
 	static DatabaseRecord* valueFromFetcher(FileStorageEntryFetcher* fetcher, ThreadContext* ctx);
 public:

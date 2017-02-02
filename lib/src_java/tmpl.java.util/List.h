@@ -15,6 +15,7 @@ template class ::java::util::List<::alinous::system::config::remote::RegionRef>;
 template class ::java::util::List<::alinous::system::config::remote::Region>;
 template class ::java::util::List<::alinous::db::ITableRegion>;
 template class ::java::util::List<::alinous::db::ITableSchema>;
+template class ::java::util::List<::alinous::db::table::IDatabaseRecord>;
 template class ::java::util::List<::alinous::runtime::variant::VariantValue>;
 template class ::java::util::List<::alinous::remote::monitor::NodeInfo>;
 template class ::java::util::List<::alinous::remote::region::NodeTableReference>;
@@ -100,7 +101,6 @@ template class ::java::util::List<::alinous::db::trx::cache::TrxRecordCacheIndex
 template class ::java::util::List<::alinous::db::TableSchema>;
 template class ::java::util::List<::alinous::db::trx::CreateIndexMetadata>;
 template class ::java::util::List<::alinous::db::trx::scan::ScanResultIndex>;
-template class ::java::util::List<::alinous::db::table::IDatabaseRecord>;
 template class ::java::util::List<::java::lang::Integer>;
 template class ::java::util::List<::alinous::db::trx::scan::ScannedOids::Oids>;
 template class ::java::util::List<::java::lang::Thread>;

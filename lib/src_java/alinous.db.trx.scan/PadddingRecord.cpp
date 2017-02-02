@@ -107,5 +107,15 @@ long long PadddingRecord::getMaxCommitId(ThreadContext* ctx) throw()
 {
 	return 0;
 }
+int PadddingRecord::getNumColumn(ThreadContext* ctx) throw() 
+{
+	return 0;
+}
+void PadddingRecord::setLastUpdateCommitId(long long commitId, ThreadContext* ctx) throw() 
+{
+}
+void PadddingRecord::setInsertedCommitId(long long insertedCommitId, ThreadContext* ctx) throw() 
+{
+}
 }}}}
 

@@ -145,7 +145,7 @@ using ::alinous::system::AlinousNotSupportedException;
 
 
 
-class TrxRecordsCache final : public virtual IObject {
+class TrxRecordsCache : public virtual IObject {
 public:
 	TrxRecordsCache(const TrxRecordsCache& base) = default;
 public:
@@ -157,7 +157,7 @@ public:
 	}
 	virtual ~TrxRecordsCache() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
-private:
+public:
 	bool insert;
 	String* tmpDir;
 	String* schema;
@@ -167,8 +167,9 @@ private:
 	TableMetadata* metadata;
 	long long serial;
 	DbTransaction* trx;
-	ArrayList<TrxRecordCacheIndex>* indexList;
 private:
+	ArrayList<TrxRecordCacheIndex>* indexList;
+public:
 	constexpr static const long long BLOCK_SIZE{256};
 public:
 	TrxRecordsCache* init(String* tmpDir, String* schema, String* tableName, TableMetadata* metadata, DbTransaction* trx, bool insert, ThreadContext* ctx);
@@ -176,7 +177,7 @@ public:
 	void dispose(ThreadContext* ctx);
 	TrxRecordCacheIndex* getCachedIndex(ArrayList<ScanTableColumnIdentifier>* colIdList, ThreadContext* ctx) throw() ;
 	void commitUpdateRecord(AlinousDatabase* db, IDatabaseTable* table, long long newCommitId, ThreadContext* ctx);
-	void commitInsertRecord(AlinousDatabase* db, IDatabaseTable* table, long long newCommitId, ThreadContext* ctx);
+	virtual void commitInsertRecord(AlinousDatabase* db, IDatabaseTable* table, long long newCommitId, ThreadContext* ctx);
 	CachedRecord* getRecordByOid(long long oid, ThreadContext* ctx);
 	void insertUpdateRecord(ScanResultRecord* srecord, ThreadContext* ctx);
 	void insertRecord(ArrayList<IDomVariable>* values, ArrayList<CulumnOrder>* columns, ThreadContext* ctx);

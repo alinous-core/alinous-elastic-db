@@ -94,7 +94,7 @@ TrxRecordsCache* TrxStorageManager::getUpdateCacheWithCreate(String* schema, Str
 	{
 		tblcache = (new(ctx) HashMap<String,TrxRecordsCache>(ctx));
 		this->updateStorages->put(schema, tblcache, ctx);
-		TrxRecordsCache* cache = (new(ctx) TrxRecordsCache(ctx))->init(this->tmpDir, schema, table, metadata, this->trx, false, ctx);
+		TrxRecordsCache* cache = TrxRecordsCacheFactory::createCache(this->tmpDir, schema, table, metadata, this->trx, false, ctx);
 		tblcache->put(table, cache, ctx);
 		return cache;
 	}
@@ -119,7 +119,7 @@ TrxRecordsCache* TrxStorageManager::getInsertCacheWithCreate(String* schema, Str
 	{
 		tblcache = (new(ctx) HashMap<String,TrxRecordsCache>(ctx));
 		this->insertStorages->put(schema, tblcache, ctx);
-		TrxRecordsCache* cache = (new(ctx) TrxRecordsCache(ctx))->init(this->tmpDir, schema, table, metadata, this->trx, true, ctx);
+		TrxRecordsCache* cache = TrxRecordsCacheFactory::createCache(this->tmpDir, schema, table, metadata, this->trx, true, ctx);
 		tblcache->put(table, cache, ctx);
 		return cache;
 	}

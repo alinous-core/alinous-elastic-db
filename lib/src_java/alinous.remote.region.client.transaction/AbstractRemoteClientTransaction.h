@@ -49,6 +49,7 @@ public:
 	virtual ~AbstractRemoteClientTransaction() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 public:
+	bool isRemote(ThreadContext* ctx) throw()  final;
 	void createTable(TableSchema* schema, ThreadContext* ctx) final;
 public:
 	static bool __init_done;

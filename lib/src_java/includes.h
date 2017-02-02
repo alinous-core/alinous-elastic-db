@@ -818,6 +818,8 @@
 #include "alinous.db.trx/SerializableTransaction.h"
 #include "alinous.db.trx/DbTransactionFactory.h"
 #include "alinous.db.trx.cache/TrxRecordCacheFullScanner.h"
+#include "alinous.remote.region.client/RemoteClientTrxRecordsCache.h"
+#include "alinous.db.trx.cache/TrxRecordsCacheFactory.h"
 #include "alinous.db.trx.scan/GroupedScanResultRecord.h"
 #include "alinous.db.trx.scan/JoinedRecords.h"
 #include "alinous.db.trx.scan/ScanResultScanner.h"
@@ -1559,6 +1561,7 @@ inline static void __cleanUpStatics(alinous::ThreadContext* ctx){
 	alinous::db::trx::cache::TrxRecordCacheIndexScanner::__cleanUp(ctx);
 	alinous::db::trx::cache::TrxRecordCacheIndex::__cleanUp(ctx);
 	alinous::db::trx::cache::TrxRecordCacheFullScanner::__cleanUp(ctx);
+	alinous::db::trx::cache::TrxRecordsCacheFactory::__cleanUp(ctx);
 	alinous::db::trx::cache::TrxStorageManager::__cleanUp(ctx);
 	alinous::db::trx::cache::CulumnOrder::__cleanUp(ctx);
 	alinous::db::trx::cache::TrxRecordsCache::__cleanUp(ctx);
@@ -1771,6 +1774,7 @@ inline static void __cleanUpStatics(alinous::ThreadContext* ctx){
 	alinous::remote::region::client::DatabaseTableClient::__cleanUp(ctx);
 	alinous::remote::region::client::RemoteTableScheme::__cleanUp(ctx);
 	alinous::remote::region::client::RegionClientConnectionFactory::__cleanUp(ctx);
+	alinous::remote::region::client::RemoteClientTrxRecordsCache::__cleanUp(ctx);
 	alinous::remote::region::client::RegionConnection::__cleanUp(ctx);
 	alinous::remote::region::client::RemoteRegionRef::__cleanUp(ctx);
 	alinous::remote::region::client::RegionConnectionInfo::__cleanUp(ctx);

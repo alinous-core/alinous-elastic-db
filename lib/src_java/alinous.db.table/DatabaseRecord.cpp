@@ -40,7 +40,7 @@ void DatabaseRecord::__construct_impl(long long oid, int numColumn, long long Co
 		this->values->add((new(ctx) VariantValue(ctx)), ctx);
 	}
 }
- DatabaseRecord::DatabaseRecord(long long oid, int numColumn, long long CommitId, CachedRecord* data, ThreadContext* ctx) throw()  : IObject(ctx), IDatabaseRecord(ctx), position(0), oid(0), lastUpdateCommitId(0), insertedCommitId(0), deletedCommitId(0), values(GCUtils<ArrayList<VariantValue> >::ins(this, (new(ctx) ArrayList<VariantValue>(ctx)), ctx, __FILEW__, __LINE__, L"")), storageForCache(nullptr), hashcode(0)
+ DatabaseRecord::DatabaseRecord(long long oid, int numColumn, long long CommitId, IDatabaseRecord* data, ThreadContext* ctx) throw()  : IObject(ctx), IDatabaseRecord(ctx), position(0), oid(0), lastUpdateCommitId(0), insertedCommitId(0), deletedCommitId(0), values(GCUtils<ArrayList<VariantValue> >::ins(this, (new(ctx) ArrayList<VariantValue>(ctx)), ctx, __FILEW__, __LINE__, L"")), storageForCache(nullptr), hashcode(0)
 {
 	this->oid = oid;
 	this->lastUpdateCommitId = 0;
@@ -51,7 +51,7 @@ void DatabaseRecord::__construct_impl(long long oid, int numColumn, long long Co
 		this->values->add(data->getColumnValue(i, ctx), ctx);
 	}
 }
-void DatabaseRecord::__construct_impl(long long oid, int numColumn, long long CommitId, CachedRecord* data, ThreadContext* ctx) throw() 
+void DatabaseRecord::__construct_impl(long long oid, int numColumn, long long CommitId, IDatabaseRecord* data, ThreadContext* ctx) throw() 
 {
 	this->oid = oid;
 	this->lastUpdateCommitId = 0;
@@ -211,6 +211,10 @@ ArrayList<VariantValue>* DatabaseRecord::getValues(ThreadContext* ctx) throw()
 int DatabaseRecord::getKind(ThreadContext* ctx) throw() 
 {
 	return IDatabaseRecord::NORMAL_RECORD;
+}
+int DatabaseRecord::getNumColumn(ThreadContext* ctx) throw() 
+{
+	return this->values->size(ctx);
 }
 DatabaseRecord* DatabaseRecord::valueFromFetcher(FileStorageEntryFetcher* fetcher, ThreadContext* ctx)
 {

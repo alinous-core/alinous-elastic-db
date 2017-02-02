@@ -38,6 +38,10 @@ void AbstractRemoteClientTransaction::__releaseRegerences(bool prepare, ThreadCo
 	}
 	DbTransaction::__releaseRegerences(true, ctx);
 }
+bool AbstractRemoteClientTransaction::isRemote(ThreadContext* ctx) throw() 
+{
+	return true;
+}
 void AbstractRemoteClientTransaction::createTable(TableSchema* schema, ThreadContext* ctx)
 {
 	if(schema->getregionName(ctx) == nullptr)

@@ -53,6 +53,9 @@ public:
 	virtual void addValue(VariantValue* vv, ThreadContext* ctx) throw()  = 0;
 	virtual long long getOid(ThreadContext* ctx) throw()  = 0;
 	virtual long long getMaxCommitId(ThreadContext* ctx) throw()  = 0;
+	virtual int getNumColumn(ThreadContext* ctx) throw()  = 0;
+	virtual void setLastUpdateCommitId(long long commitId, ThreadContext* ctx) throw()  = 0;
+	virtual void setInsertedCommitId(long long insertedCommitId, ThreadContext* ctx) throw()  = 0;
 public:
 	static bool __init_done;
 	static bool __init_static_variables();

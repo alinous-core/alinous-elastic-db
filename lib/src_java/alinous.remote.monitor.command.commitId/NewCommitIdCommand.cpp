@@ -43,7 +43,7 @@ void NewCommitIdCommand::__releaseRegerences(bool prepare, ThreadContext* ctx) t
 }
 void NewCommitIdCommand::executeOnServer(TransactionMonitorServer* monitorServer, BufferedOutputStream* outStream, ThreadContext* ctx)
 {
-	this->commitId = monitorServer->getCommitId(ctx);
+	this->commitId = monitorServer->getNextCommitId(ctx);
 	writeByteStream(outStream, ctx);
 }
 void NewCommitIdCommand::readFromStream(InputStream* stream, int remain, ThreadContext* ctx)

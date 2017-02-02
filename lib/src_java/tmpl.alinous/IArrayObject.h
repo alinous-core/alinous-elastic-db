@@ -285,6 +285,13 @@ template class alinous::IArrayObject<alinous::ArrayObject<alinous::IArrayObject<
 template class alinous::IArrayObject<alinous::ArrayObject<::alinous::db::ITableSchema>>;
 template class alinous::IArrayObject<alinous::IArrayObject<alinous::ArrayObject<::alinous::db::ITableSchema>>>;
 template class alinous::IArrayObject<alinous::ArrayObject<alinous::ArrayObject<::alinous::db::ITableSchema>>>;
+template class alinous::IArrayObject<::alinous::db::table::IDatabaseRecord>;
+template class alinous::IArrayObject<alinous::IArrayObject<::alinous::db::table::IDatabaseRecord>>;
+template class alinous::IArrayObject<alinous::IArrayObject<alinous::IArrayObject<::alinous::db::table::IDatabaseRecord>>>;
+template class alinous::IArrayObject<alinous::ArrayObject<alinous::IArrayObject<::alinous::db::table::IDatabaseRecord>>>;
+template class alinous::IArrayObject<alinous::ArrayObject<::alinous::db::table::IDatabaseRecord>>;
+template class alinous::IArrayObject<alinous::IArrayObject<alinous::ArrayObject<::alinous::db::table::IDatabaseRecord>>>;
+template class alinous::IArrayObject<alinous::ArrayObject<alinous::ArrayObject<::alinous::db::table::IDatabaseRecord>>>;
 template class alinous::IArrayObject<::alinous::runtime::variant::VariantValue>;
 template class alinous::IArrayObject<alinous::IArrayObject<::alinous::runtime::variant::VariantValue>>;
 template class alinous::IArrayObject<alinous::IArrayObject<alinous::IArrayObject<::alinous::runtime::variant::VariantValue>>>;
@@ -775,13 +782,6 @@ template class alinous::IArrayObject<alinous::ArrayObject<alinous::IArrayObject<
 template class alinous::IArrayObject<alinous::ArrayObject<::alinous::db::trx::scan::ScanResultIndex>>;
 template class alinous::IArrayObject<alinous::IArrayObject<alinous::ArrayObject<::alinous::db::trx::scan::ScanResultIndex>>>;
 template class alinous::IArrayObject<alinous::ArrayObject<alinous::ArrayObject<::alinous::db::trx::scan::ScanResultIndex>>>;
-template class alinous::IArrayObject<::alinous::db::table::IDatabaseRecord>;
-template class alinous::IArrayObject<alinous::IArrayObject<::alinous::db::table::IDatabaseRecord>>;
-template class alinous::IArrayObject<alinous::IArrayObject<alinous::IArrayObject<::alinous::db::table::IDatabaseRecord>>>;
-template class alinous::IArrayObject<alinous::ArrayObject<alinous::IArrayObject<::alinous::db::table::IDatabaseRecord>>>;
-template class alinous::IArrayObject<alinous::ArrayObject<::alinous::db::table::IDatabaseRecord>>;
-template class alinous::IArrayObject<alinous::IArrayObject<alinous::ArrayObject<::alinous::db::table::IDatabaseRecord>>>;
-template class alinous::IArrayObject<alinous::ArrayObject<alinous::ArrayObject<::alinous::db::table::IDatabaseRecord>>>;
 template class alinous::IArrayObject<::java::lang::Integer>;
 template class alinous::IArrayObject<alinous::IArrayObject<::java::lang::Integer>>;
 template class alinous::IArrayObject<alinous::IArrayObject<alinous::IArrayObject<::java::lang::Integer>>>;

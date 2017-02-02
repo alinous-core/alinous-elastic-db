@@ -75,7 +75,7 @@ public:
 public:
 	long long getOid(ThreadContext* ctx) throw()  final;
 	void setValue(int index, VariantValue* value, ThreadContext* ctx) throw()  final;
-	int getNumColumn(ThreadContext* ctx) throw() ;
+	int getNumColumn(ThreadContext* ctx) throw()  final;
 	VariantValue* getColumnValue(int index, ThreadContext* ctx) throw()  final;
 	void set(int index, VariantValue* vv, ThreadContext* ctx) throw() ;
 	void appendToEntry(FileStorageEntryBuilder* builder, ThreadContext* ctx) final;
@@ -87,8 +87,8 @@ public:
 	long long getLastUpdateCommitId(ThreadContext* ctx) throw()  final;
 	long long getInsertedCommitId(ThreadContext* ctx) throw()  final;
 	long long getDeletedCommitId(ThreadContext* ctx) throw()  final;
-	void setLastUpdateCommitId(long long lastUpdateCommitId, ThreadContext* ctx) throw() ;
-	void setInsertedCommitId(long long insertedCommitId, ThreadContext* ctx) throw() ;
+	void setLastUpdateCommitId(long long lastUpdateCommitId, ThreadContext* ctx) throw()  final;
+	void setInsertedCommitId(long long insertedCommitId, ThreadContext* ctx) throw()  final;
 	void setDeletedCommitId(long long deletedCommitId, ThreadContext* ctx) throw() ;
 	ArrayList<VariantValue>* getValues(ThreadContext* ctx) throw()  final;
 	int getKind(ThreadContext* ctx) throw()  final;

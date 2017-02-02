@@ -1253,6 +1253,16 @@ void DomVariable::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw
 	}
 	this->value->writeData(buff, ctx);
 }
+int DomVariable::getNumColumn(ThreadContext* ctx) throw() 
+{
+	return this->properties->size(ctx);
+}
+void DomVariable::setLastUpdateCommitId(long long commitId, ThreadContext* ctx) throw() 
+{
+}
+void DomVariable::setInsertedCommitId(long long insertedCommitId, ThreadContext* ctx) throw() 
+{
+}
 DomVariable* DomVariable::importFromDebugXml(DomNode* node, ThreadContext* ctx) throw() 
 {
 	if(!node->getName(ctx)->equals(DomVariable::VAL_TYPE, ctx))

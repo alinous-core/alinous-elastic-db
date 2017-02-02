@@ -449,6 +449,9 @@ public:
 	long long getMaxCommitId(ThreadContext* ctx) throw()  final;
 	void readData(NetworkBinaryBuffer* buff, ThreadContext* ctx) final;
 	void writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw()  final;
+	int getNumColumn(ThreadContext* ctx) throw()  final;
+	void setLastUpdateCommitId(long long commitId, ThreadContext* ctx) throw()  final;
+	void setInsertedCommitId(long long insertedCommitId, ThreadContext* ctx) throw()  final;
 public:
 	static DomVariable* importFromDebugXml(DomNode* node, ThreadContext* ctx) throw() ;
 	static DomVariable* valueFromFetcher(FileStorageEntryFetcher* fetcher, ThreadContext* ctx);

@@ -84,6 +84,10 @@ void DbTransaction::__releaseRegerences(bool prepare, ThreadContext* ctx) throw(
 		return;
 	}
 }
+bool DbTransaction::isRemote(ThreadContext* ctx) throw() 
+{
+	return false;
+}
 long long DbTransaction::newSoid(ThreadContext* ctx) throw() 
 {
 	return this->soidSerial++;
@@ -257,32 +261,7 @@ void DbTransaction::commit(ThreadContext* ctx)
 		this->trxSchema->executeCommit(this->core, this->database->getBtreeCache(ctx), ctx);
 		this->trxSchema->reset(ctx);
 	}
-	if(this->trxStorageManager->isHasOperation(ctx))
-	{
-		{
-			try
-			{
-				this->trxStorageManager->commit(newCommitId, ctx);
-			}
-			catch(IOException* e)
-			{
-				(new(ctx) AlinousDbException(ConstStr::getCNST_STR_1694(), e, ctx));
-			}
-			catch(InterruptedException* e)
-			{
-				(new(ctx) AlinousDbException(ConstStr::getCNST_STR_1694(), e, ctx));
-			}
-			catch(VariableException* e)
-			{
-				(new(ctx) AlinousDbException(ConstStr::getCNST_STR_1694(), e, ctx));
-			}
-			catch(BTreeException* e)
-			{
-				(new(ctx) AlinousDbException(ConstStr::getCNST_STR_1694(), e, ctx));
-			}
-		}
-		this->trxStorageManager->reset(ctx);
-	}
+	commitUpdateInsert(newCommitId, ctx);
 }
 void DbTransaction::close(ThreadContext* ctx)
 {
@@ -331,6 +310,35 @@ bool DbTransaction::equals(IObject* obj, ThreadContext* ctx) throw()
 DbVersionContext* DbTransaction::getVersionContext(ThreadContext* ctx) throw() 
 {
 	return this->vctx;
+}
+void DbTransaction::commitUpdateInsert(long long newCommitId, ThreadContext* ctx)
+{
+	if(this->trxStorageManager->isHasOperation(ctx))
+	{
+		{
+			try
+			{
+				this->trxStorageManager->commit(newCommitId, ctx);
+			}
+			catch(IOException* e)
+			{
+				(new(ctx) AlinousDbException(ConstStr::getCNST_STR_1694(), e, ctx));
+			}
+			catch(InterruptedException* e)
+			{
+				(new(ctx) AlinousDbException(ConstStr::getCNST_STR_1694(), e, ctx));
+			}
+			catch(VariableException* e)
+			{
+				(new(ctx) AlinousDbException(ConstStr::getCNST_STR_1694(), e, ctx));
+			}
+			catch(BTreeException* e)
+			{
+				(new(ctx) AlinousDbException(ConstStr::getCNST_STR_1694(), e, ctx));
+			}
+		}
+		this->trxStorageManager->reset(ctx);
+	}
 }
 void DbTransaction::noGroupBySelect(SelectStatement* selectStmt, ScriptMachine* machine, bool debug, ThreadContext* ctx)
 {

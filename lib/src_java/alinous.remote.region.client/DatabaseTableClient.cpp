@@ -230,10 +230,17 @@ ArrayList<IScannableIndex>* DatabaseTableClient::getIndexes(ThreadContext* ctx) 
 {
 	return indexes;
 }
-void DatabaseTableClient::insertData(CachedRecord* record, long long newCommitId, IArrayObject<SequentialBackgroundJob>* jobs, ISystemLog* logger, ThreadContext* ctx)
+void DatabaseTableClient::insertData(IDatabaseRecord* record, long long newCommitId, IArrayObject<SequentialBackgroundJob>* jobs, ISystemLog* logger, ThreadContext* ctx)
 {
 }
-void DatabaseTableClient::updateData(CachedRecord* record, long long newCommitId, IArrayObject<SequentialBackgroundJob>* jobs, ISystemLog* logger, ThreadContext* ctx)
+void DatabaseTableClient::insertData(List<IDatabaseRecord>* records, long long newCommitId, IArrayObject<SequentialBackgroundJob>* jobs, ISystemLog* logger, ThreadContext* ctx)
+{
+	int maxLoop = records->size(ctx);
+	for(int i = 0; i != maxLoop; ++i)
+	{
+	}
+}
+void DatabaseTableClient::updateData(IDatabaseRecord* record, long long newCommitId, IArrayObject<SequentialBackgroundJob>* jobs, ISystemLog* logger, ThreadContext* ctx)
 {
 }
 void DatabaseTableClient::createIndex(String* getindexName, ArrayList<String>* columns, AlinousCore* core, BTreeGlobalCache* cache, ThreadContext* ctx)
