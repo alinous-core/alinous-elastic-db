@@ -31,7 +31,7 @@ void NetworkAlinousVariableFactory::__releaseRegerences(bool prepare, ThreadCont
 		return;
 	}
 }
-IAlinousVariable* NetworkAlinousVariableFactory::fromNetworkData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+IAlinousVariable* NetworkAlinousVariableFactory::fromNetworkData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 {
 	IAlinousVariable* val = nullptr;
 	int type = buff->getInt(ctx);
@@ -97,6 +97,7 @@ IAlinousVariable* NetworkAlinousVariableFactory::fromNetworkData(NetworkBinaryBu
 		return nullptr;
 		break;
 	}
+	val->readData(buff, ctx);
 	return val;
 }
 }}}

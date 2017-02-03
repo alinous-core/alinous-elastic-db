@@ -191,6 +191,7 @@ VariantValue* VariantValue::toVariantValue(ThreadContext* ctx)
 IAlinousVariable* VariantValue::copy(ThreadContext* ctx)
 {
 	VariantValue* newValue = (new(ctx) VariantValue(ctx));
+	newValue->vtype = this->vtype;
 	__GC_MV(newValue, &(newValue->data), this->data, IVariantData);
 	return newValue;
 }

@@ -113,7 +113,7 @@ public:
 	virtual ~NetworkAlinousVariableFactory() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 public:
-	static IAlinousVariable* fromNetworkData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() ;
+	static IAlinousVariable* fromNetworkData(NetworkBinaryBuffer* buff, ThreadContext* ctx);
 public:
 	static bool __init_done;
 	static bool __init_static_variables();

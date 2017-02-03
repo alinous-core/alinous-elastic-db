@@ -67,7 +67,7 @@ public:
 	void readFromStream(InputStream* stream, int remain, ThreadContext* ctx) final;
 	String* getSchemaName(ThreadContext* ctx) throw() ;
 	void setSchemaName(String* schemaName, ThreadContext* ctx) throw() ;
-	void writeByteStream(OutputStream* out, ThreadContext* ctx) final;
+	void writeByteStream(OutputStream* outStream, ThreadContext* ctx) final;
 public:
 	static bool __init_done;
 	static bool __init_static_variables();

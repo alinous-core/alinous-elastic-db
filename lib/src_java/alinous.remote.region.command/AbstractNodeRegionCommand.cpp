@@ -14,6 +14,8 @@ constexpr const int AbstractNodeRegionCommand::TYPE_TERMINATE;
 constexpr const int AbstractNodeRegionCommand::TYPE_GET_SCHEMA_FROM_REGION;
 constexpr const int AbstractNodeRegionCommand::TYPE_CREATE_SCHEMA;
 constexpr const int AbstractNodeRegionCommand::TYPE_CREATE_TABLE;
+constexpr const int AbstractNodeRegionCommand::TYPE_INSERT_DATA;
+constexpr const int AbstractNodeRegionCommand::TYPE_FINISH_COMMIT_SESSION;
 bool AbstractNodeRegionCommand::__init_done = __init_static_variables();
 bool AbstractNodeRegionCommand::__init_static_variables(){
 	Java2CppSystem::getSelf();

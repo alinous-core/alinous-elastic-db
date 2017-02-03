@@ -58,8 +58,14 @@ AbstractNodeRegionCommand* NodeRegionCommandReader::readFromStream(InputStream* 
 	case AbstractNodeRegionCommand::TYPE_CREATE_TABLE:
 		cmd = (new(ctx) RegionCreateTableCommand(ctx));
 		break ;
+	case AbstractNodeRegionCommand::TYPE_INSERT_DATA:
+		cmd = (new(ctx) ClientInsertDataCommand(ctx));
+		break ;
+	case AbstractNodeRegionCommand::TYPE_FINISH_COMMIT_SESSION:
+		cmd = (new(ctx) ClientFinishCommitSession(ctx));
+		break ;
 	default:
-		throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3579(), ctx));
+		throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3582(), ctx));
 		break;
 	}
 	cmd->readFromStream(stream, size, ctx);

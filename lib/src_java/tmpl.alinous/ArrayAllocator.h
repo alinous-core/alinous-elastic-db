@@ -128,6 +128,7 @@ template class alinous::ArrayAllocator<::alinous::server::http::MimeHeader>;
 template class alinous::ArrayAllocator<::alinous::server::http::MimePart>;
 template class alinous::ArrayAllocator<::alinous::buffer::FifoElement<::alinous::server::webmodule::AbstractWebModule>>;
 template class alinous::ArrayAllocator<::alinous::remote::db::command::data::StorageNodeData>;
+template class alinous::ArrayAllocator<::alinous::remote::region::command::data::ClientNetworkRecord>;
 template class alinous::ArrayAllocator<::alinous::runtime::parallel::ConcurrentTaskQueue>;
 template class alinous::ArrayAllocator<::alinous::runtime::parallel::IThreadAction>;
 template class alinous::ArrayAllocator<::alinous::compile::analyse::VariableDeclareHolder>;

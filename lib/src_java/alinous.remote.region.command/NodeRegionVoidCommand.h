@@ -48,9 +48,9 @@ public:
 	virtual ~NodeRegionVoidCommand() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 public:
-	void readFromStream(InputStream* stream, int remain, ThreadContext* ctx) final;
+	void readFromStream(InputStream* outStream, int remain, ThreadContext* ctx) final;
 	void executeOnServer(NodeRegionServer* nodeRegionServer, BufferedOutputStream* outStream, ThreadContext* ctx) final;
-	void writeByteStream(OutputStream* out, ThreadContext* ctx) final;
+	void writeByteStream(OutputStream* outStream, ThreadContext* ctx) final;
 public:
 	static bool __init_done;
 	static bool __init_static_variables();

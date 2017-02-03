@@ -382,6 +382,9 @@
 #include "alinous.remote.region.command/NodeRegionConnectCommand.h"
 #include "alinous.remote.region.command.ddl/RegionCreateSchemaCommand.h"
 #include "alinous.remote.region.command.ddl/RegionCreateTableCommand.h"
+#include "alinous.remote.region.command.dml/ClientFinishCommitSession.h"
+#include "alinous.remote.region.command.data/ClientNetworkRecord.h"
+#include "alinous.remote.region.command.dml/ClientInsertDataCommand.h"
 #include "alinous.remote.region.command/NodeRegionFinishConnectionCommand.h"
 #include "alinous.remote.region.command/NodeRegionTerminateCommand.h"
 #include "alinous.remote.region.command/NodeRegionVoidCommand.h"
@@ -1792,8 +1795,11 @@ inline static void __cleanUpStatics(alinous::ThreadContext* ctx){
 	alinous::remote::region::command::data::ClientStructureMetadata::__cleanUp(ctx);
 	alinous::remote::region::command::data::ClientTableData::__cleanUp(ctx);
 	alinous::remote::region::command::data::ClientSchemaData::__cleanUp(ctx);
+	alinous::remote::region::command::data::ClientNetworkRecord::__cleanUp(ctx);
 	alinous::remote::region::command::ddl::RegionCreateSchemaCommand::__cleanUp(ctx);
 	alinous::remote::region::command::ddl::RegionCreateTableCommand::__cleanUp(ctx);
+	alinous::remote::region::command::dml::ClientFinishCommitSession::__cleanUp(ctx);
+	alinous::remote::region::command::dml::ClientInsertDataCommand::__cleanUp(ctx);
 	alinous::remote::socket::NetworkBinaryBuffer::__cleanUp(ctx);
 	alinous::remote::socket::SocketServer::__cleanUp(ctx);
 	alinous::remote::socket::SocketConnectionPool::__cleanUp(ctx);

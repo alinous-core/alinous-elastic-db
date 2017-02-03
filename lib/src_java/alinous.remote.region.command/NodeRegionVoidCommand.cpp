@@ -40,21 +40,21 @@ void NodeRegionVoidCommand::__releaseRegerences(bool prepare, ThreadContext* ctx
 	}
 	AbstractNodeRegionCommand::__releaseRegerences(true, ctx);
 }
-void NodeRegionVoidCommand::readFromStream(InputStream* stream, int remain, ThreadContext* ctx)
+void NodeRegionVoidCommand::readFromStream(InputStream* outStream, int remain, ThreadContext* ctx)
 {
 }
 void NodeRegionVoidCommand::executeOnServer(NodeRegionServer* nodeRegionServer, BufferedOutputStream* outStream, ThreadContext* ctx)
 {
 	writeByteStream(outStream, ctx);
 }
-void NodeRegionVoidCommand::writeByteStream(OutputStream* out, ThreadContext* ctx)
+void NodeRegionVoidCommand::writeByteStream(OutputStream* outStream, ThreadContext* ctx)
 {
 	NetworkBinaryBuffer* buff = (new(ctx) NetworkBinaryBuffer(32, ctx));
-	buff->putInt(NodeRegionConnectCommand::TYPE_VOID, ctx);
+	buff->putInt(this->type, ctx);
 	IArrayObjectPrimitive<char>* b = buff->toBinary(ctx);
 	int pos = buff->getPutSize(ctx);
-	out->write(b, 0, pos, ctx);
-	out->flush(ctx);
+	outStream->write(b, 0, pos, ctx);
+	outStream->flush(ctx);
 }
 }}}}
 

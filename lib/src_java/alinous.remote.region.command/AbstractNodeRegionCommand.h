@@ -90,6 +90,8 @@ public:
 	constexpr static const int TYPE_GET_SCHEMA_FROM_REGION{1001};
 	constexpr static const int TYPE_CREATE_SCHEMA{1002};
 	constexpr static const int TYPE_CREATE_TABLE{1003};
+	constexpr static const int TYPE_INSERT_DATA{1004};
+	constexpr static const int TYPE_FINISH_COMMIT_SESSION{1005};
 public:
 	int getType(ThreadContext* ctx) throw() ;
 	AbstractNodeRegionCommand* sendCommand(AlinousSocket* socket, ThreadContext* ctx);
@@ -97,7 +99,7 @@ public:
 	virtual void readFromStream(InputStream* stream, int remain, ThreadContext* ctx) = 0;
 	bool hasError(ThreadContext* ctx) throw() ;
 	List<String>* getErrorMessage(ThreadContext* ctx) throw() ;
-	virtual void writeByteStream(OutputStream* out, ThreadContext* ctx) = 0;
+	virtual void writeByteStream(OutputStream* outStream, ThreadContext* ctx) = 0;
 	void handleError(Throwable* e, ThreadContext* ctx) throw() ;
 	void writeErrorByteStream(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() ;
 	void readErrorFromStream(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() ;

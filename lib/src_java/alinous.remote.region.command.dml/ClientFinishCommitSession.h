@@ -1,13 +1,10 @@
-#ifndef ALINOUS_REMOTE_REGION_COMMAND_DDL_REGIONCREATETABLECOMMAND_H_
-#define ALINOUS_REMOTE_REGION_COMMAND_DDL_REGIONCREATETABLECOMMAND_H_
+#ifndef ALINOUS_REMOTE_REGION_COMMAND_DML_CLIENTFINISHCOMMITSESSION_H_
+#define ALINOUS_REMOTE_REGION_COMMAND_DML_CLIENTFINISHCOMMITSESSION_H_
 namespace alinous {namespace remote {namespace region {
 class NodeRegionServer;}}}
 
 namespace java {namespace io {
 class BufferedOutputStream;}}
-
-namespace alinous {namespace system {
-class AlinousException;}}
 
 namespace java {namespace io {
 class OutputStream;}}
@@ -18,26 +15,20 @@ class NetworkBinaryBuffer;}}}
 namespace java {namespace io {
 class InputStream;}}
 
+namespace alinous {namespace remote {namespace region {namespace command {
+class AbstractNodeRegionCommand;}}}}
+
 namespace java {namespace io {
 class IOException;}}
 
 namespace alinous {namespace runtime {namespace dom {
 class VariableException;}}}
 
-namespace alinous {namespace db {namespace table {
-class TableMetadata;}}}
-
-namespace alinous {namespace remote {namespace region {namespace command {
-class AbstractNodeRegionCommand;}}}}
-
-namespace alinous {namespace remote {namespace region {namespace command {
-class NodeRegionConnectCommand;}}}}
-
 namespace alinous {
 class ThreadContext;
 }
 
-namespace alinous {namespace remote {namespace region {namespace command {namespace ddl {
+namespace alinous {namespace remote {namespace region {namespace command {namespace dml {
 
 using namespace ::alinous;
 using namespace ::java::lang;
@@ -46,31 +37,28 @@ using ::java::io::BufferedOutputStream;
 using ::java::io::IOException;
 using ::java::io::InputStream;
 using ::java::io::OutputStream;
-using ::alinous::db::table::TableMetadata;
 using ::alinous::remote::region::NodeRegionServer;
 using ::alinous::remote::region::command::AbstractNodeRegionCommand;
-using ::alinous::remote::region::command::NodeRegionConnectCommand;
 using ::alinous::remote::socket::NetworkBinaryBuffer;
 using ::alinous::runtime::dom::VariableException;
-using ::alinous::system::AlinousException;
 
 
 
-class RegionCreateTableCommand final : public AbstractNodeRegionCommand {
+class ClientFinishCommitSession final : public AbstractNodeRegionCommand {
 public:
-	RegionCreateTableCommand(const RegionCreateTableCommand& base) = default;
+	ClientFinishCommitSession(const ClientFinishCommitSession& base) = default;
 public:
-	RegionCreateTableCommand(ThreadContext* ctx) throw() ;
+	ClientFinishCommitSession(ThreadContext* ctx) throw() ;
 	void __construct_impl(ThreadContext* ctx) throw() ;
-	virtual ~RegionCreateTableCommand() throw();
+	virtual ~ClientFinishCommitSession() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 private:
-	TableMetadata* metadata;
+	long long commitId;
 public:
 	void executeOnServer(NodeRegionServer* nodeRegionServer, BufferedOutputStream* outStream, ThreadContext* ctx) final;
 	void readFromStream(InputStream* stream, int remain, ThreadContext* ctx) final;
-	TableMetadata* getMetadata(ThreadContext* ctx) throw() ;
-	void setMetadata(TableMetadata* metadata, ThreadContext* ctx) throw() ;
+	long long getCommitId(ThreadContext* ctx) throw() ;
+	void setCommitId(long long commitId, ThreadContext* ctx) throw() ;
 	void writeByteStream(OutputStream* outStream, ThreadContext* ctx) final;
 public:
 	static bool __init_done;
@@ -82,4 +70,4 @@ public:
 
 }}}}}
 
-#endif /* end of ALINOUS_REMOTE_REGION_COMMAND_DDL_REGIONCREATETABLECOMMAND_H_ */
+#endif /* end of ALINOUS_REMOTE_REGION_COMMAND_DML_CLIENTFINISHCOMMITSESSION_H_ */

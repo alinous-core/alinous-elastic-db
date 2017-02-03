@@ -45,17 +45,41 @@ class ISystemLog;}}
 namespace java {namespace util {
 template <typename  T> class List;}}
 
-namespace alinous {namespace db {namespace table {
-class IDatabaseTable;}}}
+namespace alinous {namespace remote {namespace region {namespace command {namespace dml {
+class ClientFinishCommitSession;}}}}}
+
+namespace alinous {namespace remote {namespace socket {
+class ISocketConnection;}}}
+
+namespace alinous {namespace net {
+class AlinousSocket;}}
+
+namespace alinous {namespace db {
+class AlinousDbException;}}
+
+namespace alinous {namespace net {
+class UnknownHostException;}}
 
 namespace java {namespace io {
 class IOException;}}
 
+namespace alinous {namespace system {
+class AlinousException;}}
+
+namespace alinous {namespace remote {namespace region {namespace command {namespace dml {
+class ClientInsertDataCommand;}}}}}
+
+namespace alinous {namespace remote {namespace region {namespace command {namespace data {
+class ClientNetworkRecord;}}}}}
+
+namespace alinous {namespace runtime {namespace dom {
+class VariableException;}}}
+
+namespace alinous {namespace db {namespace table {
+class IDatabaseTable;}}}
+
 namespace alinous {namespace btree {
 class BTreeException;}}
-
-namespace alinous {namespace db {
-class AlinousDbException;}}
 
 namespace alinous {namespace db {namespace table {
 class DatabaseException;}}}
@@ -65,12 +89,6 @@ class DatabaseTableIdPublisher;}}}
 
 namespace alinous {namespace db {namespace table {namespace lockmonitor {
 class DatabaseLockException;}}}}
-
-namespace alinous {namespace runtime {namespace dom {
-class VariableException;}}}
-
-namespace alinous {namespace system {
-class AlinousException;}}
 
 namespace java {namespace lang {
 class IObject;
@@ -86,6 +104,7 @@ using namespace ::alinous;
 using namespace ::java::lang;
 using ::java::util::Iterator;
 using ::java::io::IOException;
+using ::java::net::UnknownHostException;
 using ::java::util::ArrayList;
 using ::java::util::List;
 using ::alinous::btree::BTreeException;
@@ -102,6 +121,11 @@ using ::alinous::db::table::TableMetadata;
 using ::alinous::db::table::lockmonitor::DatabaseLockException;
 using ::alinous::db::table::lockmonitor::IThreadLocker;
 using ::alinous::db::table::lockmonitor::ThreadLocker;
+using ::alinous::net::AlinousSocket;
+using ::alinous::remote::region::command::data::ClientNetworkRecord;
+using ::alinous::remote::region::command::dml::ClientFinishCommitSession;
+using ::alinous::remote::region::command::dml::ClientInsertDataCommand;
+using ::alinous::remote::socket::ISocketConnection;
 using ::alinous::remote::socket::SocketConnectionPool;
 using ::alinous::runtime::dom::VariableException;
 using ::alinous::runtime::parallel::SequentialBackgroundJob;
@@ -167,6 +191,8 @@ public:
 private:
 	bool matchIndexByIdList(ArrayList<TableColumnMetadata>* columnsMetadataList, ArrayList<ScanTableColumnIdentifier>* columns, ThreadContext* ctx) throw() ;
 	bool matchIndexByStrList(ArrayList<TableColumnMetadata>* columnsMetadataList, ArrayList<String>* columns, ThreadContext* ctx) throw() ;
+	void finishCommitSession(long long newCommitId, ThreadContext* ctx);
+	void doInsertData(List<IDatabaseRecord>* records, long long newCommitId, ThreadContext* ctx);
 public:
 	static bool __init_done;
 	static bool __init_static_variables();

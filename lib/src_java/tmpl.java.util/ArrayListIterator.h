@@ -118,3 +118,4 @@ template class ::java::util::ArrayListIterator<::alinous::remote::db::command::d
 template class ::java::util::ArrayListIterator<::alinous::remote::monitor::NodeInfo>;
 template class ::java::util::ArrayListIterator<::alinous::remote::region::NodeTableReference>;
 template class ::java::util::ArrayListIterator<::alinous::remote::region::NodeReference>;
+template class ::java::util::ArrayListIterator<::alinous::remote::region::command::data::ClientNetworkRecord>;

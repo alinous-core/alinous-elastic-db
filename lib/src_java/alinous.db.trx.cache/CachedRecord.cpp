@@ -75,6 +75,9 @@ void CachedRecord::appendToEntry(FileStorageEntryBuilder* builder, ThreadContext
 {
 	builder->putInt(IBTreeValue::TYPE_CACHE_RECORD, ctx);
 	builder->putLong(this->oid, ctx);
+	builder->putLong(this->lastUpdateCommitId, ctx);
+	builder->putLong(this->insertedCommitId, ctx);
+	builder->putLong(this->deletedCommitId, ctx);
 	int maxLoop = this->values->size(ctx);
 	builder->putInt(maxLoop, ctx);
 	for(int i = 0; i != maxLoop; ++i)
@@ -86,6 +89,7 @@ void CachedRecord::appendToEntry(FileStorageEntryBuilder* builder, ThreadContext
 int CachedRecord::diskSize(ThreadContext* ctx)
 {
 	int total = 8;
+	total += 8 * 2;
 	int maxLoop = this->values->size(ctx);
 	for(int i = 0; i != maxLoop; ++i)
 	{
@@ -167,6 +171,10 @@ CachedRecord* CachedRecord::valueFromFetcher(FileStorageEntryFetcher* fetcher, T
 	long long oid = fetcher->fetchLong(ctx);
 	int maxLoop = fetcher->fetchInt(ctx);
 	CachedRecord* rec = (new(ctx) CachedRecord(oid, maxLoop, ctx));
+	long long uid = fetcher->fetchLong(ctx);
+	long long iid = fetcher->fetchLong(ctx);
+	rec->lastUpdateCommitId = uid;
+	rec->setInsertedCommitId(iid, ctx);
 	for(int i = 0; i != maxLoop; ++i)
 	{
 		VariantValue* variant = VariantValue::valueFromFetcher(fetcher, ctx);

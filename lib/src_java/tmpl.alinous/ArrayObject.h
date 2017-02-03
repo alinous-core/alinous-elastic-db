@@ -908,6 +908,13 @@ template class alinous::ArrayObject<alinous::ArrayObject<alinous::IArrayObject<:
 template class alinous::ArrayObject<alinous::ArrayObject<::alinous::remote::db::command::data::StorageNodeData>>;
 template class alinous::ArrayObject<alinous::IArrayObject<alinous::ArrayObject<::alinous::remote::db::command::data::StorageNodeData>>>;
 template class alinous::ArrayObject<alinous::ArrayObject<alinous::ArrayObject<::alinous::remote::db::command::data::StorageNodeData>>>;
+template class alinous::ArrayObject<::alinous::remote::region::command::data::ClientNetworkRecord>;
+template class alinous::ArrayObject<alinous::IArrayObject<::alinous::remote::region::command::data::ClientNetworkRecord>>;
+template class alinous::ArrayObject<alinous::IArrayObject<alinous::IArrayObject<::alinous::remote::region::command::data::ClientNetworkRecord>>>;
+template class alinous::ArrayObject<alinous::ArrayObject<alinous::IArrayObject<::alinous::remote::region::command::data::ClientNetworkRecord>>>;
+template class alinous::ArrayObject<alinous::ArrayObject<::alinous::remote::region::command::data::ClientNetworkRecord>>;
+template class alinous::ArrayObject<alinous::IArrayObject<alinous::ArrayObject<::alinous::remote::region::command::data::ClientNetworkRecord>>>;
+template class alinous::ArrayObject<alinous::ArrayObject<alinous::ArrayObject<::alinous::remote::region::command::data::ClientNetworkRecord>>>;
 template class alinous::ArrayObject<::alinous::runtime::parallel::ConcurrentTaskQueue>;
 template class alinous::ArrayObject<alinous::IArrayObject<::alinous::runtime::parallel::ConcurrentTaskQueue>>;
 template class alinous::ArrayObject<alinous::IArrayObject<alinous::IArrayObject<::alinous::runtime::parallel::ConcurrentTaskQueue>>>;

@@ -101,6 +101,8 @@ void NodeRegionResponceAction::handleCommand(BufferedInputStream* stream, Buffer
 		case AbstractNodeRegionCommand::TYPE_GET_SCHEMA_FROM_REGION:
 		case AbstractNodeRegionCommand::TYPE_CREATE_SCHEMA:
 		case AbstractNodeRegionCommand::TYPE_CREATE_TABLE:
+		case AbstractNodeRegionCommand::TYPE_INSERT_DATA:
+		case AbstractNodeRegionCommand::TYPE_FINISH_COMMIT_SESSION:
 		default:
 			cmd->executeOnServer(this->nodeRegionServer, outStream, ctx);
 			break ;

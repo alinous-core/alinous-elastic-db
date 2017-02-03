@@ -235,9 +235,31 @@ void DatabaseTableClient::insertData(IDatabaseRecord* record, long long newCommi
 }
 void DatabaseTableClient::insertData(List<IDatabaseRecord>* records, long long newCommitId, IArrayObject<SequentialBackgroundJob>* jobs, ISystemLog* logger, ThreadContext* ctx)
 {
-	int maxLoop = records->size(ctx);
-	for(int i = 0; i != maxLoop; ++i)
 	{
+		std::function<void(void)> finallyLm2= [&, this]()
+		{
+			finishCommitSession(newCommitId, ctx);
+		};
+		Releaser finalyCaller2(finallyLm2);
+		try
+		{
+			ArrayList<IDatabaseRecord>* list = (new(ctx) ArrayList<IDatabaseRecord>(ctx));
+			int maxLoop = records->size(ctx);
+			for(int i = 0; i != maxLoop; ++i)
+			{
+				IDatabaseRecord* rec = records->get(i, ctx);
+				list->add(rec, ctx);
+				if(i % 200 == 0)
+				{
+					doInsertData(records, newCommitId, ctx);
+				}
+			}
+			if(!list->isEmpty(ctx))
+			{
+				doInsertData(list, newCommitId, ctx);
+			}
+		}
+		catch(...){throw;}
 	}
 }
 void DatabaseTableClient::updateData(IDatabaseRecord* record, long long newCommitId, IArrayObject<SequentialBackgroundJob>* jobs, ISystemLog* logger, ThreadContext* ctx)
@@ -284,6 +306,86 @@ bool DatabaseTableClient::matchIndexByStrList(ArrayList<TableColumnMetadata>* co
 		}
 	}
 	return true;
+}
+void DatabaseTableClient::finishCommitSession(long long newCommitId, ThreadContext* ctx)
+{
+	ClientFinishCommitSession* cmd = (new(ctx) ClientFinishCommitSession(ctx));
+	cmd->setCommitId(newCommitId, ctx);
+	ISocketConnection* con = nullptr;
+	{
+		std::function<void(void)> finallyLm2= [&, this]()
+		{
+			this->regionAccessPool->returnConnection(con, ctx);
+		};
+		Releaser finalyCaller2(finallyLm2);
+		try
+		{
+			con = this->regionAccessPool->getConnection(ctx);
+			AlinousSocket* socket = con->getSocket(ctx);
+			cmd->sendCommand(socket, ctx);
+		}
+		catch(UnknownHostException* e)
+		{
+			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3574(), e, ctx));
+		}
+		catch(IOException* e)
+		{
+			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3574(), e, ctx));
+		}
+		catch(AlinousException* e)
+		{
+			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3574(), e, ctx));
+		}
+	}
+}
+void DatabaseTableClient::doInsertData(List<IDatabaseRecord>* records, long long newCommitId, ThreadContext* ctx)
+{
+	ClientInsertDataCommand* cmd = (new(ctx) ClientInsertDataCommand(ctx));
+	cmd->setCommitId(newCommitId, ctx);
+	ArrayList<ClientNetworkRecord>* list = cmd->getList(ctx);
+	int maxLoop = records->size(ctx);
+	for(int i = 0; i != maxLoop; ++i)
+	{
+		IDatabaseRecord* rec = records->get(i, ctx);
+		ClientNetworkRecord* netRec = 0;
+		{
+			try
+			{
+				netRec = (new(ctx) ClientNetworkRecord(rec, ctx));
+			}
+			catch(VariableException* e)
+			{
+				throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3575(), e, ctx));
+			}
+		}
+		list->add(netRec, ctx);
+	}
+	ISocketConnection* con = nullptr;
+	{
+		std::function<void(void)> finallyLm2= [&, this]()
+		{
+			this->regionAccessPool->returnConnection(con, ctx);
+		};
+		Releaser finalyCaller2(finallyLm2);
+		try
+		{
+			con = this->regionAccessPool->getConnection(ctx);
+			AlinousSocket* socket = con->getSocket(ctx);
+			cmd->sendCommand(socket, ctx);
+		}
+		catch(UnknownHostException* e)
+		{
+			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3576(), e, ctx));
+		}
+		catch(IOException* e)
+		{
+			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3576(), e, ctx));
+		}
+		catch(AlinousException* e)
+		{
+			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3576(), e, ctx));
+		}
+	}
 }
 }}}}
 

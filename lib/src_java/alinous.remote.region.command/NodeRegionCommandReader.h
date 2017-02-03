@@ -27,6 +27,12 @@ class RegionCreateSchemaCommand;}}}}}
 namespace alinous {namespace remote {namespace region {namespace command {namespace ddl {
 class RegionCreateTableCommand;}}}}}
 
+namespace alinous {namespace remote {namespace region {namespace command {namespace dml {
+class ClientInsertDataCommand;}}}}}
+
+namespace alinous {namespace remote {namespace region {namespace command {namespace dml {
+class ClientFinishCommitSession;}}}}}
+
 namespace alinous {namespace system {
 class AlinousException;}}
 
@@ -53,6 +59,8 @@ using ::java::io::IOException;
 using ::java::io::InputStream;
 using ::alinous::remote::region::command::ddl::RegionCreateSchemaCommand;
 using ::alinous::remote::region::command::ddl::RegionCreateTableCommand;
+using ::alinous::remote::region::command::dml::ClientFinishCommitSession;
+using ::alinous::remote::region::command::dml::ClientInsertDataCommand;
 using ::alinous::remote::socket::NetworkBinalyUtils;
 using ::alinous::system::AlinousException;
 

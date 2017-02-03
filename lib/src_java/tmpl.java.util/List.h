@@ -119,5 +119,6 @@ template class ::java::util::List<::alinous::server::http::MimeHeader>;
 template class ::java::util::List<::alinous::server::http::MimePart>;
 template class ::java::util::List<::alinous::buffer::FifoElement<::alinous::server::webmodule::AbstractWebModule>>;
 template class ::java::util::List<::alinous::remote::db::command::data::StorageNodeData>;
+template class ::java::util::List<::alinous::remote::region::command::data::ClientNetworkRecord>;
 template class ::java::util::List<::alinous::runtime::parallel::ConcurrentTaskQueue>;
 template class ::java::util::List<::alinous::runtime::parallel::IThreadAction>;

@@ -73,7 +73,7 @@ void RegionCreateTableCommand::readFromStream(InputStream* stream, int remain, T
 			}
 			catch(VariableException* e)
 			{
-				throw (new(ctx) IOException(e, ctx));
+				throw (new(ctx) IOException(ConstStr::getCNST_STR_3584(), e, ctx));
 			}
 		}
 	}
@@ -87,7 +87,7 @@ void RegionCreateTableCommand::setMetadata(TableMetadata* metadata, ThreadContex
 {
 	__GC_MV(this, &(this->metadata), metadata, TableMetadata);
 }
-void RegionCreateTableCommand::writeByteStream(OutputStream* out, ThreadContext* ctx)
+void RegionCreateTableCommand::writeByteStream(OutputStream* outStream, ThreadContext* ctx)
 {
 	NetworkBinaryBuffer* buff = (new(ctx) NetworkBinaryBuffer(256, ctx));
 	buff->putInt(NodeRegionConnectCommand::TYPE_CREATE_TABLE, ctx);
@@ -100,8 +100,8 @@ void RegionCreateTableCommand::writeByteStream(OutputStream* out, ThreadContext*
 	writeErrorByteStream(buff, ctx);
 	IArrayObjectPrimitive<char>* b = buff->toBinary(ctx);
 	int pos = buff->getPutSize(ctx);
-	out->write(b, 0, pos, ctx);
-	out->flush(ctx);
+	outStream->write(b, 0, pos, ctx);
+	outStream->flush(ctx);
 }
 }}}}}
 

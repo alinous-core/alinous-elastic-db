@@ -47,14 +47,14 @@ void NodeRegionTerminateCommand::executeOnServer(NodeRegionServer* nodeRegionSer
 {
 	writeByteStream(outStream, ctx);
 }
-void NodeRegionTerminateCommand::writeByteStream(OutputStream* out, ThreadContext* ctx)
+void NodeRegionTerminateCommand::writeByteStream(OutputStream* outStream, ThreadContext* ctx)
 {
 	NetworkBinaryBuffer* buff = (new(ctx) NetworkBinaryBuffer(32, ctx));
 	buff->putInt(NodeRegionConnectCommand::TYPE_TERMINATE, ctx);
 	IArrayObjectPrimitive<char>* b = buff->toBinary(ctx);
 	int pos = buff->getPutSize(ctx);
-	out->write(b, 0, pos, ctx);
-	out->flush(ctx);
+	outStream->write(b, 0, pos, ctx);
+	outStream->flush(ctx);
 }
 }}}}
 
