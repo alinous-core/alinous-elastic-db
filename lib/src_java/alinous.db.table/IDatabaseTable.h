@@ -27,6 +27,9 @@ class BTreeGlobalCache;}}
 namespace alinous {namespace runtime {namespace parallel {
 class ThreadPool;}}}
 
+namespace alinous {namespace db {namespace trx {
+class DbTransaction;}}}
+
 namespace alinous {namespace runtime {namespace parallel {
 class SequentialBackgroundJob;}}}
 
@@ -76,6 +79,7 @@ using ::alinous::compile::sql::analyze::ScanTableColumnIdentifier;
 using ::alinous::db::AlinousDbException;
 using ::alinous::db::table::lockmonitor::DatabaseLockException;
 using ::alinous::db::table::lockmonitor::IThreadLocker;
+using ::alinous::db::trx::DbTransaction;
 using ::alinous::runtime::dom::VariableException;
 using ::alinous::runtime::parallel::SequentialBackgroundJob;
 using ::alinous::runtime::parallel::ThreadPool;
@@ -116,8 +120,8 @@ public:
 	virtual void lockStorage(ThreadContext* ctx) = 0;
 	virtual void unlockStorage(ThreadContext* ctx) = 0;
 	virtual ArrayList<IScannableIndex>* getIndexes(ThreadContext* ctx) throw()  = 0;
-	virtual void insertData(IDatabaseRecord* record, long long newCommitId, IArrayObject<SequentialBackgroundJob>* jobs, ISystemLog* logger, ThreadContext* ctx) = 0;
-	virtual void insertData(List<IDatabaseRecord>* records, long long newCommitId, IArrayObject<SequentialBackgroundJob>* jobs, ISystemLog* logger, ThreadContext* ctx) = 0;
+	virtual void insertData(DbTransaction* trx, IDatabaseRecord* record, long long newCommitId, IArrayObject<SequentialBackgroundJob>* jobs, ISystemLog* logger, ThreadContext* ctx) = 0;
+	virtual void insertData(DbTransaction* trx, List<IDatabaseRecord>* records, long long newCommitId, IArrayObject<SequentialBackgroundJob>* jobs, ISystemLog* logger, ThreadContext* ctx) = 0;
 	virtual void updateData(IDatabaseRecord* record, long long newCommitId, IArrayObject<SequentialBackgroundJob>* jobs, ISystemLog* logger, ThreadContext* ctx) = 0;
 	virtual void createIndex(String* getindexName, ArrayList<String>* columns, AlinousCore* core, BTreeGlobalCache* cache, ThreadContext* ctx) = 0;
 	virtual void close(ThreadContext* ctx) throw()  = 0;

@@ -230,15 +230,15 @@ ArrayList<IScannableIndex>* DatabaseTableClient::getIndexes(ThreadContext* ctx) 
 {
 	return indexes;
 }
-void DatabaseTableClient::insertData(IDatabaseRecord* record, long long newCommitId, IArrayObject<SequentialBackgroundJob>* jobs, ISystemLog* logger, ThreadContext* ctx)
+void DatabaseTableClient::insertData(DbTransaction* trx, IDatabaseRecord* record, long long newCommitId, IArrayObject<SequentialBackgroundJob>* jobs, ISystemLog* logger, ThreadContext* ctx)
 {
 }
-void DatabaseTableClient::insertData(List<IDatabaseRecord>* records, long long newCommitId, IArrayObject<SequentialBackgroundJob>* jobs, ISystemLog* logger, ThreadContext* ctx)
+void DatabaseTableClient::insertData(DbTransaction* trx, List<IDatabaseRecord>* records, long long newCommitId, IArrayObject<SequentialBackgroundJob>* jobs, ISystemLog* logger, ThreadContext* ctx)
 {
 	{
 		std::function<void(void)> finallyLm2= [&, this]()
 		{
-			finishCommitSession(newCommitId, ctx);
+			finishCommitSession(trx, newCommitId, ctx);
 		};
 		Releaser finalyCaller2(finallyLm2);
 		try
@@ -249,14 +249,16 @@ void DatabaseTableClient::insertData(List<IDatabaseRecord>* records, long long n
 			{
 				IDatabaseRecord* rec = records->get(i, ctx);
 				list->add(rec, ctx);
-				if(i % 200 == 0)
+				int num = i + 1;
+				if(num % 200 == 0)
 				{
-					doInsertData(records, newCommitId, ctx);
+					doInsertData(trx, records, newCommitId, ctx);
+					list->clear(ctx);
 				}
 			}
 			if(!list->isEmpty(ctx))
 			{
-				doInsertData(list, newCommitId, ctx);
+				doInsertData(trx, list, newCommitId, ctx);
 			}
 		}
 		catch(...){throw;}
@@ -307,10 +309,11 @@ bool DatabaseTableClient::matchIndexByStrList(ArrayList<TableColumnMetadata>* co
 	}
 	return true;
 }
-void DatabaseTableClient::finishCommitSession(long long newCommitId, ThreadContext* ctx)
+void DatabaseTableClient::finishCommitSession(DbTransaction* trx, long long newCommitId, ThreadContext* ctx)
 {
-	ClientFinishCommitSession* cmd = (new(ctx) ClientFinishCommitSession(ctx));
+	ClientFinishInsertCommitSession* cmd = (new(ctx) ClientFinishInsertCommitSession(ctx));
 	cmd->setCommitId(newCommitId, ctx);
+	cmd->setTrxId(trx->getVersionContext(ctx)->getTrxId(ctx), ctx);
 	ISocketConnection* con = nullptr;
 	{
 		std::function<void(void)> finallyLm2= [&, this]()
@@ -338,10 +341,13 @@ void DatabaseTableClient::finishCommitSession(long long newCommitId, ThreadConte
 		}
 	}
 }
-void DatabaseTableClient::doInsertData(List<IDatabaseRecord>* records, long long newCommitId, ThreadContext* ctx)
+void DatabaseTableClient::doInsertData(DbTransaction* trx, List<IDatabaseRecord>* records, long long newCommitId, ThreadContext* ctx)
 {
 	ClientInsertDataCommand* cmd = (new(ctx) ClientInsertDataCommand(ctx));
 	cmd->setCommitId(newCommitId, ctx);
+	cmd->setTable(this->name, ctx);
+	cmd->setSchema(this->schema, ctx);
+	cmd->setVctx(trx->getVersionContext(ctx), ctx);
 	ArrayList<ClientNetworkRecord>* list = cmd->getList(ctx);
 	int maxLoop = records->size(ctx);
 	for(int i = 0; i != maxLoop; ++i)

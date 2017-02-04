@@ -64,5 +64,19 @@ void DbVersionContext::setTrxId(long long trxId, ThreadContext* ctx) throw()
 {
 	this->trxId = trxId;
 }
+void DbVersionContext::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
+{
+	this->commitId = buff->getLong(ctx);
+	this->trxId = buff->getLong(ctx);
+	this->schemaVersion = buff->getLong(ctx);
+	this->nodeClusterVersion = buff->getLong(ctx);
+}
+void DbVersionContext::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+{
+	buff->putLong(this->commitId, ctx);
+	buff->putLong(this->trxId, ctx);
+	buff->putLong(this->schemaVersion, ctx);
+	buff->putLong(this->nodeClusterVersion, ctx);
+}
 }}}
 

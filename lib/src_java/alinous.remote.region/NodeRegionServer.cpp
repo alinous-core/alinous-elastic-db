@@ -19,7 +19,7 @@ bool NodeRegionServer::__init_static_variables(){
 	delete ctx;
 	return true;
 }
- NodeRegionServer::NodeRegionServer(int port, int maxthread, AlinousCore* core, ThreadContext* ctx) throw()  : IObject(ctx), port(0), maxthread(0), refs(nullptr), socketServer(nullptr), monitorConnectionPool(nullptr), nodeClusterRevisionLock(__GC_INS(this, (new(ctx) LockObject(ctx)), LockObject)), nodeClusterRevision(1), region(nullptr), core(nullptr)
+ NodeRegionServer::NodeRegionServer(int port, int maxthread, AlinousCore* core, ThreadContext* ctx) throw()  : IObject(ctx), port(0), maxthread(0), refs(nullptr), socketServer(nullptr), monitorConnectionPool(nullptr), nodeClusterRevisionLock(__GC_INS(this, (new(ctx) LockObject(ctx)), LockObject)), nodeClusterRevision(1), region(nullptr), core(nullptr), insertSessions(__GC_INS(this, (new(ctx) RegionInsertExecutorPool(ctx)), RegionInsertExecutorPool))
 {
 	this->port = port;
 	this->maxthread = maxthread;
@@ -55,6 +55,8 @@ void NodeRegionServer::__releaseRegerences(bool prepare, ThreadContext* ctx) thr
 	region = nullptr;
 	__e_obj1.add(this->core, this);
 	core = nullptr;
+	__e_obj1.add(this->insertSessions, this);
+	insertSessions = nullptr;
 	if(!prepare){
 		return;
 	}
@@ -141,11 +143,42 @@ void NodeRegionServer::createTable(TableMetadata* metadata, ThreadContext* ctx)
 	}
 	syncScheme(ctx);
 }
+void NodeRegionServer::InsertData(ArrayList<ClientNetworkRecord>* list, long long commitId, String* schema, String* table, DbVersionContext* vctx, ThreadContext* ctx)
+{
+	checkVersion(vctx, ctx);
+	RegionInsertExecutor* exec = this->insertSessions->getSession(vctx->getTrxId(ctx), ctx);
+	if(exec == nullptr)
+	{
+		exec = (new(ctx) RegionInsertExecutor(vctx->getTrxId(ctx), commitId, this->refs, ctx));
+	}
+	exec->execInsert(list, schema, table, ctx);
+}
+void NodeRegionServer::finishInsertData(long long trxId, ThreadContext* ctx) throw() 
+{
+	this->insertSessions->removeSession(trxId, ctx);
+}
 void NodeRegionServer::initMonitorRef(MonitorRef* monRef, ThreadContext* ctx) throw() 
 {
 	MonitorConnectionInfo* monInfo = (new(ctx) MonitorConnectionInfo(monRef->getHost(ctx), monRef->getPort(ctx), ctx));
 	MonitorClientConnectionFactory* factory = (new(ctx) MonitorClientConnectionFactory(monInfo, ctx));
 	__GC_MV(this, &(this->monitorConnectionPool), (new(ctx) SocketConnectionPool(factory, ctx)), SocketConnectionPool);
+}
+void NodeRegionServer::checkVersion(DbVersionContext* vctx, ThreadContext* ctx)
+{
+	long long clusterVer = 0;
+	{
+		SynchronizedBlockObj __synchronized_2(this->nodeClusterRevisionLock, ctx);
+		clusterVer = this->nodeClusterRevision;
+	}
+	if(clusterVer < vctx->getNodeClusterVersion(ctx))
+	{
+		syncNodes(ctx);
+	}
+	long long schemeVer = this->refs->getSchemaVersion(ctx);
+	if(schemeVer < vctx->getSchemaVersion(ctx))
+	{
+		syncScheme(ctx);
+	}
 }
 void NodeRegionServer::reportClusterUpdate(ThreadContext* ctx)
 {

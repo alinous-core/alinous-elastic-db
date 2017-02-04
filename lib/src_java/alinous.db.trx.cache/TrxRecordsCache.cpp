@@ -240,7 +240,7 @@ void TrxRecordsCache::commitInsertRecord(AlinousDatabase* db, IDatabaseTable* ta
 				IBTreeNode* lnode = scanner->next(ctx);
 				ArrayList<IBTreeValue>* values = lnode->getValues(ctx);
 				CachedRecord* record = static_cast<CachedRecord*>(values->get(0, ctx));
-				table->insertData(record, newCommitId, jobs, this->trx->getLogger(ctx), ctx);
+				table->insertData(this->trx, record, newCommitId, jobs, this->trx->getLogger(ctx), ctx);
 			}
 			scanner->endScan(ctx);
 			for(int i = 0; i != slotSize; ++i)

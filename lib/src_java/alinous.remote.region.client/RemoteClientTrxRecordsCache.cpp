@@ -45,7 +45,7 @@ void RemoteClientTrxRecordsCache::commitInsertRecord(AlinousDatabase* db, IDatab
 		list->add(record, ctx);
 	}
 	scanner->endScan(ctx);
-	table->insertData(list, newCommitId, nullptr, this->trx->getLogger(ctx), ctx);
+	table->insertData(this->trx, list, newCommitId, nullptr, this->trx->getLogger(ctx), ctx);
 }
 }}}}
 

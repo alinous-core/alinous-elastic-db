@@ -7,6 +7,7 @@ template class alinous::MemoryUtils<::alinous::HashMapInternalElement<::alinous:
 template class alinous::MemoryUtils<::alinous::HashMapInternalElement<::java::lang::String, ::alinous::remote::db::command::data::TableClusterData>>;
 template class alinous::MemoryUtils<::alinous::HashMapInternalElement<::java::lang::String, ::alinous::remote::db::command::data::SchemaData>>;
 template class alinous::MemoryUtils<::alinous::HashMapInternalElement<::java::lang::String, ::alinous::remote::monitor::RegionNodeInfo>>;
+template class alinous::MemoryUtils<::alinous::HashMapInternalElement<::java::lang::Long, ::alinous::remote::region::RegionInsertExecutor>>;
 template class alinous::MemoryUtils<::alinous::HashMapInternalElement<::java::lang::String, ::alinous::remote::region::NodeTableClaster>>;
 template class alinous::MemoryUtils<::alinous::HashMapInternalElement<::java::lang::String, ::alinous::remote::region::NodeRegionSchema>>;
 template class alinous::MemoryUtils<::alinous::HashMapInternalElement<::java::lang::String, ::alinous::remote::region::command::data::ClientTableData>>;
@@ -47,6 +48,7 @@ template class alinous::MemoryUtils<::alinous::HashMapRawArray<::alinous::html::
 template class alinous::MemoryUtils<::alinous::HashMapRawArray<::java::lang::String, ::alinous::remote::db::command::data::TableClusterData>>;
 template class alinous::MemoryUtils<::alinous::HashMapRawArray<::java::lang::String, ::alinous::remote::db::command::data::SchemaData>>;
 template class alinous::MemoryUtils<::alinous::HashMapRawArray<::java::lang::String, ::alinous::remote::monitor::RegionNodeInfo>>;
+template class alinous::MemoryUtils<::alinous::HashMapRawArray<::java::lang::Long, ::alinous::remote::region::RegionInsertExecutor>>;
 template class alinous::MemoryUtils<::alinous::HashMapRawArray<::java::lang::String, ::alinous::remote::region::NodeTableClaster>>;
 template class alinous::MemoryUtils<::alinous::HashMapRawArray<::java::lang::String, ::alinous::remote::region::NodeRegionSchema>>;
 template class alinous::MemoryUtils<::alinous::HashMapRawArray<::java::lang::String, ::alinous::remote::region::command::data::ClientTableData>>;
@@ -393,6 +395,13 @@ template class alinous::MemoryUtils<alinous::ArrayObject<alinous::IArrayObject<:
 template class alinous::MemoryUtils<alinous::ArrayObject<::alinous::remote::region::NodeTableReference>>;
 template class alinous::MemoryUtils<alinous::IArrayObject<alinous::ArrayObject<::alinous::remote::region::NodeTableReference>>>;
 template class alinous::MemoryUtils<alinous::ArrayObject<alinous::ArrayObject<::alinous::remote::region::NodeTableReference>>>;
+template class alinous::MemoryUtils<::alinous::remote::region::RegionShardPart>;
+template class alinous::MemoryUtils<alinous::IArrayObject<::alinous::remote::region::RegionShardPart>>;
+template class alinous::MemoryUtils<alinous::IArrayObject<alinous::IArrayObject<::alinous::remote::region::RegionShardPart>>>;
+template class alinous::MemoryUtils<alinous::ArrayObject<alinous::IArrayObject<::alinous::remote::region::RegionShardPart>>>;
+template class alinous::MemoryUtils<alinous::ArrayObject<::alinous::remote::region::RegionShardPart>>;
+template class alinous::MemoryUtils<alinous::IArrayObject<alinous::ArrayObject<::alinous::remote::region::RegionShardPart>>>;
+template class alinous::MemoryUtils<alinous::ArrayObject<alinous::ArrayObject<::alinous::remote::region::RegionShardPart>>>;
 template class alinous::MemoryUtils<::alinous::remote::region::NodeReference>;
 template class alinous::MemoryUtils<alinous::IArrayObject<::alinous::remote::region::NodeReference>>;
 template class alinous::MemoryUtils<alinous::IArrayObject<alinous::IArrayObject<::alinous::remote::region::NodeReference>>>;

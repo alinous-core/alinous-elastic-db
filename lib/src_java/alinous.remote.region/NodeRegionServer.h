@@ -54,6 +54,15 @@ class SocketServer;}}}
 namespace alinous {namespace db {namespace table {
 class TableMetadata;}}}
 
+namespace alinous {namespace remote {namespace region {namespace command {namespace data {
+class ClientNetworkRecord;}}}}}
+
+namespace alinous {namespace db {namespace trx {
+class DbVersionContext;}}}
+
+namespace alinous {namespace remote {namespace region {
+class RegionInsertExecutor;}}}
+
 namespace alinous {namespace remote {namespace monitor {namespace command {namespace commitId {
 class ReportClusterVersionUpCommand;}}}}}
 
@@ -65,6 +74,9 @@ class IOException;}}
 
 namespace alinous {namespace lock {
 class LockObject;}}
+
+namespace alinous {namespace remote {namespace region {
+class RegionInsertExecutorPool;}}}
 
 namespace java {namespace lang {
 class IObject;
@@ -81,7 +93,9 @@ using namespace ::java::lang;
 using ::java::util::Iterator;
 using ::java::io::IOException;
 using ::java::net::UnknownHostException;
+using ::java::util::ArrayList;
 using ::alinous::db::table::TableMetadata;
+using ::alinous::db::trx::DbVersionContext;
 using ::alinous::lock::LockObject;
 using ::alinous::net::AlinousSocket;
 using ::alinous::remote::monitor::client::MonitorClientConnectionFactory;
@@ -90,6 +104,7 @@ using ::alinous::remote::monitor::command::AbstractMonitorCommand;
 using ::alinous::remote::monitor::command::GetRegionNodeInfoCommand;
 using ::alinous::remote::monitor::command::commitId::ReportClusterVersionUpCommand;
 using ::alinous::remote::monitor::command::data::RegionInfoData;
+using ::alinous::remote::region::command::data::ClientNetworkRecord;
 using ::alinous::remote::region::command::data::ClientStructureMetadata;
 using ::alinous::remote::socket::ISocketConnection;
 using ::alinous::remote::socket::SocketConnectionPool;
@@ -120,6 +135,7 @@ private:
 	long long nodeClusterRevision;
 	String* region;
 	AlinousCore* core;
+	RegionInsertExecutorPool* insertSessions;
 private:
 	static String* THREAD_NAME;
 public:
@@ -133,8 +149,11 @@ public:
 	NodeReferenceManager* getRefs(ThreadContext* ctx) throw() ;
 	void createSchema(String* schemaName, ThreadContext* ctx);
 	void createTable(TableMetadata* metadata, ThreadContext* ctx);
+	void InsertData(ArrayList<ClientNetworkRecord>* list, long long commitId, String* schema, String* table, DbVersionContext* vctx, ThreadContext* ctx);
+	void finishInsertData(long long trxId, ThreadContext* ctx) throw() ;
 private:
 	void initMonitorRef(MonitorRef* monRef, ThreadContext* ctx) throw() ;
+	void checkVersion(DbVersionContext* vctx, ThreadContext* ctx);
 	void reportClusterUpdate(ThreadContext* ctx);
 public:
 	static bool __init_done;

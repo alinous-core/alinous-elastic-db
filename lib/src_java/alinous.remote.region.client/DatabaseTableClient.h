@@ -36,6 +36,9 @@ class BTreeGlobalCache;}}
 namespace alinous {namespace runtime {namespace parallel {
 class ThreadPool;}}}
 
+namespace alinous {namespace db {namespace trx {
+class DbTransaction;}}}
+
 namespace alinous {namespace runtime {namespace parallel {
 class SequentialBackgroundJob;}}}
 
@@ -46,7 +49,7 @@ namespace java {namespace util {
 template <typename  T> class List;}}
 
 namespace alinous {namespace remote {namespace region {namespace command {namespace dml {
-class ClientFinishCommitSession;}}}}}
+class ClientFinishInsertCommitSession;}}}}}
 
 namespace alinous {namespace remote {namespace socket {
 class ISocketConnection;}}}
@@ -121,9 +124,10 @@ using ::alinous::db::table::TableMetadata;
 using ::alinous::db::table::lockmonitor::DatabaseLockException;
 using ::alinous::db::table::lockmonitor::IThreadLocker;
 using ::alinous::db::table::lockmonitor::ThreadLocker;
+using ::alinous::db::trx::DbTransaction;
 using ::alinous::net::AlinousSocket;
 using ::alinous::remote::region::command::data::ClientNetworkRecord;
-using ::alinous::remote::region::command::dml::ClientFinishCommitSession;
+using ::alinous::remote::region::command::dml::ClientFinishInsertCommitSession;
 using ::alinous::remote::region::command::dml::ClientInsertDataCommand;
 using ::alinous::remote::socket::ISocketConnection;
 using ::alinous::remote::socket::SocketConnectionPool;
@@ -182,8 +186,8 @@ public:
 	void lockStorage(ThreadContext* ctx) final;
 	void unlockStorage(ThreadContext* ctx) final;
 	ArrayList<IScannableIndex>* getIndexes(ThreadContext* ctx) throw()  final;
-	void insertData(IDatabaseRecord* record, long long newCommitId, IArrayObject<SequentialBackgroundJob>* jobs, ISystemLog* logger, ThreadContext* ctx) final;
-	void insertData(List<IDatabaseRecord>* records, long long newCommitId, IArrayObject<SequentialBackgroundJob>* jobs, ISystemLog* logger, ThreadContext* ctx) final;
+	void insertData(DbTransaction* trx, IDatabaseRecord* record, long long newCommitId, IArrayObject<SequentialBackgroundJob>* jobs, ISystemLog* logger, ThreadContext* ctx) final;
+	void insertData(DbTransaction* trx, List<IDatabaseRecord>* records, long long newCommitId, IArrayObject<SequentialBackgroundJob>* jobs, ISystemLog* logger, ThreadContext* ctx) final;
 	void updateData(IDatabaseRecord* record, long long newCommitId, IArrayObject<SequentialBackgroundJob>* jobs, ISystemLog* logger, ThreadContext* ctx) final;
 	void createIndex(String* getindexName, ArrayList<String>* columns, AlinousCore* core, BTreeGlobalCache* cache, ThreadContext* ctx) final;
 	void close(ThreadContext* ctx) throw()  final;
@@ -191,8 +195,8 @@ public:
 private:
 	bool matchIndexByIdList(ArrayList<TableColumnMetadata>* columnsMetadataList, ArrayList<ScanTableColumnIdentifier>* columns, ThreadContext* ctx) throw() ;
 	bool matchIndexByStrList(ArrayList<TableColumnMetadata>* columnsMetadataList, ArrayList<String>* columns, ThreadContext* ctx) throw() ;
-	void finishCommitSession(long long newCommitId, ThreadContext* ctx);
-	void doInsertData(List<IDatabaseRecord>* records, long long newCommitId, ThreadContext* ctx);
+	void finishCommitSession(DbTransaction* trx, long long newCommitId, ThreadContext* ctx);
+	void doInsertData(DbTransaction* trx, List<IDatabaseRecord>* records, long long newCommitId, ThreadContext* ctx);
 public:
 	static bool __init_done;
 	static bool __init_static_variables();

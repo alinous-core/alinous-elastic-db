@@ -81,6 +81,10 @@ void NodeRegionSchema::dispose(ThreadContext* ctx) throw()
 		cluster->dispose(ctx);
 	}
 }
+NodeTableClaster* NodeRegionSchema::getNodeTableCluster(String* tableName, ThreadContext* ctx) throw() 
+{
+	return this->tablesDictinary->get(tableName, ctx);
+}
 String* NodeRegionSchema::getSchemaName(ThreadContext* ctx) throw() 
 {
 	return schemaName;

@@ -122,6 +122,24 @@ void NodeReferenceManager::createTable(TableMetadata* meta, ThreadContext* ctx)
 	NodeReference* nodeRef = list->get(0, ctx);
 	nodeRef->createTable(meta, ctx);
 }
+RegionShardTable* NodeReferenceManager::getCluster(String* schemaName, String* tableName, ThreadContext* ctx) throw() 
+{
+	{
+		SynchronizedBlockObj __synchronized_2(this->lock, ctx);
+		NodeRegionSchema* schema = this->schemaDictinary->get(schemaName, ctx);
+		if(schema == nullptr)
+		{
+			return nullptr;
+		}
+		NodeTableClaster* table = schema->getNodeTableCluster(tableName, ctx);
+		if(table == nullptr)
+		{
+			return nullptr;
+		}
+		RegionShardTable* shard = (new(ctx) RegionShardTable(table, ctx));
+		return shard;
+	}
+}
 void NodeReferenceManager::doSyncScmema(SchemasStructureInfoData* data, ThreadContext* ctx) throw() 
 {
 	Map<String,SchemaData>* schemaMap = data->getSchemas(ctx);

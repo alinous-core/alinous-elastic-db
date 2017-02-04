@@ -1,5 +1,5 @@
-#ifndef ALINOUS_REMOTE_REGION_COMMAND_DML_CLIENTFINISHCOMMITSESSION_H_
-#define ALINOUS_REMOTE_REGION_COMMAND_DML_CLIENTFINISHCOMMITSESSION_H_
+#ifndef ALINOUS_REMOTE_REGION_COMMAND_DML_CLIENTFINISHINSERTCOMMITSESSION_H_
+#define ALINOUS_REMOTE_REGION_COMMAND_DML_CLIENTFINISHINSERTCOMMITSESSION_H_
 namespace alinous {namespace remote {namespace region {
 class NodeRegionServer;}}}
 
@@ -44,19 +44,22 @@ using ::alinous::runtime::dom::VariableException;
 
 
 
-class ClientFinishCommitSession final : public AbstractNodeRegionCommand {
+class ClientFinishInsertCommitSession final : public AbstractNodeRegionCommand {
 public:
-	ClientFinishCommitSession(const ClientFinishCommitSession& base) = default;
+	ClientFinishInsertCommitSession(const ClientFinishInsertCommitSession& base) = default;
 public:
-	ClientFinishCommitSession(ThreadContext* ctx) throw() ;
+	ClientFinishInsertCommitSession(ThreadContext* ctx) throw() ;
 	void __construct_impl(ThreadContext* ctx) throw() ;
-	virtual ~ClientFinishCommitSession() throw();
+	virtual ~ClientFinishInsertCommitSession() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 private:
 	long long commitId;
+	long long trxId;
 public:
 	void executeOnServer(NodeRegionServer* nodeRegionServer, BufferedOutputStream* outStream, ThreadContext* ctx) final;
 	void readFromStream(InputStream* stream, int remain, ThreadContext* ctx) final;
+	long long getTrxId(ThreadContext* ctx) throw() ;
+	void setTrxId(long long trxId, ThreadContext* ctx) throw() ;
 	long long getCommitId(ThreadContext* ctx) throw() ;
 	void setCommitId(long long commitId, ThreadContext* ctx) throw() ;
 	void writeByteStream(OutputStream* outStream, ThreadContext* ctx) final;
@@ -70,4 +73,4 @@ public:
 
 }}}}}
 
-#endif /* end of ALINOUS_REMOTE_REGION_COMMAND_DML_CLIENTFINISHCOMMITSESSION_H_ */
+#endif /* end of ALINOUS_REMOTE_REGION_COMMAND_DML_CLIENTFINISHINSERTCOMMITSESSION_H_ */

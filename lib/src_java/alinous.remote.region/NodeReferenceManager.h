@@ -45,6 +45,12 @@ class TableMetadata;}}}
 namespace alinous {namespace db {
 class AlinousDbException;}}
 
+namespace alinous {namespace remote {namespace region {
+class RegionShardTable;}}}
+
+namespace alinous {namespace remote {namespace region {
+class NodeTableClaster;}}}
+
 namespace java {namespace util {
 template <typename  T, typename V> class HashMap;}}
 
@@ -106,6 +112,7 @@ public:
 	long long getSchemaVersion(ThreadContext* ctx) throw() ;
 	void createSchema(String* schemaName, ThreadContext* ctx);
 	void createTable(TableMetadata* meta, ThreadContext* ctx);
+	RegionShardTable* getCluster(String* schemaName, String* tableName, ThreadContext* ctx) throw() ;
 private:
 	void doSyncScmema(SchemasStructureInfoData* data, ThreadContext* ctx) throw() ;
 	NodeRegionSchema* getNodeRegionSchema(String* schemaName, ThreadContext* ctx) throw() ;

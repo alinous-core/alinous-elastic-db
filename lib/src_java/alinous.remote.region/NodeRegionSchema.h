@@ -69,6 +69,7 @@ public:
 	ClientSchemaData* toClientData(ThreadContext* ctx) throw() ;
 	void updateTableClusters(SchemaData* scdata, NodeCluster* nodeAccessRefs, ThreadContext* ctx) throw() ;
 	void dispose(ThreadContext* ctx) throw() ;
+	NodeTableClaster* getNodeTableCluster(String* tableName, ThreadContext* ctx) throw() ;
 	String* getSchemaName(ThreadContext* ctx) throw() ;
 private:
 	NodeTableClaster* getNodeClusterOrInit(String* clusterName, ThreadContext* ctx) throw() ;

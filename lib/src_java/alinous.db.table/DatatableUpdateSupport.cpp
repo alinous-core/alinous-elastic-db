@@ -50,19 +50,19 @@ void DatatableUpdateSupport::updateData(IDatabaseRecord* data, long long commitI
 	data->setInsertedCommitId(lastdbrecord->getInsertedCommitId(ctx), ctx);
 	this->cacheEngine->updateData(this, lastdbrecord, commitId, jobs, log, ctx);
 }
-void DatatableUpdateSupport::insertData(IDatabaseRecord* data, long long commitId, IArrayObject<SequentialBackgroundJob>* jobs, ISystemLog* log, ThreadContext* ctx)
+void DatatableUpdateSupport::insertData(DbTransaction* trx, IDatabaseRecord* data, long long commitId, IArrayObject<SequentialBackgroundJob>* jobs, ISystemLog* log, ThreadContext* ctx)
 {
 	long long nextOid = this->dataStorage->getNextOid(ctx);
 	DatabaseRecord* dbrecord = (new(ctx) DatabaseRecord(nextOid, data->getNumColumn(ctx), commitId, data, ctx));
 	this->cacheEngine->insertData(this, dbrecord, commitId, jobs, log, ctx);
 }
-void DatatableUpdateSupport::insertData(List<IDatabaseRecord>* records, long long newCommitId, IArrayObject<SequentialBackgroundJob>* jobs, ISystemLog* logger, ThreadContext* ctx)
+void DatatableUpdateSupport::insertData(DbTransaction* trx, List<IDatabaseRecord>* records, long long newCommitId, IArrayObject<SequentialBackgroundJob>* jobs, ISystemLog* logger, ThreadContext* ctx)
 {
 	int maxLoop = records->size(ctx);
 	for(int i = 0; i != maxLoop; ++i)
 	{
 		IDatabaseRecord* data = records->get(i, ctx);
-		insertData(data, newCommitId, jobs, logger, ctx);
+		insertData(trx, data, newCommitId, jobs, logger, ctx);
 	}
 }
 }}}

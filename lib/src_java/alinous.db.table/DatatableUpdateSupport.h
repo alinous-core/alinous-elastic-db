@@ -18,6 +18,9 @@ class ISystemLog;}}
 namespace alinous {namespace db {namespace table {
 class DatabaseRecord;}}}
 
+namespace alinous {namespace db {namespace trx {
+class DbTransaction;}}}
+
 namespace java {namespace util {
 template <typename  T> class List;}}
 
@@ -49,6 +52,7 @@ using ::java::io::IOException;
 using ::java::util::List;
 using ::alinous::btree::BTreeException;
 using ::alinous::db::AlinousDbException;
+using ::alinous::db::trx::DbTransaction;
 using ::alinous::runtime::parallel::SequentialBackgroundJob;
 using ::alinous::system::AlinousException;
 using ::alinous::system::ISystemLog;
@@ -67,8 +71,8 @@ public:
 	IOidPublisher* oidPublisher;
 public:
 	void updateData(IDatabaseRecord* data, long long commitId, IArrayObject<SequentialBackgroundJob>* jobs, ISystemLog* log, ThreadContext* ctx) final;
-	void insertData(IDatabaseRecord* data, long long commitId, IArrayObject<SequentialBackgroundJob>* jobs, ISystemLog* log, ThreadContext* ctx) final;
-	void insertData(List<IDatabaseRecord>* records, long long newCommitId, IArrayObject<SequentialBackgroundJob>* jobs, ISystemLog* logger, ThreadContext* ctx) final;
+	void insertData(DbTransaction* trx, IDatabaseRecord* data, long long commitId, IArrayObject<SequentialBackgroundJob>* jobs, ISystemLog* log, ThreadContext* ctx) final;
+	void insertData(DbTransaction* trx, List<IDatabaseRecord>* records, long long newCommitId, IArrayObject<SequentialBackgroundJob>* jobs, ISystemLog* logger, ThreadContext* ctx) final;
 public:
 	static bool __init_done;
 	static bool __init_static_variables();

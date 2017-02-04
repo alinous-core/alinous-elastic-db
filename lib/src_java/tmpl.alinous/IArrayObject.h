@@ -313,6 +313,13 @@ template class alinous::IArrayObject<alinous::ArrayObject<alinous::IArrayObject<
 template class alinous::IArrayObject<alinous::ArrayObject<::alinous::remote::region::NodeTableReference>>;
 template class alinous::IArrayObject<alinous::IArrayObject<alinous::ArrayObject<::alinous::remote::region::NodeTableReference>>>;
 template class alinous::IArrayObject<alinous::ArrayObject<alinous::ArrayObject<::alinous::remote::region::NodeTableReference>>>;
+template class alinous::IArrayObject<::alinous::remote::region::RegionShardPart>;
+template class alinous::IArrayObject<alinous::IArrayObject<::alinous::remote::region::RegionShardPart>>;
+template class alinous::IArrayObject<alinous::IArrayObject<alinous::IArrayObject<::alinous::remote::region::RegionShardPart>>>;
+template class alinous::IArrayObject<alinous::ArrayObject<alinous::IArrayObject<::alinous::remote::region::RegionShardPart>>>;
+template class alinous::IArrayObject<alinous::ArrayObject<::alinous::remote::region::RegionShardPart>>;
+template class alinous::IArrayObject<alinous::IArrayObject<alinous::ArrayObject<::alinous::remote::region::RegionShardPart>>>;
+template class alinous::IArrayObject<alinous::ArrayObject<alinous::ArrayObject<::alinous::remote::region::RegionShardPart>>>;
 template class alinous::IArrayObject<::alinous::remote::region::NodeReference>;
 template class alinous::IArrayObject<alinous::IArrayObject<::alinous::remote::region::NodeReference>>;
 template class alinous::IArrayObject<alinous::IArrayObject<alinous::IArrayObject<::alinous::remote::region::NodeReference>>>;

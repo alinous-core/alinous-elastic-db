@@ -62,7 +62,7 @@ AbstractNodeRegionCommand* NodeRegionCommandReader::readFromStream(InputStream* 
 		cmd = (new(ctx) ClientInsertDataCommand(ctx));
 		break ;
 	case AbstractNodeRegionCommand::TYPE_FINISH_COMMIT_SESSION:
-		cmd = (new(ctx) ClientFinishCommitSession(ctx));
+		cmd = (new(ctx) ClientFinishInsertCommitSession(ctx));
 		break ;
 	default:
 		throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3582(), ctx));
