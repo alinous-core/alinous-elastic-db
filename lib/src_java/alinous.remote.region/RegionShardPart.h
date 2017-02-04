@@ -38,6 +38,9 @@ private:
 	TablePartitionMaxValue* maxValue;
 	NodeReference* nodeAccessRef;
 public:
+	TablePartitionMaxValue* getMaxValue(ThreadContext* ctx) throw() ;
+	NodeReference* getNodeAccessRef(ThreadContext* ctx) throw() ;
+public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:

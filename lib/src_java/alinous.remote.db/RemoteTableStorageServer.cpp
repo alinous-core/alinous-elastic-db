@@ -7,7 +7,7 @@ namespace alinous {namespace remote {namespace db {
 
 
 
-String* RemoteTableStorageServer::THREAD_NAME = ConstStr::getCNST_STR_3553();
+String* RemoteTableStorageServer::THREAD_NAME = ConstStr::getCNST_STR_3557();
 const IntKey RemoteTableStorageServer:: __SCHEMA = (IntKey(10, nullptr));
 const IntKey RemoteTableStorageServer:: __SCHEMA_VERSION = (IntKey(11, nullptr));
 bool RemoteTableStorageServer::__init_done = __init_static_variables();
@@ -82,10 +82,10 @@ void RemoteTableStorageServer::init(AlinousCore* core, MonitorRef* monitorRef, T
 		catch(BTreeException* e)
 		{
 			e->printStackTrace(ctx);
-			throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_3550(), e, ctx));
+			throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_3554(), e, ctx));
 		}
 	}
-	__GC_MV(this, &(this->workerThreadsPool), (new(ctx) ThreadPool(16, ConstStr::getCNST_STR_3551(), ctx)), ThreadPool);
+	__GC_MV(this, &(this->workerThreadsPool), (new(ctx) ThreadPool(16, ConstStr::getCNST_STR_3555(), ctx)), ThreadPool);
 	__GC_MV(this, &(this->monitorAccess), (new(ctx) MonitorAccess(monitorRef, ctx)), MonitorAccess);
 	this->monitorAccess->init(ctx);
 	if(exists(ctx))
@@ -117,27 +117,27 @@ void RemoteTableStorageServer::start(AlinousCore* core, ThreadContext* ctx)
 		}
 		catch(IOException* e)
 		{
-			throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_3552(), ctx));
+			throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_3556(), ctx));
 		}
 		catch(InterruptedException* e)
 		{
-			throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_3552(), ctx));
+			throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_3556(), ctx));
 		}
 		catch(BTreeException* e)
 		{
-			throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_3552(), ctx));
+			throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_3556(), ctx));
 		}
 		catch(VariableException* e)
 		{
-			throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_3552(), ctx));
+			throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_3556(), ctx));
 		}
 		catch(DatabaseException* e)
 		{
-			throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_3552(), ctx));
+			throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_3556(), ctx));
 		}
 		catch(AlinousException* e)
 		{
-			throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_3552(), ctx));
+			throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_3556(), ctx));
 		}
 	}
 	RemoteStorageResponceActionFactory* factory = (new(ctx) RemoteStorageResponceActionFactory(this, ctx));
@@ -245,23 +245,23 @@ void RemoteTableStorageServer::initInstance(AlinousCore* core, ThreadContext* ct
 		}
 		catch(IOException* e)
 		{
-			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1659(), e, ctx));
+			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1663(), e, ctx));
 		}
 		catch(InterruptedException* e)
 		{
-			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1659(), e, ctx));
+			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1663(), e, ctx));
 		}
 		catch(BTreeException* e)
 		{
-			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1659(), e, ctx));
+			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1663(), e, ctx));
 		}
 		catch(VariableException* e)
 		{
-			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1659(), e, ctx));
+			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1663(), e, ctx));
 		}
 		catch(AlinousException* e)
 		{
-			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1659(), e, ctx));
+			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1663(), e, ctx));
 		}
 	}
 }
@@ -269,7 +269,7 @@ File* RemoteTableStorageServer::getConfigFile(ThreadContext* ctx) throw()
 {
 	if(this->configFile == nullptr)
 	{
-		String* pathname = this->dataDir->clone(ctx)->append(ConstStr::getCNST_STR_1663(), ctx);
+		String* pathname = this->dataDir->clone(ctx)->append(ConstStr::getCNST_STR_1667(), ctx);
 		__GC_MV(this, &(this->configFile), (new(ctx) File(pathname, ctx)), File);
 	}
 	return this->configFile;

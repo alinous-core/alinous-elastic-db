@@ -43,7 +43,7 @@ void DropIndexStatement::validate(SourceValidator* validator, ThreadContext* ctx
 {
 	if(!((dynamic_cast<TableJoinTarget*>(indexName) != 0)))
 	{
-		validator->addError(ConstStr::getCNST_STR_1035(), this, ctx);
+		validator->addError(ConstStr::getCNST_STR_1037(), this, ctx);
 	}
 }
 bool DropIndexStatement::visit(IAlinousElementVisitor* visitor, AbstractSrcElement* parent, ThreadContext* ctx) throw() 

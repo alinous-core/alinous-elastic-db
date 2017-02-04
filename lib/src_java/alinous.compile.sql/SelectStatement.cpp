@@ -260,7 +260,7 @@ void SelectStatement::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
 		if(el == nullptr || !((dynamic_cast<SQLExpressionList*>(el) != 0)))
 		{
-			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1037(), ctx));
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1039(), ctx));
 		}
 		__GC_MV(this, &(this->list), static_cast<SQLExpressionList*>(el), SQLExpressionList);
 	}
@@ -280,7 +280,7 @@ void SelectStatement::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
 		if(el == nullptr || !((dynamic_cast<SQLWhere*>(el) != 0)))
 		{
-			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1039(), ctx));
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1041(), ctx));
 		}
 		__GC_MV(this, &(this->where), static_cast<SQLWhere*>(el), SQLWhere);
 	}
@@ -290,7 +290,7 @@ void SelectStatement::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
 		if(el == nullptr || !((dynamic_cast<SQLGroupBy*>(el) != 0)))
 		{
-			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1040(), ctx));
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1042(), ctx));
 		}
 		__GC_MV(this, &(this->groupBy), static_cast<SQLGroupBy*>(el), SQLGroupBy);
 	}
@@ -300,7 +300,7 @@ void SelectStatement::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
 		if(el == nullptr || !((dynamic_cast<SQLLimitOffset*>(el) != 0)))
 		{
-			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1041(), ctx));
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1043(), ctx));
 		}
 		__GC_MV(this, &(this->limitOffset), static_cast<SQLLimitOffset*>(el), SQLLimitOffset);
 	}

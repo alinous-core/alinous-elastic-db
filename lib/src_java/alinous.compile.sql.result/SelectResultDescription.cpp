@@ -122,11 +122,11 @@ ArrayList<ScanTableColumnIdentifier>* SelectResultDescription::getGroupByIndexCo
 			}
 		case AbstructSelectResult::ALL_COLUMNS:
 			{
-				throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1079(), ctx));
+				throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1081(), ctx));
 			}
 		case AbstructSelectResult::FUNCTION:
 		default:
-			throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1080(), ctx));
+			throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1082(), ctx));
 			break;
 		}
 	}

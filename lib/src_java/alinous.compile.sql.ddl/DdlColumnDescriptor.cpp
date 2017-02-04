@@ -180,7 +180,7 @@ void DdlColumnDescriptor::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx
 		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
 		if(el == nullptr || !((dynamic_cast<ColumnTypeDescriptor*>(el) != 0)))
 		{
-			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1065(), ctx));
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1067(), ctx));
 		}
 		__GC_MV(this, &(this->typeDescriptor), static_cast<ColumnTypeDescriptor*>(el), ColumnTypeDescriptor);
 	}
@@ -190,7 +190,7 @@ void DdlColumnDescriptor::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx
 		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
 		if(el == nullptr || !((dynamic_cast<ISQLExpression*>(el) != 0)))
 		{
-			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1044(), ctx));
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1046(), ctx));
 		}
 		__GC_MV(this, &(this->defaultValue), static_cast<ISQLExpression*>(el), ISQLExpression);
 	}

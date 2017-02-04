@@ -100,7 +100,7 @@ void InsertStatement::validate(SourceValidator* validator, ThreadContext* ctx) t
 {
 	if(!((dynamic_cast<TableJoinTarget*>(this->table) != 0)))
 	{
-		validator->addError(ConstStr::getCNST_STR_1047(), this->table, ctx);
+		validator->addError(ConstStr::getCNST_STR_1049(), this->table, ctx);
 	}
 }
 bool InsertStatement::visit(IAlinousElementVisitor* visitor, AbstractSrcElement* parent, ThreadContext* ctx) throw() 
@@ -223,7 +223,7 @@ void InsertStatement::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
 		if(el == nullptr || !((dynamic_cast<SQLExpressionList*>(el) != 0)))
 		{
-			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1037(), ctx));
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1039(), ctx));
 		}
 		__GC_MV(this, &(this->list), static_cast<SQLExpressionList*>(el), SQLExpressionList);
 	}
@@ -233,7 +233,7 @@ void InsertStatement::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
 		if(el == nullptr || !((dynamic_cast<InsertValues*>(el) != 0)))
 		{
-			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1048(), ctx));
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1050(), ctx));
 		}
 		this->values->add(static_cast<InsertValues*>(el), ctx);
 	}

@@ -56,7 +56,7 @@ class TablePartitionMaxValue final : public ICommandData, public virtual IObject
 public:
 	TablePartitionMaxValue(const TablePartitionMaxValue& base) = default;
 public:
-	TablePartitionMaxValue(ThreadContext* ctx) throw()  : IObject(ctx), ICommandData(ctx), values(GCUtils<List<VariantValue> >::ins(this, (new(ctx) ArrayList<VariantValue>(ctx)), ctx, __FILEW__, __LINE__, L""))
+	TablePartitionMaxValue(ThreadContext* ctx) throw()  : IObject(ctx), ICommandData(ctx), values(nullptr), subvalues(nullptr)
 	{
 	}
 	void __construct_impl(ThreadContext* ctx) throw() 
@@ -66,8 +66,10 @@ public:
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 private:
 	List<VariantValue>* values;
+	List<VariantValue>* subvalues;
 public:
 	void addValue(VariantValue* value, ThreadContext* ctx) throw() ;
+	void addSubValue(VariantValue* value, ThreadContext* ctx) throw() ;
 	int fileSize(ThreadContext* ctx);
 	void toFileEntry(FileStorageEntryBuilder* builder, ThreadContext* ctx);
 	void readData(NetworkBinaryBuffer* buff, ThreadContext* ctx) final;

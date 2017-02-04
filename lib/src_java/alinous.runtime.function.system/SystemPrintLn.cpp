@@ -20,14 +20,14 @@ bool SystemPrintLn::__init_static_variables(){
 }
  SystemPrintLn::SystemPrintLn(ThreadContext* ctx) throw()  : IObject(ctx), AbstractNativeFunction(ctx)
 {
-	__GC_MV(this, &(this->prefix), ConstStr::getCNST_STR_1209(), String);
-	__GC_MV(this, &(this->name), ConstStr::getCNST_STR_1210(), String);
+	__GC_MV(this, &(this->prefix), ConstStr::getCNST_STR_1211(), String);
+	__GC_MV(this, &(this->name), ConstStr::getCNST_STR_1212(), String);
 	this->argumentMetadata->add(makeStringType(ctx), ctx);
 }
 void SystemPrintLn::__construct_impl(ThreadContext* ctx) throw() 
 {
-	__GC_MV(this, &(this->prefix), ConstStr::getCNST_STR_1209(), String);
-	__GC_MV(this, &(this->name), ConstStr::getCNST_STR_1210(), String);
+	__GC_MV(this, &(this->prefix), ConstStr::getCNST_STR_1211(), String);
+	__GC_MV(this, &(this->name), ConstStr::getCNST_STR_1212(), String);
 	this->argumentMetadata->add(makeStringType(ctx), ctx);
 }
  SystemPrintLn::~SystemPrintLn() throw() 

@@ -7,7 +7,7 @@ namespace alinous {namespace runtime {namespace dom {
 
 
 
-String* DomVariableContainer::TAG_DOM_VARIABLE_CONTAINER = ConstStr::getCNST_STR_1110();
+String* DomVariableContainer::TAG_DOM_VARIABLE_CONTAINER = ConstStr::getCNST_STR_1112();
 bool DomVariableContainer::__init_done = __init_static_variables();
 bool DomVariableContainer::__init_static_variables(){
 	Java2CppSystem::getSelf();

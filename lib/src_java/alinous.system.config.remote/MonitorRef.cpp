@@ -41,7 +41,7 @@ void MonitorRef::parseUrl(ThreadContext* ctx)
 	IArrayObject<String>* segs = this->url->split(ConstStr::getCNST_STR_381(), ctx);
 	if(segs->length != 2)
 	{
-		throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_1297(), ctx));
+		throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_1299(), ctx));
 	}
 	__GC_MV(this, &(this->host), segs->get(0), String);
 	{
@@ -51,7 +51,7 @@ void MonitorRef::parseUrl(ThreadContext* ctx)
 		}
 		catch(NumberFormatException* e)
 		{
-			throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_1297(), ctx));
+			throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_1299(), ctx));
 		}
 	}
 }
@@ -91,18 +91,18 @@ MonitorRef* MonitorRef::parseInstance(MatchCandidate* candidate, DomDocument* do
 {
 	MonitorRef* monitorRef = (new(ctx) MonitorRef(ctx));
 	DomNode* selfDom = candidate->getCandidateDom(ctx);
-	IVariableValue* attr = selfDom->getAttributeValue(ConstStr::getCNST_STR_1262(), ctx);
+	IVariableValue* attr = selfDom->getAttributeValue(ConstStr::getCNST_STR_1264(), ctx);
 	if(attr == nullptr)
 	{
-		throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_1296(), ctx));
+		throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_1298(), ctx));
 	}
 	monitorRef->setUrl(attr->toString(ctx)->trim(ctx), ctx);
 	monitorRef->parseUrl(ctx);
-	attr = selfDom->getAttributeValue(ConstStr::getCNST_STR_1264(), ctx);
+	attr = selfDom->getAttributeValue(ConstStr::getCNST_STR_1266(), ctx);
 	if(attr != nullptr)
 	{
 		String* ipv6 = attr->toString(ctx)->trim(ctx);
-		if(!ipv6->equals(ConstStr::getCNST_STR_1137(), ctx))
+		if(!ipv6->equals(ConstStr::getCNST_STR_1139(), ctx))
 		{
 			monitorRef->setIpv6(true, ctx);
 		}

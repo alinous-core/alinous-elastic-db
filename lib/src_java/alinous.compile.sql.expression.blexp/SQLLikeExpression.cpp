@@ -141,7 +141,7 @@ bool SQLLikeExpression::analyseSQL(SQLAnalyseContext* context, bool leftValue, b
 			catch(AlinousException* e)
 			{
 				e->printStackTrace(ctx);
-				throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1075(), ctx));
+				throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1077(), ctx));
 			}
 		}
 	}
@@ -214,7 +214,7 @@ bool SQLLikeExpression::hasArrayResult(ThreadContext* ctx) throw()
 }
 ArrayList<VariantValue>* SQLLikeExpression::resolveSQLExpressionAsArray(ScanResultRecord* record, ScriptMachine* machine, bool debug, ThreadContext* ctx)
 {
-	throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1036(), ctx));
+	throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1038(), ctx));
 }
 int SQLLikeExpression::getExpressionType(ThreadContext* ctx) throw() 
 {
@@ -229,7 +229,7 @@ void SQLLikeExpression::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
 		if(el == nullptr || !((dynamic_cast<ISQLExpression*>(el) != 0)))
 		{
-			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1044(), ctx));
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1046(), ctx));
 		}
 		__GC_MV(this, &(this->first), static_cast<ISQLExpression*>(el), ISQLExpression);
 	}
@@ -239,7 +239,7 @@ void SQLLikeExpression::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
 		if(el == nullptr || !((dynamic_cast<ISQLExpression*>(el) != 0)))
 		{
-			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1044(), ctx));
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1046(), ctx));
 		}
 		__GC_MV(this, &(this->exp), static_cast<ISQLExpression*>(el), ISQLExpression);
 	}
@@ -249,7 +249,7 @@ void SQLLikeExpression::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
 		if(el == nullptr || !((dynamic_cast<ISQLExpression*>(el) != 0)))
 		{
-			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1044(), ctx));
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1046(), ctx));
 		}
 		__GC_MV(this, &(this->esc), static_cast<ISQLExpression*>(el), ISQLExpression);
 	}
@@ -355,7 +355,7 @@ void SQLLikeExpression::fromFileEntry(FileStorageEntryFetcher* fetcher, ThreadCo
 		IExpression* el = IExpressionFactory::fromFetcher(fetcher, ctx);
 		if(el == nullptr || !((dynamic_cast<ISQLExpression*>(el) != 0)))
 		{
-			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1044(), ctx));
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1046(), ctx));
 		}
 		__GC_MV(this, &(this->first), static_cast<ISQLExpression*>(el), ISQLExpression);
 	}
@@ -365,7 +365,7 @@ void SQLLikeExpression::fromFileEntry(FileStorageEntryFetcher* fetcher, ThreadCo
 		IExpression* el = IExpressionFactory::fromFetcher(fetcher, ctx);
 		if(el == nullptr || !((dynamic_cast<ISQLExpression*>(el) != 0)))
 		{
-			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1044(), ctx));
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1046(), ctx));
 		}
 		__GC_MV(this, &(this->exp), static_cast<ISQLExpression*>(el), ISQLExpression);
 	}
@@ -375,7 +375,7 @@ void SQLLikeExpression::fromFileEntry(FileStorageEntryFetcher* fetcher, ThreadCo
 		IExpression* el = IExpressionFactory::fromFetcher(fetcher, ctx);
 		if(el == nullptr || !((dynamic_cast<ISQLExpression*>(el) != 0)))
 		{
-			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1044(), ctx));
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1046(), ctx));
 		}
 		__GC_MV(this, &(this->esc), static_cast<ISQLExpression*>(el), ISQLExpression);
 	}

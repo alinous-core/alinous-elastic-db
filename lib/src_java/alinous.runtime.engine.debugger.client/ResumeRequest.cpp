@@ -7,7 +7,7 @@ namespace alinous {namespace runtime {namespace engine {namespace debugger {name
 
 
 
-String* ResumeRequest::THREAD_ID = ConstStr::getCNST_STR_1191();
+String* ResumeRequest::THREAD_ID = ConstStr::getCNST_STR_1193();
 bool ResumeRequest::__init_done = __init_static_variables();
 bool ResumeRequest::__init_static_variables(){
 	Java2CppSystem::getSelf();

@@ -43,7 +43,7 @@ void UpdateStatement::validate(SourceValidator* validator, ThreadContext* ctx) t
 {
 	if(!((dynamic_cast<TableJoinTarget*>(this->table) != 0)))
 	{
-		validator->addError(ConstStr::getCNST_STR_1045(), this->table, ctx);
+		validator->addError(ConstStr::getCNST_STR_1047(), this->table, ctx);
 	}
 }
 AlinousName* UpdateStatement::getTableName(ThreadContext* ctx) throw() 
@@ -161,7 +161,7 @@ void UpdateStatement::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
 		if(el == nullptr || !((dynamic_cast<UpdateSet*>(el) != 0)))
 		{
-			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1046(), ctx));
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1048(), ctx));
 		}
 		UpdateSet* set = static_cast<UpdateSet*>(el);
 		this->sets->add(set, ctx);
@@ -172,7 +172,7 @@ void UpdateStatement::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
 		if(el == nullptr || !((dynamic_cast<SQLWhere*>(el) != 0)))
 		{
-			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1039(), ctx));
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1041(), ctx));
 		}
 		__GC_MV(this, &(this->where), static_cast<SQLWhere*>(el), SQLWhere);
 	}

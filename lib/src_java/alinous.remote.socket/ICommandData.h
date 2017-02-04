@@ -185,6 +185,8 @@ public:
 	constexpr static const int __AlinousModulePackage{1124};
 	constexpr static const int __VirtualTable{1125};
 	constexpr static const int __LeftJoin{1126};
+	constexpr static const int __ShardKeys{1127};
+	constexpr static const int __SubShardKeys{1128};
 public:
 	virtual void readData(NetworkBinaryBuffer* buff, ThreadContext* ctx) = 0;
 	virtual void writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw()  = 0;

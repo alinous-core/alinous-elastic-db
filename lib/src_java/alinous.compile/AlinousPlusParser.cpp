@@ -41,7 +41,7 @@ bool AlinousPlusParser::__init_static_variables(){
 	delete ctx;
 	return true;
 }
- AlinousPlusParser::AlinousPlusParser(java::io::InputStream* stream, ThreadContext* ctx) : IObject(ctx), AlinousPlusParserConstants(ctx), token_source(nullptr), token(nullptr), jj_nt(nullptr), jj_input_stream(nullptr), jj_ntk(0), jj_scanpos(nullptr), jj_lastpos(nullptr), jj_la(0), jj_gen(0), jj_la1(__GC_INS(this, ((IArrayObjectPrimitive<long long>*)new(ctx) ArrayObjectPrimitive<long long>(ArrayAllocatorPrimitive<long long>::allocatep(ctx, 116), ctx)), IArrayObjectPrimitive<long long>)), jj_2_rtns(__GC_INS(this, ((IArrayObject<JJCalls>*)new(ctx) ArrayObject<JJCalls>(ArrayAllocator<JJCalls>::allocate(ctx, 67), ctx)), IArrayObject<JJCalls>)), jj_rescan(false), jj_gc(0), jj_ls(__GC_INS(this, (new(ctx) AlinousPlusParser::LookaheadSuccess(ctx)), AlinousPlusParser::LookaheadSuccess)), jj_expentries(GCUtils<java::util::List<IArrayObjectPrimitive<long long>> >::ins(this, (new(ctx) java::util::ArrayList<IArrayObjectPrimitive<long long>>(ctx)), ctx, __FILEW__, __LINE__, L"")), jj_expentry(nullptr), jj_kind(-1), jj_lasttokens(__GC_INS(this, ((IArrayObjectPrimitive<long long>*)new(ctx) ArrayObjectPrimitive<long long>(ArrayAllocatorPrimitive<long long>::allocatep(ctx, 100), ctx)), IArrayObjectPrimitive<long long>)), jj_endpos(0)
+ AlinousPlusParser::AlinousPlusParser(java::io::InputStream* stream, ThreadContext* ctx) : IObject(ctx), AlinousPlusParserConstants(ctx), token_source(nullptr), token(nullptr), jj_nt(nullptr), jj_input_stream(nullptr), jj_ntk(0), jj_scanpos(nullptr), jj_lastpos(nullptr), jj_la(0), jj_gen(0), jj_la1(__GC_INS(this, ((IArrayObjectPrimitive<long long>*)new(ctx) ArrayObjectPrimitive<long long>(ArrayAllocatorPrimitive<long long>::allocatep(ctx, 118), ctx)), IArrayObjectPrimitive<long long>)), jj_2_rtns(__GC_INS(this, ((IArrayObject<JJCalls>*)new(ctx) ArrayObject<JJCalls>(ArrayAllocator<JJCalls>::allocate(ctx, 67), ctx)), IArrayObject<JJCalls>)), jj_rescan(false), jj_gc(0), jj_ls(__GC_INS(this, (new(ctx) AlinousPlusParser::LookaheadSuccess(ctx)), AlinousPlusParser::LookaheadSuccess)), jj_expentries(GCUtils<java::util::List<IArrayObjectPrimitive<long long>> >::ins(this, (new(ctx) java::util::ArrayList<IArrayObjectPrimitive<long long>>(ctx)), ctx, __FILEW__, __LINE__, L"")), jj_expentry(nullptr), jj_kind(-1), jj_lasttokens(__GC_INS(this, ((IArrayObjectPrimitive<long long>*)new(ctx) ArrayObjectPrimitive<long long>(ArrayAllocatorPrimitive<long long>::allocatep(ctx, 100), ctx)), IArrayObjectPrimitive<long long>)), jj_endpos(0)
 {
 	__construct_impl(stream, nullptr, ctx);
 }
@@ -49,7 +49,7 @@ void AlinousPlusParser::__construct_impl(java::io::InputStream* stream, ThreadCo
 {
 	__construct_impl(stream, nullptr, ctx);
 }
- AlinousPlusParser::AlinousPlusParser(java::io::InputStream* stream, String* encoding, ThreadContext* ctx) : IObject(ctx), AlinousPlusParserConstants(ctx), token_source(nullptr), token(nullptr), jj_nt(nullptr), jj_input_stream(nullptr), jj_ntk(0), jj_scanpos(nullptr), jj_lastpos(nullptr), jj_la(0), jj_gen(0), jj_la1(__GC_INS(this, ((IArrayObjectPrimitive<long long>*)new(ctx) ArrayObjectPrimitive<long long>(ArrayAllocatorPrimitive<long long>::allocatep(ctx, 116), ctx)), IArrayObjectPrimitive<long long>)), jj_2_rtns(__GC_INS(this, ((IArrayObject<JJCalls>*)new(ctx) ArrayObject<JJCalls>(ArrayAllocator<JJCalls>::allocate(ctx, 67), ctx)), IArrayObject<JJCalls>)), jj_rescan(false), jj_gc(0), jj_ls(__GC_INS(this, (new(ctx) AlinousPlusParser::LookaheadSuccess(ctx)), AlinousPlusParser::LookaheadSuccess)), jj_expentries(GCUtils<java::util::List<IArrayObjectPrimitive<long long>> >::ins(this, (new(ctx) java::util::ArrayList<IArrayObjectPrimitive<long long>>(ctx)), ctx, __FILEW__, __LINE__, L"")), jj_expentry(nullptr), jj_kind(-1), jj_lasttokens(__GC_INS(this, ((IArrayObjectPrimitive<long long>*)new(ctx) ArrayObjectPrimitive<long long>(ArrayAllocatorPrimitive<long long>::allocatep(ctx, 100), ctx)), IArrayObjectPrimitive<long long>)), jj_endpos(0)
+ AlinousPlusParser::AlinousPlusParser(java::io::InputStream* stream, String* encoding, ThreadContext* ctx) : IObject(ctx), AlinousPlusParserConstants(ctx), token_source(nullptr), token(nullptr), jj_nt(nullptr), jj_input_stream(nullptr), jj_ntk(0), jj_scanpos(nullptr), jj_lastpos(nullptr), jj_la(0), jj_gen(0), jj_la1(__GC_INS(this, ((IArrayObjectPrimitive<long long>*)new(ctx) ArrayObjectPrimitive<long long>(ArrayAllocatorPrimitive<long long>::allocatep(ctx, 118), ctx)), IArrayObjectPrimitive<long long>)), jj_2_rtns(__GC_INS(this, ((IArrayObject<JJCalls>*)new(ctx) ArrayObject<JJCalls>(ArrayAllocator<JJCalls>::allocate(ctx, 67), ctx)), IArrayObject<JJCalls>)), jj_rescan(false), jj_gc(0), jj_ls(__GC_INS(this, (new(ctx) AlinousPlusParser::LookaheadSuccess(ctx)), AlinousPlusParser::LookaheadSuccess)), jj_expentries(GCUtils<java::util::List<IArrayObjectPrimitive<long long>> >::ins(this, (new(ctx) java::util::ArrayList<IArrayObjectPrimitive<long long>>(ctx)), ctx, __FILEW__, __LINE__, L"")), jj_expentry(nullptr), jj_kind(-1), jj_lasttokens(__GC_INS(this, ((IArrayObjectPrimitive<long long>*)new(ctx) ArrayObjectPrimitive<long long>(ArrayAllocatorPrimitive<long long>::allocatep(ctx, 100), ctx)), IArrayObjectPrimitive<long long>)), jj_endpos(0)
 {
 	{
 		try
@@ -65,7 +65,7 @@ void AlinousPlusParser::__construct_impl(java::io::InputStream* stream, ThreadCo
 	__GC_MV(this, &(token), (new(ctx) Token(ctx)), Token);
 	jj_ntk = -1;
 	jj_gen = 0;
-	for(long long i = 0; i < (long long)116; i ++ )
+	for(long long i = 0; i < (long long)118; i ++ )
 	jj_la1->set(-1,i, ctx);
 	for(long long i = 0; i < (long long)jj_2_rtns->length; i ++ )
 	jj_2_rtns->set((new(ctx) AlinousPlusParser::JJCalls(ctx)),i, ctx);
@@ -86,19 +86,19 @@ void AlinousPlusParser::__construct_impl(java::io::InputStream* stream, String* 
 	__GC_MV(this, &(token), (new(ctx) Token(ctx)), Token);
 	jj_ntk = -1;
 	jj_gen = 0;
-	for(long long i = 0; i < (long long)116; i ++ )
+	for(long long i = 0; i < (long long)118; i ++ )
 	jj_la1->set(-1,i, ctx);
 	for(long long i = 0; i < (long long)jj_2_rtns->length; i ++ )
 	jj_2_rtns->set((new(ctx) AlinousPlusParser::JJCalls(ctx)),i, ctx);
 }
- AlinousPlusParser::AlinousPlusParser(java::io::Reader* stream, ThreadContext* ctx) : IObject(ctx), AlinousPlusParserConstants(ctx), token_source(nullptr), token(nullptr), jj_nt(nullptr), jj_input_stream(nullptr), jj_ntk(0), jj_scanpos(nullptr), jj_lastpos(nullptr), jj_la(0), jj_gen(0), jj_la1(__GC_INS(this, ((IArrayObjectPrimitive<long long>*)new(ctx) ArrayObjectPrimitive<long long>(ArrayAllocatorPrimitive<long long>::allocatep(ctx, 116), ctx)), IArrayObjectPrimitive<long long>)), jj_2_rtns(__GC_INS(this, ((IArrayObject<JJCalls>*)new(ctx) ArrayObject<JJCalls>(ArrayAllocator<JJCalls>::allocate(ctx, 67), ctx)), IArrayObject<JJCalls>)), jj_rescan(false), jj_gc(0), jj_ls(__GC_INS(this, (new(ctx) AlinousPlusParser::LookaheadSuccess(ctx)), AlinousPlusParser::LookaheadSuccess)), jj_expentries(GCUtils<java::util::List<IArrayObjectPrimitive<long long>> >::ins(this, (new(ctx) java::util::ArrayList<IArrayObjectPrimitive<long long>>(ctx)), ctx, __FILEW__, __LINE__, L"")), jj_expentry(nullptr), jj_kind(-1), jj_lasttokens(__GC_INS(this, ((IArrayObjectPrimitive<long long>*)new(ctx) ArrayObjectPrimitive<long long>(ArrayAllocatorPrimitive<long long>::allocatep(ctx, 100), ctx)), IArrayObjectPrimitive<long long>)), jj_endpos(0)
+ AlinousPlusParser::AlinousPlusParser(java::io::Reader* stream, ThreadContext* ctx) : IObject(ctx), AlinousPlusParserConstants(ctx), token_source(nullptr), token(nullptr), jj_nt(nullptr), jj_input_stream(nullptr), jj_ntk(0), jj_scanpos(nullptr), jj_lastpos(nullptr), jj_la(0), jj_gen(0), jj_la1(__GC_INS(this, ((IArrayObjectPrimitive<long long>*)new(ctx) ArrayObjectPrimitive<long long>(ArrayAllocatorPrimitive<long long>::allocatep(ctx, 118), ctx)), IArrayObjectPrimitive<long long>)), jj_2_rtns(__GC_INS(this, ((IArrayObject<JJCalls>*)new(ctx) ArrayObject<JJCalls>(ArrayAllocator<JJCalls>::allocate(ctx, 67), ctx)), IArrayObject<JJCalls>)), jj_rescan(false), jj_gc(0), jj_ls(__GC_INS(this, (new(ctx) AlinousPlusParser::LookaheadSuccess(ctx)), AlinousPlusParser::LookaheadSuccess)), jj_expentries(GCUtils<java::util::List<IArrayObjectPrimitive<long long>> >::ins(this, (new(ctx) java::util::ArrayList<IArrayObjectPrimitive<long long>>(ctx)), ctx, __FILEW__, __LINE__, L"")), jj_expentry(nullptr), jj_kind(-1), jj_lasttokens(__GC_INS(this, ((IArrayObjectPrimitive<long long>*)new(ctx) ArrayObjectPrimitive<long long>(ArrayAllocatorPrimitive<long long>::allocatep(ctx, 100), ctx)), IArrayObjectPrimitive<long long>)), jj_endpos(0)
 {
 	__GC_MV(this, &(jj_input_stream), (new(ctx) JavaCharStream(stream, 1, 1, ctx)), JavaCharStream);
 	__GC_MV(this, &(token_source), (new(ctx) AlinousPlusParserTokenManager(jj_input_stream, ctx)), AlinousPlusParserTokenManager);
 	__GC_MV(this, &(token), (new(ctx) Token(ctx)), Token);
 	jj_ntk = -1;
 	jj_gen = 0;
-	for(long long i = 0; i < (long long)116; i ++ )
+	for(long long i = 0; i < (long long)118; i ++ )
 	jj_la1->set(-1,i, ctx);
 	for(long long i = 0; i < (long long)jj_2_rtns->length; i ++ )
 	jj_2_rtns->set((new(ctx) AlinousPlusParser::JJCalls(ctx)),i, ctx);
@@ -110,18 +110,18 @@ void AlinousPlusParser::__construct_impl(java::io::Reader* stream, ThreadContext
 	__GC_MV(this, &(token), (new(ctx) Token(ctx)), Token);
 	jj_ntk = -1;
 	jj_gen = 0;
-	for(long long i = 0; i < (long long)116; i ++ )
+	for(long long i = 0; i < (long long)118; i ++ )
 	jj_la1->set(-1,i, ctx);
 	for(long long i = 0; i < (long long)jj_2_rtns->length; i ++ )
 	jj_2_rtns->set((new(ctx) AlinousPlusParser::JJCalls(ctx)),i, ctx);
 }
- AlinousPlusParser::AlinousPlusParser(AlinousPlusParserTokenManager* tm, ThreadContext* ctx) : IObject(ctx), AlinousPlusParserConstants(ctx), token_source(nullptr), token(nullptr), jj_nt(nullptr), jj_input_stream(nullptr), jj_ntk(0), jj_scanpos(nullptr), jj_lastpos(nullptr), jj_la(0), jj_gen(0), jj_la1(__GC_INS(this, ((IArrayObjectPrimitive<long long>*)new(ctx) ArrayObjectPrimitive<long long>(ArrayAllocatorPrimitive<long long>::allocatep(ctx, 116), ctx)), IArrayObjectPrimitive<long long>)), jj_2_rtns(__GC_INS(this, ((IArrayObject<JJCalls>*)new(ctx) ArrayObject<JJCalls>(ArrayAllocator<JJCalls>::allocate(ctx, 67), ctx)), IArrayObject<JJCalls>)), jj_rescan(false), jj_gc(0), jj_ls(__GC_INS(this, (new(ctx) AlinousPlusParser::LookaheadSuccess(ctx)), AlinousPlusParser::LookaheadSuccess)), jj_expentries(GCUtils<java::util::List<IArrayObjectPrimitive<long long>> >::ins(this, (new(ctx) java::util::ArrayList<IArrayObjectPrimitive<long long>>(ctx)), ctx, __FILEW__, __LINE__, L"")), jj_expentry(nullptr), jj_kind(-1), jj_lasttokens(__GC_INS(this, ((IArrayObjectPrimitive<long long>*)new(ctx) ArrayObjectPrimitive<long long>(ArrayAllocatorPrimitive<long long>::allocatep(ctx, 100), ctx)), IArrayObjectPrimitive<long long>)), jj_endpos(0)
+ AlinousPlusParser::AlinousPlusParser(AlinousPlusParserTokenManager* tm, ThreadContext* ctx) : IObject(ctx), AlinousPlusParserConstants(ctx), token_source(nullptr), token(nullptr), jj_nt(nullptr), jj_input_stream(nullptr), jj_ntk(0), jj_scanpos(nullptr), jj_lastpos(nullptr), jj_la(0), jj_gen(0), jj_la1(__GC_INS(this, ((IArrayObjectPrimitive<long long>*)new(ctx) ArrayObjectPrimitive<long long>(ArrayAllocatorPrimitive<long long>::allocatep(ctx, 118), ctx)), IArrayObjectPrimitive<long long>)), jj_2_rtns(__GC_INS(this, ((IArrayObject<JJCalls>*)new(ctx) ArrayObject<JJCalls>(ArrayAllocator<JJCalls>::allocate(ctx, 67), ctx)), IArrayObject<JJCalls>)), jj_rescan(false), jj_gc(0), jj_ls(__GC_INS(this, (new(ctx) AlinousPlusParser::LookaheadSuccess(ctx)), AlinousPlusParser::LookaheadSuccess)), jj_expentries(GCUtils<java::util::List<IArrayObjectPrimitive<long long>> >::ins(this, (new(ctx) java::util::ArrayList<IArrayObjectPrimitive<long long>>(ctx)), ctx, __FILEW__, __LINE__, L"")), jj_expentry(nullptr), jj_kind(-1), jj_lasttokens(__GC_INS(this, ((IArrayObjectPrimitive<long long>*)new(ctx) ArrayObjectPrimitive<long long>(ArrayAllocatorPrimitive<long long>::allocatep(ctx, 100), ctx)), IArrayObjectPrimitive<long long>)), jj_endpos(0)
 {
 	__GC_MV(this, &(token_source), tm, AlinousPlusParserTokenManager);
 	__GC_MV(this, &(token), (new(ctx) Token(ctx)), Token);
 	jj_ntk = -1;
 	jj_gen = 0;
-	for(long long i = 0; i < (long long)116; i ++ )
+	for(long long i = 0; i < (long long)118; i ++ )
 	jj_la1->set(-1,i, ctx);
 	for(long long i = 0; i < (long long)jj_2_rtns->length; i ++ )
 	jj_2_rtns->set((new(ctx) AlinousPlusParser::JJCalls(ctx)),i, ctx);
@@ -132,7 +132,7 @@ void AlinousPlusParser::__construct_impl(AlinousPlusParserTokenManager* tm, Thre
 	__GC_MV(this, &(token), (new(ctx) Token(ctx)), Token);
 	jj_ntk = -1;
 	jj_gen = 0;
-	for(long long i = 0; i < (long long)116; i ++ )
+	for(long long i = 0; i < (long long)118; i ++ )
 	jj_la1->set(-1,i, ctx);
 	for(long long i = 0; i < (long long)jj_2_rtns->length; i ++ )
 	jj_2_rtns->set((new(ctx) AlinousPlusParser::JJCalls(ctx)),i, ctx);
@@ -294,8 +294,11 @@ AlinousSrc* AlinousPlusParser::parse(ThreadContext* ctx)
 		case _NULL:
 		case FUNCTION:
 		case USE:
+		case REGION:
+		case SHARD:
+		case SUB:
 		case IDENTIFIER:
-		case 197:
+		case 199:
 			{
 				;
 				break ;
@@ -404,6 +407,9 @@ AlinousSrc* AlinousPlusParser::parse(ThreadContext* ctx)
 			case ADJUST_SET:
 			case FUNCTION:
 			case USE:
+			case REGION:
+			case SHARD:
+			case SUB:
 			case IDENTIFIER:
 				{
 					dec = alinousDeclare(ctx);
@@ -424,7 +430,7 @@ AlinousSrc* AlinousPlusParser::parse(ThreadContext* ctx)
 			return src;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1311(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
 }
 void AlinousPlusParser::headerSection(AlinousSrc* src, ThreadContext* ctx)
 {
@@ -484,7 +490,7 @@ IncludePreprocessor* AlinousPlusParser::includePreprocessor(ThreadContext* ctx)
 			return inc;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1311(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
 }
 StatementList* AlinousPlusParser::statementList(ThreadContext* ctx)
 {
@@ -521,7 +527,7 @@ StatementList* AlinousPlusParser::statementList(ThreadContext* ctx)
 			return list;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1311(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
 }
 IStatement* AlinousPlusParser::allStatements(ThreadContext* ctx)
 {
@@ -640,8 +646,11 @@ IStatement* AlinousPlusParser::allStatements(ThreadContext* ctx)
 		case ADJUST_SET:
 		case _NULL:
 		case USE:
+		case REGION:
+		case SHARD:
+		case SUB:
 		case IDENTIFIER:
-		case 197:
+		case 199:
 			{
 				stmt = alinousStatement(ctx);
 				break ;
@@ -658,7 +667,7 @@ IStatement* AlinousPlusParser::allStatements(ThreadContext* ctx)
 			return stmt;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1311(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
 }
 IDeclare* AlinousPlusParser::alinousDeclare(ThreadContext* ctx)
 {
@@ -692,7 +701,7 @@ IDeclare* AlinousPlusParser::alinousDeclare(ThreadContext* ctx)
 			return dec;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1311(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
 }
 AlinousClass* AlinousPlusParser::alinousInterface(ThreadContext* ctx)
 {
@@ -772,7 +781,7 @@ AlinousClass* AlinousPlusParser::alinousInterface(ThreadContext* ctx)
 			return clazz;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1311(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
 }
 AlinousClass* AlinousPlusParser::alinousClass(ThreadContext* ctx)
 {
@@ -864,7 +873,7 @@ AlinousClass* AlinousPlusParser::alinousClass(ThreadContext* ctx)
 			return clazz;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1311(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
 }
 ArrayList<ClassImplements>* AlinousPlusParser::classImplements(ThreadContext* ctx)
 {
@@ -969,6 +978,9 @@ ArrayList<ClassImplements>* AlinousPlusParser::classImplements(ThreadContext* ct
 		case ADJUST_WHERE:
 		case ADJUST_SET:
 		case USE:
+		case REGION:
+		case SHARD:
+		case SUB:
 		case IDENTIFIER:
 			{
 				;
@@ -985,7 +997,7 @@ ArrayList<ClassImplements>* AlinousPlusParser::classImplements(ThreadContext* ct
 			return list;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1311(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
 }
 ClassExtends* AlinousPlusParser::classExtends(ThreadContext* ctx)
 {
@@ -1001,7 +1013,7 @@ ClassExtends* AlinousPlusParser::classExtends(ThreadContext* ctx)
 			return exts;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1311(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
 }
 IClassMember* AlinousPlusParser::classMember(ThreadContext* ctx)
 {
@@ -1034,7 +1046,7 @@ IClassMember* AlinousPlusParser::classMember(ThreadContext* ctx)
 			return member;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1311(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
 }
 void AlinousPlusParser::classMemberVariableLookAhead(ThreadContext* ctx)
 {
@@ -1135,6 +1147,9 @@ void AlinousPlusParser::classMemberVariableLookAhead(ThreadContext* ctx)
 	case ADJUST_WHERE:
 	case ADJUST_SET:
 	case USE:
+	case REGION:
+	case SHARD:
+	case SUB:
 	case IDENTIFIER:
 		{
 			alinousName(ctx);
@@ -1303,6 +1318,9 @@ ClassMemberVariable* AlinousPlusParser::classMemberVariable(ThreadContext* ctx)
 	case ADJUST_WHERE:
 	case ADJUST_SET:
 	case USE:
+	case REGION:
+	case SHARD:
+	case SUB:
 	case IDENTIFIER:
 		{
 			type = alinousName(ctx);
@@ -1372,7 +1390,7 @@ ClassMemberVariable* AlinousPlusParser::classMemberVariable(ThreadContext* ctx)
 			return val;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1311(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
 }
 ClassMethodFunction* AlinousPlusParser::classMethodFunction(ThreadContext* ctx)
 {
@@ -1389,7 +1407,7 @@ ClassMethodFunction* AlinousPlusParser::classMethodFunction(ThreadContext* ctx)
 			return method;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1311(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
 }
 ClassMemberModifiers* AlinousPlusParser::classMemberModifiers(ThreadContext* ctx)
 {
@@ -1463,7 +1481,7 @@ ClassMemberModifiers* AlinousPlusParser::classMemberModifiers(ThreadContext* ctx
 			return mod;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1311(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
 }
 void AlinousPlusParser::alinousFunctionLookAhead(ThreadContext* ctx)
 {
@@ -1564,6 +1582,9 @@ void AlinousPlusParser::alinousFunctionLookAhead(ThreadContext* ctx)
 		case ADJUST_WHERE:
 		case ADJUST_SET:
 		case USE:
+		case REGION:
+		case SHARD:
+		case SUB:
 		case IDENTIFIER:
 			{
 				returnValueDefinition(ctx);
@@ -1730,6 +1751,9 @@ AlinousFunction* AlinousPlusParser::alinousFunction(ThreadContext* ctx)
 			case ADJUST_WHERE:
 			case ADJUST_SET:
 			case USE:
+			case REGION:
+			case SHARD:
+			case SUB:
 			case IDENTIFIER:
 				{
 					name = alinousName(ctx);
@@ -1804,7 +1828,7 @@ AlinousFunction* AlinousPlusParser::alinousFunction(ThreadContext* ctx)
 			return func;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1311(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
 }
 ReturnValueDefinition* AlinousPlusParser::returnValueDefinition(ThreadContext* ctx)
 {
@@ -1818,7 +1842,7 @@ ReturnValueDefinition* AlinousPlusParser::returnValueDefinition(ThreadContext* c
 			return retValue;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1311(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
 }
 FunctionArgumentsListDefine* AlinousPlusParser::functionArgumentsListDefine(ThreadContext* ctx)
 {
@@ -1919,6 +1943,9 @@ FunctionArgumentsListDefine* AlinousPlusParser::functionArgumentsListDefine(Thre
 	case ADJUST_WHERE:
 	case ADJUST_SET:
 	case USE:
+	case REGION:
+	case SHARD:
+	case SUB:
 	case IDENTIFIER:
 		{
 			arg = functionArgumentDefine(ctx);
@@ -1954,7 +1981,7 @@ FunctionArgumentsListDefine* AlinousPlusParser::functionArgumentsListDefine(Thre
 			return arguments;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1311(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
 }
 FunctionArgumentDefine* AlinousPlusParser::functionArgumentDefine(ThreadContext* ctx)
 {
@@ -2065,6 +2092,9 @@ FunctionArgumentDefine* AlinousPlusParser::functionArgumentDefine(ThreadContext*
 	case ADJUST_WHERE:
 	case ADJUST_SET:
 	case USE:
+	case REGION:
+	case SHARD:
+	case SUB:
 	case IDENTIFIER:
 		{
 			type = alinousName(ctx);
@@ -2085,7 +2115,7 @@ FunctionArgumentDefine* AlinousPlusParser::functionArgumentDefine(ThreadContext*
 		throw (new(ctx) ParseException(ctx));
 		break;
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1311(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
 }
 ThrowsDefine* AlinousPlusParser::throwsDefine(ThreadContext* ctx)
 {
@@ -2119,7 +2149,7 @@ ThrowsDefine* AlinousPlusParser::throwsDefine(ThreadContext* ctx)
 			return throwsDef;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1311(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
 }
 IStatement* AlinousPlusParser::alinousStatement(ThreadContext* ctx)
 {
@@ -2177,7 +2207,7 @@ IStatement* AlinousPlusParser::alinousStatement(ThreadContext* ctx)
 			return stmt;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1311(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
 }
 IfStatement* AlinousPlusParser::ifStatement(ThreadContext* ctx)
 {
@@ -2198,7 +2228,7 @@ IfStatement* AlinousPlusParser::ifStatement(ThreadContext* ctx)
 			return stmt;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1311(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
 }
 SwitchStatement* AlinousPlusParser::switchStatement(ThreadContext* ctx)
 {
@@ -2257,7 +2287,7 @@ SwitchStatement* AlinousPlusParser::switchStatement(ThreadContext* ctx)
 			return stmt;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1311(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
 }
 SwitchCasePart* AlinousPlusParser::switchCasePart(ThreadContext* ctx)
 {
@@ -2317,7 +2347,7 @@ SwitchCasePart* AlinousPlusParser::switchCasePart(ThreadContext* ctx)
 			return part;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1311(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
 }
 CaseStatement* AlinousPlusParser::caseStatement(ThreadContext* ctx)
 {
@@ -2335,7 +2365,7 @@ CaseStatement* AlinousPlusParser::caseStatement(ThreadContext* ctx)
 			return stmt;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1311(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
 }
 DefaultStatement* AlinousPlusParser::defaultStatement(ThreadContext* ctx)
 {
@@ -2350,7 +2380,7 @@ DefaultStatement* AlinousPlusParser::defaultStatement(ThreadContext* ctx)
 			return stmt;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1311(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
 }
 ForStatement* AlinousPlusParser::forStatement(ThreadContext* ctx)
 {
@@ -2488,8 +2518,11 @@ ForStatement* AlinousPlusParser::forStatement(ThreadContext* ctx)
 	case ADJUST_SET:
 	case _NULL:
 	case USE:
+	case REGION:
+	case SHARD:
+	case SUB:
 	case IDENTIFIER:
-	case 197:
+	case 199:
 		{
 			initStatement = alinousStatement(ctx);
 			stmt->setInitStatement(initStatement, ctx);
@@ -2605,8 +2638,11 @@ ForStatement* AlinousPlusParser::forStatement(ThreadContext* ctx)
 	case ADJUST_SET:
 	case _NULL:
 	case USE:
+	case REGION:
+	case SHARD:
+	case SUB:
 	case IDENTIFIER:
-	case 197:
+	case 199:
 		{
 			condition = conditionalExpression(ctx);
 			stmt->setCondition(condition, ctx);
@@ -2722,8 +2758,11 @@ ForStatement* AlinousPlusParser::forStatement(ThreadContext* ctx)
 	case ADJUST_SET:
 	case _NULL:
 	case USE:
+	case REGION:
+	case SHARD:
+	case SUB:
 	case IDENTIFIER:
-	case 197:
+	case 199:
 		{
 			updatePart = forUpdatePart(ctx);
 			stmt->setUpdatePart(updatePart, ctx);
@@ -2751,7 +2790,7 @@ ForStatement* AlinousPlusParser::forStatement(ThreadContext* ctx)
 			return stmt;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1311(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
 }
 ForUpdatePart* AlinousPlusParser::forUpdatePart(ThreadContext* ctx)
 {
@@ -2762,8 +2801,6 @@ ForUpdatePart* AlinousPlusParser::forUpdatePart(ThreadContext* ctx)
 	left = conditionalExpression(ctx);
 	switch((jj_ntk == (long long)-1) ? jj_ntk_f(ctx) : jj_ntk) {
 	case EQUALS:
-	case 198:
-	case 199:
 	case 200:
 	case 201:
 	case 202:
@@ -2772,6 +2809,8 @@ ForUpdatePart* AlinousPlusParser::forUpdatePart(ThreadContext* ctx)
 	case 205:
 	case 206:
 	case 207:
+	case 208:
+	case 209:
 		{
 			op = assignmentOperator(ctx);
 			right = conditionalExpression(ctx);
@@ -2799,7 +2838,7 @@ ForUpdatePart* AlinousPlusParser::forUpdatePart(ThreadContext* ctx)
 			return part;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1311(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
 }
 DoWhileStatement* AlinousPlusParser::doWhileStatement(ThreadContext* ctx)
 {
@@ -2843,7 +2882,7 @@ DoWhileStatement* AlinousPlusParser::doWhileStatement(ThreadContext* ctx)
 			return stmt;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1311(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
 }
 WhileStatement* AlinousPlusParser::whileStatement(ThreadContext* ctx)
 {
@@ -2884,7 +2923,7 @@ WhileStatement* AlinousPlusParser::whileStatement(ThreadContext* ctx)
 			return stmt;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1311(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
 }
 BreakStatement* AlinousPlusParser::breakStatement(ThreadContext* ctx)
 {
@@ -2902,7 +2941,7 @@ BreakStatement* AlinousPlusParser::breakStatement(ThreadContext* ctx)
 			return stmt;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1311(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
 }
 ContinueStatement* AlinousPlusParser::continueStatement(ThreadContext* ctx)
 {
@@ -2920,7 +2959,7 @@ ContinueStatement* AlinousPlusParser::continueStatement(ThreadContext* ctx)
 			return stmt;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1311(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
 }
 LabeledStatement* AlinousPlusParser::labeledStatement(ThreadContext* ctx)
 {
@@ -2936,7 +2975,7 @@ LabeledStatement* AlinousPlusParser::labeledStatement(ThreadContext* ctx)
 			return stmt;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1311(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
 }
 TypedVariableDeclare* AlinousPlusParser::typedVariableDeclare(ThreadContext* ctx)
 {
@@ -3008,7 +3047,7 @@ TypedVariableDeclare* AlinousPlusParser::typedVariableDeclare(ThreadContext* ctx
 			return stmt;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1311(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
 }
 void AlinousPlusParser::assignmentStatementLookAhead(ThreadContext* ctx)
 {
@@ -3037,7 +3076,7 @@ AssignmentStatement* AlinousPlusParser::assignmentStatement(ThreadContext* ctx)
 			return stmt;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1311(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
 }
 StatementBlock* AlinousPlusParser::statementBlock(ThreadContext* ctx)
 {
@@ -3154,8 +3193,11 @@ StatementBlock* AlinousPlusParser::statementBlock(ThreadContext* ctx)
 	case ADJUST_SET:
 	case _NULL:
 	case USE:
+	case REGION:
+	case SHARD:
+	case SUB:
 	case IDENTIFIER:
-	case 197:
+	case 199:
 		{
 			list = statementList(ctx);
 			break ;
@@ -3173,7 +3215,7 @@ StatementBlock* AlinousPlusParser::statementBlock(ThreadContext* ctx)
 			return stmt;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1311(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
 }
 ExpressionStatement* AlinousPlusParser::expressionStatement(ThreadContext* ctx)
 {
@@ -3189,7 +3231,7 @@ ExpressionStatement* AlinousPlusParser::expressionStatement(ThreadContext* ctx)
 			return stmt;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1311(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
 }
 ReturnStatement* AlinousPlusParser::returnStatement(ThreadContext* ctx)
 {
@@ -3302,8 +3344,11 @@ ReturnStatement* AlinousPlusParser::returnStatement(ThreadContext* ctx)
 	case ADJUST_SET:
 	case _NULL:
 	case USE:
+	case REGION:
+	case SHARD:
+	case SUB:
 	case IDENTIFIER:
-	case 197:
+	case 199:
 		{
 			exp = conditionalExpression(ctx);
 			break ;
@@ -3328,7 +3373,7 @@ ReturnStatement* AlinousPlusParser::returnStatement(ThreadContext* ctx)
 			return stmt;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1311(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
 }
 IExpression* AlinousPlusParser::conditionalExpression(ThreadContext* ctx)
 {
@@ -3340,7 +3385,7 @@ IExpression* AlinousPlusParser::conditionalExpression(ThreadContext* ctx)
 	first = conditionalOrExpression(ctx);
 	if(jj_2_14((long long)2, ctx))
 	{
-		t = jj_consume_token((long long)194, ctx);
+		t = jj_consume_token((long long)196, ctx);
 		exp = conditionalExpression(ctx);
 		jj_consume_token(COLON, ctx);
 		altexp = conditionalExpression(ctx);
@@ -3367,7 +3412,7 @@ IExpression* AlinousPlusParser::conditionalExpression(ThreadContext* ctx)
 			return cond;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1311(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
 }
 IExpression* AlinousPlusParser::conditionalOrExpression(ThreadContext* ctx)
 {
@@ -3413,7 +3458,7 @@ IExpression* AlinousPlusParser::conditionalOrExpression(ThreadContext* ctx)
 			return orExp;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1311(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
 }
 IExpression* AlinousPlusParser::conditionalAndExpression(ThreadContext* ctx)
 {
@@ -3459,7 +3504,7 @@ IExpression* AlinousPlusParser::conditionalAndExpression(ThreadContext* ctx)
 			return andExp;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1311(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
 }
 IExpression* AlinousPlusParser::inclusiveOrExpression(ThreadContext* ctx)
 {
@@ -3505,7 +3550,7 @@ IExpression* AlinousPlusParser::inclusiveOrExpression(ThreadContext* ctx)
 			return orExp;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1311(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
 }
 IExpression* AlinousPlusParser::exclusiveOrExpression(ThreadContext* ctx)
 {
@@ -3525,7 +3570,7 @@ IExpression* AlinousPlusParser::exclusiveOrExpression(ThreadContext* ctx)
 		{
 			goto label_21_out_break;
 		}
-		t = jj_consume_token((long long)195, ctx);
+		t = jj_consume_token((long long)197, ctx);
 		exp = andExpression(ctx);
 		if(exor == nullptr)
 		{
@@ -3551,7 +3596,7 @@ IExpression* AlinousPlusParser::exclusiveOrExpression(ThreadContext* ctx)
 			return exor;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1311(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
 }
 IExpression* AlinousPlusParser::andExpression(ThreadContext* ctx)
 {
@@ -3597,7 +3642,7 @@ IExpression* AlinousPlusParser::andExpression(ThreadContext* ctx)
 			return andExp;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1311(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
 }
 IExpression* AlinousPlusParser::equalityExpression(ThreadContext* ctx)
 {
@@ -3652,7 +3697,7 @@ IExpression* AlinousPlusParser::equalityExpression(ThreadContext* ctx)
 			return eqexp;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1311(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
 }
 IExpression* AlinousPlusParser::instanceOfExpression(ThreadContext* ctx)
 {
@@ -3687,7 +3732,7 @@ IExpression* AlinousPlusParser::instanceOfExpression(ThreadContext* ctx)
 			return instanceofexp;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1311(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
 }
 IExpression* AlinousPlusParser::relationalExpression(ThreadContext* ctx)
 {
@@ -3749,7 +3794,7 @@ IExpression* AlinousPlusParser::relationalExpression(ThreadContext* ctx)
 			return relational;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1311(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
 }
 IExpression* AlinousPlusParser::shiftExpression(ThreadContext* ctx)
 {
@@ -3770,9 +3815,9 @@ IExpression* AlinousPlusParser::shiftExpression(ThreadContext* ctx)
 			goto label_23_out_break;
 		}
 		switch((jj_ntk == (long long)-1) ? jj_ntk_f(ctx) : jj_ntk) {
-		case 196:
+		case 198:
 			{
-				t = jj_consume_token((long long)196, ctx);
+				t = jj_consume_token((long long)198, ctx);
 				break ;
 			}
 		case RSIGNEDSHIFT:
@@ -3816,7 +3861,7 @@ IExpression* AlinousPlusParser::shiftExpression(ThreadContext* ctx)
 			return shift;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1311(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
 }
 IExpression* AlinousPlusParser::additiveExpression(ThreadContext* ctx)
 {
@@ -3878,7 +3923,7 @@ IExpression* AlinousPlusParser::additiveExpression(ThreadContext* ctx)
 			return additive;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1311(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
 }
 IExpression* AlinousPlusParser::multiplicativeExpression(ThreadContext* ctx)
 {
@@ -3941,7 +3986,7 @@ IExpression* AlinousPlusParser::multiplicativeExpression(ThreadContext* ctx)
 			return mulExp;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1311(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
 }
 IExpression* AlinousPlusParser::notExpression(ThreadContext* ctx)
 {
@@ -3973,7 +4018,7 @@ IExpression* AlinousPlusParser::notExpression(ThreadContext* ctx)
 			return notexp;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1311(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
 }
 IExpression* AlinousPlusParser::unaryExpression(ThreadContext* ctx)
 {
@@ -3989,7 +4034,7 @@ IExpression* AlinousPlusParser::unaryExpression(ThreadContext* ctx)
 			exp = preDecrementExpression(ctx);
 			break ;
 		}
-	case 197:
+	case 199:
 		{
 			exp = bitReverseExpression(ctx);
 			break ;
@@ -4051,7 +4096,7 @@ IExpression* AlinousPlusParser::unaryExpression(ThreadContext* ctx)
 			return exp;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1311(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
 }
 AllocationExpression* AlinousPlusParser::allocationExpression(ThreadContext* ctx)
 {
@@ -4117,7 +4162,7 @@ AllocationExpression* AlinousPlusParser::allocationExpression(ThreadContext* ctx
 			return exp;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1311(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
 }
 ExpressionStream* AlinousPlusParser::expressionStream(ThreadContext* ctx)
 {
@@ -4222,6 +4267,9 @@ ExpressionStream* AlinousPlusParser::expressionStream(ThreadContext* ctx)
 		case ADJUST_WHERE:
 		case ADJUST_SET:
 		case USE:
+		case REGION:
+		case SHARD:
+		case SUB:
 		case IDENTIFIER:
 			{
 				exp = expStreamSegment(ctx);
@@ -4293,7 +4341,7 @@ ExpressionStream* AlinousPlusParser::expressionStream(ThreadContext* ctx)
 			return stream;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1311(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
 }
 FunctionCallExpression* AlinousPlusParser::functionCallExpression(ThreadContext* ctx)
 {
@@ -4310,7 +4358,7 @@ FunctionCallExpression* AlinousPlusParser::functionCallExpression(ThreadContext*
 			return exp;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1311(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
 }
 ExpStreamSegment* AlinousPlusParser::expStreamSegment(ThreadContext* ctx)
 {
@@ -4397,7 +4445,7 @@ ExpStreamSegment* AlinousPlusParser::expStreamSegment(ThreadContext* ctx)
 			return expStream;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1311(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
 }
 ExpStreamCast* AlinousPlusParser::expStreamCast(ThreadContext* ctx)
 {
@@ -4417,7 +4465,7 @@ ExpStreamCast* AlinousPlusParser::expStreamCast(ThreadContext* ctx)
 			return castExp;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1311(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
 }
 ExpStreamParenthesis* AlinousPlusParser::expStreamParenthesis(ThreadContext* ctx)
 {
@@ -4435,7 +4483,7 @@ ExpStreamParenthesis* AlinousPlusParser::expStreamParenthesis(ThreadContext* ctx
 			return pareExp;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1311(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
 }
 PreIncrementExpression* AlinousPlusParser::preIncrementExpression(ThreadContext* ctx)
 {
@@ -4451,7 +4499,7 @@ PreIncrementExpression* AlinousPlusParser::preIncrementExpression(ThreadContext*
 			return preExp;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1311(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
 }
 PreDecrementExpression* AlinousPlusParser::preDecrementExpression(ThreadContext* ctx)
 {
@@ -4467,14 +4515,14 @@ PreDecrementExpression* AlinousPlusParser::preDecrementExpression(ThreadContext*
 			return preExp;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1311(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
 }
 BitReverseExpression* AlinousPlusParser::bitReverseExpression(ThreadContext* ctx)
 {
 	BitReverseExpression* bitexp = (new(ctx) BitReverseExpression(ctx));
 	IExpression* exp = nullptr;
 	Token* t = nullptr;
-	t = jj_consume_token((long long)197, ctx);
+	t = jj_consume_token((long long)199, ctx);
 	exp = unaryExpression(ctx);
 	bitexp->position(t, exp, ctx);
 	bitexp->setExp(exp, ctx);
@@ -4483,7 +4531,7 @@ BitReverseExpression* AlinousPlusParser::bitReverseExpression(ThreadContext* ctx
 			return bitexp;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1311(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
 }
 void AlinousPlusParser::parenthesisLookahead(ThreadContext* ctx)
 {
@@ -4507,7 +4555,7 @@ ParenthesisExpression* AlinousPlusParser::parenthesisExpression(ThreadContext* c
 			return parenthesisExp;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1311(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
 }
 CastExpression* AlinousPlusParser::castExpression(ThreadContext* ctx)
 {
@@ -4526,7 +4574,7 @@ CastExpression* AlinousPlusParser::castExpression(ThreadContext* ctx)
 			return castExp;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1311(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
 }
 FunctionArguments* AlinousPlusParser::functionArguments(ThreadContext* ctx)
 {
@@ -4639,8 +4687,11 @@ FunctionArguments* AlinousPlusParser::functionArguments(ThreadContext* ctx)
 	case ADJUST_SET:
 	case _NULL:
 	case USE:
+	case REGION:
+	case SHARD:
+	case SUB:
 	case IDENTIFIER:
-	case 197:
+	case 199:
 		{
 			exp = conditionalExpression(ctx);
 			args->addArgument(exp, ctx);
@@ -4675,7 +4726,7 @@ FunctionArguments* AlinousPlusParser::functionArguments(ThreadContext* ctx)
 			return args;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1311(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
 }
 Literal* AlinousPlusParser::literal(ThreadContext* ctx)
 {
@@ -4725,7 +4776,7 @@ Literal* AlinousPlusParser::literal(ThreadContext* ctx)
 			return lit;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1311(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
 }
 BooleanLiteral* AlinousPlusParser::booleanLiteral(ThreadContext* ctx)
 {
@@ -4755,7 +4806,7 @@ BooleanLiteral* AlinousPlusParser::booleanLiteral(ThreadContext* ctx)
 			return lit;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1311(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
 }
 NullLiteral* AlinousPlusParser::nullLiteral(ThreadContext* ctx)
 {
@@ -4768,7 +4819,7 @@ NullLiteral* AlinousPlusParser::nullLiteral(ThreadContext* ctx)
 			return lit;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1311(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
 }
 DomVariableDescriptor* AlinousPlusParser::domVariableDescriptor(ThreadContext* ctx)
 {
@@ -4834,7 +4885,7 @@ DomVariableDescriptor* AlinousPlusParser::domVariableDescriptor(ThreadContext* c
 		}
 	}
 	label_30_out_break: ;
-	if(t->image->equals(ConstStr::getCNST_STR_1312(), ctx))
+	if(t->image->equals(ConstStr::getCNST_STR_1314(), ctx))
 	{
 		desc->markLastSegmentAsArray(ctx);
 	}
@@ -4851,7 +4902,7 @@ DomVariableDescriptor* AlinousPlusParser::domVariableDescriptor(ThreadContext* c
 			return desc;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1311(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
 }
 DomNameSegment* AlinousPlusParser::domNameSegment(ThreadContext* ctx)
 {
@@ -4865,7 +4916,7 @@ DomNameSegment* AlinousPlusParser::domNameSegment(ThreadContext* ctx)
 			return seg;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1311(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
 }
 DomIndexSegment* AlinousPlusParser::domIndexSegment(ThreadContext* ctx)
 {
@@ -4883,7 +4934,7 @@ DomIndexSegment* AlinousPlusParser::domIndexSegment(ThreadContext* ctx)
 			return seg;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1311(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
 }
 AlinousName* AlinousPlusParser::alinousName(ThreadContext* ctx)
 {
@@ -4922,7 +4973,7 @@ AlinousName* AlinousPlusParser::alinousName(ThreadContext* ctx)
 			return buff;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1311(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
 }
 Token* AlinousPlusParser::nameIdentifier(ThreadContext* ctx)
 {
@@ -5378,6 +5429,21 @@ Token* AlinousPlusParser::nameIdentifier(ThreadContext* ctx)
 			t = jj_consume_token(SUPER, ctx);
 			break ;
 		}
+	case REGION:
+		{
+			t = jj_consume_token(REGION, ctx);
+			break ;
+		}
+	case SHARD:
+		{
+			t = jj_consume_token(SHARD, ctx);
+			break ;
+		}
+	case SUB:
+		{
+			t = jj_consume_token(SUB, ctx);
+			break ;
+		}
 	default:
 		jj_la1->set(jj_gen,74, ctx);
 		jj_consume_token((long long)-1, ctx);
@@ -5389,7 +5455,7 @@ Token* AlinousPlusParser::nameIdentifier(ThreadContext* ctx)
 			return t;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1311(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
 }
 Token* AlinousPlusParser::assignmentOperator(ThreadContext* ctx)
 {
@@ -5398,16 +5464,6 @@ Token* AlinousPlusParser::assignmentOperator(ThreadContext* ctx)
 	case EQUALS:
 		{
 			t = jj_consume_token(EQUALS, ctx);
-			break ;
-		}
-	case 198:
-		{
-			t = jj_consume_token((long long)198, ctx);
-			break ;
-		}
-	case 199:
-		{
-			t = jj_consume_token((long long)199, ctx);
 			break ;
 		}
 	case 200:
@@ -5450,6 +5506,16 @@ Token* AlinousPlusParser::assignmentOperator(ThreadContext* ctx)
 			t = jj_consume_token((long long)207, ctx);
 			break ;
 		}
+	case 208:
+		{
+			t = jj_consume_token((long long)208, ctx);
+			break ;
+		}
+	case 209:
+		{
+			t = jj_consume_token((long long)209, ctx);
+			break ;
+		}
 	default:
 		jj_la1->set(jj_gen,75, ctx);
 		jj_consume_token((long long)-1, ctx);
@@ -5461,7 +5527,7 @@ Token* AlinousPlusParser::assignmentOperator(ThreadContext* ctx)
 			return t;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1311(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
 }
 ISqlStatement* AlinousPlusParser::sqlStatement(ThreadContext* ctx)
 {
@@ -5547,7 +5613,7 @@ ISqlStatement* AlinousPlusParser::sqlStatement(ThreadContext* ctx)
 			return stmt;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1311(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
 }
 SelectStatement* AlinousPlusParser::selectStatement(ThreadContext* ctx)
 {
@@ -5605,7 +5671,7 @@ SelectStatement* AlinousPlusParser::selectStatement(ThreadContext* ctx)
 			return stmt;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1311(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
 }
 SQLFrom* AlinousPlusParser::sqlFrom(ThreadContext* ctx)
 {
@@ -5621,7 +5687,7 @@ SQLFrom* AlinousPlusParser::sqlFrom(ThreadContext* ctx)
 			return from;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1311(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
 }
 IJoin* AlinousPlusParser::sqlJoin(ThreadContext* ctx)
 {
@@ -5872,7 +5938,7 @@ IJoin* AlinousPlusParser::sqlJoin(ThreadContext* ctx)
 			return join;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1311(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
 }
 SQLJoinCondition* AlinousPlusParser::sqlJoinCondition(ThreadContext* ctx)
 {
@@ -5888,7 +5954,7 @@ SQLJoinCondition* AlinousPlusParser::sqlJoinCondition(ThreadContext* ctx)
 			return joinCond;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1311(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
 }
 IJoin* AlinousPlusParser::joinTarget(ThreadContext* ctx)
 {
@@ -5985,6 +6051,9 @@ IJoin* AlinousPlusParser::joinTarget(ThreadContext* ctx)
 	case ADJUST_WHERE:
 	case ADJUST_SET:
 	case USE:
+	case REGION:
+	case SHARD:
+	case SUB:
 	case IDENTIFIER:
 		{
 			target = tableJoinTarget(ctx);
@@ -6022,7 +6091,7 @@ IJoin* AlinousPlusParser::joinTarget(ThreadContext* ctx)
 			return target;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1311(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
 }
 IJoinTarget* AlinousPlusParser::tableJoinTarget(ThreadContext* ctx)
 {
@@ -6055,7 +6124,7 @@ IJoinTarget* AlinousPlusParser::tableJoinTarget(ThreadContext* ctx)
 			return table;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1311(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
 }
 IJoinTarget* AlinousPlusParser::domVariableJoinTarget(ThreadContext* ctx)
 {
@@ -6088,7 +6157,7 @@ IJoinTarget* AlinousPlusParser::domVariableJoinTarget(ThreadContext* ctx)
 			return dom;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1311(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
 }
 IJoinTarget* AlinousPlusParser::joinSubQueryTarget(ThreadContext* ctx)
 {
@@ -6109,7 +6178,7 @@ IJoinTarget* AlinousPlusParser::joinSubQueryTarget(ThreadContext* ctx)
 			return target;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1311(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
 }
 SQLWhere* AlinousPlusParser::sqlWhere(ThreadContext* ctx)
 {
@@ -6125,7 +6194,7 @@ SQLWhere* AlinousPlusParser::sqlWhere(ThreadContext* ctx)
 			return wh;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1311(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
 }
 SQLGroupBy* AlinousPlusParser::sqlGroupBy(ThreadContext* ctx)
 {
@@ -6156,7 +6225,7 @@ SQLGroupBy* AlinousPlusParser::sqlGroupBy(ThreadContext* ctx)
 			return gby;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1311(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
 }
 SQLLimitOffset* AlinousPlusParser::sqlLimitOffset(ThreadContext* ctx)
 {
@@ -6203,7 +6272,7 @@ SQLLimitOffset* AlinousPlusParser::sqlLimitOffset(ThreadContext* ctx)
 			return lim;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1311(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
 }
 InsertStatement* AlinousPlusParser::insertStatement(ThreadContext* ctx)
 {
@@ -6258,7 +6327,7 @@ InsertStatement* AlinousPlusParser::insertStatement(ThreadContext* ctx)
 			return stmt;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1311(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
 }
 InsertValues* AlinousPlusParser::insertValues(ThreadContext* ctx)
 {
@@ -6375,6 +6444,9 @@ InsertValues* AlinousPlusParser::insertValues(ThreadContext* ctx)
 		case ADJUST_WHERE:
 		case ADJUST_SET:
 		case USE:
+		case REGION:
+		case SHARD:
+		case SUB:
 		case IDENTIFIER:
 			{
 				domDesc = sqlExpressionStream(ctx);
@@ -6394,7 +6466,7 @@ InsertValues* AlinousPlusParser::insertValues(ThreadContext* ctx)
 			break;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1311(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
 }
 UpdateStatement* AlinousPlusParser::updateStatement(ThreadContext* ctx)
 {
@@ -6443,7 +6515,7 @@ UpdateStatement* AlinousPlusParser::updateStatement(ThreadContext* ctx)
 			return stmt;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1311(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
 }
 UpdateSet* AlinousPlusParser::updateSet(ThreadContext* ctx)
 {
@@ -6461,7 +6533,7 @@ UpdateSet* AlinousPlusParser::updateSet(ThreadContext* ctx)
 			return updateSet;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1311(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
 }
 DeleteStatement* AlinousPlusParser::deleteStatement(ThreadContext* ctx)
 {
@@ -6490,7 +6562,7 @@ DeleteStatement* AlinousPlusParser::deleteStatement(ThreadContext* ctx)
 			return stmt;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1311(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
 }
 BeginStatement* AlinousPlusParser::beginStatement(ThreadContext* ctx)
 {
@@ -6505,7 +6577,7 @@ BeginStatement* AlinousPlusParser::beginStatement(ThreadContext* ctx)
 			return stmt;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1311(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
 }
 CommitStatement* AlinousPlusParser::commitStatement(ThreadContext* ctx)
 {
@@ -6520,7 +6592,7 @@ CommitStatement* AlinousPlusParser::commitStatement(ThreadContext* ctx)
 			return stmt;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1311(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
 }
 RollbackStatement* AlinousPlusParser::rollbackStatement(ThreadContext* ctx)
 {
@@ -6535,7 +6607,7 @@ RollbackStatement* AlinousPlusParser::rollbackStatement(ThreadContext* ctx)
 			return stmt;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1311(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
 }
 CreateTableStatement* AlinousPlusParser::createTableStatement(ThreadContext* ctx)
 {
@@ -6545,6 +6617,8 @@ CreateTableStatement* AlinousPlusParser::createTableStatement(ThreadContext* ctx
 	Unique* unq = nullptr;
 	PrimaryKeys* keys = nullptr;
 	CheckDefinition* chk = nullptr;
+	ShardKeys* shard = nullptr;
+	SubShardKeys* subshard = nullptr;
 	Token* t = nullptr;
 	Token* t2 = nullptr;
 	Token* t3 = nullptr;
@@ -6576,6 +6650,10 @@ CreateTableStatement* AlinousPlusParser::createTableStatement(ThreadContext* ctx
 			{
 				chk = check(ctx);
 				stmt->addCheckDef(chk, ctx);
+				shard = shardKeys(ctx);
+				stmt->setShardKeys(shard, ctx);
+				subshard = subShardKeys(ctx);
+				stmt->setSubShardKeys(subshard, ctx);
 				break ;
 			}
 		default:
@@ -6643,7 +6721,82 @@ CreateTableStatement* AlinousPlusParser::createTableStatement(ThreadContext* ctx
 			return stmt;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1311(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
+}
+ShardKeys* AlinousPlusParser::shardKeys(ThreadContext* ctx)
+{
+	ShardKeys* shardKeys = (new(ctx) ShardKeys(ctx));
+	Token* t = nullptr;
+	Token* t1 = nullptr;
+	Token* t2 = nullptr;
+	t = jj_consume_token(SHARD, ctx);
+	jj_consume_token(KEY, ctx);
+	jj_consume_token(L_PARENTHESIS, ctx);
+	t1 = jj_consume_token(IDENTIFIER, ctx);
+	shardKeys->addKey(t1->image, ctx);
+	while(true)
+	{
+		switch((jj_ntk == (long long)-1) ? jj_ntk_f(ctx) : jj_ntk) {
+		case COMMA:
+			{
+				;
+				break ;
+			}
+		default:
+			jj_la1->set(jj_gen,96, ctx);
+			goto label_37_out_break;
+		}
+		jj_consume_token(COMMA, ctx);
+		t1 = jj_consume_token(IDENTIFIER, ctx);
+		shardKeys->addKey(t1->image, ctx);
+	}
+	label_37_out_break: ;
+	t2 = jj_consume_token(R_PARENTHESIS, ctx);
+	shardKeys->position(t, t2, ctx);
+	{
+		{
+			return shardKeys;
+		}
+	}
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
+}
+SubShardKeys* AlinousPlusParser::subShardKeys(ThreadContext* ctx)
+{
+	SubShardKeys* shardKeys = (new(ctx) SubShardKeys(ctx));
+	Token* t = nullptr;
+	Token* t1 = nullptr;
+	Token* t2 = nullptr;
+	t = jj_consume_token(SUB, ctx);
+	jj_consume_token(SHARD, ctx);
+	jj_consume_token(KEY, ctx);
+	jj_consume_token(L_PARENTHESIS, ctx);
+	t1 = jj_consume_token(IDENTIFIER, ctx);
+	shardKeys->addKey(t1->image, ctx);
+	while(true)
+	{
+		switch((jj_ntk == (long long)-1) ? jj_ntk_f(ctx) : jj_ntk) {
+		case COMMA:
+			{
+				;
+				break ;
+			}
+		default:
+			jj_la1->set(jj_gen,97, ctx);
+			goto label_38_out_break;
+		}
+		jj_consume_token(COMMA, ctx);
+		t1 = jj_consume_token(IDENTIFIER, ctx);
+		shardKeys->addKey(t1->image, ctx);
+	}
+	label_38_out_break: ;
+	t2 = jj_consume_token(R_PARENTHESIS, ctx);
+	shardKeys->position(t, t2, ctx);
+	{
+		{
+			return shardKeys;
+		}
+	}
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
 }
 PrimaryKeys* AlinousPlusParser::primaryKeys(ThreadContext* ctx)
 {
@@ -6665,14 +6818,14 @@ PrimaryKeys* AlinousPlusParser::primaryKeys(ThreadContext* ctx)
 				break ;
 			}
 		default:
-			jj_la1->set(jj_gen,96, ctx);
-			goto label_37_out_break;
+			jj_la1->set(jj_gen,98, ctx);
+			goto label_39_out_break;
 		}
 		jj_consume_token(COMMA, ctx);
 		t1 = jj_consume_token(IDENTIFIER, ctx);
 		primaryKeys->addKey(t1->image, ctx);
 	}
-	label_37_out_break: ;
+	label_39_out_break: ;
 	t2 = jj_consume_token(R_PARENTHESIS, ctx);
 	primaryKeys->position(t, t2, ctx);
 	{
@@ -6680,7 +6833,7 @@ PrimaryKeys* AlinousPlusParser::primaryKeys(ThreadContext* ctx)
 			return primaryKeys;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1311(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
 }
 Unique* AlinousPlusParser::unique(ThreadContext* ctx)
 {
@@ -6701,14 +6854,14 @@ Unique* AlinousPlusParser::unique(ThreadContext* ctx)
 				break ;
 			}
 		default:
-			jj_la1->set(jj_gen,97, ctx);
-			goto label_38_out_break;
+			jj_la1->set(jj_gen,99, ctx);
+			goto label_40_out_break;
 		}
 		jj_consume_token(COMMA, ctx);
 		t1 = jj_consume_token(IDENTIFIER, ctx);
 		unq->addKey(t1->image, ctx);
 	}
-	label_38_out_break: ;
+	label_40_out_break: ;
 	t2 = jj_consume_token(R_PARENTHESIS, ctx);
 	unq->position(t, t2, ctx);
 	{
@@ -6716,7 +6869,7 @@ Unique* AlinousPlusParser::unique(ThreadContext* ctx)
 			return unq;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1311(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
 }
 DdlColumnDescriptor* AlinousPlusParser::ddlColumnDescriptor(ThreadContext* ctx)
 {
@@ -6740,8 +6893,8 @@ DdlColumnDescriptor* AlinousPlusParser::ddlColumnDescriptor(ThreadContext* ctx)
 				break ;
 			}
 		default:
-			jj_la1->set(jj_gen,98, ctx);
-			goto label_39_out_break;
+			jj_la1->set(jj_gen,100, ctx);
+			goto label_41_out_break;
 		}
 		switch((jj_ntk == (long long)-1) ? jj_ntk_f(ctx) : jj_ntk) {
 		case SQL_NOT:
@@ -6762,13 +6915,13 @@ DdlColumnDescriptor* AlinousPlusParser::ddlColumnDescriptor(ThreadContext* ctx)
 				break ;
 			}
 		default:
-			jj_la1->set(jj_gen,99, ctx);
+			jj_la1->set(jj_gen,101, ctx);
 			jj_consume_token((long long)-1, ctx);
 			throw (new(ctx) ParseException(ctx));
 			break;
 		}
 	}
-	label_39_out_break: ;
+	label_41_out_break: ;
 	switch((jj_ntk == (long long)-1) ? jj_ntk_f(ctx) : jj_ntk) {
 	case CHECK:
 		{
@@ -6776,7 +6929,7 @@ DdlColumnDescriptor* AlinousPlusParser::ddlColumnDescriptor(ThreadContext* ctx)
 			break ;
 		}
 	default:
-		jj_la1->set(jj_gen,100, ctx);
+		jj_la1->set(jj_gen,102, ctx);
 		;
 		break;
 	}
@@ -6808,7 +6961,7 @@ DdlColumnDescriptor* AlinousPlusParser::ddlColumnDescriptor(ThreadContext* ctx)
 			return desc;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1311(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
 }
 ColumnTypeDescriptor* AlinousPlusParser::columnTypeDescriptor(ThreadContext* ctx)
 {
@@ -6833,7 +6986,7 @@ ColumnTypeDescriptor* AlinousPlusParser::columnTypeDescriptor(ThreadContext* ctx
 			break ;
 		}
 	default:
-		jj_la1->set(jj_gen,101, ctx);
+		jj_la1->set(jj_gen,103, ctx);
 		jj_consume_token((long long)-1, ctx);
 		throw (new(ctx) ParseException(ctx));
 		break;
@@ -6847,7 +7000,7 @@ ColumnTypeDescriptor* AlinousPlusParser::columnTypeDescriptor(ThreadContext* ctx
 			break ;
 		}
 	default:
-		jj_la1->set(jj_gen,102, ctx);
+		jj_la1->set(jj_gen,104, ctx);
 		;
 		break;
 	}
@@ -6866,7 +7019,7 @@ ColumnTypeDescriptor* AlinousPlusParser::columnTypeDescriptor(ThreadContext* ctx
 			return typeDesc;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1311(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
 }
 CheckDefinition* AlinousPlusParser::check(ThreadContext* ctx)
 {
@@ -6885,7 +7038,7 @@ CheckDefinition* AlinousPlusParser::check(ThreadContext* ctx)
 			return check;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1311(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
 }
 DropTableStatement* AlinousPlusParser::dropTableStatement(ThreadContext* ctx)
 {
@@ -6904,7 +7057,7 @@ DropTableStatement* AlinousPlusParser::dropTableStatement(ThreadContext* ctx)
 			return stmt;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1311(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
 }
 CreateIndexStatement* AlinousPlusParser::createIndexStatement(ThreadContext* ctx)
 {
@@ -6931,14 +7084,14 @@ CreateIndexStatement* AlinousPlusParser::createIndexStatement(ThreadContext* ctx
 				break ;
 			}
 		default:
-			jj_la1->set(jj_gen,103, ctx);
-			goto label_40_out_break;
+			jj_la1->set(jj_gen,105, ctx);
+			goto label_42_out_break;
 		}
 		jj_consume_token(COMMA, ctx);
 		column = nameIdentifier(ctx);
 		stmt->addColumn(column->image, ctx);
 	}
-	label_40_out_break: ;
+	label_42_out_break: ;
 	jj_consume_token(R_PARENTHESIS, ctx);
 	t2 = jj_consume_token(SEMI_COLON, ctx);
 	stmt->setName(name, ctx);
@@ -6949,7 +7102,7 @@ CreateIndexStatement* AlinousPlusParser::createIndexStatement(ThreadContext* ctx
 			return stmt;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1311(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
 }
 DropIndexStatement* AlinousPlusParser::dropIndexStatement(ThreadContext* ctx)
 {
@@ -6968,7 +7121,7 @@ DropIndexStatement* AlinousPlusParser::dropIndexStatement(ThreadContext* ctx)
 			return stmt;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1311(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
 }
 ISQLExpression* AlinousPlusParser::sqlOrExpression(ThreadContext* ctx)
 {
@@ -6986,7 +7139,7 @@ ISQLExpression* AlinousPlusParser::sqlOrExpression(ThreadContext* ctx)
 		}
 				else 
 		{
-			goto label_41_out_break;
+			goto label_43_out_break;
 		}
 		t = jj_consume_token(OR, ctx);
 		exp = sqlAndExpression(ctx);
@@ -6997,7 +7150,7 @@ ISQLExpression* AlinousPlusParser::sqlOrExpression(ThreadContext* ctx)
 		sub = (new(ctx) SQLBoolSubExpression(t->image, exp, ctx));
 		orExp->addSubExpression(sub, ctx);
 	}
-	label_41_out_break: ;
+	label_43_out_break: ;
 	if(t == nullptr)
 	{
 		{
@@ -7013,7 +7166,7 @@ ISQLExpression* AlinousPlusParser::sqlOrExpression(ThreadContext* ctx)
 			return orExp;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1311(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
 }
 ISQLExpression* AlinousPlusParser::sqlAndExpression(ThreadContext* ctx)
 {
@@ -7031,7 +7184,7 @@ ISQLExpression* AlinousPlusParser::sqlAndExpression(ThreadContext* ctx)
 		}
 				else 
 		{
-			goto label_42_out_break;
+			goto label_44_out_break;
 		}
 		t = jj_consume_token(SQLAND, ctx);
 		exp = sqlNotExpression(ctx);
@@ -7042,7 +7195,7 @@ ISQLExpression* AlinousPlusParser::sqlAndExpression(ThreadContext* ctx)
 		sub = (new(ctx) SQLBoolSubExpression(t->image, exp, ctx));
 		andExp->addSubExpression(sub, ctx);
 	}
-	label_42_out_break: ;
+	label_44_out_break: ;
 	if(t == nullptr)
 	{
 		{
@@ -7058,7 +7211,7 @@ ISQLExpression* AlinousPlusParser::sqlAndExpression(ThreadContext* ctx)
 			return andExp;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1311(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
 }
 ISQLExpression* AlinousPlusParser::sqlNotExpression(ThreadContext* ctx)
 {
@@ -7090,7 +7243,7 @@ ISQLExpression* AlinousPlusParser::sqlNotExpression(ThreadContext* ctx)
 			return notExp;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1311(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
 }
 ISQLExpression* AlinousPlusParser::sqlEqualityExpression(ThreadContext* ctx)
 {
@@ -7102,7 +7255,7 @@ ISQLExpression* AlinousPlusParser::sqlEqualityExpression(ThreadContext* ctx)
 	switch((jj_ntk == (long long)-1) ? jj_ntk_f(ctx) : jj_ntk) {
 	case EQUALS:
 	case CMP_NOTEQUALS:
-	case 208:
+	case 210:
 		{
 			switch((jj_ntk == (long long)-1) ? jj_ntk_f(ctx) : jj_ntk) {
 			case EQUALS:
@@ -7110,9 +7263,9 @@ ISQLExpression* AlinousPlusParser::sqlEqualityExpression(ThreadContext* ctx)
 					t = jj_consume_token(EQUALS, ctx);
 					break ;
 				}
-			case 208:
+			case 210:
 				{
-					t = jj_consume_token((long long)208, ctx);
+					t = jj_consume_token((long long)210, ctx);
 					break ;
 				}
 			case CMP_NOTEQUALS:
@@ -7121,7 +7274,7 @@ ISQLExpression* AlinousPlusParser::sqlEqualityExpression(ThreadContext* ctx)
 					break ;
 				}
 			default:
-				jj_la1->set(jj_gen,104, ctx);
+				jj_la1->set(jj_gen,106, ctx);
 				jj_consume_token((long long)-1, ctx);
 				throw (new(ctx) ParseException(ctx));
 				break;
@@ -7130,7 +7283,7 @@ ISQLExpression* AlinousPlusParser::sqlEqualityExpression(ThreadContext* ctx)
 			break ;
 		}
 	default:
-		jj_la1->set(jj_gen,105, ctx);
+		jj_la1->set(jj_gen,107, ctx);
 		;
 		break;
 	}
@@ -7152,7 +7305,7 @@ ISQLExpression* AlinousPlusParser::sqlEqualityExpression(ThreadContext* ctx)
 			return eqExp;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1311(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
 }
 ISQLExpression* AlinousPlusParser::sqlRelationalExpression(ThreadContext* ctx)
 {
@@ -7189,7 +7342,7 @@ ISQLExpression* AlinousPlusParser::sqlRelationalExpression(ThreadContext* ctx)
 					break ;
 				}
 			default:
-				jj_la1->set(jj_gen,106, ctx);
+				jj_la1->set(jj_gen,108, ctx);
 				jj_consume_token((long long)-1, ctx);
 				throw (new(ctx) ParseException(ctx));
 				break;
@@ -7198,7 +7351,7 @@ ISQLExpression* AlinousPlusParser::sqlRelationalExpression(ThreadContext* ctx)
 			break ;
 		}
 	default:
-		jj_la1->set(jj_gen,107, ctx);
+		jj_la1->set(jj_gen,109, ctx);
 		;
 		break;
 	}
@@ -7220,7 +7373,7 @@ ISQLExpression* AlinousPlusParser::sqlRelationalExpression(ThreadContext* ctx)
 			return relExp;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1311(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
 }
 ISQLExpression* AlinousPlusParser::sqlIsNullExpression(ThreadContext* ctx)
 {
@@ -7239,7 +7392,7 @@ ISQLExpression* AlinousPlusParser::sqlIsNullExpression(ThreadContext* ctx)
 				break ;
 			}
 		default:
-			jj_la1->set(jj_gen,108, ctx);
+			jj_la1->set(jj_gen,110, ctx);
 			;
 			break;
 		}
@@ -7273,7 +7426,7 @@ ISQLExpression* AlinousPlusParser::sqlIsNullExpression(ThreadContext* ctx)
 			return exp;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1311(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
 }
 ISQLExpression* AlinousPlusParser::sqlLikeExpression(ThreadContext* ctx)
 {
@@ -7326,7 +7479,7 @@ ISQLExpression* AlinousPlusParser::sqlLikeExpression(ThreadContext* ctx)
 			return likeExp;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1311(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
 }
 ISQLExpression* AlinousPlusParser::sqlInExpression(ThreadContext* ctx)
 {
@@ -7363,7 +7516,7 @@ ISQLExpression* AlinousPlusParser::sqlInExpression(ThreadContext* ctx)
 			return inexp;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1311(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
 }
 ISQLExpression* AlinousPlusParser::sqlAdditiveExpression(ThreadContext* ctx)
 {
@@ -7381,7 +7534,7 @@ ISQLExpression* AlinousPlusParser::sqlAdditiveExpression(ThreadContext* ctx)
 		}
 				else 
 		{
-			goto label_43_out_break;
+			goto label_45_out_break;
 		}
 		switch((jj_ntk == (long long)-1) ? jj_ntk_f(ctx) : jj_ntk) {
 		case PLUS:
@@ -7395,7 +7548,7 @@ ISQLExpression* AlinousPlusParser::sqlAdditiveExpression(ThreadContext* ctx)
 				break ;
 			}
 		default:
-			jj_la1->set(jj_gen,109, ctx);
+			jj_la1->set(jj_gen,111, ctx);
 			jj_consume_token((long long)-1, ctx);
 			throw (new(ctx) ParseException(ctx));
 			break;
@@ -7409,7 +7562,7 @@ ISQLExpression* AlinousPlusParser::sqlAdditiveExpression(ThreadContext* ctx)
 		subExp->position(t, exp, ctx);
 		additive->addSubExpression(subExp, ctx);
 	}
-	label_43_out_break: ;
+	label_45_out_break: ;
 	if(exp == nullptr)
 	{
 		{
@@ -7425,7 +7578,7 @@ ISQLExpression* AlinousPlusParser::sqlAdditiveExpression(ThreadContext* ctx)
 			return additive;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1311(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
 }
 ISQLExpression* AlinousPlusParser::sqlMultiplicativeExpression(ThreadContext* ctx)
 {
@@ -7443,7 +7596,7 @@ ISQLExpression* AlinousPlusParser::sqlMultiplicativeExpression(ThreadContext* ct
 		}
 				else 
 		{
-			goto label_44_out_break;
+			goto label_46_out_break;
 		}
 		switch((jj_ntk == (long long)-1) ? jj_ntk_f(ctx) : jj_ntk) {
 		case ASTERISK:
@@ -7462,7 +7615,7 @@ ISQLExpression* AlinousPlusParser::sqlMultiplicativeExpression(ThreadContext* ct
 				break ;
 			}
 		default:
-			jj_la1->set(jj_gen,110, ctx);
+			jj_la1->set(jj_gen,112, ctx);
 			jj_consume_token((long long)-1, ctx);
 			throw (new(ctx) ParseException(ctx));
 			break;
@@ -7476,7 +7629,7 @@ ISQLExpression* AlinousPlusParser::sqlMultiplicativeExpression(ThreadContext* ct
 		subExp->position(t, exp, ctx);
 		mulExp->addSubExpression(subExp, ctx);
 	}
-	label_44_out_break: ;
+	label_46_out_break: ;
 	if(exp == nullptr)
 	{
 		{
@@ -7492,7 +7645,7 @@ ISQLExpression* AlinousPlusParser::sqlMultiplicativeExpression(ThreadContext* ct
 			return mulExp;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1311(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
 }
 ISQLExpression* AlinousPlusParser::sqlBaseExpression(ThreadContext* ctx)
 {
@@ -7513,7 +7666,7 @@ ISQLExpression* AlinousPlusParser::sqlBaseExpression(ThreadContext* ctx)
 			break ;
 		}
 	default:
-		jj_la1->set(jj_gen,111, ctx);
+		jj_la1->set(jj_gen,113, ctx);
 		if(jj_2_61((long long)3, ctx))
 		{
 			exp = sqlExpressionStream(ctx);
@@ -7544,7 +7697,7 @@ ISQLExpression* AlinousPlusParser::sqlBaseExpression(ThreadContext* ctx)
 			return exp;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1311(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
 }
 SQLExpressionStream* AlinousPlusParser::sqlExpressionStream(ThreadContext* ctx)
 {
@@ -7558,7 +7711,7 @@ SQLExpressionStream* AlinousPlusParser::sqlExpressionStream(ThreadContext* ctx)
 			return sqlExp;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1311(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
 }
 SQLParenthesisExpression* AlinousPlusParser::sqlParenthesisExpression(ThreadContext* ctx)
 {
@@ -7576,7 +7729,7 @@ SQLParenthesisExpression* AlinousPlusParser::sqlParenthesisExpression(ThreadCont
 			return pexp;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1311(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
 }
 ISQLExpression* AlinousPlusParser::sqlColumnIdentifier(ThreadContext* ctx)
 {
@@ -7639,7 +7792,7 @@ ISQLExpression* AlinousPlusParser::sqlColumnIdentifier(ThreadContext* ctx)
 			return identifier;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1311(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
 }
 ISQLBoolExpression* AlinousPlusParser::sqlBooleanLiteral(ThreadContext* ctx)
 {
@@ -7657,7 +7810,7 @@ ISQLBoolExpression* AlinousPlusParser::sqlBooleanLiteral(ThreadContext* ctx)
 			break ;
 		}
 	default:
-		jj_la1->set(jj_gen,112, ctx);
+		jj_la1->set(jj_gen,114, ctx);
 		jj_consume_token((long long)-1, ctx);
 		throw (new(ctx) ParseException(ctx));
 		break;
@@ -7669,7 +7822,7 @@ ISQLBoolExpression* AlinousPlusParser::sqlBooleanLiteral(ThreadContext* ctx)
 			return lit;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1311(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
 }
 ISQLExpression* AlinousPlusParser::sqlLiteral(ThreadContext* ctx)
 {
@@ -7701,7 +7854,7 @@ ISQLExpression* AlinousPlusParser::sqlLiteral(ThreadContext* ctx)
 			break ;
 		}
 	default:
-		jj_la1->set(jj_gen,113, ctx);
+		jj_la1->set(jj_gen,115, ctx);
 		jj_consume_token((long long)-1, ctx);
 		throw (new(ctx) ParseException(ctx));
 		break;
@@ -7713,7 +7866,7 @@ ISQLExpression* AlinousPlusParser::sqlLiteral(ThreadContext* ctx)
 			return lit;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1311(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
 }
 SQLExpressionList* AlinousPlusParser::sqlExpressionList(ThreadContext* ctx)
 {
@@ -7733,14 +7886,14 @@ SQLExpressionList* AlinousPlusParser::sqlExpressionList(ThreadContext* ctx)
 					break ;
 				}
 			default:
-				jj_la1->set(jj_gen,114, ctx);
-				goto label_45_out_break;
+				jj_la1->set(jj_gen,116, ctx);
+				goto label_47_out_break;
 			}
 			jj_consume_token(COMMA, ctx);
 			exp = sqlExpressionListElement(ctx);
 			list->addElement(exp, ctx);
 		}
-		label_45_out_break: ;
+		label_47_out_break: ;
 	}
 		else 
 	{
@@ -7762,7 +7915,7 @@ SQLExpressionList* AlinousPlusParser::sqlExpressionList(ThreadContext* ctx)
 			return list;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1311(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
 }
 ISQLExpression* AlinousPlusParser::sqlExpressionListElement(ThreadContext* ctx)
 {
@@ -7790,7 +7943,7 @@ ISQLExpression* AlinousPlusParser::sqlExpressionListElement(ThreadContext* ctx)
 				break ;
 			}
 		default:
-			jj_la1->set(jj_gen,115, ctx);
+			jj_la1->set(jj_gen,117, ctx);
 			jj_consume_token((long long)-1, ctx);
 			throw (new(ctx) ParseException(ctx));
 			break;
@@ -7801,7 +7954,7 @@ ISQLExpression* AlinousPlusParser::sqlExpressionListElement(ThreadContext* ctx)
 			return exp;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1311(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
 }
 ISQLExpression* AlinousPlusParser::sqlSubqueryExpression(ThreadContext* ctx)
 {
@@ -7814,7 +7967,7 @@ ISQLExpression* AlinousPlusParser::sqlSubqueryExpression(ThreadContext* ctx)
 			return exp;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1311(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
 }
 void AlinousPlusParser::ReInit(java::io::InputStream* stream, ThreadContext* ctx)
 {
@@ -7836,7 +7989,7 @@ void AlinousPlusParser::ReInit(java::io::InputStream* stream, String* encoding, 
 	__GC_MV(this, &(token), (new(ctx) Token(ctx)), Token);
 	jj_ntk = -1;
 	jj_gen = 0;
-	for(long long i = 0; i < (long long)116; i ++ )
+	for(long long i = 0; i < (long long)118; i ++ )
 	jj_la1->set(-1,i, ctx);
 	for(long long i = 0; i < (long long)jj_2_rtns->length; i ++ )
 	jj_2_rtns->set((new(ctx) AlinousPlusParser::JJCalls(ctx)),i, ctx);
@@ -7848,7 +8001,7 @@ void AlinousPlusParser::ReInit(java::io::Reader* stream, ThreadContext* ctx)
 	__GC_MV(this, &(token), (new(ctx) Token(ctx)), Token);
 	jj_ntk = -1;
 	jj_gen = 0;
-	for(long long i = 0; i < (long long)116; i ++ )
+	for(long long i = 0; i < (long long)118; i ++ )
 	jj_la1->set(-1,i, ctx);
 	for(long long i = 0; i < (long long)jj_2_rtns->length; i ++ )
 	jj_2_rtns->set((new(ctx) AlinousPlusParser::JJCalls(ctx)),i, ctx);
@@ -7859,7 +8012,7 @@ void AlinousPlusParser::ReInit(AlinousPlusParserTokenManager* tm, ThreadContext*
 	__GC_MV(this, &(token), (new(ctx) Token(ctx)), Token);
 	jj_ntk = -1;
 	jj_gen = 0;
-	for(long long i = 0; i < (long long)116; i ++ )
+	for(long long i = 0; i < (long long)118; i ++ )
 	jj_la1->set(-1,i, ctx);
 	for(long long i = 0; i < (long long)jj_2_rtns->length; i ++ )
 	jj_2_rtns->set((new(ctx) AlinousPlusParser::JJCalls(ctx)),i, ctx);
@@ -7897,13 +8050,13 @@ Token* AlinousPlusParser::getToken(long long index, ThreadContext* ctx)
 ParseException* AlinousPlusParser::generateParseException(ThreadContext* ctx)
 {
 	jj_expentries->clear(ctx);
-	IArrayObjectPrimitive<bool>* la1tokens = ArrayAllocatorPrimitive<bool>::allocatep(ctx, 209);
+	IArrayObjectPrimitive<bool>* la1tokens = ArrayAllocatorPrimitive<bool>::allocatep(ctx, 211);
 	if(jj_kind >= (long long)0)
 	{
 		la1tokens->set(true,jj_kind, ctx);
 		jj_kind = -1;
 	}
-	for(long long i = 0; i < (long long)116; i ++ )
+	for(long long i = 0; i < (long long)118; i ++ )
 	{
 		if(jj_la1->get(i) == jj_gen)
 		{
@@ -7940,7 +8093,7 @@ ParseException* AlinousPlusParser::generateParseException(ThreadContext* ctx)
 			}
 		}
 	}
-	for(long long i = 0; i < (long long)209; i ++ )
+	for(long long i = 0; i < (long long)211; i ++ )
 	{
 		if(la1tokens->get(i))
 		{
@@ -9305,15 +9458,15 @@ bool AlinousPlusParser::jj_2_67(long long xla, ThreadContext* ctx)
 		}
 	}
 }
-bool AlinousPlusParser::jj_3R_193(ThreadContext* ctx)
+bool AlinousPlusParser::jj_3R_195(ThreadContext* ctx)
 {
-	if(jj_3R_46(ctx))
+	if(jj_3R_48(ctx))
 	{
 		return true;
 	}
 	return false;
 }
-bool AlinousPlusParser::jj_3R_132(ThreadContext* ctx)
+bool AlinousPlusParser::jj_3R_134(ThreadContext* ctx)
 {
 	if(jj_scan_token(L_PARENTHESIS, ctx))
 	{
@@ -9321,7 +9474,7 @@ bool AlinousPlusParser::jj_3R_132(ThreadContext* ctx)
 	}
 	Token* xsp = 0;
 	xsp = jj_scanpos;
-	if(jj_3R_225(ctx))
+	if(jj_3R_227(ctx))
 	{
 		__GC_MV(this, &(jj_scanpos), xsp, Token);
 	}
@@ -9331,13 +9484,13 @@ bool AlinousPlusParser::jj_3R_132(ThreadContext* ctx)
 	}
 	return false;
 }
-bool AlinousPlusParser::jj_3R_229(ThreadContext* ctx)
+bool AlinousPlusParser::jj_3R_231(ThreadContext* ctx)
 {
 	if(jj_scan_token(L_PARENTHESIS, ctx))
 	{
 		return true;
 	}
-	if(jj_3R_89(ctx))
+	if(jj_3R_91(ctx))
 	{
 		return true;
 	}
@@ -9347,7 +9500,7 @@ bool AlinousPlusParser::jj_3R_229(ThreadContext* ctx)
 	}
 	return false;
 }
-bool AlinousPlusParser::jj_3R_162(ThreadContext* ctx)
+bool AlinousPlusParser::jj_3R_164(ThreadContext* ctx)
 {
 	if(jj_scan_token(L_BRACE, ctx))
 	{
@@ -9355,7 +9508,7 @@ bool AlinousPlusParser::jj_3R_162(ThreadContext* ctx)
 	}
 	Token* xsp = 0;
 	xsp = jj_scanpos;
-	if(jj_3R_193(ctx))
+	if(jj_3R_195(ctx))
 	{
 		__GC_MV(this, &(jj_scanpos), xsp, Token);
 	}
@@ -9365,7 +9518,7 @@ bool AlinousPlusParser::jj_3R_162(ThreadContext* ctx)
 	}
 	return false;
 }
-bool AlinousPlusParser::jj_3R_152(ThreadContext* ctx)
+bool AlinousPlusParser::jj_3R_154(ThreadContext* ctx)
 {
 	if(jj_scan_token(INSERT, ctx))
 	{
@@ -9375,13 +9528,13 @@ bool AlinousPlusParser::jj_3R_152(ThreadContext* ctx)
 	{
 		return true;
 	}
-	if(jj_3R_189(ctx))
+	if(jj_3R_191(ctx))
 	{
 		return true;
 	}
 	Token* xsp = 0;
 	xsp = jj_scanpos;
-	if(jj_3R_229(ctx))
+	if(jj_3R_231(ctx))
 	{
 		__GC_MV(this, &(jj_scanpos), xsp, Token);
 	}
@@ -9389,14 +9542,14 @@ bool AlinousPlusParser::jj_3R_152(ThreadContext* ctx)
 	{
 		return true;
 	}
-	if(jj_3R_230(ctx))
+	if(jj_3R_232(ctx))
 	{
 		return true;
 	}
 	while(true)
 	{
 		xsp = jj_scanpos;
-		if(jj_3R_231(ctx))
+		if(jj_3R_233(ctx))
 		{
 			__GC_MV(this, &(jj_scanpos), xsp, Token);
 			break ;
@@ -9408,370 +9561,9 @@ bool AlinousPlusParser::jj_3R_152(ThreadContext* ctx)
 	}
 	return false;
 }
-bool AlinousPlusParser::jj_3_60(ThreadContext* ctx)
+bool AlinousPlusParser::jj_3R_226(ThreadContext* ctx)
 {
-	Token* xsp = 0;
-	xsp = jj_scanpos;
-	if(jj_scan_token((long long)23, ctx))
-	{
-		__GC_MV(this, &(jj_scanpos), xsp, Token);
-		if(jj_scan_token((long long)28, ctx))
-		{
-			__GC_MV(this, &(jj_scanpos), xsp, Token);
-			if(jj_scan_token((long long)29, ctx))
-			{
-				return true;
-			}
-		}
-	}
-	if(jj_3R_96(ctx))
-	{
-		return true;
-	}
-	return false;
-}
-bool AlinousPlusParser::jj_3R_95(ThreadContext* ctx)
-{
-	if(jj_3R_96(ctx))
-	{
-		return true;
-	}
-	Token* xsp = 0;
-	while(true)
-	{
-		xsp = jj_scanpos;
-		if(jj_3_60(ctx))
-		{
-			__GC_MV(this, &(jj_scanpos), xsp, Token);
-			break ;
-		}
-	}
-	return false;
-}
-bool AlinousPlusParser::jj_3R_69(ThreadContext* ctx)
-{
-	if(jj_scan_token(L_PARENTHESIS, ctx))
-	{
-		return true;
-	}
-	if(jj_3R_51(ctx))
-	{
-		return true;
-	}
-	if(jj_scan_token(R_PARENTHESIS, ctx))
-	{
-		return true;
-	}
-	if(jj_3R_58(ctx))
-	{
-		return true;
-	}
-	return false;
-}
-bool AlinousPlusParser::jj_3R_209(ThreadContext* ctx)
-{
-	if(jj_3R_58(ctx))
-	{
-		return true;
-	}
-	if(jj_3R_222(ctx))
-	{
-		return true;
-	}
-	if(jj_3R_58(ctx))
-	{
-		return true;
-	}
-	if(jj_scan_token(SEMI_COLON, ctx))
-	{
-		return true;
-	}
-	return false;
-}
-bool AlinousPlusParser::jj_3R_203(ThreadContext* ctx)
-{
-	if(jj_scan_token(L_PARENTHESIS, ctx))
-	{
-		return true;
-	}
-	if(jj_3R_58(ctx))
-	{
-		return true;
-	}
-	if(jj_scan_token(R_PARENTHESIS, ctx))
-	{
-		return true;
-	}
-	return false;
-}
-bool AlinousPlusParser::jj_3_47(ThreadContext* ctx)
-{
-	if(jj_scan_token(OFFSET, ctx))
-	{
-		return true;
-	}
-	if(jj_3R_88(ctx))
-	{
-		return true;
-	}
-	return false;
-}
-bool AlinousPlusParser::jj_3R_53(ThreadContext* ctx)
-{
-	if(jj_3R_58(ctx))
-	{
-		return true;
-	}
-	if(jj_scan_token(EQUALS, ctx))
-	{
-		return true;
-	}
-	if(jj_3R_58(ctx))
-	{
-		return true;
-	}
-	if(jj_scan_token(SEMI_COLON, ctx))
-	{
-		return true;
-	}
-	return false;
-}
-bool AlinousPlusParser::jj_3R_71(ThreadContext* ctx)
-{
-	if(jj_scan_token(L_PARENTHESIS, ctx))
-	{
-		return true;
-	}
-	if(jj_3R_58(ctx))
-	{
-		return true;
-	}
-	if(jj_scan_token(R_PARENTHESIS, ctx))
-	{
-		return true;
-	}
-	return false;
-}
-bool AlinousPlusParser::jj_3_59(ThreadContext* ctx)
-{
-	Token* xsp = 0;
-	xsp = jj_scanpos;
-	if(jj_scan_token((long long)25, ctx))
-	{
-		__GC_MV(this, &(jj_scanpos), xsp, Token);
-		if(jj_scan_token((long long)27, ctx))
-		{
-			return true;
-		}
-	}
-	if(jj_3R_95(ctx))
-	{
-		return true;
-	}
-	return false;
-}
-bool AlinousPlusParser::jj_3R_124(ThreadContext* ctx)
-{
-	if(jj_scan_token(EQUALS, ctx))
-	{
-		return true;
-	}
-	if(jj_3R_58(ctx))
-	{
-		return true;
-	}
-	return false;
-}
-bool AlinousPlusParser::jj_3_46(ThreadContext* ctx)
-{
-	if(jj_scan_token(LIMIT, ctx))
-	{
-		return true;
-	}
-	if(jj_3R_88(ctx))
-	{
-		return true;
-	}
-	return false;
-}
-bool AlinousPlusParser::jj_3R_228(ThreadContext* ctx)
-{
-	Token* xsp = 0;
-	xsp = jj_scanpos;
-	if(jj_3_46(ctx))
-	{
-		__GC_MV(this, &(jj_scanpos), xsp, Token);
-	}
-	xsp = jj_scanpos;
-	if(jj_3_47(ctx))
-	{
-		__GC_MV(this, &(jj_scanpos), xsp, Token);
-	}
-	return false;
-}
-bool AlinousPlusParser::jj_3R_88(ThreadContext* ctx)
-{
-	if(jj_3R_95(ctx))
-	{
-		return true;
-	}
-	Token* xsp = 0;
-	while(true)
-	{
-		xsp = jj_scanpos;
-		if(jj_3_59(ctx))
-		{
-			__GC_MV(this, &(jj_scanpos), xsp, Token);
-			break ;
-		}
-	}
-	return false;
-}
-bool AlinousPlusParser::jj_3R_123(ThreadContext* ctx)
-{
-	if(jj_scan_token(L_BRACKET, ctx))
-	{
-		return true;
-	}
-	if(jj_scan_token(R_BRACKET, ctx))
-	{
-		return true;
-	}
-	return false;
-}
-bool AlinousPlusParser::jj_3_58(ThreadContext* ctx)
-{
-	if(jj_scan_token(IN, ctx))
-	{
-		return true;
-	}
-	if(jj_scan_token(L_PARENTHESIS, ctx))
-	{
-		return true;
-	}
-	if(jj_3R_89(ctx))
-	{
-		return true;
-	}
-	if(jj_scan_token(R_PARENTHESIS, ctx))
-	{
-		return true;
-	}
-	return false;
-}
-bool AlinousPlusParser::jj_3R_122(ThreadContext* ctx)
-{
-	if(jj_scan_token(L_BRACKET, ctx))
-	{
-		return true;
-	}
-	if(jj_scan_token(R_BRACKET, ctx))
-	{
-		return true;
-	}
-	return false;
-}
-bool AlinousPlusParser::jj_3R_198(ThreadContext* ctx)
-{
-	if(jj_scan_token((long long)197, ctx))
-	{
-		return true;
-	}
-	if(jj_3R_129(ctx))
-	{
-		return true;
-	}
-	return false;
-}
-bool AlinousPlusParser::jj_3_45(ThreadContext* ctx)
-{
-	if(jj_scan_token(HAVING, ctx))
-	{
-		return true;
-	}
-	if(jj_3R_87(ctx))
-	{
-		return true;
-	}
-	return false;
-}
-bool AlinousPlusParser::jj_3R_55(ThreadContext* ctx)
-{
-	if(jj_3R_51(ctx))
-	{
-		return true;
-	}
-	Token* xsp = 0;
-	while(true)
-	{
-		xsp = jj_scanpos;
-		if(jj_3R_122(ctx))
-		{
-			__GC_MV(this, &(jj_scanpos), xsp, Token);
-			break ;
-		}
-	}
-	if(jj_3R_51(ctx))
-	{
-		return true;
-	}
-	while(true)
-	{
-		xsp = jj_scanpos;
-		if(jj_3R_123(ctx))
-		{
-			__GC_MV(this, &(jj_scanpos), xsp, Token);
-			break ;
-		}
-	}
-	xsp = jj_scanpos;
-	if(jj_3R_124(ctx))
-	{
-		__GC_MV(this, &(jj_scanpos), xsp, Token);
-	}
-	if(jj_scan_token(SEMI_COLON, ctx))
-	{
-		return true;
-	}
-	return false;
-}
-bool AlinousPlusParser::jj_3R_197(ThreadContext* ctx)
-{
-	if(jj_scan_token(MINUSMINUS, ctx))
-	{
-		return true;
-	}
-	if(jj_3R_129(ctx))
-	{
-		return true;
-	}
-	return false;
-}
-bool AlinousPlusParser::jj_3R_78(ThreadContext* ctx)
-{
-	if(jj_scan_token(GROUP, ctx))
-	{
-		return true;
-	}
-	if(jj_scan_token(BY, ctx))
-	{
-		return true;
-	}
-	if(jj_3R_89(ctx))
-	{
-		return true;
-	}
-	Token* xsp = 0;
-	xsp = jj_scanpos;
-	if(jj_3_45(ctx))
-	{
-		__GC_MV(this, &(jj_scanpos), xsp, Token);
-	}
-	return false;
-}
-bool AlinousPlusParser::jj_3R_224(ThreadContext* ctx)
-{
-	if(jj_3R_88(ctx))
+	if(jj_3R_90(ctx))
 	{
 		return true;
 	}
@@ -9783,13 +9575,33 @@ bool AlinousPlusParser::jj_3R_224(ThreadContext* ctx)
 	}
 	return false;
 }
+bool AlinousPlusParser::jj_3R_71(ThreadContext* ctx)
+{
+	if(jj_scan_token(L_PARENTHESIS, ctx))
+	{
+		return true;
+	}
+	if(jj_3R_53(ctx))
+	{
+		return true;
+	}
+	if(jj_scan_token(R_PARENTHESIS, ctx))
+	{
+		return true;
+	}
+	if(jj_3R_60(ctx))
+	{
+		return true;
+	}
+	return false;
+}
 bool AlinousPlusParser::jj_3_57(ThreadContext* ctx)
 {
 	if(jj_scan_token(LIKE, ctx))
 	{
 		return true;
 	}
-	if(jj_3R_94(ctx))
+	if(jj_3R_96(ctx))
 	{
 		return true;
 	}
@@ -9801,25 +9613,37 @@ bool AlinousPlusParser::jj_3_57(ThreadContext* ctx)
 	}
 	return false;
 }
-bool AlinousPlusParser::jj_3R_196(ThreadContext* ctx)
+bool AlinousPlusParser::jj_3R_211(ThreadContext* ctx)
 {
-	if(jj_scan_token(PLUSPLUS, ctx))
+	if(jj_3R_60(ctx))
 	{
 		return true;
 	}
-	if(jj_3R_129(ctx))
+	if(jj_3R_224(ctx))
+	{
+		return true;
+	}
+	if(jj_3R_60(ctx))
+	{
+		return true;
+	}
+	if(jj_scan_token(SEMI_COLON, ctx))
 	{
 		return true;
 	}
 	return false;
 }
-bool AlinousPlusParser::jj_3R_77(ThreadContext* ctx)
+bool AlinousPlusParser::jj_3R_205(ThreadContext* ctx)
 {
-	if(jj_scan_token(WHERE, ctx))
+	if(jj_scan_token(L_PARENTHESIS, ctx))
 	{
 		return true;
 	}
-	if(jj_3R_87(ctx))
+	if(jj_3R_60(ctx))
+	{
+		return true;
+	}
+	if(jj_scan_token(R_PARENTHESIS, ctx))
 	{
 		return true;
 	}
@@ -9831,19 +9655,35 @@ bool AlinousPlusParser::jj_3_56(ThreadContext* ctx)
 	{
 		return true;
 	}
-	if(jj_3R_94(ctx))
+	if(jj_3R_96(ctx))
 	{
 		return true;
 	}
 	return false;
 }
-bool AlinousPlusParser::jj_3R_207(ThreadContext* ctx)
+bool AlinousPlusParser::jj_3_47(ThreadContext* ctx)
 {
-	if(jj_scan_token(CONTINUE, ctx))
+	if(jj_scan_token(OFFSET, ctx))
 	{
 		return true;
 	}
-	if(jj_3R_120(ctx))
+	if(jj_3R_90(ctx))
+	{
+		return true;
+	}
+	return false;
+}
+bool AlinousPlusParser::jj_3R_55(ThreadContext* ctx)
+{
+	if(jj_3R_60(ctx))
+	{
+		return true;
+	}
+	if(jj_scan_token(EQUALS, ctx))
+	{
+		return true;
+	}
+	if(jj_3R_60(ctx))
 	{
 		return true;
 	}
@@ -9853,13 +9693,27 @@ bool AlinousPlusParser::jj_3R_207(ThreadContext* ctx)
 	}
 	return false;
 }
-bool AlinousPlusParser::jj_3R_175(ThreadContext* ctx)
+bool AlinousPlusParser::jj_3R_222(ThreadContext* ctx)
+{
+	if(jj_3R_226(ctx))
+	{
+		return true;
+	}
+	Token* xsp = 0;
+	xsp = jj_scanpos;
+	if(jj_3_57(ctx))
+	{
+		__GC_MV(this, &(jj_scanpos), xsp, Token);
+	}
+	return false;
+}
+bool AlinousPlusParser::jj_3R_73(ThreadContext* ctx)
 {
 	if(jj_scan_token(L_PARENTHESIS, ctx))
 	{
 		return true;
 	}
-	if(jj_3R_70(ctx))
+	if(jj_3R_60(ctx))
 	{
 		return true;
 	}
@@ -9869,17 +9723,15 @@ bool AlinousPlusParser::jj_3R_175(ThreadContext* ctx)
 	}
 	return false;
 }
-bool AlinousPlusParser::jj_3R_220(ThreadContext* ctx)
+bool AlinousPlusParser::jj_3_46(ThreadContext* ctx)
 {
-	if(jj_3R_224(ctx))
+	if(jj_scan_token(LIMIT, ctx))
 	{
 		return true;
 	}
-	Token* xsp = 0;
-	xsp = jj_scanpos;
-	if(jj_3_57(ctx))
+	if(jj_3R_90(ctx))
 	{
-		__GC_MV(this, &(jj_scanpos), xsp, Token);
+		return true;
 	}
 	return false;
 }
@@ -9901,15 +9753,114 @@ bool AlinousPlusParser::jj_3_55(ThreadContext* ctx)
 	}
 	return false;
 }
-bool AlinousPlusParser::jj_3R_206(ThreadContext* ctx)
+bool AlinousPlusParser::jj_3R_230(ThreadContext* ctx)
 {
-	if(jj_scan_token(BREAK, ctx))
+	Token* xsp = 0;
+	xsp = jj_scanpos;
+	if(jj_3_46(ctx))
+	{
+		__GC_MV(this, &(jj_scanpos), xsp, Token);
+	}
+	xsp = jj_scanpos;
+	if(jj_3_47(ctx))
+	{
+		__GC_MV(this, &(jj_scanpos), xsp, Token);
+	}
+	return false;
+}
+bool AlinousPlusParser::jj_3R_126(ThreadContext* ctx)
+{
+	if(jj_scan_token(EQUALS, ctx))
 	{
 		return true;
 	}
-	if(jj_3R_120(ctx))
+	if(jj_3R_60(ctx))
 	{
 		return true;
+	}
+	return false;
+}
+bool AlinousPlusParser::jj_3R_125(ThreadContext* ctx)
+{
+	if(jj_scan_token(L_BRACKET, ctx))
+	{
+		return true;
+	}
+	if(jj_scan_token(R_BRACKET, ctx))
+	{
+		return true;
+	}
+	return false;
+}
+bool AlinousPlusParser::jj_3R_124(ThreadContext* ctx)
+{
+	if(jj_scan_token(L_BRACKET, ctx))
+	{
+		return true;
+	}
+	if(jj_scan_token(R_BRACKET, ctx))
+	{
+		return true;
+	}
+	return false;
+}
+bool AlinousPlusParser::jj_3R_200(ThreadContext* ctx)
+{
+	if(jj_scan_token((long long)199, ctx))
+	{
+		return true;
+	}
+	if(jj_3R_131(ctx))
+	{
+		return true;
+	}
+	return false;
+}
+bool AlinousPlusParser::jj_3_45(ThreadContext* ctx)
+{
+	if(jj_scan_token(HAVING, ctx))
+	{
+		return true;
+	}
+	if(jj_3R_89(ctx))
+	{
+		return true;
+	}
+	return false;
+}
+bool AlinousPlusParser::jj_3R_57(ThreadContext* ctx)
+{
+	if(jj_3R_53(ctx))
+	{
+		return true;
+	}
+	Token* xsp = 0;
+	while(true)
+	{
+		xsp = jj_scanpos;
+		if(jj_3R_124(ctx))
+		{
+			__GC_MV(this, &(jj_scanpos), xsp, Token);
+			break ;
+		}
+	}
+	if(jj_3R_53(ctx))
+	{
+		return true;
+	}
+	while(true)
+	{
+		xsp = jj_scanpos;
+		if(jj_3R_125(ctx))
+		{
+			__GC_MV(this, &(jj_scanpos), xsp, Token);
+			break ;
+		}
+	}
+	xsp = jj_scanpos;
+	if(jj_3R_126(ctx))
+	{
+		__GC_MV(this, &(jj_scanpos), xsp, Token);
 	}
 	if(jj_scan_token(SEMI_COLON, ctx))
 	{
@@ -9917,71 +9868,9 @@ bool AlinousPlusParser::jj_3R_206(ThreadContext* ctx)
 	}
 	return false;
 }
-bool AlinousPlusParser::jj_3R_133(ThreadContext* ctx)
+bool AlinousPlusParser::jj_3R_207(ThreadContext* ctx)
 {
-	if(jj_scan_token(L_PARENTHESIS, ctx))
-	{
-		return true;
-	}
-	if(jj_3R_51(ctx))
-	{
-		return true;
-	}
-	if(jj_scan_token(R_PARENTHESIS, ctx))
-	{
-		return true;
-	}
-	if(jj_3R_70(ctx))
-	{
-		return true;
-	}
-	return false;
-}
-bool AlinousPlusParser::jj_3R_102(ThreadContext* ctx)
-{
-	if(jj_3R_150(ctx))
-	{
-		return true;
-	}
-	return false;
-}
-bool AlinousPlusParser::jj_3_4(ThreadContext* ctx)
-{
-	if(jj_3R_49(ctx))
-	{
-		return true;
-	}
-	return false;
-}
-bool AlinousPlusParser::jj_3_44(ThreadContext* ctx)
-{
-	if(jj_scan_token(AS, ctx))
-	{
-		return true;
-	}
-	if(jj_scan_token(IDENTIFIER, ctx))
-	{
-		return true;
-	}
-	return false;
-}
-bool AlinousPlusParser::jj_3R_204(ThreadContext* ctx)
-{
-	if(jj_3R_164(ctx))
-	{
-		return true;
-	}
-	Token* xsp = 0;
-	xsp = jj_scanpos;
-	if(jj_3_44(ctx))
-	{
-		__GC_MV(this, &(jj_scanpos), xsp, Token);
-	}
-	return false;
-}
-bool AlinousPlusParser::jj_3R_205(ThreadContext* ctx)
-{
-	if(jj_3R_220(ctx))
+	if(jj_3R_222(ctx))
 	{
 		return true;
 	}
@@ -9993,35 +9882,41 @@ bool AlinousPlusParser::jj_3R_205(ThreadContext* ctx)
 	}
 	return false;
 }
-bool AlinousPlusParser::jj_3R_135(ThreadContext* ctx)
+bool AlinousPlusParser::jj_3R_80(ThreadContext* ctx)
 {
-	if(jj_scan_token(L_BRACKET, ctx))
+	if(jj_scan_token(GROUP, ctx))
 	{
 		return true;
 	}
-	if(jj_3R_58(ctx))
+	if(jj_scan_token(BY, ctx))
 	{
 		return true;
 	}
-	if(jj_scan_token(R_BRACKET, ctx))
+	if(jj_3R_91(ctx))
+	{
+		return true;
+	}
+	Token* xsp = 0;
+	xsp = jj_scanpos;
+	if(jj_3_45(ctx))
+	{
+		__GC_MV(this, &(jj_scanpos), xsp, Token);
+	}
+	return false;
+}
+bool AlinousPlusParser::jj_3R_199(ThreadContext* ctx)
+{
+	if(jj_scan_token(MINUSMINUS, ctx))
+	{
+		return true;
+	}
+	if(jj_3R_131(ctx))
 	{
 		return true;
 	}
 	return false;
 }
-bool AlinousPlusParser::jj_3_43(ThreadContext* ctx)
-{
-	if(jj_scan_token(AS, ctx))
-	{
-		return true;
-	}
-	if(jj_scan_token(IDENTIFIER, ctx))
-	{
-		return true;
-	}
-	return false;
-}
-bool AlinousPlusParser::jj_3R_227(ThreadContext* ctx)
+bool AlinousPlusParser::jj_3R_229(ThreadContext* ctx)
 {
 	Token* xsp = 0;
 	xsp = jj_scanpos;
@@ -10041,7 +9936,241 @@ bool AlinousPlusParser::jj_3R_227(ThreadContext* ctx)
 			}
 		}
 	}
-	if(jj_3R_205(ctx))
+	if(jj_3R_207(ctx))
+	{
+		return true;
+	}
+	return false;
+}
+bool AlinousPlusParser::jj_3R_198(ThreadContext* ctx)
+{
+	if(jj_scan_token(PLUSPLUS, ctx))
+	{
+		return true;
+	}
+	if(jj_3R_131(ctx))
+	{
+		return true;
+	}
+	return false;
+}
+bool AlinousPlusParser::jj_3R_79(ThreadContext* ctx)
+{
+	if(jj_scan_token(WHERE, ctx))
+	{
+		return true;
+	}
+	if(jj_3R_89(ctx))
+	{
+		return true;
+	}
+	return false;
+}
+bool AlinousPlusParser::jj_3R_181(ThreadContext* ctx)
+{
+	if(jj_3R_207(ctx))
+	{
+		return true;
+	}
+	Token* xsp = 0;
+	xsp = jj_scanpos;
+	if(jj_3R_229(ctx))
+	{
+		__GC_MV(this, &(jj_scanpos), xsp, Token);
+	}
+	return false;
+}
+bool AlinousPlusParser::jj_3R_209(ThreadContext* ctx)
+{
+	if(jj_scan_token(CONTINUE, ctx))
+	{
+		return true;
+	}
+	if(jj_3R_122(ctx))
+	{
+		return true;
+	}
+	if(jj_scan_token(SEMI_COLON, ctx))
+	{
+		return true;
+	}
+	return false;
+}
+bool AlinousPlusParser::jj_3R_177(ThreadContext* ctx)
+{
+	if(jj_scan_token(L_PARENTHESIS, ctx))
+	{
+		return true;
+	}
+	if(jj_3R_72(ctx))
+	{
+		return true;
+	}
+	if(jj_scan_token(R_PARENTHESIS, ctx))
+	{
+		return true;
+	}
+	return false;
+}
+bool AlinousPlusParser::jj_3R_228(ThreadContext* ctx)
+{
+	Token* xsp = 0;
+	xsp = jj_scanpos;
+	if(jj_scan_token((long long)22, ctx))
+	{
+		__GC_MV(this, &(jj_scanpos), xsp, Token);
+		if(jj_scan_token((long long)210, ctx))
+		{
+			__GC_MV(this, &(jj_scanpos), xsp, Token);
+			if(jj_scan_token((long long)46, ctx))
+			{
+				return true;
+			}
+		}
+	}
+	if(jj_3R_181(ctx))
+	{
+		return true;
+	}
+	return false;
+}
+bool AlinousPlusParser::jj_3R_208(ThreadContext* ctx)
+{
+	if(jj_scan_token(BREAK, ctx))
+	{
+		return true;
+	}
+	if(jj_3R_122(ctx))
+	{
+		return true;
+	}
+	if(jj_scan_token(SEMI_COLON, ctx))
+	{
+		return true;
+	}
+	return false;
+}
+bool AlinousPlusParser::jj_3R_143(ThreadContext* ctx)
+{
+	if(jj_3R_181(ctx))
+	{
+		return true;
+	}
+	Token* xsp = 0;
+	xsp = jj_scanpos;
+	if(jj_3R_228(ctx))
+	{
+		__GC_MV(this, &(jj_scanpos), xsp, Token);
+	}
+	return false;
+}
+bool AlinousPlusParser::jj_3R_135(ThreadContext* ctx)
+{
+	if(jj_scan_token(L_PARENTHESIS, ctx))
+	{
+		return true;
+	}
+	if(jj_3R_53(ctx))
+	{
+		return true;
+	}
+	if(jj_scan_token(R_PARENTHESIS, ctx))
+	{
+		return true;
+	}
+	if(jj_3R_72(ctx))
+	{
+		return true;
+	}
+	return false;
+}
+bool AlinousPlusParser::jj_3R_104(ThreadContext* ctx)
+{
+	if(jj_3R_152(ctx))
+	{
+		return true;
+	}
+	return false;
+}
+bool AlinousPlusParser::jj_3_4(ThreadContext* ctx)
+{
+	if(jj_3R_51(ctx))
+	{
+		return true;
+	}
+	return false;
+}
+bool AlinousPlusParser::jj_3_44(ThreadContext* ctx)
+{
+	if(jj_scan_token(AS, ctx))
+	{
+		return true;
+	}
+	if(jj_scan_token(IDENTIFIER, ctx))
+	{
+		return true;
+	}
+	return false;
+}
+bool AlinousPlusParser::jj_3R_206(ThreadContext* ctx)
+{
+	if(jj_3R_166(ctx))
+	{
+		return true;
+	}
+	Token* xsp = 0;
+	xsp = jj_scanpos;
+	if(jj_3_44(ctx))
+	{
+		__GC_MV(this, &(jj_scanpos), xsp, Token);
+	}
+	return false;
+}
+bool AlinousPlusParser::jj_3_54(ThreadContext* ctx)
+{
+	if(jj_scan_token(NOT, ctx))
+	{
+		return true;
+	}
+	return false;
+}
+bool AlinousPlusParser::jj_3R_95(ThreadContext* ctx)
+{
+	Token* xsp = 0;
+	xsp = jj_scanpos;
+	if(jj_3_54(ctx))
+	{
+		__GC_MV(this, &(jj_scanpos), xsp, Token);
+	}
+	if(jj_3R_143(ctx))
+	{
+		return true;
+	}
+	return false;
+}
+bool AlinousPlusParser::jj_3_43(ThreadContext* ctx)
+{
+	if(jj_scan_token(AS, ctx))
+	{
+		return true;
+	}
+	if(jj_scan_token(IDENTIFIER, ctx))
+	{
+		return true;
+	}
+	return false;
+}
+bool AlinousPlusParser::jj_3R_137(ThreadContext* ctx)
+{
+	if(jj_scan_token(L_BRACKET, ctx))
+	{
+		return true;
+	}
+	if(jj_3R_60(ctx))
+	{
+		return true;
+	}
+	if(jj_scan_token(R_BRACKET, ctx))
 	{
 		return true;
 	}
@@ -10049,29 +10178,15 @@ bool AlinousPlusParser::jj_3R_227(ThreadContext* ctx)
 }
 bool AlinousPlusParser::jj_3_3(ThreadContext* ctx)
 {
-	if(jj_3R_48(ctx))
+	if(jj_3R_50(ctx))
 	{
 		return true;
 	}
 	return false;
 }
-bool AlinousPlusParser::jj_3R_47(ThreadContext* ctx)
+bool AlinousPlusParser::jj_3R_191(ThreadContext* ctx)
 {
-	Token* xsp = 0;
-	xsp = jj_scanpos;
-	if(jj_3_3(ctx))
-	{
-		__GC_MV(this, &(jj_scanpos), xsp, Token);
-		if(jj_3R_102(ctx))
-		{
-			return true;
-		}
-	}
-	return false;
-}
-bool AlinousPlusParser::jj_3R_189(ThreadContext* ctx)
-{
-	if(jj_3R_51(ctx))
+	if(jj_3R_53(ctx))
 	{
 		return true;
 	}
@@ -10083,21 +10198,33 @@ bool AlinousPlusParser::jj_3R_189(ThreadContext* ctx)
 	}
 	return false;
 }
-bool AlinousPlusParser::jj_3R_179(ThreadContext* ctx)
+bool AlinousPlusParser::jj_3R_49(ThreadContext* ctx)
 {
-	if(jj_3R_205(ctx))
-	{
-		return true;
-	}
 	Token* xsp = 0;
 	xsp = jj_scanpos;
-	if(jj_3R_227(ctx))
+	if(jj_3_3(ctx))
 	{
 		__GC_MV(this, &(jj_scanpos), xsp, Token);
+		if(jj_3R_104(ctx))
+		{
+			return true;
+		}
 	}
 	return false;
 }
-bool AlinousPlusParser::jj_3R_134(ThreadContext* ctx)
+bool AlinousPlusParser::jj_3_53(ThreadContext* ctx)
+{
+	if(jj_scan_token(SQLAND, ctx))
+	{
+		return true;
+	}
+	if(jj_3R_95(ctx))
+	{
+		return true;
+	}
+	return false;
+}
+bool AlinousPlusParser::jj_3R_136(ThreadContext* ctx)
 {
 	Token* xsp = 0;
 	xsp = jj_scanpos;
@@ -10111,22 +10238,17 @@ bool AlinousPlusParser::jj_3R_134(ThreadContext* ctx)
 	}
 	return false;
 }
-bool AlinousPlusParser::jj_3R_74(ThreadContext* ctx)
+bool AlinousPlusParser::jj_3R_94(ThreadContext* ctx)
 {
-	Token* xsp = 0;
-	xsp = jj_scanpos;
-	if(jj_3R_134(ctx))
-	{
-		__GC_MV(this, &(jj_scanpos), xsp, Token);
-	}
-	if(jj_3R_120(ctx))
+	if(jj_3R_95(ctx))
 	{
 		return true;
 	}
+	Token* xsp = 0;
 	while(true)
 	{
 		xsp = jj_scanpos;
-		if(jj_3R_135(ctx))
+		if(jj_3_53(ctx))
 		{
 			__GC_MV(this, &(jj_scanpos), xsp, Token);
 			break ;
@@ -10134,21 +10256,36 @@ bool AlinousPlusParser::jj_3R_74(ThreadContext* ctx)
 	}
 	return false;
 }
-bool AlinousPlusParser::jj_3_2(ThreadContext* ctx)
+bool AlinousPlusParser::jj_3R_76(ThreadContext* ctx)
 {
-	if(jj_3R_47(ctx))
+	Token* xsp = 0;
+	xsp = jj_scanpos;
+	if(jj_3R_136(ctx))
+	{
+		__GC_MV(this, &(jj_scanpos), xsp, Token);
+	}
+	if(jj_3R_122(ctx))
 	{
 		return true;
 	}
+	while(true)
+	{
+		xsp = jj_scanpos;
+		if(jj_3R_137(ctx))
+		{
+			__GC_MV(this, &(jj_scanpos), xsp, Token);
+			break ;
+		}
+	}
 	return false;
 }
-bool AlinousPlusParser::jj_3R_178(ThreadContext* ctx)
+bool AlinousPlusParser::jj_3R_180(ThreadContext* ctx)
 {
 	if(jj_scan_token(L_PARENTHESIS, ctx))
 	{
 		return true;
 	}
-	if(jj_3R_210(ctx))
+	if(jj_3R_212(ctx))
 	{
 		return true;
 	}
@@ -10158,45 +10295,31 @@ bool AlinousPlusParser::jj_3R_178(ThreadContext* ctx)
 	}
 	return false;
 }
-bool AlinousPlusParser::jj_3R_177(ThreadContext* ctx)
+bool AlinousPlusParser::jj_3R_179(ThreadContext* ctx)
 {
-	if(jj_3R_204(ctx))
+	if(jj_3R_206(ctx))
 	{
 		return true;
 	}
 	return false;
 }
-bool AlinousPlusParser::jj_3R_226(ThreadContext* ctx)
+bool AlinousPlusParser::jj_3R_178(ThreadContext* ctx)
 {
-	Token* xsp = 0;
-	xsp = jj_scanpos;
-	if(jj_scan_token((long long)22, ctx))
-	{
-		__GC_MV(this, &(jj_scanpos), xsp, Token);
-		if(jj_scan_token((long long)208, ctx))
-		{
-			__GC_MV(this, &(jj_scanpos), xsp, Token);
-			if(jj_scan_token((long long)46, ctx))
-			{
-				return true;
-			}
-		}
-	}
-	if(jj_3R_179(ctx))
+	if(jj_3R_191(ctx))
 	{
 		return true;
 	}
 	return false;
 }
-bool AlinousPlusParser::jj_3R_176(ThreadContext* ctx)
+bool AlinousPlusParser::jj_3_2(ThreadContext* ctx)
 {
-	if(jj_3R_189(ctx))
+	if(jj_3R_49(ctx))
 	{
 		return true;
 	}
 	return false;
 }
-bool AlinousPlusParser::jj_3R_46(ThreadContext* ctx)
+bool AlinousPlusParser::jj_3R_48(ThreadContext* ctx)
 {
 	Token* xsp = 0;
 	if(jj_3_2(ctx))
@@ -10214,29 +10337,17 @@ bool AlinousPlusParser::jj_3R_46(ThreadContext* ctx)
 	}
 	return false;
 }
-bool AlinousPlusParser::jj_3R_72(ThreadContext* ctx)
-{
-	if(jj_3R_120(ctx))
-	{
-		return true;
-	}
-	if(jj_3R_132(ctx))
-	{
-		return true;
-	}
-	return false;
-}
-bool AlinousPlusParser::jj_3R_136(ThreadContext* ctx)
+bool AlinousPlusParser::jj_3R_138(ThreadContext* ctx)
 {
 	Token* xsp = 0;
 	xsp = jj_scanpos;
-	if(jj_3R_176(ctx))
+	if(jj_3R_178(ctx))
 	{
 		__GC_MV(this, &(jj_scanpos), xsp, Token);
-		if(jj_3R_177(ctx))
+		if(jj_3R_179(ctx))
 		{
 			__GC_MV(this, &(jj_scanpos), xsp, Token);
-			if(jj_3R_178(ctx))
+			if(jj_3R_180(ctx))
 			{
 				return true;
 			}
@@ -10244,23 +10355,13 @@ bool AlinousPlusParser::jj_3R_136(ThreadContext* ctx)
 	}
 	return false;
 }
-bool AlinousPlusParser::jj_3R_141(ThreadContext* ctx)
+bool AlinousPlusParser::jj_3R_74(ThreadContext* ctx)
 {
-	if(jj_3R_179(ctx))
+	if(jj_3R_122(ctx))
 	{
 		return true;
 	}
-	Token* xsp = 0;
-	xsp = jj_scanpos;
-	if(jj_3R_226(ctx))
-	{
-		__GC_MV(this, &(jj_scanpos), xsp, Token);
-	}
-	return false;
-}
-bool AlinousPlusParser::jj_3R_73(ThreadContext* ctx)
-{
-	if(jj_3R_133(ctx))
+	if(jj_3R_134(ctx))
 	{
 		return true;
 	}
@@ -10268,7 +10369,27 @@ bool AlinousPlusParser::jj_3R_73(ThreadContext* ctx)
 }
 bool AlinousPlusParser::jj_3_41(ThreadContext* ctx)
 {
-	if(jj_3R_79(ctx))
+	if(jj_3R_81(ctx))
+	{
+		return true;
+	}
+	return false;
+}
+bool AlinousPlusParser::jj_3_52(ThreadContext* ctx)
+{
+	if(jj_scan_token(OR, ctx))
+	{
+		return true;
+	}
+	if(jj_3R_94(ctx))
+	{
+		return true;
+	}
+	return false;
+}
+bool AlinousPlusParser::jj_3R_75(ThreadContext* ctx)
+{
+	if(jj_3R_135(ctx))
 	{
 		return true;
 	}
@@ -10276,7 +10397,19 @@ bool AlinousPlusParser::jj_3_41(ThreadContext* ctx)
 }
 bool AlinousPlusParser::jj_3_33(ThreadContext* ctx)
 {
-	if(jj_3R_74(ctx))
+	if(jj_3R_76(ctx))
+	{
+		return true;
+	}
+	return false;
+}
+bool AlinousPlusParser::jj_3R_81(ThreadContext* ctx)
+{
+	if(jj_scan_token(ON, ctx))
+	{
+		return true;
+	}
+	if(jj_3R_89(ctx))
 	{
 		return true;
 	}
@@ -10284,69 +10417,61 @@ bool AlinousPlusParser::jj_3_33(ThreadContext* ctx)
 }
 bool AlinousPlusParser::jj_3_32(ThreadContext* ctx)
 {
-	if(jj_3R_72(ctx))
+	if(jj_3R_74(ctx))
 	{
 		return true;
 	}
 	return false;
 }
-bool AlinousPlusParser::jj_3R_79(ThreadContext* ctx)
+bool AlinousPlusParser::jj_3R_89(ThreadContext* ctx)
 {
-	if(jj_scan_token(ON, ctx))
+	if(jj_3R_94(ctx))
 	{
 		return true;
 	}
-	if(jj_3R_87(ctx))
+	Token* xsp = 0;
+	while(true)
 	{
-		return true;
+		xsp = jj_scanpos;
+		if(jj_3_52(ctx))
+		{
+			__GC_MV(this, &(jj_scanpos), xsp, Token);
+			break ;
+		}
 	}
 	return false;
 }
 bool AlinousPlusParser::jj_3_40(ThreadContext* ctx)
 {
-	if(jj_3R_79(ctx))
+	if(jj_3R_81(ctx))
 	{
 		return true;
 	}
 	return false;
 }
-bool AlinousPlusParser::jj_3_54(ThreadContext* ctx)
-{
-	if(jj_scan_token(NOT, ctx))
-	{
-		return true;
-	}
-	return false;
-}
-bool AlinousPlusParser::jj_3R_93(ThreadContext* ctx)
-{
-	Token* xsp = 0;
-	xsp = jj_scanpos;
-	if(jj_3_54(ctx))
-	{
-		__GC_MV(this, &(jj_scanpos), xsp, Token);
-	}
-	if(jj_3R_141(ctx))
-	{
-		return true;
-	}
-	return false;
-}
-bool AlinousPlusParser::jj_3R_131(ThreadContext* ctx)
-{
-	if(jj_3R_175(ctx))
-	{
-		return true;
-	}
-	return false;
-}
-bool AlinousPlusParser::jj_3R_138(ThreadContext* ctx)
+bool AlinousPlusParser::jj_3R_140(ThreadContext* ctx)
 {
 	if(jj_scan_token(COMMA, ctx))
 	{
 		return true;
 	}
-	if(jj_3R_136(ctx))
+	if(jj_3R_138(ctx))
+	{
+		return true;
+	}
+	return false;
+}
+bool AlinousPlusParser::jj_3R_133(ThreadContext* ctx)
+{
+	if(jj_3R_177(ctx))
+	{
+		return true;
+	}
+	return false;
+}
+bool AlinousPlusParser::jj_3_39(ThreadContext* ctx)
+{
+	if(jj_3R_81(ctx))
 	{
 		return true;
 	}
@@ -10366,7 +10491,7 @@ bool AlinousPlusParser::jj_3_31(ThreadContext* ctx)
 		if(jj_3_33(ctx))
 		{
 			__GC_MV(this, &(jj_scanpos), xsp, Token);
-			if(jj_3R_73(ctx))
+			if(jj_3R_75(ctx))
 			{
 				return true;
 			}
@@ -10374,17 +10499,9 @@ bool AlinousPlusParser::jj_3_31(ThreadContext* ctx)
 	}
 	return false;
 }
-bool AlinousPlusParser::jj_3R_130(ThreadContext* ctx)
+bool AlinousPlusParser::jj_3R_132(ThreadContext* ctx)
 {
-	if(jj_3R_74(ctx))
-	{
-		return true;
-	}
-	return false;
-}
-bool AlinousPlusParser::jj_3_39(ThreadContext* ctx)
-{
-	if(jj_3R_79(ctx))
+	if(jj_3R_76(ctx))
 	{
 		return true;
 	}
@@ -10392,19 +10509,19 @@ bool AlinousPlusParser::jj_3_39(ThreadContext* ctx)
 }
 bool AlinousPlusParser::jj_3_30(ThreadContext* ctx)
 {
-	if(jj_3R_72(ctx))
+	if(jj_3R_74(ctx))
 	{
 		return true;
 	}
 	return false;
 }
-bool AlinousPlusParser::jj_3R_254(ThreadContext* ctx)
+bool AlinousPlusParser::jj_3R_260(ThreadContext* ctx)
 {
 	if(jj_scan_token(L_BRACKET, ctx))
 	{
 		return true;
 	}
-	if(jj_3R_58(ctx))
+	if(jj_3R_60(ctx))
 	{
 		return true;
 	}
@@ -10414,7 +10531,7 @@ bool AlinousPlusParser::jj_3R_254(ThreadContext* ctx)
 	}
 	return false;
 }
-bool AlinousPlusParser::jj_3R_137(ThreadContext* ctx)
+bool AlinousPlusParser::jj_3R_139(ThreadContext* ctx)
 {
 	Token* xsp = 0;
 	xsp = jj_scanpos;
@@ -10433,17 +10550,55 @@ bool AlinousPlusParser::jj_3R_137(ThreadContext* ctx)
 	}
 	return false;
 }
-bool AlinousPlusParser::jj_3R_70(ThreadContext* ctx)
+bool AlinousPlusParser::jj_3R_161(ThreadContext* ctx)
+{
+	if(jj_scan_token(DROP, ctx))
+	{
+		return true;
+	}
+	if(jj_scan_token(INDEX, ctx))
+	{
+		return true;
+	}
+	if(jj_3R_191(ctx))
+	{
+		return true;
+	}
+	if(jj_scan_token(SEMI_COLON, ctx))
+	{
+		return true;
+	}
+	return false;
+}
+bool AlinousPlusParser::jj_3R_88(ThreadContext* ctx)
+{
+	Token* xsp = 0;
+	if(jj_3R_140(ctx))
+	{
+		return true;
+	}
+	while(true)
+	{
+		xsp = jj_scanpos;
+		if(jj_3R_140(ctx))
+		{
+			__GC_MV(this, &(jj_scanpos), xsp, Token);
+			break ;
+		}
+	}
+	return false;
+}
+bool AlinousPlusParser::jj_3R_72(ThreadContext* ctx)
 {
 	Token* xsp = 0;
 	xsp = jj_scanpos;
 	if(jj_3_30(ctx))
 	{
 		__GC_MV(this, &(jj_scanpos), xsp, Token);
-		if(jj_3R_130(ctx))
+		if(jj_3R_132(ctx))
 		{
 			__GC_MV(this, &(jj_scanpos), xsp, Token);
-			if(jj_3R_131(ctx))
+			if(jj_3R_133(ctx))
 			{
 				return true;
 			}
@@ -10460,17 +10615,17 @@ bool AlinousPlusParser::jj_3R_70(ThreadContext* ctx)
 	}
 	return false;
 }
-bool AlinousPlusParser::jj_3R_86(ThreadContext* ctx)
+bool AlinousPlusParser::jj_3R_258(ThreadContext* ctx)
 {
 	Token* xsp = 0;
-	if(jj_3R_138(ctx))
+	if(jj_3R_260(ctx))
 	{
 		return true;
 	}
 	while(true)
 	{
 		xsp = jj_scanpos;
-		if(jj_3R_138(ctx))
+		if(jj_3R_260(ctx))
 		{
 			__GC_MV(this, &(jj_scanpos), xsp, Token);
 			break ;
@@ -10478,67 +10633,49 @@ bool AlinousPlusParser::jj_3R_86(ThreadContext* ctx)
 	}
 	return false;
 }
-bool AlinousPlusParser::jj_3_53(ThreadContext* ctx)
+bool AlinousPlusParser::jj_3R_238(ThreadContext* ctx)
 {
-	if(jj_scan_token(SQLAND, ctx))
+	if(jj_scan_token(COMMA, ctx))
 	{
 		return true;
 	}
-	if(jj_3R_93(ctx))
+	if(jj_3R_122(ctx))
 	{
 		return true;
-	}
-	return false;
-}
-bool AlinousPlusParser::jj_3R_252(ThreadContext* ctx)
-{
-	Token* xsp = 0;
-	if(jj_3R_254(ctx))
-	{
-		return true;
-	}
-	while(true)
-	{
-		xsp = jj_scanpos;
-		if(jj_3R_254(ctx))
-		{
-			__GC_MV(this, &(jj_scanpos), xsp, Token);
-			break ;
-		}
 	}
 	return false;
 }
 bool AlinousPlusParser::jj_3_1(ThreadContext* ctx)
 {
-	if(jj_3R_46(ctx))
+	if(jj_3R_48(ctx))
 	{
 		return true;
 	}
 	return false;
 }
-bool AlinousPlusParser::jj_3R_251(ThreadContext* ctx)
+bool AlinousPlusParser::jj_3R_257(ThreadContext* ctx)
 {
-	if(jj_3R_132(ctx))
+	if(jj_3R_134(ctx))
 	{
 		return true;
 	}
 	return false;
 }
-bool AlinousPlusParser::jj_3R_250(ThreadContext* ctx)
+bool AlinousPlusParser::jj_3R_256(ThreadContext* ctx)
 {
 	Token* xsp = 0;
 	xsp = jj_scanpos;
-	if(jj_3R_251(ctx))
+	if(jj_3R_257(ctx))
 	{
 		__GC_MV(this, &(jj_scanpos), xsp, Token);
-		if(jj_3R_252(ctx))
+		if(jj_3R_258(ctx))
 		{
 			return true;
 		}
 	}
 	return false;
 }
-bool AlinousPlusParser::jj_3R_85(ThreadContext* ctx)
+bool AlinousPlusParser::jj_3R_87(ThreadContext* ctx)
 {
 	if(jj_scan_token(CROSS, ctx))
 	{
@@ -10548,7 +10685,7 @@ bool AlinousPlusParser::jj_3R_85(ThreadContext* ctx)
 	{
 		return true;
 	}
-	if(jj_3R_136(ctx))
+	if(jj_3R_138(ctx))
 	{
 		return true;
 	}
@@ -10560,33 +10697,15 @@ bool AlinousPlusParser::jj_3R_85(ThreadContext* ctx)
 	}
 	return false;
 }
-bool AlinousPlusParser::jj_3R_92(ThreadContext* ctx)
-{
-	if(jj_3R_93(ctx))
-	{
-		return true;
-	}
-	Token* xsp = 0;
-	while(true)
-	{
-		xsp = jj_scanpos;
-		if(jj_3_53(ctx))
-		{
-			__GC_MV(this, &(jj_scanpos), xsp, Token);
-			break ;
-		}
-	}
-	return false;
-}
 bool AlinousPlusParser::jj_3_38(ThreadContext* ctx)
 {
-	if(jj_3R_79(ctx))
+	if(jj_3R_81(ctx))
 	{
 		return true;
 	}
 	return false;
 }
-bool AlinousPlusParser::jj_3R_84(ThreadContext* ctx)
+bool AlinousPlusParser::jj_3R_86(ThreadContext* ctx)
 {
 	if(jj_scan_token(NATURAL, ctx))
 	{
@@ -10594,7 +10713,7 @@ bool AlinousPlusParser::jj_3R_84(ThreadContext* ctx)
 	}
 	Token* xsp = 0;
 	xsp = jj_scanpos;
-	if(jj_3R_137(ctx))
+	if(jj_3R_139(ctx))
 	{
 		__GC_MV(this, &(jj_scanpos), xsp, Token);
 	}
@@ -10602,13 +10721,13 @@ bool AlinousPlusParser::jj_3R_84(ThreadContext* ctx)
 	{
 		return true;
 	}
-	if(jj_3R_136(ctx))
+	if(jj_3R_138(ctx))
 	{
 		return true;
 	}
 	return false;
 }
-bool AlinousPlusParser::jj_3R_126(ThreadContext* ctx)
+bool AlinousPlusParser::jj_3R_128(ThreadContext* ctx)
 {
 	if(jj_scan_token(SQL_DEFAULT, ctx))
 	{
@@ -10620,33 +10739,65 @@ bool AlinousPlusParser::jj_3R_126(ThreadContext* ctx)
 	}
 	return false;
 }
-bool AlinousPlusParser::jj_3_29(ThreadContext* ctx)
+bool AlinousPlusParser::jj_3R_160(ThreadContext* ctx)
 {
-	if(jj_3R_71(ctx))
+	if(jj_scan_token(CREATE, ctx))
 	{
 		return true;
 	}
-	return false;
-}
-bool AlinousPlusParser::jj_3R_199(ThreadContext* ctx)
-{
-	if(jj_scan_token(NEW, ctx))
+	if(jj_scan_token(INDEX, ctx))
 	{
 		return true;
 	}
-	if(jj_3R_51(ctx))
+	if(jj_3R_191(ctx))
+	{
+		return true;
+	}
+	if(jj_scan_token(ON, ctx))
+	{
+		return true;
+	}
+	if(jj_3R_191(ctx))
+	{
+		return true;
+	}
+	if(jj_scan_token(L_PARENTHESIS, ctx))
+	{
+		return true;
+	}
+	if(jj_3R_122(ctx))
 	{
 		return true;
 	}
 	Token* xsp = 0;
-	xsp = jj_scanpos;
-	if(jj_3R_250(ctx))
+	while(true)
 	{
-		__GC_MV(this, &(jj_scanpos), xsp, Token);
+		xsp = jj_scanpos;
+		if(jj_3R_238(ctx))
+		{
+			__GC_MV(this, &(jj_scanpos), xsp, Token);
+			break ;
+		}
+	}
+	if(jj_scan_token(R_PARENTHESIS, ctx))
+	{
+		return true;
+	}
+	if(jj_scan_token(SEMI_COLON, ctx))
+	{
+		return true;
 	}
 	return false;
 }
-bool AlinousPlusParser::jj_3R_83(ThreadContext* ctx)
+bool AlinousPlusParser::jj_3_29(ThreadContext* ctx)
+{
+	if(jj_3R_73(ctx))
+	{
+		return true;
+	}
+	return false;
+}
+bool AlinousPlusParser::jj_3R_85(ThreadContext* ctx)
 {
 	if(jj_scan_token(RIGHT, ctx))
 	{
@@ -10662,7 +10813,7 @@ bool AlinousPlusParser::jj_3R_83(ThreadContext* ctx)
 	{
 		return true;
 	}
-	if(jj_3R_136(ctx))
+	if(jj_3R_138(ctx))
 	{
 		return true;
 	}
@@ -10673,13 +10824,90 @@ bool AlinousPlusParser::jj_3R_83(ThreadContext* ctx)
 	}
 	return false;
 }
-bool AlinousPlusParser::jj_3_52(ThreadContext* ctx)
+bool AlinousPlusParser::jj_3R_201(ThreadContext* ctx)
 {
-	if(jj_scan_token(OR, ctx))
+	if(jj_scan_token(NEW, ctx))
 	{
 		return true;
 	}
-	if(jj_3R_92(ctx))
+	if(jj_3R_53(ctx))
+	{
+		return true;
+	}
+	Token* xsp = 0;
+	xsp = jj_scanpos;
+	if(jj_3R_256(ctx))
+	{
+		__GC_MV(this, &(jj_scanpos), xsp, Token);
+	}
+	return false;
+}
+bool AlinousPlusParser::jj_3R_176(ThreadContext* ctx)
+{
+	if(jj_3R_205(ctx))
+	{
+		return true;
+	}
+	return false;
+}
+bool AlinousPlusParser::jj_3_28(ThreadContext* ctx)
+{
+	if(jj_3R_72(ctx))
+	{
+		return true;
+	}
+	return false;
+}
+bool AlinousPlusParser::jj_3R_84(ThreadContext* ctx)
+{
+	if(jj_scan_token(LEFT, ctx))
+	{
+		return true;
+	}
+	Token* xsp = 0;
+	xsp = jj_scanpos;
+	if(jj_scan_token((long long)117, ctx))
+	{
+		__GC_MV(this, &(jj_scanpos), xsp, Token);
+	}
+	if(jj_scan_token(JOIN, ctx))
+	{
+		return true;
+	}
+	if(jj_3R_138(ctx))
+	{
+		return true;
+	}
+	xsp = jj_scanpos;
+	if(jj_3_39(ctx))
+	{
+		__GC_MV(this, &(jj_scanpos), xsp, Token);
+	}
+	return false;
+}
+bool AlinousPlusParser::jj_3_27(ThreadContext* ctx)
+{
+	if(jj_3R_71(ctx))
+	{
+		return true;
+	}
+	return false;
+}
+bool AlinousPlusParser::jj_3R_175(ThreadContext* ctx)
+{
+	if(jj_3R_204(ctx))
+	{
+		return true;
+	}
+	return false;
+}
+bool AlinousPlusParser::jj_3R_127(ThreadContext* ctx)
+{
+	if(jj_scan_token(CASE, ctx))
+	{
+		return true;
+	}
+	if(jj_3R_53(ctx))
 	{
 		return true;
 	}
@@ -10688,34 +10916,6 @@ bool AlinousPlusParser::jj_3_52(ThreadContext* ctx)
 bool AlinousPlusParser::jj_3R_174(ThreadContext* ctx)
 {
 	if(jj_3R_203(ctx))
-	{
-		return true;
-	}
-	return false;
-}
-bool AlinousPlusParser::jj_3_28(ThreadContext* ctx)
-{
-	if(jj_3R_70(ctx))
-	{
-		return true;
-	}
-	return false;
-}
-bool AlinousPlusParser::jj_3_27(ThreadContext* ctx)
-{
-	if(jj_3R_69(ctx))
-	{
-		return true;
-	}
-	return false;
-}
-bool AlinousPlusParser::jj_3R_125(ThreadContext* ctx)
-{
-	if(jj_scan_token(CASE, ctx))
-	{
-		return true;
-	}
-	if(jj_3R_51(ctx))
 	{
 		return true;
 	}
@@ -10737,33 +10937,6 @@ bool AlinousPlusParser::jj_3R_172(ThreadContext* ctx)
 	}
 	return false;
 }
-bool AlinousPlusParser::jj_3R_82(ThreadContext* ctx)
-{
-	if(jj_scan_token(LEFT, ctx))
-	{
-		return true;
-	}
-	Token* xsp = 0;
-	xsp = jj_scanpos;
-	if(jj_scan_token((long long)117, ctx))
-	{
-		__GC_MV(this, &(jj_scanpos), xsp, Token);
-	}
-	if(jj_scan_token(JOIN, ctx))
-	{
-		return true;
-	}
-	if(jj_3R_136(ctx))
-	{
-		return true;
-	}
-	xsp = jj_scanpos;
-	if(jj_3_39(ctx))
-	{
-		__GC_MV(this, &(jj_scanpos), xsp, Token);
-	}
-	return false;
-}
 bool AlinousPlusParser::jj_3R_171(ThreadContext* ctx)
 {
 	if(jj_3R_200(ctx))
@@ -10772,21 +10945,23 @@ bool AlinousPlusParser::jj_3R_171(ThreadContext* ctx)
 	}
 	return false;
 }
-bool AlinousPlusParser::jj_3R_87(ThreadContext* ctx)
+bool AlinousPlusParser::jj_3R_78(ThreadContext* ctx)
 {
-	if(jj_3R_92(ctx))
+	if(jj_scan_token(DROP, ctx))
 	{
 		return true;
 	}
-	Token* xsp = 0;
-	while(true)
+	if(jj_scan_token(TABLE, ctx))
 	{
-		xsp = jj_scanpos;
-		if(jj_3_52(ctx))
-		{
-			__GC_MV(this, &(jj_scanpos), xsp, Token);
-			break ;
-		}
+		return true;
+	}
+	if(jj_3R_191(ctx))
+	{
+		return true;
+	}
+	if(jj_scan_token(SEMI_COLON, ctx))
+	{
+		return true;
 	}
 	return false;
 }
@@ -10806,61 +10981,45 @@ bool AlinousPlusParser::jj_3R_169(ThreadContext* ctx)
 	}
 	return false;
 }
-bool AlinousPlusParser::jj_3R_168(ThreadContext* ctx)
-{
-	if(jj_3R_197(ctx))
-	{
-		return true;
-	}
-	return false;
-}
-bool AlinousPlusParser::jj_3R_167(ThreadContext* ctx)
-{
-	if(jj_3R_196(ctx))
-	{
-		return true;
-	}
-	return false;
-}
-bool AlinousPlusParser::jj_3R_81(ThreadContext* ctx)
+bool AlinousPlusParser::jj_3R_83(ThreadContext* ctx)
 {
 	if(jj_scan_token(JOIN, ctx))
 	{
 		return true;
 	}
-	if(jj_3R_136(ctx))
+	if(jj_3R_138(ctx))
 	{
 		return true;
 	}
-	if(jj_3R_79(ctx))
+	if(jj_3R_81(ctx))
 	{
 		return true;
 	}
 	return false;
 }
-bool AlinousPlusParser::jj_3R_129(ThreadContext* ctx)
+bool AlinousPlusParser::jj_3R_131(ThreadContext* ctx)
 {
 	Token* xsp = 0;
 	xsp = jj_scanpos;
-	if(jj_3R_167(ctx))
+	if(jj_3R_169(ctx))
 	{
 		__GC_MV(this, &(jj_scanpos), xsp, Token);
-		if(jj_3R_168(ctx))
+		if(jj_3R_170(ctx))
 		{
 			__GC_MV(this, &(jj_scanpos), xsp, Token);
-			if(jj_3R_169(ctx))
+			if(jj_3R_171(ctx))
 			{
 				__GC_MV(this, &(jj_scanpos), xsp, Token);
-				if(jj_3R_170(ctx))
+				if(jj_3R_172(ctx))
 				{
 					__GC_MV(this, &(jj_scanpos), xsp, Token);
-					if(jj_3R_171(ctx))
+					if(jj_3R_173(ctx))
 					{
 						__GC_MV(this, &(jj_scanpos), xsp, Token);
-						if(jj_3R_172(ctx))
+						if(jj_3R_174(ctx))
 						{
 							__GC_MV(this, &(jj_scanpos), xsp, Token);
-							if(jj_3R_173(ctx))
+							if(jj_3R_175(ctx))
 							{
 								__GC_MV(this, &(jj_scanpos), xsp, Token);
 								if(jj_3_27(ctx))
@@ -10869,7 +11028,7 @@ bool AlinousPlusParser::jj_3R_129(ThreadContext* ctx)
 									if(jj_3_28(ctx))
 									{
 										__GC_MV(this, &(jj_scanpos), xsp, Token);
-										if(jj_3R_174(ctx))
+										if(jj_3R_176(ctx))
 										{
 											return true;
 										}
@@ -10884,17 +11043,17 @@ bool AlinousPlusParser::jj_3R_129(ThreadContext* ctx)
 	}
 	return false;
 }
-bool AlinousPlusParser::jj_3R_57(ThreadContext* ctx)
+bool AlinousPlusParser::jj_3R_59(ThreadContext* ctx)
 {
-	if(jj_3R_126(ctx))
+	if(jj_3R_128(ctx))
 	{
 		return true;
 	}
 	return false;
 }
-bool AlinousPlusParser::jj_3R_56(ThreadContext* ctx)
+bool AlinousPlusParser::jj_3R_58(ThreadContext* ctx)
 {
-	if(jj_3R_125(ctx))
+	if(jj_3R_127(ctx))
 	{
 		return true;
 	}
@@ -10902,33 +11061,13 @@ bool AlinousPlusParser::jj_3R_56(ThreadContext* ctx)
 }
 bool AlinousPlusParser::jj_3_13(ThreadContext* ctx)
 {
-	if(jj_3R_46(ctx))
+	if(jj_3R_48(ctx))
 	{
 		return true;
 	}
 	return false;
 }
-bool AlinousPlusParser::jj_3R_159(ThreadContext* ctx)
-{
-	if(jj_scan_token(DROP, ctx))
-	{
-		return true;
-	}
-	if(jj_scan_token(INDEX, ctx))
-	{
-		return true;
-	}
-	if(jj_3R_189(ctx))
-	{
-		return true;
-	}
-	if(jj_scan_token(SEMI_COLON, ctx))
-	{
-		return true;
-	}
-	return false;
-}
-bool AlinousPlusParser::jj_3R_80(ThreadContext* ctx)
+bool AlinousPlusParser::jj_3R_82(ThreadContext* ctx)
 {
 	if(jj_scan_token(INNER, ctx))
 	{
@@ -10938,7 +11077,7 @@ bool AlinousPlusParser::jj_3R_80(ThreadContext* ctx)
 	{
 		return true;
 	}
-	if(jj_3R_136(ctx))
+	if(jj_3R_138(ctx))
 	{
 		return true;
 	}
@@ -10950,13 +11089,33 @@ bool AlinousPlusParser::jj_3R_80(ThreadContext* ctx)
 	}
 	return false;
 }
-bool AlinousPlusParser::jj_3R_236(ThreadContext* ctx)
+bool AlinousPlusParser::jj_3R_142(ThreadContext* ctx)
 {
-	if(jj_scan_token(COMMA, ctx))
+	if(jj_scan_token(CHECK, ctx))
 	{
 		return true;
 	}
-	if(jj_3R_120(ctx))
+	if(jj_scan_token(L_PARENTHESIS, ctx))
+	{
+		return true;
+	}
+	if(jj_3R_89(ctx))
+	{
+		return true;
+	}
+	if(jj_scan_token(R_PARENTHESIS, ctx))
+	{
+		return true;
+	}
+	return false;
+}
+bool AlinousPlusParser::jj_3R_247(ThreadContext* ctx)
+{
+	if(jj_scan_token(SQL_DEFAULT, ctx))
+	{
+		return true;
+	}
+	if(jj_3R_90(ctx))
 	{
 		return true;
 	}
@@ -10970,7 +11129,7 @@ bool AlinousPlusParser::jj_3_26(ThreadContext* ctx)
 	}
 	return false;
 }
-bool AlinousPlusParser::jj_3R_68(ThreadContext* ctx)
+bool AlinousPlusParser::jj_3R_70(ThreadContext* ctx)
 {
 	Token* xsp = 0;
 	xsp = jj_scanpos;
@@ -10978,7 +11137,7 @@ bool AlinousPlusParser::jj_3R_68(ThreadContext* ctx)
 	{
 		__GC_MV(this, &(jj_scanpos), xsp, Token);
 	}
-	if(jj_3R_129(ctx))
+	if(jj_3R_131(ctx))
 	{
 		return true;
 	}
@@ -10988,10 +11147,10 @@ bool AlinousPlusParser::jj_3_12(ThreadContext* ctx)
 {
 	Token* xsp = 0;
 	xsp = jj_scanpos;
-	if(jj_3R_56(ctx))
+	if(jj_3R_58(ctx))
 	{
 		__GC_MV(this, &(jj_scanpos), xsp, Token);
-		if(jj_3R_57(ctx))
+		if(jj_3R_59(ctx))
 		{
 			return true;
 		}
@@ -11002,25 +11161,25 @@ bool AlinousPlusParser::jj_3_42(ThreadContext* ctx)
 {
 	Token* xsp = 0;
 	xsp = jj_scanpos;
-	if(jj_3R_80(ctx))
+	if(jj_3R_82(ctx))
 	{
 		__GC_MV(this, &(jj_scanpos), xsp, Token);
-		if(jj_3R_81(ctx))
+		if(jj_3R_83(ctx))
 		{
 			__GC_MV(this, &(jj_scanpos), xsp, Token);
-			if(jj_3R_82(ctx))
+			if(jj_3R_84(ctx))
 			{
 				__GC_MV(this, &(jj_scanpos), xsp, Token);
-				if(jj_3R_83(ctx))
+				if(jj_3R_85(ctx))
 				{
 					__GC_MV(this, &(jj_scanpos), xsp, Token);
-					if(jj_3R_84(ctx))
+					if(jj_3R_86(ctx))
 					{
 						__GC_MV(this, &(jj_scanpos), xsp, Token);
-						if(jj_3R_85(ctx))
+						if(jj_3R_87(ctx))
 						{
 							__GC_MV(this, &(jj_scanpos), xsp, Token);
-							if(jj_3R_86(ctx))
+							if(jj_3R_88(ctx))
 							{
 								return true;
 							}
@@ -11032,9 +11191,9 @@ bool AlinousPlusParser::jj_3_42(ThreadContext* ctx)
 	}
 	return false;
 }
-bool AlinousPlusParser::jj_3R_210(ThreadContext* ctx)
+bool AlinousPlusParser::jj_3R_212(ThreadContext* ctx)
 {
-	if(jj_3R_136(ctx))
+	if(jj_3R_138(ctx))
 	{
 		return true;
 	}
@@ -11046,53 +11205,42 @@ bool AlinousPlusParser::jj_3R_210(ThreadContext* ctx)
 	}
 	return false;
 }
-bool AlinousPlusParser::jj_3R_158(ThreadContext* ctx)
+bool AlinousPlusParser::jj_3R_245(ThreadContext* ctx)
 {
-	if(jj_scan_token(CREATE, ctx))
-	{
-		return true;
-	}
-	if(jj_scan_token(INDEX, ctx))
-	{
-		return true;
-	}
-	if(jj_3R_189(ctx))
-	{
-		return true;
-	}
-	if(jj_scan_token(ON, ctx))
-	{
-		return true;
-	}
-	if(jj_3R_189(ctx))
-	{
-		return true;
-	}
 	if(jj_scan_token(L_PARENTHESIS, ctx))
 	{
 		return true;
 	}
-	if(jj_3R_120(ctx))
+	if(jj_3R_90(ctx))
 	{
 		return true;
-	}
-	Token* xsp = 0;
-	while(true)
-	{
-		xsp = jj_scanpos;
-		if(jj_3R_236(ctx))
-		{
-			__GC_MV(this, &(jj_scanpos), xsp, Token);
-			break ;
-		}
 	}
 	if(jj_scan_token(R_PARENTHESIS, ctx))
 	{
 		return true;
 	}
-	if(jj_scan_token(SEMI_COLON, ctx))
+	return false;
+}
+bool AlinousPlusParser::jj_3R_240(ThreadContext* ctx)
+{
+	Token* xsp = 0;
+	xsp = jj_scanpos;
+	if(jj_scan_token((long long)189, ctx))
 	{
-		return true;
+		__GC_MV(this, &(jj_scanpos), xsp, Token);
+		if(jj_scan_token((long long)175, ctx))
+		{
+			__GC_MV(this, &(jj_scanpos), xsp, Token);
+			if(jj_scan_token((long long)182, ctx))
+			{
+				return true;
+			}
+		}
+	}
+	xsp = jj_scanpos;
+	if(jj_3R_245(ctx))
+	{
+		__GC_MV(this, &(jj_scanpos), xsp, Token);
 	}
 	return false;
 }
@@ -11112,15 +11260,27 @@ bool AlinousPlusParser::jj_3_25(ThreadContext* ctx)
 			}
 		}
 	}
-	if(jj_3R_68(ctx))
+	if(jj_3R_70(ctx))
 	{
 		return true;
 	}
 	return false;
 }
-bool AlinousPlusParser::jj_3R_67(ThreadContext* ctx)
+bool AlinousPlusParser::jj_3R_190(ThreadContext* ctx)
 {
-	if(jj_3R_68(ctx))
+	if(jj_scan_token(FROM, ctx))
+	{
+		return true;
+	}
+	if(jj_3R_212(ctx))
+	{
+		return true;
+	}
+	return false;
+}
+bool AlinousPlusParser::jj_3R_69(ThreadContext* ctx)
+{
+	if(jj_3R_70(ctx))
 	{
 		return true;
 	}
@@ -11136,33 +11296,39 @@ bool AlinousPlusParser::jj_3R_67(ThreadContext* ctx)
 	}
 	return false;
 }
-bool AlinousPlusParser::jj_3R_188(ThreadContext* ctx)
+bool AlinousPlusParser::jj_3R_246(ThreadContext* ctx)
 {
-	if(jj_scan_token(FROM, ctx))
+	if(jj_scan_token(SQL_NOT, ctx))
 	{
 		return true;
 	}
-	if(jj_3R_210(ctx))
+	if(jj_scan_token(_NULL, ctx))
 	{
 		return true;
 	}
 	return false;
 }
-bool AlinousPlusParser::jj_3R_76(ThreadContext* ctx)
+bool AlinousPlusParser::jj_3R_241(ThreadContext* ctx)
 {
-	if(jj_scan_token(DROP, ctx))
+	Token* xsp = 0;
+	xsp = jj_scanpos;
+	if(jj_3R_246(ctx))
 	{
-		return true;
+		__GC_MV(this, &(jj_scanpos), xsp, Token);
+		if(jj_scan_token((long long)161, ctx))
+		{
+			__GC_MV(this, &(jj_scanpos), xsp, Token);
+			if(jj_3R_247(ctx))
+			{
+				return true;
+			}
+		}
 	}
-	if(jj_scan_token(TABLE, ctx))
-	{
-		return true;
-	}
-	if(jj_3R_189(ctx))
-	{
-		return true;
-	}
-	if(jj_scan_token(SEMI_COLON, ctx))
+	return false;
+}
+bool AlinousPlusParser::jj_3R_242(ThreadContext* ctx)
+{
+	if(jj_3R_142(ctx))
 	{
 		return true;
 	}
@@ -11170,15 +11336,54 @@ bool AlinousPlusParser::jj_3R_76(ThreadContext* ctx)
 }
 bool AlinousPlusParser::jj_3_37(ThreadContext* ctx)
 {
-	if(jj_3R_78(ctx))
+	if(jj_3R_80(ctx))
 	{
 		return true;
 	}
 	return false;
 }
+bool AlinousPlusParser::jj_3R_141(ThreadContext* ctx)
+{
+	if(jj_scan_token(IDENTIFIER, ctx))
+	{
+		return true;
+	}
+	if(jj_3R_240(ctx))
+	{
+		return true;
+	}
+	Token* xsp = 0;
+	while(true)
+	{
+		xsp = jj_scanpos;
+		if(jj_3R_241(ctx))
+		{
+			__GC_MV(this, &(jj_scanpos), xsp, Token);
+			break ;
+		}
+	}
+	xsp = jj_scanpos;
+	if(jj_3R_242(ctx))
+	{
+		__GC_MV(this, &(jj_scanpos), xsp, Token);
+	}
+	return false;
+}
 bool AlinousPlusParser::jj_3_36(ThreadContext* ctx)
 {
-	if(jj_3R_77(ctx))
+	if(jj_3R_79(ctx))
+	{
+		return true;
+	}
+	return false;
+}
+bool AlinousPlusParser::jj_3R_189(ThreadContext* ctx)
+{
+	if(jj_scan_token(INTO, ctx))
+	{
+		return true;
+	}
+	if(jj_3R_53(ctx))
 	{
 		return true;
 	}
@@ -11186,7 +11391,7 @@ bool AlinousPlusParser::jj_3_36(ThreadContext* ctx)
 }
 bool AlinousPlusParser::jj_3_9(ThreadContext* ctx)
 {
-	if(jj_3R_53(ctx))
+	if(jj_3R_55(ctx))
 	{
 		return true;
 	}
@@ -11204,47 +11409,15 @@ bool AlinousPlusParser::jj_3_24(ThreadContext* ctx)
 			return true;
 		}
 	}
-	if(jj_3R_67(ctx))
+	if(jj_3R_69(ctx))
 	{
 		return true;
 	}
 	return false;
 }
-bool AlinousPlusParser::jj_3R_187(ThreadContext* ctx)
+bool AlinousPlusParser::jj_3R_68(ThreadContext* ctx)
 {
-	if(jj_scan_token(INTO, ctx))
-	{
-		return true;
-	}
-	if(jj_3R_51(ctx))
-	{
-		return true;
-	}
-	return false;
-}
-bool AlinousPlusParser::jj_3R_140(ThreadContext* ctx)
-{
-	if(jj_scan_token(CHECK, ctx))
-	{
-		return true;
-	}
-	if(jj_scan_token(L_PARENTHESIS, ctx))
-	{
-		return true;
-	}
-	if(jj_3R_87(ctx))
-	{
-		return true;
-	}
-	if(jj_scan_token(R_PARENTHESIS, ctx))
-	{
-		return true;
-	}
-	return false;
-}
-bool AlinousPlusParser::jj_3R_66(ThreadContext* ctx)
-{
-	if(jj_3R_67(ctx))
+	if(jj_3R_69(ctx))
 	{
 		return true;
 	}
@@ -11260,21 +11433,9 @@ bool AlinousPlusParser::jj_3R_66(ThreadContext* ctx)
 	}
 	return false;
 }
-bool AlinousPlusParser::jj_3R_245(ThreadContext* ctx)
-{
-	if(jj_scan_token(SQL_DEFAULT, ctx))
-	{
-		return true;
-	}
-	if(jj_3R_88(ctx))
-	{
-		return true;
-	}
-	return false;
-}
 bool AlinousPlusParser::jj_3_10(ThreadContext* ctx)
 {
-	if(jj_3R_54(ctx))
+	if(jj_3R_56(ctx))
 	{
 		return true;
 	}
@@ -11282,69 +11443,57 @@ bool AlinousPlusParser::jj_3_10(ThreadContext* ctx)
 }
 bool AlinousPlusParser::jj_3_11(ThreadContext* ctx)
 {
-	if(jj_3R_55(ctx))
+	if(jj_3R_57(ctx))
 	{
 		return true;
 	}
 	return false;
 }
-bool AlinousPlusParser::jj_3R_186(ThreadContext* ctx)
+bool AlinousPlusParser::jj_3R_255(ThreadContext* ctx)
 {
-	if(jj_3R_209(ctx))
+	if(jj_scan_token(COMMA, ctx))
+	{
+		return true;
+	}
+	if(jj_scan_token(IDENTIFIER, ctx))
 	{
 		return true;
 	}
 	return false;
 }
-bool AlinousPlusParser::jj_3R_185(ThreadContext* ctx)
+bool AlinousPlusParser::jj_3R_188(ThreadContext* ctx)
 {
-	if(jj_3R_208(ctx))
+	if(jj_3R_211(ctx))
 	{
 		return true;
 	}
 	return false;
 }
-bool AlinousPlusParser::jj_3R_184(ThreadContext* ctx)
+bool AlinousPlusParser::jj_3R_187(ThreadContext* ctx)
 {
-	if(jj_3R_162(ctx))
+	if(jj_3R_210(ctx))
 	{
 		return true;
 	}
 	return false;
 }
-bool AlinousPlusParser::jj_3R_183(ThreadContext* ctx)
-{
-	if(jj_3R_207(ctx))
-	{
-		return true;
-	}
-	return false;
-}
-bool AlinousPlusParser::jj_3R_182(ThreadContext* ctx)
-{
-	if(jj_3R_206(ctx))
-	{
-		return true;
-	}
-	return false;
-}
-bool AlinousPlusParser::jj_3R_151(ThreadContext* ctx)
+bool AlinousPlusParser::jj_3R_153(ThreadContext* ctx)
 {
 	if(jj_scan_token(SELECT, ctx))
 	{
 		return true;
 	}
-	if(jj_3R_89(ctx))
+	if(jj_3R_91(ctx))
 	{
 		return true;
 	}
 	Token* xsp = 0;
 	xsp = jj_scanpos;
-	if(jj_3R_187(ctx))
+	if(jj_3R_189(ctx))
 	{
 		__GC_MV(this, &(jj_scanpos), xsp, Token);
 	}
-	if(jj_3R_188(ctx))
+	if(jj_3R_190(ctx))
 	{
 		return true;
 	}
@@ -11358,7 +11507,7 @@ bool AlinousPlusParser::jj_3R_151(ThreadContext* ctx)
 	{
 		__GC_MV(this, &(jj_scanpos), xsp, Token);
 	}
-	if(jj_3R_228(ctx))
+	if(jj_3R_230(ctx))
 	{
 		return true;
 	}
@@ -11368,39 +11517,47 @@ bool AlinousPlusParser::jj_3R_151(ThreadContext* ctx)
 	}
 	return false;
 }
-bool AlinousPlusParser::jj_3R_243(ThreadContext* ctx)
+bool AlinousPlusParser::jj_3R_186(ThreadContext* ctx)
 {
-	if(jj_scan_token(L_PARENTHESIS, ctx))
-	{
-		return true;
-	}
-	if(jj_3R_88(ctx))
-	{
-		return true;
-	}
-	if(jj_scan_token(R_PARENTHESIS, ctx))
+	if(jj_3R_164(ctx))
 	{
 		return true;
 	}
 	return false;
 }
-bool AlinousPlusParser::jj_3R_150(ThreadContext* ctx)
+bool AlinousPlusParser::jj_3R_185(ThreadContext* ctx)
+{
+	if(jj_3R_209(ctx))
+	{
+		return true;
+	}
+	return false;
+}
+bool AlinousPlusParser::jj_3R_184(ThreadContext* ctx)
+{
+	if(jj_3R_208(ctx))
+	{
+		return true;
+	}
+	return false;
+}
+bool AlinousPlusParser::jj_3R_152(ThreadContext* ctx)
 {
 	Token* xsp = 0;
 	xsp = jj_scanpos;
-	if(jj_3R_182(ctx))
+	if(jj_3R_184(ctx))
 	{
 		__GC_MV(this, &(jj_scanpos), xsp, Token);
-		if(jj_3R_183(ctx))
+		if(jj_3R_185(ctx))
 		{
 			__GC_MV(this, &(jj_scanpos), xsp, Token);
-			if(jj_3R_184(ctx))
+			if(jj_3R_186(ctx))
 			{
 				__GC_MV(this, &(jj_scanpos), xsp, Token);
-				if(jj_3R_185(ctx))
+				if(jj_3R_187(ctx))
 				{
 					__GC_MV(this, &(jj_scanpos), xsp, Token);
-					if(jj_3R_186(ctx))
+					if(jj_3R_188(ctx))
 					{
 						__GC_MV(this, &(jj_scanpos), xsp, Token);
 						if(jj_3_10(ctx))
@@ -11418,44 +11575,51 @@ bool AlinousPlusParser::jj_3R_150(ThreadContext* ctx)
 	}
 	return false;
 }
-bool AlinousPlusParser::jj_3R_238(ThreadContext* ctx)
+bool AlinousPlusParser::jj_3R_251(ThreadContext* ctx)
 {
-	Token* xsp = 0;
-	xsp = jj_scanpos;
-	if(jj_scan_token((long long)187, ctx))
+	if(jj_scan_token(UNIQUE, ctx))
 	{
-		__GC_MV(this, &(jj_scanpos), xsp, Token);
-		if(jj_scan_token((long long)175, ctx))
+		return true;
+	}
+	if(jj_scan_token(L_PARENTHESIS, ctx))
+	{
+		return true;
+	}
+	if(jj_scan_token(IDENTIFIER, ctx))
+	{
+		return true;
+	}
+	Token* xsp = 0;
+	while(true)
+	{
+		xsp = jj_scanpos;
+		if(jj_3R_255(ctx))
 		{
 			__GC_MV(this, &(jj_scanpos), xsp, Token);
-			if(jj_scan_token((long long)182, ctx))
-			{
-				return true;
-			}
+			break ;
 		}
 	}
-	xsp = jj_scanpos;
-	if(jj_3R_243(ctx))
+	if(jj_scan_token(R_PARENTHESIS, ctx))
 	{
-		__GC_MV(this, &(jj_scanpos), xsp, Token);
+		return true;
 	}
 	return false;
 }
-bool AlinousPlusParser::jj_3R_192(ThreadContext* ctx)
+bool AlinousPlusParser::jj_3R_194(ThreadContext* ctx)
 {
 	if(jj_scan_token(COMMA, ctx))
 	{
 		return true;
 	}
-	if(jj_3R_51(ctx))
+	if(jj_3R_53(ctx))
 	{
 		return true;
 	}
 	return false;
 }
-bool AlinousPlusParser::jj_3R_111(ThreadContext* ctx)
+bool AlinousPlusParser::jj_3R_113(ThreadContext* ctx)
 {
-	if(jj_3R_159(ctx))
+	if(jj_3R_161(ctx))
 	{
 		return true;
 	}
@@ -11463,7 +11627,15 @@ bool AlinousPlusParser::jj_3R_111(ThreadContext* ctx)
 }
 bool AlinousPlusParser::jj_3_35(ThreadContext* ctx)
 {
-	if(jj_3R_76(ctx))
+	if(jj_3R_78(ctx))
+	{
+		return true;
+	}
+	return false;
+}
+bool AlinousPlusParser::jj_3R_112(ThreadContext* ctx)
+{
+	if(jj_3R_160(ctx))
 	{
 		return true;
 	}
@@ -11473,7 +11645,7 @@ bool AlinousPlusParser::jj_3_23(ThreadContext* ctx)
 {
 	Token* xsp = 0;
 	xsp = jj_scanpos;
-	if(jj_scan_token((long long)196, ctx))
+	if(jj_scan_token((long long)198, ctx))
 	{
 		__GC_MV(this, &(jj_scanpos), xsp, Token);
 		if(jj_scan_token((long long)53, ctx))
@@ -11485,23 +11657,23 @@ bool AlinousPlusParser::jj_3_23(ThreadContext* ctx)
 			}
 		}
 	}
-	if(jj_3R_66(ctx))
+	if(jj_3R_68(ctx))
 	{
 		return true;
 	}
 	return false;
 }
-bool AlinousPlusParser::jj_3R_110(ThreadContext* ctx)
+bool AlinousPlusParser::jj_3_34(ThreadContext* ctx)
 {
-	if(jj_3R_158(ctx))
+	if(jj_3R_77(ctx))
 	{
 		return true;
 	}
 	return false;
 }
-bool AlinousPlusParser::jj_3R_65(ThreadContext* ctx)
+bool AlinousPlusParser::jj_3R_67(ThreadContext* ctx)
 {
-	if(jj_3R_66(ctx))
+	if(jj_3R_68(ctx))
 	{
 		return true;
 	}
@@ -11517,9 +11689,29 @@ bool AlinousPlusParser::jj_3R_65(ThreadContext* ctx)
 	}
 	return false;
 }
-bool AlinousPlusParser::jj_3_34(ThreadContext* ctx)
+bool AlinousPlusParser::jj_3R_111(ThreadContext* ctx)
 {
-	if(jj_3R_75(ctx))
+	if(jj_3R_159(ctx))
+	{
+		return true;
+	}
+	return false;
+}
+bool AlinousPlusParser::jj_3R_254(ThreadContext* ctx)
+{
+	if(jj_scan_token(COMMA, ctx))
+	{
+		return true;
+	}
+	if(jj_scan_token(IDENTIFIER, ctx))
+	{
+		return true;
+	}
+	return false;
+}
+bool AlinousPlusParser::jj_3R_110(ThreadContext* ctx)
+{
+	if(jj_3R_158(ctx))
 	{
 		return true;
 	}
@@ -11533,13 +11725,13 @@ bool AlinousPlusParser::jj_3R_109(ThreadContext* ctx)
 	}
 	return false;
 }
-bool AlinousPlusParser::jj_3R_161(ThreadContext* ctx)
+bool AlinousPlusParser::jj_3R_163(ThreadContext* ctx)
 {
 	if(jj_scan_token(THROWS, ctx))
 	{
 		return true;
 	}
-	if(jj_3R_51(ctx))
+	if(jj_3R_53(ctx))
 	{
 		return true;
 	}
@@ -11547,7 +11739,7 @@ bool AlinousPlusParser::jj_3R_161(ThreadContext* ctx)
 	while(true)
 	{
 		xsp = jj_scanpos;
-		if(jj_3R_192(ctx))
+		if(jj_3R_194(ctx))
 		{
 			__GC_MV(this, &(jj_scanpos), xsp, Token);
 			break ;
@@ -11587,119 +11779,75 @@ bool AlinousPlusParser::jj_3R_105(ThreadContext* ctx)
 	}
 	return false;
 }
-bool AlinousPlusParser::jj_3R_104(ThreadContext* ctx)
+bool AlinousPlusParser::jj_3R_250(ThreadContext* ctx)
 {
-	if(jj_3R_152(ctx))
+	if(jj_scan_token(PRIMARY, ctx))
 	{
 		return true;
 	}
-	return false;
-}
-bool AlinousPlusParser::jj_3R_244(ThreadContext* ctx)
-{
-	if(jj_scan_token(SQL_NOT, ctx))
+	if(jj_scan_token(KEY, ctx))
 	{
 		return true;
 	}
-	if(jj_scan_token(_NULL, ctx))
+	if(jj_scan_token(L_PARENTHESIS, ctx))
 	{
 		return true;
 	}
-	return false;
-}
-bool AlinousPlusParser::jj_3R_239(ThreadContext* ctx)
-{
+	if(jj_scan_token(IDENTIFIER, ctx))
+	{
+		return true;
+	}
 	Token* xsp = 0;
-	xsp = jj_scanpos;
-	if(jj_3R_244(ctx))
+	while(true)
 	{
-		__GC_MV(this, &(jj_scanpos), xsp, Token);
-		if(jj_scan_token((long long)161, ctx))
+		xsp = jj_scanpos;
+		if(jj_3R_254(ctx))
 		{
 			__GC_MV(this, &(jj_scanpos), xsp, Token);
-			if(jj_3R_245(ctx))
-			{
-				return true;
-			}
+			break ;
 		}
 	}
-	return false;
-}
-bool AlinousPlusParser::jj_3R_103(ThreadContext* ctx)
-{
-	if(jj_3R_151(ctx))
+	if(jj_scan_token(R_PARENTHESIS, ctx))
 	{
 		return true;
 	}
 	return false;
 }
-bool AlinousPlusParser::jj_3R_240(ThreadContext* ctx)
-{
-	if(jj_3R_140(ctx))
-	{
-		return true;
-	}
-	return false;
-}
-bool AlinousPlusParser::jj_3R_212(ThreadContext* ctx)
-{
-	if(jj_3R_51(ctx))
-	{
-		return true;
-	}
-	if(jj_3R_51(ctx))
-	{
-		return true;
-	}
-	return false;
-}
-bool AlinousPlusParser::jj_3_21(ThreadContext* ctx)
-{
-	if(jj_scan_token(INSTANCEOF, ctx))
-	{
-		return true;
-	}
-	if(jj_3R_51(ctx))
-	{
-		return true;
-	}
-	return false;
-}
-bool AlinousPlusParser::jj_3R_48(ThreadContext* ctx)
+bool AlinousPlusParser::jj_3R_50(ThreadContext* ctx)
 {
 	Token* xsp = 0;
 	xsp = jj_scanpos;
-	if(jj_3R_103(ctx))
+	if(jj_3R_105(ctx))
 	{
 		__GC_MV(this, &(jj_scanpos), xsp, Token);
-		if(jj_3R_104(ctx))
+		if(jj_3R_106(ctx))
 		{
 			__GC_MV(this, &(jj_scanpos), xsp, Token);
-			if(jj_3R_105(ctx))
+			if(jj_3R_107(ctx))
 			{
 				__GC_MV(this, &(jj_scanpos), xsp, Token);
-				if(jj_3R_106(ctx))
+				if(jj_3R_108(ctx))
 				{
 					__GC_MV(this, &(jj_scanpos), xsp, Token);
-					if(jj_3R_107(ctx))
+					if(jj_3R_109(ctx))
 					{
 						__GC_MV(this, &(jj_scanpos), xsp, Token);
-						if(jj_3R_108(ctx))
+						if(jj_3R_110(ctx))
 						{
 							__GC_MV(this, &(jj_scanpos), xsp, Token);
-							if(jj_3R_109(ctx))
+							if(jj_3R_111(ctx))
 							{
 								__GC_MV(this, &(jj_scanpos), xsp, Token);
 								if(jj_3_34(ctx))
 								{
 									__GC_MV(this, &(jj_scanpos), xsp, Token);
-									if(jj_3R_110(ctx))
+									if(jj_3R_112(ctx))
 									{
 										__GC_MV(this, &(jj_scanpos), xsp, Token);
 										if(jj_3_35(ctx))
 										{
 											__GC_MV(this, &(jj_scanpos), xsp, Token);
-											if(jj_3R_111(ctx))
+											if(jj_3R_113(ctx))
 											{
 												return true;
 											}
@@ -11712,6 +11860,30 @@ bool AlinousPlusParser::jj_3R_48(ThreadContext* ctx)
 				}
 			}
 		}
+	}
+	return false;
+}
+bool AlinousPlusParser::jj_3R_214(ThreadContext* ctx)
+{
+	if(jj_3R_53(ctx))
+	{
+		return true;
+	}
+	if(jj_3R_53(ctx))
+	{
+		return true;
+	}
+	return false;
+}
+bool AlinousPlusParser::jj_3_21(ThreadContext* ctx)
+{
+	if(jj_scan_token(INSTANCEOF, ctx))
+	{
+		return true;
+	}
+	if(jj_3R_53(ctx))
+	{
+		return true;
 	}
 	return false;
 }
@@ -11735,27 +11907,27 @@ bool AlinousPlusParser::jj_3_22(ThreadContext* ctx)
 			}
 		}
 	}
-	if(jj_3R_65(ctx))
+	if(jj_3R_67(ctx))
 	{
 		return true;
 	}
 	return false;
 }
-bool AlinousPlusParser::jj_3R_191(ThreadContext* ctx)
+bool AlinousPlusParser::jj_3R_193(ThreadContext* ctx)
 {
 	if(jj_scan_token(COMMA, ctx))
 	{
 		return true;
 	}
-	if(jj_3R_190(ctx))
+	if(jj_3R_192(ctx))
 	{
 		return true;
 	}
 	return false;
 }
-bool AlinousPlusParser::jj_3R_128(ThreadContext* ctx)
+bool AlinousPlusParser::jj_3R_130(ThreadContext* ctx)
 {
-	if(jj_3R_65(ctx))
+	if(jj_3R_67(ctx))
 	{
 		return true;
 	}
@@ -11767,74 +11939,7 @@ bool AlinousPlusParser::jj_3R_128(ThreadContext* ctx)
 	}
 	return false;
 }
-bool AlinousPlusParser::jj_3R_139(ThreadContext* ctx)
-{
-	if(jj_scan_token(IDENTIFIER, ctx))
-	{
-		return true;
-	}
-	if(jj_3R_238(ctx))
-	{
-		return true;
-	}
-	Token* xsp = 0;
-	while(true)
-	{
-		xsp = jj_scanpos;
-		if(jj_3R_239(ctx))
-		{
-			__GC_MV(this, &(jj_scanpos), xsp, Token);
-			break ;
-		}
-	}
-	xsp = jj_scanpos;
-	if(jj_3R_240(ctx))
-	{
-		__GC_MV(this, &(jj_scanpos), xsp, Token);
-	}
-	return false;
-}
-bool AlinousPlusParser::jj_3R_211(ThreadContext* ctx)
-{
-	if(jj_3R_164(ctx))
-	{
-		return true;
-	}
-	return false;
-}
-bool AlinousPlusParser::jj_3R_190(ThreadContext* ctx)
-{
-	Token* xsp = 0;
-	xsp = jj_scanpos;
-	if(jj_3R_211(ctx))
-	{
-		__GC_MV(this, &(jj_scanpos), xsp, Token);
-		if(jj_3R_212(ctx))
-		{
-			return true;
-		}
-	}
-	return false;
-}
-bool AlinousPlusParser::jj_3R_160(ThreadContext* ctx)
-{
-	if(jj_3R_190(ctx))
-	{
-		return true;
-	}
-	Token* xsp = 0;
-	while(true)
-	{
-		xsp = jj_scanpos;
-		if(jj_3R_191(ctx))
-		{
-			__GC_MV(this, &(jj_scanpos), xsp, Token);
-			break ;
-		}
-	}
-	return false;
-}
-bool AlinousPlusParser::jj_3R_249(ThreadContext* ctx)
+bool AlinousPlusParser::jj_3R_253(ThreadContext* ctx)
 {
 	if(jj_scan_token(COMMA, ctx))
 	{
@@ -11846,41 +11951,81 @@ bool AlinousPlusParser::jj_3R_249(ThreadContext* ctx)
 	}
 	return false;
 }
-bool AlinousPlusParser::jj_3R_222(ThreadContext* ctx)
+bool AlinousPlusParser::jj_3R_213(ThreadContext* ctx)
+{
+	if(jj_3R_166(ctx))
+	{
+		return true;
+	}
+	return false;
+}
+bool AlinousPlusParser::jj_3R_192(ThreadContext* ctx)
+{
+	Token* xsp = 0;
+	xsp = jj_scanpos;
+	if(jj_3R_213(ctx))
+	{
+		__GC_MV(this, &(jj_scanpos), xsp, Token);
+		if(jj_3R_214(ctx))
+		{
+			return true;
+		}
+	}
+	return false;
+}
+bool AlinousPlusParser::jj_3R_162(ThreadContext* ctx)
+{
+	if(jj_3R_192(ctx))
+	{
+		return true;
+	}
+	Token* xsp = 0;
+	while(true)
+	{
+		xsp = jj_scanpos;
+		if(jj_3R_193(ctx))
+		{
+			__GC_MV(this, &(jj_scanpos), xsp, Token);
+			break ;
+		}
+	}
+	return false;
+}
+bool AlinousPlusParser::jj_3R_224(ThreadContext* ctx)
 {
 	Token* xsp = 0;
 	xsp = jj_scanpos;
 	if(jj_scan_token((long long)22, ctx))
 	{
 		__GC_MV(this, &(jj_scanpos), xsp, Token);
-		if(jj_scan_token((long long)198, ctx))
+		if(jj_scan_token((long long)200, ctx))
 		{
 			__GC_MV(this, &(jj_scanpos), xsp, Token);
-			if(jj_scan_token((long long)199, ctx))
+			if(jj_scan_token((long long)201, ctx))
 			{
 				__GC_MV(this, &(jj_scanpos), xsp, Token);
-				if(jj_scan_token((long long)200, ctx))
+				if(jj_scan_token((long long)202, ctx))
 				{
 					__GC_MV(this, &(jj_scanpos), xsp, Token);
-					if(jj_scan_token((long long)201, ctx))
+					if(jj_scan_token((long long)203, ctx))
 					{
 						__GC_MV(this, &(jj_scanpos), xsp, Token);
-						if(jj_scan_token((long long)202, ctx))
+						if(jj_scan_token((long long)204, ctx))
 						{
 							__GC_MV(this, &(jj_scanpos), xsp, Token);
-							if(jj_scan_token((long long)203, ctx))
+							if(jj_scan_token((long long)205, ctx))
 							{
 								__GC_MV(this, &(jj_scanpos), xsp, Token);
-								if(jj_scan_token((long long)204, ctx))
+								if(jj_scan_token((long long)206, ctx))
 								{
 									__GC_MV(this, &(jj_scanpos), xsp, Token);
-									if(jj_scan_token((long long)205, ctx))
+									if(jj_scan_token((long long)207, ctx))
 									{
 										__GC_MV(this, &(jj_scanpos), xsp, Token);
-										if(jj_scan_token((long long)206, ctx))
+										if(jj_scan_token((long long)208, ctx))
 										{
 											__GC_MV(this, &(jj_scanpos), xsp, Token);
-											if(jj_scan_token((long long)207, ctx))
+											if(jj_scan_token((long long)209, ctx))
 											{
 												return true;
 											}
@@ -11896,123 +12041,13 @@ bool AlinousPlusParser::jj_3R_222(ThreadContext* ctx)
 	}
 	return false;
 }
-bool AlinousPlusParser::jj_3R_64(ThreadContext* ctx)
+bool AlinousPlusParser::jj_3R_249(ThreadContext* ctx)
 {
-	if(jj_3R_128(ctx))
+	if(jj_scan_token(SUB, ctx))
 	{
 		return true;
 	}
-	Token* xsp = 0;
-	xsp = jj_scanpos;
-	if(jj_3_21(ctx))
-	{
-		__GC_MV(this, &(jj_scanpos), xsp, Token);
-	}
-	return false;
-}
-bool AlinousPlusParser::jj_3R_113(ThreadContext* ctx)
-{
-	if(jj_scan_token(L_PARENTHESIS, ctx))
-	{
-		return true;
-	}
-	Token* xsp = 0;
-	xsp = jj_scanpos;
-	if(jj_3R_160(ctx))
-	{
-		__GC_MV(this, &(jj_scanpos), xsp, Token);
-	}
-	if(jj_scan_token(R_PARENTHESIS, ctx))
-	{
-		return true;
-	}
-	return false;
-}
-bool AlinousPlusParser::jj_3R_247(ThreadContext* ctx)
-{
-	if(jj_scan_token(UNIQUE, ctx))
-	{
-		return true;
-	}
-	if(jj_scan_token(L_PARENTHESIS, ctx))
-	{
-		return true;
-	}
-	if(jj_scan_token(IDENTIFIER, ctx))
-	{
-		return true;
-	}
-	Token* xsp = 0;
-	while(true)
-	{
-		xsp = jj_scanpos;
-		if(jj_3R_249(ctx))
-		{
-			__GC_MV(this, &(jj_scanpos), xsp, Token);
-			break ;
-		}
-	}
-	if(jj_scan_token(R_PARENTHESIS, ctx))
-	{
-		return true;
-	}
-	return false;
-}
-bool AlinousPlusParser::jj_3R_248(ThreadContext* ctx)
-{
-	if(jj_scan_token(COMMA, ctx))
-	{
-		return true;
-	}
-	if(jj_scan_token(IDENTIFIER, ctx))
-	{
-		return true;
-	}
-	return false;
-}
-bool AlinousPlusParser::jj_3R_52(ThreadContext* ctx)
-{
-	if(jj_3R_51(ctx))
-	{
-		return true;
-	}
-	return false;
-}
-bool AlinousPlusParser::jj_3_20(ThreadContext* ctx)
-{
-	Token* xsp = 0;
-	xsp = jj_scanpos;
-	if(jj_scan_token((long long)45, ctx))
-	{
-		__GC_MV(this, &(jj_scanpos), xsp, Token);
-		if(jj_scan_token((long long)46, ctx))
-		{
-			return true;
-		}
-	}
-	if(jj_3R_64(ctx))
-	{
-		return true;
-	}
-	return false;
-}
-bool AlinousPlusParser::jj_3R_63(ThreadContext* ctx)
-{
-	if(jj_3R_64(ctx))
-	{
-		return true;
-	}
-	Token* xsp = 0;
-	xsp = jj_scanpos;
-	if(jj_3_20(ctx))
-	{
-		__GC_MV(this, &(jj_scanpos), xsp, Token);
-	}
-	return false;
-}
-bool AlinousPlusParser::jj_3R_246(ThreadContext* ctx)
-{
-	if(jj_scan_token(PRIMARY, ctx))
+	if(jj_scan_token(SHARD, ctx))
 	{
 		return true;
 	}
@@ -12032,7 +12067,7 @@ bool AlinousPlusParser::jj_3R_246(ThreadContext* ctx)
 	while(true)
 	{
 		xsp = jj_scanpos;
-		if(jj_3R_248(ctx))
+		if(jj_3R_253(ctx))
 		{
 			__GC_MV(this, &(jj_scanpos), xsp, Token);
 			break ;
@@ -12044,7 +12079,175 @@ bool AlinousPlusParser::jj_3R_246(ThreadContext* ctx)
 	}
 	return false;
 }
-bool AlinousPlusParser::jj_3R_235(ThreadContext* ctx)
+bool AlinousPlusParser::jj_3R_66(ThreadContext* ctx)
+{
+	if(jj_3R_130(ctx))
+	{
+		return true;
+	}
+	Token* xsp = 0;
+	xsp = jj_scanpos;
+	if(jj_3_21(ctx))
+	{
+		__GC_MV(this, &(jj_scanpos), xsp, Token);
+	}
+	return false;
+}
+bool AlinousPlusParser::jj_3R_183(ThreadContext* ctx)
+{
+	if(jj_3R_153(ctx))
+	{
+		return true;
+	}
+	return false;
+}
+bool AlinousPlusParser::jj_3R_252(ThreadContext* ctx)
+{
+	if(jj_scan_token(COMMA, ctx))
+	{
+		return true;
+	}
+	if(jj_scan_token(IDENTIFIER, ctx))
+	{
+		return true;
+	}
+	return false;
+}
+bool AlinousPlusParser::jj_3R_115(ThreadContext* ctx)
+{
+	if(jj_scan_token(L_PARENTHESIS, ctx))
+	{
+		return true;
+	}
+	Token* xsp = 0;
+	xsp = jj_scanpos;
+	if(jj_3R_162(ctx))
+	{
+		__GC_MV(this, &(jj_scanpos), xsp, Token);
+	}
+	if(jj_scan_token(R_PARENTHESIS, ctx))
+	{
+		return true;
+	}
+	return false;
+}
+bool AlinousPlusParser::jj_3R_151(ThreadContext* ctx)
+{
+	if(jj_scan_token(ASTERISK, ctx))
+	{
+		return true;
+	}
+	return false;
+}
+bool AlinousPlusParser::jj_3R_150(ThreadContext* ctx)
+{
+	if(jj_3R_183(ctx))
+	{
+		return true;
+	}
+	return false;
+}
+bool AlinousPlusParser::jj_3R_248(ThreadContext* ctx)
+{
+	if(jj_scan_token(SHARD, ctx))
+	{
+		return true;
+	}
+	if(jj_scan_token(KEY, ctx))
+	{
+		return true;
+	}
+	if(jj_scan_token(L_PARENTHESIS, ctx))
+	{
+		return true;
+	}
+	if(jj_scan_token(IDENTIFIER, ctx))
+	{
+		return true;
+	}
+	Token* xsp = 0;
+	while(true)
+	{
+		xsp = jj_scanpos;
+		if(jj_3R_252(ctx))
+		{
+			__GC_MV(this, &(jj_scanpos), xsp, Token);
+			break ;
+		}
+	}
+	if(jj_scan_token(R_PARENTHESIS, ctx))
+	{
+		return true;
+	}
+	return false;
+}
+bool AlinousPlusParser::jj_3R_54(ThreadContext* ctx)
+{
+	if(jj_3R_53(ctx))
+	{
+		return true;
+	}
+	return false;
+}
+bool AlinousPlusParser::jj_3_67(ThreadContext* ctx)
+{
+	if(jj_3R_90(ctx))
+	{
+		return true;
+	}
+	return false;
+}
+bool AlinousPlusParser::jj_3R_102(ThreadContext* ctx)
+{
+	Token* xsp = 0;
+	xsp = jj_scanpos;
+	if(jj_3_67(ctx))
+	{
+		__GC_MV(this, &(jj_scanpos), xsp, Token);
+		if(jj_3R_150(ctx))
+		{
+			__GC_MV(this, &(jj_scanpos), xsp, Token);
+			if(jj_3R_151(ctx))
+			{
+				return true;
+			}
+		}
+	}
+	return false;
+}
+bool AlinousPlusParser::jj_3_20(ThreadContext* ctx)
+{
+	Token* xsp = 0;
+	xsp = jj_scanpos;
+	if(jj_scan_token((long long)45, ctx))
+	{
+		__GC_MV(this, &(jj_scanpos), xsp, Token);
+		if(jj_scan_token((long long)46, ctx))
+		{
+			return true;
+		}
+	}
+	if(jj_3R_66(ctx))
+	{
+		return true;
+	}
+	return false;
+}
+bool AlinousPlusParser::jj_3R_65(ThreadContext* ctx)
+{
+	if(jj_3R_66(ctx))
+	{
+		return true;
+	}
+	Token* xsp = 0;
+	xsp = jj_scanpos;
+	if(jj_3_20(ctx))
+	{
+		__GC_MV(this, &(jj_scanpos), xsp, Token);
+	}
+	return false;
+}
+bool AlinousPlusParser::jj_3R_237(ThreadContext* ctx)
 {
 	if(jj_scan_token(REGION, ctx))
 	{
@@ -12060,17 +12263,63 @@ bool AlinousPlusParser::jj_3R_235(ThreadContext* ctx)
 	}
 	return false;
 }
-bool AlinousPlusParser::jj_3R_242(ThreadContext* ctx)
+bool AlinousPlusParser::jj_3R_244(ThreadContext* ctx)
 {
-	if(jj_3R_247(ctx))
+	if(jj_3R_251(ctx))
 	{
 		return true;
 	}
 	return false;
 }
-bool AlinousPlusParser::jj_3R_241(ThreadContext* ctx)
+bool AlinousPlusParser::jj_3R_243(ThreadContext* ctx)
 {
-	if(jj_3R_246(ctx))
+	if(jj_3R_250(ctx))
+	{
+		return true;
+	}
+	return false;
+}
+bool AlinousPlusParser::jj_3R_103(ThreadContext* ctx)
+{
+	if(jj_scan_token(COMMA, ctx))
+	{
+		return true;
+	}
+	if(jj_3R_102(ctx))
+	{
+		return true;
+	}
+	return false;
+}
+bool AlinousPlusParser::jj_3R_236(ThreadContext* ctx)
+{
+	if(jj_scan_token(COMMA, ctx))
+	{
+		return true;
+	}
+	Token* xsp = 0;
+	xsp = jj_scanpos;
+	if(jj_3R_243(ctx))
+	{
+		__GC_MV(this, &(jj_scanpos), xsp, Token);
+		if(jj_3R_244(ctx))
+		{
+			return true;
+		}
+	}
+	return false;
+}
+bool AlinousPlusParser::jj_3R_93(ThreadContext* ctx)
+{
+	if(jj_3R_142(ctx))
+	{
+		return true;
+	}
+	if(jj_3R_248(ctx))
+	{
+		return true;
+	}
+	if(jj_3R_249(ctx))
 	{
 		return true;
 	}
@@ -12082,15 +12331,33 @@ bool AlinousPlusParser::jj_3_19(ThreadContext* ctx)
 	{
 		return true;
 	}
-	if(jj_3R_63(ctx))
+	if(jj_3R_65(ctx))
 	{
 		return true;
 	}
 	return false;
 }
-bool AlinousPlusParser::jj_3R_62(ThreadContext* ctx)
+bool AlinousPlusParser::jj_3_66(ThreadContext* ctx)
 {
-	if(jj_3R_63(ctx))
+	if(jj_3R_102(ctx))
+	{
+		return true;
+	}
+	Token* xsp = 0;
+	while(true)
+	{
+		xsp = jj_scanpos;
+		if(jj_3R_103(ctx))
+		{
+			__GC_MV(this, &(jj_scanpos), xsp, Token);
+			break ;
+		}
+	}
+	return false;
+}
+bool AlinousPlusParser::jj_3R_64(ThreadContext* ctx)
+{
+	if(jj_3R_65(ctx))
 	{
 		return true;
 	}
@@ -12108,33 +12375,17 @@ bool AlinousPlusParser::jj_3R_62(ThreadContext* ctx)
 }
 bool AlinousPlusParser::jj_3R_91(ThreadContext* ctx)
 {
-	if(jj_3R_140(ctx))
-	{
-		return true;
-	}
-	return false;
-}
-bool AlinousPlusParser::jj_3R_234(ThreadContext* ctx)
-{
-	if(jj_scan_token(COMMA, ctx))
-	{
-		return true;
-	}
 	Token* xsp = 0;
 	xsp = jj_scanpos;
-	if(jj_3R_241(ctx))
+	if(jj_3_66(ctx))
 	{
 		__GC_MV(this, &(jj_scanpos), xsp, Token);
-		if(jj_3R_242(ctx))
-		{
-			return true;
-		}
 	}
 	return false;
 }
-bool AlinousPlusParser::jj_3R_181(ThreadContext* ctx)
+bool AlinousPlusParser::jj_3R_92(ThreadContext* ctx)
 {
-	if(jj_3R_151(ctx))
+	if(jj_3R_141(ctx))
 	{
 		return true;
 	}
@@ -12142,45 +12393,71 @@ bool AlinousPlusParser::jj_3R_181(ThreadContext* ctx)
 }
 bool AlinousPlusParser::jj_3_8(ThreadContext* ctx)
 {
-	if(jj_3R_52(ctx))
+	if(jj_3R_54(ctx))
 	{
 		return true;
 	}
-	if(jj_3R_51(ctx))
+	if(jj_3R_53(ctx))
 	{
 		return true;
 	}
 	return false;
 }
-bool AlinousPlusParser::jj_3R_90(ThreadContext* ctx)
+bool AlinousPlusParser::jj_3R_147(ThreadContext* ctx)
 {
-	if(jj_3R_139(ctx))
+	if(jj_scan_token(SQL_STRING_LITERAL, ctx))
 	{
 		return true;
 	}
 	return false;
 }
-bool AlinousPlusParser::jj_3R_149(ThreadContext* ctx)
+bool AlinousPlusParser::jj_3_51(ThreadContext* ctx)
 {
-	if(jj_scan_token(ASTERISK, ctx))
+	if(jj_scan_token(COMMA, ctx))
 	{
 		return true;
 	}
+	Token* xsp = 0;
+	xsp = jj_scanpos;
+	if(jj_3R_92(ctx))
+	{
+		__GC_MV(this, &(jj_scanpos), xsp, Token);
+		if(jj_3R_93(ctx))
+		{
+			return true;
+		}
+	}
 	return false;
 }
-bool AlinousPlusParser::jj_3R_114(ThreadContext* ctx)
+bool AlinousPlusParser::jj_3R_146(ThreadContext* ctx)
 {
-	if(jj_3R_161(ctx))
+	if(jj_scan_token(CHARACTER_LITERAL, ctx))
 	{
 		return true;
 	}
 	return false;
 }
-bool AlinousPlusParser::jj_3R_120(ThreadContext* ctx)
+bool AlinousPlusParser::jj_3R_145(ThreadContext* ctx)
+{
+	if(jj_scan_token(FLOATING_POINT_LITERAL, ctx))
+	{
+		return true;
+	}
+	return false;
+}
+bool AlinousPlusParser::jj_3R_116(ThreadContext* ctx)
+{
+	if(jj_3R_163(ctx))
+	{
+		return true;
+	}
+	return false;
+}
+bool AlinousPlusParser::jj_3R_122(ThreadContext* ctx)
 {
 	Token* xsp = 0;
 	xsp = jj_scanpos;
-	if(jj_scan_token((long long)187, ctx))
+	if(jj_scan_token((long long)189, ctx))
 	{
 		__GC_MV(this, &(jj_scanpos), xsp, Token);
 		if(jj_scan_token((long long)102, ctx))
@@ -12449,7 +12726,19 @@ bool AlinousPlusParser::jj_3R_120(ThreadContext* ctx)
 																																																																																										__GC_MV(this, &(jj_scanpos), xsp, Token);
 																																																																																										if(jj_scan_token((long long)84, ctx))
 																																																																																										{
-																																																																																											return true;
+																																																																																											__GC_MV(this, &(jj_scanpos), xsp, Token);
+																																																																																											if(jj_scan_token((long long)186, ctx))
+																																																																																											{
+																																																																																												__GC_MV(this, &(jj_scanpos), xsp, Token);
+																																																																																												if(jj_scan_token((long long)187, ctx))
+																																																																																												{
+																																																																																													__GC_MV(this, &(jj_scanpos), xsp, Token);
+																																																																																													if(jj_scan_token((long long)188, ctx))
+																																																																																													{
+																																																																																														return true;
+																																																																																													}
+																																																																																												}
+																																																																																											}
 																																																																																										}
 																																																																																									}
 																																																																																								}
@@ -12542,53 +12831,37 @@ bool AlinousPlusParser::jj_3R_120(ThreadContext* ctx)
 	}
 	return false;
 }
-bool AlinousPlusParser::jj_3R_148(ThreadContext* ctx)
+bool AlinousPlusParser::jj_3R_144(ThreadContext* ctx)
 {
-	if(jj_3R_181(ctx))
+	if(jj_scan_token(INTEGER_LITERAL, ctx))
 	{
 		return true;
 	}
 	return false;
 }
-bool AlinousPlusParser::jj_3_51(ThreadContext* ctx)
+bool AlinousPlusParser::jj_3R_96(ThreadContext* ctx)
 {
-	if(jj_scan_token(COMMA, ctx))
-	{
-		return true;
-	}
 	Token* xsp = 0;
 	xsp = jj_scanpos;
-	if(jj_3R_90(ctx))
+	if(jj_3R_144(ctx))
 	{
 		__GC_MV(this, &(jj_scanpos), xsp, Token);
-		if(jj_3R_91(ctx))
+		if(jj_3R_145(ctx))
 		{
-			return true;
+			__GC_MV(this, &(jj_scanpos), xsp, Token);
+			if(jj_3R_146(ctx))
+			{
+				__GC_MV(this, &(jj_scanpos), xsp, Token);
+				if(jj_3R_147(ctx))
+				{
+					return true;
+				}
+			}
 		}
 	}
 	return false;
 }
-bool AlinousPlusParser::jj_3_67(ThreadContext* ctx)
-{
-	if(jj_3R_88(ctx))
-	{
-		return true;
-	}
-	return false;
-}
-bool AlinousPlusParser::jj_3_18(ThreadContext* ctx)
-{
-	if(jj_scan_token((long long)195, ctx))
-	{
-		return true;
-	}
-	if(jj_3R_62(ctx))
-	{
-		return true;
-	}
-	return false;
-}
-bool AlinousPlusParser::jj_3R_75(ThreadContext* ctx)
+bool AlinousPlusParser::jj_3R_77(ThreadContext* ctx)
 {
 	if(jj_scan_token(CREATE, ctx))
 	{
@@ -12598,7 +12871,7 @@ bool AlinousPlusParser::jj_3R_75(ThreadContext* ctx)
 	{
 		return true;
 	}
-	if(jj_3R_189(ctx))
+	if(jj_3R_191(ctx))
 	{
 		return true;
 	}
@@ -12606,7 +12879,7 @@ bool AlinousPlusParser::jj_3R_75(ThreadContext* ctx)
 	{
 		return true;
 	}
-	if(jj_3R_139(ctx))
+	if(jj_3R_141(ctx))
 	{
 		return true;
 	}
@@ -12623,7 +12896,7 @@ bool AlinousPlusParser::jj_3R_75(ThreadContext* ctx)
 	while(true)
 	{
 		xsp = jj_scanpos;
-		if(jj_3R_234(ctx))
+		if(jj_3R_236(ctx))
 		{
 			__GC_MV(this, &(jj_scanpos), xsp, Token);
 			break ;
@@ -12634,7 +12907,7 @@ bool AlinousPlusParser::jj_3R_75(ThreadContext* ctx)
 		return true;
 	}
 	xsp = jj_scanpos;
-	if(jj_3R_235(ctx))
+	if(jj_3R_237(ctx))
 	{
 		__GC_MV(this, &(jj_scanpos), xsp, Token);
 	}
@@ -12644,27 +12917,21 @@ bool AlinousPlusParser::jj_3R_75(ThreadContext* ctx)
 	}
 	return false;
 }
-bool AlinousPlusParser::jj_3R_100(ThreadContext* ctx)
+bool AlinousPlusParser::jj_3_18(ThreadContext* ctx)
 {
-	Token* xsp = 0;
-	xsp = jj_scanpos;
-	if(jj_3_67(ctx))
+	if(jj_scan_token((long long)197, ctx))
 	{
-		__GC_MV(this, &(jj_scanpos), xsp, Token);
-		if(jj_3R_148(ctx))
-		{
-			__GC_MV(this, &(jj_scanpos), xsp, Token);
-			if(jj_3R_149(ctx))
-			{
-				return true;
-			}
-		}
+		return true;
+	}
+	if(jj_3R_64(ctx))
+	{
+		return true;
 	}
 	return false;
 }
-bool AlinousPlusParser::jj_3R_61(ThreadContext* ctx)
+bool AlinousPlusParser::jj_3R_63(ThreadContext* ctx)
 {
-	if(jj_3R_62(ctx))
+	if(jj_3R_64(ctx))
 	{
 		return true;
 	}
@@ -12686,35 +12953,49 @@ bool AlinousPlusParser::jj_3_7(ThreadContext* ctx)
 	{
 		return true;
 	}
-	if(jj_3R_51(ctx))
+	if(jj_3R_53(ctx))
 	{
 		return true;
 	}
 	return false;
 }
-bool AlinousPlusParser::jj_3R_121(ThreadContext* ctx)
+bool AlinousPlusParser::jj_3R_123(ThreadContext* ctx)
 {
 	if(jj_scan_token(DOT, ctx))
 	{
 		return true;
 	}
-	if(jj_3R_120(ctx))
+	if(jj_3R_122(ctx))
 	{
 		return true;
 	}
 	return false;
 }
-bool AlinousPlusParser::jj_3R_115(ThreadContext* ctx)
+bool AlinousPlusParser::jj_3R_182(ThreadContext* ctx)
 {
-	if(jj_3R_162(ctx))
+	Token* xsp = 0;
+	xsp = jj_scanpos;
+	if(jj_scan_token((long long)100, ctx))
+	{
+		__GC_MV(this, &(jj_scanpos), xsp, Token);
+		if(jj_scan_token((long long)101, ctx))
+		{
+			return true;
+		}
+	}
+	return false;
+}
+bool AlinousPlusParser::jj_3R_117(ThreadContext* ctx)
+{
+	if(jj_3R_164(ctx))
 	{
 		return true;
 	}
 	return false;
 }
-bool AlinousPlusParser::jj_3R_51(ThreadContext* ctx)
+bool AlinousPlusParser::jj_3R_53(ThreadContext* ctx)
 {
-	if(jj_3R_120(ctx))
+	if(jj_3R_122(ctx))
 	{
 		return true;
 	}
@@ -12722,7 +13003,7 @@ bool AlinousPlusParser::jj_3R_51(ThreadContext* ctx)
 	while(true)
 	{
 		xsp = jj_scanpos;
-		if(jj_3R_121(ctx))
+		if(jj_3R_123(ctx))
 		{
 			__GC_MV(this, &(jj_scanpos), xsp, Token);
 			break ;
@@ -12730,31 +13011,19 @@ bool AlinousPlusParser::jj_3R_51(ThreadContext* ctx)
 	}
 	return false;
 }
-bool AlinousPlusParser::jj_3R_101(ThreadContext* ctx)
+bool AlinousPlusParser::jj_3R_114(ThreadContext* ctx)
 {
-	if(jj_scan_token(COMMA, ctx))
+	if(jj_3R_54(ctx))
 	{
 		return true;
 	}
-	if(jj_3R_100(ctx))
+	if(jj_3R_53(ctx))
 	{
 		return true;
 	}
 	return false;
 }
-bool AlinousPlusParser::jj_3R_112(ThreadContext* ctx)
-{
-	if(jj_3R_52(ctx))
-	{
-		return true;
-	}
-	if(jj_3R_51(ctx))
-	{
-		return true;
-	}
-	return false;
-}
-bool AlinousPlusParser::jj_3R_157(ThreadContext* ctx)
+bool AlinousPlusParser::jj_3R_159(ThreadContext* ctx)
 {
 	if(jj_scan_token(ROLLBACK, ctx))
 	{
@@ -12772,7 +13041,7 @@ bool AlinousPlusParser::jj_3_17(ThreadContext* ctx)
 	{
 		return true;
 	}
-	if(jj_3R_61(ctx))
+	if(jj_3R_63(ctx))
 	{
 		return true;
 	}
@@ -12784,15 +13053,15 @@ bool AlinousPlusParser::jj_3_6(ThreadContext* ctx)
 	{
 		return true;
 	}
-	if(jj_3R_51(ctx))
+	if(jj_3R_53(ctx))
 	{
 		return true;
 	}
 	return false;
 }
-bool AlinousPlusParser::jj_3R_60(ThreadContext* ctx)
+bool AlinousPlusParser::jj_3R_62(ThreadContext* ctx)
 {
-	if(jj_3R_61(ctx))
+	if(jj_3R_63(ctx))
 	{
 		return true;
 	}
@@ -12808,39 +13077,7 @@ bool AlinousPlusParser::jj_3R_60(ThreadContext* ctx)
 	}
 	return false;
 }
-bool AlinousPlusParser::jj_3R_49(ThreadContext* ctx)
-{
-	Token* xsp = 0;
-	xsp = jj_scanpos;
-	if(jj_3_6(ctx))
-	{
-		__GC_MV(this, &(jj_scanpos), xsp, Token);
-		if(jj_3R_112(ctx))
-		{
-			return true;
-		}
-	}
-	if(jj_3R_113(ctx))
-	{
-		return true;
-	}
-	xsp = jj_scanpos;
-	if(jj_3R_114(ctx))
-	{
-		__GC_MV(this, &(jj_scanpos), xsp, Token);
-	}
-	xsp = jj_scanpos;
-	if(jj_3R_115(ctx))
-	{
-		__GC_MV(this, &(jj_scanpos), xsp, Token);
-		if(jj_scan_token((long long)21, ctx))
-		{
-			return true;
-		}
-	}
-	return false;
-}
-bool AlinousPlusParser::jj_3R_156(ThreadContext* ctx)
+bool AlinousPlusParser::jj_3R_158(ThreadContext* ctx)
 {
 	if(jj_scan_token(COMMIT, ctx))
 	{
@@ -12852,171 +13089,41 @@ bool AlinousPlusParser::jj_3R_156(ThreadContext* ctx)
 	}
 	return false;
 }
-bool AlinousPlusParser::jj_3_66(ThreadContext* ctx)
+bool AlinousPlusParser::jj_3R_51(ThreadContext* ctx)
 {
-	if(jj_3R_100(ctx))
+	Token* xsp = 0;
+	xsp = jj_scanpos;
+	if(jj_3_6(ctx))
+	{
+		__GC_MV(this, &(jj_scanpos), xsp, Token);
+		if(jj_3R_114(ctx))
+		{
+			return true;
+		}
+	}
+	if(jj_3R_115(ctx))
 	{
 		return true;
 	}
-	Token* xsp = 0;
-	while(true)
+	xsp = jj_scanpos;
+	if(jj_3R_116(ctx))
 	{
-		xsp = jj_scanpos;
-		if(jj_3R_101(ctx))
+		__GC_MV(this, &(jj_scanpos), xsp, Token);
+	}
+	xsp = jj_scanpos;
+	if(jj_3R_117(ctx))
+	{
+		__GC_MV(this, &(jj_scanpos), xsp, Token);
+		if(jj_scan_token((long long)21, ctx))
 		{
-			__GC_MV(this, &(jj_scanpos), xsp, Token);
-			break ;
+			return true;
 		}
 	}
 	return false;
 }
-bool AlinousPlusParser::jj_3R_223(ThreadContext* ctx)
+bool AlinousPlusParser::jj_3R_225(ThreadContext* ctx)
 {
 	if(jj_scan_token(L_BRACKET, ctx))
-	{
-		return true;
-	}
-	if(jj_3R_58(ctx))
-	{
-		return true;
-	}
-	if(jj_scan_token(R_BRACKET, ctx))
-	{
-		return true;
-	}
-	return false;
-}
-bool AlinousPlusParser::jj_3R_89(ThreadContext* ctx)
-{
-	Token* xsp = 0;
-	xsp = jj_scanpos;
-	if(jj_3_66(ctx))
-	{
-		__GC_MV(this, &(jj_scanpos), xsp, Token);
-	}
-	return false;
-}
-bool AlinousPlusParser::jj_3R_194(ThreadContext* ctx)
-{
-	if(jj_scan_token(IDENTIFIER, ctx))
-	{
-		return true;
-	}
-	return false;
-}
-bool AlinousPlusParser::jj_3R_155(ThreadContext* ctx)
-{
-	if(jj_scan_token(BEGIN, ctx))
-	{
-		return true;
-	}
-	if(jj_scan_token(SEMI_COLON, ctx))
-	{
-		return true;
-	}
-	return false;
-}
-bool AlinousPlusParser::jj_3R_145(ThreadContext* ctx)
-{
-	if(jj_scan_token(SQL_STRING_LITERAL, ctx))
-	{
-		return true;
-	}
-	return false;
-}
-bool AlinousPlusParser::jj_3R_144(ThreadContext* ctx)
-{
-	if(jj_scan_token(CHARACTER_LITERAL, ctx))
-	{
-		return true;
-	}
-	return false;
-}
-bool AlinousPlusParser::jj_3R_163(ThreadContext* ctx)
-{
-	Token* xsp = 0;
-	xsp = jj_scanpos;
-	if(jj_scan_token((long long)81, ctx))
-	{
-		__GC_MV(this, &(jj_scanpos), xsp, Token);
-		if(jj_scan_token((long long)79, ctx))
-		{
-			__GC_MV(this, &(jj_scanpos), xsp, Token);
-			if(jj_scan_token((long long)80, ctx))
-			{
-				__GC_MV(this, &(jj_scanpos), xsp, Token);
-				if(jj_scan_token((long long)83, ctx))
-				{
-					__GC_MV(this, &(jj_scanpos), xsp, Token);
-					if(jj_scan_token((long long)64, ctx))
-					{
-						return true;
-					}
-				}
-			}
-		}
-	}
-	return false;
-}
-bool AlinousPlusParser::jj_3R_143(ThreadContext* ctx)
-{
-	if(jj_scan_token(FLOATING_POINT_LITERAL, ctx))
-	{
-		return true;
-	}
-	return false;
-}
-bool AlinousPlusParser::jj_3R_116(ThreadContext* ctx)
-{
-	Token* xsp = 0;
-	if(jj_3R_163(ctx))
-	{
-		return true;
-	}
-	while(true)
-	{
-		xsp = jj_scanpos;
-		if(jj_3R_163(ctx))
-		{
-			__GC_MV(this, &(jj_scanpos), xsp, Token);
-			break ;
-		}
-	}
-	return false;
-}
-bool AlinousPlusParser::jj_3R_142(ThreadContext* ctx)
-{
-	if(jj_scan_token(INTEGER_LITERAL, ctx))
-	{
-		return true;
-	}
-	return false;
-}
-bool AlinousPlusParser::jj_3R_94(ThreadContext* ctx)
-{
-	Token* xsp = 0;
-	xsp = jj_scanpos;
-	if(jj_3R_142(ctx))
-	{
-		__GC_MV(this, &(jj_scanpos), xsp, Token);
-		if(jj_3R_143(ctx))
-		{
-			__GC_MV(this, &(jj_scanpos), xsp, Token);
-			if(jj_3R_144(ctx))
-			{
-				__GC_MV(this, &(jj_scanpos), xsp, Token);
-				if(jj_3R_145(ctx))
-				{
-					return true;
-				}
-			}
-		}
-	}
-	return false;
-}
-bool AlinousPlusParser::jj_3_16(ThreadContext* ctx)
-{
-	if(jj_scan_token(LOGICAL_AND, ctx))
 	{
 		return true;
 	}
@@ -13024,236 +13131,7 @@ bool AlinousPlusParser::jj_3_16(ThreadContext* ctx)
 	{
 		return true;
 	}
-	return false;
-}
-bool AlinousPlusParser::jj_3_50(ThreadContext* ctx)
-{
-	if(jj_3R_77(ctx))
-	{
-		return true;
-	}
-	return false;
-}
-bool AlinousPlusParser::jj_3R_59(ThreadContext* ctx)
-{
-	if(jj_3R_60(ctx))
-	{
-		return true;
-	}
-	Token* xsp = 0;
-	while(true)
-	{
-		xsp = jj_scanpos;
-		if(jj_3_16(ctx))
-		{
-			__GC_MV(this, &(jj_scanpos), xsp, Token);
-			break ;
-		}
-	}
-	return false;
-}
-bool AlinousPlusParser::jj_3R_214(ThreadContext* ctx)
-{
-	if(jj_3R_223(ctx))
-	{
-		return true;
-	}
-	return false;
-}
-bool AlinousPlusParser::jj_3R_154(ThreadContext* ctx)
-{
-	if(jj_scan_token(DELETE, ctx))
-	{
-		return true;
-	}
-	if(jj_scan_token(FROM, ctx))
-	{
-		return true;
-	}
-	if(jj_3R_189(ctx))
-	{
-		return true;
-	}
-	Token* xsp = 0;
-	xsp = jj_scanpos;
-	if(jj_3_50(ctx))
-	{
-		__GC_MV(this, &(jj_scanpos), xsp, Token);
-	}
-	if(jj_scan_token(SEMI_COLON, ctx))
-	{
-		return true;
-	}
-	return false;
-}
-bool AlinousPlusParser::jj_3R_180(ThreadContext* ctx)
-{
-	Token* xsp = 0;
-	xsp = jj_scanpos;
-	if(jj_scan_token((long long)100, ctx))
-	{
-		__GC_MV(this, &(jj_scanpos), xsp, Token);
-		if(jj_scan_token((long long)101, ctx))
-		{
-			return true;
-		}
-	}
-	return false;
-}
-bool AlinousPlusParser::jj_3R_213(ThreadContext* ctx)
-{
-	if(jj_scan_token(DOT, ctx))
-	{
-		return true;
-	}
-	if(jj_3R_194(ctx))
-	{
-		return true;
-	}
-	return false;
-}
-bool AlinousPlusParser::jj_3R_195(ThreadContext* ctx)
-{
-	Token* xsp = 0;
-	xsp = jj_scanpos;
-	if(jj_3R_213(ctx))
-	{
-		__GC_MV(this, &(jj_scanpos), xsp, Token);
-		if(jj_3R_214(ctx))
-		{
-			return true;
-		}
-	}
-	return false;
-}
-bool AlinousPlusParser::jj_3R_232(ThreadContext* ctx)
-{
-	if(jj_3R_51(ctx))
-	{
-		return true;
-	}
-	if(jj_scan_token(EQUALS, ctx))
-	{
-		return true;
-	}
-	if(jj_3R_88(ctx))
-	{
-		return true;
-	}
-	return false;
-}
-bool AlinousPlusParser::jj_3_15(ThreadContext* ctx)
-{
-	if(jj_scan_token(LOGICAL_OR, ctx))
-	{
-		return true;
-	}
-	if(jj_3R_59(ctx))
-	{
-		return true;
-	}
-	return false;
-}
-bool AlinousPlusParser::jj_3R_164(ThreadContext* ctx)
-{
-	Token* xsp = 0;
-	xsp = jj_scanpos;
-	if(jj_scan_token((long long)38, ctx))
-	{
-		__GC_MV(this, &(jj_scanpos), xsp, Token);
-		if(jj_scan_token((long long)42, ctx))
-		{
-			return true;
-		}
-	}
-	if(jj_3R_194(ctx))
-	{
-		return true;
-	}
-	while(true)
-	{
-		xsp = jj_scanpos;
-		if(jj_3R_195(ctx))
-		{
-			__GC_MV(this, &(jj_scanpos), xsp, Token);
-			break ;
-		}
-	}
-	return false;
-}
-bool AlinousPlusParser::jj_3_14(ThreadContext* ctx)
-{
-	if(jj_scan_token((long long)194, ctx))
-	{
-		return true;
-	}
-	if(jj_3R_58(ctx))
-	{
-		return true;
-	}
-	if(jj_scan_token(COLON, ctx))
-	{
-		return true;
-	}
-	if(jj_3R_58(ctx))
-	{
-		return true;
-	}
-	return false;
-}
-bool AlinousPlusParser::jj_3R_166(ThreadContext* ctx)
-{
-	if(jj_scan_token(L_BRACKET, ctx))
-	{
-		return true;
-	}
 	if(jj_scan_token(R_BRACKET, ctx))
-	{
-		return true;
-	}
-	return false;
-}
-bool AlinousPlusParser::jj_3R_127(ThreadContext* ctx)
-{
-	if(jj_3R_59(ctx))
-	{
-		return true;
-	}
-	Token* xsp = 0;
-	while(true)
-	{
-		xsp = jj_scanpos;
-		if(jj_3_15(ctx))
-		{
-			__GC_MV(this, &(jj_scanpos), xsp, Token);
-			break ;
-		}
-	}
-	return false;
-}
-bool AlinousPlusParser::jj_3R_233(ThreadContext* ctx)
-{
-	if(jj_scan_token(COMMA, ctx))
-	{
-		return true;
-	}
-	if(jj_3R_232(ctx))
-	{
-		return true;
-	}
-	return false;
-}
-bool AlinousPlusParser::jj_3_49(ThreadContext* ctx)
-{
-	if(jj_3R_77(ctx))
-	{
-		return true;
-	}
-	return false;
-}
-bool AlinousPlusParser::jj_3R_201(ThreadContext* ctx)
-{
-	if(jj_scan_token(_NULL, ctx))
 	{
 		return true;
 	}
@@ -13279,7 +13157,7 @@ bool AlinousPlusParser::jj_3_64(ThreadContext* ctx)
 	}
 	return false;
 }
-bool AlinousPlusParser::jj_3R_98(ThreadContext* ctx)
+bool AlinousPlusParser::jj_3R_100(ThreadContext* ctx)
 {
 	Token* xsp = 0;
 	xsp = jj_scanpos;
@@ -13287,7 +13165,7 @@ bool AlinousPlusParser::jj_3R_98(ThreadContext* ctx)
 	{
 		__GC_MV(this, &(jj_scanpos), xsp, Token);
 	}
-	if(jj_3R_51(ctx))
+	if(jj_3R_53(ctx))
 	{
 		return true;
 	}
@@ -13298,38 +13176,11 @@ bool AlinousPlusParser::jj_3R_98(ThreadContext* ctx)
 	}
 	return false;
 }
-bool AlinousPlusParser::jj_3R_153(ThreadContext* ctx)
+bool AlinousPlusParser::jj_3R_157(ThreadContext* ctx)
 {
-	if(jj_scan_token(UPDATE, ctx))
+	if(jj_scan_token(BEGIN, ctx))
 	{
 		return true;
-	}
-	if(jj_3R_189(ctx))
-	{
-		return true;
-	}
-	if(jj_scan_token(SET, ctx))
-	{
-		return true;
-	}
-	if(jj_3R_232(ctx))
-	{
-		return true;
-	}
-	Token* xsp = 0;
-	while(true)
-	{
-		xsp = jj_scanpos;
-		if(jj_3R_233(ctx))
-		{
-			__GC_MV(this, &(jj_scanpos), xsp, Token);
-			break ;
-		}
-	}
-	xsp = jj_scanpos;
-	if(jj_3_49(ctx))
-	{
-		__GC_MV(this, &(jj_scanpos), xsp, Token);
 	}
 	if(jj_scan_token(SEMI_COLON, ctx))
 	{
@@ -13337,206 +13188,31 @@ bool AlinousPlusParser::jj_3R_153(ThreadContext* ctx)
 	}
 	return false;
 }
+bool AlinousPlusParser::jj_3R_196(ThreadContext* ctx)
+{
+	if(jj_scan_token(IDENTIFIER, ctx))
+	{
+		return true;
+	}
+	return false;
+}
 bool AlinousPlusParser::jj_3R_165(ThreadContext* ctx)
 {
-	if(jj_scan_token(L_BRACKET, ctx))
-	{
-		return true;
-	}
-	if(jj_scan_token(R_BRACKET, ctx))
-	{
-		return true;
-	}
-	return false;
-}
-bool AlinousPlusParser::jj_3R_200(ThreadContext* ctx)
-{
 	Token* xsp = 0;
 	xsp = jj_scanpos;
-	if(jj_scan_token((long long)100, ctx))
+	if(jj_scan_token((long long)81, ctx))
 	{
 		__GC_MV(this, &(jj_scanpos), xsp, Token);
-		if(jj_scan_token((long long)101, ctx))
-		{
-			return true;
-		}
-	}
-	return false;
-}
-bool AlinousPlusParser::jj_3R_58(ThreadContext* ctx)
-{
-	if(jj_3R_127(ctx))
-	{
-		return true;
-	}
-	Token* xsp = 0;
-	xsp = jj_scanpos;
-	if(jj_3_14(ctx))
-	{
-		__GC_MV(this, &(jj_scanpos), xsp, Token);
-	}
-	return false;
-}
-bool AlinousPlusParser::jj_3R_99(ThreadContext* ctx)
-{
-	if(jj_scan_token(L_PARENTHESIS, ctx))
-	{
-		return true;
-	}
-	if(jj_3R_87(ctx))
-	{
-		return true;
-	}
-	if(jj_scan_token(R_PARENTHESIS, ctx))
-	{
-		return true;
-	}
-	return false;
-}
-bool AlinousPlusParser::jj_3R_119(ThreadContext* ctx)
-{
-	if(jj_scan_token(EQUALS, ctx))
-	{
-		return true;
-	}
-	if(jj_3R_58(ctx))
-	{
-		return true;
-	}
-	return false;
-}
-bool AlinousPlusParser::jj_3R_118(ThreadContext* ctx)
-{
-	if(jj_3R_51(ctx))
-	{
-		return true;
-	}
-	Token* xsp = 0;
-	while(true)
-	{
-		xsp = jj_scanpos;
-		if(jj_3R_165(ctx))
+		if(jj_scan_token((long long)79, ctx))
 		{
 			__GC_MV(this, &(jj_scanpos), xsp, Token);
-			break ;
-		}
-	}
-	if(jj_3R_51(ctx))
-	{
-		return true;
-	}
-	while(true)
-	{
-		xsp = jj_scanpos;
-		if(jj_3R_166(ctx))
-		{
-			__GC_MV(this, &(jj_scanpos), xsp, Token);
-			break ;
-		}
-	}
-	return false;
-}
-bool AlinousPlusParser::jj_3R_221(ThreadContext* ctx)
-{
-	if(jj_3R_58(ctx))
-	{
-		return true;
-	}
-	return false;
-}
-bool AlinousPlusParser::jj_3R_219(ThreadContext* ctx)
-{
-	if(jj_scan_token(SQL_STRING_LITERAL, ctx))
-	{
-		return true;
-	}
-	return false;
-}
-bool AlinousPlusParser::jj_3R_117(ThreadContext* ctx)
-{
-	if(jj_3R_164(ctx))
-	{
-		return true;
-	}
-	return false;
-}
-bool AlinousPlusParser::jj_3R_218(ThreadContext* ctx)
-{
-	if(jj_scan_token(STRING_LITERAL, ctx))
-	{
-		return true;
-	}
-	return false;
-}
-bool AlinousPlusParser::jj_3R_237(ThreadContext* ctx)
-{
-	if(jj_3R_97(ctx))
-	{
-		return true;
-	}
-	return false;
-}
-bool AlinousPlusParser::jj_3R_217(ThreadContext* ctx)
-{
-	if(jj_scan_token(CHARACTER_LITERAL, ctx))
-	{
-		return true;
-	}
-	return false;
-}
-bool AlinousPlusParser::jj_3R_97(ThreadContext* ctx)
-{
-	if(jj_3R_70(ctx))
-	{
-		return true;
-	}
-	return false;
-}
-bool AlinousPlusParser::jj_3R_216(ThreadContext* ctx)
-{
-	if(jj_scan_token(FLOATING_POINT_LITERAL, ctx))
-	{
-		return true;
-	}
-	return false;
-}
-bool AlinousPlusParser::jj_3R_215(ThreadContext* ctx)
-{
-	if(jj_scan_token(INTEGER_LITERAL, ctx))
-	{
-		return true;
-	}
-	return false;
-}
-bool AlinousPlusParser::jj_3R_253(ThreadContext* ctx)
-{
-	if(jj_scan_token(COMMA, ctx))
-	{
-		return true;
-	}
-	if(jj_3R_58(ctx))
-	{
-		return true;
-	}
-	return false;
-}
-bool AlinousPlusParser::jj_3R_202(ThreadContext* ctx)
-{
-	Token* xsp = 0;
-	xsp = jj_scanpos;
-	if(jj_3R_215(ctx))
-	{
-		__GC_MV(this, &(jj_scanpos), xsp, Token);
-		if(jj_3R_216(ctx))
-		{
-			__GC_MV(this, &(jj_scanpos), xsp, Token);
-			if(jj_3R_217(ctx))
+			if(jj_scan_token((long long)80, ctx))
 			{
 				__GC_MV(this, &(jj_scanpos), xsp, Token);
-				if(jj_3R_218(ctx))
+				if(jj_scan_token((long long)83, ctx))
 				{
 					__GC_MV(this, &(jj_scanpos), xsp, Token);
-					if(jj_3R_219(ctx))
+					if(jj_scan_token((long long)64, ctx))
 					{
 						return true;
 					}
@@ -13546,56 +13222,25 @@ bool AlinousPlusParser::jj_3R_202(ThreadContext* ctx)
 	}
 	return false;
 }
-bool AlinousPlusParser::jj_3R_50(ThreadContext* ctx)
-{
-	if(jj_3R_116(ctx))
-	{
-		return true;
-	}
-	Token* xsp = 0;
-	xsp = jj_scanpos;
-	if(jj_3R_117(ctx))
-	{
-		__GC_MV(this, &(jj_scanpos), xsp, Token);
-		if(jj_3R_118(ctx))
-		{
-			return true;
-		}
-	}
-	xsp = jj_scanpos;
-	if(jj_3R_119(ctx))
-	{
-		__GC_MV(this, &(jj_scanpos), xsp, Token);
-	}
-	if(jj_scan_token(SEMI_COLON, ctx))
-	{
-		return true;
-	}
-	return false;
-}
-bool AlinousPlusParser::jj_3_5(ThreadContext* ctx)
-{
-	if(jj_3R_50(ctx))
-	{
-		return true;
-	}
-	return false;
-}
-bool AlinousPlusParser::jj_3R_230(ThreadContext* ctx)
+bool AlinousPlusParser::jj_3R_118(ThreadContext* ctx)
 {
 	Token* xsp = 0;
-	xsp = jj_scanpos;
-	if(jj_3_48(ctx))
+	if(jj_3R_165(ctx))
 	{
-		__GC_MV(this, &(jj_scanpos), xsp, Token);
-		if(jj_3R_237(ctx))
+		return true;
+	}
+	while(true)
+	{
+		xsp = jj_scanpos;
+		if(jj_3R_165(ctx))
 		{
-			return true;
+			__GC_MV(this, &(jj_scanpos), xsp, Token);
+			break ;
 		}
 	}
 	return false;
 }
-bool AlinousPlusParser::jj_3_48(ThreadContext* ctx)
+bool AlinousPlusParser::jj_3R_101(ThreadContext* ctx)
 {
 	if(jj_scan_token(L_PARENTHESIS, ctx))
 	{
@@ -13611,23 +13256,61 @@ bool AlinousPlusParser::jj_3_48(ThreadContext* ctx)
 	}
 	return false;
 }
-bool AlinousPlusParser::jj_3_62(ThreadContext* ctx)
+bool AlinousPlusParser::jj_3_50(ThreadContext* ctx)
 {
-	if(jj_3R_98(ctx))
+	if(jj_3R_79(ctx))
 	{
 		return true;
 	}
 	return false;
 }
-bool AlinousPlusParser::jj_3R_208(ThreadContext* ctx)
+bool AlinousPlusParser::jj_3_16(ThreadContext* ctx)
 {
-	if(jj_scan_token(RETURN, ctx))
+	if(jj_scan_token(LOGICAL_AND, ctx))
+	{
+		return true;
+	}
+	if(jj_3R_62(ctx))
+	{
+		return true;
+	}
+	return false;
+}
+bool AlinousPlusParser::jj_3R_61(ThreadContext* ctx)
+{
+	if(jj_3R_62(ctx))
+	{
+		return true;
+	}
+	Token* xsp = 0;
+	while(true)
+	{
+		xsp = jj_scanpos;
+		if(jj_3_16(ctx))
+		{
+			__GC_MV(this, &(jj_scanpos), xsp, Token);
+			break ;
+		}
+	}
+	return false;
+}
+bool AlinousPlusParser::jj_3R_156(ThreadContext* ctx)
+{
+	if(jj_scan_token(DELETE, ctx))
+	{
+		return true;
+	}
+	if(jj_scan_token(FROM, ctx))
+	{
+		return true;
+	}
+	if(jj_3R_191(ctx))
 	{
 		return true;
 	}
 	Token* xsp = 0;
 	xsp = jj_scanpos;
-	if(jj_3R_221(ctx))
+	if(jj_3_50(ctx))
 	{
 		__GC_MV(this, &(jj_scanpos), xsp, Token);
 	}
@@ -13637,9 +13320,75 @@ bool AlinousPlusParser::jj_3R_208(ThreadContext* ctx)
 	}
 	return false;
 }
+bool AlinousPlusParser::jj_3R_216(ThreadContext* ctx)
+{
+	if(jj_3R_225(ctx))
+	{
+		return true;
+	}
+	return false;
+}
+bool AlinousPlusParser::jj_3R_99(ThreadContext* ctx)
+{
+	if(jj_3R_72(ctx))
+	{
+		return true;
+	}
+	return false;
+}
+bool AlinousPlusParser::jj_3R_215(ThreadContext* ctx)
+{
+	if(jj_scan_token(DOT, ctx))
+	{
+		return true;
+	}
+	if(jj_3R_196(ctx))
+	{
+		return true;
+	}
+	return false;
+}
+bool AlinousPlusParser::jj_3R_197(ThreadContext* ctx)
+{
+	Token* xsp = 0;
+	xsp = jj_scanpos;
+	if(jj_3R_215(ctx))
+	{
+		__GC_MV(this, &(jj_scanpos), xsp, Token);
+		if(jj_3R_216(ctx))
+		{
+			return true;
+		}
+	}
+	return false;
+}
+bool AlinousPlusParser::jj_3_62(ThreadContext* ctx)
+{
+	if(jj_3R_100(ctx))
+	{
+		return true;
+	}
+	return false;
+}
 bool AlinousPlusParser::jj_3_63(ThreadContext* ctx)
 {
-	if(jj_3R_99(ctx))
+	if(jj_3R_101(ctx))
+	{
+		return true;
+	}
+	return false;
+}
+bool AlinousPlusParser::jj_3R_234(ThreadContext* ctx)
+{
+	if(jj_3R_53(ctx))
+	{
+		return true;
+	}
+	if(jj_scan_token(EQUALS, ctx))
+	{
+		return true;
+	}
+	if(jj_3R_90(ctx))
 	{
 		return true;
 	}
@@ -13647,54 +13396,48 @@ bool AlinousPlusParser::jj_3_63(ThreadContext* ctx)
 }
 bool AlinousPlusParser::jj_3_61(ThreadContext* ctx)
 {
-	if(jj_3R_97(ctx))
+	if(jj_3R_99(ctx))
 	{
 		return true;
 	}
 	return false;
 }
-bool AlinousPlusParser::jj_3R_147(ThreadContext* ctx)
+bool AlinousPlusParser::jj_3R_149(ThreadContext* ctx)
 {
-	if(jj_3R_180(ctx))
+	if(jj_3R_182(ctx))
 	{
 		return true;
 	}
 	return false;
 }
-bool AlinousPlusParser::jj_3R_146(ThreadContext* ctx)
+bool AlinousPlusParser::jj_3R_148(ThreadContext* ctx)
 {
-	if(jj_3R_94(ctx))
+	if(jj_3R_96(ctx))
 	{
 		return true;
 	}
 	return false;
 }
-bool AlinousPlusParser::jj_3R_225(ThreadContext* ctx)
+bool AlinousPlusParser::jj_3_15(ThreadContext* ctx)
 {
-	if(jj_3R_58(ctx))
+	if(jj_scan_token(LOGICAL_OR, ctx))
 	{
 		return true;
 	}
-	Token* xsp = 0;
-	while(true)
+	if(jj_3R_61(ctx))
 	{
-		xsp = jj_scanpos;
-		if(jj_3R_253(ctx))
-		{
-			__GC_MV(this, &(jj_scanpos), xsp, Token);
-			break ;
-		}
+		return true;
 	}
 	return false;
 }
-bool AlinousPlusParser::jj_3R_96(ThreadContext* ctx)
+bool AlinousPlusParser::jj_3R_98(ThreadContext* ctx)
 {
 	Token* xsp = 0;
 	xsp = jj_scanpos;
-	if(jj_3R_146(ctx))
+	if(jj_3R_148(ctx))
 	{
 		__GC_MV(this, &(jj_scanpos), xsp, Token);
-		if(jj_3R_147(ctx))
+		if(jj_3R_149(ctx))
 		{
 			__GC_MV(this, &(jj_scanpos), xsp, Token);
 			if(jj_3_61(ctx))
@@ -13713,21 +13456,547 @@ bool AlinousPlusParser::jj_3R_96(ThreadContext* ctx)
 	}
 	return false;
 }
-bool AlinousPlusParser::jj_3R_231(ThreadContext* ctx)
+bool AlinousPlusParser::jj_3R_166(ThreadContext* ctx)
 {
-	if(jj_scan_token(COMMA, ctx))
+	Token* xsp = 0;
+	xsp = jj_scanpos;
+	if(jj_scan_token((long long)38, ctx))
+	{
+		__GC_MV(this, &(jj_scanpos), xsp, Token);
+		if(jj_scan_token((long long)42, ctx))
+		{
+			return true;
+		}
+	}
+	if(jj_3R_196(ctx))
 	{
 		return true;
 	}
-	if(jj_3R_230(ctx))
+	while(true)
+	{
+		xsp = jj_scanpos;
+		if(jj_3R_197(ctx))
+		{
+			__GC_MV(this, &(jj_scanpos), xsp, Token);
+			break ;
+		}
+	}
+	return false;
+}
+bool AlinousPlusParser::jj_3_14(ThreadContext* ctx)
+{
+	if(jj_scan_token((long long)196, ctx))
+	{
+		return true;
+	}
+	if(jj_3R_60(ctx))
+	{
+		return true;
+	}
+	if(jj_scan_token(COLON, ctx))
+	{
+		return true;
+	}
+	if(jj_3R_60(ctx))
 	{
 		return true;
 	}
 	return false;
 }
-bool AlinousPlusParser::jj_3R_54(ThreadContext* ctx)
+bool AlinousPlusParser::jj_3R_168(ThreadContext* ctx)
 {
-	if(jj_3R_58(ctx))
+	if(jj_scan_token(L_BRACKET, ctx))
+	{
+		return true;
+	}
+	if(jj_scan_token(R_BRACKET, ctx))
+	{
+		return true;
+	}
+	return false;
+}
+bool AlinousPlusParser::jj_3R_129(ThreadContext* ctx)
+{
+	if(jj_3R_61(ctx))
+	{
+		return true;
+	}
+	Token* xsp = 0;
+	while(true)
+	{
+		xsp = jj_scanpos;
+		if(jj_3_15(ctx))
+		{
+			__GC_MV(this, &(jj_scanpos), xsp, Token);
+			break ;
+		}
+	}
+	return false;
+}
+bool AlinousPlusParser::jj_3R_235(ThreadContext* ctx)
+{
+	if(jj_scan_token(COMMA, ctx))
+	{
+		return true;
+	}
+	if(jj_3R_234(ctx))
+	{
+		return true;
+	}
+	return false;
+}
+bool AlinousPlusParser::jj_3_49(ThreadContext* ctx)
+{
+	if(jj_3R_79(ctx))
+	{
+		return true;
+	}
+	return false;
+}
+bool AlinousPlusParser::jj_3R_203(ThreadContext* ctx)
+{
+	if(jj_scan_token(_NULL, ctx))
+	{
+		return true;
+	}
+	return false;
+}
+bool AlinousPlusParser::jj_3R_155(ThreadContext* ctx)
+{
+	if(jj_scan_token(UPDATE, ctx))
+	{
+		return true;
+	}
+	if(jj_3R_191(ctx))
+	{
+		return true;
+	}
+	if(jj_scan_token(SET, ctx))
+	{
+		return true;
+	}
+	if(jj_3R_234(ctx))
+	{
+		return true;
+	}
+	Token* xsp = 0;
+	while(true)
+	{
+		xsp = jj_scanpos;
+		if(jj_3R_235(ctx))
+		{
+			__GC_MV(this, &(jj_scanpos), xsp, Token);
+			break ;
+		}
+	}
+	xsp = jj_scanpos;
+	if(jj_3_49(ctx))
+	{
+		__GC_MV(this, &(jj_scanpos), xsp, Token);
+	}
+	if(jj_scan_token(SEMI_COLON, ctx))
+	{
+		return true;
+	}
+	return false;
+}
+bool AlinousPlusParser::jj_3_60(ThreadContext* ctx)
+{
+	Token* xsp = 0;
+	xsp = jj_scanpos;
+	if(jj_scan_token((long long)23, ctx))
+	{
+		__GC_MV(this, &(jj_scanpos), xsp, Token);
+		if(jj_scan_token((long long)28, ctx))
+		{
+			__GC_MV(this, &(jj_scanpos), xsp, Token);
+			if(jj_scan_token((long long)29, ctx))
+			{
+				return true;
+			}
+		}
+	}
+	if(jj_3R_98(ctx))
+	{
+		return true;
+	}
+	return false;
+}
+bool AlinousPlusParser::jj_3R_167(ThreadContext* ctx)
+{
+	if(jj_scan_token(L_BRACKET, ctx))
+	{
+		return true;
+	}
+	if(jj_scan_token(R_BRACKET, ctx))
+	{
+		return true;
+	}
+	return false;
+}
+bool AlinousPlusParser::jj_3R_97(ThreadContext* ctx)
+{
+	if(jj_3R_98(ctx))
+	{
+		return true;
+	}
+	Token* xsp = 0;
+	while(true)
+	{
+		xsp = jj_scanpos;
+		if(jj_3_60(ctx))
+		{
+			__GC_MV(this, &(jj_scanpos), xsp, Token);
+			break ;
+		}
+	}
+	return false;
+}
+bool AlinousPlusParser::jj_3R_202(ThreadContext* ctx)
+{
+	Token* xsp = 0;
+	xsp = jj_scanpos;
+	if(jj_scan_token((long long)100, ctx))
+	{
+		__GC_MV(this, &(jj_scanpos), xsp, Token);
+		if(jj_scan_token((long long)101, ctx))
+		{
+			return true;
+		}
+	}
+	return false;
+}
+bool AlinousPlusParser::jj_3R_60(ThreadContext* ctx)
+{
+	if(jj_3R_129(ctx))
+	{
+		return true;
+	}
+	Token* xsp = 0;
+	xsp = jj_scanpos;
+	if(jj_3_14(ctx))
+	{
+		__GC_MV(this, &(jj_scanpos), xsp, Token);
+	}
+	return false;
+}
+bool AlinousPlusParser::jj_3R_121(ThreadContext* ctx)
+{
+	if(jj_scan_token(EQUALS, ctx))
+	{
+		return true;
+	}
+	if(jj_3R_60(ctx))
+	{
+		return true;
+	}
+	return false;
+}
+bool AlinousPlusParser::jj_3R_120(ThreadContext* ctx)
+{
+	if(jj_3R_53(ctx))
+	{
+		return true;
+	}
+	Token* xsp = 0;
+	while(true)
+	{
+		xsp = jj_scanpos;
+		if(jj_3R_167(ctx))
+		{
+			__GC_MV(this, &(jj_scanpos), xsp, Token);
+			break ;
+		}
+	}
+	if(jj_3R_53(ctx))
+	{
+		return true;
+	}
+	while(true)
+	{
+		xsp = jj_scanpos;
+		if(jj_3R_168(ctx))
+		{
+			__GC_MV(this, &(jj_scanpos), xsp, Token);
+			break ;
+		}
+	}
+	return false;
+}
+bool AlinousPlusParser::jj_3R_223(ThreadContext* ctx)
+{
+	if(jj_3R_60(ctx))
+	{
+		return true;
+	}
+	return false;
+}
+bool AlinousPlusParser::jj_3R_221(ThreadContext* ctx)
+{
+	if(jj_scan_token(SQL_STRING_LITERAL, ctx))
+	{
+		return true;
+	}
+	return false;
+}
+bool AlinousPlusParser::jj_3R_239(ThreadContext* ctx)
+{
+	if(jj_3R_99(ctx))
+	{
+		return true;
+	}
+	return false;
+}
+bool AlinousPlusParser::jj_3R_119(ThreadContext* ctx)
+{
+	if(jj_3R_166(ctx))
+	{
+		return true;
+	}
+	return false;
+}
+bool AlinousPlusParser::jj_3R_220(ThreadContext* ctx)
+{
+	if(jj_scan_token(STRING_LITERAL, ctx))
+	{
+		return true;
+	}
+	return false;
+}
+bool AlinousPlusParser::jj_3R_219(ThreadContext* ctx)
+{
+	if(jj_scan_token(CHARACTER_LITERAL, ctx))
+	{
+		return true;
+	}
+	return false;
+}
+bool AlinousPlusParser::jj_3R_218(ThreadContext* ctx)
+{
+	if(jj_scan_token(FLOATING_POINT_LITERAL, ctx))
+	{
+		return true;
+	}
+	return false;
+}
+bool AlinousPlusParser::jj_3R_217(ThreadContext* ctx)
+{
+	if(jj_scan_token(INTEGER_LITERAL, ctx))
+	{
+		return true;
+	}
+	return false;
+}
+bool AlinousPlusParser::jj_3R_232(ThreadContext* ctx)
+{
+	Token* xsp = 0;
+	xsp = jj_scanpos;
+	if(jj_3_48(ctx))
+	{
+		__GC_MV(this, &(jj_scanpos), xsp, Token);
+		if(jj_3R_239(ctx))
+		{
+			return true;
+		}
+	}
+	return false;
+}
+bool AlinousPlusParser::jj_3_48(ThreadContext* ctx)
+{
+	if(jj_scan_token(L_PARENTHESIS, ctx))
+	{
+		return true;
+	}
+	if(jj_3R_91(ctx))
+	{
+		return true;
+	}
+	if(jj_scan_token(R_PARENTHESIS, ctx))
+	{
+		return true;
+	}
+	return false;
+}
+bool AlinousPlusParser::jj_3R_259(ThreadContext* ctx)
+{
+	if(jj_scan_token(COMMA, ctx))
+	{
+		return true;
+	}
+	if(jj_3R_60(ctx))
+	{
+		return true;
+	}
+	return false;
+}
+bool AlinousPlusParser::jj_3R_204(ThreadContext* ctx)
+{
+	Token* xsp = 0;
+	xsp = jj_scanpos;
+	if(jj_3R_217(ctx))
+	{
+		__GC_MV(this, &(jj_scanpos), xsp, Token);
+		if(jj_3R_218(ctx))
+		{
+			__GC_MV(this, &(jj_scanpos), xsp, Token);
+			if(jj_3R_219(ctx))
+			{
+				__GC_MV(this, &(jj_scanpos), xsp, Token);
+				if(jj_3R_220(ctx))
+				{
+					__GC_MV(this, &(jj_scanpos), xsp, Token);
+					if(jj_3R_221(ctx))
+					{
+						return true;
+					}
+				}
+			}
+		}
+	}
+	return false;
+}
+bool AlinousPlusParser::jj_3R_52(ThreadContext* ctx)
+{
+	if(jj_3R_118(ctx))
+	{
+		return true;
+	}
+	Token* xsp = 0;
+	xsp = jj_scanpos;
+	if(jj_3R_119(ctx))
+	{
+		__GC_MV(this, &(jj_scanpos), xsp, Token);
+		if(jj_3R_120(ctx))
+		{
+			return true;
+		}
+	}
+	xsp = jj_scanpos;
+	if(jj_3R_121(ctx))
+	{
+		__GC_MV(this, &(jj_scanpos), xsp, Token);
+	}
+	if(jj_scan_token(SEMI_COLON, ctx))
+	{
+		return true;
+	}
+	return false;
+}
+bool AlinousPlusParser::jj_3_5(ThreadContext* ctx)
+{
+	if(jj_3R_52(ctx))
+	{
+		return true;
+	}
+	return false;
+}
+bool AlinousPlusParser::jj_3R_210(ThreadContext* ctx)
+{
+	if(jj_scan_token(RETURN, ctx))
+	{
+		return true;
+	}
+	Token* xsp = 0;
+	xsp = jj_scanpos;
+	if(jj_3R_223(ctx))
+	{
+		__GC_MV(this, &(jj_scanpos), xsp, Token);
+	}
+	if(jj_scan_token(SEMI_COLON, ctx))
+	{
+		return true;
+	}
+	return false;
+}
+bool AlinousPlusParser::jj_3_59(ThreadContext* ctx)
+{
+	Token* xsp = 0;
+	xsp = jj_scanpos;
+	if(jj_scan_token((long long)25, ctx))
+	{
+		__GC_MV(this, &(jj_scanpos), xsp, Token);
+		if(jj_scan_token((long long)27, ctx))
+		{
+			return true;
+		}
+	}
+	if(jj_3R_97(ctx))
+	{
+		return true;
+	}
+	return false;
+}
+bool AlinousPlusParser::jj_3R_90(ThreadContext* ctx)
+{
+	if(jj_3R_97(ctx))
+	{
+		return true;
+	}
+	Token* xsp = 0;
+	while(true)
+	{
+		xsp = jj_scanpos;
+		if(jj_3_59(ctx))
+		{
+			__GC_MV(this, &(jj_scanpos), xsp, Token);
+			break ;
+		}
+	}
+	return false;
+}
+bool AlinousPlusParser::jj_3R_227(ThreadContext* ctx)
+{
+	if(jj_3R_60(ctx))
+	{
+		return true;
+	}
+	Token* xsp = 0;
+	while(true)
+	{
+		xsp = jj_scanpos;
+		if(jj_3R_259(ctx))
+		{
+			__GC_MV(this, &(jj_scanpos), xsp, Token);
+			break ;
+		}
+	}
+	return false;
+}
+bool AlinousPlusParser::jj_3_58(ThreadContext* ctx)
+{
+	if(jj_scan_token(IN, ctx))
+	{
+		return true;
+	}
+	if(jj_scan_token(L_PARENTHESIS, ctx))
+	{
+		return true;
+	}
+	if(jj_3R_91(ctx))
+	{
+		return true;
+	}
+	if(jj_scan_token(R_PARENTHESIS, ctx))
+	{
+		return true;
+	}
+	return false;
+}
+bool AlinousPlusParser::jj_3R_233(ThreadContext* ctx)
+{
+	if(jj_scan_token(COMMA, ctx))
+	{
+		return true;
+	}
+	if(jj_3R_232(ctx))
+	{
+		return true;
+	}
+	return false;
+}
+bool AlinousPlusParser::jj_3R_56(ThreadContext* ctx)
+{
+	if(jj_3R_60(ctx))
 	{
 		return true;
 	}
@@ -14125,31 +14394,31 @@ void AlinousPlusParser::jj_save(long long index, long long xla, ThreadContext* c
 }
 void AlinousPlusParser::jj_la1_init_0(ThreadContext* ctx)
 {
-	__GC_MV(nullptr, &(jj_la1_0), ((IArrayObjectPrimitive<long long>*)new(ctx) ArrayObjectPrimitive<long long>({0x51c2200, 0x0, 0x0, 0x0, 0x0, 0x51c2200, 0x0, 0x0, 0x0, 0x200000, 0x0, 0x0, 0x0, 0x200000, 0x0, 0x0, 0x0, 0x0, 0x0, 0x400000, 0x0, 0x0, 0x0, 0x400000, 0x0, 0x0, 0x0, 0x0, 0x200000, 0x0, 0x0, 0x200000, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x53c2200, 0x51c2200, 0x51c2200, 0x400000, 0x0, 0x0, 0x0, 0x0, 0x400000, 0x51c2200, 0x51c2200, 0x0, 0x0, 0x0, 0xa000000, 0x30800000, 0x51c2200, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x51c2200, 0x1c2200, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x400000, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x400000, 0x400000, 0x0, 0x0, 0x0, 0xa000000, 0x30800000, 0x182200, 0x0, 0x182200, 0x0, 0x800000}, ctx)), IArrayObjectPrimitive<long long>);
+	__GC_MV(nullptr, &(jj_la1_0), ((IArrayObjectPrimitive<long long>*)new(ctx) ArrayObjectPrimitive<long long>({0x51c2200, 0x0, 0x0, 0x0, 0x0, 0x51c2200, 0x0, 0x0, 0x0, 0x200000, 0x0, 0x0, 0x0, 0x200000, 0x0, 0x0, 0x0, 0x0, 0x0, 0x400000, 0x0, 0x0, 0x0, 0x400000, 0x0, 0x0, 0x0, 0x0, 0x200000, 0x0, 0x0, 0x200000, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x53c2200, 0x51c2200, 0x51c2200, 0x400000, 0x0, 0x0, 0x0, 0x0, 0x400000, 0x51c2200, 0x51c2200, 0x0, 0x0, 0x0, 0xa000000, 0x30800000, 0x51c2200, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x51c2200, 0x1c2200, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x400000, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x400000, 0x400000, 0x0, 0x0, 0x0, 0xa000000, 0x30800000, 0x182200, 0x0, 0x182200, 0x0, 0x800000}, ctx)), IArrayObjectPrimitive<long long>);
 }
 void AlinousPlusParser::jj_la1_init_1(ThreadContext* ctx)
 {
-	__GC_MV(nullptr, &(jj_la1_1), ((IArrayObjectPrimitive<long long>*)new(ctx) ArrayObjectPrimitive<long long>({0x16080c44, 0x6080000, 0x0, 0x4, 0x8, 0x10080c44, 0x6000000, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x80000, 0x0, 0x10, 0x10, 0x80440, 0x0, 0x10, 0x10, 0x80440, 0x0, 0x0, 0x0, 0x80000, 0x0, 0x800, 0x80000, 0x0, 0x800, 0x100, 0x80440, 0x80440, 0x100, 0x10000800, 0x100000, 0x40000000, 0x40000000, 0x100000, 0x10080c44, 0x80444, 0x80444, 0x0, 0x100000, 0x100000, 0x10, 0x10, 0x0, 0x10080c44, 0x80444, 0x6000, 0x78000, 0x600000, 0x0, 0x0, 0x0, 0x10, 0x14, 0x14, 0x80444, 0x4, 0x440, 0x440, 0x10, 0x100, 0x80444, 0x0, 0x0, 0x440, 0x90, 0x90, 0x80, 0x80000, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x100, 0x100, 0x80444, 0x4, 0x100, 0x80444, 0x100, 0x0, 0x100, 0x0, 0x0, 0x100, 0x100, 0x0, 0x0, 0x0, 0x0, 0x4, 0x100, 0x4000, 0x4000, 0x78000, 0x78000, 0x80000, 0x0, 0x0, 0x0, 0x0, 0x0, 0x100, 0x0}, ctx)), IArrayObjectPrimitive<long long>);
+	__GC_MV(nullptr, &(jj_la1_1), ((IArrayObjectPrimitive<long long>*)new(ctx) ArrayObjectPrimitive<long long>({0x16080c44, 0x6080000, 0x0, 0x4, 0x8, 0x10080c44, 0x6000000, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x80000, 0x0, 0x10, 0x10, 0x80440, 0x0, 0x10, 0x10, 0x80440, 0x0, 0x0, 0x0, 0x80000, 0x0, 0x800, 0x80000, 0x0, 0x800, 0x100, 0x80440, 0x80440, 0x100, 0x10000800, 0x100000, 0x40000000, 0x40000000, 0x100000, 0x10080c44, 0x80444, 0x80444, 0x0, 0x100000, 0x100000, 0x10, 0x10, 0x0, 0x10080c44, 0x80444, 0x6000, 0x78000, 0x600000, 0x0, 0x0, 0x0, 0x10, 0x14, 0x14, 0x80444, 0x4, 0x440, 0x440, 0x10, 0x100, 0x80444, 0x0, 0x0, 0x440, 0x90, 0x90, 0x80, 0x80000, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x100, 0x100, 0x80444, 0x4, 0x100, 0x80444, 0x100, 0x0, 0x100, 0x0, 0x0, 0x100, 0x100, 0x100, 0x100, 0x0, 0x0, 0x0, 0x0, 0x4, 0x100, 0x4000, 0x4000, 0x78000, 0x78000, 0x80000, 0x0, 0x0, 0x0, 0x0, 0x0, 0x100, 0x0}, ctx)), IArrayObjectPrimitive<long long>);
 }
 void AlinousPlusParser::jj_la1_init_2(ThreadContext* ctx)
 {
-	__GC_MV(nullptr, &(jj_la1_2), ((IArrayObjectPrimitive<long long>*)new(ctx) ArrayObjectPrimitive<long long>({0xc8946002, 0xc8902000, 0x20000000, 0x0, 0x0, 0xc8946002, 0x0, 0x20, 0xb8001, 0x0, 0x20, 0x800, 0xb8001, 0x0, 0xc8902000, 0xb8001, 0x0, 0x0, 0xc8902000, 0x0, 0x0, 0x0, 0xc8902000, 0x0, 0xb8001, 0xb8001, 0xc8902000, 0x2000000, 0x0, 0xc8902000, 0x2000000, 0x0, 0x0, 0xc8902000, 0xc8902000, 0x0, 0x40002, 0x0, 0x0, 0x0, 0x0, 0xc8946002, 0xc8906000, 0xc8906000, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0xc8946002, 0xc8906000, 0x0, 0x0, 0x0, 0x0, 0x0, 0x4000, 0x0, 0x0, 0x0, 0xc8902000, 0x0, 0x0, 0x0, 0x0, 0x0, 0xc8906000, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0xc8902000, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0xc8902000, 0x0, 0x0, 0xc8902000, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0}, ctx)), IArrayObjectPrimitive<long long>);
+	__GC_MV(nullptr, &(jj_la1_2), ((IArrayObjectPrimitive<long long>*)new(ctx) ArrayObjectPrimitive<long long>({0xc8946002, 0xc8902000, 0x20000000, 0x0, 0x0, 0xc8946002, 0x0, 0x20, 0xb8001, 0x0, 0x20, 0x800, 0xb8001, 0x0, 0xc8902000, 0xb8001, 0x0, 0x0, 0xc8902000, 0x0, 0x0, 0x0, 0xc8902000, 0x0, 0xb8001, 0xb8001, 0xc8902000, 0x2000000, 0x0, 0xc8902000, 0x2000000, 0x0, 0x0, 0xc8902000, 0xc8902000, 0x0, 0x40002, 0x0, 0x0, 0x0, 0x0, 0xc8946002, 0xc8906000, 0xc8906000, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0xc8946002, 0xc8906000, 0x0, 0x0, 0x0, 0x0, 0x0, 0x4000, 0x0, 0x0, 0x0, 0xc8902000, 0x0, 0x0, 0x0, 0x0, 0x0, 0xc8906000, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0xc8902000, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0xc8902000, 0x0, 0x0, 0xc8902000, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0}, ctx)), IArrayObjectPrimitive<long long>);
 }
 void AlinousPlusParser::jj_la1_init_3(ThreadContext* ctx)
 {
-	__GC_MV(nullptr, &(jj_la1_3), ((IArrayObjectPrimitive<long long>*)new(ctx) ArrayObjectPrimitive<long long>({0xff7ffffb, 0xff7fffcb, 0x0, 0x0, 0x0, 0xff7ffffb, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0xff7fffcb, 0x0, 0x0, 0x0, 0xff7fffcb, 0x0, 0x0, 0x0, 0xff7fffcb, 0x0, 0x0, 0x0, 0xff7fffcb, 0x0, 0x0, 0xff7fffcb, 0x0, 0x0, 0x0, 0xff7fffcb, 0xff7fffcb, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0xff7ffffb, 0xff7ffffb, 0xff7ffffb, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0xff7ffffb, 0xff7ffffb, 0x0, 0x0, 0x0, 0x0, 0x0, 0x30, 0x0, 0x0, 0x0, 0xff7fffcb, 0x0, 0x0, 0x0, 0x0, 0x0, 0xff7ffffb, 0x0, 0x30, 0x0, 0x0, 0x0, 0x0, 0xff7fffcb, 0x0, 0x3c0, 0x0, 0x0, 0x400, 0x200000, 0x200000, 0x60000, 0x200000, 0x60000, 0x0, 0x19e0000, 0xff7fffcb, 0x0, 0x0, 0xff7fffcb, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x30, 0x30, 0x0, 0x0, 0x40}, ctx)), IArrayObjectPrimitive<long long>);
+	__GC_MV(nullptr, &(jj_la1_3), ((IArrayObjectPrimitive<long long>*)new(ctx) ArrayObjectPrimitive<long long>({0xff7ffffb, 0xff7fffcb, 0x0, 0x0, 0x0, 0xff7ffffb, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0xff7fffcb, 0x0, 0x0, 0x0, 0xff7fffcb, 0x0, 0x0, 0x0, 0xff7fffcb, 0x0, 0x0, 0x0, 0xff7fffcb, 0x0, 0x0, 0xff7fffcb, 0x0, 0x0, 0x0, 0xff7fffcb, 0xff7fffcb, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0xff7ffffb, 0xff7ffffb, 0xff7ffffb, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0xff7ffffb, 0xff7ffffb, 0x0, 0x0, 0x0, 0x0, 0x0, 0x30, 0x0, 0x0, 0x0, 0xff7fffcb, 0x0, 0x0, 0x0, 0x0, 0x0, 0xff7ffffb, 0x0, 0x30, 0x0, 0x0, 0x0, 0x0, 0xff7fffcb, 0x0, 0x3c0, 0x0, 0x0, 0x400, 0x200000, 0x200000, 0x60000, 0x200000, 0x60000, 0x0, 0x19e0000, 0xff7fffcb, 0x0, 0x0, 0xff7fffcb, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x30, 0x30, 0x0, 0x0, 0x40}, ctx)), IArrayObjectPrimitive<long long>);
 }
 void AlinousPlusParser::jj_la1_init_4(ThreadContext* ctx)
 {
-	__GC_MV(nullptr, &(jj_la1_4), ((IArrayObjectPrimitive<long long>*)new(ctx) ArrayObjectPrimitive<long long>({0xffffffef, 0xffffffef, 0x0, 0x0, 0x0, 0xffffffef, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0xffffffef, 0x0, 0x0, 0x0, 0xffffffef, 0x0, 0x0, 0x0, 0xffffffef, 0x0, 0x0, 0x0, 0xffffffef, 0x0, 0x0, 0xffffffef, 0x0, 0x0, 0x0, 0xffffffef, 0xffffffef, 0x0, 0x0, 0x0, 0x4000000, 0x4000000, 0x0, 0xffffffef, 0xffffffef, 0xffffffef, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0xffffffef, 0xffffffef, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0xffffffef, 0x0, 0x0, 0x0, 0x0, 0x0, 0xffffffef, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0xffffffef, 0x0, 0x242000, 0x400000, 0x800000, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0xffffffef, 0x0, 0x0, 0xffffffef, 0x0, 0x0, 0x0, 0x80000000, 0x0, 0x0, 0x0, 0x4000010, 0x4000010, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0}, ctx)), IArrayObjectPrimitive<long long>);
+	__GC_MV(nullptr, &(jj_la1_4), ((IArrayObjectPrimitive<long long>*)new(ctx) ArrayObjectPrimitive<long long>({0xffffffef, 0xffffffef, 0x0, 0x0, 0x0, 0xffffffef, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0xffffffef, 0x0, 0x0, 0x0, 0xffffffef, 0x0, 0x0, 0x0, 0xffffffef, 0x0, 0x0, 0x0, 0xffffffef, 0x0, 0x0, 0xffffffef, 0x0, 0x0, 0x0, 0xffffffef, 0xffffffef, 0x0, 0x0, 0x0, 0x4000000, 0x4000000, 0x0, 0xffffffef, 0xffffffef, 0xffffffef, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0xffffffef, 0xffffffef, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0xffffffef, 0x0, 0x0, 0x0, 0x0, 0x0, 0xffffffef, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0xffffffef, 0x0, 0x242000, 0x400000, 0x800000, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0xffffffef, 0x0, 0x0, 0xffffffef, 0x0, 0x0, 0x0, 0x80000000, 0x0, 0x0, 0x0, 0x0, 0x0, 0x4000010, 0x4000010, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0}, ctx)), IArrayObjectPrimitive<long long>);
 }
 void AlinousPlusParser::jj_la1_init_5(ThreadContext* ctx)
 {
-	__GC_MV(nullptr, &(jj_la1_5), ((IArrayObjectPrimitive<long long>*)new(ctx) ArrayObjectPrimitive<long long>({0xbbfffff, 0xb3fffff, 0x0, 0x0, 0x0, 0xabfffff, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0xa3fffff, 0x0, 0x0, 0x0, 0xa3fffff, 0x0, 0x0, 0x0, 0xa3fffff, 0x0, 0x0, 0x0, 0xa3fffff, 0x0, 0x0, 0xa3fffff, 0x0, 0x0, 0x0, 0xa3fffff, 0xa3fffff, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0xabfffff, 0xabfffff, 0xabfffff, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0xabfffff, 0xabfffff, 0x0, 0x0, 0x0, 0x0, 0x0, 0x800000, 0x0, 0x0, 0x0, 0xa3fffff, 0x0, 0x0, 0x0, 0x0, 0x0, 0xabfffff, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0xa3fffff, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0xa3fffff, 0x0, 0x0, 0xa3fffff, 0x0, 0x8000004, 0x0, 0x2, 0x4000000, 0x0, 0x0, 0x2, 0x2, 0x4, 0x8408000, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0}, ctx)), IArrayObjectPrimitive<long long>);
+	__GC_MV(nullptr, &(jj_la1_5), ((IArrayObjectPrimitive<long long>*)new(ctx) ArrayObjectPrimitive<long long>({0x3fbfffff, 0x3f3fffff, 0x0, 0x0, 0x0, 0x3ebfffff, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x3e3fffff, 0x0, 0x0, 0x0, 0x3e3fffff, 0x0, 0x0, 0x0, 0x3e3fffff, 0x0, 0x0, 0x0, 0x3e3fffff, 0x0, 0x0, 0x3e3fffff, 0x0, 0x0, 0x0, 0x3e3fffff, 0x3e3fffff, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x3ebfffff, 0x3ebfffff, 0x3ebfffff, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x3ebfffff, 0x3ebfffff, 0x0, 0x0, 0x0, 0x0, 0x0, 0x800000, 0x0, 0x0, 0x0, 0x3e3fffff, 0x0, 0x0, 0x0, 0x0, 0x0, 0x3ebfffff, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x3e3fffff, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x3e3fffff, 0x0, 0x0, 0x3e3fffff, 0x0, 0x20000004, 0x0, 0x2, 0x4000000, 0x0, 0x0, 0x0, 0x0, 0x2, 0x2, 0x4, 0x20408000, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0}, ctx)), IArrayObjectPrimitive<long long>);
 }
 void AlinousPlusParser::jj_la1_init_6(ThreadContext* ctx)
 {
-	__GC_MV(nullptr, &(jj_la1_6), ((IArrayObjectPrimitive<long long>*)new(ctx) ArrayObjectPrimitive<long long>({0x20, 0x0, 0x0, 0x0, 0x0, 0x20, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x20, 0x20, 0x20, 0xffc0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x20, 0x20, 0x0, 0x0, 0x10, 0x0, 0x0, 0x20, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x20, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0xffc0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x10000, 0x10000, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0}, ctx)), IArrayObjectPrimitive<long long>);
+	__GC_MV(nullptr, &(jj_la1_6), ((IArrayObjectPrimitive<long long>*)new(ctx) ArrayObjectPrimitive<long long>({0x80, 0x0, 0x0, 0x0, 0x0, 0x80, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x80, 0x80, 0x80, 0x3ff00, 0x0, 0x0, 0x0, 0x0, 0x0, 0x80, 0x80, 0x0, 0x0, 0x40, 0x0, 0x0, 0x80, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x80, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x3ff00, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x40000, 0x40000, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0}, ctx)), IArrayObjectPrimitive<long long>);
 }
 }}
 

@@ -18,7 +18,7 @@ bool SQLAndExpression::__init_static_variables(){
 	delete ctx;
 	return true;
 }
- SQLAndExpression::SQLAndExpression(ArrayList<ISQLExpression>* result, ThreadContext* ctx) throw()  : IObject(ctx), AbstractSQLBooleanCollectionExpression(result, ConstStr::getCNST_STR_1072(), ctx)
+ SQLAndExpression::SQLAndExpression(ArrayList<ISQLExpression>* result, ThreadContext* ctx) throw()  : IObject(ctx), AbstractSQLBooleanCollectionExpression(result, ConstStr::getCNST_STR_1074(), ctx)
 {
 }
 void SQLAndExpression::__construct_impl(ArrayList<ISQLExpression>* result, ThreadContext* ctx) throw() 
@@ -108,7 +108,7 @@ bool SQLAndExpression::hasArrayResult(ThreadContext* ctx) throw()
 }
 ArrayList<VariantValue>* SQLAndExpression::resolveSQLExpressionAsArray(ScanResultRecord* record, ScriptMachine* machine, bool debug, ThreadContext* ctx)
 {
-	throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1036(), ctx));
+	throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1038(), ctx));
 }
 int SQLAndExpression::getExpressionType(ThreadContext* ctx) throw() 
 {

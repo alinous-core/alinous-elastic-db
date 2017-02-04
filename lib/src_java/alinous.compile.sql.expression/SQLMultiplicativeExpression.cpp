@@ -44,7 +44,7 @@ IAlinousVariable* SQLMultiplicativeExpression::resolveExpression(ScriptMachine* 
 		{
 			if(operand->toIntVariable(ctx)->getIntValue(ctx) == 0)
 			{
-				throw (new(ctx) AlinousException(ConstStr::getCNST_STR_1066(), ctx));
+				throw (new(ctx) AlinousException(ConstStr::getCNST_STR_1068(), ctx));
 			}
 			val = val->div(operand, ctx);
 		}
@@ -67,7 +67,7 @@ VariantValue* SQLMultiplicativeExpression::resolveSQLExpression(ScanResultRecord
 		{
 			if(operand->toIntVariable(ctx)->getIntValue(ctx) == 0)
 			{
-				throw (new(ctx) AlinousException(ConstStr::getCNST_STR_1066(), ctx));
+				throw (new(ctx) AlinousException(ConstStr::getCNST_STR_1068(), ctx));
 			}
 			val = val->div(operand, ctx)->toVariantValue(ctx);
 		}
@@ -107,7 +107,7 @@ bool SQLMultiplicativeExpression::hasArrayResult(ThreadContext* ctx) throw()
 }
 ArrayList<VariantValue>* SQLMultiplicativeExpression::resolveSQLExpressionAsArray(ScanResultRecord* record, ScriptMachine* machine, bool debug, ThreadContext* ctx)
 {
-	throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1036(), ctx));
+	throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1038(), ctx));
 }
 int SQLMultiplicativeExpression::getExpressionType(ThreadContext* ctx) throw() 
 {

@@ -40,6 +40,10 @@ void CreateTableStatement::__releaseRegerences(bool prepare, ThreadContext* ctx)
 	primaryKeys = nullptr;
 	__e_obj1.add(this->region, this);
 	region = nullptr;
+	__e_obj1.add(this->shardKeys, this);
+	shardKeys = nullptr;
+	__e_obj1.add(this->subShardKeys, this);
+	subShardKeys = nullptr;
 	__e_obj1.add(this->metadata, this);
 	metadata = nullptr;
 	if(!prepare){
@@ -296,6 +300,26 @@ void CreateTableStatement::readData(NetworkBinaryBuffer* buff, ThreadContext* ct
 	{
 		__GC_MV(this, &(this->region), buff->getString(ctx), String);
 	}
+	isnull = buff->getBoolean(ctx);
+	if(!isnull)
+	{
+		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
+		if(el == nullptr || !((dynamic_cast<ShardKeys*>(el) != 0)))
+		{
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1035(), ctx));
+		}
+		__GC_MV(this, &(this->shardKeys), static_cast<ShardKeys*>(el), ShardKeys);
+	}
+	isnull = buff->getBoolean(ctx);
+	if(!isnull)
+	{
+		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
+		if(el == nullptr || !((dynamic_cast<SubShardKeys*>(el) != 0)))
+		{
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1036(), ctx));
+		}
+		__GC_MV(this, &(this->subShardKeys), static_cast<SubShardKeys*>(el), SubShardKeys);
+	}
 }
 void CreateTableStatement::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
 {
@@ -339,6 +363,34 @@ void CreateTableStatement::writeData(NetworkBinaryBuffer* buff, ThreadContext* c
 	{
 		buff->putString(this->region, ctx);
 	}
+	isnull = (this->shardKeys == nullptr);
+	buff->putBoolean(isnull, ctx);
+	if(!isnull)
+	{
+		shardKeys->writeData(buff, ctx);
+	}
+	isnull = (this->subShardKeys == nullptr);
+	buff->putBoolean(isnull, ctx);
+	if(!isnull)
+	{
+		subShardKeys->writeData(buff, ctx);
+	}
+}
+ShardKeys* CreateTableStatement::getShardKeys(ThreadContext* ctx) throw() 
+{
+	return shardKeys;
+}
+void CreateTableStatement::setShardKeys(ShardKeys* shardKeys, ThreadContext* ctx) throw() 
+{
+	__GC_MV(this, &(this->shardKeys), shardKeys, ShardKeys);
+}
+SubShardKeys* CreateTableStatement::getSubShardKeys(ThreadContext* ctx) throw() 
+{
+	return subShardKeys;
+}
+void CreateTableStatement::setSubShardKeys(SubShardKeys* subShardKeys, ThreadContext* ctx) throw() 
+{
+	__GC_MV(this, &(this->subShardKeys), subShardKeys, SubShardKeys);
 }
 }}}
 

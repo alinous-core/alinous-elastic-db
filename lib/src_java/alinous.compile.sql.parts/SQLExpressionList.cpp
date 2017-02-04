@@ -193,7 +193,7 @@ void SQLExpressionList::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
 		if(el == nullptr || !((dynamic_cast<ISQLExpression*>(el) != 0)))
 		{
-			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1044(), ctx));
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1046(), ctx));
 		}
 		this->list->add(static_cast<ISQLExpression*>(el), ctx);
 	}
@@ -240,7 +240,7 @@ void SQLExpressionList::fromFileEntry(FileStorageEntryFetcher* fetcher, ThreadCo
 		IExpression* el = IExpressionFactory::fromFetcher(fetcher, ctx);
 		if(el == nullptr || !((dynamic_cast<ISQLExpression*>(el) != 0)))
 		{
-			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1044(), ctx));
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1046(), ctx));
 		}
 		this->list->add(static_cast<ISQLExpression*>(el), ctx);
 	}

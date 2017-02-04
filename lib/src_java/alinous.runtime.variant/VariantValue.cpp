@@ -28,8 +28,8 @@ bool VariantValue::__init_static_variables(){
 	ThreadContext* ctx = ThreadContext::newThreadContext();
 	{
 		GCNotifier __refobj1(ctx, __FILEW__, __LINE__, L"VariantValue", L"__init_static_variables");
-		__GC_MV(nullptr, &(TAG_NAME), ConstStr::getCNST_STR_1227(), String);
-		__GC_MV(nullptr, &(ATTR_VTYPE), ConstStr::getCNST_STR_1228(), String);
+		__GC_MV(nullptr, &(TAG_NAME), ConstStr::getCNST_STR_1229(), String);
+		__GC_MV(nullptr, &(ATTR_VTYPE), ConstStr::getCNST_STR_1230(), String);
 	}
 	ctx->localGC();
 	delete ctx;
@@ -448,7 +448,7 @@ IAlinousVariable* VariantValue::minus(VariantValue* variant, ThreadContext* ctx)
 	}
 	switch(this->getVtype(ctx)) {
 	case VariantValue::TYPE_STRING:
-		throw (new(ctx) VariableException(ConstStr::getCNST_STR_1217(), ctx));
+		throw (new(ctx) VariableException(ConstStr::getCNST_STR_1219(), ctx));
 	case VariantValue::TYPE_LONG:
 		lresult = getLong(ctx) - variant->getLong(ctx);
 		setLong(lresult, ctx);
@@ -515,7 +515,7 @@ IAlinousVariable* VariantValue::multiply(VariantValue* variant, ThreadContext* c
 	}
 	switch(this->getVtype(ctx)) {
 	case VariantValue::TYPE_STRING:
-		throw (new(ctx) VariableException(ConstStr::getCNST_STR_1218(), ctx));
+		throw (new(ctx) VariableException(ConstStr::getCNST_STR_1220(), ctx));
 	case VariantValue::TYPE_LONG:
 		lresult = getLong(ctx) * variant->getLong(ctx);
 		setLong(lresult, ctx);
@@ -570,7 +570,7 @@ IAlinousVariable* VariantValue::div(VariantValue* variant, ThreadContext* ctx)
 	}
 	switch(this->getVtype(ctx)) {
 	case VariantValue::TYPE_STRING:
-		throw (new(ctx) VariableException(ConstStr::getCNST_STR_1219(), ctx));
+		throw (new(ctx) VariableException(ConstStr::getCNST_STR_1221(), ctx));
 	case VariantValue::TYPE_LONG:
 		lresult = getLong(ctx) / variant->getLong(ctx);
 		setLong(lresult, ctx);
@@ -624,7 +624,7 @@ IAlinousVariable* VariantValue::shiftLeft(VariantValue* variant, ThreadContext* 
 	}
 	switch(this->getVtype(ctx)) {
 	case VariantValue::TYPE_STRING:
-		throw (new(ctx) VariableException(ConstStr::getCNST_STR_1220(), ctx));
+		throw (new(ctx) VariableException(ConstStr::getCNST_STR_1222(), ctx));
 	case VariantValue::TYPE_LONG:
 		lresult = getLong(ctx) << variant->getLong(ctx);
 		setLong(lresult, ctx);
@@ -648,7 +648,7 @@ IAlinousVariable* VariantValue::shiftLeft(VariantValue* variant, ThreadContext* 
 	case VariantValue::TYPE_FLOAT:
 	case VariantValue::TYPE_DOUBLE:
 	case VariantValue::TYPE_BIG_DECIMAL:
-		throw (new(ctx) VariableException(ConstStr::getCNST_STR_1221(), ctx));
+		throw (new(ctx) VariableException(ConstStr::getCNST_STR_1223(), ctx));
 	case VariantValue::TYPE_NULL:
 	default:
 		throw (new(ctx) VariableException(ctx));
@@ -666,7 +666,7 @@ IAlinousVariable* VariantValue::shiftRight(VariantValue* variant, ThreadContext*
 	}
 	switch(this->getVtype(ctx)) {
 	case VariantValue::TYPE_STRING:
-		throw (new(ctx) VariableException(ConstStr::getCNST_STR_1220(), ctx));
+		throw (new(ctx) VariableException(ConstStr::getCNST_STR_1222(), ctx));
 	case VariantValue::TYPE_LONG:
 		lresult = getLong(ctx) >> variant->getLong(ctx);
 		setLong(lresult, ctx);
@@ -690,7 +690,7 @@ IAlinousVariable* VariantValue::shiftRight(VariantValue* variant, ThreadContext*
 	case VariantValue::TYPE_FLOAT:
 	case VariantValue::TYPE_DOUBLE:
 	case VariantValue::TYPE_BIG_DECIMAL:
-		throw (new(ctx) VariableException(ConstStr::getCNST_STR_1221(), ctx));
+		throw (new(ctx) VariableException(ConstStr::getCNST_STR_1223(), ctx));
 	case VariantValue::TYPE_NULL:
 	default:
 		throw (new(ctx) VariableException(ctx));
@@ -708,7 +708,7 @@ IAlinousVariable* VariantValue::shiftRightUnsigned(VariantValue* variant, Thread
 	}
 	switch(this->getVtype(ctx)) {
 	case VariantValue::TYPE_STRING:
-		throw (new(ctx) VariableException(ConstStr::getCNST_STR_1220(), ctx));
+		throw (new(ctx) VariableException(ConstStr::getCNST_STR_1222(), ctx));
 	case VariantValue::TYPE_LONG:
 		lresult = ((unsigned long long)getLong(ctx))>> variant->getLong(ctx);
 		setLong(lresult, ctx);
@@ -732,7 +732,7 @@ IAlinousVariable* VariantValue::shiftRightUnsigned(VariantValue* variant, Thread
 	case VariantValue::TYPE_FLOAT:
 	case VariantValue::TYPE_DOUBLE:
 	case VariantValue::TYPE_BIG_DECIMAL:
-		throw (new(ctx) VariableException(ConstStr::getCNST_STR_1221(), ctx));
+		throw (new(ctx) VariableException(ConstStr::getCNST_STR_1223(), ctx));
 	case VariantValue::TYPE_NULL:
 	default:
 		throw (new(ctx) VariableException(ctx));
@@ -750,7 +750,7 @@ IAlinousVariable* VariantValue::modulo(VariantValue* variant, ThreadContext* ctx
 	}
 	switch(this->getVtype(ctx)) {
 	case VariantValue::TYPE_STRING:
-		throw (new(ctx) VariableException(ConstStr::getCNST_STR_1222(), ctx));
+		throw (new(ctx) VariableException(ConstStr::getCNST_STR_1224(), ctx));
 	case VariantValue::TYPE_LONG:
 		lresult = getLong(ctx) % variant->getLong(ctx);
 		setLong(lresult, ctx);
@@ -774,7 +774,7 @@ IAlinousVariable* VariantValue::modulo(VariantValue* variant, ThreadContext* ctx
 	case VariantValue::TYPE_FLOAT:
 	case VariantValue::TYPE_DOUBLE:
 	case VariantValue::TYPE_BIG_DECIMAL:
-		throw (new(ctx) VariableException(ConstStr::getCNST_STR_1223(), ctx));
+		throw (new(ctx) VariableException(ConstStr::getCNST_STR_1225(), ctx));
 	case VariantValue::TYPE_NULL:
 	default:
 		throw (new(ctx) VariableException(ctx));
@@ -829,7 +829,7 @@ IAlinousVariable* VariantValue::bitOr(VariantValue* variant, ThreadContext* ctx)
 	}
 	switch(this->getVtype(ctx)) {
 	case VariantValue::TYPE_STRING:
-		throw (new(ctx) VariableException(ConstStr::getCNST_STR_1224(), ctx));
+		throw (new(ctx) VariableException(ConstStr::getCNST_STR_1226(), ctx));
 	case VariantValue::TYPE_LONG:
 		lresult = getLong(ctx) | variant->getLong(ctx);
 		setLong(lresult, ctx);
@@ -853,7 +853,7 @@ IAlinousVariable* VariantValue::bitOr(VariantValue* variant, ThreadContext* ctx)
 	case VariantValue::TYPE_FLOAT:
 	case VariantValue::TYPE_DOUBLE:
 	case VariantValue::TYPE_BIG_DECIMAL:
-		throw (new(ctx) VariableException(ConstStr::getCNST_STR_1225(), ctx));
+		throw (new(ctx) VariableException(ConstStr::getCNST_STR_1227(), ctx));
 	case VariantValue::TYPE_NULL:
 	default:
 		throw (new(ctx) VariableException(ctx));
@@ -871,7 +871,7 @@ IAlinousVariable* VariantValue::bitAnd(VariantValue* variant, ThreadContext* ctx
 	}
 	switch(this->getVtype(ctx)) {
 	case VariantValue::TYPE_STRING:
-		throw (new(ctx) VariableException(ConstStr::getCNST_STR_1224(), ctx));
+		throw (new(ctx) VariableException(ConstStr::getCNST_STR_1226(), ctx));
 	case VariantValue::TYPE_LONG:
 		lresult = getLong(ctx) & variant->getLong(ctx);
 		setLong(lresult, ctx);
@@ -895,7 +895,7 @@ IAlinousVariable* VariantValue::bitAnd(VariantValue* variant, ThreadContext* ctx
 	case VariantValue::TYPE_FLOAT:
 	case VariantValue::TYPE_DOUBLE:
 	case VariantValue::TYPE_BIG_DECIMAL:
-		throw (new(ctx) VariableException(ConstStr::getCNST_STR_1225(), ctx));
+		throw (new(ctx) VariableException(ConstStr::getCNST_STR_1227(), ctx));
 	case VariantValue::TYPE_NULL:
 	default:
 		throw (new(ctx) VariableException(ctx));
@@ -913,7 +913,7 @@ IAlinousVariable* VariantValue::bitExor(VariantValue* variant, ThreadContext* ct
 	}
 	switch(this->getVtype(ctx)) {
 	case VariantValue::TYPE_STRING:
-		throw (new(ctx) VariableException(ConstStr::getCNST_STR_1224(), ctx));
+		throw (new(ctx) VariableException(ConstStr::getCNST_STR_1226(), ctx));
 	case VariantValue::TYPE_LONG:
 		lresult = getLong(ctx) ^ variant->getLong(ctx);
 		setLong(lresult, ctx);
@@ -937,7 +937,7 @@ IAlinousVariable* VariantValue::bitExor(VariantValue* variant, ThreadContext* ct
 	case VariantValue::TYPE_FLOAT:
 	case VariantValue::TYPE_DOUBLE:
 	case VariantValue::TYPE_BIG_DECIMAL:
-		throw (new(ctx) VariableException(ConstStr::getCNST_STR_1225(), ctx));
+		throw (new(ctx) VariableException(ConstStr::getCNST_STR_1227(), ctx));
 	case VariantValue::TYPE_NULL:
 	default:
 		throw (new(ctx) VariableException(ctx));
@@ -955,7 +955,7 @@ IAlinousVariable* VariantValue::bitReverse(ThreadContext* ctx)
 	}
 	switch(this->getVtype(ctx)) {
 	case VariantValue::TYPE_STRING:
-		throw (new(ctx) VariableException(ConstStr::getCNST_STR_1226(), ctx));
+		throw (new(ctx) VariableException(ConstStr::getCNST_STR_1228(), ctx));
 	case VariantValue::TYPE_LONG:
 		lresult = getLong(ctx);
 		lresult = ~lresult;
@@ -1012,7 +1012,7 @@ IAlinousVariable* VariantValue::add(DomVariable* variable, ThreadContext* ctx)
 }
 IAlinousVariable* VariantValue::add(BoolVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1129(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1131(), ctx));
 }
 IAlinousVariable* VariantValue::add(ByteVariable* variable, ThreadContext* ctx)
 {
@@ -1052,7 +1052,7 @@ IAlinousVariable* VariantValue::minus(DomVariable* variable, ThreadContext* ctx)
 }
 IAlinousVariable* VariantValue::minus(BoolVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1129(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1131(), ctx));
 }
 IAlinousVariable* VariantValue::minus(ByteVariable* variable, ThreadContext* ctx)
 {
@@ -1080,7 +1080,7 @@ IAlinousVariable* VariantValue::minus(ShortVariable* variable, ThreadContext* ct
 }
 IAlinousVariable* VariantValue::minus(StringVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1130(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1132(), ctx));
 }
 IAlinousVariable* VariantValue::multiply(DomVariable* variable, ThreadContext* ctx)
 {
@@ -1088,7 +1088,7 @@ IAlinousVariable* VariantValue::multiply(DomVariable* variable, ThreadContext* c
 }
 IAlinousVariable* VariantValue::multiply(BoolVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1129(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1131(), ctx));
 }
 IAlinousVariable* VariantValue::multiply(ByteVariable* variable, ThreadContext* ctx)
 {
@@ -1116,7 +1116,7 @@ IAlinousVariable* VariantValue::multiply(ShortVariable* variable, ThreadContext*
 }
 IAlinousVariable* VariantValue::multiply(StringVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1130(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1132(), ctx));
 }
 IAlinousVariable* VariantValue::div(DomVariable* variable, ThreadContext* ctx)
 {
@@ -1124,7 +1124,7 @@ IAlinousVariable* VariantValue::div(DomVariable* variable, ThreadContext* ctx)
 }
 IAlinousVariable* VariantValue::div(BoolVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1129(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1131(), ctx));
 }
 IAlinousVariable* VariantValue::div(ByteVariable* variable, ThreadContext* ctx)
 {
@@ -1152,7 +1152,7 @@ IAlinousVariable* VariantValue::div(ShortVariable* variable, ThreadContext* ctx)
 }
 IAlinousVariable* VariantValue::div(StringVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1130(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1132(), ctx));
 }
 IAlinousVariable* VariantValue::multiply(IAlinousVariable* variable, ThreadContext* ctx)
 {
@@ -1281,7 +1281,7 @@ IAlinousVariable* VariantValue::modulo(DomVariable* variable, ThreadContext* ctx
 }
 IAlinousVariable* VariantValue::modulo(BoolVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1129(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1131(), ctx));
 }
 IAlinousVariable* VariantValue::modulo(ByteVariable* variable, ThreadContext* ctx)
 {
@@ -1452,7 +1452,7 @@ IAlinousVariable* VariantValue::bitOr(DomVariable* variable, ThreadContext* ctx)
 }
 IAlinousVariable* VariantValue::bitOr(BoolVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1129(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1131(), ctx));
 }
 IAlinousVariable* VariantValue::bitOr(ByteVariable* variable, ThreadContext* ctx)
 {
@@ -1496,7 +1496,7 @@ IAlinousVariable* VariantValue::bitAnd(DomVariable* variable, ThreadContext* ctx
 }
 IAlinousVariable* VariantValue::bitAnd(BoolVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1129(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1131(), ctx));
 }
 IAlinousVariable* VariantValue::bitAnd(ByteVariable* variable, ThreadContext* ctx)
 {
@@ -1540,7 +1540,7 @@ IAlinousVariable* VariantValue::bitExor(DomVariable* variable, ThreadContext* ct
 }
 IAlinousVariable* VariantValue::bitExor(BoolVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1129(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1131(), ctx));
 }
 IAlinousVariable* VariantValue::bitExor(ByteVariable* variable, ThreadContext* ctx)
 {
@@ -1632,7 +1632,7 @@ IAlinousVariable* VariantValue::shiftRightUnsigned(DomVariable* variable, Thread
 }
 IAlinousVariable* VariantValue::shiftRightUnsigned(BoolVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1129(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1131(), ctx));
 }
 IAlinousVariable* VariantValue::shiftRightUnsigned(ByteVariable* variable, ThreadContext* ctx)
 {
@@ -1812,7 +1812,7 @@ IAlinousVariable* VariantValue::bitExor(TimestampVariable* variable, ThreadConte
 }
 IAlinousVariable* VariantValue::substitute(TypedVariableArray* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1124(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1126(), ctx));
 }
 void VariantValue::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 {

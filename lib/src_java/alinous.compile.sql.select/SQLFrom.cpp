@@ -142,7 +142,7 @@ bool SQLFrom::hasArrayResult(ThreadContext* ctx) throw()
 }
 ArrayList<VariantValue>* SQLFrom::resolveSQLExpressionAsArray(ScanResultRecord* record, ScriptMachine* machine, bool debug, ThreadContext* ctx)
 {
-	throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1036(), ctx));
+	throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1038(), ctx));
 }
 bool SQLFrom::isSQLExp(ThreadContext* ctx) throw() 
 {
@@ -167,7 +167,7 @@ void SQLFrom::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
 		if(el == nullptr || !((dynamic_cast<IJoin*>(el) != 0)))
 		{
-			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1081(), ctx));
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1083(), ctx));
 		}
 		__GC_MV(this, &(this->join), static_cast<IJoin*>(el), IJoin);
 	}
@@ -184,15 +184,15 @@ void SQLFrom::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw()
 }
 int SQLFrom::fileSize(ThreadContext* ctx)
 {
-	throw (new(ctx) AlinousNotSupportedException(ConstStr::getCNST_STR_1082(), ctx));
+	throw (new(ctx) AlinousNotSupportedException(ConstStr::getCNST_STR_1084(), ctx));
 }
 void SQLFrom::toFileEntry(FileStorageEntryBuilder* builder, ThreadContext* ctx)
 {
-	throw (new(ctx) AlinousNotSupportedException(ConstStr::getCNST_STR_1082(), ctx));
+	throw (new(ctx) AlinousNotSupportedException(ConstStr::getCNST_STR_1084(), ctx));
 }
 void SQLFrom::fromFileEntry(FileStorageEntryFetcher* fetcher, ThreadContext* ctx)
 {
-	throw (new(ctx) AlinousNotSupportedException(ConstStr::getCNST_STR_1082(), ctx));
+	throw (new(ctx) AlinousNotSupportedException(ConstStr::getCNST_STR_1084(), ctx));
 }
 }}}}
 

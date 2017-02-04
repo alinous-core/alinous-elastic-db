@@ -57,7 +57,7 @@ void AlinousDatabaseHandler::initDriver(AlinousCore* core, AlinousDbInstanceInfo
 	int maxConnection = this->instanceConfig->getMaxConnections(ctx);
 	if(trxTmpDir == nullptr)
 	{
-		trxTmpDir = dataDir->clone(ctx)->append(ConstStr::getCNST_STR_1104(), ctx);
+		trxTmpDir = dataDir->clone(ctx)->append(ConstStr::getCNST_STR_1106(), ctx);
 	}
 	__GC_MV(this, &(this->database), (new(ctx) AlinousDatabase(ctx)), AlinousDatabase);
 	this->database->construct(core, dataDir, trxTmpDir, maxConnection, ctx);

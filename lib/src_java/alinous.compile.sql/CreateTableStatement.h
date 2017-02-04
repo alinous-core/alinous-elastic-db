@@ -57,6 +57,12 @@ class IAlinousElement;}}
 namespace alinous {namespace runtime {namespace dom {
 class VariableException;}}}
 
+namespace alinous {namespace compile {namespace sql {namespace ddl {
+class ShardKeys;}}}}
+
+namespace alinous {namespace compile {namespace sql {namespace ddl {
+class SubShardKeys;}}}}
+
 namespace alinous {namespace compile {namespace sql {
 class AbstractSQLStatement;}}}
 
@@ -92,6 +98,8 @@ using ::alinous::compile::sql::analyze::SQLAnalyseContext;
 using ::alinous::compile::sql::ddl::CheckDefinition;
 using ::alinous::compile::sql::ddl::DdlColumnDescriptor;
 using ::alinous::compile::sql::ddl::PrimaryKeys;
+using ::alinous::compile::sql::ddl::ShardKeys;
+using ::alinous::compile::sql::ddl::SubShardKeys;
 using ::alinous::compile::sql::ddl::Unique;
 using ::alinous::compile::sql::select::join::IJoinTarget;
 using ::alinous::compile::sql::select::join::TableJoinTarget;
@@ -111,7 +119,7 @@ class CreateTableStatement final : public AbstractSQLStatement {
 public:
 	CreateTableStatement(const CreateTableStatement& base) = default;
 public:
-	CreateTableStatement(ThreadContext* ctx) throw()  : IObject(ctx), AbstractSQLStatement(ctx), table(nullptr), columns(GCUtils<ArrayList<DdlColumnDescriptor> >::ins(this, (new(ctx) ArrayList<DdlColumnDescriptor>(ctx)), ctx, __FILEW__, __LINE__, L"")), uniques(GCUtils<ArrayList<Unique> >::ins(this, (new(ctx) ArrayList<Unique>(ctx)), ctx, __FILEW__, __LINE__, L"")), checks(GCUtils<ArrayList<CheckDefinition> >::ins(this, (new(ctx) ArrayList<CheckDefinition>(ctx)), ctx, __FILEW__, __LINE__, L"")), primaryKeys(nullptr), region(nullptr), metadata(nullptr)
+	CreateTableStatement(ThreadContext* ctx) throw()  : IObject(ctx), AbstractSQLStatement(ctx), table(nullptr), columns(GCUtils<ArrayList<DdlColumnDescriptor> >::ins(this, (new(ctx) ArrayList<DdlColumnDescriptor>(ctx)), ctx, __FILEW__, __LINE__, L"")), uniques(GCUtils<ArrayList<Unique> >::ins(this, (new(ctx) ArrayList<Unique>(ctx)), ctx, __FILEW__, __LINE__, L"")), checks(GCUtils<ArrayList<CheckDefinition> >::ins(this, (new(ctx) ArrayList<CheckDefinition>(ctx)), ctx, __FILEW__, __LINE__, L"")), primaryKeys(nullptr), region(nullptr), shardKeys(nullptr), subShardKeys(nullptr), metadata(nullptr)
 	{
 	}
 	void __construct_impl(ThreadContext* ctx) throw() 
@@ -126,6 +134,8 @@ private:
 	ArrayList<CheckDefinition>* checks;
 	PrimaryKeys* primaryKeys;
 	String* region;
+	ShardKeys* shardKeys;
+	SubShardKeys* subShardKeys;
 	TableMetadata* metadata;
 public:
 	TableSchema* createMetadata(ScriptMachine* machine, bool debug, ThreadContext* ctx);
@@ -149,6 +159,10 @@ public:
 	void analyzeSQL(SQLAnalyseContext* context, bool debug, ThreadContext* ctx) throw()  final;
 	void readData(NetworkBinaryBuffer* buff, ThreadContext* ctx) final;
 	void writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw()  final;
+	ShardKeys* getShardKeys(ThreadContext* ctx) throw() ;
+	void setShardKeys(ShardKeys* shardKeys, ThreadContext* ctx) throw() ;
+	SubShardKeys* getSubShardKeys(ThreadContext* ctx) throw() ;
+	void setSubShardKeys(SubShardKeys* subShardKeys, ThreadContext* ctx) throw() ;
 public:
 	static bool __init_done;
 	static bool __init_static_variables();

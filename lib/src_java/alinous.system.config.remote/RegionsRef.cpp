@@ -46,7 +46,7 @@ RegionsRef* RegionsRef::parseInstance(MatchCandidate* candidate, DomDocument* do
 {
 	RegionsRef* refs = (new(ctx) RegionsRef(ctx));
 	DomNode* selfDom = candidate->getCandidateDom(ctx);
-	MatchCandidatesCollection* result = matcher->match(document, selfDom, ConstStr::getCNST_STR_1292(), ctx);
+	MatchCandidatesCollection* result = matcher->match(document, selfDom, ConstStr::getCNST_STR_1294(), ctx);
 	ArrayList<MatchCandidate>* list = result->getCandidatesList(ctx);
 	Iterator<MatchCandidate>* it = list->iterator(ctx);
 	while(it->hasNext(ctx))
@@ -54,17 +54,17 @@ RegionsRef* RegionsRef::parseInstance(MatchCandidate* candidate, DomDocument* do
 		MatchCandidate* cnd = it->next(ctx);
 		DomNode* dom = cnd->getCandidateDom(ctx);
 		RegionRef* ref = (new(ctx) RegionRef(ctx));
-		IVariableValue* attr = dom->getAttributeValue(ConstStr::getCNST_STR_1116(), ctx);
+		IVariableValue* attr = dom->getAttributeValue(ConstStr::getCNST_STR_1118(), ctx);
 		if(attr == nullptr)
 		{
-			throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_1293(), ctx));
+			throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_1295(), ctx));
 		}
 		String* name = attr->toString(ctx)->trim(ctx);
 		ref->setName(name, ctx);
-		attr = dom->getAttributeValue(ConstStr::getCNST_STR_1262(), ctx);
+		attr = dom->getAttributeValue(ConstStr::getCNST_STR_1264(), ctx);
 		if(attr == nullptr)
 		{
-			throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_1294(), ctx));
+			throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_1296(), ctx));
 		}
 		ref->setUrl(attr->toString(ctx)->trim(ctx), ctx);
 		refs->addRegionRef(ref, ctx);

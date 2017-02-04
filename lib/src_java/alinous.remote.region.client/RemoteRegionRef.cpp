@@ -83,13 +83,13 @@ void RemoteRegionRef::syncSchemes(ThreadContext* ctx)
 			AbstractNodeRegionCommand* retcmd = cmd->sendCommand(socket, ctx);
 			if(retcmd->getType(ctx) != AbstractNodeRegionCommand::TYPE_GET_SCHEMA_FROM_REGION)
 			{
-				throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3577(), ctx));
+				throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3581(), ctx));
 			}
 			cmd = static_cast<GetSchemaFromRegionCommand*>(retcmd);
 		}
 		catch(AlinousException* e)
 		{
-			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3578(), e, ctx));
+			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3582(), e, ctx));
 		}
 	}
 	{
@@ -137,21 +137,21 @@ void RemoteRegionRef::createSchema(String* schemaName, ThreadContext* ctx)
 			AbstractNodeRegionCommand* retcmd = cmd->sendCommand(socket, ctx);
 			if(retcmd->getType(ctx) != AbstractNodeRegionCommand::TYPE_CREATE_SCHEMA)
 			{
-				throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3577(), ctx));
+				throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3581(), ctx));
 			}
 			syncSchemes(ctx);
 		}
 		catch(UnknownHostException* e)
 		{
-			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3579(), e, ctx));
+			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3583(), e, ctx));
 		}
 		catch(IOException* e)
 		{
-			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3579(), e, ctx));
+			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3583(), e, ctx));
 		}
 		catch(AlinousException* e)
 		{
-			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3579(), e, ctx));
+			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3583(), e, ctx));
 		}
 	}
 }
@@ -173,7 +173,7 @@ void RemoteRegionRef::createTable(String* schemaName, TableMetadata* tblMeta, Th
 			AbstractNodeRegionCommand* retcmd = cmd->sendCommand(socket, ctx);
 			if(retcmd->getType(ctx) != AbstractNodeRegionCommand::TYPE_CREATE_TABLE)
 			{
-				throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3580(), ctx));
+				throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3584(), ctx));
 			}
 			syncSchemes(ctx);
 		}
@@ -199,7 +199,7 @@ void RemoteRegionRef::initRegionServerAcess(ThreadContext* ctx)
 	IArrayObject<String>* segs = this->url->split(ConstStr::getCNST_STR_381(), ctx);
 	if(segs->length != 2)
 	{
-		throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3560(), ctx));
+		throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3564(), ctx));
 	}
 	String* host = segs->get(0);
 	int port = 0;
@@ -210,7 +210,7 @@ void RemoteRegionRef::initRegionServerAcess(ThreadContext* ctx)
 		}
 		catch(NumberFormatException* e)
 		{
-			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3561(), e, ctx));
+			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3565(), e, ctx));
 		}
 	}
 	__GC_MV(this, &(this->info), (new(ctx) RegionConnectionInfo(host, port, ctx)), RegionConnectionInfo);

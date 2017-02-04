@@ -445,6 +445,8 @@
 #include "alinous.compile.sql.ddl/ColumnTypeDescriptor.h"
 #include "alinous.compile.sql.ddl/DdlColumnDescriptor.h"
 #include "alinous.compile.sql.ddl/PrimaryKeys.h"
+#include "alinous.compile.sql.ddl/ShardKeys.h"
+#include "alinous.compile.sql.ddl/SubShardKeys.h"
 #include "alinous.compile.sql.ddl/Unique.h"
 #include "alinous.db.table/IOidPublisher.h"
 #include "alinous.db/ITableSchema.h"
@@ -1134,7 +1136,9 @@ inline static void __cleanUpStatics(alinous::ThreadContext* ctx){
 	alinous::compile::sql::ddl::PrimaryKeys::__cleanUp(ctx);
 	alinous::compile::sql::ddl::Unique::__cleanUp(ctx);
 	alinous::compile::sql::ddl::ColumnTypeDescriptor::__cleanUp(ctx);
+	alinous::compile::sql::ddl::ShardKeys::__cleanUp(ctx);
 	alinous::compile::sql::ddl::CheckDefinition::__cleanUp(ctx);
+	alinous::compile::sql::ddl::SubShardKeys::__cleanUp(ctx);
 	alinous::compile::sql::ddl::DdlColumnDescriptor::__cleanUp(ctx);
 	alinous::compile::sql::expression::SQLAdditiveExpression::__cleanUp(ctx);
 	alinous::compile::sql::expression::SQLExpressionStream::__cleanUp(ctx);

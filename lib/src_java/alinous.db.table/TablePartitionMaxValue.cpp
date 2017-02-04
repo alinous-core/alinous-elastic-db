@@ -30,63 +30,154 @@ void TablePartitionMaxValue::__releaseRegerences(bool prepare, ThreadContext* ct
 	ObjectEraser __e_obj1(ctx, __FILEW__, __LINE__, L"TablePartitionMaxValue", L"~TablePartitionMaxValue");
 	__e_obj1.add(this->values, this);
 	values = nullptr;
+	__e_obj1.add(this->subvalues, this);
+	subvalues = nullptr;
 	if(!prepare){
 		return;
 	}
 }
 void TablePartitionMaxValue::addValue(VariantValue* value, ThreadContext* ctx) throw() 
 {
+	if(this->values == nullptr)
+	{
+		GCUtils<List<VariantValue> >::mv(this, &(this->values), (new(ctx) ArrayList<VariantValue>(ctx)), ctx);
+	}
 	this->values->add(value, ctx);
+}
+void TablePartitionMaxValue::addSubValue(VariantValue* value, ThreadContext* ctx) throw() 
+{
+	if(this->subvalues == nullptr)
+	{
+		GCUtils<List<VariantValue> >::mv(this, &(this->subvalues), (new(ctx) ArrayList<VariantValue>(ctx)), ctx);
+	}
+	this->subvalues->add(value, ctx);
 }
 int TablePartitionMaxValue::fileSize(ThreadContext* ctx)
 {
-	int total = 4;
-	int maxLoop = this->values->size(ctx);
-	for(int i = 0; i != maxLoop; ++i)
+	int total = 0;
+	bool isnull = (this->values == nullptr);
+	total += 1;
+	if(!isnull)
 	{
-		VariantValue* value = this->values->get(i, ctx);
-		total += value->bufferSize(ctx);
+		int maxLoop = this->values->size(ctx);
+		total += 4;
+		for(int i = 0; i != maxLoop; ++i)
+		{
+			VariantValue* value = this->values->get(i, ctx);
+			total += value->bufferSize(ctx);
+		}
+	}
+	isnull = (this->subvalues == nullptr);
+	total += 1;
+	if(!isnull)
+	{
+		int maxLoop = this->subvalues->size(ctx);
+		total += 4;
+		for(int i = 0; i != maxLoop; ++i)
+		{
+			VariantValue* value = this->subvalues->get(i, ctx);
+			total += value->bufferSize(ctx);
+		}
 	}
 	return total;
 }
 void TablePartitionMaxValue::toFileEntry(FileStorageEntryBuilder* builder, ThreadContext* ctx)
 {
-	int maxLoop = this->values->size(ctx);
-	builder->putInt(maxLoop, ctx);
-	for(int i = 0; i != maxLoop; ++i)
+	bool isnull = (this->values == nullptr);
+	if(!isnull)
 	{
-		VariantValue* value = this->values->get(i, ctx);
-		value->appendToEntry(builder, ctx);
+		int maxLoop = this->values->size(ctx);
+		builder->putInt(maxLoop, ctx);
+		for(int i = 0; i != maxLoop; ++i)
+		{
+			VariantValue* value = this->values->get(i, ctx);
+			value->appendToEntry(builder, ctx);
+		}
+	}
+	isnull = (this->subvalues == nullptr);
+	if(!isnull)
+	{
+		int maxLoop = this->subvalues->size(ctx);
+		builder->putInt(maxLoop, ctx);
+		for(int i = 0; i != maxLoop; ++i)
+		{
+			VariantValue* value = this->subvalues->get(i, ctx);
+			value->appendToEntry(builder, ctx);
+		}
 	}
 }
 void TablePartitionMaxValue::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 {
-	int maxLoop = buff->getInt(ctx);
-	for(int i = 0; i != maxLoop; ++i)
+	bool isnull = (this->values == nullptr);
+	if(!isnull)
 	{
-		VariantValue* value = (new(ctx) VariantValue(ctx));
-		value->readData(buff, ctx);
-		addValue(value, ctx);
+		int maxLoop = buff->getInt(ctx);
+		for(int i = 0; i != maxLoop; ++i)
+		{
+			VariantValue* value = (new(ctx) VariantValue(ctx));
+			value->readData(buff, ctx);
+			addValue(value, ctx);
+		}
+	}
+	isnull = (this->values == nullptr);
+	if(!isnull)
+	{
+		int maxLoop = buff->getInt(ctx);
+		for(int i = 0; i != maxLoop; ++i)
+		{
+			VariantValue* value = (new(ctx) VariantValue(ctx));
+			value->readData(buff, ctx);
+			addSubValue(value, ctx);
+		}
 	}
 }
 void TablePartitionMaxValue::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
 {
-	int maxLoop = this->values->size(ctx);
-	buff->putInt(maxLoop, ctx);
-	for(int i = 0; i != maxLoop; ++i)
+	bool isnull = buff->getBoolean(ctx);
+	if(!isnull)
 	{
-		VariantValue* value = this->values->get(i, ctx);
-		value->writeData(buff, ctx);
+		int maxLoop = this->values->size(ctx);
+		buff->putInt(maxLoop, ctx);
+		for(int i = 0; i != maxLoop; ++i)
+		{
+			VariantValue* value = this->values->get(i, ctx);
+			value->writeData(buff, ctx);
+		}
+	}
+	isnull = buff->getBoolean(ctx);
+	if(!isnull)
+	{
+		int maxLoop = this->subvalues->size(ctx);
+		buff->putInt(maxLoop, ctx);
+		for(int i = 0; i != maxLoop; ++i)
+		{
+			VariantValue* value = this->subvalues->get(i, ctx);
+			value->writeData(buff, ctx);
+		}
 	}
 }
 TablePartitionMaxValue* TablePartitionMaxValue::loadFromFetcher(FileStorageEntryFetcher* fetcher, ThreadContext* ctx)
 {
 	TablePartitionMaxValue* maxValue = (new(ctx) TablePartitionMaxValue(ctx));
-	int maxLoop = fetcher->fetchInt(ctx);
-	for(int i = 0; i != maxLoop; ++i)
+	bool isnull = fetcher->fetchBoolean(ctx);
+	if(!isnull)
 	{
-		VariantValue* value = VariantValue::valueFromFetcher(fetcher, ctx);
-		maxValue->addValue(value, ctx);
+		int maxLoop = fetcher->fetchInt(ctx);
+		for(int i = 0; i != maxLoop; ++i)
+		{
+			VariantValue* value = VariantValue::valueFromFetcher(fetcher, ctx);
+			maxValue->addValue(value, ctx);
+		}
+	}
+	isnull = fetcher->fetchBoolean(ctx);
+	if(!isnull)
+	{
+		int maxLoop = fetcher->fetchInt(ctx);
+		for(int i = 0; i != maxLoop; ++i)
+		{
+			VariantValue* value = VariantValue::valueFromFetcher(fetcher, ctx);
+			maxValue->addSubValue(value, ctx);
+		}
 	}
 	return maxValue;
 }

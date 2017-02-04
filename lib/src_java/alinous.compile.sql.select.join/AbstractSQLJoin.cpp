@@ -251,7 +251,7 @@ void AbstractSQLJoin::__readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
 		if(el == nullptr || !((dynamic_cast<IJoin*>(el) != 0)))
 		{
-			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1081(), ctx));
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1083(), ctx));
 		}
 		__GC_MV(this, &(this->left), static_cast<IJoin*>(el), IJoin);
 	}
@@ -261,7 +261,7 @@ void AbstractSQLJoin::__readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
 		if(el == nullptr || !((dynamic_cast<IJoin*>(el) != 0)))
 		{
-			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1081(), ctx));
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1083(), ctx));
 		}
 		__GC_MV(this, &(this->right), static_cast<IJoin*>(el), IJoin);
 	}
@@ -271,7 +271,7 @@ void AbstractSQLJoin::__readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
 		if(el == nullptr || !((dynamic_cast<SQLJoinCondition*>(el) != 0)))
 		{
-			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1090(), ctx));
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1092(), ctx));
 		}
 		__GC_MV(this, &(this->condition), static_cast<SQLJoinCondition*>(el), SQLJoinCondition);
 	}
@@ -326,7 +326,7 @@ ScannedResultIndexScanner* AbstractSQLJoin::toResultScanner(DbTransaction* trx, 
 					}
 					catch(Throwable* e)
 					{
-						throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1088(), ctx));
+						throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1090(), ctx));
 					}
 				}
 			}
@@ -376,7 +376,7 @@ ITableTargetScanner* AbstractSQLJoin::getJoinStrategyScanner(DbTransaction* trx,
 		rightScanner = this->right->getScanner(trx, machine, nullptr, debug, ctx);
 		return (new(ctx) ReverseIndexScanner(trx, leftScanner, rightScanner, left->getScanTableMetadata(ctx), right->getScanTableMetadata(ctx), inner, exp, this->condition, machine, ctx));
 	}
-	throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1089(), ctx));
+	throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1091(), ctx));
 }
 }}}}}
 

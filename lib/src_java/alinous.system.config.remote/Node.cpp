@@ -81,10 +81,10 @@ void Node::setMonitorRef(MonitorRef* monitorRef, ThreadContext* ctx) throw()
 Node* Node::parseInstance(DomNode* dom, DomDocument* document, Matcher* matcher, String* alinousHome, ThreadContext* ctx)
 {
 	Node* node = (new(ctx) Node(ctx));
-	IVariableValue* attr = dom->getAttributeValue(ConstStr::getCNST_STR_1260(), ctx);
+	IVariableValue* attr = dom->getAttributeValue(ConstStr::getCNST_STR_1262(), ctx);
 	if(attr == nullptr)
 	{
-		throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_1265(), ctx));
+		throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_1267(), ctx));
 	}
 	{
 		try
@@ -94,18 +94,18 @@ Node* Node::parseInstance(DomNode* dom, DomDocument* document, Matcher* matcher,
 		}
 		catch(Throwable* e)
 		{
-			throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_1266(), ctx));
+			throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_1268(), ctx));
 		}
 	}
-	attr = dom->getAttributeValue(ConstStr::getCNST_STR_1267(), ctx);
+	attr = dom->getAttributeValue(ConstStr::getCNST_STR_1269(), ctx);
 	if(attr == nullptr)
 	{
-		throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_1268(), ctx));
+		throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_1270(), ctx));
 	}
 	String* dir = attr->toString(ctx)->trim(ctx);
 	dir = ConfigPathUtils::getAbsDirPath(alinousHome, dir, ctx);
 	node->setDataDir(dir, ctx);
-	MatchCandidatesCollection* result = matcher->match(document, dom, ConstStr::getCNST_STR_1269(), ctx);
+	MatchCandidatesCollection* result = matcher->match(document, dom, ConstStr::getCNST_STR_1271(), ctx);
 	ArrayList<MatchCandidate>* list = result->getCandidatesList(ctx);
 	if(!list->isEmpty(ctx))
 	{
@@ -114,15 +114,15 @@ Node* Node::parseInstance(DomNode* dom, DomDocument* document, Matcher* matcher,
 		Tables* tables = Tables::parseInstance(tablesdom, document, matcher, ctx);
 		node->setTables(tables, ctx);
 	}
-	result = matcher->match(document, dom, ConstStr::getCNST_STR_1259(), ctx);
+	result = matcher->match(document, dom, ConstStr::getCNST_STR_1261(), ctx);
 	list = result->getCandidatesList(ctx);
 	if(list->isEmpty(ctx))
 	{
-		throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_1270(), ctx));
+		throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_1272(), ctx));
 	}
 	if(list->size(ctx) != 1)
 	{
-		throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_1271(), ctx));
+		throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_1273(), ctx));
 	}
 	MatchCandidate* candidate = list->get(0, ctx);
 	__GC_MV(node, &(node->monitorRef), MonitorRef::parseInstance(candidate, document, matcher, ctx), MonitorRef);

@@ -124,7 +124,7 @@ bool SQLColumnIdentifier::analyseSQL(SQLAnalyseContext* context, bool leftValue,
 		table = SQLAnalyseContext::findTable(context, schema, column, ctx);
 		if(table == nullptr)
 		{
-			throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1042()->clone(ctx)->append(this->id->toString(ctx), ctx), ctx));
+			throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1044()->clone(ctx)->append(this->id->toString(ctx), ctx), ctx));
 		}
 		break ;
 	case 2:
@@ -138,13 +138,13 @@ bool SQLColumnIdentifier::analyseSQL(SQLAnalyseContext* context, bool leftValue,
 		column = segments->get(2, ctx);
 		break ;
 	default:
-		throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1042()->clone(ctx)->append(this->id->toString(ctx), ctx), ctx));
+		throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1044()->clone(ctx)->append(this->id->toString(ctx), ctx), ctx));
 		break;
 	}
 	IDatabaseTable* dataStore = context->getDatabase(ctx)->getTable(schema, table, ctx);
 	if(dataStore == nullptr)
 	{
-		throw (new(ctx) DatabaseException(schema->clone(ctx)->append(ConstStr::getCNST_STR_950(), ctx)->append(table, ctx)->append(ConstStr::getCNST_STR_1043(), ctx), ctx));
+		throw (new(ctx) DatabaseException(schema->clone(ctx)->append(ConstStr::getCNST_STR_950(), ctx)->append(table, ctx)->append(ConstStr::getCNST_STR_1045(), ctx), ctx));
 	}
 	TableAndSchema* tableSc = (new(ctx) TableAndSchema(schema, table, ctx));
 	ScanTableIdentifier* tableId = (new(ctx) ScanTableIdentifier(tableSc, this->asName, dataStore->getColumnCount(ctx), ctx));
@@ -199,7 +199,7 @@ bool SQLColumnIdentifier::hasArrayResult(ThreadContext* ctx) throw()
 }
 ArrayList<VariantValue>* SQLColumnIdentifier::resolveSQLExpressionAsArray(ScanResultRecord* record, ScriptMachine* machine, bool debug, ThreadContext* ctx)
 {
-	throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1036(), ctx));
+	throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1038(), ctx));
 }
 bool SQLColumnIdentifier::isSQLExp(ThreadContext* ctx) throw() 
 {

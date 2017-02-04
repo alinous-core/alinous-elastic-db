@@ -384,6 +384,12 @@ class VirtualTable;}}}
 namespace alinous {namespace compile {namespace sql {namespace select {namespace join {
 class LeftJoin;}}}}}
 
+namespace alinous {namespace compile {namespace sql {namespace ddl {
+class ShardKeys;}}}}
+
+namespace alinous {namespace compile {namespace sql {namespace ddl {
+class SubShardKeys;}}}}
+
 namespace alinous {namespace remote {namespace socket {
 class ICommandData;}}}
 
@@ -467,6 +473,8 @@ using ::alinous::compile::sql::ddl::CheckDefinition;
 using ::alinous::compile::sql::ddl::ColumnTypeDescriptor;
 using ::alinous::compile::sql::ddl::DdlColumnDescriptor;
 using ::alinous::compile::sql::ddl::PrimaryKeys;
+using ::alinous::compile::sql::ddl::ShardKeys;
+using ::alinous::compile::sql::ddl::SubShardKeys;
 using ::alinous::compile::sql::ddl::Unique;
 using ::alinous::compile::sql::expression::SQLAdditiveExpression;
 using ::alinous::compile::sql::expression::SQLColumnIdentifier;

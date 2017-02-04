@@ -151,6 +151,8 @@ constexpr const int ICommandData::__NotExpression;
 constexpr const int ICommandData::__AlinousModulePackage;
 constexpr const int ICommandData::__VirtualTable;
 constexpr const int ICommandData::__LeftJoin;
+constexpr const int ICommandData::__ShardKeys;
+constexpr const int ICommandData::__SubShardKeys;
 bool ICommandData::__init_done = __init_static_variables();
 bool ICommandData::__init_static_variables(){
 	Java2CppSystem::getSelf();

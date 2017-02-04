@@ -46,5 +46,13 @@ void RegionShardPart::__releaseRegerences(bool prepare, ThreadContext* ctx) thro
 		return;
 	}
 }
+TablePartitionMaxValue* RegionShardPart::getMaxValue(ThreadContext* ctx) throw() 
+{
+	return maxValue;
+}
+NodeReference* RegionShardPart::getNodeAccessRef(ThreadContext* ctx) throw() 
+{
+	return nodeAccessRef;
+}
 }}}
 

@@ -414,6 +414,12 @@ IAlinousElement* AlinousElementNetworkFactory::formNetworkData(NetworkBinaryBuff
 	case ICommandData::__LeftJoin:
 		element = (new(ctx) LeftJoin(ctx));
 		break ;
+	case ICommandData::__ShardKeys:
+		element = (new(ctx) ShardKeys(ctx));
+		break ;
+	case ICommandData::__SubShardKeys:
+		element = (new(ctx) SubShardKeys(ctx));
+		break ;
 	default:
 		return nullptr;
 		break;

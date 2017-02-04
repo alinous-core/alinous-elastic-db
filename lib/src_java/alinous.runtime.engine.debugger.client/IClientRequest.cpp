@@ -6,15 +6,15 @@ namespace alinous {namespace runtime {namespace engine {namespace debugger {name
 
 
 
-String* IClientRequest::CMD_TERMINATE = ConstStr::getCNST_STR_1182();
-String* IClientRequest::CMD_STATUS_THREAD = ConstStr::getCNST_STR_1183();
-String* IClientRequest::CMD_CLEAR_BREAKPOINTS = ConstStr::getCNST_STR_1184();
-String* IClientRequest::CMD_SETUP_ALL_BREAKPOINTS = ConstStr::getCNST_STR_1185();
-String* IClientRequest::CMD_ADD_BREAKPOINTS = ConstStr::getCNST_STR_1186();
-String* IClientRequest::CMD_RESUME = ConstStr::getCNST_STR_1187();
-String* IClientRequest::CMD_STEP_OVER = ConstStr::getCNST_STR_1188();
-String* IClientRequest::CMD_STEP_IN = ConstStr::getCNST_STR_1189();
-String* IClientRequest::CMD_STEP_RETURN = ConstStr::getCNST_STR_1190();
+String* IClientRequest::CMD_TERMINATE = ConstStr::getCNST_STR_1184();
+String* IClientRequest::CMD_STATUS_THREAD = ConstStr::getCNST_STR_1185();
+String* IClientRequest::CMD_CLEAR_BREAKPOINTS = ConstStr::getCNST_STR_1186();
+String* IClientRequest::CMD_SETUP_ALL_BREAKPOINTS = ConstStr::getCNST_STR_1187();
+String* IClientRequest::CMD_ADD_BREAKPOINTS = ConstStr::getCNST_STR_1188();
+String* IClientRequest::CMD_RESUME = ConstStr::getCNST_STR_1189();
+String* IClientRequest::CMD_STEP_OVER = ConstStr::getCNST_STR_1190();
+String* IClientRequest::CMD_STEP_IN = ConstStr::getCNST_STR_1191();
+String* IClientRequest::CMD_STEP_RETURN = ConstStr::getCNST_STR_1192();
 bool IClientRequest::__init_done = __init_static_variables();
 bool IClientRequest::__init_static_variables(){
 	Java2CppSystem::getSelf();

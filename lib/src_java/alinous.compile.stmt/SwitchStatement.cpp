@@ -121,7 +121,7 @@ void SwitchStatement::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
 		if(el == nullptr || !((dynamic_cast<LabeledStatement*>(el) != 0)))
 		{
-			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1093(), ctx));
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1095(), ctx));
 		}
 		__GC_MV(this, &(this->label), static_cast<LabeledStatement*>(el), LabeledStatement);
 	}

@@ -117,7 +117,7 @@ void XMLTagBase::serialize(SerializeContext* context, ThreadContext* ctx)
 	}
 	if(isSingleEnd(ctx))
 	{
-		context->addStaticString(ConstStr::getCNST_STR_1818(), ctx);
+		context->addStaticString(ConstStr::getCNST_STR_1822(), ctx);
 		return;
 	}
 		else 
@@ -133,13 +133,13 @@ void XMLTagBase::serialize(SerializeContext* context, ThreadContext* ctx)
 	}
 	if(!this->isDynamicTagName)
 	{
-		buff->append(ConstStr::getCNST_STR_1754(), ctx)->append(this->tagName, ctx)->append(ConstStr::getCNST_STR_82(), ctx);
+		buff->append(ConstStr::getCNST_STR_1758(), ctx)->append(this->tagName, ctx)->append(ConstStr::getCNST_STR_82(), ctx);
 		context->addStaticString(buff->toString(ctx), ctx);
 		buff->setLength(0, ctx);
 	}
 		else 
 	{
-		context->addStaticString(ConstStr::getCNST_STR_1754(), ctx);
+		context->addStaticString(ConstStr::getCNST_STR_1758(), ctx);
 		context->addParts(this->parts, ctx);
 		context->addStaticString(ConstStr::getCNST_STR_82(), ctx);
 	}
@@ -196,7 +196,7 @@ String* XMLTagBase::toString(ThreadContext* ctx) throw()
 	}
 	if(this->innerElements->isEmpty(ctx))
 	{
-		buff->append(ConstStr::getCNST_STR_1753(), ctx);
+		buff->append(ConstStr::getCNST_STR_1757(), ctx);
 		return buff->toString(ctx);
 	}
 	buff->append(ConstStr::getCNST_STR_82(), ctx);
@@ -206,7 +206,7 @@ String* XMLTagBase::toString(ThreadContext* ctx) throw()
 		AbstractXHtmlElement* innerObject = this->innerElements->get(i, ctx);
 		buff->append(innerObject->toString(ctx), ctx);
 	}
-	buff->append(ConstStr::getCNST_STR_1754(), ctx)->append(this->tagName, ctx)->append(ConstStr::getCNST_STR_82(), ctx);
+	buff->append(ConstStr::getCNST_STR_1758(), ctx)->append(this->tagName, ctx)->append(ConstStr::getCNST_STR_82(), ctx);
 	return buff->toString(ctx);
 }
 AbstractXHtmlElement::ElementType XMLTagBase::getElementType(ThreadContext* ctx) throw() 

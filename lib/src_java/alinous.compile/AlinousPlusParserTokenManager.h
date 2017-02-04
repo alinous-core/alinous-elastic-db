@@ -229,6 +229,12 @@ namespace alinous {namespace compile {namespace sql {namespace ddl {
 class PrimaryKeys;}}}}
 
 namespace alinous {namespace compile {namespace sql {namespace ddl {
+class ShardKeys;}}}}
+
+namespace alinous {namespace compile {namespace sql {namespace ddl {
+class SubShardKeys;}}}}
+
+namespace alinous {namespace compile {namespace sql {namespace ddl {
 class Unique;}}}}
 
 namespace alinous {namespace compile {namespace sql {namespace expression {
@@ -486,6 +492,8 @@ using ::alinous::compile::sql::ddl::CheckDefinition;
 using ::alinous::compile::sql::ddl::ColumnTypeDescriptor;
 using ::alinous::compile::sql::ddl::DdlColumnDescriptor;
 using ::alinous::compile::sql::ddl::PrimaryKeys;
+using ::alinous::compile::sql::ddl::ShardKeys;
+using ::alinous::compile::sql::ddl::SubShardKeys;
 using ::alinous::compile::sql::ddl::Unique;
 using ::alinous::compile::sql::expression::ISQLExpression;
 using ::alinous::compile::sql::expression::SQLAdditiveExpression;

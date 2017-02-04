@@ -110,6 +110,8 @@ private:
 	String* schema;
 	String* tableName;
 	ArrayList<CheckDefinition>* checks;
+	ArrayList<TableColumnMetadata>* shardKeys;
+	ArrayList<TableColumnMetadata>* subShardKeys;
 	TablePartitionMaxValue* maxPartitionValue;
 public:
 	TableClusterData* toCommandData(String* region, String* host, int port, bool ipv6, ThreadContext* ctx) throw() ;
