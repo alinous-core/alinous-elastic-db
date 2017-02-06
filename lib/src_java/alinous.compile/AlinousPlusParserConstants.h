@@ -212,7 +212,7 @@ public:
 	constexpr static const long long FUNCTION{184};
 	constexpr static const long long USE{185};
 	constexpr static const long long REGION{186};
-	constexpr static const long long SHARD{187};
+	constexpr static const long long PARTITION{187};
 	constexpr static const long long SUB{188};
 	constexpr static const long long IDENTIFIER{189};
 	constexpr static const long long DEFAULT{0};

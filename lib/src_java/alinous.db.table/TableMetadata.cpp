@@ -140,6 +140,20 @@ int TableMetadata::fileSize(ThreadContext* ctx)
 		CheckDefinition* checkdef = this->checks->get(i, ctx);
 		total += checkdef->fileSize(ctx);
 	}
+	maxLoop = this->shardKeys->size(ctx);
+	total += 4;
+	for(int i = 0; i != maxLoop; ++i)
+	{
+		TableColumnMetadata* col = this->shardKeys->get(i, ctx);
+		total += col->fileSize(ctx);
+	}
+	maxLoop = this->subShardKeys->size(ctx);
+	total += 4;
+	for(int i = 0; i != maxLoop; ++i)
+	{
+		TableColumnMetadata* col = this->subShardKeys->get(i, ctx);
+		total += col->fileSize(ctx);
+	}
 	return total;
 }
 void TableMetadata::toFileEntry(FileStorageEntryBuilder* builder, ThreadContext* ctx)
@@ -185,6 +199,20 @@ void TableMetadata::toFileEntry(FileStorageEntryBuilder* builder, ThreadContext*
 	{
 		CheckDefinition* checkdef = this->checks->get(i, ctx);
 		checkdef->toFileEntry(builder, ctx);
+	}
+	maxLoop = this->shardKeys->size(ctx);
+	builder->putInt(maxLoop, ctx);
+	for(int i = 0; i != maxLoop; ++i)
+	{
+		TableColumnMetadata* col = this->shardKeys->get(i, ctx);
+		col->toFileEntry(builder, ctx);
+	}
+	maxLoop = this->subShardKeys->size(ctx);
+	builder->putInt(maxLoop, ctx);
+	for(int i = 0; i != maxLoop; ++i)
+	{
+		TableColumnMetadata* col = this->subShardKeys->get(i, ctx);
+		col->toFileEntry(builder, ctx);
 	}
 }
 void TableMetadata::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
@@ -242,6 +270,26 @@ void TableMetadata::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 		CheckDefinition* def = static_cast<CheckDefinition*>(el);
 		this->checks->add(def, ctx);
 	}
+	maxLoop = this->shardKeys->size(ctx);
+	for(int i = 0; i != maxLoop; ++i)
+	{
+		TableColumnMetadata* col = TableColumnMetadata::fromNetwork(buff, ctx);
+		if(col == nullptr)
+		{
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1691(), ctx));
+		}
+		this->shardKeys->add(col, ctx);
+	}
+	maxLoop = this->subShardKeys->size(ctx);
+	for(int i = 0; i != maxLoop; ++i)
+	{
+		TableColumnMetadata* col = TableColumnMetadata::fromNetwork(buff, ctx);
+		if(col == nullptr)
+		{
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1691(), ctx));
+		}
+		this->subShardKeys->add(col, ctx);
+	}
 }
 void TableMetadata::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
 {
@@ -286,6 +334,20 @@ void TableMetadata::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) thr
 	{
 		CheckDefinition* checkdef = this->checks->get(i, ctx);
 		checkdef->writeData(buff, ctx);
+	}
+	maxLoop = this->shardKeys->size(ctx);
+	buff->putInt(maxLoop, ctx);
+	for(int i = 0; i != maxLoop; ++i)
+	{
+		TableColumnMetadata* col = this->shardKeys->get(i, ctx);
+		col->writeData(buff, ctx);
+	}
+	maxLoop = this->subShardKeys->size(ctx);
+	buff->putInt(maxLoop, ctx);
+	for(int i = 0; i != maxLoop; ++i)
+	{
+		TableColumnMetadata* col = this->subShardKeys->get(i, ctx);
+		col->writeData(buff, ctx);
 	}
 }
 void TableMetadata::addindex(TableIndexMetadata* indexMeta, ThreadContext* ctx) throw() 
@@ -356,7 +418,7 @@ void TableMetadata::addPrimaryKey(String* col, ThreadContext* ctx)
 	TableColumnMetadata* colmeta = this->columns->get(col->toLowerCase(ctx), ctx);
 	if(colmeta == nullptr)
 	{
-		throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1691(), ctx));
+		throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1692(), ctx));
 	}
 	this->primaryKeys->add(colmeta, ctx);
 	colmeta->setPrimaryKey(true, ctx);
@@ -416,6 +478,18 @@ TableMetadata* TableMetadata::loadFromFetcher(FileStorageEntryFetcher* fetcher, 
 	{
 		CheckDefinition* def = CheckDefinition::fromFileEntry(fetcher, ctx);
 		metadata->checks->add(def, ctx);
+	}
+	maxLoop = fetcher->fetchInt(ctx);
+	for(int i = 0; i != maxLoop; ++i)
+	{
+		TableColumnMetadata* col = TableColumnMetadata::loadFromFetcher(fetcher, ctx);
+		metadata->shardKeys->add(col, ctx);
+	}
+	maxLoop = fetcher->fetchInt(ctx);
+	for(int i = 0; i != maxLoop; ++i)
+	{
+		TableColumnMetadata* col = TableColumnMetadata::loadFromFetcher(fetcher, ctx);
+		metadata->subShardKeys->add(col, ctx);
 	}
 	return metadata;
 }

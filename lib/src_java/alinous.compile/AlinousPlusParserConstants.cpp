@@ -189,7 +189,7 @@ constexpr const long long AlinousPlusParserConstants::_NULL;
 constexpr const long long AlinousPlusParserConstants::FUNCTION;
 constexpr const long long AlinousPlusParserConstants::USE;
 constexpr const long long AlinousPlusParserConstants::REGION;
-constexpr const long long AlinousPlusParserConstants::SHARD;
+constexpr const long long AlinousPlusParserConstants::PARTITION;
 constexpr const long long AlinousPlusParserConstants::SUB;
 constexpr const long long AlinousPlusParserConstants::IDENTIFIER;
 constexpr const long long AlinousPlusParserConstants::DEFAULT;

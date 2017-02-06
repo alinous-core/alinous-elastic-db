@@ -52,7 +52,7 @@ ISocketConnection* SocketConnectionPool::getConnection(ThreadContext* ctx)
 {
 	if(!active)
 	{
-		throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3589(), ctx));
+		throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3590(), ctx));
 	}
 	ISocketConnection* con = nullptr;
 	{

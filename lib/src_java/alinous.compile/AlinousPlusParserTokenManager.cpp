@@ -411,11 +411,11 @@ long long AlinousPlusParserTokenManager::jjMoveStringLiteralDfa0_0(ThreadContext
 	case 79:
 		return jjMoveStringLiteralDfa1_0((long long)0x0L, (long long)0x4020200000000000L, (long long)0x20cL, (long long)0x0L, ctx);
 	case 80:
-		return jjMoveStringLiteralDfa1_0((long long)0x0L, (long long)0x0L, (long long)0x200080084000L, (long long)0x0L, ctx);
+		return jjMoveStringLiteralDfa1_0((long long)0x0L, (long long)0x0L, (long long)0x800200080084000L, (long long)0x0L, ctx);
 	case 82:
 		return jjMoveStringLiteralDfa1_0((long long)0x0L, (long long)0x4000000000000L, (long long)0x408044810200000L, (long long)0x0L, ctx);
 	case 83:
-		return jjMoveStringLiteralDfa1_0((long long)0x0L, (long long)0x200004000000000L, (long long)0x1800081000000080L, (long long)0x0L, ctx);
+		return jjMoveStringLiteralDfa1_0((long long)0x0L, (long long)0x200004000000000L, (long long)0x1000081000000080L, (long long)0x0L, ctx);
 	case 84:
 		return jjMoveStringLiteralDfa1_0((long long)0x0L, (long long)0x0L, (long long)0x800042008000L, (long long)0x0L, ctx);
 	case 85:
@@ -462,11 +462,11 @@ long long AlinousPlusParserTokenManager::jjMoveStringLiteralDfa0_0(ThreadContext
 	case 111:
 		return jjMoveStringLiteralDfa1_0((long long)0x0L, (long long)0x4020200000000000L, (long long)0x20cL, (long long)0x0L, ctx);
 	case 112:
-		return jjMoveStringLiteralDfa1_0((long long)0x100000000000000L, (long long)0x400038000L, (long long)0x200080084000L, (long long)0x0L, ctx);
+		return jjMoveStringLiteralDfa1_0((long long)0x100000000000000L, (long long)0x400038000L, (long long)0x800200080084000L, (long long)0x0L, ctx);
 	case 114:
 		return jjMoveStringLiteralDfa1_0((long long)0x0L, (long long)0x4000180040000L, (long long)0x408044810200000L, (long long)0x0L, ctx);
 	case 115:
-		return jjMoveStringLiteralDfa1_0((long long)0x0L, (long long)0x200004000780000L, (long long)0x1800081000000080L, (long long)0x0L, ctx);
+		return jjMoveStringLiteralDfa1_0((long long)0x0L, (long long)0x200004000780000L, (long long)0x1000081000000080L, (long long)0x0L, ctx);
 	case 116:
 		return jjMoveStringLiteralDfa1_0((long long)0x0L, (long long)0x1007800000L, (long long)0x800042008000L, (long long)0x0L, ctx);
 	case 117:
@@ -665,7 +665,7 @@ long long AlinousPlusParserTokenManager::jjMoveStringLiteralDfa1_0(long long act
 		}
 		break ;
 	case 65:
-		return jjMoveStringLiteralDfa2_0(active0, (long long)0L, active1, (long long)0x2408000000000000L, active2, (long long)0x22002000000L, active3, (long long)0L, ctx);
+		return jjMoveStringLiteralDfa2_0(active0, (long long)0L, active1, (long long)0x2408000000000000L, active2, (long long)0x800022002000000L, active3, (long long)0L, ctx);
 	case 68:
 		return jjMoveStringLiteralDfa2_0(active0, (long long)0L, active1, (long long)0L, active2, (long long)0x30000008000000L, active3, (long long)0L, ctx);
 	case 69:
@@ -678,7 +678,7 @@ long long AlinousPlusParserTokenManager::jjMoveStringLiteralDfa1_0(long long act
 		}
 		return jjMoveStringLiteralDfa2_0(active0, (long long)0L, active1, (long long)0L, active2, (long long)0x2000000000004L, active3, (long long)0L, ctx);
 	case 72:
-		return jjMoveStringLiteralDfa2_0(active0, (long long)0L, active1, (long long)0x100000000000L, active2, (long long)0x800000400000080L, active3, (long long)0L, ctx);
+		return jjMoveStringLiteralDfa2_0(active0, (long long)0L, active1, (long long)0x100000000000L, active2, (long long)0x400000080L, active3, (long long)0L, ctx);
 	case 73:
 		return jjMoveStringLiteralDfa2_0(active0, (long long)0L, active1, (long long)0x4800000000000L, active2, (long long)0x42L, active3, (long long)0L, ctx);
 	case 76:
@@ -743,7 +743,7 @@ long long AlinousPlusParserTokenManager::jjMoveStringLiteralDfa1_0(long long act
 		}
 		break ;
 	case 97:
-		return jjMoveStringLiteralDfa2_0(active0, (long long)0xc100000000000000L, active1, (long long)0x2408002600002000L, active2, (long long)0x22002000000L, active3, (long long)0L, ctx);
+		return jjMoveStringLiteralDfa2_0(active0, (long long)0xc100000000000000L, active1, (long long)0x2408002600002000L, active2, (long long)0x800022002000000L, active3, (long long)0L, ctx);
 	case 98:
 		return jjMoveStringLiteralDfa2_0(active0, (long long)0x800000000000000L, active1, (long long)0L, active2, (long long)0L, active3, (long long)0L, ctx);
 	case 100:
@@ -766,7 +766,7 @@ long long AlinousPlusParserTokenManager::jjMoveStringLiteralDfa1_0(long long act
 		}
 		return jjMoveStringLiteralDfa2_0(active0, (long long)0L, active1, (long long)0L, active2, (long long)0x2000000000004L, active3, (long long)0L, ctx);
 	case 104:
-		return jjMoveStringLiteralDfa2_0(active0, (long long)0L, active1, (long long)0x100013800000L, active2, (long long)0x800000400000080L, active3, (long long)0L, ctx);
+		return jjMoveStringLiteralDfa2_0(active0, (long long)0L, active1, (long long)0x100013800000L, active2, (long long)0x400000080L, active3, (long long)0L, ctx);
 	case 105:
 		return jjMoveStringLiteralDfa2_0(active0, (long long)0L, active1, (long long)0x48000000000c0L, active2, (long long)0x42L, active3, (long long)0L, ctx);
 	case 108:
@@ -898,7 +898,7 @@ long long AlinousPlusParserTokenManager::jjMoveStringLiteralDfa2_0(long long old
 		}
 		break ;
 	case 65:
-		return jjMoveStringLiteralDfa3_0(active0, (long long)0L, active1, (long long)0L, active2, (long long)0x800080000008080L, active3, (long long)0L, ctx);
+		return jjMoveStringLiteralDfa3_0(active0, (long long)0L, active1, (long long)0L, active2, (long long)0x80000008080L, active3, (long long)0L, ctx);
 	case 66:
 		if((active2 & 0x1000000000000000L) != (long long)0L)
 		{
@@ -964,7 +964,7 @@ long long AlinousPlusParserTokenManager::jjMoveStringLiteralDfa2_0(long long old
 	case 80:
 		return jjMoveStringLiteralDfa3_0(active0, (long long)0L, active1, (long long)0L, active2, (long long)0x4000000000L, active3, (long long)0L, ctx);
 	case 82:
-		return jjMoveStringLiteralDfa3_0(active0, (long long)0L, active1, (long long)0L, active2, (long long)0x4000000000000L, active3, (long long)0L, ctx);
+		return jjMoveStringLiteralDfa3_0(active0, (long long)0L, active1, (long long)0L, active2, (long long)0x804000000000000L, active3, (long long)0L, ctx);
 	case 83:
 		return jjMoveStringLiteralDfa3_0(active0, (long long)0L, active1, (long long)0x1008000000000L, active2, (long long)0x41L, active3, (long long)0L, ctx);
 	case 84:
@@ -999,7 +999,7 @@ long long AlinousPlusParserTokenManager::jjMoveStringLiteralDfa2_0(long long old
 		}
 		break ;
 	case 97:
-		return jjMoveStringLiteralDfa3_0(active0, (long long)0x200000000000000L, active1, (long long)0x80000L, active2, (long long)0x800080000008080L, active3, (long long)0L, ctx);
+		return jjMoveStringLiteralDfa3_0(active0, (long long)0x200000000000000L, active1, (long long)0x80000L, active2, (long long)0x80000008080L, active3, (long long)0L, ctx);
 	case 98:
 		if((active2 & 0x1000000000000000L) != (long long)0L)
 		{
@@ -1070,7 +1070,7 @@ long long AlinousPlusParserTokenManager::jjMoveStringLiteralDfa2_0(long long old
 			jjmatchedKind = 72;
 			jjmatchedPos = 2;
 		}
-		return jjMoveStringLiteralDfa3_0(active0, (long long)0L, active1, (long long)0x403000000L, active2, (long long)0x4000000000000L, active3, (long long)0L, ctx);
+		return jjMoveStringLiteralDfa3_0(active0, (long long)0L, active1, (long long)0x403000000L, active2, (long long)0x804000000000000L, active3, (long long)0L, ctx);
 	case 115:
 		return jjMoveStringLiteralDfa3_0(active0, (long long)0x4800000000000000L, active1, (long long)0x1008000001008L, active2, (long long)0x41L, active3, (long long)0L, ctx);
 	case 116:
@@ -1229,7 +1229,7 @@ long long AlinousPlusParserTokenManager::jjMoveStringLiteralDfa3_0(long long old
 	case 81:
 		return jjMoveStringLiteralDfa4_0(active0, (long long)0L, active1, (long long)0L, active2, (long long)0x200000000L, ctx);
 	case 82:
-		return jjMoveStringLiteralDfa4_0(active0, (long long)0L, active1, (long long)0x100000000000L, active2, (long long)0x800000000000080L, ctx);
+		return jjMoveStringLiteralDfa4_0(active0, (long long)0L, active1, (long long)0x100000000000L, active2, (long long)0x80L, ctx);
 	case 83:
 		return jjMoveStringLiteralDfa4_0(active0, (long long)0L, active1, (long long)0x100000000000000L, active2, (long long)0x400000000004L, ctx);
 	case 84:
@@ -1238,7 +1238,7 @@ long long AlinousPlusParserTokenManager::jjMoveStringLiteralDfa3_0(long long old
 			jjmatchedKind = 113;
 			jjmatchedPos = 3;
 		}
-		return jjMoveStringLiteralDfa4_0(active0, (long long)0L, active1, (long long)0L, active2, (long long)0x80000000040L, ctx);
+		return jjMoveStringLiteralDfa4_0(active0, (long long)0L, active1, (long long)0L, active2, (long long)0x800080000000040L, ctx);
 	case 85:
 		return jjMoveStringLiteralDfa4_0(active0, (long long)0L, active1, (long long)0xc08000000000000L, active2, (long long)0x30000820000000L, ctx);
 	case 87:
@@ -1381,7 +1381,7 @@ long long AlinousPlusParserTokenManager::jjMoveStringLiteralDfa3_0(long long old
 	case 113:
 		return jjMoveStringLiteralDfa4_0(active0, (long long)0L, active1, (long long)0L, active2, (long long)0x200000000L, ctx);
 	case 114:
-		return jjMoveStringLiteralDfa4_0(active0, (long long)0L, active1, (long long)0x100000000000L, active2, (long long)0x800000000000080L, ctx);
+		return jjMoveStringLiteralDfa4_0(active0, (long long)0L, active1, (long long)0x100000000000L, active2, (long long)0x80L, ctx);
 	case 115:
 		if((active1 & 0x800000L) != (long long)0L)
 		{
@@ -1395,7 +1395,7 @@ long long AlinousPlusParserTokenManager::jjMoveStringLiteralDfa3_0(long long old
 			jjmatchedKind = 113;
 			jjmatchedPos = 3;
 		}
-		return jjMoveStringLiteralDfa4_0(active0, (long long)0x800000000000000L, active1, (long long)0x291002L, active2, (long long)0x80000000040L, ctx);
+		return jjMoveStringLiteralDfa4_0(active0, (long long)0x800000000000000L, active1, (long long)0x291002L, active2, (long long)0x800080000000040L, ctx);
 	case 117:
 		return jjMoveStringLiteralDfa4_0(active0, (long long)0L, active1, (long long)0xc08000000040000L, active2, (long long)0x30000820000000L, ctx);
 	case 118:
@@ -1433,13 +1433,6 @@ long long AlinousPlusParserTokenManager::jjMoveStringLiteralDfa4_0(long long old
 		return jjMoveStringLiteralDfa5_0(active0, (long long)0L, active1, (long long)0L, active2, (long long)0x200000L, ctx);
 	case 67:
 		return jjMoveStringLiteralDfa5_0(active0, (long long)0L, active1, (long long)0x4000000000L, active2, (long long)0L, ctx);
-	case 68:
-		if((active2 & 0x800000000000000L) != (long long)0L)
-		{
-			jjmatchedKind = 187;
-			jjmatchedPos = 4;
-		}
-		break ;
 	case 69:
 		if((active1 & 0x100000000000L) != (long long)0L)
 		{
@@ -1478,7 +1471,7 @@ long long AlinousPlusParserTokenManager::jjMoveStringLiteralDfa4_0(long long old
 		}
 		return jjMoveStringLiteralDfa5_0(active0, (long long)0L, active1, (long long)0L, active2, (long long)0x800000000000L, ctx);
 	case 73:
-		return jjMoveStringLiteralDfa5_0(active0, (long long)0L, active1, (long long)0L, active2, (long long)0x4000000040140L, ctx);
+		return jjMoveStringLiteralDfa5_0(active0, (long long)0L, active1, (long long)0L, active2, (long long)0x804000000040140L, ctx);
 	case 75:
 		if((active2 & 0x400000000L) != (long long)0L)
 		{
@@ -1588,11 +1581,6 @@ long long AlinousPlusParserTokenManager::jjMoveStringLiteralDfa4_0(long long old
 	case 99:
 		return jjMoveStringLiteralDfa5_0(active0, (long long)0L, active1, (long long)0x4000200000L, active2, (long long)0L, ctx);
 	case 100:
-		if((active2 & 0x800000000000000L) != (long long)0L)
-		{
-			jjmatchedKind = 187;
-			jjmatchedPos = 4;
-		}
 		return jjMoveStringLiteralDfa5_0(active0, (long long)0L, active1, (long long)0x200000000L, active2, (long long)0L, ctx);
 	case 101:
 		if((active1 & 0x10000000L) != (long long)0L)
@@ -1655,7 +1643,7 @@ long long AlinousPlusParserTokenManager::jjMoveStringLiteralDfa4_0(long long old
 		}
 		return jjMoveStringLiteralDfa5_0(active0, (long long)0L, active1, (long long)0x400000L, active2, (long long)0L, ctx);
 	case 105:
-		return jjMoveStringLiteralDfa5_0(active0, (long long)0L, active1, (long long)0xa0002L, active2, (long long)0x4000000040140L, ctx);
+		return jjMoveStringLiteralDfa5_0(active0, (long long)0L, active1, (long long)0xa0002L, active2, (long long)0x804000000040140L, ctx);
 	case 107:
 		if((active0 & 0x1000000000000000L) != (long long)0L)
 		{
@@ -1978,7 +1966,7 @@ long long AlinousPlusParserTokenManager::jjMoveStringLiteralDfa5_0(long long old
 				}
 			}
 		}
-		return jjMoveStringLiteralDfa6_0(active0, (long long)0L, active1, (long long)0L, active2, (long long)0x30100000010000L, ctx);
+		return jjMoveStringLiteralDfa6_0(active0, (long long)0L, active1, (long long)0L, active2, (long long)0x830100000010000L, ctx);
 	case 95:
 		return jjMoveStringLiteralDfa6_0(active0, (long long)0L, active1, (long long)0x100000000L, active2, (long long)0L, ctx);
 	case 97:
@@ -2175,7 +2163,7 @@ long long AlinousPlusParserTokenManager::jjMoveStringLiteralDfa5_0(long long old
 				}
 			}
 		}
-		return jjMoveStringLiteralDfa6_0(active0, (long long)0L, active1, (long long)0x8000L, active2, (long long)0x30100000010000L, ctx);
+		return jjMoveStringLiteralDfa6_0(active0, (long long)0L, active1, (long long)0x8000L, active2, (long long)0x830100000010000L, ctx);
 	default:
 		break ;
 	}
@@ -2229,7 +2217,7 @@ long long AlinousPlusParserTokenManager::jjMoveStringLiteralDfa6_0(long long old
 	case 71:
 		return jjMoveStringLiteralDfa7_0(active0, (long long)0L, active1, (long long)0L, active2, (long long)0x2000000000L, ctx);
 	case 73:
-		return jjMoveStringLiteralDfa7_0(active0, (long long)0L, active1, (long long)0L, active2, (long long)0x10000L, ctx);
+		return jjMoveStringLiteralDfa7_0(active0, (long long)0L, active1, (long long)0L, active2, (long long)0x800000000010000L, ctx);
 	case 76:
 		if((active1 & 0x8000000000000L) != (long long)0L)
 		{
@@ -2342,7 +2330,7 @@ long long AlinousPlusParserTokenManager::jjMoveStringLiteralDfa6_0(long long old
 	case 103:
 		return jjMoveStringLiteralDfa7_0(active0, (long long)0L, active1, (long long)0L, active2, (long long)0x2000000000L, ctx);
 	case 105:
-		return jjMoveStringLiteralDfa7_0(active0, (long long)0L, active1, (long long)0L, active2, (long long)0x10000L, ctx);
+		return jjMoveStringLiteralDfa7_0(active0, (long long)0L, active1, (long long)0L, active2, (long long)0x800000000010000L, ctx);
 	case 108:
 		if((active1 & 0x8000000000000L) != (long long)0L)
 		{
@@ -2476,7 +2464,7 @@ long long AlinousPlusParserTokenManager::jjMoveStringLiteralDfa7_0(long long old
 		}
 		return jjMoveStringLiteralDfa8_0(active0, (long long)0L, active1, (long long)0L, active2, (long long)0x80000000000L, ctx);
 	case 79:
-		return jjMoveStringLiteralDfa8_0(active0, (long long)0L, active1, (long long)0L, active2, (long long)0x10000L, ctx);
+		return jjMoveStringLiteralDfa8_0(active0, (long long)0L, active1, (long long)0L, active2, (long long)0x800000000010000L, ctx);
 	case 82:
 		return jjMoveStringLiteralDfa8_0(active0, (long long)0L, active1, (long long)0L, active2, (long long)0x200000000000L, ctx);
 	case 83:
@@ -2544,7 +2532,7 @@ long long AlinousPlusParserTokenManager::jjMoveStringLiteralDfa7_0(long long old
 		}
 		return jjMoveStringLiteralDfa8_0(active0, (long long)0L, active1, (long long)0x400800L, active2, (long long)0x80000000000L, ctx);
 	case 111:
-		return jjMoveStringLiteralDfa8_0(active0, (long long)0L, active1, (long long)0x200000000L, active2, (long long)0x10000L, ctx);
+		return jjMoveStringLiteralDfa8_0(active0, (long long)0L, active1, (long long)0x200000000L, active2, (long long)0x800000000010000L, ctx);
 	case 114:
 		return jjMoveStringLiteralDfa8_0(active0, (long long)0L, active1, (long long)0x100000000L, active2, (long long)0x200000000000L, ctx);
 	case 115:
@@ -2616,6 +2604,14 @@ long long AlinousPlusParserTokenManager::jjMoveStringLiteralDfa8_0(long long old
 			jjmatchedKind = 144;
 			jjmatchedPos = 8;
 		}
+				else 
+		{
+			if((active2 & 0x800000000000000L) != (long long)0L)
+			{
+				jjmatchedKind = 187;
+				jjmatchedPos = 8;
+			}
+		}
 		break ;
 	case 84:
 		if((active2 & 0x80000000000L) != (long long)0L)
@@ -2655,6 +2651,14 @@ long long AlinousPlusParserTokenManager::jjMoveStringLiteralDfa8_0(long long old
 		{
 			jjmatchedKind = 144;
 			jjmatchedPos = 8;
+		}
+				else 
+		{
+			if((active2 & 0x800000000000000L) != (long long)0L)
+			{
+				jjmatchedKind = 187;
+				jjmatchedPos = 8;
+			}
 		}
 		break ;
 	case 111:

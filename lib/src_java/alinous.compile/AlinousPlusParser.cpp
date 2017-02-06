@@ -295,7 +295,7 @@ AlinousSrc* AlinousPlusParser::parse(ThreadContext* ctx)
 		case FUNCTION:
 		case USE:
 		case REGION:
-		case SHARD:
+		case PARTITION:
 		case SUB:
 		case IDENTIFIER:
 		case 199:
@@ -408,7 +408,7 @@ AlinousSrc* AlinousPlusParser::parse(ThreadContext* ctx)
 			case FUNCTION:
 			case USE:
 			case REGION:
-			case SHARD:
+			case PARTITION:
 			case SUB:
 			case IDENTIFIER:
 				{
@@ -647,7 +647,7 @@ IStatement* AlinousPlusParser::allStatements(ThreadContext* ctx)
 		case _NULL:
 		case USE:
 		case REGION:
-		case SHARD:
+		case PARTITION:
 		case SUB:
 		case IDENTIFIER:
 		case 199:
@@ -979,7 +979,7 @@ ArrayList<ClassImplements>* AlinousPlusParser::classImplements(ThreadContext* ct
 		case ADJUST_SET:
 		case USE:
 		case REGION:
-		case SHARD:
+		case PARTITION:
 		case SUB:
 		case IDENTIFIER:
 			{
@@ -1148,7 +1148,7 @@ void AlinousPlusParser::classMemberVariableLookAhead(ThreadContext* ctx)
 	case ADJUST_SET:
 	case USE:
 	case REGION:
-	case SHARD:
+	case PARTITION:
 	case SUB:
 	case IDENTIFIER:
 		{
@@ -1319,7 +1319,7 @@ ClassMemberVariable* AlinousPlusParser::classMemberVariable(ThreadContext* ctx)
 	case ADJUST_SET:
 	case USE:
 	case REGION:
-	case SHARD:
+	case PARTITION:
 	case SUB:
 	case IDENTIFIER:
 		{
@@ -1583,7 +1583,7 @@ void AlinousPlusParser::alinousFunctionLookAhead(ThreadContext* ctx)
 		case ADJUST_SET:
 		case USE:
 		case REGION:
-		case SHARD:
+		case PARTITION:
 		case SUB:
 		case IDENTIFIER:
 			{
@@ -1752,7 +1752,7 @@ AlinousFunction* AlinousPlusParser::alinousFunction(ThreadContext* ctx)
 			case ADJUST_SET:
 			case USE:
 			case REGION:
-			case SHARD:
+			case PARTITION:
 			case SUB:
 			case IDENTIFIER:
 				{
@@ -1944,7 +1944,7 @@ FunctionArgumentsListDefine* AlinousPlusParser::functionArgumentsListDefine(Thre
 	case ADJUST_SET:
 	case USE:
 	case REGION:
-	case SHARD:
+	case PARTITION:
 	case SUB:
 	case IDENTIFIER:
 		{
@@ -2093,7 +2093,7 @@ FunctionArgumentDefine* AlinousPlusParser::functionArgumentDefine(ThreadContext*
 	case ADJUST_SET:
 	case USE:
 	case REGION:
-	case SHARD:
+	case PARTITION:
 	case SUB:
 	case IDENTIFIER:
 		{
@@ -2519,7 +2519,7 @@ ForStatement* AlinousPlusParser::forStatement(ThreadContext* ctx)
 	case _NULL:
 	case USE:
 	case REGION:
-	case SHARD:
+	case PARTITION:
 	case SUB:
 	case IDENTIFIER:
 	case 199:
@@ -2639,7 +2639,7 @@ ForStatement* AlinousPlusParser::forStatement(ThreadContext* ctx)
 	case _NULL:
 	case USE:
 	case REGION:
-	case SHARD:
+	case PARTITION:
 	case SUB:
 	case IDENTIFIER:
 	case 199:
@@ -2759,7 +2759,7 @@ ForStatement* AlinousPlusParser::forStatement(ThreadContext* ctx)
 	case _NULL:
 	case USE:
 	case REGION:
-	case SHARD:
+	case PARTITION:
 	case SUB:
 	case IDENTIFIER:
 	case 199:
@@ -3194,7 +3194,7 @@ StatementBlock* AlinousPlusParser::statementBlock(ThreadContext* ctx)
 	case _NULL:
 	case USE:
 	case REGION:
-	case SHARD:
+	case PARTITION:
 	case SUB:
 	case IDENTIFIER:
 	case 199:
@@ -3345,7 +3345,7 @@ ReturnStatement* AlinousPlusParser::returnStatement(ThreadContext* ctx)
 	case _NULL:
 	case USE:
 	case REGION:
-	case SHARD:
+	case PARTITION:
 	case SUB:
 	case IDENTIFIER:
 	case 199:
@@ -4268,7 +4268,7 @@ ExpressionStream* AlinousPlusParser::expressionStream(ThreadContext* ctx)
 		case ADJUST_SET:
 		case USE:
 		case REGION:
-		case SHARD:
+		case PARTITION:
 		case SUB:
 		case IDENTIFIER:
 			{
@@ -4688,7 +4688,7 @@ FunctionArguments* AlinousPlusParser::functionArguments(ThreadContext* ctx)
 	case _NULL:
 	case USE:
 	case REGION:
-	case SHARD:
+	case PARTITION:
 	case SUB:
 	case IDENTIFIER:
 	case 199:
@@ -5434,9 +5434,9 @@ Token* AlinousPlusParser::nameIdentifier(ThreadContext* ctx)
 			t = jj_consume_token(REGION, ctx);
 			break ;
 		}
-	case SHARD:
+	case PARTITION:
 		{
-			t = jj_consume_token(SHARD, ctx);
+			t = jj_consume_token(PARTITION, ctx);
 			break ;
 		}
 	case SUB:
@@ -6052,7 +6052,7 @@ IJoin* AlinousPlusParser::joinTarget(ThreadContext* ctx)
 	case ADJUST_SET:
 	case USE:
 	case REGION:
-	case SHARD:
+	case PARTITION:
 	case SUB:
 	case IDENTIFIER:
 		{
@@ -6445,7 +6445,7 @@ InsertValues* AlinousPlusParser::insertValues(ThreadContext* ctx)
 		case ADJUST_SET:
 		case USE:
 		case REGION:
-		case SHARD:
+		case PARTITION:
 		case SUB:
 		case IDENTIFIER:
 			{
@@ -6729,7 +6729,7 @@ ShardKeys* AlinousPlusParser::shardKeys(ThreadContext* ctx)
 	Token* t = nullptr;
 	Token* t1 = nullptr;
 	Token* t2 = nullptr;
-	t = jj_consume_token(SHARD, ctx);
+	t = jj_consume_token(PARTITION, ctx);
 	jj_consume_token(KEY, ctx);
 	jj_consume_token(L_PARENTHESIS, ctx);
 	t1 = jj_consume_token(IDENTIFIER, ctx);
@@ -6767,7 +6767,7 @@ SubShardKeys* AlinousPlusParser::subShardKeys(ThreadContext* ctx)
 	Token* t1 = nullptr;
 	Token* t2 = nullptr;
 	t = jj_consume_token(SUB, ctx);
-	jj_consume_token(SHARD, ctx);
+	jj_consume_token(PARTITION, ctx);
 	jj_consume_token(KEY, ctx);
 	jj_consume_token(L_PARENTHESIS, ctx);
 	t1 = jj_consume_token(IDENTIFIER, ctx);
@@ -12047,7 +12047,7 @@ bool AlinousPlusParser::jj_3R_249(ThreadContext* ctx)
 	{
 		return true;
 	}
-	if(jj_scan_token(SHARD, ctx))
+	if(jj_scan_token(PARTITION, ctx))
 	{
 		return true;
 	}
@@ -12149,7 +12149,7 @@ bool AlinousPlusParser::jj_3R_150(ThreadContext* ctx)
 }
 bool AlinousPlusParser::jj_3R_248(ThreadContext* ctx)
 {
-	if(jj_scan_token(SHARD, ctx))
+	if(jj_scan_token(PARTITION, ctx))
 	{
 		return true;
 	}

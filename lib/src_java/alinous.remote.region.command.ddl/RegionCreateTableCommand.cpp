@@ -73,7 +73,7 @@ void RegionCreateTableCommand::readFromStream(InputStream* stream, int remain, T
 			}
 			catch(VariableException* e)
 			{
-				throw (new(ctx) IOException(ConstStr::getCNST_STR_3588(), e, ctx));
+				throw (new(ctx) IOException(ConstStr::getCNST_STR_3589(), e, ctx));
 			}
 		}
 	}
