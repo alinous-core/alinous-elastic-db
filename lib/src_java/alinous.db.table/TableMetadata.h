@@ -139,6 +139,8 @@ public:
 	void setChecks(ArrayList<CheckDefinition>* checks, ThreadContext* ctx) throw() ;
 	TablePartitionMaxValue* getMaxPartitionValue(ThreadContext* ctx) throw() ;
 	void setMaxPartitionValue(TablePartitionMaxValue* maxPartitionValue, ThreadContext* ctx) throw() ;
+	void addShardKey(String* col, ThreadContext* ctx);
+	void addSubShardKey(String* col, ThreadContext* ctx);
 public:
 	static TableMetadata* loadFromFetcher(FileStorageEntryFetcher* fetcher, ThreadContext* ctx);
 	static TableMetadata* fromNetwork(NetworkBinaryBuffer* buff, ThreadContext* ctx);

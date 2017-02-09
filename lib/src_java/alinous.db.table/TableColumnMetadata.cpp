@@ -140,6 +140,10 @@ void TableColumnMetadata::writeData(NetworkBinaryBuffer* buff, ThreadContext* ct
 		this->check->writeData(buff, ctx);
 	}
 }
+int TableColumnMetadata::getType(ThreadContext* ctx) throw() 
+{
+	return type;
+}
 TableColumnMetadata* TableColumnMetadata::loadFromFetcher(FileStorageEntryFetcher* fetcher, ThreadContext* ctx) throw() 
 {
 	int type = fetcher->fetchInt(ctx);

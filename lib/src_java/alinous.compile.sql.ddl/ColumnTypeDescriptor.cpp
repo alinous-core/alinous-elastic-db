@@ -8,12 +8,15 @@ namespace alinous {namespace compile {namespace sql {namespace ddl {
 
 
 constexpr const int ColumnTypeDescriptor::INT;
+constexpr const int ColumnTypeDescriptor::LONG;
 constexpr const int ColumnTypeDescriptor::VARCHAR;
 constexpr const int ColumnTypeDescriptor::TEXT;
 constexpr const int ColumnTypeDescriptor::DOUBLE;
 constexpr const int ColumnTypeDescriptor::DATE;
+constexpr const int ColumnTypeDescriptor::TIME;
 constexpr const int ColumnTypeDescriptor::TIMESTAMP;
 constexpr const int ColumnTypeDescriptor::BLOB;
+constexpr const int ColumnTypeDescriptor::BIG_DECIMAL;
 bool ColumnTypeDescriptor::__init_done = __init_static_variables();
 bool ColumnTypeDescriptor::__init_static_variables(){
 	Java2CppSystem::getSelf();
@@ -155,25 +158,37 @@ int ColumnTypeDescriptor::toTypeNum(String* str, ThreadContext* ctx) throw()
 	{
 		return INT;
 	}
-	if(str->equalsIgnoreCase(ConstStr::getCNST_STR_1058(), ctx) || str->equalsIgnoreCase(ConstStr::getCNST_STR_1059(), ctx))
+	if(str->equalsIgnoreCase(ConstStr::getCNST_STR_1058(), ctx))
+	{
+		return LONG;
+	}
+	if(str->equalsIgnoreCase(ConstStr::getCNST_STR_1059(), ctx) || str->equalsIgnoreCase(ConstStr::getCNST_STR_1060(), ctx))
 	{
 		return VARCHAR;
 	}
-	if(str->equalsIgnoreCase(ConstStr::getCNST_STR_1060(), ctx) || str->equalsIgnoreCase(ConstStr::getCNST_STR_1061(), ctx))
+	if(str->equalsIgnoreCase(ConstStr::getCNST_STR_1061(), ctx) || str->equalsIgnoreCase(ConstStr::getCNST_STR_1062(), ctx))
 	{
 		return TEXT;
 	}
-	if(str->equalsIgnoreCase(ConstStr::getCNST_STR_1062(), ctx) || str->equalsIgnoreCase(ConstStr::getCNST_STR_1063(), ctx))
-	{
-		return DOUBLE;
-	}
-	if(str->equalsIgnoreCase(ConstStr::getCNST_STR_1064(), ctx))
+	if(str->equalsIgnoreCase(ConstStr::getCNST_STR_1063(), ctx) || str->equalsIgnoreCase(ConstStr::getCNST_STR_1064(), ctx))
 	{
 		return DOUBLE;
 	}
 	if(str->equalsIgnoreCase(ConstStr::getCNST_STR_1065(), ctx))
 	{
+		return DOUBLE;
+	}
+	if(str->equalsIgnoreCase(ConstStr::getCNST_STR_1066(), ctx))
+	{
 		return TIMESTAMP;
+	}
+	if(str->equalsIgnoreCase(ConstStr::getCNST_STR_1067(), ctx))
+	{
+		return TIME;
+	}
+	if(str->equalsIgnoreCase(ConstStr::getCNST_STR_1068(), ctx))
+	{
+		return BIG_DECIMAL;
 	}
 	return -1;
 }

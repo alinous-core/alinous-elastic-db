@@ -7,8 +7,8 @@ namespace alinous {namespace runtime {namespace dom {
 
 
 
-String* DomVariable::VAL_TYPE = ConstStr::getCNST_STR_1116();
-String* DomVariable::PROPS = ConstStr::getCNST_STR_1117();
+String* DomVariable::VAL_TYPE = ConstStr::getCNST_STR_1119();
+String* DomVariable::PROPS = ConstStr::getCNST_STR_1120();
 bool DomVariable::__init_done = __init_static_variables();
 bool DomVariable::__init_static_variables(){
 	Java2CppSystem::getSelf();
@@ -200,7 +200,7 @@ String* DomVariable::toString(ThreadContext* ctx) throw()
 {
 	StringBuffer* buff = (new(ctx) StringBuffer(ctx));
 	buff->append(this->value->toString(ctx), ctx);
-	buff->append(ConstStr::getCNST_STR_1113(), ctx);
+	buff->append(ConstStr::getCNST_STR_1116(), ctx);
 	int cnt = 0;
 	Iterator<IDomVariable>* it = this->properties->iterator(ctx);
 	while(it->hasNext(ctx))
@@ -213,7 +213,7 @@ String* DomVariable::toString(ThreadContext* ctx) throw()
 		cnt ++ ;
 		buff->append(value->toString(ctx), ctx);
 	}
-	buff->append(ConstStr::getCNST_STR_1114(), ctx);
+	buff->append(ConstStr::getCNST_STR_1117(), ctx);
 	return buff->toString(ctx);
 }
 IDomVariable* DomVariable::get(int index, ThreadContext* ctx) throw() 
@@ -1184,7 +1184,7 @@ int DomVariable::getKind(ThreadContext* ctx) throw()
 }
 void DomVariable::addValue(VariantValue* vv, ThreadContext* ctx) throw() 
 {
-	throw (new(ctx) RuntimeException(ConstStr::getCNST_STR_1115(), ctx));
+	throw (new(ctx) RuntimeException(ConstStr::getCNST_STR_1118(), ctx));
 }
 long long DomVariable::getOid(ThreadContext* ctx) throw() 
 {

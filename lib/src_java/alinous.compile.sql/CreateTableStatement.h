@@ -21,6 +21,12 @@ class DdlColumnDescriptor;}}}}
 namespace alinous {namespace db {namespace table {
 class TableColumnMetadata;}}}
 
+namespace alinous {namespace db {namespace table {
+class TablePartitionMaxValue;}}}
+
+namespace alinous {namespace runtime {namespace variant {
+class VariantValue;}}}
+
 namespace alinous {namespace compile {namespace analyse {
 class SourceValidator;}}}
 
@@ -69,6 +75,9 @@ class AbstractSQLStatement;}}}
 namespace alinous {namespace compile {
 class AlinousElementNetworkFactory;}}
 
+namespace alinous {namespace compile {namespace sql {namespace ddl {
+class ColumnTypeDescriptor;}}}}
+
 namespace alinous {namespace db {namespace table {
 class DatabaseException;}}}
 
@@ -96,6 +105,7 @@ using ::alinous::compile::analyse::SourceValidator;
 using ::alinous::compile::analyse::SrcAnalyseContext;
 using ::alinous::compile::sql::analyze::SQLAnalyseContext;
 using ::alinous::compile::sql::ddl::CheckDefinition;
+using ::alinous::compile::sql::ddl::ColumnTypeDescriptor;
 using ::alinous::compile::sql::ddl::DdlColumnDescriptor;
 using ::alinous::compile::sql::ddl::PrimaryKeys;
 using ::alinous::compile::sql::ddl::ShardKeys;
@@ -107,10 +117,12 @@ using ::alinous::db::TableSchema;
 using ::alinous::db::table::DatabaseException;
 using ::alinous::db::table::TableColumnMetadata;
 using ::alinous::db::table::TableMetadata;
+using ::alinous::db::table::TablePartitionMaxValue;
 using ::alinous::remote::socket::ICommandData;
 using ::alinous::remote::socket::NetworkBinaryBuffer;
 using ::alinous::runtime::dom::VariableException;
 using ::alinous::runtime::engine::ScriptMachine;
+using ::alinous::runtime::variant::VariantValue;
 using ::alinous::system::AlinousException;
 
 
@@ -163,6 +175,9 @@ public:
 	void setShardKeys(ShardKeys* shardKeys, ThreadContext* ctx) throw() ;
 	SubShardKeys* getSubShardKeys(ThreadContext* ctx) throw() ;
 	void setSubShardKeys(SubShardKeys* subShardKeys, ThreadContext* ctx) throw() ;
+private:
+	TablePartitionMaxValue* makeMaxTablePartitionMaxValue(TableMetadata* tblMetadata, ThreadContext* ctx) throw() ;
+	int ddlColumnType2VariantType(int coltype, ThreadContext* ctx) throw() ;
 public:
 	static bool __init_done;
 	static bool __init_static_variables();

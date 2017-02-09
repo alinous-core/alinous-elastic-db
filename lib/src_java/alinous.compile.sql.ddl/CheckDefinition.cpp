@@ -139,7 +139,7 @@ CheckDefinition* CheckDefinition::fromFileEntry(FileStorageEntryFetcher* fetcher
 		IExpression* el = IExpressionFactory::fromFetcher(fetcher, ctx);
 		if(el == nullptr || !((dynamic_cast<ISQLExpression*>(el) != 0)))
 		{
-			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_1066(), ctx));
+			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_1069(), ctx));
 		}
 		def->setExp(static_cast<ISQLExpression*>(el), ctx);
 	}

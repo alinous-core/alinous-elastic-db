@@ -7,8 +7,8 @@ namespace alinous {namespace runtime {namespace engine {namespace debugger {name
 
 
 
-String* StepReturnRequest::THREAD_ID = ConstStr::getCNST_STR_1193();
-String* StepReturnRequest::STACK_ID = ConstStr::getCNST_STR_1194();
+String* StepReturnRequest::THREAD_ID = ConstStr::getCNST_STR_1196();
+String* StepReturnRequest::STACK_ID = ConstStr::getCNST_STR_1197();
 bool StepReturnRequest::__init_done = __init_static_variables();
 bool StepReturnRequest::__init_static_variables(){
 	Java2CppSystem::getSelf();

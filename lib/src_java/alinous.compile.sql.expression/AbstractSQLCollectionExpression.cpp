@@ -212,7 +212,7 @@ void AbstractSQLCollectionExpression::__readData(NetworkBinaryBuffer* buff, Thre
 		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
 		if(el == nullptr || !((dynamic_cast<SQLSubExpression*>(el) != 0)))
 		{
-			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1069(), ctx));
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1072(), ctx));
 		}
 		this->expressions->add(static_cast<SQLSubExpression*>(el), ctx);
 	}
@@ -308,7 +308,7 @@ void AbstractSQLCollectionExpression::fromFileEntry(FileStorageEntryFetcher* fet
 		IExpression* el = IExpressionFactory::fromFetcher(fetcher, ctx);
 		if(el == nullptr || !((dynamic_cast<SQLSubExpression*>(el) != 0)))
 		{
-			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1069(), ctx));
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1072(), ctx));
 		}
 		this->expressions->add(static_cast<SQLSubExpression*>(el), ctx);
 	}

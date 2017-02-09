@@ -89,6 +89,29 @@ TableSchema* CreateTableStatement::createMetadata(ScriptMachine* machine, bool d
 	}
 	tblMetadata->setChecks(this->checks, ctx);
 	schema->setRegionName(this->region, ctx);
+	ArrayList<String>* scolumns = this->primaryKeys->getColumns(ctx);
+	if(this->shardKeys != nullptr)
+	{
+		scolumns = this->shardKeys->getColumns(ctx);
+	}
+	maxLoop = scolumns->size(ctx);
+	for(int i = 0; i != maxLoop; ++i)
+	{
+		String* key = scolumns->get(i, ctx);
+		tblMetadata->addShardKey(key, ctx);
+	}
+	if(this->subShardKeys != nullptr)
+	{
+		scolumns = this->subShardKeys->getColumns(ctx);
+		maxLoop = scolumns->size(ctx);
+		for(int i = 0; i != maxLoop; ++i)
+		{
+			String* key = scolumns->get(i, ctx);
+			tblMetadata->addSubShardKey(key, ctx);
+		}
+	}
+	TablePartitionMaxValue* maxPartitionValue = makeMaxTablePartitionMaxValue(tblMetadata, ctx);
+	tblMetadata->setMaxPartitionValue(maxPartitionValue, ctx);
 	return schema;
 }
 void CreateTableStatement::validate(SourceValidator* validator, ThreadContext* ctx) throw() 
@@ -391,6 +414,69 @@ SubShardKeys* CreateTableStatement::getSubShardKeys(ThreadContext* ctx) throw()
 void CreateTableStatement::setSubShardKeys(SubShardKeys* subShardKeys, ThreadContext* ctx) throw() 
 {
 	__GC_MV(this, &(this->subShardKeys), subShardKeys, SubShardKeys);
+}
+TablePartitionMaxValue* CreateTableStatement::makeMaxTablePartitionMaxValue(TableMetadata* tblMetadata, ThreadContext* ctx) throw() 
+{
+	TablePartitionMaxValue* value = (new(ctx) TablePartitionMaxValue(ctx));
+	ArrayList<String>* scolumns = this->primaryKeys->getColumns(ctx);
+	if(this->shardKeys != nullptr)
+	{
+		scolumns = this->shardKeys->getColumns(ctx);
+	}
+	int maxLoop = scolumns->size(ctx);
+	for(int i = 0; i != maxLoop; ++i)
+	{
+		String* key = scolumns->get(i, ctx);
+		TableColumnMetadata* col = tblMetadata->getColumnByName(key, ctx);
+		int coltype = col->getType(ctx);
+		int type = ddlColumnType2VariantType(coltype, ctx);
+		VariantValue* max = VariantValue::createMaxValue(type, ctx);
+		value->addValue(max, ctx);
+	}
+	if(this->subShardKeys != nullptr)
+	{
+		scolumns = this->subShardKeys->getColumns(ctx);
+		maxLoop = scolumns->size(ctx);
+		for(int i = 0; i != maxLoop; ++i)
+		{
+			String* key = scolumns->get(i, ctx);
+			TableColumnMetadata* col = tblMetadata->getColumnByName(key, ctx);
+			int coltype = col->getType(ctx);
+			int type = ddlColumnType2VariantType(coltype, ctx);
+			VariantValue* max = VariantValue::createMaxValue(type, ctx);
+			value->addSubValue(max, ctx);
+		}
+	}
+	return value;
+}
+int CreateTableStatement::ddlColumnType2VariantType(int coltype, ThreadContext* ctx) throw() 
+{
+	int type = 0;
+	switch(coltype) {
+	case ColumnTypeDescriptor::INT:
+		type = VariantValue::TYPE_INT;
+		break ;
+	case ColumnTypeDescriptor::DOUBLE:
+		type = VariantValue::TYPE_DOUBLE;
+		break ;
+	case ColumnTypeDescriptor::DATE:
+	case ColumnTypeDescriptor::TIMESTAMP:
+		type = VariantValue::TYPE_TIMESTAMP;
+		break ;
+	case ColumnTypeDescriptor::TIME:
+		type = VariantValue::TYPE_TIME;
+		break ;
+	case ColumnTypeDescriptor::BIG_DECIMAL:
+		type = VariantValue::TYPE_BIG_DECIMAL;
+		break ;
+	case ColumnTypeDescriptor::VARCHAR:
+	case ColumnTypeDescriptor::TEXT:
+	case ColumnTypeDescriptor::BLOB:
+	default:
+		type = VariantValue::TYPE_STRING;
+		break ;
+	}
+	return type;
 }
 }}}
 

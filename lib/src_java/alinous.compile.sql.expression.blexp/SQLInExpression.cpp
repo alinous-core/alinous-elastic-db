@@ -120,7 +120,7 @@ bool SQLInExpression::analyseSQL(SQLAnalyseContext* context, bool leftValue, boo
 	ArrayList<ScanTableColumnIdentifier>* colList = this->first->getColumns(ctx);
 	if(colList == nullptr || colList->isEmpty(ctx))
 	{
-		throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1075(), ctx));
+		throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1078(), ctx));
 	}
 	return true;
 }

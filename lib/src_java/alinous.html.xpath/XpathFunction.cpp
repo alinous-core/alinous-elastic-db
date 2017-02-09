@@ -65,13 +65,13 @@ String* XpathFunction::toString(ThreadContext* ctx) throw()
 IVariableValue* XpathFunction::getValue(DomDocument* document, DomNode* currentNode, ThreadContext* ctx) throw() 
 {
 	IXpathFunction* func = nullptr;
-	if(this->name->equals(ConstStr::getCNST_STR_1771(), ctx))
+	if(this->name->equals(ConstStr::getCNST_STR_1778(), ctx))
 	{
 		func = (new(ctx) First(ctx));
 	}
 		else 
 	{
-		if(this->name->equals(ConstStr::getCNST_STR_1768(), ctx))
+		if(this->name->equals(ConstStr::getCNST_STR_1775(), ctx))
 		{
 			func = (new(ctx) Last(ctx));
 		}

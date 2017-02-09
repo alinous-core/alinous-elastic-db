@@ -68,10 +68,10 @@ RegionsServer* RegionsServer::parseInstance(MatchCandidate* candidate, DomDocume
 {
 	RegionsServer* regions = (new(ctx) RegionsServer(ctx));
 	DomNode* selfDom = candidate->getCandidateDom(ctx);
-	IVariableValue* attr = selfDom->getAttributeValue(ConstStr::getCNST_STR_1262(), ctx);
+	IVariableValue* attr = selfDom->getAttributeValue(ConstStr::getCNST_STR_1267(), ctx);
 	if(attr == nullptr)
 	{
-		throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_1274(), ctx));
+		throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_1279(), ctx));
 	}
 	{
 		try
@@ -81,10 +81,10 @@ RegionsServer* RegionsServer::parseInstance(MatchCandidate* candidate, DomDocume
 		}
 		catch(Throwable* e)
 		{
-			throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_1275(), ctx));
+			throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_1280(), ctx));
 		}
 	}
-	attr = selfDom->getAttributeValue(ConstStr::getCNST_STR_1276(), ctx);
+	attr = selfDom->getAttributeValue(ConstStr::getCNST_STR_1281(), ctx);
 	if(attr != nullptr)
 	{
 		{
@@ -95,45 +95,45 @@ RegionsServer* RegionsServer::parseInstance(MatchCandidate* candidate, DomDocume
 			}
 			catch(Throwable* e)
 			{
-				throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_1275(), ctx));
+				throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_1280(), ctx));
 			}
 		}
 	}
-	MatchCandidatesCollection* result = matcher->match(document, selfDom, ConstStr::getCNST_STR_1261(), ctx);
+	MatchCandidatesCollection* result = matcher->match(document, selfDom, ConstStr::getCNST_STR_1266(), ctx);
 	ArrayList<MatchCandidate>* list = result->getCandidatesList(ctx);
 	if(list->isEmpty(ctx))
 	{
-		throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_1277(), ctx));
+		throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_1282(), ctx));
 	}
 		else 
 	{
 		if(list->size(ctx) != 1)
 		{
-			throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_1278(), ctx));
+			throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_1283(), ctx));
 		}
 	}
 	MatchCandidate* moncandidate = list->get(0, ctx);
 	MonitorRef* monitorRef = MonitorRef::parseInstance(moncandidate, document, matcher, ctx);
 	regions->setMonitorRef(monitorRef, ctx);
-	result = matcher->match(document, selfDom, ConstStr::getCNST_STR_1279(), ctx);
+	result = matcher->match(document, selfDom, ConstStr::getCNST_STR_1284(), ctx);
 	list = result->getCandidatesList(ctx);
 	if(list->isEmpty(ctx))
 	{
-		throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_1280(), ctx));
+		throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_1285(), ctx));
 	}
 		else 
 	{
 		if(list->size(ctx) != 1)
 		{
-			throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_1281(), ctx));
+			throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_1286(), ctx));
 		}
 	}
 	moncandidate = list->get(0, ctx);
 	DomNode* regionDom = moncandidate->getCandidateDom(ctx);
-	attr = regionDom->getAttributeValue(ConstStr::getCNST_STR_1118(), ctx);
+	attr = regionDom->getAttributeValue(ConstStr::getCNST_STR_1121(), ctx);
 	if(attr == nullptr)
 	{
-		throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_1282(), ctx));
+		throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_1287(), ctx));
 	}
 	__GC_MV(regions, &(regions->region), attr->toString(ctx)->trim(ctx), String);
 	return regions;

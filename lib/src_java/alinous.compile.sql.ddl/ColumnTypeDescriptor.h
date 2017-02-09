@@ -73,12 +73,15 @@ private:
 	int typeNum;
 public:
 	constexpr static const int INT{0};
-	constexpr static const int VARCHAR{1};
-	constexpr static const int TEXT{2};
-	constexpr static const int DOUBLE{3};
-	constexpr static const int DATE{4};
-	constexpr static const int TIMESTAMP{5};
-	constexpr static const int BLOB{6};
+	constexpr static const int LONG{1};
+	constexpr static const int VARCHAR{2};
+	constexpr static const int TEXT{3};
+	constexpr static const int DOUBLE{4};
+	constexpr static const int DATE{5};
+	constexpr static const int TIME{6};
+	constexpr static const int TIMESTAMP{7};
+	constexpr static const int BLOB{8};
+	constexpr static const int BIG_DECIMAL{9};
 public:
 	bool visit(IAlinousElementVisitor* visitor, AbstractSrcElement* parent, ThreadContext* ctx) throw()  final;
 	ISQLExpression* getLength(ThreadContext* ctx) throw() ;

@@ -430,7 +430,7 @@ AlinousSrc* AlinousPlusParser::parse(ThreadContext* ctx)
 			return src;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1318(), ctx));
 }
 void AlinousPlusParser::headerSection(AlinousSrc* src, ThreadContext* ctx)
 {
@@ -490,7 +490,7 @@ IncludePreprocessor* AlinousPlusParser::includePreprocessor(ThreadContext* ctx)
 			return inc;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1318(), ctx));
 }
 StatementList* AlinousPlusParser::statementList(ThreadContext* ctx)
 {
@@ -527,7 +527,7 @@ StatementList* AlinousPlusParser::statementList(ThreadContext* ctx)
 			return list;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1318(), ctx));
 }
 IStatement* AlinousPlusParser::allStatements(ThreadContext* ctx)
 {
@@ -667,7 +667,7 @@ IStatement* AlinousPlusParser::allStatements(ThreadContext* ctx)
 			return stmt;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1318(), ctx));
 }
 IDeclare* AlinousPlusParser::alinousDeclare(ThreadContext* ctx)
 {
@@ -701,7 +701,7 @@ IDeclare* AlinousPlusParser::alinousDeclare(ThreadContext* ctx)
 			return dec;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1318(), ctx));
 }
 AlinousClass* AlinousPlusParser::alinousInterface(ThreadContext* ctx)
 {
@@ -781,7 +781,7 @@ AlinousClass* AlinousPlusParser::alinousInterface(ThreadContext* ctx)
 			return clazz;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1318(), ctx));
 }
 AlinousClass* AlinousPlusParser::alinousClass(ThreadContext* ctx)
 {
@@ -873,7 +873,7 @@ AlinousClass* AlinousPlusParser::alinousClass(ThreadContext* ctx)
 			return clazz;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1318(), ctx));
 }
 ArrayList<ClassImplements>* AlinousPlusParser::classImplements(ThreadContext* ctx)
 {
@@ -997,7 +997,7 @@ ArrayList<ClassImplements>* AlinousPlusParser::classImplements(ThreadContext* ct
 			return list;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1318(), ctx));
 }
 ClassExtends* AlinousPlusParser::classExtends(ThreadContext* ctx)
 {
@@ -1013,7 +1013,7 @@ ClassExtends* AlinousPlusParser::classExtends(ThreadContext* ctx)
 			return exts;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1318(), ctx));
 }
 IClassMember* AlinousPlusParser::classMember(ThreadContext* ctx)
 {
@@ -1046,7 +1046,7 @@ IClassMember* AlinousPlusParser::classMember(ThreadContext* ctx)
 			return member;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1318(), ctx));
 }
 void AlinousPlusParser::classMemberVariableLookAhead(ThreadContext* ctx)
 {
@@ -1390,7 +1390,7 @@ ClassMemberVariable* AlinousPlusParser::classMemberVariable(ThreadContext* ctx)
 			return val;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1318(), ctx));
 }
 ClassMethodFunction* AlinousPlusParser::classMethodFunction(ThreadContext* ctx)
 {
@@ -1407,7 +1407,7 @@ ClassMethodFunction* AlinousPlusParser::classMethodFunction(ThreadContext* ctx)
 			return method;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1318(), ctx));
 }
 ClassMemberModifiers* AlinousPlusParser::classMemberModifiers(ThreadContext* ctx)
 {
@@ -1481,7 +1481,7 @@ ClassMemberModifiers* AlinousPlusParser::classMemberModifiers(ThreadContext* ctx
 			return mod;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1318(), ctx));
 }
 void AlinousPlusParser::alinousFunctionLookAhead(ThreadContext* ctx)
 {
@@ -1828,7 +1828,7 @@ AlinousFunction* AlinousPlusParser::alinousFunction(ThreadContext* ctx)
 			return func;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1318(), ctx));
 }
 ReturnValueDefinition* AlinousPlusParser::returnValueDefinition(ThreadContext* ctx)
 {
@@ -1842,7 +1842,7 @@ ReturnValueDefinition* AlinousPlusParser::returnValueDefinition(ThreadContext* c
 			return retValue;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1318(), ctx));
 }
 FunctionArgumentsListDefine* AlinousPlusParser::functionArgumentsListDefine(ThreadContext* ctx)
 {
@@ -1981,7 +1981,7 @@ FunctionArgumentsListDefine* AlinousPlusParser::functionArgumentsListDefine(Thre
 			return arguments;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1318(), ctx));
 }
 FunctionArgumentDefine* AlinousPlusParser::functionArgumentDefine(ThreadContext* ctx)
 {
@@ -2115,7 +2115,7 @@ FunctionArgumentDefine* AlinousPlusParser::functionArgumentDefine(ThreadContext*
 		throw (new(ctx) ParseException(ctx));
 		break;
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1318(), ctx));
 }
 ThrowsDefine* AlinousPlusParser::throwsDefine(ThreadContext* ctx)
 {
@@ -2149,7 +2149,7 @@ ThrowsDefine* AlinousPlusParser::throwsDefine(ThreadContext* ctx)
 			return throwsDef;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1318(), ctx));
 }
 IStatement* AlinousPlusParser::alinousStatement(ThreadContext* ctx)
 {
@@ -2207,7 +2207,7 @@ IStatement* AlinousPlusParser::alinousStatement(ThreadContext* ctx)
 			return stmt;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1318(), ctx));
 }
 IfStatement* AlinousPlusParser::ifStatement(ThreadContext* ctx)
 {
@@ -2228,7 +2228,7 @@ IfStatement* AlinousPlusParser::ifStatement(ThreadContext* ctx)
 			return stmt;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1318(), ctx));
 }
 SwitchStatement* AlinousPlusParser::switchStatement(ThreadContext* ctx)
 {
@@ -2287,7 +2287,7 @@ SwitchStatement* AlinousPlusParser::switchStatement(ThreadContext* ctx)
 			return stmt;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1318(), ctx));
 }
 SwitchCasePart* AlinousPlusParser::switchCasePart(ThreadContext* ctx)
 {
@@ -2347,7 +2347,7 @@ SwitchCasePart* AlinousPlusParser::switchCasePart(ThreadContext* ctx)
 			return part;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1318(), ctx));
 }
 CaseStatement* AlinousPlusParser::caseStatement(ThreadContext* ctx)
 {
@@ -2365,7 +2365,7 @@ CaseStatement* AlinousPlusParser::caseStatement(ThreadContext* ctx)
 			return stmt;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1318(), ctx));
 }
 DefaultStatement* AlinousPlusParser::defaultStatement(ThreadContext* ctx)
 {
@@ -2380,7 +2380,7 @@ DefaultStatement* AlinousPlusParser::defaultStatement(ThreadContext* ctx)
 			return stmt;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1318(), ctx));
 }
 ForStatement* AlinousPlusParser::forStatement(ThreadContext* ctx)
 {
@@ -2790,7 +2790,7 @@ ForStatement* AlinousPlusParser::forStatement(ThreadContext* ctx)
 			return stmt;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1318(), ctx));
 }
 ForUpdatePart* AlinousPlusParser::forUpdatePart(ThreadContext* ctx)
 {
@@ -2838,7 +2838,7 @@ ForUpdatePart* AlinousPlusParser::forUpdatePart(ThreadContext* ctx)
 			return part;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1318(), ctx));
 }
 DoWhileStatement* AlinousPlusParser::doWhileStatement(ThreadContext* ctx)
 {
@@ -2882,7 +2882,7 @@ DoWhileStatement* AlinousPlusParser::doWhileStatement(ThreadContext* ctx)
 			return stmt;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1318(), ctx));
 }
 WhileStatement* AlinousPlusParser::whileStatement(ThreadContext* ctx)
 {
@@ -2923,7 +2923,7 @@ WhileStatement* AlinousPlusParser::whileStatement(ThreadContext* ctx)
 			return stmt;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1318(), ctx));
 }
 BreakStatement* AlinousPlusParser::breakStatement(ThreadContext* ctx)
 {
@@ -2941,7 +2941,7 @@ BreakStatement* AlinousPlusParser::breakStatement(ThreadContext* ctx)
 			return stmt;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1318(), ctx));
 }
 ContinueStatement* AlinousPlusParser::continueStatement(ThreadContext* ctx)
 {
@@ -2959,7 +2959,7 @@ ContinueStatement* AlinousPlusParser::continueStatement(ThreadContext* ctx)
 			return stmt;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1318(), ctx));
 }
 LabeledStatement* AlinousPlusParser::labeledStatement(ThreadContext* ctx)
 {
@@ -2975,7 +2975,7 @@ LabeledStatement* AlinousPlusParser::labeledStatement(ThreadContext* ctx)
 			return stmt;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1318(), ctx));
 }
 TypedVariableDeclare* AlinousPlusParser::typedVariableDeclare(ThreadContext* ctx)
 {
@@ -3047,7 +3047,7 @@ TypedVariableDeclare* AlinousPlusParser::typedVariableDeclare(ThreadContext* ctx
 			return stmt;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1318(), ctx));
 }
 void AlinousPlusParser::assignmentStatementLookAhead(ThreadContext* ctx)
 {
@@ -3076,7 +3076,7 @@ AssignmentStatement* AlinousPlusParser::assignmentStatement(ThreadContext* ctx)
 			return stmt;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1318(), ctx));
 }
 StatementBlock* AlinousPlusParser::statementBlock(ThreadContext* ctx)
 {
@@ -3215,7 +3215,7 @@ StatementBlock* AlinousPlusParser::statementBlock(ThreadContext* ctx)
 			return stmt;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1318(), ctx));
 }
 ExpressionStatement* AlinousPlusParser::expressionStatement(ThreadContext* ctx)
 {
@@ -3231,7 +3231,7 @@ ExpressionStatement* AlinousPlusParser::expressionStatement(ThreadContext* ctx)
 			return stmt;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1318(), ctx));
 }
 ReturnStatement* AlinousPlusParser::returnStatement(ThreadContext* ctx)
 {
@@ -3373,7 +3373,7 @@ ReturnStatement* AlinousPlusParser::returnStatement(ThreadContext* ctx)
 			return stmt;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1318(), ctx));
 }
 IExpression* AlinousPlusParser::conditionalExpression(ThreadContext* ctx)
 {
@@ -3412,7 +3412,7 @@ IExpression* AlinousPlusParser::conditionalExpression(ThreadContext* ctx)
 			return cond;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1318(), ctx));
 }
 IExpression* AlinousPlusParser::conditionalOrExpression(ThreadContext* ctx)
 {
@@ -3458,7 +3458,7 @@ IExpression* AlinousPlusParser::conditionalOrExpression(ThreadContext* ctx)
 			return orExp;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1318(), ctx));
 }
 IExpression* AlinousPlusParser::conditionalAndExpression(ThreadContext* ctx)
 {
@@ -3504,7 +3504,7 @@ IExpression* AlinousPlusParser::conditionalAndExpression(ThreadContext* ctx)
 			return andExp;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1318(), ctx));
 }
 IExpression* AlinousPlusParser::inclusiveOrExpression(ThreadContext* ctx)
 {
@@ -3550,7 +3550,7 @@ IExpression* AlinousPlusParser::inclusiveOrExpression(ThreadContext* ctx)
 			return orExp;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1318(), ctx));
 }
 IExpression* AlinousPlusParser::exclusiveOrExpression(ThreadContext* ctx)
 {
@@ -3596,7 +3596,7 @@ IExpression* AlinousPlusParser::exclusiveOrExpression(ThreadContext* ctx)
 			return exor;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1318(), ctx));
 }
 IExpression* AlinousPlusParser::andExpression(ThreadContext* ctx)
 {
@@ -3642,7 +3642,7 @@ IExpression* AlinousPlusParser::andExpression(ThreadContext* ctx)
 			return andExp;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1318(), ctx));
 }
 IExpression* AlinousPlusParser::equalityExpression(ThreadContext* ctx)
 {
@@ -3697,7 +3697,7 @@ IExpression* AlinousPlusParser::equalityExpression(ThreadContext* ctx)
 			return eqexp;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1318(), ctx));
 }
 IExpression* AlinousPlusParser::instanceOfExpression(ThreadContext* ctx)
 {
@@ -3732,7 +3732,7 @@ IExpression* AlinousPlusParser::instanceOfExpression(ThreadContext* ctx)
 			return instanceofexp;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1318(), ctx));
 }
 IExpression* AlinousPlusParser::relationalExpression(ThreadContext* ctx)
 {
@@ -3794,7 +3794,7 @@ IExpression* AlinousPlusParser::relationalExpression(ThreadContext* ctx)
 			return relational;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1318(), ctx));
 }
 IExpression* AlinousPlusParser::shiftExpression(ThreadContext* ctx)
 {
@@ -3861,7 +3861,7 @@ IExpression* AlinousPlusParser::shiftExpression(ThreadContext* ctx)
 			return shift;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1318(), ctx));
 }
 IExpression* AlinousPlusParser::additiveExpression(ThreadContext* ctx)
 {
@@ -3923,7 +3923,7 @@ IExpression* AlinousPlusParser::additiveExpression(ThreadContext* ctx)
 			return additive;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1318(), ctx));
 }
 IExpression* AlinousPlusParser::multiplicativeExpression(ThreadContext* ctx)
 {
@@ -3986,7 +3986,7 @@ IExpression* AlinousPlusParser::multiplicativeExpression(ThreadContext* ctx)
 			return mulExp;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1318(), ctx));
 }
 IExpression* AlinousPlusParser::notExpression(ThreadContext* ctx)
 {
@@ -4018,7 +4018,7 @@ IExpression* AlinousPlusParser::notExpression(ThreadContext* ctx)
 			return notexp;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1318(), ctx));
 }
 IExpression* AlinousPlusParser::unaryExpression(ThreadContext* ctx)
 {
@@ -4096,7 +4096,7 @@ IExpression* AlinousPlusParser::unaryExpression(ThreadContext* ctx)
 			return exp;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1318(), ctx));
 }
 AllocationExpression* AlinousPlusParser::allocationExpression(ThreadContext* ctx)
 {
@@ -4162,7 +4162,7 @@ AllocationExpression* AlinousPlusParser::allocationExpression(ThreadContext* ctx
 			return exp;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1318(), ctx));
 }
 ExpressionStream* AlinousPlusParser::expressionStream(ThreadContext* ctx)
 {
@@ -4341,7 +4341,7 @@ ExpressionStream* AlinousPlusParser::expressionStream(ThreadContext* ctx)
 			return stream;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1318(), ctx));
 }
 FunctionCallExpression* AlinousPlusParser::functionCallExpression(ThreadContext* ctx)
 {
@@ -4358,7 +4358,7 @@ FunctionCallExpression* AlinousPlusParser::functionCallExpression(ThreadContext*
 			return exp;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1318(), ctx));
 }
 ExpStreamSegment* AlinousPlusParser::expStreamSegment(ThreadContext* ctx)
 {
@@ -4445,7 +4445,7 @@ ExpStreamSegment* AlinousPlusParser::expStreamSegment(ThreadContext* ctx)
 			return expStream;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1318(), ctx));
 }
 ExpStreamCast* AlinousPlusParser::expStreamCast(ThreadContext* ctx)
 {
@@ -4465,7 +4465,7 @@ ExpStreamCast* AlinousPlusParser::expStreamCast(ThreadContext* ctx)
 			return castExp;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1318(), ctx));
 }
 ExpStreamParenthesis* AlinousPlusParser::expStreamParenthesis(ThreadContext* ctx)
 {
@@ -4483,7 +4483,7 @@ ExpStreamParenthesis* AlinousPlusParser::expStreamParenthesis(ThreadContext* ctx
 			return pareExp;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1318(), ctx));
 }
 PreIncrementExpression* AlinousPlusParser::preIncrementExpression(ThreadContext* ctx)
 {
@@ -4499,7 +4499,7 @@ PreIncrementExpression* AlinousPlusParser::preIncrementExpression(ThreadContext*
 			return preExp;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1318(), ctx));
 }
 PreDecrementExpression* AlinousPlusParser::preDecrementExpression(ThreadContext* ctx)
 {
@@ -4515,7 +4515,7 @@ PreDecrementExpression* AlinousPlusParser::preDecrementExpression(ThreadContext*
 			return preExp;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1318(), ctx));
 }
 BitReverseExpression* AlinousPlusParser::bitReverseExpression(ThreadContext* ctx)
 {
@@ -4531,7 +4531,7 @@ BitReverseExpression* AlinousPlusParser::bitReverseExpression(ThreadContext* ctx
 			return bitexp;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1318(), ctx));
 }
 void AlinousPlusParser::parenthesisLookahead(ThreadContext* ctx)
 {
@@ -4555,7 +4555,7 @@ ParenthesisExpression* AlinousPlusParser::parenthesisExpression(ThreadContext* c
 			return parenthesisExp;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1318(), ctx));
 }
 CastExpression* AlinousPlusParser::castExpression(ThreadContext* ctx)
 {
@@ -4574,7 +4574,7 @@ CastExpression* AlinousPlusParser::castExpression(ThreadContext* ctx)
 			return castExp;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1318(), ctx));
 }
 FunctionArguments* AlinousPlusParser::functionArguments(ThreadContext* ctx)
 {
@@ -4726,7 +4726,7 @@ FunctionArguments* AlinousPlusParser::functionArguments(ThreadContext* ctx)
 			return args;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1318(), ctx));
 }
 Literal* AlinousPlusParser::literal(ThreadContext* ctx)
 {
@@ -4776,7 +4776,7 @@ Literal* AlinousPlusParser::literal(ThreadContext* ctx)
 			return lit;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1318(), ctx));
 }
 BooleanLiteral* AlinousPlusParser::booleanLiteral(ThreadContext* ctx)
 {
@@ -4806,7 +4806,7 @@ BooleanLiteral* AlinousPlusParser::booleanLiteral(ThreadContext* ctx)
 			return lit;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1318(), ctx));
 }
 NullLiteral* AlinousPlusParser::nullLiteral(ThreadContext* ctx)
 {
@@ -4819,7 +4819,7 @@ NullLiteral* AlinousPlusParser::nullLiteral(ThreadContext* ctx)
 			return lit;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1318(), ctx));
 }
 DomVariableDescriptor* AlinousPlusParser::domVariableDescriptor(ThreadContext* ctx)
 {
@@ -4885,7 +4885,7 @@ DomVariableDescriptor* AlinousPlusParser::domVariableDescriptor(ThreadContext* c
 		}
 	}
 	label_30_out_break: ;
-	if(t->image->equals(ConstStr::getCNST_STR_1314(), ctx))
+	if(t->image->equals(ConstStr::getCNST_STR_1319(), ctx))
 	{
 		desc->markLastSegmentAsArray(ctx);
 	}
@@ -4902,7 +4902,7 @@ DomVariableDescriptor* AlinousPlusParser::domVariableDescriptor(ThreadContext* c
 			return desc;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1318(), ctx));
 }
 DomNameSegment* AlinousPlusParser::domNameSegment(ThreadContext* ctx)
 {
@@ -4916,7 +4916,7 @@ DomNameSegment* AlinousPlusParser::domNameSegment(ThreadContext* ctx)
 			return seg;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1318(), ctx));
 }
 DomIndexSegment* AlinousPlusParser::domIndexSegment(ThreadContext* ctx)
 {
@@ -4934,7 +4934,7 @@ DomIndexSegment* AlinousPlusParser::domIndexSegment(ThreadContext* ctx)
 			return seg;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1318(), ctx));
 }
 AlinousName* AlinousPlusParser::alinousName(ThreadContext* ctx)
 {
@@ -4973,7 +4973,7 @@ AlinousName* AlinousPlusParser::alinousName(ThreadContext* ctx)
 			return buff;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1318(), ctx));
 }
 Token* AlinousPlusParser::nameIdentifier(ThreadContext* ctx)
 {
@@ -5455,7 +5455,7 @@ Token* AlinousPlusParser::nameIdentifier(ThreadContext* ctx)
 			return t;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1318(), ctx));
 }
 Token* AlinousPlusParser::assignmentOperator(ThreadContext* ctx)
 {
@@ -5527,7 +5527,7 @@ Token* AlinousPlusParser::assignmentOperator(ThreadContext* ctx)
 			return t;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1318(), ctx));
 }
 ISqlStatement* AlinousPlusParser::sqlStatement(ThreadContext* ctx)
 {
@@ -5613,7 +5613,7 @@ ISqlStatement* AlinousPlusParser::sqlStatement(ThreadContext* ctx)
 			return stmt;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1318(), ctx));
 }
 SelectStatement* AlinousPlusParser::selectStatement(ThreadContext* ctx)
 {
@@ -5671,7 +5671,7 @@ SelectStatement* AlinousPlusParser::selectStatement(ThreadContext* ctx)
 			return stmt;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1318(), ctx));
 }
 SQLFrom* AlinousPlusParser::sqlFrom(ThreadContext* ctx)
 {
@@ -5687,7 +5687,7 @@ SQLFrom* AlinousPlusParser::sqlFrom(ThreadContext* ctx)
 			return from;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1318(), ctx));
 }
 IJoin* AlinousPlusParser::sqlJoin(ThreadContext* ctx)
 {
@@ -5938,7 +5938,7 @@ IJoin* AlinousPlusParser::sqlJoin(ThreadContext* ctx)
 			return join;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1318(), ctx));
 }
 SQLJoinCondition* AlinousPlusParser::sqlJoinCondition(ThreadContext* ctx)
 {
@@ -5954,7 +5954,7 @@ SQLJoinCondition* AlinousPlusParser::sqlJoinCondition(ThreadContext* ctx)
 			return joinCond;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1318(), ctx));
 }
 IJoin* AlinousPlusParser::joinTarget(ThreadContext* ctx)
 {
@@ -6091,7 +6091,7 @@ IJoin* AlinousPlusParser::joinTarget(ThreadContext* ctx)
 			return target;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1318(), ctx));
 }
 IJoinTarget* AlinousPlusParser::tableJoinTarget(ThreadContext* ctx)
 {
@@ -6124,7 +6124,7 @@ IJoinTarget* AlinousPlusParser::tableJoinTarget(ThreadContext* ctx)
 			return table;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1318(), ctx));
 }
 IJoinTarget* AlinousPlusParser::domVariableJoinTarget(ThreadContext* ctx)
 {
@@ -6157,7 +6157,7 @@ IJoinTarget* AlinousPlusParser::domVariableJoinTarget(ThreadContext* ctx)
 			return dom;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1318(), ctx));
 }
 IJoinTarget* AlinousPlusParser::joinSubQueryTarget(ThreadContext* ctx)
 {
@@ -6178,7 +6178,7 @@ IJoinTarget* AlinousPlusParser::joinSubQueryTarget(ThreadContext* ctx)
 			return target;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1318(), ctx));
 }
 SQLWhere* AlinousPlusParser::sqlWhere(ThreadContext* ctx)
 {
@@ -6194,7 +6194,7 @@ SQLWhere* AlinousPlusParser::sqlWhere(ThreadContext* ctx)
 			return wh;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1318(), ctx));
 }
 SQLGroupBy* AlinousPlusParser::sqlGroupBy(ThreadContext* ctx)
 {
@@ -6225,7 +6225,7 @@ SQLGroupBy* AlinousPlusParser::sqlGroupBy(ThreadContext* ctx)
 			return gby;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1318(), ctx));
 }
 SQLLimitOffset* AlinousPlusParser::sqlLimitOffset(ThreadContext* ctx)
 {
@@ -6272,7 +6272,7 @@ SQLLimitOffset* AlinousPlusParser::sqlLimitOffset(ThreadContext* ctx)
 			return lim;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1318(), ctx));
 }
 InsertStatement* AlinousPlusParser::insertStatement(ThreadContext* ctx)
 {
@@ -6327,7 +6327,7 @@ InsertStatement* AlinousPlusParser::insertStatement(ThreadContext* ctx)
 			return stmt;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1318(), ctx));
 }
 InsertValues* AlinousPlusParser::insertValues(ThreadContext* ctx)
 {
@@ -6466,7 +6466,7 @@ InsertValues* AlinousPlusParser::insertValues(ThreadContext* ctx)
 			break;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1318(), ctx));
 }
 UpdateStatement* AlinousPlusParser::updateStatement(ThreadContext* ctx)
 {
@@ -6515,7 +6515,7 @@ UpdateStatement* AlinousPlusParser::updateStatement(ThreadContext* ctx)
 			return stmt;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1318(), ctx));
 }
 UpdateSet* AlinousPlusParser::updateSet(ThreadContext* ctx)
 {
@@ -6533,7 +6533,7 @@ UpdateSet* AlinousPlusParser::updateSet(ThreadContext* ctx)
 			return updateSet;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1318(), ctx));
 }
 DeleteStatement* AlinousPlusParser::deleteStatement(ThreadContext* ctx)
 {
@@ -6562,7 +6562,7 @@ DeleteStatement* AlinousPlusParser::deleteStatement(ThreadContext* ctx)
 			return stmt;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1318(), ctx));
 }
 BeginStatement* AlinousPlusParser::beginStatement(ThreadContext* ctx)
 {
@@ -6577,7 +6577,7 @@ BeginStatement* AlinousPlusParser::beginStatement(ThreadContext* ctx)
 			return stmt;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1318(), ctx));
 }
 CommitStatement* AlinousPlusParser::commitStatement(ThreadContext* ctx)
 {
@@ -6592,7 +6592,7 @@ CommitStatement* AlinousPlusParser::commitStatement(ThreadContext* ctx)
 			return stmt;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1318(), ctx));
 }
 RollbackStatement* AlinousPlusParser::rollbackStatement(ThreadContext* ctx)
 {
@@ -6607,7 +6607,7 @@ RollbackStatement* AlinousPlusParser::rollbackStatement(ThreadContext* ctx)
 			return stmt;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1318(), ctx));
 }
 CreateTableStatement* AlinousPlusParser::createTableStatement(ThreadContext* ctx)
 {
@@ -6721,7 +6721,7 @@ CreateTableStatement* AlinousPlusParser::createTableStatement(ThreadContext* ctx
 			return stmt;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1318(), ctx));
 }
 ShardKeys* AlinousPlusParser::shardKeys(ThreadContext* ctx)
 {
@@ -6758,7 +6758,7 @@ ShardKeys* AlinousPlusParser::shardKeys(ThreadContext* ctx)
 			return shardKeys;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1318(), ctx));
 }
 SubShardKeys* AlinousPlusParser::subShardKeys(ThreadContext* ctx)
 {
@@ -6796,7 +6796,7 @@ SubShardKeys* AlinousPlusParser::subShardKeys(ThreadContext* ctx)
 			return shardKeys;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1318(), ctx));
 }
 PrimaryKeys* AlinousPlusParser::primaryKeys(ThreadContext* ctx)
 {
@@ -6833,7 +6833,7 @@ PrimaryKeys* AlinousPlusParser::primaryKeys(ThreadContext* ctx)
 			return primaryKeys;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1318(), ctx));
 }
 Unique* AlinousPlusParser::unique(ThreadContext* ctx)
 {
@@ -6869,7 +6869,7 @@ Unique* AlinousPlusParser::unique(ThreadContext* ctx)
 			return unq;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1318(), ctx));
 }
 DdlColumnDescriptor* AlinousPlusParser::ddlColumnDescriptor(ThreadContext* ctx)
 {
@@ -6961,7 +6961,7 @@ DdlColumnDescriptor* AlinousPlusParser::ddlColumnDescriptor(ThreadContext* ctx)
 			return desc;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1318(), ctx));
 }
 ColumnTypeDescriptor* AlinousPlusParser::columnTypeDescriptor(ThreadContext* ctx)
 {
@@ -7019,7 +7019,7 @@ ColumnTypeDescriptor* AlinousPlusParser::columnTypeDescriptor(ThreadContext* ctx
 			return typeDesc;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1318(), ctx));
 }
 CheckDefinition* AlinousPlusParser::check(ThreadContext* ctx)
 {
@@ -7038,7 +7038,7 @@ CheckDefinition* AlinousPlusParser::check(ThreadContext* ctx)
 			return check;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1318(), ctx));
 }
 DropTableStatement* AlinousPlusParser::dropTableStatement(ThreadContext* ctx)
 {
@@ -7057,7 +7057,7 @@ DropTableStatement* AlinousPlusParser::dropTableStatement(ThreadContext* ctx)
 			return stmt;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1318(), ctx));
 }
 CreateIndexStatement* AlinousPlusParser::createIndexStatement(ThreadContext* ctx)
 {
@@ -7102,7 +7102,7 @@ CreateIndexStatement* AlinousPlusParser::createIndexStatement(ThreadContext* ctx
 			return stmt;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1318(), ctx));
 }
 DropIndexStatement* AlinousPlusParser::dropIndexStatement(ThreadContext* ctx)
 {
@@ -7121,7 +7121,7 @@ DropIndexStatement* AlinousPlusParser::dropIndexStatement(ThreadContext* ctx)
 			return stmt;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1318(), ctx));
 }
 ISQLExpression* AlinousPlusParser::sqlOrExpression(ThreadContext* ctx)
 {
@@ -7166,7 +7166,7 @@ ISQLExpression* AlinousPlusParser::sqlOrExpression(ThreadContext* ctx)
 			return orExp;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1318(), ctx));
 }
 ISQLExpression* AlinousPlusParser::sqlAndExpression(ThreadContext* ctx)
 {
@@ -7211,7 +7211,7 @@ ISQLExpression* AlinousPlusParser::sqlAndExpression(ThreadContext* ctx)
 			return andExp;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1318(), ctx));
 }
 ISQLExpression* AlinousPlusParser::sqlNotExpression(ThreadContext* ctx)
 {
@@ -7243,7 +7243,7 @@ ISQLExpression* AlinousPlusParser::sqlNotExpression(ThreadContext* ctx)
 			return notExp;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1318(), ctx));
 }
 ISQLExpression* AlinousPlusParser::sqlEqualityExpression(ThreadContext* ctx)
 {
@@ -7305,7 +7305,7 @@ ISQLExpression* AlinousPlusParser::sqlEqualityExpression(ThreadContext* ctx)
 			return eqExp;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1318(), ctx));
 }
 ISQLExpression* AlinousPlusParser::sqlRelationalExpression(ThreadContext* ctx)
 {
@@ -7373,7 +7373,7 @@ ISQLExpression* AlinousPlusParser::sqlRelationalExpression(ThreadContext* ctx)
 			return relExp;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1318(), ctx));
 }
 ISQLExpression* AlinousPlusParser::sqlIsNullExpression(ThreadContext* ctx)
 {
@@ -7426,7 +7426,7 @@ ISQLExpression* AlinousPlusParser::sqlIsNullExpression(ThreadContext* ctx)
 			return exp;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1318(), ctx));
 }
 ISQLExpression* AlinousPlusParser::sqlLikeExpression(ThreadContext* ctx)
 {
@@ -7479,7 +7479,7 @@ ISQLExpression* AlinousPlusParser::sqlLikeExpression(ThreadContext* ctx)
 			return likeExp;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1318(), ctx));
 }
 ISQLExpression* AlinousPlusParser::sqlInExpression(ThreadContext* ctx)
 {
@@ -7516,7 +7516,7 @@ ISQLExpression* AlinousPlusParser::sqlInExpression(ThreadContext* ctx)
 			return inexp;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1318(), ctx));
 }
 ISQLExpression* AlinousPlusParser::sqlAdditiveExpression(ThreadContext* ctx)
 {
@@ -7578,7 +7578,7 @@ ISQLExpression* AlinousPlusParser::sqlAdditiveExpression(ThreadContext* ctx)
 			return additive;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1318(), ctx));
 }
 ISQLExpression* AlinousPlusParser::sqlMultiplicativeExpression(ThreadContext* ctx)
 {
@@ -7645,7 +7645,7 @@ ISQLExpression* AlinousPlusParser::sqlMultiplicativeExpression(ThreadContext* ct
 			return mulExp;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1318(), ctx));
 }
 ISQLExpression* AlinousPlusParser::sqlBaseExpression(ThreadContext* ctx)
 {
@@ -7697,7 +7697,7 @@ ISQLExpression* AlinousPlusParser::sqlBaseExpression(ThreadContext* ctx)
 			return exp;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1318(), ctx));
 }
 SQLExpressionStream* AlinousPlusParser::sqlExpressionStream(ThreadContext* ctx)
 {
@@ -7711,7 +7711,7 @@ SQLExpressionStream* AlinousPlusParser::sqlExpressionStream(ThreadContext* ctx)
 			return sqlExp;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1318(), ctx));
 }
 SQLParenthesisExpression* AlinousPlusParser::sqlParenthesisExpression(ThreadContext* ctx)
 {
@@ -7729,7 +7729,7 @@ SQLParenthesisExpression* AlinousPlusParser::sqlParenthesisExpression(ThreadCont
 			return pexp;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1318(), ctx));
 }
 ISQLExpression* AlinousPlusParser::sqlColumnIdentifier(ThreadContext* ctx)
 {
@@ -7792,7 +7792,7 @@ ISQLExpression* AlinousPlusParser::sqlColumnIdentifier(ThreadContext* ctx)
 			return identifier;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1318(), ctx));
 }
 ISQLBoolExpression* AlinousPlusParser::sqlBooleanLiteral(ThreadContext* ctx)
 {
@@ -7822,7 +7822,7 @@ ISQLBoolExpression* AlinousPlusParser::sqlBooleanLiteral(ThreadContext* ctx)
 			return lit;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1318(), ctx));
 }
 ISQLExpression* AlinousPlusParser::sqlLiteral(ThreadContext* ctx)
 {
@@ -7866,7 +7866,7 @@ ISQLExpression* AlinousPlusParser::sqlLiteral(ThreadContext* ctx)
 			return lit;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1318(), ctx));
 }
 SQLExpressionList* AlinousPlusParser::sqlExpressionList(ThreadContext* ctx)
 {
@@ -7915,7 +7915,7 @@ SQLExpressionList* AlinousPlusParser::sqlExpressionList(ThreadContext* ctx)
 			return list;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1318(), ctx));
 }
 ISQLExpression* AlinousPlusParser::sqlExpressionListElement(ThreadContext* ctx)
 {
@@ -7954,7 +7954,7 @@ ISQLExpression* AlinousPlusParser::sqlExpressionListElement(ThreadContext* ctx)
 			return exp;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1318(), ctx));
 }
 ISQLExpression* AlinousPlusParser::sqlSubqueryExpression(ThreadContext* ctx)
 {
@@ -7967,7 +7967,7 @@ ISQLExpression* AlinousPlusParser::sqlSubqueryExpression(ThreadContext* ctx)
 			return exp;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1313(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1318(), ctx));
 }
 void AlinousPlusParser::ReInit(java::io::InputStream* stream, ThreadContext* ctx)
 {

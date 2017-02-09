@@ -84,6 +84,7 @@ int TablePartitionMaxValue::fileSize(ThreadContext* ctx)
 void TablePartitionMaxValue::toFileEntry(FileStorageEntryBuilder* builder, ThreadContext* ctx)
 {
 	bool isnull = (this->values == nullptr);
+	builder->putBoolean(isnull, ctx);
 	if(!isnull)
 	{
 		int maxLoop = this->values->size(ctx);
@@ -95,6 +96,7 @@ void TablePartitionMaxValue::toFileEntry(FileStorageEntryBuilder* builder, Threa
 		}
 	}
 	isnull = (this->subvalues == nullptr);
+	builder->putBoolean(isnull, ctx);
 	if(!isnull)
 	{
 		int maxLoop = this->subvalues->size(ctx);
@@ -108,18 +110,22 @@ void TablePartitionMaxValue::toFileEntry(FileStorageEntryBuilder* builder, Threa
 }
 void TablePartitionMaxValue::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 {
-	bool isnull = (this->values == nullptr);
+	bool isnull = buff->getBoolean(ctx);
 	if(!isnull)
 	{
 		int maxLoop = buff->getInt(ctx);
 		for(int i = 0; i != maxLoop; ++i)
 		{
-			VariantValue* value = (new(ctx) VariantValue(ctx));
-			value->readData(buff, ctx);
+			IAlinousVariable* vl = NetworkAlinousVariableFactory::fromNetworkData(buff, ctx);
+			if(vl == nullptr || !((dynamic_cast<VariantValue*>(vl) != 0)))
+			{
+				throw (new(ctx) VariableException(ConstStr::getCNST_STR_1693(), ctx));
+			}
+			VariantValue* value = static_cast<VariantValue*>(vl);
 			addValue(value, ctx);
 		}
 	}
-	isnull = (this->values == nullptr);
+	isnull = buff->getBoolean(ctx);
 	if(!isnull)
 	{
 		int maxLoop = buff->getInt(ctx);
@@ -133,7 +139,8 @@ void TablePartitionMaxValue::readData(NetworkBinaryBuffer* buff, ThreadContext* 
 }
 void TablePartitionMaxValue::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
 {
-	bool isnull = buff->getBoolean(ctx);
+	bool isnull = (this->values == nullptr);
+	buff->putBoolean(isnull, ctx);
 	if(!isnull)
 	{
 		int maxLoop = this->values->size(ctx);
@@ -144,7 +151,8 @@ void TablePartitionMaxValue::writeData(NetworkBinaryBuffer* buff, ThreadContext*
 			value->writeData(buff, ctx);
 		}
 	}
-	isnull = buff->getBoolean(ctx);
+	isnull = (this->subvalues == nullptr);
+	buff->putBoolean(isnull, ctx);
 	if(!isnull)
 	{
 		int maxLoop = this->subvalues->size(ctx);

@@ -106,7 +106,7 @@ void IfStatement::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
 		if(el == nullptr || !((dynamic_cast<IStatement*>(el) != 0)))
 		{
-			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1096(), ctx));
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1099(), ctx));
 		}
 		__GC_MV(this, &(this->exec), static_cast<IStatement*>(el), IStatement);
 	}

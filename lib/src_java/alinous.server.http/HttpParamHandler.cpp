@@ -38,7 +38,7 @@ HashMap<String,AbstractHttpParameter>* HttpParamHandler::postParams(InputStream*
 }
 void HttpParamHandler::postMimeParams(InputStream* inStream, int contentLength, String* contentType, ThreadContext* ctx)
 {
-	int index = contentType->indexOf(ConstStr::getCNST_STR_3537(), ctx);
+	int index = contentType->indexOf(ConstStr::getCNST_STR_3544(), ctx);
 	String* boundary = contentType->substring(index + 9, contentType->length(ctx), ctx);
 	MimeFormParameterDecoder* decoder = (new(ctx) MimeFormParameterDecoder(ctx));
 	decoder->decode(inStream, boundary, contentLength, ctx);

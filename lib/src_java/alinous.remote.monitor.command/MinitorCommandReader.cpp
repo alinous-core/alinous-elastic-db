@@ -68,7 +68,7 @@ AbstractMonitorCommand* MinitorCommandReader::readFromStream(InputStream* stream
 		cmd = (new(ctx) ReportClusterVersionUpCommand(ctx));
 		break ;
 	default:
-		throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3569(), ctx));
+		throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3576(), ctx));
 		break;
 	}
 	cmd->readFromStream(stream, size, ctx);

@@ -7,7 +7,7 @@ namespace alinous {namespace runtime {namespace engine {namespace debugger {name
 
 
 
-String* NotifyExceptionThrownCommand::CMD_STRING = ConstStr::getCNST_STR_1203();
+String* NotifyExceptionThrownCommand::CMD_STRING = ConstStr::getCNST_STR_1206();
 bool NotifyExceptionThrownCommand::__init_done = __init_static_variables();
 bool NotifyExceptionThrownCommand::__init_static_variables(){
 	Java2CppSystem::getSelf();

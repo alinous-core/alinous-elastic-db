@@ -15,6 +15,12 @@ class FileStorageEntryFetcher;}}}
 namespace alinous {namespace remote {namespace socket {
 class NetworkBinaryBuffer;}}}
 
+namespace alinous {namespace runtime {namespace dom {
+class IAlinousVariable;}}}
+
+namespace alinous {namespace runtime {namespace dom {
+class VariableException;}}}
+
 namespace java {namespace util {
 template <typename  T> class List;}}
 
@@ -25,7 +31,7 @@ namespace alinous {namespace db {
 class AlinousDbException;}}
 
 namespace alinous {namespace runtime {namespace dom {
-class VariableException;}}}
+class NetworkAlinousVariableFactory;}}}
 
 namespace java {namespace lang {
 class IObject;
@@ -47,6 +53,8 @@ using ::alinous::buffer::storage::FileStorageEntryFetcher;
 using ::alinous::db::AlinousDbException;
 using ::alinous::remote::socket::ICommandData;
 using ::alinous::remote::socket::NetworkBinaryBuffer;
+using ::alinous::runtime::dom::IAlinousVariable;
+using ::alinous::runtime::dom::NetworkAlinousVariableFactory;
 using ::alinous::runtime::dom::VariableException;
 using ::alinous::runtime::variant::VariantValue;
 

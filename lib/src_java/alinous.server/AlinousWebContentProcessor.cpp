@@ -7,10 +7,10 @@ namespace alinous {namespace server {
 
 
 
-String* AlinousWebContentProcessor::PING_TO_SERVER = ConstStr::getCNST_STR_1880();
-String* AlinousWebContentProcessor::PING_RETURN = ConstStr::getCNST_STR_1880();
-String* AlinousWebContentProcessor::DEBUG_CMD_ACCESS = ConstStr::getCNST_STR_1881();
-String* AlinousWebContentProcessor::HEAD_METHOD = ConstStr::getCNST_STR_1882();
+String* AlinousWebContentProcessor::PING_TO_SERVER = ConstStr::getCNST_STR_1887();
+String* AlinousWebContentProcessor::PING_RETURN = ConstStr::getCNST_STR_1887();
+String* AlinousWebContentProcessor::DEBUG_CMD_ACCESS = ConstStr::getCNST_STR_1888();
+String* AlinousWebContentProcessor::HEAD_METHOD = ConstStr::getCNST_STR_1889();
 bool AlinousWebContentProcessor::__init_done = __init_static_variables();
 bool AlinousWebContentProcessor::__init_static_variables(){
 	Java2CppSystem::getSelf();
@@ -70,7 +70,7 @@ ContentResult* AlinousWebContentProcessor::proccess(HttpHeaderProcessor* request
 		{
 			try
 			{
-				ret = pingReturn->getBytes(ConstStr::getCNST_STR_1103(), ctx);
+				ret = pingReturn->getBytes(ConstStr::getCNST_STR_1106(), ctx);
 			}
 			catch(UnsupportedEncodingException* e)
 			{
@@ -83,7 +83,7 @@ ContentResult* AlinousWebContentProcessor::proccess(HttpHeaderProcessor* request
 	{
 		if(core->debug && path->equals(AlinousWebContentProcessor::DEBUG_CMD_ACCESS, ctx))
 		{
-			return (new(ctx) ContentResult(DebugProcessor::process(this->core, request, ctx), ConstStr::getCNST_STR_1879(), this->mimeResolver, head, ctx));
+			return (new(ctx) ContentResult(DebugProcessor::process(this->core, request, ctx), ConstStr::getCNST_STR_1886(), this->mimeResolver, head, ctx));
 		}
 	}
 	AbstractWebModule* module = this->webModuleManager->getModule(path, core->debug, ctx);

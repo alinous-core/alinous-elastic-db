@@ -141,7 +141,7 @@ bool SQLLikeExpression::analyseSQL(SQLAnalyseContext* context, bool leftValue, b
 			catch(AlinousException* e)
 			{
 				e->printStackTrace(ctx);
-				throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1077(), ctx));
+				throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1080(), ctx));
 			}
 		}
 	}

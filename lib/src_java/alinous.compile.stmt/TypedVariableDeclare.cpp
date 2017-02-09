@@ -157,7 +157,7 @@ void TypedVariableDeclare::validate(SourceValidator* validator, ThreadContext* c
 {
 	if(this->name->getSegments(ctx)->size(ctx) != 1)
 	{
-		validator->addError(ConstStr::getCNST_STR_1099(), this->name, ctx);
+		validator->addError(ConstStr::getCNST_STR_1102(), this->name, ctx);
 	}
 }
 bool TypedVariableDeclare::visit(IAlinousElementVisitor* visitor, AbstractSrcElement* parent, ThreadContext* ctx) throw() 

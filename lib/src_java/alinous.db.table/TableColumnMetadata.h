@@ -21,6 +21,9 @@ class NetworkBinaryBuffer;}}}
 namespace alinous {namespace remote {namespace socket {
 class ICommandData;}}}
 
+namespace alinous {namespace compile {namespace sql {namespace ddl {
+class ColumnTypeDescriptor;}}}}
+
 namespace alinous {namespace runtime {namespace dom {
 class VariableException;}}}
 
@@ -43,6 +46,7 @@ using ::java::util::Iterator;
 using ::alinous::buffer::storage::FileStorageEntryBuilder;
 using ::alinous::buffer::storage::FileStorageEntryFetcher;
 using ::alinous::compile::sql::ddl::CheckDefinition;
+using ::alinous::compile::sql::ddl::ColumnTypeDescriptor;
 using ::alinous::remote::socket::ICommandData;
 using ::alinous::remote::socket::NetworkBinaryBuffer;
 using ::alinous::runtime::dom::VariableException;
@@ -84,6 +88,7 @@ public:
 	void setPrimaryKey(bool primaryKey, ThreadContext* ctx) throw() ;
 	void readData(NetworkBinaryBuffer* buff, ThreadContext* ctx) final;
 	void writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw()  final;
+	int getType(ThreadContext* ctx) throw() ;
 public:
 	static TableColumnMetadata* loadFromFetcher(FileStorageEntryFetcher* fetcher, ThreadContext* ctx) throw() ;
 	static TableColumnMetadata* fromNetwork(NetworkBinaryBuffer* buff, ThreadContext* ctx);

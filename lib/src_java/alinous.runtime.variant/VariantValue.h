@@ -214,6 +214,7 @@ public:
 private:
 	int vtype;
 	IVariantData* data;
+	char max;
 public:
 	constexpr static const int TYPE_STRING{1};
 	constexpr static const int TYPE_LONG{2};
@@ -230,6 +231,8 @@ public:
 	constexpr static const int TYPE_NULL{13};
 	static String* TAG_NAME;
 	static String* ATTR_VTYPE;
+	constexpr static const int MAX_VALUE{1};
+	constexpr static const int MIN_VALUE{-1};
 public:
 	void outDebugXml(DomNode* parentNode, String* name, ThreadContext* ctx) throw()  final;
 	int getIntValue(ThreadContext* ctx) final;
@@ -248,6 +251,8 @@ public:
 	void setBigDecimal(BigDecimal* value, ThreadContext* ctx) throw() ;
 	void setTime(TimeOnlyTimestamp* value, ThreadContext* ctx) throw() ;
 	void setTimestamp(Timestamp* value, ThreadContext* ctx) throw() ;
+	bool isMax(ThreadContext* ctx) throw() ;
+	bool isMinimum(ThreadContext* ctx) throw() ;
 	void setNull(ThreadContext* ctx) throw() ;
 	void setValue(VariantValue* variant, ThreadContext* ctx);
 	int bufferSize(ThreadContext* ctx);
@@ -373,6 +378,7 @@ public:
 	IAlinousVariable* substitute(StringVariable* variable, ThreadContext* ctx) final;
 	IAlinousVariable* substitute(TimestampVariable* variable, ThreadContext* ctx) final;
 	IAlinousVariable* substitute(TimeVariable* variable, ThreadContext* ctx) final;
+	int compareTo(BigDecimalVariable* variable, ThreadContext* ctx) final;
 	int compareTo(IAlinousVariable* variable, ThreadContext* ctx) final;
 	int compareTo(DomVariable* variable, ThreadContext* ctx) final;
 	int compareTo(BoolVariable* variable, ThreadContext* ctx) final;
@@ -430,7 +436,6 @@ public:
 	IAlinousVariable* bitAnd(BigDecimalVariable* variable, ThreadContext* ctx) final;
 	IAlinousVariable* bitExor(BigDecimalVariable* variable, ThreadContext* ctx) final;
 	IAlinousVariable* substitute(BigDecimalVariable* variable, ThreadContext* ctx) final;
-	int compareTo(BigDecimalVariable* variable, ThreadContext* ctx) final;
 	IAlinousVariable* shiftRightUnsigned(IAlinousVariable* variable, ThreadContext* ctx) final;
 	IAlinousVariable* shiftRightUnsigned(DomVariable* variable, ThreadContext* ctx) final;
 	IAlinousVariable* shiftRightUnsigned(BoolVariable* variable, ThreadContext* ctx) final;
@@ -483,7 +488,9 @@ public:
 	void writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw()  final;
 private:
 	int nullCompare(VariantValue* variant, ThreadContext* ctx) throw() ;
+	int compareMinMax(VariantValue* variable, ThreadContext* ctx) throw() ;
 public:
+	static VariantValue* createMaxValue(int type, ThreadContext* ctx) throw() ;
 	static VariantValue* importFromDebugXml(DomNode* node, ThreadContext* ctx) throw() ;
 	static VariantValue* valueFromFetcher(FileStorageEntryFetcher* fetcher, ThreadContext* ctx);
 public:
