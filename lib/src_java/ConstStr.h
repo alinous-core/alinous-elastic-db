@@ -2341,9 +2341,9 @@ public:
 	constexpr static StaticUnicodeString __CNST_STR_628{L"Pacific/Pitcairn",16};
 public:
 	static UnicodeStringWrapper* getCNST_STR_628() throw();
-	constexpr static StaticUnicodeString __CNST_STR_1674{L"Failed in loading config file",29};
+	constexpr static StaticUnicodeString __CNST_STR_1675{L"Failed in loading config file",29};
 public:
-	static UnicodeStringWrapper* getCNST_STR_1674() throw();
+	static UnicodeStringWrapper* getCNST_STR_1675() throw();
 	constexpr static StaticUnicodeString __CNST_STR_1173{L"SubStackFrame",13};
 public:
 	static UnicodeStringWrapper* getCNST_STR_1173() throw();
@@ -8770,9 +8770,9 @@ public:
 	constexpr static StaticUnicodeString __CNST_STR_3296{L"uvp",3};
 public:
 	static UnicodeStringWrapper* getCNST_STR_3296() throw();
-	constexpr static StaticUnicodeString __CNST_STR_1675{L"Error on synchronizing remote regions",37};
+	constexpr static StaticUnicodeString __CNST_STR_1674{L"Error on synchronizing remote regions",37};
 public:
-	static UnicodeStringWrapper* getCNST_STR_1675() throw();
+	static UnicodeStringWrapper* getCNST_STR_1674() throw();
 	constexpr static StaticUnicodeString __CNST_STR_3284{L"uva",3};
 public:
 	static UnicodeStringWrapper* getCNST_STR_3284() throw();

@@ -106,6 +106,12 @@ long long FileStorage::alloc(long long totalBytes, FileStorageBlock* block, File
 	long long pos = this->freeScanEntry;
 	long long firstBlock = 0;
 	long long lastBlock = 0;
+	if(pos + block->BLOCK_SIZE > this->totalSize)
+	{
+		long long newLength = this->totalSize * 2;
+		this->rfile->setLength(newLength, ctx);
+		this->totalSize = newLength;
+	}
 	while(alloced != numBlocks)
 	{
 		block->loadBlock(this, pos, ctx);
@@ -260,12 +266,13 @@ void FileStorage::loadBlocks(long long position, FileStorageEntry* entry, FileSt
 		__GC_MV(entry, &(entry->data), ByteBuffer::allocate(((int)entry->used), ctx), ByteBuffer);
 	}
 	entry->data->clear(ctx);
-	workBlock->read(this, (long long)16, entry->data, ctx);
+	long long arrayOffset = 0;
+	arrayOffset += workBlock->read(this, (long long)16, entry->data, (long long)0, ctx);
 	while(workBlock->hasNext(ctx))
 	{
 		workBlock->closeWrapper(ctx);
 		workBlock->loadChildNextBlock(this, ctx);
-		workBlock->read(this, (long long)0, entry->data, ctx);
+		arrayOffset += workBlock->read(this, (long long)0, entry->data, arrayOffset, ctx);
 	}
 	workBlock->closeWrapper(ctx);
 }

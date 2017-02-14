@@ -240,6 +240,7 @@ public:
 	void syncSchemaVersion(DbVersionContext* vctx, ThreadContext* ctx);
 private:
 	File* getConfigFile(ThreadContext* ctx) throw() ;
+	void openLocal(ThreadContext* ctx);
 	void openRegions(AlinousDbInstanceInfo* instanceConfig, ThreadContext* ctx);
 public:
 	static bool __init_done;

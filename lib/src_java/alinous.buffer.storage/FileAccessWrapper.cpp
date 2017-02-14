@@ -38,10 +38,10 @@ void FileAccessWrapper::__releaseRegerences(bool prepare, ThreadContext* ctx) th
 }
 FileAccessWrapper* FileAccessWrapper::init(ConcurrentFileAccess* access, long long currentPosition, long long blockSize, ThreadContext* ctx)
 {
-	__GC_MV(this, &(this->segs), access->getSegments(currentPosition, blockSize, ctx), IArrayObject<MMapSegment>);
 	this->fileSize = access->length(ctx);
 	this->basePosition = currentPosition;
 	this->position = 0;
+	__GC_MV(this, &(this->segs), access->getSegments(currentPosition, blockSize, ctx), IArrayObject<MMapSegment>);
 	__GC_MV(this, &(this->buffer), ByteBuffer::allocate(32, ctx), ByteBuffer);
 	return this;
 }
@@ -54,17 +54,17 @@ void FileAccessWrapper::close(ThreadContext* ctx) throw()
 		seg->decUserCount(ctx);
 	}
 }
-long long FileAccessWrapper::read(long long position, IArrayObjectPrimitive<char>* buffer, int offset, int count, ThreadContext* ctx)
+long long FileAccessWrapper::read(long long position, IArrayObjectPrimitive<char>* buffer, long long offset, int count, ThreadContext* ctx)
 {
 	long long fileRemain = this->fileSize - position;
 	long long bytesToRead = fileRemain > (long long)count ? count : fileRemain;
 	long long pos = position;
-	int off = offset;
+	long long off = offset;
 	int cnt = 0;
 	while(bytesToRead > (long long)0)
 	{
 		MMapSegment* seg = getSegment(pos, ctx);
-		long long read = seg->read(pos, buffer, off, ((int)bytesToRead), ctx);
+		long long read = seg->read(pos, buffer, ((int)off), ((int)bytesToRead), ctx);
 		cnt += read;
 		off += read;
 		pos += read;
@@ -114,20 +114,22 @@ void FileAccessWrapper::put(IArrayObjectPrimitive<char>* data, int offset, int c
 short FileAccessWrapper::getShort(ThreadContext* ctx)
 {
 	buffer->clear(ctx);
-	read(this->position, buffer->array(ctx), 0, 2, ctx);
+	read(this->position, buffer->array(ctx), (long long)0, 2, ctx);
 	this->position += 2;
 	return buffer->getShort(0, ctx);
 }
 long long FileAccessWrapper::getLong(ThreadContext* ctx)
 {
 	buffer->clear(ctx);
-	read(this->position, buffer->array(ctx), 0, 8, ctx);
+	read(this->position, buffer->array(ctx), (long long)0, 8, ctx);
 	this->position += 8;
 	return buffer->getLong(0, ctx);
 }
-void FileAccessWrapper::read(IArrayObjectPrimitive<char>* buffer, int offset, int count, ThreadContext* ctx)
+int FileAccessWrapper::read(IArrayObjectPrimitive<char>* buffer, long long offset, int count, ThreadContext* ctx)
 {
-	this->position += read(this->position, buffer, offset, count, ctx);
+	long long red = read(this->position, buffer, offset, count, ctx);
+	this->position += red;
+	return ((int)red);
 }
 MMapSegment* FileAccessWrapper::getSegment(long long position, ThreadContext* ctx) throw() 
 {

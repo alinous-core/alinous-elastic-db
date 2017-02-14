@@ -109,11 +109,13 @@ short FileStorageBlock::readShort(FileStorage* storage, long long positionOffset
 	this->wraapper->setPosition(((int)(BLOCK_HEADER_OFFSET + positionOffset)), ctx);
 	return this->wraapper->getShort(ctx);
 }
-void FileStorageBlock::read(FileStorage* storage, long long positionOffset, ByteBuffer* bbuff, ThreadContext* ctx)
+long long FileStorageBlock::read(FileStorage* storage, long long positionOffset, ByteBuffer* bbuff, long long arrayOffset, ThreadContext* ctx)
 {
 	this->wraapper->setPosition(((int)(BLOCK_HEADER_OFFSET + positionOffset)), ctx);
 	IArrayObjectPrimitive<char>* array = bbuff->array(ctx);
-	this->wraapper->read(array, 0, ((int)(this->usedBytes - positionOffset)), ctx);
+	int n = 0;
+	n = this->wraapper->read(array, arrayOffset, ((int)(this->usedBytes - positionOffset)), ctx);
+	return n;
 }
 bool FileStorageBlock::isFree(ThreadContext* ctx) throw() 
 {

@@ -67,7 +67,7 @@ public:
 	void writeShortData(FileStorage* storage, int offset, short value, ThreadContext* ctx);
 	long long readLong(FileStorage* storage, long long positionOffset, ThreadContext* ctx);
 	short readShort(FileStorage* storage, long long positionOffset, ThreadContext* ctx);
-	void read(FileStorage* storage, long long positionOffset, ByteBuffer* bbuff, ThreadContext* ctx);
+	long long read(FileStorage* storage, long long positionOffset, ByteBuffer* bbuff, long long arrayOffset, ThreadContext* ctx);
 	bool isFree(ThreadContext* ctx) throw() ;
 	bool hasNext(ThreadContext* ctx) throw() ;
 	void loadChildNextBlock(FileStorage* storage, ThreadContext* ctx);

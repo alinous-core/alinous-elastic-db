@@ -279,70 +279,25 @@ void AlinousDatabase::open(AlinousDbInstanceInfo* instanceConfig, ThreadContext*
 	}
 	__GC_MV(this, &(this->trxLockManager), (new(ctx) TrxLockManager(ctx)), TrxLockManager);
 	__GC_MV(this, &(this->regionManager), (new(ctx) TableRegionManager(ctx)), TableRegionManager);
+	if(!isRemote(ctx))
 	{
-		try
-		{
-			this->dbconfig->open(ctx);
-			ArrayList<IBTreeValue>* schemeValue = this->dbconfig->getValues(SCHEMA, ctx);
-			if(schemeValue->size(ctx) > 0)
-			{
-				LocalTableRegion* localRegion = this->regionManager->getLocalRegion(ctx);
-				if(localRegion != nullptr)
-				{
-					SchemaManager* schemas = localRegion->getSchemaManager(ctx);
-					schemas = static_cast<SchemaManager*>(schemeValue->get(0, ctx));
-					schemas->loadAfterFetch(this->dataDir, this->core->getLogger(ctx), this->workerThreadsPool, this->core, this->btreeCache, ctx);
-					localRegion->setSchemaManager(schemas, ctx);
-				}
-			}
-			ArrayList<IBTreeValue>* lvTrxIds = this->dbconfig->getValues(MAX_COMMIT_ID, ctx);
-			this->commitIdPublisher->setMaxCommitId((static_cast<LongValue*>(lvTrxIds->get(0, ctx)))->value, ctx);
-		}
-		catch(Throwable* e)
-		{
-			{
-				try
-				{
-					this->dbconfig->close(ctx);
-				}
-				catch(IOException* e2)
-				{
-					throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1674(), e2, ctx));
-				}
-				catch(InterruptedException* e2)
-				{
-					throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1674(), e2, ctx));
-				}
-			}
-			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1674(), e, ctx));
-		}
+		openLocal(ctx);
 	}
+		else 
 	{
-		try
 		{
-			this->dbconfig->close(ctx);
-		}
-		catch(IOException* e)
-		{
-			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1674(), e, ctx));
-		}
-		catch(InterruptedException* e)
-		{
-			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1674(), e, ctx));
-		}
-	}
-	{
-		try
-		{
-			openRegions(instanceConfig, ctx);
-		}
-		catch(UnknownHostException* e)
-		{
-			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1675(), e, ctx));
-		}
-		catch(IOException* e)
-		{
-			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1675(), e, ctx));
+			try
+			{
+				openRegions(instanceConfig, ctx);
+			}
+			catch(UnknownHostException* e)
+			{
+				throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1674(), e, ctx));
+			}
+			catch(IOException* e)
+			{
+				throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1674(), e, ctx));
+			}
 		}
 	}
 }
@@ -460,6 +415,45 @@ File* AlinousDatabase::getConfigFile(ThreadContext* ctx) throw()
 		__GC_MV(this, &(this->configFile), (new(ctx) File(pathname, ctx)), File);
 	}
 	return this->configFile;
+}
+void AlinousDatabase::openLocal(ThreadContext* ctx)
+{
+	{
+		try
+		{
+			this->dbconfig->open(ctx);
+			ArrayList<IBTreeValue>* schemeValue = this->dbconfig->getValues(SCHEMA, ctx);
+			if(schemeValue->size(ctx) > 0)
+			{
+				LocalTableRegion* localRegion = (new(ctx) LocalTableRegion(dataDir, this->core->getLogger(ctx), this->workerThreadsPool, core, this->btreeCache, static_cast<LocalCommitIdPublisher*>(this->commitIdPublisher), ctx));
+				this->regionManager->addRegion(localRegion, ctx);
+				SchemaManager* schemas = localRegion->getSchemaManager(ctx);
+				schemas = static_cast<SchemaManager*>(schemeValue->get(0, ctx));
+				schemas->loadAfterFetch(this->dataDir, this->core->getLogger(ctx), this->workerThreadsPool, this->core, this->btreeCache, ctx);
+				localRegion->setSchemaManager(schemas, ctx);
+			}
+			ArrayList<IBTreeValue>* lvTrxIds = this->dbconfig->getValues(MAX_COMMIT_ID, ctx);
+			this->commitIdPublisher->setMaxCommitId((static_cast<LongValue*>(lvTrxIds->get(0, ctx)))->value, ctx);
+		}
+		catch(Throwable* e)
+		{
+			{
+				try
+				{
+					this->dbconfig->close(ctx);
+				}
+				catch(IOException* e2)
+				{
+					throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1675(), e2, ctx));
+				}
+				catch(InterruptedException* e2)
+				{
+					throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1675(), e2, ctx));
+				}
+			}
+			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1675(), e, ctx));
+		}
+	}
 }
 void AlinousDatabase::openRegions(AlinousDbInstanceInfo* instanceConfig, ThreadContext* ctx)
 {

@@ -132,7 +132,6 @@ void DatatableDDLSupport::buildFirstindexValue(TableIndex* newindex, ThreadConte
 		LongValue* longValue = static_cast<LongValue*>(values->get(0, ctx));
 		entry = reader->read(longValue->value, ctx);
 		fetcher->load(entry, ctx);
-		fetcher->fetchInt(ctx);
 		DatabaseRecord* dbrecord = DatabaseRecord::valueFromFetcher(fetcher, ctx);
 		newindex->addIndexValue(dbrecord, ctx);
 	}

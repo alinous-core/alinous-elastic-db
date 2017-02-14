@@ -21,7 +21,7 @@ bool DbTransaction::__init_static_variables(){
  DbTransaction::DbTransaction(DbTransactionManager* mgr, String* tmpDir, AlinousDatabase* database, AlinousCore* core, long long commitId, DbVersionContext* vctx, ThreadContext* ctx) throw()  : IObject(ctx), lockContext(nullptr), lockMode(0), commitId(0), trxManager(nullptr), trxSchema(nullptr), trxStorageManager(nullptr), database(nullptr), logger(nullptr), subTransaction(nullptr), resultSerial(0), trxDir(nullptr), vctx(nullptr), soidSerial(0), core(nullptr)
 {
 	__GC_MV(this, &(this->trxManager), mgr, DbTransactionManager);
-	__GC_MV(this, &(this->trxSchema), (new(ctx) TrxSchemeManager(database, logger, ctx)), TrxSchemeManager);
+	__GC_MV(this, &(this->trxSchema), (new(ctx) TrxSchemeManager(database, core->getLogger(ctx), ctx)), TrxSchemeManager);
 	__GC_MV(this, &(this->trxStorageManager), (new(ctx) TrxStorageManager(tmpDir, this, ctx)), TrxStorageManager);
 	__GC_MV(this, &(this->database), database, AlinousDatabase);
 	__GC_MV(this, &(this->core), core, AlinousCore);
@@ -37,7 +37,7 @@ bool DbTransaction::__init_static_variables(){
 void DbTransaction::__construct_impl(DbTransactionManager* mgr, String* tmpDir, AlinousDatabase* database, AlinousCore* core, long long commitId, DbVersionContext* vctx, ThreadContext* ctx) throw() 
 {
 	__GC_MV(this, &(this->trxManager), mgr, DbTransactionManager);
-	__GC_MV(this, &(this->trxSchema), (new(ctx) TrxSchemeManager(database, logger, ctx)), TrxSchemeManager);
+	__GC_MV(this, &(this->trxSchema), (new(ctx) TrxSchemeManager(database, core->getLogger(ctx), ctx)), TrxSchemeManager);
 	__GC_MV(this, &(this->trxStorageManager), (new(ctx) TrxStorageManager(tmpDir, this, ctx)), TrxStorageManager);
 	__GC_MV(this, &(this->database), database, AlinousDatabase);
 	__GC_MV(this, &(this->core), core, AlinousCore);

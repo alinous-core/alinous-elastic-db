@@ -56,7 +56,7 @@ private:
 public:
 	FileAccessWrapper* init(ConcurrentFileAccess* access, long long currentPosition, long long blockSize, ThreadContext* ctx);
 	void close(ThreadContext* ctx) throw() ;
-	long long read(long long position, IArrayObjectPrimitive<char>* buffer, int offset, int count, ThreadContext* ctx);
+	long long read(long long position, IArrayObjectPrimitive<char>* buffer, long long offset, int count, ThreadContext* ctx);
 	long long write(long long position, IArrayObjectPrimitive<char>* buffer, int offset, int count, ThreadContext* ctx);
 	void setPosition(int i, ThreadContext* ctx) throw() ;
 	void putShort(short value, ThreadContext* ctx);
@@ -64,7 +64,7 @@ public:
 	void put(IArrayObjectPrimitive<char>* data, int offset, int count, ThreadContext* ctx);
 	short getShort(ThreadContext* ctx);
 	long long getLong(ThreadContext* ctx);
-	void read(IArrayObjectPrimitive<char>* buffer, int offset, int count, ThreadContext* ctx);
+	int read(IArrayObjectPrimitive<char>* buffer, long long offset, int count, ThreadContext* ctx);
 private:
 	MMapSegment* getSegment(long long position, ThreadContext* ctx) throw() ;
 public:
