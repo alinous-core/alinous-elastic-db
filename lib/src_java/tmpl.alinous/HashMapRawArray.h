@@ -2,6 +2,7 @@ template class ::alinous::HashMapRawArray<::java::lang::String, ::com::google::r
 template class ::alinous::HashMapRawArray<::java::lang::String, ::alinous::runtime::dom::IDomVariable>;
 template class ::alinous::HashMapRawArray<::java::lang::String, ::alinous::runtime::dom::typed::ITypedVariable>;
 template class ::alinous::HashMapRawArray<::java::lang::String, ::java::lang::String>;
+template class ::alinous::HashMapRawArray<::java::lang::String, ::alinous::db::table::LocalOidCounter>;
 template class ::alinous::HashMapRawArray<::java::lang::String, ::alinous::db::table::lockmonitor::IThreadLocker>;
 template class ::alinous::HashMapRawArray<::alinous::html::DomNode, ::java::util::ArrayList<::alinous::html::xpath::match::MatchCandidate>>;
 template class ::alinous::HashMapRawArray<::java::lang::String, ::alinous::remote::db::command::data::TableClusterData>;

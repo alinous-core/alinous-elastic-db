@@ -59,7 +59,7 @@ bool XpathFilter::isIndex(ThreadContext* ctx) throw()
 		{
 			return true;
 		}
-		if((dynamic_cast<XpathFunction*>(param) != 0) && (static_cast<XpathFunction*>(param))->getName(ctx)->equals(ConstStr::getCNST_STR_1780(), ctx))
+		if((dynamic_cast<XpathFunction*>(param) != 0) && (static_cast<XpathFunction*>(param))->getName(ctx)->equals(ConstStr::getCNST_STR_1781(), ctx))
 		{
 			return true;
 		}

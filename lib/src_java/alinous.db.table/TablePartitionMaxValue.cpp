@@ -119,7 +119,7 @@ void TablePartitionMaxValue::readData(NetworkBinaryBuffer* buff, ThreadContext* 
 			IAlinousVariable* vl = NetworkAlinousVariableFactory::fromNetworkData(buff, ctx);
 			if(vl == nullptr || !((dynamic_cast<VariantValue*>(vl) != 0)))
 			{
-				throw (new(ctx) VariableException(ConstStr::getCNST_STR_1698(), ctx));
+				throw (new(ctx) VariableException(ConstStr::getCNST_STR_1699(), ctx));
 			}
 			VariantValue* value = static_cast<VariantValue*>(vl);
 			addValue(value, ctx);

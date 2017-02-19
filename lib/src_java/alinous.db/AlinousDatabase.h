@@ -42,6 +42,9 @@ class TrxLockContext;}}}
 namespace alinous {namespace system {namespace config {
 class AlinousDbInstanceInfo;}}}
 
+namespace alinous {namespace db {namespace table {
+class LocalOidPublisher;}}}
+
 namespace alinous {namespace db {
 class LocalTableRegion;}}
 
@@ -89,6 +92,9 @@ class TableRegionManager;}}
 
 namespace alinous {namespace net {
 class UnknownHostException;}}
+
+namespace alinous {namespace db {namespace table {
+class IOidPublisher;}}}
 
 namespace alinous {namespace system {namespace config {namespace remote {
 class RegionsRef;}}}}
@@ -163,6 +169,8 @@ using ::alinous::btree::IntKey;
 using ::alinous::btree::LongValue;
 using ::alinous::compile::declare::AlinousName;
 using ::alinous::db::table::IDatabaseTable;
+using ::alinous::db::table::IOidPublisher;
+using ::alinous::db::table::LocalOidPublisher;
 using ::alinous::db::trx::DbTransactionManager;
 using ::alinous::db::trx::DbVersionContext;
 using ::alinous::db::trx::TrxLockContext;
@@ -204,6 +212,7 @@ private:
 	String* dataDir;
 	BTree* dbconfig;
 	File* configFile;
+	IOidPublisher* oidPublisher;
 	AlinousThread* trxWriterThread;
 	BTreeGlobalCache* btreeCache;
 	TableRegionManager* regionManager;
@@ -238,6 +247,7 @@ public:
 	TableRegionManager* getRegionManager(ThreadContext* ctx) throw() ;
 	bool isRemote(ThreadContext* ctx) throw() ;
 	void syncSchemaVersion(DbVersionContext* vctx, ThreadContext* ctx);
+	IOidPublisher* getOidPublisher(ThreadContext* ctx) throw() ;
 private:
 	File* getConfigFile(ThreadContext* ctx) throw() ;
 	void openLocal(ThreadContext* ctx);

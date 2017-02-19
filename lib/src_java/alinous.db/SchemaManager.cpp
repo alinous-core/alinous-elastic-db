@@ -18,7 +18,7 @@ bool SchemaManager::__init_static_variables(){
 	delete ctx;
 	return true;
 }
- SchemaManager::SchemaManager(String* dataDir, ISystemLog* logger, ThreadPool* threadPool, AlinousCore* core, BTreeGlobalCache* cache, ThreadContext* ctx) throw()  : IObject(ctx), IBTreeValue(ctx), dataDir(nullptr), schemas(GCUtils<HashMap<String,TableSchema> >::ins(this, (new(ctx) HashMap<String,TableSchema>(ctx)), ctx, __FILEW__, __LINE__, L"")), schemeLock(__GC_INS(this, (new(ctx) LockObject(ctx)), LockObject)), logger(nullptr), threadPool(nullptr), oidPublisher(nullptr)
+ SchemaManager::SchemaManager(String* dataDir, ISystemLog* logger, ThreadPool* threadPool, AlinousCore* core, BTreeGlobalCache* cache, ThreadContext* ctx) throw()  : IObject(ctx), IBTreeValue(ctx), dataDir(nullptr), schemas(GCUtils<HashMap<String,TableSchema> >::ins(this, (new(ctx) HashMap<String,TableSchema>(ctx)), ctx, __FILEW__, __LINE__, L"")), schemeLock(__GC_INS(this, (new(ctx) LockObject(ctx)), LockObject)), logger(nullptr), threadPool(nullptr)
 {
 	__GC_MV(this, &(this->dataDir), dataDir, String);
 	__GC_MV(this, &(this->logger), logger, ISystemLog);
@@ -50,8 +50,6 @@ void SchemaManager::__releaseRegerences(bool prepare, ThreadContext* ctx) throw(
 	logger = nullptr;
 	__e_obj1.add(this->threadPool, this);
 	threadPool = nullptr;
-	__e_obj1.add(this->oidPublisher, this);
-	oidPublisher = nullptr;
 	if(!prepare){
 		return;
 	}
@@ -89,7 +87,7 @@ void SchemaManager::loadAfterFetch(String* dataDir, ISystemLog* logger, ThreadPo
 	{
 		String* key = it->next(ctx);
 		TableSchema* sc = this->schemas->get(key, ctx);
-		sc->initAfterFetched(dataDir, sc->name, threadPool, this->oidPublisher, core, cache, ctx);
+		sc->initAfterFetched(dataDir, sc->name, threadPool, core, cache, ctx);
 	}
 }
 void SchemaManager::appendToEntry(FileStorageEntryBuilder* builder, ThreadContext* ctx)
@@ -148,10 +146,10 @@ void SchemaManager::doCreateTable(String* schemaName, TableMetadata* tableMetada
 	IDatabaseTable* table = schema->getTableStore(tableMetadata->getTableName(ctx), ctx);
 	if(table != nullptr)
 	{
-		logger->logWarning(ConstStr::getCNST_STR_1681()->clone(ctx)->append(tableMetadata->getTableName(ctx), ctx)->append(ConstStr::getCNST_STR_1682(), ctx), ctx);
+		logger->logWarning(ConstStr::getCNST_STR_1682()->clone(ctx)->append(tableMetadata->getTableName(ctx), ctx)->append(ConstStr::getCNST_STR_1683(), ctx), ctx);
 		return;
 	}
-	IDatabaseTable* tableStore = (new(ctx) DatabaseTable(schemaName, tableMetadata->getTableName(ctx), schema->getSchemaDir(ctx), this->threadPool, this->oidPublisher, ctx));
+	IDatabaseTable* tableStore = (new(ctx) DatabaseTable(schemaName, tableMetadata->getTableName(ctx), schema->getSchemaDir(ctx), this->threadPool, ctx));
 	tableStore->createTable(tableMetadata, threadPool, core, cache, ctx);
 	schema->addTableStore(tableStore, ctx);
 }

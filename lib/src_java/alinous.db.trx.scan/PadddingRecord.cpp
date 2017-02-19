@@ -117,5 +117,10 @@ void PadddingRecord::setLastUpdateCommitId(long long commitId, ThreadContext* ct
 void PadddingRecord::setInsertedCommitId(long long insertedCommitId, ThreadContext* ctx) throw() 
 {
 }
+PadddingRecord* PadddingRecord::fromFetcher(FileStorageEntryFetcher* fetcher, ThreadContext* ctx) throw() 
+{
+	PadddingRecord* rec = (new(ctx) PadddingRecord(fetcher->fetchInt(ctx), ctx));
+	return rec;
+}
 }}}}
 

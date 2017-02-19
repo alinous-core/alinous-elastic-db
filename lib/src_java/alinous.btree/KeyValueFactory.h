@@ -61,10 +61,16 @@ namespace alinous {namespace db {namespace table {
 class DatabaseRecord;}}}
 
 namespace alinous {namespace db {namespace table {
+class LocalOidPublisher;}}}
+
+namespace alinous {namespace db {namespace table {
 class TableIndexValue;}}}
 
 namespace alinous {namespace db {namespace trx {namespace cache {
 class CachedRecord;}}}}
+
+namespace alinous {namespace db {namespace trx {namespace scan {
+class PadddingRecord;}}}}
 
 namespace alinous {namespace db {namespace trx {namespace scan {
 class ScanResultRecord;}}}}
@@ -93,8 +99,10 @@ using ::alinous::db::AlinousDbException;
 using ::alinous::db::SchemaManager;
 using ::alinous::db::table::BTreeIndexKey;
 using ::alinous::db::table::DatabaseRecord;
+using ::alinous::db::table::LocalOidPublisher;
 using ::alinous::db::table::TableIndexValue;
 using ::alinous::db::trx::cache::CachedRecord;
+using ::alinous::db::trx::scan::PadddingRecord;
 using ::alinous::db::trx::scan::ScanResultRecord;
 using ::alinous::runtime::dom::DomVariable;
 using ::alinous::runtime::dom::VariableException;

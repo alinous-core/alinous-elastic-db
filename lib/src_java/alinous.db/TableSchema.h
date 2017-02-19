@@ -21,9 +21,6 @@ class File;}}
 namespace alinous {namespace runtime {namespace parallel {
 class ThreadPool;}}}
 
-namespace alinous {namespace db {namespace table {
-class IOidPublisher;}}}
-
 namespace alinous {namespace system {
 class AlinousCore;}}
 
@@ -94,7 +91,6 @@ using ::alinous::buffer::storage::FileStorageEntryFetcher;
 using ::alinous::db::table::DatabaseException;
 using ::alinous::db::table::DatabaseTable;
 using ::alinous::db::table::IDatabaseTable;
-using ::alinous::db::table::IOidPublisher;
 using ::alinous::db::table::TableMetadata;
 using ::alinous::remote::db::command::data::SchemaData;
 using ::alinous::remote::db::command::data::TableClusterData;
@@ -123,7 +119,7 @@ private:
 public:
 	SchemaData* toCommandData(String* region, String* host, int port, bool ipv6, ThreadContext* ctx) throw() ;
 	void create(ThreadContext* ctx) throw() ;
-	void initAfterFetched(String* dataDir, String* schemaName, ThreadPool* threadPool, IOidPublisher* oidPublisher, AlinousCore* core, BTreeGlobalCache* cache, ThreadContext* ctx);
+	void initAfterFetched(String* dataDir, String* schemaName, ThreadPool* threadPool, AlinousCore* core, BTreeGlobalCache* cache, ThreadContext* ctx);
 	String* getSchemaDir(ThreadContext* ctx) throw() ;
 	void addTableStore(IDatabaseTable* tableStore, ThreadContext* ctx) throw() ;
 	IDatabaseTable* getTableStore(String* tableName, ThreadContext* ctx) throw()  final;

@@ -60,6 +60,7 @@ public:
 	constexpr static const int TYPE_DOM_VARIABLE_RECORD{10};
 	constexpr static const int TYPE_TABLE_INDEX_VALUE{11};
 	constexpr static const int TYPE_PADDING_RECORD{12};
+	constexpr static const int TYPE_LOCAL_ID_PUBLISHER{13};
 public:
 	virtual void appendToEntry(FileStorageEntryBuilder* builder, ThreadContext* ctx) = 0;
 	virtual int diskSize(ThreadContext* ctx) = 0;

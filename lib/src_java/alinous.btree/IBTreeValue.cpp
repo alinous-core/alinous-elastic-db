@@ -19,6 +19,7 @@ constexpr const int IBTreeValue::TYPE_SCAN_RESULT_RECORD;
 constexpr const int IBTreeValue::TYPE_DOM_VARIABLE_RECORD;
 constexpr const int IBTreeValue::TYPE_TABLE_INDEX_VALUE;
 constexpr const int IBTreeValue::TYPE_PADDING_RECORD;
+constexpr const int IBTreeValue::TYPE_LOCAL_ID_PUBLISHER;
 bool IBTreeValue::__init_done = __init_static_variables();
 bool IBTreeValue::__init_static_variables(){
 	Java2CppSystem::getSelf();

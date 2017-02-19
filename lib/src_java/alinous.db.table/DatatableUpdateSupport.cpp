@@ -18,13 +18,11 @@ bool DatatableUpdateSupport::__init_static_variables(){
 	delete ctx;
 	return true;
 }
- DatatableUpdateSupport::DatatableUpdateSupport(String* schema, String* name, String* baseDir, IOidPublisher* oidPublisher, ThreadContext* ctx) throw()  : IObject(ctx), DatatableDDLSupport(schema, name, baseDir, ctx), oidPublisher(nullptr)
+ DatatableUpdateSupport::DatatableUpdateSupport(String* schema, String* name, String* baseDir, ThreadContext* ctx) throw()  : IObject(ctx), DatatableDDLSupport(schema, name, baseDir, ctx)
 {
-	__GC_MV(this, &(this->oidPublisher), oidPublisher, IOidPublisher);
 }
-void DatatableUpdateSupport::__construct_impl(String* schema, String* name, String* baseDir, IOidPublisher* oidPublisher, ThreadContext* ctx) throw() 
+void DatatableUpdateSupport::__construct_impl(String* schema, String* name, String* baseDir, ThreadContext* ctx) throw() 
 {
-	__GC_MV(this, &(this->oidPublisher), oidPublisher, IOidPublisher);
 }
  DatatableUpdateSupport::~DatatableUpdateSupport() throw() 
 {
@@ -35,9 +33,6 @@ void DatatableUpdateSupport::__construct_impl(String* schema, String* name, Stri
 }
 void DatatableUpdateSupport::__releaseRegerences(bool prepare, ThreadContext* ctx) throw() 
 {
-	ObjectEraser __e_obj1(ctx, __FILEW__, __LINE__, L"DatatableUpdateSupport", L"~DatatableUpdateSupport");
-	__e_obj1.add(this->oidPublisher, this);
-	oidPublisher = nullptr;
 	if(!prepare){
 		return;
 	}
@@ -52,8 +47,7 @@ void DatatableUpdateSupport::updateData(IDatabaseRecord* data, long long commitI
 }
 void DatatableUpdateSupport::insertData(DbTransaction* trx, IDatabaseRecord* data, long long commitId, IArrayObject<SequentialBackgroundJob>* jobs, ISystemLog* log, ThreadContext* ctx)
 {
-	long long nextOid = this->dataStorage->getNextOid(ctx);
-	DatabaseRecord* dbrecord = (new(ctx) DatabaseRecord(nextOid, data->getNumColumn(ctx), commitId, data, ctx));
+	DatabaseRecord* dbrecord = (new(ctx) DatabaseRecord(data->getOid(ctx), data->getNumColumn(ctx), commitId, data, ctx));
 	this->cacheEngine->insertData(this, dbrecord, commitId, jobs, log, ctx);
 }
 void DatatableUpdateSupport::insertData(DbTransaction* trx, List<IDatabaseRecord>* records, long long newCommitId, IArrayObject<SequentialBackgroundJob>* jobs, ISystemLog* logger, ThreadContext* ctx)

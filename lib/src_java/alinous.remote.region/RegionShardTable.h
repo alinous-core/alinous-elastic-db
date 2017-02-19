@@ -54,6 +54,7 @@ public:
 	long long getCommitId(ThreadContext* ctx) throw() ;
 	void setCommitId(long long commitId, ThreadContext* ctx) throw() ;
 	void putRecords(ArrayList<ClientNetworkRecord>* list, ThreadContext* ctx) throw() ;
+	TableMetadata* getMetadata(ThreadContext* ctx) throw() ;
 private:
 	void handleRecord(ClientNetworkRecord* record, ThreadContext* ctx) throw() ;
 public:

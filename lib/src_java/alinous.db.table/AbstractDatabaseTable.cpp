@@ -100,7 +100,7 @@ void AbstractDatabaseTable::open(AlinousCore* core, BTreeGlobalCache* cache, Thr
 		}
 		catch(Throwable* e)
 		{
-			throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1685(), e, ctx));
+			throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1686(), e, ctx));
 		}
 	}
 	__GC_MV(this, &(this->updateHistoryCache), (new(ctx) DatatableUpdateCache(this, ctx)), DatatableUpdateCache);
@@ -170,15 +170,15 @@ void AbstractDatabaseTable::open(bool loadscheme, AlinousCore* core, BTreeGlobal
 		}
 		catch(IOException* e)
 		{
-			throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1694(), e, ctx));
+			throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1695(), e, ctx));
 		}
 		catch(BTreeException* e)
 		{
-			throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1694(), e, ctx));
+			throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1695(), e, ctx));
 		}
 		catch(InterruptedException* e)
 		{
-			throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1694(), e, ctx));
+			throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1695(), e, ctx));
 		}
 	}
 }
@@ -334,7 +334,7 @@ String* AbstractDatabaseTable::getDataStorageName(ThreadContext* ctx) throw()
 		{
 			buff->append(ConstStr::getCNST_STR_1007(), ctx);
 		}
-		buff->append(this->name, ctx)->append(ConstStr::getCNST_STR_1695(), ctx);
+		buff->append(this->name, ctx)->append(ConstStr::getCNST_STR_1696(), ctx);
 		__GC_MV(this, &(this->dataStoragePath), buff->toString(ctx), String);
 	}
 	return this->dataStoragePath;
@@ -372,7 +372,7 @@ void AbstractDatabaseTable::loadScheme(ThreadContext* ctx)
 		}
 		catch(InterruptedException* e)
 		{
-			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1696(), e, ctx));
+			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1697(), e, ctx));
 		}
 	}
 	FileStorageEntry* entry = reader->readFirstEntry(ctx);
@@ -393,7 +393,7 @@ String* AbstractDatabaseTable::getOidIndexName(ThreadContext* ctx) throw()
 		{
 			buff->append(ConstStr::getCNST_STR_1007(), ctx);
 		}
-		buff->append(ConstStr::getCNST_STR_1686(), ctx)->append(this->name, ctx)->append(ConstStr::getCNST_STR_1697(), ctx);
+		buff->append(ConstStr::getCNST_STR_1687(), ctx)->append(this->name, ctx)->append(ConstStr::getCNST_STR_1698(), ctx);
 		__GC_MV(this, &(this->oidIndexPath), buff->toString(ctx), String);
 	}
 	return this->oidIndexPath;

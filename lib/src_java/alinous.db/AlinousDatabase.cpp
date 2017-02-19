@@ -10,7 +10,7 @@ namespace alinous {namespace db {
 const IntKey AlinousDatabase:: __SCHEMA = (IntKey(10, nullptr));
 const IntKey AlinousDatabase:: __USERS = (IntKey(20, nullptr));
 const IntKey AlinousDatabase:: __MAX_COMMIT_ID = (IntKey(30, nullptr));
-const IntKey AlinousDatabase:: __MAX_OID_ID = (IntKey(30, nullptr));
+const IntKey AlinousDatabase:: __MAX_OID_ID = (IntKey(40, nullptr));
 bool AlinousDatabase::__init_done = __init_static_variables();
 bool AlinousDatabase::__init_static_variables(){
 	Java2CppSystem::getSelf();
@@ -22,7 +22,7 @@ bool AlinousDatabase::__init_static_variables(){
 	delete ctx;
 	return true;
 }
- AlinousDatabase::AlinousDatabase(ThreadContext* ctx) throw()  : IObject(ctx), instanceConfigLock(__GC_INS(this, (new(ctx) LockObject(ctx)), LockObject)), trxManager(nullptr), trxLockManager(nullptr), commitIdPublisher(nullptr), workerThreadsPool(nullptr), core(nullptr), remote(false), dataDir(nullptr), dbconfig(nullptr), configFile(nullptr), trxWriterThread(nullptr), btreeCache(nullptr), regionManager(nullptr)
+ AlinousDatabase::AlinousDatabase(ThreadContext* ctx) throw()  : IObject(ctx), instanceConfigLock(__GC_INS(this, (new(ctx) LockObject(ctx)), LockObject)), trxManager(nullptr), trxLockManager(nullptr), commitIdPublisher(nullptr), workerThreadsPool(nullptr), core(nullptr), remote(false), dataDir(nullptr), dbconfig(nullptr), configFile(nullptr), oidPublisher(nullptr), trxWriterThread(nullptr), btreeCache(nullptr), regionManager(nullptr)
 {
 	__GC_MV(this, &(this->trxWriterThread), nullptr, AlinousThread);
 	__GC_MV(this, &(this->workerThreadsPool), nullptr, ThreadPool);
@@ -62,6 +62,8 @@ void AlinousDatabase::__releaseRegerences(bool prepare, ThreadContext* ctx) thro
 	dbconfig = nullptr;
 	__e_obj1.add(this->configFile, this);
 	configFile = nullptr;
+	__e_obj1.add(this->oidPublisher, this);
+	oidPublisher = nullptr;
 	__e_obj1.add(this->trxWriterThread, this);
 	trxWriterThread = nullptr;
 	__e_obj1.add(this->btreeCache, this);
@@ -111,6 +113,7 @@ void AlinousDatabase::initInstance(AlinousDbInstanceInfo* instanceConfig, Thread
 		file->mkdirs(ctx);
 	}
 	__GC_MV(this, &(this->commitIdPublisher), (new(ctx) LocalCommitIdPublisher(this, ctx)), ICommidIdPublisher);
+	__GC_MV(this, &(this->oidPublisher), (new(ctx) LocalOidPublisher(ctx)), IOidPublisher);
 	LocalTableRegion* localRegion = (new(ctx) LocalTableRegion(dataDir, this->core->getLogger(ctx), nullptr, core, this->btreeCache, static_cast<LocalCommitIdPublisher*>(this->commitIdPublisher), ctx));
 	SchemaManager* schemas = localRegion->getSchemaManager(ctx);
 	schemas->createSchema(ConstStr::getCNST_STR_955(), ctx);
@@ -125,6 +128,7 @@ void AlinousDatabase::initInstance(AlinousDbInstanceInfo* instanceConfig, Thread
 			this->dbconfig->putKeyValue(SCHEMA, schemas, ctx);
 			LongValue* lvTrx = (new(ctx) LongValue(this->commitIdPublisher->getMaxCommitId(ctx), ctx));
 			this->dbconfig->putKeyValue(MAX_COMMIT_ID, lvTrx, ctx);
+			this->dbconfig->putKeyValue(MAX_OID_ID, static_cast<LocalOidPublisher*>(this->oidPublisher), ctx);
 			this->dbconfig->close(ctx);
 		}
 		catch(IOException* e)
@@ -216,6 +220,11 @@ void AlinousDatabase::syncScheme(ThreadContext* ctx)
 				LongValue* lvTrx = (new(ctx) LongValue(this->commitIdPublisher->getMaxCommitId(ctx), ctx));
 				this->dbconfig->putKeyValue(MAX_COMMIT_ID, lvTrx, ctx);
 			}
+			lvTrxIdNode = this->dbconfig->findByKey(MAX_OID_ID, ctx);
+			trxvals = lvTrxIdNode->getValues(ctx);
+			trxvals->clear(ctx);
+			trxvals->add(static_cast<LocalOidPublisher*>(this->oidPublisher), ctx);
+			lvTrxIdNode->save(ctx);
 			this->dbconfig->close(ctx);
 		}
 		catch(Throwable* e)
@@ -399,13 +408,17 @@ void AlinousDatabase::syncSchemaVersion(DbVersionContext* vctx, ThreadContext* c
 		}
 		catch(UnknownHostException* e)
 		{
-			(new(ctx) AlinousDbException(ConstStr::getCNST_STR_1679(), e, ctx));
+			(new(ctx) AlinousDbException(ConstStr::getCNST_STR_1680(), e, ctx));
 		}
 		catch(IOException* e)
 		{
-			(new(ctx) AlinousDbException(ConstStr::getCNST_STR_1679(), e, ctx));
+			(new(ctx) AlinousDbException(ConstStr::getCNST_STR_1680(), e, ctx));
 		}
 	}
+}
+IOidPublisher* AlinousDatabase::getOidPublisher(ThreadContext* ctx) throw() 
+{
+	return oidPublisher;
 }
 File* AlinousDatabase::getConfigFile(ThreadContext* ctx) throw() 
 {
@@ -427,13 +440,18 @@ void AlinousDatabase::openLocal(ThreadContext* ctx)
 			{
 				LocalTableRegion* localRegion = (new(ctx) LocalTableRegion(dataDir, this->core->getLogger(ctx), this->workerThreadsPool, core, this->btreeCache, static_cast<LocalCommitIdPublisher*>(this->commitIdPublisher), ctx));
 				this->regionManager->addRegion(localRegion, ctx);
-				SchemaManager* schemas = localRegion->getSchemaManager(ctx);
-				schemas = static_cast<SchemaManager*>(schemeValue->get(0, ctx));
+				SchemaManager* schemas = static_cast<SchemaManager*>(schemeValue->get(0, ctx));
 				schemas->loadAfterFetch(this->dataDir, this->core->getLogger(ctx), this->workerThreadsPool, this->core, this->btreeCache, ctx);
 				localRegion->setSchemaManager(schemas, ctx);
 			}
 			ArrayList<IBTreeValue>* lvTrxIds = this->dbconfig->getValues(MAX_COMMIT_ID, ctx);
 			this->commitIdPublisher->setMaxCommitId((static_cast<LongValue*>(lvTrxIds->get(0, ctx)))->value, ctx);
+			lvTrxIds = this->dbconfig->getValues(MAX_OID_ID, ctx);
+			if(lvTrxIds == nullptr || lvTrxIds->size(ctx) == 0)
+			{
+				throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1678(), ctx));
+			}
+			__GC_MV(this, &(this->oidPublisher), static_cast<IOidPublisher*>(lvTrxIds->get(0, ctx)), IOidPublisher);
 		}
 		catch(Throwable* e)
 		{
@@ -444,14 +462,14 @@ void AlinousDatabase::openLocal(ThreadContext* ctx)
 				}
 				catch(IOException* e2)
 				{
-					throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1678(), e2, ctx));
+					throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1679(), e2, ctx));
 				}
 				catch(InterruptedException* e2)
 				{
-					throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1678(), e2, ctx));
+					throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1679(), e2, ctx));
 				}
 			}
-			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1678(), e, ctx));
+			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1679(), e, ctx));
 		}
 	}
 }

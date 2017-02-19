@@ -538,6 +538,7 @@ set(srcjava
 	"src_java/alinous.db.table/TableIndexValue.cpp"
 	"src_java/alinous.db.table/BTreeIndexKey.cpp"
 	"src_java/alinous.db.table/IDatabaseTable.cpp"
+	"src_java/alinous.db.table/LocalOidCounter.cpp"
 	"src_java/alinous.db.table/TablePartitionMaxValue.cpp"
 	"src_java/alinous.db.table/DatabaseRecord.cpp"
 	"src_java/alinous.compile.declare/AbstractClassMember.cpp"

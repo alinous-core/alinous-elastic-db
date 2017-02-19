@@ -89,6 +89,12 @@ IBTreeValue* KeyValueFactory::valueFromFetcher(FileStorageEntryFetcher* fetcher,
 	case IBTreeValue::TYPE_TABLE_INDEX_VALUE:
 		value = TableIndexValue::fetcher->valueFromFetcher(fetcher, ctx);
 		break ;
+	case IBTreeValue::TYPE_PADDING_RECORD:
+		value = PadddingRecord::fromFetcher(fetcher, ctx);
+		break ;
+	case IBTreeValue::TYPE_LOCAL_ID_PUBLISHER:
+		value = LocalOidPublisher::fromFetcher(fetcher, ctx);
+		break ;
 	}
 	return value;
 }

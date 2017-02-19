@@ -23,6 +23,7 @@ template class ::java::util::HashMap<::java::lang::String, ::alinous::db::table:
 template class ::java::util::HashMap<::java::lang::String, ::alinous::db::table::IDatabaseTable>;
 template class ::java::util::HashMap<::java::lang::String, ::alinous::db::TableSchema>;
 template class ::java::util::HashMap<::java::lang::String, ::java::lang::Integer>;
+template class ::java::util::HashMap<::java::lang::String, ::alinous::db::table::LocalOidCounter>;
 template class ::java::util::HashMap<::java::lang::String, ::alinous::db::table::TableColumnMetadata>;
 template class ::java::util::HashMap<::java::lang::String, ::alinous::db::table::lockmonitor::IThreadLocker>;
 template class ::java::util::HashMap<::java::lang::String, ::alinous::db::trx::cache::TrxRecordsCache>;

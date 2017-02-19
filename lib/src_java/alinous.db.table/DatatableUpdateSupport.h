@@ -4,9 +4,6 @@ namespace alinous{namespace annotation{
 class OneSource;
 }}
 namespace alinous {namespace db {namespace table {
-class IOidPublisher;}}}
-
-namespace alinous {namespace db {namespace table {
 class IDatabaseRecord;}}}
 
 namespace alinous {namespace runtime {namespace parallel {
@@ -63,12 +60,10 @@ class DatatableUpdateSupport : public DatatableDDLSupport {
 public:
 	DatatableUpdateSupport(const DatatableUpdateSupport& base) = default;
 public:
-	DatatableUpdateSupport(String* schema, String* name, String* baseDir, IOidPublisher* oidPublisher, ThreadContext* ctx) throw() ;
-	void __construct_impl(String* schema, String* name, String* baseDir, IOidPublisher* oidPublisher, ThreadContext* ctx) throw() ;
+	DatatableUpdateSupport(String* schema, String* name, String* baseDir, ThreadContext* ctx) throw() ;
+	void __construct_impl(String* schema, String* name, String* baseDir, ThreadContext* ctx) throw() ;
 	virtual ~DatatableUpdateSupport() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
-public:
-	IOidPublisher* oidPublisher;
 public:
 	void updateData(IDatabaseRecord* data, long long commitId, IArrayObject<SequentialBackgroundJob>* jobs, ISystemLog* log, ThreadContext* ctx) final;
 	void insertData(DbTransaction* trx, IDatabaseRecord* data, long long commitId, IArrayObject<SequentialBackgroundJob>* jobs, ISystemLog* log, ThreadContext* ctx) final;

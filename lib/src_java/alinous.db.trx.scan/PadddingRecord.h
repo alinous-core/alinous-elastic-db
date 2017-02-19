@@ -3,6 +3,12 @@
 namespace alinous {namespace buffer {namespace storage {
 class FileStorageEntryBuilder;}}}
 
+namespace alinous {namespace db {namespace trx {namespace scan {
+class PadddingRecord;}}}}
+
+namespace alinous {namespace buffer {namespace storage {
+class FileStorageEntryFetcher;}}}
+
 namespace alinous {namespace btree {
 class IValueFetcher;}}
 
@@ -35,6 +41,7 @@ using ::java::util::ArrayList;
 using ::alinous::btree::IBTreeValue;
 using ::alinous::btree::IValueFetcher;
 using ::alinous::buffer::storage::FileStorageEntryBuilder;
+using ::alinous::buffer::storage::FileStorageEntryFetcher;
 using ::alinous::db::table::IDatabaseRecord;
 using ::alinous::runtime::dom::VariableException;
 using ::alinous::runtime::variant::VariantValue;
@@ -71,6 +78,8 @@ public:
 	int getNumColumn(ThreadContext* ctx) throw()  final;
 	void setLastUpdateCommitId(long long commitId, ThreadContext* ctx) throw()  final;
 	void setInsertedCommitId(long long insertedCommitId, ThreadContext* ctx) throw()  final;
+public:
+	static PadddingRecord* fromFetcher(FileStorageEntryFetcher* fetcher, ThreadContext* ctx) throw() ;
 public:
 	static bool __init_done;
 	static bool __init_static_variables();

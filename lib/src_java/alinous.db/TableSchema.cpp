@@ -22,13 +22,13 @@ bool TableSchema::__init_static_variables(){
 {
 	__GC_MV(this, &(this->dataDir), dataDir, String);
 	__GC_MV(this, &(this->name), name, String);
-	__GC_MV(this, &(this->regionName), ConstStr::getCNST_STR_1680(), String);
+	__GC_MV(this, &(this->regionName), ConstStr::getCNST_STR_1681(), String);
 }
 void TableSchema::__construct_impl(String* name, String* dataDir, ThreadContext* ctx) throw() 
 {
 	__GC_MV(this, &(this->dataDir), dataDir, String);
 	__GC_MV(this, &(this->name), name, String);
-	__GC_MV(this, &(this->regionName), ConstStr::getCNST_STR_1680(), String);
+	__GC_MV(this, &(this->regionName), ConstStr::getCNST_STR_1681(), String);
 }
  TableSchema::~TableSchema() throw() 
 {
@@ -79,7 +79,7 @@ void TableSchema::create(ThreadContext* ctx) throw()
 		file->mkdirs(ctx);
 	}
 }
-void TableSchema::initAfterFetched(String* dataDir, String* schemaName, ThreadPool* threadPool, IOidPublisher* oidPublisher, AlinousCore* core, BTreeGlobalCache* cache, ThreadContext* ctx)
+void TableSchema::initAfterFetched(String* dataDir, String* schemaName, ThreadPool* threadPool, AlinousCore* core, BTreeGlobalCache* cache, ThreadContext* ctx)
 {
 	__GC_MV(this, &(this->dataDir), dataDir, String);
 	StringBuilder* buff = (new(ctx) StringBuilder(ctx));
@@ -89,7 +89,7 @@ void TableSchema::initAfterFetched(String* dataDir, String* schemaName, ThreadPo
 	while(it->hasNext(ctx))
 	{
 		String* tableNname = it->next(ctx);
-		IDatabaseTable* dataStore = (new(ctx) DatabaseTable(schemaName, tableNname, baseDir, threadPool, oidPublisher, ctx));
+		IDatabaseTable* dataStore = (new(ctx) DatabaseTable(schemaName, tableNname, baseDir, threadPool, ctx));
 		this->tableStores->put(tableNname, dataStore, ctx);
 		dataStore->open(core, cache, ctx);
 	}

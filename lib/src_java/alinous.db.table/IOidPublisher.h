@@ -29,7 +29,7 @@ public:
 	virtual ~IOidPublisher() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 public:
-	virtual long long newOid(ThreadContext* ctx) throw()  = 0;
+	virtual long long newOid(String* tableFullName, ThreadContext* ctx) throw()  = 0;
 public:
 	static bool __init_done;
 	static bool __init_static_variables();

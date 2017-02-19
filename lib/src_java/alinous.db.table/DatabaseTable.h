@@ -6,9 +6,6 @@ class OneSource;
 namespace alinous {namespace runtime {namespace parallel {
 class ThreadPool;}}}
 
-namespace alinous {namespace db {namespace table {
-class IOidPublisher;}}}
-
 namespace alinous {namespace db {namespace table {namespace cache {
 class RecordCacheEngine;}}}}
 
@@ -60,8 +57,8 @@ class DatabaseTable final : public DatatableUpdateSupport {
 public:
 	DatabaseTable(const DatabaseTable& base) = default;
 public:
-	DatabaseTable(String* schema, String* name, String* baseDir, ThreadPool* threadPool, IOidPublisher* oidPublisher, ThreadContext* ctx);
-	void __construct_impl(String* schema, String* name, String* baseDir, ThreadPool* threadPool, IOidPublisher* oidPublisher, ThreadContext* ctx);
+	DatabaseTable(String* schema, String* name, String* baseDir, ThreadPool* threadPool, ThreadContext* ctx);
+	void __construct_impl(String* schema, String* name, String* baseDir, ThreadPool* threadPool, ThreadContext* ctx);
 	virtual ~DatabaseTable() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 private:

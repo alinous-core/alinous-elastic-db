@@ -77,6 +77,10 @@ void RegionShardTable::putRecords(ArrayList<ClientNetworkRecord>* list, ThreadCo
 		handleRecord(record, ctx);
 	}
 }
+TableMetadata* RegionShardTable::getMetadata(ThreadContext* ctx) throw() 
+{
+	return metadata;
+}
 void RegionShardTable::handleRecord(ClientNetworkRecord* record, ThreadContext* ctx) throw() 
 {
 }

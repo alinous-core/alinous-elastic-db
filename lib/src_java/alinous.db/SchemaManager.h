@@ -54,9 +54,6 @@ template <typename  T, typename V> class HashMap;}}
 namespace alinous {namespace lock {
 class LockObject;}}
 
-namespace alinous {namespace db {namespace table {
-class IOidPublisher;}}}
-
 namespace alinous {namespace btree {
 class IBTreeValue;}}
 
@@ -97,7 +94,6 @@ using ::alinous::buffer::storage::FileStorageEntryFetcher;
 using ::alinous::db::table::DatabaseException;
 using ::alinous::db::table::DatabaseTable;
 using ::alinous::db::table::IDatabaseTable;
-using ::alinous::db::table::IOidPublisher;
 using ::alinous::db::table::TableMetadata;
 using ::alinous::lock::LockObject;
 using ::alinous::remote::db::command::data::SchemaData;
@@ -123,7 +119,6 @@ private:
 	LockObject* schemeLock;
 	ISystemLog* logger;
 	ThreadPool* threadPool;
-	IOidPublisher* oidPublisher;
 public:
 	void createTable(String* schemaName, TableMetadata* tableMetadata, ThreadPool* threadPool, AlinousCore* core, BTreeGlobalCache* cache, ThreadContext* ctx);
 	TableSchema* createSchema(String* name, ThreadContext* ctx) throw() ;

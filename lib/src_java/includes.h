@@ -291,6 +291,9 @@
 #include "alinous.btree/BTreeMachine.h"
 #include "alinous.btree/BTree.h"
 #include "alinous.btree/IntKey.h"
+#include "alinous.db.table/IOidPublisher.h"
+#include "alinous.db.table/LocalOidCounter.h"
+#include "alinous.db.table/LocalOidPublisher.h"
 #include "alinous.runtime.parallel/LaunchJoin.h"
 #include "alinous.runtime.parallel/IThreadAction.h"
 #include "alinous.runtime.parallel/AlinousThread.h"
@@ -448,7 +451,6 @@
 #include "alinous.compile.sql.ddl/ShardKeys.h"
 #include "alinous.compile.sql.ddl/SubShardKeys.h"
 #include "alinous.compile.sql.ddl/Unique.h"
-#include "alinous.db.table/IOidPublisher.h"
 #include "alinous.db/ITableSchema.h"
 #include "alinous.db/TableSchema.h"
 #include "alinous.compile.sql/CreateTableStatement.h"
@@ -730,6 +732,7 @@
 #include "alinous.db.table.lockmonitor/DBThreadMonitor.h"
 #include "alinous.db.table/DatabaseTable.h"
 #include "alinous.db/SchemaManager.h"
+#include "alinous.db.trx.scan/PadddingRecord.h"
 #include "alinous.btree/IntValue.h"
 #include "alinous.btree/StringValue.h"
 #include "alinous.btree/TimestampValue.h"
@@ -738,7 +741,6 @@
 #include "alinous.btree/DoubleKey.h"
 #include "alinous.btree/TimestampKey.h"
 #include "alinous.btree/KeyValueFactory.h"
-#include "alinous.db.trx.scan/PadddingRecord.h"
 #include "alinous.db.trx.scan/ScanResultRecord.h"
 #include "alinous.compile.sql.analyze/SQLAnalyseContext.h"
 #include "alinous.compile.sql/InsertValues.h"
@@ -816,7 +818,6 @@
 #include "alinous.system.functions/IAlinousSystem.h"
 #include "alinous.btreememory.scan/MemoryBTreeScanner.h"
 #include "alinous.db.table/OidPublisherFactory.h"
-#include "alinous.db.table/LocalOidPublisher.h"
 #include "alinous.db.table.lockmonitor/RowLockReleaser.h"
 #include "alinous.remote.region.client.transaction/AbstractRemoteClientTransaction.h"
 #include "alinous.remote.region.client.transaction/RemoteClientReadCommittedTrx.h"
@@ -1510,6 +1511,8 @@ inline static void __cleanUpStatics(alinous::ThreadContext* ctx){
 	alinous::db::table::DatatableConstants::__cleanUp(ctx);
 	alinous::db::table::AbstractDatabaseTable::__cleanUp(ctx);
 	alinous::db::table::IDatabaseTable::__cleanUp(ctx);
+	alinous::db::table::LocalOidCounter::__cleanUp(ctx);
+	alinous::db::table::LocalOidCounter::ValueFetcher::__cleanUp(ctx);
 	alinous::db::table::IOidPublisher::__cleanUp(ctx);
 	alinous::db::table::TablePartitionMaxValue::__cleanUp(ctx);
 	alinous::db::table::DatatableLockSupport::__cleanUp(ctx);

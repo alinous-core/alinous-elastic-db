@@ -2,6 +2,7 @@ template class ::alinous::HashMapInternalElement<::java::lang::String, ::com::go
 template class ::alinous::HashMapInternalElement<::java::lang::String, ::alinous::runtime::dom::IDomVariable>;
 template class ::alinous::HashMapInternalElement<::java::lang::String, ::alinous::runtime::dom::typed::ITypedVariable>;
 template class ::alinous::HashMapInternalElement<::java::lang::String, ::java::lang::String>;
+template class ::alinous::HashMapInternalElement<::java::lang::String, ::alinous::db::table::LocalOidCounter>;
 template class ::alinous::HashMapInternalElement<::java::lang::String, ::alinous::db::table::lockmonitor::IThreadLocker>;
 template class ::alinous::HashMapInternalElement<::alinous::html::DomNode, ::java::util::ArrayList<::alinous::html::xpath::match::MatchCandidate>>;
 template class ::alinous::HashMapInternalElement<::java::lang::String, ::alinous::remote::db::command::data::TableClusterData>;
