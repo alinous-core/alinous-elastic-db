@@ -411,6 +411,9 @@ class TypedVariableDeclare;}}}
 namespace alinous {namespace compile {namespace stmt {
 class WhileStatement;}}}
 
+namespace alinous {namespace runtime {namespace dbif {
+class IDatabaseDriver;}}}
+
 namespace java {namespace lang {
 class IObject;
 }}
@@ -553,6 +556,7 @@ using ::alinous::compile::stmt::SwitchCasePart;
 using ::alinous::compile::stmt::SwitchStatement;
 using ::alinous::compile::stmt::TypedVariableDeclare;
 using ::alinous::compile::stmt::WhileStatement;
+using ::alinous::runtime::dbif::IDatabaseDriver;
 
 
 

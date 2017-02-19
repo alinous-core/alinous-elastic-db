@@ -141,6 +141,9 @@ public:
 	void setMaxPartitionValue(TablePartitionMaxValue* maxPartitionValue, ThreadContext* ctx) throw() ;
 	void addShardKey(String* col, ThreadContext* ctx);
 	void addSubShardKey(String* col, ThreadContext* ctx);
+	bool checkHasIndex(ArrayList<String>* columns, String* indexName, ThreadContext* ctx) throw() ;
+private:
+	bool checkColumnArrays(ArrayList<String>* columns, TableIndexMetadata* index, ThreadContext* ctx) throw() ;
 public:
 	static TableMetadata* loadFromFetcher(FileStorageEntryFetcher* fetcher, ThreadContext* ctx);
 	static TableMetadata* fromNetwork(NetworkBinaryBuffer* buff, ThreadContext* ctx);

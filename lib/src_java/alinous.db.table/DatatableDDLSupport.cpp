@@ -50,12 +50,12 @@ void DatatableDDLSupport::createTable(TableMetadata* metadata, ThreadPool* threa
 			{
 				dir->mkdirs(ctx);
 			}
-			__GC_MV(this, &(this->dataStorage), (new(ctx) FileStorage(core->diskCache, (new(ctx) File(dataStoragePath, ctx)), ConstStr::getCNST_STR_1661(), ctx)), FileStorage);
+			__GC_MV(this, &(this->dataStorage), (new(ctx) FileStorage(core->diskCache, (new(ctx) File(dataStoragePath, ctx)), ConstStr::getCNST_STR_1664(), ctx)), FileStorage);
 			this->dataStorage->createStorage((long long)DatatableConstants::capacity, (long long)DatatableConstants::BLOCK_SIZE, ctx);
 			__GC_MV(this, &(this->oidIndex), (new(ctx) BTree(ctx))->init((new(ctx) File(this->oidIndexPath, ctx)), cache, core->diskCache, ctx), BTree);
 			this->oidIndex->initTreeStorage(32, IBTreeValue::TYPE_LONG, IBTreeValue::TYPE_LONG, (long long)DatatableConstants::capacity, (long long)64, ctx);
 			StringBuilder* primname = (new(ctx) StringBuilder(ctx));
-			primname->append(this->name, ctx)->append(ConstStr::getCNST_STR_1685(), ctx);
+			primname->append(this->name, ctx)->append(ConstStr::getCNST_STR_1688(), ctx);
 			__GC_MV(this, &(this->primaryIndex), (new(ctx) TableIndex(primname->toString(ctx), this->baseDir, true, metadata->getPrimaryKeys(ctx), ctx)), TableIndex);
 			this->primaryIndex->createIndex(core, cache, ctx);
 			__GC_MV(this, &(this->metadata), metadata, TableMetadata);
@@ -95,6 +95,11 @@ void DatatableDDLSupport::createTable(TableMetadata* metadata, ThreadPool* threa
 void DatatableDDLSupport::createIndex(String* indexName, ArrayList<String>* columns, AlinousCore* core, BTreeGlobalCache* cache, ThreadContext* ctx)
 {
 	lockStorage(ctx);
+	if(this->metadata->checkHasIndex(columns, indexName, ctx))
+	{
+		unlockStorage(ctx);
+		throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1689(), ctx));
+	}
 	{
 		try
 		{
@@ -112,7 +117,7 @@ void DatatableDDLSupport::createIndex(String* indexName, ArrayList<String>* colu
 		catch(Throwable* e)
 		{
 			unlockStorage(ctx);
-			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1686(), e, ctx));
+			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1690(), e, ctx));
 		}
 	}
 	unlockStorage(ctx);
@@ -132,6 +137,11 @@ void DatatableDDLSupport::buildFirstindexValue(TableIndex* newindex, ThreadConte
 		LongValue* longValue = static_cast<LongValue*>(values->get(0, ctx));
 		entry = reader->read(longValue->value, ctx);
 		fetcher->load(entry, ctx);
+		int type = fetcher->fetchInt(ctx);
+		if(type != IBTreeValue::TYPE_DATABASE_RECORD)
+		{
+			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_1691(), ctx));
+		}
 		DatabaseRecord* dbrecord = DatabaseRecord::valueFromFetcher(fetcher, ctx);
 		newindex->addIndexValue(dbrecord, ctx);
 	}

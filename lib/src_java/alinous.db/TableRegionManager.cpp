@@ -70,7 +70,7 @@ void TableRegionManager::commitCreateTable(String* regionName, String* schemaNam
 {
 	if(regionName == nullptr)
 	{
-		regionName = ConstStr::getCNST_STR_1677();
+		regionName = ConstStr::getCNST_STR_1680();
 	}
 	int maxLoop = this->regions->size(ctx);
 	ITableRegion* region = nullptr;
@@ -85,7 +85,7 @@ void TableRegionManager::commitCreateTable(String* regionName, String* schemaNam
 	}
 	if(region == nullptr)
 	{
-		throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1680(), ctx));
+		throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1683(), ctx));
 	}
 	region->createSchema(schemaName, ctx);
 	region->createTable(schemaName, tblMeta, database->workerThreadsPool, core, database->getBtreeCache(ctx), ctx);

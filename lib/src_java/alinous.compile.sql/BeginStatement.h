@@ -54,7 +54,7 @@ class BeginStatement final : public AbstractSQLStatement {
 public:
 	BeginStatement(const BeginStatement& base) = default;
 public:
-	BeginStatement(ThreadContext* ctx) throw()  : IObject(ctx), AbstractSQLStatement(ctx)
+	BeginStatement(ThreadContext* ctx) throw()  : IObject(ctx), AbstractSQLStatement(ctx), isolationLevel(-1)
 	{
 	}
 	void __construct_impl(ThreadContext* ctx) throw() 
@@ -62,6 +62,8 @@ public:
 	}
 	virtual ~BeginStatement() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
+private:
+	int isolationLevel;
 public:
 	bool visit(IAlinousElementVisitor* visitor, AbstractSrcElement* parent, ThreadContext* ctx) throw()  final;
 	bool analyse(SrcAnalyseContext* context, bool leftValue, ThreadContext* ctx) throw()  final;
@@ -70,6 +72,8 @@ public:
 	void analyzeSQL(SQLAnalyseContext* context, bool debug, ThreadContext* ctx) throw()  final;
 	void readData(NetworkBinaryBuffer* buff, ThreadContext* ctx) final;
 	void writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw()  final;
+	int getIsolationLevel(ThreadContext* ctx) throw() ;
+	void setIsolationLevel(int isolationLevel, ThreadContext* ctx) throw() ;
 public:
 	static bool __init_done;
 	static bool __init_static_variables();

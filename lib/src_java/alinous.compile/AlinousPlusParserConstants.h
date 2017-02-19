@@ -214,7 +214,10 @@ public:
 	constexpr static const long long REGION{186};
 	constexpr static const long long PARTITION{187};
 	constexpr static const long long SUB{188};
-	constexpr static const long long IDENTIFIER{189};
+	constexpr static const long long SERIALIZABLE{189};
+	constexpr static const long long READ{190};
+	constexpr static const long long COMMITTED{191};
+	constexpr static const long long IDENTIFIER{192};
 	constexpr static const long long DEFAULT{0};
 	constexpr static const long long COMM{1};
 	constexpr static const long long L_COMM{2};

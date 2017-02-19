@@ -53,6 +53,11 @@ bool SQLStatementRunner::executeBeginStatement(BeginStatement* stmt, ScriptMachi
 	IDatabaseConnection* con = handle->getCon(ctx);
 	IDatabaseDriver* driver = handle->getDbdriver(ctx);
 	int acid = driver->getDefaultAcid(ctx);
+	int beginIsolationLevel = stmt->getIsolationLevel(ctx);
+	if(beginIsolationLevel > 0)
+	{
+		acid = beginIsolationLevel;
+	}
 	driver->begin(con, acid, ctx);
 	return false;
 }

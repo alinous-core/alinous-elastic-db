@@ -82,6 +82,7 @@ public:
 	ArrayList<String>* getColumns(ThreadContext* ctx) throw() ;
 	void setColumns(ArrayList<String>* columns, ThreadContext* ctx) throw() ;
 	ArrayList<TableColumnMetadata>* getMetadata(ThreadContext* ctx) throw() ;
+	bool hasColumn(String* name, ThreadContext* ctx) throw() ;
 public:
 	static TableIndexMetadata* fromNetwork(NetworkBinaryBuffer* buff, ThreadContext* ctx);
 	static TableIndexMetadata* loadFromFetcher(FileStorageEntryFetcher* fetcher, ThreadContext* ctx) throw() ;

@@ -51,11 +51,11 @@ class DatabaseException;}}}
 namespace alinous {namespace system {
 class AlinousException;}}
 
-namespace alinous {namespace db {namespace table {
-class TableIndexMetadata;}}}
-
 namespace alinous {namespace db {
 class AlinousDbException;}}
+
+namespace alinous {namespace db {namespace table {
+class TableIndexMetadata;}}}
 
 namespace java {namespace lang {
 class Throwable;}}

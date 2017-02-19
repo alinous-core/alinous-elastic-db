@@ -57,7 +57,7 @@ void TableIndexMetadata::setupColumnMetadata(TableMetadata* meta, ThreadContext*
 		TableColumnMetadata* col = meta->getColumnByName(name, ctx);
 		if(col == nullptr)
 		{
-			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1687()->clone(ctx)->append(name, ctx)->append(ConstStr::getCNST_STR_1688(), ctx)->append(this->name, ctx), ctx));
+			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1692()->clone(ctx)->append(name, ctx)->append(ConstStr::getCNST_STR_1693(), ctx)->append(this->name, ctx), ctx));
 		}
 		this->metadata->add(col, ctx);
 	}
@@ -129,6 +129,19 @@ void TableIndexMetadata::setColumns(ArrayList<String>* columns, ThreadContext* c
 ArrayList<TableColumnMetadata>* TableIndexMetadata::getMetadata(ThreadContext* ctx) throw() 
 {
 	return metadata;
+}
+bool TableIndexMetadata::hasColumn(String* name, ThreadContext* ctx) throw() 
+{
+	int maxLoop = this->columns->size(ctx);
+	for(int i = 0; i != maxLoop; ++i)
+	{
+		String* colname = this->columns->get(i, ctx);
+		if(!colname->equals(name, ctx))
+		{
+			return false;
+		}
+	}
+	return true;
 }
 TableIndexMetadata* TableIndexMetadata::fromNetwork(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 {

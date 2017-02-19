@@ -234,7 +234,7 @@ void TableMetadata::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 			}
 			catch(AlinousDbException* e)
 			{
-				throw (new(ctx) VariableException(ConstStr::getCNST_STR_1696(), e, ctx));
+				throw (new(ctx) VariableException(ConstStr::getCNST_STR_1701(), e, ctx));
 			}
 		}
 	}
@@ -249,7 +249,7 @@ void TableMetadata::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 			}
 			catch(AlinousDbException* e)
 			{
-				throw (new(ctx) VariableException(ConstStr::getCNST_STR_1696(), e, ctx));
+				throw (new(ctx) VariableException(ConstStr::getCNST_STR_1701(), e, ctx));
 			}
 		}
 		indexes->add(idx, ctx);
@@ -276,7 +276,7 @@ void TableMetadata::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 		TableColumnMetadata* col = TableColumnMetadata::fromNetwork(buff, ctx);
 		if(col == nullptr)
 		{
-			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1697(), ctx));
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1702(), ctx));
 		}
 		this->shardKeys->add(col, ctx);
 	}
@@ -286,7 +286,7 @@ void TableMetadata::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 		TableColumnMetadata* col = TableColumnMetadata::fromNetwork(buff, ctx);
 		if(col == nullptr)
 		{
-			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1697(), ctx));
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1702(), ctx));
 		}
 		this->subShardKeys->add(col, ctx);
 	}
@@ -418,7 +418,7 @@ void TableMetadata::addPrimaryKey(String* col, ThreadContext* ctx)
 	TableColumnMetadata* colmeta = this->columns->get(col->toLowerCase(ctx), ctx);
 	if(colmeta == nullptr)
 	{
-		throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1698(), ctx));
+		throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1703(), ctx));
 	}
 	this->primaryKeys->add(colmeta, ctx);
 	colmeta->setPrimaryKey(true, ctx);
@@ -449,7 +449,7 @@ void TableMetadata::addShardKey(String* col, ThreadContext* ctx)
 	TableColumnMetadata* colmeta = this->columns->get(col->toLowerCase(ctx), ctx);
 	if(colmeta == nullptr)
 	{
-		throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1699(), ctx));
+		throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1704(), ctx));
 	}
 	this->shardKeys->add(colmeta, ctx);
 }
@@ -458,9 +458,40 @@ void TableMetadata::addSubShardKey(String* col, ThreadContext* ctx)
 	TableColumnMetadata* colmeta = this->columns->get(col->toLowerCase(ctx), ctx);
 	if(colmeta == nullptr)
 	{
-		throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1699(), ctx));
+		throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1704(), ctx));
 	}
 	this->subShardKeys->add(colmeta, ctx);
+}
+bool TableMetadata::checkHasIndex(ArrayList<String>* columns, String* indexName, ThreadContext* ctx) throw() 
+{
+	int maxLoop = this->indexes->size(ctx);
+	for(int i = 0; i != maxLoop; ++i)
+	{
+		TableIndexMetadata* index = this->indexes->get(i, ctx);
+		String* name = index->getName(ctx);
+		if(name->equals(indexName, ctx))
+		{
+			return true;
+		}
+		if(checkColumnArrays(columns, index, ctx))
+		{
+			return true;
+		}
+	}
+	return false;
+}
+bool TableMetadata::checkColumnArrays(ArrayList<String>* columns, TableIndexMetadata* index, ThreadContext* ctx) throw() 
+{
+	int maxLoop = columns->size(ctx);
+	for(int i = 0; i != maxLoop; ++i)
+	{
+		String* name = columns->get(i, ctx);
+		if(!index->hasColumn(name, ctx))
+		{
+			return false;
+		}
+	}
+	return true;
 }
 TableMetadata* TableMetadata::loadFromFetcher(FileStorageEntryFetcher* fetcher, ThreadContext* ctx)
 {

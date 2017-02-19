@@ -27,6 +27,7 @@ bool BeginStatement::__init_static_variables(){
 }
 void BeginStatement::__releaseRegerences(bool prepare, ThreadContext* ctx) throw() 
 {
+	ObjectEraser __e_obj1(ctx, __FILEW__, __LINE__, L"BeginStatement", L"~BeginStatement");
 	if(!prepare){
 		return;
 	}
@@ -60,6 +61,14 @@ void BeginStatement::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 void BeginStatement::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
 {
 	buff->putInt(ICommandData::__BeginStatement, ctx);
+}
+int BeginStatement::getIsolationLevel(ThreadContext* ctx) throw() 
+{
+	return isolationLevel;
+}
+void BeginStatement::setIsolationLevel(int isolationLevel, ThreadContext* ctx) throw() 
+{
+	this->isolationLevel = isolationLevel;
 }
 }}}
 

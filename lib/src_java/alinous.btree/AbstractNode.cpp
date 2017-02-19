@@ -128,7 +128,7 @@ void AbstractNode::printTab(StringBuffer* buff, int level, ThreadContext* ctx) t
 {
 	for(int i = 0; i != level; ++i)
 	{
-		buff->append(ConstStr::getCNST_STR_1657(), ctx);
+		buff->append(ConstStr::getCNST_STR_1660(), ctx);
 	}
 }
 FileStorage* AbstractNode::getStorage(ThreadContext* ctx) throw() 
