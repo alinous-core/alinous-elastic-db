@@ -233,6 +233,7 @@ void TrxRecordsCache::commitInsertRecord(AlinousDatabase* db, IDatabaseTable* ta
 			{
 				jobs->set((new(ctx) SequentialBackgroundJob(ctx))->init(this->trx->getThreadPool(ctx), ctx),i, ctx);
 			}
+			IOidPublisher* oidPublisher = db->getOidPublisher(ctx);
 			BTreeScanner* scanner = (new(ctx) BTreeScanner(this->storage, ctx));
 			scanner->startScan(false, ctx);
 			while(scanner->hasNext(ctx))
@@ -240,6 +241,8 @@ void TrxRecordsCache::commitInsertRecord(AlinousDatabase* db, IDatabaseTable* ta
 				IBTreeNode* lnode = scanner->next(ctx);
 				ArrayList<IBTreeValue>* values = lnode->getValues(ctx);
 				CachedRecord* record = static_cast<CachedRecord*>(values->get(0, ctx));
+				long long oid = oidPublisher->newOid(table->getFullName(ctx), ctx);
+				record->setOid(oid, ctx);
 				table->insertData(this->trx, record, newCommitId, jobs, this->trx->getLogger(ctx), ctx);
 			}
 			scanner->endScan(ctx);

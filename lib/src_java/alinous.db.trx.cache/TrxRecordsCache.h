@@ -78,6 +78,9 @@ class CachedRecord;}}}}
 namespace java {namespace lang {
 class Throwable;}}
 
+namespace alinous {namespace db {namespace table {
+class IOidPublisher;}}}
+
 namespace alinous {namespace btree {
 class LongKey;}}
 
@@ -131,6 +134,7 @@ using ::alinous::compile::sql::analyze::ScanTableColumnIdentifier;
 using ::alinous::db::AlinousDatabase;
 using ::alinous::db::AlinousDbException;
 using ::alinous::db::table::IDatabaseTable;
+using ::alinous::db::table::IOidPublisher;
 using ::alinous::db::table::TableColumnMetadata;
 using ::alinous::db::table::TableIndexMetadata;
 using ::alinous::db::table::TableMetadata;

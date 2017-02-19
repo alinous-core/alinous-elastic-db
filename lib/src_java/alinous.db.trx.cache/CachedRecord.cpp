@@ -166,6 +166,10 @@ long long CachedRecord::getMaxCommitId(ThreadContext* ctx) throw()
 	long long commitId = this->lastUpdateCommitId < this->insertedCommitId ? this->insertedCommitId : this->lastUpdateCommitId;
 	return commitId > this->deletedCommitId ? commitId : this->deletedCommitId;
 }
+void CachedRecord::setOid(long long oid, ThreadContext* ctx) throw() 
+{
+	this->oid = oid;
+}
 CachedRecord* CachedRecord::valueFromFetcher(FileStorageEntryFetcher* fetcher, ThreadContext* ctx)
 {
 	long long oid = fetcher->fetchLong(ctx);

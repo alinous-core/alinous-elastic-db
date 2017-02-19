@@ -843,6 +843,11 @@
 #include "alinous.lock/UpgreadableGate.h"
 #include "alinous.lock/CriticalSectionMarkerException.h"
 #include "alinous.lock/CriticalSectionMarker.h"
+#include "alinous.lock.unique/UniqueExclusiveLock.h"
+#include "alinous.lock.unique/ColumnsUniqueCollections.h"
+#include "alinous.lock.unique/TableUniqueCollections.h"
+#include "alinous.lock.unique/UniqueExclusiveLockManager.h"
+#include "alinous.lock.unique/ValueCollections.h"
 #include "alinous.range/LongRange.h"
 #include "alinous.range/LongRangeIterator.h"
 #include "alinous.range/LongRangeList.h"
@@ -1608,6 +1613,11 @@ inline static void __cleanUpStatics(alinous::ThreadContext* ctx){
 	alinous::lock::ConcurrentGate::__cleanUp(ctx);
 	alinous::lock::UpdateLock::__cleanUp(ctx);
 	alinous::lock::IConcurrentLockManager::__cleanUp(ctx);
+	alinous::lock::unique::TableUniqueCollections::__cleanUp(ctx);
+	alinous::lock::unique::UniqueExclusiveLockManager::__cleanUp(ctx);
+	alinous::lock::unique::ValueCollections::__cleanUp(ctx);
+	alinous::lock::unique::ColumnsUniqueCollections::__cleanUp(ctx);
+	alinous::lock::unique::UniqueExclusiveLock::__cleanUp(ctx);
 	alinous::range::LongRangeList::__cleanUp(ctx);
 	alinous::range::LongRangeIterator::__cleanUp(ctx);
 	alinous::range::LongRange::__cleanUp(ctx);
