@@ -144,6 +144,14 @@ int TableColumnMetadata::getType(ThreadContext* ctx) throw()
 {
 	return type;
 }
+bool TableColumnMetadata::isUnique(ThreadContext* ctx) throw() 
+{
+	return unique;
+}
+void TableColumnMetadata::setUnique(bool unique, ThreadContext* ctx) throw() 
+{
+	this->unique = unique;
+}
 TableColumnMetadata* TableColumnMetadata::loadFromFetcher(FileStorageEntryFetcher* fetcher, ThreadContext* ctx) throw() 
 {
 	int type = fetcher->fetchInt(ctx);

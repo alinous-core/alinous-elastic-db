@@ -674,6 +674,13 @@ template class alinous::RawArray<alinous::ArrayObject<alinous::IArrayObject<::al
 template class alinous::RawArray<alinous::ArrayObject<::alinous::compile::sql::analyze::JoinMatchExpression>>;
 template class alinous::RawArray<alinous::IArrayObject<alinous::ArrayObject<::alinous::compile::sql::analyze::JoinMatchExpression>>>;
 template class alinous::RawArray<alinous::ArrayObject<alinous::ArrayObject<::alinous::compile::sql::analyze::JoinMatchExpression>>>;
+template class alinous::RawArray<::alinous::compile::sql::analyze::ScanUnique>;
+template class alinous::RawArray<alinous::IArrayObject<::alinous::compile::sql::analyze::ScanUnique>>;
+template class alinous::RawArray<alinous::IArrayObject<alinous::IArrayObject<::alinous::compile::sql::analyze::ScanUnique>>>;
+template class alinous::RawArray<alinous::ArrayObject<alinous::IArrayObject<::alinous::compile::sql::analyze::ScanUnique>>>;
+template class alinous::RawArray<alinous::ArrayObject<::alinous::compile::sql::analyze::ScanUnique>>;
+template class alinous::RawArray<alinous::IArrayObject<alinous::ArrayObject<::alinous::compile::sql::analyze::ScanUnique>>>;
+template class alinous::RawArray<alinous::ArrayObject<alinous::ArrayObject<::alinous::compile::sql::analyze::ScanUnique>>>;
 template class alinous::RawArray<::alinous::compile::sql::analyze::ScanTableMetadata>;
 template class alinous::RawArray<alinous::IArrayObject<::alinous::compile::sql::analyze::ScanTableMetadata>>;
 template class alinous::RawArray<alinous::IArrayObject<alinous::IArrayObject<::alinous::compile::sql::analyze::ScanTableMetadata>>>;
@@ -793,6 +800,13 @@ template class alinous::RawArray<alinous::ArrayObject<alinous::IArrayObject<::al
 template class alinous::RawArray<alinous::ArrayObject<::alinous::db::table::IScannableIndex>>;
 template class alinous::RawArray<alinous::IArrayObject<alinous::ArrayObject<::alinous::db::table::IScannableIndex>>>;
 template class alinous::RawArray<alinous::ArrayObject<alinous::ArrayObject<::alinous::db::table::IScannableIndex>>>;
+template class alinous::RawArray<::alinous::db::table::TableMetadataUnique>;
+template class alinous::RawArray<alinous::IArrayObject<::alinous::db::table::TableMetadataUnique>>;
+template class alinous::RawArray<alinous::IArrayObject<alinous::IArrayObject<::alinous::db::table::TableMetadataUnique>>>;
+template class alinous::RawArray<alinous::ArrayObject<alinous::IArrayObject<::alinous::db::table::TableMetadataUnique>>>;
+template class alinous::RawArray<alinous::ArrayObject<::alinous::db::table::TableMetadataUnique>>;
+template class alinous::RawArray<alinous::IArrayObject<alinous::ArrayObject<::alinous::db::table::TableMetadataUnique>>>;
+template class alinous::RawArray<alinous::ArrayObject<alinous::ArrayObject<::alinous::db::table::TableMetadataUnique>>>;
 template class alinous::RawArray<::alinous::db::table::DatabaseRecord>;
 template class alinous::RawArray<alinous::IArrayObject<::alinous::db::table::DatabaseRecord>>;
 template class alinous::RawArray<alinous::IArrayObject<alinous::IArrayObject<::alinous::db::table::DatabaseRecord>>>;

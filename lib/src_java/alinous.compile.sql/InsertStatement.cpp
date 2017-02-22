@@ -209,6 +209,7 @@ void InsertStatement::analyzeSQL(SQLAnalyseContext* context, bool debug, ThreadC
 		String* tableName = tableIdentifier->getTable(ctx)->getTable(ctx);
 		IDatabaseTable* table = context->getDatabase(ctx)->getTable(schemaName, tableName, ctx);
 		TableMetadata* meta = table->getMetadata(ctx);
+		TableMetadataUniqueCollection* uniques = meta->getUniques(ctx);
 	}
 }
 void InsertStatement::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)

@@ -586,6 +586,13 @@ template class alinous::IArrayObject<alinous::ArrayObject<alinous::IArrayObject<
 template class alinous::IArrayObject<alinous::ArrayObject<::alinous::compile::sql::analyze::JoinMatchExpression>>;
 template class alinous::IArrayObject<alinous::IArrayObject<alinous::ArrayObject<::alinous::compile::sql::analyze::JoinMatchExpression>>>;
 template class alinous::IArrayObject<alinous::ArrayObject<alinous::ArrayObject<::alinous::compile::sql::analyze::JoinMatchExpression>>>;
+template class alinous::IArrayObject<::alinous::compile::sql::analyze::ScanUnique>;
+template class alinous::IArrayObject<alinous::IArrayObject<::alinous::compile::sql::analyze::ScanUnique>>;
+template class alinous::IArrayObject<alinous::IArrayObject<alinous::IArrayObject<::alinous::compile::sql::analyze::ScanUnique>>>;
+template class alinous::IArrayObject<alinous::ArrayObject<alinous::IArrayObject<::alinous::compile::sql::analyze::ScanUnique>>>;
+template class alinous::IArrayObject<alinous::ArrayObject<::alinous::compile::sql::analyze::ScanUnique>>;
+template class alinous::IArrayObject<alinous::IArrayObject<alinous::ArrayObject<::alinous::compile::sql::analyze::ScanUnique>>>;
+template class alinous::IArrayObject<alinous::ArrayObject<alinous::ArrayObject<::alinous::compile::sql::analyze::ScanUnique>>>;
 template class alinous::IArrayObject<::alinous::compile::sql::analyze::ScanTableMetadata>;
 template class alinous::IArrayObject<alinous::IArrayObject<::alinous::compile::sql::analyze::ScanTableMetadata>>;
 template class alinous::IArrayObject<alinous::IArrayObject<alinous::IArrayObject<::alinous::compile::sql::analyze::ScanTableMetadata>>>;
@@ -705,6 +712,13 @@ template class alinous::IArrayObject<alinous::ArrayObject<alinous::IArrayObject<
 template class alinous::IArrayObject<alinous::ArrayObject<::alinous::db::table::IScannableIndex>>;
 template class alinous::IArrayObject<alinous::IArrayObject<alinous::ArrayObject<::alinous::db::table::IScannableIndex>>>;
 template class alinous::IArrayObject<alinous::ArrayObject<alinous::ArrayObject<::alinous::db::table::IScannableIndex>>>;
+template class alinous::IArrayObject<::alinous::db::table::TableMetadataUnique>;
+template class alinous::IArrayObject<alinous::IArrayObject<::alinous::db::table::TableMetadataUnique>>;
+template class alinous::IArrayObject<alinous::IArrayObject<alinous::IArrayObject<::alinous::db::table::TableMetadataUnique>>>;
+template class alinous::IArrayObject<alinous::ArrayObject<alinous::IArrayObject<::alinous::db::table::TableMetadataUnique>>>;
+template class alinous::IArrayObject<alinous::ArrayObject<::alinous::db::table::TableMetadataUnique>>;
+template class alinous::IArrayObject<alinous::IArrayObject<alinous::ArrayObject<::alinous::db::table::TableMetadataUnique>>>;
+template class alinous::IArrayObject<alinous::ArrayObject<alinous::ArrayObject<::alinous::db::table::TableMetadataUnique>>>;
 template class alinous::IArrayObject<::alinous::db::table::DatabaseRecord>;
 template class alinous::IArrayObject<alinous::IArrayObject<::alinous::db::table::DatabaseRecord>>;
 template class alinous::IArrayObject<alinous::IArrayObject<alinous::IArrayObject<::alinous::db::table::DatabaseRecord>>>;

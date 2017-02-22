@@ -69,6 +69,9 @@ class IDatabaseTable;}}}
 namespace alinous {namespace db {namespace table {
 class TableMetadata;}}}
 
+namespace alinous {namespace compile {namespace sql {namespace analyze {
+class TableMetadataUniqueCollection;}}}}
+
 namespace alinous {namespace remote {namespace socket {
 class NetworkBinaryBuffer;}}}
 
@@ -115,6 +118,7 @@ using ::alinous::compile::analyse::SrcAnalyseContext;
 using ::alinous::compile::sql::analyze::SQLAnalyseContext;
 using ::alinous::compile::sql::analyze::ScanTableIdentifier;
 using ::alinous::compile::sql::analyze::ScanTableMetadata;
+using ::alinous::compile::sql::analyze::TableMetadataUniqueCollection;
 using ::alinous::compile::sql::expression::ISQLExpression;
 using ::alinous::compile::sql::parts::SQLExpressionList;
 using ::alinous::compile::sql::select::join::IJoinTarget;

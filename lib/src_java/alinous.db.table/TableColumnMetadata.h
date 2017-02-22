@@ -89,6 +89,8 @@ public:
 	void readData(NetworkBinaryBuffer* buff, ThreadContext* ctx) final;
 	void writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw()  final;
 	int getType(ThreadContext* ctx) throw() ;
+	bool isUnique(ThreadContext* ctx) throw() ;
+	void setUnique(bool unique, ThreadContext* ctx) throw() ;
 public:
 	static TableColumnMetadata* loadFromFetcher(FileStorageEntryFetcher* fetcher, ThreadContext* ctx) throw() ;
 	static TableColumnMetadata* fromNetwork(NetworkBinaryBuffer* buff, ThreadContext* ctx);

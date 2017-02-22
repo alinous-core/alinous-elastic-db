@@ -41,6 +41,7 @@ template class ::java::util::ArrayList<::alinous::compile::sql::analyze::ScanTab
 template class ::java::util::ArrayList<::alinous::compile::sql::analyze::ScanTableIdentifier>;
 template class ::java::util::ArrayList<::alinous::compile::sql::analyze::IndexScanStrategyPlan>;
 template class ::java::util::ArrayList<::alinous::compile::sql::analyze::JoinMatchExpression>;
+template class ::java::util::ArrayList<::alinous::compile::sql::analyze::ScanUnique>;
 template class ::java::util::ArrayList<::alinous::compile::sql::analyze::ScanTableMetadata>;
 template class ::java::util::ArrayList<::alinous::db::trx::scan::ITableTargetScanner>;
 template class ::java::util::ArrayList<::alinous::compile::sql::analyze::JoinStrategyPart>;
@@ -72,6 +73,7 @@ template class ::java::util::ArrayList<::alinous::btree::IBTreeNode>;
 template class ::java::util::ArrayList<::alinous::db::ITableRegion>;
 template class ::java::util::ArrayList<::alinous::db::ITableSchema>;
 template class ::java::util::ArrayList<::alinous::db::table::IScannableIndex>;
+template class ::java::util::ArrayList<::alinous::db::table::TableMetadataUnique>;
 template class ::java::util::ArrayList<::alinous::db::table::DatabaseRecord>;
 template class ::java::util::ArrayList<::alinous::db::table::lockmonitor::TableLock>;
 template class ::java::util::ArrayList<::alinous::db::table::lockmonitor::RowLock>;

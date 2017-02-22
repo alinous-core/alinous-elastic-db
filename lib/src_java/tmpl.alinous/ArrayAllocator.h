@@ -82,6 +82,7 @@ template class alinous::ArrayAllocator<::alinous::compile::sql::analyze::ScanTab
 template class alinous::ArrayAllocator<::alinous::compile::sql::analyze::ScanTableIdentifier>;
 template class alinous::ArrayAllocator<::alinous::compile::sql::analyze::IndexScanStrategyPlan>;
 template class alinous::ArrayAllocator<::alinous::compile::sql::analyze::JoinMatchExpression>;
+template class alinous::ArrayAllocator<::alinous::compile::sql::analyze::ScanUnique>;
 template class alinous::ArrayAllocator<::alinous::compile::sql::analyze::ScanTableMetadata>;
 template class alinous::ArrayAllocator<::alinous::db::trx::scan::ITableTargetScanner>;
 template class alinous::ArrayAllocator<::alinous::compile::sql::analyze::JoinStrategyPart>;
@@ -99,6 +100,7 @@ template class alinous::ArrayAllocator<::alinous::compile::analyse::AlinousType>
 template class alinous::ArrayAllocator<::alinous::html::xpath::match::MatchCandidate>;
 template class alinous::ArrayAllocator<::alinous::btree::IBTreeValue>;
 template class alinous::ArrayAllocator<::alinous::db::table::IScannableIndex>;
+template class alinous::ArrayAllocator<::alinous::db::table::TableMetadataUnique>;
 template class alinous::ArrayAllocator<::alinous::db::table::DatabaseRecord>;
 template class alinous::ArrayAllocator<::alinous::db::table::lockmonitor::TableLock>;
 template class alinous::ArrayAllocator<::alinous::db::table::lockmonitor::RowLock>;

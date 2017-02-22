@@ -261,6 +261,9 @@
 #include "alinous.compile.sql.ddl/CheckDefinition.h"
 #include "alinous.compile.sql.ddl/ColumnTypeDescriptor.h"
 #include "alinous.db.table/TableColumnMetadata.h"
+#include "alinous.db.table/TableMetadataUnique.h"
+#include "alinous.compile.sql.analyze/ScanUnique.h"
+#include "alinous.compile.sql.analyze/TableMetadataUniqueCollection.h"
 #include "alinous.remote.db.command.data/StorageNodeData.h"
 #include "alinous.remote.db.command.data/TableClusterData.h"
 #include "alinous.db.table/TablePartitionMaxValue.h"
@@ -1123,8 +1126,10 @@ inline static void __cleanUpStatics(alinous::ThreadContext* ctx){
 	alinous::compile::sql::analyze::ScanTableMetadata::__cleanUp(ctx);
 	alinous::compile::sql::analyze::ScanTableColumnMetadata::__cleanUp(ctx);
 	alinous::compile::sql::analyze::ScanTableIdentifier::__cleanUp(ctx);
+	alinous::compile::sql::analyze::ScanUnique::__cleanUp(ctx);
 	alinous::compile::sql::analyze::IndexScanStrategy::__cleanUp(ctx);
 	alinous::compile::sql::analyze::JoinStrategyPart::__cleanUp(ctx);
+	alinous::compile::sql::analyze::TableMetadataUniqueCollection::__cleanUp(ctx);
 	alinous::compile::sql::analyze::IndexConditionDetector::__cleanUp(ctx);
 	alinous::compile::sql::analyze::InnerNecessaryCondition::__cleanUp(ctx);
 	alinous::compile::sql::analyze::SQLAnalyseContext::__cleanUp(ctx);
@@ -1535,6 +1540,7 @@ inline static void __cleanUpStatics(alinous::ThreadContext* ctx){
 	alinous::db::table::IScannableIndex::__cleanUp(ctx);
 	alinous::db::table::DatatableUpdateSupport::__cleanUp(ctx);
 	alinous::db::table::TableMetadata::__cleanUp(ctx);
+	alinous::db::table::TableMetadataUnique::__cleanUp(ctx);
 	alinous::db::table::cache::DbRecordHashMainList::__cleanUp(ctx);
 	alinous::db::table::cache::RecordCacheEngine::__cleanUp(ctx);
 	alinous::db::table::cache::DbRecordHashArray::__cleanUp(ctx);

@@ -24,6 +24,9 @@ class TableColumnMetadata;}}}
 namespace alinous {namespace db {namespace table {
 class TableIndexMetadata;}}}
 
+namespace alinous {namespace db {namespace table {
+class TableMetadataUnique;}}}
+
 namespace alinous {namespace compile {namespace sql {namespace ddl {
 class CheckDefinition;}}}}
 
@@ -47,6 +50,12 @@ class IAlinousElement;}}
 
 namespace alinous {namespace db {namespace table {
 class TablePartitionMaxValue;}}}
+
+namespace alinous {namespace compile {namespace sql {namespace analyze {
+class TableMetadataUniqueCollection;}}}}
+
+namespace alinous {namespace compile {namespace sql {namespace analyze {
+class ScanUnique;}}}}
 
 namespace java {namespace util {
 template <typename  T, typename V> class HashMap;}}
@@ -81,6 +90,8 @@ using ::alinous::buffer::storage::FileStorageEntryBuilder;
 using ::alinous::buffer::storage::FileStorageEntryFetcher;
 using ::alinous::compile::AlinousElementNetworkFactory;
 using ::alinous::compile::IAlinousElement;
+using ::alinous::compile::sql::analyze::ScanUnique;
+using ::alinous::compile::sql::analyze::TableMetadataUniqueCollection;
 using ::alinous::compile::sql::ddl::CheckDefinition;
 using ::alinous::db::AlinousDbException;
 using ::alinous::remote::db::command::data::StorageNodeData;
@@ -107,7 +118,7 @@ private:
 	ArrayList<TableColumnMetadata>* columnsList;
 	ArrayList<TableColumnMetadata>* primaryKeys;
 	ArrayList<TableIndexMetadata>* indexes;
-	ArrayList<TableColumnMetadata>* uniqueList;
+	ArrayList<TableMetadataUnique>* uniqueList;
 	String* schema;
 	String* tableName;
 	ArrayList<CheckDefinition>* checks;
@@ -143,6 +154,7 @@ public:
 	void addShardKey(String* col, ThreadContext* ctx);
 	void addSubShardKey(String* col, ThreadContext* ctx);
 	bool checkHasIndex(ArrayList<String>* columns, String* indexName, ThreadContext* ctx) throw() ;
+	TableMetadataUniqueCollection* getUniques(ThreadContext* ctx) throw() ;
 private:
 	bool checkColumnArrays(ArrayList<String>* columns, TableIndexMetadata* index, ThreadContext* ctx) throw() ;
 public:
