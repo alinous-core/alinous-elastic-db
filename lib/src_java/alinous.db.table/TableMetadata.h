@@ -107,6 +107,7 @@ private:
 	ArrayList<TableColumnMetadata>* columnsList;
 	ArrayList<TableColumnMetadata>* primaryKeys;
 	ArrayList<TableIndexMetadata>* indexes;
+	ArrayList<TableColumnMetadata>* uniqueList;
 	String* schema;
 	String* tableName;
 	ArrayList<CheckDefinition>* checks;
