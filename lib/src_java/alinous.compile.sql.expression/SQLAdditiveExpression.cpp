@@ -109,7 +109,7 @@ void SQLAdditiveExpression::readData(NetworkBinaryBuffer* buff, ThreadContext* c
 {
 	__readData(buff, ctx);
 }
-void SQLAdditiveExpression::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+void SQLAdditiveExpression::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 {
 	buff->putInt(ICommandData::__SQLAdditiveExpression, ctx);
 	__writeData(buff, ctx);

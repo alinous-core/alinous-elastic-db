@@ -87,7 +87,7 @@ public:
 	bool isPrimaryKey(ThreadContext* ctx) throw() ;
 	void setPrimaryKey(bool primaryKey, ThreadContext* ctx) throw() ;
 	void readData(NetworkBinaryBuffer* buff, ThreadContext* ctx) final;
-	void writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw()  final;
+	void writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) final;
 	int getType(ThreadContext* ctx) throw() ;
 	bool isUnique(ThreadContext* ctx) throw() ;
 	void setUnique(bool unique, ThreadContext* ctx) throw() ;

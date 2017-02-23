@@ -108,7 +108,7 @@ void DeleteStatement::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
 		if(el == nullptr || !((dynamic_cast<IJoinTarget*>(el) != 0)))
 		{
-			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1030(), ctx));
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1031(), ctx));
 		}
 		__GC_MV(this, &(this->table), static_cast<IJoinTarget*>(el), IJoinTarget);
 	}
@@ -123,7 +123,7 @@ void DeleteStatement::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 		__GC_MV(this, &(this->where), static_cast<SQLWhere*>(el), SQLWhere);
 	}
 }
-void DeleteStatement::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+void DeleteStatement::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 {
 	buff->putInt(ICommandData::__DeleteStatement, ctx);
 	bool isnull = (this->table == nullptr);

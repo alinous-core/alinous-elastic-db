@@ -231,7 +231,7 @@ void SQLInExpression::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 		__GC_MV(this, &(this->list), static_cast<SQLExpressionList*>(el), SQLExpressionList);
 	}
 }
-void SQLInExpression::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+void SQLInExpression::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 {
 	buff->putInt(ICommandData::__SQLInExpression, ctx);
 	__writeData(buff, ctx);

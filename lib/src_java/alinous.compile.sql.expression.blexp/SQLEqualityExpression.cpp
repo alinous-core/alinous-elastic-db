@@ -263,7 +263,7 @@ void SQLEqualityExpression::readData(NetworkBinaryBuffer* buff, ThreadContext* c
 	}
 	this->checkEquals = buff->getBoolean(ctx);
 }
-void SQLEqualityExpression::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+void SQLEqualityExpression::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 {
 	buff->putInt(ICommandData::__SQLEqualityExpression, ctx);
 	__writeData(buff, ctx);

@@ -118,7 +118,7 @@ void TableColumnMetadata::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx
 		this->check->readData(buff, ctx);
 	}
 }
-void TableColumnMetadata::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+void TableColumnMetadata::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 {
 	buff->putInt(this->type, ctx);
 	buff->putInt(this->length, ctx);

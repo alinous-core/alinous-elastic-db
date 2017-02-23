@@ -87,7 +87,7 @@ public:
 	bool visit(IAlinousElementVisitor* visitor, AbstractSrcElement* parent, ThreadContext* ctx) throw()  final;
 	bool analyse(SrcAnalyseContext* context, bool leftValue, ThreadContext* ctx) throw()  final;
 	void readData(NetworkBinaryBuffer* buff, ThreadContext* ctx) final;
-	void writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw()  final;
+	void writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) final;
 	int getLine(ThreadContext* ctx) throw()  final;
 	int getStartPosition(ThreadContext* ctx) throw()  final;
 	int getEndLine(ThreadContext* ctx) throw()  final;

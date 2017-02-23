@@ -44,7 +44,7 @@ void RightJoin::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 {
 	__readData(buff, ctx);
 }
-void RightJoin::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+void RightJoin::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 {
 	buff->putInt(ICommandData::__RightJoin, ctx);
 	__writeData(buff, ctx);

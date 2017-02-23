@@ -140,7 +140,7 @@ void AlinousType::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 	this->type = buff->getInt(ctx);
 	this->dimension = buff->getInt(ctx);
 }
-void AlinousType::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+void AlinousType::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 {
 	buff->putInt(this->typeClass, ctx);
 	bool isnull = (this->clazz == nullptr);

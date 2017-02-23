@@ -156,7 +156,7 @@ void DomVariableJoinTarget::readData(NetworkBinaryBuffer* buff, ThreadContext* c
 		__GC_MV(this, &(this->asName), buff->getString(ctx), String);
 	}
 }
-void DomVariableJoinTarget::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+void DomVariableJoinTarget::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 {
 	buff->putInt(ICommandData::__DomVariableJoinTarget, ctx);
 	bool isnull = (this->domDesc == nullptr);

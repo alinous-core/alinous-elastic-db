@@ -198,7 +198,7 @@ void SQLExpressionList::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 		this->list->add(static_cast<ISQLExpression*>(el), ctx);
 	}
 }
-void SQLExpressionList::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+void SQLExpressionList::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 {
 	buff->putInt(ICommandData::__SQLExpressionList, ctx);
 	int maxLoop = this->list->size(ctx);

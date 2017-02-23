@@ -29,6 +29,7 @@ template class alinous::ArrayAllocator<::alinous::system::config::remote::NodeRe
 template class alinous::ArrayAllocator<::com::google::re2j::Machine::LogicalThread>;
 template class alinous::ArrayAllocator<::com::google::re2j::Inst>;
 template class alinous::ArrayAllocator<::com::google::re2j::Machine>;
+template class alinous::ArrayAllocator<::alinous::compile::sql::ddl::ShardKeys>;
 template class alinous::ArrayAllocator<::alinous::runtime::engine::debugger::server::IServerCommand>;
 template class alinous::ArrayAllocator<::alinous::system::config::remote::Node>;
 template class alinous::ArrayAllocator<::alinous::system::config::remote::RegionsServer>;
@@ -39,6 +40,7 @@ template class alinous::ArrayAllocator<::alinous::system::config::remote::Region
 template class alinous::ArrayAllocator<::alinous::system::config::remote::Region>;
 template class alinous::ArrayAllocator<::alinous::db::ITableRegion>;
 template class alinous::ArrayAllocator<::alinous::db::ITableSchema>;
+template class alinous::ArrayAllocator<::alinous::db::table::TablePartitionKey>;
 template class alinous::ArrayAllocator<::alinous::db::table::IDatabaseRecord>;
 template class alinous::ArrayAllocator<::alinous::runtime::variant::VariantValue>;
 template class alinous::ArrayAllocator<::alinous::remote::monitor::NodeInfo>;
@@ -64,6 +66,7 @@ template class alinous::ArrayAllocator<::alinous::compile::declare::AlinousName>
 template class alinous::ArrayAllocator<::alinous::compile::expression::IDomSegment>;
 template class alinous::ArrayAllocator<::alinous::compile::expression::SubExpression>;
 template class alinous::ArrayAllocator<::alinous::compile::expression::blexp::BooleanSubExpression>;
+template class alinous::ArrayAllocator<::alinous::db::table::TableColumnMetadata>;
 template class alinous::ArrayAllocator<::alinous::compile::sql::ddl::DdlColumnDescriptor>;
 template class alinous::ArrayAllocator<::alinous::compile::sql::ddl::Unique>;
 template class alinous::ArrayAllocator<::alinous::compile::sql::ddl::CheckDefinition>;
@@ -76,7 +79,6 @@ template class alinous::ArrayAllocator<::alinous::compile::sql::InsertValues>;
 template class alinous::ArrayAllocator<::alinous::compile::sql::analyze::ScanTableIndexMetadata>;
 template class alinous::ArrayAllocator<::alinous::compile::sql::analyze::InnerNecessaryCondition>;
 template class alinous::ArrayAllocator<::alinous::compile::sql::expression::blexp::SQLBoolSubExpression>;
-template class alinous::ArrayAllocator<::alinous::db::table::TableColumnMetadata>;
 template class alinous::ArrayAllocator<::alinous::db::table::TableIndexMetadata>;
 template class alinous::ArrayAllocator<::alinous::compile::sql::analyze::ScanTableColumnMetadata>;
 template class alinous::ArrayAllocator<::alinous::compile::sql::analyze::ScanTableIdentifier>;
@@ -99,6 +101,7 @@ template class alinous::ArrayAllocator<::alinous::runtime::engine::DatabaseHandl
 template class alinous::ArrayAllocator<::alinous::compile::analyse::AlinousType>;
 template class alinous::ArrayAllocator<::alinous::html::xpath::match::MatchCandidate>;
 template class alinous::ArrayAllocator<::alinous::btree::IBTreeValue>;
+template class alinous::ArrayAllocator<::alinous::db::table::TablePartitionRange>;
 template class alinous::ArrayAllocator<::alinous::db::table::IScannableIndex>;
 template class alinous::ArrayAllocator<::alinous::db::table::TableMetadataUnique>;
 template class alinous::ArrayAllocator<::alinous::db::table::DatabaseRecord>;

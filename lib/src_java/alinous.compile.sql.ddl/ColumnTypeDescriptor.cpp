@@ -135,7 +135,7 @@ void ColumnTypeDescriptor::readData(NetworkBinaryBuffer* buff, ThreadContext* ct
 	}
 	this->typeNum = buff->getInt(ctx);
 }
-void ColumnTypeDescriptor::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+void ColumnTypeDescriptor::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 {
 	buff->putInt(ICommandData::__Unique, ctx);
 	bool isnull = (this->length == nullptr);

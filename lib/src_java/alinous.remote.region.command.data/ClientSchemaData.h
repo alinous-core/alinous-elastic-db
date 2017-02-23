@@ -62,7 +62,7 @@ public:
 	void addTable(String* tableName, ClientTableData* tableData, ThreadContext* ctx) throw() ;
 	Map<String,ClientTableData>* getMap(ThreadContext* ctx) throw() ;
 	void readData(NetworkBinaryBuffer* buff, ThreadContext* ctx) final;
-	void writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw()  final;
+	void writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) final;
 	String* getName(ThreadContext* ctx) throw() ;
 	void setName(String* name, ThreadContext* ctx) throw() ;
 public:

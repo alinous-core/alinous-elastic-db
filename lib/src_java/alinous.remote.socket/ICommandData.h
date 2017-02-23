@@ -189,7 +189,7 @@ public:
 	constexpr static const int __SubShardKeys{1128};
 public:
 	virtual void readData(NetworkBinaryBuffer* buff, ThreadContext* ctx) = 0;
-	virtual void writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw()  = 0;
+	virtual void writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) = 0;
 public:
 	static bool __init_done;
 	static bool __init_static_variables();

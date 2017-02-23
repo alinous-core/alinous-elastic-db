@@ -137,7 +137,7 @@ void AbstractCollectionExpression::__readData(NetworkBinaryBuffer* buff, ThreadC
 		this->expressions->add(static_cast<SubExpression*>(el), ctx);
 	}
 }
-void AbstractCollectionExpression::__writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+void AbstractCollectionExpression::__writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 {
 	bool isnull = (this->first == nullptr);
 	buff->putBoolean(isnull, ctx);

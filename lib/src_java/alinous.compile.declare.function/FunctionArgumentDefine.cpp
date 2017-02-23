@@ -462,7 +462,7 @@ void FunctionArgumentDefine::readData(NetworkBinaryBuffer* buff, ThreadContext* 
 		__GC_MV(this, &(this->domDescriptor), static_cast<DomVariableDescriptor*>(el), DomVariableDescriptor);
 	}
 }
-void FunctionArgumentDefine::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+void FunctionArgumentDefine::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 {
 	buff->putInt(ICommandData::__FunctionArgumentDefine, ctx);
 	bool isnull = (this->type == nullptr);

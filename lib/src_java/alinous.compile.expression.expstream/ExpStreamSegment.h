@@ -240,7 +240,7 @@ public:
 	ClassMemberVariable* getMemberVariableDef(ThreadContext* ctx) throw() ;
 	int getExpressionType(ThreadContext* ctx) throw()  final;
 	void readData(NetworkBinaryBuffer* buff, ThreadContext* ctx) final;
-	void writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw()  final;
+	void writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) final;
 	int fileSize(ThreadContext* ctx) final;
 	void toFileEntry(FileStorageEntryBuilder* builder, ThreadContext* ctx) final;
 	void fromFileEntry(FileStorageEntryFetcher* fetcher, ThreadContext* ctx) final;

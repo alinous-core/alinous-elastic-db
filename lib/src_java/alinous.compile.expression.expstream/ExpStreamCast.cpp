@@ -122,7 +122,7 @@ void ExpStreamCast::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 		__GC_MV(this, &(this->exp), static_cast<ExpressionStream*>(el), ExpressionStream);
 	}
 }
-void ExpStreamCast::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+void ExpStreamCast::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 {
 	buff->putInt(ICommandData::__ExpStreamCast, ctx);
 	bool isnull = (this->type == nullptr);

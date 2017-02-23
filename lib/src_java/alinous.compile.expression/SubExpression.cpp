@@ -119,7 +119,7 @@ void SubExpression::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 		__GC_MV(this, &(this->exp), static_cast<IExpression*>(el), IExpression);
 	}
 }
-void SubExpression::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+void SubExpression::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 {
 	buff->putInt(ICommandData::__SubExpression, ctx);
 	buff->putInt(this->op, ctx);

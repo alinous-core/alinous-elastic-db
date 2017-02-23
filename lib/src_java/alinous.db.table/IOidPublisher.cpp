@@ -29,6 +29,7 @@ void IOidPublisher::__releaseRegerences(bool prepare, ThreadContext* ctx) throw(
 	if(!prepare){
 		return;
 	}
+	IBTreeValue::__releaseRegerences(true, ctx);
 }
 }}}
 

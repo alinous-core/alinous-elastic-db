@@ -74,7 +74,7 @@ void LeftJoin::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 {
 	__readData(buff, ctx);
 }
-void LeftJoin::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+void LeftJoin::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 {
 	buff->putInt(ICommandData::__LeftJoin, ctx);
 	__writeData(buff, ctx);

@@ -81,7 +81,7 @@ void StorageNodeData::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 		__GC_MV(this, &(this->metadata), TableMetadata::fromNetwork(buff, ctx), TableMetadata);
 	}
 }
-void StorageNodeData::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+void StorageNodeData::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 {
 	buff->putString(this->host, ctx);
 	buff->putInt(this->port, ctx);

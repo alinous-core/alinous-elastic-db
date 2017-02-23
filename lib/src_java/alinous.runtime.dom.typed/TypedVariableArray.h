@@ -350,7 +350,7 @@ public:
 	int compareTo(TimeVariable* variable, ThreadContext* ctx) final;
 	int compareTo(TimestampVariable* variable, ThreadContext* ctx) final;
 	void readData(NetworkBinaryBuffer* buff, ThreadContext* ctx) final;
-	void writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw()  final;
+	void writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) final;
 public:
 	static TypedVariableArray* fromDebugXml(DomNode* node, ThreadContext* ctx) throw() ;
 public:

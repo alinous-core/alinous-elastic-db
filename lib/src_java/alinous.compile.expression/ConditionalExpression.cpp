@@ -175,7 +175,7 @@ void ConditionalExpression::readData(NetworkBinaryBuffer* buff, ThreadContext* c
 		__GC_MV(this, &(this->altexp), static_cast<IExpression*>(el), IExpression);
 	}
 }
-void ConditionalExpression::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+void ConditionalExpression::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 {
 	buff->putInt(ICommandData::__ConditionalExpression, ctx);
 	bool isnull = (this->first == nullptr);

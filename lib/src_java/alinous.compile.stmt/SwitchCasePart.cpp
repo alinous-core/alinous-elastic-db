@@ -117,7 +117,7 @@ void SwitchCasePart::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 		__GC_MV(this, &(this->stmtlist), static_cast<StatementList*>(el), StatementList);
 	}
 }
-void SwitchCasePart::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+void SwitchCasePart::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 {
 	buff->putInt(ICommandData::__SwitchCasePart, ctx);
 	int maxLoop = this->casesList->size(ctx);

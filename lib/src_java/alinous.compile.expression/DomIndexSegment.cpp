@@ -123,7 +123,7 @@ void DomIndexSegment::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 	}
 	this->segmentVariableType = buff->getInt(ctx);
 }
-void DomIndexSegment::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+void DomIndexSegment::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 {
 	buff->putInt(ICommandData::__DomIndexSegment, ctx);
 	bool isnull = (this->index == nullptr);

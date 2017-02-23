@@ -83,6 +83,10 @@ IValueFetcher* LocalOidPublisher::getFetcher(ThreadContext* ctx) throw()
 {
 	return nullptr;
 }
+bool LocalOidPublisher::equals(IObject* obj, ThreadContext* ctx) throw() 
+{
+	return this == obj;
+}
 LocalOidPublisher* LocalOidPublisher::fromFetcher(FileStorageEntryFetcher* fetcher, ThreadContext* ctx) throw() 
 {
 	LocalOidPublisher* publisher = (new(ctx) LocalOidPublisher(ctx));

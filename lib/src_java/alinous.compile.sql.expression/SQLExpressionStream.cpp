@@ -277,7 +277,7 @@ void SQLExpressionStream::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx
 		__GC_MV(this, &(this->asName), buff->getString(ctx), String);
 	}
 }
-void SQLExpressionStream::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+void SQLExpressionStream::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 {
 	buff->putInt(ICommandData::__SQLEqualityExpression, ctx);
 	bool isnull = (this->exp == nullptr);

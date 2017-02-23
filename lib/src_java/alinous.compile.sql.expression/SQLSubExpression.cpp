@@ -185,7 +185,7 @@ void SQLSubExpression::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 		__GC_MV(this, &(this->exp), static_cast<ISQLExpression*>(el), ISQLExpression);
 	}
 }
-void SQLSubExpression::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+void SQLSubExpression::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 {
 	buff->putInt(ICommandData::__SQLNotExpression, ctx);
 	__writeData(buff, ctx);

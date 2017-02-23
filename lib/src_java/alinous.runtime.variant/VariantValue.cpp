@@ -1879,7 +1879,7 @@ void VariantValue::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 		__GC_MV(this, &(this->data), VariantDataFactory::fromNetworkData(buff, ctx), IVariantData);
 	}
 }
-void VariantValue::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+void VariantValue::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 {
 	buff->putInt(ICommandData::__VariantValue, ctx);
 	buff->putInt(this->vtype, ctx);
@@ -1921,6 +1921,13 @@ VariantValue* VariantValue::createMaxValue(int type, ThreadContext* ctx) throw()
 	VariantValue* vv = (new(ctx) VariantValue(ctx));
 	vv->vtype = type;
 	vv->max = MAX_VALUE;
+	return vv;
+}
+VariantValue* VariantValue::createMinValue(int type, ThreadContext* ctx) throw() 
+{
+	VariantValue* vv = (new(ctx) VariantValue(ctx));
+	vv->vtype = type;
+	vv->max = MIN_VALUE;
 	return vv;
 }
 VariantValue* VariantValue::importFromDebugXml(DomNode* node, ThreadContext* ctx) throw() 

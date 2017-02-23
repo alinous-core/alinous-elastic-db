@@ -187,7 +187,7 @@ void ClassMethodFunction::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx
 		__GC_MV(this, &(this->superConstructor), static_cast<ClassMethodFunction*>(el), ClassMethodFunction);
 	}
 }
-void ClassMethodFunction::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+void ClassMethodFunction::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 {
 	buff->putInt(ICommandData::__ClassMethodFunction, ctx);
 	bool isnull = (this->func == nullptr);

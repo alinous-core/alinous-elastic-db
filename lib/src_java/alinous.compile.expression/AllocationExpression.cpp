@@ -230,7 +230,7 @@ void AllocationExpression::readData(NetworkBinaryBuffer* buff, ThreadContext* ct
 		this->arrayCapacity->add(static_cast<IExpression*>(el), ctx);
 	}
 }
-void AllocationExpression::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+void AllocationExpression::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 {
 	buff->putInt(ICommandData::__AllocationExpression, ctx);
 	bool isnull = (this->objectClassName == nullptr);

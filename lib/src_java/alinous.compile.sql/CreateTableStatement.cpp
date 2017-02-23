@@ -40,10 +40,8 @@ void CreateTableStatement::__releaseRegerences(bool prepare, ThreadContext* ctx)
 	primaryKeys = nullptr;
 	__e_obj1.add(this->region, this);
 	region = nullptr;
-	__e_obj1.add(this->shardKeys, this);
-	shardKeys = nullptr;
-	__e_obj1.add(this->subShardKeys, this);
-	subShardKeys = nullptr;
+	__e_obj1.add(this->partitionKeys, this);
+	partitionKeys = nullptr;
 	__e_obj1.add(this->metadata, this);
 	metadata = nullptr;
 	if(!prepare){
@@ -89,36 +87,39 @@ TableSchema* CreateTableStatement::createMetadata(ScriptMachine* machine, bool d
 	}
 	tblMetadata->setChecks(this->checks, ctx);
 	schema->setRegionName(this->region, ctx);
-	ArrayList<String>* scolumns = this->primaryKeys->getColumns(ctx);
-	if(this->shardKeys != nullptr)
+	if(this->partitionKeys->isEmpty(ctx))
 	{
-		scolumns = this->shardKeys->getColumns(ctx);
-	}
-	maxLoop = scolumns->size(ctx);
-	for(int i = 0; i != maxLoop; ++i)
-	{
-		String* key = scolumns->get(i, ctx);
-		tblMetadata->addShardKey(key, ctx);
-	}
-	if(this->subShardKeys != nullptr)
-	{
-		scolumns = this->subShardKeys->getColumns(ctx);
+		ArrayList<String>* scolumns = this->primaryKeys->getColumns(ctx);
+		ShardKeys* mainKey = (new(ctx) ShardKeys(ctx));
 		maxLoop = scolumns->size(ctx);
 		for(int i = 0; i != maxLoop; ++i)
 		{
 			String* key = scolumns->get(i, ctx);
-			tblMetadata->addSubShardKey(key, ctx);
+			mainKey->addKey(key, ctx);
 		}
+		this->partitionKeys->add(mainKey, ctx);
 	}
-	TablePartitionMaxValue* maxPartitionValue = makeMaxTablePartitionMaxValue(tblMetadata, ctx);
-	tblMetadata->setMaxPartitionValue(maxPartitionValue, ctx);
+	TablePartitionKeyCollection* partitionKeys = (new(ctx) TablePartitionKeyCollection(ctx));
+	TablePartitionRangeCollection* partitionValueRanges = (new(ctx) TablePartitionRangeCollection(ctx));
+	maxLoop = this->partitionKeys->size(ctx);
+	for(int i = 0; i != maxLoop; ++i)
+	{
+		ShardKeys* skey = this->partitionKeys->get(i, ctx);
+		ArrayList<String>* cols = skey->getColumns(ctx);
+		TablePartitionKey* key = toPartitionKeys(tblMetadata, cols, ctx);
+		partitionKeys->addPartitionKey(key, ctx);
+		TablePartitionRange* range = makeDefaultRange(tblMetadata, key, ctx);
+		partitionValueRanges->addRange(range, ctx);
+	}
+	tblMetadata->setPartitionKeys(partitionKeys, ctx);
+	tblMetadata->setPartitionValueRanges(partitionValueRanges, ctx);
 	return schema;
 }
 void CreateTableStatement::validate(SourceValidator* validator, ThreadContext* ctx) throw() 
 {
 	if(!((dynamic_cast<TableJoinTarget*>(this->table) != 0)))
 	{
-		validator->addError(ConstStr::getCNST_STR_1028(), this, ctx);
+		validator->addError(ConstStr::getCNST_STR_1029(), this, ctx);
 	}
 		else 
 	{
@@ -126,7 +127,7 @@ void CreateTableStatement::validate(SourceValidator* validator, ThreadContext* c
 		ArrayList<String>* segments = tbl->getName(ctx)->getSegments(ctx);
 		if(segments->size(ctx) > 2)
 		{
-			validator->addError(ConstStr::getCNST_STR_1028(), this, ctx);
+			validator->addError(ConstStr::getCNST_STR_1029(), this, ctx);
 		}
 	}
 	int maxLoop = this->columns->size(ctx);
@@ -137,7 +138,7 @@ void CreateTableStatement::validate(SourceValidator* validator, ThreadContext* c
 	}
 	if(this->primaryKeys == nullptr)
 	{
-		validator->addError(ConstStr::getCNST_STR_1029(), this, ctx);
+		validator->addError(ConstStr::getCNST_STR_1030(), this, ctx);
 	}
 }
 TableMetadata* CreateTableStatement::getMetadata(ThreadContext* ctx) throw() 
@@ -274,7 +275,7 @@ void CreateTableStatement::readData(NetworkBinaryBuffer* buff, ThreadContext* ct
 		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
 		if(el == nullptr || !((dynamic_cast<IJoinTarget*>(el) != 0)))
 		{
-			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1030(), ctx));
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1031(), ctx));
 		}
 		__GC_MV(this, &(this->table), static_cast<IJoinTarget*>(el), IJoinTarget);
 	}
@@ -284,7 +285,7 @@ void CreateTableStatement::readData(NetworkBinaryBuffer* buff, ThreadContext* ct
 		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
 		if(el == nullptr || !((dynamic_cast<DdlColumnDescriptor*>(el) != 0)))
 		{
-			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1031(), ctx));
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1032(), ctx));
 		}
 		this->columns->add(static_cast<DdlColumnDescriptor*>(el), ctx);
 	}
@@ -294,7 +295,7 @@ void CreateTableStatement::readData(NetworkBinaryBuffer* buff, ThreadContext* ct
 		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
 		if(el == nullptr || !((dynamic_cast<Unique*>(el) != 0)))
 		{
-			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1032(), ctx));
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1033(), ctx));
 		}
 		this->uniques->add(static_cast<Unique*>(el), ctx);
 	}
@@ -304,7 +305,7 @@ void CreateTableStatement::readData(NetworkBinaryBuffer* buff, ThreadContext* ct
 		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
 		if(el == nullptr || !((dynamic_cast<CheckDefinition*>(el) != 0)))
 		{
-			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1033(), ctx));
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1034(), ctx));
 		}
 		this->checks->add(static_cast<CheckDefinition*>(el), ctx);
 	}
@@ -314,7 +315,7 @@ void CreateTableStatement::readData(NetworkBinaryBuffer* buff, ThreadContext* ct
 		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
 		if(el == nullptr || !((dynamic_cast<PrimaryKeys*>(el) != 0)))
 		{
-			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1034(), ctx));
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1035(), ctx));
 		}
 		__GC_MV(this, &(this->primaryKeys), static_cast<PrimaryKeys*>(el), PrimaryKeys);
 	}
@@ -323,28 +324,19 @@ void CreateTableStatement::readData(NetworkBinaryBuffer* buff, ThreadContext* ct
 	{
 		__GC_MV(this, &(this->region), buff->getString(ctx), String);
 	}
-	isnull = buff->getBoolean(ctx);
-	if(!isnull)
+	maxLoop = this->partitionKeys->size(ctx);
+	for(int i = 0; i != maxLoop; ++i)
 	{
 		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
 		if(el == nullptr || !((dynamic_cast<ShardKeys*>(el) != 0)))
 		{
-			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1035(), ctx));
-		}
-		__GC_MV(this, &(this->shardKeys), static_cast<ShardKeys*>(el), ShardKeys);
-	}
-	isnull = buff->getBoolean(ctx);
-	if(!isnull)
-	{
-		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
-		if(el == nullptr || !((dynamic_cast<SubShardKeys*>(el) != 0)))
-		{
 			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1036(), ctx));
 		}
-		__GC_MV(this, &(this->subShardKeys), static_cast<SubShardKeys*>(el), SubShardKeys);
+		ShardKeys* keys = static_cast<ShardKeys*>(el);
+		this->partitionKeys->add(keys, ctx);
 	}
 }
-void CreateTableStatement::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+void CreateTableStatement::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 {
 	buff->putInt(ICommandData::__CreateTableStatement, ctx);
 	bool isnull = (this->table == nullptr);
@@ -386,68 +378,50 @@ void CreateTableStatement::writeData(NetworkBinaryBuffer* buff, ThreadContext* c
 	{
 		buff->putString(this->region, ctx);
 	}
-	isnull = (this->shardKeys == nullptr);
-	buff->putBoolean(isnull, ctx);
-	if(!isnull)
+	maxLoop = this->partitionKeys->size(ctx);
+	buff->putInt(maxLoop, ctx);
+	for(int i = 0; i < maxLoop; ++i)
 	{
-		shardKeys->writeData(buff, ctx);
-	}
-	isnull = (this->subShardKeys == nullptr);
-	buff->putBoolean(isnull, ctx);
-	if(!isnull)
-	{
-		subShardKeys->writeData(buff, ctx);
+		ShardKeys* keys = this->partitionKeys->get(i, ctx);
+		keys->writeData(buff, ctx);
 	}
 }
-ShardKeys* CreateTableStatement::getShardKeys(ThreadContext* ctx) throw() 
+void CreateTableStatement::addPartitionKey(ShardKeys* key, ThreadContext* ctx) throw() 
 {
-	return shardKeys;
+	this->partitionKeys->add(key, ctx);
 }
-void CreateTableStatement::setShardKeys(ShardKeys* shardKeys, ThreadContext* ctx) throw() 
+TablePartitionKey* CreateTableStatement::toPartitionKeys(TableMetadata* meta, ArrayList<String>* cols, ThreadContext* ctx)
 {
-	__GC_MV(this, &(this->shardKeys), shardKeys, ShardKeys);
-}
-SubShardKeys* CreateTableStatement::getSubShardKeys(ThreadContext* ctx) throw() 
-{
-	return subShardKeys;
-}
-void CreateTableStatement::setSubShardKeys(SubShardKeys* subShardKeys, ThreadContext* ctx) throw() 
-{
-	__GC_MV(this, &(this->subShardKeys), subShardKeys, SubShardKeys);
-}
-TablePartitionMaxValue* CreateTableStatement::makeMaxTablePartitionMaxValue(TableMetadata* tblMetadata, ThreadContext* ctx) throw() 
-{
-	TablePartitionMaxValue* value = (new(ctx) TablePartitionMaxValue(ctx));
-	ArrayList<String>* scolumns = this->primaryKeys->getColumns(ctx);
-	if(this->shardKeys != nullptr)
-	{
-		scolumns = this->shardKeys->getColumns(ctx);
-	}
-	int maxLoop = scolumns->size(ctx);
+	TablePartitionKey* key = (new(ctx) TablePartitionKey(ctx));
+	int maxLoop = cols->size(ctx);
 	for(int i = 0; i != maxLoop; ++i)
 	{
-		String* key = scolumns->get(i, ctx);
-		TableColumnMetadata* col = tblMetadata->getColumnByName(key, ctx);
+		String* col = cols->get(i, ctx);
+		TableColumnMetadata* colmeta = meta->getColumnByName(col, ctx);
+		if(colmeta == nullptr)
+		{
+			throw (new(ctx) DatabaseException(col->clone(ctx)->append(ConstStr::getCNST_STR_1028(), ctx), ctx));
+		}
+		key->addKeyColumn(colmeta, ctx);
+	}
+	return key;
+}
+TablePartitionRange* CreateTableStatement::makeDefaultRange(TableMetadata* meta, TablePartitionKey* key, ThreadContext* ctx) throw() 
+{
+	TablePartitionRange* range = (new(ctx) TablePartitionRange(key, ctx));
+	ArrayList<TableColumnMetadata>* keys = key->getKeys(ctx);
+	int maxLoop = keys->size(ctx);
+	for(int i = 0; i != maxLoop; ++i)
+	{
+		TableColumnMetadata* col = keys->get(i, ctx);
 		int coltype = col->getType(ctx);
 		int type = ddlColumnType2VariantType(coltype, ctx);
 		VariantValue* max = VariantValue::createMaxValue(type, ctx);
-		value->addValue(max, ctx);
+		VariantValue* min = VariantValue::createMinValue(type, ctx);
+		range->addMaxKeyValue(max, ctx);
+		range->addMinKeyValue(min, ctx);
 	}
-	if(this->subShardKeys != nullptr)
-	{
-		scolumns = this->subShardKeys->getColumns(ctx);
-		maxLoop = scolumns->size(ctx);
-		for(int i = 0; i != maxLoop; ++i)
-		{
-			String* key = scolumns->get(i, ctx);
-			TableColumnMetadata* col = tblMetadata->getColumnByName(key, ctx);
-			int coltype = col->getType(ctx);
-			int type = ddlColumnType2VariantType(coltype, ctx);
-			VariantValue* max = VariantValue::createMaxValue(type, ctx);
-			value->addSubValue(max, ctx);
-		}
-	}
-	return value;
+	return range;
 }
 int CreateTableStatement::ddlColumnType2VariantType(int coltype, ThreadContext* ctx) throw() 
 {

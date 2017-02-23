@@ -153,7 +153,7 @@ void EqualityExpression::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 		__GC_MV(this, &(this->right), static_cast<IExpression*>(el), IExpression);
 	}
 }
-void EqualityExpression::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+void EqualityExpression::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 {
 	buff->putInt(ICommandData::__EqualityExpression, ctx);
 	bool isnull = (this->left == nullptr);

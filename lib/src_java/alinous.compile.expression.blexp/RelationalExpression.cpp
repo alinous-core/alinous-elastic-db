@@ -213,7 +213,7 @@ void RelationalExpression::readData(NetworkBinaryBuffer* buff, ThreadContext* ct
 		__GC_MV(this, &(this->right), static_cast<IExpression*>(el), IExpression);
 	}
 }
-void RelationalExpression::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+void RelationalExpression::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 {
 	buff->putInt(ICommandData::__RelationalExpression, ctx);
 	bool isnull = (this->left == nullptr);

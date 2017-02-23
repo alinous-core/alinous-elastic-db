@@ -64,6 +64,10 @@ int LocalOidCounter::diskSize(ThreadContext* ctx)
 	int total = 8;
 	return total;
 }
+bool LocalOidCounter::equals(IObject* obj, ThreadContext* ctx) throw() 
+{
+	return this == obj;
+}
 IValueFetcher* LocalOidCounter::getFetcher(ThreadContext* ctx) throw() 
 {
 	return fetcher;

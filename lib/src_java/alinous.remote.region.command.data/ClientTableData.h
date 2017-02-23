@@ -51,7 +51,7 @@ private:
 	TableMetadata* metadata;
 public:
 	void readData(NetworkBinaryBuffer* buff, ThreadContext* ctx) final;
-	void writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw()  final;
+	void writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) final;
 	String* getName(ThreadContext* ctx) throw() ;
 	void setName(String* name, ThreadContext* ctx) throw() ;
 	TableMetadata* getMetadata(ThreadContext* ctx) throw() ;

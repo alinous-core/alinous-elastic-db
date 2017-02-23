@@ -83,7 +83,7 @@ void ExpressionStatement::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx
 		__GC_MV(this, &(this->exp), static_cast<IExpression*>(el), IExpression);
 	}
 }
-void ExpressionStatement::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+void ExpressionStatement::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 {
 	buff->putInt(ICommandData::__ExpressionStatement, ctx);
 	bool isnull = (this->exp == nullptr);

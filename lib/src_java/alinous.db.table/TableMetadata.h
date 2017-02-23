@@ -48,14 +48,17 @@ class AlinousDbException;}}
 namespace alinous {namespace compile {
 class IAlinousElement;}}
 
-namespace alinous {namespace db {namespace table {
-class TablePartitionMaxValue;}}}
-
 namespace alinous {namespace compile {namespace sql {namespace analyze {
 class TableMetadataUniqueCollection;}}}}
 
 namespace alinous {namespace compile {namespace sql {namespace analyze {
 class ScanUnique;}}}}
+
+namespace alinous {namespace db {namespace table {
+class TablePartitionKeyCollection;}}}
+
+namespace alinous {namespace db {namespace table {
+class TablePartitionRangeCollection;}}}
 
 namespace java {namespace util {
 template <typename  T, typename V> class HashMap;}}
@@ -122,16 +125,15 @@ private:
 	String* schema;
 	String* tableName;
 	ArrayList<CheckDefinition>* checks;
-	ArrayList<TableColumnMetadata>* shardKeys;
-	ArrayList<TableColumnMetadata>* subShardKeys;
-	TablePartitionMaxValue* maxPartitionValue;
+	TablePartitionKeyCollection* partitionKeys;
+	TablePartitionRangeCollection* partitionValueRanges;
 public:
 	TableClusterData* toCommandData(String* region, String* host, int port, bool ipv6, ThreadContext* ctx) throw() ;
 	bool checkEquals(TableMetadata* metadata, ThreadContext* ctx) throw() ;
 	int fileSize(ThreadContext* ctx);
 	void toFileEntry(FileStorageEntryBuilder* builder, ThreadContext* ctx);
 	void readData(NetworkBinaryBuffer* buff, ThreadContext* ctx) final;
-	void writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw()  final;
+	void writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) final;
 	void addindex(TableIndexMetadata* indexMeta, ThreadContext* ctx) throw() ;
 	void addColumn(String* name, int type, int length, ThreadContext* ctx) throw() ;
 	void addColumn(TableColumnMetadata* meta, ThreadContext* ctx) throw() ;
@@ -149,12 +151,12 @@ public:
 	void addPrimaryKey(TableColumnMetadata* colmeta, ThreadContext* ctx);
 	ArrayList<CheckDefinition>* getChecks(ThreadContext* ctx) throw() ;
 	void setChecks(ArrayList<CheckDefinition>* checks, ThreadContext* ctx) throw() ;
-	TablePartitionMaxValue* getMaxPartitionValue(ThreadContext* ctx) throw() ;
-	void setMaxPartitionValue(TablePartitionMaxValue* maxPartitionValue, ThreadContext* ctx) throw() ;
-	void addShardKey(String* col, ThreadContext* ctx);
-	void addSubShardKey(String* col, ThreadContext* ctx);
 	bool checkHasIndex(ArrayList<String>* columns, String* indexName, ThreadContext* ctx) throw() ;
 	TableMetadataUniqueCollection* getUniques(ThreadContext* ctx) throw() ;
+	TablePartitionKeyCollection* getPartitionKeys(ThreadContext* ctx) throw() ;
+	TablePartitionRangeCollection* getPartitionValueRanges(ThreadContext* ctx) throw() ;
+	void setPartitionValueRanges(TablePartitionRangeCollection* partitionValueRanges, ThreadContext* ctx) throw() ;
+	void setPartitionKeys(TablePartitionKeyCollection* partitionKeys, ThreadContext* ctx) throw() ;
 private:
 	bool checkColumnArrays(ArrayList<String>* columns, TableIndexMetadata* index, ThreadContext* ctx) throw() ;
 public:

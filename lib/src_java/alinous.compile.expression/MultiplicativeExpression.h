@@ -74,7 +74,7 @@ public:
 	bool isSQLExp(ThreadContext* ctx) throw()  final;
 	int getExpressionType(ThreadContext* ctx) throw()  final;
 	void readData(NetworkBinaryBuffer* buff, ThreadContext* ctx) final;
-	void writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw()  final;
+	void writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) final;
 	void toFileEntry(FileStorageEntryBuilder* builder, ThreadContext* ctx) final;
 public:
 	static bool __init_done;

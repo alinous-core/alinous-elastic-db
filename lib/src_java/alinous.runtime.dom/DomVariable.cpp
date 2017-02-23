@@ -1242,7 +1242,7 @@ void DomVariable::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 	}
 	this->value->readData(buff, ctx);
 }
-void DomVariable::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+void DomVariable::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 {
 	buff->putInt(ICommandData::__DomVariable, ctx);
 	char nullbl = ((char)(isNull(ctx) ? 0 : 1));

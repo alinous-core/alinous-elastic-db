@@ -109,7 +109,7 @@ void FunctionArguments::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 		this->arguments->add(static_cast<IExpression*>(el), ctx);
 	}
 }
-void FunctionArguments::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+void FunctionArguments::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 {
 	buff->putInt(ICommandData::__FunctionArguments, ctx);
 	int maxLoop = this->arguments->size(ctx);

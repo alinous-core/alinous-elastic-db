@@ -100,7 +100,7 @@ void SQLWhere::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 		__GC_MV(this, &(this->condition), static_cast<ISQLExpression*>(el), ISQLExpression);
 	}
 }
-void SQLWhere::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+void SQLWhere::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 {
 	buff->putInt(ICommandData::__SQLWhere, ctx);
 	bool isnull = (this->condition == nullptr);

@@ -209,7 +209,7 @@ public:
 	ArrayList<ClassImplements>* getImplementsClass(ThreadContext* ctx) throw() ;
 	void setImplementsClass(ArrayList<ClassImplements>* implementsClass, ThreadContext* ctx) throw() ;
 	void readData(NetworkBinaryBuffer* buff, ThreadContext* ctx) final;
-	void writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw()  final;
+	void writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) final;
 private:
 	void initMembers(AlinousClassVariable* obj, ScriptMachine* machine, bool debug, ThreadContext* ctx);
 	void analyzeMethodVirtual(SrcAnalyseContext* context, ClassMethodFunction* method, ThreadContext* ctx) throw() ;

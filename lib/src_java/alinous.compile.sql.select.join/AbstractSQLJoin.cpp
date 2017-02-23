@@ -276,7 +276,7 @@ void AbstractSQLJoin::__readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 		__GC_MV(this, &(this->condition), static_cast<SQLJoinCondition*>(el), SQLJoinCondition);
 	}
 }
-void AbstractSQLJoin::__writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+void AbstractSQLJoin::__writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 {
 	bool isnull = (this->left == nullptr);
 	buff->putBoolean(isnull, ctx);

@@ -220,7 +220,7 @@ void SQLGroupBy::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 		__GC_MV(this, &(this->havingCondition), static_cast<ISQLExpression*>(el), ISQLExpression);
 	}
 }
-void SQLGroupBy::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+void SQLGroupBy::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 {
 	buff->putInt(ICommandData::__SQLGroupBy, ctx);
 	bool isnull = (this->groupList == nullptr);

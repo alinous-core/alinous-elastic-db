@@ -83,7 +83,7 @@ void TableMetadataUnique::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx
 		addUnique(col, ctx);
 	}
 }
-void TableMetadataUnique::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+void TableMetadataUnique::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 {
 	int maxLoop = this->uniqueColList->size(ctx);
 	for(int i = 0; i != maxLoop; ++i)

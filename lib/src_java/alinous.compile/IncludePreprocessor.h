@@ -81,7 +81,7 @@ public:
 	void setModule(AlinousModule* module, ThreadContext* ctx) throw() ;
 	bool visit(IAlinousElementVisitor* visitor, AlinousSrc* alinousSrc, ThreadContext* ctx) throw() ;
 	void readData(NetworkBinaryBuffer* buff, ThreadContext* ctx) final;
-	void writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw()  final;
+	void writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) final;
 public:
 	static bool __init_done;
 	static bool __init_static_variables();

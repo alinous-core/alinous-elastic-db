@@ -65,11 +65,11 @@ using ::alinous::system::AlinousException;
 
 
 
-class LocalOidPublisher final : public IOidPublisher, public IBTreeValue, public virtual IObject {
+class LocalOidPublisher final : public IOidPublisher, public virtual IObject {
 public:
 	LocalOidPublisher(const LocalOidPublisher& base) = default;
 public:
-	LocalOidPublisher(ThreadContext* ctx) throw()  : IObject(ctx), IOidPublisher(ctx), IBTreeValue(ctx), tables(GCUtils<Map<String,LocalOidCounter> >::ins(this, (new(ctx) HashMap<String,LocalOidCounter>(ctx)), ctx, __FILEW__, __LINE__, L"")), lock(__GC_INS(this, (new(ctx) LockObject(ctx)), LockObject))
+	LocalOidPublisher(ThreadContext* ctx) throw()  : IObject(ctx), IOidPublisher(ctx), tables(GCUtils<Map<String,LocalOidCounter> >::ins(this, (new(ctx) HashMap<String,LocalOidCounter>(ctx)), ctx, __FILEW__, __LINE__, L"")), lock(__GC_INS(this, (new(ctx) LockObject(ctx)), LockObject))
 	{
 	}
 	void __construct_impl(ThreadContext* ctx) throw() 
@@ -85,6 +85,7 @@ public:
 	void appendToEntry(FileStorageEntryBuilder* builder, ThreadContext* ctx) final;
 	int diskSize(ThreadContext* ctx) final;
 	IValueFetcher* getFetcher(ThreadContext* ctx) throw()  final;
+	bool equals(IObject* obj, ThreadContext* ctx) throw()  final;
 public:
 	static LocalOidPublisher* fromFetcher(FileStorageEntryFetcher* fetcher, ThreadContext* ctx) throw() ;
 public:

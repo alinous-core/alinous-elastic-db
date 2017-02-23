@@ -222,7 +222,7 @@ void AbstractSQLCollectionExpression::__readData(NetworkBinaryBuffer* buff, Thre
 		__GC_MV(this, &(this->asName), buff->getString(ctx), String);
 	}
 }
-void AbstractSQLCollectionExpression::__writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+void AbstractSQLCollectionExpression::__writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 {
 	bool isnull = (this->first == nullptr);
 	buff->putBoolean(isnull, ctx);

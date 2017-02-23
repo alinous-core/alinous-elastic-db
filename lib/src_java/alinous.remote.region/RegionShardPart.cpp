@@ -18,14 +18,14 @@ bool RegionShardPart::__init_static_variables(){
 	delete ctx;
 	return true;
 }
- RegionShardPart::RegionShardPart(NodeTableReference* nodeRef, ThreadContext* ctx) throw()  : IObject(ctx), maxValue(nullptr), nodeAccessRef(nullptr)
+ RegionShardPart::RegionShardPart(NodeTableReference* nodeRef, ThreadContext* ctx) throw()  : IObject(ctx), partitionRange(nullptr), nodeAccessRef(nullptr)
 {
-	__GC_MV(this, &(this->maxValue), nodeRef->getMaxValue(ctx), TablePartitionMaxValue);
+	__GC_MV(this, &(this->partitionRange), nodeRef->getRange(ctx), TablePartitionRangeCollection);
 	__GC_MV(this, &(this->nodeAccessRef), nodeRef->getNodeAccessRef(ctx), NodeReference);
 }
 void RegionShardPart::__construct_impl(NodeTableReference* nodeRef, ThreadContext* ctx) throw() 
 {
-	__GC_MV(this, &(this->maxValue), nodeRef->getMaxValue(ctx), TablePartitionMaxValue);
+	__GC_MV(this, &(this->partitionRange), nodeRef->getRange(ctx), TablePartitionRangeCollection);
 	__GC_MV(this, &(this->nodeAccessRef), nodeRef->getNodeAccessRef(ctx), NodeReference);
 }
  RegionShardPart::~RegionShardPart() throw() 
@@ -38,17 +38,17 @@ void RegionShardPart::__construct_impl(NodeTableReference* nodeRef, ThreadContex
 void RegionShardPart::__releaseRegerences(bool prepare, ThreadContext* ctx) throw() 
 {
 	ObjectEraser __e_obj1(ctx, __FILEW__, __LINE__, L"RegionShardPart", L"~RegionShardPart");
-	__e_obj1.add(this->maxValue, this);
-	maxValue = nullptr;
+	__e_obj1.add(this->partitionRange, this);
+	partitionRange = nullptr;
 	__e_obj1.add(this->nodeAccessRef, this);
 	nodeAccessRef = nullptr;
 	if(!prepare){
 		return;
 	}
 }
-TablePartitionMaxValue* RegionShardPart::getMaxValue(ThreadContext* ctx) throw() 
+TablePartitionRangeCollection* RegionShardPart::getPartitionRange(ThreadContext* ctx) throw() 
 {
-	return maxValue;
+	return partitionRange;
 }
 NodeReference* RegionShardPart::getNodeAccessRef(ThreadContext* ctx) throw() 
 {

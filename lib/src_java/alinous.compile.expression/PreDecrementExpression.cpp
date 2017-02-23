@@ -112,7 +112,7 @@ void PreDecrementExpression::readData(NetworkBinaryBuffer* buff, ThreadContext* 
 		__GC_MV(this, &(this->exp), static_cast<IExpression*>(el), IExpression);
 	}
 }
-void PreDecrementExpression::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+void PreDecrementExpression::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 {
 	buff->putInt(ICommandData::__PreDecrementExpression, ctx);
 	bool isnull = (this->exp == nullptr);

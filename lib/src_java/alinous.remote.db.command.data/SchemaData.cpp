@@ -79,7 +79,7 @@ void SchemaData::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 		addTable(data, ctx);
 	}
 }
-void SchemaData::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+void SchemaData::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 {
 	buff->putString(this->name, ctx);
 	int size = this->tablesMap->size(ctx);

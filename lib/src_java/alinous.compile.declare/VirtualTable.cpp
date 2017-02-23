@@ -72,7 +72,7 @@ void VirtualTable::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 		this->list->add(pair, ctx);
 	}
 }
-void VirtualTable::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+void VirtualTable::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 {
 	buff->putInt(ICommandData::__VirtualTable, ctx);
 	int maxLoop = this->list->size(ctx);

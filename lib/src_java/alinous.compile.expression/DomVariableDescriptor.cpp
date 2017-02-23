@@ -207,7 +207,7 @@ void DomVariableDescriptor::readData(NetworkBinaryBuffer* buff, ThreadContext* c
 		__GC_MV(this, &(this->prefix), buff->getString(ctx), String);
 	}
 }
-void DomVariableDescriptor::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+void DomVariableDescriptor::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 {
 	buff->putInt(ICommandData::__DomVariableDescriptor, ctx);
 	int maxLoop = this->segments->size(ctx);

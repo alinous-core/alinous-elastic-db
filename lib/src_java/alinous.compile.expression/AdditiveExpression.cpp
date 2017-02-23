@@ -72,7 +72,7 @@ void AdditiveExpression::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 {
 	__readData(buff, ctx);
 }
-void AdditiveExpression::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+void AdditiveExpression::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 {
 	buff->putInt(ICommandData::__AdditiveExpression, ctx);
 	__writeData(buff, ctx);

@@ -111,7 +111,7 @@ void SQLOrExpression::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 {
 	__readData(buff, ctx);
 }
-void SQLOrExpression::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+void SQLOrExpression::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 {
 	buff->putInt(ICommandData::__SQLOrExpression, ctx);
 	__writeData(buff, ctx);

@@ -94,7 +94,7 @@ void ExpStreamParenthesis::readData(NetworkBinaryBuffer* buff, ThreadContext* ct
 		__GC_MV(this, &(this->exp), static_cast<ExpressionStream*>(el), ExpressionStream);
 	}
 }
-void ExpStreamParenthesis::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+void ExpStreamParenthesis::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 {
 	buff->putInt(ICommandData::__ExpStreamParenthesis, ctx);
 	bool isnull = (this->exp == nullptr);

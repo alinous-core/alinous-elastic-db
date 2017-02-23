@@ -171,7 +171,7 @@ void FunctionCallExpression::readData(NetworkBinaryBuffer* buff, ThreadContext* 
 		__GC_MV(this, &(this->arguments), static_cast<FunctionArguments*>(el), FunctionArguments);
 	}
 }
-void FunctionCallExpression::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+void FunctionCallExpression::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 {
 	buff->putInt(ICommandData::__FunctionCallExpression, ctx);
 	bool isnull = (this->body == nullptr);

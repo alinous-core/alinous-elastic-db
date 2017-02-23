@@ -84,7 +84,7 @@ public:
 	IStatement::StatementType getType(ThreadContext* ctx) throw()  final;
 	void validate(SourceValidator* validator, ThreadContext* ctx) throw()  final;
 	virtual void readData(NetworkBinaryBuffer* buff, ThreadContext* ctx);
-	virtual void writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() ;
+	virtual void writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx);
 public:
 	static bool __init_done;
 	static bool __init_static_variables();

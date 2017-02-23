@@ -1,8 +1,7 @@
 #ifndef ALINOUS_DB_TABLE_IOIDPUBLISHER_H_
 #define ALINOUS_DB_TABLE_IOIDPUBLISHER_H_
-namespace java {namespace lang {
-class IObject;
-}}
+namespace alinous {namespace btree {
+class IBTreeValue;}}
 
 namespace alinous {
 class ThreadContext;
@@ -13,14 +12,15 @@ namespace alinous {namespace db {namespace table {
 using namespace ::alinous;
 using namespace ::java::lang;
 using ::java::util::Iterator;
+using ::alinous::btree::IBTreeValue;
 
 
 
-class IOidPublisher : public virtual IObject {
+class IOidPublisher : public virtual IObject, public IBTreeValue {
 public:
 	IOidPublisher(const IOidPublisher& base) = default;
 public:
-	IOidPublisher(ThreadContext* ctx) throw()  : IObject(ctx)
+	IOidPublisher(ThreadContext* ctx) throw()  : IObject(ctx), IBTreeValue(ctx)
 	{
 	}
 	void __construct_impl(ThreadContext* ctx) throw() 

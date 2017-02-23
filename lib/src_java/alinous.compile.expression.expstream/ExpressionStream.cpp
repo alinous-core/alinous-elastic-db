@@ -280,7 +280,7 @@ void ExpressionStream::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 		this->segments->add(static_cast<IExpression*>(el), ctx);
 	}
 }
-void ExpressionStream::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+void ExpressionStream::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 {
 	buff->putInt(ICommandData::__ExpressionStream, ctx);
 	int maxLoop = this->segments->size(ctx);

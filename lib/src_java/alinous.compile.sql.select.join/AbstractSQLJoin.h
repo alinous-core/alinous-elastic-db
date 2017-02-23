@@ -191,7 +191,7 @@ public:
 	AbstractSrcElement* getParent(ThreadContext* ctx) throw()  final;
 	void setParent(AbstractSrcElement* parent, ThreadContext* ctx) throw()  final;
 	void __readData(NetworkBinaryBuffer* buff, ThreadContext* ctx);
-	void __writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() ;
+	void __writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx);
 	ITableTargetScanner* getCrossJoinsScanner(DbTransaction* trx, ScriptMachine* machine, ArrayList<ScanTableColumnIdentifier>* joinRequest, bool debug, ThreadContext* ctx);
 	ScannedResultIndexScanner* toResultScanner(DbTransaction* trx, ITableTargetScanner* scanner, ArrayList<ScanTableColumnIdentifier>* joinRequest, ScanTableMetadata* tableMeta, bool debug, ThreadContext* ctx);
 	ITableTargetScanner* getJoinStrategyScanner(DbTransaction* trx, ScriptMachine* machine, JoinStrategyPart* part, bool inner, bool debug, ThreadContext* ctx);

@@ -280,7 +280,7 @@ void SQLRelationalExpression::readData(NetworkBinaryBuffer* buff, ThreadContext*
 		__GC_MV(this, &(this->right), static_cast<ISQLExpression*>(el), ISQLExpression);
 	}
 }
-void SQLRelationalExpression::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+void SQLRelationalExpression::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 {
 	buff->putInt(ICommandData::__SQLRelationalExpression, ctx);
 	__writeData(buff, ctx);

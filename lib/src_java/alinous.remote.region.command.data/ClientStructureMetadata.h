@@ -61,7 +61,7 @@ public:
 	void addSchema(String* name, ClientSchemaData* data, ThreadContext* ctx) throw() ;
 	Map<String,ClientSchemaData>* getMap(ThreadContext* ctx) throw() ;
 	void readData(NetworkBinaryBuffer* buff, ThreadContext* ctx) final;
-	void writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw()  final;
+	void writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) final;
 public:
 	static bool __init_done;
 	static bool __init_static_variables();

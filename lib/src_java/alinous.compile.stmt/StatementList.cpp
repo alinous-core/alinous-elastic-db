@@ -106,7 +106,7 @@ void StatementList::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 		this->list->add(static_cast<IStatement*>(element), ctx);
 	}
 }
-void StatementList::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+void StatementList::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 {
 	buff->putInt(ICommandData::__StatementList, ctx);
 	int maxLoop = this->list->size(ctx);

@@ -4,7 +4,7 @@ namespace alinous {namespace remote {namespace region {
 class NodeReference;}}}
 
 namespace alinous {namespace db {namespace table {
-class TablePartitionMaxValue;}}}
+class TablePartitionRangeCollection;}}}
 
 namespace alinous {namespace remote {namespace region {
 class NodeTableReference;}}}
@@ -22,7 +22,7 @@ namespace alinous {namespace remote {namespace region {
 using namespace ::alinous;
 using namespace ::java::lang;
 using ::java::util::Iterator;
-using ::alinous::db::table::TablePartitionMaxValue;
+using ::alinous::db::table::TablePartitionRangeCollection;
 
 
 
@@ -30,22 +30,22 @@ class NodeTableReference final : public virtual IObject {
 public:
 	NodeTableReference(const NodeTableReference& base) = default;
 public:
-	NodeTableReference(String* host, int port, bool ipv6, NodeReference* nodeAccessRef, TablePartitionMaxValue* maxValue, ThreadContext* ctx) throw() ;
-	void __construct_impl(String* host, int port, bool ipv6, NodeReference* nodeAccessRef, TablePartitionMaxValue* maxValue, ThreadContext* ctx) throw() ;
+	NodeTableReference(String* host, int port, bool ipv6, NodeReference* nodeAccessRef, TablePartitionRangeCollection* range, ThreadContext* ctx) throw() ;
+	void __construct_impl(String* host, int port, bool ipv6, NodeReference* nodeAccessRef, TablePartitionRangeCollection* range, ThreadContext* ctx) throw() ;
 	virtual ~NodeTableReference() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 private:
 	String* host;
 	int port;
 	bool ipv6;
-	TablePartitionMaxValue* maxValue;
+	TablePartitionRangeCollection* range;
 	NodeReference* nodeAccessRef;
 public:
 	String* getHost(ThreadContext* ctx) throw() ;
 	int getPort(ThreadContext* ctx) throw() ;
 	bool isIpv6(ThreadContext* ctx) throw() ;
-	TablePartitionMaxValue* getMaxValue(ThreadContext* ctx) throw() ;
-	void setMaxValue(TablePartitionMaxValue* maxValue, ThreadContext* ctx) throw() ;
+	TablePartitionRangeCollection* getRange(ThreadContext* ctx) throw() ;
+	void setRange(TablePartitionRangeCollection* range, ThreadContext* ctx) throw() ;
 	NodeReference* getNodeAccessRef(ThreadContext* ctx) throw() ;
 	bool equals(IObject* obj, ThreadContext* ctx) throw() ;
 	bool equals(NodeTableReference* ref, ThreadContext* ctx) throw() ;

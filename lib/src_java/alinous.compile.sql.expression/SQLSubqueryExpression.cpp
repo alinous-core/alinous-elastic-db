@@ -100,7 +100,7 @@ void SQLSubqueryExpression::readData(NetworkBinaryBuffer* buff, ThreadContext* c
 		__GC_MV(this, &(this->selectStatement), static_cast<SelectStatement*>(el), SelectStatement);
 	}
 }
-void SQLSubqueryExpression::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+void SQLSubqueryExpression::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 {
 	buff->putInt(ICommandData::__SQLSubqueryExpression, ctx);
 	__writeData(buff, ctx);

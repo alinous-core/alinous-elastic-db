@@ -135,7 +135,7 @@ void JoinSubQueryTarget::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 		__GC_MV(this, &(this->asName), buff->getString(ctx), String);
 	}
 }
-void JoinSubQueryTarget::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+void JoinSubQueryTarget::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 {
 	buff->putInt(ICommandData::__JoinSubQueryTarget, ctx);
 	bool isnull = (this->selectStatement == nullptr);

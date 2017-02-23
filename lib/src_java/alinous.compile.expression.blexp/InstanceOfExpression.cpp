@@ -120,7 +120,7 @@ void InstanceOfExpression::readData(NetworkBinaryBuffer* buff, ThreadContext* ct
 		__GC_MV(this, &(this->right), static_cast<AlinousName*>(el), AlinousName);
 	}
 }
-void InstanceOfExpression::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+void InstanceOfExpression::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 {
 	buff->putInt(ICommandData::__InstanceOfExpression, ctx);
 	bool isnull = (this->left == nullptr);

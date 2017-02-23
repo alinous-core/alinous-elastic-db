@@ -139,7 +139,7 @@ void DoWhileStatement::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 		__GC_MV(this, &(this->exec), static_cast<IStatement*>(el), IStatement);
 	}
 }
-void DoWhileStatement::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+void DoWhileStatement::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 {
 	buff->putInt(ICommandData::__DoWhileStatement, ctx);
 	bool isnull = (this->label == nullptr);

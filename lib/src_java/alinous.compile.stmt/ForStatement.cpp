@@ -195,7 +195,7 @@ void ForStatement::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 		__GC_MV(this, &(this->exec), static_cast<IStatement*>(el), IStatement);
 	}
 }
-void ForStatement::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+void ForStatement::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 {
 	buff->putInt(ICommandData::__ForStatement, ctx);
 	bool isnull = (this->label == nullptr);

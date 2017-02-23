@@ -255,7 +255,7 @@ void InsertValues::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 		__GC_MV(this, &(this->domDesc), static_cast<SQLExpressionStream*>(el), SQLExpressionStream);
 	}
 }
-void InsertValues::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+void InsertValues::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 {
 	buff->putInt(ICommandData::__InsertValues, ctx);
 	bool isnull = (this->vlist == nullptr);

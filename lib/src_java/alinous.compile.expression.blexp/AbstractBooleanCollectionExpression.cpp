@@ -139,7 +139,7 @@ void AbstractBooleanCollectionExpression::__readData(NetworkBinaryBuffer* buff, 
 		this->expressions->add(static_cast<BooleanSubExpression*>(el), ctx);
 	}
 }
-void AbstractBooleanCollectionExpression::__writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+void AbstractBooleanCollectionExpression::__writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 {
 	bool isnull = (this->first == nullptr);
 	buff->putBoolean(isnull, ctx);

@@ -154,7 +154,7 @@ void AlinousSrc::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 		this->statements->add(static_cast<StatementList*>(element), ctx);
 	}
 }
-void AlinousSrc::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+void AlinousSrc::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 {
 	buff->putInt(ICommandData::__AlinousSrc, ctx);
 	int maxLoop = this->includes->size(ctx);

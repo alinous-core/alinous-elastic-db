@@ -67,7 +67,7 @@ public:
 	void addScheme(SchemaData* value, ThreadContext* ctx) throw() ;
 	Map<String,SchemaData>* getSchemas(ThreadContext* ctx) throw() ;
 	void readData(NetworkBinaryBuffer* buff, ThreadContext* ctx) final;
-	void writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw()  final;
+	void writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) final;
 	long long getSchemaVersion(ThreadContext* ctx) throw() ;
 	void setSchemaVersion(long long schemaVersion, ThreadContext* ctx) throw() ;
 private:

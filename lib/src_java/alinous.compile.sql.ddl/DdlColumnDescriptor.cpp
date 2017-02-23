@@ -202,12 +202,12 @@ void DdlColumnDescriptor::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx
 		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
 		if(el == nullptr || !((dynamic_cast<CheckDefinition*>(el) != 0)))
 		{
-			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1033(), ctx));
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1034(), ctx));
 		}
 		__GC_MV(this, &(this->check), static_cast<CheckDefinition*>(el), CheckDefinition);
 	}
 }
-void DdlColumnDescriptor::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+void DdlColumnDescriptor::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 {
 	buff->putInt(ICommandData::__DdlColumnDescriptor, ctx);
 	bool isnull = (this->name == nullptr);

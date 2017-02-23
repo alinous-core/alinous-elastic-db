@@ -128,7 +128,7 @@ public:
 	AbstractSrcElement* getParent(ThreadContext* ctx) throw()  final;
 	void setParent(AbstractSrcElement* parent, ThreadContext* ctx) throw()  final;
 	void readData(NetworkBinaryBuffer* buff, ThreadContext* ctx) final;
-	void writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw()  final;
+	void writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) final;
 public:
 	static bool __init_done;
 	static bool __init_static_variables();

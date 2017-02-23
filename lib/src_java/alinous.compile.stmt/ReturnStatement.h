@@ -80,7 +80,7 @@ public:
 	void setExp(IExpression* exp, ThreadContext* ctx) throw() ;
 	IStatement::StatementType getType(ThreadContext* ctx) throw()  final;
 	void readData(NetworkBinaryBuffer* buff, ThreadContext* ctx) final;
-	void writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw()  final;
+	void writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) final;
 public:
 	static bool __init_done;
 	static bool __init_static_variables();

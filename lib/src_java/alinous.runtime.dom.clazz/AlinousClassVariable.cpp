@@ -1019,7 +1019,7 @@ void AlinousClassVariable::readData(NetworkBinaryBuffer* buff, ThreadContext* ct
 	}
 	this->nullObject = buff->getBoolean(ctx);
 }
-void AlinousClassVariable::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+void AlinousClassVariable::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 {
 	buff->putInt(ICommandData::__AlinousClass, ctx);
 	int size = this->memberValues->size(ctx);

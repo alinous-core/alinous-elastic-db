@@ -998,7 +998,7 @@ void IdentifierVariable::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 		__GC_MV(this, &(this->domDescriptor), static_cast<DomVariableDescriptor*>(el), DomVariableDescriptor);
 	}
 }
-void IdentifierVariable::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+void IdentifierVariable::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 {
 	buff->putInt(ICommandData::__IdentifierVariable, ctx);
 	bool isnull = (this->id == nullptr);

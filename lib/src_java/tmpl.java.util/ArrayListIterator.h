@@ -35,9 +35,11 @@ template class ::java::util::ArrayListIterator<::alinous::compile::declare::Alin
 template class ::java::util::ArrayListIterator<::alinous::compile::expression::IDomSegment>;
 template class ::java::util::ArrayListIterator<::alinous::compile::expression::SubExpression>;
 template class ::java::util::ArrayListIterator<::alinous::compile::expression::blexp::BooleanSubExpression>;
+template class ::java::util::ArrayListIterator<::alinous::db::table::TableColumnMetadata>;
 template class ::java::util::ArrayListIterator<::alinous::compile::sql::ddl::DdlColumnDescriptor>;
 template class ::java::util::ArrayListIterator<::alinous::compile::sql::ddl::Unique>;
 template class ::java::util::ArrayListIterator<::alinous::compile::sql::ddl::CheckDefinition>;
+template class ::java::util::ArrayListIterator<::alinous::compile::sql::ddl::ShardKeys>;
 template class ::java::util::ArrayListIterator<::alinous::compile::sql::expression::ISQLExpression>;
 template class ::java::util::ArrayListIterator<::alinous::compile::sql::analyze::ScanTableColumnIdentifier>;
 template class ::java::util::ArrayListIterator<::alinous::runtime::variant::VariantValue>;
@@ -48,7 +50,6 @@ template class ::java::util::ArrayListIterator<::alinous::compile::sql::InsertVa
 template class ::java::util::ArrayListIterator<::alinous::compile::sql::analyze::ScanTableIndexMetadata>;
 template class ::java::util::ArrayListIterator<::alinous::compile::sql::analyze::InnerNecessaryCondition>;
 template class ::java::util::ArrayListIterator<::alinous::compile::sql::expression::blexp::SQLBoolSubExpression>;
-template class ::java::util::ArrayListIterator<::alinous::db::table::TableColumnMetadata>;
 template class ::java::util::ArrayListIterator<::alinous::db::table::TableIndexMetadata>;
 template class ::java::util::ArrayListIterator<::alinous::compile::sql::analyze::ScanTableColumnMetadata>;
 template class ::java::util::ArrayListIterator<::alinous::compile::sql::analyze::ScanTableIdentifier>;
@@ -84,6 +85,8 @@ template class ::java::util::ArrayListIterator<::alinous::system::config::remote
 template class ::java::util::ArrayListIterator<::alinous::btree::IBTreeValue>;
 template class ::java::util::ArrayListIterator<::alinous::db::ITableRegion>;
 template class ::java::util::ArrayListIterator<::alinous::db::ITableSchema>;
+template class ::java::util::ArrayListIterator<::alinous::db::table::TablePartitionRange>;
+template class ::java::util::ArrayListIterator<::alinous::db::table::TablePartitionKey>;
 template class ::java::util::ArrayListIterator<::alinous::db::table::IScannableIndex>;
 template class ::java::util::ArrayListIterator<::alinous::db::table::TableMetadataUnique>;
 template class ::java::util::ArrayListIterator<::alinous::db::table::DatabaseRecord>;

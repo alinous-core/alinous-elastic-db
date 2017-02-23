@@ -104,7 +104,7 @@ public:
 	ExpressionSourceId* getSourceId(ThreadContext* ctx) throw()  final;
 	bool isSQLExp(ThreadContext* ctx) throw()  final;
 	void __readData(NetworkBinaryBuffer* buff, ThreadContext* ctx);
-	void __writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() ;
+	void __writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx);
 	int fileSize(ThreadContext* ctx) final;
 	void __toFileEntry(FileStorageEntryBuilder* builder, ThreadContext* ctx);
 	void fromFileEntry(FileStorageEntryFetcher* fetcher, ThreadContext* ctx) final;

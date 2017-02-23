@@ -87,7 +87,7 @@ void SchemasStructureInfoData::readData(NetworkBinaryBuffer* buff, ThreadContext
 	}
 	this->schemaVersion = buff->getLong(ctx);
 }
-void SchemasStructureInfoData::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+void SchemasStructureInfoData::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 {
 	int maxLoop = this->schemas->size(ctx);
 	buff->putInt(maxLoop, ctx);

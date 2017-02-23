@@ -188,7 +188,7 @@ void SQLIsNullExpression::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx
 	}
 	this->notNull = buff->getBoolean(ctx);
 }
-void SQLIsNullExpression::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+void SQLIsNullExpression::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 {
 	buff->putInt(ICommandData::__SQLIsNullExpression, ctx);
 	__writeData(buff, ctx);

@@ -982,7 +982,7 @@ void TypedVariableArray::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 		this->array->add(static_cast<ITypedVariable*>(val), ctx);
 	}
 }
-void TypedVariableArray::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+void TypedVariableArray::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 {
 	buff->putInt(ICommandData::__TypedVariableArray, ctx);
 	int maxLoop = this->array->size(ctx);

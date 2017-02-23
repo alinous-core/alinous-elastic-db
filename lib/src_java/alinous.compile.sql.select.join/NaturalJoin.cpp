@@ -51,7 +51,7 @@ void NaturalJoin::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 {
 	__readData(buff, ctx);
 }
-void NaturalJoin::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+void NaturalJoin::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 {
 	buff->putInt(ICommandData::__NaturalJoin, ctx);
 	__writeData(buff, ctx);

@@ -126,7 +126,7 @@ void ForUpdatePart::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 		__GC_MV(this, &(this->ope), buff->getString(ctx), String);
 	}
 }
-void ForUpdatePart::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+void ForUpdatePart::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 {
 	buff->putInt(ICommandData::__ForUpdatePart, ctx);
 	bool isnull = (this->left == nullptr);

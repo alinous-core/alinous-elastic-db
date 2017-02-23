@@ -55,13 +55,13 @@ void NodeTableClaster::updateClusterNodes(TableClusterData* clusterData, NodeClu
 		StorageNodeData* nodeData = list->get(i, ctx);
 		NodeReference* ref = nodeAccessRef->getNode(nodeData->getHost(ctx), nodeData->getPort(ctx), nodeData->isIpv6(ctx), ctx);
 		TableMetadata* metadata = nodeData->getMetadata(ctx);
-		TablePartitionMaxValue* maxPartitionValue = metadata->getMaxPartitionValue(ctx);
-		NodeTableReference* nodeRef = (new(ctx) NodeTableReference(nodeData->getHost(ctx), nodeData->getPort(ctx), nodeData->isIpv6(ctx), ref, maxPartitionValue, ctx));
+		TablePartitionRangeCollection* ranges = metadata->getPartitionValueRanges(ctx);
+		NodeTableReference* nodeRef = (new(ctx) NodeTableReference(nodeData->getHost(ctx), nodeData->getPort(ctx), nodeData->isIpv6(ctx), ref, ranges, ctx));
 		this->nodes->add(nodeRef, ctx);
 		if(this->metadata == nullptr)
 		{
 			__GC_MV(this, &(this->metadata), metadata, TableMetadata);
-			this->metadata->setMaxPartitionValue(nullptr, ctx);
+			this->metadata->setPartitionValueRanges(nullptr, ctx);
 		}
 	}
 }

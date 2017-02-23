@@ -4,7 +4,7 @@ namespace alinous {namespace remote {namespace region {
 class NodeTableReference;}}}
 
 namespace alinous {namespace db {namespace table {
-class TablePartitionMaxValue;}}}
+class TablePartitionRangeCollection;}}}
 
 namespace alinous {namespace remote {namespace region {
 class NodeReference;}}}
@@ -22,7 +22,7 @@ namespace alinous {namespace remote {namespace region {
 using namespace ::alinous;
 using namespace ::java::lang;
 using ::java::util::Iterator;
-using ::alinous::db::table::TablePartitionMaxValue;
+using ::alinous::db::table::TablePartitionRangeCollection;
 
 
 
@@ -35,10 +35,10 @@ public:
 	virtual ~RegionShardPart() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 private:
-	TablePartitionMaxValue* maxValue;
+	TablePartitionRangeCollection* partitionRange;
 	NodeReference* nodeAccessRef;
 public:
-	TablePartitionMaxValue* getMaxValue(ThreadContext* ctx) throw() ;
+	TablePartitionRangeCollection* getPartitionRange(ThreadContext* ctx) throw() ;
 	NodeReference* getNodeAccessRef(ThreadContext* ctx) throw() ;
 public:
 	static bool __init_done;

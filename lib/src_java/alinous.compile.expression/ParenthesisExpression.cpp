@@ -100,7 +100,7 @@ void ParenthesisExpression::readData(NetworkBinaryBuffer* buff, ThreadContext* c
 		__GC_MV(this, &(this->exp), static_cast<IExpression*>(el), IExpression);
 	}
 }
-void ParenthesisExpression::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+void ParenthesisExpression::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 {
 	buff->putInt(ICommandData::__ParenthesisExpression, ctx);
 	bool isnull = (this->exp == nullptr);

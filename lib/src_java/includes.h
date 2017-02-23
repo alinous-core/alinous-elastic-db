@@ -266,7 +266,10 @@
 #include "alinous.compile.sql.analyze/TableMetadataUniqueCollection.h"
 #include "alinous.remote.db.command.data/StorageNodeData.h"
 #include "alinous.remote.db.command.data/TableClusterData.h"
-#include "alinous.db.table/TablePartitionMaxValue.h"
+#include "alinous.db.table/TablePartitionKey.h"
+#include "alinous.db.table/TablePartitionKeyCollection.h"
+#include "alinous.db.table/TablePartitionRange.h"
+#include "alinous.db.table/TablePartitionRangeCollection.h"
 #include "alinous.db.table/TableMetadata.h"
 #include "alinous.db.table/TableIndexMetadata.h"
 #include "alinous.compile.sql.analyze/ScanTableColumnMetadata.h"
@@ -452,7 +455,6 @@
 #include "alinous.compile.sql.ddl/DdlColumnDescriptor.h"
 #include "alinous.compile.sql.ddl/PrimaryKeys.h"
 #include "alinous.compile.sql.ddl/ShardKeys.h"
-#include "alinous.compile.sql.ddl/SubShardKeys.h"
 #include "alinous.compile.sql.ddl/Unique.h"
 #include "alinous.db/ITableSchema.h"
 #include "alinous.db/TableSchema.h"
@@ -1149,7 +1151,6 @@ inline static void __cleanUpStatics(alinous::ThreadContext* ctx){
 	alinous::compile::sql::ddl::ColumnTypeDescriptor::__cleanUp(ctx);
 	alinous::compile::sql::ddl::ShardKeys::__cleanUp(ctx);
 	alinous::compile::sql::ddl::CheckDefinition::__cleanUp(ctx);
-	alinous::compile::sql::ddl::SubShardKeys::__cleanUp(ctx);
 	alinous::compile::sql::ddl::DdlColumnDescriptor::__cleanUp(ctx);
 	alinous::compile::sql::expression::SQLAdditiveExpression::__cleanUp(ctx);
 	alinous::compile::sql::expression::SQLExpressionStream::__cleanUp(ctx);
@@ -1510,11 +1511,13 @@ inline static void __cleanUpStatics(alinous::ThreadContext* ctx){
 	alinous::db::AlinousDbConnection::__cleanUp(ctx);
 	alinous::db::AlinousDbException::__cleanUp(ctx);
 	alinous::db::table::DatatableUpdateCache::__cleanUp(ctx);
+	alinous::db::table::TablePartitionRangeCollection::__cleanUp(ctx);
 	alinous::db::table::IBtreeTableIndex::__cleanUp(ctx);
 	alinous::db::table::OidIndexJob::__cleanUp(ctx);
 	alinous::db::table::DatabaseTableIdPublisher::__cleanUp(ctx);
 	alinous::db::table::DataTableStorageSupport::__cleanUp(ctx);
 	alinous::db::table::DatatableDDLSupport::__cleanUp(ctx);
+	alinous::db::table::TablePartitionKeyCollection::__cleanUp(ctx);
 	alinous::db::table::OidPublisherFactory::__cleanUp(ctx);
 	alinous::db::table::TableIndexMetadata::__cleanUp(ctx);
 	alinous::db::table::LocalOidPublisher::__cleanUp(ctx);
@@ -1524,7 +1527,6 @@ inline static void __cleanUpStatics(alinous::ThreadContext* ctx){
 	alinous::db::table::LocalOidCounter::__cleanUp(ctx);
 	alinous::db::table::LocalOidCounter::ValueFetcher::__cleanUp(ctx);
 	alinous::db::table::IOidPublisher::__cleanUp(ctx);
-	alinous::db::table::TablePartitionMaxValue::__cleanUp(ctx);
 	alinous::db::table::DatatableLockSupport::__cleanUp(ctx);
 	alinous::db::table::DatabaseException::__cleanUp(ctx);
 	alinous::db::table::TableIndexValue::__cleanUp(ctx);
@@ -1537,6 +1539,8 @@ inline static void __cleanUpStatics(alinous::ThreadContext* ctx){
 	alinous::db::table::BTreeIndexKey::__cleanUp(ctx);
 	alinous::db::table::TableIndex::__cleanUp(ctx);
 	alinous::db::table::TableColumnMetadata::__cleanUp(ctx);
+	alinous::db::table::TablePartitionKey::__cleanUp(ctx);
+	alinous::db::table::TablePartitionRange::__cleanUp(ctx);
 	alinous::db::table::IScannableIndex::__cleanUp(ctx);
 	alinous::db::table::DatatableUpdateSupport::__cleanUp(ctx);
 	alinous::db::table::TableMetadata::__cleanUp(ctx);

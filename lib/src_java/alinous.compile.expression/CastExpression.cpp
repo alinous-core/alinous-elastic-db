@@ -127,7 +127,7 @@ void CastExpression::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 		__GC_MV(this, &(this->exp), static_cast<IExpression*>(el), IExpression);
 	}
 }
-void CastExpression::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+void CastExpression::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 {
 	buff->putInt(ICommandData::__CastExpression, ctx);
 	bool isnull = (this->type == nullptr);

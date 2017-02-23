@@ -59,7 +59,7 @@ void ConditionalAndExpression::readData(NetworkBinaryBuffer* buff, ThreadContext
 {
 	__readData(buff, ctx);
 }
-void ConditionalAndExpression::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+void ConditionalAndExpression::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 {
 	buff->putInt(ICommandData::__ConditionalAndExpression, ctx);
 	__writeData(buff, ctx);

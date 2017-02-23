@@ -175,7 +175,7 @@ public:
 	AlinousModule* getParent(ThreadContext* ctx) throw()  final;
 	void setParent(AlinousModule* parent, ThreadContext* ctx) throw() ;
 	void readData(NetworkBinaryBuffer* buff, ThreadContext* ctx) final;
-	void writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw()  final;
+	void writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) final;
 	bool analyse(SrcAnalyseContext* context, bool leftValue, ThreadContext* ctx) throw()  final;
 private:
 	IAlinousVariable* executeAsScript(ScriptMachine* machine, bool degug, ThreadContext* ctx);

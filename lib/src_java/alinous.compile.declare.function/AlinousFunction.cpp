@@ -274,7 +274,7 @@ void AlinousFunction::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 		__GC_MV(this, &(this->block), static_cast<StatementBlock*>(el), StatementBlock);
 	}
 }
-void AlinousFunction::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+void AlinousFunction::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 {
 	buff->putInt(ICommandData::__AlinousFunction, ctx);
 	bool isnull = (this->name == nullptr);

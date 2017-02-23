@@ -55,7 +55,7 @@ void ClientSchemaData::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 		this->map->put(tableName, data, ctx);
 	}
 }
-void ClientSchemaData::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+void ClientSchemaData::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 {
 	int size = this->map->size(ctx);
 	buff->putInt(size, ctx);

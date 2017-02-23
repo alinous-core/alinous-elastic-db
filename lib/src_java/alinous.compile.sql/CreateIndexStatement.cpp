@@ -144,7 +144,7 @@ void CreateIndexStatement::readData(NetworkBinaryBuffer* buff, ThreadContext* ct
 		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
 		if(el == nullptr || !((dynamic_cast<IJoinTarget*>(el) != 0)))
 		{
-			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1030(), ctx));
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1031(), ctx));
 		}
 		__GC_MV(this, &(this->name), static_cast<IJoinTarget*>(el), IJoinTarget);
 	}
@@ -154,7 +154,7 @@ void CreateIndexStatement::readData(NetworkBinaryBuffer* buff, ThreadContext* ct
 		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
 		if(el == nullptr || !((dynamic_cast<IJoinTarget*>(el) != 0)))
 		{
-			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1030(), ctx));
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1031(), ctx));
 		}
 		__GC_MV(this, &(this->table), static_cast<IJoinTarget*>(el), IJoinTarget);
 	}
@@ -165,7 +165,7 @@ void CreateIndexStatement::readData(NetworkBinaryBuffer* buff, ThreadContext* ct
 		this->columns->add(str, ctx);
 	}
 }
-void CreateIndexStatement::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+void CreateIndexStatement::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 {
 	buff->putInt(ICommandData::__CreateIndexStatement, ctx);
 	bool isnull = (this->name == nullptr);

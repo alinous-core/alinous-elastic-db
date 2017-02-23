@@ -363,7 +363,7 @@ public:
 	int compareTo(TimestampVariable* variable, ThreadContext* ctx) final;
 	IAlinousVariable* substitute(TypedVariableArray* variable, ThreadContext* ctx) final;
 	void readData(NetworkBinaryBuffer* buff, ThreadContext* ctx) final;
-	void writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw()  final;
+	void writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) final;
 public:
 	static DomArray* importFromDebugXml(DomNode* node, ThreadContext* ctx) throw() ;
 public:

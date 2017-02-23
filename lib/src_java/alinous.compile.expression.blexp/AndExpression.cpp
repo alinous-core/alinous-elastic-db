@@ -53,7 +53,7 @@ void AndExpression::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 {
 	__readData(buff, ctx);
 }
-void AndExpression::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+void AndExpression::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 {
 	buff->putInt(ICommandData::__AndExpression, ctx);
 	__writeData(buff, ctx);

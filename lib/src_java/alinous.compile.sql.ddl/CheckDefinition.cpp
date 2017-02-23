@@ -100,7 +100,7 @@ void CheckDefinition::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 		__GC_MV(this, &(this->exp), static_cast<ISQLExpression*>(el), ISQLExpression);
 	}
 }
-void CheckDefinition::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+void CheckDefinition::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 {
 	buff->putInt(ICommandData::__CheckDefinition, ctx);
 	bool isnull = (this->exp == nullptr);

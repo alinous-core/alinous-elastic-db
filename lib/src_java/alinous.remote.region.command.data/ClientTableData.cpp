@@ -55,7 +55,7 @@ void ClientTableData::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 		__GC_MV(this, &(this->metadata), TableMetadata::fromNetwork(buff, ctx), TableMetadata);
 	}
 }
-void ClientTableData::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+void ClientTableData::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 {
 	buff->putString(this->name, ctx);
 	bool isnull = (this->metadata == nullptr);

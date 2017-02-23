@@ -104,7 +104,7 @@ void IncludePreprocessor::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx
 		this->module->readData(buff, ctx);
 	}
 }
-void IncludePreprocessor::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+void IncludePreprocessor::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 {
 	buff->putInt(ICommandData::__IncludePreprocessor, ctx);
 	bool isnull = (this->path == nullptr);

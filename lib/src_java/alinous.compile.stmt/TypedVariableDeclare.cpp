@@ -301,7 +301,7 @@ void TypedVariableDeclare::readData(NetworkBinaryBuffer* buff, ThreadContext* ct
 	int typeNum = buff->getInt(ctx);
 	int2enum(typeNum, ctx);
 }
-void TypedVariableDeclare::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+void TypedVariableDeclare::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 {
 	buff->putInt(ICommandData::__TypedVariableDeclare, ctx);
 	bool isnull = (this->typeName == nullptr);

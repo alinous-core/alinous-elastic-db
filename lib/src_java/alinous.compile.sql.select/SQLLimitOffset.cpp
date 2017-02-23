@@ -128,7 +128,7 @@ void SQLLimitOffset::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 		__GC_MV(this, &(this->offset), static_cast<ISQLExpression*>(el), ISQLExpression);
 	}
 }
-void SQLLimitOffset::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+void SQLLimitOffset::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 {
 	buff->putInt(ICommandData::__SQLLimitOffset, ctx);
 	bool isnull = (this->limit == nullptr);

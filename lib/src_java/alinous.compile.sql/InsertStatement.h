@@ -177,7 +177,7 @@ public:
 	bool needsAnalyse(DbVersionContext* vctx, ThreadContext* ctx) throw() ;
 	void analyzeSQL(SQLAnalyseContext* context, bool debug, ThreadContext* ctx) final;
 	void readData(NetworkBinaryBuffer* buff, ThreadContext* ctx) final;
-	void writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw()  final;
+	void writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) final;
 	DbVersionContext* getVctx(ThreadContext* ctx) throw() ;
 	void setVctx(DbVersionContext* vctx, ThreadContext* ctx) throw() ;
 public:

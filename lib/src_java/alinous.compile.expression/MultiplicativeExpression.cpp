@@ -72,7 +72,7 @@ void MultiplicativeExpression::readData(NetworkBinaryBuffer* buff, ThreadContext
 {
 	__readData(buff, ctx);
 }
-void MultiplicativeExpression::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+void MultiplicativeExpression::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 {
 	buff->putInt(ICommandData::__MultiplicativeExpression, ctx);
 	__writeData(buff, ctx);

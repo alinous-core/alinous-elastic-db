@@ -53,7 +53,7 @@ void ExclusiveOrExpression::readData(NetworkBinaryBuffer* buff, ThreadContext* c
 {
 	__readData(buff, ctx);
 }
-void ExclusiveOrExpression::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+void ExclusiveOrExpression::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 {
 	buff->putInt(ICommandData::__ExclusiveOrExpression, ctx);
 	__writeData(buff, ctx);

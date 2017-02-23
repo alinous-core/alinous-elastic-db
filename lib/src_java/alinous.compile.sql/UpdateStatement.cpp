@@ -151,7 +151,7 @@ void UpdateStatement::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
 		if(el == nullptr || !((dynamic_cast<IJoinTarget*>(el) != 0)))
 		{
-			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1030(), ctx));
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1031(), ctx));
 		}
 		__GC_MV(this, &(this->table), static_cast<IJoinTarget*>(el), IJoinTarget);
 	}
@@ -177,7 +177,7 @@ void UpdateStatement::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 		__GC_MV(this, &(this->where), static_cast<SQLWhere*>(el), SQLWhere);
 	}
 }
-void UpdateStatement::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+void UpdateStatement::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 {
 	buff->putInt(ICommandData::__UpdateStatement, ctx);
 	bool isnull = (this->table == nullptr);

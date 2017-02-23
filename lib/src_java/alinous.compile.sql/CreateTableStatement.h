@@ -21,8 +21,23 @@ class DdlColumnDescriptor;}}}}
 namespace alinous {namespace db {namespace table {
 class TableColumnMetadata;}}}
 
+namespace alinous {namespace compile {namespace sql {namespace ddl {
+class ShardKeys;}}}}
+
 namespace alinous {namespace db {namespace table {
-class TablePartitionMaxValue;}}}
+class TablePartitionKeyCollection;}}}
+
+namespace alinous {namespace db {namespace table {
+class TablePartitionRangeCollection;}}}
+
+namespace alinous {namespace db {namespace table {
+class TablePartitionKey;}}}
+
+namespace alinous {namespace db {namespace table {
+class TablePartitionRange;}}}
+
+namespace alinous {namespace db {namespace table {
+class DatabaseException;}}}
 
 namespace alinous {namespace runtime {namespace variant {
 class VariantValue;}}}
@@ -63,11 +78,8 @@ class IAlinousElement;}}
 namespace alinous {namespace runtime {namespace dom {
 class VariableException;}}}
 
-namespace alinous {namespace compile {namespace sql {namespace ddl {
-class ShardKeys;}}}}
-
-namespace alinous {namespace compile {namespace sql {namespace ddl {
-class SubShardKeys;}}}}
+namespace java {namespace util {
+template <typename  T> class List;}}
 
 namespace alinous {namespace compile {namespace sql {
 class AbstractSQLStatement;}}}
@@ -77,9 +89,6 @@ class AlinousElementNetworkFactory;}}
 
 namespace alinous {namespace compile {namespace sql {namespace ddl {
 class ColumnTypeDescriptor;}}}}
-
-namespace alinous {namespace db {namespace table {
-class DatabaseException;}}}
 
 namespace alinous {namespace remote {namespace socket {
 class ICommandData;}}}
@@ -97,6 +106,7 @@ using namespace ::alinous;
 using namespace ::java::lang;
 using ::java::util::Iterator;
 using ::java::util::ArrayList;
+using ::java::util::List;
 using ::alinous::compile::AbstractSrcElement;
 using ::alinous::compile::AlinousElementNetworkFactory;
 using ::alinous::compile::IAlinousElement;
@@ -109,7 +119,6 @@ using ::alinous::compile::sql::ddl::ColumnTypeDescriptor;
 using ::alinous::compile::sql::ddl::DdlColumnDescriptor;
 using ::alinous::compile::sql::ddl::PrimaryKeys;
 using ::alinous::compile::sql::ddl::ShardKeys;
-using ::alinous::compile::sql::ddl::SubShardKeys;
 using ::alinous::compile::sql::ddl::Unique;
 using ::alinous::compile::sql::select::join::IJoinTarget;
 using ::alinous::compile::sql::select::join::TableJoinTarget;
@@ -117,7 +126,10 @@ using ::alinous::db::TableSchema;
 using ::alinous::db::table::DatabaseException;
 using ::alinous::db::table::TableColumnMetadata;
 using ::alinous::db::table::TableMetadata;
-using ::alinous::db::table::TablePartitionMaxValue;
+using ::alinous::db::table::TablePartitionKey;
+using ::alinous::db::table::TablePartitionKeyCollection;
+using ::alinous::db::table::TablePartitionRange;
+using ::alinous::db::table::TablePartitionRangeCollection;
 using ::alinous::remote::socket::ICommandData;
 using ::alinous::remote::socket::NetworkBinaryBuffer;
 using ::alinous::runtime::dom::VariableException;
@@ -131,7 +143,7 @@ class CreateTableStatement final : public AbstractSQLStatement {
 public:
 	CreateTableStatement(const CreateTableStatement& base) = default;
 public:
-	CreateTableStatement(ThreadContext* ctx) throw()  : IObject(ctx), AbstractSQLStatement(ctx), table(nullptr), columns(GCUtils<ArrayList<DdlColumnDescriptor> >::ins(this, (new(ctx) ArrayList<DdlColumnDescriptor>(ctx)), ctx, __FILEW__, __LINE__, L"")), uniques(GCUtils<ArrayList<Unique> >::ins(this, (new(ctx) ArrayList<Unique>(ctx)), ctx, __FILEW__, __LINE__, L"")), checks(GCUtils<ArrayList<CheckDefinition> >::ins(this, (new(ctx) ArrayList<CheckDefinition>(ctx)), ctx, __FILEW__, __LINE__, L"")), primaryKeys(nullptr), region(nullptr), shardKeys(nullptr), subShardKeys(nullptr), metadata(nullptr)
+	CreateTableStatement(ThreadContext* ctx) throw()  : IObject(ctx), AbstractSQLStatement(ctx), table(nullptr), columns(GCUtils<ArrayList<DdlColumnDescriptor> >::ins(this, (new(ctx) ArrayList<DdlColumnDescriptor>(ctx)), ctx, __FILEW__, __LINE__, L"")), uniques(GCUtils<ArrayList<Unique> >::ins(this, (new(ctx) ArrayList<Unique>(ctx)), ctx, __FILEW__, __LINE__, L"")), checks(GCUtils<ArrayList<CheckDefinition> >::ins(this, (new(ctx) ArrayList<CheckDefinition>(ctx)), ctx, __FILEW__, __LINE__, L"")), primaryKeys(nullptr), region(nullptr), partitionKeys(GCUtils<List<ShardKeys> >::ins(this, (new(ctx) ArrayList<ShardKeys>(ctx)), ctx, __FILEW__, __LINE__, L"")), metadata(nullptr)
 	{
 	}
 	void __construct_impl(ThreadContext* ctx) throw() 
@@ -146,8 +158,7 @@ private:
 	ArrayList<CheckDefinition>* checks;
 	PrimaryKeys* primaryKeys;
 	String* region;
-	ShardKeys* shardKeys;
-	SubShardKeys* subShardKeys;
+	List<ShardKeys>* partitionKeys;
 	TableMetadata* metadata;
 public:
 	TableSchema* createMetadata(ScriptMachine* machine, bool debug, ThreadContext* ctx);
@@ -170,13 +181,11 @@ public:
 	IStatement::StatementType getType(ThreadContext* ctx) throw()  final;
 	void analyzeSQL(SQLAnalyseContext* context, bool debug, ThreadContext* ctx) throw()  final;
 	void readData(NetworkBinaryBuffer* buff, ThreadContext* ctx) final;
-	void writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw()  final;
-	ShardKeys* getShardKeys(ThreadContext* ctx) throw() ;
-	void setShardKeys(ShardKeys* shardKeys, ThreadContext* ctx) throw() ;
-	SubShardKeys* getSubShardKeys(ThreadContext* ctx) throw() ;
-	void setSubShardKeys(SubShardKeys* subShardKeys, ThreadContext* ctx) throw() ;
+	void writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) final;
+	void addPartitionKey(ShardKeys* key, ThreadContext* ctx) throw() ;
 private:
-	TablePartitionMaxValue* makeMaxTablePartitionMaxValue(TableMetadata* tblMetadata, ThreadContext* ctx) throw() ;
+	TablePartitionKey* toPartitionKeys(TableMetadata* meta, ArrayList<String>* cols, ThreadContext* ctx);
+	TablePartitionRange* makeDefaultRange(TableMetadata* meta, TablePartitionKey* key, ThreadContext* ctx) throw() ;
 	int ddlColumnType2VariantType(int coltype, ThreadContext* ctx) throw() ;
 public:
 	static bool __init_done;

@@ -259,7 +259,7 @@ void SQLLikeExpression::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 		__GC_MV(this, &(this->escapeStr), buff->getString(ctx), String);
 	}
 }
-void SQLLikeExpression::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+void SQLLikeExpression::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 {
 	buff->putInt(ICommandData::__SQLLikeExpression, ctx);
 	__writeData(buff, ctx);

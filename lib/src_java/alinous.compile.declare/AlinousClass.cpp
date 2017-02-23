@@ -658,7 +658,7 @@ void AlinousClass::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 		this->staticMethods->add(static_cast<ClassMethodFunction*>(el), ctx);
 	}
 }
-void AlinousClass::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+void AlinousClass::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 {
 	buff->putInt(ICommandData::__AlinousClass, ctx);
 	bool isnull = (this->packageName == nullptr);

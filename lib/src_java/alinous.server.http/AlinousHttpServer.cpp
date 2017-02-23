@@ -23,14 +23,14 @@ bool AlinousHttpServer::__init_static_variables(){
 	this->port = port;
 	__GC_MV(this, &(this->core), core, AlinousCore);
 	__GC_MV(this, &(this->webProccessor), (new(ctx) AlinousWebContentProcessor(core, ctx)), AlinousWebContentProcessor);
-	__GC_MV(this, &(this->threadPool), (new(ctx) ThreadPool(maxThread, ConstStr::getCNST_STR_3539(), ctx)), ThreadPool);
+	__GC_MV(this, &(this->threadPool), (new(ctx) ThreadPool(maxThread, ConstStr::getCNST_STR_3536(), ctx)), ThreadPool);
 }
 void AlinousHttpServer::__construct_impl(int port, AlinousCore* core, int maxThread, ThreadContext* ctx) throw() 
 {
 	this->port = port;
 	__GC_MV(this, &(this->core), core, AlinousCore);
 	__GC_MV(this, &(this->webProccessor), (new(ctx) AlinousWebContentProcessor(core, ctx)), AlinousWebContentProcessor);
-	__GC_MV(this, &(this->threadPool), (new(ctx) ThreadPool(maxThread, ConstStr::getCNST_STR_3539(), ctx)), ThreadPool);
+	__GC_MV(this, &(this->threadPool), (new(ctx) ThreadPool(maxThread, ConstStr::getCNST_STR_3536(), ctx)), ThreadPool);
 }
  AlinousHttpServer::~AlinousHttpServer() throw() 
 {
@@ -76,7 +76,7 @@ void AlinousHttpServer::startServer(ThreadContext* ctx) throw()
 			}
 		}
 	}
-	System::out->println(ConstStr::getCNST_STR_3540(), ctx);
+	System::out->println(ConstStr::getCNST_STR_3537(), ctx);
 }
 void AlinousHttpServer::stopServer(ThreadContext* ctx) throw() 
 {
@@ -86,7 +86,7 @@ void AlinousHttpServer::stopServer(ThreadContext* ctx) throw()
 	{
 		try
 		{
-			client->get(ConstStr::getCNST_STR_3541(), this->port, AlinousWebContentProcessor::PING_TO_SERVER, params, ctx);
+			client->get(ConstStr::getCNST_STR_3538(), this->port, AlinousWebContentProcessor::PING_TO_SERVER, params, ctx);
 			client->dispose(ctx);
 		}
 		catch(UnknownHostException* e)
@@ -138,7 +138,7 @@ void AlinousHttpServer::run(ThreadContext* ctx) throw()
 					return;
 				}
 				retry ++ ;
-				System::out->println(ConstStr::getCNST_STR_3542(), ctx);
+				System::out->println(ConstStr::getCNST_STR_3539(), ctx);
 				{
 					try
 					{
@@ -157,7 +157,7 @@ void AlinousHttpServer::run(ThreadContext* ctx) throw()
 	{
 		handleRequest(ctx);
 	}
-	System::out->println(ConstStr::getCNST_STR_3543()->clone(ctx)->append(this->refs, ctx), ctx);
+	System::out->println(ConstStr::getCNST_STR_3540()->clone(ctx)->append(this->refs, ctx), ctx);
 }
 void AlinousHttpServer::dec(ThreadContext* ctx) throw() 
 {

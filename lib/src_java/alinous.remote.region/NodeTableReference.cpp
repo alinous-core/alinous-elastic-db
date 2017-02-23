@@ -18,21 +18,21 @@ bool NodeTableReference::__init_static_variables(){
 	delete ctx;
 	return true;
 }
- NodeTableReference::NodeTableReference(String* host, int port, bool ipv6, NodeReference* nodeAccessRef, TablePartitionMaxValue* maxValue, ThreadContext* ctx) throw()  : IObject(ctx), host(nullptr), port(0), ipv6(0), maxValue(nullptr), nodeAccessRef(nullptr)
+ NodeTableReference::NodeTableReference(String* host, int port, bool ipv6, NodeReference* nodeAccessRef, TablePartitionRangeCollection* range, ThreadContext* ctx) throw()  : IObject(ctx), host(nullptr), port(0), ipv6(0), range(nullptr), nodeAccessRef(nullptr)
 {
 	__GC_MV(this, &(this->host), host, String);
 	this->port = port;
 	this->ipv6 = ipv6;
 	__GC_MV(this, &(this->nodeAccessRef), nodeAccessRef, NodeReference);
-	__GC_MV(this, &(this->maxValue), maxValue, TablePartitionMaxValue);
+	__GC_MV(this, &(this->range), range, TablePartitionRangeCollection);
 }
-void NodeTableReference::__construct_impl(String* host, int port, bool ipv6, NodeReference* nodeAccessRef, TablePartitionMaxValue* maxValue, ThreadContext* ctx) throw() 
+void NodeTableReference::__construct_impl(String* host, int port, bool ipv6, NodeReference* nodeAccessRef, TablePartitionRangeCollection* range, ThreadContext* ctx) throw() 
 {
 	__GC_MV(this, &(this->host), host, String);
 	this->port = port;
 	this->ipv6 = ipv6;
 	__GC_MV(this, &(this->nodeAccessRef), nodeAccessRef, NodeReference);
-	__GC_MV(this, &(this->maxValue), maxValue, TablePartitionMaxValue);
+	__GC_MV(this, &(this->range), range, TablePartitionRangeCollection);
 }
  NodeTableReference::~NodeTableReference() throw() 
 {
@@ -46,8 +46,8 @@ void NodeTableReference::__releaseRegerences(bool prepare, ThreadContext* ctx) t
 	ObjectEraser __e_obj1(ctx, __FILEW__, __LINE__, L"NodeTableReference", L"~NodeTableReference");
 	__e_obj1.add(this->host, this);
 	host = nullptr;
-	__e_obj1.add(this->maxValue, this);
-	maxValue = nullptr;
+	__e_obj1.add(this->range, this);
+	range = nullptr;
 	__e_obj1.add(this->nodeAccessRef, this);
 	nodeAccessRef = nullptr;
 	if(!prepare){
@@ -66,13 +66,13 @@ bool NodeTableReference::isIpv6(ThreadContext* ctx) throw()
 {
 	return ipv6;
 }
-TablePartitionMaxValue* NodeTableReference::getMaxValue(ThreadContext* ctx) throw() 
+TablePartitionRangeCollection* NodeTableReference::getRange(ThreadContext* ctx) throw() 
 {
-	return maxValue;
+	return range;
 }
-void NodeTableReference::setMaxValue(TablePartitionMaxValue* maxValue, ThreadContext* ctx) throw() 
+void NodeTableReference::setRange(TablePartitionRangeCollection* range, ThreadContext* ctx) throw() 
 {
-	__GC_MV(this, &(this->maxValue), maxValue, TablePartitionMaxValue);
+	__GC_MV(this, &(this->range), range, TablePartitionRangeCollection);
 }
 NodeReference* NodeTableReference::getNodeAccessRef(ThreadContext* ctx) throw() 
 {

@@ -53,7 +53,7 @@ void InclusiveOrExpression::readData(NetworkBinaryBuffer* buff, ThreadContext* c
 {
 	__readData(buff, ctx);
 }
-void InclusiveOrExpression::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+void InclusiveOrExpression::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 {
 	buff->putInt(ICommandData::__InclusiveOrExpression, ctx);
 	__writeData(buff, ctx);

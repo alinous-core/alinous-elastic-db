@@ -16,7 +16,7 @@ namespace alinous {namespace db {namespace table {
 class TableMetadata;}}}
 
 namespace alinous {namespace db {namespace table {
-class TablePartitionMaxValue;}}}
+class TablePartitionRangeCollection;}}}
 
 namespace alinous {namespace remote {namespace region {
 class NodeTableReference;}}}
@@ -40,7 +40,7 @@ using ::java::util::Iterator;
 using ::java::util::ArrayList;
 using ::java::util::List;
 using ::alinous::db::table::TableMetadata;
-using ::alinous::db::table::TablePartitionMaxValue;
+using ::alinous::db::table::TablePartitionRangeCollection;
 using ::alinous::remote::db::command::data::StorageNodeData;
 using ::alinous::remote::db::command::data::TableClusterData;
 

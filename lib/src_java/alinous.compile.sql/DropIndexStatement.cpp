@@ -85,12 +85,12 @@ void DropIndexStatement::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
 		if(el == nullptr || !((dynamic_cast<IJoinTarget*>(el) != 0)))
 		{
-			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1030(), ctx));
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1031(), ctx));
 		}
 		__GC_MV(this, &(this->indexName), static_cast<IJoinTarget*>(el), IJoinTarget);
 	}
 }
-void DropIndexStatement::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+void DropIndexStatement::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 {
 	buff->putInt(ICommandData::__DropIndexStatement, ctx);
 	bool isnull = (this->indexName == nullptr);

@@ -305,7 +305,7 @@ void SelectStatement::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 		__GC_MV(this, &(this->limitOffset), static_cast<SQLLimitOffset*>(el), SQLLimitOffset);
 	}
 }
-void SelectStatement::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+void SelectStatement::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 {
 	buff->putInt(ICommandData::__SelectStatement, ctx);
 	bool isnull = (this->list == nullptr);

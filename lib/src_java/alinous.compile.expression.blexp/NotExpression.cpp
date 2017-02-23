@@ -98,7 +98,7 @@ void NotExpression::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 		__GC_MV(this, &(this->exp), static_cast<IExpression*>(el), IExpression);
 	}
 }
-void NotExpression::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+void NotExpression::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 {
 	buff->putInt(ICommandData::__NotExpression, ctx);
 	bool isnull = (this->exp == nullptr);

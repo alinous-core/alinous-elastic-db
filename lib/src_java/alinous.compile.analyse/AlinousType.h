@@ -188,7 +188,7 @@ public:
 	int getDimension(ThreadContext* ctx) throw() ;
 	void setDimension(int dimension, ThreadContext* ctx) throw() ;
 	void readData(NetworkBinaryBuffer* buff, ThreadContext* ctx) final;
-	void writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw()  final;
+	void writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) final;
 private:
 	IAlinousVariable* returnClasssVariable(ThreadContext* ctx) throw() ;
 	IAlinousVariable* returnStandardVariable(ThreadContext* ctx) throw() ;

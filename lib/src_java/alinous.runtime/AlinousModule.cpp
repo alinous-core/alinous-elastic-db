@@ -253,7 +253,7 @@ void AlinousModule::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 		__GC_MV(this, &(this->moduleSource), static_cast<AlinousSrc*>(el), AlinousSrc);
 	}
 }
-void AlinousModule::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+void AlinousModule::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 {
 	buff->putInt(ICommandData::__AlinousModule, ctx);
 	bool isnull = (this->packageName == nullptr);

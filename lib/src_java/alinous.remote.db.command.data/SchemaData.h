@@ -68,7 +68,7 @@ public:
 	void setName(String* name, ThreadContext* ctx) throw() ;
 	Map<String,TableClusterData>* getTablesMap(ThreadContext* ctx) throw() ;
 	void readData(NetworkBinaryBuffer* buff, ThreadContext* ctx) final;
-	void writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw()  final;
+	void writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) final;
 private:
 	TableClusterData* findTableCluster(String* tableName, TableClusterData* cluster, ThreadContext* ctx) throw() ;
 public:

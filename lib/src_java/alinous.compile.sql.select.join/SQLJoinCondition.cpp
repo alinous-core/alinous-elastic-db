@@ -172,7 +172,7 @@ void SQLJoinCondition::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 		__GC_MV(this, &(this->condition), static_cast<ISQLExpression*>(el), ISQLExpression);
 	}
 }
-void SQLJoinCondition::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+void SQLJoinCondition::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 {
 	buff->putInt(ICommandData::__SQLJoinCondition, ctx);
 	__writeData(buff, ctx);

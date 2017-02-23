@@ -112,7 +112,7 @@ void PreIncrementExpression::readData(NetworkBinaryBuffer* buff, ThreadContext* 
 		__GC_MV(this, &(this->exp), static_cast<IExpression*>(el), IExpression);
 	}
 }
-void PreIncrementExpression::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+void PreIncrementExpression::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 {
 	buff->putInt(ICommandData::__PreIncrementExpression, ctx);
 	bool isnull = (this->exp == nullptr);

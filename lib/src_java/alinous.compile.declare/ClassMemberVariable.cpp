@@ -231,7 +231,7 @@ void ClassMemberVariable::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx
 		__GC_MV(this, &(this->staticValue), el, IAlinousVariable);
 	}
 }
-void ClassMemberVariable::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+void ClassMemberVariable::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 {
 	buff->putInt(ICommandData::__ClassMemberVariable, ctx);
 	bool isnull = (this->type == nullptr);

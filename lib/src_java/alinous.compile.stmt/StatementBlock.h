@@ -101,7 +101,7 @@ public:
 	IStatement::StatementType getType(ThreadContext* ctx) throw()  final;
 	void validate(SourceValidator* validator, ThreadContext* ctx) throw()  final;
 	void readData(NetworkBinaryBuffer* buff, ThreadContext* ctx) final;
-	void writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw()  final;
+	void writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) final;
 private:
 	void addArgumentsToAnalysingStack(AlinousFunction* func, SrcAnalyseContext* context, ThreadContext* ctx) throw() ;
 public:

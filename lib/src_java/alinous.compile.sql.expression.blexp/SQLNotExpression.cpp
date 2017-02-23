@@ -163,7 +163,7 @@ void SQLNotExpression::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 		__GC_MV(this, &(this->first), static_cast<ISQLExpression*>(el), ISQLExpression);
 	}
 }
-void SQLNotExpression::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+void SQLNotExpression::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 {
 	buff->putInt(ICommandData::__SQLNotExpression, ctx);
 	__writeData(buff, ctx);

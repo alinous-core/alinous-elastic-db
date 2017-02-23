@@ -170,7 +170,7 @@ void TableList::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 		this->list->add(static_cast<IJoin*>(el), ctx);
 	}
 }
-void TableList::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+void TableList::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 {
 	buff->putInt(ICommandData::__TableList, ctx);
 	int maxLoop = this->list->size(ctx);

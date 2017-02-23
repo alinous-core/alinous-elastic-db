@@ -153,7 +153,7 @@ void SQLParenthesisExpression::readData(NetworkBinaryBuffer* buff, ThreadContext
 		__GC_MV(this, &(this->exp), static_cast<ISQLExpression*>(el), ISQLExpression);
 	}
 }
-void SQLParenthesisExpression::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+void SQLParenthesisExpression::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 {
 	buff->putInt(ICommandData::__SQLParenthesisExpression, ctx);
 	bool isnull = (this->exp == nullptr);

@@ -51,7 +51,7 @@ void CrossJoin::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 {
 	__readData(buff, ctx);
 }
-void CrossJoin::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+void CrossJoin::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 {
 	buff->putInt(ICommandData::__CrossJoin, ctx);
 	__writeData(buff, ctx);

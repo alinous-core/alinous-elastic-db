@@ -146,7 +146,7 @@ void SwitchStatement::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 		this->caseParts->add(static_cast<SwitchCasePart*>(el), ctx);
 	}
 }
-void SwitchStatement::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+void SwitchStatement::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 {
 	buff->putInt(ICommandData::__SwitchStatement, ctx);
 	bool isnull = (this->label == nullptr);

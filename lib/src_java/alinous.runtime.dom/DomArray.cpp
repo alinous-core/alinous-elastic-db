@@ -1013,7 +1013,7 @@ void DomArray::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 		this->array->add(static_cast<IDomVariable*>(val), ctx);
 	}
 }
-void DomArray::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+void DomArray::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 {
 	buff->putInt(ICommandData::__DomArray, ctx);
 	buff->putInt(this->cap, ctx);

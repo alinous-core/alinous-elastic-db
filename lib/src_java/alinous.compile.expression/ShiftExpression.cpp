@@ -76,7 +76,7 @@ void ShiftExpression::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 {
 	__readData(buff, ctx);
 }
-void ShiftExpression::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+void ShiftExpression::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 {
 	buff->putInt(ICommandData::__ShiftExpression, ctx);
 	__writeData(buff, ctx);

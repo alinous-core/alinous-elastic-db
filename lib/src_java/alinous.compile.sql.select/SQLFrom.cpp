@@ -172,7 +172,7 @@ void SQLFrom::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 		__GC_MV(this, &(this->join), static_cast<IJoin*>(el), IJoin);
 	}
 }
-void SQLFrom::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+void SQLFrom::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 {
 	buff->putInt(ICommandData::__SQLFrom, ctx);
 	bool isnull = (this->join == nullptr);

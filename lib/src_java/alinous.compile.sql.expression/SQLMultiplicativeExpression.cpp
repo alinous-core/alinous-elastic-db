@@ -117,7 +117,7 @@ void SQLMultiplicativeExpression::readData(NetworkBinaryBuffer* buff, ThreadCont
 {
 	__readData(buff, ctx);
 }
-void SQLMultiplicativeExpression::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+void SQLMultiplicativeExpression::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 {
 	buff->putInt(ICommandData::__SQLMultiplicativeExpression, ctx);
 	__writeData(buff, ctx);

@@ -83,7 +83,7 @@ void ReturnStatement::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 		__GC_MV(this, &(this->exp), static_cast<IExpression*>(el), IExpression);
 	}
 }
-void ReturnStatement::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+void ReturnStatement::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 {
 	buff->putInt(ICommandData::__ReturnStatement, ctx);
 	bool isnull = (this->exp == nullptr);

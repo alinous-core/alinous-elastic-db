@@ -111,7 +111,7 @@ void IfStatement::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 		__GC_MV(this, &(this->exec), static_cast<IStatement*>(el), IStatement);
 	}
 }
-void IfStatement::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+void IfStatement::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 {
 	buff->putInt(ICommandData::__IfStatement, ctx);
 	bool isnull = (this->exp == nullptr);

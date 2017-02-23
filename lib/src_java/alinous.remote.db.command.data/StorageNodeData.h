@@ -61,7 +61,7 @@ public:
 	bool equals(String* host, int port, bool ipv6, ThreadContext* ctx) throw() ;
 	bool equals(StorageNodeData* another, ThreadContext* ctx) throw() ;
 	void readData(NetworkBinaryBuffer* buff, ThreadContext* ctx) final;
-	void writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw()  final;
+	void writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) final;
 	TableMetadata* getMetadata(ThreadContext* ctx) throw() ;
 public:
 	static bool __init_done;

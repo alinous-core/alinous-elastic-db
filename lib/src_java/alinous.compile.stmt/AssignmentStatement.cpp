@@ -126,7 +126,7 @@ void AssignmentStatement::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx
 		__GC_MV(this, &(this->ope), buff->getString(ctx), String);
 	}
 }
-void AssignmentStatement::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+void AssignmentStatement::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 {
 	buff->putInt(ICommandData::__AssignmentStatement, ctx);
 	bool isnull = (this->left == nullptr);

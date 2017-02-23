@@ -122,7 +122,7 @@ public:
 	VirtualTable* getVtable(ThreadContext* ctx) throw() ;
 	void setVtable(VirtualTable* vtable, ThreadContext* ctx) throw() ;
 	void readData(NetworkBinaryBuffer* buff, ThreadContext* ctx) final;
-	void writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw()  final;
+	void writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) final;
 private:
 	bool analyseConstructorMethod(SrcAnalyseContext* context, ThreadContext* ctx) throw() ;
 public:

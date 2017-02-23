@@ -113,7 +113,7 @@ void StatementBlock::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 		__GC_MV(this, &(this->list), static_cast<StatementList*>(el), StatementList);
 	}
 }
-void StatementBlock::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+void StatementBlock::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 {
 	buff->putInt(ICommandData::__StatementBlock, ctx);
 	bool isnull = (this->list == nullptr);

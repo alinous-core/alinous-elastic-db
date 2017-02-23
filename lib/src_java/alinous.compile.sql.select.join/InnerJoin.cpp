@@ -74,7 +74,7 @@ void InnerJoin::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 {
 	__readData(buff, ctx);
 }
-void InnerJoin::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+void InnerJoin::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 {
 	buff->putInt(ICommandData::__InnerJoin, ctx);
 	__writeData(buff, ctx);

@@ -1003,7 +1003,7 @@ void DocumentVariable::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 	}
 	this->value->readData(buff, ctx);
 }
-void DocumentVariable::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+void DocumentVariable::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 {
 	buff->putInt(ICommandData::__DocumentVariable, ctx);
 	char nullbl = ((char)(isNull(ctx) ? 0 : 1));

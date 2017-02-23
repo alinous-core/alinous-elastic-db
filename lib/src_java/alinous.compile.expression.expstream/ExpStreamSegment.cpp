@@ -242,7 +242,7 @@ void ExpStreamSegment::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 		this->arrayIndexes->add(static_cast<IExpression*>(el), ctx);
 	}
 }
-void ExpStreamSegment::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+void ExpStreamSegment::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 {
 	buff->putInt(ICommandData::__ExpStreamSegment, ctx);
 	bool isnull = (this->prefix == nullptr);

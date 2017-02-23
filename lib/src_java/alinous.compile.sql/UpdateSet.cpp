@@ -253,7 +253,7 @@ void UpdateSet::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 		__GC_MV(this, &(this->value), static_cast<ISQLExpression*>(el), ISQLExpression);
 	}
 }
-void UpdateSet::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+void UpdateSet::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 {
 	buff->putInt(ICommandData::__UpdateSet, ctx);
 	bool isnull = (this->name == nullptr);

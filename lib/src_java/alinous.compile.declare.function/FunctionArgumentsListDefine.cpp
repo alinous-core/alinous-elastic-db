@@ -140,7 +140,7 @@ void FunctionArgumentsListDefine::readData(NetworkBinaryBuffer* buff, ThreadCont
 		this->list->add(static_cast<FunctionArgumentDefine*>(el), ctx);
 	}
 }
-void FunctionArgumentsListDefine::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+void FunctionArgumentsListDefine::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 {
 	buff->putInt(ICommandData::__FunctionArgumentsListDefine, ctx);
 	int maxLoop = this->list->size(ctx);

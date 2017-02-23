@@ -63,6 +63,7 @@ public:
 	long long newOid(ThreadContext* ctx) throw() ;
 	void appendToEntry(FileStorageEntryBuilder* builder, ThreadContext* ctx) final;
 	int diskSize(ThreadContext* ctx) final;
+	bool equals(IObject* obj, ThreadContext* ctx) throw()  final;
 	IValueFetcher* getFetcher(ThreadContext* ctx) throw()  final;
 public:
 	static LocalOidCounter* fromFetcher(FileStorageEntryFetcher* fetcher, ThreadContext* ctx) throw() ;

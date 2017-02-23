@@ -53,7 +53,7 @@ void ClientStructureMetadata::readData(NetworkBinaryBuffer* buff, ThreadContext*
 		this->map->put(schemeName, data, ctx);
 	}
 }
-void ClientStructureMetadata::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
+void ClientStructureMetadata::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 {
 	int size = this->map->size(ctx);
 	buff->putInt(size, ctx);

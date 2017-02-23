@@ -485,12 +485,13 @@ public:
 	IAlinousVariable* bitExor(TimestampVariable* variable, ThreadContext* ctx) final;
 	IAlinousVariable* substitute(TypedVariableArray* variable, ThreadContext* ctx) final;
 	void readData(NetworkBinaryBuffer* buff, ThreadContext* ctx) final;
-	void writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw()  final;
+	void writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) final;
 private:
 	int nullCompare(VariantValue* variant, ThreadContext* ctx) throw() ;
 	int compareMinMax(VariantValue* variable, ThreadContext* ctx) throw() ;
 public:
 	static VariantValue* createMaxValue(int type, ThreadContext* ctx) throw() ;
+	static VariantValue* createMinValue(int type, ThreadContext* ctx) throw() ;
 	static VariantValue* importFromDebugXml(DomNode* node, ThreadContext* ctx) throw() ;
 	static VariantValue* valueFromFetcher(FileStorageEntryFetcher* fetcher, ThreadContext* ctx);
 public:
