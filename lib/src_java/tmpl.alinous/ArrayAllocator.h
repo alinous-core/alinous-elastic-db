@@ -30,6 +30,7 @@ template class alinous::ArrayAllocator<::com::google::re2j::Machine::LogicalThre
 template class alinous::ArrayAllocator<::com::google::re2j::Inst>;
 template class alinous::ArrayAllocator<::com::google::re2j::Machine>;
 template class alinous::ArrayAllocator<::alinous::compile::sql::ddl::ShardKeys>;
+template class alinous::ArrayAllocator<::alinous::db::table::TablePartitionKey>;
 template class alinous::ArrayAllocator<::alinous::runtime::engine::debugger::server::IServerCommand>;
 template class alinous::ArrayAllocator<::alinous::system::config::remote::Node>;
 template class alinous::ArrayAllocator<::alinous::system::config::remote::RegionsServer>;
@@ -40,7 +41,6 @@ template class alinous::ArrayAllocator<::alinous::system::config::remote::Region
 template class alinous::ArrayAllocator<::alinous::system::config::remote::Region>;
 template class alinous::ArrayAllocator<::alinous::db::ITableRegion>;
 template class alinous::ArrayAllocator<::alinous::db::ITableSchema>;
-template class alinous::ArrayAllocator<::alinous::db::table::TablePartitionKey>;
 template class alinous::ArrayAllocator<::alinous::db::table::IDatabaseRecord>;
 template class alinous::ArrayAllocator<::alinous::runtime::variant::VariantValue>;
 template class alinous::ArrayAllocator<::alinous::remote::monitor::NodeInfo>;

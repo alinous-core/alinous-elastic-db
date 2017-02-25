@@ -203,13 +203,6 @@ void InsertStatement::analyzeSQL(SQLAnalyseContext* context, bool debug, ThreadC
 		{
 			this->values->get(i, ctx)->analyseSQL(context, false, debug, ctx);
 		}
-		ScanTableMetadata* scanMeta = this->table->getScanTableMetadata(ctx);
-		ScanTableIdentifier* tableIdentifier = scanMeta->getFirstTableId(ctx);
-		String* schemaName = tableIdentifier->getTable(ctx)->getSchema(ctx);
-		String* tableName = tableIdentifier->getTable(ctx)->getTable(ctx);
-		IDatabaseTable* table = context->getDatabase(ctx)->getTable(schemaName, tableName, ctx);
-		TableMetadata* meta = table->getMetadata(ctx);
-		TableMetadataUniqueCollection* uniques = meta->getUniques(ctx);
 	}
 }
 void InsertStatement::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)

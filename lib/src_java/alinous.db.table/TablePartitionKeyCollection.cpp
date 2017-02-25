@@ -78,6 +78,10 @@ void TablePartitionKeyCollection::writeData(NetworkBinaryBuffer* buff, ThreadCon
 		key->writeData(buff, ctx);
 	}
 }
+List<TablePartitionKey>* TablePartitionKeyCollection::getKeys(ThreadContext* ctx) throw() 
+{
+	return keys;
+}
 TablePartitionKeyCollection* TablePartitionKeyCollection::loadFromFetcher(FileStorageEntryFetcher* fetcher, ThreadContext* ctx)
 {
 	TablePartitionKeyCollection* collection = (new(ctx) TablePartitionKeyCollection(ctx));

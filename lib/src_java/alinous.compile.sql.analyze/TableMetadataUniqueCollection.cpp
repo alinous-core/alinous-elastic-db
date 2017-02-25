@@ -42,5 +42,24 @@ ArrayList<ScanUnique>* TableMetadataUniqueCollection::getUniqueList(ThreadContex
 {
 	return uniqueList;
 }
+void TableMetadataUniqueCollection::calcPartitionCoverage(TablePartitionKeyCollection* partitionKeys, ThreadContext* ctx) throw() 
+{
+	int maxLoop = this->uniqueList->size(ctx);
+	for(int i = 0; i != maxLoop; ++i)
+	{
+		ScanUnique* unique = this->uniqueList->get(i, ctx);
+		calcCover(unique, partitionKeys, ctx);
+	}
+}
+void TableMetadataUniqueCollection::calcCover(ScanUnique* unique, TablePartitionKeyCollection* partitionKeys, ThreadContext* ctx) throw() 
+{
+	List<TablePartitionKey>* keyslist = partitionKeys->getKeys(ctx);
+	int maxLoop = keyslist->size(ctx);
+	for(int i = 0; i != maxLoop; ++i)
+	{
+		TablePartitionKey* key = keyslist->get(i, ctx);
+		unique->calcCoverage(key, ctx);
+	}
+}
 }}}}
 

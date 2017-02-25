@@ -57,21 +57,6 @@ class DbVersionContext;}}}
 namespace alinous {namespace compile {namespace sql {namespace analyze {
 class SQLAnalyseContext;}}}}
 
-namespace alinous {namespace compile {namespace sql {namespace analyze {
-class ScanTableMetadata;}}}}
-
-namespace alinous {namespace compile {namespace sql {namespace analyze {
-class ScanTableIdentifier;}}}}
-
-namespace alinous {namespace db {namespace table {
-class IDatabaseTable;}}}
-
-namespace alinous {namespace db {namespace table {
-class TableMetadata;}}}
-
-namespace alinous {namespace compile {namespace sql {namespace analyze {
-class TableMetadataUniqueCollection;}}}}
-
 namespace alinous {namespace remote {namespace socket {
 class NetworkBinaryBuffer;}}}
 
@@ -116,17 +101,12 @@ using ::alinous::compile::IAlinousElementVisitor;
 using ::alinous::compile::analyse::SourceValidator;
 using ::alinous::compile::analyse::SrcAnalyseContext;
 using ::alinous::compile::sql::analyze::SQLAnalyseContext;
-using ::alinous::compile::sql::analyze::ScanTableIdentifier;
-using ::alinous::compile::sql::analyze::ScanTableMetadata;
-using ::alinous::compile::sql::analyze::TableMetadataUniqueCollection;
 using ::alinous::compile::sql::expression::ISQLExpression;
 using ::alinous::compile::sql::parts::SQLExpressionList;
 using ::alinous::compile::sql::select::join::IJoinTarget;
 using ::alinous::compile::sql::select::join::TableJoinTarget;
 using ::alinous::db::AlinousDbException;
 using ::alinous::db::table::DatabaseException;
-using ::alinous::db::table::IDatabaseTable;
-using ::alinous::db::table::TableMetadata;
 using ::alinous::db::trx::DbVersionContext;
 using ::alinous::db::trx::cache::CulumnOrder;
 using ::alinous::db::trx::cache::TrxRecordsCache;

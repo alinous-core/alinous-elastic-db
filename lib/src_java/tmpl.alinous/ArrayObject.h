@@ -222,6 +222,13 @@ template class alinous::ArrayObject<alinous::ArrayObject<alinous::IArrayObject<:
 template class alinous::ArrayObject<alinous::ArrayObject<::alinous::compile::sql::ddl::ShardKeys>>;
 template class alinous::ArrayObject<alinous::IArrayObject<alinous::ArrayObject<::alinous::compile::sql::ddl::ShardKeys>>>;
 template class alinous::ArrayObject<alinous::ArrayObject<alinous::ArrayObject<::alinous::compile::sql::ddl::ShardKeys>>>;
+template class alinous::ArrayObject<::alinous::db::table::TablePartitionKey>;
+template class alinous::ArrayObject<alinous::IArrayObject<::alinous::db::table::TablePartitionKey>>;
+template class alinous::ArrayObject<alinous::IArrayObject<alinous::IArrayObject<::alinous::db::table::TablePartitionKey>>>;
+template class alinous::ArrayObject<alinous::ArrayObject<alinous::IArrayObject<::alinous::db::table::TablePartitionKey>>>;
+template class alinous::ArrayObject<alinous::ArrayObject<::alinous::db::table::TablePartitionKey>>;
+template class alinous::ArrayObject<alinous::IArrayObject<alinous::ArrayObject<::alinous::db::table::TablePartitionKey>>>;
+template class alinous::ArrayObject<alinous::ArrayObject<alinous::ArrayObject<::alinous::db::table::TablePartitionKey>>>;
 template class alinous::ArrayObject<::alinous::runtime::engine::debugger::server::IServerCommand>;
 template class alinous::ArrayObject<alinous::IArrayObject<::alinous::runtime::engine::debugger::server::IServerCommand>>;
 template class alinous::ArrayObject<alinous::IArrayObject<alinous::IArrayObject<::alinous::runtime::engine::debugger::server::IServerCommand>>>;
@@ -292,13 +299,6 @@ template class alinous::ArrayObject<alinous::ArrayObject<alinous::IArrayObject<:
 template class alinous::ArrayObject<alinous::ArrayObject<::alinous::db::ITableSchema>>;
 template class alinous::ArrayObject<alinous::IArrayObject<alinous::ArrayObject<::alinous::db::ITableSchema>>>;
 template class alinous::ArrayObject<alinous::ArrayObject<alinous::ArrayObject<::alinous::db::ITableSchema>>>;
-template class alinous::ArrayObject<::alinous::db::table::TablePartitionKey>;
-template class alinous::ArrayObject<alinous::IArrayObject<::alinous::db::table::TablePartitionKey>>;
-template class alinous::ArrayObject<alinous::IArrayObject<alinous::IArrayObject<::alinous::db::table::TablePartitionKey>>>;
-template class alinous::ArrayObject<alinous::ArrayObject<alinous::IArrayObject<::alinous::db::table::TablePartitionKey>>>;
-template class alinous::ArrayObject<alinous::ArrayObject<::alinous::db::table::TablePartitionKey>>;
-template class alinous::ArrayObject<alinous::IArrayObject<alinous::ArrayObject<::alinous::db::table::TablePartitionKey>>>;
-template class alinous::ArrayObject<alinous::ArrayObject<alinous::ArrayObject<::alinous::db::table::TablePartitionKey>>>;
 template class alinous::ArrayObject<::alinous::db::table::IDatabaseRecord>;
 template class alinous::ArrayObject<alinous::IArrayObject<::alinous::db::table::IDatabaseRecord>>;
 template class alinous::ArrayObject<alinous::IArrayObject<alinous::IArrayObject<::alinous::db::table::IDatabaseRecord>>>;

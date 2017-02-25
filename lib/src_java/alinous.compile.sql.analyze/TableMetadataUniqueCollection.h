@@ -3,6 +3,15 @@
 namespace alinous {namespace compile {namespace sql {namespace analyze {
 class ScanUnique;}}}}
 
+namespace alinous {namespace db {namespace table {
+class TablePartitionKeyCollection;}}}
+
+namespace java {namespace util {
+template <typename  T> class List;}}
+
+namespace alinous {namespace db {namespace table {
+class TablePartitionKey;}}}
+
 namespace java {namespace lang {
 class IObject;
 }}
@@ -17,6 +26,9 @@ using namespace ::alinous;
 using namespace ::java::lang;
 using ::java::util::Iterator;
 using ::java::util::ArrayList;
+using ::java::util::List;
+using ::alinous::db::table::TablePartitionKey;
+using ::alinous::db::table::TablePartitionKeyCollection;
 
 
 
@@ -37,6 +49,9 @@ private:
 public:
 	void addUnique(ScanUnique* unique, ThreadContext* ctx) throw() ;
 	ArrayList<ScanUnique>* getUniqueList(ThreadContext* ctx) throw() ;
+	void calcPartitionCoverage(TablePartitionKeyCollection* partitionKeys, ThreadContext* ctx) throw() ;
+private:
+	void calcCover(ScanUnique* unique, TablePartitionKeyCollection* partitionKeys, ThreadContext* ctx) throw() ;
 public:
 	static bool __init_done;
 	static bool __init_static_variables();

@@ -75,6 +75,7 @@ public:
 	void toFileEntry(FileStorageEntryBuilder* builder, ThreadContext* ctx);
 	void readData(NetworkBinaryBuffer* buff, ThreadContext* ctx) final;
 	void writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) final;
+	List<TablePartitionKey>* getKeys(ThreadContext* ctx) throw() ;
 public:
 	static TablePartitionKeyCollection* loadFromFetcher(FileStorageEntryFetcher* fetcher, ThreadContext* ctx);
 	static TablePartitionKeyCollection* fromNetwork(NetworkBinaryBuffer* buff, ThreadContext* ctx);

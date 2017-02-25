@@ -470,6 +470,7 @@ TableMetadataUniqueCollection* TableMetadata::getUniques(ThreadContext* ctx) thr
 			list->addUnique(unique->toScanUnique(ctx), ctx);
 		}
 	}
+	list->calcPartitionCoverage(this->partitionKeys, ctx);
 	return list;
 }
 TablePartitionKeyCollection* TableMetadata::getPartitionKeys(ThreadContext* ctx) throw() 
