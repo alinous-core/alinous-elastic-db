@@ -6,8 +6,14 @@ class BTreeOnMemory;}}
 namespace alinous {namespace lock {namespace unique {
 class UniqueExclusiveLock;}}}
 
-namespace alinous {namespace db {namespace trx {namespace scan {
-class ScanResultIndexKey;}}}}
+namespace alinous {namespace compile {namespace sql {namespace analyze {
+class ScanUnique;}}}}
+
+namespace alinous {namespace db {namespace table {
+class IDatabaseRecord;}}}
+
+namespace alinous {namespace lock {namespace unique {
+class ValueCollections;}}}
 
 namespace alinous {namespace btree {
 class IBTreeNode;}}
@@ -56,7 +62,8 @@ using ::alinous::btree::IBTree;
 using ::alinous::btree::IBTreeNode;
 using ::alinous::btree::IBTreeValue;
 using ::alinous::btreememory::BTreeOnMemory;
-using ::alinous::db::trx::scan::ScanResultIndexKey;
+using ::alinous::compile::sql::analyze::ScanUnique;
+using ::alinous::db::table::IDatabaseRecord;
 using ::alinous::lock::LockObject;
 using ::alinous::runtime::dom::VariableException;
 using ::alinous::system::AlinousException;
@@ -75,7 +82,7 @@ private:
 	IBTree* lockStore;
 	LockObject* lock;
 public:
-	UniqueExclusiveLock* getLock(ScanResultIndexKey* key, ThreadContext* ctx);
+	UniqueExclusiveLock* getLock(ScanUnique* unique, IDatabaseRecord* value, ThreadContext* ctx);
 	void dispose(ThreadContext* ctx) throw() ;
 public:
 	static bool __init_done;

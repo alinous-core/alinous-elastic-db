@@ -51,6 +51,9 @@ class IAlinousElement;}}
 namespace alinous {namespace compile {namespace sql {namespace analyze {
 class TableMetadataUniqueCollection;}}}}
 
+namespace java {namespace lang {
+class StringBuffer;}}
+
 namespace alinous {namespace compile {namespace sql {namespace analyze {
 class ScanUnique;}}}}
 

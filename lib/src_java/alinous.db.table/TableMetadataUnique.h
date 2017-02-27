@@ -66,7 +66,7 @@ public:
 public:
 	ArrayList<TableColumnMetadata>* uniqueColList;
 public:
-	ScanUnique* toScanUnique(ThreadContext* ctx) throw() ;
+	ScanUnique* toScanUnique(String* tableFullName, ThreadContext* ctx) throw() ;
 	void addUnique(TableColumnMetadata* col, ThreadContext* ctx) throw() ;
 	ArrayList<TableColumnMetadata>* getUniqueColList(ThreadContext* ctx) throw() ;
 	int fileSize(ThreadContext* ctx);

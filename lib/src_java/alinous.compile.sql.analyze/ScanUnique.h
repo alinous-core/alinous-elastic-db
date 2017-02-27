@@ -29,7 +29,7 @@ class ScanUnique final : public TableMetadataUnique {
 public:
 	ScanUnique(const ScanUnique& base) = default;
 public:
-	ScanUnique(ThreadContext* ctx) throw()  : IObject(ctx), TableMetadataUnique(ctx), coveredKey(nullptr), matchLength(0)
+	ScanUnique(ThreadContext* ctx) throw()  : IObject(ctx), TableMetadataUnique(ctx), coveredKey(nullptr), matchLength(0), tableFullName(nullptr)
 	{
 	}
 	void __construct_impl(ThreadContext* ctx) throw() 
@@ -40,12 +40,15 @@ public:
 private:
 	TablePartitionKey* coveredKey;
 	int matchLength;
+	String* tableFullName;
 public:
 	TablePartitionKey* getCoveredKey(ThreadContext* ctx) throw() ;
 	void setCoveredKey(TablePartitionKey* coveredKey, ThreadContext* ctx) throw() ;
 	bool isCovered(ThreadContext* ctx) throw() ;
 	int getMatchLength(ThreadContext* ctx) throw() ;
 	void calcCoverage(TablePartitionKey* key, ThreadContext* ctx) throw() ;
+	String* getTableFullName(ThreadContext* ctx) throw() ;
+	void setTableFullName(String* tableFullName, ThreadContext* ctx) throw() ;
 public:
 	static bool __init_done;
 	static bool __init_static_variables();

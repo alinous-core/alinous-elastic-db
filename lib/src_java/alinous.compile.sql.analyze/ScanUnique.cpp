@@ -30,6 +30,8 @@ void ScanUnique::__releaseRegerences(bool prepare, ThreadContext* ctx) throw()
 	ObjectEraser __e_obj1(ctx, __FILEW__, __LINE__, L"ScanUnique", L"~ScanUnique");
 	__e_obj1.add(this->coveredKey, this);
 	coveredKey = nullptr;
+	__e_obj1.add(this->tableFullName, this);
+	tableFullName = nullptr;
 	if(!prepare){
 		return;
 	}
@@ -71,6 +73,14 @@ void ScanUnique::calcCoverage(TablePartitionKey* key, ThreadContext* ctx) throw(
 		this->matchLength = matchLength;
 		__GC_MV(this, &(this->coveredKey), key, TablePartitionKey);
 	}
+}
+String* ScanUnique::getTableFullName(ThreadContext* ctx) throw() 
+{
+	return tableFullName;
+}
+void ScanUnique::setTableFullName(String* tableFullName, ThreadContext* ctx) throw() 
+{
+	__GC_MV(this, &(this->tableFullName), tableFullName, String);
 }
 }}}}
 

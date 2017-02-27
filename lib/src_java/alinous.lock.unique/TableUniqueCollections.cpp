@@ -34,6 +34,17 @@ void TableUniqueCollections::__releaseRegerences(bool prepare, ThreadContext* ct
 		return;
 	}
 }
+UniqueExclusiveLock* TableUniqueCollections::findLock(ScanUnique* unique, IDatabaseRecord* value, ThreadContext* ctx)
+{
+	TablePartitionKey* coverKey = unique->getCoveredKey(ctx);
+	String* colsstr = coverKey->toString(ctx);
+	ColumnsUniqueCollections* col = this->uniqueLocks->get(colsstr, ctx);
+	if(col == nullptr)
+	{
+		return nullptr;
+	}
+	return col->getLock(unique, value, ctx);
+}
 void TableUniqueCollections::dispose(ThreadContext* ctx) throw() 
 {
 	Iterator<String>* it = this->uniqueLocks->keySet(ctx)->iterator(ctx);

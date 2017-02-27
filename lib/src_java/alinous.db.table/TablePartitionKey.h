@@ -3,6 +3,9 @@
 namespace alinous {namespace db {namespace table {
 class TableColumnMetadata;}}}
 
+namespace java {namespace lang {
+class StringBuffer;}}
+
 namespace alinous {namespace buffer {namespace storage {
 class FileStorageEntryBuilder;}}}
 
@@ -67,6 +70,7 @@ private:
 	ArrayList<TableColumnMetadata>* keys;
 public:
 	void addKeyColumn(TableColumnMetadata* col, ThreadContext* ctx) throw() ;
+	String* toString(ThreadContext* ctx) throw() ;
 	int fileSize(ThreadContext* ctx);
 	void toFileEntry(FileStorageEntryBuilder* builder, ThreadContext* ctx);
 	void readData(NetworkBinaryBuffer* buff, ThreadContext* ctx) final;

@@ -435,11 +435,15 @@ bool TableMetadata::checkHasIndex(ArrayList<String>* columns, String* indexName,
 }
 TableMetadataUniqueCollection* TableMetadata::getUniques(ThreadContext* ctx) throw() 
 {
+	StringBuffer* buff = (new(ctx) StringBuffer(ctx));
+	buff->append(this->schema, ctx)->append(ConstStr::getCNST_STR_950(), ctx)->append(this->tableName, ctx);
+	String* fullName = buff->toString(ctx);
 	TableMetadataUniqueCollection* list = (new(ctx) TableMetadataUniqueCollection(ctx));
 	int maxLoop = this->primaryKeys->size(ctx);
 	if(maxLoop > 0)
 	{
 		ScanUnique* unique = (new(ctx) ScanUnique(ctx));
+		unique->setTableFullName(fullName, ctx);
 		for(int i = 0; i != maxLoop; ++i)
 		{
 			TableColumnMetadata* col = this->primaryKeys->get(i, ctx);
@@ -456,6 +460,7 @@ TableMetadataUniqueCollection* TableMetadata::getUniques(ThreadContext* ctx) thr
 			if(col->isUnique(ctx))
 			{
 				ScanUnique* unique = (new(ctx) ScanUnique(ctx));
+				unique->setTableFullName(fullName, ctx);
 				unique->addUnique(col, ctx);
 				list->addUnique(unique, ctx);
 			}
@@ -467,7 +472,7 @@ TableMetadataUniqueCollection* TableMetadata::getUniques(ThreadContext* ctx) thr
 		for(int i = 0; i != maxLoop; ++i)
 		{
 			TableMetadataUnique* unique = this->uniqueList->get(i, ctx);
-			list->addUnique(unique->toScanUnique(ctx), ctx);
+			list->addUnique(unique->toScanUnique(fullName, ctx), ctx);
 		}
 	}
 	list->calcPartitionCoverage(this->partitionKeys, ctx);

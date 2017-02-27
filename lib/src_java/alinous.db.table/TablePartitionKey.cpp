@@ -38,6 +38,21 @@ void TablePartitionKey::addKeyColumn(TableColumnMetadata* col, ThreadContext* ct
 {
 	this->keys->add(col, ctx);
 }
+String* TablePartitionKey::toString(ThreadContext* ctx) throw() 
+{
+	StringBuffer* buff = (new(ctx) StringBuffer(ctx));
+	int maxLoop = this->keys->size(ctx);
+	for(int i = 0; i != maxLoop; ++i)
+	{
+		TableColumnMetadata* col = this->keys->get(i, ctx);
+		if(i != 0)
+		{
+			buff->append(ConstStr::getCNST_STR_888(), ctx);
+		}
+		buff->append(col->name, ctx);
+	}
+	return buff->toString(ctx);
+}
 int TablePartitionKey::fileSize(ThreadContext* ctx)
 {
 	int total = 4;

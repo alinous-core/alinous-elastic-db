@@ -44,8 +44,9 @@ void ColumnsUniqueCollections::__releaseRegerences(bool prepare, ThreadContext* 
 		return;
 	}
 }
-UniqueExclusiveLock* ColumnsUniqueCollections::getLock(ScanResultIndexKey* key, ThreadContext* ctx)
+UniqueExclusiveLock* ColumnsUniqueCollections::getLock(ScanUnique* unique, IDatabaseRecord* value, ThreadContext* ctx)
 {
+	ValueCollections* key = (new(ctx) ValueCollections(value, ctx));
 	{
 		SynchronizedBlockObj __synchronized_2(this->lock, ctx);
 		IBTreeNode* node = this->lockStore->findByKey(key, ctx);

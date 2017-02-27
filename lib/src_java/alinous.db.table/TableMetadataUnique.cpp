@@ -34,9 +34,10 @@ void TableMetadataUnique::__releaseRegerences(bool prepare, ThreadContext* ctx) 
 		return;
 	}
 }
-ScanUnique* TableMetadataUnique::toScanUnique(ThreadContext* ctx) throw() 
+ScanUnique* TableMetadataUnique::toScanUnique(String* tableFullName, ThreadContext* ctx) throw() 
 {
 	ScanUnique* unique = (new(ctx) ScanUnique(ctx));
+	unique->setTableFullName(tableFullName, ctx);
 	int maxLoop = uniqueColList->size(ctx);
 	for(int i = 0; i != maxLoop; ++i)
 	{

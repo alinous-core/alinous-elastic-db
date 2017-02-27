@@ -34,6 +34,15 @@ void UniqueExclusiveLockManager::__releaseRegerences(bool prepare, ThreadContext
 		return;
 	}
 }
+UniqueExclusiveLock* UniqueExclusiveLockManager::findLock(ScanUnique* unique, IDatabaseRecord* value, ThreadContext* ctx)
+{
+	TableUniqueCollections* tableUnique = getTableUnique(unique->getTableFullName(ctx), ctx);
+	if(tableUnique == nullptr)
+	{
+		return nullptr;
+	}
+	return tableUnique->findLock(unique, value, ctx);
+}
 void UniqueExclusiveLockManager::dispose(ThreadContext* ctx) throw() 
 {
 	Iterator<String>* it = this->tables->keySet(ctx)->iterator(ctx);
@@ -44,6 +53,10 @@ void UniqueExclusiveLockManager::dispose(ThreadContext* ctx) throw()
 		tableLock->dispose(ctx);
 	}
 	this->tables->clear(ctx);
+}
+TableUniqueCollections* UniqueExclusiveLockManager::getTableUnique(String* fullName, ThreadContext* ctx) throw() 
+{
+	return this->tables->get(fullName, ctx);
 }
 }}}
 

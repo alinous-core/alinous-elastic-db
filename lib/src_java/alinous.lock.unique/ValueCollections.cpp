@@ -18,6 +18,14 @@ bool ValueCollections::__init_static_variables(){
 	delete ctx;
 	return true;
 }
+ ValueCollections::ValueCollections(IDatabaseRecord* value, ThreadContext* ctx) throw()  : IObject(ctx), IBTreeKey(ctx), value(nullptr)
+{
+	__GC_MV(this, &(this->value), value, IDatabaseRecord);
+}
+void ValueCollections::__construct_impl(IDatabaseRecord* value, ThreadContext* ctx) throw() 
+{
+	__GC_MV(this, &(this->value), value, IDatabaseRecord);
+}
  ValueCollections::~ValueCollections() throw() 
 {
 	ThreadContext *ctx = ThreadContext::getCurentContext();
@@ -27,9 +35,28 @@ bool ValueCollections::__init_static_variables(){
 }
 void ValueCollections::__releaseRegerences(bool prepare, ThreadContext* ctx) throw() 
 {
+	ObjectEraser __e_obj1(ctx, __FILEW__, __LINE__, L"ValueCollections", L"~ValueCollections");
+	__e_obj1.add(this->value, this);
+	value = nullptr;
 	if(!prepare){
 		return;
 	}
+}
+int ValueCollections::compareTo(IBTreeKey* another, ThreadContext* ctx) throw() 
+{
+	ValueCollections* col = static_cast<ValueCollections*>(another);
+	return 0;
+}
+void ValueCollections::appendToEntry(FileStorageEntryBuilder* builder, ThreadContext* ctx)
+{
+}
+int ValueCollections::size(ThreadContext* ctx)
+{
+	return 0;
+}
+int ValueCollections::ValueCompare::operator() (IBTreeKey* _this, IBTreeKey* another, ThreadContext* ctx) const throw()
+{
+	return _this->compareTo(another, ctx);
 }
 }}}
 

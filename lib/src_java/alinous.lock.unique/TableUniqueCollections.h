@@ -1,16 +1,40 @@
 #ifndef ALINOUS_LOCK_UNIQUE_TABLEUNIQUECOLLECTIONS_H_
 #define ALINOUS_LOCK_UNIQUE_TABLEUNIQUECOLLECTIONS_H_
-namespace java {namespace util {
-template <typename  T> class Iterator;}}
+namespace alinous {namespace lock {namespace unique {
+class UniqueExclusiveLock;}}}
+
+namespace alinous {namespace compile {namespace sql {namespace analyze {
+class ScanUnique;}}}}
+
+namespace alinous {namespace db {namespace table {
+class IDatabaseRecord;}}}
+
+namespace alinous {namespace db {namespace table {
+class TablePartitionKey;}}}
 
 namespace alinous {namespace lock {namespace unique {
 class ColumnsUniqueCollections;}}}
+
+namespace java {namespace util {
+template <typename  T> class Iterator;}}
 
 namespace java {namespace util {
 template <typename  T, typename V> class Map;}}
 
 namespace java {namespace util {
 template <typename  T, typename V> class HashMap;}}
+
+namespace java {namespace io {
+class IOException;}}
+
+namespace alinous {namespace btree {
+class BTreeException;}}
+
+namespace alinous {namespace runtime {namespace dom {
+class VariableException;}}}
+
+namespace alinous {namespace system {
+class AlinousException;}}
 
 namespace java {namespace lang {
 class IObject;
@@ -25,9 +49,16 @@ namespace alinous {namespace lock {namespace unique {
 using namespace ::alinous;
 using namespace ::java::lang;
 using ::java::util::Iterator;
+using ::java::io::IOException;
 using ::java::util::HashMap;
 using ::java::util::Iterator;
 using ::java::util::Map;
+using ::alinous::btree::BTreeException;
+using ::alinous::compile::sql::analyze::ScanUnique;
+using ::alinous::db::table::IDatabaseRecord;
+using ::alinous::db::table::TablePartitionKey;
+using ::alinous::runtime::dom::VariableException;
+using ::alinous::system::AlinousException;
 
 
 
@@ -46,6 +77,7 @@ public:
 private:
 	Map<String,ColumnsUniqueCollections>* uniqueLocks;
 public:
+	UniqueExclusiveLock* findLock(ScanUnique* unique, IDatabaseRecord* value, ThreadContext* ctx);
 	void dispose(ThreadContext* ctx) throw() ;
 public:
 	static bool __init_done;
