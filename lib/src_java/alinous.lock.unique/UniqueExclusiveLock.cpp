@@ -18,6 +18,14 @@ bool UniqueExclusiveLock::__init_static_variables(){
 	delete ctx;
 	return true;
 }
+ UniqueExclusiveLock::UniqueExclusiveLock(ThreadContext* ctx) throw()  : IObject(ctx), gate(nullptr)
+{
+	__GC_MV(this, &(this->gate), (new(ctx) ConcurrentGate(ctx)), ConcurrentGate);
+}
+void UniqueExclusiveLock::__construct_impl(ThreadContext* ctx) throw() 
+{
+	__GC_MV(this, &(this->gate), (new(ctx) ConcurrentGate(ctx)), ConcurrentGate);
+}
  UniqueExclusiveLock::~UniqueExclusiveLock() throw() 
 {
 	ThreadContext *ctx = ThreadContext::getCurentContext();
@@ -27,9 +35,20 @@ bool UniqueExclusiveLock::__init_static_variables(){
 }
 void UniqueExclusiveLock::__releaseRegerences(bool prepare, ThreadContext* ctx) throw() 
 {
+	ObjectEraser __e_obj1(ctx, __FILEW__, __LINE__, L"UniqueExclusiveLock", L"~UniqueExclusiveLock");
+	__e_obj1.add(this->gate, this);
+	gate = nullptr;
 	if(!prepare){
 		return;
 	}
+}
+void UniqueExclusiveLock::lock(ThreadContext* ctx)
+{
+	gate->close(ctx);
+}
+void UniqueExclusiveLock::unlock(ThreadContext* ctx)
+{
+	gate->open(ctx);
 }
 }}}
 

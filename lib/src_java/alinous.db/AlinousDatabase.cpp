@@ -22,7 +22,7 @@ bool AlinousDatabase::__init_static_variables(){
 	delete ctx;
 	return true;
 }
- AlinousDatabase::AlinousDatabase(ThreadContext* ctx) throw()  : IObject(ctx), instanceConfigLock(__GC_INS(this, (new(ctx) LockObject(ctx)), LockObject)), trxManager(nullptr), trxLockManager(nullptr), commitIdPublisher(nullptr), workerThreadsPool(nullptr), core(nullptr), remote(false), dataDir(nullptr), dbconfig(nullptr), configFile(nullptr), oidPublisher(nullptr), trxWriterThread(nullptr), btreeCache(nullptr), regionManager(nullptr)
+ AlinousDatabase::AlinousDatabase(ThreadContext* ctx) throw()  : IObject(ctx), instanceConfigLock(__GC_INS(this, (new(ctx) LockObject(ctx)), LockObject)), trxManager(nullptr), trxLockManager(nullptr), commitIdPublisher(nullptr), workerThreadsPool(nullptr), core(nullptr), remote(false), dataDir(nullptr), dbconfig(nullptr), configFile(nullptr), oidPublisher(nullptr), trxWriterThread(nullptr), btreeCache(nullptr), regionManager(nullptr), uniqueExclusiveLockManager(nullptr)
 {
 	__GC_MV(this, &(this->trxWriterThread), nullptr, AlinousThread);
 	__GC_MV(this, &(this->workerThreadsPool), nullptr, ThreadPool);
@@ -70,6 +70,8 @@ void AlinousDatabase::__releaseRegerences(bool prepare, ThreadContext* ctx) thro
 	btreeCache = nullptr;
 	__e_obj1.add(this->regionManager, this);
 	regionManager = nullptr;
+	__e_obj1.add(this->uniqueExclusiveLockManager, this);
+	uniqueExclusiveLockManager = nullptr;
 	if(!prepare){
 		return;
 	}
@@ -180,6 +182,10 @@ long long AlinousDatabase::newCommitId(ThreadContext* ctx)
 		}
 	}
 }
+UniqueExclusiveLockClient* AlinousDatabase::newUniqueExclusiveLockClient(ThreadContext* ctx) throw() 
+{
+	return UniqueLockClientFactory::createClient(this->uniqueExclusiveLockManager, ctx);
+}
 DbVersionContext* AlinousDatabase::newTransactionContext(ThreadContext* ctx)
 {
 	{
@@ -288,6 +294,7 @@ void AlinousDatabase::open(AlinousDbInstanceInfo* instanceConfig, ThreadContext*
 	}
 	__GC_MV(this, &(this->trxLockManager), (new(ctx) TrxLockManager(ctx)), TrxLockManager);
 	__GC_MV(this, &(this->regionManager), (new(ctx) TableRegionManager(ctx)), TableRegionManager);
+	__GC_MV(this, &(this->uniqueExclusiveLockManager), (new(ctx) UniqueExclusiveLockManager(ctx)), UniqueExclusiveLockManager);
 	if(!isRemote(ctx))
 	{
 		openLocal(ctx);

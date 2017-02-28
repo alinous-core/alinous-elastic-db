@@ -117,6 +117,9 @@ class SQLWhere;}}}}
 namespace alinous {namespace compile {namespace sql {namespace expression {
 class ISQLExpression;}}}}
 
+namespace alinous {namespace db {namespace table {namespace scan {
+class IndexScannerLockRequirement;}}}}
+
 namespace java {namespace lang {
 class IObject;
 }}
@@ -147,6 +150,7 @@ using ::alinous::db::table::scan::IndexListScanner;
 using ::alinous::db::table::scan::IndexListScannerParam;
 using ::alinous::db::table::scan::IndexRangeScanner;
 using ::alinous::db::table::scan::IndexRangeScannerParam;
+using ::alinous::db::table::scan::IndexScannerLockRequirement;
 using ::alinous::db::table::scan::SingleTableIndexScanner;
 using ::alinous::db::table::scan::TableFullScanner;
 using ::alinous::db::table::scan::TableIndexScanner;

@@ -30,9 +30,26 @@ void UniqueExclusiveLockManager::__releaseRegerences(bool prepare, ThreadContext
 	ObjectEraser __e_obj1(ctx, __FILEW__, __LINE__, L"UniqueExclusiveLockManager", L"~UniqueExclusiveLockManager");
 	__e_obj1.add(this->tables, this);
 	tables = nullptr;
+	__e_obj1.add(this->lock, this);
+	lock = nullptr;
 	if(!prepare){
 		return;
 	}
+}
+UniqueExclusiveLock* UniqueExclusiveLockManager::lockWithCheck(ScanUnique* unique, IDatabaseRecord* value, ThreadContext* ctx)
+{
+	TableUniqueCollections* tableUnique = nullptr;
+	{
+		SynchronizedBlockObj __synchronized_2(this->lock, ctx);
+		String* fullName = unique->getTableFullName(ctx);
+		tableUnique = getTableUnique(fullName, ctx);
+		if(tableUnique == nullptr)
+		{
+			tableUnique = (new(ctx) TableUniqueCollections(ctx));
+			this->tables->put(fullName, tableUnique, ctx);
+		}
+	}
+	return tableUnique->lockWithCheck(unique, value, ctx);
 }
 UniqueExclusiveLock* UniqueExclusiveLockManager::findLock(ScanUnique* unique, IDatabaseRecord* value, ThreadContext* ctx)
 {

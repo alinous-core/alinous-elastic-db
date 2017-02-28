@@ -30,6 +30,7 @@ template class ::java::util::HashMap<::java::lang::String, ::alinous::db::trx::c
 template class ::java::util::HashMap<::java::lang::String, ::java::util::HashMap<::java::lang::String, ::alinous::db::trx::cache::TrxRecordsCache>>;
 template class ::java::util::HashMap<::java::lang::String, ::alinous::lock::unique::ColumnsUniqueCollections>;
 template class ::java::util::HashMap<::java::lang::String, ::alinous::lock::unique::TableUniqueCollections>;
+template class ::java::util::HashMap<::java::lang::String, ::alinous::lock::unique::UniqueExclusiveLock>;
 template class ::java::util::HashMap<::alinous::html::DomNode, ::java::util::ArrayList<::alinous::html::xpath::match::MatchCandidate>>;
 template class ::java::util::HashMap<::java::lang::String, ::alinous::remote::db::command::data::TableClusterData>;
 template class ::java::util::HashMap<::java::lang::String, ::alinous::remote::db::command::data::SchemaData>;

@@ -6,6 +6,7 @@ template class ::alinous::HashMapRawArray<::java::lang::String, ::alinous::db::t
 template class ::alinous::HashMapRawArray<::java::lang::String, ::alinous::db::table::lockmonitor::IThreadLocker>;
 template class ::alinous::HashMapRawArray<::java::lang::String, ::alinous::lock::unique::ColumnsUniqueCollections>;
 template class ::alinous::HashMapRawArray<::java::lang::String, ::alinous::lock::unique::TableUniqueCollections>;
+template class ::alinous::HashMapRawArray<::java::lang::String, ::alinous::lock::unique::UniqueExclusiveLock>;
 template class ::alinous::HashMapRawArray<::alinous::html::DomNode, ::java::util::ArrayList<::alinous::html::xpath::match::MatchCandidate>>;
 template class ::alinous::HashMapRawArray<::java::lang::String, ::alinous::remote::db::command::data::TableClusterData>;
 template class ::alinous::HashMapRawArray<::java::lang::String, ::alinous::remote::db::command::data::SchemaData>;

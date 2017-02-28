@@ -6,6 +6,7 @@ template class alinous::MemoryUtils<::alinous::HashMapInternalElement<::java::la
 template class alinous::MemoryUtils<::alinous::HashMapInternalElement<::java::lang::String, ::alinous::db::table::lockmonitor::IThreadLocker>>;
 template class alinous::MemoryUtils<::alinous::HashMapInternalElement<::java::lang::String, ::alinous::lock::unique::ColumnsUniqueCollections>>;
 template class alinous::MemoryUtils<::alinous::HashMapInternalElement<::java::lang::String, ::alinous::lock::unique::TableUniqueCollections>>;
+template class alinous::MemoryUtils<::alinous::HashMapInternalElement<::java::lang::String, ::alinous::lock::unique::UniqueExclusiveLock>>;
 template class alinous::MemoryUtils<::alinous::HashMapInternalElement<::alinous::html::DomNode, ::java::util::ArrayList<::alinous::html::xpath::match::MatchCandidate>>>;
 template class alinous::MemoryUtils<::alinous::HashMapInternalElement<::java::lang::String, ::alinous::remote::db::command::data::TableClusterData>>;
 template class alinous::MemoryUtils<::alinous::HashMapInternalElement<::java::lang::String, ::alinous::remote::db::command::data::SchemaData>>;
@@ -50,6 +51,7 @@ template class alinous::MemoryUtils<::alinous::HashMapRawArray<::java::lang::Str
 template class alinous::MemoryUtils<::alinous::HashMapRawArray<::java::lang::String, ::alinous::db::table::lockmonitor::IThreadLocker>>;
 template class alinous::MemoryUtils<::alinous::HashMapRawArray<::java::lang::String, ::alinous::lock::unique::ColumnsUniqueCollections>>;
 template class alinous::MemoryUtils<::alinous::HashMapRawArray<::java::lang::String, ::alinous::lock::unique::TableUniqueCollections>>;
+template class alinous::MemoryUtils<::alinous::HashMapRawArray<::java::lang::String, ::alinous::lock::unique::UniqueExclusiveLock>>;
 template class alinous::MemoryUtils<::alinous::HashMapRawArray<::alinous::html::DomNode, ::java::util::ArrayList<::alinous::html::xpath::match::MatchCandidate>>>;
 template class alinous::MemoryUtils<::alinous::HashMapRawArray<::java::lang::String, ::alinous::remote::db::command::data::TableClusterData>>;
 template class alinous::MemoryUtils<::alinous::HashMapRawArray<::java::lang::String, ::alinous::remote::db::command::data::SchemaData>>;

@@ -24,7 +24,7 @@ bool WebModuleManager::__init_static_variables(){
 	__GC_MV(this, &(this->webInfo), core->getConfig(ctx)->getWebHandler(ctx), WebHandlerInfo);
 	if(this->webInfo == nullptr)
 	{
-		throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3555(), ctx));
+		throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3557(), ctx));
 	}
 	__GC_MV(this, &(this->webRoot), this->webInfo->getDocumentRoot(ctx), String);
 	__GC_MV(this, &(this->moduleLoader), core->getModulerepository(ctx), AlinousModuleRepository);
@@ -36,7 +36,7 @@ void WebModuleManager::__construct_impl(AlinousCore* core, ThreadContext* ctx)
 	__GC_MV(this, &(this->webInfo), core->getConfig(ctx)->getWebHandler(ctx), WebHandlerInfo);
 	if(this->webInfo == nullptr)
 	{
-		throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3555(), ctx));
+		throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3557(), ctx));
 	}
 	__GC_MV(this, &(this->webRoot), this->webInfo->getDocumentRoot(ctx), String);
 	__GC_MV(this, &(this->moduleLoader), core->getModulerepository(ctx), AlinousModuleRepository);
@@ -109,7 +109,7 @@ AbstractWebModule* WebModuleManager::getModule(String* path, bool debug, ThreadC
 AbstractWebModule* WebModuleManager::loadModule(String* path, bool debug, ThreadContext* ctx)
 {
 	bool isDir = path->endsWith(ConstStr::getCNST_STR_1007(), ctx);
-	if(path->endsWith(ConstStr::getCNST_STR_3556(), ctx) || isDir)
+	if(path->endsWith(ConstStr::getCNST_STR_3558(), ctx) || isDir)
 	{
 		AbstractWebModule* mod = handleWebModule(path, debug, ctx);
 		if(mod != nullptr)
@@ -117,11 +117,11 @@ AbstractWebModule* WebModuleManager::loadModule(String* path, bool debug, Thread
 			return mod;
 		}
 	}
-	if(path->endsWith(ConstStr::getCNST_STR_3557(), ctx) || isDir)
+	if(path->endsWith(ConstStr::getCNST_STR_3559(), ctx) || isDir)
 	{
 		return handleDirectModule(path, debug, ctx);
 	}
-	if(path->endsWith(ConstStr::getCNST_STR_3558(), ctx))
+	if(path->endsWith(ConstStr::getCNST_STR_3560(), ctx))
 	{
 		AbstractWebModule* mod = handleWebXmlModule(path, debug, ctx);
 		if(mod != nullptr)
@@ -162,7 +162,7 @@ AbstractWebModule* WebModuleManager::handleWebXmlModule(String* path, bool debug
 		}
 		catch(Throwable* e)
 		{
-			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3559(), e, ctx));
+			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3561(), e, ctx));
 		}
 	}
 	AlinousModule* alnsModule = loadAlinousModule(path, debug, ctx);
@@ -179,7 +179,7 @@ AlinousWebHtmlXmlModule* WebModuleManager::handleXmlModule(String* path, ThreadC
 	builder->append(path, ctx);
 	if(path->endsWith(ConstStr::getCNST_STR_1007(), ctx))
 	{
-		builder->append(ConstStr::getCNST_STR_3560(), ctx);
+		builder->append(ConstStr::getCNST_STR_3562(), ctx);
 	}
 	File* file = (new(ctx) File(builder->toString(ctx), ctx));
 	if(!file->exists(ctx))
@@ -194,7 +194,7 @@ AlinousWebHtmlXmlModule* WebModuleManager::handleXmlModule(String* path, ThreadC
 		}
 		catch(Throwable* e)
 		{
-			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3561(), e, ctx));
+			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3563(), e, ctx));
 		}
 	}
 	return module;
@@ -213,14 +213,14 @@ AbstractWebModule* WebModuleManager::handleWebModule(String* path, bool debug, T
 		}
 		catch(Throwable* e)
 		{
-			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3559(), e, ctx));
+			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3561(), e, ctx));
 		}
 	}
 	String* modPath = nullptr;
-	if(path->endsWith(ConstStr::getCNST_STR_3556(), ctx))
+	if(path->endsWith(ConstStr::getCNST_STR_3558(), ctx))
 	{
 		StringBuilder* sb = (new(ctx) StringBuilder(ctx));
-		sb->append(path->substring(0, path->length(ctx) - 4, ctx), ctx)->append(ConstStr::getCNST_STR_3562(), ctx);
+		sb->append(path->substring(0, path->length(ctx) - 4, ctx), ctx)->append(ConstStr::getCNST_STR_3564(), ctx);
 		modPath = sb->toString(ctx);
 	}
 		else 
@@ -240,7 +240,7 @@ AlinousModule* WebModuleManager::loadAlinousModule(String* path, bool debug, Thr
 	builder->append(path, ctx);
 	if(path->endsWith(ConstStr::getCNST_STR_1007(), ctx))
 	{
-		builder->append(ConstStr::getCNST_STR_3563(), ctx);
+		builder->append(ConstStr::getCNST_STR_3565(), ctx);
 	}
 	AlinousModule* mod = nullptr;
 	{
@@ -262,7 +262,7 @@ AlinousWebHtmlXmlModule* WebModuleManager::handleHtmlModule(String* path, Thread
 	builder->append(path, ctx);
 	if(path->endsWith(ConstStr::getCNST_STR_1007(), ctx))
 	{
-		builder->append(ConstStr::getCNST_STR_3564(), ctx);
+		builder->append(ConstStr::getCNST_STR_3566(), ctx);
 	}
 	File* file = (new(ctx) File(builder->toString(ctx), ctx));
 	if(!file->exists(ctx))
@@ -277,7 +277,7 @@ AlinousWebHtmlXmlModule* WebModuleManager::handleHtmlModule(String* path, Thread
 		}
 		catch(Throwable* e)
 		{
-			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3561(), e, ctx));
+			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3563(), e, ctx));
 		}
 	}
 	return module;

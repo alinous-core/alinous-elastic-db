@@ -82,17 +82,17 @@ SchemasStructureInfoData* NodeReference::getSchemeInfo(String* region, ThreadCon
 			AbstractRemoteStorageCommand* retcmd = cmd->sendCommand(socket, ctx);
 			if(retcmd->getType(ctx) != AbstractRemoteStorageCommand::TYPE_GET_TABLE_SCHEME)
 			{
-				throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3583(), ctx));
+				throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3585(), ctx));
 			}
 			cmd = static_cast<GetTableSchemeCommand*>(retcmd);
 		}
 		catch(UnknownHostException* e)
 		{
-			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3584(), e, ctx));
+			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3586(), e, ctx));
 		}
 		catch(IOException* e)
 		{
-			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3585(), e, ctx));
+			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3587(), e, ctx));
 		}
 	}
 	return cmd->getData(ctx);
@@ -114,21 +114,21 @@ void NodeReference::createSchema(String* schemaName, ThreadContext* ctx)
 			AbstractRemoteStorageCommand* retcmd = cmd->sendCommand(socket, ctx);
 			if(retcmd->getType(ctx) != AbstractRemoteStorageCommand::TYPE_CREATE_SCHEMA)
 			{
-				throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3583(), ctx));
+				throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3585(), ctx));
 			}
 			cmd = static_cast<CreateSchemaCommand*>(retcmd);
 		}
 		catch(UnknownHostException* e)
 		{
-			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3586(), e, ctx));
+			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3588(), e, ctx));
 		}
 		catch(IOException* e)
 		{
-			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3586(), e, ctx));
+			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3588(), e, ctx));
 		}
 		catch(AlinousException* e)
 		{
-			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3586(), e, ctx));
+			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3588(), e, ctx));
 		}
 	}
 }
@@ -150,20 +150,20 @@ void NodeReference::createTable(TableMetadata* meta, ThreadContext* ctx)
 			AbstractRemoteStorageCommand* retcmd = cmd->sendCommand(socket, ctx);
 			if(retcmd->getType(ctx) != AbstractRemoteStorageCommand::TYPE_CREATE_TABLE)
 			{
-				throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3583(), ctx));
+				throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3585(), ctx));
 			}
 		}
 		catch(UnknownHostException* e)
 		{
-			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3587(), e, ctx));
+			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3589(), e, ctx));
 		}
 		catch(IOException* e)
 		{
-			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3587(), e, ctx));
+			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3589(), e, ctx));
 		}
 		catch(AlinousException* e)
 		{
-			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3587(), e, ctx));
+			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3589(), e, ctx));
 		}
 	}
 }

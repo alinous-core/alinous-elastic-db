@@ -112,6 +112,14 @@ public:
 	virtual IScannableIndex* getAbailableIndexByScanColId(ArrayList<ScanTableColumnIdentifier>* joinRequest, ThreadContext* ctx) throw()  = 0;
 	virtual IScannableIndex* getTableIndex(ArrayList<String>* columns, ThreadContext* ctx) throw()  = 0;
 	virtual IThreadLocker* newThreadLocker(String* fullName, ThreadContext* ctx) throw()  = 0;
+	virtual void updateUnlockRow(long long oid, IThreadLocker* locker, ThreadContext* ctx) = 0;
+	virtual void updateLockRow(long long oid, IThreadLocker* locker, ThreadContext* ctx) = 0;
+	virtual void shareUnlockRow(long long oid, IThreadLocker* locker, ThreadContext* ctx) = 0;
+	virtual void shareLockRow(long long oid, IThreadLocker* locker, ThreadContext* ctx) = 0;
+	virtual void shareUnlockTable(IThreadLocker* locker, ThreadContext* ctx) = 0;
+	virtual void shareLockTable(IThreadLocker* locker, ThreadContext* ctx) = 0;
+	virtual void updateUnlockTable(IThreadLocker* locker, ThreadContext* ctx) = 0;
+	virtual void updateLockTable(IThreadLocker* locker, ThreadContext* ctx) = 0;
 	virtual bool hasLaterVersion(long long oid, long long currentId, ThreadContext* ctx) = 0;
 	virtual bool hasLaterVersionBefore(long long oid, long long maxCommitId, long long currentCommitId, ThreadContext* ctx) = 0;
 	virtual String* getName(ThreadContext* ctx) throw()  = 0;
@@ -126,14 +134,6 @@ public:
 	virtual void createIndex(String* getindexName, ArrayList<String>* columns, AlinousCore* core, BTreeGlobalCache* cache, ThreadContext* ctx) = 0;
 	virtual void close(ThreadContext* ctx) throw()  = 0;
 	virtual String* getFullName(ThreadContext* ctx) throw()  = 0;
-	virtual void updateUnlockRow(long long oid, IThreadLocker* locker, ThreadContext* ctx) = 0;
-	virtual void updateLockRow(long long oid, IThreadLocker* locker, ThreadContext* ctx) = 0;
-	virtual void shareUnlockRow(long long oid, IThreadLocker* locker, ThreadContext* ctx) = 0;
-	virtual void shareLockRow(long long oid, IThreadLocker* locker, ThreadContext* ctx) = 0;
-	virtual void shareUnlockTable(IThreadLocker* locker, ThreadContext* ctx) = 0;
-	virtual void shareLockTable(IThreadLocker* locker, ThreadContext* ctx) = 0;
-	virtual void updateUnlockTable(IThreadLocker* locker, ThreadContext* ctx) = 0;
-	virtual void updateLockTable(IThreadLocker* locker, ThreadContext* ctx) = 0;
 public:
 	static bool __init_done;
 	static bool __init_static_variables();

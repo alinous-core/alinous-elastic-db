@@ -42,7 +42,7 @@ long long NodeReferenceManager::getClientData(ClientStructureMetadata* data, Thr
 {
 	if(this->nodeReferences == nullptr)
 	{
-		throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3588(), ctx));
+		throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3590(), ctx));
 	}
 	{
 		SynchronizedBlockObj __synchronized_2(this->lock, ctx);
@@ -61,7 +61,7 @@ void NodeReferenceManager::syncSchemeTables(String* regionName, ThreadContext* c
 {
 	if(this->nodeReferences == nullptr)
 	{
-		throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3588(), ctx));
+		throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3590(), ctx));
 	}
 	SchemasStructureInfoData* data = this->nodeReferences->getSchemeInfo(regionName, ctx);
 	{
@@ -117,7 +117,7 @@ void NodeReferenceManager::createTable(TableMetadata* meta, ThreadContext* ctx)
 	List<NodeReference>* list = this->nodeReferences->getNodes(ctx);
 	if(list->isEmpty(ctx))
 	{
-		throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3589(), ctx));
+		throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3591(), ctx));
 	}
 	NodeReference* nodeRef = list->get(0, ctx);
 	nodeRef->createTable(meta, ctx);

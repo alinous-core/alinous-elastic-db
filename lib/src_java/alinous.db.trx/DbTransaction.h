@@ -159,11 +159,11 @@ class DbTransaction;}}}
 namespace alinous {namespace db {namespace trx {
 class TrxLockContext;}}}
 
+namespace alinous {namespace lock {namespace unique {
+class UniqueExclusiveLockClient;}}}
+
 namespace alinous {namespace db {namespace table {
 class DatabaseException;}}}
-
-namespace alinous {namespace db {namespace table {namespace scan {
-class IndexScannerLockRequirement;}}}}
 
 namespace java {namespace lang {
 class IObject;
@@ -206,7 +206,6 @@ using ::alinous::db::table::IDatabaseRecord;
 using ::alinous::db::table::IDatabaseTable;
 using ::alinous::db::table::TableMetadata;
 using ::alinous::db::table::lockmonitor::DatabaseLockException;
-using ::alinous::db::table::scan::IndexScannerLockRequirement;
 using ::alinous::db::trx::cache::CachedRecord;
 using ::alinous::db::trx::cache::CulumnOrder;
 using ::alinous::db::trx::cache::TrxRecordsCache;
@@ -216,6 +215,7 @@ using ::alinous::db::trx::scan::ITableTargetScanner;
 using ::alinous::db::trx::scan::ScanResult;
 using ::alinous::db::trx::scan::ScanResultIndex;
 using ::alinous::db::trx::scan::ScanResultRecord;
+using ::alinous::lock::unique::UniqueExclusiveLockClient;
 using ::alinous::runtime::dom::DomArray;
 using ::alinous::runtime::dom::DomVariable;
 using ::alinous::runtime::dom::IDomVariable;
@@ -239,7 +239,6 @@ public:
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 public:
 	TrxLockContext* lockContext;
-	int lockMode;
 	long long commitId;
 	DbTransactionManager* trxManager;
 	TrxSchemeManager* trxSchema;
@@ -247,6 +246,7 @@ public:
 	AlinousDatabase* database;
 	ISystemLog* logger;
 	DbTransaction* subTransaction;
+	UniqueExclusiveLockClient* uniqueExclusiveLock;
 	int resultSerial;
 	String* trxDir;
 	DbVersionContext* vctx;

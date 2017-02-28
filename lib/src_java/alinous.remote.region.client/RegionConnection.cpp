@@ -55,12 +55,12 @@ void RegionConnection::connect(ThreadContext* ctx)
 	AbstractNodeRegionCommand* retcmd = cmd->sendCommand(this->socket, ctx);
 	if(retcmd->getType(ctx) != AbstractNodeRegionCommand::TYPE_CONNECT)
 	{
-		throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3571(), ctx));
+		throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3573(), ctx));
 	}
 	cmd = static_cast<NodeRegionConnectCommand*>(retcmd);
 	if(!cmd->isConnected(ctx))
 	{
-		throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3571(), ctx));
+		throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3573(), ctx));
 	}
 }
 void RegionConnection::close(ThreadContext* ctx) throw() 

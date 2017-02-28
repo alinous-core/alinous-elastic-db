@@ -18,7 +18,7 @@ bool DbTransaction::__init_static_variables(){
 	delete ctx;
 	return true;
 }
- DbTransaction::DbTransaction(DbTransactionManager* mgr, String* tmpDir, AlinousDatabase* database, AlinousCore* core, long long commitId, DbVersionContext* vctx, ThreadContext* ctx) throw()  : IObject(ctx), lockContext(nullptr), lockMode(0), commitId(0), trxManager(nullptr), trxSchema(nullptr), trxStorageManager(nullptr), database(nullptr), logger(nullptr), subTransaction(nullptr), resultSerial(0), trxDir(nullptr), vctx(nullptr), soidSerial(0), core(nullptr)
+ DbTransaction::DbTransaction(DbTransactionManager* mgr, String* tmpDir, AlinousDatabase* database, AlinousCore* core, long long commitId, DbVersionContext* vctx, ThreadContext* ctx) throw()  : IObject(ctx), lockContext(nullptr), commitId(0), trxManager(nullptr), trxSchema(nullptr), trxStorageManager(nullptr), database(nullptr), logger(nullptr), subTransaction(nullptr), uniqueExclusiveLock(nullptr), resultSerial(0), trxDir(nullptr), vctx(nullptr), soidSerial(0), core(nullptr)
 {
 	__GC_MV(this, &(this->trxManager), mgr, DbTransactionManager);
 	__GC_MV(this, &(this->trxSchema), (new(ctx) TrxSchemeManager(database, core->getLogger(ctx), ctx)), TrxSchemeManager);
@@ -28,7 +28,7 @@ bool DbTransaction::__init_static_variables(){
 	__GC_MV(this, &(this->logger), core->getLogger(ctx), ISystemLog);
 	this->commitId = commitId;
 	__GC_MV(this, &(this->lockContext), database->newLockContext(ctx), TrxLockContext);
-	this->lockMode = IndexScannerLockRequirement::INSTANT_SHARE;
+	__GC_MV(this, &(this->uniqueExclusiveLock), database->newUniqueExclusiveLockClient(ctx), UniqueExclusiveLockClient);
 	this->resultSerial = 1;
 	__GC_MV(this, &(this->trxDir), tmpDir, String);
 	this->soidSerial = 1;
@@ -44,7 +44,7 @@ void DbTransaction::__construct_impl(DbTransactionManager* mgr, String* tmpDir, 
 	__GC_MV(this, &(this->logger), core->getLogger(ctx), ISystemLog);
 	this->commitId = commitId;
 	__GC_MV(this, &(this->lockContext), database->newLockContext(ctx), TrxLockContext);
-	this->lockMode = IndexScannerLockRequirement::INSTANT_SHARE;
+	__GC_MV(this, &(this->uniqueExclusiveLock), database->newUniqueExclusiveLockClient(ctx), UniqueExclusiveLockClient);
 	this->resultSerial = 1;
 	__GC_MV(this, &(this->trxDir), tmpDir, String);
 	this->soidSerial = 1;
@@ -74,6 +74,8 @@ void DbTransaction::__releaseRegerences(bool prepare, ThreadContext* ctx) throw(
 	logger = nullptr;
 	__e_obj1.add(this->subTransaction, this);
 	subTransaction = nullptr;
+	__e_obj1.add(this->uniqueExclusiveLock, this);
+	uniqueExclusiveLock = nullptr;
 	__e_obj1.add(this->trxDir, this);
 	trxDir = nullptr;
 	__e_obj1.add(this->vctx, this);

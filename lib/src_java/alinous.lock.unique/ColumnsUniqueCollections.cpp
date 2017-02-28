@@ -18,14 +18,6 @@ bool ColumnsUniqueCollections::__init_static_variables(){
 	delete ctx;
 	return true;
 }
- ColumnsUniqueCollections::ColumnsUniqueCollections(ThreadContext* ctx) throw()  : IObject(ctx), lockStore(nullptr), lock(__GC_INS(this, (new(ctx) LockObject(ctx)), LockObject))
-{
-	__GC_MV(this, &(this->lockStore), (new(ctx) BTreeOnMemory(16, ctx)), IBTree);
-}
-void ColumnsUniqueCollections::__construct_impl(ThreadContext* ctx) throw() 
-{
-	__GC_MV(this, &(this->lockStore), (new(ctx) BTreeOnMemory(16, ctx)), IBTree);
-}
  ColumnsUniqueCollections::~ColumnsUniqueCollections() throw() 
 {
 	ThreadContext *ctx = ThreadContext::getCurentContext();
@@ -36,47 +28,60 @@ void ColumnsUniqueCollections::__construct_impl(ThreadContext* ctx) throw()
 void ColumnsUniqueCollections::__releaseRegerences(bool prepare, ThreadContext* ctx) throw() 
 {
 	ObjectEraser __e_obj1(ctx, __FILEW__, __LINE__, L"ColumnsUniqueCollections", L"~ColumnsUniqueCollections");
-	__e_obj1.add(this->lockStore, this);
-	lockStore = nullptr;
 	__e_obj1.add(this->lock, this);
 	lock = nullptr;
+	__e_obj1.add(this->locks, this);
+	locks = nullptr;
 	if(!prepare){
 		return;
 	}
 }
-UniqueExclusiveLock* ColumnsUniqueCollections::getLock(ScanUnique* unique, IDatabaseRecord* value, ThreadContext* ctx)
+UniqueExclusiveLock* ColumnsUniqueCollections::lockWithCheck(ScanUnique* unique, IDatabaseRecord* value, ThreadContext* ctx)
 {
-	ValueCollections* key = (new(ctx) ValueCollections(value, ctx));
+	String* lockString = getLockValueString(unique, value, ctx);
+	UniqueExclusiveLock* lock = nullptr;
 	{
 		SynchronizedBlockObj __synchronized_2(this->lock, ctx);
-		IBTreeNode* node = this->lockStore->findByKey(key, ctx);
-		if(node == nullptr)
+		lock = this->locks->get(lockString, ctx);
+		if(lock != nullptr)
 		{
-			return nullptr;
+			throw (new(ctx) UniqueExclusiveException(lockString->clone(ctx)->append(ConstStr::getCNST_STR_1757(), ctx), ctx));
 		}
-		ArrayList<IBTreeValue>* values = node->getValues(ctx);
-		if(values->isEmpty(ctx))
-		{
-			return nullptr;
-		}
+		lock = (new(ctx) UniqueExclusiveLock(ctx));
+		this->locks->put(lockString, lock, ctx);
 	}
-	return nullptr;
+	return lock;
+}
+UniqueExclusiveLock* ColumnsUniqueCollections::getLock(ScanUnique* unique, IDatabaseRecord* value, ThreadContext* ctx)
+{
+	String* lockString = getLockValueString(unique, value, ctx);
+	UniqueExclusiveLock* lock = nullptr;
+	{
+		SynchronizedBlockObj __synchronized_2(this->lock, ctx);
+		lock = this->locks->get(lockString, ctx);
+	}
+	return lock;
 }
 void ColumnsUniqueCollections::dispose(ThreadContext* ctx) throw() 
 {
+}
+String* ColumnsUniqueCollections::getLockValueString(ScanUnique* unique, IDatabaseRecord* value, ThreadContext* ctx) throw() 
+{
+	StringBuffer* buff = (new(ctx) StringBuffer(ctx));
+	ArrayList<TableColumnMetadata>* colslist = unique->getUniqueColList(ctx);
+	int maxLoop = colslist->size(ctx);
+	for(int i = 0; i != maxLoop; ++i)
 	{
-		try
+		TableColumnMetadata* col = colslist->get(i, ctx);
+		VariantValue* vv = value->getColumnValue(col->columnOrder, ctx);
+		if(i != maxLoop)
 		{
-			this->lockStore->close(ctx);
+			buff->append(ConstStr::getCNST_STR_888(), ctx);
 		}
-		catch(IOException* e)
-		{
-		}
-		catch(InterruptedException* e)
-		{
-		}
+		String* str = vv->toString(ctx);
+		buff->append(str, ctx);
 	}
-	__GC_MV(this, &(this->lockStore), nullptr, IBTree);
+	return buff->toString(ctx);
 }
 }}}
 

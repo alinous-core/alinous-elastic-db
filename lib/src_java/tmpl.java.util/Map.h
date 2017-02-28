@@ -5,6 +5,7 @@ template class ::java::util::Map<::java::lang::String, ::alinous::db::table::Loc
 template class ::java::util::Map<::java::lang::String, ::alinous::db::table::lockmonitor::IThreadLocker>;
 template class ::java::util::Map<::java::lang::String, ::alinous::lock::unique::ColumnsUniqueCollections>;
 template class ::java::util::Map<::java::lang::String, ::alinous::lock::unique::TableUniqueCollections>;
+template class ::java::util::Map<::java::lang::String, ::alinous::lock::unique::UniqueExclusiveLock>;
 template class ::java::util::Map<::alinous::html::DomNode, ::java::util::ArrayList<::alinous::html::xpath::match::MatchCandidate>>;
 template class ::java::util::Map<::java::lang::String, ::alinous::remote::db::command::data::TableClusterData>;
 template class ::java::util::Map<::java::lang::String, ::alinous::remote::db::command::data::SchemaData>;

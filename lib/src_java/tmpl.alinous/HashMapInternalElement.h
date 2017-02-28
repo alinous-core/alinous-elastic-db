@@ -6,6 +6,7 @@ template class ::alinous::HashMapInternalElement<::java::lang::String, ::alinous
 template class ::alinous::HashMapInternalElement<::java::lang::String, ::alinous::db::table::lockmonitor::IThreadLocker>;
 template class ::alinous::HashMapInternalElement<::java::lang::String, ::alinous::lock::unique::ColumnsUniqueCollections>;
 template class ::alinous::HashMapInternalElement<::java::lang::String, ::alinous::lock::unique::TableUniqueCollections>;
+template class ::alinous::HashMapInternalElement<::java::lang::String, ::alinous::lock::unique::UniqueExclusiveLock>;
 template class ::alinous::HashMapInternalElement<::alinous::html::DomNode, ::java::util::ArrayList<::alinous::html::xpath::match::MatchCandidate>>;
 template class ::alinous::HashMapInternalElement<::java::lang::String, ::alinous::remote::db::command::data::TableClusterData>;
 template class ::alinous::HashMapInternalElement<::java::lang::String, ::alinous::remote::db::command::data::SchemaData>;

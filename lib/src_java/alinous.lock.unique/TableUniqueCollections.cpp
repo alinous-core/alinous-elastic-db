@@ -30,15 +30,37 @@ void TableUniqueCollections::__releaseRegerences(bool prepare, ThreadContext* ct
 	ObjectEraser __e_obj1(ctx, __FILEW__, __LINE__, L"TableUniqueCollections", L"~TableUniqueCollections");
 	__e_obj1.add(this->uniqueLocks, this);
 	uniqueLocks = nullptr;
+	__e_obj1.add(this->lock, this);
+	lock = nullptr;
 	if(!prepare){
 		return;
 	}
+}
+UniqueExclusiveLock* TableUniqueCollections::lockWithCheck(ScanUnique* unique, IDatabaseRecord* value, ThreadContext* ctx)
+{
+	TablePartitionKey* coverKey = unique->getCoveredKey(ctx);
+	String* colsstr = coverKey->toString(ctx);
+	ColumnsUniqueCollections* col = nullptr;
+	{
+		SynchronizedBlockObj __synchronized_2(this->lock, ctx);
+		col = this->uniqueLocks->get(colsstr, ctx);
+		if(col == nullptr)
+		{
+			col = (new(ctx) ColumnsUniqueCollections(ctx));
+			this->uniqueLocks->put(colsstr, col, ctx);
+		}
+	}
+	return col->lockWithCheck(unique, value, ctx);
 }
 UniqueExclusiveLock* TableUniqueCollections::findLock(ScanUnique* unique, IDatabaseRecord* value, ThreadContext* ctx)
 {
 	TablePartitionKey* coverKey = unique->getCoveredKey(ctx);
 	String* colsstr = coverKey->toString(ctx);
-	ColumnsUniqueCollections* col = this->uniqueLocks->get(colsstr, ctx);
+	ColumnsUniqueCollections* col = nullptr;
+	{
+		SynchronizedBlockObj __synchronized_2(this->lock, ctx);
+		col = this->uniqueLocks->get(colsstr, ctx);
+	}
 	if(col == nullptr)
 	{
 		return nullptr;

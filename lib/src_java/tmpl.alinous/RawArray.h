@@ -6,6 +6,7 @@ template class alinous::RawArray<::alinous::HashMapInternalElement<::java::lang:
 template class alinous::RawArray<::alinous::HashMapInternalElement<::java::lang::String, ::alinous::db::table::lockmonitor::IThreadLocker>, ::alinous::HashMapInternalElement<::java::lang::String, ::alinous::db::table::lockmonitor::IThreadLocker>::ValueCompare>;
 template class alinous::RawArray<::alinous::HashMapInternalElement<::java::lang::String, ::alinous::lock::unique::ColumnsUniqueCollections>, ::alinous::HashMapInternalElement<::java::lang::String, ::alinous::lock::unique::ColumnsUniqueCollections>::ValueCompare>;
 template class alinous::RawArray<::alinous::HashMapInternalElement<::java::lang::String, ::alinous::lock::unique::TableUniqueCollections>, ::alinous::HashMapInternalElement<::java::lang::String, ::alinous::lock::unique::TableUniqueCollections>::ValueCompare>;
+template class alinous::RawArray<::alinous::HashMapInternalElement<::java::lang::String, ::alinous::lock::unique::UniqueExclusiveLock>, ::alinous::HashMapInternalElement<::java::lang::String, ::alinous::lock::unique::UniqueExclusiveLock>::ValueCompare>;
 template class alinous::RawArray<::alinous::HashMapInternalElement<::alinous::html::DomNode, ::java::util::ArrayList<::alinous::html::xpath::match::MatchCandidate>>, ::alinous::HashMapInternalElement<::alinous::html::DomNode, ::java::util::ArrayList<::alinous::html::xpath::match::MatchCandidate>>::ValueCompare>;
 template class alinous::RawArray<::alinous::HashMapInternalElement<::java::lang::String, ::alinous::remote::db::command::data::TableClusterData>, ::alinous::HashMapInternalElement<::java::lang::String, ::alinous::remote::db::command::data::TableClusterData>::ValueCompare>;
 template class alinous::RawArray<::alinous::HashMapInternalElement<::java::lang::String, ::alinous::remote::db::command::data::SchemaData>, ::alinous::HashMapInternalElement<::java::lang::String, ::alinous::remote::db::command::data::SchemaData>::ValueCompare>;
@@ -50,6 +51,7 @@ template class alinous::RawArray<::alinous::HashMapRawArray<::java::lang::String
 template class alinous::RawArray<::alinous::HashMapRawArray<::java::lang::String, ::alinous::db::table::lockmonitor::IThreadLocker>>;
 template class alinous::RawArray<::alinous::HashMapRawArray<::java::lang::String, ::alinous::lock::unique::ColumnsUniqueCollections>>;
 template class alinous::RawArray<::alinous::HashMapRawArray<::java::lang::String, ::alinous::lock::unique::TableUniqueCollections>>;
+template class alinous::RawArray<::alinous::HashMapRawArray<::java::lang::String, ::alinous::lock::unique::UniqueExclusiveLock>>;
 template class alinous::RawArray<::alinous::HashMapRawArray<::alinous::html::DomNode, ::java::util::ArrayList<::alinous::html::xpath::match::MatchCandidate>>>;
 template class alinous::RawArray<::alinous::HashMapRawArray<::java::lang::String, ::alinous::remote::db::command::data::TableClusterData>>;
 template class alinous::RawArray<::alinous::HashMapRawArray<::java::lang::String, ::alinous::remote::db::command::data::SchemaData>>;

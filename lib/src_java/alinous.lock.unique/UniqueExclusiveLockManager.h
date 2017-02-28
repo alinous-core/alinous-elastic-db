@@ -21,6 +21,9 @@ template <typename  T, typename V> class Map;}}
 namespace java {namespace util {
 template <typename  T, typename V> class HashMap;}}
 
+namespace alinous {namespace lock {
+class LockObject;}}
+
 namespace java {namespace io {
 class IOException;}}
 
@@ -53,6 +56,7 @@ using ::java::util::Map;
 using ::alinous::btree::BTreeException;
 using ::alinous::compile::sql::analyze::ScanUnique;
 using ::alinous::db::table::IDatabaseRecord;
+using ::alinous::lock::LockObject;
 using ::alinous::runtime::dom::VariableException;
 using ::alinous::system::AlinousException;
 
@@ -62,7 +66,7 @@ class UniqueExclusiveLockManager final : public virtual IObject {
 public:
 	UniqueExclusiveLockManager(const UniqueExclusiveLockManager& base) = default;
 public:
-	UniqueExclusiveLockManager(ThreadContext* ctx) throw()  : IObject(ctx), tables(GCUtils<Map<String,TableUniqueCollections> >::ins(this, (new(ctx) HashMap<String,TableUniqueCollections>(ctx)), ctx, __FILEW__, __LINE__, L""))
+	UniqueExclusiveLockManager(ThreadContext* ctx) throw()  : IObject(ctx), tables(GCUtils<Map<String,TableUniqueCollections> >::ins(this, (new(ctx) HashMap<String,TableUniqueCollections>(ctx)), ctx, __FILEW__, __LINE__, L"")), lock(__GC_INS(this, (new(ctx) LockObject(ctx)), LockObject))
 	{
 	}
 	void __construct_impl(ThreadContext* ctx) throw() 
@@ -72,7 +76,9 @@ public:
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 private:
 	Map<String,TableUniqueCollections>* tables;
+	LockObject* lock;
 public:
+	UniqueExclusiveLock* lockWithCheck(ScanUnique* unique, IDatabaseRecord* value, ThreadContext* ctx);
 	UniqueExclusiveLock* findLock(ScanUnique* unique, IDatabaseRecord* value, ThreadContext* ctx);
 	void dispose(ThreadContext* ctx) throw() ;
 private:

@@ -22,7 +22,7 @@ using ::alinous::system::AlinousException;
 
 
 
-class AlinousDbException final : public AlinousException {
+class AlinousDbException : public AlinousException {
 public:
 	AlinousDbException(const AlinousDbException& base) = default;
 public:

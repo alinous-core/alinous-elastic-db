@@ -161,7 +161,7 @@ SingleTableIndexScanner* ScanSingleStrategy::getIndexScanner(DbTransaction* trx,
 			throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1052(), e, ctx));
 		}
 	}
-	SingleTableIndexScanner* scanner = (new(ctx) SingleTableIndexScanner(ctx))->init(this->tableId, trx, index, tableStore, insertCacheindex, updateCacheindex, trx->lockMode, ctx);
+	SingleTableIndexScanner* scanner = (new(ctx) SingleTableIndexScanner(ctx))->init(this->tableId, trx, index, tableStore, insertCacheindex, updateCacheindex, IndexScannerLockRequirement::INSTANT_SHARE, ctx);
 	return scanner;
 }
 ITableTargetScanner* ScanSingleStrategy::getFullScanScanner(DbTransaction* trx, ThreadContext* ctx)
@@ -200,7 +200,7 @@ ITableTargetScanner* ScanSingleStrategy::getFullScanScanner(DbTransaction* trx, 
 			throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1052(), e, ctx));
 		}
 	}
-	SingleTableIndexScanner* scanner = (new(ctx) SingleTableIndexScanner(ctx))->init(this->tableId, trx, index, tableStore, insertCacheindex, updateCacheindex, trx->lockMode, ctx);
+	SingleTableIndexScanner* scanner = (new(ctx) SingleTableIndexScanner(ctx))->init(this->tableId, trx, index, tableStore, insertCacheindex, updateCacheindex, IndexScannerLockRequirement::INSTANT_SHARE, ctx);
 	return scanner;
 }
 ITableTargetScanner* ScanSingleStrategy::getCachedFullScanScanner(DbTransaction* trx, ArrayList<ScanTableColumnIdentifier>* joinRequest, bool debug, ThreadContext* ctx)
@@ -313,21 +313,21 @@ ITableTargetScanner* ScanSingleStrategy::initOnTheFlyScanner(ScriptMachine* mach
 		{
 			ScanResultIndexKey* eqKey = plan->getEqIndexKey(machine, index->getColumns(ctx), debug, ctx);
 			int effectiveKeyLength = plan->getEqKeyLength(ctx);
-			IndexEqScanner* intnlScanner = (new(ctx) IndexEqScanner(ctx))->init(this->tableId, trx, index, tableStore, insertCacheindex, updateCacheindex, trx->lockMode, eqKey, effectiveKeyLength, necessaryCnd, machine, ctx);
+			IndexEqScanner* intnlScanner = (new(ctx) IndexEqScanner(ctx))->init(this->tableId, trx, index, tableStore, insertCacheindex, updateCacheindex, IndexScannerLockRequirement::INSTANT_SHARE, eqKey, effectiveKeyLength, necessaryCnd, machine, ctx);
 			return intnlScanner;
 		}
 	case IndexScanStrategyPlan::SCAN_RANGE:
 		{
 			IndexRangeScannerParam* param = plan->getRamgeIndexKeyParam(machine, index->getColumns(ctx), debug, ctx);
 			int effectiveKeyLength = 1;
-			IndexRangeScanner* rangeScanner = (new(ctx) IndexRangeScanner(ctx))->init(this->tableId, trx, index, tableStore, insertCacheindex, updateCacheindex, trx->lockMode, param, effectiveKeyLength, necessaryCnd, machine, ctx);
+			IndexRangeScanner* rangeScanner = (new(ctx) IndexRangeScanner(ctx))->init(this->tableId, trx, index, tableStore, insertCacheindex, updateCacheindex, IndexScannerLockRequirement::INSTANT_SHARE, param, effectiveKeyLength, necessaryCnd, machine, ctx);
 			return rangeScanner;
 		}
 	case IndexScanStrategyPlan::SCAN_LIST:
 		{
 			IndexListScannerParam* param = plan->getListIndexKey(machine, index->getColumns(ctx), debug, ctx);
 			int effectiveKeyLength = 1;
-			IndexListScanner* listScanner = (new(ctx) IndexListScanner(ctx))->init(this->tableId, trx, index, tableStore, insertCacheindex, updateCacheindex, trx->lockMode, param, effectiveKeyLength, necessaryCnd, machine, ctx);
+			IndexListScanner* listScanner = (new(ctx) IndexListScanner(ctx))->init(this->tableId, trx, index, tableStore, insertCacheindex, updateCacheindex, IndexScannerLockRequirement::INSTANT_SHARE, param, effectiveKeyLength, necessaryCnd, machine, ctx);
 			return listScanner;
 		}
 	default:
@@ -342,10 +342,10 @@ ITableTargetScanner* ScanSingleStrategy::initOnTheFlyScanner4Join(ScriptMachine*
 	IScannableIndex* index = tableStore->getAbailableIndexByScanColId(joinRequest, ctx);
 	if(index == nullptr)
 	{
-		TableIndexScanner* indexScanner = (new(ctx) TableIndexScanner(ctx))->init(this->tableId, trx, index, tableStore, trx->lockMode, ctx);
+		TableIndexScanner* indexScanner = (new(ctx) TableIndexScanner(ctx))->init(this->tableId, trx, index, tableStore, IndexScannerLockRequirement::INSTANT_SHARE, ctx);
 		return indexScanner;
 	}
-	TableFullScanner* scanner = (new(ctx) TableFullScanner(ctx))->init(this->tableId, trx, tableStore, trx->lockMode, ctx);
+	TableFullScanner* scanner = (new(ctx) TableFullScanner(ctx))->init(this->tableId, trx, tableStore, IndexScannerLockRequirement::INSTANT_SHARE, ctx);
 	return scanner;
 }
 }}}}

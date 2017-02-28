@@ -60,6 +60,9 @@ class VariableException;}}}
 namespace alinous {namespace system {
 class AlinousException;}}
 
+namespace alinous {namespace lock {namespace unique {
+class UniqueExclusiveLockClient;}}}
+
 namespace alinous {namespace db {namespace trx {
 class DbVersionContext;}}}
 
@@ -89,6 +92,9 @@ class TrxLockManager;}}}
 
 namespace alinous {namespace db {
 class TableRegionManager;}}
+
+namespace alinous {namespace lock {namespace unique {
+class UniqueExclusiveLockManager;}}}
 
 namespace alinous {namespace net {
 class UnknownHostException;}}
@@ -138,6 +144,9 @@ class ICommidIdPublisher;}}
 namespace alinous {namespace btree {
 class IBTreeKey;}}
 
+namespace alinous {namespace lock {namespace unique {
+class UniqueLockClientFactory;}}}
+
 namespace alinous {namespace system {namespace utils {
 class FileUtils;}}}
 
@@ -176,6 +185,9 @@ using ::alinous::db::trx::DbVersionContext;
 using ::alinous::db::trx::TrxLockContext;
 using ::alinous::db::trx::TrxLockManager;
 using ::alinous::lock::LockObject;
+using ::alinous::lock::unique::UniqueExclusiveLockClient;
+using ::alinous::lock::unique::UniqueExclusiveLockManager;
+using ::alinous::lock::unique::UniqueLockClientFactory;
 using ::alinous::remote::monitor::client::RemoteCommitIdPublisher;
 using ::alinous::remote::region::client::RemoteRegionRef;
 using ::alinous::runtime::dom::VariableException;
@@ -216,6 +228,7 @@ private:
 	AlinousThread* trxWriterThread;
 	BTreeGlobalCache* btreeCache;
 	TableRegionManager* regionManager;
+	UniqueExclusiveLockManager* uniqueExclusiveLockManager;
 public:
 	const static IntKey __SCHEMA;
 	constexpr static IntKey* SCHEMA{const_cast<IntKey*>(&__SCHEMA)};
@@ -231,6 +244,7 @@ public:
 	void initInstance(AlinousDbInstanceInfo* instanceConfig, ThreadContext* ctx);
 	long long getCommitId(ThreadContext* ctx);
 	long long newCommitId(ThreadContext* ctx);
+	UniqueExclusiveLockClient* newUniqueExclusiveLockClient(ThreadContext* ctx) throw() ;
 	DbVersionContext* newTransactionContext(ThreadContext* ctx);
 	void syncScheme(ThreadContext* ctx);
 	void open(AlinousDbInstanceInfo* instanceConfig, ThreadContext* ctx);
