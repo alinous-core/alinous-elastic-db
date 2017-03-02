@@ -36,7 +36,7 @@ void TableUniqueCollections::__releaseRegerences(bool prepare, ThreadContext* ct
 		return;
 	}
 }
-UniqueExclusiveLock* TableUniqueCollections::lockWithCheck(ScanUnique* unique, IDatabaseRecord* value, ThreadContext* ctx)
+UniqueExclusiveLock* TableUniqueCollections::lockWithCheck(ScanUnique* unique, IDatabaseRecord* record, bool throwex, ThreadContext* ctx)
 {
 	TablePartitionKey* coverKey = unique->getCoveredKey(ctx);
 	String* colsstr = coverKey->toString(ctx);
@@ -50,9 +50,29 @@ UniqueExclusiveLock* TableUniqueCollections::lockWithCheck(ScanUnique* unique, I
 			this->uniqueLocks->put(colsstr, col, ctx);
 		}
 	}
-	return col->lockWithCheck(unique, value, ctx);
+	return col->lockWithCheck(unique, record, throwex, ctx);
 }
-UniqueExclusiveLock* TableUniqueCollections::findLock(ScanUnique* unique, IDatabaseRecord* value, ThreadContext* ctx)
+bool TableUniqueCollections::unlock(ScanUnique* unique, IDatabaseRecord* record, ThreadContext* ctx) throw() 
+{
+	TablePartitionKey* coverKey = unique->getCoveredKey(ctx);
+	String* colsstr = coverKey->toString(ctx);
+	ColumnsUniqueCollections* col = nullptr;
+	{
+		SynchronizedBlockObj __synchronized_2(this->lock, ctx);
+		col = this->uniqueLocks->get(colsstr, ctx);
+		if(col == nullptr)
+		{
+			return this->uniqueLocks->isEmpty(ctx);
+		}
+		bool isEmpty = col->unlock(unique, record, ctx);
+		if(isEmpty)
+		{
+			this->uniqueLocks->remove(colsstr, ctx);
+		}
+		return this->uniqueLocks->isEmpty(ctx);
+	}
+}
+UniqueExclusiveLock* TableUniqueCollections::findLock(ScanUnique* unique, IDatabaseRecord* record, ThreadContext* ctx)
 {
 	TablePartitionKey* coverKey = unique->getCoveredKey(ctx);
 	String* colsstr = coverKey->toString(ctx);
@@ -65,7 +85,7 @@ UniqueExclusiveLock* TableUniqueCollections::findLock(ScanUnique* unique, IDatab
 	{
 		return nullptr;
 	}
-	return col->getLock(unique, value, ctx);
+	return col->getLock(unique, record, ctx);
 }
 void TableUniqueCollections::dispose(ThreadContext* ctx) throw() 
 {

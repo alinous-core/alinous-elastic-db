@@ -221,12 +221,13 @@ void TrxRecordsCache::commitUpdateRecord(AlinousDatabase* db, IDatabaseTable* ta
 	}
 	table->unlockStorage(ctx);
 }
-void TrxRecordsCache::commitInsertRecord(AlinousDatabase* db, IDatabaseTable* table, long long newCommitId, ThreadContext* ctx)
+void TrxRecordsCache::commitInsertRecord(DbTransaction* trx, AlinousDatabase* db, IDatabaseTable* table, long long newCommitId, ThreadContext* ctx)
 {
 	table->lockStorage(ctx);
 	{
 		try
 		{
+			checkInsertUnique(trx, table, ctx);
 			int slotSize = table->getIndexes(ctx)->size(ctx) + 2;
 			IArrayObject<SequentialBackgroundJob>* jobs = ArrayAllocator<SequentialBackgroundJob>::allocate(ctx, slotSize);
 			for(int i = 0; i != slotSize; ++i)
@@ -463,6 +464,31 @@ bool TrxRecordsCache::matchIndexByIdList(ArrayList<TableColumnMetadata>* cachedI
 		}
 	}
 	return true;
+}
+void TrxRecordsCache::checkInsertUnique(DbTransaction* trx, IDatabaseTable* table, ThreadContext* ctx)
+{
+	UniqueExclusiveLockClient* uniqueLock = trx->getUniqueExclusiveLock(ctx);
+	TableMetadata* meta = table->getMetadata(ctx);
+	TableMetadataUniqueCollection* uniques = meta->getUniques(ctx);
+	BTreeScanner* scanner = (new(ctx) BTreeScanner(this->storage, ctx));
+	scanner->startScan(false, ctx);
+	while(scanner->hasNext(ctx))
+	{
+		IBTreeNode* lnode = scanner->next(ctx);
+		ArrayList<IBTreeValue>* values = lnode->getValues(ctx);
+		CachedRecord* record = static_cast<CachedRecord*>(values->get(0, ctx));
+		ckeckUniques(uniqueLock, uniques, record, ctx);
+	}
+}
+void TrxRecordsCache::ckeckUniques(UniqueExclusiveLockClient* uniqueLock, TableMetadataUniqueCollection* uniques, CachedRecord* record, ThreadContext* ctx)
+{
+	ArrayList<ScanUnique>* list = uniques->getUniqueList(ctx);
+	int maxLoop = list->size(ctx);
+	for(int i = 0; i != maxLoop; ++i)
+	{
+		ScanUnique* unique = list->get(i, ctx);
+		uniqueLock->lockWithCheck(unique, record, true, ctx);
+	}
 }
 void TrxRecordsCache::buildFirstIndex(TrxRecordCacheIndex* newIndex, ThreadContext* ctx)
 {

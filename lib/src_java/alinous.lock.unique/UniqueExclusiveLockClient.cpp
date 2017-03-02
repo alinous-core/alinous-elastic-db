@@ -18,7 +18,7 @@ bool UniqueExclusiveLockClient::__init_static_variables(){
 	delete ctx;
 	return true;
 }
- UniqueExclusiveLockClient::UniqueExclusiveLockClient(UniqueExclusiveLockManager* mgr, ThreadContext* ctx) throw()  : IObject(ctx), mgr(nullptr)
+ UniqueExclusiveLockClient::UniqueExclusiveLockClient(UniqueExclusiveLockManager* mgr, ThreadContext* ctx) throw()  : IObject(ctx), mgr(nullptr), lock(__GC_INS(this, (new(ctx) LockObject(ctx)), LockObject)), uniqueLocks(GCUtils<Map<String,UniqueExclusiveLock> >::ins(this, (new(ctx) HashMap<String,UniqueExclusiveLock>(ctx)), ctx, __FILEW__, __LINE__, L""))
 {
 	__GC_MV(this, &(this->mgr), mgr, UniqueExclusiveLockManager);
 }
@@ -38,8 +38,30 @@ void UniqueExclusiveLockClient::__releaseRegerences(bool prepare, ThreadContext*
 	ObjectEraser __e_obj1(ctx, __FILEW__, __LINE__, L"UniqueExclusiveLockClient", L"~UniqueExclusiveLockClient");
 	__e_obj1.add(this->mgr, this);
 	mgr = nullptr;
+	__e_obj1.add(this->lock, this);
+	lock = nullptr;
+	__e_obj1.add(this->uniqueLocks, this);
+	uniqueLocks = nullptr;
 	if(!prepare){
 		return;
+	}
+}
+void UniqueExclusiveLockClient::lockWithCheck(ScanUnique* unique, IDatabaseRecord* record, bool throwex, ThreadContext* ctx)
+{
+	String* lockKey = UniqueExclusiveLock::makeString(unique, record, ctx);
+	UniqueExclusiveLock* lock = nullptr;
+	{
+		SynchronizedBlockObj __synchronized_2(this->lock, ctx);
+		lock = this->uniqueLocks->get(lockKey, ctx);
+		if(lock != nullptr)
+		{
+			return;
+		}
+	}
+	lock = this->mgr->lockWithCheck(unique, record, throwex, ctx);
+	{
+		SynchronizedBlockObj __synchronized_2(this->lock, ctx);
+		this->uniqueLocks->put(lockKey, lock, ctx);
 	}
 }
 bool UniqueExclusiveLockClient::checkLocking(ScanUnique* unique, IDatabaseRecord* value, ThreadContext* ctx)
@@ -52,25 +74,40 @@ bool UniqueExclusiveLockClient::checkLocking(ScanUnique* unique, IDatabaseRecord
 		}
 		catch(VariableException* e)
 		{
-			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_1758(), e, ctx));
+			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_1759(), e, ctx));
 		}
 		catch(IOException* e)
 		{
-			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_1758(), e, ctx));
+			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_1759(), e, ctx));
 		}
 		catch(InterruptedException* e)
 		{
-			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_1758(), e, ctx));
+			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_1759(), e, ctx));
 		}
 		catch(BTreeException* e)
 		{
-			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_1758(), e, ctx));
+			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_1759(), e, ctx));
 		}
 	}
 	return lock != nullptr;
 }
+void UniqueExclusiveLockClient::reset(ThreadContext* ctx) throw() 
+{
+	{
+		SynchronizedBlockObj __synchronized_2(this->lock, ctx);
+		Iterator<String>* it = this->uniqueLocks->keySet(ctx)->iterator(ctx);
+		while(it->hasNext(ctx))
+		{
+			String* key = it->next(ctx);
+			UniqueExclusiveLock* lock = this->uniqueLocks->get(key, ctx);
+			this->mgr->unlock(lock, ctx);
+		}
+		this->uniqueLocks->clear(ctx);
+	}
+}
 void UniqueExclusiveLockClient::dispose(ThreadContext* ctx) throw() 
 {
+	reset(ctx);
 	this->mgr->dispose(ctx);
 	__GC_MV(this, &(this->mgr), nullptr, UniqueExclusiveLockManager);
 }

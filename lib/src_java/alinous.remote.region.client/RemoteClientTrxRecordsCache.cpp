@@ -32,7 +32,7 @@ void RemoteClientTrxRecordsCache::__releaseRegerences(bool prepare, ThreadContex
 	}
 	TrxRecordsCache::__releaseRegerences(true, ctx);
 }
-void RemoteClientTrxRecordsCache::commitInsertRecord(AlinousDatabase* db, IDatabaseTable* table, long long newCommitId, ThreadContext* ctx)
+void RemoteClientTrxRecordsCache::commitInsertRecord(DbTransaction* trx, AlinousDatabase* db, IDatabaseTable* table, long long newCommitId, ThreadContext* ctx)
 {
 	ArrayList<IDatabaseRecord>* list = (new(ctx) ArrayList<IDatabaseRecord>(ctx));
 	BTreeScanner* scanner = (new(ctx) BTreeScanner(this->storage, ctx));

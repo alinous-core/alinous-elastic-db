@@ -153,14 +153,14 @@ class ISystemLog;}}
 namespace alinous {namespace runtime {namespace parallel {
 class ThreadPool;}}}
 
+namespace alinous {namespace lock {namespace unique {
+class UniqueExclusiveLockClient;}}}
+
 namespace alinous {namespace db {namespace trx {
 class DbTransaction;}}}
 
 namespace alinous {namespace db {namespace trx {
 class TrxLockContext;}}}
-
-namespace alinous {namespace lock {namespace unique {
-class UniqueExclusiveLockClient;}}}
 
 namespace alinous {namespace db {namespace table {
 class DatabaseException;}}}
@@ -275,6 +275,7 @@ public:
 	ThreadPool* getThreadPool(ThreadContext* ctx) throw() ;
 	bool equals(IObject* obj, ThreadContext* ctx) throw() ;
 	DbVersionContext* getVersionContext(ThreadContext* ctx) throw() ;
+	UniqueExclusiveLockClient* getUniqueExclusiveLock(ThreadContext* ctx) throw() ;
 	void commitUpdateInsert(long long newCommitId, ThreadContext* ctx);
 private:
 	void noGroupBySelect(SelectStatement* selectStmt, ScriptMachine* machine, bool debug, ThreadContext* ctx);

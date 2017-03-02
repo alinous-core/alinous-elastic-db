@@ -13,6 +13,9 @@ namespace alinous {namespace lock {namespace unique {
 class UniqueExclusiveException;}}}
 
 namespace java {namespace lang {
+class InterruptedException;}}
+
+namespace java {namespace lang {
 class StringBuffer;}}
 
 namespace alinous {namespace db {namespace table {
@@ -86,7 +89,8 @@ private:
 	LockObject* lock;
 	Map<String,UniqueExclusiveLock>* locks;
 public:
-	UniqueExclusiveLock* lockWithCheck(ScanUnique* unique, IDatabaseRecord* value, ThreadContext* ctx);
+	UniqueExclusiveLock* lockWithCheck(ScanUnique* unique, IDatabaseRecord* record, bool throwex, ThreadContext* ctx);
+	bool unlock(ScanUnique* unique, IDatabaseRecord* record, ThreadContext* ctx) throw() ;
 	UniqueExclusiveLock* getLock(ScanUnique* unique, IDatabaseRecord* value, ThreadContext* ctx);
 	void dispose(ThreadContext* ctx) throw() ;
 private:

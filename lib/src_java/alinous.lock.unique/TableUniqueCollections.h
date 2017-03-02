@@ -82,8 +82,9 @@ private:
 	Map<String,ColumnsUniqueCollections>* uniqueLocks;
 	LockObject* lock;
 public:
-	UniqueExclusiveLock* lockWithCheck(ScanUnique* unique, IDatabaseRecord* value, ThreadContext* ctx);
-	UniqueExclusiveLock* findLock(ScanUnique* unique, IDatabaseRecord* value, ThreadContext* ctx);
+	UniqueExclusiveLock* lockWithCheck(ScanUnique* unique, IDatabaseRecord* record, bool throwex, ThreadContext* ctx);
+	bool unlock(ScanUnique* unique, IDatabaseRecord* record, ThreadContext* ctx) throw() ;
+	UniqueExclusiveLock* findLock(ScanUnique* unique, IDatabaseRecord* record, ThreadContext* ctx);
 	void dispose(ThreadContext* ctx) throw() ;
 public:
 	static bool __init_done;

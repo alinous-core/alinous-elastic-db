@@ -36,21 +36,65 @@ void ColumnsUniqueCollections::__releaseRegerences(bool prepare, ThreadContext* 
 		return;
 	}
 }
-UniqueExclusiveLock* ColumnsUniqueCollections::lockWithCheck(ScanUnique* unique, IDatabaseRecord* value, ThreadContext* ctx)
+UniqueExclusiveLock* ColumnsUniqueCollections::lockWithCheck(ScanUnique* unique, IDatabaseRecord* record, bool throwex, ThreadContext* ctx)
 {
-	String* lockString = getLockValueString(unique, value, ctx);
+	String* lockString = getLockValueString(unique, record, ctx);
 	UniqueExclusiveLock* lock = nullptr;
 	{
 		SynchronizedBlockObj __synchronized_2(this->lock, ctx);
 		lock = this->locks->get(lockString, ctx);
 		if(lock != nullptr)
 		{
-			throw (new(ctx) UniqueExclusiveException(lockString->clone(ctx)->append(ConstStr::getCNST_STR_1757(), ctx), ctx));
+			if(throwex)
+			{
+				throw (new(ctx) UniqueExclusiveException(lockString->clone(ctx)->append(ConstStr::getCNST_STR_1757(), ctx), ctx));
+			}
+			{
+				try
+				{
+					lock->lock(ctx);
+				}
+				catch(InterruptedException* e)
+				{
+					throw (new(ctx) UniqueExclusiveException(ConstStr::getCNST_STR_1758(), e, ctx));
+				}
+			}
+			return lock;
 		}
-		lock = (new(ctx) UniqueExclusiveLock(ctx));
+		lock = (new(ctx) UniqueExclusiveLock(unique, record, ctx));
 		this->locks->put(lockString, lock, ctx);
+		{
+			try
+			{
+				lock->lock(ctx);
+			}
+			catch(InterruptedException* e)
+			{
+				throw (new(ctx) UniqueExclusiveException(ConstStr::getCNST_STR_1758(), e, ctx));
+			}
+		}
 	}
 	return lock;
+}
+bool ColumnsUniqueCollections::unlock(ScanUnique* unique, IDatabaseRecord* record, ThreadContext* ctx) throw() 
+{
+	String* lockString = getLockValueString(unique, record, ctx);
+	UniqueExclusiveLock* lock = nullptr;
+	{
+		SynchronizedBlockObj __synchronized_2(this->lock, ctx);
+		lock = this->locks->get(lockString, ctx);
+		if(lock == nullptr)
+		{
+			return this->locks->isEmpty(ctx);
+		}
+		lock->unlock(ctx);
+		if(lock->getCount(ctx) == 0)
+		{
+			this->locks->remove(lockString, ctx);
+			return this->locks->isEmpty(ctx);
+		}
+	}
+	return false;
 }
 UniqueExclusiveLock* ColumnsUniqueCollections::getLock(ScanUnique* unique, IDatabaseRecord* value, ThreadContext* ctx)
 {
@@ -74,7 +118,7 @@ String* ColumnsUniqueCollections::getLockValueString(ScanUnique* unique, IDataba
 	{
 		TableColumnMetadata* col = colslist->get(i, ctx);
 		VariantValue* vv = value->getColumnValue(col->columnOrder, ctx);
-		if(i != maxLoop)
+		if(i != 0)
 		{
 			buff->append(ConstStr::getCNST_STR_888(), ctx);
 		}

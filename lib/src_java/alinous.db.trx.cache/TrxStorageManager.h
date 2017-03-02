@@ -116,6 +116,7 @@ public:
 	void addIndex(CreateIndexMetadata* createMeta, TableMetadata* tblmetadata, AlinousDatabase* database, ThreadContext* ctx);
 private:
 	void initStorage(ThreadContext* ctx) throw() ;
+	void commitInsertLocal(long long newCommitId, AlinousDatabase* db, ThreadContext* ctx);
 public:
 	static bool __init_done;
 	static bool __init_static_variables();

@@ -18,13 +18,19 @@ bool UniqueExclusiveLock::__init_static_variables(){
 	delete ctx;
 	return true;
 }
- UniqueExclusiveLock::UniqueExclusiveLock(ThreadContext* ctx) throw()  : IObject(ctx), gate(nullptr)
+ UniqueExclusiveLock::UniqueExclusiveLock(ScanUnique* unique, IDatabaseRecord* record, ThreadContext* ctx) throw()  : IObject(ctx), gate(nullptr), unique(nullptr), record(nullptr), count(0)
 {
 	__GC_MV(this, &(this->gate), (new(ctx) ConcurrentGate(ctx)), ConcurrentGate);
+	__GC_MV(this, &(this->unique), unique, ScanUnique);
+	__GC_MV(this, &(this->record), record, IDatabaseRecord);
+	this->count = 0;
 }
-void UniqueExclusiveLock::__construct_impl(ThreadContext* ctx) throw() 
+void UniqueExclusiveLock::__construct_impl(ScanUnique* unique, IDatabaseRecord* record, ThreadContext* ctx) throw() 
 {
 	__GC_MV(this, &(this->gate), (new(ctx) ConcurrentGate(ctx)), ConcurrentGate);
+	__GC_MV(this, &(this->unique), unique, ScanUnique);
+	__GC_MV(this, &(this->record), record, IDatabaseRecord);
+	this->count = 0;
 }
  UniqueExclusiveLock::~UniqueExclusiveLock() throw() 
 {
@@ -38,17 +44,69 @@ void UniqueExclusiveLock::__releaseRegerences(bool prepare, ThreadContext* ctx) 
 	ObjectEraser __e_obj1(ctx, __FILEW__, __LINE__, L"UniqueExclusiveLock", L"~UniqueExclusiveLock");
 	__e_obj1.add(this->gate, this);
 	gate = nullptr;
+	__e_obj1.add(this->unique, this);
+	unique = nullptr;
+	__e_obj1.add(this->record, this);
+	record = nullptr;
 	if(!prepare){
 		return;
 	}
 }
+String* UniqueExclusiveLock::toString(ThreadContext* ctx) throw() 
+{
+	return makeString(unique, record, ctx);
+}
 void UniqueExclusiveLock::lock(ThreadContext* ctx)
 {
 	gate->close(ctx);
+	this->count ++ ;
 }
-void UniqueExclusiveLock::unlock(ThreadContext* ctx)
+void UniqueExclusiveLock::unlock(ThreadContext* ctx) throw() 
 {
-	gate->open(ctx);
+	{
+		try
+		{
+			gate->open(ctx);
+		}
+		catch(InterruptedException* ignore)
+		{
+			ignore->printStackTrace(ctx);
+		}
+	}
+	this->count -- ;
+}
+ScanUnique* UniqueExclusiveLock::getUnique(ThreadContext* ctx) throw() 
+{
+	return unique;
+}
+IDatabaseRecord* UniqueExclusiveLock::getRecord(ThreadContext* ctx) throw() 
+{
+	return record;
+}
+int UniqueExclusiveLock::getCount(ThreadContext* ctx) throw() 
+{
+	return count;
+}
+String* UniqueExclusiveLock::makeString(ScanUnique* unique, IDatabaseRecord* record, ThreadContext* ctx) throw() 
+{
+	StringBuffer* buff = (new(ctx) StringBuffer(ctx));
+	StringBuffer* vbuff = (new(ctx) StringBuffer(ctx));
+	buff->append(unique->getTableFullName(ctx), ctx);
+	ArrayList<TableColumnMetadata>* list = unique->getUniqueColList(ctx);
+	int maxLoop = list->size(ctx);
+	for(int i = 0; i != maxLoop; ++i)
+	{
+		TableColumnMetadata* col = list->get(i, ctx);
+		buff->append(ConstStr::getCNST_STR_888(), ctx);
+		buff->append(col->name, ctx);
+		if(i != 0)
+		{
+			vbuff->append(ConstStr::getCNST_STR_888(), ctx);
+		}
+		vbuff->append(record->getColumnValue(col->columnOrder, ctx), ctx);
+	}
+	buff->append(vbuff->toString(ctx), ctx);
+	return buff->toString(ctx);
 }
 }}}
 

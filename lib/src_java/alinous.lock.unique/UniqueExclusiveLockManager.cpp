@@ -36,7 +36,7 @@ void UniqueExclusiveLockManager::__releaseRegerences(bool prepare, ThreadContext
 		return;
 	}
 }
-UniqueExclusiveLock* UniqueExclusiveLockManager::lockWithCheck(ScanUnique* unique, IDatabaseRecord* value, ThreadContext* ctx)
+UniqueExclusiveLock* UniqueExclusiveLockManager::lockWithCheck(ScanUnique* unique, IDatabaseRecord* value, bool throwex, ThreadContext* ctx)
 {
 	TableUniqueCollections* tableUnique = nullptr;
 	{
@@ -49,7 +49,23 @@ UniqueExclusiveLock* UniqueExclusiveLockManager::lockWithCheck(ScanUnique* uniqu
 			this->tables->put(fullName, tableUnique, ctx);
 		}
 	}
-	return tableUnique->lockWithCheck(unique, value, ctx);
+	return tableUnique->lockWithCheck(unique, value, throwex, ctx);
+}
+void UniqueExclusiveLockManager::unlock(UniqueExclusiveLock* lock, ThreadContext* ctx) throw() 
+{
+	ScanUnique* unique = lock->getUnique(ctx);
+	IDatabaseRecord* record = lock->getRecord(ctx);
+	TableUniqueCollections* tableUnique = nullptr;
+	{
+		SynchronizedBlockObj __synchronized_2(this->lock, ctx);
+		String* fullName = unique->getTableFullName(ctx);
+		tableUnique = getTableUnique(fullName, ctx);
+		bool isEmpty = tableUnique->unlock(unique, record, ctx);
+		if(isEmpty)
+		{
+			this->tables->remove(fullName, ctx);
+		}
+	}
 }
 UniqueExclusiveLock* UniqueExclusiveLockManager::findLock(ScanUnique* unique, IDatabaseRecord* value, ThreadContext* ctx)
 {

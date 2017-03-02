@@ -81,6 +81,15 @@ class Throwable;}}
 namespace alinous {namespace db {namespace table {
 class IOidPublisher;}}}
 
+namespace alinous {namespace lock {namespace unique {
+class UniqueExclusiveLockClient;}}}
+
+namespace alinous {namespace compile {namespace sql {namespace analyze {
+class TableMetadataUniqueCollection;}}}}
+
+namespace alinous {namespace compile {namespace sql {namespace analyze {
+class ScanUnique;}}}}
+
 namespace alinous {namespace btree {
 class LongKey;}}
 
@@ -131,6 +140,8 @@ using ::alinous::btree::LongKey;
 using ::alinous::btree::scan::BTreeScanner;
 using ::alinous::btreememory::BTreeOnMemory;
 using ::alinous::compile::sql::analyze::ScanTableColumnIdentifier;
+using ::alinous::compile::sql::analyze::ScanUnique;
+using ::alinous::compile::sql::analyze::TableMetadataUniqueCollection;
 using ::alinous::db::AlinousDatabase;
 using ::alinous::db::AlinousDbException;
 using ::alinous::db::table::IDatabaseTable;
@@ -140,6 +151,7 @@ using ::alinous::db::table::TableIndexMetadata;
 using ::alinous::db::table::TableMetadata;
 using ::alinous::db::trx::DbTransaction;
 using ::alinous::db::trx::scan::ScanResultRecord;
+using ::alinous::lock::unique::UniqueExclusiveLockClient;
 using ::alinous::runtime::dom::DomArray;
 using ::alinous::runtime::dom::IDomVariable;
 using ::alinous::runtime::dom::VariableException;
@@ -181,7 +193,7 @@ public:
 	void dispose(ThreadContext* ctx);
 	TrxRecordCacheIndex* getCachedIndex(ArrayList<ScanTableColumnIdentifier>* colIdList, ThreadContext* ctx) throw() ;
 	void commitUpdateRecord(AlinousDatabase* db, IDatabaseTable* table, long long newCommitId, ThreadContext* ctx);
-	virtual void commitInsertRecord(AlinousDatabase* db, IDatabaseTable* table, long long newCommitId, ThreadContext* ctx);
+	virtual void commitInsertRecord(DbTransaction* trx, AlinousDatabase* db, IDatabaseTable* table, long long newCommitId, ThreadContext* ctx);
 	CachedRecord* getRecordByOid(long long oid, ThreadContext* ctx);
 	void insertUpdateRecord(ScanResultRecord* srecord, ThreadContext* ctx);
 	void insertRecord(ArrayList<IDomVariable>* values, ArrayList<CulumnOrder>* columns, ThreadContext* ctx);
@@ -191,6 +203,8 @@ public:
 private:
 	void setStorageFilePath(ThreadContext* ctx) throw() ;
 	bool matchIndexByIdList(ArrayList<TableColumnMetadata>* cachedIndexCols, ArrayList<ScanTableColumnIdentifier>* colIdList, ThreadContext* ctx) throw() ;
+	void checkInsertUnique(DbTransaction* trx, IDatabaseTable* table, ThreadContext* ctx);
+	void ckeckUniques(UniqueExclusiveLockClient* uniqueLock, TableMetadataUniqueCollection* uniques, CachedRecord* record, ThreadContext* ctx);
 	void buildFirstIndex(TrxRecordCacheIndex* newIndex, ThreadContext* ctx);
 	CachedRecord* getLastCommitedRecord(IBTreeNode* node, ThreadContext* ctx) throw() ;
 public:

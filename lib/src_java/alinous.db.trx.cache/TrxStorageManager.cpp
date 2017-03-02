@@ -134,22 +134,8 @@ TrxRecordsCache* TrxStorageManager::getInsertCacheWithCreate(String* schema, Str
 void TrxStorageManager::commit(long long newCommitId, ThreadContext* ctx)
 {
 	AlinousDatabase* db = this->trx->getDatabase(ctx);
-	Iterator<String>* scit = this->insertStorages->keySet(ctx)->iterator(ctx);
-	while(scit->hasNext(ctx))
-	{
-		String* sckey = scit->next(ctx);
-		TableSchemaCollection* schema = db->getSchema(sckey, ctx);
-		HashMap<String,TrxRecordsCache>* cacheMap = this->insertStorages->get(sckey, ctx);
-		Iterator<String>* it = cacheMap->keySet(ctx)->iterator(ctx);
-		while(it->hasNext(ctx))
-		{
-			String* key = it->next(ctx);
-			TrxRecordsCache* cache = cacheMap->get(key, ctx);
-			IDatabaseTable* table = schema->getTableStore(key, ctx);
-			cache->commitInsertRecord(db, table, newCommitId, ctx);
-		}
-	}
-	scit = this->updateStorages->keySet(ctx)->iterator(ctx);
+	commitInsertLocal(newCommitId, db, ctx);
+	Iterator<String>* scit = this->updateStorages->keySet(ctx)->iterator(ctx);
 	while(scit->hasNext(ctx))
 	{
 		String* sckey = scit->next(ctx);
@@ -239,6 +225,24 @@ void TrxStorageManager::initStorage(ThreadContext* ctx) throw()
 		FileUtils::removeAll(file, ctx);
 	}
 	file->mkdirs(ctx);
+}
+void TrxStorageManager::commitInsertLocal(long long newCommitId, AlinousDatabase* db, ThreadContext* ctx)
+{
+	Iterator<String>* scit = this->insertStorages->keySet(ctx)->iterator(ctx);
+	while(scit->hasNext(ctx))
+	{
+		String* sckey = scit->next(ctx);
+		TableSchemaCollection* schema = db->getSchema(sckey, ctx);
+		HashMap<String,TrxRecordsCache>* cacheMap = this->insertStorages->get(sckey, ctx);
+		Iterator<String>* it = cacheMap->keySet(ctx)->iterator(ctx);
+		while(it->hasNext(ctx))
+		{
+			String* key = it->next(ctx);
+			TrxRecordsCache* cache = cacheMap->get(key, ctx);
+			IDatabaseTable* table = schema->getTableStore(key, ctx);
+			cache->commitInsertRecord(this->trx, db, table, newCommitId, ctx);
+		}
+	}
 }
 }}}}
 

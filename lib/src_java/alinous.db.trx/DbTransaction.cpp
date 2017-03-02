@@ -271,6 +271,7 @@ void DbTransaction::close(ThreadContext* ctx)
 	{
 		this->subTransaction->close(ctx);
 	}
+	this->uniqueExclusiveLock->reset(ctx);
 	this->trxSchema->reset(ctx);
 	this->trxStorageManager->reset(ctx);
 	this->lockContext->reset(ctx);
@@ -278,6 +279,7 @@ void DbTransaction::close(ThreadContext* ctx)
 }
 void DbTransaction::dispose(ThreadContext* ctx) throw() 
 {
+	this->uniqueExclusiveLock->dispose(ctx);
 	this->trxSchema->dispose(ctx);
 	this->trxStorageManager->dispose(ctx);
 }
@@ -312,6 +314,10 @@ bool DbTransaction::equals(IObject* obj, ThreadContext* ctx) throw()
 DbVersionContext* DbTransaction::getVersionContext(ThreadContext* ctx) throw() 
 {
 	return this->vctx;
+}
+UniqueExclusiveLockClient* DbTransaction::getUniqueExclusiveLock(ThreadContext* ctx) throw() 
+{
+	return uniqueExclusiveLock;
 }
 void DbTransaction::commitUpdateInsert(long long newCommitId, ThreadContext* ctx)
 {
