@@ -1,5 +1,8 @@
 #ifndef ALINOUS_REMOTE_SOCKET_SOCKETCONNECTIONPOOL_H_
 #define ALINOUS_REMOTE_SOCKET_SOCKETCONNECTIONPOOL_H_
+namespace java{namespace net{
+class UnknownHostException;
+}}
 namespace alinous {namespace remote {namespace socket {
 class ISocketConnectionFactory;}}}
 
@@ -17,9 +20,6 @@ class LockObject;}}
 
 namespace java {namespace io {
 class IOException;}}
-
-namespace alinous {namespace net {
-class UnknownHostException;}}
 
 namespace java {namespace lang {
 class IObject;

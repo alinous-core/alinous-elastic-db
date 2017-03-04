@@ -11,7 +11,7 @@ template class ::java::util::List<::alinous::system::config::remote::Node>;
 template class ::java::util::List<::alinous::system::config::remote::RegionsServer>;
 template class ::java::util::List<::alinous::remote::db::RemoteTableStorageServer>;
 template class ::java::util::List<::alinous::remote::region::NodeRegionServer>;
-template class ::java::util::List<::alinous::system::config::remote::NodeRef>;
+template class ::java::util::List<::alinous::system::config::remote::RemoteNodeReference>;
 template class ::java::util::List<::alinous::system::config::remote::Table>;
 template class ::java::util::List<::alinous::system::config::remote::RegionRef>;
 template class ::java::util::List<::alinous::system::config::remote::Region>;

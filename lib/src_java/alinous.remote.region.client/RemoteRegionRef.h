@@ -1,5 +1,8 @@
 #ifndef ALINOUS_REMOTE_REGION_CLIENT_REMOTEREGIONREF_H_
 #define ALINOUS_REMOTE_REGION_CLIENT_REMOTEREGIONREF_H_
+namespace java{namespace net{
+class UnknownHostException;
+}}
 namespace alinous {namespace system {namespace config {namespace remote {
 class RegionRef;}}}}
 
@@ -56,9 +59,6 @@ class ITableSchema;}}
 
 namespace alinous {namespace remote {namespace region {namespace command {namespace ddl {
 class RegionCreateSchemaCommand;}}}}}
-
-namespace alinous {namespace net {
-class UnknownHostException;}}
 
 namespace java {namespace io {
 class IOException;}}

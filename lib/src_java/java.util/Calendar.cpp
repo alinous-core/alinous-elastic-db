@@ -1,5 +1,18 @@
-#include "includes.h"
+#include "include/global.h"
 
+
+#include "java.util/Locale.h"
+#include "java.util/TimeZone.h"
+#include "java.util/SimpleTimeZone.h"
+#include "java.util/Calendar.h"
+#include "java.util/GregorianCalendar.h"
+#include "java.util/Date.h"
+#include "alinous.numeric/InternalDate.h"
+#include "java.sql/Date.h"
+#include "java.util/BitSet.h"
+#include "java.util/TimeZones.h"
+#include "java.util/Random.h"
+#include "java.util/Arrays.h"
 
 namespace java {namespace util {
 
@@ -218,9 +231,9 @@ int Calendar::getMinimalDaysInFirstWeek(ThreadContext* ctx) throw()
 {
 	return minimalDaysInFirstWeek;
 }
-Date* Calendar::getTime(ThreadContext* ctx) throw() 
+java::util::Date* Calendar::getTime(ThreadContext* ctx) throw() 
 {
-	return (new(ctx) Date(getTimeInMillis(ctx), ctx));
+	return (new(ctx) java::util::Date(getTimeInMillis(ctx), ctx));
 }
 long long Calendar::getTimeInMillis(ThreadContext* ctx) throw() 
 {
@@ -303,7 +316,7 @@ void Calendar::setMinimalDaysInFirstWeek(int value, ThreadContext* ctx) throw()
 {
 	minimalDaysInFirstWeek = value;
 }
-void Calendar::setTime(Date* date, ThreadContext* ctx) throw() 
+void Calendar::setTime(java::util::Date* date, ThreadContext* ctx) throw() 
 {
 	setTimeInMillis(date->getTime(ctx), ctx);
 }

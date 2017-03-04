@@ -1,5 +1,8 @@
 #ifndef ALINOUS_DB_TABLEREGIONMANAGER_H_
 #define ALINOUS_DB_TABLEREGIONMANAGER_H_
+namespace java{namespace net{
+class UnknownHostException;
+}}
 namespace alinous {namespace db {
 class ITableRegion;}}
 
@@ -32,9 +35,6 @@ class DbVersionContext;}}}
 
 namespace java {namespace io {
 class IOException;}}
-
-namespace alinous {namespace net {
-class UnknownHostException;}}
 
 namespace alinous {namespace btree {
 class BTreeException;}}

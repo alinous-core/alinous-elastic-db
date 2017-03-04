@@ -31,10 +31,10 @@ namespace alinous {namespace btree {
 class IBTreeKey;}}
 
 namespace alinous {namespace btree {
-class BTreeLeafNode;}}
+class IBTreeNode;}}
 
 namespace alinous {namespace btree {
-class IBTreeNode;}}
+class BTreeLeafNode;}}
 
 namespace alinous {namespace btree {
 class BTreeMachine;}}
@@ -132,7 +132,7 @@ public:
 	bool putUniqueKeyValue(IBTreeKey* key, IBTreeValue* value, ThreadContext* ctx);
 	void appendKeyValue(IBTreeKey* key, IBTreeValue* value, ThreadContext* ctx) final;
 	void putKeyValue(IBTreeKey* key, IBTreeValue* value, ThreadContext* ctx) final;
-	BTreeLeafNode* findByKey(IBTreeKey* key, ThreadContext* ctx) final;
+	IBTreeNode* findByKey(IBTreeKey* key, ThreadContext* ctx) final;
 	void putKey(IBTreeKey* key, ThreadContext* ctx) final;
 	void removeKey(IBTreeKey* key, ThreadContext* ctx);
 	void saveNode(IBTreeNode* node, ThreadContext* ctx);

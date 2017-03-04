@@ -1,5 +1,8 @@
 #ifndef ALINOUS_REMOTE_REGION_CLIENT_DATABASETABLECLIENT_H_
 #define ALINOUS_REMOTE_REGION_CLIENT_DATABASETABLECLIENT_H_
+namespace java{namespace net{
+class UnknownHostException;
+}}
 namespace alinous {namespace db {namespace table {
 class TableMetadata;}}}
 
@@ -59,9 +62,6 @@ class AlinousSocket;}}
 
 namespace alinous {namespace db {
 class AlinousDbException;}}
-
-namespace alinous {namespace net {
-class UnknownHostException;}}
 
 namespace java {namespace io {
 class IOException;}}

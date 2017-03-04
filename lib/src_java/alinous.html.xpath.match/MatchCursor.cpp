@@ -1,5 +1,26 @@
-#include "includes.h"
+#include "include/global.h"
 
+
+#include "alinous.html.xpath/IVariableValue.h"
+#include "alinous.html/IDomObject.h"
+#include "alinous.html/Attribute.h"
+#include "alinous.html/DomNode.h"
+#include "alinous.html.xpath/IXpathElement.h"
+#include "alinous.html.xpath.match/MatchCursor.h"
+#include "alinous.html/DomDocument.h"
+#include "alinous.html.xpath.match/MatchingException.h"
+#include "alinous.html.xpath/IXpathStatement.h"
+#include "alinous.html.xpath.match/MatchCandidate.h"
+#include "alinous.html.xpath.match/MatchCandidatesCollection.h"
+#include "alinous.html.xpath/XpathIdentifier.h"
+#include "alinous.html.xpath/AttributeIdentifier.h"
+#include "alinous.html.xpath/IXpathBooleanCondition.h"
+#include "alinous.html.xpath/XpathFilter.h"
+#include "alinous.html.xpath/XpathContextLocationCtrl.h"
+#include "alinous.html.xpath/XpathContextLocation.h"
+#include "alinous.html.xpath/XpathContext.h"
+#include "alinous.html.xpath/Xpath.h"
+#include "alinous.html.xpath.match/Matcher.h"
 
 namespace alinous {namespace html {namespace xpath {namespace match {
 

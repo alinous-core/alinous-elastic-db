@@ -92,7 +92,7 @@ public:
 public:
 	KeyValue* keyValue;
 public:
-	void save(ThreadContext* ctx);
+	void save(ThreadContext* ctx) final;
 	int nodeSize(ThreadContext* ctx) final;
 	FileStorageEntry* toFileStorageEntry(FileStorageEntry* entry, ThreadContext* ctx);
 	FileStorageEntry* toFileStorageEntry(FileStorageEntryBuilder* builder, FileStorageEntry* entry, ThreadContext* ctx) final;

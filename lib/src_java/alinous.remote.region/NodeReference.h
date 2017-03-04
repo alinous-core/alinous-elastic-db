@@ -1,5 +1,8 @@
 #ifndef ALINOUS_REMOTE_REGION_NODEREFERENCE_H_
 #define ALINOUS_REMOTE_REGION_NODEREFERENCE_H_
+namespace java{namespace net{
+class UnknownHostException;
+}}
 namespace alinous {namespace remote {namespace db {namespace client {
 class RemoteStorageConnectionInfo;}}}}
 
@@ -26,9 +29,6 @@ class AbstractRemoteStorageCommand;}}}}
 
 namespace alinous {namespace system {
 class AlinousException;}}
-
-namespace alinous {namespace net {
-class UnknownHostException;}}
 
 namespace java {namespace io {
 class IOException;}}

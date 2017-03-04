@@ -1,7 +1,7 @@
-#ifndef ALINOUS_SYSTEM_CONFIG_REMOTE_NODEREF_H_
-#define ALINOUS_SYSTEM_CONFIG_REMOTE_NODEREF_H_
+#ifndef ALINOUS_SYSTEM_CONFIG_REMOTE_REMOTENODEREFERENCE_H_
+#define ALINOUS_SYSTEM_CONFIG_REMOTE_REMOTENODEREFERENCE_H_
 namespace alinous {namespace system {namespace config {namespace remote {
-class NodeRef;}}}}
+class RemoteNodeReference;}}}}
 
 namespace alinous {namespace html {
 class DomNode;}}
@@ -51,17 +51,17 @@ using ::alinous::system::config::IAlinousConfigElement;
 
 
 
-class NodeRef final : public IAlinousConfigElement, public virtual IObject {
+class RemoteNodeReference final : public IAlinousConfigElement, public virtual IObject {
 public:
-	NodeRef(const NodeRef& base) = default;
+	RemoteNodeReference(const RemoteNodeReference& base) = default;
 public:
-	NodeRef(ThreadContext* ctx) throw()  : IObject(ctx), IAlinousConfigElement(ctx), url(nullptr), ipv6(false)
+	RemoteNodeReference(ThreadContext* ctx) throw()  : IObject(ctx), IAlinousConfigElement(ctx), url(nullptr), ipv6(false)
 	{
 	}
 	void __construct_impl(ThreadContext* ctx) throw() 
 	{
 	}
-	virtual ~NodeRef() throw();
+	virtual ~RemoteNodeReference() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 private:
 	String* url;
@@ -72,7 +72,7 @@ public:
 	bool isIpv6(ThreadContext* ctx) throw() ;
 	void setIpv6(bool ipv6, ThreadContext* ctx) throw() ;
 public:
-	static NodeRef* parseInstance(DomNode* dom, DomDocument* document, Matcher* matcher, ThreadContext* ctx);
+	static RemoteNodeReference* parseInstance(DomNode* dom, DomDocument* document, Matcher* matcher, ThreadContext* ctx);
 public:
 	static bool __init_done;
 	static bool __init_static_variables();
@@ -83,4 +83,4 @@ public:
 
 }}}}
 
-#endif /* end of ALINOUS_SYSTEM_CONFIG_REMOTE_NODEREF_H_ */
+#endif /* end of ALINOUS_SYSTEM_CONFIG_REMOTE_REMOTENODEREFERENCE_H_ */

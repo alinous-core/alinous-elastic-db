@@ -4,7 +4,38 @@
  */
 
 
-#include "includes.h"
+#include "include/global.h"
+
+#include "alinous.lock/LockObject.h"
+
+#include "alinous.btree/IBTreeValue.h"
+#include "alinous.db.table/IDatabaseRecord.h"
+#include "alinous.remote.socket/ICommandData.h"
+#include "alinous.runtime.dom/IDomVariableContainer.h"
+#include "alinous.runtime.dom/IAlinousVariable.h"
+
+#include "alinous.runtime.dom/IDomVariable.h"
+#include "alinous.runtime.variant/VariantValue.h"
+#include "alinous.runtime.dom/DomVariable.h"
+#include "alinous.runtime.dom/DomArray.h"
+
+
+#include "java.lang/Boolean.h"
+#include "java.lang/Comparable.h"
+#include "java.lang/Number.h"
+#include "java.lang/Double.h"
+#include "java.lang/Integer.h"
+#include "java.lang/Byte.h"
+#include "java.lang/Long.h"
+#include "java.lang/Float.h"
+#include "java.lang/Short.h"
+
+#include "alinous.numeric/InternalDate.h"
+#include "alinous.numeric/TimeOnlyTimestamp.h"
+#include "alinous.numeric/BigDecimal.h"
+#include "java.sql/Timestamp.h"
+
+
 
 namespace alinous{ namespace jdk{ namespace functions{
 

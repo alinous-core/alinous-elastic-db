@@ -258,8 +258,18 @@ const int PLOSS = 6;
 #include "jnilib/DomConverter.h"
 #include "jnilib/JavaFunctionManager.h"
 
+#include "java.lang/Comparable.h"
+#include "java.lang/Boolean.h"
+#include "java.lang/Comparable.h"
+#include "java.lang/Number.h"
+#include "java.lang/Double.h"
+#include "java.lang/Integer.h"
+#include "java.lang/Byte.h"
+#include "java.lang/Long.h"
+#include "java.lang/Float.h"
+#include "java.lang/Short.h"
 
-
+#include "ConstStr.h"
 
 #endif /* INCLUDE_GLOBAL_H_ */
 

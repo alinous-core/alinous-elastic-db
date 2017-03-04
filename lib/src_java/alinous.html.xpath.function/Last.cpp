@@ -1,5 +1,17 @@
-#include "includes.h"
+#include "include/global.h"
 
+
+#include "alinous.html.xpath/IVariableValue.h"
+#include "alinous.html/IDomObject.h"
+#include "alinous.html/Attribute.h"
+#include "alinous.html/DomNode.h"
+#include "alinous.html/DomDocument.h"
+#include "alinous.html.xpath/IXpathElement.h"
+#include "alinous.html.xpath/XpathFunctionArgument.h"
+#include "alinous.html.xpath/IXpathFunction.h"
+#include "alinous.html.xpath/NumberValue.h"
+#include "alinous.html.xpath.function/Last.h"
+#include "alinous.html.xpath.function/First.h"
 
 namespace alinous {namespace html {namespace xpath {namespace function {
 

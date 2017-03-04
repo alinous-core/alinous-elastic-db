@@ -10,7 +10,7 @@ namespace java {namespace util {
 template <typename  T> class List;}}
 
 namespace alinous {namespace system {namespace config {namespace remote {
-class NodeRef;}}}}
+class RemoteNodeReference;}}}}
 
 namespace alinous {namespace remote {namespace monitor {
 class NodeInfo;}}}
@@ -42,7 +42,7 @@ using ::java::util::List;
 using ::alinous::db::AlinousDbException;
 using ::alinous::remote::socket::ICommandData;
 using ::alinous::remote::socket::NetworkBinaryBuffer;
-using ::alinous::system::config::remote::NodeRef;
+using ::alinous::system::config::remote::RemoteNodeReference;
 using ::alinous::system::config::remote::Region;
 
 

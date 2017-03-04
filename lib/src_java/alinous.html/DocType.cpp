@@ -1,5 +1,20 @@
-#include "includes.h"
+#include "include/global.h"
 
+
+#include "alinous.html.xpath/IVariableValue.h"
+#include "alinous.html/IDomObject.h"
+#include "alinous.html/Attribute.h"
+#include "alinous.html/DomNode.h"
+#include "alinous.html/IReplacer.h"
+#include "alinous.html/DomTokenizer.h"
+#include "alinous.html/DomConverter.h"
+#include "alinous.html/DomDocument.h"
+#include "alinous.html/DocType.h"
+#include "alinous.html/DomComment.h"
+#include "alinous.html/DomText.h"
+#include "alinous.html/AlinousDomEventHandler.h"
+#include "alinous.html/AlinousDomReplacer.h"
+#include "alinous.html/Test.h"
 
 namespace alinous {namespace html {
 

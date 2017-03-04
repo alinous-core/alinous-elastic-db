@@ -1,5 +1,8 @@
 #ifndef ALINOUS_REMOTE_REGION_NODEREGIONSERVER_H_
 #define ALINOUS_REMOTE_REGION_NODEREGIONSERVER_H_
+namespace java{namespace net{
+class UnknownHostException;
+}}
 namespace alinous {namespace system {
 class AlinousCore;}}
 
@@ -65,9 +68,6 @@ class RegionInsertExecutor;}}}
 
 namespace alinous {namespace remote {namespace monitor {namespace command {namespace commitId {
 class ReportClusterVersionUpCommand;}}}}}
-
-namespace alinous {namespace net {
-class UnknownHostException;}}
 
 namespace java {namespace io {
 class IOException;}}

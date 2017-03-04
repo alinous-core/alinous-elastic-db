@@ -36,6 +36,9 @@ class FileStorage;}}}
 namespace java {namespace io {
 class IOException;}}
 
+namespace alinous {namespace system {
+class AlinousException;}}
+
 namespace java {namespace lang {
 class IObject;
 }}
@@ -55,6 +58,7 @@ using ::alinous::btree::scan::INodeIterator;
 using ::alinous::buffer::storage::FileStorage;
 using ::alinous::buffer::storage::FileStorageEntry;
 using ::alinous::buffer::storage::FileStorageEntryBuilder;
+using ::alinous::system::AlinousException;
 
 
 
@@ -101,6 +105,7 @@ public:
 	void unloadChildren(ThreadContext* ctx) throw()  final;
 	FileStorage* getStorage(ThreadContext* ctx) throw()  final;
 	void setStorage(FileStorage* storage, ThreadContext* ctx) throw()  final;
+	void save(ThreadContext* ctx) final;
 public:
 	static bool __init_done;
 	static bool __init_static_variables();

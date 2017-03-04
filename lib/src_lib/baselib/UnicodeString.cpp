@@ -3,7 +3,25 @@
  * Licensed under the MIT license.
  */
 
-#include "includes.h"
+#include "include/global.h"
+
+#include "org.alinous.charset/CharsetManager.h"
+#include "org.alinous.charset/CharsetDecoder.h"
+#include "org.alinous.charset/CharsetEncoder.h"
+#include "org.alinous.charset/CharsetConverter.h"
+
+#include "java.lang/Boolean.h"
+#include "java.lang/Comparable.h"
+#include "java.lang/Number.h"
+#include "java.lang/Double.h"
+#include "java.lang/Integer.h"
+#include "java.lang/Byte.h"
+#include "java.lang/Long.h"
+#include "java.lang/Float.h"
+#include "java.lang/Short.h"
+
+#include "com.google.re2j/Pattern.h"
+#include "com.google.re2j/Matcher.h"
 
 #ifndef BASELIB_UNICODESTRING_CPP_
 #define BASELIB_UNICODESTRING_CPP_

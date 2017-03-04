@@ -19,7 +19,7 @@ namespace alinous {namespace btree {
 class IBTreeValue;}}
 
 namespace alinous {namespace btree {
-class BTreeLeafNode;}}
+class IBTreeNode;}}
 
 namespace java {namespace lang {
 class Throwable;}}
@@ -57,7 +57,7 @@ using ::java::util::Iterator;
 using ::java::io::IOException;
 using ::java::util::ArrayList;
 using ::alinous::btree::BTreeException;
-using ::alinous::btree::BTreeLeafNode;
+using ::alinous::btree::IBTreeNode;
 using ::alinous::btree::IBTreeValue;
 using ::alinous::btree::LongValue;
 using ::alinous::db::table::cache::RecordCacheEngine;

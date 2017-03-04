@@ -1,5 +1,8 @@
 #ifndef ALINOUS_DB_ITABLEREGION_H_
 #define ALINOUS_DB_ITABLEREGION_H_
+namespace java{namespace net{
+class UnknownHostException;
+}}
 namespace alinous {namespace db {
 class ITableSchema;}}
 
@@ -17,9 +20,6 @@ class BTreeGlobalCache;}}
 
 namespace java {namespace io {
 class IOException;}}
-
-namespace alinous {namespace net {
-class UnknownHostException;}}
 
 namespace alinous {namespace btree {
 class BTreeException;}}

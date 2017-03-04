@@ -25,7 +25,7 @@ namespace alinous {namespace html {namespace xpath {namespace match {
 class MatchCandidate;}}}}
 
 namespace alinous {namespace system {namespace config {namespace remote {
-class NodeRef;}}}}
+class RemoteNodeReference;}}}}
 
 namespace java {namespace util {
 template <typename  T> class List;}}
@@ -71,7 +71,7 @@ class Region final : public IAlinousConfigElement, public virtual IObject {
 public:
 	Region(const Region& base) = default;
 public:
-	Region(ThreadContext* ctx) throw()  : IObject(ctx), IAlinousConfigElement(ctx), name(nullptr), nodeRefs(GCUtils<List<NodeRef> >::ins(this, (new(ctx) ArrayList<NodeRef>(ctx)), ctx, __FILEW__, __LINE__, L""))
+	Region(ThreadContext* ctx) throw()  : IObject(ctx), IAlinousConfigElement(ctx), name(nullptr), nodeRefs(GCUtils<List<RemoteNodeReference> >::ins(this, (new(ctx) ArrayList<RemoteNodeReference>(ctx)), ctx, __FILEW__, __LINE__, L""))
 	{
 	}
 	void __construct_impl(ThreadContext* ctx) throw() 
@@ -81,10 +81,10 @@ public:
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 private:
 	String* name;
-	List<NodeRef>* nodeRefs;
+	List<RemoteNodeReference>* nodeRefs;
 public:
-	void addNodeRef(NodeRef* ref, ThreadContext* ctx) throw() ;
-	List<NodeRef>* getNodeRefs(ThreadContext* ctx) throw() ;
+	void addNodeRef(RemoteNodeReference* ref, ThreadContext* ctx) throw() ;
+	List<RemoteNodeReference>* getNodeRefs(ThreadContext* ctx) throw() ;
 	String* getName(ThreadContext* ctx) throw() ;
 	void setName(String* name, ThreadContext* ctx) throw() ;
 public:

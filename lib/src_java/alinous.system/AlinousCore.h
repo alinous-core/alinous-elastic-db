@@ -1,5 +1,8 @@
 #ifndef ALINOUS_SYSTEM_ALINOUSCORE_H_
 #define ALINOUS_SYSTEM_ALINOUSCORE_H_
+namespace java{namespace net{
+class UnknownHostException;
+}}
 namespace alinous{namespace annotation{
 class OneSource;
 }}
@@ -68,9 +71,6 @@ class RegionsServer;}}}}
 
 namespace alinous {namespace remote {namespace region {
 class NodeRegionServer;}}}
-
-namespace alinous {namespace net {
-class UnknownHostException;}}
 
 namespace java {namespace io {
 class IOException;}}

@@ -3,7 +3,7 @@
  * Licensed under the MIT license.
  */
 
-#include "includes.h"
+#include "include/global.h"
 
 #ifndef BASELIB_IO_OUTPUTSTREAMWRITER_H_
 #define BASELIB_IO_OUTPUTSTREAMWRITER_H_

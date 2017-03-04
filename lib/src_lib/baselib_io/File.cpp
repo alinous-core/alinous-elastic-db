@@ -4,7 +4,9 @@
  */
 
 
-#include "includes.h"
+#include "include/global.h"
+
+#include "com.google.re2j/Pattern.h"
 
 namespace java{ namespace io {
 
@@ -38,6 +40,20 @@ bool File::__init_static_variables(){
 	ctx->localGC();
 	delete ctx;
 	return true;
+}
+
+void File::__cleanUp(ThreadContext* ctx)
+{
+	__GC_DEC(nullptr, regexSep, UnicodeString);
+	__GC_DEC(nullptr, regexSep2, UnicodeString);
+	__GC_DEC(nullptr, DOT, UnicodeString);
+	__GC_DEC(nullptr, DDOT, UnicodeString);
+	__GC_DEC(nullptr, separator, UnicodeString);
+
+
+	if(sepPattern != nullptr){
+		__GC_DEC(nullptr, sepPattern, com::google::re2j::Pattern);
+	}
 }
 
 IArrayObject<UnicodeString>* File::split(UnicodeString* path, ThreadContext* ctx){

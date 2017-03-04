@@ -47,7 +47,7 @@ using ::alinous::system::AlinousException;
 
 
 
-class RemoteClientSerializableTrx final : public AbstractRemoteClientTransaction {
+class RemoteClientSerializableTrx : public AbstractRemoteClientTransaction {
 public:
 	RemoteClientSerializableTrx(const RemoteClientSerializableTrx& base) = default;
 public:

@@ -1,5 +1,8 @@
 #ifndef ALINOUS_REMOTE_MONITOR_CLIENT_MONITORCONNECTION_H_
 #define ALINOUS_REMOTE_MONITOR_CLIENT_MONITORCONNECTION_H_
+namespace java{namespace net{
+class UnknownHostException;
+}}
 namespace alinous {namespace remote {namespace socket {
 class SocketConnectionPool;}}}
 
@@ -29,9 +32,6 @@ class AlinousException;}}
 
 namespace alinous {namespace remote {namespace socket {
 class ISocketConnection;}}}
-
-namespace alinous {namespace net {
-class UnknownHostException;}}
 
 namespace java {namespace lang {
 class IObject;

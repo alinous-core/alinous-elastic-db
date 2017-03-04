@@ -1,5 +1,10 @@
-#include "includes.h"
+#include "include/global.h"
 
+
+#include "java.io/ByteArrayOutputStream.h"
+#include "alinous.http.client/HttpRequestHeaders.h"
+#include "alinous.http.client/HttpClient.h"
+#include "alinous.http.client/HttpsClient.h"
 
 namespace alinous {namespace http {namespace client {
 

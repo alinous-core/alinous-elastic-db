@@ -55,9 +55,6 @@ namespace alinous {namespace runtime {namespace variant {
 class VariantValue;}}}
 
 namespace alinous {namespace btree {
-class BTreeLeafNode;}}
-
-namespace alinous {namespace btree {
 class IBTreeValue;}}
 
 namespace alinous {namespace system {
@@ -86,7 +83,6 @@ using ::java::io::IOException;
 using ::java::util::ArrayList;
 using ::alinous::btree::BTree;
 using ::alinous::btree::BTreeException;
-using ::alinous::btree::BTreeLeafNode;
 using ::alinous::btree::IBTreeNode;
 using ::alinous::btree::IBTreeValue;
 using ::alinous::btree::LongKey;

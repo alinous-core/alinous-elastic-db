@@ -97,19 +97,7 @@ public:
 
 	static bool __init_done;
 	static bool __init_static_variables();
-	static void __cleanUp(ThreadContext* ctx)
-	{
-		__GC_DEC(nullptr, regexSep, UnicodeString);
-		__GC_DEC(nullptr, regexSep2, UnicodeString);
-		__GC_DEC(nullptr, DOT, UnicodeString);
-		__GC_DEC(nullptr, DDOT, UnicodeString);
-		__GC_DEC(nullptr, separator, UnicodeString);
-
-
-		if(sepPattern != nullptr){
-			__GC_DEC(nullptr, sepPattern, com::google::re2j::Pattern);
-		}
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }} /* namespace alinous */

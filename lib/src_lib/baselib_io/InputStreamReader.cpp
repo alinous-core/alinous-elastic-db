@@ -4,7 +4,11 @@
  */
 
 
-#include "includes.h"
+#include "include/global.h"
+
+#include "org.alinous.charset/CharsetManager.h"
+#include "org.alinous.charset/CharsetDecoder.h"
+#include "org.alinous.charset/CharsetConverter.h"
 
 namespace java { namespace io {
 

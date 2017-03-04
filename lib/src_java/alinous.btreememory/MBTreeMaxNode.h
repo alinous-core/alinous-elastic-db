@@ -90,6 +90,7 @@ public:
 	void unloadChildren(ThreadContext* ctx) final;
 	FileStorage* getStorage(ThreadContext* ctx) throw()  final;
 	void setStorage(FileStorage* storage, ThreadContext* ctx) throw()  final;
+	void save(ThreadContext* ctx) throw()  final;
 public:
 	static bool __init_done;
 	static bool __init_static_variables();

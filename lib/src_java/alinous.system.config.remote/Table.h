@@ -28,7 +28,7 @@ namespace java {namespace util {
 template <typename  T> class Iterator;}}
 
 namespace alinous {namespace system {namespace config {namespace remote {
-class NodeRef;}}}}
+class RemoteNodeReference;}}}}
 
 namespace java {namespace util {
 template <typename  T> class List;}}
@@ -75,7 +75,7 @@ class Table final : public IAlinousConfigElement, public virtual IObject {
 public:
 	Table(const Table& base) = default;
 public:
-	Table(ThreadContext* ctx) throw()  : IObject(ctx), IAlinousConfigElement(ctx), name(nullptr), keys(GCUtils<List<String> >::ins(this, (new(ctx) ArrayList<String>(ctx)), ctx, __FILEW__, __LINE__, L"")), nodeRefs(GCUtils<List<NodeRef> >::ins(this, (new(ctx) ArrayList<NodeRef>(ctx)), ctx, __FILEW__, __LINE__, L"")), max(nullptr)
+	Table(ThreadContext* ctx) throw()  : IObject(ctx), IAlinousConfigElement(ctx), name(nullptr), keys(GCUtils<List<String> >::ins(this, (new(ctx) ArrayList<String>(ctx)), ctx, __FILEW__, __LINE__, L"")), nodeRefs(GCUtils<List<RemoteNodeReference> >::ins(this, (new(ctx) ArrayList<RemoteNodeReference>(ctx)), ctx, __FILEW__, __LINE__, L"")), max(nullptr)
 	{
 	}
 	void __construct_impl(ThreadContext* ctx) throw() 
@@ -86,15 +86,15 @@ public:
 private:
 	String* name;
 	List<String>* keys;
-	List<NodeRef>* nodeRefs;
+	List<RemoteNodeReference>* nodeRefs;
 	String* max;
 public:
 	String* getName(ThreadContext* ctx) throw() ;
 	void setName(String* name, ThreadContext* ctx) throw() ;
 	List<String>* getKeys(ThreadContext* ctx) throw() ;
 	void addKey(String* key, ThreadContext* ctx) throw() ;
-	void addNodeRef(NodeRef* node, ThreadContext* ctx) throw() ;
-	List<NodeRef>* getNodeRefs(ThreadContext* ctx) throw() ;
+	void addNodeRef(RemoteNodeReference* node, ThreadContext* ctx) throw() ;
+	List<RemoteNodeReference>* getNodeRefs(ThreadContext* ctx) throw() ;
 	String* getMax(ThreadContext* ctx) throw() ;
 	void setMax(String* max, ThreadContext* ctx) throw() ;
 public:

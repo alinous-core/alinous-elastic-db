@@ -91,6 +91,7 @@ public:
 	void setKey(IBTreeKey* key, ThreadContext* ctx) final;
 	bool hasMaxNode(ThreadContext* ctx) throw()  final;
 	ArrayList<IBTreeValue>* getValues(ThreadContext* ctx) throw()  final;
+	void save(ThreadContext* ctx) final;
 public:
 	static IBTreeNode* fromFetcher(FileStorageEntryFetcher* fetcher, LockObject* sync, BTreeNodeLoader* loader, FifoElement<IBTreeNode>* fifoElement, ThreadContext* ctx) throw() ;
 public:

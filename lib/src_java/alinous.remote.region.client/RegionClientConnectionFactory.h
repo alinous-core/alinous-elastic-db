@@ -1,5 +1,8 @@
 #ifndef ALINOUS_REMOTE_REGION_CLIENT_REGIONCLIENTCONNECTIONFACTORY_H_
 #define ALINOUS_REMOTE_REGION_CLIENT_REGIONCLIENTCONNECTIONFACTORY_H_
+namespace java{namespace net{
+class UnknownHostException;
+}}
 namespace alinous {namespace remote {namespace region {namespace client {
 class RegionConnectionInfo;}}}}
 
@@ -17,9 +20,6 @@ class ISocketConnectionFactory;}}}
 
 namespace java {namespace io {
 class IOException;}}
-
-namespace alinous {namespace net {
-class UnknownHostException;}}
 
 namespace alinous {namespace system {
 class AlinousException;}}

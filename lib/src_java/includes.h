@@ -351,7 +351,7 @@
 #include "alinous.html.xpath.match/Matcher.h"
 #include "alinous.system.config/AlinousInitException.h"
 #include "alinous.system.config/IAlinousConfigElement.h"
-#include "alinous.system.config.remote/NodeRef.h"
+#include "alinous.system.config.remote/RemoteNodeReference.h"
 #include "alinous.system.config.remote/Region.h"
 #include "alinous.remote.monitor/NodeInfo.h"
 #include "alinous.remote.monitor/RegionNodeInfo.h"
@@ -833,8 +833,8 @@
 #include "alinous.db.table.lockmonitor/RowLockReleaser.h"
 #include "alinous.remote.region.client.transaction/AbstractRemoteClientTransaction.h"
 #include "alinous.remote.region.client.transaction/RemoteClientReadCommittedTrx.h"
-#include "alinous.remote.region.client.transaction/RemoteClientRepeatableReadTrx.h"
 #include "alinous.remote.region.client.transaction/RemoteClientSerializableTrx.h"
+#include "alinous.remote.region.client.transaction/RemoteClientRepeatableReadTrx.h"
 #include "alinous.db.trx/ReadCommittedTransaction.h"
 #include "alinous.db.trx/RepeatableReadTransaction.h"
 #include "alinous.db.trx/SerializableTransaction.h"
@@ -1403,8 +1403,8 @@ inline static void __cleanUpStatics(alinous::ThreadContext* ctx){
 	alinous::system::config::IAlinousConfigElement::__cleanUp(ctx);
 	alinous::system::config::WebHandlerInfo::__cleanUp(ctx);
 	alinous::system::config::remote::RegionRef::__cleanUp(ctx);
-	alinous::system::config::remote::NodeRef::__cleanUp(ctx);
 	alinous::system::config::remote::Node::__cleanUp(ctx);
+	alinous::system::config::remote::RemoteNodeReference::__cleanUp(ctx);
 	alinous::system::config::remote::RegionsServer::__cleanUp(ctx);
 	alinous::system::config::remote::Table::__cleanUp(ctx);
 	alinous::system::config::remote::Monitor::__cleanUp(ctx);

@@ -4,7 +4,20 @@
  */
 
 
-#include "includes.h"
+#include "include/global.h"
+
+#include "alinous.system/AlinousCore.h"
+#include "alinous.system/ISystemLog.h"
+
+#include "alinous.btree/IBTreeValue.h"
+#include "alinous.db.table/IDatabaseRecord.h"
+#include "alinous.remote.socket/ICommandData.h"
+#include "alinous.runtime.dom/IDomVariableContainer.h"
+#include "alinous.runtime.dom/IAlinousVariable.h"
+#include "alinous.runtime.dom/IDomVariable.h"
+
+
+#include "alinous.compile.analyse/AlinousType.h"
 
 #include <sys/types.h>
 

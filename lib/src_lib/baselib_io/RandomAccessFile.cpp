@@ -4,7 +4,13 @@
  */
 
 
-#include "includes.h"
+#include "include/global.h"
+
+#include "java.lang/Comparable.h"
+#include "java.lang/Number.h"
+#include "java.lang/Double.h"
+#include "java.lang/Float.h"
+
 
 namespace java {
 namespace io {

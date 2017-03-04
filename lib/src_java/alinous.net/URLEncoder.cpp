@@ -1,5 +1,10 @@
-#include "includes.h"
+#include "include/global.h"
 
+
+#include "alinous.net/UnknownHostException.h"
+#include "org.alinous.charset/CharsetDecoder.h"
+#include "alinous.net/URLDecoder.h"
+#include "alinous.net/URLEncoder.h"
 
 namespace alinous {namespace net {
 

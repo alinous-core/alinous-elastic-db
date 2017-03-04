@@ -1,5 +1,9 @@
-#include "includes.h"
+#include "include/global.h"
 
+
+#include "alinous.range/LongRange.h"
+#include "alinous.range/LongRangeIterator.h"
+#include "alinous.range/LongRangeList.h"
 
 namespace alinous {namespace range {
 

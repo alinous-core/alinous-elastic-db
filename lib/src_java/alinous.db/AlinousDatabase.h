@@ -1,5 +1,8 @@
 #ifndef ALINOUS_DB_ALINOUSDATABASE_H_
 #define ALINOUS_DB_ALINOUSDATABASE_H_
+namespace java{namespace net{
+class UnknownHostException;
+}}
 namespace alinous{namespace annotation{
 class OneSource;
 }}
@@ -67,7 +70,7 @@ namespace alinous {namespace db {namespace trx {
 class DbVersionContext;}}}
 
 namespace alinous {namespace btree {
-class BTreeLeafNode;}}
+class IBTreeNode;}}
 
 namespace alinous {namespace btree {
 class IBTreeValue;}}
@@ -95,9 +98,6 @@ class TableRegionManager;}}
 
 namespace alinous {namespace lock {namespace unique {
 class UniqueExclusiveLockManager;}}}
-
-namespace alinous {namespace net {
-class UnknownHostException;}}
 
 namespace alinous {namespace db {namespace table {
 class IOidPublisher;}}}
@@ -171,8 +171,8 @@ using ::java::util::List;
 using ::alinous::btree::BTree;
 using ::alinous::btree::BTreeException;
 using ::alinous::btree::BTreeGlobalCache;
-using ::alinous::btree::BTreeLeafNode;
 using ::alinous::btree::IBTreeKey;
+using ::alinous::btree::IBTreeNode;
 using ::alinous::btree::IBTreeValue;
 using ::alinous::btree::IntKey;
 using ::alinous::btree::LongValue;

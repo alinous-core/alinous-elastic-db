@@ -4,7 +4,11 @@
  */
 
 
-#include "includes.h"
+#include "include/global.h"
+
+#include "org.alinous.charset/CharsetManager.h"
+#include "org.alinous.charset/CharsetEncoder.h"
+#include "org.alinous.charset/CharsetConverter.h"
 
 #ifndef BASELIB_IO_OUTPUTSTREAMWRITER_CPP_
 #define BASELIB_IO_OUTPUTSTREAMWRITER_CPP_

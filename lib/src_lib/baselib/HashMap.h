@@ -40,6 +40,7 @@ public:
 
 	virtual int size(ThreadContext* ctx) = 0;
 	virtual void remove(T* key, ThreadContext* ctx) = 0;
+	virtual bool isEmpty(ThreadContext* ctx) = 0;
 
 	static void __cleanUp(ThreadContext* ctx){
 	}
@@ -106,6 +107,10 @@ public:
 	int size(ThreadContext* ctx) {
 		return this->hashMapKeySet->size(ctx);
 	}
+	bool isEmpty(ThreadContext* ctx){
+		return this->hashMapKeySet->size(ctx) == 0;
+	}
+
 	virtual void remove(T* key, ThreadContext* ctx) {
 		this->hashMapKeySet->remove(key, ctx);
 	}

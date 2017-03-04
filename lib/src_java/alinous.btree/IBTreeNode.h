@@ -111,6 +111,7 @@ public:
 	virtual FileStorage* getStorage(ThreadContext* ctx) throw()  = 0;
 	virtual void setStorage(FileStorage* storage, ThreadContext* ctx) throw()  = 0;
 	virtual long long getHashKey(ThreadContext* ctx) throw()  = 0;
+	virtual void save(ThreadContext* ctx) = 0;
 public:
 	static bool __init_done;
 	static bool __init_static_variables();

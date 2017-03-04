@@ -1,5 +1,26 @@
-#include "includes.h"
+#include "include/global.h"
 
+
+#include "com.google.re2j/Regexp.h"
+#include "com.google.re2j/Simplify.h"
+#include "com.google.re2j/Inst.h"
+#include "com.google.re2j/Prog.h"
+#include "com.google.re2j/MachineInput.h"
+#include "com.google.re2j/UTF8Input.h"
+#include "com.google.re2j/UTF16Input.h"
+#include "com.google.re2j/RE2.h"
+#include "com.google.re2j/Machine.h"
+#include "com.google.re2j/PatternSyntaxException.h"
+#include "com.google.re2j/CharGroup.h"
+#include "com.google.re2j/CharClass.h"
+#include "com.google.re2j/Parser.h"
+#include "com.google.re2j/Unicode.h"
+#include "com.google.re2j/Compiler.h"
+#include "com.google.re2j/UnicodeTable2.h"
+#include "com.google.re2j/Utils.h"
+#include "com.google.re2j/UnicodeTables.h"
+#include "com.google.re2j/Pattern.h"
+#include "com.google.re2j/Matcher.h"
 
 namespace com {namespace google {namespace re2j {
 

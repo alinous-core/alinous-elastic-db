@@ -1,5 +1,11 @@
-#include "includes.h"
+#include "include/global.h"
 
+
+#include "alinous.server.http.params/AbstractHttpParameter.h"
+#include "alinous.server.http.params/HttpArrayParameter.h"
+#include "alinous.server.http.params/HttpUploadParameter.h"
+#include "alinous.server.http.params/HttpParameter.h"
+#include "alinous.server.http.params/ParamFactory.h"
 
 namespace alinous {namespace server {namespace http {namespace params {
 

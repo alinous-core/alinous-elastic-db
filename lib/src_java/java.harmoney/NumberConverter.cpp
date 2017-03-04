@@ -1,5 +1,20 @@
-#include "includes.h"
+#include "include/global.h"
 
+
+#include "java.lang/Number.h"
+#include "java.lang/Comparable.h"
+#include "java.lang/Integer.h"
+#include "java.harmoney/FloatingPointParser.h"
+#include "java.lang/Double.h"
+#include "java.harmoney/NumberConverter.h"
+#include "com.google.re2j/Inst.h"
+#include "com.google.re2j/Prog.h"
+#include "com.google.re2j/MachineInput.h"
+#include "com.google.re2j/Machine.h"
+#include "com.google.re2j/RE2.h"
+#include "com.google.re2j/Pattern.h"
+#include "com.google.re2j/Matcher.h"
+#include "java.harmoney/HexStringParser.h"
 
 namespace java {namespace harmoney {
 

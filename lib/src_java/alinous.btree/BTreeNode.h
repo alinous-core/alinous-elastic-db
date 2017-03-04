@@ -108,6 +108,7 @@ public:
 	bool hasMaxNode(ThreadContext* ctx) throw()  final;
 	void loadChildren(ThreadContext* ctx) final;
 	ArrayList<IBTreeValue>* getValues(ThreadContext* ctx) throw()  final;
+	void save(ThreadContext* ctx) final;
 public:
 	static IBTreeNode* fromFetcher(FileStorageEntryFetcher* fetcher, LockObject* sync, BTreeNodeLoader* loader, FifoElement<IBTreeNode>* fifoElement, ThreadContext* ctx);
 public:

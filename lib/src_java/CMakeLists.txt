@@ -281,7 +281,7 @@ set(srcjava
 	"src_java/alinous.system.config.remote/Table.cpp"
 	"src_java/alinous.system.config.remote/RegionsServer.cpp"
 	"src_java/alinous.system.config.remote/RegionsRef.cpp"
-	"src_java/alinous.system.config.remote/NodeRef.cpp"
+	"src_java/alinous.system.config.remote/RemoteNodeReference.cpp"
 	"src_java/alinous.runtime.parallel/ConcurrentTaskExexutor.cpp"
 	"src_java/alinous.runtime.parallel/ThreadPool.cpp"
 	"src_java/alinous.runtime.parallel/IParallelTask.cpp"

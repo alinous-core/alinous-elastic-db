@@ -1,5 +1,8 @@
 #ifndef ALINOUS_REMOTE_DB_MONITORACCESS_H_
 #define ALINOUS_REMOTE_DB_MONITORACCESS_H_
+namespace java{namespace net{
+class UnknownHostException;
+}}
 namespace alinous {namespace system {namespace config {namespace remote {
 class MonitorRef;}}}}
 
@@ -26,9 +29,6 @@ class AbstractMonitorCommand;}}}}
 
 namespace alinous {namespace system {
 class AlinousException;}}
-
-namespace alinous {namespace net {
-class UnknownHostException;}}
 
 namespace java {namespace io {
 class IOException;}}

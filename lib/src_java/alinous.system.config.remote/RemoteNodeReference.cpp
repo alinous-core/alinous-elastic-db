@@ -1,15 +1,31 @@
 #include "include/global.h"
 
 
-#include "alinous.btree/BTreeException.h"
-#include "alinous.buffer/FifoElement.h"
-#include "alinous.buffer/FifoIterator.h"
-#include "alinous.buffer/FifoList.h"
-#include "java.util/BitSet.h"
+#include "alinous.system.config/IAlinousConfigElement.h"
+#include "alinous.system.config.remote/RegionRef.h"
+#include "alinous.html.xpath/IVariableValue.h"
+#include "alinous.html/IDomObject.h"
+#include "alinous.html/Attribute.h"
+#include "alinous.html/DomNode.h"
+#include "alinous.html/DomDocument.h"
+#include "alinous.html.xpath/IXpathElement.h"
+#include "alinous.html.xpath.match/MatchCursor.h"
+#include "alinous.html.xpath.match/MatchCandidate.h"
+#include "alinous.html.xpath.match/MatchingException.h"
+#include "alinous.html.xpath/IXpathStatement.h"
+#include "alinous.html.xpath.match/MatchCandidatesCollection.h"
+#include "alinous.html.xpath/XpathIdentifier.h"
+#include "alinous.html.xpath/AttributeIdentifier.h"
+#include "alinous.html.xpath/IXpathBooleanCondition.h"
+#include "alinous.html.xpath/XpathFilter.h"
+#include "alinous.html.xpath/XpathContextLocationCtrl.h"
+#include "alinous.html.xpath/XpathContextLocation.h"
+#include "alinous.html.xpath/XpathContext.h"
+#include "alinous.html.xpath/Xpath.h"
+#include "alinous.parser.xpath/ParseException.h"
+#include "alinous.html.xpath.match/Matcher.h"
 #include "alinous.buffer.storage/FileStorageEntry.h"
 #include "alinous.buffer.storage/FileStorageEntryBuilder.h"
-#include "java.lang/Comparable.h"
-#include "alinous.btree/IBTreeKey.h"
 #include "alinous.buffer.storage/FileStorageEntryFetcher.h"
 #include "alinous.compile/IAlinousElementVisitor.h"
 #include "alinous.compile/IAlinousVisitorContainer.h"
@@ -17,15 +33,12 @@
 #include "alinous.numeric/TimeOnlyTimestamp.h"
 #include "java.sql/Timestamp.h"
 #include "alinous.compile/ExpressionSourceId.h"
-#include "alinous.html.xpath/IVariableValue.h"
-#include "alinous.html/IDomObject.h"
-#include "alinous.html/Attribute.h"
-#include "alinous.html/DomNode.h"
 #include "alinous.remote.socket/NetworkBinaryBuffer.h"
 #include "alinous.remote.socket/ICommandData.h"
 #include "alinous.lock/LockObject.h"
 #include "java.util/Random.h"
 #include "java.lang/Number.h"
+#include "java.lang/Comparable.h"
 #include "alinous.numeric/BigInteger.h"
 #include "alinous.numeric/RoundingMode.h"
 #include "alinous.numeric/MathContext.h"
@@ -89,6 +102,12 @@
 #include "alinous.buffer.storage/FileStorageEntryWriter.h"
 #include "alinous.buffer.storage/FileStorageEntryReader.h"
 #include "alinous.buffer.storage/FileStorage.h"
+#include "alinous.buffer/FifoElement.h"
+#include "alinous.buffer/FifoIterator.h"
+#include "alinous.buffer/FifoList.h"
+#include "java.util/BitSet.h"
+#include "alinous.btree/IBTreeKey.h"
+#include "alinous.btree.scan/INodeIterator.h"
 #include "alinous.btree/NodeRef.h"
 #include "alinous.btree/IBTreeNode.h"
 #include "alinous.btree/AbstractNode.h"
@@ -103,18 +122,20 @@
 #include "alinous.btree/KeyValue.h"
 #include "alinous.btree/BTreeLeafNode.h"
 #include "alinous.btree/BTreeNodeLoader.h"
+#include "alinous.btree/BTreeCacheArray.h"
+#include "alinous.buffer/HashArrayListIterator.h"
+#include "alinous.buffer/HashArrayList.h"
+#include "alinous.btree/BTreeCacheRecord.h"
+#include "alinous.btree/BTreeGlobalCache.h"
 #include "alinous.btree/IBTree.h"
 #include "alinous.btree/BTree.h"
 #include "alinous.btree/IntKey.h"
 #include "alinous.compile.sql.analyze/ScanTableColumnIdentifier.h"
-#include "alinous.system/AlinousException.h"
-#include "alinous.db/AlinousDbException.h"
 #include "alinous.db.table.lockmonitor/ConcurrentGatePool.h"
 #include "alinous.db.table.lockmonitor/IDatabaseLock.h"
 #include "alinous.db.table.lockmonitor/TableLock.h"
 #include "alinous.db.table.lockmonitor/RowLock.h"
 #include "alinous.db.table.lockmonitor/IThreadLocker.h"
-#include "alinous.btree.scan/BTreeScanner.h"
 #include "alinous.compile.sql/ISqlStatement.h"
 #include "alinous.compile.sql.expression/ISQLExpression.h"
 #include "alinous.compile.sql.parts/ISQLExpressionPart.h"
@@ -206,34 +227,6 @@
 #include "alinous.db.table/IScannableIndex.h"
 #include "alinous.db.table/IDatabaseTable.h"
 #include "alinous.db.trx/TrxLockManager.h"
-#include "alinous.remote.region.command.data/ClientTableData.h"
-#include "alinous.remote.region.command.data/ClientSchemaData.h"
-#include "alinous.remote.region.command.data/ClientStructureMetadata.h"
-#include "alinous.remote.socket/ISocketConnection.h"
-#include "alinous.remote.socket/ISocketConnectionFactory.h"
-#include "alinous.remote.socket/SocketConnectionPool.h"
-#include "alinous.system.config/IAlinousConfigElement.h"
-#include "alinous.system.config.remote/RegionRef.h"
-#include "alinous.remote.region.client/RegionConnectionInfo.h"
-#include "alinous.remote.region.client/RegionConnection.h"
-#include "alinous.remote.region.client/RegionClientConnectionFactory.h"
-#include "alinous.remote.region.client/RemoteTableScheme.h"
-#include "alinous.remote.region.client/RemoteRegionRef.h"
-#include "alinous.html/DomDocument.h"
-#include "alinous.html.xpath/IXpathElement.h"
-#include "alinous.html.xpath.match/MatchCursor.h"
-#include "alinous.html.xpath.match/MatchCandidate.h"
-#include "alinous.html.xpath/IXpathStatement.h"
-#include "alinous.html.xpath.match/MatchCandidatesCollection.h"
-#include "alinous.html.xpath/XpathIdentifier.h"
-#include "alinous.html.xpath/AttributeIdentifier.h"
-#include "alinous.html.xpath/IXpathBooleanCondition.h"
-#include "alinous.html.xpath/XpathFilter.h"
-#include "alinous.html.xpath/XpathContextLocationCtrl.h"
-#include "alinous.html.xpath/XpathContextLocation.h"
-#include "alinous.html.xpath/XpathContext.h"
-#include "alinous.html.xpath/Xpath.h"
-#include "alinous.html.xpath.match/Matcher.h"
 #include "alinous.system.config.remote/MonitorRef.h"
 #include "alinous.system.config.remote/RegionsRef.h"
 #include "alinous.system.config/AlinousDbInstanceInfo.h"
@@ -258,6 +251,9 @@
 #include "alinous.compile.sql.functions/SQLFunctionManager.h"
 #include "alinous.remote.socket/ISocketActionFactory.h"
 #include "alinous.remote.socket/SocketServer.h"
+#include "alinous.remote.socket/ISocketConnection.h"
+#include "alinous.remote.socket/ISocketConnectionFactory.h"
+#include "alinous.remote.socket/SocketConnectionPool.h"
 #include "alinous.remote.db/MonitorAccess.h"
 #include "alinous.remote.db/RemoteTableStorageServer.h"
 #include "alinous.system.config.remote/RemoteNodeReference.h"
@@ -270,6 +266,9 @@
 #include "alinous.remote.monitor/RegionNodeInfoManager.h"
 #include "alinous.remote.monitor/TransactionMonitorServer.h"
 #include "alinous.remote.region.command.data/ClientNetworkRecord.h"
+#include "alinous.remote.region.command.data/ClientTableData.h"
+#include "alinous.remote.region.command.data/ClientSchemaData.h"
+#include "alinous.remote.region.command.data/ClientStructureMetadata.h"
 #include "alinous.system.config.remote/RegionsServer.h"
 #include "alinous.remote.region/NodeReference.h"
 #include "alinous.remote.region/NodeCluster.h"
@@ -299,7 +298,6 @@
 #include "alinous.runtime.engine.debugger/AlinousDebugEventNotifier.h"
 #include "alinous.runtime.engine.debugger/AlinousScriptDebugger.h"
 #include "alinous.web.htmlxml.inner/IHtmlStringPart.h"
-#include "alinous.web.parse.htmlxml/Token.h"
 #include "alinous.web.htmlxml/AbstractXHtmlElement.h"
 #include "alinous.web.htmlxml/AbstractXHtmlAttributeValue.h"
 #include "alinous.web.htmlxml/XHtmlAttribute.h"
@@ -316,9 +314,6 @@
 #include "alinous.server.webmodule/WebModuleList.h"
 #include "alinous.server.webmodule/WebModuleHashList.h"
 #include "alinous.server.webmodule/WebModuleManager.h"
-#include "alinous.system.config.remote/Table.h"
-#include "alinous.system.config.remote/Tables.h"
-#include "alinous.system.config.remote/Node.h"
 #include "alinous.system.config.remote/Nodes.h"
 #include "alinous.system.config/DataSourceInfo.h"
 #include "alinous.system.config/MailInfo.h"
@@ -368,60 +363,78 @@
 #include "alinous.compile.declare/ClassExtends.h"
 #include "alinous.compile.declare/ClassImplements.h"
 #include "alinous.compile.declare/AlinousClass.h"
-#include "alinous.btree.scan/INodeIterator.h"
-#include "alinous.btree/BTreeCacheArray.h"
-#include "alinous.buffer/HashArrayListIterator.h"
-#include "alinous.buffer/HashArrayList.h"
-#include "alinous.btree/BTreeCacheRecord.h"
-#include "alinous.btree/BTreeGlobalCache.h"
-#include "alinous.remote.region.client/DatabaseTableClient.h"
-#include "alinous.remote.region.client/RemoteClientTrxRecordsCache.h"
+#include "alinous.compile/Token.h"
+#include "alinous.system/AlinousException.h"
+#include "alinous.system.config/AlinousInitException.h"
+#include "alinous.system.config.remote/Table.h"
+#include "alinous.system.config.remote/Tables.h"
+#include "alinous.system.config.remote/Node.h"
 
-namespace alinous {namespace remote {namespace region {namespace client {
+namespace alinous {namespace system {namespace config {namespace remote {
 
 
 
 
 
-bool RemoteClientTrxRecordsCache::__init_done = __init_static_variables();
-bool RemoteClientTrxRecordsCache::__init_static_variables(){
+bool RemoteNodeReference::__init_done = __init_static_variables();
+bool RemoteNodeReference::__init_static_variables(){
 	Java2CppSystem::getSelf();
 	ThreadContext* ctx = ThreadContext::newThreadContext();
 	{
-		GCNotifier __refobj1(ctx, __FILEW__, __LINE__, L"RemoteClientTrxRecordsCache", L"__init_static_variables");
+		GCNotifier __refobj1(ctx, __FILEW__, __LINE__, L"RemoteNodeReference", L"__init_static_variables");
 	}
 	ctx->localGC();
 	delete ctx;
 	return true;
 }
- RemoteClientTrxRecordsCache::~RemoteClientTrxRecordsCache() throw() 
+ RemoteNodeReference::~RemoteNodeReference() throw() 
 {
 	ThreadContext *ctx = ThreadContext::getCurentContext();
 	if(ctx != nullptr){ctx->incGcDenial();}
 	__releaseRegerences(false, ctx);
 	if(ctx != nullptr){ctx->decGcDenial();}
 }
-void RemoteClientTrxRecordsCache::__releaseRegerences(bool prepare, ThreadContext* ctx) throw() 
+void RemoteNodeReference::__releaseRegerences(bool prepare, ThreadContext* ctx) throw() 
 {
+	ObjectEraser __e_obj1(ctx, __FILEW__, __LINE__, L"RemoteNodeReference", L"~RemoteNodeReference");
+	__e_obj1.add(this->url, this);
+	url = nullptr;
 	if(!prepare){
 		return;
 	}
-	TrxRecordsCache::__releaseRegerences(true, ctx);
 }
-void RemoteClientTrxRecordsCache::commitInsertRecord(DbTransaction* trx, AlinousDatabase* db, IDatabaseTable* table, long long newCommitId, ThreadContext* ctx)
+String* RemoteNodeReference::getUrl(ThreadContext* ctx) throw() 
 {
-	ArrayList<IDatabaseRecord>* list = (new(ctx) ArrayList<IDatabaseRecord>(ctx));
-	BTreeScanner* scanner = (new(ctx) BTreeScanner(this->storage, ctx));
-	scanner->startScan(false, ctx);
-	while(scanner->hasNext(ctx))
+	return url;
+}
+void RemoteNodeReference::setUrl(String* url, ThreadContext* ctx) throw() 
+{
+	__GC_MV(this, &(this->url), url, String);
+}
+bool RemoteNodeReference::isIpv6(ThreadContext* ctx) throw() 
+{
+	return ipv6;
+}
+void RemoteNodeReference::setIpv6(bool ipv6, ThreadContext* ctx) throw() 
+{
+	this->ipv6 = ipv6;
+}
+RemoteNodeReference* RemoteNodeReference::parseInstance(DomNode* dom, DomDocument* document, Matcher* matcher, ThreadContext* ctx)
+{
+	RemoteNodeReference* noderef = (new(ctx) RemoteNodeReference(ctx));
+	IVariableValue* attr = dom->getAttributeValue(ConstStr::getCNST_STR_1276(), ctx);
+	if(attr == nullptr)
 	{
-		IBTreeNode* lnode = scanner->next(ctx);
-		ArrayList<IBTreeValue>* values = lnode->getValues(ctx);
-		CachedRecord* record = static_cast<CachedRecord*>(values->get(0, ctx));
-		list->add(record, ctx);
+		throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_1277(), ctx));
 	}
-	scanner->endScan(ctx);
-	table->insertData(this->trx, list, newCommitId, nullptr, this->trx->getLogger(ctx), ctx);
+	noderef->setUrl(attr->toString(ctx)->trim(ctx), ctx);
+	attr = dom->getAttributeValue(ConstStr::getCNST_STR_1278(), ctx);
+	if(attr != nullptr)
+	{
+		String* ipv6 = attr->toString(ctx)->trim(ctx);
+		noderef->setIpv6(!ipv6->equalsIgnoreCase(ConstStr::getCNST_STR_1142(), ctx), ctx);
+	}
+	return noderef;
 }
 }}}}
 

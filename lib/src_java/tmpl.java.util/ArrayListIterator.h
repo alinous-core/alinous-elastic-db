@@ -77,7 +77,7 @@ template class ::java::util::ArrayListIterator<::alinous::remote::db::RemoteTabl
 template class ::java::util::ArrayListIterator<::alinous::remote::region::NodeRegionServer>;
 template class ::java::util::ArrayListIterator<::alinous::html::xpath::match::MatchCandidate>;
 template class ::java::util::ArrayListIterator<::alinous::system::config::remote::RegionsServer>;
-template class ::java::util::ArrayListIterator<::alinous::system::config::remote::NodeRef>;
+template class ::java::util::ArrayListIterator<::alinous::system::config::remote::RemoteNodeReference>;
 template class ::java::util::ArrayListIterator<::alinous::system::config::remote::Table>;
 template class ::java::util::ArrayListIterator<::alinous::system::config::remote::RegionRef>;
 template class ::java::util::ArrayListIterator<::alinous::system::config::remote::Node>;

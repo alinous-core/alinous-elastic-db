@@ -1,5 +1,13 @@
-#include "includes.h"
+#include "include/global.h"
 
+
+#include "java.io/StringWriter.h"
+#include "java.io/StringReader.h"
+#include "java.io/FilterInputStream.h"
+#include "java.io/BufferedInputStream.h"
+#include "java.io/FilterOutputStream.h"
+#include "java.io/BufferedOutputStream.h"
+#include "java.io/ByteArrayOutputStream.h"
 
 namespace java {namespace io {
 

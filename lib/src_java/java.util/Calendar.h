@@ -125,7 +125,7 @@ public:
 	virtual int getMaximum(int field, ThreadContext* ctx) throw()  = 0;
 	int getMinimalDaysInFirstWeek(ThreadContext* ctx) throw() ;
 	virtual int getMinimum(int field, ThreadContext* ctx) throw()  = 0;
-	Date* getTime(ThreadContext* ctx) throw() ;
+	java::util::Date* getTime(ThreadContext* ctx) throw() ;
 	long long getTimeInMillis(ThreadContext* ctx) throw() ;
 	TimeZone* getTimeZone(ThreadContext* ctx) throw() ;
 	virtual int hashCode(ThreadContext* ctx) throw() ;
@@ -140,7 +140,7 @@ public:
 	virtual void setFirstDayOfWeek(int value, ThreadContext* ctx) throw() ;
 	void setLenient(bool value, ThreadContext* ctx) throw() ;
 	virtual void setMinimalDaysInFirstWeek(int value, ThreadContext* ctx) throw() ;
-	void setTime(Date* date, ThreadContext* ctx) throw() ;
+	void setTime(java::util::Date* date, ThreadContext* ctx) throw() ;
 	void setTimeInMillis(long long milliseconds, ThreadContext* ctx) throw() ;
 	void setTimeZone(TimeZone* timezone, ThreadContext* ctx) throw() ;
 	String* toString(ThreadContext* ctx) throw() ;

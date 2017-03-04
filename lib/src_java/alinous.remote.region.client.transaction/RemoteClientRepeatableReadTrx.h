@@ -12,20 +12,8 @@ class AlinousCore;}}
 namespace alinous {namespace db {namespace trx {
 class DbVersionContext;}}}
 
-namespace alinous {namespace db {namespace table {
-class IDatabaseRecord;}}}
-
-namespace alinous {namespace db {namespace table {
-class IDatabaseTable;}}}
-
 namespace alinous {namespace remote {namespace region {namespace client {namespace transaction {
-class AbstractRemoteClientTransaction;}}}}}
-
-namespace alinous {namespace db {namespace table {
-class DatabaseException;}}}
-
-namespace alinous {namespace system {
-class AlinousException;}}
+class RemoteClientSerializableTrx;}}}}}
 
 namespace alinous {
 class ThreadContext;
@@ -37,17 +25,13 @@ using namespace ::alinous;
 using namespace ::java::lang;
 using ::java::util::Iterator;
 using ::alinous::db::AlinousDatabase;
-using ::alinous::db::table::DatabaseException;
-using ::alinous::db::table::IDatabaseRecord;
-using ::alinous::db::table::IDatabaseTable;
 using ::alinous::db::trx::DbTransactionManager;
 using ::alinous::db::trx::DbVersionContext;
 using ::alinous::system::AlinousCore;
-using ::alinous::system::AlinousException;
 
 
 
-class RemoteClientRepeatableReadTrx final : public AbstractRemoteClientTransaction {
+class RemoteClientRepeatableReadTrx final : public RemoteClientSerializableTrx {
 public:
 	RemoteClientRepeatableReadTrx(const RemoteClientRepeatableReadTrx& base) = default;
 public:
@@ -55,8 +39,6 @@ public:
 	void __construct_impl(DbTransactionManager* mgr, String* tmpDir, AlinousDatabase* database, AlinousCore* core, long long commitId, DbVersionContext* vctx, ThreadContext* ctx) throw() ;
 	virtual ~RemoteClientRepeatableReadTrx() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
-public:
-	bool isVisible(IDatabaseRecord* record, IDatabaseTable* tableStore, ThreadContext* ctx) final;
 public:
 	static bool __init_done;
 	static bool __init_static_variables();
