@@ -455,7 +455,7 @@ NodeInfo* NodeInfo::parseUrl(String* url, bool ipv6, ThreadContext* ctx)
 	IArrayObject<String>* segs = url->split(ConstStr::getCNST_STR_381(), ctx);
 	if(segs->length != 2)
 	{
-		throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3578(), ctx));
+		throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3580(), ctx));
 	}
 	info->setHost(segs->get(0), ctx);
 	{
@@ -466,7 +466,7 @@ NodeInfo* NodeInfo::parseUrl(String* url, bool ipv6, ThreadContext* ctx)
 		}
 		catch(NumberFormatException* e)
 		{
-			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3578(), ctx));
+			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3580(), ctx));
 		}
 	}
 	info->setIpv6(ipv6, ctx);

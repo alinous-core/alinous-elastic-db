@@ -458,7 +458,7 @@ void MonitorResponceAction::handleCommand(BufferedInputStream* stream, BufferedO
 		cmd = parseCommand(stream, ctx);
 		if(cmd == nullptr)
 		{
-			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3568(), ctx));
+			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3570(), ctx));
 		}
 		int type = cmd->getType(ctx);
 		switch(type) {

@@ -543,7 +543,7 @@ void ClientNetworkRecord::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx
 		IAlinousVariable* val = NetworkAlinousVariableFactory::fromNetworkData(buff, ctx);
 		if(val == nullptr || !((dynamic_cast<VariantValue*>(val) != 0)))
 		{
-			throw (new(ctx) VariableException(ConstStr::getCNST_STR_3602(), ctx));
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_3604(), ctx));
 		}
 		VariantValue* variant = static_cast<VariantValue*>(val);
 		this->values->add(variant, ctx);

@@ -475,7 +475,7 @@ FileStorageEntry* BTreeMaxNode::toFileStorageEntry(FileStorageEntryBuilder* buil
 }
 IBTreeNode* BTreeMaxNode::addLeafNode(IBTreeNode* newNode, ThreadContext* ctx)
 {
-	throw (new(ctx) BTreeException(ConstStr::getCNST_STR_1650(), ctx));
+	throw (new(ctx) BTreeException(ConstStr::getCNST_STR_1652(), ctx));
 }
 IBTreeKey* BTreeMaxNode::getKey(ThreadContext* ctx) throw() 
 {
@@ -504,7 +504,7 @@ char BTreeMaxNode::getNodeType(ThreadContext* ctx) throw()
 void BTreeMaxNode::printNode(StringBuffer* buff, int level, ThreadContext* ctx)
 {
 	printTab(buff, level, ctx);
-	buff->append(ConstStr::getCNST_STR_1651(), ctx)->append(ConstStr::getCNST_STR_1652(), ctx)->append(ConstStr::getCNST_STR_1648(), ctx);
+	buff->append(ConstStr::getCNST_STR_1653(), ctx)->append(ConstStr::getCNST_STR_1654(), ctx)->append(ConstStr::getCNST_STR_1650(), ctx);
 	int nextLevel = level + 1;
 	int maxLoop = this->nodeUsed;
 	for(int i = 0; i != maxLoop; ++i)
@@ -518,7 +518,7 @@ void BTreeMaxNode::printNode(StringBuffer* buff, int level, ThreadContext* ctx)
 	node->printNode(buff, nextLevel, ctx);
 	node->endUse(ctx);
 	printTab(buff, level, ctx);
-	buff->append(ConstStr::getCNST_STR_1653(), ctx);
+	buff->append(ConstStr::getCNST_STR_1655(), ctx);
 }
 bool BTreeMaxNode::removeChild(IBTreeKey* key, ThreadContext* ctx)
 {
@@ -542,7 +542,7 @@ bool BTreeMaxNode::isEmpty(ThreadContext* ctx) throw()
 }
 void BTreeMaxNode::setKey(IBTreeKey* key, ThreadContext* ctx)
 {
-	throw (new(ctx) BTreeException(ConstStr::getCNST_STR_1654(), ctx));
+	throw (new(ctx) BTreeException(ConstStr::getCNST_STR_1656(), ctx));
 }
 bool BTreeMaxNode::hasMaxNode(ThreadContext* ctx) throw() 
 {

@@ -387,7 +387,7 @@ namespace alinous {namespace runtime {namespace variant {
 
 
 
-String* FloatData::TAG_NAME = ConstStr::getCNST_STR_1221();
+String* FloatData::TAG_NAME = ConstStr::getCNST_STR_1223();
 bool FloatData::__init_done = __init_static_variables();
 bool FloatData::__init_static_variables(){
 	Java2CppSystem::getSelf();

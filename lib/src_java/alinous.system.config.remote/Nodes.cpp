@@ -415,7 +415,7 @@ Nodes* Nodes::parseInstance(MatchCandidate* candidate, DomDocument* document, Ma
 {
 	Nodes* ref = (new(ctx) Nodes(ctx));
 	DomNode* selfDom = candidate->getCandidateDom(ctx);
-	MatchCandidatesCollection* result = matcher->match(document, selfDom, ConstStr::getCNST_STR_1302(), ctx);
+	MatchCandidatesCollection* result = matcher->match(document, selfDom, ConstStr::getCNST_STR_1304(), ctx);
 	ArrayList<MatchCandidate>* list = result->getCandidatesList(ctx);
 	Iterator<MatchCandidate>* it = list->iterator(ctx);
 	while(it->hasNext(ctx))

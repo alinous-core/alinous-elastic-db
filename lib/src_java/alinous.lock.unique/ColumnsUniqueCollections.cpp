@@ -419,7 +419,7 @@ UniqueExclusiveLock* ColumnsUniqueCollections::lockWithCheck(ScanUnique* unique,
 		{
 			if(throwex)
 			{
-				throw (new(ctx) UniqueExclusiveException(lockString->clone(ctx)->append(ConstStr::getCNST_STR_1757(), ctx), ctx));
+				throw (new(ctx) UniqueExclusiveException(lockString->clone(ctx)->append(ConstStr::getCNST_STR_1759(), ctx), ctx));
 			}
 			{
 				try
@@ -428,7 +428,7 @@ UniqueExclusiveLock* ColumnsUniqueCollections::lockWithCheck(ScanUnique* unique,
 				}
 				catch(InterruptedException* e)
 				{
-					throw (new(ctx) UniqueExclusiveException(ConstStr::getCNST_STR_1758(), e, ctx));
+					throw (new(ctx) UniqueExclusiveException(ConstStr::getCNST_STR_1760(), e, ctx));
 				}
 			}
 			return lock;
@@ -442,7 +442,7 @@ UniqueExclusiveLock* ColumnsUniqueCollections::lockWithCheck(ScanUnique* unique,
 			}
 			catch(InterruptedException* e)
 			{
-				throw (new(ctx) UniqueExclusiveException(ConstStr::getCNST_STR_1758(), e, ctx));
+				throw (new(ctx) UniqueExclusiveException(ConstStr::getCNST_STR_1760(), e, ctx));
 			}
 		}
 	}

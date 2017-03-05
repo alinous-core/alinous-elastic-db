@@ -566,7 +566,7 @@ HttpParamHandler::ParamResult* HttpParamHandler::handleAlinousType(String* strVa
 	HttpParamHandler::ParamResult* result = (new(ctx) HttpParamHandler::ParamResult(ctx));
 	result->type = HttpParamHandler::STRING_VALUE;
 	__GC_MV(result, &(result->str), strValue, String);
-	if(typeValue->equals(ConstStr::getCNST_STR_1172(), ctx))
+	if(typeValue->equals(ConstStr::getCNST_STR_1174(), ctx))
 	{
 		return result;
 	}
@@ -825,7 +825,7 @@ IDomVariable* HttpParamHandler::toVariable(int alnsType, String* valStr, ThreadC
 }
 int HttpParamHandler::handleAlinousTypeOnly(String* typeValue, ThreadContext* ctx) throw() 
 {
-	if(typeValue->equals(ConstStr::getCNST_STR_1172(), ctx))
+	if(typeValue->equals(ConstStr::getCNST_STR_1174(), ctx))
 	{
 		return HttpParamHandler::STRING_VALUE;
 	}

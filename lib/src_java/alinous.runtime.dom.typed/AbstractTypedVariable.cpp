@@ -376,7 +376,7 @@ namespace alinous {namespace runtime {namespace dom {namespace typed {
 
 
 
-String* AbstractTypedVariable::VALUE = ConstStr::getCNST_STR_1157();
+String* AbstractTypedVariable::VALUE = ConstStr::getCNST_STR_1159();
 IArrayObject<ITypedCaller>* AbstractTypedVariable::typedCallers = nullptr;
 bool AbstractTypedVariable::__init_done = __init_static_variables();
 bool AbstractTypedVariable::__init_static_variables(){

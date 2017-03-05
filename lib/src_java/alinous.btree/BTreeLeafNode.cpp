@@ -503,7 +503,7 @@ void BTreeLeafNode::printNode(StringBuffer* buff, int level, ThreadContext* ctx)
 {
 	printTab(buff, level, ctx);
 	printTab(buff, level, ctx);
-	buff->append(ConstStr::getCNST_STR_1656(), ctx)->append(getKey(ctx)->toString(ctx), ctx)->append(ConstStr::getCNST_STR_1657(), ctx);
+	buff->append(ConstStr::getCNST_STR_1658(), ctx)->append(getKey(ctx)->toString(ctx), ctx)->append(ConstStr::getCNST_STR_1659(), ctx);
 }
 bool BTreeLeafNode::removeChild(IBTreeKey* key, ThreadContext* ctx)
 {

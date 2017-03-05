@@ -55,14 +55,14 @@ void HttpRequestHeaders::__releaseRegerences(bool prepare, ThreadContext* ctx) t
 }
 void HttpRequestHeaders::writeHeader(StringBuffer* buff, ThreadContext* ctx)
 {
-	dowrite(buff, ConstStr::getCNST_STR_1873(), this->userAgent, ctx);
-	dowrite(buff, ConstStr::getCNST_STR_1874(), this->accept, ctx);
-	dowrite(buff, ConstStr::getCNST_STR_1875(), this->acceptLanguage, ctx);
-	dowrite(buff, ConstStr::getCNST_STR_1876(), this->acceptEncoding, ctx);
-	dowrite(buff, ConstStr::getCNST_STR_1877(), this->acceptCharset, ctx);
-	dowrite(buff, ConstStr::getCNST_STR_1878(), this->keepAlive, ctx);
-	dowrite(buff, ConstStr::getCNST_STR_1879(), this->connection, ctx);
-	dowrite(buff, ConstStr::getCNST_STR_1880(), this->cookie, ctx);
+	dowrite(buff, ConstStr::getCNST_STR_1875(), this->userAgent, ctx);
+	dowrite(buff, ConstStr::getCNST_STR_1876(), this->accept, ctx);
+	dowrite(buff, ConstStr::getCNST_STR_1877(), this->acceptLanguage, ctx);
+	dowrite(buff, ConstStr::getCNST_STR_1878(), this->acceptEncoding, ctx);
+	dowrite(buff, ConstStr::getCNST_STR_1879(), this->acceptCharset, ctx);
+	dowrite(buff, ConstStr::getCNST_STR_1880(), this->keepAlive, ctx);
+	dowrite(buff, ConstStr::getCNST_STR_1881(), this->connection, ctx);
+	dowrite(buff, ConstStr::getCNST_STR_1882(), this->cookie, ctx);
 }
 String* HttpRequestHeaders::getUserAgent(ThreadContext* ctx) throw() 
 {
@@ -134,7 +134,7 @@ void HttpRequestHeaders::dowrite(StringBuffer* writer, String* key, String* valu
 	{
 		return;
 	}
-	writer->append(key, ctx)->append(ConstStr::getCNST_STR_1881(), ctx)->append(value, ctx)->append(ConstStr::getCNST_STR_1882(), ctx);
+	writer->append(key, ctx)->append(ConstStr::getCNST_STR_1883(), ctx)->append(value, ctx)->append(ConstStr::getCNST_STR_1884(), ctx);
 }
 }}}
 

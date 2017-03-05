@@ -394,9 +394,9 @@ bool AlinousDebugEventNotifier::__init_static_variables(){
 {
 	this->port = -1;
 	__GC_MV(this, &(this->debugManager), debugManager, AlinousScriptDebugger);
-	debugOut(ConstStr::getCNST_STR_1178(), ctx);
+	debugOut(ConstStr::getCNST_STR_1180(), ctx);
 	this->loop = true;
-	__GC_MV(this, &(this->th), (new(ctx) Thread(this, ConstStr::getCNST_STR_1179(), ctx)), Thread);
+	__GC_MV(this, &(this->th), (new(ctx) Thread(this, ConstStr::getCNST_STR_1181(), ctx)), Thread);
 	this->th->start(ctx);
 	{
 		try
@@ -408,15 +408,15 @@ bool AlinousDebugEventNotifier::__init_static_variables(){
 			e->printStackTrace(ctx);
 		}
 	}
-	debugOut(ConstStr::getCNST_STR_1180(), ctx);
+	debugOut(ConstStr::getCNST_STR_1182(), ctx);
 }
 void AlinousDebugEventNotifier::__construct_impl(AlinousScriptDebugger* debugManager, ThreadContext* ctx) throw() 
 {
 	this->port = -1;
 	__GC_MV(this, &(this->debugManager), debugManager, AlinousScriptDebugger);
-	debugOut(ConstStr::getCNST_STR_1178(), ctx);
+	debugOut(ConstStr::getCNST_STR_1180(), ctx);
 	this->loop = true;
-	__GC_MV(this, &(this->th), (new(ctx) Thread(this, ConstStr::getCNST_STR_1179(), ctx)), Thread);
+	__GC_MV(this, &(this->th), (new(ctx) Thread(this, ConstStr::getCNST_STR_1181(), ctx)), Thread);
 	this->th->start(ctx);
 	{
 		try
@@ -428,7 +428,7 @@ void AlinousDebugEventNotifier::__construct_impl(AlinousScriptDebugger* debugMan
 			e->printStackTrace(ctx);
 		}
 	}
-	debugOut(ConstStr::getCNST_STR_1180(), ctx);
+	debugOut(ConstStr::getCNST_STR_1182(), ctx);
 }
  AlinousDebugEventNotifier::~AlinousDebugEventNotifier() throw() 
 {
@@ -497,7 +497,7 @@ void AlinousDebugEventNotifier::run(ThreadContext* ctx) throw()
 			{
 				try
 				{
-					debugOut(ConstStr::getCNST_STR_1181()->clone(ctx)->append(queuesize, ctx), ctx);
+					debugOut(ConstStr::getCNST_STR_1183()->clone(ctx)->append(queuesize, ctx), ctx);
 					{
 						SynchronizedBlockObj __synchronized_5(this->lock, ctx);
 						this->lock->wait(ctx);
@@ -553,7 +553,7 @@ void AlinousDebugEventNotifier::run(ThreadContext* ctx) throw()
 void AlinousDebugEventNotifier::sendCommand(IServerCommand* command, ScriptMachine* context, ThreadContext* ctx)
 {
 	Socket* con = nullptr;
-	con = (new(ctx) Socket(ConstStr::getCNST_STR_1182(), port, ctx));
+	con = (new(ctx) Socket(ConstStr::getCNST_STR_1184(), port, ctx));
 	OutputStream* stream = nullptr;
 	Writer* writer = nullptr;
 	{

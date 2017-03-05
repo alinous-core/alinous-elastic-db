@@ -636,7 +636,7 @@ HtmlTopObject* HtmlXmlParser::parse(ThreadContext* ctx)
 			return top;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1318(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1320(), ctx));
 }
 HtmlDocType* HtmlXmlParser::docType(ThreadContext* ctx)
 {
@@ -697,7 +697,7 @@ HtmlDocType* HtmlXmlParser::docType(ThreadContext* ctx)
 			return docType;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1318(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1320(), ctx));
 }
 XHtmlComment* HtmlXmlParser::comment(ThreadContext* ctx)
 {
@@ -711,7 +711,7 @@ XHtmlComment* HtmlXmlParser::comment(ThreadContext* ctx)
 			return com;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1318(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1320(), ctx));
 }
 XMLTagBase* HtmlXmlParser::tagObject(ThreadContext* ctx)
 {
@@ -747,7 +747,7 @@ XMLTagBase* HtmlXmlParser::tagObject(ThreadContext* ctx)
 			return tag;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1318(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1320(), ctx));
 }
 XMLTagBase* HtmlXmlParser::normalTagObject(ThreadContext* ctx)
 {
@@ -869,7 +869,7 @@ XMLTagBase* HtmlXmlParser::normalTagObject(ThreadContext* ctx)
 			return tag;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1318(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1320(), ctx));
 }
 void HtmlXmlParser::singleTagObjectLookAhead(ThreadContext* ctx)
 {
@@ -933,7 +933,7 @@ XMLTagBase* HtmlXmlParser::singleTagObject(ThreadContext* ctx)
 			return tag;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1318(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1320(), ctx));
 }
 XMLTagBase* HtmlXmlParser::htmlSingleTagObject(ThreadContext* ctx)
 {
@@ -1036,7 +1036,7 @@ XMLTagBase* HtmlXmlParser::htmlSingleTagObject(ThreadContext* ctx)
 			return tag;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1318(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1320(), ctx));
 }
 XHtmlAttribute* HtmlXmlParser::attribute(ThreadContext* ctx)
 {
@@ -1097,7 +1097,7 @@ XHtmlAttribute* HtmlXmlParser::attribute(ThreadContext* ctx)
 			return attr;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1318(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1320(), ctx));
 }
 void HtmlXmlParser::skipWhiteSpace(ThreadContext* ctx)
 {
@@ -1267,7 +1267,7 @@ BodyText* HtmlXmlParser::bodyText(ThreadContext* ctx)
 			return text;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1318(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1320(), ctx));
 }
 void HtmlXmlParser::ReInit(java::io::InputStream* stream, ThreadContext* ctx)
 {

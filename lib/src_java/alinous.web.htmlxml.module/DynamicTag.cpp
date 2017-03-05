@@ -558,7 +558,7 @@ void DynamicTag::execute(ScriptMachine* machine, Writer* writer, bool debug, Thr
 }
 String* DynamicTag::toString(ThreadContext* ctx) throw() 
 {
-	return ConstStr::getCNST_STR_1838();
+	return ConstStr::getCNST_STR_1840();
 }
 void DynamicTag::setAlinoutAttributes(XHtmlAttribute* attr, ThreadContext* ctx)
 {
@@ -682,7 +682,7 @@ void DynamicTag::writeTag(ScriptMachine* machine, Writer* writer, bool debug, Th
 	writeName(machine, writer, debug, ctx);
 	if(this->innerStack->isEmpty(ctx))
 	{
-		writer->write(ConstStr::getCNST_STR_1837(), ctx);
+		writer->write(ConstStr::getCNST_STR_1839(), ctx);
 	}
 		else 
 	{
@@ -702,7 +702,7 @@ void DynamicTag::writeEndTag(ScriptMachine* machine, Writer* writer, bool debug,
 	}
 	if(!this->innerStack->isEmpty(ctx))
 	{
-		writer->write(ConstStr::getCNST_STR_1773(), ctx);
+		writer->write(ConstStr::getCNST_STR_1775(), ctx);
 		writeName(machine, writer, debug, ctx);
 		writer->write(ConstStr::getCNST_STR_82(), ctx);
 	}

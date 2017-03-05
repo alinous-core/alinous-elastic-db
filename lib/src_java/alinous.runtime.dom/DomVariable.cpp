@@ -381,8 +381,8 @@ namespace alinous {namespace runtime {namespace dom {
 
 
 
-String* DomVariable::VAL_TYPE = ConstStr::getCNST_STR_1119();
-String* DomVariable::PROPS = ConstStr::getCNST_STR_1120();
+String* DomVariable::VAL_TYPE = ConstStr::getCNST_STR_1120();
+String* DomVariable::PROPS = ConstStr::getCNST_STR_1121();
 bool DomVariable::__init_done = __init_static_variables();
 bool DomVariable::__init_static_variables(){
 	Java2CppSystem::getSelf();
@@ -1614,7 +1614,12 @@ void DomVariable::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 	{
 		return;
 	}
-	this->value->readData(buff, ctx);
+	IAlinousVariable* val = NetworkAlinousVariableFactory::fromNetworkData(buff, ctx);
+	if(val == nullptr || !((dynamic_cast<VariantValue*>(val) != 0)))
+	{
+		throw (new(ctx) VariableException(ConstStr::getCNST_STR_1119(), ctx));
+	}
+	__GC_MV(this, &(this->value), static_cast<VariantValue*>(val), VariantValue);
 }
 void DomVariable::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 {

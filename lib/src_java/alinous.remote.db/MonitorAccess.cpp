@@ -443,20 +443,20 @@ void MonitorAccess::reportSchemaUpdated(ThreadContext* ctx)
 			AbstractMonitorCommand* retcmd = cmd->sendCommand(socket, ctx);
 			if(retcmd->getType(ctx) != AbstractMonitorCommand::TYPE_REPORT_SCHEMA_UPDATED)
 			{
-				throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3573(), ctx));
+				throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3575(), ctx));
 			}
 		}
 		catch(UnknownHostException* e)
 		{
-			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3573(), e, ctx));
+			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3575(), e, ctx));
 		}
 		catch(IOException* e)
 		{
-			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3573(), e, ctx));
+			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3575(), e, ctx));
 		}
 		catch(AlinousException* e)
 		{
-			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3573(), e, ctx));
+			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3575(), e, ctx));
 		}
 	}
 }

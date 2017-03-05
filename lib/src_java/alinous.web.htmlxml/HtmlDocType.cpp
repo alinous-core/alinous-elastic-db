@@ -437,7 +437,7 @@ ArrayList<AbstractXHtmlElement>* HtmlDocType::getElements(ThreadContext* ctx) th
 String* HtmlDocType::toString(ThreadContext* ctx) throw() 
 {
 	StringBuffer* buff = (new(ctx) StringBuffer(ctx));
-	buff->append(ConstStr::getCNST_STR_1768(), ctx);
+	buff->append(ConstStr::getCNST_STR_1770(), ctx);
 	int maxLoop = this->elements->size(ctx);
 	for(int i = 0; i != maxLoop; ++i)
 	{

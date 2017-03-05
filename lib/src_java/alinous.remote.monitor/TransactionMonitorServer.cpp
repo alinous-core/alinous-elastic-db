@@ -381,7 +381,7 @@ namespace alinous {namespace remote {namespace monitor {
 
 
 
-String* TransactionMonitorServer::THREAD_NAME = ConstStr::getCNST_STR_3576();
+String* TransactionMonitorServer::THREAD_NAME = ConstStr::getCNST_STR_3578();
 bool TransactionMonitorServer::__init_done = __init_static_variables();
 bool TransactionMonitorServer::__init_static_variables(){
 	Java2CppSystem::getSelf();

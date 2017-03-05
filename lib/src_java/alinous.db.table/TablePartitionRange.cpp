@@ -23,24 +23,14 @@
 #include "alinous.html/IDomObject.h"
 #include "alinous.html/Attribute.h"
 #include "alinous.html/DomNode.h"
-#include "alinous.remote.socket/NetworkBinaryBuffer.h"
-#include "alinous.remote.socket/ICommandData.h"
-#include "java.util/Random.h"
-#include "java.lang/Number.h"
-#include "java.lang/Comparable.h"
-#include "alinous.numeric/BigInteger.h"
-#include "alinous.numeric/RoundingMode.h"
-#include "alinous.numeric/MathContext.h"
-#include "alinous.numeric/BigDecimal.h"
-#include "alinous.system/AlinousException.h"
-#include "alinous.btree/IValueFetcher.h"
-#include "alinous.btree/IBTreeValue.h"
 #include "alinous.compile.analyse/DomVariableDeclareSource.h"
 #include "alinous.compile/AbstractSrcElement.h"
+#include "alinous.remote.socket/ICommandData.h"
 #include "alinous.compile/IAlinousElement.h"
 #include "alinous.compile/IStatement.h"
 #include "alinous.compile.analyse/SourceValidationError.h"
 #include "alinous.compile.analyse/SourceValidator.h"
+#include "alinous.remote.socket/NetworkBinaryBuffer.h"
 #include "alinous.compile.stmt/AbstractAlinousStatement.h"
 #include "alinous.compile.stmt/TypedVariableDeclare.h"
 #include "alinous.compile.analyse/TypedVariableDeclareSource.h"
@@ -51,14 +41,23 @@
 #include "alinous.runtime.dom/IDomVariable.h"
 #include "alinous.runtime.dom.typed/ITypedVariable.h"
 #include "alinous.runtime.dom.clazz/IAlinousClassVariable.h"
+#include "alinous.system/AlinousException.h"
 #include "alinous.compile.expression/IDomSegment.h"
 #include "alinous.runtime.dom/DomVariableContainer.h"
+#include "alinous.btree/IValueFetcher.h"
+#include "alinous.btree/IBTreeValue.h"
+#include "java.util/Random.h"
+#include "java.lang/Number.h"
+#include "java.lang/Comparable.h"
+#include "alinous.numeric/BigInteger.h"
+#include "alinous.numeric/RoundingMode.h"
+#include "alinous.numeric/MathContext.h"
+#include "alinous.numeric/BigDecimal.h"
 #include "alinous.runtime.dom.typed/ITypedCaller.h"
 #include "alinous.runtime.dom.typed/AbstractTypedVariable.h"
 #include "alinous.runtime.dom.typed/TypedVariableArray.h"
 #include "alinous.runtime.dom.typed/TimestampVariable.h"
 #include "alinous.runtime.dom.typed/TimeVariable.h"
-#include "alinous.runtime.dom.typed/StringVariable.h"
 #include "alinous.runtime.dom.typed/ShortVariable.h"
 #include "alinous.runtime.dom.typed/LongVariable.h"
 #include "alinous.runtime.dom.typed/IntegerVariable.h"
@@ -66,9 +65,13 @@
 #include "alinous.runtime.dom.typed/DoubleVariable.h"
 #include "alinous.runtime.dom.typed/CharVariable.h"
 #include "alinous.runtime.dom.typed/ByteVariable.h"
+#include "alinous.runtime.dom.typed/StringVariable.h"
+#include "alinous.runtime.dom.typed/BoolVariable.h"
+#include "alinous.runtime.dom.typed/BigDecimalVariable.h"
 #include "alinous.runtime.variant/IVariantData.h"
 #include "alinous.runtime.variant/VariantValue.h"
-#include "alinous.runtime.dom.typed/BoolVariable.h"
+#include "alinous.db.table/IDatabaseRecord.h"
+#include "alinous.runtime.dom/DomVariable.h"
 #include "alinous.runtime.dom.clazz/AlinousClassVariable.h"
 #include "alinous.runtime.dom.typed/TypedVariableContainer.h"
 #include "alinous.compile.analyse/ExpressionStreamResult.h"
@@ -132,7 +135,6 @@
 #include "alinous.compile.sql.ddl/ColumnTypeDescriptor.h"
 #include "alinous.db.table/TableColumnMetadata.h"
 #include "alinous.db.table/IBtreeTableIndex.h"
-#include "alinous.db.table/IDatabaseRecord.h"
 #include "alinous.db.table/BTreeIndexKey.h"
 #include "alinous.db.trx.scan/ScanResultIndexKey.h"
 #include "alinous.db.trx.scan/ITableTargetScanner.h"
@@ -366,7 +368,6 @@
 #include "alinous.compile.stmt/StatementBlock.h"
 #include "alinous.runtime.engine/DatabaseHandle.h"
 #include "alinous.runtime.engine/SQLStatementRunner.h"
-#include "alinous.compile.expression.expstream/IdentifierVariable.h"
 #include "alinous.runtime.engine/AlinousStatementRunner.h"
 #include "alinous.runtime.engine/ScriptRunner.h"
 #include "alinous.compile.expression.expstream/FunctionCallExpression.h"
@@ -382,8 +383,8 @@
 #include "alinous.compile.declare.function/FunctionArgumentDefine.h"
 #include "alinous.compile.analyse/VariableDeclareHolder.h"
 #include "alinous.compile.expression/DomVariableDescriptor.h"
-#include "alinous.runtime.dom/DomVariable.h"
-#include "alinous.runtime.dom.typed/BigDecimalVariable.h"
+#include "alinous.compile.expression.expstream/IdentifierVariable.h"
+#include "alinous.runtime.dom/NetworkAlinousVariableFactory.h"
 #include "alinous.compile.analyse/AlinousType.h"
 #include "alinous.compile.declare/AlinousName.h"
 #include "alinous.compile.analyse/ClassDeclareHolder.h"
@@ -507,15 +508,23 @@ void TablePartitionRange::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx
 	int maxLoop = buff->getInt(ctx);
 	for(int i = 0; i != maxLoop; ++i)
 	{
-		VariantValue* vv = (new(ctx) VariantValue(ctx));
-		vv->readData(buff, ctx);
+		IAlinousVariable* val = NetworkAlinousVariableFactory::fromNetworkData(buff, ctx);
+		if(val == nullptr || !((dynamic_cast<VariantValue*>(val) != 0)))
+		{
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1119(), ctx));
+		}
+		VariantValue* vv = static_cast<VariantValue*>(val);
 		this->max->add(vv, ctx);
 	}
 	maxLoop = buff->getInt(ctx);
 	for(int i = 0; i != maxLoop; ++i)
 	{
-		VariantValue* vv = (new(ctx) VariantValue(ctx));
-		vv->readData(buff, ctx);
+		IAlinousVariable* val = NetworkAlinousVariableFactory::fromNetworkData(buff, ctx);
+		if(val == nullptr || !((dynamic_cast<VariantValue*>(val) != 0)))
+		{
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1119(), ctx));
+		}
+		VariantValue* vv = static_cast<VariantValue*>(val);
 		this->min->add(vv, ctx);
 	}
 }

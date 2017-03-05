@@ -384,9 +384,9 @@ namespace alinous {namespace runtime {namespace engine {namespace debugger {
 
 
 
-String* AlinousServerDebugHttpResponse::TAG_ROOT = ConstStr::getCNST_STR_1184();
-String* AlinousServerDebugHttpResponse::TAG_HOT_THREAD = ConstStr::getCNST_STR_1185();
-String* AlinousServerDebugHttpResponse::ATTR_THREAD_ID = ConstStr::getCNST_STR_1186();
+String* AlinousServerDebugHttpResponse::TAG_ROOT = ConstStr::getCNST_STR_1186();
+String* AlinousServerDebugHttpResponse::TAG_HOT_THREAD = ConstStr::getCNST_STR_1187();
+String* AlinousServerDebugHttpResponse::ATTR_THREAD_ID = ConstStr::getCNST_STR_1188();
 bool AlinousServerDebugHttpResponse::__init_done = __init_static_variables();
 bool AlinousServerDebugHttpResponse::__init_static_variables(){
 	Java2CppSystem::getSelf();
@@ -472,7 +472,7 @@ void AlinousServerDebugHttpResponse::importFromXmlString(InputStream* inStream, 
 	DomDocument* document = replacer->getDocument(ctx);
 	if(document->getNumChildern(ctx) == 0)
 	{
-		throw (new(ctx) IOException(ConstStr::getCNST_STR_1183(), ctx));
+		throw (new(ctx) IOException(ConstStr::getCNST_STR_1185(), ctx));
 	}
 	DomNode* rootnode = document->getChildNodeAt(0, ctx);
 	int maxLoop = rootnode->getNumChildern(ctx);

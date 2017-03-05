@@ -417,7 +417,7 @@ void AbstractRemoteClientTransaction::createTable(TableSchema* schema, ThreadCon
 {
 	if(schema->getregionName(ctx) == nullptr)
 	{
-		throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3600(), ctx));
+		throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3602(), ctx));
 	}
 	DbTransaction::createTable(schema, ctx);
 }
