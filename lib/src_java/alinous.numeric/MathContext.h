@@ -68,12 +68,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-		GCUtils<MathContext>::dec(nullptr, MathContext::DECIMAL128, ctx, __FILEW__, __LINE__, L"MathContext");
-		GCUtils<MathContext>::dec(nullptr, MathContext::DECIMAL32, ctx, __FILEW__, __LINE__, L"MathContext");
-		GCUtils<MathContext>::dec(nullptr, MathContext::DECIMAL64, ctx, __FILEW__, __LINE__, L"MathContext");
-		GCUtils<MathContext>::dec(nullptr, MathContext::UNLIMITED, ctx, __FILEW__, __LINE__, L"MathContext");
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}

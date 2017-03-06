@@ -11,13 +11,13 @@
 #include "com.google.re2j/RE2.h"
 #include "com.google.re2j/Machine.h"
 #include "com.google.re2j/PatternSyntaxException.h"
+#include "com.google.re2j/Utils.h"
+#include "com.google.re2j/Unicode.h"
 #include "com.google.re2j/CharGroup.h"
 #include "com.google.re2j/CharClass.h"
 #include "com.google.re2j/Parser.h"
-#include "com.google.re2j/Unicode.h"
 #include "com.google.re2j/Compiler.h"
 #include "com.google.re2j/UnicodeTable2.h"
-#include "com.google.re2j/Utils.h"
 #include "com.google.re2j/UnicodeTables.h"
 #include "com.google.re2j/Pattern.h"
 #include "com.google.re2j/Matcher.h"
@@ -187,6 +187,8 @@ String* Inst::escapeRunes(IArrayObjectPrimitive<int>* runes, ThreadContext* ctx)
 	}
 	out->append(L'"', ctx);
 	return out->toString(ctx);
+}
+void Inst::__cleanUp(ThreadContext* ctx){
 }
 }}}
 

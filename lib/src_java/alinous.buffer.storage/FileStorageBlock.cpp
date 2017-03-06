@@ -3,8 +3,6 @@
 
 #include "alinous.buffer.storage/FileStorageEntry.h"
 #include "alinous.buffer.storage/FileStorageEntryFetcher.h"
-#include "alinous.lock/LockObject.h"
-#include "alinous.lock/ConcurrentGate.h"
 #include "alinous.buffer.storage/IFileStorage.h"
 #include "alinous.buffer.storage/FileStorageEntryWriter.h"
 #include "alinous.buffer.storage/FileStorageEntryReader.h"
@@ -163,6 +161,8 @@ int FileStorageBlock::necessaryBlocks(long long bytes, long long BLOCK_SIZE, Thr
 	long long BLOCK_SIZE_MASK = BLOCK_SIZE - 1;
 	int size = (bytes & BLOCK_SIZE_MASK) == (long long)0 ? ((int)(bytes / BLOCK_SIZE)) : ((int)(bytes / BLOCK_SIZE + 1));
 	return size;
+}
+void FileStorageBlock::__cleanUp(ThreadContext* ctx){
 }
 }}}
 

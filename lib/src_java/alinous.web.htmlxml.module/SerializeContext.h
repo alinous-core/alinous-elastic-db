@@ -49,12 +49,8 @@ class SerializeContext final : public virtual IObject {
 public:
 	SerializeContext(const SerializeContext& base) = default;
 public:
-	SerializeContext(ThreadContext* ctx) throw()  : IObject(ctx), stack(GCUtils<Stack<AbstractSerializedHtmlPart> >::ins(this, (new(ctx) Stack<AbstractSerializedHtmlPart>(ctx)), ctx, __FILEW__, __LINE__, L""))
-	{
-	}
-	void __construct_impl(ThreadContext* ctx) throw() 
-	{
-	}
+	SerializeContext(ThreadContext* ctx) throw() ;
+	void __construct_impl(ThreadContext* ctx) throw() ;
 	virtual ~SerializeContext() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 public:
@@ -68,8 +64,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}}}

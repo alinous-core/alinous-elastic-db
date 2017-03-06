@@ -98,12 +98,8 @@ class NotExpression final : public AbstractBooleanExpression {
 public:
 	NotExpression(const NotExpression& base) = default;
 public:
-	NotExpression(ThreadContext* ctx) throw()  : IObject(ctx), AbstractBooleanExpression(ctx), exp(nullptr)
-	{
-	}
-	void __construct_impl(ThreadContext* ctx) throw() 
-	{
-	}
+	NotExpression(ThreadContext* ctx) throw() ;
+	void __construct_impl(ThreadContext* ctx) throw() ;
 	virtual ~NotExpression() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 private:
@@ -126,8 +122,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}}}

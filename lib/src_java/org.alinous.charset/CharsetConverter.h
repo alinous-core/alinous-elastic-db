@@ -29,12 +29,8 @@ class CharsetConverter : public virtual IObject {
 public:
 	CharsetConverter(const CharsetConverter& base) = default;
 public:
-	CharsetConverter(ThreadContext* ctx) throw()  : IObject(ctx)
-	{
-	}
-	void __construct_impl(ThreadContext* ctx) throw() 
-	{
-	}
+	CharsetConverter(ThreadContext* ctx) throw() ;
+	void __construct_impl(ThreadContext* ctx) throw() ;
 	virtual ~CharsetConverter() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 public:
@@ -44,8 +40,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}}

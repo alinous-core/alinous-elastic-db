@@ -1,7 +1,7 @@
 #ifndef ALINOUS_REMOTE_REGION_NODEREFERENCEMANAGER_H_
 #define ALINOUS_REMOTE_REGION_NODEREFERENCEMANAGER_H_
-namespace alinous {namespace remote {namespace region {namespace command {namespace data {
-class ClientStructureMetadata;}}}}}
+namespace alinous {namespace remote {namespace region {namespace client {namespace command {namespace data {
+class ClientStructureMetadata;}}}}}}
 
 namespace alinous {namespace system {
 class AlinousException;}}
@@ -12,20 +12,20 @@ template <typename  T> class Iterator;}}
 namespace alinous {namespace remote {namespace region {
 class NodeRegionSchema;}}}
 
-namespace alinous {namespace remote {namespace region {namespace command {namespace data {
-class ClientSchemaData;}}}}}
+namespace alinous {namespace remote {namespace region {namespace client {namespace command {namespace data {
+class ClientSchemaData;}}}}}}
 
-namespace alinous {namespace remote {namespace db {namespace command {namespace data {
-class SchemasStructureInfoData;}}}}}
+namespace alinous {namespace remote {namespace db {namespace client {namespace command {namespace data {
+class SchemasStructureInfoData;}}}}}}
 
 namespace java {namespace util {
 template <typename  T, typename V> class Map;}}
 
-namespace alinous {namespace remote {namespace db {namespace command {namespace data {
-class SchemaData;}}}}}
+namespace alinous {namespace remote {namespace db {namespace client {namespace command {namespace data {
+class SchemaData;}}}}}}
 
-namespace alinous {namespace remote {namespace monitor {namespace command {namespace data {
-class RegionInfoData;}}}}}
+namespace alinous {namespace remote {namespace monitor {namespace client {namespace command {namespace data {
+class RegionInfoData;}}}}}}
 
 namespace alinous {namespace remote {namespace monitor {
 class RegionNodeInfo;}}}
@@ -77,12 +77,12 @@ using ::java::util::Map;
 using ::alinous::db::AlinousDbException;
 using ::alinous::db::table::TableMetadata;
 using ::alinous::lock::LockObject;
-using ::alinous::remote::db::command::data::SchemaData;
-using ::alinous::remote::db::command::data::SchemasStructureInfoData;
+using ::alinous::remote::db::client::command::data::SchemaData;
+using ::alinous::remote::db::client::command::data::SchemasStructureInfoData;
 using ::alinous::remote::monitor::RegionNodeInfo;
-using ::alinous::remote::monitor::command::data::RegionInfoData;
-using ::alinous::remote::region::command::data::ClientSchemaData;
-using ::alinous::remote::region::command::data::ClientStructureMetadata;
+using ::alinous::remote::monitor::client::command::data::RegionInfoData;
+using ::alinous::remote::region::client::command::data::ClientSchemaData;
+using ::alinous::remote::region::client::command::data::ClientStructureMetadata;
 using ::alinous::system::AlinousException;
 
 
@@ -91,12 +91,8 @@ class NodeReferenceManager final : public virtual IObject {
 public:
 	NodeReferenceManager(const NodeReferenceManager& base) = default;
 public:
-	NodeReferenceManager(ThreadContext* ctx) throw()  : IObject(ctx), schemaDictinary(GCUtils<Map<String,NodeRegionSchema> >::ins(this, (new(ctx) HashMap<String,NodeRegionSchema>(ctx)), ctx, __FILEW__, __LINE__, L"")), schemaVersion(0), nodeReferences(nullptr), lock(__GC_INS(this, (new(ctx) LockObject(ctx)), LockObject))
-	{
-	}
-	void __construct_impl(ThreadContext* ctx) throw() 
-	{
-	}
+	NodeReferenceManager(ThreadContext* ctx) throw() ;
+	void __construct_impl(ThreadContext* ctx) throw() ;
 	virtual ~NodeReferenceManager() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 private:
@@ -121,8 +117,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}}

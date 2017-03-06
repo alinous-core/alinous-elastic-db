@@ -1,7 +1,12 @@
 #include "include/global.h"
 
 
+#include "java.util/Locale.h"
+#include "java.util/Calendar.h"
+#include "java.util/GregorianCalendar.h"
+#include "java.util/Date.h"
 #include "alinous.numeric/InternalDate.h"
+#include "java.util/TimeZone.h"
 #include "alinous.numeric/TimeOnlyTimestamp.h"
 #include "java.util/Random.h"
 #include "java.lang/Number.h"
@@ -64,6 +69,12 @@ bool Primality::__init_static_variables(){
 	ctx->localGC();
 	delete ctx;
 	return true;
+}
+ Primality::Primality(ThreadContext* ctx) throw()  : IObject(ctx)
+{
+}
+void Primality::__construct_impl(ThreadContext* ctx) throw() 
+{
 }
  Primality::~Primality() throw() 
 {
@@ -248,6 +259,10 @@ bool Primality::millerRabin(BigInteger* n, int t, ThreadContext* ctx) throw()
 		}
 	}
 	return true;
+}
+void Primality::__cleanUp(ThreadContext* ctx){
+	GCUtils<IArrayObject<BigInteger>>::dec(nullptr, Primality::BIprimes, ctx, __FILEW__, __LINE__, L"IArrayObject<BigInteger>");
+	GCUtils<IArrayObject<IArrayObjectPrimitive<int>>>::dec(nullptr, Primality::offsetPrimes, ctx, __FILEW__, __LINE__, L"IArrayObject<IArrayObjectPrimitive<int>>");
 }
 }}
 

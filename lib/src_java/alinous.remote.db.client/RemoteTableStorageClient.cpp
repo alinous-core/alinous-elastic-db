@@ -2,7 +2,6 @@
 
 
 #include "alinous.remote.socket/ISocketConnection.h"
-#include "alinous.lock/LockObject.h"
 #include "alinous.remote.socket/ISocketConnectionFactory.h"
 #include "alinous.remote.socket/SocketConnectionPool.h"
 #include "alinous.remote.db.client/RemoteStorageConnectionInfo.h"
@@ -27,6 +26,12 @@ bool RemoteTableStorageClient::__init_static_variables(){
 	delete ctx;
 	return true;
 }
+ RemoteTableStorageClient::RemoteTableStorageClient(ThreadContext* ctx) throw()  : IObject(ctx)
+{
+}
+void RemoteTableStorageClient::__construct_impl(ThreadContext* ctx) throw() 
+{
+}
  RemoteTableStorageClient::~RemoteTableStorageClient() throw() 
 {
 	ThreadContext *ctx = ThreadContext::getCurentContext();
@@ -39,6 +44,8 @@ void RemoteTableStorageClient::__releaseRegerences(bool prepare, ThreadContext* 
 	if(!prepare){
 		return;
 	}
+}
+void RemoteTableStorageClient::__cleanUp(ThreadContext* ctx){
 }
 }}}}
 

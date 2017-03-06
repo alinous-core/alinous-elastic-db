@@ -93,12 +93,8 @@ class PreDecrementExpression final : public AbstractExpression {
 public:
 	PreDecrementExpression(const PreDecrementExpression& base) = default;
 public:
-	PreDecrementExpression(ThreadContext* ctx) throw()  : IObject(ctx), AbstractExpression(ctx), exp(nullptr)
-	{
-	}
-	void __construct_impl(ThreadContext* ctx) throw() 
-	{
-	}
+	PreDecrementExpression(ThreadContext* ctx) throw() ;
+	void __construct_impl(ThreadContext* ctx) throw() ;
 	virtual ~PreDecrementExpression() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 private:
@@ -122,8 +118,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}}

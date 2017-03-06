@@ -51,6 +51,12 @@ bool XpathFunction::__init_static_variables(){
 	delete ctx;
 	return true;
 }
+ XpathFunction::XpathFunction(ThreadContext* ctx) throw()  : IObject(ctx), IXpathStatement(ctx), name(nullptr), arguments(GCUtils<ArrayList<XpathFunctionArgument> >::ins(this, (new(ctx) ArrayList<XpathFunctionArgument>(ctx)), ctx, __FILEW__, __LINE__, L""))
+{
+}
+void XpathFunction::__construct_impl(ThreadContext* ctx) throw() 
+{
+}
  XpathFunction::~XpathFunction() throw() 
 {
 	ThreadContext *ctx = ThreadContext::getCurentContext();
@@ -114,6 +120,8 @@ IVariableValue* XpathFunction::getValue(DomDocument* document, DomNode* currentN
 		return func->getValue(document, currentNode, this->arguments, ctx);
 	}
 	return nullptr;
+}
+void XpathFunction::__cleanUp(ThreadContext* ctx){
 }
 }}}
 

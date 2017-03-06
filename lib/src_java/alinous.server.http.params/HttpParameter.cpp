@@ -63,5 +63,7 @@ String* HttpParameter::getStringValue(ThreadContext* ctx) throw()
 {
 	return this->value;
 }
+void HttpParameter::__cleanUp(ThreadContext* ctx){
+}
 }}}}
 

@@ -69,12 +69,8 @@ class LocalOidPublisher final : public IOidPublisher, public virtual IObject {
 public:
 	LocalOidPublisher(const LocalOidPublisher& base) = default;
 public:
-	LocalOidPublisher(ThreadContext* ctx) throw()  : IObject(ctx), IOidPublisher(ctx), tables(GCUtils<Map<String,LocalOidCounter> >::ins(this, (new(ctx) HashMap<String,LocalOidCounter>(ctx)), ctx, __FILEW__, __LINE__, L"")), lock(__GC_INS(this, (new(ctx) LockObject(ctx)), LockObject))
-	{
-	}
-	void __construct_impl(ThreadContext* ctx) throw() 
-	{
-	}
+	LocalOidPublisher(ThreadContext* ctx) throw() ;
+	void __construct_impl(ThreadContext* ctx) throw() ;
 	virtual ~LocalOidPublisher() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 private:
@@ -92,8 +88,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}}

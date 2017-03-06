@@ -77,12 +77,8 @@ class Node final : public IAlinousConfigElement, public virtual IObject {
 public:
 	Node(const Node& base) = default;
 public:
-	Node(ThreadContext* ctx) throw()  : IObject(ctx), IAlinousConfigElement(ctx), port(0), tables(nullptr), dataDir(nullptr), maxCon(8), monitorRef(nullptr)
-	{
-	}
-	void __construct_impl(ThreadContext* ctx) throw() 
-	{
-	}
+	Node(ThreadContext* ctx) throw() ;
+	void __construct_impl(ThreadContext* ctx) throw() ;
 	virtual ~Node() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 private:
@@ -108,8 +104,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}}}

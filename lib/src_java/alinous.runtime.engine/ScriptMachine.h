@@ -9,8 +9,14 @@ class AlinousModule;}}
 namespace alinous {namespace system {
 class AlinousCore;}}
 
+namespace alinous {namespace compile {
+class AlinousSrc;}}
+
 namespace alinous {namespace runtime {namespace engine {
 class MainStackFrame;}}}
+
+namespace alinous {namespace system {namespace config {
+class SystemInfo;}}}
 
 namespace alinous {namespace runtime {namespace dbif {
 class IDatabaseDriver;}}}
@@ -113,6 +119,7 @@ using ::java::util::ArrayList;
 using ::java::util::HashMap;
 using ::java::util::Iterator;
 using ::java::util::Stack;
+using ::alinous::compile::AlinousSrc;
 using ::alinous::compile::declare::function::AlinousFunction;
 using ::alinous::compile::expression::DomNameSegment;
 using ::alinous::compile::expression::DomVariableDescriptor;
@@ -135,6 +142,7 @@ using ::alinous::server::http::params::HttpParameter;
 using ::alinous::server::http::params::HttpUploadParameter;
 using ::alinous::system::AlinousCore;
 using ::alinous::system::AlinousException;
+using ::alinous::system::config::SystemInfo;
 
 
 
@@ -196,8 +204,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}}

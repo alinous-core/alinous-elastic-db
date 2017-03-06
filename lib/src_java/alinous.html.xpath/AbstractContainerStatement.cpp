@@ -49,6 +49,12 @@ bool AbstractContainerStatement::__init_static_variables(){
 	delete ctx;
 	return true;
 }
+ AbstractContainerStatement::AbstractContainerStatement(ThreadContext* ctx) throw()  : IObject(ctx), IXpathBooleanCondition(ctx), statements(GCUtils<ArrayList<IXpathBooleanCondition> >::ins(this, (new(ctx) ArrayList<IXpathBooleanCondition>(ctx)), ctx, __FILEW__, __LINE__, L""))
+{
+}
+void AbstractContainerStatement::__construct_impl(ThreadContext* ctx) throw() 
+{
+}
  AbstractContainerStatement::~AbstractContainerStatement() throw() 
 {
 	ThreadContext *ctx = ThreadContext::getCurentContext();
@@ -68,6 +74,8 @@ void AbstractContainerStatement::__releaseRegerences(bool prepare, ThreadContext
 void AbstractContainerStatement::addStatement(IXpathBooleanCondition* stmt, ThreadContext* ctx) throw() 
 {
 	this->statements->add(stmt, ctx);
+}
+void AbstractContainerStatement::__cleanUp(ThreadContext* ctx){
 }
 }}}
 

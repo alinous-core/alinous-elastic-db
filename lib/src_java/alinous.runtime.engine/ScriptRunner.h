@@ -24,6 +24,12 @@ class AlinousClass;}}}
 namespace alinous {namespace compile {namespace stmt {
 class StatementList;}}}
 
+namespace alinous {namespace system {
+class AlinousCore;}}
+
+namespace alinous {namespace runtime {namespace engine {namespace debugger {
+class AlinousScriptDebugger;}}}}
+
 namespace alinous {namespace compile {
 class IStatement;}}
 
@@ -117,6 +123,8 @@ using ::alinous::compile::stmt::StatementList;
 using ::alinous::compile::stmt::TypedVariableDeclare;
 using ::alinous::db::table::DatabaseException;
 using ::alinous::runtime::AlinousModule;
+using ::alinous::runtime::engine::debugger::AlinousScriptDebugger;
+using ::alinous::system::AlinousCore;
 using ::alinous::system::AlinousException;
 
 
@@ -145,8 +153,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}}

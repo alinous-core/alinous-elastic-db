@@ -142,12 +142,8 @@ public:
 	public:
 		ReplaceFunc(const ReplaceFunc& base) = default;
 	public:
-		ReplaceFunc(ThreadContext* ctx) throw()  : IObject(ctx)
-		{
-		}
-		void __construct_impl(ThreadContext* ctx) throw() 
-		{
-		}
+		ReplaceFunc(ThreadContext* ctx) throw() ;
+		void __construct_impl(ThreadContext* ctx) throw() ;
 		virtual ~ReplaceFunc() throw();
 		virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 	public:
@@ -156,8 +152,7 @@ public:
 		static bool __init_done;
 		static bool __init_static_variables();
 	public:
-		static void __cleanUp(ThreadContext* ctx){
-		}
+		static void __cleanUp(ThreadContext* ctx);
 	};
 
 
@@ -167,12 +162,8 @@ public:
 	public:
 		DeliverFunc(const DeliverFunc& base) = default;
 	public:
-		DeliverFunc(ThreadContext* ctx) throw()  : IObject(ctx)
-		{
-		}
-		void __construct_impl(ThreadContext* ctx) throw() 
-		{
-		}
+		DeliverFunc(ThreadContext* ctx) throw() ;
+		void __construct_impl(ThreadContext* ctx) throw() ;
 		virtual ~DeliverFunc() throw();
 		virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 	public:
@@ -181,15 +172,13 @@ public:
 		static bool __init_done;
 		static bool __init_static_variables();
 	public:
-		static void __cleanUp(ThreadContext* ctx){
-		}
+		static void __cleanUp(ThreadContext* ctx);
 	};
 
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 class RE2Anonimous0 : public RE2::ReplaceFunc {

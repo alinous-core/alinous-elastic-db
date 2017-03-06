@@ -139,12 +139,8 @@ class SelectStatement final : public IJoinTarget, public ThreadMonitor {
 public:
 	SelectStatement(const SelectStatement& base) = default;
 public:
-	SelectStatement(ThreadContext* ctx) throw()  : IObject(ctx), IJoinTarget(ctx), ThreadMonitor(ctx), intoDesc(nullptr), resultDesc(nullptr), groupByDesc(nullptr), list(nullptr), into(nullptr), from(nullptr), where(nullptr), groupBy(nullptr), limitOffset(nullptr)
-	{
-	}
-	void __construct_impl(ThreadContext* ctx) throw() 
-	{
-	}
+	SelectStatement(ThreadContext* ctx) throw() ;
+	void __construct_impl(ThreadContext* ctx) throw() ;
 	virtual ~SelectStatement() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 public:
@@ -195,8 +191,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}}

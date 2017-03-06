@@ -162,9 +162,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-		GCUtils<IArrayObject<String>>::dec(nullptr, Calendar::fieldNames, ctx, __FILEW__, __LINE__, L"IArrayObject<String>");
-	}
+	static void __cleanUp(ThreadContext* ctx);
 	class ValueCompare {
 	public:
 		int operator() (Calendar* _this, Calendar* anotherCalendar, ThreadContext* ctx) const throw();

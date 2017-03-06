@@ -49,6 +49,12 @@ bool XpathNumber::__init_static_variables(){
 	delete ctx;
 	return true;
 }
+ XpathNumber::XpathNumber(ThreadContext* ctx) throw()  : IObject(ctx), IXpathStatement(ctx), number(nullptr)
+{
+}
+void XpathNumber::__construct_impl(ThreadContext* ctx) throw() 
+{
+}
  XpathNumber::~XpathNumber() throw() 
 {
 	ThreadContext *ctx = ThreadContext::getCurentContext();
@@ -80,6 +86,8 @@ String* XpathNumber::toString(ThreadContext* ctx) throw()
 IVariableValue* XpathNumber::getValue(DomDocument* document, DomNode* currentNode, ThreadContext* ctx) throw() 
 {
 	return (new(ctx) NumberValue(Integer::parseInt(this->number, ctx), ctx));
+}
+void XpathNumber::__cleanUp(ThreadContext* ctx){
 }
 }}}
 

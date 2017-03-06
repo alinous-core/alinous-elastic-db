@@ -176,5 +176,7 @@ bool StringReader::isClosed(ThreadContext* ctx) throw()
 {
 	return str == nullptr;
 }
+void StringReader::__cleanUp(ThreadContext* ctx){
+}
 }}
 

@@ -27,12 +27,8 @@ class HttpRequestHeaders final : public virtual IObject {
 public:
 	HttpRequestHeaders(const HttpRequestHeaders& base) = default;
 public:
-	HttpRequestHeaders(ThreadContext* ctx) throw()  : IObject(ctx), userAgent(nullptr), accept(__GC_INS(this, ConstStr::getCNST_STR_1885(), String)), acceptLanguage(nullptr), acceptEncoding(nullptr), acceptCharset(nullptr), keepAlive(nullptr), connection(nullptr), cookie(nullptr)
-	{
-	}
-	void __construct_impl(ThreadContext* ctx) throw() 
-	{
-	}
+	HttpRequestHeaders(ThreadContext* ctx) throw() ;
+	void __construct_impl(ThreadContext* ctx) throw() ;
 	virtual ~HttpRequestHeaders() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 private:
@@ -68,8 +64,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}}

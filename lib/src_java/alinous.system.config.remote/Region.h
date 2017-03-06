@@ -71,12 +71,8 @@ class Region final : public IAlinousConfigElement, public virtual IObject {
 public:
 	Region(const Region& base) = default;
 public:
-	Region(ThreadContext* ctx) throw()  : IObject(ctx), IAlinousConfigElement(ctx), name(nullptr), nodeRefs(GCUtils<List<RemoteNodeReference> >::ins(this, (new(ctx) ArrayList<RemoteNodeReference>(ctx)), ctx, __FILEW__, __LINE__, L""))
-	{
-	}
-	void __construct_impl(ThreadContext* ctx) throw() 
-	{
-	}
+	Region(ThreadContext* ctx) throw() ;
+	void __construct_impl(ThreadContext* ctx) throw() ;
 	virtual ~Region() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 private:
@@ -93,8 +89,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}}}

@@ -1,51 +1,28 @@
 #include "include/global.h"
 
 
-#include "alinous.buffer.storage/FileStorageEntry.h"
-#include "alinous.buffer.storage/FileStorageEntryBuilder.h"
 #include "java.lang/Comparable.h"
 #include "alinous.btree/IBTreeKey.h"
-#include "alinous.lock/LockObject.h"
-#include "alinous.lock/ConcurrentGate.h"
-#include "alinous.buffer.storage/FileAccessWrapper.h"
-#include "alinous.buffer.storage/FileStorageBlock.h"
 #include "alinous.buffer.storage/IFileStorage.h"
-#include "alinous.buffer.storage/FileStorageEntryWriter.h"
-#include "alinous.buffer.storage/FileStorageEntryReader.h"
 #include "alinous.buffer.storage/FileStorage.h"
 #include "alinous.buffer/FifoElement.h"
-#include "alinous.buffer.storage/FileStorageEntryFetcher.h"
-#include "alinous.buffer/FifoIterator.h"
-#include "alinous.buffer/FifoList.h"
-#include "java.util/BitSet.h"
-#include "alinous.btree/BTreeCacheArray.h"
-#include "alinous.buffer/HashArrayListIterator.h"
-#include "alinous.buffer/HashArrayList.h"
-#include "alinous.btree/IValueFetcher.h"
-#include "alinous.btree/IBTreeValue.h"
-#include "alinous.btree/IBTreeNode.h"
-#include "alinous.btree/BTreeCacheRecord.h"
-#include "alinous.btree/BTreeGlobalCache.h"
+#include "alinous.lock/LockObject.h"
 #include "alinous.btree.scan/INodeIterator.h"
 #include "alinous.btree.scan/AbstractNodeIterator.h"
 #include "alinous.btree.scan/NodeIterator.h"
 #include "alinous.btree/NodeRef.h"
+#include "alinous.btree/IBTreeNode.h"
 #include "alinous.btree/AbstractNode.h"
 #include "alinous.btree/BTreeNodeHandler.h"
 #include "alinous.btree/AbstractBTreeNode.h"
 #include "alinous.btree/BTreeNode.h"
-#include "alinous.btree.scan/LeafContainerIterator.h"
-#include "alinous.btree/AbstractBTreeLeafContainer.h"
-#include "alinous.btree/BTreeLeafContainer.h"
-#include "alinous.btree/BTreeMaxLeafContainer.h"
-#include "alinous.btree/BTreeValues.h"
-#include "alinous.btree/KeyValue.h"
-#include "alinous.btree/BTreeLeafNode.h"
 #include "alinous.btree/BTreeNodeLoader.h"
 #include "alinous.btree/BTreeMaxNode.h"
 #include "alinous.btree.scan/MaxNodeIterator.h"
 #include "alinous.btree/IBTree.h"
 #include "alinous.btree.scan/BTreeScanner.h"
+#include "alinous.btree/AbstractBTreeLeafContainer.h"
+#include "alinous.btree.scan/LeafContainerIterator.h"
 
 namespace alinous {namespace btree {namespace scan {
 
@@ -89,6 +66,8 @@ void AbstractNodeIterator::__releaseRegerences(bool prepare, ThreadContext* ctx)
 	if(!prepare){
 		return;
 	}
+}
+void AbstractNodeIterator::__cleanUp(ThreadContext* ctx){
 }
 }}}
 

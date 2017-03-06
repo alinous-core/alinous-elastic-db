@@ -210,19 +210,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-		GCUtils<BigDecimal>::dec(nullptr, BigDecimal::ZERO, ctx, __FILEW__, __LINE__, L"BigDecimal");
-		GCUtils<BigDecimal>::dec(nullptr, BigDecimal::ONE, ctx, __FILEW__, __LINE__, L"BigDecimal");
-		GCUtils<BigDecimal>::dec(nullptr, BigDecimal::TEN, ctx, __FILEW__, __LINE__, L"BigDecimal");
-		GCUtils<IArrayObject<BigInteger>>::dec(nullptr, BigDecimal::FIVE_POW, ctx, __FILEW__, __LINE__, L"IArrayObject<BigInteger>");
-		GCUtils<IArrayObject<BigInteger>>::dec(nullptr, BigDecimal::TEN_POW, ctx, __FILEW__, __LINE__, L"IArrayObject<BigInteger>");
-		GCUtils<IArrayObjectPrimitive<int>>::dec(nullptr, BigDecimal::LONG_FIVE_POW_BIT_LENGTH, ctx, __FILEW__, __LINE__, L"IArrayObjectPrimitive<int>");
-		GCUtils<IArrayObjectPrimitive<int>>::dec(nullptr, BigDecimal::LONG_TEN_POW_BIT_LENGTH, ctx, __FILEW__, __LINE__, L"IArrayObjectPrimitive<int>");
-		GCUtils<IArrayObject<BigDecimal>>::dec(nullptr, BigDecimal::BI_SCALED_BY_ZERO, ctx, __FILEW__, __LINE__, L"IArrayObject<BigDecimal>");
-		GCUtils<IArrayObject<BigDecimal>>::dec(nullptr, BigDecimal::ZERO_SCALED_BY, ctx, __FILEW__, __LINE__, L"IArrayObject<BigDecimal>");
-		GCUtils<IArrayObjectPrimitive<wchar_t>>::dec(nullptr, BigDecimal::CH_ZEROS, ctx, __FILEW__, __LINE__, L"IArrayObjectPrimitive<wchar_t>");
-		GCUtils<LockObject>::dec(nullptr, BigDecimal::initLock, ctx, __FILEW__, __LINE__, L"LockObject");
-	}
+	static void __cleanUp(ThreadContext* ctx);
 	class ValueCompare {
 	public:
 		int operator() (BigDecimal* _this, BigDecimal* val, ThreadContext* ctx) const throw();

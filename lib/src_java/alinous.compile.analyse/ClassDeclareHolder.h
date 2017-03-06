@@ -44,12 +44,8 @@ public:
 	class ClassDeclares;
 	ClassDeclareHolder(const ClassDeclareHolder& base) = default;
 public:
-	ClassDeclareHolder(ThreadContext* ctx) throw()  : IObject(ctx), declares(GCUtils<HashMap<String,ClassDeclareHolder::ClassDeclares> >::ins(this, (new(ctx) HashMap<String,ClassDeclareHolder::ClassDeclares>(ctx)), ctx, __FILEW__, __LINE__, L""))
-	{
-	}
-	void __construct_impl(ThreadContext* ctx) throw() 
-	{
-	}
+	ClassDeclareHolder(ThreadContext* ctx) throw() ;
+	void __construct_impl(ThreadContext* ctx) throw() ;
 	virtual ~ClassDeclareHolder() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 private:
@@ -69,12 +65,8 @@ public:
 	public:
 		ClassDeclares(const ClassDeclares& base) = default;
 	public:
-		ClassDeclares(ThreadContext* ctx) throw()  : IObject(ctx), declares(GCUtils<HashMap<String,AlinousClass> >::ins(this, (new(ctx) HashMap<String,AlinousClass>(ctx)), ctx, __FILEW__, __LINE__, L""))
-		{
-		}
-		void __construct_impl(ThreadContext* ctx) throw() 
-		{
-		}
+		ClassDeclares(ThreadContext* ctx) throw() ;
+		void __construct_impl(ThreadContext* ctx) throw() ;
 		virtual ~ClassDeclares() throw();
 		virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 	private:
@@ -86,15 +78,13 @@ public:
 		static bool __init_done;
 		static bool __init_static_variables();
 	public:
-		static void __cleanUp(ThreadContext* ctx){
-		}
+		static void __cleanUp(ThreadContext* ctx);
 	};
 
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}}

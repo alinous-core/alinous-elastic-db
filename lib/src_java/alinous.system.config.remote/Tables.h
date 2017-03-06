@@ -71,12 +71,8 @@ class Tables final : public IAlinousConfigElement, public virtual IObject {
 public:
 	Tables(const Tables& base) = default;
 public:
-	Tables(ThreadContext* ctx) throw()  : IObject(ctx), IAlinousConfigElement(ctx), list(GCUtils<List<Table> >::ins(this, (new(ctx) ArrayList<Table>(ctx)), ctx, __FILEW__, __LINE__, L""))
-	{
-	}
-	void __construct_impl(ThreadContext* ctx) throw() 
-	{
-	}
+	Tables(ThreadContext* ctx) throw() ;
+	void __construct_impl(ThreadContext* ctx) throw() ;
 	virtual ~Tables() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 private:
@@ -90,8 +86,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}}}

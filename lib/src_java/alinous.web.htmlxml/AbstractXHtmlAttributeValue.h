@@ -31,12 +31,8 @@ class AbstractXHtmlAttributeValue : public AbstractXHtmlElement {
 public:
 	AbstractXHtmlAttributeValue(const AbstractXHtmlAttributeValue& base) = default;
 public:
-	AbstractXHtmlAttributeValue(ThreadContext* ctx) throw()  : IObject(ctx), AbstractXHtmlElement(ctx), value(nullptr)
-	{
-	}
-	void __construct_impl(ThreadContext* ctx) throw() 
-	{
-	}
+	AbstractXHtmlAttributeValue(ThreadContext* ctx) throw() ;
+	void __construct_impl(ThreadContext* ctx) throw() ;
 	virtual ~AbstractXHtmlAttributeValue() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 public:
@@ -48,8 +44,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}}

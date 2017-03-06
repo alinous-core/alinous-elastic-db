@@ -102,21 +102,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-		GCUtils<String>::dec(nullptr, DomConverter::GT, ctx, __FILEW__, __LINE__, L"String");
-		GCUtils<String>::dec(nullptr, DomConverter::LT, ctx, __FILEW__, __LINE__, L"String");
-		GCUtils<String>::dec(nullptr, DomConverter::QUOTE, ctx, __FILEW__, __LINE__, L"String");
-		GCUtils<String>::dec(nullptr, DomConverter::DOUBLE_QUOTE, ctx, __FILEW__, __LINE__, L"String");
-		GCUtils<String>::dec(nullptr, DomConverter::SRC, ctx, __FILEW__, __LINE__, L"String");
-		GCUtils<String>::dec(nullptr, DomConverter::EQUALS, ctx, __FILEW__, __LINE__, L"String");
-		GCUtils<String>::dec(nullptr, DomConverter::A, ctx, __FILEW__, __LINE__, L"String");
-		GCUtils<String>::dec(nullptr, DomConverter::IMG, ctx, __FILEW__, __LINE__, L"String");
-		GCUtils<String>::dec(nullptr, DomConverter::SPACE, ctx, __FILEW__, __LINE__, L"String");
-		GCUtils<String>::dec(nullptr, DomConverter::TAB, ctx, __FILEW__, __LINE__, L"String");
-		GCUtils<String>::dec(nullptr, DomConverter::NEW_LINE, ctx, __FILEW__, __LINE__, L"String");
-		GCUtils<String>::dec(nullptr, DomConverter::SLASH, ctx, __FILEW__, __LINE__, L"String");
-		GCUtils<String>::dec(nullptr, DomConverter::BACK_SLASH, ctx, __FILEW__, __LINE__, L"String");
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}

@@ -30,12 +30,8 @@ class FileStorageEntry final : public virtual IObject {
 public:
 	FileStorageEntry(const FileStorageEntry& base) = default;
 public:
-	FileStorageEntry(ThreadContext* ctx) throw()  : IObject(ctx), position(0), oid(0), used(0), data(nullptr)
-	{
-	}
-	void __construct_impl(ThreadContext* ctx) throw() 
-	{
-	}
+	FileStorageEntry(ThreadContext* ctx) throw() ;
+	void __construct_impl(ThreadContext* ctx) throw() ;
 	virtual ~FileStorageEntry() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 public:
@@ -51,8 +47,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}}

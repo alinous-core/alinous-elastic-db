@@ -11,13 +11,13 @@
 #include "com.google.re2j/RE2.h"
 #include "com.google.re2j/Machine.h"
 #include "com.google.re2j/PatternSyntaxException.h"
+#include "com.google.re2j/Utils.h"
+#include "com.google.re2j/Unicode.h"
 #include "com.google.re2j/CharGroup.h"
 #include "com.google.re2j/CharClass.h"
 #include "com.google.re2j/Parser.h"
-#include "com.google.re2j/Unicode.h"
 #include "com.google.re2j/Compiler.h"
 #include "com.google.re2j/UnicodeTable2.h"
-#include "com.google.re2j/Utils.h"
 #include "com.google.re2j/UnicodeTables.h"
 #include "com.google.re2j/Pattern.h"
 #include "com.google.re2j/Matcher.h"
@@ -38,6 +38,12 @@ bool Prog::__init_static_variables(){
 	ctx->localGC();
 	delete ctx;
 	return true;
+}
+ Prog::Prog(ThreadContext* ctx) throw()  : IObject(ctx), start(0), numCap(2), inst(GCUtils<List<Inst> >::ins(this, (new(ctx) ArrayList<Inst>(ctx)), ctx, __FILEW__, __LINE__, L""))
+{
+}
+void Prog::__construct_impl(ThreadContext* ctx) throw() 
+{
 }
  Prog::~Prog() throw() 
 {
@@ -186,6 +192,8 @@ int Prog::append(int l1, int l2, ThreadContext* ctx) throw()
 		i->arg = l2;
 	}
 	return l1;
+}
+void Prog::__cleanUp(ThreadContext* ctx){
 }
 }}}
 

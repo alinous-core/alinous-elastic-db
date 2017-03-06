@@ -53,12 +53,8 @@ public:
 	class QueueExecutor;
 	SequentialBackgroundJob(const SequentialBackgroundJob& base) = default;
 public:
-	SequentialBackgroundJob(ThreadContext* ctx) throw()  : IObject(ctx), actions(GCUtils<LinkedList<IThreadAction> >::ins(this, (new(ctx) LinkedList<IThreadAction>(ctx)), ctx, __FILEW__, __LINE__, L"")), actionLock(__GC_INS(this, (new(ctx) LockObject(ctx)), LockObject)), pool(nullptr), executor(nullptr), executing(0), lastException(nullptr)
-	{
-	}
-	void __construct_impl(ThreadContext* ctx) throw() 
-	{
-	}
+	SequentialBackgroundJob(ThreadContext* ctx) throw() ;
+	void __construct_impl(ThreadContext* ctx) throw() ;
 	virtual ~SequentialBackgroundJob() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 private:
@@ -95,15 +91,13 @@ public:
 		static bool __init_done;
 		static bool __init_static_variables();
 	public:
-		static void __cleanUp(ThreadContext* ctx){
-		}
+		static void __cleanUp(ThreadContext* ctx);
 	};
 
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}}

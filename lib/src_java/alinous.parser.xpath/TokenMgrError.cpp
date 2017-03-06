@@ -3,6 +3,7 @@
 
 #include "alinous.parser.xpath/TokenMgrError.h"
 #include "alinous.html.xpath/IVariableValue.h"
+#include "alinous.html.xpath/StringValue.h"
 #include "alinous.html/IDomObject.h"
 #include "alinous.html/Attribute.h"
 #include "alinous.html/DomNode.h"
@@ -12,12 +13,9 @@
 #include "alinous.html.xpath/XpathIdentifier.h"
 #include "alinous.html.xpath/AttributeIdentifier.h"
 #include "alinous.html.xpath/IXpathBooleanCondition.h"
-#include "alinous.html.xpath.match/MatchCursor.h"
 #include "alinous.html.xpath/XpathNumber.h"
-#include "alinous.html.xpath/XpathFunctionArgument.h"
 #include "alinous.html.xpath/XpathFunction.h"
 #include "alinous.html.xpath/XpathFilter.h"
-#include "alinous.html.xpath/XpathContextLocationCtrl.h"
 #include "alinous.html.xpath/XpathContextLocation.h"
 #include "alinous.html.xpath/XpathContext.h"
 #include "alinous.html.xpath/Xpath.h"
@@ -29,8 +27,8 @@
 #include "alinous.parser.xpath/AlinousXpathParserConstants.h"
 #include "alinous.parser.xpath/AlinousXpathParserTokenManager.h"
 #include "alinous.parser.xpath/AlinousXpathParser.h"
-#include "alinous.compile/Token.h"
 #include "alinous.compile/JavaCharStream.h"
+#include "alinous.compile/Token.h"
 #include "alinous.compile/ParseException.h"
 
 namespace alinous {namespace parser {namespace xpath {
@@ -54,6 +52,12 @@ bool TokenMgrError::__init_static_variables(){
 	ctx->localGC();
 	delete ctx;
 	return true;
+}
+ TokenMgrError::TokenMgrError(ThreadContext* ctx) throw()  : IObject(ctx), Error(ctx), errorCode(0)
+{
+}
+void TokenMgrError::__construct_impl(ThreadContext* ctx) throw() 
+{
 }
  TokenMgrError::TokenMgrError(String* message, int reason, ThreadContext* ctx) throw()  : IObject(ctx), Error(message, ctx), errorCode(0)
 {
@@ -143,6 +147,8 @@ String* TokenMgrError::addEscapes(String* str, ThreadContext* ctx) throw()
 String* TokenMgrError::LexicalError(bool EOFSeen, int lexState, int errorLine, int errorColumn, String* errorAfter, wchar_t curChar, ThreadContext* ctx) throw() 
 {
 	return (ConstStr::getCNST_STR_1313()->clone(ctx)->append(errorLine, ctx)->append(ConstStr::getCNST_STR_1314(), ctx)->append(errorColumn, ctx)->append(ConstStr::getCNST_STR_1315(), ctx)->append((EOFSeen ? ConstStr::getCNST_STR_1316() : (ConstStr::getCNST_STR_1317()->clone(ctx)->append(addEscapes(String::valueOf(curChar, ctx), ctx), ctx)->append(ConstStr::getCNST_STR_1317(), ctx))->clone(ctx)->append(ConstStr::getCNST_STR_887(), ctx)->append(((int)curChar), ctx)->append(ConstStr::getCNST_STR_1318(), ctx)), ctx)->append(ConstStr::getCNST_STR_1319(), ctx)->append(addEscapes(errorAfter, ctx), ctx)->append(ConstStr::getCNST_STR_1317(), ctx));
+}
+void TokenMgrError::__cleanUp(ThreadContext* ctx){
 }
 }}}
 

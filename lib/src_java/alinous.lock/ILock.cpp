@@ -28,6 +28,12 @@ bool ILock::__init_static_variables(){
 	delete ctx;
 	return true;
 }
+ ILock::ILock(ThreadContext* ctx) throw()  : IObject(ctx)
+{
+}
+void ILock::__construct_impl(ThreadContext* ctx) throw() 
+{
+}
  ILock::~ILock() throw() 
 {
 	ThreadContext *ctx = ThreadContext::getCurentContext();
@@ -40,6 +46,8 @@ void ILock::__releaseRegerences(bool prepare, ThreadContext* ctx) throw()
 	if(!prepare){
 		return;
 	}
+}
+void ILock::__cleanUp(ThreadContext* ctx){
 }
 }}
 

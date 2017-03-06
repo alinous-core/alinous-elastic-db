@@ -120,12 +120,8 @@ class TimeVariable final : public AbstractTypedVariable {
 public:
 	TimeVariable(const TimeVariable& base) = default;
 public:
-	TimeVariable(ThreadContext* ctx) throw()  : IObject(ctx), AbstractTypedVariable(ctx), value(nullptr)
-	{
-	}
-	void __construct_impl(ThreadContext* ctx) throw() 
-	{
-	}
+	TimeVariable(ThreadContext* ctx) throw() ;
+	void __construct_impl(ThreadContext* ctx) throw() ;
 	TimeVariable(TimeOnlyTimestamp* time, ThreadContext* ctx) throw() ;
 	void __construct_impl(TimeOnlyTimestamp* time, ThreadContext* ctx) throw() ;
 	virtual ~TimeVariable() throw();
@@ -353,8 +349,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 	class ValueCompare {
 	public:
 		int operator() (VariantValue* _this, VariantValue* variable, ThreadContext* ctx) const throw();

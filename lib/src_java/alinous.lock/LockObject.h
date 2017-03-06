@@ -26,20 +26,15 @@ class LockObject final : public ThreadMonitor, public virtual IObject {
 public:
 	LockObject(const LockObject& base) = default;
 public:
-	LockObject(ThreadContext* ctx) throw()  : IObject(ctx), ThreadMonitor(ctx)
-	{
-	}
-	void __construct_impl(ThreadContext* ctx) throw() 
-	{
-	}
+	LockObject(ThreadContext* ctx) throw() ;
+	void __construct_impl(ThreadContext* ctx) throw() ;
 	virtual ~LockObject() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}

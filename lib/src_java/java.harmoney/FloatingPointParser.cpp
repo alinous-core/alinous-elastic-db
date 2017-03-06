@@ -5,17 +5,10 @@
 #include "java.lang/Comparable.h"
 #include "java.lang/Integer.h"
 #include "com.google.re2j/PatternSyntaxException.h"
+#include "java.harmoney/HexStringParser.h"
 #include "java.harmoney/FloatingPointParser.h"
 #include "java.lang/Double.h"
 #include "java.harmoney/NumberConverter.h"
-#include "com.google.re2j/Inst.h"
-#include "com.google.re2j/Prog.h"
-#include "com.google.re2j/MachineInput.h"
-#include "com.google.re2j/Machine.h"
-#include "com.google.re2j/RE2.h"
-#include "com.google.re2j/Pattern.h"
-#include "com.google.re2j/Matcher.h"
-#include "java.harmoney/HexStringParser.h"
 
 namespace java {namespace harmoney {
 
@@ -38,6 +31,12 @@ bool FloatingPointParser::__init_static_variables(){
 	delete ctx;
 	return true;
 }
+ FloatingPointParser::FloatingPointParser(ThreadContext* ctx) throw()  : IObject(ctx)
+{
+}
+void FloatingPointParser::__construct_impl(ThreadContext* ctx) throw() 
+{
+}
  FloatingPointParser::~FloatingPointParser() throw() 
 {
 	ThreadContext *ctx = ThreadContext::getCurentContext();
@@ -50,6 +49,9 @@ void FloatingPointParser::__releaseRegerences(bool prepare, ThreadContext* ctx) 
 	if(!prepare){
 		return;
 	}
+}
+void FloatingPointParser::includes(HexStringParser* arg0, ThreadContext* ctx) throw() 
+{
 }
 double FloatingPointParser::doparseDouble(String* s, ThreadContext* ctx)
 {
@@ -290,6 +292,8 @@ FloatingPointParser::StringExponentPair* FloatingPointParser::initialParse(Strin
 	}
 	return (new(ctx) FloatingPointParser::StringExponentPair(s, e, negative, ctx));
 }
+void FloatingPointParser::__cleanUp(ThreadContext* ctx){
+}
 }}
 
 namespace java {namespace harmoney {
@@ -336,6 +340,8 @@ void FloatingPointParser::StringExponentPair::__releaseRegerences(bool prepare, 
 	if(!prepare){
 		return;
 	}
+}
+void FloatingPointParser::StringExponentPair::__cleanUp(ThreadContext* ctx){
 }
 }}
 

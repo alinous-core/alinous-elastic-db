@@ -30,6 +30,12 @@ bool FileStorageEntryWriter::__init_static_variables(){
 	delete ctx;
 	return true;
 }
+ FileStorageEntryWriter::FileStorageEntryWriter(ThreadContext* ctx) throw()  : IObject(ctx), storage(nullptr), block(nullptr), block2(nullptr), block3(nullptr)
+{
+}
+void FileStorageEntryWriter::__construct_impl(ThreadContext* ctx) throw() 
+{
+}
  FileStorageEntryWriter::~FileStorageEntryWriter() throw() 
 {
 	ThreadContext *ctx = ThreadContext::getCurentContext();
@@ -62,7 +68,8 @@ FileStorageEntryWriter* FileStorageEntryWriter::init(IFileStorage* storage, Thre
 }
 void FileStorageEntryWriter::write(FileStorageEntry* entry, ThreadContext* ctx)
 {
-	storage->getGate(ctx)->close(ctx);
+	ConcurrentGate* gate = storage->getGate(ctx);
+	gate->close(ctx);
 	if(entry->position <= (long long)0)
 	{
 		{
@@ -90,7 +97,7 @@ void FileStorageEntryWriter::write(FileStorageEntry* entry, ThreadContext* ctx)
 			throw e;
 		}
 	}
-	storage->getGate(ctx)->open(ctx);
+	gate->open(ctx);
 }
 void FileStorageEntryWriter::end(ThreadContext* ctx) throw() 
 {
@@ -108,6 +115,8 @@ void FileStorageEntryWriter::insertNewEntry(FileStorageEntry* entry, ThreadConte
 		entry->oid = storage->newOid(ctx);
 	}
 	storage->updateEntry(entry, block, block2, block3, ctx);
+}
+void FileStorageEntryWriter::__cleanUp(ThreadContext* ctx){
 }
 }}}
 

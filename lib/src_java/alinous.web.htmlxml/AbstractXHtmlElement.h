@@ -69,12 +69,8 @@ public:
 public:
 	AbstractXHtmlElement(const AbstractXHtmlElement& base) = default;
 public:
-	AbstractXHtmlElement(ThreadContext* ctx) throw()  : IObject(ctx), parts(nullptr), isDynamic(false), line(0), startPosition(0), endLine(0), _endPosition(0)
-	{
-	}
-	void __construct_impl(ThreadContext* ctx) throw() 
-	{
-	}
+	AbstractXHtmlElement(ThreadContext* ctx) throw() ;
+	void __construct_impl(ThreadContext* ctx) throw() ;
 	virtual ~AbstractXHtmlElement() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 public:
@@ -105,8 +101,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}}

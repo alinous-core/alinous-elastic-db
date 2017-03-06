@@ -65,12 +65,8 @@ class FunctionArgumentsListDefine final : public IDeclare {
 public:
 	FunctionArgumentsListDefine(const FunctionArgumentsListDefine& base) = default;
 public:
-	FunctionArgumentsListDefine(ThreadContext* ctx) throw()  : IObject(ctx), IDeclare(ctx), list(GCUtils<ArrayList<FunctionArgumentDefine> >::ins(this, (new(ctx) ArrayList<FunctionArgumentDefine>(ctx)), ctx, __FILEW__, __LINE__, L""))
-	{
-	}
-	void __construct_impl(ThreadContext* ctx) throw() 
-	{
-	}
+	FunctionArgumentsListDefine(ThreadContext* ctx) throw() ;
+	void __construct_impl(ThreadContext* ctx) throw() ;
 	virtual ~FunctionArgumentsListDefine() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 private:
@@ -94,8 +90,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}}}

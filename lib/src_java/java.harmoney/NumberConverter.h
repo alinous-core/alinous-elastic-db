@@ -35,12 +35,8 @@ class NumberConverter final : public virtual IObject {
 public:
 	NumberConverter(const NumberConverter& base) = default;
 public:
-	NumberConverter(ThreadContext* ctx) throw()  : IObject(ctx), setCount(0), getCount(0), uArray(__GC_INS(this, ((IArrayObjectPrimitive<int>*)new(ctx) ArrayObjectPrimitive<int>(ArrayAllocatorPrimitive<int>::allocatep(ctx, 64), ctx)), IArrayObjectPrimitive<int>)), firstK(0)
-	{
-	}
-	void __construct_impl(ThreadContext* ctx) throw() 
-	{
-	}
+	NumberConverter(ThreadContext* ctx) throw() ;
+	void __construct_impl(ThreadContext* ctx) throw() ;
 	virtual ~NumberConverter() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 private:
@@ -66,9 +62,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-		GCUtils<IArrayObjectPrimitive<long long>>::dec(nullptr, NumberConverter::TEN_TO_THE, ctx, __FILEW__, __LINE__, L"IArrayObjectPrimitive<long long>");
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}

@@ -44,12 +44,8 @@ class XpathAndStatement final : public AbstractContainerStatement {
 public:
 	XpathAndStatement(const XpathAndStatement& base) = default;
 public:
-	XpathAndStatement(ThreadContext* ctx) throw()  : IObject(ctx), AbstractContainerStatement(ctx)
-	{
-	}
-	void __construct_impl(ThreadContext* ctx) throw() 
-	{
-	}
+	XpathAndStatement(ThreadContext* ctx) throw() ;
+	void __construct_impl(ThreadContext* ctx) throw() ;
 	virtual ~XpathAndStatement() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 public:
@@ -59,8 +55,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}}

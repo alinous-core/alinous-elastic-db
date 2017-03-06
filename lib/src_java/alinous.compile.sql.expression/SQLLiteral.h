@@ -131,12 +131,8 @@ public:
 public:
 	SQLLiteral(SQLLiteral::sqlliteralType type, ThreadContext* ctx) throw() ;
 	void __construct_impl(SQLLiteral::sqlliteralType type, ThreadContext* ctx) throw() ;
-	SQLLiteral(ThreadContext* ctx) throw()  : IObject(ctx), AbstractSQLExpression(ctx), vvalue(nullptr), value(nullptr)
-	{
-	}
-	void __construct_impl(ThreadContext* ctx) throw() 
-	{
-	}
+	SQLLiteral(ThreadContext* ctx) throw() ;
+	void __construct_impl(ThreadContext* ctx) throw() ;
 	virtual ~SQLLiteral() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 public:
@@ -177,8 +173,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}}}

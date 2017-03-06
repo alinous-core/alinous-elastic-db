@@ -60,8 +60,14 @@ class RemoteStorageResponceActionFactory;}}}
 namespace alinous {namespace remote {namespace socket {
 class SocketServer;}}}
 
-namespace alinous {namespace remote {namespace db {namespace command {namespace data {
-class SchemasStructureInfoData;}}}}}
+namespace java {namespace lang {
+class Throwable;}}
+
+namespace alinous {namespace system {
+class ISystemLog;}}
+
+namespace alinous {namespace remote {namespace db {namespace client {namespace command {namespace data {
+class SchemasStructureInfoData;}}}}}}
 
 namespace alinous {namespace db {namespace table {
 class TableMetadata;}}}
@@ -103,12 +109,13 @@ using ::alinous::db::SchemaManager;
 using ::alinous::db::table::DatabaseException;
 using ::alinous::db::table::TableMetadata;
 using ::alinous::lock::LockObject;
-using ::alinous::remote::db::command::data::SchemasStructureInfoData;
+using ::alinous::remote::db::client::command::data::SchemasStructureInfoData;
 using ::alinous::remote::socket::SocketServer;
 using ::alinous::runtime::dom::VariableException;
 using ::alinous::runtime::parallel::ThreadPool;
 using ::alinous::system::AlinousCore;
 using ::alinous::system::AlinousException;
+using ::alinous::system::ISystemLog;
 using ::alinous::system::config::AlinousInitException;
 using ::alinous::system::config::remote::MonitorRef;
 
@@ -153,6 +160,7 @@ public:
 	void start(AlinousCore* core, ThreadContext* ctx);
 	void dispose(ThreadContext* ctx) throw() ;
 	AlinousCore* getCore(ThreadContext* ctx) throw() ;
+	void logError(Throwable* e, ThreadContext* ctx) throw() ;
 	long long getSchemeInfo(SchemasStructureInfoData* data, String* region, String* host, int port, bool ipv6, ThreadContext* ctx) throw() ;
 	void createSchema(String* schemaName, ThreadContext* ctx);
 	void createTable(TableMetadata* metadata, ThreadContext* ctx);
@@ -163,8 +171,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}}

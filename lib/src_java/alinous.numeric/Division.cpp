@@ -1,7 +1,12 @@
 #include "include/global.h"
 
 
+#include "java.util/Locale.h"
+#include "java.util/Calendar.h"
+#include "java.util/GregorianCalendar.h"
+#include "java.util/Date.h"
 #include "alinous.numeric/InternalDate.h"
+#include "java.util/TimeZone.h"
 #include "alinous.numeric/TimeOnlyTimestamp.h"
 #include "java.util/Random.h"
 #include "java.lang/Number.h"
@@ -35,6 +40,12 @@ bool Division::__init_static_variables(){
 	ctx->localGC();
 	delete ctx;
 	return true;
+}
+ Division::Division(ThreadContext* ctx) throw()  : IObject(ctx)
+{
+}
+void Division::__construct_impl(ThreadContext* ctx) throw() 
+{
 }
  Division::~Division() throw() 
 {
@@ -726,6 +737,8 @@ void Division::monReduction(IArrayObjectPrimitive<int>* res, BigInteger* modulus
 	{
 		res->set(res->get(j + modulusLen),j, ctx);
 	}
+}
+void Division::__cleanUp(ThreadContext* ctx){
 }
 }}
 

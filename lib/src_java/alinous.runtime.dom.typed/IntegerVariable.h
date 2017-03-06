@@ -123,12 +123,8 @@ class IntegerVariable final : public AbstractTypedVariable {
 public:
 	IntegerVariable(const IntegerVariable& base) = default;
 public:
-	IntegerVariable(ThreadContext* ctx) throw()  : IObject(ctx), AbstractTypedVariable(ctx), value(0)
-	{
-	}
-	void __construct_impl(ThreadContext* ctx) throw() 
-	{
-	}
+	IntegerVariable(ThreadContext* ctx) throw() ;
+	void __construct_impl(ThreadContext* ctx) throw() ;
 	IntegerVariable(int value, ThreadContext* ctx) throw() ;
 	void __construct_impl(int value, ThreadContext* ctx) throw() ;
 	virtual ~IntegerVariable() throw();
@@ -356,8 +352,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 	class ValueCompare {
 	public:
 		int operator() (VariantValue* _this, VariantValue* variable, ThreadContext* ctx) const throw();

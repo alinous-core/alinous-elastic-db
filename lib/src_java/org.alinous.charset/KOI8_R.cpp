@@ -84,6 +84,8 @@ bool KOI8_R::contains(String* cs, ThreadContext* ctx) throw()
 {
 	return cs->equalsIgnoreCase(ConstStr::getCNST_STR_913(), ctx) || cs->equalsIgnoreCase(ConstStr::getCNST_STR_893(), ctx) || cs->equalsIgnoreCase(ConstStr::getCNST_STR_892(), ctx);
 }
+void KOI8_R::__cleanUp(ThreadContext* ctx){
+}
 }}}
 
 namespace org {namespace alinous {namespace charset {
@@ -104,6 +106,12 @@ bool KOI8_R::Decoder::__init_static_variables(){
 	ctx->localGC();
 	delete ctx;
 	return true;
+}
+ KOI8_R::Decoder::Decoder(ThreadContext* ctx) throw()  : IObject(ctx), CharsetDecoder(ctx)
+{
+}
+void KOI8_R::Decoder::__construct_impl(ThreadContext* ctx) throw() 
+{
 }
  KOI8_R::Decoder::~Decoder() throw() 
 {
@@ -175,6 +183,8 @@ CoderResult* KOI8_R::Decoder::decodeLoop(ByteBuffer* bb, CharBuffer* cb, ThreadC
 	}
 	return CoderResult::UNDERFLOW;
 }
+void KOI8_R::Decoder::__cleanUp(ThreadContext* ctx){
+}
 }}}
 
 namespace org {namespace alinous {namespace charset {
@@ -197,6 +207,12 @@ bool KOI8_R::Encoder::__init_static_variables(){
 	ctx->localGC();
 	delete ctx;
 	return true;
+}
+ KOI8_R::Encoder::Encoder(ThreadContext* ctx) throw()  : IObject(ctx), CharsetEncoder(ctx)
+{
+}
+void KOI8_R::Encoder::__construct_impl(ThreadContext* ctx) throw() 
+{
 }
  KOI8_R::Encoder::~Encoder() throw() 
 {
@@ -362,6 +378,8 @@ CoderResult* KOI8_R::Encoder::encodeLoop(CharBuffer* cb, ByteBuffer* bb, ThreadC
 		}
 	}
 	return CoderResult::UNDERFLOW;
+}
+void KOI8_R::Encoder::__cleanUp(ThreadContext* ctx){
 }
 }}}
 

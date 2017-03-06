@@ -19,12 +19,8 @@ class UTF_16LE final : public UTF_16 {
 public:
 	UTF_16LE(const UTF_16LE& base) = default;
 public:
-	UTF_16LE(ThreadContext* ctx) throw()  : IObject(ctx), UTF_16(ctx)
-	{
-	}
-	void __construct_impl(ThreadContext* ctx) throw() 
-	{
-	}
+	UTF_16LE(ThreadContext* ctx) throw() ;
+	void __construct_impl(ThreadContext* ctx) throw() ;
 	virtual ~UTF_16LE() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 public:
@@ -34,8 +30,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}}

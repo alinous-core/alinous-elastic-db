@@ -59,5 +59,7 @@ String* HttpUploadParameter::getStringValue(ThreadContext* ctx) throw()
 {
 	return this->name;
 }
+void HttpUploadParameter::__cleanUp(ThreadContext* ctx){
+}
 }}}}
 

@@ -3,10 +3,7 @@
 
 #include "alinous.remote.socket/NetworkBinaryBuffer.h"
 #include "alinous.lock/LockObject.h"
-#include "alinous.runtime.parallel/LaunchJoin.h"
 #include "alinous.runtime.parallel/ThreadPool.h"
-#include "alinous.runtime.parallel/IThreadAction.h"
-#include "alinous.runtime.parallel/AlinousThread.h"
 #include "alinous.system/ISystemLog.h"
 #include "alinous.remote.socket/ISocketActionFactory.h"
 #include "alinous.remote.socket/SocketServer.h"
@@ -221,6 +218,8 @@ void NetworkBinaryBuffer::extend(int length, ThreadContext* ctx) throw()
 		this->buff->clear(ctx);
 		this->buff->put(bytes, 0, len, ctx);
 	}
+}
+void NetworkBinaryBuffer::__cleanUp(ThreadContext* ctx){
 }
 }}}
 

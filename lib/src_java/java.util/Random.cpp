@@ -8,9 +8,9 @@
 #include "java.util/GregorianCalendar.h"
 #include "java.util/Date.h"
 #include "alinous.numeric/InternalDate.h"
+#include "java.util/TimeZones.h"
 #include "java.sql/Date.h"
 #include "java.util/BitSet.h"
-#include "java.util/TimeZones.h"
 #include "java.util/Random.h"
 #include "java.util/Arrays.h"
 
@@ -148,6 +148,8 @@ int Random::next(int bits, ThreadContext* ctx) throw()
 {
 	seed = (seed * multiplier + 0xbL) & ((1L << 48) - 1);
 	return ((int)(((unsigned long long)seed)>> (48 - bits)));
+}
+void Random::__cleanUp(ThreadContext* ctx){
 }
 }}
 

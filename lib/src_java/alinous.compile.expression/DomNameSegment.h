@@ -65,12 +65,8 @@ class DomNameSegment final : public IDomSegment {
 public:
 	DomNameSegment(const DomNameSegment& base) = default;
 public:
-	DomNameSegment(ThreadContext* ctx) throw()  : IObject(ctx), IDomSegment(ctx), name(nullptr), segmentVariableType(IDomVariable::TYPE_DOM)
-	{
-	}
-	void __construct_impl(ThreadContext* ctx) throw() 
-	{
-	}
+	DomNameSegment(ThreadContext* ctx) throw() ;
+	void __construct_impl(ThreadContext* ctx) throw() ;
 	DomNameSegment(String* name, ThreadContext* ctx) throw() ;
 	void __construct_impl(String* name, ThreadContext* ctx) throw() ;
 	virtual ~DomNameSegment() throw();
@@ -104,8 +100,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}}

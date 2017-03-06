@@ -31,12 +31,8 @@ class DebugProbe final : public virtual IObject {
 public:
 	DebugProbe(const DebugProbe& base) = default;
 public:
-	DebugProbe(ThreadContext* ctx) throw()  : IObject(ctx), list(GCUtils<ArrayList<DebugProbeSection> >::ins(this, (new(ctx) ArrayList<DebugProbeSection>(ctx)), ctx, __FILEW__, __LINE__, L""))
-	{
-	}
-	void __construct_impl(ThreadContext* ctx) throw() 
-	{
-	}
+	DebugProbe(ThreadContext* ctx) throw() ;
+	void __construct_impl(ThreadContext* ctx) throw() ;
 	virtual ~DebugProbe() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 private:
@@ -52,9 +48,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-		GCUtils<DebugProbe>::dec(nullptr, DebugProbe::inst, ctx, __FILEW__, __LINE__, L"DebugProbe");
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}

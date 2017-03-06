@@ -29,12 +29,8 @@ class IDomObject : public virtual IObject {
 public:
 	IDomObject(const IDomObject& base) = default;
 public:
-	IDomObject(ThreadContext* ctx) throw()  : IObject(ctx)
-	{
-	}
-	void __construct_impl(ThreadContext* ctx) throw() 
-	{
-	}
+	IDomObject(ThreadContext* ctx) throw() ;
+	void __construct_impl(ThreadContext* ctx) throw() ;
 	virtual ~IDomObject() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 public:
@@ -54,8 +50,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}

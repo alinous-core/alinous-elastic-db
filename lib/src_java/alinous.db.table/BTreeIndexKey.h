@@ -60,12 +60,8 @@ class BTreeIndexKey final : public IBTreeKey, public virtual IObject {
 public:
 	BTreeIndexKey(const BTreeIndexKey& base) = default;
 public:
-	BTreeIndexKey(ThreadContext* ctx) throw()  : IObject(ctx), IBTreeKey(ctx), values(GCUtils<ArrayList<VariantValue> >::ins(this, (new(ctx) ArrayList<VariantValue>(ctx)), ctx, __FILEW__, __LINE__, L""))
-	{
-	}
-	void __construct_impl(ThreadContext* ctx) throw() 
-	{
-	}
+	BTreeIndexKey(ThreadContext* ctx) throw() ;
+	void __construct_impl(ThreadContext* ctx) throw() ;
 	BTreeIndexKey(ScanResultIndexKey* indexKeyValue, ThreadContext* ctx) throw() ;
 	void __construct_impl(ScanResultIndexKey* indexKeyValue, ThreadContext* ctx) throw() ;
 	BTreeIndexKey(IBtreeTableIndex* index, IDatabaseRecord* dbrecord, ThreadContext* ctx) throw() ;
@@ -86,8 +82,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 	class ValueCompare {
 	public:
 		int operator() (IBTreeKey* _this, IBTreeKey* another, ThreadContext* ctx) const throw();

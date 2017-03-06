@@ -23,12 +23,8 @@ class ConnectInfo final : public virtual IObject {
 public:
 	ConnectInfo(const ConnectInfo& base) = default;
 public:
-	ConnectInfo(ThreadContext* ctx) throw()  : IObject(ctx), user(nullptr), pass(nullptr)
-	{
-	}
-	void __construct_impl(ThreadContext* ctx) throw() 
-	{
-	}
+	ConnectInfo(ThreadContext* ctx) throw() ;
+	void __construct_impl(ThreadContext* ctx) throw() ;
 	virtual ~ConnectInfo() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 private:
@@ -43,8 +39,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}

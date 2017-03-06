@@ -120,12 +120,8 @@ class SQLJoinCondition final : public AbstractSQLBooleanExpression {
 public:
 	SQLJoinCondition(const SQLJoinCondition& base) = default;
 public:
-	SQLJoinCondition(ThreadContext* ctx) throw()  : IObject(ctx), AbstractSQLBooleanExpression(ctx), condition(nullptr)
-	{
-	}
-	void __construct_impl(ThreadContext* ctx) throw() 
-	{
-	}
+	SQLJoinCondition(ThreadContext* ctx) throw() ;
+	void __construct_impl(ThreadContext* ctx) throw() ;
 	virtual ~SQLJoinCondition() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 private:
@@ -163,8 +159,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}}}}

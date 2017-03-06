@@ -2,35 +2,14 @@
 
 
 #include "alinous.remote.socket/ISocketConnection.h"
-#include "alinous.lock/LockObject.h"
 #include "alinous.remote.socket/SocketConnectionPool.h"
 #include "alinous.remote.socket/ISocketConnectionFactory.h"
 #include "alinous.remote.monitor.client/MonitorConnectionInfo.h"
 #include "alinous.remote.monitor.client/MonitorConnection.h"
 #include "alinous.remote.monitor.client/MonitorClientConnectionFactory.h"
-#include "alinous.remote.socket/NetworkBinaryBuffer.h"
 #include "alinous.remote.socket/ICommandData.h"
 #include "alinous.db.trx/DbVersionContext.h"
 #include "alinous.db/ICommidIdPublisher.h"
-#include "alinous.html.xpath/IVariableValue.h"
-#include "alinous.html/IDomObject.h"
-#include "alinous.html/Attribute.h"
-#include "alinous.html/DomNode.h"
-#include "alinous.html/DomDocument.h"
-#include "alinous.html.xpath/IXpathElement.h"
-#include "alinous.html.xpath.match/MatchCursor.h"
-#include "alinous.html.xpath.match/MatchCandidate.h"
-#include "alinous.html.xpath/IXpathStatement.h"
-#include "alinous.html.xpath.match/MatchCandidatesCollection.h"
-#include "alinous.html.xpath/XpathIdentifier.h"
-#include "alinous.html.xpath/AttributeIdentifier.h"
-#include "alinous.html.xpath/IXpathBooleanCondition.h"
-#include "alinous.html.xpath/XpathFilter.h"
-#include "alinous.html.xpath/XpathContextLocationCtrl.h"
-#include "alinous.html.xpath/XpathContextLocation.h"
-#include "alinous.html.xpath/XpathContext.h"
-#include "alinous.html.xpath/Xpath.h"
-#include "alinous.html.xpath.match/Matcher.h"
 #include "alinous.system.config/IAlinousConfigElement.h"
 #include "alinous.system.config.remote/MonitorRef.h"
 #include "alinous.remote.monitor.client/RemoteCommitIdPublisher.h"
@@ -93,6 +72,8 @@ int MonitorConnectionInfo::getPort(ThreadContext* ctx) throw()
 void MonitorConnectionInfo::setPort(int port, ThreadContext* ctx) throw() 
 {
 	this->port = port;
+}
+void MonitorConnectionInfo::__cleanUp(ThreadContext* ctx){
 }
 }}}}
 

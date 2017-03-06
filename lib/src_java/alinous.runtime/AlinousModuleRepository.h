@@ -7,6 +7,9 @@ namespace alinous {namespace system {
 class AlinousCore;}}
 
 namespace alinous {namespace system {namespace config {
+class AlinousConfig;}}}
+
+namespace alinous {namespace system {namespace config {
 class SystemInfo;}}}
 
 namespace alinous {namespace system {namespace config {
@@ -94,6 +97,7 @@ using ::alinous::db::table::DatabaseException;
 using ::alinous::runtime::engine::AlinousNullPointerException;
 using ::alinous::system::AlinousCore;
 using ::alinous::system::AlinousException;
+using ::alinous::system::config::AlinousConfig;
 using ::alinous::system::config::SystemInfo;
 using ::alinous::system::config::WebHandlerInfo;
 
@@ -123,8 +127,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}

@@ -10,6 +10,9 @@ namespace java {namespace io {
 class File;}}
 
 namespace alinous {namespace system {namespace config {
+class SystemInfo;}}}
+
+namespace alinous {namespace system {namespace config {
 class WebHandlerInfo;}}}
 
 namespace java {namespace lang {
@@ -34,6 +37,7 @@ using ::java::util::Iterator;
 using ::java::io::File;
 using ::alinous::system::config::AlinousConfig;
 using ::alinous::system::config::AlinousInitException;
+using ::alinous::system::config::SystemInfo;
 using ::alinous::system::config::WebHandlerInfo;
 
 
@@ -42,12 +46,8 @@ class DebugConfigLoader final : public virtual IObject {
 public:
 	DebugConfigLoader(const DebugConfigLoader& base) = default;
 public:
-	DebugConfigLoader(ThreadContext* ctx) throw()  : IObject(ctx), home(nullptr), lastUpdate(0), config(nullptr), moduleDir(nullptr), webDir(nullptr)
-	{
-	}
-	void __construct_impl(ThreadContext* ctx) throw() 
-	{
-	}
+	DebugConfigLoader(ThreadContext* ctx) throw() ;
+	void __construct_impl(ThreadContext* ctx) throw() ;
 	DebugConfigLoader(AlinousConfig* config, ThreadContext* ctx) throw() ;
 	void __construct_impl(AlinousConfig* config, ThreadContext* ctx) throw() ;
 	virtual ~DebugConfigLoader() throw();
@@ -72,8 +72,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}}

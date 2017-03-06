@@ -12,11 +12,11 @@ class RegionConnectionInfo;}}}}
 namespace alinous {namespace net {
 class AlinousSocket;}}
 
-namespace alinous {namespace remote {namespace region {namespace command {
-class NodeRegionConnectCommand;}}}}
+namespace alinous {namespace remote {namespace region {namespace client {namespace command {
+class NodeRegionConnectCommand;}}}}}
 
-namespace alinous {namespace remote {namespace region {namespace command {
-class AbstractNodeRegionCommand;}}}}
+namespace alinous {namespace remote {namespace region {namespace client {namespace command {
+class AbstractNodeRegionCommand;}}}}}
 
 namespace alinous {namespace db {
 class AlinousDbException;}}
@@ -24,8 +24,8 @@ class AlinousDbException;}}
 namespace java {namespace io {
 class IOException;}}
 
-namespace alinous {namespace remote {namespace region {namespace command {
-class NodeRegionFinishConnectionCommand;}}}}
+namespace alinous {namespace remote {namespace region {namespace client {namespace command {
+class NodeRegionFinishConnectionCommand;}}}}}
 
 namespace alinous {namespace system {
 class AlinousException;}}
@@ -50,9 +50,9 @@ using ::java::io::IOException;
 using ::java::net::UnknownHostException;
 using ::alinous::db::AlinousDbException;
 using ::alinous::net::AlinousSocket;
-using ::alinous::remote::region::command::AbstractNodeRegionCommand;
-using ::alinous::remote::region::command::NodeRegionConnectCommand;
-using ::alinous::remote::region::command::NodeRegionFinishConnectionCommand;
+using ::alinous::remote::region::client::command::AbstractNodeRegionCommand;
+using ::alinous::remote::region::client::command::NodeRegionConnectCommand;
+using ::alinous::remote::region::client::command::NodeRegionFinishConnectionCommand;
 using ::alinous::remote::socket::ISocketConnection;
 using ::alinous::remote::socket::SocketConnectionPool;
 using ::alinous::system::AlinousException;
@@ -81,8 +81,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}}}

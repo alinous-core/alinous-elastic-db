@@ -11,13 +11,13 @@
 #include "com.google.re2j/RE2.h"
 #include "com.google.re2j/Machine.h"
 #include "com.google.re2j/PatternSyntaxException.h"
+#include "com.google.re2j/Utils.h"
+#include "com.google.re2j/Unicode.h"
 #include "com.google.re2j/CharGroup.h"
 #include "com.google.re2j/CharClass.h"
 #include "com.google.re2j/Parser.h"
-#include "com.google.re2j/Unicode.h"
 #include "com.google.re2j/Compiler.h"
 #include "com.google.re2j/UnicodeTable2.h"
-#include "com.google.re2j/Utils.h"
 #include "com.google.re2j/UnicodeTables.h"
 #include "com.google.re2j/Pattern.h"
 #include "com.google.re2j/Matcher.h"
@@ -1433,6 +1433,8 @@ IArrayObjectPrimitive<int>* Parser::concatRunes(IArrayObjectPrimitive<int>* x, I
 	System::arraycopy(y, 0, z, x->length, y->length, ctx);
 	return z;
 }
+void Parser::__cleanUp(ThreadContext* ctx){
+}
 }}}
 
 namespace com {namespace google {namespace re2j {
@@ -1453,6 +1455,12 @@ bool Parser::Stack::__init_static_variables(){
 	delete ctx;
 	return true;
 }
+ Parser::Stack::Stack(ThreadContext* ctx) throw()  : IObject(ctx), ArrayList<Regexp>(ctx)
+{
+}
+void Parser::Stack::__construct_impl(ThreadContext* ctx) throw() 
+{
+}
  Parser::Stack::~Stack() throw() 
 {
 	ThreadContext *ctx = ThreadContext::getCurentContext();
@@ -1470,6 +1478,8 @@ void Parser::Stack::__releaseRegerences(bool prepare, ThreadContext* ctx) throw(
 void Parser::Stack::removeRange(int fromIndex, int toIndex, ThreadContext* ctx) throw() 
 {
 	ArrayList<Regexp>::removeRange(fromIndex, toIndex, ctx);
+}
+void Parser::Stack::__cleanUp(ThreadContext* ctx){
 }
 }}}
 
@@ -1564,6 +1574,8 @@ String* Parser::StringIterator::from(int beforePos, ThreadContext* ctx) throw()
 {
 	return str->substring(beforePos, _pos, ctx);
 }
+void Parser::StringIterator::__cleanUp(ThreadContext* ctx){
+}
 }}}
 
 namespace com {namespace google {namespace re2j {
@@ -1616,6 +1628,9 @@ void Parser::Pair<F, S>::__releaseRegerences(bool prepare, ThreadContext* ctx) t
 	if(!prepare){
 		return;
 	}
+}
+template <typename F, typename S>
+void Parser::Pair<F, S>::__cleanUp(ThreadContext* ctx){
 }
 }}}
 

@@ -89,6 +89,8 @@ bool UTF_16::contains(String* cs, ThreadContext* ctx) throw()
 {
 	return cs->equalsIgnoreCase(ConstStr::getCNST_STR_891(), ctx) || cs->equalsIgnoreCase(ConstStr::getCNST_STR_892(), ctx) || cs->equalsIgnoreCase(ConstStr::getCNST_STR_893(), ctx) || cs->equalsIgnoreCase(ConstStr::getCNST_STR_894(), ctx) || cs->equalsIgnoreCase(ConstStr::getCNST_STR_895(), ctx) || cs->equalsIgnoreCase(ConstStr::getCNST_STR_896(), ctx) || cs->equalsIgnoreCase(ConstStr::getCNST_STR_897(), ctx) || cs->equalsIgnoreCase(ConstStr::getCNST_STR_898(), ctx) || cs->equalsIgnoreCase(ConstStr::getCNST_STR_899(), ctx) || cs->equalsIgnoreCase(ConstStr::getCNST_STR_900(), ctx) || cs->equalsIgnoreCase(ConstStr::getCNST_STR_901(), ctx) || cs->equalsIgnoreCase(ConstStr::getCNST_STR_902(), ctx) || cs->equalsIgnoreCase(ConstStr::getCNST_STR_903(), ctx) || cs->equalsIgnoreCase(ConstStr::getCNST_STR_904(), ctx) || cs->equalsIgnoreCase(ConstStr::getCNST_STR_905(), ctx) || cs->equalsIgnoreCase(ConstStr::getCNST_STR_906(), ctx) || cs->equalsIgnoreCase(ConstStr::getCNST_STR_907(), ctx) || cs->equalsIgnoreCase(ConstStr::getCNST_STR_908(), ctx) || cs->equalsIgnoreCase(ConstStr::getCNST_STR_909(), ctx) || cs->equalsIgnoreCase(ConstStr::getCNST_STR_910(), ctx) || cs->equalsIgnoreCase(ConstStr::getCNST_STR_120(), ctx) || cs->equalsIgnoreCase(ConstStr::getCNST_STR_911(), ctx) || cs->equalsIgnoreCase(ConstStr::getCNST_STR_912(), ctx);
 }
+void UTF_16::__cleanUp(ThreadContext* ctx){
+}
 }}}
 
 namespace org {namespace alinous {namespace charset {
@@ -239,6 +241,8 @@ int UTF_16::Decoder::getDetectedEndian(int b1, int b2, ThreadContext* ctx) throw
 		return BIG;
 	}
 	return NOT_DETECTED;
+}
+void UTF_16::Decoder::__cleanUp(ThreadContext* ctx){
 }
 }}}
 
@@ -397,6 +401,8 @@ void UTF_16::Encoder::implReset(ThreadContext* ctx) throw()
 int UTF_16::Encoder::getDefaultEndian(ThreadContext* ctx) throw() 
 {
 	return ANY;
+}
+void UTF_16::Encoder::__cleanUp(ThreadContext* ctx){
 }
 }}}
 

@@ -66,12 +66,8 @@ class UniqueExclusiveLockManager final : public virtual IObject {
 public:
 	UniqueExclusiveLockManager(const UniqueExclusiveLockManager& base) = default;
 public:
-	UniqueExclusiveLockManager(ThreadContext* ctx) throw()  : IObject(ctx), tables(GCUtils<Map<String,TableUniqueCollections> >::ins(this, (new(ctx) HashMap<String,TableUniqueCollections>(ctx)), ctx, __FILEW__, __LINE__, L"")), lock(__GC_INS(this, (new(ctx) LockObject(ctx)), LockObject))
-	{
-	}
-	void __construct_impl(ThreadContext* ctx) throw() 
-	{
-	}
+	UniqueExclusiveLockManager(ThreadContext* ctx) throw() ;
+	void __construct_impl(ThreadContext* ctx) throw() ;
 	virtual ~UniqueExclusiveLockManager() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 private:
@@ -88,8 +84,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}}

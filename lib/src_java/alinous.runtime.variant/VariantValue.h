@@ -498,10 +498,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-		GCUtils<String>::dec(nullptr, VariantValue::TAG_NAME, ctx, __FILEW__, __LINE__, L"String");
-		GCUtils<String>::dec(nullptr, VariantValue::ATTR_VTYPE, ctx, __FILEW__, __LINE__, L"String");
-	}
+	static void __cleanUp(ThreadContext* ctx);
 	class ValueCompare {
 	public:
 		int operator() (VariantValue* _this, VariantValue* variant, ThreadContext* ctx) const throw();

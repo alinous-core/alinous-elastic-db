@@ -69,12 +69,8 @@ class SwitchStatement final : public AbstractAlinousStatement {
 public:
 	SwitchStatement(const SwitchStatement& base) = default;
 public:
-	SwitchStatement(ThreadContext* ctx) throw()  : IObject(ctx), AbstractAlinousStatement(ctx), label(nullptr), exp(nullptr), caseParts(GCUtils<ArrayList<SwitchCasePart> >::ins(this, (new(ctx) ArrayList<SwitchCasePart>(ctx)), ctx, __FILEW__, __LINE__, L""))
-	{
-	}
-	void __construct_impl(ThreadContext* ctx) throw() 
-	{
-	}
+	SwitchStatement(ThreadContext* ctx) throw() ;
+	void __construct_impl(ThreadContext* ctx) throw() ;
 	virtual ~SwitchStatement() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 private:
@@ -98,8 +94,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}}

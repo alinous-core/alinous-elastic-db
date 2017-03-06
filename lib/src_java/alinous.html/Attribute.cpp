@@ -2,6 +2,7 @@
 
 
 #include "alinous.html.xpath/IVariableValue.h"
+#include "alinous.html.xpath/StringValue.h"
 #include "alinous.html/IDomObject.h"
 #include "alinous.html/Attribute.h"
 #include "alinous.html/DomNode.h"
@@ -44,6 +45,12 @@ void Attribute::__construct_impl(String* name, String* value, DomNode* parent, T
 	__GC_MV(this, &(this->name), name, String);
 	__GC_MV(this, &(this->value), value, String);
 	__GC_MV(this, &(this->parent), parent, DomNode);
+}
+ Attribute::Attribute(ThreadContext* ctx) throw()  : IObject(ctx), IDomObject(ctx), name(nullptr), value(nullptr), parent(nullptr)
+{
+}
+void Attribute::__construct_impl(ThreadContext* ctx) throw() 
+{
 }
  Attribute::~Attribute() throw() 
 {
@@ -128,6 +135,8 @@ IDomObject* Attribute::getNextSibilingElement(ThreadContext* ctx) throw()
 int Attribute::getType(ThreadContext* ctx) throw() 
 {
 	return IDomObject::TYPE_ATTRIBUTE;
+}
+void Attribute::__cleanUp(ThreadContext* ctx){
 }
 }}
 

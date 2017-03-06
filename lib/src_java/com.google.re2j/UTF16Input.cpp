@@ -11,13 +11,13 @@
 #include "com.google.re2j/RE2.h"
 #include "com.google.re2j/Machine.h"
 #include "com.google.re2j/PatternSyntaxException.h"
+#include "com.google.re2j/Utils.h"
+#include "com.google.re2j/Unicode.h"
 #include "com.google.re2j/CharGroup.h"
 #include "com.google.re2j/CharClass.h"
 #include "com.google.re2j/Parser.h"
-#include "com.google.re2j/Unicode.h"
 #include "com.google.re2j/Compiler.h"
 #include "com.google.re2j/UnicodeTable2.h"
-#include "com.google.re2j/Utils.h"
 #include "com.google.re2j/UnicodeTables.h"
 #include "com.google.re2j/Pattern.h"
 #include "com.google.re2j/Matcher.h"
@@ -154,6 +154,8 @@ int UTF16Input::indexOfFallback(CharSequence* hayStack, String* needle, int from
 		}
 	}
 	return -1;
+}
+void UTF16Input::__cleanUp(ThreadContext* ctx){
 }
 }}}
 

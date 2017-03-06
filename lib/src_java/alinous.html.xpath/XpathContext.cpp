@@ -50,6 +50,12 @@ bool XpathContext::__init_static_variables(){
 	delete ctx;
 	return true;
 }
+ XpathContext::XpathContext(ThreadContext* ctx) throw()  : IObject(ctx), IXpathElement(ctx), filters(GCUtils<ArrayList<XpathFilter> >::ins(this, (new(ctx) ArrayList<XpathFilter>(ctx)), ctx, __FILEW__, __LINE__, L"")), location(nullptr), identifier(nullptr), index(nullptr), xpath(nullptr)
+{
+}
+void XpathContext::__construct_impl(ThreadContext* ctx) throw() 
+{
+}
  XpathContext::~XpathContext() throw() 
 {
 	ThreadContext *ctx = ThreadContext::getCurentContext();
@@ -251,6 +257,8 @@ void XpathContext::setupRelationalScan(MatchCursor* cursor, ThreadContext* ctx)
 	}
 	cursor->caluculateScanPolicy(ScanPolicy::scan_all_inherited_children, ctx);
 	cursor->caluculateStopNode(ctx);
+}
+void XpathContext::__cleanUp(ThreadContext* ctx){
 }
 }}}
 

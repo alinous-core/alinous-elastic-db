@@ -556,6 +556,8 @@ int Integer::parse(String* string, int offset, int radix, bool negative, ThreadC
 	}
 	return result;
 }
+void Integer::__cleanUp(ThreadContext* ctx){
+}
 int Integer::ValueCompare::operator() (Integer* _this, Integer* object, ThreadContext* ctx) const throw()
 {
 	return _this->compareTo(object, ctx);

@@ -94,12 +94,8 @@ class SQLSubqueryExpression final : public AbstractSQLCollectionExpression {
 public:
 	SQLSubqueryExpression(const SQLSubqueryExpression& base) = default;
 public:
-	SQLSubqueryExpression(ThreadContext* ctx) throw()  : IObject(ctx), AbstractSQLCollectionExpression(ctx), selectStatement(nullptr)
-	{
-	}
-	void __construct_impl(ThreadContext* ctx) throw() 
-	{
-	}
+	SQLSubqueryExpression(ThreadContext* ctx) throw() ;
+	void __construct_impl(ThreadContext* ctx) throw() ;
 	virtual ~SQLSubqueryExpression() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 private:
@@ -125,8 +121,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}}}

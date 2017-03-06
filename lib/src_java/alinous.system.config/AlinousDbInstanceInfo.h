@@ -34,12 +34,8 @@ class AlinousDbInstanceInfo final : public IAlinousConfigElement, public virtual
 public:
 	AlinousDbInstanceInfo(const AlinousDbInstanceInfo& base) = default;
 public:
-	AlinousDbInstanceInfo(ThreadContext* ctx) throw()  : IObject(ctx), IAlinousConfigElement(ctx), id(nullptr), dataDir(nullptr), trxTmpDir(nullptr), maxConnections(16), regionsRef(nullptr), monitorRef(nullptr)
-	{
-	}
-	void __construct_impl(ThreadContext* ctx) throw() 
-	{
-	}
+	AlinousDbInstanceInfo(ThreadContext* ctx) throw() ;
+	void __construct_impl(ThreadContext* ctx) throw() ;
 	virtual ~AlinousDbInstanceInfo() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 private:
@@ -66,8 +62,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}}

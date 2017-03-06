@@ -52,6 +52,12 @@ bool XpathFilter::__init_static_variables(){
 	delete ctx;
 	return true;
 }
+ XpathFilter::XpathFilter(ThreadContext* ctx) throw()  : IObject(ctx), IXpathElement(ctx), condition(nullptr)
+{
+}
+void XpathFilter::__construct_impl(ThreadContext* ctx) throw() 
+{
+}
  XpathFilter::~XpathFilter() throw() 
 {
 	ThreadContext *ctx = ThreadContext::getCurentContext();
@@ -109,6 +115,8 @@ String* XpathFilter::toString(ThreadContext* ctx) throw()
 	buffer->append(condition->toString(ctx), ctx);
 	buffer->append(ConstStr::getCNST_STR_564(), ctx);
 	return buffer->toString(ctx);
+}
+void XpathFilter::__cleanUp(ThreadContext* ctx){
 }
 }}}
 

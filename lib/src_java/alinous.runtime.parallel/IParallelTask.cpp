@@ -27,6 +27,12 @@ bool IParallelTask::__init_static_variables(){
 	delete ctx;
 	return true;
 }
+ IParallelTask::IParallelTask(ThreadContext* ctx) throw()  : IObject(ctx)
+{
+}
+void IParallelTask::__construct_impl(ThreadContext* ctx) throw() 
+{
+}
  IParallelTask::~IParallelTask() throw() 
 {
 	ThreadContext *ctx = ThreadContext::getCurentContext();
@@ -39,6 +45,8 @@ void IParallelTask::__releaseRegerences(bool prepare, ThreadContext* ctx) throw(
 	if(!prepare){
 		return;
 	}
+}
+void IParallelTask::__cleanUp(ThreadContext* ctx){
 }
 }}}
 

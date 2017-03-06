@@ -1,7 +1,12 @@
 #include "include/global.h"
 
 
+#include "java.util/Locale.h"
+#include "java.util/Calendar.h"
+#include "java.util/GregorianCalendar.h"
+#include "java.util/Date.h"
 #include "alinous.numeric/InternalDate.h"
+#include "java.util/TimeZone.h"
 #include "java.sql/Timestamp.h"
 #include "java.sql/Date.h"
 
@@ -92,6 +97,8 @@ Date* Date::valueOf(String* dateString, ThreadContext* ctx) throw()
 long long Date::normalizeTime(long long theTime, ThreadContext* ctx) throw() 
 {
 	return theTime;
+}
+void Date::__cleanUp(ThreadContext* ctx){
 }
 }}
 

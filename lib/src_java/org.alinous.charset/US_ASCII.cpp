@@ -84,6 +84,8 @@ bool US_ASCII::contains(String* cs, ThreadContext* ctx) throw()
 {
 	return cs->equalsIgnoreCase(ConstStr::getCNST_STR_916(), ctx);
 }
+void US_ASCII::__cleanUp(ThreadContext* ctx){
+}
 }}}
 
 namespace org {namespace alinous {namespace charset {
@@ -102,6 +104,12 @@ bool US_ASCII::Decoder::__init_static_variables(){
 	ctx->localGC();
 	delete ctx;
 	return true;
+}
+ US_ASCII::Decoder::Decoder(ThreadContext* ctx) throw()  : IObject(ctx), CharsetDecoder(ctx)
+{
+}
+void US_ASCII::Decoder::__construct_impl(ThreadContext* ctx) throw() 
+{
 }
  US_ASCII::Decoder::~Decoder() throw() 
 {
@@ -168,6 +176,8 @@ CoderResult* US_ASCII::Decoder::decodeLoop(ByteBuffer* bb, CharBuffer* cb, Threa
 	}
 	return CoderResult::UNDERFLOW;
 }
+void US_ASCII::Decoder::__cleanUp(ThreadContext* ctx){
+}
 }}}
 
 namespace org {namespace alinous {namespace charset {
@@ -186,6 +196,12 @@ bool US_ASCII::Encoder::__init_static_variables(){
 	ctx->localGC();
 	delete ctx;
 	return true;
+}
+ US_ASCII::Encoder::Encoder(ThreadContext* ctx) throw()  : IObject(ctx), CharsetEncoder(ctx)
+{
+}
+void US_ASCII::Encoder::__construct_impl(ThreadContext* ctx) throw() 
+{
 }
  US_ASCII::Encoder::~Encoder() throw() 
 {
@@ -295,6 +311,8 @@ CoderResult* US_ASCII::Encoder::encodeLoop(CharBuffer* cb, ByteBuffer* bb, Threa
 		}
 	}
 	return CoderResult::UNDERFLOW;
+}
+void US_ASCII::Encoder::__cleanUp(ThreadContext* ctx){
 }
 }}}
 

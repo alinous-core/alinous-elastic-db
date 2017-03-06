@@ -87,5 +87,7 @@ long long FilterInputStream::skip(long long count, ThreadContext* ctx)
 {
 	return in->skip(count, ctx);
 }
+void FilterInputStream::__cleanUp(ThreadContext* ctx){
+}
 }}
 

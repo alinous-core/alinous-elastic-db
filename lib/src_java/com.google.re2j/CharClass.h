@@ -4,6 +4,15 @@ namespace alinous{namespace annotation{
 class OneSource;
 }}
 namespace com {namespace google {namespace re2j {
+class Utils;}}}
+
+namespace com {namespace google {namespace re2j {
+class RE2;}}}
+
+namespace com {namespace google {namespace re2j {
+class Unicode;}}}
+
+namespace com {namespace google {namespace re2j {
 class CharClass;}}}
 
 namespace com {namespace google {namespace re2j {
@@ -60,6 +69,7 @@ public:
 private:
 	void ensureCapacity(int newLen, ThreadContext* ctx) throw() ;
 public:
+	static void includes(Utils* arg0, RE2* arg1, Unicode* arg2, ThreadContext* ctx) throw() ;
 	static String* charClassToString(IArrayObjectPrimitive<int>* r, int len, ThreadContext* ctx) throw() ;
 private:
 	static int cmp(IArrayObjectPrimitive<int>* array, int i, int pivotFrom, int pivotTo, ThreadContext* ctx) throw() ;
@@ -68,8 +78,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}}

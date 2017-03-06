@@ -51,12 +51,8 @@ public:
 	class MethodPair;
 	VirtualTable(const VirtualTable& base) = default;
 public:
-	VirtualTable(ThreadContext* ctx) throw()  : IObject(ctx), IAlinousElement(ctx), list(GCUtils<ArrayList<VirtualTable::MethodPair> >::ins(this, (new(ctx) ArrayList<VirtualTable::MethodPair>(ctx)), ctx, __FILEW__, __LINE__, L""))
-	{
-	}
-	void __construct_impl(ThreadContext* ctx) throw() 
-	{
-	}
+	VirtualTable(ThreadContext* ctx) throw() ;
+	void __construct_impl(ThreadContext* ctx) throw() ;
 	virtual ~VirtualTable() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 private:
@@ -86,15 +82,13 @@ public:
 		static bool __init_done;
 		static bool __init_static_variables();
 	public:
-		static void __cleanUp(ThreadContext* ctx){
-		}
+		static void __cleanUp(ThreadContext* ctx);
 	};
 
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}}

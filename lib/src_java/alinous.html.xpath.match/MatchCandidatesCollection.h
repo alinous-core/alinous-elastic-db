@@ -72,12 +72,8 @@ class MatchCandidatesCollection final : public virtual IObject {
 public:
 	MatchCandidatesCollection(const MatchCandidatesCollection& base) = default;
 public:
-	MatchCandidatesCollection(ThreadContext* ctx) throw()  : IObject(ctx), candidatesList(GCUtils<ArrayList<MatchCandidate> >::ins(this, (new(ctx) ArrayList<MatchCandidate>(ctx)), ctx, __FILEW__, __LINE__, L"")), domParents(GCUtils<Map<DomNode,ArrayList<MatchCandidate>> >::ins(this, (new(ctx) HashMap<DomNode,ArrayList<MatchCandidate>>(ctx)), ctx, __FILEW__, __LINE__, L""))
-	{
-	}
-	void __construct_impl(ThreadContext* ctx) throw() 
-	{
-	}
+	MatchCandidatesCollection(ThreadContext* ctx) throw() ;
+	void __construct_impl(ThreadContext* ctx) throw() ;
 	virtual ~MatchCandidatesCollection() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 private:
@@ -96,8 +92,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}}}

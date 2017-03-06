@@ -3,23 +3,11 @@
 
 #include "alinous.system.utils/FileUtils.h"
 #include "alinous.html.xpath/IVariableValue.h"
+#include "alinous.html.xpath/StringValue.h"
 #include "alinous.html/IDomObject.h"
 #include "alinous.html/Attribute.h"
 #include "alinous.html/DomNode.h"
 #include "alinous.html/DomDocument.h"
-#include "alinous.html.xpath/IXpathElement.h"
-#include "alinous.html.xpath/IXpathStatement.h"
-#include "alinous.html.xpath.match/MatchCursor.h"
-#include "alinous.html.xpath.match/MatchCandidate.h"
-#include "alinous.html.xpath.match/MatchCandidatesCollection.h"
-#include "alinous.html.xpath/XpathIdentifier.h"
-#include "alinous.html.xpath/AttributeIdentifier.h"
-#include "alinous.html.xpath/IXpathBooleanCondition.h"
-#include "alinous.html.xpath/XpathFilter.h"
-#include "alinous.html.xpath/XpathContextLocationCtrl.h"
-#include "alinous.html.xpath/XpathContextLocation.h"
-#include "alinous.html.xpath/XpathContext.h"
-#include "alinous.html.xpath/Xpath.h"
 #include "alinous.html.xpath.match/Matcher.h"
 #include "alinous.system.utils/ConfigFileUtiles.h"
 
@@ -39,6 +27,12 @@ bool FileUtils::__init_static_variables(){
 	ctx->localGC();
 	delete ctx;
 	return true;
+}
+ FileUtils::FileUtils(ThreadContext* ctx) throw()  : IObject(ctx)
+{
+}
+void FileUtils::__construct_impl(ThreadContext* ctx) throw() 
+{
 }
  FileUtils::~FileUtils() throw() 
 {
@@ -206,6 +200,8 @@ String* FileUtils::readAllText(String* srcPath, String* encode, ThreadContext* c
 		}
 	}
 	return buff->toString(ctx);
+}
+void FileUtils::__cleanUp(ThreadContext* ctx){
 }
 }}}
 

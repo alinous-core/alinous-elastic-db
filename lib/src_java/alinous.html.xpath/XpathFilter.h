@@ -59,12 +59,8 @@ public:
 public:
 	XpathFilter(const XpathFilter& base) = default;
 public:
-	XpathFilter(ThreadContext* ctx) throw()  : IObject(ctx), IXpathElement(ctx), condition(nullptr)
-	{
-	}
-	void __construct_impl(ThreadContext* ctx) throw() 
-	{
-	}
+	XpathFilter(ThreadContext* ctx) throw() ;
+	void __construct_impl(ThreadContext* ctx) throw() ;
 	virtual ~XpathFilter() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 private:
@@ -79,8 +75,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}}

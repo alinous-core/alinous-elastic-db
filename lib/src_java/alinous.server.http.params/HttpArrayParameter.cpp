@@ -113,5 +113,7 @@ String* HttpArrayParameter::getStringValue(ThreadContext* ctx) throw()
 	}
 	return buff->toString(ctx);
 }
+void HttpArrayParameter::__cleanUp(ThreadContext* ctx){
+}
 }}}}
 

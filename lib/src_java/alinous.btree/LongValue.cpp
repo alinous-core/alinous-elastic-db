@@ -9,19 +9,12 @@
 #include "java.lang/Comparable.h"
 #include "alinous.btree/IBTreeKey.h"
 #include "alinous.btree.scan/INodeIterator.h"
-#include "alinous.lock/ConcurrentGate.h"
-#include "alinous.buffer.storage/FileAccessWrapper.h"
-#include "alinous.buffer.storage/FileStorageBlock.h"
 #include "alinous.buffer.storage/IFileStorage.h"
-#include "alinous.buffer.storage/FileStorageEntryWriter.h"
-#include "alinous.buffer.storage/FileStorageEntryReader.h"
 #include "alinous.buffer.storage/FileStorage.h"
-#include "alinous.buffer/FifoIterator.h"
 #include "alinous.buffer/FifoList.h"
-#include "java.util/BitSet.h"
+#include "alinous.buffer/FifoIterator.h"
 #include "alinous.btree/BTreeCacheArray.h"
 #include "alinous.btree/BTreeException.h"
-#include "alinous.buffer/HashArrayListIterator.h"
 #include "alinous.buffer/HashArrayList.h"
 #include "alinous.btree/IValueFetcher.h"
 #include "alinous.btree/IBTreeValue.h"
@@ -33,6 +26,8 @@
 #include "alinous.btree/AbstractBTreeNode.h"
 #include "alinous.btree/BTreeNode.h"
 #include "alinous.btree/BTreeMaxNode.h"
+#include "alinous.btree.scan/AbstractNodeIterator.h"
+#include "alinous.btree.scan/LeafContainerIterator.h"
 #include "alinous.btree/AbstractBTreeLeafContainer.h"
 #include "alinous.btree/BTreeMaxLeafContainer.h"
 #include "alinous.btree/BTreeValues.h"
@@ -117,6 +112,8 @@ IValueFetcher* LongValue::getFetcher(ThreadContext* ctx) throw()
 {
 	return LongValue::fetcher;
 }
+void LongValue::__cleanUp(ThreadContext* ctx){
+}
 }}
 
 namespace alinous {namespace btree {
@@ -136,6 +133,12 @@ bool LongValue::ValueFetcher::__init_static_variables(){
 	delete ctx;
 	return true;
 }
+ LongValue::ValueFetcher::ValueFetcher(ThreadContext* ctx) throw()  : IObject(ctx), IValueFetcher(ctx)
+{
+}
+void LongValue::ValueFetcher::__construct_impl(ThreadContext* ctx) throw() 
+{
+}
  LongValue::ValueFetcher::~ValueFetcher() throw() 
 {
 	ThreadContext *ctx = ThreadContext::getCurentContext();
@@ -153,6 +156,8 @@ IBTreeValue* LongValue::ValueFetcher::valueFromFetcher(FileStorageEntryFetcher* 
 {
 	IBTreeValue* value = (new(ctx) LongValue(fetcher->fetchLong(ctx), ctx));
 	return value;
+}
+void LongValue::ValueFetcher::__cleanUp(ThreadContext* ctx){
 }
 }}
 

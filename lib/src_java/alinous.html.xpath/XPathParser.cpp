@@ -49,6 +49,12 @@ bool XPathParser::__init_static_variables(){
 	delete ctx;
 	return true;
 }
+ XPathParser::XPathParser(ThreadContext* ctx) throw()  : IObject(ctx), IXpathElement(ctx)
+{
+}
+void XPathParser::__construct_impl(ThreadContext* ctx) throw() 
+{
+}
  XPathParser::~XPathParser() throw() 
 {
 	ThreadContext *ctx = ThreadContext::getCurentContext();
@@ -61,6 +67,8 @@ void XPathParser::__releaseRegerences(bool prepare, ThreadContext* ctx) throw()
 	if(!prepare){
 		return;
 	}
+}
+void XPathParser::__cleanUp(ThreadContext* ctx){
 }
 }}}
 

@@ -125,12 +125,8 @@ class TableIndexScanner final : public IFilterScanner, public virtual IObject {
 public:
 	TableIndexScanner(const TableIndexScanner& base) = default;
 public:
-	TableIndexScanner(ThreadContext* ctx) throw()  : IObject(ctx), IFilterScanner(ctx), trx(nullptr), index(nullptr), storage(nullptr), scanner(nullptr), tableStore(nullptr), values(nullptr), current(0), lockMode(0), tableId(nullptr), nextresult(nullptr)
-	{
-	}
-	void __construct_impl(ThreadContext* ctx) throw() 
-	{
-	}
+	TableIndexScanner(ThreadContext* ctx) throw() ;
+	void __construct_impl(ThreadContext* ctx) throw() ;
 	virtual ~TableIndexScanner() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 private:
@@ -158,8 +154,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}}}

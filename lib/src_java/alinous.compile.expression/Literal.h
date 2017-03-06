@@ -103,12 +103,8 @@ public:
 public:
 	Literal(Literal::literalTypes type, ThreadContext* ctx) throw() ;
 	void __construct_impl(Literal::literalTypes type, ThreadContext* ctx) throw() ;
-	Literal(ThreadContext* ctx) throw()  : IObject(ctx), AbstractExpression(ctx), value(nullptr)
-	{
-	}
-	void __construct_impl(ThreadContext* ctx) throw() 
-	{
-	}
+	Literal(ThreadContext* ctx) throw() ;
+	void __construct_impl(ThreadContext* ctx) throw() ;
 	virtual ~Literal() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 public:
@@ -143,8 +139,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}}

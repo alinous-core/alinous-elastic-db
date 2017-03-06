@@ -1,9 +1,6 @@
 #ifndef ALINOUS_COMPILE_EXPRESSION_EXPSTREAM_FUNCTIONCALLEXPRESSION_H_
 #define ALINOUS_COMPILE_EXPRESSION_EXPSTREAM_FUNCTIONCALLEXPRESSION_H_
 namespace alinous{namespace annotation{
-class NoBlankConstructor;
-}}
-namespace alinous{namespace annotation{
 class OneSource;
 }}
 namespace alinous {namespace compile {
@@ -27,6 +24,12 @@ class AlinousType;}}}
 namespace alinous {namespace compile {namespace declare {
 class AlinousClass;}}}
 
+namespace alinous {namespace compile {namespace declare {namespace function {
+class AlinousFunction;}}}}
+
+namespace alinous {namespace compile {namespace declare {namespace function {
+class ReturnValueDefinition;}}}}
+
 namespace alinous {namespace runtime {namespace dom {
 class IAlinousVariable;}}}
 
@@ -46,7 +49,7 @@ namespace alinous {namespace compile {namespace declare {
 class ClassMethodFunction;}}}
 
 namespace alinous {namespace compile {namespace declare {namespace function {
-class AlinousFunction;}}}}
+class FunctionArgumentsListDefine;}}}}
 
 namespace alinous {namespace compile {namespace declare {namespace function {
 class FunctionArgumentDefine;}}}}
@@ -59,6 +62,9 @@ class AlinousException;}}
 
 namespace alinous {namespace runtime {namespace engine {
 class MainStackFrame;}}}
+
+namespace alinous {namespace compile {namespace stmt {
+class StatementBlock;}}}
 
 namespace alinous {namespace compile {namespace stmt {
 class StatementList;}}}
@@ -129,10 +135,13 @@ using ::alinous::compile::declare::AlinousClass;
 using ::alinous::compile::declare::ClassMethodFunction;
 using ::alinous::compile::declare::function::AlinousFunction;
 using ::alinous::compile::declare::function::FunctionArgumentDefine;
+using ::alinous::compile::declare::function::FunctionArgumentsListDefine;
+using ::alinous::compile::declare::function::ReturnValueDefinition;
 using ::alinous::compile::expression::AbstractExpression;
 using ::alinous::compile::expression::FunctionArguments;
 using ::alinous::compile::expression::IExpression;
 using ::alinous::compile::expression::IExpressionFactory;
+using ::alinous::compile::stmt::StatementBlock;
 using ::alinous::compile::stmt::StatementList;
 using ::alinous::db::table::DatabaseException;
 using ::alinous::remote::socket::ICommandData;
@@ -197,8 +206,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}}}

@@ -79,5 +79,7 @@ String* NumberValue::toString(ThreadContext* ctx) throw()
 {
 	return Integer::toString(value, ctx);
 }
+void NumberValue::__cleanUp(ThreadContext* ctx){
+}
 }}}
 

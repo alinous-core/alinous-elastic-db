@@ -75,6 +75,9 @@ class IBTreeNode;}}
 namespace alinous {namespace btree {
 class IBTreeValue;}}
 
+namespace alinous {namespace system {
+class ISystemLog;}}
+
 namespace java {namespace lang {
 class Throwable;}}
 
@@ -196,6 +199,7 @@ using ::alinous::runtime::parallel::LaunchJoin;
 using ::alinous::runtime::parallel::ThreadPool;
 using ::alinous::system::AlinousCore;
 using ::alinous::system::AlinousException;
+using ::alinous::system::ISystemLog;
 using ::alinous::system::config::AlinousDbInstanceInfo;
 using ::alinous::system::config::remote::MonitorRef;
 using ::alinous::system::config::remote::RegionRef;
@@ -270,8 +274,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}

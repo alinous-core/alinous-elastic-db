@@ -76,12 +76,8 @@ class DomIndexSegment final : public IDomSegment {
 public:
 	DomIndexSegment(const DomIndexSegment& base) = default;
 public:
-	DomIndexSegment(ThreadContext* ctx) throw()  : IObject(ctx), IDomSegment(ctx), index(nullptr), segmentVariableType(IDomVariable::TYPE_DOM)
-	{
-	}
-	void __construct_impl(ThreadContext* ctx) throw() 
-	{
-	}
+	DomIndexSegment(ThreadContext* ctx) throw() ;
+	void __construct_impl(ThreadContext* ctx) throw() ;
 	DomIndexSegment(IExpression* index, ThreadContext* ctx) throw() ;
 	void __construct_impl(IExpression* index, ThreadContext* ctx) throw() ;
 	virtual ~DomIndexSegment() throw();
@@ -115,8 +111,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}}

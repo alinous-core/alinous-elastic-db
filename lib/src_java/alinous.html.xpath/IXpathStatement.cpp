@@ -49,6 +49,12 @@ bool IXpathStatement::__init_static_variables(){
 	delete ctx;
 	return true;
 }
+ IXpathStatement::IXpathStatement(ThreadContext* ctx) throw()  : IObject(ctx), IXpathElement(ctx)
+{
+}
+void IXpathStatement::__construct_impl(ThreadContext* ctx) throw() 
+{
+}
  IXpathStatement::~IXpathStatement() throw() 
 {
 	ThreadContext *ctx = ThreadContext::getCurentContext();
@@ -62,6 +68,8 @@ void IXpathStatement::__releaseRegerences(bool prepare, ThreadContext* ctx) thro
 		return;
 	}
 	IXpathElement::__releaseRegerences(true, ctx);
+}
+void IXpathStatement::__cleanUp(ThreadContext* ctx){
 }
 }}}
 

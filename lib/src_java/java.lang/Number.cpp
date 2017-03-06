@@ -29,6 +29,12 @@ bool Number::__init_static_variables(){
 	delete ctx;
 	return true;
 }
+ Number::Number(ThreadContext* ctx) throw()  : IObject(ctx)
+{
+}
+void Number::__construct_impl(ThreadContext* ctx) throw() 
+{
+}
  Number::~Number() throw() 
 {
 	ThreadContext *ctx = ThreadContext::getCurentContext();
@@ -49,6 +55,8 @@ char Number::byteValue(ThreadContext* ctx) throw()
 short Number::shortValue(ThreadContext* ctx) throw() 
 {
 	return ((short)intValue(ctx));
+}
+void Number::__cleanUp(ThreadContext* ctx){
 }
 }}
 

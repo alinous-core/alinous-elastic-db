@@ -66,12 +66,8 @@ class IBTreeNode : public virtual IObject, public Comparable<IBTreeNode> {
 public:
 	IBTreeNode(const IBTreeNode& base) = default;
 public:
-	IBTreeNode(ThreadContext* ctx) throw()  : IObject(ctx), Comparable<IBTreeNode>(ctx)
-	{
-	}
-	void __construct_impl(ThreadContext* ctx) throw() 
-	{
-	}
+	IBTreeNode(ThreadContext* ctx) throw() ;
+	void __construct_impl(ThreadContext* ctx) throw() ;
 	virtual ~IBTreeNode() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 public:
@@ -116,8 +112,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}

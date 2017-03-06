@@ -156,5 +156,7 @@ int ThreadPool::getMaxThread(ThreadContext* ctx) throw()
 {
 	return maxThread;
 }
+void ThreadPool::__cleanUp(ThreadContext* ctx){
+}
 }}}
 

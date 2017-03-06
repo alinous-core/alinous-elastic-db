@@ -41,12 +41,8 @@ class AbstractSrcElement : public virtual IObject {
 public:
 	AbstractSrcElement(const AbstractSrcElement& base) = default;
 public:
-	AbstractSrcElement(ThreadContext* ctx) throw()  : IObject(ctx), parent(nullptr), filePath(nullptr), debugFilePath(nullptr), line(0), _startPosition(0), endLine(0), _endPosition(0)
-	{
-	}
-	void __construct_impl(ThreadContext* ctx) throw() 
-	{
-	}
+	AbstractSrcElement(ThreadContext* ctx) throw() ;
+	void __construct_impl(ThreadContext* ctx) throw() ;
 	virtual ~AbstractSrcElement() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 public:
@@ -88,8 +84,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}

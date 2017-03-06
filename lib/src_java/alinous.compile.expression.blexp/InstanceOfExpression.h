@@ -98,12 +98,8 @@ class InstanceOfExpression final : public AbstractBooleanExpression {
 public:
 	InstanceOfExpression(const InstanceOfExpression& base) = default;
 public:
-	InstanceOfExpression(ThreadContext* ctx) throw()  : IObject(ctx), AbstractBooleanExpression(ctx), left(nullptr), right(nullptr)
-	{
-	}
-	void __construct_impl(ThreadContext* ctx) throw() 
-	{
-	}
+	InstanceOfExpression(ThreadContext* ctx) throw() ;
+	void __construct_impl(ThreadContext* ctx) throw() ;
 	virtual ~InstanceOfExpression() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 private:
@@ -129,8 +125,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}}}

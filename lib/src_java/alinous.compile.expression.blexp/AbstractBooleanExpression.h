@@ -23,12 +23,8 @@ class AbstractBooleanExpression : public AbstractExpression {
 public:
 	AbstractBooleanExpression(const AbstractBooleanExpression& base) = default;
 public:
-	AbstractBooleanExpression(ThreadContext* ctx) throw()  : IObject(ctx), AbstractExpression(ctx)
-	{
-	}
-	void __construct_impl(ThreadContext* ctx) throw() 
-	{
-	}
+	AbstractBooleanExpression(ThreadContext* ctx) throw() ;
+	void __construct_impl(ThreadContext* ctx) throw() ;
 	virtual ~AbstractBooleanExpression() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 public:
@@ -45,8 +41,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}}}

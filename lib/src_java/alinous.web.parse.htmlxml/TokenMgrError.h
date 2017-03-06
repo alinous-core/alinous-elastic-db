@@ -22,12 +22,8 @@ class TokenMgrError final : public Error {
 public:
 	TokenMgrError(const TokenMgrError& base) = default;
 public:
-	TokenMgrError(ThreadContext* ctx) throw()  : IObject(ctx), Error(ctx), errorCode(0)
-	{
-	}
-	void __construct_impl(ThreadContext* ctx) throw() 
-	{
-	}
+	TokenMgrError(ThreadContext* ctx) throw() ;
+	void __construct_impl(ThreadContext* ctx) throw() ;
 	TokenMgrError(String* message, int reason, ThreadContext* ctx) throw() ;
 	void __construct_impl(String* message, int reason, ThreadContext* ctx) throw() ;
 	TokenMgrError(bool EOFSeen, int lexState, int errorLine, int errorColumn, String* errorAfter, wchar_t curChar, int reason, ThreadContext* ctx) throw() ;
@@ -52,8 +48,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}}}

@@ -89,10 +89,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-		GCUtils<IArrayObject<String>>::dec(nullptr, InternalDate::dayOfWeekNames, ctx, __FILEW__, __LINE__, L"IArrayObject<String>");
-		GCUtils<IArrayObject<String>>::dec(nullptr, InternalDate::monthNames, ctx, __FILEW__, __LINE__, L"IArrayObject<String>");
-	}
+	static void __cleanUp(ThreadContext* ctx);
 	class ValueCompare {
 	public:
 		int operator() (InternalDate* _this, InternalDate* date, ThreadContext* ctx) const throw();

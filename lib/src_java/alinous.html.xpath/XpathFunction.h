@@ -59,12 +59,8 @@ class XpathFunction final : public IXpathStatement, public virtual IObject {
 public:
 	XpathFunction(const XpathFunction& base) = default;
 public:
-	XpathFunction(ThreadContext* ctx) throw()  : IObject(ctx), IXpathStatement(ctx), name(nullptr), arguments(GCUtils<ArrayList<XpathFunctionArgument> >::ins(this, (new(ctx) ArrayList<XpathFunctionArgument>(ctx)), ctx, __FILEW__, __LINE__, L""))
-	{
-	}
-	void __construct_impl(ThreadContext* ctx) throw() 
-	{
-	}
+	XpathFunction(ThreadContext* ctx) throw() ;
+	void __construct_impl(ThreadContext* ctx) throw() ;
 	virtual ~XpathFunction() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 private:
@@ -80,8 +76,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}}

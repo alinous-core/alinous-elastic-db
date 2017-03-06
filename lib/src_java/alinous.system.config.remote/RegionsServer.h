@@ -70,12 +70,8 @@ class RegionsServer final : public IAlinousConfigElement, public virtual IObject
 public:
 	RegionsServer(const RegionsServer& base) = default;
 public:
-	RegionsServer(ThreadContext* ctx) throw()  : IObject(ctx), IAlinousConfigElement(ctx), port(0), maxCon(8), monitorRef(nullptr), region(nullptr)
-	{
-	}
-	void __construct_impl(ThreadContext* ctx) throw() 
-	{
-	}
+	RegionsServer(ThreadContext* ctx) throw() ;
+	void __construct_impl(ThreadContext* ctx) throw() ;
 	virtual ~RegionsServer() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 private:
@@ -97,8 +93,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}}}

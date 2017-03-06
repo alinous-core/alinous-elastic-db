@@ -11,13 +11,13 @@
 #include "com.google.re2j/RE2.h"
 #include "com.google.re2j/Machine.h"
 #include "com.google.re2j/PatternSyntaxException.h"
+#include "com.google.re2j/Utils.h"
+#include "com.google.re2j/Unicode.h"
 #include "com.google.re2j/CharGroup.h"
 #include "com.google.re2j/CharClass.h"
 #include "com.google.re2j/Parser.h"
-#include "com.google.re2j/Unicode.h"
 #include "com.google.re2j/Compiler.h"
 #include "com.google.re2j/UnicodeTable2.h"
-#include "com.google.re2j/Utils.h"
 #include "com.google.re2j/UnicodeTables.h"
 #include "com.google.re2j/Pattern.h"
 #include "com.google.re2j/Matcher.h"
@@ -38,6 +38,12 @@ bool Simplify::__init_static_variables(){
 	ctx->localGC();
 	delete ctx;
 	return true;
+}
+ Simplify::Simplify(ThreadContext* ctx) throw()  : IObject(ctx)
+{
+}
+void Simplify::__construct_impl(ThreadContext* ctx) throw() 
+{
 }
  Simplify::~Simplify() throw() 
 {
@@ -174,6 +180,8 @@ Regexp* Simplify::simplify1(Regexp::Op op, int flags, Regexp* sub, Regexp* re, T
 	re->flags = flags;
 	__GC_MV(re, &(re->subs), ((IArrayObject<Regexp>*)new(ctx) ArrayObject<Regexp>({sub}, ctx)), IArrayObject<Regexp>);
 	return re;
+}
+void Simplify::__cleanUp(ThreadContext* ctx){
 }
 }}}
 

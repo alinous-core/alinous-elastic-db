@@ -19,20 +19,15 @@ class IFilterScanner : public virtual IObject, public ITableTargetScanner {
 public:
 	IFilterScanner(const IFilterScanner& base) = default;
 public:
-	IFilterScanner(ThreadContext* ctx) throw()  : IObject(ctx), ITableTargetScanner(ctx)
-	{
-	}
-	void __construct_impl(ThreadContext* ctx) throw() 
-	{
-	}
+	IFilterScanner(ThreadContext* ctx) throw() ;
+	void __construct_impl(ThreadContext* ctx) throw() ;
 	virtual ~IFilterScanner() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}}}

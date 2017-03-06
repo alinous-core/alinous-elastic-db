@@ -118,9 +118,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-		GCUtils<Locale>::dec(nullptr, Locale::defaultLocale, ctx, __FILEW__, __LINE__, L"Locale");
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}

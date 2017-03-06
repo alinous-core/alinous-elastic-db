@@ -106,12 +106,8 @@ class CharsetManager final : public virtual IObject {
 public:
 	CharsetManager(const CharsetManager& base) = default;
 public:
-	CharsetManager(ThreadContext* ctx) throw()  : IObject(ctx), charConverters(GCUtils<HashMap<String,CharsetConverter> >::ins(this, (new(ctx) HashMap<String,CharsetConverter>(ctx)), ctx, __FILEW__, __LINE__, L""))
-	{
-	}
-	void __construct_impl(ThreadContext* ctx) throw() 
-	{
-	}
+	CharsetManager(ThreadContext* ctx) throw() ;
+	void __construct_impl(ThreadContext* ctx) throw() ;
 	virtual ~CharsetManager() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 private:
@@ -128,9 +124,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-		GCUtils<CharsetManager>::dec(nullptr, CharsetManager::instance, ctx, __FILEW__, __LINE__, L"CharsetManager");
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}}

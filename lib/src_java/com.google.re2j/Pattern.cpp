@@ -11,13 +11,13 @@
 #include "com.google.re2j/RE2.h"
 #include "com.google.re2j/Machine.h"
 #include "com.google.re2j/PatternSyntaxException.h"
+#include "com.google.re2j/Utils.h"
+#include "com.google.re2j/Unicode.h"
 #include "com.google.re2j/CharGroup.h"
 #include "com.google.re2j/CharClass.h"
 #include "com.google.re2j/Parser.h"
-#include "com.google.re2j/Unicode.h"
 #include "com.google.re2j/Compiler.h"
 #include "com.google.re2j/UnicodeTable2.h"
-#include "com.google.re2j/Utils.h"
 #include "com.google.re2j/UnicodeTables.h"
 #include "com.google.re2j/Pattern.h"
 #include "com.google.re2j/Matcher.h"
@@ -214,6 +214,8 @@ Pattern* Pattern::compile(String* flregex, String* regex, int flags, ThreadConte
 		re2Flags = re2Flags & (~RE2::UNICODE_GROUPS);
 	}
 	return (new(ctx) Pattern(regex, flags, RE2::compileImpl(flregex, re2Flags, false, ctx), ctx));
+}
+void Pattern::__cleanUp(ThreadContext* ctx){
 }
 }}}
 

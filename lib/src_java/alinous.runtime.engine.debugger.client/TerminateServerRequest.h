@@ -39,12 +39,8 @@ class TerminateServerRequest final : public IClientRequest, public virtual IObje
 public:
 	TerminateServerRequest(const TerminateServerRequest& base) = default;
 public:
-	TerminateServerRequest(ThreadContext* ctx) throw()  : IObject(ctx), IClientRequest(ctx)
-	{
-	}
-	void __construct_impl(ThreadContext* ctx) throw() 
-	{
-	}
+	TerminateServerRequest(ThreadContext* ctx) throw() ;
+	void __construct_impl(ThreadContext* ctx) throw() ;
 	virtual ~TerminateServerRequest() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 public:
@@ -56,8 +52,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}}}}

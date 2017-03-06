@@ -123,12 +123,8 @@ class DoubleVariable final : public AbstractTypedVariable {
 public:
 	DoubleVariable(const DoubleVariable& base) = default;
 public:
-	DoubleVariable(ThreadContext* ctx) throw()  : IObject(ctx), AbstractTypedVariable(ctx), value(0)
-	{
-	}
-	void __construct_impl(ThreadContext* ctx) throw() 
-	{
-	}
+	DoubleVariable(ThreadContext* ctx) throw() ;
+	void __construct_impl(ThreadContext* ctx) throw() ;
 	DoubleVariable(double value, ThreadContext* ctx) throw() ;
 	void __construct_impl(double value, ThreadContext* ctx) throw() ;
 	virtual ~DoubleVariable() throw();
@@ -356,8 +352,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 	class ValueCompare {
 	public:
 		int operator() (VariantValue* _this, VariantValue* variable, ThreadContext* ctx) const throw();

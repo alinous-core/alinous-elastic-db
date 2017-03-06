@@ -210,5 +210,7 @@ void AlinousThread::threadLoop(ThreadContext* ctx) throw()
 		this->pool->putBack(this, ctx);
 	}
 }
+void AlinousThread::__cleanUp(ThreadContext* ctx){
+}
 }}}
 

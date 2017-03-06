@@ -61,12 +61,8 @@ class MultiplicativeExpression final : public AbstractCollectionExpression {
 public:
 	MultiplicativeExpression(const MultiplicativeExpression& base) = default;
 public:
-	MultiplicativeExpression(ThreadContext* ctx) throw()  : IObject(ctx), AbstractCollectionExpression(ctx)
-	{
-	}
-	void __construct_impl(ThreadContext* ctx) throw() 
-	{
-	}
+	MultiplicativeExpression(ThreadContext* ctx) throw() ;
+	void __construct_impl(ThreadContext* ctx) throw() ;
 	virtual ~MultiplicativeExpression() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 public:
@@ -80,8 +76,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}}

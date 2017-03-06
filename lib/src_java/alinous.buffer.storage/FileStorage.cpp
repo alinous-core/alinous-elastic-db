@@ -490,5 +490,7 @@ long long FileStorage::allocSingleBlockEntry(long long totalBytes, FileStorageBl
 	syncStatus(ctx);
 	return firstBlock;
 }
+void FileStorage::__cleanUp(ThreadContext* ctx){
+}
 }}}
 

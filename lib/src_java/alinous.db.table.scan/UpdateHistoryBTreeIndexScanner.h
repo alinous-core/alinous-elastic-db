@@ -96,12 +96,8 @@ class UpdateHistoryBTreeIndexScanner final : public ITableTargetScanner, public 
 public:
 	UpdateHistoryBTreeIndexScanner(const UpdateHistoryBTreeIndexScanner& base) = default;
 public:
-	UpdateHistoryBTreeIndexScanner(ThreadContext* ctx) throw()  : IObject(ctx), ITableTargetScanner(ctx), storage(nullptr), scanner(nullptr), commitId(0), iterator(nullptr), trx(nullptr), tableId(nullptr)
-	{
-	}
-	void __construct_impl(ThreadContext* ctx) throw() 
-	{
-	}
+	UpdateHistoryBTreeIndexScanner(ThreadContext* ctx) throw() ;
+	void __construct_impl(ThreadContext* ctx) throw() ;
 	virtual ~UpdateHistoryBTreeIndexScanner() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 private:
@@ -122,8 +118,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}}}

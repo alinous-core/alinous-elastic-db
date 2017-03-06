@@ -26,12 +26,8 @@ class Token final : public java::io::Serializable, public virtual IObject {
 public:
 	Token(const Token& base) = default;
 public:
-	Token(ThreadContext* ctx) throw()  : IObject(ctx), java::io::Serializable(ctx), kind(0), beginLine(0), beginColumn(0), endLine(0), endColumn(0), image(nullptr), next(nullptr), specialToken(nullptr)
-	{
-	}
-	void __construct_impl(ThreadContext* ctx) throw() 
-	{
-	}
+	Token(ThreadContext* ctx) throw() ;
+	void __construct_impl(ThreadContext* ctx) throw() ;
 	Token(int kind, ThreadContext* ctx) throw() ;
 	void __construct_impl(int kind, ThreadContext* ctx) throw() ;
 	Token(int kind, String* image, ThreadContext* ctx) throw() ;
@@ -59,8 +55,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}

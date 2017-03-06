@@ -55,12 +55,8 @@ public:
 	class TypedVariableCaller;
 	VariableOperationCaller(const VariableOperationCaller& base) = default;
 public:
-	VariableOperationCaller(ThreadContext* ctx) throw()  : IObject(ctx)
-	{
-	}
-	void __construct_impl(ThreadContext* ctx) throw() 
-	{
-	}
+	VariableOperationCaller(ThreadContext* ctx) throw() ;
+	void __construct_impl(ThreadContext* ctx) throw() ;
 	virtual ~VariableOperationCaller() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 public:
@@ -88,12 +84,8 @@ public:
 	public:
 		VariantCaller(const VariantCaller& base) = default;
 	public:
-		VariantCaller(ThreadContext* ctx) throw()  : IObject(ctx), IVariableClassOperationCaller(ctx)
-		{
-		}
-		void __construct_impl(ThreadContext* ctx) throw() 
-		{
-		}
+		VariantCaller(ThreadContext* ctx) throw() ;
+		void __construct_impl(ThreadContext* ctx) throw() ;
 		virtual ~VariantCaller() throw();
 		virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 	public:
@@ -114,8 +106,7 @@ public:
 		static bool __init_done;
 		static bool __init_static_variables();
 	public:
-		static void __cleanUp(ThreadContext* ctx){
-		}
+		static void __cleanUp(ThreadContext* ctx);
 	};
 
 
@@ -125,12 +116,8 @@ public:
 	public:
 		DomCaller(const DomCaller& base) = default;
 	public:
-		DomCaller(ThreadContext* ctx) throw()  : IObject(ctx), IVariableClassOperationCaller(ctx)
-		{
-		}
-		void __construct_impl(ThreadContext* ctx) throw() 
-		{
-		}
+		DomCaller(ThreadContext* ctx) throw() ;
+		void __construct_impl(ThreadContext* ctx) throw() ;
 		virtual ~DomCaller() throw();
 		virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 	public:
@@ -151,8 +138,7 @@ public:
 		static bool __init_done;
 		static bool __init_static_variables();
 	public:
-		static void __cleanUp(ThreadContext* ctx){
-		}
+		static void __cleanUp(ThreadContext* ctx);
 	};
 
 
@@ -162,12 +148,8 @@ public:
 	public:
 		ObjectCaller(const ObjectCaller& base) = default;
 	public:
-		ObjectCaller(ThreadContext* ctx) throw()  : IObject(ctx), IVariableClassOperationCaller(ctx)
-		{
-		}
-		void __construct_impl(ThreadContext* ctx) throw() 
-		{
-		}
+		ObjectCaller(ThreadContext* ctx) throw() ;
+		void __construct_impl(ThreadContext* ctx) throw() ;
 		virtual ~ObjectCaller() throw();
 		virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 	public:
@@ -188,8 +170,7 @@ public:
 		static bool __init_done;
 		static bool __init_static_variables();
 	public:
-		static void __cleanUp(ThreadContext* ctx){
-		}
+		static void __cleanUp(ThreadContext* ctx);
 	};
 
 
@@ -199,12 +180,8 @@ public:
 	public:
 		TypedVariableCaller(const TypedVariableCaller& base) = default;
 	public:
-		TypedVariableCaller(ThreadContext* ctx) throw()  : IObject(ctx), IVariableClassOperationCaller(ctx)
-		{
-		}
-		void __construct_impl(ThreadContext* ctx) throw() 
-		{
-		}
+		TypedVariableCaller(ThreadContext* ctx) throw() ;
+		void __construct_impl(ThreadContext* ctx) throw() ;
 		virtual ~TypedVariableCaller() throw();
 		virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 	public:
@@ -225,16 +202,13 @@ public:
 		static bool __init_done;
 		static bool __init_static_variables();
 	public:
-		static void __cleanUp(ThreadContext* ctx){
-		}
+		static void __cleanUp(ThreadContext* ctx);
 	};
 
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-		GCUtils<IArrayObject<IVariableClassOperationCaller>>::dec(nullptr, VariableOperationCaller::callers, ctx, __FILEW__, __LINE__, L"IArrayObject<IVariableClassOperationCaller>");
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}}

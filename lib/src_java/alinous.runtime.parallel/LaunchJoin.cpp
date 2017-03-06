@@ -76,5 +76,7 @@ void LaunchJoin::childrenJoin(ThreadContext* ctx) throw()
 		}
 	}
 }
+void LaunchJoin::__cleanUp(ThreadContext* ctx){
+}
 }}}
 

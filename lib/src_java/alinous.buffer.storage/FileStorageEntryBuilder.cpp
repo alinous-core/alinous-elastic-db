@@ -3,8 +3,6 @@
 
 #include "alinous.buffer.storage/FileStorageEntry.h"
 #include "alinous.buffer.storage/FileStorageEntryFetcher.h"
-#include "alinous.lock/LockObject.h"
-#include "alinous.lock/ConcurrentGate.h"
 #include "alinous.buffer.storage/IFileStorage.h"
 #include "alinous.buffer.storage/FileStorageEntryWriter.h"
 #include "alinous.buffer.storage/FileStorageEntryReader.h"
@@ -188,6 +186,8 @@ void FileStorageEntryBuilder::realloc(int need, ThreadContext* ctx) throw()
 		__GC_MV(this, &(this->buff), ByteBuffer::allocate(nextCap, ctx), ByteBuffer);
 		this->buff->put(buffLast->array(ctx), 0, buffLast->position(ctx), ctx);
 	}
+}
+void FileStorageEntryBuilder::__cleanUp(ThreadContext* ctx){
 }
 }}}
 

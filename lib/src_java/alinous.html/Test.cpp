@@ -2,6 +2,7 @@
 
 
 #include "alinous.html.xpath/IVariableValue.h"
+#include "alinous.html.xpath/StringValue.h"
 #include "alinous.html/IDomObject.h"
 #include "alinous.html/Attribute.h"
 #include "alinous.html/DomNode.h"
@@ -32,6 +33,12 @@ bool Test::__init_static_variables(){
 	ctx->localGC();
 	delete ctx;
 	return true;
+}
+ Test::Test(ThreadContext* ctx) throw()  : IObject(ctx)
+{
+}
+void Test::__construct_impl(ThreadContext* ctx) throw() 
+{
 }
  Test::~Test() throw() 
 {
@@ -121,6 +128,8 @@ String* Test::readAllText(String* srcPath, String* encode, ThreadContext* ctx) t
 		}
 	}
 	return buff->toString(ctx);
+}
+void Test::__cleanUp(ThreadContext* ctx){
 }
 }}
 

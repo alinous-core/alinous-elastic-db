@@ -29,6 +29,12 @@ bool BinarySearch::__init_static_variables(){
 	delete ctx;
 	return true;
 }
+ BinarySearch::BinarySearch(ThreadContext* ctx) throw()  : IObject(ctx)
+{
+}
+void BinarySearch::__construct_impl(ThreadContext* ctx) throw() 
+{
+}
  BinarySearch::~BinarySearch() throw() 
 {
 	ThreadContext *ctx = ThreadContext::getCurentContext();
@@ -92,6 +98,8 @@ int BinarySearch::binarySearch(String* data, wchar_t value, ThreadContext* ctx) 
 		}
 	}
 	return -1;
+}
+void BinarySearch::__cleanUp(ThreadContext* ctx){
 }
 }}
 

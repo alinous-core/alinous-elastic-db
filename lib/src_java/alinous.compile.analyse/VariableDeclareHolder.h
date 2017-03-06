@@ -48,12 +48,8 @@ class VariableDeclareHolder final : public virtual IObject {
 public:
 	VariableDeclareHolder(const VariableDeclareHolder& base) = default;
 public:
-	VariableDeclareHolder(ThreadContext* ctx) throw()  : IObject(ctx), variableDeclares(GCUtils<Stack<SubVariableDeclareHolder> >::ins(this, (new(ctx) Stack<SubVariableDeclareHolder>(ctx)), ctx, __FILEW__, __LINE__, L"")), domDeclare(GCUtils<HashMap<String,DomVariableDeclareSource> >::ins(this, (new(ctx) HashMap<String,DomVariableDeclareSource>(ctx)), ctx, __FILEW__, __LINE__, L""))
-	{
-	}
-	void __construct_impl(ThreadContext* ctx) throw() 
-	{
-	}
+	VariableDeclareHolder(ThreadContext* ctx) throw() ;
+	void __construct_impl(ThreadContext* ctx) throw() ;
 	virtual ~VariableDeclareHolder() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 private:
@@ -71,8 +67,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}}

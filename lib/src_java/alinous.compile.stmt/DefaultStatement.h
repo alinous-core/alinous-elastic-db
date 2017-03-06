@@ -34,12 +34,8 @@ class DefaultStatement final : public CaseStatement {
 public:
 	DefaultStatement(const DefaultStatement& base) = default;
 public:
-	DefaultStatement(ThreadContext* ctx) throw()  : IObject(ctx), CaseStatement(ctx)
-	{
-	}
-	void __construct_impl(ThreadContext* ctx) throw() 
-	{
-	}
+	DefaultStatement(ThreadContext* ctx) throw() ;
+	void __construct_impl(ThreadContext* ctx) throw() ;
 	virtual ~DefaultStatement() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 public:
@@ -50,8 +46,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}}

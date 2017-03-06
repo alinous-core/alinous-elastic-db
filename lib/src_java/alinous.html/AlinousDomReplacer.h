@@ -47,12 +47,8 @@ class AlinousDomReplacer final : public IReplacer, public virtual IObject {
 public:
 	AlinousDomReplacer(const AlinousDomReplacer& base) = default;
 public:
-	AlinousDomReplacer(ThreadContext* ctx) throw()  : IObject(ctx), IReplacer(ctx), currentAttribute(nullptr), currentTag(nullptr), processingTagIsEnd(0), eventHandler(__GC_INS(this, (new(ctx) AlinousDomEventHandler(ctx)), AlinousDomEventHandler))
-	{
-	}
-	void __construct_impl(ThreadContext* ctx) throw() 
-	{
-	}
+	AlinousDomReplacer(ThreadContext* ctx) throw() ;
+	void __construct_impl(ThreadContext* ctx) throw() ;
 	virtual ~AlinousDomReplacer() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 private:
@@ -76,8 +72,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}

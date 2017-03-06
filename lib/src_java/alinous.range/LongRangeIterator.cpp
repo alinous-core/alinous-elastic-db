@@ -97,5 +97,7 @@ long long LongRangeIterator::next(ThreadContext* ctx) throw()
 	}
 	return ret;
 }
+void LongRangeIterator::__cleanUp(ThreadContext* ctx){
+}
 }}
 

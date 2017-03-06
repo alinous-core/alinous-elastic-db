@@ -50,12 +50,8 @@ class IVariantData : public virtual IObject, public ICommandData {
 public:
 	IVariantData(const IVariantData& base) = default;
 public:
-	IVariantData(ThreadContext* ctx) throw()  : IObject(ctx), ICommandData(ctx)
-	{
-	}
-	void __construct_impl(ThreadContext* ctx) throw() 
-	{
-	}
+	IVariantData(ThreadContext* ctx) throw() ;
+	void __construct_impl(ThreadContext* ctx) throw() ;
 	virtual ~IVariantData() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 public:
@@ -96,8 +92,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 	class ValueCompare {
 	public:
 		int operator() (VariantValue* _this, VariantValue* variant, ThreadContext* ctx) const throw();

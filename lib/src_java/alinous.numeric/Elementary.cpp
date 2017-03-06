@@ -1,7 +1,12 @@
 #include "include/global.h"
 
 
+#include "java.util/Locale.h"
+#include "java.util/Calendar.h"
+#include "java.util/GregorianCalendar.h"
+#include "java.util/Date.h"
 #include "alinous.numeric/InternalDate.h"
+#include "java.util/TimeZone.h"
 #include "alinous.numeric/TimeOnlyTimestamp.h"
 #include "java.util/Random.h"
 #include "java.lang/Number.h"
@@ -35,6 +40,12 @@ bool Elementary::__init_static_variables(){
 	ctx->localGC();
 	delete ctx;
 	return true;
+}
+ Elementary::Elementary(ThreadContext* ctx) throw()  : IObject(ctx)
+{
+}
+void Elementary::__construct_impl(ThreadContext* ctx) throw() 
+{
 }
  Elementary::~Elementary() throw() 
 {
@@ -405,6 +416,8 @@ int Elementary::unsignedArraysCompare(IArrayObjectPrimitive<int>* a, IArrayObjec
 			return i < 0 ? BigInteger::EQUALS : ((a->get(i) & 0xFFFFFFFFL) < (b->get(i) & 0xFFFFFFFFL) ? BigInteger::LESS : BigInteger::GREATER);
 		}
 	}
+}
+void Elementary::__cleanUp(ThreadContext* ctx){
 }
 }}
 

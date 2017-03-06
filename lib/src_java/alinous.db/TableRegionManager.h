@@ -72,12 +72,8 @@ class TableRegionManager final : public virtual IObject {
 public:
 	TableRegionManager(const TableRegionManager& base) = default;
 public:
-	TableRegionManager(ThreadContext* ctx) throw()  : IObject(ctx), regions(GCUtils<List<ITableRegion> >::ins(this, (new(ctx) ArrayList<ITableRegion>(ctx)), ctx, __FILEW__, __LINE__, L""))
-	{
-	}
-	void __construct_impl(ThreadContext* ctx) throw() 
-	{
-	}
+	TableRegionManager(ThreadContext* ctx) throw() ;
+	void __construct_impl(ThreadContext* ctx) throw() ;
 	virtual ~TableRegionManager() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 private:
@@ -94,8 +90,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}

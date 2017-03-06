@@ -1,15 +1,12 @@
 #include "include/global.h"
 
 
-#include "java.util/Date.h"
 #include "java.util/Locale.h"
+#include "java.util/Calendar.h"
+#include "java.util/GregorianCalendar.h"
+#include "java.util/Date.h"
 #include "alinous.numeric/InternalDate.h"
 #include "java.util/TimeZone.h"
-#include "java.util/Calendar.h"
-#include "com.google.re2j/Inst.h"
-#include "com.google.re2j/Prog.h"
-#include "com.google.re2j/MachineInput.h"
-#include "com.google.re2j/Machine.h"
 #include "com.google.re2j/RE2.h"
 #include "com.google.re2j/Matcher.h"
 #include "com.google.re2j/Pattern.h"
@@ -298,6 +295,8 @@ Timestamp* Timestamp::valueOf(String* s, ThreadContext* ctx)
 	long long mls = cal->getTimeInMillis(ctx);
 	Timestamp* tm = (new(ctx) Timestamp(mls, ctx));
 	return tm;
+}
+void Timestamp::__cleanUp(ThreadContext* ctx){
 }
 int Timestamp::ValueCompare::operator() (InternalDate* _this, InternalDate* theObject, ThreadContext* ctx) const throw()
 {

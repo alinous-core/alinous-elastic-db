@@ -46,6 +46,12 @@ bool CharsetManager::__init_static_variables(){
 	delete ctx;
 	return true;
 }
+ CharsetManager::CharsetManager(ThreadContext* ctx) throw()  : IObject(ctx), charConverters(GCUtils<HashMap<String,CharsetConverter> >::ins(this, (new(ctx) HashMap<String,CharsetConverter>(ctx)), ctx, __FILEW__, __LINE__, L""))
+{
+}
+void CharsetManager::__construct_impl(ThreadContext* ctx) throw() 
+{
+}
  CharsetManager::~CharsetManager() throw() 
 {
 	ThreadContext *ctx = ThreadContext::getCurentContext();
@@ -349,6 +355,9 @@ CharsetManager* CharsetManager::getInstance(ThreadContext* ctx) throw()
 		__GC_MV(nullptr, &(CharsetManager::instance), (new(ctx) CharsetManager(ctx)), CharsetManager);
 	}
 	return CharsetManager::instance;
+}
+void CharsetManager::__cleanUp(ThreadContext* ctx){
+	GCUtils<CharsetManager>::dec(nullptr, CharsetManager::instance, ctx, __FILEW__, __LINE__, L"CharsetManager");
 }
 }}}
 

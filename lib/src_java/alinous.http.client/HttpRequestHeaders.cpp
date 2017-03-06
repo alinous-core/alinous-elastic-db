@@ -2,6 +2,7 @@
 
 
 #include "java.io/ByteArrayOutputStream.h"
+#include "alinous.system/AlinousException.h"
 #include "alinous.http.client/HttpRequestHeaders.h"
 #include "alinous.http.client/HttpClient.h"
 #include "alinous.http.client/HttpsClient.h"
@@ -22,6 +23,12 @@ bool HttpRequestHeaders::__init_static_variables(){
 	ctx->localGC();
 	delete ctx;
 	return true;
+}
+ HttpRequestHeaders::HttpRequestHeaders(ThreadContext* ctx) throw()  : IObject(ctx), userAgent(nullptr), accept(__GC_INS(this, ConstStr::getCNST_STR_1885(), String)), acceptLanguage(nullptr), acceptEncoding(nullptr), acceptCharset(nullptr), keepAlive(nullptr), connection(nullptr), cookie(nullptr)
+{
+}
+void HttpRequestHeaders::__construct_impl(ThreadContext* ctx) throw() 
+{
 }
  HttpRequestHeaders::~HttpRequestHeaders() throw() 
 {
@@ -135,6 +142,8 @@ void HttpRequestHeaders::dowrite(StringBuffer* writer, String* key, String* valu
 		return;
 	}
 	writer->append(key, ctx)->append(ConstStr::getCNST_STR_1883(), ctx)->append(value, ctx)->append(ConstStr::getCNST_STR_1884(), ctx);
+}
+void HttpRequestHeaders::__cleanUp(ThreadContext* ctx){
 }
 }}}
 

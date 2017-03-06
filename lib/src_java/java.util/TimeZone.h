@@ -4,6 +4,9 @@ namespace alinous{namespace annotation{
 class OneSource;
 }}
 namespace java {namespace util {
+class TimeZones;}}
+
+namespace java {namespace util {
 class TimeZone;}}
 
 namespace java {namespace util {
@@ -48,12 +51,8 @@ class TimeZone : public virtual IObject {
 public:
 	TimeZone(const TimeZone& base) = default;
 public:
-	TimeZone(ThreadContext* ctx) throw()  : IObject(ctx), ID(nullptr)
-	{
-	}
-	void __construct_impl(ThreadContext* ctx) throw() 
-	{
-	}
+	TimeZone(ThreadContext* ctx) throw() ;
+	void __construct_impl(ThreadContext* ctx) throw() ;
 	virtual ~TimeZone() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 private:
@@ -66,6 +65,7 @@ private:
 	static HashMap<String,TimeZone>* AvailableZones;
 	static TimeZone* Default;
 public:
+	void includeDummy(TimeZones* arg0, ThreadContext* ctx) throw() ;
 	virtual IObject* clone(ThreadContext* ctx) throw() ;
 	String* getDisplayName(ThreadContext* ctx) throw() ;
 	String* getDisplayName(Locale* locale, ThreadContext* ctx) throw() ;
@@ -96,11 +96,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-		GCUtils<TimeZone>::dec(nullptr, TimeZone::GMT, ctx, __FILEW__, __LINE__, L"TimeZone");
-		GCUtils<HashMap<String,TimeZone>>::dec(nullptr, TimeZone::AvailableZones, ctx, __FILEW__, __LINE__, L"HashMap<String,TimeZone>");
-		GCUtils<TimeZone>::dec(nullptr, TimeZone::Default, ctx, __FILEW__, __LINE__, L"TimeZone");
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}

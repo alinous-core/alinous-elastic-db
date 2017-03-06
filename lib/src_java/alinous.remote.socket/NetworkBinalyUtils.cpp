@@ -3,10 +3,7 @@
 
 #include "alinous.remote.socket/NetworkBinaryBuffer.h"
 #include "alinous.lock/LockObject.h"
-#include "alinous.runtime.parallel/LaunchJoin.h"
 #include "alinous.runtime.parallel/ThreadPool.h"
-#include "alinous.runtime.parallel/IThreadAction.h"
-#include "alinous.runtime.parallel/AlinousThread.h"
 #include "alinous.system/ISystemLog.h"
 #include "alinous.remote.socket/ISocketActionFactory.h"
 #include "alinous.remote.socket/SocketServer.h"
@@ -32,6 +29,12 @@ bool NetworkBinalyUtils::__init_static_variables(){
 	ctx->localGC();
 	delete ctx;
 	return true;
+}
+ NetworkBinalyUtils::NetworkBinalyUtils(ThreadContext* ctx) throw()  : IObject(ctx)
+{
+}
+void NetworkBinalyUtils::__construct_impl(ThreadContext* ctx) throw() 
+{
 }
  NetworkBinalyUtils::~NetworkBinalyUtils() throw() 
 {
@@ -66,6 +69,8 @@ short NetworkBinalyUtils::readShort(InputStream* stream, ThreadContext* ctx)
 	stream->read(intbytes, ctx);
 	ByteBuffer* buff = ByteBuffer::wrap(intbytes, ctx);
 	return buff->getShort(ctx);
+}
+void NetworkBinalyUtils::__cleanUp(ThreadContext* ctx){
 }
 }}}
 

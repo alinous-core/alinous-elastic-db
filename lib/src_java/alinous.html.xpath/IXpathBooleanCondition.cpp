@@ -49,6 +49,12 @@ bool IXpathBooleanCondition::__init_static_variables(){
 	delete ctx;
 	return true;
 }
+ IXpathBooleanCondition::IXpathBooleanCondition(ThreadContext* ctx) throw()  : IObject(ctx), IXpathElement(ctx)
+{
+}
+void IXpathBooleanCondition::__construct_impl(ThreadContext* ctx) throw() 
+{
+}
  IXpathBooleanCondition::~IXpathBooleanCondition() throw() 
 {
 	ThreadContext *ctx = ThreadContext::getCurentContext();
@@ -62,6 +68,8 @@ void IXpathBooleanCondition::__releaseRegerences(bool prepare, ThreadContext* ct
 		return;
 	}
 	IXpathElement::__releaseRegerences(true, ctx);
+}
+void IXpathBooleanCondition::__cleanUp(ThreadContext* ctx){
 }
 }}}
 

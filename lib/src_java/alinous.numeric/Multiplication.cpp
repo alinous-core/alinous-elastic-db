@@ -1,7 +1,12 @@
 #include "include/global.h"
 
 
+#include "java.util/Locale.h"
+#include "java.util/Calendar.h"
+#include "java.util/GregorianCalendar.h"
+#include "java.util/Date.h"
 #include "alinous.numeric/InternalDate.h"
+#include "java.util/TimeZone.h"
 #include "alinous.numeric/TimeOnlyTimestamp.h"
 #include "java.util/Random.h"
 #include "java.lang/Number.h"
@@ -44,6 +49,12 @@ bool Multiplication::__init_static_variables(){
 	ctx->localGC();
 	delete ctx;
 	return true;
+}
+ Multiplication::Multiplication(ThreadContext* ctx) throw()  : IObject(ctx)
+{
+}
+void Multiplication::__construct_impl(ThreadContext* ctx) throw() 
+{
 }
  Multiplication::~Multiplication() throw() 
 {
@@ -330,6 +341,10 @@ int Multiplication::multiplyByInt(IArrayObjectPrimitive<int>* res, IArrayObjectP
 		carry = ((unsigned long long)carry) >> 32;
 	}
 	return ((int)carry);
+}
+void Multiplication::__cleanUp(ThreadContext* ctx){
+	GCUtils<IArrayObject<BigInteger>>::dec(nullptr, Multiplication::bigTenPows, ctx, __FILEW__, __LINE__, L"IArrayObject<BigInteger>");
+	GCUtils<IArrayObject<BigInteger>>::dec(nullptr, Multiplication::bigFivePows, ctx, __FILEW__, __LINE__, L"IArrayObject<BigInteger>");
 }
 }}
 

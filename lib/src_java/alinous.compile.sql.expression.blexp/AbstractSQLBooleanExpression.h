@@ -55,12 +55,8 @@ class AbstractSQLBooleanExpression : public ISQLBoolExpression {
 public:
 	AbstractSQLBooleanExpression(const AbstractSQLBooleanExpression& base) = default;
 public:
-	AbstractSQLBooleanExpression(ThreadContext* ctx) throw()  : IObject(ctx), ISQLBoolExpression(ctx), asName(nullptr)
-	{
-	}
-	void __construct_impl(ThreadContext* ctx) throw() 
-	{
-	}
+	AbstractSQLBooleanExpression(ThreadContext* ctx) throw() ;
+	void __construct_impl(ThreadContext* ctx) throw() ;
 	virtual ~AbstractSQLBooleanExpression() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 public:
@@ -91,8 +87,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}}}}

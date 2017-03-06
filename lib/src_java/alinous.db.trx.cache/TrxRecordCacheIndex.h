@@ -15,6 +15,9 @@ class AlinousDatabase;}}
 namespace java {namespace io {
 class File;}}
 
+namespace alinous {namespace system {
+class AlinousCore;}}
+
 namespace alinous {namespace btree {
 class BTree;}}
 
@@ -82,6 +85,7 @@ using ::alinous::db::table::BTreeIndexKey;
 using ::alinous::db::table::IBtreeTableIndex;
 using ::alinous::db::table::IDatabaseRecord;
 using ::alinous::db::table::TableColumnMetadata;
+using ::alinous::system::AlinousCore;
 using ::alinous::system::AlinousException;
 
 
@@ -120,8 +124,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}}}

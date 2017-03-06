@@ -2,6 +2,7 @@
 
 
 #include "alinous.html.xpath/IVariableValue.h"
+#include "alinous.html.xpath/StringValue.h"
 #include "alinous.html/IDomObject.h"
 #include "alinous.html/Attribute.h"
 #include "alinous.html/DomNode.h"
@@ -121,6 +122,8 @@ void AlinousDomEventHandler::reportBodyString(DomText* bodyString, ThreadContext
 DomNode* AlinousDomEventHandler::getTopObject(ThreadContext* ctx) throw() 
 {
 	return topObject;
+}
+void AlinousDomEventHandler::__cleanUp(ThreadContext* ctx){
 }
 }}
 

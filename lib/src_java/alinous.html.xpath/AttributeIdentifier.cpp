@@ -73,5 +73,7 @@ String* AttributeIdentifier::toString(ThreadContext* ctx) throw()
 {
 	return ConstStr::getCNST_STR_1321()->clone(ctx)->append(this->id, ctx);
 }
+void AttributeIdentifier::__cleanUp(ThreadContext* ctx){
+}
 }}}
 

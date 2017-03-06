@@ -21,8 +21,8 @@ class InterruptedException;}}
 namespace alinous {namespace net {
 class AlinousSocket;}}
 
-namespace alinous {namespace remote {namespace monitor {namespace command {
-class TerminateCommand;}}}}
+namespace alinous {namespace remote {namespace monitor {namespace client {namespace command {
+class TerminateCommand;}}}}}
 
 namespace java {namespace io {
 class IOException;}}
@@ -69,7 +69,7 @@ using ::java::net::Socket;
 using ::alinous::lock::LockObject;
 using ::alinous::net::AlinousServerSocket;
 using ::alinous::net::AlinousSocket;
-using ::alinous::remote::monitor::command::TerminateCommand;
+using ::alinous::remote::monitor::client::command::TerminateCommand;
 using ::alinous::runtime::parallel::AlinousThread;
 using ::alinous::runtime::parallel::IThreadAction;
 using ::alinous::runtime::parallel::ThreadPool;
@@ -108,8 +108,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}}

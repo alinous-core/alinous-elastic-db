@@ -50,5 +50,7 @@ void CriticalSectionMarkerException::__releaseRegerences(bool prepare, ThreadCon
 	}
 	Throwable::__releaseRegerences(true, ctx);
 }
+void CriticalSectionMarkerException::__cleanUp(ThreadContext* ctx){
+}
 }}
 

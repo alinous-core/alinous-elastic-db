@@ -47,12 +47,8 @@ class StepReturnRequest final : public IClientRequest, public virtual IObject {
 public:
 	StepReturnRequest(const StepReturnRequest& base) = default;
 public:
-	StepReturnRequest(ThreadContext* ctx) throw()  : IObject(ctx), IClientRequest(ctx), threadId(0), stackId(0)
-	{
-	}
-	void __construct_impl(ThreadContext* ctx) throw() 
-	{
-	}
+	StepReturnRequest(ThreadContext* ctx) throw() ;
+	void __construct_impl(ThreadContext* ctx) throw() ;
 	virtual ~StepReturnRequest() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 private:
@@ -74,8 +70,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}}}}

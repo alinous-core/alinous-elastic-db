@@ -51,12 +51,8 @@ class RegionNodeInfo final : public ICommandData, public virtual IObject {
 public:
 	RegionNodeInfo(const RegionNodeInfo& base) = default;
 public:
-	RegionNodeInfo(ThreadContext* ctx) throw()  : IObject(ctx), ICommandData(ctx), name(nullptr), nodes(GCUtils<List<NodeInfo> >::ins(this, (new(ctx) ArrayList<NodeInfo>(ctx)), ctx, __FILEW__, __LINE__, L""))
-	{
-	}
-	void __construct_impl(ThreadContext* ctx) throw() 
-	{
-	}
+	RegionNodeInfo(ThreadContext* ctx) throw() ;
+	void __construct_impl(ThreadContext* ctx) throw() ;
 	virtual ~RegionNodeInfo() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 private:
@@ -77,8 +73,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}}

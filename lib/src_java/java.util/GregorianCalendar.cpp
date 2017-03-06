@@ -8,9 +8,9 @@
 #include "java.util/GregorianCalendar.h"
 #include "java.util/Date.h"
 #include "alinous.numeric/InternalDate.h"
+#include "java.util/TimeZones.h"
 #include "java.sql/Date.h"
 #include "java.util/BitSet.h"
-#include "java.util/TimeZones.h"
 #include "java.util/Random.h"
 #include "java.util/Arrays.h"
 
@@ -1199,6 +1199,8 @@ int GregorianCalendar::mod7(long long num1, ThreadContext* ctx) throw()
 		return rem + 7;
 	}
 	return rem;
+}
+void GregorianCalendar::__cleanUp(ThreadContext* ctx){
 }
 }}
 

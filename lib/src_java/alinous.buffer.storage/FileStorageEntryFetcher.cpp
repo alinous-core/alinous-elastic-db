@@ -3,8 +3,6 @@
 
 #include "alinous.buffer.storage/FileStorageEntry.h"
 #include "alinous.buffer.storage/FileStorageEntryFetcher.h"
-#include "alinous.lock/LockObject.h"
-#include "alinous.lock/ConcurrentGate.h"
 #include "alinous.buffer.storage/IFileStorage.h"
 #include "alinous.buffer.storage/FileStorageEntryWriter.h"
 #include "alinous.buffer.storage/FileStorageEntryReader.h"
@@ -135,6 +133,8 @@ long long FileStorageEntryFetcher::getPosition(ThreadContext* ctx) throw()
 long long FileStorageEntryFetcher::getOid(ThreadContext* ctx) throw() 
 {
 	return oid;
+}
+void FileStorageEntryFetcher::__cleanUp(ThreadContext* ctx){
 }
 }}}
 

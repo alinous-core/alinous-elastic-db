@@ -8,9 +8,9 @@
 #include "java.util/GregorianCalendar.h"
 #include "java.util/Date.h"
 #include "alinous.numeric/InternalDate.h"
+#include "java.util/TimeZones.h"
 #include "java.sql/Date.h"
 #include "java.util/BitSet.h"
-#include "java.util/TimeZones.h"
 #include "java.util/Random.h"
 #include "java.util/Arrays.h"
 
@@ -773,6 +773,8 @@ int BitSet::pop(long long x, ThreadContext* ctx) throw()
 	x = x + (((unsigned long long)x)>> 8);
 	x = x + (((unsigned long long)x)>> 16);
 	return ((int)x) & 0x0000003f;
+}
+void BitSet::__cleanUp(ThreadContext* ctx){
 }
 }}
 

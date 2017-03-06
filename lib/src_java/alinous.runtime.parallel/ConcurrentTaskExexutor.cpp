@@ -249,6 +249,8 @@ void ConcurrentTaskExexutor::asyncStart(ThreadContext* ctx)
 		}
 	}
 }
+void ConcurrentTaskExexutor::__cleanUp(ThreadContext* ctx){
+}
 }}}
 
 namespace alinous {namespace runtime {namespace parallel {
@@ -305,6 +307,8 @@ void ConcurrentTaskExexutor::FinalyzerEntryPoint::execute(ThreadContext* ctx) th
 		}
 	}
 }
+void ConcurrentTaskExexutor::FinalyzerEntryPoint::__cleanUp(ThreadContext* ctx){
+}
 }}}
 
 namespace alinous {namespace runtime {namespace parallel {
@@ -360,6 +364,8 @@ void ConcurrentTaskExexutor::LauncherEntryPoint::execute(ThreadContext* ctx) thr
 			e->printStackTrace(ctx);
 		}
 	}
+}
+void ConcurrentTaskExexutor::LauncherEntryPoint::__cleanUp(ThreadContext* ctx){
 }
 }}}
 

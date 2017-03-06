@@ -149,6 +149,8 @@ Byte* Byte::valueOf(char b, ThreadContext* ctx) throw()
 {
 	return (new(ctx) Byte(b, ctx));
 }
+void Byte::__cleanUp(ThreadContext* ctx){
+}
 int Byte::ValueCompare::operator() (Byte* _this, Byte* object, ThreadContext* ctx) const throw()
 {
 	return _this->compareTo(object, ctx);

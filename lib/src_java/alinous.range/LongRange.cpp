@@ -70,5 +70,7 @@ void LongRange::setMax(long long max, ThreadContext* ctx) throw()
 {
 	this->max = max;
 }
+void LongRange::__cleanUp(ThreadContext* ctx){
+}
 }}
 

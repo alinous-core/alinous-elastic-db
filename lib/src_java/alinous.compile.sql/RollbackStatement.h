@@ -58,12 +58,8 @@ class RollbackStatement final : public AbstractSQLStatement {
 public:
 	RollbackStatement(const RollbackStatement& base) = default;
 public:
-	RollbackStatement(ThreadContext* ctx) throw()  : IObject(ctx), AbstractSQLStatement(ctx)
-	{
-	}
-	void __construct_impl(ThreadContext* ctx) throw() 
-	{
-	}
+	RollbackStatement(ThreadContext* ctx) throw() ;
+	void __construct_impl(ThreadContext* ctx) throw() ;
 	virtual ~RollbackStatement() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 public:
@@ -78,8 +74,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}}

@@ -193,20 +193,15 @@ public:
 	public:
 		LookaheadSuccess(const LookaheadSuccess& base) = default;
 	public:
-		LookaheadSuccess(ThreadContext* ctx) throw()  : IObject(ctx), java::lang::Error(ctx)
-		{
-		}
-		void __construct_impl(ThreadContext* ctx) throw() 
-		{
-		}
+		LookaheadSuccess(ThreadContext* ctx) throw() ;
+		void __construct_impl(ThreadContext* ctx) throw() ;
 		virtual ~LookaheadSuccess() throw();
 		virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 	public:
 		static bool __init_done;
 		static bool __init_static_variables();
 	public:
-		static void __cleanUp(ThreadContext* ctx){
-		}
+		static void __cleanUp(ThreadContext* ctx);
 	};
 
 
@@ -216,12 +211,8 @@ public:
 	public:
 		JJCalls(const JJCalls& base) = default;
 	public:
-		JJCalls(ThreadContext* ctx) throw()  : IObject(ctx), gen(0), first(nullptr), arg(0), next(nullptr)
-		{
-		}
-		void __construct_impl(ThreadContext* ctx) throw() 
-		{
-		}
+		JJCalls(ThreadContext* ctx) throw() ;
+		void __construct_impl(ThreadContext* ctx) throw() ;
 		virtual ~JJCalls() throw();
 		virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 	public:
@@ -233,16 +224,13 @@ public:
 		static bool __init_done;
 		static bool __init_static_variables();
 	public:
-		static void __cleanUp(ThreadContext* ctx){
-		}
+		static void __cleanUp(ThreadContext* ctx);
 	};
 
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-		GCUtils<IArrayObjectPrimitive<long long>>::dec(nullptr, HtmlXmlParser::jj_la1_0, ctx, __FILEW__, __LINE__, L"IArrayObjectPrimitive<long long>");
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}}}

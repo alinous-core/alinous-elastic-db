@@ -34,12 +34,8 @@ class Prog final : public virtual IObject {
 public:
 	Prog(const Prog& base) = default;
 public:
-	Prog(ThreadContext* ctx) throw()  : IObject(ctx), start(0), numCap(2), inst(GCUtils<List<Inst> >::ins(this, (new(ctx) ArrayList<Inst>(ctx)), ctx, __FILEW__, __LINE__, L""))
-	{
-	}
-	void __construct_impl(ThreadContext* ctx) throw() 
-	{
-	}
+	Prog(ThreadContext* ctx) throw() ;
+	void __construct_impl(ThreadContext* ctx) throw() ;
 	virtual ~Prog() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 public:
@@ -62,8 +58,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}}

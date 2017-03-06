@@ -1,7 +1,12 @@
 #include "include/global.h"
 
 
+#include "java.util/Locale.h"
+#include "java.util/Calendar.h"
+#include "java.util/GregorianCalendar.h"
+#include "java.util/Date.h"
 #include "alinous.numeric/InternalDate.h"
+#include "java.util/TimeZone.h"
 #include "alinous.numeric/TimeOnlyTimestamp.h"
 #include "java.util/Random.h"
 #include "java.lang/Number.h"
@@ -35,6 +40,12 @@ bool BitLevel::__init_static_variables(){
 	ctx->localGC();
 	delete ctx;
 	return true;
+}
+ BitLevel::BitLevel(ThreadContext* ctx) throw()  : IObject(ctx)
+{
+}
+void BitLevel::__construct_impl(ThreadContext* ctx) throw() 
+{
 }
  BitLevel::~BitLevel() throw() 
 {
@@ -316,6 +327,8 @@ BigInteger* BitLevel::flipBit(BigInteger* val, int n, ThreadContext* ctx) throw(
 	BigInteger* result = (new(ctx) BigInteger(resSign, resLength, resDigits, ctx));
 	result->cutOffLeadingZeroes(ctx);
 	return result;
+}
+void BitLevel::__cleanUp(ThreadContext* ctx){
 }
 }}
 

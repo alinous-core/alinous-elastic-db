@@ -113,6 +113,8 @@ Boolean* Boolean::valueOf(bool b, ThreadContext* ctx) throw()
 {
 	return b ? Boolean::TRUE : Boolean::FALSE;
 }
+void Boolean::__cleanUp(ThreadContext* ctx){
+}
 int Boolean::ValueCompare::operator() (Boolean* _this, Boolean* that, ThreadContext* ctx) const throw()
 {
 	return _this->compareTo(that, ctx);

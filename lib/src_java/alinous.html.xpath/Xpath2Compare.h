@@ -67,12 +67,8 @@ class Xpath2Compare final : public IXpathBooleanCondition, public virtual IObjec
 public:
 	Xpath2Compare(const Xpath2Compare& base) = default;
 public:
-	Xpath2Compare(ThreadContext* ctx) throw()  : IObject(ctx), IXpathBooleanCondition(ctx), lparam(nullptr), rparam(nullptr), ope(nullptr)
-	{
-	}
-	void __construct_impl(ThreadContext* ctx) throw() 
-	{
-	}
+	Xpath2Compare(ThreadContext* ctx) throw() ;
+	void __construct_impl(ThreadContext* ctx) throw() ;
 	virtual ~Xpath2Compare() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 private:
@@ -94,8 +90,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}}

@@ -44,12 +44,8 @@ class XpathReference final : public IXpathStatement, public virtual IObject {
 public:
 	XpathReference(const XpathReference& base) = default;
 public:
-	XpathReference(ThreadContext* ctx) throw()  : IObject(ctx), IXpathStatement(ctx), xpath(nullptr)
-	{
-	}
-	void __construct_impl(ThreadContext* ctx) throw() 
-	{
-	}
+	XpathReference(ThreadContext* ctx) throw() ;
+	void __construct_impl(ThreadContext* ctx) throw() ;
 	virtual ~XpathReference() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 private:
@@ -63,8 +59,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}}

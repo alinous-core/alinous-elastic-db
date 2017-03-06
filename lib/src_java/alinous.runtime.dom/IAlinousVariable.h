@@ -96,12 +96,8 @@ class IAlinousVariable : public virtual IObject, public ICommandData {
 public:
 	IAlinousVariable(const IAlinousVariable& base) = default;
 public:
-	IAlinousVariable(ThreadContext* ctx) throw()  : IObject(ctx), ICommandData(ctx)
-	{
-	}
-	void __construct_impl(ThreadContext* ctx) throw() 
-	{
-	}
+	IAlinousVariable(ThreadContext* ctx) throw() ;
+	void __construct_impl(ThreadContext* ctx) throw() ;
 	virtual ~IAlinousVariable() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 public:
@@ -336,8 +332,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 	class ValueCompare {
 	public:
 		int operator() (IAlinousVariable* _this, IAlinousVariable* variable, ThreadContext* ctx) const throw();

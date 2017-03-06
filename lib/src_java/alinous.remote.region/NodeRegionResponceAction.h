@@ -24,8 +24,8 @@ class BufferedOutputStream;}}
 namespace java {namespace lang {
 class Throwable;}}
 
-namespace alinous {namespace remote {namespace region {namespace command {
-class AbstractNodeRegionCommand;}}}}
+namespace alinous {namespace remote {namespace region {namespace client {namespace command {
+class AbstractNodeRegionCommand;}}}}}
 
 namespace alinous {namespace system {
 class AlinousException;}}
@@ -36,8 +36,8 @@ class IThreadAction;}}}
 namespace java {namespace io {
 class IOException;}}
 
-namespace alinous {namespace remote {namespace region {namespace command {
-class NodeRegionCommandReader;}}}}
+namespace alinous {namespace remote {namespace region {namespace client {namespace command {
+class NodeRegionCommandReader;}}}}}
 
 namespace java {namespace lang {
 class IObject;
@@ -58,8 +58,8 @@ using ::java::io::IOException;
 using ::java::io::InputStream;
 using ::java::io::OutputStream;
 using ::java::net::Socket;
-using ::alinous::remote::region::command::AbstractNodeRegionCommand;
-using ::alinous::remote::region::command::NodeRegionCommandReader;
+using ::alinous::remote::region::client::command::AbstractNodeRegionCommand;
+using ::alinous::remote::region::client::command::NodeRegionCommandReader;
 using ::alinous::remote::socket::SocketServer;
 using ::alinous::runtime::parallel::IThreadAction;
 using ::alinous::system::AlinousException;
@@ -86,8 +86,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}}

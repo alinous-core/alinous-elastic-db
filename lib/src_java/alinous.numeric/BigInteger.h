@@ -144,14 +144,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-		GCUtils<BigInteger>::dec(nullptr, BigInteger::ZERO, ctx, __FILEW__, __LINE__, L"BigInteger");
-		GCUtils<BigInteger>::dec(nullptr, BigInteger::ONE, ctx, __FILEW__, __LINE__, L"BigInteger");
-		GCUtils<BigInteger>::dec(nullptr, BigInteger::TEN, ctx, __FILEW__, __LINE__, L"BigInteger");
-		GCUtils<BigInteger>::dec(nullptr, BigInteger::MINUS_ONE, ctx, __FILEW__, __LINE__, L"BigInteger");
-		GCUtils<IArrayObject<BigInteger>>::dec(nullptr, BigInteger::SMALL_VALUES, ctx, __FILEW__, __LINE__, L"IArrayObject<BigInteger>");
-		GCUtils<IArrayObject<BigInteger>>::dec(nullptr, BigInteger::TWO_POWS, ctx, __FILEW__, __LINE__, L"IArrayObject<BigInteger>");
-	}
+	static void __cleanUp(ThreadContext* ctx);
 	class ValueCompare {
 	public:
 		int operator() (BigInteger* _this, BigInteger* val, ThreadContext* ctx) const throw();

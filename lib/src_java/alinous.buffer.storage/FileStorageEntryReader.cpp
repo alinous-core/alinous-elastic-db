@@ -78,18 +78,19 @@ FileStorageEntry* FileStorageEntryReader::readFirstEntry(ThreadContext* ctx)
 }
 FileStorageEntry* FileStorageEntryReader::read(long long filePointer, ThreadContext* ctx)
 {
-	storage->getGate(ctx)->enter(ctx);
+	ConcurrentGate* gate = storage->getGate(ctx);
+	gate->enter(ctx);
 	{
 		try
 		{
 			FileStorageEntry* entry = (new(ctx) FileStorageEntry(ctx));
 			read(filePointer, entry, ctx);
-			storage->getGate(ctx)->exit(ctx);
+			gate->exit(ctx);
 			return entry;
 		}
 		catch(Throwable* e)
 		{
-			storage->getGate(ctx)->exit(ctx);
+			gate->exit(ctx);
 			throw e;
 		}
 	}
@@ -106,6 +107,8 @@ FileStorageEntry* FileStorageEntryReader::read(long long filePointer, FileStorag
 	entry->position = filePointer;
 	storage->loadBlocks(filePointer, entry, block, ctx);
 	return entry;
+}
+void FileStorageEntryReader::__cleanUp(ThreadContext* ctx){
 }
 }}}
 

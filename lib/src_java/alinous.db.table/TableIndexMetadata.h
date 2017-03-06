@@ -59,12 +59,8 @@ public:
 public:
 	TableIndexMetadata(String* name, ArrayList<String>* columns, ThreadContext* ctx) throw() ;
 	void __construct_impl(String* name, ArrayList<String>* columns, ThreadContext* ctx) throw() ;
-	TableIndexMetadata(ThreadContext* ctx) throw()  : IObject(ctx), ICommandData(ctx), name(nullptr), columns(nullptr), metadata(GCUtils<ArrayList<TableColumnMetadata> >::ins(this, (new(ctx) ArrayList<TableColumnMetadata>(ctx)), ctx, __FILEW__, __LINE__, L""))
-	{
-	}
-	void __construct_impl(ThreadContext* ctx) throw() 
-	{
-	}
+	TableIndexMetadata(ThreadContext* ctx) throw() ;
+	void __construct_impl(ThreadContext* ctx) throw() ;
 	virtual ~TableIndexMetadata() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 private:
@@ -90,8 +86,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}}

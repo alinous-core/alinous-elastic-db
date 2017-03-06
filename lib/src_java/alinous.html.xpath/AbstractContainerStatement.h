@@ -27,12 +27,8 @@ class AbstractContainerStatement : public IXpathBooleanCondition, public virtual
 public:
 	AbstractContainerStatement(const AbstractContainerStatement& base) = default;
 public:
-	AbstractContainerStatement(ThreadContext* ctx) throw()  : IObject(ctx), IXpathBooleanCondition(ctx), statements(GCUtils<ArrayList<IXpathBooleanCondition> >::ins(this, (new(ctx) ArrayList<IXpathBooleanCondition>(ctx)), ctx, __FILEW__, __LINE__, L""))
-	{
-	}
-	void __construct_impl(ThreadContext* ctx) throw() 
-	{
-	}
+	AbstractContainerStatement(ThreadContext* ctx) throw() ;
+	void __construct_impl(ThreadContext* ctx) throw() ;
 	virtual ~AbstractContainerStatement() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 public:
@@ -43,8 +39,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}}

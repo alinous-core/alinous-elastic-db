@@ -12,11 +12,11 @@ class RemoteStorageConnectionInfo;}}}}
 namespace alinous {namespace net {
 class AlinousSocket;}}
 
-namespace alinous {namespace remote {namespace db {namespace command {
-class RemoteStorageConnectCommand;}}}}
+namespace alinous {namespace remote {namespace db {namespace client {namespace command {
+class RemoteStorageConnectCommand;}}}}}
 
-namespace alinous {namespace remote {namespace db {namespace command {
-class AbstractRemoteStorageCommand;}}}}
+namespace alinous {namespace remote {namespace db {namespace client {namespace command {
+class AbstractRemoteStorageCommand;}}}}}
 
 namespace alinous {namespace db {
 class AlinousDbException;}}
@@ -24,8 +24,8 @@ class AlinousDbException;}}
 namespace java {namespace io {
 class IOException;}}
 
-namespace alinous {namespace remote {namespace db {namespace command {
-class FinishRemoteStorageConnectionCommand;}}}}
+namespace alinous {namespace remote {namespace db {namespace client {namespace command {
+class FinishRemoteStorageConnectionCommand;}}}}}
 
 namespace alinous {namespace system {
 class AlinousException;}}
@@ -50,9 +50,9 @@ using ::java::io::IOException;
 using ::java::net::UnknownHostException;
 using ::alinous::db::AlinousDbException;
 using ::alinous::net::AlinousSocket;
-using ::alinous::remote::db::command::AbstractRemoteStorageCommand;
-using ::alinous::remote::db::command::FinishRemoteStorageConnectionCommand;
-using ::alinous::remote::db::command::RemoteStorageConnectCommand;
+using ::alinous::remote::db::client::command::AbstractRemoteStorageCommand;
+using ::alinous::remote::db::client::command::FinishRemoteStorageConnectionCommand;
+using ::alinous::remote::db::client::command::RemoteStorageConnectCommand;
 using ::alinous::remote::socket::ISocketConnection;
 using ::alinous::remote::socket::SocketConnectionPool;
 using ::alinous::system::AlinousException;
@@ -81,8 +81,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}}}

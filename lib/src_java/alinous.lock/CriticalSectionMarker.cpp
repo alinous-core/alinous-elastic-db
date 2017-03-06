@@ -85,5 +85,7 @@ void CriticalSectionMarker::checkCritical(ThreadContext* ctx)
 		}
 	}
 }
+void CriticalSectionMarker::__cleanUp(ThreadContext* ctx){
+}
 }}
 

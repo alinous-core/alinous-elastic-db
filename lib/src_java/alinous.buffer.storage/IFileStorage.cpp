@@ -33,6 +33,12 @@ bool IFileStorage::__init_static_variables(){
 	delete ctx;
 	return true;
 }
+ IFileStorage::IFileStorage(ThreadContext* ctx) throw()  : IObject(ctx)
+{
+}
+void IFileStorage::__construct_impl(ThreadContext* ctx) throw() 
+{
+}
  IFileStorage::~IFileStorage() throw() 
 {
 	ThreadContext *ctx = ThreadContext::getCurentContext();
@@ -45,6 +51,8 @@ void IFileStorage::__releaseRegerences(bool prepare, ThreadContext* ctx) throw()
 	if(!prepare){
 		return;
 	}
+}
+void IFileStorage::__cleanUp(ThreadContext* ctx){
 }
 }}}
 

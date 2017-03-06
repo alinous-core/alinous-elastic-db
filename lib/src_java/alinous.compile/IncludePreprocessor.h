@@ -55,12 +55,8 @@ class IncludePreprocessor final : public IAlinousElement {
 public:
 	IncludePreprocessor(const IncludePreprocessor& base) = default;
 public:
-	IncludePreprocessor(ThreadContext* ctx) throw()  : IObject(ctx), IAlinousElement(ctx), path(nullptr), module(nullptr)
-	{
-	}
-	void __construct_impl(ThreadContext* ctx) throw() 
-	{
-	}
+	IncludePreprocessor(ThreadContext* ctx) throw() ;
+	void __construct_impl(ThreadContext* ctx) throw() ;
 	virtual ~IncludePreprocessor() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 private:
@@ -86,8 +82,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}

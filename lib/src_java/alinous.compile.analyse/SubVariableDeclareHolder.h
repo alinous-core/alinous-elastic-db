@@ -38,12 +38,8 @@ class SubVariableDeclareHolder final : public virtual IObject {
 public:
 	SubVariableDeclareHolder(const SubVariableDeclareHolder& base) = default;
 public:
-	SubVariableDeclareHolder(ThreadContext* ctx) throw()  : IObject(ctx), typedVariableDeclare(GCUtils<HashMap<String,TypedVariableDeclareSource> >::ins(this, (new(ctx) HashMap<String,TypedVariableDeclareSource>(ctx)), ctx, __FILEW__, __LINE__, L""))
-	{
-	}
-	void __construct_impl(ThreadContext* ctx) throw() 
-	{
-	}
+	SubVariableDeclareHolder(ThreadContext* ctx) throw() ;
+	void __construct_impl(ThreadContext* ctx) throw() ;
 	virtual ~SubVariableDeclareHolder() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 private:
@@ -57,8 +53,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}}

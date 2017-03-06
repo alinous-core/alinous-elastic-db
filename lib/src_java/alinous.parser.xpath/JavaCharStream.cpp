@@ -3,6 +3,7 @@
 
 #include "alinous.parser.xpath/TokenMgrError.h"
 #include "alinous.html.xpath/IVariableValue.h"
+#include "alinous.html.xpath/StringValue.h"
 #include "alinous.html/IDomObject.h"
 #include "alinous.html/Attribute.h"
 #include "alinous.html/DomNode.h"
@@ -12,12 +13,9 @@
 #include "alinous.html.xpath/XpathIdentifier.h"
 #include "alinous.html.xpath/AttributeIdentifier.h"
 #include "alinous.html.xpath/IXpathBooleanCondition.h"
-#include "alinous.html.xpath.match/MatchCursor.h"
 #include "alinous.html.xpath/XpathNumber.h"
-#include "alinous.html.xpath/XpathFunctionArgument.h"
 #include "alinous.html.xpath/XpathFunction.h"
 #include "alinous.html.xpath/XpathFilter.h"
-#include "alinous.html.xpath/XpathContextLocationCtrl.h"
 #include "alinous.html.xpath/XpathContextLocation.h"
 #include "alinous.html.xpath/XpathContext.h"
 #include "alinous.html.xpath/Xpath.h"
@@ -29,8 +27,8 @@
 #include "alinous.parser.xpath/AlinousXpathParserConstants.h"
 #include "alinous.parser.xpath/AlinousXpathParserTokenManager.h"
 #include "alinous.parser.xpath/AlinousXpathParser.h"
-#include "alinous.compile/Token.h"
 #include "alinous.compile/JavaCharStream.h"
+#include "alinous.compile/Token.h"
 #include "alinous.compile/ParseException.h"
 
 namespace alinous {namespace parser {namespace xpath {
@@ -654,6 +652,8 @@ int JavaCharStream::hexval(wchar_t c, ThreadContext* ctx)
 		return 15;
 	}
 	throw (new(ctx) java::io::IOException(ctx));
+}
+void JavaCharStream::__cleanUp(ThreadContext* ctx){
 }
 }}}
 

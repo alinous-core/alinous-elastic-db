@@ -42,11 +42,11 @@ class FileStorageEntryBuilder;}}}
 namespace alinous {namespace btree {
 class IValueFetcher;}}
 
-namespace alinous {namespace remote {namespace db {namespace command {namespace data {
-class SchemasStructureInfoData;}}}}}
+namespace alinous {namespace remote {namespace db {namespace client {namespace command {namespace data {
+class SchemasStructureInfoData;}}}}}}
 
-namespace alinous {namespace remote {namespace db {namespace command {namespace data {
-class SchemaData;}}}}}
+namespace alinous {namespace remote {namespace db {namespace client {namespace command {namespace data {
+class SchemaData;}}}}}}
 
 namespace java {namespace util {
 template <typename  T, typename V> class HashMap;}}
@@ -96,8 +96,8 @@ using ::alinous::db::table::DatabaseTable;
 using ::alinous::db::table::IDatabaseTable;
 using ::alinous::db::table::TableMetadata;
 using ::alinous::lock::LockObject;
-using ::alinous::remote::db::command::data::SchemaData;
-using ::alinous::remote::db::command::data::SchemasStructureInfoData;
+using ::alinous::remote::db::client::command::data::SchemaData;
+using ::alinous::remote::db::client::command::data::SchemasStructureInfoData;
 using ::alinous::runtime::parallel::ThreadPool;
 using ::alinous::system::AlinousCore;
 using ::alinous::system::AlinousException;
@@ -137,8 +137,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}

@@ -78,10 +78,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-		GCUtils<IArrayObject<String>>::dec(nullptr, Date::dayOfWeekNames, ctx, __FILEW__, __LINE__, L"IArrayObject<String>");
-		GCUtils<IArrayObject<String>>::dec(nullptr, Date::monthNames, ctx, __FILEW__, __LINE__, L"IArrayObject<String>");
-	}
+	static void __cleanUp(ThreadContext* ctx);
 	class ValueCompare {
 	public:
 		int operator() (Date* _this, Date* date, ThreadContext* ctx) const throw();

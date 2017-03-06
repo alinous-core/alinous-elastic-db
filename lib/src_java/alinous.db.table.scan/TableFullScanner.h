@@ -121,12 +121,8 @@ class TableFullScanner final : public IFilterScanner, public virtual IObject {
 public:
 	TableFullScanner(const TableFullScanner& base) = default;
 public:
-	TableFullScanner(ThreadContext* ctx) throw()  : IObject(ctx), IFilterScanner(ctx), trx(nullptr), index(nullptr), storage(nullptr), scanner(nullptr), tableStore(nullptr), values(nullptr), current(0), lockMode(0), locker(nullptr), nextresult(nullptr), tableId(nullptr)
-	{
-	}
-	void __construct_impl(ThreadContext* ctx) throw() 
-	{
-	}
+	TableFullScanner(ThreadContext* ctx) throw() ;
+	void __construct_impl(ThreadContext* ctx) throw() ;
 	virtual ~TableFullScanner() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 private:
@@ -155,8 +151,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}}}

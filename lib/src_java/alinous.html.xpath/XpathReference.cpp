@@ -50,6 +50,12 @@ bool XpathReference::__init_static_variables(){
 	delete ctx;
 	return true;
 }
+ XpathReference::XpathReference(ThreadContext* ctx) throw()  : IObject(ctx), IXpathStatement(ctx), xpath(nullptr)
+{
+}
+void XpathReference::__construct_impl(ThreadContext* ctx) throw() 
+{
+}
  XpathReference::~XpathReference() throw() 
 {
 	ThreadContext *ctx = ThreadContext::getCurentContext();
@@ -81,6 +87,8 @@ String* XpathReference::toString(ThreadContext* ctx) throw()
 IVariableValue* XpathReference::getValue(DomDocument* document, DomNode* currentNode, ThreadContext* ctx)
 {
 	return this->xpath->getValue(document, currentNode, ctx);
+}
+void XpathReference::__cleanUp(ThreadContext* ctx){
 }
 }}}
 

@@ -15,8 +15,8 @@ class MonitorClientConnectionFactory;}}}}
 namespace alinous {namespace remote {namespace socket {
 class SocketConnectionPool;}}}
 
-namespace alinous {namespace remote {namespace monitor {namespace command {namespace commitId {
-class ReportSchemaVersionCommand;}}}}}
+namespace alinous {namespace remote {namespace monitor {namespace client {namespace command {namespace commitId {
+class ReportSchemaVersionCommand;}}}}}}
 
 namespace alinous {namespace remote {namespace socket {
 class ISocketConnection;}}}
@@ -24,8 +24,8 @@ class ISocketConnection;}}}
 namespace alinous {namespace net {
 class AlinousSocket;}}
 
-namespace alinous {namespace remote {namespace monitor {namespace command {
-class AbstractMonitorCommand;}}}}
+namespace alinous {namespace remote {namespace monitor {namespace client {namespace command {
+class AbstractMonitorCommand;}}}}}
 
 namespace alinous {namespace system {
 class AlinousException;}}
@@ -51,8 +51,8 @@ using ::java::net::UnknownHostException;
 using ::alinous::net::AlinousSocket;
 using ::alinous::remote::monitor::client::MonitorClientConnectionFactory;
 using ::alinous::remote::monitor::client::MonitorConnectionInfo;
-using ::alinous::remote::monitor::command::AbstractMonitorCommand;
-using ::alinous::remote::monitor::command::commitId::ReportSchemaVersionCommand;
+using ::alinous::remote::monitor::client::command::AbstractMonitorCommand;
+using ::alinous::remote::monitor::client::command::commitId::ReportSchemaVersionCommand;
 using ::alinous::remote::socket::ISocketConnection;
 using ::alinous::remote::socket::SocketConnectionPool;
 using ::alinous::system::AlinousException;
@@ -79,8 +79,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}}

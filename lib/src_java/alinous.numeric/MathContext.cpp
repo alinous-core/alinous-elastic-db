@@ -1,7 +1,12 @@
 #include "include/global.h"
 
 
+#include "java.util/Locale.h"
+#include "java.util/Calendar.h"
+#include "java.util/GregorianCalendar.h"
+#include "java.util/Date.h"
 #include "alinous.numeric/InternalDate.h"
+#include "java.util/TimeZone.h"
 #include "alinous.numeric/TimeOnlyTimestamp.h"
 #include "java.util/Random.h"
 #include "java.lang/Number.h"
@@ -233,6 +238,12 @@ String* MathContext::toString(ThreadContext* ctx) throw()
 	sb->append(chRoundingMode, ctx);
 	sb->append(roundingMode, ctx);
 	return sb->toString(ctx);
+}
+void MathContext::__cleanUp(ThreadContext* ctx){
+	GCUtils<MathContext>::dec(nullptr, MathContext::DECIMAL128, ctx, __FILEW__, __LINE__, L"MathContext");
+	GCUtils<MathContext>::dec(nullptr, MathContext::DECIMAL32, ctx, __FILEW__, __LINE__, L"MathContext");
+	GCUtils<MathContext>::dec(nullptr, MathContext::DECIMAL64, ctx, __FILEW__, __LINE__, L"MathContext");
+	GCUtils<MathContext>::dec(nullptr, MathContext::UNLIMITED, ctx, __FILEW__, __LINE__, L"MathContext");
 }
 }}
 

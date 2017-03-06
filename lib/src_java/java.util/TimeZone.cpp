@@ -8,9 +8,9 @@
 #include "java.util/GregorianCalendar.h"
 #include "java.util/Date.h"
 #include "alinous.numeric/InternalDate.h"
+#include "java.util/TimeZones.h"
 #include "java.sql/Date.h"
 #include "java.util/BitSet.h"
-#include "java.util/TimeZones.h"
 #include "java.util/Random.h"
 #include "java.util/Arrays.h"
 
@@ -39,6 +39,12 @@ bool TimeZone::__init_static_variables(){
 	delete ctx;
 	return true;
 }
+ TimeZone::TimeZone(ThreadContext* ctx) throw()  : IObject(ctx), ID(nullptr)
+{
+}
+void TimeZone::__construct_impl(ThreadContext* ctx) throw() 
+{
+}
  TimeZone::~TimeZone() throw() 
 {
 	ThreadContext *ctx = ThreadContext::getCurentContext();
@@ -54,6 +60,9 @@ void TimeZone::__releaseRegerences(bool prepare, ThreadContext* ctx) throw()
 	if(!prepare){
 		return;
 	}
+}
+void TimeZone::includeDummy(TimeZones* arg0, ThreadContext* ctx) throw() 
+{
 }
 IObject* TimeZone::clone(ThreadContext* ctx) throw() 
 {
@@ -262,6 +271,11 @@ int TimeZone::parseNumber(String* string, int offset, IArrayObjectPrimitive<int>
 	}
 	position->set(index == offset ? -1 : index,0, ctx);
 	return result;
+}
+void TimeZone::__cleanUp(ThreadContext* ctx){
+	GCUtils<TimeZone>::dec(nullptr, TimeZone::GMT, ctx, __FILEW__, __LINE__, L"TimeZone");
+	GCUtils<HashMap<String,TimeZone>>::dec(nullptr, TimeZone::AvailableZones, ctx, __FILEW__, __LINE__, L"HashMap<String,TimeZone>");
+	GCUtils<TimeZone>::dec(nullptr, TimeZone::Default, ctx, __FILEW__, __LINE__, L"TimeZone");
 }
 }}
 

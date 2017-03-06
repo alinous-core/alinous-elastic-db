@@ -68,8 +68,7 @@ public:
 		static bool __init_done;
 		static bool __init_static_variables();
 	public:
-		static void __cleanUp(ThreadContext* ctx){
-		}
+		static void __cleanUp(ThreadContext* ctx);
 	};
 
 
@@ -79,12 +78,8 @@ public:
 	public:
 		OidsArray(const OidsArray& base) = default;
 	public:
-		OidsArray(ThreadContext* ctx) throw()  : IObject(ctx), list(GCUtils<ArrayList<ScannedOids::Oids> >::ins(this, (new(ctx) ArrayList<ScannedOids::Oids>(ctx)), ctx, __FILEW__, __LINE__, L""))
-		{
-		}
-		void __construct_impl(ThreadContext* ctx) throw() 
-		{
-		}
+		OidsArray(ThreadContext* ctx) throw() ;
+		void __construct_impl(ThreadContext* ctx) throw() ;
 		virtual ~OidsArray() throw();
 		virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 	private:
@@ -96,15 +91,13 @@ public:
 		static bool __init_done;
 		static bool __init_static_variables();
 	public:
-		static void __cleanUp(ThreadContext* ctx){
-		}
+		static void __cleanUp(ThreadContext* ctx);
 	};
 
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}}}

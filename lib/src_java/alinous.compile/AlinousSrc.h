@@ -63,12 +63,8 @@ class AlinousSrc final : public IAlinousElement, public IAlinousVisitorContainer
 public:
 	AlinousSrc(const AlinousSrc& base) = default;
 public:
-	AlinousSrc(ThreadContext* ctx) throw()  : IObject(ctx), IAlinousElement(ctx), IAlinousVisitorContainer(ctx), includes(GCUtils<ArrayList<IncludePreprocessor> >::ins(this, (new(ctx) ArrayList<IncludePreprocessor>(ctx)), ctx, __FILEW__, __LINE__, L"")), statements(GCUtils<ArrayList<StatementList> >::ins(this, (new(ctx) ArrayList<StatementList>(ctx)), ctx, __FILEW__, __LINE__, L"")), declares(GCUtils<ArrayList<IDeclare> >::ins(this, (new(ctx) ArrayList<IDeclare>(ctx)), ctx, __FILEW__, __LINE__, L"")), functionDeclares(GCUtils<ArrayList<AlinousFunction> >::ins(this, (new(ctx) ArrayList<AlinousFunction>(ctx)), ctx, __FILEW__, __LINE__, L""))
-	{
-	}
-	void __construct_impl(ThreadContext* ctx) throw() 
-	{
-	}
+	AlinousSrc(ThreadContext* ctx) throw() ;
+	void __construct_impl(ThreadContext* ctx) throw() ;
 	virtual ~AlinousSrc() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 private:
@@ -98,8 +94,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}

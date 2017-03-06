@@ -113,12 +113,8 @@ class TypedVariableArray final : public AbstractTypedVariable {
 public:
 	TypedVariableArray(const TypedVariableArray& base) = default;
 public:
-	TypedVariableArray(ThreadContext* ctx) throw()  : IObject(ctx), AbstractTypedVariable(ctx), array(GCUtils<ArrayList<ITypedVariable> >::ins(this, (new(ctx) ArrayList<ITypedVariable>(ctx)), ctx, __FILEW__, __LINE__, L""))
-	{
-	}
-	void __construct_impl(ThreadContext* ctx) throw() 
-	{
-	}
+	TypedVariableArray(ThreadContext* ctx) throw() ;
+	void __construct_impl(ThreadContext* ctx) throw() ;
 	virtual ~TypedVariableArray() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 private:
@@ -357,8 +353,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 	class ValueCompare {
 	public:
 		int operator() (IAlinousVariable* _this, IAlinousVariable* variable, ThreadContext* ctx) const throw();

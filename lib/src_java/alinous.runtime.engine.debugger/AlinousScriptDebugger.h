@@ -25,6 +25,9 @@ namespace alinous {namespace runtime {namespace engine {namespace debugger {name
 class NotifyThreadStartCommand;}}}}}
 
 namespace alinous {namespace system {
+class ISystemLog;}}
+
+namespace alinous {namespace system {
 class AlinousException;}}
 
 namespace alinous {namespace runtime {namespace engine {namespace debugger {namespace server {
@@ -87,6 +90,7 @@ using ::alinous::runtime::engine::debugger::server::NotifyThreadStartCommand;
 using ::alinous::runtime::engine::debugger::server::ServerBreakPoint;
 using ::alinous::system::AlinousCore;
 using ::alinous::system::AlinousException;
+using ::alinous::system::ISystemLog;
 
 
 
@@ -129,8 +133,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}}}

@@ -2,6 +2,7 @@
 
 
 #include "alinous.html.xpath/IVariableValue.h"
+#include "alinous.html.xpath/StringValue.h"
 #include "alinous.html/IDomObject.h"
 #include "alinous.html/Attribute.h"
 #include "alinous.html/DomNode.h"
@@ -70,6 +71,8 @@ String* DomComment::toString(ThreadContext* ctx) throw()
 int DomComment::getType(ThreadContext* ctx) throw() 
 {
 	return IDomObject::TYPE_DOM_COMMENT;
+}
+void DomComment::__cleanUp(ThreadContext* ctx){
 }
 }}
 

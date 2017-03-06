@@ -123,12 +123,8 @@ class ShortVariable final : public AbstractTypedVariable {
 public:
 	ShortVariable(const ShortVariable& base) = default;
 public:
-	ShortVariable(ThreadContext* ctx) throw()  : IObject(ctx), AbstractTypedVariable(ctx), value(0)
-	{
-	}
-	void __construct_impl(ThreadContext* ctx) throw() 
-	{
-	}
+	ShortVariable(ThreadContext* ctx) throw() ;
+	void __construct_impl(ThreadContext* ctx) throw() ;
 	ShortVariable(short value, ThreadContext* ctx) throw() ;
 	void __construct_impl(short value, ThreadContext* ctx) throw() ;
 	virtual ~ShortVariable() throw();
@@ -356,8 +352,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 	class ValueCompare {
 	public:
 		int operator() (VariantValue* _this, VariantValue* variable, ThreadContext* ctx) const throw();

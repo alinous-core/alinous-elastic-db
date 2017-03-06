@@ -340,5 +340,7 @@ int DomNode::getType(ThreadContext* ctx) throw()
 {
 	return IDomObject::TYPE_DOM_NODE;
 }
+void DomNode::__cleanUp(ThreadContext* ctx){
+}
 }}
 

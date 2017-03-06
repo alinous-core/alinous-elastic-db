@@ -48,6 +48,12 @@ bool IVariableValue::__init_static_variables(){
 	delete ctx;
 	return true;
 }
+ IVariableValue::IVariableValue(ThreadContext* ctx) throw()  : IObject(ctx)
+{
+}
+void IVariableValue::__construct_impl(ThreadContext* ctx) throw() 
+{
+}
  IVariableValue::~IVariableValue() throw() 
 {
 	ThreadContext *ctx = ThreadContext::getCurentContext();
@@ -60,6 +66,8 @@ void IVariableValue::__releaseRegerences(bool prepare, ThreadContext* ctx) throw
 	if(!prepare){
 		return;
 	}
+}
+void IVariableValue::__cleanUp(ThreadContext* ctx){
 }
 }}}
 

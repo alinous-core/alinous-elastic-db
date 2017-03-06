@@ -73,12 +73,8 @@ public:
 public:
 	ByteData(char data, ThreadContext* ctx) throw() ;
 	void __construct_impl(char data, ThreadContext* ctx) throw() ;
-	ByteData(ThreadContext* ctx) throw()  : IObject(ctx), IVariantData(ctx), data(0)
-	{
-	}
-	void __construct_impl(ThreadContext* ctx) throw() 
-	{
-	}
+	ByteData(ThreadContext* ctx) throw() ;
+	void __construct_impl(ThreadContext* ctx) throw() ;
 	virtual ~ByteData() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 private:
@@ -112,8 +108,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 	class ValueCompare {
 	public:
 		int operator() (VariantValue* _this, VariantValue* variant, ThreadContext* ctx) const throw();

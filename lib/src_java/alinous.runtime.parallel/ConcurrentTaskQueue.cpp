@@ -99,6 +99,8 @@ LinkedList<ConcurrentTaskQueue>* ConcurrentTaskQueue::getQueue(ThreadContext* ct
 {
 	return queue;
 }
+void ConcurrentTaskQueue::__cleanUp(ThreadContext* ctx){
+}
 }}}
 
 namespace alinous {namespace runtime {namespace parallel {
@@ -150,6 +152,8 @@ void ConcurrentTaskQueue::ThreadEntryPoint::execute(ThreadContext* ctx) throw()
 		_this->finished = true;
 		_this->sync->notifyAll(ctx);
 	}
+}
+void ConcurrentTaskQueue::ThreadEntryPoint::__cleanUp(ThreadContext* ctx){
 }
 }}}
 

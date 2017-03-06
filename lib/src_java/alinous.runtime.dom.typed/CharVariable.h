@@ -123,12 +123,8 @@ class CharVariable final : public AbstractTypedVariable {
 public:
 	CharVariable(const CharVariable& base) = default;
 public:
-	CharVariable(ThreadContext* ctx) throw()  : IObject(ctx), AbstractTypedVariable(ctx), value(0)
-	{
-	}
-	void __construct_impl(ThreadContext* ctx) throw() 
-	{
-	}
+	CharVariable(ThreadContext* ctx) throw() ;
+	void __construct_impl(ThreadContext* ctx) throw() ;
 	CharVariable(wchar_t value, ThreadContext* ctx) throw() ;
 	void __construct_impl(wchar_t value, ThreadContext* ctx) throw() ;
 	virtual ~CharVariable() throw();
@@ -356,8 +352,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 	class ValueCompare {
 	public:
 		int operator() (VariantValue* _this, VariantValue* variable, ThreadContext* ctx) const throw();

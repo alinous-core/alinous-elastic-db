@@ -155,5 +155,7 @@ ILock* ConcurrentLock::tryLock(bool upd, ThreadContext* ctx)
 		}
 	}
 }
+void ConcurrentLock::__cleanUp(ThreadContext* ctx){
+}
 }}
 

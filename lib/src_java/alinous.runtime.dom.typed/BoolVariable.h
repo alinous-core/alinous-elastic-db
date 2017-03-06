@@ -115,12 +115,8 @@ class BoolVariable final : public AbstractTypedVariable {
 public:
 	BoolVariable(const BoolVariable& base) = default;
 public:
-	BoolVariable(ThreadContext* ctx) throw()  : IObject(ctx), AbstractTypedVariable(ctx), value(0)
-	{
-	}
-	void __construct_impl(ThreadContext* ctx) throw() 
-	{
-	}
+	BoolVariable(ThreadContext* ctx) throw() ;
+	void __construct_impl(ThreadContext* ctx) throw() ;
 	BoolVariable(bool value, ThreadContext* ctx) throw() ;
 	void __construct_impl(bool value, ThreadContext* ctx) throw() ;
 	virtual ~BoolVariable() throw();
@@ -350,8 +346,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 	class ValueCompare {
 	public:
 		int operator() (VariantValue* _this, VariantValue* variable, ThreadContext* ctx) const throw();

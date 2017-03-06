@@ -11,13 +11,13 @@
 #include "com.google.re2j/RE2.h"
 #include "com.google.re2j/Machine.h"
 #include "com.google.re2j/PatternSyntaxException.h"
+#include "com.google.re2j/Utils.h"
+#include "com.google.re2j/Unicode.h"
 #include "com.google.re2j/CharGroup.h"
 #include "com.google.re2j/CharClass.h"
 #include "com.google.re2j/Parser.h"
-#include "com.google.re2j/Unicode.h"
 #include "com.google.re2j/Compiler.h"
 #include "com.google.re2j/UnicodeTable2.h"
-#include "com.google.re2j/Utils.h"
 #include "com.google.re2j/UnicodeTables.h"
 #include "com.google.re2j/Pattern.h"
 #include "com.google.re2j/Matcher.h"
@@ -45,6 +45,12 @@ bool Unicode::__init_static_variables(){
 	ctx->localGC();
 	delete ctx;
 	return true;
+}
+ Unicode::Unicode(ThreadContext* ctx) throw()  : IObject(ctx)
+{
+}
+void Unicode::__construct_impl(ThreadContext* ctx) throw() 
+{
 }
  Unicode::~Unicode() throw() 
 {
@@ -223,6 +229,8 @@ int Unicode::to(int kase, int r, IArrayObject<IArrayObjectPrimitive<int>>* caseR
 int Unicode::to(int kase, int r, ThreadContext* ctx) throw() 
 {
 	return to(kase, r, UnicodeTables::CASE_RANGES, ctx);
+}
+void Unicode::__cleanUp(ThreadContext* ctx){
 }
 }}}
 

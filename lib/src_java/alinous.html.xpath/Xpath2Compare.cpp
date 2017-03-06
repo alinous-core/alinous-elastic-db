@@ -53,6 +53,12 @@ bool Xpath2Compare::__init_static_variables(){
 	delete ctx;
 	return true;
 }
+ Xpath2Compare::Xpath2Compare(ThreadContext* ctx) throw()  : IObject(ctx), IXpathBooleanCondition(ctx), lparam(nullptr), rparam(nullptr), ope(nullptr)
+{
+}
+void Xpath2Compare::__construct_impl(ThreadContext* ctx) throw() 
+{
+}
  Xpath2Compare::~Xpath2Compare() throw() 
 {
 	ThreadContext *ctx = ThreadContext::getCurentContext();
@@ -220,6 +226,8 @@ bool Xpath2Compare::checkExists(DomDocument* document, DomNode* currentNode, Thr
 	Matcher* matcher = (new(ctx) Matcher(ctx));
 	MatchCandidatesCollection* result = matcher->match(document, currentNode, xpath, ctx);
 	return !result->getCandidatesList(ctx)->isEmpty(ctx);
+}
+void Xpath2Compare::__cleanUp(ThreadContext* ctx){
 }
 }}}
 

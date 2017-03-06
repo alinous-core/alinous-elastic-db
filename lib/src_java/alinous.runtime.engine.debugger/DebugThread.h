@@ -69,12 +69,8 @@ class DebugThread final : public virtual IObject {
 public:
 	DebugThread(const DebugThread& base) = default;
 public:
-	DebugThread(ThreadContext* ctx) throw()  : IObject(ctx), threadId(0), machine(nullptr), operation(nullptr), status(0), sem(__GC_INS(this, (new(ctx) LockObject(ctx)), LockObject)), stackFrames(nullptr)
-	{
-	}
-	void __construct_impl(ThreadContext* ctx) throw() 
-	{
-	}
+	DebugThread(ThreadContext* ctx) throw() ;
+	void __construct_impl(ThreadContext* ctx) throw() ;
 	DebugThread(long long threadId, ScriptMachine* machine, ThreadContext* ctx) throw() ;
 	void __construct_impl(long long threadId, ScriptMachine* machine, ThreadContext* ctx) throw() ;
 	virtual ~DebugThread() throw();
@@ -113,8 +109,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}}}

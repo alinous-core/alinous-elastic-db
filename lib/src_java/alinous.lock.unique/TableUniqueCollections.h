@@ -70,12 +70,8 @@ class TableUniqueCollections final : public virtual IObject {
 public:
 	TableUniqueCollections(const TableUniqueCollections& base) = default;
 public:
-	TableUniqueCollections(ThreadContext* ctx) throw()  : IObject(ctx), uniqueLocks(GCUtils<Map<String,ColumnsUniqueCollections> >::ins(this, (new(ctx) HashMap<String,ColumnsUniqueCollections>(ctx)), ctx, __FILEW__, __LINE__, L"")), lock(__GC_INS(this, (new(ctx) LockObject(ctx)), LockObject))
-	{
-	}
-	void __construct_impl(ThreadContext* ctx) throw() 
-	{
-	}
+	TableUniqueCollections(ThreadContext* ctx) throw() ;
+	void __construct_impl(ThreadContext* ctx) throw() ;
 	virtual ~TableUniqueCollections() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 private:
@@ -90,8 +86,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}}

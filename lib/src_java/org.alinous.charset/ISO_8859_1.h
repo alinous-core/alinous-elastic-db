@@ -63,12 +63,8 @@ public:
 	public:
 		Decoder(const Decoder& base) = default;
 	public:
-		Decoder(ThreadContext* ctx) throw()  : IObject(ctx), CharsetDecoder(ctx)
-		{
-		}
-		void __construct_impl(ThreadContext* ctx) throw() 
-		{
-		}
+		Decoder(ThreadContext* ctx) throw() ;
+		void __construct_impl(ThreadContext* ctx) throw() ;
 		virtual ~Decoder() throw();
 		virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 	public:
@@ -77,8 +73,7 @@ public:
 		static bool __init_done;
 		static bool __init_static_variables();
 	public:
-		static void __cleanUp(ThreadContext* ctx){
-		}
+		static void __cleanUp(ThreadContext* ctx);
 	};
 
 
@@ -88,12 +83,8 @@ public:
 	public:
 		Encoder(const Encoder& base) = default;
 	public:
-		Encoder(ThreadContext* ctx) throw()  : IObject(ctx), CharsetEncoder(ctx)
-		{
-		}
-		void __construct_impl(ThreadContext* ctx) throw() 
-		{
-		}
+		Encoder(ThreadContext* ctx) throw() ;
+		void __construct_impl(ThreadContext* ctx) throw() ;
 		virtual ~Encoder() throw();
 		virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 	public:
@@ -102,15 +93,13 @@ public:
 		static bool __init_done;
 		static bool __init_static_variables();
 	public:
-		static void __cleanUp(ThreadContext* ctx){
-		}
+		static void __cleanUp(ThreadContext* ctx);
 	};
 
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}}

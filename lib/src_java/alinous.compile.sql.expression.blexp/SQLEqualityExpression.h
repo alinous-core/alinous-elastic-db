@@ -123,12 +123,8 @@ class SQLEqualityExpression final : public AbstractSQLBooleanExpression {
 public:
 	SQLEqualityExpression(const SQLEqualityExpression& base) = default;
 public:
-	SQLEqualityExpression(ThreadContext* ctx) throw()  : IObject(ctx), AbstractSQLBooleanExpression(ctx), left(nullptr), right(nullptr), checkEquals(0)
-	{
-	}
-	void __construct_impl(ThreadContext* ctx) throw() 
-	{
-	}
+	SQLEqualityExpression(ThreadContext* ctx) throw() ;
+	void __construct_impl(ThreadContext* ctx) throw() ;
 	virtual ~SQLEqualityExpression() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 private:
@@ -171,8 +167,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}}}}

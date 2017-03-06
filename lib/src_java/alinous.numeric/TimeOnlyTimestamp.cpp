@@ -23,7 +23,6 @@
 #include "alinous.numeric/BigDecimal.h"
 #include "alinous.numeric/Elementary.h"
 #include "alinous.numeric/Primality.h"
-#include "java.sql/Date.h"
 
 namespace alinous {namespace numeric {
 
@@ -134,6 +133,8 @@ TimeOnlyTimestamp* TimeOnlyTimestamp::valueOf(String* timeString, ThreadContext*
 	int minute = Integer::parseInt(timeString->substring(firstIndex + 1, secondIndex, ctx), ctx);
 	int second = Integer::parseInt(timeString->substring(secondIndex + 1, timeString->length(ctx), ctx), ctx);
 	return (new(ctx) TimeOnlyTimestamp(hour, minute, second, ctx));
+}
+void TimeOnlyTimestamp::__cleanUp(ThreadContext* ctx){
 }
 }}
 

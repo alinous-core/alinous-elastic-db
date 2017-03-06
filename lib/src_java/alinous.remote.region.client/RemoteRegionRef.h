@@ -24,8 +24,8 @@ class RegionClientConnectionFactory;}}}}
 namespace alinous {namespace remote {namespace socket {
 class SocketConnectionPool;}}}
 
-namespace alinous {namespace remote {namespace region {namespace command {
-class GetSchemaFromRegionCommand;}}}}
+namespace alinous {namespace remote {namespace region {namespace client {namespace command {
+class GetSchemaFromRegionCommand;}}}}}
 
 namespace alinous {namespace remote {namespace socket {
 class ISocketConnection;}}}
@@ -33,20 +33,20 @@ class ISocketConnection;}}}
 namespace alinous {namespace net {
 class AlinousSocket;}}
 
-namespace alinous {namespace remote {namespace region {namespace command {
-class AbstractNodeRegionCommand;}}}}
+namespace alinous {namespace remote {namespace region {namespace client {namespace command {
+class AbstractNodeRegionCommand;}}}}}
 
 namespace alinous {namespace system {
 class AlinousException;}}
 
-namespace alinous {namespace remote {namespace region {namespace command {namespace data {
-class ClientStructureMetadata;}}}}}
+namespace alinous {namespace remote {namespace region {namespace client {namespace command {namespace data {
+class ClientStructureMetadata;}}}}}}
 
 namespace java {namespace util {
 template <typename  T, typename V> class Map;}}
 
-namespace alinous {namespace remote {namespace region {namespace command {namespace data {
-class ClientSchemaData;}}}}}
+namespace alinous {namespace remote {namespace region {namespace client {namespace command {namespace data {
+class ClientSchemaData;}}}}}}
 
 namespace java {namespace util {
 template <typename  T> class Iterator;}}
@@ -57,8 +57,8 @@ class RemoteTableScheme;}}}}
 namespace alinous {namespace db {
 class ITableSchema;}}
 
-namespace alinous {namespace remote {namespace region {namespace command {namespace ddl {
-class RegionCreateSchemaCommand;}}}}}
+namespace alinous {namespace remote {namespace region {namespace client {namespace command {namespace ddl {
+class RegionCreateSchemaCommand;}}}}}}
 
 namespace java {namespace io {
 class IOException;}}
@@ -75,8 +75,8 @@ class AlinousCore;}}
 namespace alinous {namespace btree {
 class BTreeGlobalCache;}}
 
-namespace alinous {namespace remote {namespace region {namespace command {namespace ddl {
-class RegionCreateTableCommand;}}}}}
+namespace alinous {namespace remote {namespace region {namespace client {namespace command {namespace ddl {
+class RegionCreateTableCommand;}}}}}}
 
 namespace alinous {namespace lock {
 class LockObject;}}
@@ -121,12 +121,12 @@ using ::alinous::db::table::DatabaseException;
 using ::alinous::db::table::TableMetadata;
 using ::alinous::lock::LockObject;
 using ::alinous::net::AlinousSocket;
-using ::alinous::remote::region::command::AbstractNodeRegionCommand;
-using ::alinous::remote::region::command::GetSchemaFromRegionCommand;
-using ::alinous::remote::region::command::data::ClientSchemaData;
-using ::alinous::remote::region::command::data::ClientStructureMetadata;
-using ::alinous::remote::region::command::ddl::RegionCreateSchemaCommand;
-using ::alinous::remote::region::command::ddl::RegionCreateTableCommand;
+using ::alinous::remote::region::client::command::AbstractNodeRegionCommand;
+using ::alinous::remote::region::client::command::GetSchemaFromRegionCommand;
+using ::alinous::remote::region::client::command::data::ClientSchemaData;
+using ::alinous::remote::region::client::command::data::ClientStructureMetadata;
+using ::alinous::remote::region::client::command::ddl::RegionCreateSchemaCommand;
+using ::alinous::remote::region::client::command::ddl::RegionCreateTableCommand;
 using ::alinous::remote::socket::ISocketConnection;
 using ::alinous::remote::socket::SocketConnectionPool;
 using ::alinous::runtime::parallel::ThreadPool;
@@ -171,8 +171,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}}}

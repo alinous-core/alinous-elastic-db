@@ -143,12 +143,8 @@ class CreateTableStatement final : public AbstractSQLStatement {
 public:
 	CreateTableStatement(const CreateTableStatement& base) = default;
 public:
-	CreateTableStatement(ThreadContext* ctx) throw()  : IObject(ctx), AbstractSQLStatement(ctx), table(nullptr), columns(GCUtils<ArrayList<DdlColumnDescriptor> >::ins(this, (new(ctx) ArrayList<DdlColumnDescriptor>(ctx)), ctx, __FILEW__, __LINE__, L"")), uniques(GCUtils<ArrayList<Unique> >::ins(this, (new(ctx) ArrayList<Unique>(ctx)), ctx, __FILEW__, __LINE__, L"")), checks(GCUtils<ArrayList<CheckDefinition> >::ins(this, (new(ctx) ArrayList<CheckDefinition>(ctx)), ctx, __FILEW__, __LINE__, L"")), primaryKeys(nullptr), region(nullptr), partitionKeys(GCUtils<List<ShardKeys> >::ins(this, (new(ctx) ArrayList<ShardKeys>(ctx)), ctx, __FILEW__, __LINE__, L"")), metadata(nullptr)
-	{
-	}
-	void __construct_impl(ThreadContext* ctx) throw() 
-	{
-	}
+	CreateTableStatement(ThreadContext* ctx) throw() ;
+	void __construct_impl(ThreadContext* ctx) throw() ;
 	virtual ~CreateTableStatement() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 private:
@@ -191,8 +187,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}}

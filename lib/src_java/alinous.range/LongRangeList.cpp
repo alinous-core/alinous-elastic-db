@@ -22,6 +22,12 @@ bool LongRangeList::__init_static_variables(){
 	delete ctx;
 	return true;
 }
+ LongRangeList::LongRangeList(ThreadContext* ctx) throw()  : IObject(ctx), list(GCUtils<ArrayList<LongRange> >::ins(this, (new(ctx) ArrayList<LongRange>(ctx)), ctx, __FILEW__, __LINE__, L""))
+{
+}
+void LongRangeList::__construct_impl(ThreadContext* ctx) throw() 
+{
+}
  LongRangeList::~LongRangeList() throw() 
 {
 	ThreadContext *ctx = ThreadContext::getCurentContext();
@@ -215,6 +221,8 @@ int LongRangeList::indexOfInsert(long long value, ThreadContext* ctx) throw()
 		return begin;
 	}
 	return this->list->size(ctx);
+}
+void LongRangeList::__cleanUp(ThreadContext* ctx){
 }
 }}
 

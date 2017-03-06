@@ -37,6 +37,9 @@ namespace alinous {namespace db {
 class TableSchemaCollection;}}
 
 namespace alinous {namespace system {
+class ISystemLog;}}
+
+namespace alinous {namespace system {
 class AlinousException;}}
 
 namespace alinous {namespace db {namespace trx {
@@ -89,6 +92,7 @@ using ::alinous::db::trx::DbTransaction;
 using ::alinous::remote::region::client::transaction::AbstractRemoteClientTransaction;
 using ::alinous::runtime::dom::VariableException;
 using ::alinous::system::AlinousException;
+using ::alinous::system::ISystemLog;
 using ::alinous::system::utils::FileUtils;
 
 
@@ -130,8 +134,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}}}

@@ -1,7 +1,7 @@
 #ifndef ALINOUS_REMOTE_MONITOR_REGIONNODEINFOMANAGER_H_
 #define ALINOUS_REMOTE_MONITOR_REGIONNODEINFOMANAGER_H_
-namespace alinous {namespace remote {namespace monitor {namespace command {namespace data {
-class RegionInfoData;}}}}}
+namespace alinous {namespace remote {namespace monitor {namespace client {namespace command {namespace data {
+class RegionInfoData;}}}}}}
 
 namespace alinous {namespace remote {namespace monitor {
 class RegionNodeInfo;}}}
@@ -51,7 +51,7 @@ using ::java::util::List;
 using ::java::util::Map;
 using ::alinous::db::AlinousDbException;
 using ::alinous::lock::LockObject;
-using ::alinous::remote::monitor::command::data::RegionInfoData;
+using ::alinous::remote::monitor::client::command::data::RegionInfoData;
 using ::alinous::system::config::remote::Monitor;
 using ::alinous::system::config::remote::Region;
 using ::alinous::system::config::remote::Regions;
@@ -62,12 +62,8 @@ class RegionNodeInfoManager final : public virtual IObject {
 public:
 	RegionNodeInfoManager(const RegionNodeInfoManager& base) = default;
 public:
-	RegionNodeInfoManager(ThreadContext* ctx) throw()  : IObject(ctx), regionsMap(GCUtils<Map<String,RegionNodeInfo> >::ins(this, (new(ctx) HashMap<String,RegionNodeInfo>(ctx)), ctx, __FILEW__, __LINE__, L"")), lock(__GC_INS(this, (new(ctx) LockObject(ctx)), LockObject)), nodeClusterRevision(1)
-	{
-	}
-	void __construct_impl(ThreadContext* ctx) throw() 
-	{
-	}
+	RegionNodeInfoManager(ThreadContext* ctx) throw() ;
+	void __construct_impl(ThreadContext* ctx) throw() ;
 	virtual ~RegionNodeInfoManager() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 private:
@@ -84,8 +80,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}}

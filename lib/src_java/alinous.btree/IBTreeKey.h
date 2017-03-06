@@ -33,12 +33,8 @@ class IBTreeKey : public virtual IObject, public Comparable<IBTreeKey> {
 public:
 	IBTreeKey(const IBTreeKey& base) = default;
 public:
-	IBTreeKey(ThreadContext* ctx) throw()  : IObject(ctx), Comparable<IBTreeKey>(ctx)
-	{
-	}
-	void __construct_impl(ThreadContext* ctx) throw() 
-	{
-	}
+	IBTreeKey(ThreadContext* ctx) throw() ;
+	void __construct_impl(ThreadContext* ctx) throw() ;
 	virtual ~IBTreeKey() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 public:
@@ -57,8 +53,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}

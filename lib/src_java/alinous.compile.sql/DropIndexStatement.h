@@ -70,12 +70,8 @@ class DropIndexStatement final : public AbstractSQLStatement {
 public:
 	DropIndexStatement(const DropIndexStatement& base) = default;
 public:
-	DropIndexStatement(ThreadContext* ctx) throw()  : IObject(ctx), AbstractSQLStatement(ctx), indexName(nullptr)
-	{
-	}
-	void __construct_impl(ThreadContext* ctx) throw() 
-	{
-	}
+	DropIndexStatement(ThreadContext* ctx) throw() ;
+	void __construct_impl(ThreadContext* ctx) throw() ;
 	virtual ~DropIndexStatement() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 private:
@@ -94,8 +90,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}}

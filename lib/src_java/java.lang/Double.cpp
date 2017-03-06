@@ -6,12 +6,13 @@
 #include "java.lang/Number.h"
 #include "java.lang/Integer.h"
 #include "com.google.re2j/PatternSyntaxException.h"
-#include "java.harmoney/FloatingPointParser.h"
 #include "java.harmoney/NumberConverter.h"
+#include "java.lang/Float.h"
+#include "java.lang/Long.h"
+#include "java.harmoney/HexStringParser.h"
+#include "java.harmoney/FloatingPointParser.h"
 #include "java.lang/Double.h"
 #include "java.lang/Byte.h"
-#include "java.lang/Long.h"
-#include "java.lang/Float.h"
 #include "java.lang/Short.h"
 #include "java.lang/BinarySearch.h"
 
@@ -301,6 +302,8 @@ String* Double::toHexString(double d, ThreadContext* ctx) throw()
 		hexString->append(Long::toString(exponent - 1023, ctx), ctx);
 	}
 	return hexString->toString(ctx);
+}
+void Double::__cleanUp(ThreadContext* ctx){
 }
 int Double::ValueCompare::operator() (Double* _this, Double* object, ThreadContext* ctx) const throw()
 {

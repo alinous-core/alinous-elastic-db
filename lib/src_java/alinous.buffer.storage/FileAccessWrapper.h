@@ -39,12 +39,8 @@ class FileAccessWrapper final : public virtual IObject {
 public:
 	FileAccessWrapper(const FileAccessWrapper& base) = default;
 public:
-	FileAccessWrapper(ThreadContext* ctx) throw()  : IObject(ctx), segs(nullptr), fileSize(0), basePosition(0), position(0), buffer(nullptr)
-	{
-	}
-	void __construct_impl(ThreadContext* ctx) throw() 
-	{
-	}
+	FileAccessWrapper(ThreadContext* ctx) throw() ;
+	void __construct_impl(ThreadContext* ctx) throw() ;
 	virtual ~FileAccessWrapper() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 private:
@@ -71,8 +67,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}}

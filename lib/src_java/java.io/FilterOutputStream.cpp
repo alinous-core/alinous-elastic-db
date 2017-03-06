@@ -99,5 +99,7 @@ void FilterOutputStream::write(int oneByte, ThreadContext* ctx)
 {
 	out->write(oneByte, ctx);
 }
+void FilterOutputStream::__cleanUp(ThreadContext* ctx){
+}
 }}
 

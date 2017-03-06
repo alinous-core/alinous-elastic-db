@@ -4,23 +4,12 @@
 #include "alinous.system.config/IAlinousConfigElement.h"
 #include "alinous.system.config.remote/RegionRef.h"
 #include "alinous.html.xpath/IVariableValue.h"
+#include "alinous.html.xpath/StringValue.h"
 #include "alinous.html/IDomObject.h"
 #include "alinous.html/Attribute.h"
 #include "alinous.html/DomNode.h"
 #include "alinous.html/DomDocument.h"
-#include "alinous.html.xpath/IXpathElement.h"
-#include "alinous.html.xpath.match/MatchCursor.h"
 #include "alinous.html.xpath.match/MatchCandidate.h"
-#include "alinous.html.xpath/IXpathStatement.h"
-#include "alinous.html.xpath.match/MatchCandidatesCollection.h"
-#include "alinous.html.xpath/XpathIdentifier.h"
-#include "alinous.html.xpath/AttributeIdentifier.h"
-#include "alinous.html.xpath/IXpathBooleanCondition.h"
-#include "alinous.html.xpath/XpathFilter.h"
-#include "alinous.html.xpath/XpathContextLocationCtrl.h"
-#include "alinous.html.xpath/XpathContextLocation.h"
-#include "alinous.html.xpath/XpathContext.h"
-#include "alinous.html.xpath/Xpath.h"
 #include "alinous.html.xpath.match/Matcher.h"
 #include "alinous.system.config.remote/RemoteNodeReference.h"
 #include "alinous.system.config.remote/Table.h"
@@ -50,6 +39,12 @@ bool RegionRef::__init_static_variables(){
 	ctx->localGC();
 	delete ctx;
 	return true;
+}
+ RegionRef::RegionRef(ThreadContext* ctx) throw()  : IObject(ctx), IAlinousConfigElement(ctx), name(nullptr), url(nullptr)
+{
+}
+void RegionRef::__construct_impl(ThreadContext* ctx) throw() 
+{
 }
  RegionRef::~RegionRef() throw() 
 {
@@ -84,6 +79,8 @@ String* RegionRef::getUrl(ThreadContext* ctx) throw()
 void RegionRef::setUrl(String* url, ThreadContext* ctx) throw() 
 {
 	__GC_MV(this, &(this->url), url, String);
+}
+void RegionRef::__cleanUp(ThreadContext* ctx){
 }
 }}}}
 

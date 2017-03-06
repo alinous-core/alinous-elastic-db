@@ -59,12 +59,8 @@ class ScanTableMetadata final : public virtual IObject {
 public:
 	ScanTableMetadata(const ScanTableMetadata& base) = default;
 public:
-	ScanTableMetadata(ThreadContext* ctx) throw()  : IObject(ctx), table(GCUtils<ArrayList<ScanTableIdentifier> >::ins(this, (new(ctx) ArrayList<ScanTableIdentifier>(ctx)), ctx, __FILEW__, __LINE__, L"")), columns(GCUtils<ArrayList<ScanTableColumnMetadata> >::ins(this, (new(ctx) ArrayList<ScanTableColumnMetadata>(ctx)), ctx, __FILEW__, __LINE__, L"")), indexes(GCUtils<ArrayList<ScanTableIndexMetadata> >::ins(this, (new(ctx) ArrayList<ScanTableIndexMetadata>(ctx)), ctx, __FILEW__, __LINE__, L"")), dom(0)
-	{
-	}
-	void __construct_impl(ThreadContext* ctx) throw() 
-	{
-	}
+	ScanTableMetadata(ThreadContext* ctx) throw() ;
+	void __construct_impl(ThreadContext* ctx) throw() ;
 	ScanTableMetadata(ScanTableIdentifier* table, ThreadContext* ctx) throw() ;
 	void __construct_impl(ScanTableIdentifier* table, ThreadContext* ctx) throw() ;
 	ScanTableMetadata(TableMetadata* metadata, String* asName, ThreadContext* ctx) throw() ;
@@ -100,8 +96,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}}}

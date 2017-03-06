@@ -50,5 +50,7 @@ void UnknownHostException::__releaseRegerences(bool prepare, ThreadContext* ctx)
 	}
 	IOException::__releaseRegerences(true, ctx);
 }
+void UnknownHostException::__cleanUp(ThreadContext* ctx){
+}
 }}
 

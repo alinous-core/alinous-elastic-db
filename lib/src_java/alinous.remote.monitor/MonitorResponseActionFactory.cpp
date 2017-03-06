@@ -3,40 +3,13 @@
 
 #include "alinous.runtime.parallel/IThreadAction.h"
 #include "alinous.lock/LockObject.h"
-#include "alinous.runtime.parallel/LaunchJoin.h"
-#include "alinous.runtime.parallel/ThreadPool.h"
-#include "alinous.runtime.parallel/AlinousThread.h"
-#include "alinous.system/ISystemLog.h"
 #include "alinous.remote.socket/SocketServer.h"
 #include "alinous.remote.socket/ISocketActionFactory.h"
 #include "alinous.remote.socket/NetworkBinaryBuffer.h"
 #include "alinous.remote.socket/ICommandData.h"
-#include "alinous.html.xpath/IVariableValue.h"
-#include "alinous.html/IDomObject.h"
-#include "alinous.html/Attribute.h"
-#include "alinous.html/DomNode.h"
-#include "alinous.html/DomDocument.h"
-#include "alinous.html.xpath/IXpathElement.h"
-#include "alinous.html.xpath/IXpathStatement.h"
-#include "alinous.html.xpath.match/MatchCursor.h"
-#include "alinous.html.xpath.match/MatchCandidate.h"
-#include "alinous.html.xpath.match/MatchCandidatesCollection.h"
-#include "alinous.html.xpath/XpathIdentifier.h"
-#include "alinous.html.xpath/AttributeIdentifier.h"
-#include "alinous.html.xpath/IXpathBooleanCondition.h"
-#include "alinous.html.xpath/XpathFilter.h"
-#include "alinous.html.xpath/XpathContextLocationCtrl.h"
-#include "alinous.html.xpath/XpathContextLocation.h"
-#include "alinous.html.xpath/XpathContext.h"
-#include "alinous.html.xpath/Xpath.h"
-#include "alinous.html.xpath.match/Matcher.h"
-#include "alinous.system.config/IAlinousConfigElement.h"
-#include "alinous.system.config.remote/RemoteNodeReference.h"
-#include "alinous.system.config.remote/Region.h"
 #include "alinous.remote.monitor/NodeInfo.h"
 #include "alinous.remote.monitor/RegionNodeInfo.h"
-#include "alinous.remote.monitor.command.data/RegionInfoData.h"
-#include "alinous.system.config.remote/Regions.h"
+#include "alinous.remote.monitor.client.command.data/RegionInfoData.h"
 #include "alinous.system.config.remote/Monitor.h"
 #include "alinous.remote.monitor/RegionNodeInfoManager.h"
 #include "alinous.remote.monitor/TransactionMonitorServer.h"
@@ -44,7 +17,7 @@
 #include "java.io/BufferedInputStream.h"
 #include "java.io/FilterOutputStream.h"
 #include "java.io/BufferedOutputStream.h"
-#include "alinous.remote.monitor.command/AbstractMonitorCommand.h"
+#include "alinous.remote.monitor.client.command/AbstractMonitorCommand.h"
 #include "alinous.remote.monitor/MonitorResponceAction.h"
 #include "alinous.remote.monitor/MonitorResponseActionFactory.h"
 
@@ -96,6 +69,8 @@ IThreadAction* MonitorResponseActionFactory::getAction(Socket* socket, SocketSer
 TransactionMonitorServer* MonitorResponseActionFactory::getMonitorServer(ThreadContext* ctx) throw() 
 {
 	return monitorServer;
+}
+void MonitorResponseActionFactory::__cleanUp(ThreadContext* ctx){
 }
 }}}
 

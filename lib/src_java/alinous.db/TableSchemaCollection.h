@@ -36,12 +36,8 @@ class TableSchemaCollection final : public virtual IObject {
 public:
 	TableSchemaCollection(const TableSchemaCollection& base) = default;
 public:
-	TableSchemaCollection(ThreadContext* ctx) throw()  : IObject(ctx), list(GCUtils<List<ITableSchema> >::ins(this, (new(ctx) ArrayList<ITableSchema>(ctx)), ctx, __FILEW__, __LINE__, L""))
-	{
-	}
-	void __construct_impl(ThreadContext* ctx) throw() 
-	{
-	}
+	TableSchemaCollection(ThreadContext* ctx) throw() ;
+	void __construct_impl(ThreadContext* ctx) throw() ;
 	virtual ~TableSchemaCollection() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 private:
@@ -54,8 +50,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}

@@ -43,12 +43,8 @@ class BTreeValues final : public virtual IObject {
 public:
 	BTreeValues(const BTreeValues& base) = default;
 public:
-	BTreeValues(ThreadContext* ctx) throw()  : IObject(ctx), values(GCUtils<ArrayList<IBTreeValue> >::ins(this, (new(ctx) ArrayList<IBTreeValue>(ctx)), ctx, __FILEW__, __LINE__, L""))
-	{
-	}
-	void __construct_impl(ThreadContext* ctx) throw() 
-	{
-	}
+	BTreeValues(ThreadContext* ctx) throw() ;
+	void __construct_impl(ThreadContext* ctx) throw() ;
 	virtual ~BTreeValues() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 private:
@@ -67,8 +63,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}

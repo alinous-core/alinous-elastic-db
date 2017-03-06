@@ -63,12 +63,8 @@ class StatementList final : public AbstractAlinousStatement {
 public:
 	StatementList(const StatementList& base) = default;
 public:
-	StatementList(ThreadContext* ctx) throw()  : IObject(ctx), AbstractAlinousStatement(ctx), list(GCUtils<ArrayList<IStatement> >::ins(this, (new(ctx) ArrayList<IStatement>(ctx)), ctx, __FILEW__, __LINE__, L""))
-	{
-	}
-	void __construct_impl(ThreadContext* ctx) throw() 
-	{
-	}
+	StatementList(ThreadContext* ctx) throw() ;
+	void __construct_impl(ThreadContext* ctx) throw() ;
 	virtual ~StatementList() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 private:
@@ -88,8 +84,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}}

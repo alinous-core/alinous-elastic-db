@@ -87,12 +87,8 @@ public:
 public:
 	SubExpression(String* op, IExpression* exp, ThreadContext* ctx) throw() ;
 	void __construct_impl(String* op, IExpression* exp, ThreadContext* ctx) throw() ;
-	SubExpression(ThreadContext* ctx) throw()  : IObject(ctx), AbstractExpression(ctx), op(0), exp(nullptr)
-	{
-	}
-	void __construct_impl(ThreadContext* ctx) throw() 
-	{
-	}
+	SubExpression(ThreadContext* ctx) throw() ;
+	void __construct_impl(ThreadContext* ctx) throw() ;
 	virtual ~SubExpression() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 private:
@@ -119,8 +115,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}}

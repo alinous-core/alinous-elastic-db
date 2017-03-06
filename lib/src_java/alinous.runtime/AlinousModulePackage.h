@@ -46,12 +46,8 @@ class AlinousModulePackage final : public IAlinousElement {
 public:
 	AlinousModulePackage(const AlinousModulePackage& base) = default;
 public:
-	AlinousModulePackage(ThreadContext* ctx) throw()  : IObject(ctx), IAlinousElement(ctx), segments(GCUtils<ArrayList<String> >::ins(this, (new(ctx) ArrayList<String>(ctx)), ctx, __FILEW__, __LINE__, L""))
-	{
-	}
-	void __construct_impl(ThreadContext* ctx) throw() 
-	{
-	}
+	AlinousModulePackage(ThreadContext* ctx) throw() ;
+	void __construct_impl(ThreadContext* ctx) throw() ;
 	AlinousModulePackage(String* path, ThreadContext* ctx) throw() ;
 	void __construct_impl(String* path, ThreadContext* ctx) throw() ;
 	virtual ~AlinousModulePackage() throw();
@@ -68,8 +64,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}

@@ -120,12 +120,8 @@ class TimestampVariable final : public AbstractTypedVariable {
 public:
 	TimestampVariable(const TimestampVariable& base) = default;
 public:
-	TimestampVariable(ThreadContext* ctx) throw()  : IObject(ctx), AbstractTypedVariable(ctx), value(nullptr)
-	{
-	}
-	void __construct_impl(ThreadContext* ctx) throw() 
-	{
-	}
+	TimestampVariable(ThreadContext* ctx) throw() ;
+	void __construct_impl(ThreadContext* ctx) throw() ;
 	TimestampVariable(Timestamp* timestamp, ThreadContext* ctx) throw() ;
 	void __construct_impl(Timestamp* timestamp, ThreadContext* ctx) throw() ;
 	virtual ~TimestampVariable() throw();
@@ -353,8 +349,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 	class ValueCompare {
 	public:
 		int operator() (VariantValue* _this, VariantValue* variable, ThreadContext* ctx) const throw();

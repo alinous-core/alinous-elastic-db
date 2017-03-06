@@ -134,5 +134,7 @@ StringWriter* StringWriter::append(CharSequence* csq, int start, int end, Thread
 	write(output, 0, output->length(ctx), ctx);
 	return this;
 }
+void StringWriter::__cleanUp(ThreadContext* ctx){
+}
 }}
 

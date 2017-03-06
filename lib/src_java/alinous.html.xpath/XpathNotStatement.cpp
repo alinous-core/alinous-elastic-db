@@ -50,6 +50,12 @@ bool XpathNotStatement::__init_static_variables(){
 	delete ctx;
 	return true;
 }
+ XpathNotStatement::XpathNotStatement(ThreadContext* ctx) throw()  : IObject(ctx), IXpathBooleanCondition(ctx), notFlag(0), stmt(nullptr)
+{
+}
+void XpathNotStatement::__construct_impl(ThreadContext* ctx) throw() 
+{
+}
  XpathNotStatement::~XpathNotStatement() throw() 
 {
 	ThreadContext *ctx = ThreadContext::getCurentContext();
@@ -102,6 +108,8 @@ bool XpathNotStatement::getBooleanValue(DomDocument* document, DomNode* currentN
 		return !condition;
 	}
 	return condition;
+}
+void XpathNotStatement::__cleanUp(ThreadContext* ctx){
 }
 }}}
 

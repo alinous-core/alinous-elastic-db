@@ -66,12 +66,8 @@ class ReturnValueDefinition final : public IDeclare {
 public:
 	ReturnValueDefinition(const ReturnValueDefinition& base) = default;
 public:
-	ReturnValueDefinition(ThreadContext* ctx) throw()  : IObject(ctx), IDeclare(ctx), type(nullptr), analysedType(nullptr)
-	{
-	}
-	void __construct_impl(ThreadContext* ctx) throw() 
-	{
-	}
+	ReturnValueDefinition(ThreadContext* ctx) throw() ;
+	void __construct_impl(ThreadContext* ctx) throw() ;
 	virtual ~ReturnValueDefinition() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 private:
@@ -97,8 +93,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}}}

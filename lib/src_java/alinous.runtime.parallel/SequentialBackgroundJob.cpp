@@ -28,6 +28,12 @@ bool SequentialBackgroundJob::__init_static_variables(){
 	delete ctx;
 	return true;
 }
+ SequentialBackgroundJob::SequentialBackgroundJob(ThreadContext* ctx) throw()  : IObject(ctx), actions(GCUtils<LinkedList<IThreadAction> >::ins(this, (new(ctx) LinkedList<IThreadAction>(ctx)), ctx, __FILEW__, __LINE__, L"")), actionLock(__GC_INS(this, (new(ctx) LockObject(ctx)), LockObject)), pool(nullptr), executor(nullptr), executing(0), lastException(nullptr)
+{
+}
+void SequentialBackgroundJob::__construct_impl(ThreadContext* ctx) throw() 
+{
+}
  SequentialBackgroundJob::~SequentialBackgroundJob() throw() 
 {
 	ThreadContext *ctx = ThreadContext::getCurentContext();
@@ -130,6 +136,8 @@ Throwable* SequentialBackgroundJob::getLastException(ThreadContext* ctx) throw()
 {
 	return lastException;
 }
+void SequentialBackgroundJob::__cleanUp(ThreadContext* ctx){
+}
 }}}
 
 namespace alinous {namespace runtime {namespace parallel {
@@ -189,6 +197,8 @@ void SequentialBackgroundJob::QueueExecutor::execute(ThreadContext* ctx) throw()
 			e->printStackTrace(ctx);
 		}
 	}
+}
+void SequentialBackgroundJob::QueueExecutor::__cleanUp(ThreadContext* ctx){
 }
 }}}
 

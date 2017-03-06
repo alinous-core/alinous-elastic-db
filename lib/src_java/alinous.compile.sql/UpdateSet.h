@@ -33,6 +33,9 @@ class SQLAnalyseContext;}}}}
 namespace alinous {namespace db {namespace table {
 class DatabaseException;}}}
 
+namespace alinous {namespace db {
+class AlinousDatabase;}}
+
 namespace alinous {namespace db {namespace table {
 class IDatabaseTable;}}}
 
@@ -110,6 +113,7 @@ using ::alinous::compile::sql::analyze::ScanTableIdentifier;
 using ::alinous::compile::sql::analyze::ScanTableMetadata;
 using ::alinous::compile::sql::analyze::ScanTableColumnIdentifier;
 using ::alinous::compile::sql::expression::ISQLExpression;
+using ::alinous::db::AlinousDatabase;
 using ::alinous::db::table::DatabaseException;
 using ::alinous::db::table::IDatabaseTable;
 using ::alinous::db::trx::scan::ScanResultRecord;
@@ -127,12 +131,8 @@ class UpdateSet final : public ISQLExpression {
 public:
 	UpdateSet(const UpdateSet& base) = default;
 public:
-	UpdateSet(ThreadContext* ctx) throw()  : IObject(ctx), ISQLExpression(ctx), name(nullptr), value(nullptr), analysedColumn(nullptr), columnOrder(0)
-	{
-	}
-	void __construct_impl(ThreadContext* ctx) throw() 
-	{
-	}
+	UpdateSet(ThreadContext* ctx) throw() ;
+	void __construct_impl(ThreadContext* ctx) throw() ;
 	virtual ~UpdateSet() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 private:
@@ -183,8 +183,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}}

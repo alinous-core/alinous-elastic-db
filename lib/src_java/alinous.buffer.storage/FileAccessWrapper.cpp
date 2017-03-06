@@ -3,8 +3,6 @@
 
 #include "alinous.buffer.storage/FileStorageEntry.h"
 #include "alinous.buffer.storage/FileStorageEntryFetcher.h"
-#include "alinous.lock/LockObject.h"
-#include "alinous.lock/ConcurrentGate.h"
 #include "alinous.buffer.storage/IFileStorage.h"
 #include "alinous.buffer.storage/FileStorageEntryWriter.h"
 #include "alinous.buffer.storage/FileStorageEntryReader.h"
@@ -29,6 +27,12 @@ bool FileAccessWrapper::__init_static_variables(){
 	ctx->localGC();
 	delete ctx;
 	return true;
+}
+ FileAccessWrapper::FileAccessWrapper(ThreadContext* ctx) throw()  : IObject(ctx), segs(nullptr), fileSize(0), basePosition(0), position(0), buffer(nullptr)
+{
+}
+void FileAccessWrapper::__construct_impl(ThreadContext* ctx) throw() 
+{
 }
  FileAccessWrapper::~FileAccessWrapper() throw() 
 {
@@ -155,6 +159,8 @@ MMapSegment* FileAccessWrapper::getSegment(long long position, ThreadContext* ct
 		}
 	}
 	return nullptr;
+}
+void FileAccessWrapper::__cleanUp(ThreadContext* ctx){
 }
 }}}
 

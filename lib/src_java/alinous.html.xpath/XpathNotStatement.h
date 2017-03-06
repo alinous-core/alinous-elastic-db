@@ -41,12 +41,8 @@ class XpathNotStatement final : public IXpathBooleanCondition, public virtual IO
 public:
 	XpathNotStatement(const XpathNotStatement& base) = default;
 public:
-	XpathNotStatement(ThreadContext* ctx) throw()  : IObject(ctx), IXpathBooleanCondition(ctx), notFlag(0), stmt(nullptr)
-	{
-	}
-	void __construct_impl(ThreadContext* ctx) throw() 
-	{
-	}
+	XpathNotStatement(ThreadContext* ctx) throw() ;
+	void __construct_impl(ThreadContext* ctx) throw() ;
 	virtual ~XpathNotStatement() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 private:
@@ -63,8 +59,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}}

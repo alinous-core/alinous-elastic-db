@@ -28,12 +28,8 @@ class IDomVariable : public virtual IObject, public IDomVariableContainer, publi
 public:
 	IDomVariable(const IDomVariable& base) = default;
 public:
-	IDomVariable(ThreadContext* ctx) throw()  : IObject(ctx), IDomVariableContainer(ctx), IAlinousVariable(ctx)
-	{
-	}
-	void __construct_impl(ThreadContext* ctx) throw() 
-	{
-	}
+	IDomVariable(ThreadContext* ctx) throw() ;
+	void __construct_impl(ThreadContext* ctx) throw() ;
 	virtual ~IDomVariable() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 public:
@@ -46,8 +42,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}}

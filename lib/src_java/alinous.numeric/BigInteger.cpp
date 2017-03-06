@@ -1,7 +1,12 @@
 #include "include/global.h"
 
 
+#include "java.util/Locale.h"
+#include "java.util/Calendar.h"
+#include "java.util/GregorianCalendar.h"
+#include "java.util/Date.h"
 #include "alinous.numeric/InternalDate.h"
+#include "java.util/TimeZone.h"
 #include "alinous.numeric/TimeOnlyTimestamp.h"
 #include "java.util/Random.h"
 #include "java.lang/Number.h"
@@ -1121,6 +1126,14 @@ void BigInteger::setFromString(BigInteger* bi, String* val, int radix, ThreadCon
 	bi->numberLength = numberLength;
 	__GC_MV(bi, &(bi->digits), digits, IArrayObjectPrimitive<int>);
 	bi->cutOffLeadingZeroes(ctx);
+}
+void BigInteger::__cleanUp(ThreadContext* ctx){
+	GCUtils<BigInteger>::dec(nullptr, BigInteger::ZERO, ctx, __FILEW__, __LINE__, L"BigInteger");
+	GCUtils<BigInteger>::dec(nullptr, BigInteger::ONE, ctx, __FILEW__, __LINE__, L"BigInteger");
+	GCUtils<BigInteger>::dec(nullptr, BigInteger::TEN, ctx, __FILEW__, __LINE__, L"BigInteger");
+	GCUtils<BigInteger>::dec(nullptr, BigInteger::MINUS_ONE, ctx, __FILEW__, __LINE__, L"BigInteger");
+	GCUtils<IArrayObject<BigInteger>>::dec(nullptr, BigInteger::SMALL_VALUES, ctx, __FILEW__, __LINE__, L"IArrayObject<BigInteger>");
+	GCUtils<IArrayObject<BigInteger>>::dec(nullptr, BigInteger::TWO_POWS, ctx, __FILEW__, __LINE__, L"IArrayObject<BigInteger>");
 }
 int BigInteger::ValueCompare::operator() (BigInteger* _this, BigInteger* val, ThreadContext* ctx) const throw()
 {

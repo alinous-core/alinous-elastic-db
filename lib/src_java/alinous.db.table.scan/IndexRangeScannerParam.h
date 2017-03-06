@@ -27,12 +27,8 @@ class IndexRangeScannerParam final : public virtual IObject {
 public:
 	IndexRangeScannerParam(const IndexRangeScannerParam& base) = default;
 public:
-	IndexRangeScannerParam(ThreadContext* ctx) throw()  : IObject(ctx), start(nullptr), startEq(0), end(nullptr), endEq(0)
-	{
-	}
-	void __construct_impl(ThreadContext* ctx) throw() 
-	{
-	}
+	IndexRangeScannerParam(ThreadContext* ctx) throw() ;
+	void __construct_impl(ThreadContext* ctx) throw() ;
 	virtual ~IndexRangeScannerParam() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 public:
@@ -49,8 +45,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}}}

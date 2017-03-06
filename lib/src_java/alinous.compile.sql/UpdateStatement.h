@@ -93,12 +93,8 @@ class UpdateStatement final : public AbstractSQLStatement, public ThreadMonitor 
 public:
 	UpdateStatement(const UpdateStatement& base) = default;
 public:
-	UpdateStatement(ThreadContext* ctx) throw()  : IObject(ctx), AbstractSQLStatement(ctx), ThreadMonitor(ctx), table(nullptr), sets(GCUtils<ArrayList<UpdateSet> >::ins(this, (new(ctx) ArrayList<UpdateSet>(ctx)), ctx, __FILEW__, __LINE__, L"")), where(nullptr)
-	{
-	}
-	void __construct_impl(ThreadContext* ctx) throw() 
-	{
-	}
+	UpdateStatement(ThreadContext* ctx) throw() ;
+	void __construct_impl(ThreadContext* ctx) throw() ;
 	virtual ~UpdateStatement() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 private:
@@ -125,8 +121,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}}

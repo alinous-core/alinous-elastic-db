@@ -41,12 +41,8 @@ class MimeFormParameterDecoder final : public virtual IObject {
 public:
 	MimeFormParameterDecoder(const MimeFormParameterDecoder& base) = default;
 public:
-	MimeFormParameterDecoder(ThreadContext* ctx) throw()  : IObject(ctx), contentLength(0), boundary(nullptr), boundaryEnd(nullptr), readBytes(0), inStream(nullptr), parts(GCUtils<ArrayList<MimePart> >::ins(this, (new(ctx) ArrayList<MimePart>(ctx)), ctx, __FILEW__, __LINE__, L""))
-	{
-	}
-	void __construct_impl(ThreadContext* ctx) throw() 
-	{
-	}
+	MimeFormParameterDecoder(ThreadContext* ctx) throw() ;
+	void __construct_impl(ThreadContext* ctx) throw() ;
 	virtual ~MimeFormParameterDecoder() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 private:
@@ -68,8 +64,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}}

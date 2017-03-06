@@ -12,8 +12,8 @@ class NodeTableReference;}}}
 namespace alinous {namespace remote {namespace region {
 class RegionShardPart;}}}
 
-namespace alinous {namespace remote {namespace region {namespace command {namespace data {
-class ClientNetworkRecord;}}}}}
+namespace alinous {namespace remote {namespace region {namespace client {namespace command {namespace data {
+class ClientNetworkRecord;}}}}}}
 
 namespace alinous {namespace db {namespace table {
 class TableMetadata;}}}
@@ -34,7 +34,7 @@ using ::java::util::Iterator;
 using ::java::util::ArrayList;
 using ::java::util::List;
 using ::alinous::db::table::TableMetadata;
-using ::alinous::remote::region::command::data::ClientNetworkRecord;
+using ::alinous::remote::region::client::command::data::ClientNetworkRecord;
 
 
 
@@ -61,8 +61,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}}

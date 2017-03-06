@@ -22,12 +22,8 @@ class IClassMember : public IDeclare {
 public:
 	IClassMember(const IClassMember& base) = default;
 public:
-	IClassMember(ThreadContext* ctx) throw()  : IObject(ctx), IDeclare(ctx)
-	{
-	}
-	void __construct_impl(ThreadContext* ctx) throw() 
-	{
-	}
+	IClassMember(ThreadContext* ctx) throw() ;
+	void __construct_impl(ThreadContext* ctx) throw() ;
 	virtual ~IClassMember() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 public:
@@ -41,8 +37,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}}

@@ -62,12 +62,8 @@ class AssignmentStatement final : public AbstractAlinousStatement {
 public:
 	AssignmentStatement(const AssignmentStatement& base) = default;
 public:
-	AssignmentStatement(ThreadContext* ctx) throw()  : IObject(ctx), AbstractAlinousStatement(ctx), left(nullptr), right(nullptr), ope(nullptr)
-	{
-	}
-	void __construct_impl(ThreadContext* ctx) throw() 
-	{
-	}
+	AssignmentStatement(ThreadContext* ctx) throw() ;
+	void __construct_impl(ThreadContext* ctx) throw() ;
 	virtual ~AssignmentStatement() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 private:
@@ -91,8 +87,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}}

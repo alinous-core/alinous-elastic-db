@@ -251,5 +251,7 @@ bool UpgreadableGate::doclose(Thread* currentthread, ThreadContext* ctx)
 	}
 	return false;
 }
+void UpgreadableGate::__cleanUp(ThreadContext* ctx){
+}
 }}
 

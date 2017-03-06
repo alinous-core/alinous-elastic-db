@@ -42,6 +42,9 @@ class AlinousDatabase;}}
 namespace java {namespace io {
 class File;}}
 
+namespace alinous {namespace system {
+class AlinousCore;}}
+
 namespace alinous {namespace btree {
 class BTree;}}
 
@@ -156,6 +159,7 @@ using ::alinous::runtime::dom::DomArray;
 using ::alinous::runtime::dom::IDomVariable;
 using ::alinous::runtime::dom::VariableException;
 using ::alinous::runtime::parallel::SequentialBackgroundJob;
+using ::alinous::system::AlinousCore;
 using ::alinous::system::AlinousException;
 using ::alinous::system::AlinousNotSupportedException;
 
@@ -165,12 +169,8 @@ class TrxRecordsCache : public virtual IObject {
 public:
 	TrxRecordsCache(const TrxRecordsCache& base) = default;
 public:
-	TrxRecordsCache(ThreadContext* ctx) throw()  : IObject(ctx), insert(0), tmpDir(nullptr), schema(nullptr), tableName(nullptr), storagePath(nullptr), storage(nullptr), metadata(nullptr), serial(0), trx(nullptr), indexList(GCUtils<ArrayList<TrxRecordCacheIndex> >::ins(this, (new(ctx) ArrayList<TrxRecordCacheIndex>(ctx)), ctx, __FILEW__, __LINE__, L""))
-	{
-	}
-	void __construct_impl(ThreadContext* ctx) throw() 
-	{
-	}
+	TrxRecordsCache(ThreadContext* ctx) throw() ;
+	void __construct_impl(ThreadContext* ctx) throw() ;
 	virtual ~TrxRecordsCache() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 public:
@@ -211,8 +211,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}}}

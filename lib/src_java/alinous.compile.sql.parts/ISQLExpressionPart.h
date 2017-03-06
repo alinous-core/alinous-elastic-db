@@ -23,20 +23,15 @@ class ISQLExpressionPart : public ISQLExpression {
 public:
 	ISQLExpressionPart(const ISQLExpressionPart& base) = default;
 public:
-	ISQLExpressionPart(ThreadContext* ctx) throw()  : IObject(ctx), ISQLExpression(ctx)
-	{
-	}
-	void __construct_impl(ThreadContext* ctx) throw() 
-	{
-	}
+	ISQLExpressionPart(ThreadContext* ctx) throw() ;
+	void __construct_impl(ThreadContext* ctx) throw() ;
 	virtual ~ISQLExpressionPart() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}}}

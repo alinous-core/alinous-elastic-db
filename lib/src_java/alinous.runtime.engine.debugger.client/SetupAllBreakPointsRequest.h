@@ -52,12 +52,8 @@ class SetupAllBreakPointsRequest final : public IClientRequest, public virtual I
 public:
 	SetupAllBreakPointsRequest(const SetupAllBreakPointsRequest& base) = default;
 public:
-	SetupAllBreakPointsRequest(ThreadContext* ctx) throw()  : IObject(ctx), IClientRequest(ctx), breakpoints(GCUtils<List<ServerBreakPoint> >::ins(this, (new(ctx) ArrayList<ServerBreakPoint>(ctx)), ctx, __FILEW__, __LINE__, L""))
-	{
-	}
-	void __construct_impl(ThreadContext* ctx) throw() 
-	{
-	}
+	SetupAllBreakPointsRequest(ThreadContext* ctx) throw() ;
+	void __construct_impl(ThreadContext* ctx) throw() ;
 	virtual ~SetupAllBreakPointsRequest() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 private:
@@ -72,8 +68,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}}}}

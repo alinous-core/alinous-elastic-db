@@ -39,6 +39,9 @@ class AlinousName;}}}
 namespace alinous {namespace compile {namespace analyse {
 class VariableDeclareHolder;}}}
 
+namespace alinous {namespace compile {
+class IAlinousElement;}}
+
 namespace java {namespace util {
 template <typename  T> class Stack;}}
 
@@ -59,6 +62,7 @@ using namespace ::alinous;
 using namespace ::java::lang;
 using ::java::util::Iterator;
 using ::java::util::Stack;
+using ::alinous::compile::IAlinousElement;
 using ::alinous::compile::declare::AlinousClass;
 using ::alinous::compile::declare::AlinousName;
 using ::alinous::compile::declare::function::AlinousFunction;
@@ -103,12 +107,12 @@ public:
 	void endStack(ThreadContext* ctx) throw() ;
 	VariableDeclareHolder* getCurrentStack(ThreadContext* ctx) throw() ;
 	SourceValidator* getSourceValidator(ThreadContext* ctx) throw() ;
+	void addError(String* message, IAlinousElement* element, ThreadContext* ctx) throw() ;
 public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}}

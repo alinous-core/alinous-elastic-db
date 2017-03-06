@@ -65,12 +65,8 @@ class SwitchCasePart final : public AbstractAlinousStatement {
 public:
 	SwitchCasePart(const SwitchCasePart& base) = default;
 public:
-	SwitchCasePart(ThreadContext* ctx) throw()  : IObject(ctx), AbstractAlinousStatement(ctx), casesList(GCUtils<ArrayList<CaseStatement> >::ins(this, (new(ctx) ArrayList<CaseStatement>(ctx)), ctx, __FILEW__, __LINE__, L"")), stmtlist(nullptr)
-	{
-	}
-	void __construct_impl(ThreadContext* ctx) throw() 
-	{
-	}
+	SwitchCasePart(ThreadContext* ctx) throw() ;
+	void __construct_impl(ThreadContext* ctx) throw() ;
 	virtual ~SwitchCasePart() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 private:
@@ -91,8 +87,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}}

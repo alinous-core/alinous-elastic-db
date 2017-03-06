@@ -20,12 +20,8 @@ class AbstractHttpParameter : public virtual IObject {
 public:
 	AbstractHttpParameter(const AbstractHttpParameter& base) = default;
 public:
-	AbstractHttpParameter(ThreadContext* ctx) throw()  : IObject(ctx), paramType(0)
-	{
-	}
-	void __construct_impl(ThreadContext* ctx) throw() 
-	{
-	}
+	AbstractHttpParameter(ThreadContext* ctx) throw() ;
+	void __construct_impl(ThreadContext* ctx) throw() ;
 	virtual ~AbstractHttpParameter() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 public:
@@ -41,8 +37,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}}}

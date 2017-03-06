@@ -26,20 +26,15 @@ class MailInfo final : public IAlinousConfigElement, public virtual IObject {
 public:
 	MailInfo(const MailInfo& base) = default;
 public:
-	MailInfo(ThreadContext* ctx) throw()  : IObject(ctx), IAlinousConfigElement(ctx)
-	{
-	}
-	void __construct_impl(ThreadContext* ctx) throw() 
-	{
-	}
+	MailInfo(ThreadContext* ctx) throw() ;
+	void __construct_impl(ThreadContext* ctx) throw() ;
 	virtual ~MailInfo() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}}

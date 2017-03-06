@@ -60,12 +60,8 @@ class NativeFunctionManager final : public virtual IObject {
 public:
 	NativeFunctionManager(const NativeFunctionManager& base) = default;
 public:
-	NativeFunctionManager(ThreadContext* ctx) throw()  : IObject(ctx), nativesRegistory(nullptr)
-	{
-	}
-	void __construct_impl(ThreadContext* ctx) throw() 
-	{
-	}
+	NativeFunctionManager(ThreadContext* ctx) throw() ;
+	void __construct_impl(ThreadContext* ctx) throw() ;
 	virtual ~NativeFunctionManager() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 private:
@@ -81,8 +77,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}}

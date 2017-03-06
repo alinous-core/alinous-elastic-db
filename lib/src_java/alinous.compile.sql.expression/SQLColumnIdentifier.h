@@ -33,6 +33,9 @@ class SQLAnalyseContext;}}}}
 namespace alinous {namespace db {namespace table {
 class DatabaseException;}}}
 
+namespace alinous {namespace db {
+class AlinousDatabase;}}
+
 namespace alinous {namespace db {namespace table {
 class IDatabaseTable;}}}
 
@@ -116,6 +119,7 @@ using ::alinous::compile::sql::analyze::SQLAnalyseContext;
 using ::alinous::compile::sql::analyze::ScanTableIdentifier;
 using ::alinous::compile::sql::analyze::ScanTableMetadata;
 using ::alinous::compile::sql::analyze::ScanTableColumnIdentifier;
+using ::alinous::db::AlinousDatabase;
 using ::alinous::db::table::DatabaseException;
 using ::alinous::db::table::IDatabaseTable;
 using ::alinous::db::trx::scan::ScanResultRecord;
@@ -134,12 +138,8 @@ class SQLColumnIdentifier final : public AbstractSQLExpression {
 public:
 	SQLColumnIdentifier(const SQLColumnIdentifier& base) = default;
 public:
-	SQLColumnIdentifier(ThreadContext* ctx) throw()  : IObject(ctx), AbstractSQLExpression(ctx), distinct(0), id(nullptr), asName(nullptr), resolvedName(nullptr), analysedColumn(nullptr), columnOrder(-1)
-	{
-	}
-	void __construct_impl(ThreadContext* ctx) throw() 
-	{
-	}
+	SQLColumnIdentifier(ThreadContext* ctx) throw() ;
+	void __construct_impl(ThreadContext* ctx) throw() ;
 	SQLColumnIdentifier(AlinousName* name, ThreadContext* ctx) throw() ;
 	void __construct_impl(AlinousName* name, ThreadContext* ctx) throw() ;
 	virtual ~SQLColumnIdentifier() throw();
@@ -188,8 +188,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}}}

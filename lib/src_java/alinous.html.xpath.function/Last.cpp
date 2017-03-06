@@ -2,6 +2,7 @@
 
 
 #include "alinous.html.xpath/IVariableValue.h"
+#include "alinous.html.xpath/StringValue.h"
 #include "alinous.html/IDomObject.h"
 #include "alinous.html/Attribute.h"
 #include "alinous.html/DomNode.h"
@@ -30,6 +31,12 @@ bool Last::__init_static_variables(){
 	delete ctx;
 	return true;
 }
+ Last::Last(ThreadContext* ctx) throw()  : IObject(ctx), IXpathFunction(ctx)
+{
+}
+void Last::__construct_impl(ThreadContext* ctx) throw() 
+{
+}
  Last::~Last() throw() 
 {
 	ThreadContext *ctx = ThreadContext::getCurentContext();
@@ -46,6 +53,8 @@ void Last::__releaseRegerences(bool prepare, ThreadContext* ctx) throw()
 IVariableValue* Last::getValue(DomDocument* document, DomNode* currentNode, ArrayList<XpathFunctionArgument>* arguments, ThreadContext* ctx) throw() 
 {
 	return (new(ctx) NumberValue(currentNode->getNumChildern(ctx), ctx));
+}
+void Last::__cleanUp(ThreadContext* ctx){
 }
 }}}}
 

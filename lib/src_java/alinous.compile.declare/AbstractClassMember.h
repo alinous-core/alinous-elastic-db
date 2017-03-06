@@ -29,12 +29,8 @@ class AbstractClassMember : public IClassMember {
 public:
 	AbstractClassMember(const AbstractClassMember& base) = default;
 public:
-	AbstractClassMember(ThreadContext* ctx) throw()  : IObject(ctx), IClassMember(ctx), modifier(nullptr)
-	{
-	}
-	void __construct_impl(ThreadContext* ctx) throw() 
-	{
-	}
+	AbstractClassMember(ThreadContext* ctx) throw() ;
+	void __construct_impl(ThreadContext* ctx) throw() ;
 	virtual ~AbstractClassMember() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 public:
@@ -53,8 +49,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}}

@@ -42,12 +42,8 @@ class JoinedRecords final : public virtual IObject {
 public:
 	JoinedRecords(const JoinedRecords& base) = default;
 public:
-	JoinedRecords(ThreadContext* ctx) throw()  : IObject(ctx), oid(0), lockingMode(0), tableId(nullptr)
-	{
-	}
-	void __construct_impl(ThreadContext* ctx) throw() 
-	{
-	}
+	JoinedRecords(ThreadContext* ctx) throw() ;
+	void __construct_impl(ThreadContext* ctx) throw() ;
 	JoinedRecords(ScanTableIdentifier* tableId, long long oid, int lockingMode, ThreadContext* ctx) throw() ;
 	void __construct_impl(ScanTableIdentifier* tableId, long long oid, int lockingMode, ThreadContext* ctx) throw() ;
 	virtual ~JoinedRecords() throw();
@@ -71,8 +67,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}}}

@@ -32,12 +32,8 @@ class DbVersionContext final : public ICommandData, public virtual IObject {
 public:
 	DbVersionContext(const DbVersionContext& base) = default;
 public:
-	DbVersionContext(ThreadContext* ctx) throw()  : IObject(ctx), ICommandData(ctx), commitId(0), trxId(0), schemaVersion(0), nodeClusterVersion(0)
-	{
-	}
-	void __construct_impl(ThreadContext* ctx) throw() 
-	{
-	}
+	DbVersionContext(ThreadContext* ctx) throw() ;
+	void __construct_impl(ThreadContext* ctx) throw() ;
 	virtual ~DbVersionContext() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 private:
@@ -60,8 +56,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}}

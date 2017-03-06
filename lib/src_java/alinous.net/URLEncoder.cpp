@@ -24,6 +24,12 @@ bool URLEncoder::__init_static_variables(){
 	delete ctx;
 	return true;
 }
+ URLEncoder::URLEncoder(ThreadContext* ctx) throw()  : IObject(ctx)
+{
+}
+void URLEncoder::__construct_impl(ThreadContext* ctx) throw() 
+{
+}
  URLEncoder::~URLEncoder() throw() 
 {
 	ThreadContext *ctx = ThreadContext::getCurentContext();
@@ -88,6 +94,8 @@ void URLEncoder::convert(String* s, StringBuffer* buf, String* enc, ThreadContex
 		buf->append(digits->charAt((int)(bytes->get(j) & 0xf0) >> 4, ctx), ctx);
 		buf->append(digits->charAt((int)bytes->get(j) & 0xf, ctx), ctx);
 	}
+}
+void URLEncoder::__cleanUp(ThreadContext* ctx){
 }
 }}
 

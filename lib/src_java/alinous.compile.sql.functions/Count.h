@@ -47,12 +47,8 @@ class Count final : public ISQLFunctionBody, public virtual IObject {
 public:
 	Count(const Count& base) = default;
 public:
-	Count(ThreadContext* ctx) throw()  : IObject(ctx), ISQLFunctionBody(ctx)
-	{
-	}
-	void __construct_impl(ThreadContext* ctx) throw() 
-	{
-	}
+	Count(ThreadContext* ctx) throw() ;
+	void __construct_impl(ThreadContext* ctx) throw() ;
 	virtual ~Count() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 public:
@@ -62,8 +58,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}}}

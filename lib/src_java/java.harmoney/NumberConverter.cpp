@@ -4,17 +4,10 @@
 #include "java.lang/Number.h"
 #include "java.lang/Comparable.h"
 #include "java.lang/Integer.h"
+#include "java.harmoney/HexStringParser.h"
 #include "java.harmoney/FloatingPointParser.h"
 #include "java.lang/Double.h"
 #include "java.harmoney/NumberConverter.h"
-#include "com.google.re2j/Inst.h"
-#include "com.google.re2j/Prog.h"
-#include "com.google.re2j/MachineInput.h"
-#include "com.google.re2j/Machine.h"
-#include "com.google.re2j/RE2.h"
-#include "com.google.re2j/Pattern.h"
-#include "com.google.re2j/Matcher.h"
-#include "java.harmoney/HexStringParser.h"
 
 namespace java {namespace harmoney {
 
@@ -44,6 +37,12 @@ bool NumberConverter::__init_static_variables(){
 	ctx->localGC();
 	delete ctx;
 	return true;
+}
+ NumberConverter::NumberConverter(ThreadContext* ctx) throw()  : IObject(ctx), setCount(0), getCount(0), uArray(__GC_INS(this, ((IArrayObjectPrimitive<int>*)new(ctx) ArrayObjectPrimitive<int>(ArrayAllocatorPrimitive<int>::allocatep(ctx, 64), ctx)), IArrayObjectPrimitive<int>)), firstK(0)
+{
+}
+void NumberConverter::__construct_impl(ThreadContext* ctx) throw() 
+{
 }
  NumberConverter::~NumberConverter() throw() 
 {
@@ -290,6 +289,9 @@ String* NumberConverter::convert(double input, ThreadContext* ctx) throw()
 NumberConverter* NumberConverter::getConverter(ThreadContext* ctx) throw() 
 {
 	return (new(ctx) NumberConverter(ctx));
+}
+void NumberConverter::__cleanUp(ThreadContext* ctx){
+	GCUtils<IArrayObjectPrimitive<long long>>::dec(nullptr, NumberConverter::TEN_TO_THE, ctx, __FILEW__, __LINE__, L"IArrayObjectPrimitive<long long>");
 }
 }}
 

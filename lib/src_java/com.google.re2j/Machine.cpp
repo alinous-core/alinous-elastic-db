@@ -12,13 +12,13 @@
 #include "com.google.re2j/RE2.h"
 #include "com.google.re2j/Machine.h"
 #include "com.google.re2j/PatternSyntaxException.h"
+#include "com.google.re2j/Utils.h"
+#include "com.google.re2j/Unicode.h"
 #include "com.google.re2j/CharGroup.h"
 #include "com.google.re2j/CharClass.h"
 #include "com.google.re2j/Parser.h"
-#include "com.google.re2j/Unicode.h"
 #include "com.google.re2j/Compiler.h"
 #include "com.google.re2j/UnicodeTable2.h"
-#include "com.google.re2j/Utils.h"
 #include "com.google.re2j/UnicodeTables.h"
 #include "com.google.re2j/Pattern.h"
 #include "com.google.re2j/Matcher.h"
@@ -351,6 +351,8 @@ Machine::LogicalThread* Machine::add(Machine::Queue* q, int pc, int pos, IArrayO
 	}
 	return t;
 }
+void Machine::__cleanUp(ThreadContext* ctx){
+}
 }}}
 
 namespace com {namespace google {namespace re2j {
@@ -396,6 +398,8 @@ void Machine::LogicalThread::__releaseRegerences(bool prepare, ThreadContext* ct
 		return;
 	}
 }
+void Machine::LogicalThread::__cleanUp(ThreadContext* ctx){
+}
 }}}
 
 namespace com {namespace google {namespace re2j {
@@ -415,6 +419,12 @@ bool Machine::Entry::__init_static_variables(){
 	delete ctx;
 	return true;
 }
+ Machine::Entry::Entry(ThreadContext* ctx) throw()  : IObject(ctx), pc(0), thread(nullptr)
+{
+}
+void Machine::Entry::__construct_impl(ThreadContext* ctx) throw() 
+{
+}
  Machine::Entry::~Entry() throw() 
 {
 	ThreadContext *ctx = ThreadContext::getCurentContext();
@@ -430,6 +440,8 @@ void Machine::Entry::__releaseRegerences(bool prepare, ThreadContext* ctx) throw
 	if(!prepare){
 		return;
 	}
+}
+void Machine::Entry::__cleanUp(ThreadContext* ctx){
 }
 }}}
 
@@ -532,6 +544,8 @@ void Machine::Queue::clear(List<Machine::LogicalThread>* freePool, ThreadContext
 		}
 	}
 	size = 0;
+}
+void Machine::Queue::__cleanUp(ThreadContext* ctx){
 }
 }}}
 

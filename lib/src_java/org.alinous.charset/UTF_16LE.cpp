@@ -44,6 +44,12 @@ bool UTF_16LE::__init_static_variables(){
 	delete ctx;
 	return true;
 }
+ UTF_16LE::UTF_16LE(ThreadContext* ctx) throw()  : IObject(ctx), UTF_16(ctx)
+{
+}
+void UTF_16LE::__construct_impl(ThreadContext* ctx) throw() 
+{
+}
  UTF_16LE::~UTF_16LE() throw() 
 {
 	ThreadContext *ctx = ThreadContext::getCurentContext();
@@ -65,6 +71,8 @@ int UTF_16LE::getDefaultEndian(ThreadContext* ctx) throw()
 int UTF_16LE::getDetectedEndian(int b1, int b2, ThreadContext* ctx) throw() 
 {
 	return (b1 == 0xFF && b2 == 0xFE) ? getDefaultEndian(ctx) : NOT_DETECTED;
+}
+void UTF_16LE::__cleanUp(ThreadContext* ctx){
 }
 }}}
 

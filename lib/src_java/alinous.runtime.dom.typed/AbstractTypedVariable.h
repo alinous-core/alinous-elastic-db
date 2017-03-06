@@ -93,12 +93,8 @@ public:
 	class CallerArrayObject;
 	AbstractTypedVariable(const AbstractTypedVariable& base) = default;
 public:
-	AbstractTypedVariable(ThreadContext* ctx) throw()  : IObject(ctx), ITypedVariable(ctx)
-	{
-	}
-	void __construct_impl(ThreadContext* ctx) throw() 
-	{
-	}
+	AbstractTypedVariable(ThreadContext* ctx) throw() ;
+	void __construct_impl(ThreadContext* ctx) throw() ;
 	virtual ~AbstractTypedVariable() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 public:
@@ -128,12 +124,8 @@ public:
 	public:
 		CallerBool(const CallerBool& base) = default;
 	public:
-		CallerBool(ThreadContext* ctx) throw()  : IObject(ctx), ITypedCaller(ctx)
-		{
-		}
-		void __construct_impl(ThreadContext* ctx) throw() 
-		{
-		}
+		CallerBool(ThreadContext* ctx) throw() ;
+		void __construct_impl(ThreadContext* ctx) throw() ;
 		virtual ~CallerBool() throw();
 		virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 	public:
@@ -154,8 +146,7 @@ public:
 		static bool __init_done;
 		static bool __init_static_variables();
 	public:
-		static void __cleanUp(ThreadContext* ctx){
-		}
+		static void __cleanUp(ThreadContext* ctx);
 	};
 
 
@@ -165,12 +156,8 @@ public:
 	public:
 		CallerByte(const CallerByte& base) = default;
 	public:
-		CallerByte(ThreadContext* ctx) throw()  : IObject(ctx), ITypedCaller(ctx)
-		{
-		}
-		void __construct_impl(ThreadContext* ctx) throw() 
-		{
-		}
+		CallerByte(ThreadContext* ctx) throw() ;
+		void __construct_impl(ThreadContext* ctx) throw() ;
 		virtual ~CallerByte() throw();
 		virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 	public:
@@ -191,8 +178,7 @@ public:
 		static bool __init_done;
 		static bool __init_static_variables();
 	public:
-		static void __cleanUp(ThreadContext* ctx){
-		}
+		static void __cleanUp(ThreadContext* ctx);
 	};
 
 
@@ -202,12 +188,8 @@ public:
 	public:
 		CallerChar(const CallerChar& base) = default;
 	public:
-		CallerChar(ThreadContext* ctx) throw()  : IObject(ctx), ITypedCaller(ctx)
-		{
-		}
-		void __construct_impl(ThreadContext* ctx) throw() 
-		{
-		}
+		CallerChar(ThreadContext* ctx) throw() ;
+		void __construct_impl(ThreadContext* ctx) throw() ;
 		virtual ~CallerChar() throw();
 		virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 	public:
@@ -228,8 +210,7 @@ public:
 		static bool __init_done;
 		static bool __init_static_variables();
 	public:
-		static void __cleanUp(ThreadContext* ctx){
-		}
+		static void __cleanUp(ThreadContext* ctx);
 	};
 
 
@@ -239,12 +220,8 @@ public:
 	public:
 		CallerDouble(const CallerDouble& base) = default;
 	public:
-		CallerDouble(ThreadContext* ctx) throw()  : IObject(ctx), ITypedCaller(ctx)
-		{
-		}
-		void __construct_impl(ThreadContext* ctx) throw() 
-		{
-		}
+		CallerDouble(ThreadContext* ctx) throw() ;
+		void __construct_impl(ThreadContext* ctx) throw() ;
 		virtual ~CallerDouble() throw();
 		virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 	public:
@@ -265,8 +242,7 @@ public:
 		static bool __init_done;
 		static bool __init_static_variables();
 	public:
-		static void __cleanUp(ThreadContext* ctx){
-		}
+		static void __cleanUp(ThreadContext* ctx);
 	};
 
 
@@ -276,12 +252,8 @@ public:
 	public:
 		CallerFloat(const CallerFloat& base) = default;
 	public:
-		CallerFloat(ThreadContext* ctx) throw()  : IObject(ctx), ITypedCaller(ctx)
-		{
-		}
-		void __construct_impl(ThreadContext* ctx) throw() 
-		{
-		}
+		CallerFloat(ThreadContext* ctx) throw() ;
+		void __construct_impl(ThreadContext* ctx) throw() ;
 		virtual ~CallerFloat() throw();
 		virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 	public:
@@ -302,8 +274,7 @@ public:
 		static bool __init_done;
 		static bool __init_static_variables();
 	public:
-		static void __cleanUp(ThreadContext* ctx){
-		}
+		static void __cleanUp(ThreadContext* ctx);
 	};
 
 
@@ -313,12 +284,8 @@ public:
 	public:
 		CallerInt(const CallerInt& base) = default;
 	public:
-		CallerInt(ThreadContext* ctx) throw()  : IObject(ctx), ITypedCaller(ctx)
-		{
-		}
-		void __construct_impl(ThreadContext* ctx) throw() 
-		{
-		}
+		CallerInt(ThreadContext* ctx) throw() ;
+		void __construct_impl(ThreadContext* ctx) throw() ;
 		virtual ~CallerInt() throw();
 		virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 	public:
@@ -339,8 +306,7 @@ public:
 		static bool __init_done;
 		static bool __init_static_variables();
 	public:
-		static void __cleanUp(ThreadContext* ctx){
-		}
+		static void __cleanUp(ThreadContext* ctx);
 	};
 
 
@@ -350,12 +316,8 @@ public:
 	public:
 		CallerLong(const CallerLong& base) = default;
 	public:
-		CallerLong(ThreadContext* ctx) throw()  : IObject(ctx), ITypedCaller(ctx)
-		{
-		}
-		void __construct_impl(ThreadContext* ctx) throw() 
-		{
-		}
+		CallerLong(ThreadContext* ctx) throw() ;
+		void __construct_impl(ThreadContext* ctx) throw() ;
 		virtual ~CallerLong() throw();
 		virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 	public:
@@ -376,8 +338,7 @@ public:
 		static bool __init_done;
 		static bool __init_static_variables();
 	public:
-		static void __cleanUp(ThreadContext* ctx){
-		}
+		static void __cleanUp(ThreadContext* ctx);
 	};
 
 
@@ -387,12 +348,8 @@ public:
 	public:
 		CallerShort(const CallerShort& base) = default;
 	public:
-		CallerShort(ThreadContext* ctx) throw()  : IObject(ctx), ITypedCaller(ctx)
-		{
-		}
-		void __construct_impl(ThreadContext* ctx) throw() 
-		{
-		}
+		CallerShort(ThreadContext* ctx) throw() ;
+		void __construct_impl(ThreadContext* ctx) throw() ;
 		virtual ~CallerShort() throw();
 		virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 	public:
@@ -413,8 +370,7 @@ public:
 		static bool __init_done;
 		static bool __init_static_variables();
 	public:
-		static void __cleanUp(ThreadContext* ctx){
-		}
+		static void __cleanUp(ThreadContext* ctx);
 	};
 
 
@@ -424,12 +380,8 @@ public:
 	public:
 		CallerString(const CallerString& base) = default;
 	public:
-		CallerString(ThreadContext* ctx) throw()  : IObject(ctx), ITypedCaller(ctx)
-		{
-		}
-		void __construct_impl(ThreadContext* ctx) throw() 
-		{
-		}
+		CallerString(ThreadContext* ctx) throw() ;
+		void __construct_impl(ThreadContext* ctx) throw() ;
 		virtual ~CallerString() throw();
 		virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 	public:
@@ -450,8 +402,7 @@ public:
 		static bool __init_done;
 		static bool __init_static_variables();
 	public:
-		static void __cleanUp(ThreadContext* ctx){
-		}
+		static void __cleanUp(ThreadContext* ctx);
 	};
 
 
@@ -461,12 +412,8 @@ public:
 	public:
 		CallerBigDecimal(const CallerBigDecimal& base) = default;
 	public:
-		CallerBigDecimal(ThreadContext* ctx) throw()  : IObject(ctx), ITypedCaller(ctx)
-		{
-		}
-		void __construct_impl(ThreadContext* ctx) throw() 
-		{
-		}
+		CallerBigDecimal(ThreadContext* ctx) throw() ;
+		void __construct_impl(ThreadContext* ctx) throw() ;
 		virtual ~CallerBigDecimal() throw();
 		virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 	public:
@@ -487,8 +434,7 @@ public:
 		static bool __init_done;
 		static bool __init_static_variables();
 	public:
-		static void __cleanUp(ThreadContext* ctx){
-		}
+		static void __cleanUp(ThreadContext* ctx);
 	};
 
 
@@ -498,12 +444,8 @@ public:
 	public:
 		CallerTime(const CallerTime& base) = default;
 	public:
-		CallerTime(ThreadContext* ctx) throw()  : IObject(ctx), ITypedCaller(ctx)
-		{
-		}
-		void __construct_impl(ThreadContext* ctx) throw() 
-		{
-		}
+		CallerTime(ThreadContext* ctx) throw() ;
+		void __construct_impl(ThreadContext* ctx) throw() ;
 		virtual ~CallerTime() throw();
 		virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 	public:
@@ -524,8 +466,7 @@ public:
 		static bool __init_done;
 		static bool __init_static_variables();
 	public:
-		static void __cleanUp(ThreadContext* ctx){
-		}
+		static void __cleanUp(ThreadContext* ctx);
 	};
 
 
@@ -535,12 +476,8 @@ public:
 	public:
 		CallerTimestamp(const CallerTimestamp& base) = default;
 	public:
-		CallerTimestamp(ThreadContext* ctx) throw()  : IObject(ctx), ITypedCaller(ctx)
-		{
-		}
-		void __construct_impl(ThreadContext* ctx) throw() 
-		{
-		}
+		CallerTimestamp(ThreadContext* ctx) throw() ;
+		void __construct_impl(ThreadContext* ctx) throw() ;
 		virtual ~CallerTimestamp() throw();
 		virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 	public:
@@ -561,8 +498,7 @@ public:
 		static bool __init_done;
 		static bool __init_static_variables();
 	public:
-		static void __cleanUp(ThreadContext* ctx){
-		}
+		static void __cleanUp(ThreadContext* ctx);
 	};
 
 
@@ -572,12 +508,8 @@ public:
 	public:
 		CallerArrayObject(const CallerArrayObject& base) = default;
 	public:
-		CallerArrayObject(ThreadContext* ctx) throw()  : IObject(ctx), ITypedCaller(ctx)
-		{
-		}
-		void __construct_impl(ThreadContext* ctx) throw() 
-		{
-		}
+		CallerArrayObject(ThreadContext* ctx) throw() ;
+		void __construct_impl(ThreadContext* ctx) throw() ;
 		virtual ~CallerArrayObject() throw();
 		virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 	public:
@@ -598,16 +530,13 @@ public:
 		static bool __init_done;
 		static bool __init_static_variables();
 	public:
-		static void __cleanUp(ThreadContext* ctx){
-		}
+		static void __cleanUp(ThreadContext* ctx);
 	};
 
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-		GCUtils<IArrayObject<ITypedCaller>>::dec(nullptr, AbstractTypedVariable::typedCallers, ctx, __FILEW__, __LINE__, L"IArrayObject<ITypedCaller>");
-	}
+	static void __cleanUp(ThreadContext* ctx);
 	class ValueCompare {
 	public:
 		int operator() (IAlinousVariable* _this, IAlinousVariable* variable, ThreadContext* ctx) const throw();

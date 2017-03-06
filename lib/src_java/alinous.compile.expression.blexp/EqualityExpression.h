@@ -98,12 +98,8 @@ class EqualityExpression final : public AbstractBooleanExpression {
 public:
 	EqualityExpression(const EqualityExpression& base) = default;
 public:
-	EqualityExpression(ThreadContext* ctx) throw()  : IObject(ctx), AbstractBooleanExpression(ctx), left(nullptr), ope(0), right(nullptr)
-	{
-	}
-	void __construct_impl(ThreadContext* ctx) throw() 
-	{
-	}
+	EqualityExpression(ThreadContext* ctx) throw() ;
+	void __construct_impl(ThreadContext* ctx) throw() ;
 	virtual ~EqualityExpression() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 private:
@@ -135,8 +131,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}}}

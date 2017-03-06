@@ -96,5 +96,7 @@ String* XpathContextLocationCtrl::toString(ThreadContext* ctx) throw()
 	}
 	return nullptr;
 }
+void XpathContextLocationCtrl::__cleanUp(ThreadContext* ctx){
+}
 }}}
 

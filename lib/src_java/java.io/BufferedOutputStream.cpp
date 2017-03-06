@@ -145,5 +145,7 @@ void BufferedOutputStream::flushInternal(ThreadContext* ctx)
 		count = 0;
 	}
 }
+void BufferedOutputStream::__cleanUp(ThreadContext* ctx){
+}
 }}
 

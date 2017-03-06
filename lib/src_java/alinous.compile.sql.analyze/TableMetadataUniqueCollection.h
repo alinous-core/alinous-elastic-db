@@ -36,12 +36,8 @@ class TableMetadataUniqueCollection final : public virtual IObject {
 public:
 	TableMetadataUniqueCollection(const TableMetadataUniqueCollection& base) = default;
 public:
-	TableMetadataUniqueCollection(ThreadContext* ctx) throw()  : IObject(ctx), uniqueList(GCUtils<ArrayList<ScanUnique> >::ins(this, (new(ctx) ArrayList<ScanUnique>(ctx)), ctx, __FILEW__, __LINE__, L""))
-	{
-	}
-	void __construct_impl(ThreadContext* ctx) throw() 
-	{
-	}
+	TableMetadataUniqueCollection(ThreadContext* ctx) throw() ;
+	void __construct_impl(ThreadContext* ctx) throw() ;
 	virtual ~TableMetadataUniqueCollection() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 private:
@@ -56,8 +52,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}}}

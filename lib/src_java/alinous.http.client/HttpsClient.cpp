@@ -3,6 +3,7 @@
 
 #include "alinous.net/UnknownHostException.h"
 #include "java.io/ByteArrayOutputStream.h"
+#include "alinous.system/AlinousException.h"
 #include "alinous.http.client/HttpRequestHeaders.h"
 #include "alinous.http.client/HttpClient.h"
 #include "alinous.http.client/HttpsClient.h"
@@ -24,6 +25,12 @@ bool HttpsClient::__init_static_variables(){
 	delete ctx;
 	return true;
 }
+ HttpsClient::HttpsClient(ThreadContext* ctx) throw()  : IObject(ctx), HttpClient(ctx)
+{
+}
+void HttpsClient::__construct_impl(ThreadContext* ctx) throw() 
+{
+}
  HttpsClient::~HttpsClient() throw() 
 {
 	ThreadContext *ctx = ThreadContext::getCurentContext();
@@ -41,6 +48,8 @@ void HttpsClient::__releaseRegerences(bool prepare, ThreadContext* ctx) throw()
 void HttpsClient::connect(String* host, int port, ThreadContext* ctx)
 {
 	__GC_MV(this, &(this->socket), AlinousSSLSocketFactory::createSocket(host, port, ctx), AlinousSocket);
+}
+void HttpsClient::__cleanUp(ThreadContext* ctx){
 }
 }}}
 

@@ -23,7 +23,6 @@
 #include "alinous.numeric/BigDecimal.h"
 #include "alinous.numeric/Elementary.h"
 #include "alinous.numeric/Primality.h"
-#include "java.sql/Date.h"
 
 namespace alinous {namespace numeric {
 
@@ -237,6 +236,10 @@ int InternalDate::zone(String* text, ThreadContext* ctx) throw()
 		return -7;
 	}
 	return 0;
+}
+void InternalDate::__cleanUp(ThreadContext* ctx){
+	GCUtils<IArrayObject<String>>::dec(nullptr, InternalDate::dayOfWeekNames, ctx, __FILEW__, __LINE__, L"IArrayObject<String>");
+	GCUtils<IArrayObject<String>>::dec(nullptr, InternalDate::monthNames, ctx, __FILEW__, __LINE__, L"IArrayObject<String>");
 }
 int InternalDate::ValueCompare::operator() (InternalDate* _this, InternalDate* date, ThreadContext* ctx) const throw()
 {

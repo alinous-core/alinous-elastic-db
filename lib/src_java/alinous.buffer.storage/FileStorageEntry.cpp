@@ -3,8 +3,6 @@
 
 #include "alinous.buffer.storage/FileStorageEntry.h"
 #include "alinous.buffer.storage/FileStorageEntryFetcher.h"
-#include "alinous.lock/LockObject.h"
-#include "alinous.lock/ConcurrentGate.h"
 #include "alinous.buffer.storage/IFileStorage.h"
 #include "alinous.buffer.storage/FileStorageEntryWriter.h"
 #include "alinous.buffer.storage/FileStorageEntryReader.h"
@@ -29,6 +27,12 @@ bool FileStorageEntry::__init_static_variables(){
 	ctx->localGC();
 	delete ctx;
 	return true;
+}
+ FileStorageEntry::FileStorageEntry(ThreadContext* ctx) throw()  : IObject(ctx), position(0), oid(0), used(0), data(nullptr)
+{
+}
+void FileStorageEntry::__construct_impl(ThreadContext* ctx) throw() 
+{
 }
  FileStorageEntry::~FileStorageEntry() throw() 
 {
@@ -66,6 +70,8 @@ bool FileStorageEntry::equals(IObject* obj, ThreadContext* ctx) throw()
 		return false;
 	}
 	return true;
+}
+void FileStorageEntry::__cleanUp(ThreadContext* ctx){
 }
 }}}
 

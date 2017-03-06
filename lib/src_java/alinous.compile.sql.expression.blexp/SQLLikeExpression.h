@@ -127,12 +127,8 @@ class SQLLikeExpression final : public AbstractSQLBooleanExpression {
 public:
 	SQLLikeExpression(const SQLLikeExpression& base) = default;
 public:
-	SQLLikeExpression(ThreadContext* ctx) throw()  : IObject(ctx), AbstractSQLBooleanExpression(ctx), first(nullptr), exp(nullptr), esc(nullptr), escapeStr(__GC_INS(this, ConstStr::getCNST_STR_1008(), String))
-	{
-	}
-	void __construct_impl(ThreadContext* ctx) throw() 
-	{
-	}
+	SQLLikeExpression(ThreadContext* ctx) throw() ;
+	void __construct_impl(ThreadContext* ctx) throw() ;
 	virtual ~SQLLikeExpression() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 private:
@@ -176,8 +172,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}}}}

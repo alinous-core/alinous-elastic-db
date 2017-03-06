@@ -83,12 +83,8 @@ class NaturalJoin final : public AbstractSQLJoin {
 public:
 	NaturalJoin(const NaturalJoin& base) = default;
 public:
-	NaturalJoin(ThreadContext* ctx) throw()  : IObject(ctx), AbstractSQLJoin(ctx)
-	{
-	}
-	void __construct_impl(ThreadContext* ctx) throw() 
-	{
-	}
+	NaturalJoin(ThreadContext* ctx) throw() ;
+	void __construct_impl(ThreadContext* ctx) throw() ;
 	virtual ~NaturalJoin() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 public:
@@ -102,8 +98,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}}}}

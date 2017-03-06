@@ -120,12 +120,8 @@ class BigDecimalVariable final : public AbstractTypedVariable {
 public:
 	BigDecimalVariable(const BigDecimalVariable& base) = default;
 public:
-	BigDecimalVariable(ThreadContext* ctx) throw()  : IObject(ctx), AbstractTypedVariable(ctx), value(nullptr)
-	{
-	}
-	void __construct_impl(ThreadContext* ctx) throw() 
-	{
-	}
+	BigDecimalVariable(ThreadContext* ctx) throw() ;
+	void __construct_impl(ThreadContext* ctx) throw() ;
 	BigDecimalVariable(BigDecimal* bigDecimal, ThreadContext* ctx) throw() ;
 	void __construct_impl(BigDecimal* bigDecimal, ThreadContext* ctx) throw() ;
 	virtual ~BigDecimalVariable() throw();
@@ -352,8 +348,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 	class ValueCompare {
 	public:
 		int operator() (VariantValue* _this, VariantValue* variable, ThreadContext* ctx) const throw();

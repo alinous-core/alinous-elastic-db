@@ -84,6 +84,8 @@ bool IBM866::contains(String* cs, ThreadContext* ctx) throw()
 {
 	return cs->equalsIgnoreCase(ConstStr::getCNST_STR_940(), ctx) || cs->equalsIgnoreCase(ConstStr::getCNST_STR_913(), ctx) || cs->equalsIgnoreCase(ConstStr::getCNST_STR_892(), ctx);
 }
+void IBM866::__cleanUp(ThreadContext* ctx){
+}
 }}}
 
 namespace org {namespace alinous {namespace charset {
@@ -104,6 +106,12 @@ bool IBM866::Decoder::__init_static_variables(){
 	ctx->localGC();
 	delete ctx;
 	return true;
+}
+ IBM866::Decoder::Decoder(ThreadContext* ctx) throw()  : IObject(ctx), CharsetDecoder(ctx)
+{
+}
+void IBM866::Decoder::__construct_impl(ThreadContext* ctx) throw() 
+{
 }
  IBM866::Decoder::~Decoder() throw() 
 {
@@ -175,6 +183,8 @@ CoderResult* IBM866::Decoder::decodeLoop(ByteBuffer* bb, CharBuffer* cb, ThreadC
 	}
 	return CoderResult::UNDERFLOW;
 }
+void IBM866::Decoder::__cleanUp(ThreadContext* ctx){
+}
 }}}
 
 namespace org {namespace alinous {namespace charset {
@@ -197,6 +207,12 @@ bool IBM866::Encoder::__init_static_variables(){
 	ctx->localGC();
 	delete ctx;
 	return true;
+}
+ IBM866::Encoder::Encoder(ThreadContext* ctx) throw()  : IObject(ctx), CharsetEncoder(ctx)
+{
+}
+void IBM866::Encoder::__construct_impl(ThreadContext* ctx) throw() 
+{
 }
  IBM866::Encoder::~Encoder() throw() 
 {
@@ -362,6 +378,8 @@ CoderResult* IBM866::Encoder::encodeLoop(CharBuffer* cb, ByteBuffer* bb, ThreadC
 		}
 	}
 	return CoderResult::UNDERFLOW;
+}
+void IBM866::Encoder::__cleanUp(ThreadContext* ctx){
 }
 }}}
 

@@ -31,12 +31,8 @@ class AbstractNativeFunction : public IAlinousNativeFunction, public virtual IOb
 public:
 	AbstractNativeFunction(const AbstractNativeFunction& base) = default;
 public:
-	AbstractNativeFunction(ThreadContext* ctx) throw()  : IObject(ctx), IAlinousNativeFunction(ctx), prefix(nullptr), name(nullptr), argumentMetadata(GCUtils<ArrayList<AlinousType> >::ins(this, (new(ctx) ArrayList<AlinousType>(ctx)), ctx, __FILEW__, __LINE__, L""))
-	{
-	}
-	void __construct_impl(ThreadContext* ctx) throw() 
-	{
-	}
+	AbstractNativeFunction(ThreadContext* ctx) throw() ;
+	void __construct_impl(ThreadContext* ctx) throw() ;
 	virtual ~AbstractNativeFunction() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 public:
@@ -64,8 +60,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}}

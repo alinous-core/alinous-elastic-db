@@ -30,12 +30,8 @@ class DataSourceInfo final : public IAlinousConfigElement, public virtual IObjec
 public:
 	DataSourceInfo(const DataSourceInfo& base) = default;
 public:
-	DataSourceInfo(ThreadContext* ctx) throw()  : IObject(ctx), IAlinousConfigElement(ctx), connect(nullptr), user(nullptr), pass(nullptr), defaultAcid(IDatabaseDriver::READ_COMMITTED)
-	{
-	}
-	void __construct_impl(ThreadContext* ctx) throw() 
-	{
-	}
+	DataSourceInfo(ThreadContext* ctx) throw() ;
+	void __construct_impl(ThreadContext* ctx) throw() ;
 	virtual ~DataSourceInfo() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 private:
@@ -56,8 +52,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}}

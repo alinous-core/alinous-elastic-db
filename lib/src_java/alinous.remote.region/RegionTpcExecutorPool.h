@@ -3,6 +3,12 @@
 namespace alinous {namespace remote {namespace region {
 class RegionInsertExecutor;}}}
 
+namespace alinous {namespace db {namespace trx {
+class DbVersionContext;}}}
+
+namespace alinous {namespace remote {namespace region {
+class NodeReferenceManager;}}}
+
 namespace java {namespace lang {
 class Long;}}
 
@@ -30,6 +36,7 @@ using namespace ::java::lang;
 using ::java::util::Iterator;
 using ::java::util::HashMap;
 using ::java::util::Map;
+using ::alinous::db::trx::DbVersionContext;
 using ::alinous::lock::LockObject;
 
 
@@ -38,12 +45,8 @@ class RegionTpcExecutorPool final : public virtual IObject {
 public:
 	RegionTpcExecutorPool(const RegionTpcExecutorPool& base) = default;
 public:
-	RegionTpcExecutorPool(ThreadContext* ctx) throw()  : IObject(ctx), insertSessions(GCUtils<Map<Long,RegionInsertExecutor> >::ins(this, (new(ctx) HashMap<Long,RegionInsertExecutor>(ctx)), ctx, __FILEW__, __LINE__, L"")), lock(__GC_INS(this, (new(ctx) LockObject(ctx)), LockObject))
-	{
-	}
-	void __construct_impl(ThreadContext* ctx) throw() 
-	{
-	}
+	RegionTpcExecutorPool(ThreadContext* ctx) throw() ;
+	void __construct_impl(ThreadContext* ctx) throw() ;
 	virtual ~RegionTpcExecutorPool() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 private:
@@ -51,14 +54,13 @@ private:
 	LockObject* lock;
 public:
 	void putInsertSession(RegionInsertExecutor* exec, ThreadContext* ctx) throw() ;
-	RegionInsertExecutor* getInsertSession(long long trxId, ThreadContext* ctx) throw() ;
+	RegionInsertExecutor* getInsertSession(long long trxId, long long commitId, DbVersionContext* vctx, NodeReferenceManager* refs, ThreadContext* ctx) throw() ;
 	void removeInsertSession(long long trxId, ThreadContext* ctx) throw() ;
 public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}}

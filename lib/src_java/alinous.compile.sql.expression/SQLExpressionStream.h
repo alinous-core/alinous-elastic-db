@@ -1,13 +1,13 @@
 #ifndef ALINOUS_COMPILE_SQL_EXPRESSION_SQLEXPRESSIONSTREAM_H_
 #define ALINOUS_COMPILE_SQL_EXPRESSION_SQLEXPRESSIONSTREAM_H_
 namespace alinous{namespace annotation{
-class NoBlankConstructor;
-}}
-namespace alinous{namespace annotation{
 class OneSource;
 }}
 namespace alinous {namespace compile {namespace analyse {
 class SrcAnalyseContext;}}}
+
+namespace alinous {namespace compile {namespace sql {namespace functions {
+class SQLFunctionManager;}}}}
 
 namespace alinous {namespace compile {namespace declare {
 class AlinousName;}}}
@@ -116,6 +116,7 @@ using ::alinous::compile::expression::expstream::ExpressionStream;
 using ::alinous::compile::sql::analyze::SQLAnalyseContext;
 using ::alinous::compile::sql::analyze::ScanTableIdentifier;
 using ::alinous::compile::sql::functions::ISQLFunctionBody;
+using ::alinous::compile::sql::functions::SQLFunctionManager;
 using ::alinous::compile::sql::analyze::ScanTableColumnIdentifier;
 using ::alinous::db::table::DatabaseException;
 using ::alinous::db::trx::scan::ScanResultRecord;
@@ -187,8 +188,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}}}

@@ -147,5 +147,7 @@ void ByteArrayOutputStream::expand(int i, ThreadContext* ctx) throw()
 	System::arraycopy(buf, 0, newbuf, 0, count, ctx);
 	__GC_MV(this, &(buf), newbuf, IArrayObjectPrimitive<char>);
 }
+void ByteArrayOutputStream::__cleanUp(ThreadContext* ctx){
+}
 }}
 

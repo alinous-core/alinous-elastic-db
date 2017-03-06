@@ -292,5 +292,7 @@ int BufferedInputStream::fillbuf(InputStream* localIn, IArrayObjectPrimitive<cha
 	count = bytesread <= 0 ? pos : pos + bytesread;
 	return bytesread;
 }
+void BufferedInputStream::__cleanUp(ThreadContext* ctx){
+}
 }}
 

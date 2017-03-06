@@ -20,12 +20,8 @@ class DebugProbeSection final : public virtual IObject {
 public:
 	DebugProbeSection(const DebugProbeSection& base) = default;
 public:
-	DebugProbeSection(ThreadContext* ctx) throw()  : IObject(ctx), name(nullptr), _start(0), _end(0)
-	{
-	}
-	void __construct_impl(ThreadContext* ctx) throw() 
-	{
-	}
+	DebugProbeSection(ThreadContext* ctx) throw() ;
+	void __construct_impl(ThreadContext* ctx) throw() ;
 	DebugProbeSection(String* name, ThreadContext* ctx) throw() ;
 	void __construct_impl(String* name, ThreadContext* ctx) throw() ;
 	virtual ~DebugProbeSection() throw();
@@ -44,8 +40,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}

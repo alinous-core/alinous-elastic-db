@@ -59,12 +59,8 @@ class ISQLExpression : public IExpression {
 public:
 	ISQLExpression(const ISQLExpression& base) = default;
 public:
-	ISQLExpression(ThreadContext* ctx) throw()  : IObject(ctx), IExpression(ctx)
-	{
-	}
-	void __construct_impl(ThreadContext* ctx) throw() 
-	{
-	}
+	ISQLExpression(ThreadContext* ctx) throw() ;
+	void __construct_impl(ThreadContext* ctx) throw() ;
 	virtual ~ISQLExpression() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 public:
@@ -85,8 +81,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}}}

@@ -1,7 +1,7 @@
 #ifndef ALINOUS_REMOTE_MONITOR_TRANSACTIONMONITORSERVER_H_
 #define ALINOUS_REMOTE_MONITOR_TRANSACTIONMONITORSERVER_H_
-namespace alinous {namespace remote {namespace monitor {namespace command {namespace data {
-class RegionInfoData;}}}}}
+namespace alinous {namespace remote {namespace monitor {namespace client {namespace command {namespace data {
+class RegionInfoData;}}}}}}
 
 namespace alinous {namespace remote {namespace monitor {
 class TransactionMonitorServer;}}}
@@ -42,7 +42,7 @@ using namespace ::java::lang;
 using ::java::util::Iterator;
 using ::alinous::db::AlinousDbException;
 using ::alinous::lock::LockObject;
-using ::alinous::remote::monitor::command::data::RegionInfoData;
+using ::alinous::remote::monitor::client::command::data::RegionInfoData;
 using ::alinous::remote::socket::SocketServer;
 using ::alinous::system::ISystemLog;
 using ::alinous::system::config::remote::Monitor;
@@ -90,8 +90,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}}

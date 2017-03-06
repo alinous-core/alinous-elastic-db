@@ -116,12 +116,8 @@ class SQLFrom final : public ISQLExpression {
 public:
 	SQLFrom(const SQLFrom& base) = default;
 public:
-	SQLFrom(ThreadContext* ctx) throw()  : IObject(ctx), ISQLExpression(ctx), join(nullptr)
-	{
-	}
-	void __construct_impl(ThreadContext* ctx) throw() 
-	{
-	}
+	SQLFrom(ThreadContext* ctx) throw() ;
+	void __construct_impl(ThreadContext* ctx) throw() ;
 	virtual ~SQLFrom() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 private:
@@ -164,8 +160,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}}}

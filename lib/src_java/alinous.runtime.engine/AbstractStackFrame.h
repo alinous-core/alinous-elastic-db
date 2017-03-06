@@ -64,12 +64,8 @@ class AbstractStackFrame : public AbstractSrcElement, public IStackFrame {
 public:
 	AbstractStackFrame(const AbstractStackFrame& base) = default;
 public:
-	AbstractStackFrame(ThreadContext* ctx) throw()  : IObject(ctx), AbstractSrcElement(ctx), IStackFrame(ctx), sourceElement(nullptr), container(nullptr), typedContainer(nullptr), stackFrames(GCUtils<Stack<SubStackFrame> >::ins(this, (new(ctx) Stack<SubStackFrame>(ctx)), ctx, __FILEW__, __LINE__, L""))
-	{
-	}
-	void __construct_impl(ThreadContext* ctx) throw() 
-	{
-	}
+	AbstractStackFrame(ThreadContext* ctx) throw() ;
+	void __construct_impl(ThreadContext* ctx) throw() ;
 	virtual ~AbstractStackFrame() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 public:
@@ -93,8 +89,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}}

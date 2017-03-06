@@ -84,6 +84,8 @@ bool CP_1252::contains(String* cs, ThreadContext* ctx) throw()
 {
 	return cs->equalsIgnoreCase(ConstStr::getCNST_STR_913(), ctx) || cs->equalsIgnoreCase(ConstStr::getCNST_STR_892(), ctx) || cs->equalsIgnoreCase(ConstStr::getCNST_STR_896(), ctx);
 }
+void CP_1252::__cleanUp(ThreadContext* ctx){
+}
 }}}
 
 namespace org {namespace alinous {namespace charset {
@@ -104,6 +106,12 @@ bool CP_1252::Decoder::__init_static_variables(){
 	ctx->localGC();
 	delete ctx;
 	return true;
+}
+ CP_1252::Decoder::Decoder(ThreadContext* ctx) throw()  : IObject(ctx), CharsetDecoder(ctx)
+{
+}
+void CP_1252::Decoder::__construct_impl(ThreadContext* ctx) throw() 
+{
 }
  CP_1252::Decoder::~Decoder() throw() 
 {
@@ -175,6 +183,8 @@ CoderResult* CP_1252::Decoder::decodeLoop(ByteBuffer* bb, CharBuffer* cb, Thread
 	}
 	return CoderResult::UNDERFLOW;
 }
+void CP_1252::Decoder::__cleanUp(ThreadContext* ctx){
+}
 }}}
 
 namespace org {namespace alinous {namespace charset {
@@ -197,6 +207,12 @@ bool CP_1252::Encoder::__init_static_variables(){
 	ctx->localGC();
 	delete ctx;
 	return true;
+}
+ CP_1252::Encoder::Encoder(ThreadContext* ctx) throw()  : IObject(ctx), CharsetEncoder(ctx)
+{
+}
+void CP_1252::Encoder::__construct_impl(ThreadContext* ctx) throw() 
+{
 }
  CP_1252::Encoder::~Encoder() throw() 
 {
@@ -365,6 +381,8 @@ CoderResult* CP_1252::Encoder::encodeLoop(CharBuffer* cb, ByteBuffer* bb, Thread
 }
 void CP_1252::Encoder::nEncode(long long outAddr, int absolutePos, IArrayObjectPrimitive<wchar_t>* array, int arrPosition, IArrayObjectPrimitive<int>* res, ThreadContext* ctx) throw() 
 {
+}
+void CP_1252::Encoder::__cleanUp(ThreadContext* ctx){
 }
 }}}
 

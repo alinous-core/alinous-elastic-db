@@ -3,6 +3,9 @@
 namespace alinous{namespace annotation{
 class OneSource;
 }}
+namespace java {namespace harmoney {
+class HexStringParser;}}
+
 namespace java {namespace lang {
 class NumberFormatException;}}
 
@@ -40,12 +43,8 @@ public:
 	class StringExponentPair;
 	FloatingPointParser(const FloatingPointParser& base) = default;
 public:
-	FloatingPointParser(ThreadContext* ctx) throw()  : IObject(ctx)
-	{
-	}
-	void __construct_impl(ThreadContext* ctx) throw() 
-	{
-	}
+	FloatingPointParser(ThreadContext* ctx) throw() ;
+	void __construct_impl(ThreadContext* ctx) throw() ;
 	virtual ~FloatingPointParser() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 public:
@@ -54,6 +53,7 @@ public:
 	constexpr static const int DOUBLE_MIN_EXP{-324};
 	constexpr static const int DOUBLE_MAX_EXP{308};
 public:
+	static void includes(HexStringParser* arg0, ThreadContext* ctx) throw() ;
 	static double doparseDouble(String* s, ThreadContext* ctx);
 private:
 	static double parseDblImpl(String* s, int e, ThreadContext* ctx) throw() ;
@@ -80,15 +80,13 @@ public:
 		static bool __init_done;
 		static bool __init_static_variables();
 	public:
-		static void __cleanUp(ThreadContext* ctx){
-		}
+		static void __cleanUp(ThreadContext* ctx);
 	};
 
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}

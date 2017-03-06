@@ -81,5 +81,7 @@ String* StringValue::toString(ThreadContext* ctx) throw()
 {
 	return this->value;
 }
+void StringValue::__cleanUp(ThreadContext* ctx){
+}
 }}}
 

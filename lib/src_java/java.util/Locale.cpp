@@ -8,9 +8,9 @@
 #include "java.util/GregorianCalendar.h"
 #include "java.util/Date.h"
 #include "alinous.numeric/InternalDate.h"
+#include "java.util/TimeZones.h"
 #include "java.sql/Date.h"
 #include "java.util/BitSet.h"
-#include "java.util/TimeZones.h"
 #include "java.util/Random.h"
 #include "java.util/Arrays.h"
 
@@ -268,6 +268,9 @@ void Locale::setDefault(Locale* locale, ThreadContext* ctx) throw()
 	{
 		throw (new(ctx) NullPointerException(ctx));
 	}
+}
+void Locale::__cleanUp(ThreadContext* ctx){
+	GCUtils<Locale>::dec(nullptr, Locale::defaultLocale, ctx, __FILEW__, __LINE__, L"Locale");
 }
 }}
 

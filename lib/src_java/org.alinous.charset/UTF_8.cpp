@@ -84,6 +84,8 @@ bool UTF_8::contains(String* cs, ThreadContext* ctx) throw()
 {
 	return cs->equalsIgnoreCase(ConstStr::getCNST_STR_120(), ctx) || cs->equalsIgnoreCase(ConstStr::getCNST_STR_892(), ctx) || cs->equalsIgnoreCase(ConstStr::getCNST_STR_893(), ctx) || cs->equalsIgnoreCase(ConstStr::getCNST_STR_894(), ctx) || cs->equalsIgnoreCase(ConstStr::getCNST_STR_895(), ctx) || cs->equalsIgnoreCase(ConstStr::getCNST_STR_896(), ctx) || cs->equalsIgnoreCase(ConstStr::getCNST_STR_897(), ctx) || cs->equalsIgnoreCase(ConstStr::getCNST_STR_898(), ctx) || cs->equalsIgnoreCase(ConstStr::getCNST_STR_899(), ctx) || cs->equalsIgnoreCase(ConstStr::getCNST_STR_900(), ctx) || cs->equalsIgnoreCase(ConstStr::getCNST_STR_901(), ctx) || cs->equalsIgnoreCase(ConstStr::getCNST_STR_902(), ctx) || cs->equalsIgnoreCase(ConstStr::getCNST_STR_903(), ctx) || cs->equalsIgnoreCase(ConstStr::getCNST_STR_904(), ctx) || cs->equalsIgnoreCase(ConstStr::getCNST_STR_905(), ctx) || cs->equalsIgnoreCase(ConstStr::getCNST_STR_906(), ctx) || cs->equalsIgnoreCase(ConstStr::getCNST_STR_907(), ctx) || cs->equalsIgnoreCase(ConstStr::getCNST_STR_908(), ctx) || cs->equalsIgnoreCase(ConstStr::getCNST_STR_909(), ctx) || cs->equalsIgnoreCase(ConstStr::getCNST_STR_910(), ctx) || cs->equalsIgnoreCase(ConstStr::getCNST_STR_891(), ctx) || cs->equalsIgnoreCase(ConstStr::getCNST_STR_911(), ctx) || cs->equalsIgnoreCase(ConstStr::getCNST_STR_912(), ctx);
 }
+void UTF_8::__cleanUp(ThreadContext* ctx){
+}
 }}}
 
 namespace org {namespace alinous {namespace charset {
@@ -108,6 +110,12 @@ bool UTF_8::Decoder::__init_static_variables(){
 	ctx->localGC();
 	delete ctx;
 	return true;
+}
+ UTF_8::Decoder::Decoder(ThreadContext* ctx) throw()  : IObject(ctx), CharsetDecoder(ctx)
+{
+}
+void UTF_8::Decoder::__construct_impl(ThreadContext* ctx) throw() 
+{
 }
  UTF_8::Decoder::~Decoder() throw() 
 {
@@ -274,6 +282,8 @@ CoderResult* UTF_8::Decoder::decodeHasArray(ByteBuffer* in, CharBuffer* out, Thr
 	out->position(outIndex - out->arrayOffset(ctx), ctx);
 	return (outRemaining == 0 && inIndex < inIndexLimit) ? CoderResult::OVERFLOW : CoderResult::UNDERFLOW;
 }
+void UTF_8::Decoder::__cleanUp(ThreadContext* ctx){
+}
 }}}
 
 namespace org {namespace alinous {namespace charset {
@@ -292,6 +302,12 @@ bool UTF_8::Encoder::__init_static_variables(){
 	ctx->localGC();
 	delete ctx;
 	return true;
+}
+ UTF_8::Encoder::Encoder(ThreadContext* ctx) throw()  : IObject(ctx), CharsetEncoder(ctx)
+{
+}
+void UTF_8::Encoder::__construct_impl(ThreadContext* ctx) throw() 
+{
 }
  UTF_8::Encoder::~Encoder() throw() 
 {
@@ -516,6 +532,8 @@ CoderResult* UTF_8::Encoder::encodeNotHasArray(CharBuffer* in, ByteBuffer* out, 
 	}
 	in->position(pos, ctx);
 	return CoderResult::UNDERFLOW;
+}
+void UTF_8::Encoder::__cleanUp(ThreadContext* ctx){
 }
 }}}
 

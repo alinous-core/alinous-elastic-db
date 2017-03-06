@@ -29,12 +29,8 @@ class AlinousCoreLogger final : public ISystemLog, public virtual IObject {
 public:
 	AlinousCoreLogger(const AlinousCoreLogger& base) = default;
 public:
-	AlinousCoreLogger(ThreadContext* ctx) throw()  : IObject(ctx), ISystemLog(ctx)
-	{
-	}
-	void __construct_impl(ThreadContext* ctx) throw() 
-	{
-	}
+	AlinousCoreLogger(ThreadContext* ctx) throw() ;
+	void __construct_impl(ThreadContext* ctx) throw() ;
 	virtual ~AlinousCoreLogger() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 public:
@@ -45,8 +41,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}

@@ -26,12 +26,8 @@ class IAlinousElementVisitor : public virtual IObject {
 public:
 	IAlinousElementVisitor(const IAlinousElementVisitor& base) = default;
 public:
-	IAlinousElementVisitor(ThreadContext* ctx) throw()  : IObject(ctx)
-	{
-	}
-	void __construct_impl(ThreadContext* ctx) throw() 
-	{
-	}
+	IAlinousElementVisitor(ThreadContext* ctx) throw() ;
+	void __construct_impl(ThreadContext* ctx) throw() ;
 	virtual ~IAlinousElementVisitor() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 public:
@@ -40,8 +36,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}

@@ -60,12 +60,8 @@ class DirectModuleStream final : public IContentByteStream, public virtual IObje
 public:
 	DirectModuleStream(const DirectModuleStream& base) = default;
 public:
-	DirectModuleStream(HttpHeaderProcessor* httpRequest, AlinousModule* alnsModule, ThreadContext* ctx) throw()  : IObject(ctx), IContentByteStream(ctx), alnsModule(nullptr), buffer(nullptr)
-	{
-	}
-	void __construct_impl(HttpHeaderProcessor* httpRequest, AlinousModule* alnsModule, ThreadContext* ctx) throw() 
-	{
-	}
+	DirectModuleStream(HttpHeaderProcessor* httpRequest, AlinousModule* alnsModule, ThreadContext* ctx) throw() ;
+	void __construct_impl(HttpHeaderProcessor* httpRequest, AlinousModule* alnsModule, ThreadContext* ctx) throw() ;
 	virtual ~DirectModuleStream() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 private:
@@ -80,8 +76,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}}

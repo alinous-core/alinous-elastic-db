@@ -28,6 +28,12 @@ bool IConcurrentLockManager::__init_static_variables(){
 	delete ctx;
 	return true;
 }
+ IConcurrentLockManager::IConcurrentLockManager(ThreadContext* ctx) throw()  : IObject(ctx)
+{
+}
+void IConcurrentLockManager::__construct_impl(ThreadContext* ctx) throw() 
+{
+}
  IConcurrentLockManager::~IConcurrentLockManager() throw() 
 {
 	ThreadContext *ctx = ThreadContext::getCurentContext();
@@ -40,6 +46,8 @@ void IConcurrentLockManager::__releaseRegerences(bool prepare, ThreadContext* ct
 	if(!prepare){
 		return;
 	}
+}
+void IConcurrentLockManager::__cleanUp(ThreadContext* ctx){
 }
 }}
 

@@ -108,12 +108,8 @@ class BTree final : public IBTree, public virtual IObject {
 public:
 	BTree(const BTree& base) = default;
 public:
-	BTree(ThreadContext* ctx) throw()  : IObject(ctx), IBTree(ctx), gate(nullptr), root(0), storage(nullptr), nodeCapacity(0), keyType(0), valueType(0), loader(nullptr), fetcher(nullptr)
-	{
-	}
-	void __construct_impl(ThreadContext* ctx) throw() 
-	{
-	}
+	BTree(ThreadContext* ctx) throw() ;
+	void __construct_impl(ThreadContext* ctx) throw() ;
 	virtual ~BTree() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 public:
@@ -157,8 +153,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}

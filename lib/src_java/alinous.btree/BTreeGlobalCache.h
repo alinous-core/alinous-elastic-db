@@ -1,5 +1,11 @@
 #ifndef ALINOUS_BTREE_BTREEGLOBALCACHE_H_
 #define ALINOUS_BTREE_BTREEGLOBALCACHE_H_
+namespace alinous {namespace buffer {
+template <typename  T> class FifoIterator;}}
+
+namespace alinous {namespace btree {
+class IBTreeNode;}}
+
 namespace alinous {namespace btree {
 class BTreeGlobalCache;}}
 
@@ -8,9 +14,6 @@ class HashArrayList;}}
 
 namespace alinous {namespace buffer {
 template <typename  T> class FifoList;}}
-
-namespace alinous {namespace btree {
-class IBTreeNode;}}
 
 namespace alinous {namespace lock {
 class LockObject;}}
@@ -38,6 +41,7 @@ using namespace ::alinous;
 using namespace ::java::lang;
 using ::java::util::Iterator;
 using ::alinous::buffer::FifoElement;
+using ::alinous::buffer::FifoIterator;
 using ::alinous::buffer::FifoList;
 using ::alinous::buffer::HashArrayList;
 using ::alinous::buffer::storage::FileStorage;
@@ -49,12 +53,8 @@ class BTreeGlobalCache final : public virtual IObject {
 public:
 	BTreeGlobalCache(const BTreeGlobalCache& base) = default;
 public:
-	BTreeGlobalCache(ThreadContext* ctx) throw()  : IObject(ctx), maxCache(0), cache(nullptr), fifo(nullptr), fifoDeletable(nullptr), tmp(nullptr), sync(nullptr)
-	{
-	}
-	void __construct_impl(ThreadContext* ctx) throw() 
-	{
-	}
+	BTreeGlobalCache(ThreadContext* ctx) throw() ;
+	void __construct_impl(ThreadContext* ctx) throw() ;
 	virtual ~BTreeGlobalCache() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 private:
@@ -71,11 +71,12 @@ public:
 	void moveToUsing(FifoElement<IBTreeNode>* fifoElement, ThreadContext* ctx) throw() ;
 	void moveToDeletable(FifoElement<IBTreeNode>* fifoElement, ThreadContext* ctx) throw() ;
 public:
+	static void include(FifoIterator<IBTreeNode>* inc0, ThreadContext* ctx) throw() ;
+public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}

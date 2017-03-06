@@ -42,12 +42,8 @@ class XHtmlDqString final : public AbstractXHtmlAttributeValue {
 public:
 	XHtmlDqString(const XHtmlDqString& base) = default;
 public:
-	XHtmlDqString(ThreadContext* ctx) throw()  : IObject(ctx), AbstractXHtmlAttributeValue(ctx), dynValue(nullptr)
-	{
-	}
-	void __construct_impl(ThreadContext* ctx) throw() 
-	{
-	}
+	XHtmlDqString(ThreadContext* ctx) throw() ;
+	void __construct_impl(ThreadContext* ctx) throw() ;
 	virtual ~XHtmlDqString() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 public:
@@ -63,8 +59,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}}

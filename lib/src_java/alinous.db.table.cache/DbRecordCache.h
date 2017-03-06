@@ -50,12 +50,8 @@ class DbRecordCache final : public virtual IObject {
 public:
 	DbRecordCache(const DbRecordCache& base) = default;
 public:
-	DbRecordCache(ThreadContext* ctx) throw()  : IObject(ctx), fifo(GCUtils<FifoList<DatabaseRecord> >::ins(this, (new(ctx) FifoList<DatabaseRecord>(ctx)), ctx, __FILEW__, __LINE__, L"")), mainList(nullptr), spin(__GC_INS(this, (new(ctx) SpinMutex(ctx)), SpinMutex)), num(0), MAX_HASH(0)
-	{
-	}
-	void __construct_impl(ThreadContext* ctx) throw() 
-	{
-	}
+	DbRecordCache(ThreadContext* ctx) throw() ;
+	void __construct_impl(ThreadContext* ctx) throw() ;
 	virtual ~DbRecordCache() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 private:
@@ -72,8 +68,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}}}

@@ -26,6 +26,12 @@ bool URLDecoder::__init_static_variables(){
 	delete ctx;
 	return true;
 }
+ URLDecoder::URLDecoder(ThreadContext* ctx) throw()  : IObject(ctx)
+{
+}
+void URLDecoder::__construct_impl(ThreadContext* ctx) throw() 
+{
+}
  URLDecoder::~URLDecoder() throw() 
 {
 	ThreadContext *ctx = ThreadContext::getCurentContext();
@@ -125,6 +131,8 @@ String* URLDecoder::decode(String* s, CharsetDecoder* decoder, ThreadContext* ct
 		buf_len ++ ;
 	}
 	return (new(ctx) String(str_buf, 0, buf_len, ctx));
+}
+void URLDecoder::__cleanUp(ThreadContext* ctx){
 }
 }}
 

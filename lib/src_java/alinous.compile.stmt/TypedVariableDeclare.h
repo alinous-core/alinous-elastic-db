@@ -108,12 +108,8 @@ public:
 public:
 	TypedVariableDeclare(const TypedVariableDeclare& base) = default;
 public:
-	TypedVariableDeclare(ThreadContext* ctx) throw()  : IObject(ctx), AbstractAlinousStatement(ctx), typeName(nullptr), name(nullptr), dimension(0), initExp(nullptr), analysedType(nullptr)
-	{
-	}
-	void __construct_impl(ThreadContext* ctx) throw() 
-	{
-	}
+	TypedVariableDeclare(ThreadContext* ctx) throw() ;
+	void __construct_impl(ThreadContext* ctx) throw() ;
 	virtual ~TypedVariableDeclare() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 private:
@@ -147,8 +143,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}}

@@ -48,6 +48,12 @@ class ReturnStatement;}}}
 namespace alinous {namespace compile {namespace stmt {
 class ExpressionStatement;}}}
 
+namespace alinous {namespace system {
+class AlinousCore;}}
+
+namespace alinous {namespace runtime {namespace engine {namespace debugger {
+class AlinousScriptDebugger;}}}}
+
 namespace alinous {namespace compile {namespace stmt {
 class StatementBlock;}}}
 
@@ -160,7 +166,9 @@ using ::alinous::runtime::dom::typed::StringVariable;
 using ::alinous::runtime::dom::typed::TimeVariable;
 using ::alinous::runtime::dom::typed::TimestampVariable;
 using ::alinous::runtime::dom::typed::TypedVariableArray;
+using ::alinous::runtime::engine::debugger::AlinousScriptDebugger;
 using ::alinous::runtime::variant::VariantValue;
+using ::alinous::system::AlinousCore;
 using ::alinous::system::AlinousException;
 using ::alinous::system::AlinousNotSupportedException;
 
@@ -170,12 +178,8 @@ class AlinousStatementRunner final : public virtual IObject {
 public:
 	AlinousStatementRunner(const AlinousStatementRunner& base) = default;
 public:
-	AlinousStatementRunner(ThreadContext* ctx) throw()  : IObject(ctx)
-	{
-	}
-	void __construct_impl(ThreadContext* ctx) throw() 
-	{
-	}
+	AlinousStatementRunner(ThreadContext* ctx) throw() ;
+	void __construct_impl(ThreadContext* ctx) throw() ;
 	virtual ~AlinousStatementRunner() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 public:
@@ -191,8 +195,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}}

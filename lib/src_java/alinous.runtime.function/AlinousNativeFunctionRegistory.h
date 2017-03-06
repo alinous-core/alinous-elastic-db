@@ -54,12 +54,8 @@ public:
 	public:
 		FuncHolder(const FuncHolder& base) = default;
 	public:
-		FuncHolder(ThreadContext* ctx) throw()  : IObject(ctx), nativeFunctions(GCUtils<HashMap<String,IAlinousNativeFunction> >::ins(this, (new(ctx) HashMap<String,IAlinousNativeFunction>(ctx)), ctx, __FILEW__, __LINE__, L""))
-		{
-		}
-		void __construct_impl(ThreadContext* ctx) throw() 
-		{
-		}
+		FuncHolder(ThreadContext* ctx) throw() ;
+		void __construct_impl(ThreadContext* ctx) throw() ;
 		virtual ~FuncHolder() throw();
 		virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 	private:
@@ -71,15 +67,13 @@ public:
 		static bool __init_done;
 		static bool __init_static_variables();
 	public:
-		static void __cleanUp(ThreadContext* ctx){
-		}
+		static void __cleanUp(ThreadContext* ctx);
 	};
 
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}}

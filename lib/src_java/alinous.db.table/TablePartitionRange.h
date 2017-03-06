@@ -71,12 +71,8 @@ class TablePartitionRange final : public ICommandData, public virtual IObject {
 public:
 	TablePartitionRange(const TablePartitionRange& base) = default;
 public:
-	TablePartitionRange(ThreadContext* ctx) throw()  : IObject(ctx), ICommandData(ctx), key(nullptr), max(GCUtils<List<VariantValue> >::ins(this, (new(ctx) ArrayList<VariantValue>(ctx)), ctx, __FILEW__, __LINE__, L"")), min(GCUtils<List<VariantValue> >::ins(this, (new(ctx) ArrayList<VariantValue>(ctx)), ctx, __FILEW__, __LINE__, L""))
-	{
-	}
-	void __construct_impl(ThreadContext* ctx) throw() 
-	{
-	}
+	TablePartitionRange(ThreadContext* ctx) throw() ;
+	void __construct_impl(ThreadContext* ctx) throw() ;
 	TablePartitionRange(TablePartitionKey* key, ThreadContext* ctx) throw() ;
 	void __construct_impl(TablePartitionKey* key, ThreadContext* ctx) throw() ;
 	virtual ~TablePartitionRange() throw();
@@ -102,8 +98,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}}

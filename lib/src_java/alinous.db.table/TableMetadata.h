@@ -3,11 +3,11 @@
 namespace alinous{namespace annotation{
 class OneSource;
 }}
-namespace alinous {namespace remote {namespace db {namespace command {namespace data {
-class TableClusterData;}}}}}
+namespace alinous {namespace remote {namespace db {namespace client {namespace command {namespace data {
+class TableClusterData;}}}}}}
 
-namespace alinous {namespace remote {namespace db {namespace command {namespace data {
-class StorageNodeData;}}}}}
+namespace alinous {namespace remote {namespace db {namespace client {namespace command {namespace data {
+class StorageNodeData;}}}}}}
 
 namespace alinous {namespace db {namespace table {
 class TableMetadata;}}}
@@ -100,8 +100,8 @@ using ::alinous::compile::sql::analyze::ScanUnique;
 using ::alinous::compile::sql::analyze::TableMetadataUniqueCollection;
 using ::alinous::compile::sql::ddl::CheckDefinition;
 using ::alinous::db::AlinousDbException;
-using ::alinous::remote::db::command::data::StorageNodeData;
-using ::alinous::remote::db::command::data::TableClusterData;
+using ::alinous::remote::db::client::command::data::StorageNodeData;
+using ::alinous::remote::db::client::command::data::TableClusterData;
 using ::alinous::remote::socket::ICommandData;
 using ::alinous::remote::socket::NetworkBinaryBuffer;
 using ::alinous::runtime::dom::VariableException;
@@ -169,8 +169,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}}

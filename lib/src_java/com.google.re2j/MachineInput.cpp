@@ -11,13 +11,13 @@
 #include "com.google.re2j/RE2.h"
 #include "com.google.re2j/Machine.h"
 #include "com.google.re2j/PatternSyntaxException.h"
+#include "com.google.re2j/Utils.h"
+#include "com.google.re2j/Unicode.h"
 #include "com.google.re2j/CharGroup.h"
 #include "com.google.re2j/CharClass.h"
 #include "com.google.re2j/Parser.h"
-#include "com.google.re2j/Unicode.h"
 #include "com.google.re2j/Compiler.h"
 #include "com.google.re2j/UnicodeTable2.h"
-#include "com.google.re2j/Utils.h"
 #include "com.google.re2j/UnicodeTables.h"
 #include "com.google.re2j/Pattern.h"
 #include "com.google.re2j/Matcher.h"
@@ -39,6 +39,12 @@ bool MachineInput::__init_static_variables(){
 	ctx->localGC();
 	delete ctx;
 	return true;
+}
+ MachineInput::MachineInput(ThreadContext* ctx) throw()  : IObject(ctx)
+{
+}
+void MachineInput::__construct_impl(ThreadContext* ctx) throw() 
+{
 }
  MachineInput::~MachineInput() throw() 
 {
@@ -68,6 +74,8 @@ MachineInput* MachineInput::fromUTF16(CharSequence* s, ThreadContext* ctx) throw
 MachineInput* MachineInput::fromUTF16(CharSequence* s, int start, int end, ThreadContext* ctx) throw() 
 {
 	return (new(ctx) UTF16Input(s, start, end, ctx));
+}
+void MachineInput::__cleanUp(ThreadContext* ctx){
 }
 }}}
 

@@ -43,12 +43,8 @@ class AddBreakpointsRequest final : public IClientRequest, public virtual IObjec
 public:
 	AddBreakpointsRequest(const AddBreakpointsRequest& base) = default;
 public:
-	AddBreakpointsRequest(ThreadContext* ctx) throw()  : IObject(ctx), IClientRequest(ctx), breakpoint(nullptr)
-	{
-	}
-	void __construct_impl(ThreadContext* ctx) throw() 
-	{
-	}
+	AddBreakpointsRequest(ThreadContext* ctx) throw() ;
+	void __construct_impl(ThreadContext* ctx) throw() ;
 	AddBreakpointsRequest(ServerBreakPoint* breakpoint, ThreadContext* ctx) throw() ;
 	void __construct_impl(ServerBreakPoint* breakpoint, ThreadContext* ctx) throw() ;
 	virtual ~AddBreakpointsRequest() throw();
@@ -67,8 +63,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}}}}

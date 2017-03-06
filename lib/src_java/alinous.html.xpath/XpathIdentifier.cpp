@@ -89,5 +89,7 @@ IVariableValue* XpathIdentifier::getValue(DomDocument* document, DomNode* curren
 {
 	return (new(ctx) StringValue(this->id, ctx));
 }
+void XpathIdentifier::__cleanUp(ThreadContext* ctx){
+}
 }}}
 

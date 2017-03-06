@@ -8,9 +8,9 @@
 #include "java.util/GregorianCalendar.h"
 #include "java.util/Date.h"
 #include "alinous.numeric/InternalDate.h"
+#include "java.util/TimeZones.h"
 #include "java.sql/Date.h"
 #include "java.util/BitSet.h"
-#include "java.util/TimeZones.h"
 #include "java.util/Random.h"
 #include "java.util/Arrays.h"
 
@@ -226,6 +226,10 @@ int Date::zone(String* text, ThreadContext* ctx) throw()
 		return -7;
 	}
 	return 0;
+}
+void Date::__cleanUp(ThreadContext* ctx){
+	GCUtils<IArrayObject<String>>::dec(nullptr, Date::dayOfWeekNames, ctx, __FILEW__, __LINE__, L"IArrayObject<String>");
+	GCUtils<IArrayObject<String>>::dec(nullptr, Date::monthNames, ctx, __FILEW__, __LINE__, L"IArrayObject<String>");
 }
 int Date::ValueCompare::operator() (Date* _this, Date* date, ThreadContext* ctx) const throw()
 {

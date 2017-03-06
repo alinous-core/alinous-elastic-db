@@ -11,13 +11,13 @@
 #include "com.google.re2j/RE2.h"
 #include "com.google.re2j/Machine.h"
 #include "com.google.re2j/PatternSyntaxException.h"
+#include "com.google.re2j/Utils.h"
+#include "com.google.re2j/Unicode.h"
 #include "com.google.re2j/CharGroup.h"
 #include "com.google.re2j/CharClass.h"
 #include "com.google.re2j/Parser.h"
-#include "com.google.re2j/Unicode.h"
 #include "com.google.re2j/Compiler.h"
 #include "com.google.re2j/UnicodeTable2.h"
-#include "com.google.re2j/Utils.h"
 #include "com.google.re2j/UnicodeTables.h"
 #include "com.google.re2j/Pattern.h"
 #include "com.google.re2j/Matcher.h"
@@ -515,6 +515,12 @@ bool UnicodeTables::__init_static_variables(){
 	delete ctx;
 	return true;
 }
+ UnicodeTables::UnicodeTables(ThreadContext* ctx) throw()  : IObject(ctx)
+{
+}
+void UnicodeTables::__construct_impl(ThreadContext* ctx) throw() 
+{
+}
  UnicodeTables::~UnicodeTables() throw() 
 {
 	ThreadContext *ctx = ThreadContext::getCurentContext();
@@ -527,6 +533,8 @@ void UnicodeTables::__releaseRegerences(bool prepare, ThreadContext* ctx) throw(
 	if(!prepare){
 		return;
 	}
+}
+void UnicodeTables::__cleanUp(ThreadContext* ctx){
 }
 }}}
 

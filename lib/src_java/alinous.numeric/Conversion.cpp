@@ -1,7 +1,12 @@
 #include "include/global.h"
 
 
+#include "java.util/Locale.h"
+#include "java.util/Calendar.h"
+#include "java.util/GregorianCalendar.h"
+#include "java.util/Date.h"
 #include "alinous.numeric/InternalDate.h"
+#include "java.util/TimeZone.h"
 #include "alinous.numeric/TimeOnlyTimestamp.h"
 #include "java.util/Random.h"
 #include "java.lang/Number.h"
@@ -39,6 +44,12 @@ bool Conversion::__init_static_variables(){
 	ctx->localGC();
 	delete ctx;
 	return true;
+}
+ Conversion::Conversion(ThreadContext* ctx) throw()  : IObject(ctx)
+{
+}
+void Conversion::__construct_impl(ThreadContext* ctx) throw() 
+{
 }
  Conversion::~Conversion() throw() 
 {
@@ -485,6 +496,8 @@ double Conversion::bigInteger2Double(BigInteger* val, ThreadContext* ctx) throw(
 	exponent = ((1023 + exponent) << 52) & 0x7FF0000000000000L;
 	long long result = resSign | exponent | mantissa;
 	return Double::longBitsToDouble(result, ctx);
+}
+void Conversion::__cleanUp(ThreadContext* ctx){
 }
 }}
 

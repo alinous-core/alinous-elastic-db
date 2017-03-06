@@ -73,5 +73,7 @@ int ShareLock::getCnt(ThreadContext* ctx) throw()
 {
 	return cnt;
 }
+void ShareLock::__cleanUp(ThreadContext* ctx){
+}
 }}
 

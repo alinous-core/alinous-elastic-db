@@ -26,12 +26,8 @@ class Multiplication final : public virtual IObject {
 public:
 	Multiplication(const Multiplication& base) = default;
 public:
-	Multiplication(ThreadContext* ctx) throw()  : IObject(ctx)
-	{
-	}
-	void __construct_impl(ThreadContext* ctx) throw() 
-	{
-	}
+	Multiplication(ThreadContext* ctx) throw() ;
+	void __construct_impl(ThreadContext* ctx) throw() ;
 	virtual ~Multiplication() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 public:
@@ -63,10 +59,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-		GCUtils<IArrayObject<BigInteger>>::dec(nullptr, Multiplication::bigTenPows, ctx, __FILEW__, __LINE__, L"IArrayObject<BigInteger>");
-		GCUtils<IArrayObject<BigInteger>>::dec(nullptr, Multiplication::bigFivePows, ctx, __FILEW__, __LINE__, L"IArrayObject<BigInteger>");
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}

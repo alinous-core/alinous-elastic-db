@@ -26,6 +26,12 @@ bool ParamFactory::__init_static_variables(){
 	delete ctx;
 	return true;
 }
+ ParamFactory::ParamFactory(ThreadContext* ctx) throw()  : IObject(ctx)
+{
+}
+void ParamFactory::__construct_impl(ThreadContext* ctx) throw() 
+{
+}
  ParamFactory::~ParamFactory() throw() 
 {
 	ThreadContext *ctx = ThreadContext::getCurentContext();
@@ -75,6 +81,8 @@ ArrayList<String>* ParamFactory::split(String* content, String* ch, String* enco
 		}
 	}
 	return list;
+}
+void ParamFactory::__cleanUp(ThreadContext* ctx){
 }
 }}}}
 

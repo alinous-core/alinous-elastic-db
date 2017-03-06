@@ -9,19 +9,12 @@
 #include "java.lang/Comparable.h"
 #include "alinous.btree/IBTreeKey.h"
 #include "alinous.btree.scan/INodeIterator.h"
-#include "alinous.lock/ConcurrentGate.h"
-#include "alinous.buffer.storage/FileAccessWrapper.h"
-#include "alinous.buffer.storage/FileStorageBlock.h"
 #include "alinous.buffer.storage/IFileStorage.h"
-#include "alinous.buffer.storage/FileStorageEntryWriter.h"
-#include "alinous.buffer.storage/FileStorageEntryReader.h"
 #include "alinous.buffer.storage/FileStorage.h"
-#include "alinous.buffer/FifoIterator.h"
 #include "alinous.buffer/FifoList.h"
-#include "java.util/BitSet.h"
+#include "alinous.buffer/FifoIterator.h"
 #include "alinous.btree/BTreeCacheArray.h"
 #include "alinous.btree/BTreeException.h"
-#include "alinous.buffer/HashArrayListIterator.h"
 #include "alinous.buffer/HashArrayList.h"
 #include "alinous.btree/IValueFetcher.h"
 #include "alinous.btree/IBTreeValue.h"
@@ -33,6 +26,8 @@
 #include "alinous.btree/AbstractBTreeNode.h"
 #include "alinous.btree/BTreeNode.h"
 #include "alinous.btree/BTreeMaxNode.h"
+#include "alinous.btree.scan/AbstractNodeIterator.h"
+#include "alinous.btree.scan/LeafContainerIterator.h"
 #include "alinous.btree/AbstractBTreeLeafContainer.h"
 #include "alinous.btree/BTreeMaxLeafContainer.h"
 #include "alinous.btree/BTreeValues.h"
@@ -116,6 +111,8 @@ IValueFetcher* StringValue::getFetcher(ThreadContext* ctx) throw()
 {
 	return StringValue::fetcher;
 }
+void StringValue::__cleanUp(ThreadContext* ctx){
+}
 }}
 
 namespace alinous {namespace btree {
@@ -135,6 +132,12 @@ bool StringValue::ValueFetcher::__init_static_variables(){
 	delete ctx;
 	return true;
 }
+ StringValue::ValueFetcher::ValueFetcher(ThreadContext* ctx) throw()  : IObject(ctx), IValueFetcher(ctx)
+{
+}
+void StringValue::ValueFetcher::__construct_impl(ThreadContext* ctx) throw() 
+{
+}
  StringValue::ValueFetcher::~ValueFetcher() throw() 
 {
 	ThreadContext *ctx = ThreadContext::getCurentContext();
@@ -152,6 +155,8 @@ IBTreeValue* StringValue::ValueFetcher::valueFromFetcher(FileStorageEntryFetcher
 {
 	IBTreeValue* value = (new(ctx) StringValue(fetcher->fetchString(ctx), ctx));
 	return value;
+}
+void StringValue::ValueFetcher::__cleanUp(ThreadContext* ctx){
 }
 }}
 

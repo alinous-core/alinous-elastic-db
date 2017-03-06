@@ -28,12 +28,8 @@ class IndexListScannerParam final : public virtual IObject {
 public:
 	IndexListScannerParam(const IndexListScannerParam& base) = default;
 public:
-	IndexListScannerParam(ThreadContext* ctx) throw()  : IObject(ctx), list(GCUtils<ArrayList<ScanResultIndexKey> >::ins(this, (new(ctx) ArrayList<ScanResultIndexKey>(ctx)), ctx, __FILEW__, __LINE__, L"")), current(0)
-	{
-	}
-	void __construct_impl(ThreadContext* ctx) throw() 
-	{
-	}
+	IndexListScannerParam(ThreadContext* ctx) throw() ;
+	void __construct_impl(ThreadContext* ctx) throw() ;
 	virtual ~IndexListScannerParam() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 private:
@@ -49,8 +45,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}}}

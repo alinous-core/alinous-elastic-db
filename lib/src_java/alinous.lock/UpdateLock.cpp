@@ -57,5 +57,7 @@ void UpdateLock::unlock(ThreadContext* ctx)
 {
 	parent->endUpdateLock(ctx);
 }
+void UpdateLock::__cleanUp(ThreadContext* ctx){
+}
 }}
 

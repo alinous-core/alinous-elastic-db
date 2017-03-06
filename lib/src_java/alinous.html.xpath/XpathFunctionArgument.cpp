@@ -85,5 +85,7 @@ String* XpathFunctionArgument::toString(ThreadContext* ctx) throw()
 {
 	return this->element->toString(ctx);
 }
+void XpathFunctionArgument::__cleanUp(ThreadContext* ctx){
+}
 }}}
 

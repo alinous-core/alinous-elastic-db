@@ -27,12 +27,8 @@ class JoinStrategyPart final : public virtual IObject {
 public:
 	JoinStrategyPart(const JoinStrategyPart& base) = default;
 public:
-	JoinStrategyPart(ThreadContext* ctx) throw()  : IObject(ctx), andexpressions(GCUtils<ArrayList<JoinMatchExpression> >::ins(this, (new(ctx) ArrayList<JoinMatchExpression>(ctx)), ctx, __FILEW__, __LINE__, L"")), bestExp(nullptr), indexStatus(-1)
-	{
-	}
-	void __construct_impl(ThreadContext* ctx) throw() 
-	{
-	}
+	JoinStrategyPart(ThreadContext* ctx) throw() ;
+	void __construct_impl(ThreadContext* ctx) throw() ;
 	virtual ~JoinStrategyPart() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 private:
@@ -49,8 +45,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}}}

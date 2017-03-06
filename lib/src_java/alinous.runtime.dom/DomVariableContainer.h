@@ -56,12 +56,8 @@ class DomVariableContainer final : public IDomVariableContainer, public virtual 
 public:
 	DomVariableContainer(const DomVariableContainer& base) = default;
 public:
-	DomVariableContainer(ThreadContext* ctx) throw()  : IObject(ctx), IDomVariableContainer(ctx), variables(GCUtils<HashMap<String,IDomVariable> >::ins(this, (new(ctx) HashMap<String,IDomVariable>(ctx)), ctx, __FILEW__, __LINE__, L""))
-	{
-	}
-	void __construct_impl(ThreadContext* ctx) throw() 
-	{
-	}
+	DomVariableContainer(ThreadContext* ctx) throw() ;
+	void __construct_impl(ThreadContext* ctx) throw() ;
 	virtual ~DomVariableContainer() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 private:
@@ -84,8 +80,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}}

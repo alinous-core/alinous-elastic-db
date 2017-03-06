@@ -60,12 +60,8 @@ class ThrowsDefine final : public IDeclare {
 public:
 	ThrowsDefine(const ThrowsDefine& base) = default;
 public:
-	ThrowsDefine(ThreadContext* ctx) throw()  : IObject(ctx), IDeclare(ctx), exceptions(GCUtils<ArrayList<AlinousName> >::ins(this, (new(ctx) ArrayList<AlinousName>(ctx)), ctx, __FILEW__, __LINE__, L""))
-	{
-	}
-	void __construct_impl(ThreadContext* ctx) throw() 
-	{
-	}
+	ThrowsDefine(ThreadContext* ctx) throw() ;
+	void __construct_impl(ThreadContext* ctx) throw() ;
 	virtual ~ThrowsDefine() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 private:
@@ -87,8 +83,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}}}

@@ -74,12 +74,8 @@ class CreateIndexStatement final : public AbstractSQLStatement {
 public:
 	CreateIndexStatement(const CreateIndexStatement& base) = default;
 public:
-	CreateIndexStatement(ThreadContext* ctx) throw()  : IObject(ctx), AbstractSQLStatement(ctx), name(nullptr), table(nullptr), columns(GCUtils<ArrayList<String> >::ins(this, (new(ctx) ArrayList<String>(ctx)), ctx, __FILEW__, __LINE__, L""))
-	{
-	}
-	void __construct_impl(ThreadContext* ctx) throw() 
-	{
-	}
+	CreateIndexStatement(ThreadContext* ctx) throw() ;
+	void __construct_impl(ThreadContext* ctx) throw() ;
 	virtual ~CreateIndexStatement() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 private:
@@ -106,8 +102,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}}

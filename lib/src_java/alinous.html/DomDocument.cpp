@@ -2,6 +2,7 @@
 
 
 #include "alinous.html.xpath/IVariableValue.h"
+#include "alinous.html.xpath/StringValue.h"
 #include "alinous.html/IDomObject.h"
 #include "alinous.html/Attribute.h"
 #include "alinous.html/DomNode.h"
@@ -70,6 +71,8 @@ String* DomDocument::toString(ThreadContext* ctx) throw()
 int DomDocument::getType(ThreadContext* ctx) throw() 
 {
 	return IDomObject::TYPE_DOM_DOCUMENT;
+}
+void DomDocument::__cleanUp(ThreadContext* ctx){
 }
 }}
 

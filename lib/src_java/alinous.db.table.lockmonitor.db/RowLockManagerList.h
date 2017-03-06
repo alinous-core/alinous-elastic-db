@@ -47,12 +47,8 @@ class RowLockManagerList final : public virtual IObject {
 public:
 	RowLockManagerList(const RowLockManagerList& base) = default;
 public:
-	RowLockManagerList(ThreadContext* ctx) throw()  : IObject(ctx), list(GCUtils<ArrayList<RowLockManager> >::ins(this, (new(ctx) ArrayList<RowLockManager>(ctx)), ctx, __FILEW__, __LINE__, L""))
-	{
-	}
-	void __construct_impl(ThreadContext* ctx) throw() 
-	{
-	}
+	RowLockManagerList(ThreadContext* ctx) throw() ;
+	void __construct_impl(ThreadContext* ctx) throw() ;
 	virtual ~RowLockManagerList() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 private:
@@ -64,8 +60,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}}}}

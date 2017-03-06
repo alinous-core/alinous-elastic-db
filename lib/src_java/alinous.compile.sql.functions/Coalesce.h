@@ -47,12 +47,8 @@ class Coalesce final : public ISQLFunctionBody, public virtual IObject {
 public:
 	Coalesce(const Coalesce& base) = default;
 public:
-	Coalesce(ThreadContext* ctx) throw()  : IObject(ctx), ISQLFunctionBody(ctx)
-	{
-	}
-	void __construct_impl(ThreadContext* ctx) throw() 
-	{
-	}
+	Coalesce(ThreadContext* ctx) throw() ;
+	void __construct_impl(ThreadContext* ctx) throw() ;
 	virtual ~Coalesce() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 public:
@@ -62,8 +58,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}}}

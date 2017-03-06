@@ -21,6 +21,9 @@ class VariantValue;}}}
 namespace alinous {namespace db {namespace trx {namespace scan {
 class ScanResultRecord;}}}}
 
+namespace alinous {namespace runtime {namespace dom {namespace typed {
+class IntegerVariable;}}}}
+
 namespace alinous {namespace compile {
 class ExpressionSourceId;}}
 
@@ -79,6 +82,7 @@ using ::alinous::remote::socket::ICommandData;
 using ::alinous::remote::socket::NetworkBinaryBuffer;
 using ::alinous::runtime::dom::IAlinousVariable;
 using ::alinous::runtime::dom::VariableException;
+using ::alinous::runtime::dom::typed::IntegerVariable;
 using ::alinous::runtime::engine::ScriptMachine;
 using ::alinous::runtime::variant::VariantValue;
 using ::alinous::system::AlinousException;
@@ -89,12 +93,8 @@ class SQLMultiplicativeExpression final : public AbstractSQLCollectionExpression
 public:
 	SQLMultiplicativeExpression(const SQLMultiplicativeExpression& base) = default;
 public:
-	SQLMultiplicativeExpression(ThreadContext* ctx) throw()  : IObject(ctx), AbstractSQLCollectionExpression(ctx)
-	{
-	}
-	void __construct_impl(ThreadContext* ctx) throw() 
-	{
-	}
+	SQLMultiplicativeExpression(ThreadContext* ctx) throw() ;
+	void __construct_impl(ThreadContext* ctx) throw() ;
 	virtual ~SQLMultiplicativeExpression() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 public:
@@ -116,8 +116,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}}}

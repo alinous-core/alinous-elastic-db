@@ -125,12 +125,8 @@ public:
 public:
 	SQLBoolSubExpression(String* op, ISQLExpression* exp, ThreadContext* ctx) throw() ;
 	void __construct_impl(String* op, ISQLExpression* exp, ThreadContext* ctx) throw() ;
-	SQLBoolSubExpression(ThreadContext* ctx) throw()  : IObject(ctx), AbstractSQLBooleanExpression(ctx), op(0), exp(nullptr)
-	{
-	}
-	void __construct_impl(ThreadContext* ctx) throw() 
-	{
-	}
+	SQLBoolSubExpression(ThreadContext* ctx) throw() ;
+	void __construct_impl(ThreadContext* ctx) throw() ;
 	virtual ~SQLBoolSubExpression() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 private:
@@ -169,8 +165,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}}}}

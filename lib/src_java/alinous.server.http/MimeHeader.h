@@ -28,12 +28,8 @@ class MimeHeader final : public virtual IObject {
 public:
 	MimeHeader(const MimeHeader& base) = default;
 public:
-	MimeHeader(ThreadContext* ctx) throw()  : IObject(ctx), headerType(0), headerName(nullptr), name(nullptr), filename(nullptr), contentType(nullptr)
-	{
-	}
-	void __construct_impl(ThreadContext* ctx) throw() 
-	{
-	}
+	MimeHeader(ThreadContext* ctx) throw() ;
+	void __construct_impl(ThreadContext* ctx) throw() ;
 	virtual ~MimeHeader() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 private:
@@ -63,8 +59,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}}

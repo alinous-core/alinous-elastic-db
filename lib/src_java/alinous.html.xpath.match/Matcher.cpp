@@ -2,6 +2,7 @@
 
 
 #include "alinous.html.xpath/IVariableValue.h"
+#include "alinous.html.xpath/StringValue.h"
 #include "alinous.html/IDomObject.h"
 #include "alinous.html/Attribute.h"
 #include "alinous.html/DomNode.h"
@@ -10,7 +11,6 @@
 #include "alinous.html/DomDocument.h"
 #include "alinous.html.xpath.match/MatchingException.h"
 #include "alinous.html.xpath/IXpathStatement.h"
-#include "alinous.html.xpath/XpathFunctionArgument.h"
 #include "alinous.html.xpath/XpathFunction.h"
 #include "alinous.html.xpath.match/MatchCandidate.h"
 #include "alinous.html.xpath.match/MatchCandidatesCollection.h"
@@ -20,7 +20,6 @@
 #include "alinous.html.xpath/IXpathBooleanCondition.h"
 #include "alinous.html.xpath/XpathNumber.h"
 #include "alinous.html.xpath/XpathFilter.h"
-#include "alinous.html.xpath/XpathContextLocationCtrl.h"
 #include "alinous.html.xpath/XpathContextLocation.h"
 #include "alinous.html.xpath/XpathContext.h"
 #include "alinous.html.xpath/Xpath.h"
@@ -31,8 +30,8 @@
 #include "alinous.parser.xpath/AlinousXpathParserTokenManager.h"
 #include "alinous.parser.xpath/AlinousXpathParser.h"
 #include "alinous.html.xpath.match/Matcher.h"
-#include "alinous.compile/Token.h"
 #include "alinous.compile/JavaCharStream.h"
+#include "alinous.compile/Token.h"
 #include "alinous.compile/ParseException.h"
 
 namespace alinous {namespace html {namespace xpath {namespace match {
@@ -51,6 +50,12 @@ bool Matcher::__init_static_variables(){
 	ctx->localGC();
 	delete ctx;
 	return true;
+}
+ Matcher::Matcher(ThreadContext* ctx) throw()  : IObject(ctx)
+{
+}
+void Matcher::__construct_impl(ThreadContext* ctx) throw() 
+{
 }
  Matcher::~Matcher() throw() 
 {
@@ -135,6 +140,8 @@ bool Matcher::checkFilter(DomDocument* document, DomNode* node, XpathContext* co
 		return true;
 	}
 	return filter->getCondition(ctx)->getBooleanValue(document, node, ctx);
+}
+void Matcher::__cleanUp(ThreadContext* ctx){
 }
 }}}}
 

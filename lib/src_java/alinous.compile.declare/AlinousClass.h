@@ -30,8 +30,14 @@ class AlinousFunction;}}}}
 namespace alinous {namespace runtime {namespace engine {
 class MainStackFrame;}}}
 
+namespace alinous {namespace compile {namespace stmt {
+class StatementBlock;}}}
+
 namespace alinous {namespace runtime {namespace dom {
 class IAlinousVariable;}}}
+
+namespace alinous {namespace compile {namespace declare {namespace function {
+class FunctionArgumentsListDefine;}}}}
 
 namespace alinous {namespace compile {namespace declare {namespace function {
 class FunctionArgumentDefine;}}}}
@@ -125,8 +131,10 @@ using ::alinous::compile::analyse::tools::ClassMethodArgumentMatcher;
 using ::alinous::compile::analyse::tools::MatchingMethodCandidate;
 using ::alinous::compile::declare::function::AlinousFunction;
 using ::alinous::compile::declare::function::FunctionArgumentDefine;
+using ::alinous::compile::declare::function::FunctionArgumentsListDefine;
 using ::alinous::compile::expression::FunctionArguments;
 using ::alinous::compile::expression::IExpression;
+using ::alinous::compile::stmt::StatementBlock;
 using ::alinous::compile::stmt::StatementList;
 using ::alinous::db::table::DatabaseException;
 using ::alinous::remote::socket::ICommandData;
@@ -146,12 +154,8 @@ class AlinousClass final : public IDeclare {
 public:
 	AlinousClass(const AlinousClass& base) = default;
 public:
-	AlinousClass(ThreadContext* ctx) throw()  : IObject(ctx), IDeclare(ctx), packageName(nullptr), name(nullptr), extendsClasses(nullptr), implementsClass(nullptr), interfaceClass(0), constructors(GCUtils<ArrayList<ClassMethodFunction> >::ins(this, (new(ctx) ArrayList<ClassMethodFunction>(ctx)), ctx, __FILEW__, __LINE__, L"")), members(GCUtils<ArrayList<ClassMemberVariable> >::ins(this, (new(ctx) ArrayList<ClassMemberVariable>(ctx)), ctx, __FILEW__, __LINE__, L"")), methods(GCUtils<ArrayList<ClassMethodFunction> >::ins(this, (new(ctx) ArrayList<ClassMethodFunction>(ctx)), ctx, __FILEW__, __LINE__, L"")), staticMembers(GCUtils<ArrayList<ClassMemberVariable> >::ins(this, (new(ctx) ArrayList<ClassMemberVariable>(ctx)), ctx, __FILEW__, __LINE__, L"")), staticMethods(GCUtils<ArrayList<ClassMethodFunction> >::ins(this, (new(ctx) ArrayList<ClassMethodFunction>(ctx)), ctx, __FILEW__, __LINE__, L"")), delivedClasses(GCUtils<ArrayList<AlinousClass> >::ins(this, (new(ctx) ArrayList<AlinousClass>(ctx)), ctx, __FILEW__, __LINE__, L""))
-	{
-	}
-	void __construct_impl(ThreadContext* ctx) throw() 
-	{
-	}
+	AlinousClass(ThreadContext* ctx) throw() ;
+	void __construct_impl(ThreadContext* ctx) throw() ;
 	virtual ~AlinousClass() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 private:
@@ -219,8 +223,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}}

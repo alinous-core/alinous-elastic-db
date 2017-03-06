@@ -12,11 +12,11 @@ class RemoteStorageClientConnectionFactory;}}}}
 namespace alinous {namespace remote {namespace socket {
 class SocketConnectionPool;}}}
 
-namespace alinous {namespace remote {namespace db {namespace command {namespace data {
-class SchemasStructureInfoData;}}}}}
+namespace alinous {namespace remote {namespace db {namespace client {namespace command {namespace data {
+class SchemasStructureInfoData;}}}}}}
 
-namespace alinous {namespace remote {namespace db {namespace command {
-class GetTableSchemeCommand;}}}}
+namespace alinous {namespace remote {namespace db {namespace client {namespace command {
+class GetTableSchemeCommand;}}}}}
 
 namespace alinous {namespace remote {namespace socket {
 class ISocketConnection;}}}
@@ -24,8 +24,8 @@ class ISocketConnection;}}}
 namespace alinous {namespace net {
 class AlinousSocket;}}
 
-namespace alinous {namespace remote {namespace db {namespace command {
-class AbstractRemoteStorageCommand;}}}}
+namespace alinous {namespace remote {namespace db {namespace client {namespace command {
+class AbstractRemoteStorageCommand;}}}}}
 
 namespace alinous {namespace system {
 class AlinousException;}}
@@ -33,14 +33,14 @@ class AlinousException;}}
 namespace java {namespace io {
 class IOException;}}
 
-namespace alinous {namespace remote {namespace db {namespace command {namespace ddl {
-class CreateSchemaCommand;}}}}}
+namespace alinous {namespace remote {namespace db {namespace client {namespace command {namespace ddl {
+class CreateSchemaCommand;}}}}}}
 
 namespace alinous {namespace db {namespace table {
 class TableMetadata;}}}
 
-namespace alinous {namespace remote {namespace db {namespace command {namespace ddl {
-class CreateTableCommand;}}}}}
+namespace alinous {namespace remote {namespace db {namespace client {namespace command {namespace ddl {
+class CreateTableCommand;}}}}}}
 
 namespace alinous {namespace remote {namespace region {
 class NodeReference;}}}
@@ -64,11 +64,11 @@ using ::alinous::db::table::TableMetadata;
 using ::alinous::net::AlinousSocket;
 using ::alinous::remote::db::client::RemoteStorageClientConnectionFactory;
 using ::alinous::remote::db::client::RemoteStorageConnectionInfo;
-using ::alinous::remote::db::command::AbstractRemoteStorageCommand;
-using ::alinous::remote::db::command::GetTableSchemeCommand;
-using ::alinous::remote::db::command::data::SchemasStructureInfoData;
-using ::alinous::remote::db::command::ddl::CreateSchemaCommand;
-using ::alinous::remote::db::command::ddl::CreateTableCommand;
+using ::alinous::remote::db::client::command::AbstractRemoteStorageCommand;
+using ::alinous::remote::db::client::command::GetTableSchemeCommand;
+using ::alinous::remote::db::client::command::data::SchemasStructureInfoData;
+using ::alinous::remote::db::client::command::ddl::CreateSchemaCommand;
+using ::alinous::remote::db::client::command::ddl::CreateTableCommand;
 using ::alinous::remote::socket::ISocketConnection;
 using ::alinous::remote::socket::SocketConnectionPool;
 using ::alinous::system::AlinousException;
@@ -103,8 +103,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}}

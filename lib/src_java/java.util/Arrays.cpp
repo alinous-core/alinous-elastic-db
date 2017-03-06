@@ -8,9 +8,9 @@
 #include "java.util/GregorianCalendar.h"
 #include "java.util/Date.h"
 #include "alinous.numeric/InternalDate.h"
+#include "java.util/TimeZones.h"
 #include "java.sql/Date.h"
 #include "java.util/BitSet.h"
-#include "java.util/TimeZones.h"
 #include "java.util/Random.h"
 #include "java.util/Arrays.h"
 
@@ -30,6 +30,12 @@ bool Arrays::__init_static_variables(){
 	ctx->localGC();
 	delete ctx;
 	return true;
+}
+ Arrays::Arrays(ThreadContext* ctx) throw()  : IObject(ctx)
+{
+}
+void Arrays::__construct_impl(ThreadContext* ctx) throw() 
+{
 }
  Arrays::~Arrays() throw() 
 {
@@ -419,6 +425,8 @@ int Arrays::binarySearch(IArrayObjectPrimitive<short>* array, short value, Threa
 		return -1;
 	}
 	return -mid - (value < array->get(mid) ? 1 : 2);
+}
+void Arrays::__cleanUp(ThreadContext* ctx){
 }
 }}
 

@@ -8,9 +8,9 @@
 #include "java.util/GregorianCalendar.h"
 #include "java.util/Date.h"
 #include "alinous.numeric/InternalDate.h"
+#include "java.util/TimeZones.h"
 #include "java.sql/Date.h"
 #include "java.util/BitSet.h"
-#include "java.util/TimeZones.h"
 #include "java.util/Random.h"
 #include "java.util/Arrays.h"
 
@@ -1665,6 +1665,9 @@ Calendar* Calendar::getInstance(TimeZone* timezone, ThreadContext* ctx) throw()
 Calendar* Calendar::getInstance(TimeZone* timezone, Locale* locale, ThreadContext* ctx) throw() 
 {
 	return static_cast<Calendar*>((new(ctx) GregorianCalendar(timezone, locale, ctx)));
+}
+void Calendar::__cleanUp(ThreadContext* ctx){
+	GCUtils<IArrayObject<String>>::dec(nullptr, Calendar::fieldNames, ctx, __FILEW__, __LINE__, L"IArrayObject<String>");
 }
 int Calendar::ValueCompare::operator() (Calendar* _this, Calendar* anotherCalendar, ThreadContext* ctx) const throw()
 {

@@ -2,6 +2,7 @@
 
 
 #include "alinous.html.xpath/IVariableValue.h"
+#include "alinous.html.xpath/StringValue.h"
 #include "alinous.html/IDomObject.h"
 #include "alinous.html/Attribute.h"
 #include "alinous.html/DomNode.h"
@@ -32,6 +33,12 @@ bool DomText::__init_static_variables(){
 	ctx->localGC();
 	delete ctx;
 	return true;
+}
+ DomText::DomText(ThreadContext* ctx) throw()  : IObject(ctx), IDomObject(ctx), text(nullptr), parent(nullptr)
+{
+}
+void DomText::__construct_impl(ThreadContext* ctx) throw() 
+{
 }
  DomText::~DomText() throw() 
 {
@@ -92,6 +99,8 @@ IDomObject* DomText::getNextElement(ThreadContext* ctx) throw()
 int DomText::getType(ThreadContext* ctx) throw() 
 {
 	return IDomObject::TYPE_DOM_TEXT;
+}
+void DomText::__cleanUp(ThreadContext* ctx){
 }
 }}
 

@@ -21,6 +21,12 @@ class AlinousDebugEventNotifier;}}}}
 namespace alinous {namespace runtime {namespace engine {namespace debugger {namespace server {
 class NotifyHitBreakpoint;}}}}}
 
+namespace alinous {namespace system {
+class AlinousCore;}}
+
+namespace alinous {namespace system {
+class ISystemLog;}}
+
 namespace java {namespace io {
 class IOException;}}
 
@@ -46,6 +52,8 @@ using ::alinous::runtime::engine::debugger::AlinousDebugEvent;
 using ::alinous::runtime::engine::debugger::AlinousDebugEventNotifier;
 using ::alinous::runtime::engine::debugger::AlinousScriptDebugger;
 using ::alinous::runtime::engine::debugger::DebugThread;
+using ::alinous::system::AlinousCore;
+using ::alinous::system::ISystemLog;
 
 
 
@@ -64,8 +72,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}}}}

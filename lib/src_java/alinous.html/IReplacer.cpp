@@ -2,6 +2,7 @@
 
 
 #include "alinous.html.xpath/IVariableValue.h"
+#include "alinous.html.xpath/StringValue.h"
 #include "alinous.html/IDomObject.h"
 #include "alinous.html/Attribute.h"
 #include "alinous.html/DomNode.h"
@@ -32,6 +33,12 @@ bool IReplacer::__init_static_variables(){
 	delete ctx;
 	return true;
 }
+ IReplacer::IReplacer(ThreadContext* ctx) throw()  : IObject(ctx)
+{
+}
+void IReplacer::__construct_impl(ThreadContext* ctx) throw() 
+{
+}
  IReplacer::~IReplacer() throw() 
 {
 	ThreadContext *ctx = ThreadContext::getCurentContext();
@@ -44,6 +51,8 @@ void IReplacer::__releaseRegerences(bool prepare, ThreadContext* ctx) throw()
 	if(!prepare){
 		return;
 	}
+}
+void IReplacer::__cleanUp(ThreadContext* ctx){
 }
 }}
 

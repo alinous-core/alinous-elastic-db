@@ -73,12 +73,8 @@ public:
 public:
 	StringData(String* data, ThreadContext* ctx) throw() ;
 	void __construct_impl(String* data, ThreadContext* ctx) throw() ;
-	StringData(ThreadContext* ctx) throw()  : IObject(ctx), IVariantData(ctx), data(nullptr)
-	{
-	}
-	void __construct_impl(ThreadContext* ctx) throw() 
-	{
-	}
+	StringData(ThreadContext* ctx) throw() ;
+	void __construct_impl(ThreadContext* ctx) throw() ;
 	virtual ~StringData() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 private:
@@ -112,8 +108,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 	class ValueCompare {
 	public:
 		int operator() (VariantValue* _this, VariantValue* variant, ThreadContext* ctx) const throw();

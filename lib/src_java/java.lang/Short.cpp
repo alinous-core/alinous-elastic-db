@@ -149,6 +149,8 @@ Short* Short::valueOf(short s, ThreadContext* ctx) throw()
 {
 	return (new(ctx) Short(s, ctx));
 }
+void Short::__cleanUp(ThreadContext* ctx){
+}
 int Short::ValueCompare::operator() (Short* _this, Short* object, ThreadContext* ctx) const throw()
 {
 	return _this->compareTo(object, ctx);

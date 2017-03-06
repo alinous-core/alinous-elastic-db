@@ -15,6 +15,9 @@ class StringBuffer;}}
 namespace alinous {namespace db {namespace table {
 class TableColumnMetadata;}}}
 
+namespace alinous {namespace runtime {namespace variant {
+class VariantValue;}}}
+
 namespace java {namespace lang {
 class InterruptedException;}}
 
@@ -36,6 +39,7 @@ using ::alinous::compile::sql::analyze::ScanUnique;
 using ::alinous::db::table::IDatabaseRecord;
 using ::alinous::db::table::TableColumnMetadata;
 using ::alinous::lock::ConcurrentGate;
+using ::alinous::runtime::variant::VariantValue;
 
 
 
@@ -65,8 +69,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}}

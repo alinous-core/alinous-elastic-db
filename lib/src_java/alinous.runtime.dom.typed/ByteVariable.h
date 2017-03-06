@@ -123,12 +123,8 @@ class ByteVariable final : public AbstractTypedVariable {
 public:
 	ByteVariable(const ByteVariable& base) = default;
 public:
-	ByteVariable(ThreadContext* ctx) throw()  : IObject(ctx), AbstractTypedVariable(ctx), value(0)
-	{
-	}
-	void __construct_impl(ThreadContext* ctx) throw() 
-	{
-	}
+	ByteVariable(ThreadContext* ctx) throw() ;
+	void __construct_impl(ThreadContext* ctx) throw() ;
 	ByteVariable(char value, ThreadContext* ctx) throw() ;
 	void __construct_impl(char value, ThreadContext* ctx) throw() ;
 	virtual ~ByteVariable() throw();
@@ -356,8 +352,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 	class ValueCompare {
 	public:
 		int operator() (VariantValue* _this, VariantValue* variable, ThreadContext* ctx) const throw();

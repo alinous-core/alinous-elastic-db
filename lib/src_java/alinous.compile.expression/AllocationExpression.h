@@ -1,9 +1,6 @@
 #ifndef ALINOUS_COMPILE_EXPRESSION_ALLOCATIONEXPRESSION_H_
 #define ALINOUS_COMPILE_EXPRESSION_ALLOCATIONEXPRESSION_H_
 namespace alinous{namespace annotation{
-class NoBlankConstructor;
-}}
-namespace alinous{namespace annotation{
 class OneSource;
 }}
 namespace alinous {namespace runtime {namespace dom {
@@ -32,6 +29,12 @@ class TypedVariableArray;}}}}
 
 namespace alinous {namespace compile {namespace analyse {
 class SrcAnalyseContext;}}}
+
+namespace alinous {namespace compile {namespace analyse {
+class SourceValidator;}}}
+
+namespace alinous {namespace compile {namespace declare {
+class ClassExtends;}}}
 
 namespace alinous {namespace compile {
 class IAlinousElementVisitor;}}
@@ -99,9 +102,11 @@ using ::alinous::compile::ExpressionSourceId;
 using ::alinous::compile::IAlinousElement;
 using ::alinous::compile::IAlinousElementVisitor;
 using ::alinous::compile::analyse::AlinousType;
+using ::alinous::compile::analyse::SourceValidator;
 using ::alinous::compile::analyse::SrcAnalyseContext;
 using ::alinous::compile::declare::AlinousClass;
 using ::alinous::compile::declare::AlinousName;
+using ::alinous::compile::declare::ClassExtends;
 using ::alinous::compile::declare::ClassMethodFunction;
 using ::alinous::db::table::DatabaseException;
 using ::alinous::remote::socket::ICommandData;
@@ -163,8 +168,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}}

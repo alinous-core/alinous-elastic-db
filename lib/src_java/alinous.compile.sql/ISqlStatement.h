@@ -35,12 +35,8 @@ class ISqlStatement : public IStatement {
 public:
 	ISqlStatement(const ISqlStatement& base) = default;
 public:
-	ISqlStatement(ThreadContext* ctx) throw()  : IObject(ctx), IStatement(ctx)
-	{
-	}
-	void __construct_impl(ThreadContext* ctx) throw() 
-	{
-	}
+	ISqlStatement(ThreadContext* ctx) throw() ;
+	void __construct_impl(ThreadContext* ctx) throw() ;
 	virtual ~ISqlStatement() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 public:
@@ -49,8 +45,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}}

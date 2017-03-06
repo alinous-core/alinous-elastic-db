@@ -3,10 +3,8 @@
 
 #include "alinous.remote.socket/NetworkBinaryBuffer.h"
 #include "alinous.lock/LockObject.h"
-#include "alinous.runtime.parallel/LaunchJoin.h"
-#include "alinous.runtime.parallel/ThreadPool.h"
 #include "alinous.runtime.parallel/IThreadAction.h"
-#include "alinous.runtime.parallel/AlinousThread.h"
+#include "alinous.runtime.parallel/ThreadPool.h"
 #include "alinous.system/ISystemLog.h"
 #include "alinous.remote.socket/ISocketActionFactory.h"
 #include "alinous.remote.socket/SocketServer.h"
@@ -32,6 +30,12 @@ bool ISocketActionFactory::__init_static_variables(){
 	delete ctx;
 	return true;
 }
+ ISocketActionFactory::ISocketActionFactory(ThreadContext* ctx) throw()  : IObject(ctx)
+{
+}
+void ISocketActionFactory::__construct_impl(ThreadContext* ctx) throw() 
+{
+}
  ISocketActionFactory::~ISocketActionFactory() throw() 
 {
 	ThreadContext *ctx = ThreadContext::getCurentContext();
@@ -44,6 +48,8 @@ void ISocketActionFactory::__releaseRegerences(bool prepare, ThreadContext* ctx)
 	if(!prepare){
 		return;
 	}
+}
+void ISocketActionFactory::__cleanUp(ThreadContext* ctx){
 }
 }}}
 

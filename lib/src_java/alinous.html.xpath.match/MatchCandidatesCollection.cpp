@@ -2,6 +2,7 @@
 
 
 #include "alinous.html.xpath/IVariableValue.h"
+#include "alinous.html.xpath/StringValue.h"
 #include "alinous.html/IDomObject.h"
 #include "alinous.html/Attribute.h"
 #include "alinous.html/DomNode.h"
@@ -15,12 +16,6 @@
 #include "alinous.html.xpath/XpathFunction.h"
 #include "alinous.html.xpath.match/MatchCandidate.h"
 #include "alinous.html.xpath.match/MatchCandidatesCollection.h"
-#include "alinous.html.xpath/XpathIdentifier.h"
-#include "alinous.html.xpath/AttributeIdentifier.h"
-#include "alinous.html.xpath/IXpathBooleanCondition.h"
-#include "alinous.html.xpath/XpathFilter.h"
-#include "alinous.html.xpath/XpathContextLocationCtrl.h"
-#include "alinous.html.xpath/XpathContextLocation.h"
 #include "alinous.html.xpath/XpathContext.h"
 #include "alinous.html.xpath/Xpath.h"
 #include "alinous.html.xpath.match/Matcher.h"
@@ -41,6 +36,12 @@ bool MatchCandidatesCollection::__init_static_variables(){
 	ctx->localGC();
 	delete ctx;
 	return true;
+}
+ MatchCandidatesCollection::MatchCandidatesCollection(ThreadContext* ctx) throw()  : IObject(ctx), candidatesList(GCUtils<ArrayList<MatchCandidate> >::ins(this, (new(ctx) ArrayList<MatchCandidate>(ctx)), ctx, __FILEW__, __LINE__, L"")), domParents(GCUtils<Map<DomNode,ArrayList<MatchCandidate>> >::ins(this, (new(ctx) HashMap<DomNode,ArrayList<MatchCandidate>>(ctx)), ctx, __FILEW__, __LINE__, L""))
+{
+}
+void MatchCandidatesCollection::__construct_impl(ThreadContext* ctx) throw() 
+{
 }
  MatchCandidatesCollection::~MatchCandidatesCollection() throw() 
 {
@@ -155,6 +156,8 @@ MatchCandidatesCollection* MatchCandidatesCollection::filterByLast(ThreadContext
 		ret->addCandidate(list->get(index, ctx), ctx);
 	}
 	return ret;
+}
+void MatchCandidatesCollection::__cleanUp(ThreadContext* ctx){
 }
 }}}}
 

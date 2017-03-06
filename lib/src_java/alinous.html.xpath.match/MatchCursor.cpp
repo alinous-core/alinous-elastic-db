@@ -2,6 +2,7 @@
 
 
 #include "alinous.html.xpath/IVariableValue.h"
+#include "alinous.html.xpath/StringValue.h"
 #include "alinous.html/IDomObject.h"
 #include "alinous.html/Attribute.h"
 #include "alinous.html/DomNode.h"
@@ -12,12 +13,6 @@
 #include "alinous.html.xpath/IXpathStatement.h"
 #include "alinous.html.xpath.match/MatchCandidate.h"
 #include "alinous.html.xpath.match/MatchCandidatesCollection.h"
-#include "alinous.html.xpath/XpathIdentifier.h"
-#include "alinous.html.xpath/AttributeIdentifier.h"
-#include "alinous.html.xpath/IXpathBooleanCondition.h"
-#include "alinous.html.xpath/XpathFilter.h"
-#include "alinous.html.xpath/XpathContextLocationCtrl.h"
-#include "alinous.html.xpath/XpathContextLocation.h"
 #include "alinous.html.xpath/XpathContext.h"
 #include "alinous.html.xpath/Xpath.h"
 #include "alinous.html.xpath.match/Matcher.h"
@@ -177,6 +172,8 @@ DomNode* MatchCursor::scanThis(ThreadContext* ctx) throw()
 		return this->ptr;
 	}
 	return nullptr;
+}
+void MatchCursor::__cleanUp(ThreadContext* ctx){
 }
 }}}}
 

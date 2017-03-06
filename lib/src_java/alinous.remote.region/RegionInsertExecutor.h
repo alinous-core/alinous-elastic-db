@@ -6,8 +6,8 @@ class NodeReferenceManager;}}}
 namespace java {namespace lang {
 class Long;}}
 
-namespace alinous {namespace remote {namespace region {namespace command {namespace data {
-class ClientNetworkRecord;}}}}}
+namespace alinous {namespace remote {namespace region {namespace client {namespace command {namespace data {
+class ClientNetworkRecord;}}}}}}
 
 namespace alinous {namespace remote {namespace region {
 class RegionShardTable;}}}
@@ -26,7 +26,7 @@ using namespace ::alinous;
 using namespace ::java::lang;
 using ::java::util::Iterator;
 using ::java::util::ArrayList;
-using ::alinous::remote::region::command::data::ClientNetworkRecord;
+using ::alinous::remote::region::client::command::data::ClientNetworkRecord;
 
 
 
@@ -51,8 +51,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}}

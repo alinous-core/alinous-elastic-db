@@ -1,13 +1,13 @@
 #ifndef ALINOUS_REMOTE_REGION_NODETABLECLASTER_H_
 #define ALINOUS_REMOTE_REGION_NODETABLECLASTER_H_
-namespace alinous {namespace remote {namespace db {namespace command {namespace data {
-class TableClusterData;}}}}}
+namespace alinous {namespace remote {namespace db {namespace client {namespace command {namespace data {
+class TableClusterData;}}}}}}
 
 namespace alinous {namespace remote {namespace region {
 class NodeCluster;}}}
 
-namespace alinous {namespace remote {namespace db {namespace command {namespace data {
-class StorageNodeData;}}}}}
+namespace alinous {namespace remote {namespace db {namespace client {namespace command {namespace data {
+class StorageNodeData;}}}}}}
 
 namespace alinous {namespace remote {namespace region {
 class NodeReference;}}}
@@ -41,8 +41,8 @@ using ::java::util::ArrayList;
 using ::java::util::List;
 using ::alinous::db::table::TableMetadata;
 using ::alinous::db::table::TablePartitionRangeCollection;
-using ::alinous::remote::db::command::data::StorageNodeData;
-using ::alinous::remote::db::command::data::TableClusterData;
+using ::alinous::remote::db::client::command::data::StorageNodeData;
+using ::alinous::remote::db::client::command::data::TableClusterData;
 
 
 
@@ -69,8 +69,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}}

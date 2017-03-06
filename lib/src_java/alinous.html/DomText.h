@@ -29,12 +29,8 @@ class DomText final : public IDomObject, public virtual IObject {
 public:
 	DomText(const DomText& base) = default;
 public:
-	DomText(ThreadContext* ctx) throw()  : IObject(ctx), IDomObject(ctx), text(nullptr), parent(nullptr)
-	{
-	}
-	void __construct_impl(ThreadContext* ctx) throw() 
-	{
-	}
+	DomText(ThreadContext* ctx) throw() ;
+	void __construct_impl(ThreadContext* ctx) throw() ;
 	virtual ~DomText() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 private:
@@ -53,8 +49,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}

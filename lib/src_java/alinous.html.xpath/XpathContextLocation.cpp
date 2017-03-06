@@ -50,6 +50,12 @@ bool XpathContextLocation::__init_static_variables(){
 	delete ctx;
 	return true;
 }
+ XpathContextLocation::XpathContextLocation(ThreadContext* ctx) throw()  : IObject(ctx), IXpathElement(ctx), ctrls(GCUtils<ArrayList<XpathContextLocationCtrl> >::ins(this, (new(ctx) ArrayList<XpathContextLocationCtrl>(ctx)), ctx, __FILEW__, __LINE__, L""))
+{
+}
+void XpathContextLocation::__construct_impl(ThreadContext* ctx) throw() 
+{
+}
  XpathContextLocation::~XpathContextLocation() throw() 
 {
 	ThreadContext *ctx = ThreadContext::getCurentContext();
@@ -106,6 +112,8 @@ String* XpathContextLocation::toString(ThreadContext* ctx) throw()
 		buff->append(it->next(ctx)->toString(ctx), ctx);
 	}
 	return buff->toString(ctx);
+}
+void XpathContextLocation::__cleanUp(ThreadContext* ctx){
 }
 }}}
 

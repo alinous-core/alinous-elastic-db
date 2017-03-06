@@ -7,6 +7,9 @@ namespace alinous {namespace system {
 class AlinousCore;}}
 
 namespace alinous {namespace system {namespace config {
+class AlinousConfig;}}}
+
+namespace alinous {namespace system {namespace config {
 class AlinousDbInfo;}}}
 
 namespace java {namespace util {
@@ -20,6 +23,9 @@ class IDatabaseDriver;}}}
 
 namespace alinous {namespace runtime {namespace dbif {
 class AlinousDatabaseHandler;}}}
+
+namespace alinous {namespace system {
+class ISystemLog;}}
 
 namespace alinous {namespace db {
 class AlinousDbException;}}
@@ -48,6 +54,8 @@ using ::java::util::Iterator;
 using ::alinous::db::AlinousDbException;
 using ::alinous::system::AlinousCore;
 using ::alinous::system::AlinousException;
+using ::alinous::system::ISystemLog;
+using ::alinous::system::config::AlinousConfig;
 using ::alinous::system::config::AlinousDbInfo;
 using ::alinous::system::config::AlinousDbInstanceInfo;
 
@@ -72,8 +80,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}}

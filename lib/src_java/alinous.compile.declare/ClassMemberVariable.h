@@ -93,12 +93,8 @@ class ClassMemberVariable final : public AbstractClassMember {
 public:
 	ClassMemberVariable(const ClassMemberVariable& base) = default;
 public:
-	ClassMemberVariable(ThreadContext* ctx) throw()  : IObject(ctx), AbstractClassMember(ctx), type(nullptr), dimension(0), name(nullptr), domDescriptor(nullptr), init(nullptr), staticValue(nullptr), analysedType(nullptr)
-	{
-	}
-	void __construct_impl(ThreadContext* ctx) throw() 
-	{
-	}
+	ClassMemberVariable(ThreadContext* ctx) throw() ;
+	void __construct_impl(ThreadContext* ctx) throw() ;
 	virtual ~ClassMemberVariable() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 private:
@@ -135,8 +131,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}}

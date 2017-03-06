@@ -56,12 +56,8 @@ class ToNumber final : public ISQLFunctionBody, public virtual IObject {
 public:
 	ToNumber(const ToNumber& base) = default;
 public:
-	ToNumber(ThreadContext* ctx) throw()  : IObject(ctx), ISQLFunctionBody(ctx)
-	{
-	}
-	void __construct_impl(ThreadContext* ctx) throw() 
-	{
-	}
+	ToNumber(ThreadContext* ctx) throw() ;
+	void __construct_impl(ThreadContext* ctx) throw() ;
 	virtual ~ToNumber() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 public:
@@ -71,8 +67,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}}}

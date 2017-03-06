@@ -2,21 +2,16 @@
 
 
 #include "com.google.re2j/PatternSyntaxException.h"
-#include "java.harmoney/FloatingPointParser.h"
 #include "java.lang/Number.h"
 #include "java.lang/Comparable.h"
-#include "java.lang/Double.h"
-#include "java.harmoney/NumberConverter.h"
 #include "java.lang/Float.h"
 #include "java.lang/Long.h"
-#include "com.google.re2j/Inst.h"
-#include "com.google.re2j/Prog.h"
-#include "com.google.re2j/MachineInput.h"
-#include "com.google.re2j/Machine.h"
-#include "com.google.re2j/RE2.h"
 #include "com.google.re2j/Pattern.h"
 #include "com.google.re2j/Matcher.h"
 #include "java.harmoney/HexStringParser.h"
+#include "java.harmoney/FloatingPointParser.h"
+#include "java.lang/Double.h"
+#include "java.harmoney/NumberConverter.h"
 
 namespace java {namespace harmoney {
 
@@ -293,6 +288,10 @@ IArrayObject<String>* HexStringParser::getSegmentsFromHexString(String* hexStrin
 	hexSegments->set(matcher->group(2, ctx),1, ctx);
 	hexSegments->set(matcher->group(3, ctx),2, ctx);
 	return hexSegments;
+}
+void HexStringParser::__cleanUp(ThreadContext* ctx){
+	GCUtils<String>::dec(nullptr, HexStringParser::HEX_PATTERN, ctx, __FILEW__, __LINE__, L"String");
+	GCUtils<Pattern>::dec(nullptr, HexStringParser::PATTERN, ctx, __FILEW__, __LINE__, L"Pattern");
 }
 }}
 

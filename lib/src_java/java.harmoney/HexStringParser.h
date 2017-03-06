@@ -105,10 +105,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-		GCUtils<String>::dec(nullptr, HexStringParser::HEX_PATTERN, ctx, __FILEW__, __LINE__, L"String");
-		GCUtils<Pattern>::dec(nullptr, HexStringParser::PATTERN, ctx, __FILEW__, __LINE__, L"Pattern");
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}

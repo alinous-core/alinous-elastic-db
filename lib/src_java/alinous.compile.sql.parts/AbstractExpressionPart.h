@@ -26,12 +26,8 @@ class AbstractExpressionPart : public ISQLExpressionPart {
 public:
 	AbstractExpressionPart(const AbstractExpressionPart& base) = default;
 public:
-	AbstractExpressionPart(ThreadContext* ctx) throw()  : IObject(ctx), ISQLExpressionPart(ctx)
-	{
-	}
-	void __construct_impl(ThreadContext* ctx) throw() 
-	{
-	}
+	AbstractExpressionPart(ThreadContext* ctx) throw() ;
+	void __construct_impl(ThreadContext* ctx) throw() ;
 	virtual ~AbstractExpressionPart() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 public:
@@ -46,8 +42,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}}}

@@ -24,8 +24,8 @@ class BufferedOutputStream;}}
 namespace java {namespace lang {
 class Throwable;}}
 
-namespace alinous {namespace remote {namespace monitor {namespace command {
-class AbstractMonitorCommand;}}}}
+namespace alinous {namespace remote {namespace monitor {namespace client {namespace command {
+class AbstractMonitorCommand;}}}}}
 
 namespace alinous {namespace system {
 class AlinousException;}}
@@ -36,8 +36,8 @@ class IThreadAction;}}}
 namespace java {namespace io {
 class IOException;}}
 
-namespace alinous {namespace remote {namespace monitor {namespace command {
-class MinitorCommandReader;}}}}
+namespace alinous {namespace remote {namespace monitor {namespace client {namespace command {
+class MinitorCommandReader;}}}}}
 
 namespace java {namespace lang {
 class IObject;
@@ -58,8 +58,8 @@ using ::java::io::IOException;
 using ::java::io::InputStream;
 using ::java::io::OutputStream;
 using ::java::net::Socket;
-using ::alinous::remote::monitor::command::AbstractMonitorCommand;
-using ::alinous::remote::monitor::command::MinitorCommandReader;
+using ::alinous::remote::monitor::client::command::AbstractMonitorCommand;
+using ::alinous::remote::monitor::client::command::MinitorCommandReader;
 using ::alinous::remote::socket::SocketServer;
 using ::alinous::runtime::parallel::IThreadAction;
 using ::alinous::system::AlinousException;
@@ -88,8 +88,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}}

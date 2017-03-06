@@ -1,7 +1,12 @@
 #include "include/global.h"
 
 
+#include "java.util/Locale.h"
+#include "java.util/Calendar.h"
+#include "java.util/GregorianCalendar.h"
+#include "java.util/Date.h"
 #include "alinous.numeric/InternalDate.h"
+#include "java.util/TimeZone.h"
 #include "alinous.numeric/TimeOnlyTimestamp.h"
 #include "java.util/Random.h"
 #include "java.lang/Number.h"
@@ -101,6 +106,8 @@ RoundingMode* RoundingMode::valueOf(int mode, ThreadContext* ctx) throw()
 		throw (new(ctx) IllegalArgumentException(ConstStr::getCNST_STR_19(), ctx));
 		break;
 	}
+}
+void RoundingMode::__cleanUp(ThreadContext* ctx){
 }
 }}
 

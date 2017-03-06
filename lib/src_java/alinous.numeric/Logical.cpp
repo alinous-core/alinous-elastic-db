@@ -1,7 +1,12 @@
 #include "include/global.h"
 
 
+#include "java.util/Locale.h"
+#include "java.util/Calendar.h"
+#include "java.util/GregorianCalendar.h"
+#include "java.util/Date.h"
 #include "alinous.numeric/InternalDate.h"
+#include "java.util/TimeZone.h"
 #include "alinous.numeric/TimeOnlyTimestamp.h"
 #include "java.util/Random.h"
 #include "java.lang/Number.h"
@@ -35,6 +40,12 @@ bool Logical::__init_static_variables(){
 	ctx->localGC();
 	delete ctx;
 	return true;
+}
+ Logical::Logical(ThreadContext* ctx) throw()  : IObject(ctx)
+{
+}
+void Logical::__construct_impl(ThreadContext* ctx) throw() 
+{
 }
  Logical::~Logical() throw() 
 {
@@ -860,6 +871,8 @@ BigInteger* Logical::xorDiffSigns(BigInteger* positive, BigInteger* negative, Th
 	BigInteger* result = (new(ctx) BigInteger(-1, resLength, resDigits, ctx));
 	result->cutOffLeadingZeroes(ctx);
 	return result;
+}
+void Logical::__cleanUp(ThreadContext* ctx){
 }
 }}
 

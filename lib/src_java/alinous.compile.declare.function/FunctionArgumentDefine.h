@@ -141,12 +141,8 @@ public:
 public:
 	FunctionArgumentDefine(const FunctionArgumentDefine& base) = default;
 public:
-	FunctionArgumentDefine(ThreadContext* ctx) throw()  : IObject(ctx), IDeclare(ctx), type(nullptr), name(nullptr), domDescriptor(nullptr), analysedType(nullptr)
-	{
-	}
-	void __construct_impl(ThreadContext* ctx) throw() 
-	{
-	}
+	FunctionArgumentDefine(ThreadContext* ctx) throw() ;
+	void __construct_impl(ThreadContext* ctx) throw() ;
 	virtual ~FunctionArgumentDefine() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 private:
@@ -180,8 +176,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}}}

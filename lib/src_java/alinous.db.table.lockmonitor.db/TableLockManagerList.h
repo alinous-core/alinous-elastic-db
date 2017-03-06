@@ -47,12 +47,8 @@ class TableLockManagerList final : public virtual IObject {
 public:
 	TableLockManagerList(const TableLockManagerList& base) = default;
 public:
-	TableLockManagerList(ThreadContext* ctx) throw()  : IObject(ctx), list(GCUtils<ArrayList<TableLockMamager> >::ins(this, (new(ctx) ArrayList<TableLockMamager>(ctx)), ctx, __FILEW__, __LINE__, L""))
-	{
-	}
-	void __construct_impl(ThreadContext* ctx) throw() 
-	{
-	}
+	TableLockManagerList(ThreadContext* ctx) throw() ;
+	void __construct_impl(ThreadContext* ctx) throw() ;
 	virtual ~TableLockManagerList() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 private:
@@ -64,8 +60,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}}}}

@@ -130,5 +130,7 @@ void ConcurrentGate::close(ThreadContext* ctx)
 void ConcurrentGate::dispose(ThreadContext* ctx) throw() 
 {
 }
+void ConcurrentGate::__cleanUp(ThreadContext* ctx){
+}
 }}
 

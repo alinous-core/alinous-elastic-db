@@ -2,6 +2,7 @@
 
 
 #include "alinous.html.xpath/IVariableValue.h"
+#include "alinous.html.xpath/StringValue.h"
 #include "alinous.html/IDomObject.h"
 #include "alinous.html/Attribute.h"
 #include "alinous.html/DomNode.h"
@@ -32,6 +33,12 @@ bool AlinousDomReplacer::__init_static_variables(){
 	ctx->localGC();
 	delete ctx;
 	return true;
+}
+ AlinousDomReplacer::AlinousDomReplacer(ThreadContext* ctx) throw()  : IObject(ctx), IReplacer(ctx), currentAttribute(nullptr), currentTag(nullptr), processingTagIsEnd(0), eventHandler(__GC_INS(this, (new(ctx) AlinousDomEventHandler(ctx)), AlinousDomEventHandler))
+{
+}
+void AlinousDomReplacer::__construct_impl(ThreadContext* ctx) throw() 
+{
 }
  AlinousDomReplacer::~AlinousDomReplacer() throw() 
 {
@@ -123,6 +130,8 @@ void AlinousDomReplacer::parseEnd(ThreadContext* ctx) throw()
 DomNode* AlinousDomReplacer::getCurrentTag(ThreadContext* ctx) throw() 
 {
 	return currentTag;
+}
+void AlinousDomReplacer::__cleanUp(ThreadContext* ctx){
 }
 }}
 

@@ -45,12 +45,8 @@ class XpathContextLocation final : public IXpathElement, public virtual IObject 
 public:
 	XpathContextLocation(const XpathContextLocation& base) = default;
 public:
-	XpathContextLocation(ThreadContext* ctx) throw()  : IObject(ctx), IXpathElement(ctx), ctrls(GCUtils<ArrayList<XpathContextLocationCtrl> >::ins(this, (new(ctx) ArrayList<XpathContextLocationCtrl>(ctx)), ctx, __FILEW__, __LINE__, L""))
-	{
-	}
-	void __construct_impl(ThreadContext* ctx) throw() 
-	{
-	}
+	XpathContextLocation(ThreadContext* ctx) throw() ;
+	void __construct_impl(ThreadContext* ctx) throw() ;
 	virtual ~XpathContextLocation() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 private:
@@ -63,8 +59,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}}

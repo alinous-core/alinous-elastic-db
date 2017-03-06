@@ -29,6 +29,12 @@ bool LockObject::__init_static_variables(){
 	delete ctx;
 	return true;
 }
+ LockObject::LockObject(ThreadContext* ctx) throw()  : IObject(ctx), ThreadMonitor(ctx)
+{
+}
+void LockObject::__construct_impl(ThreadContext* ctx) throw() 
+{
+}
  LockObject::~LockObject() throw() 
 {
 	ThreadContext *ctx = ThreadContext::getCurentContext();
@@ -41,6 +47,8 @@ void LockObject::__releaseRegerences(bool prepare, ThreadContext* ctx) throw()
 	if(!prepare){
 		return;
 	}
+}
+void LockObject::__cleanUp(ThreadContext* ctx){
 }
 }}
 

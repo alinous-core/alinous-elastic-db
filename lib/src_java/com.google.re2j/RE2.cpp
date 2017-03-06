@@ -12,13 +12,13 @@
 #include "com.google.re2j/RE2.h"
 #include "com.google.re2j/Machine.h"
 #include "com.google.re2j/PatternSyntaxException.h"
+#include "com.google.re2j/Utils.h"
+#include "com.google.re2j/Unicode.h"
 #include "com.google.re2j/CharGroup.h"
 #include "com.google.re2j/CharClass.h"
 #include "com.google.re2j/Parser.h"
-#include "com.google.re2j/Unicode.h"
 #include "com.google.re2j/Compiler.h"
 #include "com.google.re2j/UnicodeTable2.h"
-#include "com.google.re2j/Utils.h"
 #include "com.google.re2j/UnicodeTables.h"
 #include "com.google.re2j/Pattern.h"
 #include "com.google.re2j/Matcher.h"
@@ -509,6 +509,8 @@ String* RE2::quoteMeta(String* s, ThreadContext* ctx) throw()
 	}
 	return b->toString(ctx);
 }
+void RE2::__cleanUp(ThreadContext* ctx){
+}
 RE2Anonimous0::RE2Anonimous0(String* repl, ThreadContext* ctx)
 : IObject(ctx), ReplaceFunc(ctx) ,repl(repl)
 {
@@ -788,6 +790,12 @@ bool RE2::ReplaceFunc::__init_static_variables(){
 	delete ctx;
 	return true;
 }
+ RE2::ReplaceFunc::ReplaceFunc(ThreadContext* ctx) throw()  : IObject(ctx)
+{
+}
+void RE2::ReplaceFunc::__construct_impl(ThreadContext* ctx) throw() 
+{
+}
  RE2::ReplaceFunc::~ReplaceFunc() throw() 
 {
 	ThreadContext *ctx = ThreadContext::getCurentContext();
@@ -800,6 +808,8 @@ void RE2::ReplaceFunc::__releaseRegerences(bool prepare, ThreadContext* ctx) thr
 	if(!prepare){
 		return;
 	}
+}
+void RE2::ReplaceFunc::__cleanUp(ThreadContext* ctx){
 }
 }}}
 
@@ -819,6 +829,12 @@ bool RE2::DeliverFunc::__init_static_variables(){
 	delete ctx;
 	return true;
 }
+ RE2::DeliverFunc::DeliverFunc(ThreadContext* ctx) throw()  : IObject(ctx)
+{
+}
+void RE2::DeliverFunc::__construct_impl(ThreadContext* ctx) throw() 
+{
+}
  RE2::DeliverFunc::~DeliverFunc() throw() 
 {
 	ThreadContext *ctx = ThreadContext::getCurentContext();
@@ -831,6 +847,8 @@ void RE2::DeliverFunc::__releaseRegerences(bool prepare, ThreadContext* ctx) thr
 	if(!prepare){
 		return;
 	}
+}
+void RE2::DeliverFunc::__cleanUp(ThreadContext* ctx){
 }
 }}}
 

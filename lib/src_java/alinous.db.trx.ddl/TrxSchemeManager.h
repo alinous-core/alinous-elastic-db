@@ -36,6 +36,9 @@ class DatabaseException;}}}
 namespace alinous {namespace db {namespace trx {
 class CreateIndexMetadata;}}}
 
+namespace alinous {namespace compile {namespace sql {
+class TableAndSchema;}}}
+
 namespace alinous {namespace db {
 class TableSchemaCollection;}}
 
@@ -56,6 +59,9 @@ template <typename  T> class Iterator;}}
 
 namespace alinous {namespace db {namespace table {
 class TableMetadata;}}}
+
+namespace alinous {namespace lock {
+class LockObject;}}
 
 namespace alinous {namespace system {
 class AlinousException;}}
@@ -79,6 +85,7 @@ using ::java::util::Iterator;
 using ::java::util::Set;
 using ::alinous::btree::BTreeException;
 using ::alinous::btree::BTreeGlobalCache;
+using ::alinous::compile::sql::TableAndSchema;
 using ::alinous::db::AlinousDatabase;
 using ::alinous::db::AlinousDbException;
 using ::alinous::db::TableRegionManager;
@@ -88,6 +95,7 @@ using ::alinous::db::table::DatabaseException;
 using ::alinous::db::table::IDatabaseTable;
 using ::alinous::db::table::TableMetadata;
 using ::alinous::db::trx::CreateIndexMetadata;
+using ::alinous::lock::LockObject;
 using ::alinous::system::AlinousCore;
 using ::alinous::system::AlinousException;
 using ::alinous::system::ISystemLog;
@@ -127,8 +135,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}}}

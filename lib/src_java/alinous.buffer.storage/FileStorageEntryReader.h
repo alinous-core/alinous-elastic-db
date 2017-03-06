@@ -15,6 +15,9 @@ class FileStorageEntry;}}}
 namespace java {namespace lang {
 class Throwable;}}
 
+namespace alinous {namespace lock {
+class ConcurrentGate;}}
+
 namespace java {namespace io {
 class IOException;}}
 
@@ -32,6 +35,7 @@ using namespace ::alinous;
 using namespace ::java::lang;
 using ::java::util::Iterator;
 using ::java::io::IOException;
+using ::alinous::lock::ConcurrentGate;
 
 
 
@@ -57,8 +61,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}}

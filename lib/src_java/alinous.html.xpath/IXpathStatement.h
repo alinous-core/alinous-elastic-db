@@ -37,12 +37,8 @@ class IXpathStatement : public virtual IObject, public IXpathElement {
 public:
 	IXpathStatement(const IXpathStatement& base) = default;
 public:
-	IXpathStatement(ThreadContext* ctx) throw()  : IObject(ctx), IXpathElement(ctx)
-	{
-	}
-	void __construct_impl(ThreadContext* ctx) throw() 
-	{
-	}
+	IXpathStatement(ThreadContext* ctx) throw() ;
+	void __construct_impl(ThreadContext* ctx) throw() ;
 	virtual ~IXpathStatement() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 public:
@@ -51,8 +47,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}}

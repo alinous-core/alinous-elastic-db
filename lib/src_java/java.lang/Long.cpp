@@ -456,6 +456,8 @@ long long Long::parse(String* string, int offset, int radix, bool negative, Thre
 	}
 	return result;
 }
+void Long::__cleanUp(ThreadContext* ctx){
+}
 int Long::ValueCompare::operator() (Long* _this, Long* object, ThreadContext* ctx) const throw()
 {
 	return _this->compareTo(object, ctx);

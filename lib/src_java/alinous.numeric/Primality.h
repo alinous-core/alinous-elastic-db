@@ -34,12 +34,8 @@ class Primality final : public virtual IObject {
 public:
 	Primality(const Primality& base) = default;
 public:
-	Primality(ThreadContext* ctx) throw()  : IObject(ctx)
-	{
-	}
-	void __construct_impl(ThreadContext* ctx) throw() 
-	{
-	}
+	Primality(ThreadContext* ctx) throw() ;
+	void __construct_impl(ThreadContext* ctx) throw() ;
 	virtual ~Primality() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 private:
@@ -80,10 +76,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-		GCUtils<IArrayObject<BigInteger>>::dec(nullptr, Primality::BIprimes, ctx, __FILEW__, __LINE__, L"IArrayObject<BigInteger>");
-		GCUtils<IArrayObject<IArrayObjectPrimitive<int>>>::dec(nullptr, Primality::offsetPrimes, ctx, __FILEW__, __LINE__, L"IArrayObject<IArrayObjectPrimitive<int>>");
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}

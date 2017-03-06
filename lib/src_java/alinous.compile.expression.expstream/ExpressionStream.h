@@ -1,9 +1,6 @@
 #ifndef ALINOUS_COMPILE_EXPRESSION_EXPSTREAM_EXPRESSIONSTREAM_H_
 #define ALINOUS_COMPILE_EXPRESSION_EXPSTREAM_EXPRESSIONSTREAM_H_
 namespace alinous{namespace annotation{
-class NoBlankConstructor;
-}}
-namespace alinous{namespace annotation{
 class OneSource;
 }}
 namespace alinous {namespace compile {namespace declare {
@@ -162,8 +159,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}}}

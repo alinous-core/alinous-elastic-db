@@ -69,6 +69,9 @@ class Throwable;}}
 namespace alinous {namespace runtime {namespace dom {
 class DomArray;}}}
 
+namespace alinous {namespace runtime {namespace engine {
+class MainStackFrame;}}}
+
 namespace alinous {namespace compile {namespace sql {namespace result {
 class SelectResultDescription;}}}}
 
@@ -220,6 +223,7 @@ using ::alinous::runtime::dom::DomArray;
 using ::alinous::runtime::dom::DomVariable;
 using ::alinous::runtime::dom::IDomVariable;
 using ::alinous::runtime::dom::VariableException;
+using ::alinous::runtime::engine::MainStackFrame;
 using ::alinous::runtime::engine::ScriptMachine;
 using ::alinous::runtime::parallel::ThreadPool;
 using ::alinous::runtime::variant::VariantValue;
@@ -284,8 +288,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}}

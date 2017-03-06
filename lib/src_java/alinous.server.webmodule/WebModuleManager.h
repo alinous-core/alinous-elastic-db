@@ -9,6 +9,9 @@ class AlinousCore;}}
 namespace alinous {namespace server {namespace webmodule {
 class WebModuleHashList;}}}
 
+namespace alinous {namespace system {namespace config {
+class AlinousConfig;}}}
+
 namespace alinous {namespace system {
 class AlinousException;}}
 
@@ -79,6 +82,7 @@ using ::alinous::runtime::AlinousModuleRepository;
 using ::alinous::runtime::ModuleNotFoundException;
 using ::alinous::system::AlinousCore;
 using ::alinous::system::AlinousException;
+using ::alinous::system::config::AlinousConfig;
 using ::alinous::system::config::WebHandlerInfo;
 using ::alinous::web::htmlxml::module::AlinousWebHtmlXmlModule;
 
@@ -113,8 +117,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}}

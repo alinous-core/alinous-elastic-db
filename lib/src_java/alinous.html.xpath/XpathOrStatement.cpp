@@ -50,6 +50,12 @@ bool XpathOrStatement::__init_static_variables(){
 	delete ctx;
 	return true;
 }
+ XpathOrStatement::XpathOrStatement(ThreadContext* ctx) throw()  : IObject(ctx), AbstractContainerStatement(ctx)
+{
+}
+void XpathOrStatement::__construct_impl(ThreadContext* ctx) throw() 
+{
+}
  XpathOrStatement::~XpathOrStatement() throw() 
 {
 	ThreadContext *ctx = ThreadContext::getCurentContext();
@@ -96,6 +102,8 @@ bool XpathOrStatement::getBooleanValue(DomDocument* document, DomNode* currentNo
 		}
 	}
 	return false;
+}
+void XpathOrStatement::__cleanUp(ThreadContext* ctx){
 }
 }}}
 

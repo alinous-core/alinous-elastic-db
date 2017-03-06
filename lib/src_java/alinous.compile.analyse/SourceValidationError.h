@@ -27,12 +27,8 @@ class SourceValidationError final : public virtual IObject {
 public:
 	SourceValidationError(const SourceValidationError& base) = default;
 public:
-	SourceValidationError(ThreadContext* ctx) throw()  : IObject(ctx), type(0), message(nullptr), src(nullptr)
-	{
-	}
-	void __construct_impl(ThreadContext* ctx) throw() 
-	{
-	}
+	SourceValidationError(ThreadContext* ctx) throw() ;
+	void __construct_impl(ThreadContext* ctx) throw() ;
 	virtual ~SourceValidationError() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 private:
@@ -54,8 +50,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}}

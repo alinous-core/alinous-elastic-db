@@ -3,6 +3,7 @@
 
 #include "alinous.parser.xpath/TokenMgrError.h"
 #include "alinous.html.xpath/IVariableValue.h"
+#include "alinous.html.xpath/StringValue.h"
 #include "alinous.html/IDomObject.h"
 #include "alinous.html/Attribute.h"
 #include "alinous.html/DomNode.h"
@@ -13,7 +14,6 @@
 #include "alinous.html.xpath/AttributeIdentifier.h"
 #include "alinous.html.xpath/IXpathBooleanCondition.h"
 #include "alinous.html.xpath/XPathParser.h"
-#include "alinous.html.xpath.match/MatchCursor.h"
 #include "alinous.html.xpath/XpathReference.h"
 #include "alinous.html.xpath/Xpath2Compare.h"
 #include "alinous.html.xpath/XpathNumber.h"
@@ -35,8 +35,8 @@
 #include "alinous.parser.xpath/AlinousXpathParserConstants.h"
 #include "alinous.parser.xpath/AlinousXpathParserTokenManager.h"
 #include "alinous.parser.xpath/AlinousXpathParser.h"
-#include "alinous.compile/Token.h"
 #include "alinous.compile/JavaCharStream.h"
+#include "alinous.compile/Token.h"
 #include "alinous.compile/ParseException.h"
 
 namespace alinous {namespace parser {namespace xpath {
@@ -1580,6 +1580,10 @@ void AlinousXpathParser::jj_la1_init_1(ThreadContext* ctx)
 {
 	__GC_MV(nullptr, &(jj_la1_1), ((IArrayObjectPrimitive<long long>*)new(ctx) ArrayObjectPrimitive<long long>({0x2000, 0x0, 0x2000, 0x0, 0x0, 0x0, 0x0, 0x800, 0x100, 0x406100, 0xf8, 0xf8, 0x404000, 0x2000, 0x0, 0x406000, 0x2000}, ctx)), IArrayObjectPrimitive<long long>);
 }
+void AlinousXpathParser::__cleanUp(ThreadContext* ctx){
+	GCUtils<IArrayObjectPrimitive<long long>>::dec(nullptr, AlinousXpathParser::jj_la1_0, ctx, __FILEW__, __LINE__, L"IArrayObjectPrimitive<long long>");
+	GCUtils<IArrayObjectPrimitive<long long>>::dec(nullptr, AlinousXpathParser::jj_la1_1, ctx, __FILEW__, __LINE__, L"IArrayObjectPrimitive<long long>");
+}
 }}}
 
 namespace alinous {namespace parser {namespace xpath {
@@ -1599,6 +1603,12 @@ bool AlinousXpathParser::LookaheadSuccess::__init_static_variables(){
 	delete ctx;
 	return true;
 }
+ AlinousXpathParser::LookaheadSuccess::LookaheadSuccess(ThreadContext* ctx) throw()  : IObject(ctx), java::lang::Error(ctx)
+{
+}
+void AlinousXpathParser::LookaheadSuccess::__construct_impl(ThreadContext* ctx) throw() 
+{
+}
  AlinousXpathParser::LookaheadSuccess::~LookaheadSuccess() throw() 
 {
 	ThreadContext *ctx = ThreadContext::getCurentContext();
@@ -1612,6 +1622,8 @@ void AlinousXpathParser::LookaheadSuccess::__releaseRegerences(bool prepare, Thr
 		return;
 	}
 	java::lang::Error::__releaseRegerences(true, ctx);
+}
+void AlinousXpathParser::LookaheadSuccess::__cleanUp(ThreadContext* ctx){
 }
 }}}
 
@@ -1632,6 +1644,12 @@ bool AlinousXpathParser::JJCalls::__init_static_variables(){
 	delete ctx;
 	return true;
 }
+ AlinousXpathParser::JJCalls::JJCalls(ThreadContext* ctx) throw()  : IObject(ctx), gen(0), first(nullptr), arg(0), next(nullptr)
+{
+}
+void AlinousXpathParser::JJCalls::__construct_impl(ThreadContext* ctx) throw() 
+{
+}
  AlinousXpathParser::JJCalls::~JJCalls() throw() 
 {
 	ThreadContext *ctx = ThreadContext::getCurentContext();
@@ -1649,6 +1667,8 @@ void AlinousXpathParser::JJCalls::__releaseRegerences(bool prepare, ThreadContex
 	if(!prepare){
 		return;
 	}
+}
+void AlinousXpathParser::JJCalls::__cleanUp(ThreadContext* ctx){
 }
 }}}
 

@@ -74,12 +74,8 @@ class UnaryExpression final : public AbstractExpression {
 public:
 	UnaryExpression(const UnaryExpression& base) = default;
 public:
-	UnaryExpression(ThreadContext* ctx) throw()  : IObject(ctx), AbstractExpression(ctx)
-	{
-	}
-	void __construct_impl(ThreadContext* ctx) throw() 
-	{
-	}
+	UnaryExpression(ThreadContext* ctx) throw() ;
+	void __construct_impl(ThreadContext* ctx) throw() ;
 	virtual ~UnaryExpression() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 public:
@@ -99,8 +95,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}}

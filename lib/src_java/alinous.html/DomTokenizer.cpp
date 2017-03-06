@@ -2,6 +2,7 @@
 
 
 #include "alinous.html.xpath/IVariableValue.h"
+#include "alinous.html.xpath/StringValue.h"
 #include "alinous.html/IDomObject.h"
 #include "alinous.html/Attribute.h"
 #include "alinous.html/DomNode.h"
@@ -155,6 +156,8 @@ wchar_t DomTokenizer::getChar(ThreadContext* ctx) throw()
 {
 	wchar_t ch = this->html->charAt(this->pos++, ctx);
 	return ch;
+}
+void DomTokenizer::__cleanUp(ThreadContext* ctx){
 }
 }}
 

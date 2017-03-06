@@ -27,6 +27,12 @@ bool IThreadAction::__init_static_variables(){
 	delete ctx;
 	return true;
 }
+ IThreadAction::IThreadAction(ThreadContext* ctx) throw()  : IObject(ctx)
+{
+}
+void IThreadAction::__construct_impl(ThreadContext* ctx) throw() 
+{
+}
  IThreadAction::~IThreadAction() throw() 
 {
 	ThreadContext *ctx = ThreadContext::getCurentContext();
@@ -39,6 +45,8 @@ void IThreadAction::__releaseRegerences(bool prepare, ThreadContext* ctx) throw(
 	if(!prepare){
 		return;
 	}
+}
+void IThreadAction::__cleanUp(ThreadContext* ctx){
 }
 }}}
 

@@ -3,8 +3,8 @@
 namespace alinous{namespace annotation{
 class OneSource;
 }}
-namespace alinous {namespace remote {namespace db {namespace command {namespace data {
-class SchemaData;}}}}}
+namespace alinous {namespace remote {namespace db {namespace client {namespace command {namespace data {
+class SchemaData;}}}}}}
 
 namespace java {namespace util {
 template <typename  T> class Iterator;}}
@@ -12,8 +12,8 @@ template <typename  T> class Iterator;}}
 namespace alinous {namespace db {namespace table {
 class TableMetadata;}}}
 
-namespace alinous {namespace remote {namespace db {namespace command {namespace data {
-class TableClusterData;}}}}}
+namespace alinous {namespace remote {namespace db {namespace client {namespace command {namespace data {
+class TableClusterData;}}}}}}
 
 namespace java {namespace io {
 class File;}}
@@ -92,8 +92,8 @@ using ::alinous::db::table::DatabaseException;
 using ::alinous::db::table::DatabaseTable;
 using ::alinous::db::table::IDatabaseTable;
 using ::alinous::db::table::TableMetadata;
-using ::alinous::remote::db::command::data::SchemaData;
-using ::alinous::remote::db::command::data::TableClusterData;
+using ::alinous::remote::db::client::command::data::SchemaData;
+using ::alinous::remote::db::client::command::data::TableClusterData;
 using ::alinous::runtime::parallel::ThreadPool;
 using ::alinous::system::AlinousCore;
 using ::alinous::system::AlinousException;
@@ -139,8 +139,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}

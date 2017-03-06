@@ -18,6 +18,9 @@ class AlinousDatabase;}}
 namespace java {namespace io {
 class File;}}
 
+namespace alinous {namespace system {
+class AlinousCore;}}
+
 namespace alinous {namespace btree {
 class BTree;}}
 
@@ -90,6 +93,7 @@ using ::alinous::compile::sql::analyze::ScanTableMetadata;
 using ::alinous::db::AlinousDatabase;
 using ::alinous::db::table::DatatableConstants;
 using ::alinous::runtime::variant::VariantValue;
+using ::alinous::system::AlinousCore;
 using ::alinous::system::AlinousException;
 using ::alinous::system::ISystemLog;
 
@@ -123,8 +127,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}}}

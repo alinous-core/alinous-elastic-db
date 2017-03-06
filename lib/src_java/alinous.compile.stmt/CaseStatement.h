@@ -62,12 +62,8 @@ class CaseStatement : public AbstractAlinousStatement {
 public:
 	CaseStatement(const CaseStatement& base) = default;
 public:
-	CaseStatement(ThreadContext* ctx) throw()  : IObject(ctx), AbstractAlinousStatement(ctx), constId(nullptr)
-	{
-	}
-	void __construct_impl(ThreadContext* ctx) throw() 
-	{
-	}
+	CaseStatement(ThreadContext* ctx) throw() ;
+	void __construct_impl(ThreadContext* ctx) throw() ;
 	virtual ~CaseStatement() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 private:
@@ -85,8 +81,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}}

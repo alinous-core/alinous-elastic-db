@@ -24,14 +24,14 @@ class MonitorClientConnectionFactory;}}}}
 namespace alinous {namespace remote {namespace socket {
 class SocketConnectionPool;}}}
 
-namespace alinous {namespace remote {namespace monitor {namespace command {namespace commitId {
-class GetMaxCommitIdCommand;}}}}}
+namespace alinous {namespace remote {namespace monitor {namespace client {namespace command {namespace commitId {
+class GetMaxCommitIdCommand;}}}}}}
 
 namespace alinous {namespace remote {namespace socket {
 class ISocketConnection;}}}
 
-namespace alinous {namespace remote {namespace monitor {namespace command {
-class AbstractMonitorCommand;}}}}
+namespace alinous {namespace remote {namespace monitor {namespace client {namespace command {
+class AbstractMonitorCommand;}}}}}
 
 namespace alinous {namespace system {
 class AlinousException;}}
@@ -39,14 +39,14 @@ class AlinousException;}}
 namespace java {namespace io {
 class IOException;}}
 
-namespace alinous {namespace remote {namespace monitor {namespace command {namespace commitId {
-class NewCommitIdCommand;}}}}}
+namespace alinous {namespace remote {namespace monitor {namespace client {namespace command {namespace commitId {
+class NewCommitIdCommand;}}}}}}
 
 namespace alinous {namespace db {namespace trx {
 class DbVersionContext;}}}
 
-namespace alinous {namespace remote {namespace monitor {namespace command {namespace commitId {
-class NewTransactionCommand;}}}}}
+namespace alinous {namespace remote {namespace monitor {namespace client {namespace command {namespace commitId {
+class NewTransactionCommand;}}}}}}
 
 namespace alinous {namespace db {
 class ICommidIdPublisher;}}
@@ -69,10 +69,10 @@ using ::java::net::UnknownHostException;
 using ::alinous::db::AlinousDbException;
 using ::alinous::db::ICommidIdPublisher;
 using ::alinous::db::trx::DbVersionContext;
-using ::alinous::remote::monitor::command::AbstractMonitorCommand;
-using ::alinous::remote::monitor::command::commitId::GetMaxCommitIdCommand;
-using ::alinous::remote::monitor::command::commitId::NewCommitIdCommand;
-using ::alinous::remote::monitor::command::commitId::NewTransactionCommand;
+using ::alinous::remote::monitor::client::command::AbstractMonitorCommand;
+using ::alinous::remote::monitor::client::command::commitId::GetMaxCommitIdCommand;
+using ::alinous::remote::monitor::client::command::commitId::NewCommitIdCommand;
+using ::alinous::remote::monitor::client::command::commitId::NewTransactionCommand;
 using ::alinous::remote::socket::ISocketConnection;
 using ::alinous::remote::socket::SocketConnectionPool;
 using ::alinous::system::AlinousException;
@@ -103,8 +103,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}}}

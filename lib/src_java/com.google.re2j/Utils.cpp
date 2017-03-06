@@ -11,13 +11,13 @@
 #include "com.google.re2j/RE2.h"
 #include "com.google.re2j/Machine.h"
 #include "com.google.re2j/PatternSyntaxException.h"
+#include "com.google.re2j/Utils.h"
+#include "com.google.re2j/Unicode.h"
 #include "com.google.re2j/CharGroup.h"
 #include "com.google.re2j/CharClass.h"
 #include "com.google.re2j/Parser.h"
-#include "com.google.re2j/Unicode.h"
 #include "com.google.re2j/Compiler.h"
 #include "com.google.re2j/UnicodeTable2.h"
-#include "com.google.re2j/Utils.h"
 #include "com.google.re2j/UnicodeTables.h"
 #include "com.google.re2j/Pattern.h"
 #include "com.google.re2j/Matcher.h"
@@ -48,6 +48,12 @@ bool Utils::__init_static_variables(){
 	ctx->localGC();
 	delete ctx;
 	return true;
+}
+ Utils::Utils(ThreadContext* ctx) throw()  : IObject(ctx)
+{
+}
+void Utils::__construct_impl(ThreadContext* ctx) throw() 
+{
 }
  Utils::~Utils() throw() 
 {
@@ -243,6 +249,8 @@ int Utils::emptyOpContext(int r1, int r2, ThreadContext* ctx) throw()
 		op = op | (EMPTY_NO_WORD_BOUNDARY);
 	}
 	return op;
+}
+void Utils::__cleanUp(ThreadContext* ctx){
 }
 }}}
 

@@ -110,12 +110,8 @@ class TableList final : public IJoin {
 public:
 	TableList(const TableList& base) = default;
 public:
-	TableList(ThreadContext* ctx) throw()  : IObject(ctx), IJoin(ctx), list(GCUtils<ArrayList<IJoin> >::ins(this, (new(ctx) ArrayList<IJoin>(ctx)), ctx, __FILEW__, __LINE__, L""))
-	{
-	}
-	void __construct_impl(ThreadContext* ctx) throw() 
-	{
-	}
+	TableList(ThreadContext* ctx) throw() ;
+	void __construct_impl(ThreadContext* ctx) throw() ;
 	virtual ~TableList() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 private:
@@ -147,8 +143,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}}}}

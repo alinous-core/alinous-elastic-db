@@ -157,6 +157,7 @@ public:
 	AlinousModuleRepository* getModulerepository(ThreadContext* ctx) throw() ;
 	DataSourceManager* getDatabaseManager(ThreadContext* ctx) throw() ;
 	ISystemLog* getLogger(ThreadContext* ctx) throw() ;
+	void logError(Throwable* e, ThreadContext* ctx) throw() ;
 	ScriptRunner* getRunner(ThreadContext* ctx) throw() ;
 	AlinousScriptDebugger* getDebugger(ThreadContext* ctx) throw() ;
 	AlinousFunctionManager* getFunctionManager(ThreadContext* ctx) throw() ;
@@ -166,8 +167,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}

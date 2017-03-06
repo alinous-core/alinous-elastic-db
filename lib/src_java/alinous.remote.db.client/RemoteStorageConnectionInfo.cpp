@@ -2,7 +2,6 @@
 
 
 #include "alinous.remote.socket/ISocketConnection.h"
-#include "alinous.lock/LockObject.h"
 #include "alinous.remote.socket/ISocketConnectionFactory.h"
 #include "alinous.remote.socket/SocketConnectionPool.h"
 #include "alinous.remote.db.client/RemoteStorageConnectionInfo.h"
@@ -68,6 +67,8 @@ int RemoteStorageConnectionInfo::getPort(ThreadContext* ctx) throw()
 void RemoteStorageConnectionInfo::setPort(int port, ThreadContext* ctx) throw() 
 {
 	this->port = port;
+}
+void RemoteStorageConnectionInfo::__cleanUp(ThreadContext* ctx){
 }
 }}}}
 

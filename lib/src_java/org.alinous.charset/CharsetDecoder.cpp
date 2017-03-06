@@ -43,6 +43,12 @@ bool CharsetDecoder::__init_static_variables(){
 	delete ctx;
 	return true;
 }
+ CharsetDecoder::CharsetDecoder(ThreadContext* ctx) throw()  : IObject(ctx)
+{
+}
+void CharsetDecoder::__construct_impl(ThreadContext* ctx) throw() 
+{
+}
  CharsetDecoder::~CharsetDecoder() throw() 
 {
 	ThreadContext *ctx = ThreadContext::getCurentContext();
@@ -55,6 +61,8 @@ void CharsetDecoder::__releaseRegerences(bool prepare, ThreadContext* ctx) throw
 	if(!prepare){
 		return;
 	}
+}
+void CharsetDecoder::__cleanUp(ThreadContext* ctx){
 }
 }}}
 

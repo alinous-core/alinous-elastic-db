@@ -112,12 +112,8 @@ class ScanResultRecord : public IBTreeValue, public virtual IObject {
 public:
 	ScanResultRecord(const ScanResultRecord& base) = default;
 public:
-	ScanResultRecord(ThreadContext* ctx) throw()  : IObject(ctx), IBTreeValue(ctx), records(GCUtils<ArrayList<IDatabaseRecord> >::ins(this, (new(ctx) ArrayList<IDatabaseRecord>(ctx)), ctx, __FILEW__, __LINE__, L"")), tables(GCUtils<ArrayList<ScanTableIdentifier> >::ins(this, (new(ctx) ArrayList<ScanTableIdentifier>(ctx)), ctx, __FILEW__, __LINE__, L"")), lockingModeList(GCUtils<ArrayList<Integer> >::ins(this, (new(ctx) ArrayList<Integer>(ctx)), ctx, __FILEW__, __LINE__, L"")), soid(0)
-	{
-	}
-	void __construct_impl(ThreadContext* ctx) throw() 
-	{
-	}
+	ScanResultRecord(ThreadContext* ctx) throw() ;
+	void __construct_impl(ThreadContext* ctx) throw() ;
 	ScanResultRecord(ScanTableIdentifier* tableId, int kind, long long oid, DbTransaction* trx, IDatabaseRecord* record, int lockingMode, ThreadContext* ctx);
 	void __construct_impl(ScanTableIdentifier* tableId, int kind, long long oid, DbTransaction* trx, IDatabaseRecord* record, int lockingMode, ThreadContext* ctx);
 	ScanResultRecord(ScanTableIdentifier* tableId, long long oid, DbTransaction* trx, ScanTableMetadata* metadata, DomVariable* domVariable, ThreadContext* ctx);
@@ -159,8 +155,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}}}

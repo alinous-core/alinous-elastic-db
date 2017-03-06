@@ -1,7 +1,7 @@
 #ifndef ALINOUS_REMOTE_REGION_CLIENT_REMOTETABLESCHEME_H_
 #define ALINOUS_REMOTE_REGION_CLIENT_REMOTETABLESCHEME_H_
-namespace alinous {namespace remote {namespace region {namespace command {namespace data {
-class ClientSchemaData;}}}}}
+namespace alinous {namespace remote {namespace region {namespace client {namespace command {namespace data {
+class ClientSchemaData;}}}}}}
 
 namespace alinous {namespace remote {namespace socket {
 class SocketConnectionPool;}}}
@@ -9,8 +9,8 @@ class SocketConnectionPool;}}}
 namespace java {namespace util {
 template <typename  T, typename V> class Map;}}
 
-namespace alinous {namespace remote {namespace region {namespace command {namespace data {
-class ClientTableData;}}}}}
+namespace alinous {namespace remote {namespace region {namespace client {namespace command {namespace data {
+class ClientTableData;}}}}}}
 
 namespace java {namespace util {
 template <typename  T> class Iterator;}}
@@ -50,8 +50,8 @@ using ::java::util::Map;
 using ::alinous::db::ITableSchema;
 using ::alinous::db::table::IDatabaseTable;
 using ::alinous::lock::LockObject;
-using ::alinous::remote::region::command::data::ClientSchemaData;
-using ::alinous::remote::region::command::data::ClientTableData;
+using ::alinous::remote::region::client::command::data::ClientSchemaData;
+using ::alinous::remote::region::client::command::data::ClientTableData;
 using ::alinous::remote::socket::SocketConnectionPool;
 
 
@@ -79,8 +79,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}}}

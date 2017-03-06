@@ -89,12 +89,8 @@ class DdlColumnDescriptor final : public IAlinousElement, public IAlinousVisitor
 public:
 	DdlColumnDescriptor(const DdlColumnDescriptor& base) = default;
 public:
-	DdlColumnDescriptor(ThreadContext* ctx) throw()  : IObject(ctx), IAlinousElement(ctx), IAlinousVisitorContainer(ctx), name(nullptr), typeDescriptor(nullptr), defaultValue(nullptr), notnull(0), unique(0), check(nullptr)
-	{
-	}
-	void __construct_impl(ThreadContext* ctx) throw() 
-	{
-	}
+	DdlColumnDescriptor(ThreadContext* ctx) throw() ;
+	void __construct_impl(ThreadContext* ctx) throw() ;
 	virtual ~DdlColumnDescriptor() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 private:
@@ -133,8 +129,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}}}

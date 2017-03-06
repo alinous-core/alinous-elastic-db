@@ -25,6 +25,9 @@ namespace alinous {namespace db {namespace table {
 class TableMetadata;}}}
 
 namespace alinous {namespace db {namespace trx {namespace cache {
+class TrxStorageManager;}}}}
+
+namespace alinous {namespace db {namespace trx {namespace cache {
 class TrxRecordsCache;}}}}
 
 namespace alinous {namespace db {namespace table {namespace scan {
@@ -85,6 +88,7 @@ using ::alinous::db::trx::DbTransaction;
 using ::alinous::db::trx::cache::TrxRecordCacheIndex;
 using ::alinous::db::trx::cache::TrxRecordCacheIndexScanner;
 using ::alinous::db::trx::cache::TrxRecordsCache;
+using ::alinous::db::trx::cache::TrxStorageManager;
 using ::alinous::db::trx::scan::IFilterScanner;
 using ::alinous::db::trx::scan::ScanException;
 using ::alinous::db::trx::scan::ScanResultIndexKey;
@@ -97,12 +101,8 @@ class SingleTableIndexScanner final : public IFilterScanner, public virtual IObj
 public:
 	SingleTableIndexScanner(const SingleTableIndexScanner& base) = default;
 public:
-	SingleTableIndexScanner(ThreadContext* ctx) throw()  : IObject(ctx), IFilterScanner(ctx), trx(nullptr), scanner(nullptr), insertScanner(nullptr), updateScanner(nullptr), result(nullptr)
-	{
-	}
-	void __construct_impl(ThreadContext* ctx) throw() 
-	{
-	}
+	SingleTableIndexScanner(ThreadContext* ctx) throw() ;
+	void __construct_impl(ThreadContext* ctx) throw() ;
 	virtual ~SingleTableIndexScanner() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 private:
@@ -124,8 +124,7 @@ public:
 	static bool __init_done;
 	static bool __init_static_variables();
 public:
-	static void __cleanUp(ThreadContext* ctx){
-	}
+	static void __cleanUp(ThreadContext* ctx);
 };
 
 }}}}

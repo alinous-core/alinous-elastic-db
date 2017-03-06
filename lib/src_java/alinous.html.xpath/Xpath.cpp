@@ -53,6 +53,12 @@ bool Xpath::__init_static_variables(){
 	delete ctx;
 	return true;
 }
+ Xpath::Xpath(ThreadContext* ctx) throw()  : IObject(ctx), IXpathStatement(ctx), contexts(GCUtils<ArrayList<XpathContext> >::ins(this, (new(ctx) ArrayList<XpathContext>(ctx)), ctx, __FILEW__, __LINE__, L""))
+{
+}
+void Xpath::__construct_impl(ThreadContext* ctx) throw() 
+{
+}
  Xpath::~Xpath() throw() 
 {
 	ThreadContext *ctx = ThreadContext::getCurentContext();
@@ -111,6 +117,8 @@ String* Xpath::toString(ThreadContext* ctx) throw()
 		buffer->append(context->toString(ctx), ctx);
 	}
 	return buffer->toString(ctx);
+}
+void Xpath::__cleanUp(ThreadContext* ctx){
 }
 }}}
 

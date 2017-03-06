@@ -27,6 +27,12 @@ bool AbstractHttpParameter::__init_static_variables(){
 	delete ctx;
 	return true;
 }
+ AbstractHttpParameter::AbstractHttpParameter(ThreadContext* ctx) throw()  : IObject(ctx), paramType(0)
+{
+}
+void AbstractHttpParameter::__construct_impl(ThreadContext* ctx) throw() 
+{
+}
  AbstractHttpParameter::~AbstractHttpParameter() throw() 
 {
 	ThreadContext *ctx = ThreadContext::getCurentContext();
@@ -40,6 +46,8 @@ void AbstractHttpParameter::__releaseRegerences(bool prepare, ThreadContext* ctx
 	if(!prepare){
 		return;
 	}
+}
+void AbstractHttpParameter::__cleanUp(ThreadContext* ctx){
 }
 }}}}
 
