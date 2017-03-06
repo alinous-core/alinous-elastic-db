@@ -35,9 +35,9 @@ template class ::java::util::HashMap<::alinous::html::DomNode, ::java::util::Arr
 template class ::java::util::HashMap<::java::lang::String, ::alinous::remote::db::command::data::TableClusterData>;
 template class ::java::util::HashMap<::java::lang::String, ::alinous::remote::db::command::data::SchemaData>;
 template class ::java::util::HashMap<::java::lang::String, ::alinous::remote::monitor::RegionNodeInfo>;
-template class ::java::util::HashMap<::java::lang::Long, ::alinous::remote::region::RegionInsertExecutor>;
 template class ::java::util::HashMap<::java::lang::String, ::alinous::remote::region::NodeTableClaster>;
 template class ::java::util::HashMap<::java::lang::String, ::alinous::remote::region::NodeRegionSchema>;
+template class ::java::util::HashMap<::java::lang::Long, ::alinous::remote::region::RegionInsertExecutor>;
 template class ::java::util::HashMap<::java::lang::String, ::alinous::remote::region::client::DatabaseTableClient>;
 template class ::java::util::HashMap<::java::lang::String, ::alinous::remote::region::client::RemoteTableScheme>;
 template class ::java::util::HashMap<::java::lang::String, ::alinous::remote::region::command::data::ClientSchemaData>;

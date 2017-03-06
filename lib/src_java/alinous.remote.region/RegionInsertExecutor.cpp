@@ -179,6 +179,11 @@
 #include "alinous.db/ITableSchema.h"
 #include "alinous.db/TableSchemaCollection.h"
 #include "alinous.db.trx/CreateIndexMetadata.h"
+#include "alinous.remote.db.command.data/SchemaData.h"
+#include "alinous.db/TableSchema.h"
+#include "alinous.db.trx/DbTransactionManager.h"
+#include "alinous.db.trx/DbTransaction.h"
+#include "alinous.remote.region.client.transaction/AbstractRemoteClientTransaction.h"
 #include "alinous.db.trx.cache/TrxStorageManager.h"
 #include "alinous.compile.expression.expstream/ExpressionStream.h"
 #include "alinous.compile.sql.expression/AbstractSQLExpression.h"
@@ -192,8 +197,6 @@
 #include "alinous.compile.sql/SelectStatement.h"
 #include "alinous.compile.sql/UpdateSet.h"
 #include "alinous.compile.sql/UpdateStatement.h"
-#include "alinous.remote.db.command.data/SchemaData.h"
-#include "alinous.db/TableSchema.h"
 #include "alinous.db/ITableRegion.h"
 #include "alinous.db/ICommidIdPublisher.h"
 #include "alinous.db/LocalCommitIdPublisher.h"
@@ -206,8 +209,6 @@
 #include "alinous.db.trx/TrxLockContext.h"
 #include "alinous.db.trx.scan/ScanResultIndex.h"
 #include "alinous.db.trx.scan/ScanResult.h"
-#include "alinous.db.trx/DbTransactionManager.h"
-#include "alinous.db.trx/DbTransaction.h"
 #include "java.lang/Integer.h"
 #include "alinous.db.table/IScannableIndex.h"
 #include "alinous.db.table/IDatabaseTable.h"
@@ -287,7 +288,7 @@
 #include "alinous.remote.region/NodeRegionResponceActionFactory.h"
 #include "java.lang/Long.h"
 #include "alinous.remote.region/RegionInsertExecutor.h"
-#include "alinous.remote.region/RegionInsertExecutorPool.h"
+#include "alinous.remote.region/RegionTpcExecutorPool.h"
 #include "alinous.remote.region/NodeRegionServer.h"
 #include "alinous.system.config/SystemInfo.h"
 #include "alinous.system.config/WebHandlerInfo.h"
@@ -420,11 +421,14 @@ void RegionInsertExecutor::__releaseRegerences(bool prepare, ThreadContext* ctx)
 		return;
 	}
 }
-void RegionInsertExecutor::execInsert(ArrayList<ClientNetworkRecord>* list, String* schema, String* table, ThreadContext* ctx) throw() 
+void RegionInsertExecutor::prepareInsert(ArrayList<ClientNetworkRecord>* list, String* schema, String* table, ThreadContext* ctx) throw() 
 {
 	RegionShardTable* shard = this->ref->getCluster(schema, table, ctx);
 	shard->setCommitId(this->commitId, ctx);
 	shard->putRecords(list, ctx);
+}
+void RegionInsertExecutor::tpcCommitInsert(ThreadContext* ctx) throw() 
+{
 }
 void RegionInsertExecutor::dispose(ThreadContext* ctx) throw() 
 {

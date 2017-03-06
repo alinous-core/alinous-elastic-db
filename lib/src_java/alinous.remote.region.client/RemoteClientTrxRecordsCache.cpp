@@ -173,6 +173,11 @@
 #include "alinous.db/ITableSchema.h"
 #include "alinous.db/TableSchemaCollection.h"
 #include "alinous.db.trx/CreateIndexMetadata.h"
+#include "alinous.remote.db.command.data/SchemaData.h"
+#include "alinous.db/TableSchema.h"
+#include "alinous.db.trx/DbTransactionManager.h"
+#include "alinous.db.trx/DbTransaction.h"
+#include "alinous.remote.region.client.transaction/AbstractRemoteClientTransaction.h"
 #include "alinous.db.trx.cache/TrxStorageManager.h"
 #include "alinous.compile.expression.expstream/ExpressionStream.h"
 #include "alinous.compile.sql.expression/AbstractSQLExpression.h"
@@ -186,8 +191,6 @@
 #include "alinous.compile.sql/SelectStatement.h"
 #include "alinous.compile.sql/UpdateSet.h"
 #include "alinous.compile.sql/UpdateStatement.h"
-#include "alinous.remote.db.command.data/SchemaData.h"
-#include "alinous.db/TableSchema.h"
 #include "alinous.db/ITableRegion.h"
 #include "alinous.db/ICommidIdPublisher.h"
 #include "alinous.db/LocalCommitIdPublisher.h"
@@ -200,8 +203,6 @@
 #include "alinous.db.trx/TrxLockContext.h"
 #include "alinous.db.trx.scan/ScanResultIndex.h"
 #include "alinous.db.trx.scan/ScanResult.h"
-#include "alinous.db.trx/DbTransactionManager.h"
-#include "alinous.db.trx/DbTransaction.h"
 #include "java.lang/Integer.h"
 #include "alinous.db.table/IScannableIndex.h"
 #include "alinous.db.table/IDatabaseTable.h"
@@ -281,7 +282,7 @@
 #include "alinous.remote.region/NodeReferenceManager.h"
 #include "java.lang/Long.h"
 #include "alinous.remote.region/RegionInsertExecutor.h"
-#include "alinous.remote.region/RegionInsertExecutorPool.h"
+#include "alinous.remote.region/RegionTpcExecutorPool.h"
 #include "alinous.remote.region/NodeRegionServer.h"
 #include "alinous.system.config/SystemInfo.h"
 #include "alinous.system.config/WebHandlerInfo.h"
@@ -408,7 +409,11 @@ void RemoteClientTrxRecordsCache::__releaseRegerences(bool prepare, ThreadContex
 	}
 	TrxRecordsCache::__releaseRegerences(true, ctx);
 }
-void RemoteClientTrxRecordsCache::commitInsertRecord(DbTransaction* trx, AlinousDatabase* db, IDatabaseTable* table, long long newCommitId, ThreadContext* ctx)
+bool RemoteClientTrxRecordsCache::commitUpdateRecord(AlinousDatabase* db, IDatabaseTable* table, long long newCommitId, ThreadContext* ctx)
+{
+	return TrxRecordsCache::commitUpdateRecord(db, table, newCommitId, ctx);
+}
+bool RemoteClientTrxRecordsCache::commitInsertRecord(DbTransaction* trx, AlinousDatabase* db, IDatabaseTable* table, long long newCommitId, ThreadContext* ctx)
 {
 	ArrayList<IDatabaseRecord>* list = (new(ctx) ArrayList<IDatabaseRecord>(ctx));
 	BTreeScanner* scanner = (new(ctx) BTreeScanner(this->storage, ctx));
@@ -421,7 +426,12 @@ void RemoteClientTrxRecordsCache::commitInsertRecord(DbTransaction* trx, Alinous
 		list->add(record, ctx);
 	}
 	scanner->endScan(ctx);
+	if(list->isEmpty(ctx))
+	{
+		return false;
+	}
 	table->insertData(this->trx, list, newCommitId, nullptr, this->trx->getLogger(ctx), ctx);
+	return true;
 }
 }}}}
 

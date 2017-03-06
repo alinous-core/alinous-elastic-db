@@ -43,7 +43,8 @@ private:
 	Long* trxId;
 	long long commitId;
 public:
-	void execInsert(ArrayList<ClientNetworkRecord>* list, String* schema, String* table, ThreadContext* ctx) throw() ;
+	void prepareInsert(ArrayList<ClientNetworkRecord>* list, String* schema, String* table, ThreadContext* ctx) throw() ;
+	void tpcCommitInsert(ThreadContext* ctx) throw() ;
 	void dispose(ThreadContext* ctx) throw() ;
 	Long* getTrxId(ThreadContext* ctx) throw() ;
 public:

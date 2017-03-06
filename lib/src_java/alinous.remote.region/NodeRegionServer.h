@@ -76,7 +76,7 @@ namespace alinous {namespace lock {
 class LockObject;}}
 
 namespace alinous {namespace remote {namespace region {
-class RegionInsertExecutorPool;}}}
+class RegionTpcExecutorPool;}}}
 
 namespace java {namespace lang {
 class IObject;
@@ -135,7 +135,7 @@ private:
 	long long nodeClusterRevision;
 	String* region;
 	AlinousCore* core;
-	RegionInsertExecutorPool* insertSessions;
+	RegionTpcExecutorPool* insertSessions;
 private:
 	static String* THREAD_NAME;
 public:

@@ -170,6 +170,10 @@
 #include "alinous.db/ITableSchema.h"
 #include "alinous.db/TableSchemaCollection.h"
 #include "alinous.db.trx/CreateIndexMetadata.h"
+#include "alinous.remote.db.command.data/SchemaData.h"
+#include "alinous.db/TableSchema.h"
+#include "alinous.db.trx/DbTransaction.h"
+#include "alinous.remote.region.client.transaction/AbstractRemoteClientTransaction.h"
 #include "alinous.db.trx.cache/TrxStorageManager.h"
 #include "alinous.compile.expression.expstream/ExpressionStream.h"
 #include "alinous.compile.sql.expression/AbstractSQLExpression.h"
@@ -183,8 +187,6 @@
 #include "alinous.compile.sql/SelectStatement.h"
 #include "alinous.compile.sql/UpdateSet.h"
 #include "alinous.compile.sql/UpdateStatement.h"
-#include "alinous.remote.db.command.data/SchemaData.h"
-#include "alinous.db/TableSchema.h"
 #include "alinous.db.table.lockmonitor/DatabaseLockException.h"
 #include "alinous.db/ITableRegion.h"
 #include "alinous.db/ICommidIdPublisher.h"
@@ -197,7 +199,6 @@
 #include "alinous.db.table/DatabaseRecord.h"
 #include "alinous.db.trx.scan/ScanResultIndex.h"
 #include "alinous.db.trx.scan/ScanResult.h"
-#include "alinous.db.trx/DbTransaction.h"
 #include "alinous.db.trx/DbTransactionManager.h"
 #include "alinous.html/DomDocument.h"
 #include "alinous.html.xpath/IXpathElement.h"
@@ -270,7 +271,7 @@
 #include "alinous.remote.region/NodeReferenceManager.h"
 #include "java.lang/Long.h"
 #include "alinous.remote.region/RegionInsertExecutor.h"
-#include "alinous.remote.region/RegionInsertExecutorPool.h"
+#include "alinous.remote.region/RegionTpcExecutorPool.h"
 #include "alinous.remote.region/NodeRegionServer.h"
 #include "alinous.system.config/SystemInfo.h"
 #include "alinous.system.config/WebHandlerInfo.h"
@@ -704,7 +705,7 @@ void DbTransaction::commitUpdateInsert(long long newCommitId, ThreadContext* ctx
 		{
 			try
 			{
-				this->trxStorageManager->commit(newCommitId, ctx);
+				this->trxStorageManager->commitLocal(newCommitId, ctx);
 			}
 			catch(IOException* e)
 			{

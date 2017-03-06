@@ -1,5 +1,5 @@
-#ifndef ALINOUS_REMOTE_REGION_REGIONINSERTEXECUTORPOOL_H_
-#define ALINOUS_REMOTE_REGION_REGIONINSERTEXECUTORPOOL_H_
+#ifndef ALINOUS_REMOTE_REGION_REGIONTPCEXECUTORPOOL_H_
+#define ALINOUS_REMOTE_REGION_REGIONTPCEXECUTORPOOL_H_
 namespace alinous {namespace remote {namespace region {
 class RegionInsertExecutor;}}}
 
@@ -34,25 +34,25 @@ using ::alinous::lock::LockObject;
 
 
 
-class RegionInsertExecutorPool final : public virtual IObject {
+class RegionTpcExecutorPool final : public virtual IObject {
 public:
-	RegionInsertExecutorPool(const RegionInsertExecutorPool& base) = default;
+	RegionTpcExecutorPool(const RegionTpcExecutorPool& base) = default;
 public:
-	RegionInsertExecutorPool(ThreadContext* ctx) throw()  : IObject(ctx), sessions(GCUtils<Map<Long,RegionInsertExecutor> >::ins(this, (new(ctx) HashMap<Long,RegionInsertExecutor>(ctx)), ctx, __FILEW__, __LINE__, L"")), lock(__GC_INS(this, (new(ctx) LockObject(ctx)), LockObject))
+	RegionTpcExecutorPool(ThreadContext* ctx) throw()  : IObject(ctx), insertSessions(GCUtils<Map<Long,RegionInsertExecutor> >::ins(this, (new(ctx) HashMap<Long,RegionInsertExecutor>(ctx)), ctx, __FILEW__, __LINE__, L"")), lock(__GC_INS(this, (new(ctx) LockObject(ctx)), LockObject))
 	{
 	}
 	void __construct_impl(ThreadContext* ctx) throw() 
 	{
 	}
-	virtual ~RegionInsertExecutorPool() throw();
+	virtual ~RegionTpcExecutorPool() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 private:
-	Map<Long,RegionInsertExecutor>* sessions;
+	Map<Long,RegionInsertExecutor>* insertSessions;
 	LockObject* lock;
 public:
-	void putSession(RegionInsertExecutor* exec, ThreadContext* ctx) throw() ;
-	RegionInsertExecutor* getSession(long long trxId, ThreadContext* ctx) throw() ;
-	void removeSession(long long trxId, ThreadContext* ctx) throw() ;
+	void putInsertSession(RegionInsertExecutor* exec, ThreadContext* ctx) throw() ;
+	RegionInsertExecutor* getInsertSession(long long trxId, ThreadContext* ctx) throw() ;
+	void removeInsertSession(long long trxId, ThreadContext* ctx) throw() ;
 public:
 	static bool __init_done;
 	static bool __init_static_variables();
@@ -63,4 +63,4 @@ public:
 
 }}}
 
-#endif /* end of ALINOUS_REMOTE_REGION_REGIONINSERTEXECUTORPOOL_H_ */
+#endif /* end of ALINOUS_REMOTE_REGION_REGIONTPCEXECUTORPOOL_H_ */

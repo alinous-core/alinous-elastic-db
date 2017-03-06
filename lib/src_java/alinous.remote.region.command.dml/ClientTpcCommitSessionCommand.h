@@ -1,5 +1,5 @@
-#ifndef ALINOUS_REMOTE_REGION_COMMAND_DML_CLIENTFINISHINSERTCOMMITSESSION_H_
-#define ALINOUS_REMOTE_REGION_COMMAND_DML_CLIENTFINISHINSERTCOMMITSESSION_H_
+#ifndef ALINOUS_REMOTE_REGION_COMMAND_DML_CLIENTTPCCOMMITSESSIONCOMMAND_H_
+#define ALINOUS_REMOTE_REGION_COMMAND_DML_CLIENTTPCCOMMITSESSIONCOMMAND_H_
 namespace alinous {namespace remote {namespace region {
 class NodeRegionServer;}}}
 
@@ -44,13 +44,13 @@ using ::alinous::runtime::dom::VariableException;
 
 
 
-class ClientFinishInsertCommitSession final : public AbstractNodeRegionCommand {
+class ClientTpcCommitSessionCommand final : public AbstractNodeRegionCommand {
 public:
-	ClientFinishInsertCommitSession(const ClientFinishInsertCommitSession& base) = default;
+	ClientTpcCommitSessionCommand(const ClientTpcCommitSessionCommand& base) = default;
 public:
-	ClientFinishInsertCommitSession(ThreadContext* ctx) throw() ;
+	ClientTpcCommitSessionCommand(ThreadContext* ctx) throw() ;
 	void __construct_impl(ThreadContext* ctx) throw() ;
-	virtual ~ClientFinishInsertCommitSession() throw();
+	virtual ~ClientTpcCommitSessionCommand() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 private:
 	long long commitId;
@@ -73,4 +73,4 @@ public:
 
 }}}}}
 
-#endif /* end of ALINOUS_REMOTE_REGION_COMMAND_DML_CLIENTFINISHINSERTCOMMITSESSION_H_ */
+#endif /* end of ALINOUS_REMOTE_REGION_COMMAND_DML_CLIENTTPCCOMMITSESSIONCOMMAND_H_ */

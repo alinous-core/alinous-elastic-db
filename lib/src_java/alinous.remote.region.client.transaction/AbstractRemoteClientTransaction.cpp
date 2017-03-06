@@ -1,6 +1,7 @@
 #include "include/global.h"
 
 
+#include "alinous.btree/BTreeException.h"
 #include "alinous.lock/LockObject.h"
 #include "alinous.lock/ConcurrentGate.h"
 #include "alinous.buffer.storage/FileAccessWrapper.h"
@@ -31,6 +32,7 @@
 #include "alinous.numeric/RoundingMode.h"
 #include "alinous.numeric/MathContext.h"
 #include "alinous.numeric/BigDecimal.h"
+#include "alinous.system/AlinousException.h"
 #include "alinous.btree/IValueFetcher.h"
 #include "alinous.btree/IBTreeValue.h"
 #include "alinous.compile.analyse/DomVariableDeclareSource.h"
@@ -109,7 +111,6 @@
 #include "alinous.btree/BTreeCacheRecord.h"
 #include "alinous.btree/BTreeGlobalCache.h"
 #include "alinous.compile.sql.analyze/ScanTableColumnIdentifier.h"
-#include "alinous.system/AlinousException.h"
 #include "alinous.db/AlinousDbException.h"
 #include "alinous.db.table.lockmonitor/ConcurrentGatePool.h"
 #include "alinous.db.table.lockmonitor/IDatabaseLock.h"
@@ -261,7 +262,7 @@
 #include "alinous.remote.region/NodeReferenceManager.h"
 #include "java.lang/Long.h"
 #include "alinous.remote.region/RegionInsertExecutor.h"
-#include "alinous.remote.region/RegionInsertExecutorPool.h"
+#include "alinous.remote.region/RegionTpcExecutorPool.h"
 #include "alinous.remote.region/NodeRegionServer.h"
 #include "alinous.system.config/SystemInfo.h"
 #include "alinous.system.config/WebHandlerInfo.h"
@@ -362,6 +363,8 @@
 #include "alinous.compile.declare/ClassExtends.h"
 #include "alinous.compile.declare/ClassImplements.h"
 #include "alinous.compile.declare/AlinousClass.h"
+#include "alinous.runtime/ExecutionException.h"
+#include "alinous.runtime.dom/VariableException.h"
 #include "alinous.btree/BTree.h"
 #include "alinous.db.trx/TrxLockManager.h"
 #include "alinous.db/ConnectInfo.h"
@@ -420,6 +423,35 @@ void AbstractRemoteClientTransaction::createTable(TableSchema* schema, ThreadCon
 		throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3602(), ctx));
 	}
 	DbTransaction::createTable(schema, ctx);
+}
+void AbstractRemoteClientTransaction::commitUpdateInsert(long long newCommitId, ThreadContext* ctx)
+{
+	if(this->trxStorageManager->isHasOperation(ctx))
+	{
+		{
+			try
+			{
+				this->trxStorageManager->commitRemote(this, newCommitId, ctx);
+			}
+			catch(IOException* e)
+			{
+				(new(ctx) AlinousDbException(ConstStr::getCNST_STR_1712(), e, ctx));
+			}
+			catch(InterruptedException* e)
+			{
+				(new(ctx) AlinousDbException(ConstStr::getCNST_STR_1712(), e, ctx));
+			}
+			catch(VariableException* e)
+			{
+				(new(ctx) AlinousDbException(ConstStr::getCNST_STR_1712(), e, ctx));
+			}
+			catch(BTreeException* e)
+			{
+				(new(ctx) AlinousDbException(ConstStr::getCNST_STR_1712(), e, ctx));
+			}
+		}
+	}
+	this->trxStorageManager->reset(ctx);
 }
 }}}}}
 

@@ -179,6 +179,11 @@
 #include "alinous.db/ITableSchema.h"
 #include "alinous.db/TableSchemaCollection.h"
 #include "alinous.db.trx/CreateIndexMetadata.h"
+#include "alinous.remote.db.command.data/SchemaData.h"
+#include "alinous.db/TableSchema.h"
+#include "alinous.db.trx/DbTransactionManager.h"
+#include "alinous.db.trx/DbTransaction.h"
+#include "alinous.remote.region.client.transaction/AbstractRemoteClientTransaction.h"
 #include "alinous.db.trx.cache/TrxStorageManager.h"
 #include "alinous.compile.expression.expstream/ExpressionStream.h"
 #include "alinous.compile.sql.expression/AbstractSQLExpression.h"
@@ -192,8 +197,6 @@
 #include "alinous.compile.sql/SelectStatement.h"
 #include "alinous.compile.sql/UpdateSet.h"
 #include "alinous.compile.sql/UpdateStatement.h"
-#include "alinous.remote.db.command.data/SchemaData.h"
-#include "alinous.db/TableSchema.h"
 #include "alinous.db/ITableRegion.h"
 #include "alinous.db/ICommidIdPublisher.h"
 #include "alinous.db/LocalCommitIdPublisher.h"
@@ -206,8 +209,6 @@
 #include "alinous.db.trx/TrxLockContext.h"
 #include "alinous.db.trx.scan/ScanResultIndex.h"
 #include "alinous.db.trx.scan/ScanResult.h"
-#include "alinous.db.trx/DbTransactionManager.h"
-#include "alinous.db.trx/DbTransaction.h"
 #include "java.lang/Integer.h"
 #include "alinous.db.table/IScannableIndex.h"
 #include "alinous.db.table/IDatabaseTable.h"
@@ -287,7 +288,7 @@
 #include "alinous.remote.region/NodeRegionResponceActionFactory.h"
 #include "java.lang/Long.h"
 #include "alinous.remote.region/RegionInsertExecutor.h"
-#include "alinous.remote.region/RegionInsertExecutorPool.h"
+#include "alinous.remote.region/RegionTpcExecutorPool.h"
 #include "alinous.remote.region/NodeRegionServer.h"
 #include "alinous.system.config/SystemInfo.h"
 #include "alinous.system.config/WebHandlerInfo.h"
@@ -379,62 +380,62 @@ namespace alinous {namespace remote {namespace region {
 
 
 
-bool RegionInsertExecutorPool::__init_done = __init_static_variables();
-bool RegionInsertExecutorPool::__init_static_variables(){
+bool RegionTpcExecutorPool::__init_done = __init_static_variables();
+bool RegionTpcExecutorPool::__init_static_variables(){
 	Java2CppSystem::getSelf();
 	ThreadContext* ctx = ThreadContext::newThreadContext();
 	{
-		GCNotifier __refobj1(ctx, __FILEW__, __LINE__, L"RegionInsertExecutorPool", L"__init_static_variables");
+		GCNotifier __refobj1(ctx, __FILEW__, __LINE__, L"RegionTpcExecutorPool", L"__init_static_variables");
 	}
 	ctx->localGC();
 	delete ctx;
 	return true;
 }
- RegionInsertExecutorPool::~RegionInsertExecutorPool() throw() 
+ RegionTpcExecutorPool::~RegionTpcExecutorPool() throw() 
 {
 	ThreadContext *ctx = ThreadContext::getCurentContext();
 	if(ctx != nullptr){ctx->incGcDenial();}
 	__releaseRegerences(false, ctx);
 	if(ctx != nullptr){ctx->decGcDenial();}
 }
-void RegionInsertExecutorPool::__releaseRegerences(bool prepare, ThreadContext* ctx) throw() 
+void RegionTpcExecutorPool::__releaseRegerences(bool prepare, ThreadContext* ctx) throw() 
 {
-	ObjectEraser __e_obj1(ctx, __FILEW__, __LINE__, L"RegionInsertExecutorPool", L"~RegionInsertExecutorPool");
-	__e_obj1.add(this->sessions, this);
-	sessions = nullptr;
+	ObjectEraser __e_obj1(ctx, __FILEW__, __LINE__, L"RegionTpcExecutorPool", L"~RegionTpcExecutorPool");
+	__e_obj1.add(this->insertSessions, this);
+	insertSessions = nullptr;
 	__e_obj1.add(this->lock, this);
 	lock = nullptr;
 	if(!prepare){
 		return;
 	}
 }
-void RegionInsertExecutorPool::putSession(RegionInsertExecutor* exec, ThreadContext* ctx) throw() 
+void RegionTpcExecutorPool::putInsertSession(RegionInsertExecutor* exec, ThreadContext* ctx) throw() 
 {
 	{
 		SynchronizedBlockObj __synchronized_2(this->lock, ctx);
-		this->sessions->put(exec->getTrxId(ctx), exec, ctx);
+		this->insertSessions->put(exec->getTrxId(ctx), exec, ctx);
 	}
 }
-RegionInsertExecutor* RegionInsertExecutorPool::getSession(long long trxId, ThreadContext* ctx) throw() 
+RegionInsertExecutor* RegionTpcExecutorPool::getInsertSession(long long trxId, ThreadContext* ctx) throw() 
 {
 	{
 		SynchronizedBlockObj __synchronized_2(this->lock, ctx);
 		Long* key = (new(ctx) Long(trxId, ctx));
-		return this->sessions->get(key, ctx);
+		return this->insertSessions->get(key, ctx);
 	}
 }
-void RegionInsertExecutorPool::removeSession(long long trxId, ThreadContext* ctx) throw() 
+void RegionTpcExecutorPool::removeInsertSession(long long trxId, ThreadContext* ctx) throw() 
 {
 	{
 		SynchronizedBlockObj __synchronized_2(this->lock, ctx);
 		Long* key = (new(ctx) Long(trxId, ctx));
-		RegionInsertExecutor* exec = this->sessions->get(key, ctx);
+		RegionInsertExecutor* exec = this->insertSessions->get(key, ctx);
 		if(exec == nullptr)
 		{
 			return;
 		}
 		exec->dispose(ctx);
-		this->sessions->remove(key, ctx);
+		this->insertSessions->remove(key, ctx);
 	}
 }
 }}}

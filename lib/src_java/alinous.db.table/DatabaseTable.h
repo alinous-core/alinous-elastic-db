@@ -24,8 +24,14 @@ class TableColumnMetadata;}}}
 namespace alinous {namespace db {namespace table {namespace lockmonitor {
 class IThreadLocker;}}}}
 
+namespace alinous {namespace db {namespace trx {
+class DbTransaction;}}}
+
 namespace alinous {namespace db {namespace table {
 class DatatableUpdateSupport;}}}
+
+namespace alinous {namespace db {
+class AlinousDbException;}}
 
 namespace alinous {namespace db {namespace table {namespace lockmonitor {
 class DatabaseLockException;}}}}
@@ -44,10 +50,12 @@ using namespace ::java::lang;
 using ::java::util::Iterator;
 using ::java::util::ArrayList;
 using ::alinous::compile::sql::analyze::ScanTableColumnIdentifier;
+using ::alinous::db::AlinousDbException;
 using ::alinous::db::table::cache::RecordCacheEngine;
 using ::alinous::db::table::lockmonitor::DBThreadMonitor;
 using ::alinous::db::table::lockmonitor::DatabaseLockException;
 using ::alinous::db::table::lockmonitor::IThreadLocker;
+using ::alinous::db::trx::DbTransaction;
 using ::alinous::runtime::parallel::ThreadPool;
 using ::alinous::system::AlinousException;
 
@@ -77,6 +85,7 @@ public:
 	void shareUnlockRow(long long oid, IThreadLocker* locker, ThreadContext* ctx) final;
 	void updateLockRow(long long oid, IThreadLocker* locker, ThreadContext* ctx) final;
 	void updateUnlockRow(long long oid, IThreadLocker* locker, ThreadContext* ctx) final;
+	void finishCommitSession(DbTransaction* trx, long long newCommitId, ThreadContext* ctx) final;
 private:
 	bool matchIndexByIdList(ArrayList<TableColumnMetadata>* columnsMetadataList, ArrayList<ScanTableColumnIdentifier>* columns, ThreadContext* ctx) throw() ;
 	bool matchIndexByStrList(ArrayList<TableColumnMetadata>* columnsMetadataList, ArrayList<String>* columns, ThreadContext* ctx) throw() ;

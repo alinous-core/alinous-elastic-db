@@ -21,17 +21,20 @@ class AlinousDbException;}}
 namespace java {namespace util {
 template <typename  T, typename V> class HashMap;}}
 
+namespace alinous {namespace remote {namespace region {namespace client {namespace transaction {
+class AbstractRemoteClientTransaction;}}}}}
+
 namespace alinous {namespace db {
 class AlinousDatabase;}}
+
+namespace alinous {namespace db {namespace table {
+class IDatabaseTable;}}}
 
 namespace java {namespace util {
 template <typename  T> class Iterator;}}
 
 namespace alinous {namespace db {
 class TableSchemaCollection;}}
-
-namespace alinous {namespace db {namespace table {
-class IDatabaseTable;}}}
 
 namespace alinous {namespace system {
 class AlinousException;}}
@@ -83,6 +86,7 @@ using ::alinous::db::table::IDatabaseTable;
 using ::alinous::db::table::TableMetadata;
 using ::alinous::db::trx::CreateIndexMetadata;
 using ::alinous::db::trx::DbTransaction;
+using ::alinous::remote::region::client::transaction::AbstractRemoteClientTransaction;
 using ::alinous::runtime::dom::VariableException;
 using ::alinous::system::AlinousException;
 using ::alinous::system::utils::FileUtils;
@@ -108,7 +112,8 @@ public:
 	TrxRecordsCache* getUpdateCache(String* schema, String* table, ThreadContext* ctx);
 	TrxRecordsCache* getUpdateCacheWithCreate(String* schema, String* table, ThreadContext* ctx);
 	TrxRecordsCache* getInsertCacheWithCreate(String* schema, String* table, ThreadContext* ctx);
-	void commit(long long newCommitId, ThreadContext* ctx);
+	void commitRemote(AbstractRemoteClientTransaction* trx, long long newCommitId, ThreadContext* ctx);
+	void commitLocal(long long newCommitId, ThreadContext* ctx);
 	bool isHasOperation(ThreadContext* ctx) throw() ;
 	void setHasOperation(bool hasOperation, ThreadContext* ctx) throw() ;
 	void reset(ThreadContext* ctx) throw() ;
@@ -116,6 +121,10 @@ public:
 	void addIndex(CreateIndexMetadata* createMeta, TableMetadata* tblmetadata, AlinousDatabase* database, ThreadContext* ctx);
 private:
 	void initStorage(ThreadContext* ctx) throw() ;
+	void tpcCommitAll(AbstractRemoteClientTransaction* trx, HashMap<String,IDatabaseTable>* tables, long long newCommitId, ThreadContext* ctx);
+	void commitRemoteInsert(AlinousDatabase* db, long long newCommitId, HashMap<String,IDatabaseTable>* tables, ThreadContext* ctx);
+	void commitRemoteUpdate(AlinousDatabase* db, long long newCommitId, HashMap<String,IDatabaseTable>* tables, ThreadContext* ctx);
+	void commitRemoteDelete(AlinousDatabase* db, long long newCommitId, HashMap<String,IDatabaseTable>* tables, ThreadContext* ctx) throw() ;
 	void commitInsertLocal(long long newCommitId, AlinousDatabase* db, ThreadContext* ctx);
 public:
 	static bool __init_done;

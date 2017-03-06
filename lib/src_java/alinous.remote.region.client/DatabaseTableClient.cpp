@@ -174,6 +174,11 @@
 #include "alinous.db/ITableSchema.h"
 #include "alinous.db/TableSchemaCollection.h"
 #include "alinous.db.trx/CreateIndexMetadata.h"
+#include "alinous.remote.db.command.data/SchemaData.h"
+#include "alinous.db/TableSchema.h"
+#include "alinous.db.trx/DbTransactionManager.h"
+#include "alinous.db.trx/DbTransaction.h"
+#include "alinous.remote.region.client.transaction/AbstractRemoteClientTransaction.h"
 #include "alinous.db.trx.cache/TrxStorageManager.h"
 #include "alinous.compile.expression.expstream/ExpressionStream.h"
 #include "alinous.compile.sql.expression/AbstractSQLExpression.h"
@@ -187,8 +192,6 @@
 #include "alinous.compile.sql/SelectStatement.h"
 #include "alinous.compile.sql/UpdateSet.h"
 #include "alinous.compile.sql/UpdateStatement.h"
-#include "alinous.remote.db.command.data/SchemaData.h"
-#include "alinous.db/TableSchema.h"
 #include "alinous.db/ITableRegion.h"
 #include "alinous.db/ICommidIdPublisher.h"
 #include "alinous.db/LocalCommitIdPublisher.h"
@@ -201,8 +204,6 @@
 #include "alinous.db.trx/TrxLockContext.h"
 #include "alinous.db.trx.scan/ScanResultIndex.h"
 #include "alinous.db.trx.scan/ScanResult.h"
-#include "alinous.db.trx/DbTransactionManager.h"
-#include "alinous.db.trx/DbTransaction.h"
 #include "java.lang/Integer.h"
 #include "alinous.db.table/IScannableIndex.h"
 #include "alinous.db.table/IDatabaseTable.h"
@@ -251,7 +252,7 @@
 #include "alinous.remote.region/NodeReferenceManager.h"
 #include "java.lang/Long.h"
 #include "alinous.remote.region/RegionInsertExecutor.h"
-#include "alinous.remote.region/RegionInsertExecutorPool.h"
+#include "alinous.remote.region/RegionTpcExecutorPool.h"
 #include "alinous.remote.region/NodeRegionServer.h"
 #include "alinous.remote.region.command/AbstractNodeRegionCommand.h"
 #include "alinous.system.config.remote/RegionRef.h"
@@ -382,7 +383,7 @@
 #include "alinous.btree/BTreeGlobalCache.h"
 #include "alinous.db.table/DatabaseTableIdPublisher.h"
 #include "alinous.db.table.lockmonitor/ThreadLocker.h"
-#include "alinous.remote.region.command.dml/ClientFinishInsertCommitSession.h"
+#include "alinous.remote.region.command.dml/ClientTpcCommitSessionCommand.h"
 #include "alinous.remote.region.command.dml/ClientInsertDataCommand.h"
 #include "alinous.remote.region.client/DatabaseTableClient.h"
 #include "alinous.remote.region.client/RemoteClientTrxRecordsCache.h"
@@ -621,33 +622,54 @@ void DatabaseTableClient::insertData(DbTransaction* trx, IDatabaseRecord* record
 }
 void DatabaseTableClient::insertData(DbTransaction* trx, List<IDatabaseRecord>* records, long long newCommitId, IArrayObject<SequentialBackgroundJob>* jobs, ISystemLog* logger, ThreadContext* ctx)
 {
+	ArrayList<IDatabaseRecord>* list = (new(ctx) ArrayList<IDatabaseRecord>(ctx));
+	int maxLoop = records->size(ctx);
+	for(int i = 0; i != maxLoop; ++i)
+	{
+		IDatabaseRecord* rec = records->get(i, ctx);
+		list->add(rec, ctx);
+		int num = i + 1;
+		if(num % 200 == 0)
+		{
+			doInsertData(trx, records, newCommitId, ctx);
+			list->clear(ctx);
+		}
+	}
+	if(!list->isEmpty(ctx))
+	{
+		doInsertData(trx, list, newCommitId, ctx);
+	}
+}
+void DatabaseTableClient::finishCommitSession(DbTransaction* trx, long long newCommitId, ThreadContext* ctx)
+{
+	ClientTpcCommitSessionCommand* cmd = (new(ctx) ClientTpcCommitSessionCommand(ctx));
+	cmd->setCommitId(newCommitId, ctx);
+	cmd->setTrxId(trx->getVersionContext(ctx)->getTrxId(ctx), ctx);
+	ISocketConnection* con = nullptr;
 	{
 		std::function<void(void)> finallyLm2= [&, this]()
 		{
-			finishCommitSession(trx, newCommitId, ctx);
+			this->regionAccessPool->returnConnection(con, ctx);
 		};
 		Releaser finalyCaller2(finallyLm2);
 		try
 		{
-			ArrayList<IDatabaseRecord>* list = (new(ctx) ArrayList<IDatabaseRecord>(ctx));
-			int maxLoop = records->size(ctx);
-			for(int i = 0; i != maxLoop; ++i)
-			{
-				IDatabaseRecord* rec = records->get(i, ctx);
-				list->add(rec, ctx);
-				int num = i + 1;
-				if(num % 200 == 0)
-				{
-					doInsertData(trx, records, newCommitId, ctx);
-					list->clear(ctx);
-				}
-			}
-			if(!list->isEmpty(ctx))
-			{
-				doInsertData(trx, list, newCommitId, ctx);
-			}
+			con = this->regionAccessPool->getConnection(ctx);
+			AlinousSocket* socket = con->getSocket(ctx);
+			cmd->sendCommand(socket, ctx);
 		}
-		catch(...){throw;}
+		catch(UnknownHostException* e)
+		{
+			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3595(), e, ctx));
+		}
+		catch(IOException* e)
+		{
+			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3595(), e, ctx));
+		}
+		catch(AlinousException* e)
+		{
+			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3595(), e, ctx));
+		}
 	}
 }
 void DatabaseTableClient::updateData(IDatabaseRecord* record, long long newCommitId, IArrayObject<SequentialBackgroundJob>* jobs, ISystemLog* logger, ThreadContext* ctx)
@@ -694,38 +716,6 @@ bool DatabaseTableClient::matchIndexByStrList(ArrayList<TableColumnMetadata>* co
 		}
 	}
 	return true;
-}
-void DatabaseTableClient::finishCommitSession(DbTransaction* trx, long long newCommitId, ThreadContext* ctx)
-{
-	ClientFinishInsertCommitSession* cmd = (new(ctx) ClientFinishInsertCommitSession(ctx));
-	cmd->setCommitId(newCommitId, ctx);
-	cmd->setTrxId(trx->getVersionContext(ctx)->getTrxId(ctx), ctx);
-	ISocketConnection* con = nullptr;
-	{
-		std::function<void(void)> finallyLm2= [&, this]()
-		{
-			this->regionAccessPool->returnConnection(con, ctx);
-		};
-		Releaser finalyCaller2(finallyLm2);
-		try
-		{
-			con = this->regionAccessPool->getConnection(ctx);
-			AlinousSocket* socket = con->getSocket(ctx);
-			cmd->sendCommand(socket, ctx);
-		}
-		catch(UnknownHostException* e)
-		{
-			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3595(), e, ctx));
-		}
-		catch(IOException* e)
-		{
-			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3595(), e, ctx));
-		}
-		catch(AlinousException* e)
-		{
-			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3595(), e, ctx));
-		}
-	}
 }
 void DatabaseTableClient::doInsertData(DbTransaction* trx, List<IDatabaseRecord>* records, long long newCommitId, ThreadContext* ctx)
 {

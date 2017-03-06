@@ -1,13 +1,13 @@
 #ifndef ALINOUS_REMOTE_REGION_CLIENT_REMOTECLIENTTRXRECORDSCACHE_H_
 #define ALINOUS_REMOTE_REGION_CLIENT_REMOTECLIENTTRXRECORDSCACHE_H_
-namespace alinous {namespace db {namespace trx {
-class DbTransaction;}}}
-
 namespace alinous {namespace db {
 class AlinousDatabase;}}
 
 namespace alinous {namespace db {namespace table {
 class IDatabaseTable;}}}
+
+namespace alinous {namespace db {namespace trx {
+class DbTransaction;}}}
 
 namespace alinous {namespace db {namespace table {
 class IDatabaseRecord;}}}
@@ -78,7 +78,8 @@ public:
 	virtual ~RemoteClientTrxRecordsCache() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 public:
-	void commitInsertRecord(DbTransaction* trx, AlinousDatabase* db, IDatabaseTable* table, long long newCommitId, ThreadContext* ctx) final;
+	bool commitUpdateRecord(AlinousDatabase* db, IDatabaseTable* table, long long newCommitId, ThreadContext* ctx) final;
+	bool commitInsertRecord(DbTransaction* trx, AlinousDatabase* db, IDatabaseTable* table, long long newCommitId, ThreadContext* ctx) final;
 public:
 	static bool __init_done;
 	static bool __init_static_variables();

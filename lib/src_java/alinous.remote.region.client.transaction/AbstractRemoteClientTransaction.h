@@ -18,8 +18,23 @@ class TableSchema;}}
 namespace alinous {namespace db {
 class AlinousDbException;}}
 
+namespace java {namespace io {
+class IOException;}}
+
+namespace java {namespace lang {
+class InterruptedException;}}
+
+namespace alinous {namespace runtime {namespace dom {
+class VariableException;}}}
+
+namespace alinous {namespace btree {
+class BTreeException;}}
+
 namespace alinous {namespace db {namespace trx {
 class DbTransaction;}}}
+
+namespace alinous {namespace system {
+class AlinousException;}}
 
 namespace alinous {
 class ThreadContext;
@@ -30,13 +45,17 @@ namespace alinous {namespace remote {namespace region {namespace client {namespa
 using namespace ::alinous;
 using namespace ::java::lang;
 using ::java::util::Iterator;
+using ::java::io::IOException;
+using ::alinous::btree::BTreeException;
 using ::alinous::db::AlinousDatabase;
 using ::alinous::db::AlinousDbException;
 using ::alinous::db::TableSchema;
 using ::alinous::db::trx::DbTransaction;
 using ::alinous::db::trx::DbTransactionManager;
 using ::alinous::db::trx::DbVersionContext;
+using ::alinous::runtime::dom::VariableException;
 using ::alinous::system::AlinousCore;
+using ::alinous::system::AlinousException;
 
 
 
@@ -51,6 +70,7 @@ public:
 public:
 	bool isRemote(ThreadContext* ctx) throw()  final;
 	void createTable(TableSchema* schema, ThreadContext* ctx) final;
+	void commitUpdateInsert(long long newCommitId, ThreadContext* ctx) final;
 public:
 	static bool __init_done;
 	static bool __init_static_variables();

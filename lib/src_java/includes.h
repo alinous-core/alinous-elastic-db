@@ -418,7 +418,7 @@
 #include "alinous.remote.region.command/NodeRegionConnectCommand.h"
 #include "alinous.remote.region.command.ddl/RegionCreateSchemaCommand.h"
 #include "alinous.remote.region.command.ddl/RegionCreateTableCommand.h"
-#include "alinous.remote.region.command.dml/ClientFinishInsertCommitSession.h"
+#include "alinous.remote.region.command.dml/ClientTpcCommitSessionCommand.h"
 #include "alinous.remote.region.command.dml/ClientInsertDataCommand.h"
 #include "alinous.remote.region.command/NodeRegionFinishConnectionCommand.h"
 #include "alinous.remote.region.command/NodeRegionTerminateCommand.h"
@@ -428,7 +428,7 @@
 #include "alinous.remote.region/NodeRegionResponceAction.h"
 #include "alinous.remote.region/NodeRegionResponceActionFactory.h"
 #include "alinous.remote.region/RegionInsertExecutor.h"
-#include "alinous.remote.region/RegionInsertExecutorPool.h"
+#include "alinous.remote.region/RegionTpcExecutorPool.h"
 #include "alinous.remote.region/NodeRegionServer.h"
 #include "alinous.compile.declare/ClassExtends.h"
 #include "alinous.compile.declare/ClassImplements.h"
@@ -488,6 +488,8 @@
 #include "alinous.db.trx.cache/TrxRecordsCache.h"
 #include "alinous.db/TableSchemaCollection.h"
 #include "alinous.db.trx/CreateIndexMetadata.h"
+#include "alinous.db.trx/DbTransaction.h"
+#include "alinous.remote.region.client.transaction/AbstractRemoteClientTransaction.h"
 #include "alinous.system.utils/FileUtils.h"
 #include "alinous.db.trx.cache/TrxStorageManager.h"
 #include "alinous.compile.sql/InsertStatement.h"
@@ -717,7 +719,6 @@
 #include "alinous.compile.sql.select.join/TableJoinTarget.h"
 #include "alinous.compile.sql/CreateIndexStatement.h"
 #include "alinous.db.trx.ddl/TrxSchemeManager.h"
-#include "alinous.db.trx/DbTransaction.h"
 #include "alinous.db.table/DatabaseRecord.h"
 #include "alinous.db.table.scan/UpdateHistoryValuesIterator.h"
 #include "alinous.db.table.scan/UpdateHistoryBTreeIndexScanner.h"
@@ -831,7 +832,6 @@
 #include "alinous.btreememory.scan/MemoryBTreeScanner.h"
 #include "alinous.db.table/OidPublisherFactory.h"
 #include "alinous.db.table.lockmonitor/RowLockReleaser.h"
-#include "alinous.remote.region.client.transaction/AbstractRemoteClientTransaction.h"
 #include "alinous.remote.region.client.transaction/RemoteClientReadCommittedTrx.h"
 #include "alinous.remote.region.client.transaction/RemoteClientSerializableTrx.h"
 #include "alinous.remote.region.client.transaction/RemoteClientRepeatableReadTrx.h"
@@ -1805,7 +1805,6 @@ inline static void __cleanUpStatics(alinous::ThreadContext* ctx){
 	alinous::remote::region::NodeRegionServer::__cleanUp(ctx);
 	alinous::remote::region::NodeReference::__cleanUp(ctx);
 	alinous::remote::region::RegionTableLockManager::__cleanUp(ctx);
-	alinous::remote::region::RegionInsertExecutorPool::__cleanUp(ctx);
 	alinous::remote::region::RegionShardTable::__cleanUp(ctx);
 	alinous::remote::region::NodeTableClaster::__cleanUp(ctx);
 	alinous::remote::region::NodeRegionResponceAction::__cleanUp(ctx);
@@ -1815,6 +1814,7 @@ inline static void __cleanUpStatics(alinous::ThreadContext* ctx){
 	alinous::remote::region::NodeRegionResponceActionFactory::__cleanUp(ctx);
 	alinous::remote::region::NodeReferenceManager::__cleanUp(ctx);
 	alinous::remote::region::NodeCluster::__cleanUp(ctx);
+	alinous::remote::region::RegionTpcExecutorPool::__cleanUp(ctx);
 	alinous::remote::region::client::DatabaseTableClient::__cleanUp(ctx);
 	alinous::remote::region::client::RemoteTableScheme::__cleanUp(ctx);
 	alinous::remote::region::client::RegionClientConnectionFactory::__cleanUp(ctx);
@@ -1839,8 +1839,8 @@ inline static void __cleanUpStatics(alinous::ThreadContext* ctx){
 	alinous::remote::region::command::data::ClientNetworkRecord::__cleanUp(ctx);
 	alinous::remote::region::command::ddl::RegionCreateSchemaCommand::__cleanUp(ctx);
 	alinous::remote::region::command::ddl::RegionCreateTableCommand::__cleanUp(ctx);
-	alinous::remote::region::command::dml::ClientFinishInsertCommitSession::__cleanUp(ctx);
 	alinous::remote::region::command::dml::ClientInsertDataCommand::__cleanUp(ctx);
+	alinous::remote::region::command::dml::ClientTpcCommitSessionCommand::__cleanUp(ctx);
 	alinous::remote::socket::NetworkBinaryBuffer::__cleanUp(ctx);
 	alinous::remote::socket::SocketServer::__cleanUp(ctx);
 	alinous::remote::socket::SocketConnectionPool::__cleanUp(ctx);

@@ -192,8 +192,8 @@ public:
 	void switchToDisk(AlinousDatabase* database, ThreadContext* ctx);
 	void dispose(ThreadContext* ctx);
 	TrxRecordCacheIndex* getCachedIndex(ArrayList<ScanTableColumnIdentifier>* colIdList, ThreadContext* ctx) throw() ;
-	void commitUpdateRecord(AlinousDatabase* db, IDatabaseTable* table, long long newCommitId, ThreadContext* ctx);
-	virtual void commitInsertRecord(DbTransaction* trx, AlinousDatabase* db, IDatabaseTable* table, long long newCommitId, ThreadContext* ctx);
+	virtual bool commitUpdateRecord(AlinousDatabase* db, IDatabaseTable* table, long long newCommitId, ThreadContext* ctx);
+	virtual bool commitInsertRecord(DbTransaction* trx, AlinousDatabase* db, IDatabaseTable* table, long long newCommitId, ThreadContext* ctx);
 	CachedRecord* getRecordByOid(long long oid, ThreadContext* ctx);
 	void insertUpdateRecord(ScanResultRecord* srecord, ThreadContext* ctx);
 	void insertRecord(ArrayList<IDomVariable>* values, ArrayList<CulumnOrder>* columns, ThreadContext* ctx);

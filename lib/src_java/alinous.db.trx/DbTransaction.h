@@ -276,7 +276,7 @@ public:
 	bool equals(IObject* obj, ThreadContext* ctx) throw() ;
 	DbVersionContext* getVersionContext(ThreadContext* ctx) throw() ;
 	UniqueExclusiveLockClient* getUniqueExclusiveLock(ThreadContext* ctx) throw() ;
-	void commitUpdateInsert(long long newCommitId, ThreadContext* ctx);
+	virtual void commitUpdateInsert(long long newCommitId, ThreadContext* ctx);
 private:
 	void noGroupBySelect(SelectStatement* selectStmt, ScriptMachine* machine, bool debug, ThreadContext* ctx);
 	void doUpdate(ScanResultRecord* record, UpdateStatement* update, ScriptMachine* machine, bool debug, ThreadContext* ctx);

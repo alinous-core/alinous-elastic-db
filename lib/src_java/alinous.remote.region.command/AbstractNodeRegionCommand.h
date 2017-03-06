@@ -91,7 +91,7 @@ public:
 	constexpr static const int TYPE_CREATE_SCHEMA{1002};
 	constexpr static const int TYPE_CREATE_TABLE{1003};
 	constexpr static const int TYPE_INSERT_DATA{1004};
-	constexpr static const int TYPE_FINISH_COMMIT_SESSION{1005};
+	constexpr static const int TYPE_TPC_COMMIT_SESSION{1005};
 public:
 	int getType(ThreadContext* ctx) throw() ;
 	AbstractNodeRegionCommand* sendCommand(AlinousSocket* socket, ThreadContext* ctx);
