@@ -61,7 +61,7 @@ template class ::java::util::ArrayList<::alinous::runtime::engine::debugger::Deb
 template class ::java::util::ArrayList<::alinous::runtime::engine::debugger::server::ServerBreakPoint>;
 template class ::java::util::ArrayList<::alinous::compile::analyse::AlinousType>;
 template class ::java::util::ArrayList<::alinous::remote::db::RemoteTableStorageServer>;
-template class ::java::util::ArrayList<::alinous::remote::region::NodeRegionServer>;
+template class ::java::util::ArrayList<::alinous::remote::region::server::NodeRegionServer>;
 template class ::java::util::ArrayList<::alinous::html::xpath::match::MatchCandidate>;
 template class ::java::util::ArrayList<::alinous::system::config::remote::RegionsServer>;
 template class ::java::util::ArrayList<::alinous::system::config::remote::RemoteNodeReference>;
@@ -111,9 +111,9 @@ template class ::java::util::ArrayList<::alinous::buffer::FifoElement<::alinous:
 template class ::java::util::ArrayList<::alinous::remote::db::client::command::data::StorageNodeData>;
 template class ::java::util::ArrayList<::alinous::remote::monitor::NodeInfo>;
 template class ::java::util::ArrayList<::alinous::remote::region::client::command::data::ClientNetworkRecord>;
-template class ::java::util::ArrayList<::alinous::remote::region::RegionShardPart>;
-template class ::java::util::ArrayList<::alinous::remote::region::NodeTableReference>;
-template class ::java::util::ArrayList<::alinous::remote::region::NodeReference>;
+template class ::java::util::ArrayList<::alinous::remote::region::server::schema::RegionShardPart>;
+template class ::java::util::ArrayList<::alinous::remote::region::server::schema::NodeTableReference>;
+template class ::java::util::ArrayList<::alinous::remote::region::server::schema::NodeReference>;
 template class ::java::util::ArrayList<::alinous::compile::analyse::VariableDeclareHolder>;
 template class ::java::util::ArrayList<::alinous::compile::analyse::ExpressionStreamResult>;
 template class ::java::util::ArrayList<::alinous::compile::analyse::SubVariableDeclareHolder>;

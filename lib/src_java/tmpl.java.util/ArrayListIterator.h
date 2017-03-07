@@ -74,7 +74,7 @@ template class ::java::util::ArrayListIterator<::alinous::runtime::engine::debug
 template class ::java::util::ArrayListIterator<::alinous::runtime::engine::debugger::server::ServerBreakPoint>;
 template class ::java::util::ArrayListIterator<::alinous::compile::analyse::AlinousType>;
 template class ::java::util::ArrayListIterator<::alinous::remote::db::RemoteTableStorageServer>;
-template class ::java::util::ArrayListIterator<::alinous::remote::region::NodeRegionServer>;
+template class ::java::util::ArrayListIterator<::alinous::remote::region::server::NodeRegionServer>;
 template class ::java::util::ArrayListIterator<::alinous::html::xpath::match::MatchCandidate>;
 template class ::java::util::ArrayListIterator<::alinous::system::config::remote::RegionsServer>;
 template class ::java::util::ArrayListIterator<::alinous::system::config::remote::RemoteNodeReference>;
@@ -122,6 +122,6 @@ template class ::java::util::ArrayListIterator<::alinous::buffer::FifoElement<::
 template class ::java::util::ArrayListIterator<::alinous::remote::db::client::command::data::StorageNodeData>;
 template class ::java::util::ArrayListIterator<::alinous::remote::monitor::NodeInfo>;
 template class ::java::util::ArrayListIterator<::alinous::remote::region::client::command::data::ClientNetworkRecord>;
-template class ::java::util::ArrayListIterator<::alinous::remote::region::RegionShardPart>;
-template class ::java::util::ArrayListIterator<::alinous::remote::region::NodeTableReference>;
-template class ::java::util::ArrayListIterator<::alinous::remote::region::NodeReference>;
+template class ::java::util::ArrayListIterator<::alinous::remote::region::server::schema::RegionShardPart>;
+template class ::java::util::ArrayListIterator<::alinous::remote::region::server::schema::NodeTableReference>;
+template class ::java::util::ArrayListIterator<::alinous::remote::region::server::schema::NodeReference>;

@@ -1,7 +1,7 @@
 #ifndef ALINOUS_REMOTE_REGION_CLIENT_COMMAND_DDL_REGIONCREATESCHEMACOMMAND_H_
 #define ALINOUS_REMOTE_REGION_CLIENT_COMMAND_DDL_REGIONCREATESCHEMACOMMAND_H_
-namespace alinous {namespace remote {namespace region {
-class NodeRegionServer;}}}
+namespace alinous {namespace remote {namespace region {namespace server {
+class NodeRegionServer;}}}}
 
 namespace java {namespace io {
 class BufferedOutputStream;}}
@@ -46,9 +46,9 @@ using ::java::io::BufferedOutputStream;
 using ::java::io::IOException;
 using ::java::io::InputStream;
 using ::java::io::OutputStream;
-using ::alinous::remote::region::NodeRegionServer;
 using ::alinous::remote::region::client::command::AbstractNodeRegionCommand;
 using ::alinous::remote::region::client::command::NodeRegionConnectCommand;
+using ::alinous::remote::region::server::NodeRegionServer;
 using ::alinous::remote::socket::NetworkBinaryBuffer;
 using ::alinous::runtime::dom::VariableException;
 using ::alinous::system::AlinousCore;

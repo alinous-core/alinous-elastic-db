@@ -1,7 +1,7 @@
-#ifndef ALINOUS_REMOTE_REGION_REGIONINSERTEXECUTOR_H_
-#define ALINOUS_REMOTE_REGION_REGIONINSERTEXECUTOR_H_
-namespace alinous {namespace remote {namespace region {
-class NodeReferenceManager;}}}
+#ifndef ALINOUS_REMOTE_REGION_SERVER_TPC_REGIONINSERTEXECUTOR_H_
+#define ALINOUS_REMOTE_REGION_SERVER_TPC_REGIONINSERTEXECUTOR_H_
+namespace alinous {namespace remote {namespace region {namespace server {namespace schema {
+class NodeReferenceManager;}}}}}
 
 namespace java {namespace lang {
 class Long;}}
@@ -9,8 +9,8 @@ class Long;}}
 namespace alinous {namespace remote {namespace region {namespace client {namespace command {namespace data {
 class ClientNetworkRecord;}}}}}}
 
-namespace alinous {namespace remote {namespace region {
-class RegionShardTable;}}}
+namespace alinous {namespace remote {namespace region {namespace server {namespace schema {
+class RegionShardTable;}}}}}
 
 namespace java {namespace lang {
 class IObject;
@@ -20,13 +20,15 @@ namespace alinous {
 class ThreadContext;
 }
 
-namespace alinous {namespace remote {namespace region {
+namespace alinous {namespace remote {namespace region {namespace server {namespace tpc {
 
 using namespace ::alinous;
 using namespace ::java::lang;
 using ::java::util::Iterator;
 using ::java::util::ArrayList;
 using ::alinous::remote::region::client::command::data::ClientNetworkRecord;
+using ::alinous::remote::region::server::schema::NodeReferenceManager;
+using ::alinous::remote::region::server::schema::RegionShardTable;
 
 
 
@@ -54,6 +56,6 @@ public:
 	static void __cleanUp(ThreadContext* ctx);
 };
 
-}}}
+}}}}}
 
-#endif /* end of ALINOUS_REMOTE_REGION_REGIONINSERTEXECUTOR_H_ */
+#endif /* end of ALINOUS_REMOTE_REGION_SERVER_TPC_REGIONINSERTEXECUTOR_H_ */

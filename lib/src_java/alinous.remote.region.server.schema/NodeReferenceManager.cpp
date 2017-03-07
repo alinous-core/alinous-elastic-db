@@ -5,56 +5,30 @@
 #include "alinous.compile/AbstractSrcElement.h"
 #include "alinous.system/AlinousException.h"
 #include "alinous.db/AlinousDbException.h"
-#include "alinous.remote.socket/NetworkBinaryBuffer.h"
 #include "alinous.remote.socket/ICommandData.h"
 #include "alinous.db.table/TablePartitionRangeCollection.h"
 #include "alinous.db.table/TableMetadata.h"
 #include "alinous.remote.db.client.command.data/SchemaData.h"
 #include "alinous.remote.db.client.command.data/SchemasStructureInfoData.h"
-#include "alinous.lock/LockObject.h"
-#include "alinous.remote.socket/SocketConnectionPool.h"
-#include "alinous.remote.region/NodeReference.h"
-#include "alinous.remote.region/NodeTableReference.h"
-#include "alinous.db.trx/DbVersionContext.h"
-#include "alinous.system.config/IAlinousConfigElement.h"
-#include "alinous.system.config.remote/Region.h"
-#include "alinous.remote.monitor/NodeInfo.h"
-#include "alinous.remote.monitor/RegionNodeInfo.h"
-#include "alinous.remote.monitor.client.command.data/RegionInfoData.h"
+#include "alinous.remote.region.server.schema/NodeReference.h"
+#include "alinous.remote.region.server.schema/NodeTableReference.h"
 #include "alinous.btree/IValueFetcher.h"
 #include "alinous.btree/IBTreeValue.h"
 #include "alinous.db.table/IDatabaseRecord.h"
 #include "alinous.remote.region.client.command.data/ClientNetworkRecord.h"
+#include "alinous.remote.monitor/RegionNodeInfo.h"
+#include "alinous.remote.region.server.schema/NodeCluster.h"
+#include "alinous.remote.region.server.schema/NodeTableClaster.h"
+#include "alinous.remote.region.server.schema/RegionShardPart.h"
+#include "alinous.remote.region.server.schema/RegionShardTable.h"
 #include "alinous.remote.region.client.command.data/ClientSchemaData.h"
+#include "alinous.remote.region.server.schema/NodeRegionSchema.h"
+#include "alinous.lock/LockObject.h"
+#include "alinous.remote.monitor.client.command.data/RegionInfoData.h"
 #include "alinous.remote.region.client.command.data/ClientStructureMetadata.h"
-#include "alinous.runtime.parallel/IThreadAction.h"
-#include "alinous.system/ISystemLog.h"
-#include "alinous.remote.socket/ISocketActionFactory.h"
-#include "alinous.remote.socket/SocketServer.h"
-#include "alinous.system.config.remote/MonitorRef.h"
-#include "alinous.system.config.remote/RegionsServer.h"
-#include "alinous.system/AlinousCore.h"
-#include "alinous.remote.region/NodeCluster.h"
-#include "alinous.remote.region/NodeTableClaster.h"
-#include "alinous.remote.region/NodeRegionSchema.h"
-#include "alinous.remote.region/RegionShardPart.h"
-#include "alinous.remote.region/RegionShardTable.h"
-#include "alinous.remote.region/NodeReferenceManager.h"
-#include "java.io/FilterInputStream.h"
-#include "java.io/BufferedInputStream.h"
-#include "java.io/FilterOutputStream.h"
-#include "java.io/BufferedOutputStream.h"
-#include "alinous.remote.region/NodeRegionResponceAction.h"
-#include "alinous.remote.region/NodeRegionResponceActionFactory.h"
-#include "java.lang/Number.h"
-#include "java.lang/Comparable.h"
-#include "java.lang/Long.h"
-#include "alinous.remote.region/RegionInsertExecutor.h"
-#include "alinous.remote.region/RegionTpcExecutorPool.h"
-#include "alinous.remote.region/NodeRegionServer.h"
-#include "alinous.remote.region/RegionTableLockManager.h"
+#include "alinous.remote.region.server.schema/NodeReferenceManager.h"
 
-namespace alinous {namespace remote {namespace region {
+namespace alinous {namespace remote {namespace region {namespace server {namespace schema {
 
 
 
@@ -101,7 +75,7 @@ long long NodeReferenceManager::getClientData(ClientStructureMetadata* data, Thr
 {
 	if(this->nodeReferences == nullptr)
 	{
-		throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3593(), ctx));
+		throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3604(), ctx));
 	}
 	{
 		SynchronizedBlockObj __synchronized_2(this->lock, ctx);
@@ -120,7 +94,7 @@ void NodeReferenceManager::syncSchemeTables(String* regionName, ThreadContext* c
 {
 	if(this->nodeReferences == nullptr)
 	{
-		throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3593(), ctx));
+		throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3604(), ctx));
 	}
 	SchemasStructureInfoData* data = this->nodeReferences->getSchemeInfo(regionName, ctx);
 	{
@@ -176,7 +150,7 @@ void NodeReferenceManager::createTable(TableMetadata* meta, ThreadContext* ctx)
 	List<NodeReference>* list = this->nodeReferences->getNodes(ctx);
 	if(list->isEmpty(ctx))
 	{
-		throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3594(), ctx));
+		throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3605(), ctx));
 	}
 	NodeReference* nodeRef = list->get(0, ctx);
 	nodeRef->createTable(meta, ctx);
@@ -228,5 +202,5 @@ void NodeReferenceManager::doSyncRegionNodes(RegionNodeInfo* nodeInfo, ThreadCon
 }
 void NodeReferenceManager::__cleanUp(ThreadContext* ctx){
 }
-}}}
+}}}}}
 

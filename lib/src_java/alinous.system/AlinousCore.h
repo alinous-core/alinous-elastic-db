@@ -69,8 +69,8 @@ class AlinousDbException;}}
 namespace alinous {namespace system {namespace config {namespace remote {
 class RegionsServer;}}}}
 
-namespace alinous {namespace remote {namespace region {
-class NodeRegionServer;}}}
+namespace alinous {namespace remote {namespace region {namespace server {
+class NodeRegionServer;}}}}
 
 namespace java {namespace io {
 class IOException;}}
@@ -107,7 +107,7 @@ using ::alinous::db::AlinousDbException;
 using ::alinous::io::DiskCacheManager;
 using ::alinous::remote::db::RemoteTableStorageServer;
 using ::alinous::remote::monitor::TransactionMonitorServer;
-using ::alinous::remote::region::NodeRegionServer;
+using ::alinous::remote::region::server::NodeRegionServer;
 using ::alinous::runtime::AlinousModuleRepository;
 using ::alinous::runtime::dbif::DataSourceManager;
 using ::alinous::runtime::engine::ScriptRunner;

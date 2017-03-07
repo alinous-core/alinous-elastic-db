@@ -1,5 +1,5 @@
-#ifndef ALINOUS_REMOTE_REGION_REGIONTABLELOCKMANAGER_H_
-#define ALINOUS_REMOTE_REGION_REGIONTABLELOCKMANAGER_H_
+#ifndef ALINOUS_REMOTE_REGION_SERVER_LOCK_REGIONTABLELOCKMANAGER_H_
+#define ALINOUS_REMOTE_REGION_SERVER_LOCK_REGIONTABLELOCKMANAGER_H_
 namespace java {namespace lang {
 class IObject;
 }}
@@ -8,7 +8,7 @@ namespace alinous {
 class ThreadContext;
 }
 
-namespace alinous {namespace remote {namespace region {
+namespace alinous {namespace remote {namespace region {namespace server {namespace lock {
 
 using namespace ::alinous;
 using namespace ::java::lang;
@@ -31,6 +31,6 @@ public:
 	static void __cleanUp(ThreadContext* ctx);
 };
 
-}}}
+}}}}}
 
-#endif /* end of ALINOUS_REMOTE_REGION_REGIONTABLELOCKMANAGER_H_ */
+#endif /* end of ALINOUS_REMOTE_REGION_SERVER_LOCK_REGIONTABLELOCKMANAGER_H_ */

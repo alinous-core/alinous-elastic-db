@@ -37,7 +37,7 @@
 #include "alinous.system/ISystemLog.h"
 #include "alinous.remote.db/RemoteTableStorageServer.h"
 #include "alinous.remote.monitor/TransactionMonitorServer.h"
-#include "alinous.remote.region/NodeRegionServer.h"
+#include "alinous.remote.region.server/NodeRegionServer.h"
 #include "alinous.runtime.engine/AlinousNullPointerException.h"
 #include "alinous.system.config/IAlinousConfigElement.h"
 #include "alinous.system.config/SystemInfo.h"

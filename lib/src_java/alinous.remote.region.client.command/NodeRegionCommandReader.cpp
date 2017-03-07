@@ -15,7 +15,7 @@
 #include "alinous.db.table/IDatabaseRecord.h"
 #include "alinous.remote.region.client.command.data/ClientNetworkRecord.h"
 #include "alinous.remote.region.client.command.data/ClientStructureMetadata.h"
-#include "alinous.remote.region/NodeRegionServer.h"
+#include "alinous.remote.region.server/NodeRegionServer.h"
 #include "alinous.remote.region.client.command/AbstractNodeRegionCommand.h"
 #include "alinous.remote.region.client.command/NodeRegionConnectCommand.h"
 #include "alinous.remote.region.client.command.ddl/RegionCreateSchemaCommand.h"
@@ -99,7 +99,7 @@ AbstractNodeRegionCommand* NodeRegionCommandReader::readFromStream(InputStream* 
 		cmd = (new(ctx) ClientTpcCommitSessionCommand(ctx));
 		break ;
 	default:
-		throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3603(), ctx));
+		throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3594(), ctx));
 		break;
 	}
 	cmd->readFromStream(stream, size, ctx);

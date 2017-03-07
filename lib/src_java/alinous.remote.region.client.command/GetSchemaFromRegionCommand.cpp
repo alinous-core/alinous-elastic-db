@@ -10,7 +10,7 @@
 #include "alinous.remote.socket/NetworkBinaryBuffer.h"
 #include "alinous.remote.socket/ICommandData.h"
 #include "alinous.remote.region.client.command.data/ClientStructureMetadata.h"
-#include "alinous.remote.region/NodeRegionServer.h"
+#include "alinous.remote.region.server/NodeRegionServer.h"
 #include "alinous.remote.region.client.command/AbstractNodeRegionCommand.h"
 #include "alinous.remote.region.client.command/NodeRegionFinishConnectionCommand.h"
 #include "alinous.remote.region.client.command/NodeRegionTerminateCommand.h"

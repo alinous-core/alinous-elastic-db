@@ -1,7 +1,7 @@
-#ifndef ALINOUS_REMOTE_REGION_NODEREGIONRESPONCEACTIONFACTORY_H_
-#define ALINOUS_REMOTE_REGION_NODEREGIONRESPONCEACTIONFACTORY_H_
-namespace alinous {namespace remote {namespace region {
-class NodeRegionServer;}}}
+#ifndef ALINOUS_REMOTE_REGION_SERVER_NODEREGIONRESPONCEACTIONFACTORY_H_
+#define ALINOUS_REMOTE_REGION_SERVER_NODEREGIONRESPONCEACTIONFACTORY_H_
+namespace alinous {namespace remote {namespace region {namespace server {
+class NodeRegionServer;}}}}
 
 namespace alinous {namespace runtime {namespace parallel {
 class IThreadAction;}}}
@@ -12,8 +12,8 @@ class Socket;}}
 namespace alinous {namespace remote {namespace socket {
 class SocketServer;}}}
 
-namespace alinous {namespace remote {namespace region {
-class NodeRegionResponceAction;}}}
+namespace alinous {namespace remote {namespace region {namespace server {
+class NodeRegionResponceAction;}}}}
 
 namespace alinous {namespace remote {namespace socket {
 class ISocketActionFactory;}}}
@@ -26,7 +26,7 @@ namespace alinous {
 class ThreadContext;
 }
 
-namespace alinous {namespace remote {namespace region {
+namespace alinous {namespace remote {namespace region {namespace server {
 
 using namespace ::alinous;
 using namespace ::java::lang;
@@ -58,6 +58,6 @@ public:
 	static void __cleanUp(ThreadContext* ctx);
 };
 
-}}}
+}}}}
 
-#endif /* end of ALINOUS_REMOTE_REGION_NODEREGIONRESPONCEACTIONFACTORY_H_ */
+#endif /* end of ALINOUS_REMOTE_REGION_SERVER_NODEREGIONRESPONCEACTIONFACTORY_H_ */

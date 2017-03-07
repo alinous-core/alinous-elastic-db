@@ -1,5 +1,5 @@
-#ifndef ALINOUS_REMOTE_REGION_NODEREFERENCEMANAGER_H_
-#define ALINOUS_REMOTE_REGION_NODEREFERENCEMANAGER_H_
+#ifndef ALINOUS_REMOTE_REGION_SERVER_SCHEMA_NODEREFERENCEMANAGER_H_
+#define ALINOUS_REMOTE_REGION_SERVER_SCHEMA_NODEREFERENCEMANAGER_H_
 namespace alinous {namespace remote {namespace region {namespace client {namespace command {namespace data {
 class ClientStructureMetadata;}}}}}}
 
@@ -9,8 +9,8 @@ class AlinousException;}}
 namespace java {namespace util {
 template <typename  T> class Iterator;}}
 
-namespace alinous {namespace remote {namespace region {
-class NodeRegionSchema;}}}
+namespace alinous {namespace remote {namespace region {namespace server {namespace schema {
+class NodeRegionSchema;}}}}}
 
 namespace alinous {namespace remote {namespace region {namespace client {namespace command {namespace data {
 class ClientSchemaData;}}}}}}
@@ -30,14 +30,14 @@ class RegionInfoData;}}}}}}
 namespace alinous {namespace remote {namespace monitor {
 class RegionNodeInfo;}}}
 
-namespace alinous {namespace remote {namespace region {
-class NodeCluster;}}}
+namespace alinous {namespace remote {namespace region {namespace server {namespace schema {
+class NodeCluster;}}}}}
 
 namespace java {namespace util {
 template <typename  T> class List;}}
 
-namespace alinous {namespace remote {namespace region {
-class NodeReference;}}}
+namespace alinous {namespace remote {namespace region {namespace server {namespace schema {
+class NodeReference;}}}}}
 
 namespace alinous {namespace db {namespace table {
 class TableMetadata;}}}
@@ -45,11 +45,11 @@ class TableMetadata;}}}
 namespace alinous {namespace db {
 class AlinousDbException;}}
 
-namespace alinous {namespace remote {namespace region {
-class RegionShardTable;}}}
+namespace alinous {namespace remote {namespace region {namespace server {namespace schema {
+class RegionShardTable;}}}}}
 
-namespace alinous {namespace remote {namespace region {
-class NodeTableClaster;}}}
+namespace alinous {namespace remote {namespace region {namespace server {namespace schema {
+class NodeTableClaster;}}}}}
 
 namespace java {namespace util {
 template <typename  T, typename V> class HashMap;}}
@@ -65,7 +65,7 @@ namespace alinous {
 class ThreadContext;
 }
 
-namespace alinous {namespace remote {namespace region {
+namespace alinous {namespace remote {namespace region {namespace server {namespace schema {
 
 using namespace ::alinous;
 using namespace ::java::lang;
@@ -120,6 +120,6 @@ public:
 	static void __cleanUp(ThreadContext* ctx);
 };
 
-}}}
+}}}}}
 
-#endif /* end of ALINOUS_REMOTE_REGION_NODEREFERENCEMANAGER_H_ */
+#endif /* end of ALINOUS_REMOTE_REGION_SERVER_SCHEMA_NODEREFERENCEMANAGER_H_ */

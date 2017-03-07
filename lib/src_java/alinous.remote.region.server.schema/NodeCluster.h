@@ -1,10 +1,10 @@
-#ifndef ALINOUS_REMOTE_REGION_NODECLUSTER_H_
-#define ALINOUS_REMOTE_REGION_NODECLUSTER_H_
+#ifndef ALINOUS_REMOTE_REGION_SERVER_SCHEMA_NODECLUSTER_H_
+#define ALINOUS_REMOTE_REGION_SERVER_SCHEMA_NODECLUSTER_H_
 namespace alinous {namespace remote {namespace db {namespace client {namespace command {namespace data {
 class SchemasStructureInfoData;}}}}}}
 
-namespace alinous {namespace remote {namespace region {
-class NodeReference;}}}
+namespace alinous {namespace remote {namespace region {namespace server {namespace schema {
+class NodeReference;}}}}}
 
 namespace alinous {namespace remote {namespace monitor {
 class RegionNodeInfo;}}}
@@ -26,7 +26,7 @@ namespace alinous {
 class ThreadContext;
 }
 
-namespace alinous {namespace remote {namespace region {
+namespace alinous {namespace remote {namespace region {namespace server {namespace schema {
 
 using namespace ::alinous;
 using namespace ::java::lang;
@@ -64,6 +64,6 @@ public:
 	static void __cleanUp(ThreadContext* ctx);
 };
 
-}}}
+}}}}}
 
-#endif /* end of ALINOUS_REMOTE_REGION_NODECLUSTER_H_ */
+#endif /* end of ALINOUS_REMOTE_REGION_SERVER_SCHEMA_NODECLUSTER_H_ */

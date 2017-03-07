@@ -23,7 +23,7 @@
 #include "alinous.system.config.remote/Monitor.h"
 #include "alinous.remote.monitor/TransactionMonitorServer.h"
 #include "alinous.system.config.remote/RegionsServer.h"
-#include "alinous.remote.region/NodeRegionServer.h"
+#include "alinous.remote.region.server/NodeRegionServer.h"
 #include "alinous.system.config.remote/Tables.h"
 #include "alinous.system.config.remote/Node.h"
 #include "alinous.system.config.remote/Nodes.h"

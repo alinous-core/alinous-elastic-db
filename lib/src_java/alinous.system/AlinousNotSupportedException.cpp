@@ -8,7 +8,7 @@
 #include "alinous.compile.sql.functions/SQLFunctionManager.h"
 #include "alinous.remote.db/RemoteTableStorageServer.h"
 #include "alinous.remote.monitor/TransactionMonitorServer.h"
-#include "alinous.remote.region/NodeRegionServer.h"
+#include "alinous.remote.region.server/NodeRegionServer.h"
 #include "alinous.system.config/AlinousConfig.h"
 #include "alinous.runtime/AlinousModuleRepository.h"
 #include "alinous.runtime.dbif/DataSourceManager.h"

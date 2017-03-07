@@ -38,7 +38,7 @@
 #include "alinous.remote.socket/ISocketConnectionFactory.h"
 #include "alinous.remote.socket/SocketConnectionPool.h"
 #include "alinous.system/ISystemLog.h"
-#include "alinous.remote.region/NodeRegionServer.h"
+#include "alinous.remote.region.server/NodeRegionServer.h"
 #include "alinous.system/AlinousCore.h"
 #include "alinous.runtime.engine/ScriptMachine.h"
 #include "alinous.compile.expression/IExpression.h"
@@ -197,13 +197,13 @@ void RemoteRegionRef::syncSchemes(ThreadContext* ctx)
 			AbstractNodeRegionCommand* retcmd = cmd->sendCommand(socket, ctx);
 			if(retcmd->getType(ctx) != AbstractNodeRegionCommand::TYPE_GET_SCHEMA_FROM_REGION)
 			{
-				throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3598(), ctx));
+				throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3589(), ctx));
 			}
 			cmd = static_cast<GetSchemaFromRegionCommand*>(retcmd);
 		}
 		catch(AlinousException* e)
 		{
-			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3599(), e, ctx));
+			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3590(), e, ctx));
 		}
 	}
 	{
@@ -251,21 +251,21 @@ void RemoteRegionRef::createSchema(String* schemaName, ThreadContext* ctx)
 			AbstractNodeRegionCommand* retcmd = cmd->sendCommand(socket, ctx);
 			if(retcmd->getType(ctx) != AbstractNodeRegionCommand::TYPE_CREATE_SCHEMA)
 			{
-				throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3598(), ctx));
+				throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3589(), ctx));
 			}
 			syncSchemes(ctx);
 		}
 		catch(UnknownHostException* e)
 		{
-			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3600(), e, ctx));
+			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3591(), e, ctx));
 		}
 		catch(IOException* e)
 		{
-			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3600(), e, ctx));
+			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3591(), e, ctx));
 		}
 		catch(AlinousException* e)
 		{
-			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3600(), e, ctx));
+			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3591(), e, ctx));
 		}
 	}
 }
@@ -287,7 +287,7 @@ void RemoteRegionRef::createTable(String* schemaName, TableMetadata* tblMeta, Th
 			AbstractNodeRegionCommand* retcmd = cmd->sendCommand(socket, ctx);
 			if(retcmd->getType(ctx) != AbstractNodeRegionCommand::TYPE_CREATE_TABLE)
 			{
-				throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3601(), ctx));
+				throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3592(), ctx));
 			}
 			syncSchemes(ctx);
 		}

@@ -1,13 +1,13 @@
-#ifndef ALINOUS_REMOTE_REGION_NODEREGIONSCHEMA_H_
-#define ALINOUS_REMOTE_REGION_NODEREGIONSCHEMA_H_
+#ifndef ALINOUS_REMOTE_REGION_SERVER_SCHEMA_NODEREGIONSCHEMA_H_
+#define ALINOUS_REMOTE_REGION_SERVER_SCHEMA_NODEREGIONSCHEMA_H_
 namespace alinous {namespace remote {namespace region {namespace client {namespace command {namespace data {
 class ClientSchemaData;}}}}}}
 
 namespace java {namespace util {
 template <typename  T> class Iterator;}}
 
-namespace alinous {namespace remote {namespace region {
-class NodeTableClaster;}}}
+namespace alinous {namespace remote {namespace region {namespace server {namespace schema {
+class NodeTableClaster;}}}}}
 
 namespace alinous {namespace db {namespace table {
 class TableMetadata;}}}
@@ -18,8 +18,8 @@ class ClientTableData;}}}}}}
 namespace alinous {namespace remote {namespace db {namespace client {namespace command {namespace data {
 class SchemaData;}}}}}}
 
-namespace alinous {namespace remote {namespace region {
-class NodeCluster;}}}
+namespace alinous {namespace remote {namespace region {namespace server {namespace schema {
+class NodeCluster;}}}}}
 
 namespace java {namespace util {
 template <typename  T, typename V> class Map;}}
@@ -38,7 +38,7 @@ namespace alinous {
 class ThreadContext;
 }
 
-namespace alinous {namespace remote {namespace region {
+namespace alinous {namespace remote {namespace region {namespace server {namespace schema {
 
 using namespace ::alinous;
 using namespace ::java::lang;
@@ -80,6 +80,6 @@ public:
 	static void __cleanUp(ThreadContext* ctx);
 };
 
-}}}
+}}}}}
 
-#endif /* end of ALINOUS_REMOTE_REGION_NODEREGIONSCHEMA_H_ */
+#endif /* end of ALINOUS_REMOTE_REGION_SERVER_SCHEMA_NODEREGIONSCHEMA_H_ */

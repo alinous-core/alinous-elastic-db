@@ -12,8 +12,8 @@ class OutputStream;}}
 namespace java {namespace io {
 class InputStream;}}
 
-namespace alinous {namespace remote {namespace region {
-class NodeRegionServer;}}}
+namespace alinous {namespace remote {namespace region {namespace server {
+class NodeRegionServer;}}}}
 
 namespace java {namespace io {
 class BufferedOutputStream;}}
@@ -30,8 +30,8 @@ class NetworkBinaryBuffer;}}}
 namespace java {namespace io {
 class IOException;}}
 
-namespace alinous {namespace remote {namespace region {
-class NodeRegionResponceAction;}}}
+namespace alinous {namespace remote {namespace region {namespace server {
+class NodeRegionResponceAction;}}}}
 
 namespace alinous {namespace runtime {namespace dom {
 class VariableException;}}}
@@ -59,8 +59,8 @@ using ::java::io::OutputStream;
 using ::java::util::ArrayList;
 using ::java::util::List;
 using ::alinous::net::AlinousSocket;
-using ::alinous::remote::region::NodeRegionResponceAction;
-using ::alinous::remote::region::NodeRegionServer;
+using ::alinous::remote::region::server::NodeRegionResponceAction;
+using ::alinous::remote::region::server::NodeRegionServer;
 using ::alinous::remote::socket::NetworkBinaryBuffer;
 using ::alinous::runtime::dom::VariableException;
 using ::alinous::system::AlinousException;

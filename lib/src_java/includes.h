@@ -373,18 +373,20 @@
 #include "alinous.remote.region.client.command.data/ClientTableData.h"
 #include "alinous.remote.region.client.command.data/ClientSchemaData.h"
 #include "alinous.remote.region.client.command.data/ClientStructureMetadata.h"
-#include "alinous.system.config.remote/RegionsServer.h"
 #include "alinous.remote.db.client/RemoteStorageConnectionInfo.h"
 #include "alinous.remote.db.client/RemoteStorageConnection.h"
 #include "alinous.remote.db.client/RemoteStorageClientConnectionFactory.h"
-#include "alinous.remote.region/NodeReference.h"
-#include "alinous.remote.region/NodeCluster.h"
-#include "alinous.remote.region/NodeTableReference.h"
-#include "alinous.remote.region/NodeTableClaster.h"
-#include "alinous.remote.region/NodeRegionSchema.h"
-#include "alinous.remote.region/RegionShardPart.h"
-#include "alinous.remote.region/RegionShardTable.h"
-#include "alinous.remote.region/NodeReferenceManager.h"
+#include "alinous.remote.region.server.schema/NodeReference.h"
+#include "alinous.remote.region.server.schema/NodeCluster.h"
+#include "alinous.remote.region.server.schema/NodeTableReference.h"
+#include "alinous.remote.region.server.schema/NodeTableClaster.h"
+#include "alinous.remote.region.server.schema/NodeRegionSchema.h"
+#include "alinous.remote.region.server.schema/RegionShardPart.h"
+#include "alinous.remote.region.server.schema/RegionShardTable.h"
+#include "alinous.remote.region.server.schema/NodeReferenceManager.h"
+#include "alinous.remote.region.server.tpc/RegionInsertExecutor.h"
+#include "alinous.remote.region.server.tpc/RegionTpcExecutorPool.h"
+#include "alinous.system.config.remote/RegionsServer.h"
 #include "alinous.remote.region.client.command/AbstractNodeRegionCommand.h"
 #include "alinous.remote.region.client.command/NodeRegionConnectCommand.h"
 #include "alinous.remote.region.client.command.ddl/RegionCreateSchemaCommand.h"
@@ -396,11 +398,9 @@
 #include "alinous.remote.region.client.command/NodeRegionVoidCommand.h"
 #include "alinous.remote.region.client.command/GetSchemaFromRegionCommand.h"
 #include "alinous.remote.region.client.command/NodeRegionCommandReader.h"
-#include "alinous.remote.region/NodeRegionResponceAction.h"
-#include "alinous.remote.region/NodeRegionResponceActionFactory.h"
-#include "alinous.remote.region/RegionInsertExecutor.h"
-#include "alinous.remote.region/RegionTpcExecutorPool.h"
-#include "alinous.remote.region/NodeRegionServer.h"
+#include "alinous.remote.region.server/NodeRegionResponceAction.h"
+#include "alinous.remote.region.server/NodeRegionResponceActionFactory.h"
+#include "alinous.remote.region.server/NodeRegionServer.h"
 #include "alinous.compile.declare/ClassExtends.h"
 #include "alinous.compile.declare/ClassImplements.h"
 #include "alinous.compile.declare.function/ThrowsDefine.h"
@@ -880,7 +880,7 @@
 #include "alinous.server.webmodule/BinaryModuleStream.h"
 #include "alinous.server.webmodule/BinaryModule.h"
 #include "alinous.remote.db.client/RemoteTableStorageClient.h"
-#include "alinous.remote.region/RegionTableLockManager.h"
+#include "alinous.remote.region.server.lock/RegionTableLockManager.h"
 
 
 inline static void __cleanUpStatics(alinous::ThreadContext* ctx){
@@ -1801,20 +1801,6 @@ inline static void __cleanUpStatics(alinous::ThreadContext* ctx){
 	alinous::remote::monitor::client::command::commitId::ReportSchemaVersionCommand::__cleanUp(ctx);
 	alinous::remote::monitor::client::command::commitId::ReportClusterVersionUpCommand::__cleanUp(ctx);
 	alinous::remote::monitor::client::command::data::RegionInfoData::__cleanUp(ctx);
-	alinous::remote::region::NodeTableReference::__cleanUp(ctx);
-	alinous::remote::region::NodeRegionServer::__cleanUp(ctx);
-	alinous::remote::region::NodeReference::__cleanUp(ctx);
-	alinous::remote::region::RegionTableLockManager::__cleanUp(ctx);
-	alinous::remote::region::RegionShardTable::__cleanUp(ctx);
-	alinous::remote::region::NodeTableClaster::__cleanUp(ctx);
-	alinous::remote::region::NodeRegionResponceAction::__cleanUp(ctx);
-	alinous::remote::region::RegionShardPart::__cleanUp(ctx);
-	alinous::remote::region::RegionInsertExecutor::__cleanUp(ctx);
-	alinous::remote::region::NodeRegionSchema::__cleanUp(ctx);
-	alinous::remote::region::NodeRegionResponceActionFactory::__cleanUp(ctx);
-	alinous::remote::region::NodeReferenceManager::__cleanUp(ctx);
-	alinous::remote::region::NodeCluster::__cleanUp(ctx);
-	alinous::remote::region::RegionTpcExecutorPool::__cleanUp(ctx);
 	alinous::remote::region::client::DatabaseTableClient::__cleanUp(ctx);
 	alinous::remote::region::client::RemoteTableScheme::__cleanUp(ctx);
 	alinous::remote::region::client::RegionClientConnectionFactory::__cleanUp(ctx);
@@ -1841,6 +1827,20 @@ inline static void __cleanUpStatics(alinous::ThreadContext* ctx){
 	alinous::remote::region::client::command::ddl::RegionCreateTableCommand::__cleanUp(ctx);
 	alinous::remote::region::client::command::dml::ClientInsertDataCommand::__cleanUp(ctx);
 	alinous::remote::region::client::command::dml::ClientTpcCommitSessionCommand::__cleanUp(ctx);
+	alinous::remote::region::server::NodeRegionServer::__cleanUp(ctx);
+	alinous::remote::region::server::NodeRegionResponceAction::__cleanUp(ctx);
+	alinous::remote::region::server::NodeRegionResponceActionFactory::__cleanUp(ctx);
+	alinous::remote::region::server::lock::RegionTableLockManager::__cleanUp(ctx);
+	alinous::remote::region::server::schema::NodeTableReference::__cleanUp(ctx);
+	alinous::remote::region::server::schema::NodeReference::__cleanUp(ctx);
+	alinous::remote::region::server::schema::RegionShardTable::__cleanUp(ctx);
+	alinous::remote::region::server::schema::NodeTableClaster::__cleanUp(ctx);
+	alinous::remote::region::server::schema::RegionShardPart::__cleanUp(ctx);
+	alinous::remote::region::server::schema::NodeRegionSchema::__cleanUp(ctx);
+	alinous::remote::region::server::schema::NodeReferenceManager::__cleanUp(ctx);
+	alinous::remote::region::server::schema::NodeCluster::__cleanUp(ctx);
+	alinous::remote::region::server::tpc::RegionInsertExecutor::__cleanUp(ctx);
+	alinous::remote::region::server::tpc::RegionTpcExecutorPool::__cleanUp(ctx);
 	alinous::remote::socket::NetworkBinaryBuffer::__cleanUp(ctx);
 	alinous::remote::socket::SocketServer::__cleanUp(ctx);
 	alinous::remote::socket::SocketConnectionPool::__cleanUp(ctx);

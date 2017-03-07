@@ -56,7 +56,7 @@
 #include "alinous.remote.socket/ISocketConnectionFactory.h"
 #include "alinous.remote.socket/SocketConnectionPool.h"
 #include "alinous.system/ISystemLog.h"
-#include "alinous.remote.region/NodeRegionServer.h"
+#include "alinous.remote.region.server/NodeRegionServer.h"
 #include "alinous.system/AlinousCore.h"
 #include "alinous.runtime.engine/ScriptMachine.h"
 #include "alinous.compile.expression/IExpression.h"
@@ -396,15 +396,15 @@ void DatabaseTableClient::finishCommitSession(DbTransaction* trx, long long newC
 		}
 		catch(UnknownHostException* e)
 		{
-			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3595(), e, ctx));
+			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3586(), e, ctx));
 		}
 		catch(IOException* e)
 		{
-			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3595(), e, ctx));
+			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3586(), e, ctx));
 		}
 		catch(AlinousException* e)
 		{
-			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3595(), e, ctx));
+			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3586(), e, ctx));
 		}
 	}
 }
@@ -473,7 +473,7 @@ void DatabaseTableClient::doInsertData(DbTransaction* trx, List<IDatabaseRecord>
 			}
 			catch(VariableException* e)
 			{
-				throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3596(), e, ctx));
+				throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3587(), e, ctx));
 			}
 		}
 		list->add(netRec, ctx);
@@ -493,15 +493,15 @@ void DatabaseTableClient::doInsertData(DbTransaction* trx, List<IDatabaseRecord>
 		}
 		catch(UnknownHostException* e)
 		{
-			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3597(), e, ctx));
+			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3588(), e, ctx));
 		}
 		catch(IOException* e)
 		{
-			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3597(), e, ctx));
+			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3588(), e, ctx));
 		}
 		catch(AlinousException* e)
 		{
-			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3597(), e, ctx));
+			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3588(), e, ctx));
 		}
 	}
 }

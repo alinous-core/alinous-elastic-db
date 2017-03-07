@@ -20,45 +20,27 @@
 #include "alinous.btree/IBTreeValue.h"
 #include "alinous.remote.db.client.command.data/SchemaData.h"
 #include "alinous.remote.db.client.command.data/SchemasStructureInfoData.h"
-#include "alinous.runtime.parallel/IThreadAction.h"
-#include "alinous.system/ISystemLog.h"
-#include "alinous.remote.socket/ISocketActionFactory.h"
-#include "alinous.remote.socket/SocketServer.h"
-#include "alinous.db.trx/DbVersionContext.h"
-#include "alinous.db.table/IDatabaseRecord.h"
-#include "alinous.remote.region.client.command.data/ClientNetworkRecord.h"
-#include "alinous.remote.region.client.command.data/ClientSchemaData.h"
-#include "alinous.remote.region.client.command.data/ClientStructureMetadata.h"
-#include "alinous.system.config/IAlinousConfigElement.h"
-#include "alinous.system.config.remote/MonitorRef.h"
-#include "alinous.system.config.remote/RegionsServer.h"
-#include "alinous.remote.region/NodeCluster.h"
-#include "alinous.remote.region/NodeTableClaster.h"
-#include "alinous.remote.region/NodeRegionSchema.h"
-#include "alinous.remote.region/RegionShardPart.h"
-#include "alinous.remote.region/RegionShardTable.h"
-#include "alinous.remote.region/NodeReferenceManager.h"
-#include "java.io/FilterInputStream.h"
-#include "java.io/BufferedInputStream.h"
-#include "alinous.remote.region/NodeRegionResponceAction.h"
-#include "alinous.remote.region/NodeRegionResponceActionFactory.h"
-#include "java.lang/Number.h"
-#include "java.lang/Comparable.h"
-#include "java.lang/Long.h"
-#include "alinous.remote.region/RegionInsertExecutor.h"
-#include "alinous.remote.region/RegionTpcExecutorPool.h"
-#include "alinous.remote.region/NodeRegionServer.h"
-#include "alinous.system/AlinousCore.h"
 #include "alinous.remote.db/RemoteTableStorageServer.h"
 #include "alinous.remote.db.client.command/AbstractRemoteStorageCommand.h"
 #include "alinous.remote.db.client.command/GetTableSchemeCommand.h"
 #include "alinous.remote.db.client.command.ddl/CreateSchemaCommand.h"
 #include "alinous.remote.db.client.command.ddl/CreateTableCommand.h"
-#include "alinous.remote.region/NodeReference.h"
-#include "alinous.remote.region/NodeTableReference.h"
-#include "alinous.remote.region/RegionTableLockManager.h"
+#include "alinous.remote.region.server.schema/NodeReference.h"
+#include "alinous.remote.region.server.schema/NodeTableReference.h"
+#include "alinous.db.table/IDatabaseRecord.h"
+#include "alinous.remote.region.client.command.data/ClientNetworkRecord.h"
+#include "alinous.remote.monitor/RegionNodeInfo.h"
+#include "alinous.remote.region.server.schema/NodeCluster.h"
+#include "alinous.remote.region.server.schema/NodeTableClaster.h"
+#include "alinous.remote.region.server.schema/RegionShardPart.h"
+#include "alinous.remote.region.server.schema/RegionShardTable.h"
+#include "alinous.remote.region.client.command.data/ClientSchemaData.h"
+#include "alinous.remote.region.server.schema/NodeRegionSchema.h"
+#include "alinous.remote.monitor.client.command.data/RegionInfoData.h"
+#include "alinous.remote.region.client.command.data/ClientStructureMetadata.h"
+#include "alinous.remote.region.server.schema/NodeReferenceManager.h"
 
-namespace alinous {namespace remote {namespace region {
+namespace alinous {namespace remote {namespace region {namespace server {namespace schema {
 
 
 
@@ -139,17 +121,17 @@ SchemasStructureInfoData* NodeReference::getSchemeInfo(String* region, ThreadCon
 			AbstractRemoteStorageCommand* retcmd = cmd->sendCommand(socket, ctx);
 			if(retcmd->getType(ctx) != AbstractRemoteStorageCommand::TYPE_GET_TABLE_SCHEME)
 			{
-				throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3588(), ctx));
+				throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3599(), ctx));
 			}
 			cmd = static_cast<GetTableSchemeCommand*>(retcmd);
 		}
 		catch(UnknownHostException* e)
 		{
-			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3589(), e, ctx));
+			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3600(), e, ctx));
 		}
 		catch(IOException* e)
 		{
-			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3590(), e, ctx));
+			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3601(), e, ctx));
 		}
 	}
 	return cmd->getData(ctx);
@@ -171,21 +153,21 @@ void NodeReference::createSchema(String* schemaName, ThreadContext* ctx)
 			AbstractRemoteStorageCommand* retcmd = cmd->sendCommand(socket, ctx);
 			if(retcmd->getType(ctx) != AbstractRemoteStorageCommand::TYPE_CREATE_SCHEMA)
 			{
-				throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3588(), ctx));
+				throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3599(), ctx));
 			}
 			cmd = static_cast<CreateSchemaCommand*>(retcmd);
 		}
 		catch(UnknownHostException* e)
 		{
-			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3591(), e, ctx));
+			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3602(), e, ctx));
 		}
 		catch(IOException* e)
 		{
-			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3591(), e, ctx));
+			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3602(), e, ctx));
 		}
 		catch(AlinousException* e)
 		{
-			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3591(), e, ctx));
+			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3602(), e, ctx));
 		}
 	}
 }
@@ -207,20 +189,20 @@ void NodeReference::createTable(TableMetadata* meta, ThreadContext* ctx)
 			AbstractRemoteStorageCommand* retcmd = cmd->sendCommand(socket, ctx);
 			if(retcmd->getType(ctx) != AbstractRemoteStorageCommand::TYPE_CREATE_TABLE)
 			{
-				throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3588(), ctx));
+				throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3599(), ctx));
 			}
 		}
 		catch(UnknownHostException* e)
 		{
-			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3592(), e, ctx));
+			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3603(), e, ctx));
 		}
 		catch(IOException* e)
 		{
-			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3592(), e, ctx));
+			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3603(), e, ctx));
 		}
 		catch(AlinousException* e)
 		{
-			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3592(), e, ctx));
+			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3603(), e, ctx));
 		}
 	}
 }
@@ -247,5 +229,5 @@ bool NodeReference::equals(IObject* obj, ThreadContext* ctx) throw()
 }
 void NodeReference::__cleanUp(ThreadContext* ctx){
 }
-}}}
+}}}}}
 

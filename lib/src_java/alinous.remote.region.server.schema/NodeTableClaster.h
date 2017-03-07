@@ -1,16 +1,16 @@
-#ifndef ALINOUS_REMOTE_REGION_NODETABLECLASTER_H_
-#define ALINOUS_REMOTE_REGION_NODETABLECLASTER_H_
+#ifndef ALINOUS_REMOTE_REGION_SERVER_SCHEMA_NODETABLECLASTER_H_
+#define ALINOUS_REMOTE_REGION_SERVER_SCHEMA_NODETABLECLASTER_H_
 namespace alinous {namespace remote {namespace db {namespace client {namespace command {namespace data {
 class TableClusterData;}}}}}}
 
-namespace alinous {namespace remote {namespace region {
-class NodeCluster;}}}
+namespace alinous {namespace remote {namespace region {namespace server {namespace schema {
+class NodeCluster;}}}}}
 
 namespace alinous {namespace remote {namespace db {namespace client {namespace command {namespace data {
 class StorageNodeData;}}}}}}
 
-namespace alinous {namespace remote {namespace region {
-class NodeReference;}}}
+namespace alinous {namespace remote {namespace region {namespace server {namespace schema {
+class NodeReference;}}}}}
 
 namespace alinous {namespace db {namespace table {
 class TableMetadata;}}}
@@ -18,8 +18,8 @@ class TableMetadata;}}}
 namespace alinous {namespace db {namespace table {
 class TablePartitionRangeCollection;}}}
 
-namespace alinous {namespace remote {namespace region {
-class NodeTableReference;}}}
+namespace alinous {namespace remote {namespace region {namespace server {namespace schema {
+class NodeTableReference;}}}}}
 
 namespace java {namespace util {
 template <typename  T> class List;}}
@@ -32,7 +32,7 @@ namespace alinous {
 class ThreadContext;
 }
 
-namespace alinous {namespace remote {namespace region {
+namespace alinous {namespace remote {namespace region {namespace server {namespace schema {
 
 using namespace ::alinous;
 using namespace ::java::lang;
@@ -72,6 +72,6 @@ public:
 	static void __cleanUp(ThreadContext* ctx);
 };
 
-}}}
+}}}}}
 
-#endif /* end of ALINOUS_REMOTE_REGION_NODETABLECLASTER_H_ */
+#endif /* end of ALINOUS_REMOTE_REGION_SERVER_SCHEMA_NODETABLECLASTER_H_ */

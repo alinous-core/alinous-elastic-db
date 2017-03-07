@@ -6,15 +6,12 @@
 #include "alinous.remote.socket/ICommandData.h"
 #include "alinous.compile/AbstractSrcElement.h"
 #include "alinous.system/AlinousException.h"
-#include "alinous.db.table/TablePartitionRangeCollection.h"
 #include "alinous.db.table/TableMetadata.h"
-#include "alinous.remote.socket/ISocketConnection.h"
-#include "alinous.lock/LockObject.h"
-#include "alinous.remote.socket/ISocketConnectionFactory.h"
-#include "alinous.remote.socket/SocketConnectionPool.h"
-#include "alinous.remote.region/NodeReference.h"
-#include "alinous.remote.region/NodeTableReference.h"
 #include "alinous.db.trx/DbVersionContext.h"
+#include "alinous.lock/LockObject.h"
+#include "alinous.remote.socket/ISocketConnection.h"
+#include "alinous.remote.socket/SocketConnectionPool.h"
+#include "alinous.remote.socket/ISocketConnectionFactory.h"
 #include "alinous.remote.monitor.client/MonitorConnectionInfo.h"
 #include "alinous.remote.monitor.client/MonitorClientConnectionFactory.h"
 #include "java.io/FilterOutputStream.h"
@@ -32,38 +29,30 @@
 #include "alinous.btree/IBTreeValue.h"
 #include "alinous.db.table/IDatabaseRecord.h"
 #include "alinous.remote.region.client.command.data/ClientNetworkRecord.h"
-#include "alinous.remote.region.client.command.data/ClientSchemaData.h"
 #include "alinous.remote.region.client.command.data/ClientStructureMetadata.h"
+#include "alinous.remote.region.server.schema/NodeReferenceManager.h"
+#include "java.lang/Number.h"
+#include "java.lang/Comparable.h"
+#include "java.lang/Long.h"
+#include "alinous.remote.region.server.tpc/RegionInsertExecutor.h"
+#include "alinous.remote.region.server.tpc/RegionTpcExecutorPool.h"
 #include "alinous.system.config/IAlinousConfigElement.h"
 #include "alinous.system.config.remote/MonitorRef.h"
 #include "alinous.system.config.remote/RegionsServer.h"
 #include "alinous.system/AlinousCore.h"
-#include "alinous.remote.db.client.command.data/SchemaData.h"
-#include "alinous.remote.region/NodeCluster.h"
-#include "alinous.remote.region/NodeTableClaster.h"
-#include "alinous.remote.region/NodeRegionSchema.h"
-#include "alinous.remote.region/RegionShardPart.h"
-#include "alinous.remote.region/RegionShardTable.h"
-#include "alinous.remote.region/NodeReferenceManager.h"
 #include "java.io/FilterInputStream.h"
 #include "java.io/BufferedInputStream.h"
-#include "alinous.remote.region/NodeRegionResponceAction.h"
-#include "alinous.remote.region/NodeRegionResponceActionFactory.h"
-#include "java.lang/Number.h"
-#include "java.lang/Comparable.h"
-#include "java.lang/Long.h"
-#include "alinous.remote.region/RegionInsertExecutor.h"
-#include "alinous.remote.region/RegionTpcExecutorPool.h"
-#include "alinous.remote.region/NodeRegionServer.h"
-#include "alinous.remote.region/RegionTableLockManager.h"
+#include "alinous.remote.region.server/NodeRegionResponceAction.h"
+#include "alinous.remote.region.server/NodeRegionResponceActionFactory.h"
+#include "alinous.remote.region.server/NodeRegionServer.h"
 
-namespace alinous {namespace remote {namespace region {
+namespace alinous {namespace remote {namespace region {namespace server {
 
 
 
 
 
-String* NodeRegionServer::THREAD_NAME = ConstStr::getCNST_STR_3587();
+String* NodeRegionServer::THREAD_NAME = ConstStr::getCNST_STR_3598();
 bool NodeRegionServer::__init_done = __init_static_variables();
 bool NodeRegionServer::__init_static_variables(){
 	Java2CppSystem::getSelf();
@@ -161,7 +150,7 @@ void NodeRegionServer::syncNodes(ThreadContext* ctx)
 			AbstractMonitorCommand* retcmd = cmd->sendCommand(socket, ctx);
 			if(retcmd->getType(ctx) != AbstractMonitorCommand::TYPE_GET_REGION_INFO)
 			{
-				throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3586(), ctx));
+				throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3597(), ctx));
 			}
 			cmd = static_cast<GetRegionNodeInfoCommand*>(retcmd);
 			RegionInfoData* data = cmd->getRegionData(ctx);
@@ -255,21 +244,21 @@ void NodeRegionServer::reportClusterUpdate(ThreadContext* ctx)
 			AbstractMonitorCommand* retcmd = cmd->sendCommand(socket, ctx);
 			if(retcmd->getType(ctx) != AbstractMonitorCommand::TYPE_REPORT_CLUSTER_UPDATED)
 			{
-				throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3586(), ctx));
+				throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3597(), ctx));
 			}
 			cmd = static_cast<ReportClusterVersionUpCommand*>(retcmd);
 		}
 		catch(UnknownHostException* e)
 		{
-			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3586(), ctx));
+			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3597(), ctx));
 		}
 		catch(IOException* e)
 		{
-			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3586(), ctx));
+			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3597(), ctx));
 		}
 	}
 }
 void NodeRegionServer::__cleanUp(ThreadContext* ctx){
 }
-}}}
+}}}}
 

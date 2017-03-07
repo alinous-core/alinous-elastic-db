@@ -28,7 +28,7 @@
 #include "alinous.system.functions/AlinousFunctionManager.h"
 #include "alinous.system/AlinousCoreLogger.h"
 #include "alinous.system/AlinousCore.h"
-#include "alinous.remote.region/NodeRegionServer.h"
+#include "alinous.remote.region.server/NodeRegionServer.h"
 #include "alinous.remote.region.client.command/AbstractNodeRegionCommand.h"
 #include "alinous.remote.region.client.command.dml/ClientInsertDataCommand.h"
 #include "alinous.remote.region.client.command.dml/ClientTpcCommitSessionCommand.h"

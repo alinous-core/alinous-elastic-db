@@ -1,13 +1,13 @@
-#ifndef ALINOUS_REMOTE_REGION_NODETABLEREFERENCE_H_
-#define ALINOUS_REMOTE_REGION_NODETABLEREFERENCE_H_
-namespace alinous {namespace remote {namespace region {
-class NodeReference;}}}
+#ifndef ALINOUS_REMOTE_REGION_SERVER_SCHEMA_NODETABLEREFERENCE_H_
+#define ALINOUS_REMOTE_REGION_SERVER_SCHEMA_NODETABLEREFERENCE_H_
+namespace alinous {namespace remote {namespace region {namespace server {namespace schema {
+class NodeReference;}}}}}
 
 namespace alinous {namespace db {namespace table {
 class TablePartitionRangeCollection;}}}
 
-namespace alinous {namespace remote {namespace region {
-class NodeTableReference;}}}
+namespace alinous {namespace remote {namespace region {namespace server {namespace schema {
+class NodeTableReference;}}}}}
 
 namespace java {namespace lang {
 class IObject;
@@ -17,7 +17,7 @@ namespace alinous {
 class ThreadContext;
 }
 
-namespace alinous {namespace remote {namespace region {
+namespace alinous {namespace remote {namespace region {namespace server {namespace schema {
 
 using namespace ::alinous;
 using namespace ::java::lang;
@@ -57,6 +57,6 @@ public:
 	static void __cleanUp(ThreadContext* ctx);
 };
 
-}}}
+}}}}}
 
-#endif /* end of ALINOUS_REMOTE_REGION_NODETABLEREFERENCE_H_ */
+#endif /* end of ALINOUS_REMOTE_REGION_SERVER_SCHEMA_NODETABLEREFERENCE_H_ */

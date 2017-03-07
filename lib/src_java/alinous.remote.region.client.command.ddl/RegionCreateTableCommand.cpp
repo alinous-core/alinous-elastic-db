@@ -23,7 +23,7 @@
 #include "alinous.system.functions/AlinousFunctionManager.h"
 #include "alinous.system/AlinousCoreLogger.h"
 #include "alinous.system/AlinousCore.h"
-#include "alinous.remote.region/NodeRegionServer.h"
+#include "alinous.remote.region.server/NodeRegionServer.h"
 #include "alinous.remote.region.client.command/AbstractNodeRegionCommand.h"
 #include "alinous.remote.region.client.command/NodeRegionConnectCommand.h"
 #include "alinous.remote.region.client.command.ddl/RegionCreateSchemaCommand.h"
@@ -102,7 +102,7 @@ void RegionCreateTableCommand::readFromStream(InputStream* stream, int remain, T
 			}
 			catch(VariableException* e)
 			{
-				throw (new(ctx) IOException(ConstStr::getCNST_STR_3605(), e, ctx));
+				throw (new(ctx) IOException(ConstStr::getCNST_STR_3596(), e, ctx));
 			}
 		}
 	}

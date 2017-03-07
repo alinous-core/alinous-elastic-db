@@ -36,7 +36,7 @@
 #include "alinous.remote.socket/ISocketConnectionFactory.h"
 #include "alinous.remote.socket/SocketConnectionPool.h"
 #include "alinous.system/ISystemLog.h"
-#include "alinous.remote.region/NodeRegionServer.h"
+#include "alinous.remote.region.server/NodeRegionServer.h"
 #include "alinous.system/AlinousCore.h"
 #include "alinous.runtime.engine/ScriptMachine.h"
 #include "alinous.compile.expression/IExpression.h"

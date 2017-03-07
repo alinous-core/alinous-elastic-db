@@ -1,13 +1,13 @@
-#ifndef ALINOUS_REMOTE_REGION_REGIONTPCEXECUTORPOOL_H_
-#define ALINOUS_REMOTE_REGION_REGIONTPCEXECUTORPOOL_H_
-namespace alinous {namespace remote {namespace region {
-class RegionInsertExecutor;}}}
+#ifndef ALINOUS_REMOTE_REGION_SERVER_TPC_REGIONTPCEXECUTORPOOL_H_
+#define ALINOUS_REMOTE_REGION_SERVER_TPC_REGIONTPCEXECUTORPOOL_H_
+namespace alinous {namespace remote {namespace region {namespace server {namespace tpc {
+class RegionInsertExecutor;}}}}}
 
 namespace alinous {namespace db {namespace trx {
 class DbVersionContext;}}}
 
-namespace alinous {namespace remote {namespace region {
-class NodeReferenceManager;}}}
+namespace alinous {namespace remote {namespace region {namespace server {namespace schema {
+class NodeReferenceManager;}}}}}
 
 namespace java {namespace lang {
 class Long;}}
@@ -29,7 +29,7 @@ namespace alinous {
 class ThreadContext;
 }
 
-namespace alinous {namespace remote {namespace region {
+namespace alinous {namespace remote {namespace region {namespace server {namespace tpc {
 
 using namespace ::alinous;
 using namespace ::java::lang;
@@ -38,6 +38,7 @@ using ::java::util::HashMap;
 using ::java::util::Map;
 using ::alinous::db::trx::DbVersionContext;
 using ::alinous::lock::LockObject;
+using ::alinous::remote::region::server::schema::NodeReferenceManager;
 
 
 
@@ -63,6 +64,6 @@ public:
 	static void __cleanUp(ThreadContext* ctx);
 };
 
-}}}
+}}}}}
 
-#endif /* end of ALINOUS_REMOTE_REGION_REGIONTPCEXECUTORPOOL_H_ */
+#endif /* end of ALINOUS_REMOTE_REGION_SERVER_TPC_REGIONTPCEXECUTORPOOL_H_ */

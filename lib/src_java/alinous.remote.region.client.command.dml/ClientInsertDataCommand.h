@@ -1,7 +1,7 @@
 #ifndef ALINOUS_REMOTE_REGION_CLIENT_COMMAND_DML_CLIENTINSERTDATACOMMAND_H_
 #define ALINOUS_REMOTE_REGION_CLIENT_COMMAND_DML_CLIENTINSERTDATACOMMAND_H_
-namespace alinous {namespace remote {namespace region {
-class NodeRegionServer;}}}
+namespace alinous {namespace remote {namespace region {namespace server {
+class NodeRegionServer;}}}}
 
 namespace java {namespace io {
 class BufferedOutputStream;}}
@@ -51,9 +51,9 @@ using ::java::io::InputStream;
 using ::java::io::OutputStream;
 using ::java::util::ArrayList;
 using ::alinous::db::trx::DbVersionContext;
-using ::alinous::remote::region::NodeRegionServer;
 using ::alinous::remote::region::client::command::AbstractNodeRegionCommand;
 using ::alinous::remote::region::client::command::data::ClientNetworkRecord;
+using ::alinous::remote::region::server::NodeRegionServer;
 using ::alinous::remote::socket::NetworkBinaryBuffer;
 using ::alinous::runtime::dom::VariableException;
 using ::alinous::system::AlinousCore;
