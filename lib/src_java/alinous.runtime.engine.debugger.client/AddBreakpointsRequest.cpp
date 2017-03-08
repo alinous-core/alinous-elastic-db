@@ -5,16 +5,7 @@
 #include "alinous.runtime.engine.debugger/AlinousScriptDebugger.h"
 #include "alinous.runtime.engine.debugger/AlinousServerDebugHttpResponse.h"
 #include "alinous.runtime.engine.debugger.client/IClientRequest.h"
-#include "alinous.runtime.engine.debugger.client/SetupAllBreakPointsRequest.h"
-#include "alinous.runtime.engine.debugger.client/TerminateServerRequest.h"
-#include "alinous.runtime.engine.debugger.client/StatusThreadRequest.h"
-#include "alinous.runtime.engine.debugger.client/ClearBreakpointsRequest.h"
 #include "alinous.runtime.engine.debugger.client/AddBreakpointsRequest.h"
-#include "alinous.runtime.engine.debugger.client/ResumeRequest.h"
-#include "alinous.runtime.engine.debugger.client/StepOverRequest.h"
-#include "alinous.runtime.engine.debugger.client/StepInRequest.h"
-#include "alinous.runtime.engine.debugger.client/StepReturnRequest.h"
-#include "alinous.runtime.engine.debugger.client/ClientRequestFactory.h"
 
 namespace alinous {namespace runtime {namespace engine {namespace debugger {namespace client {
 

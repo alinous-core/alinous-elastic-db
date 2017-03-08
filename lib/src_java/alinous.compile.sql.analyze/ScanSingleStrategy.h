@@ -4,6 +4,9 @@ namespace alinous{namespace annotation{
 class OneSource;
 }}
 namespace alinous {namespace compile {namespace sql {namespace analyze {
+class BooleanFilterConditionUtil;}}}}
+
+namespace alinous {namespace compile {namespace sql {namespace analyze {
 class ScanTableMetadata;}}}}
 
 namespace alinous {namespace compile {namespace sql {namespace analyze {
@@ -80,6 +83,9 @@ class Throwable;}}
 
 namespace alinous {namespace compile {namespace sql {namespace analyze {
 class InnerNecessaryCondition;}}}}
+
+namespace alinous {namespace compile {namespace sql {namespace analyze {
+class IndexScanStrategy;}}}}
 
 namespace alinous {namespace compile {namespace sql {namespace analyze {
 class IndexScanStrategyPlan;}}}}
@@ -197,6 +203,8 @@ private:
 	ITableTargetScanner* necessaryCollectionScanner(ScriptMachine* machine, DbTransaction* trx, ArrayList<ScanTableColumnIdentifier>* joinRequest, bool debug, ThreadContext* ctx);
 	ITableTargetScanner* initOnTheFlyScanner(ScriptMachine* machine, IndexScanStrategyPlan* plan, DbTransaction* trx, ArrayList<ScanTableColumnIdentifier>* joinRequest, InnerNecessaryCondition* necessaryCnd, bool debug, ThreadContext* ctx);
 	ITableTargetScanner* initOnTheFlyScanner4Join(ScriptMachine* machine, IndexScanStrategyPlan* plan, DbTransaction* trx, ArrayList<ScanTableColumnIdentifier>* joinRequest, InnerNecessaryCondition* necessaryCnd, ThreadContext* ctx);
+public:
+	static void includes(BooleanFilterConditionUtil* arg0, ThreadContext* ctx) throw() ;
 public:
 	static bool __init_done;
 	static bool __init_static_variables();

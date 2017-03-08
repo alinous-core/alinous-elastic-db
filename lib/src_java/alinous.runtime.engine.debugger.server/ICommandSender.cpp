@@ -2,30 +2,9 @@
 
 
 #include "alinous.runtime.engine/ScriptMachine.h"
-#include "alinous.runtime.engine.debugger.server/ServerBreakPoint.h"
-#include "alinous.runtime.engine.debugger.server/FileBreakpointContainer.h"
-#include "alinous.runtime.engine.debugger.server/IServerCommand.h"
-#include "alinous.runtime.engine.debugger.server/AbstractAlinousServerCommand.h"
-#include "alinous.runtime.engine.debugger.server/NotifyHitBreakpoint.h"
-#include "alinous.runtime.engine.debugger.server/IDebuggerOperation.h"
-#include "alinous.runtime.engine.debugger.server/AbstractDebuggerOperation.h"
-#include "alinous.runtime.engine.debugger.server/RunningOperation.h"
-#include "alinous.runtime.engine.debugger/DebugThread.h"
-#include "alinous.runtime.engine.debugger/AlinousDebugEvent.h"
-#include "alinous.runtime.engine.debugger.server/NotifyThreadEndedCommand.h"
-#include "alinous.runtime.engine.debugger.server/NotifyThreadStartCommand.h"
 #include "alinous.runtime.engine.debugger/AlinousScriptDebugger.h"
+#include "alinous.runtime.engine.debugger.server/IServerCommand.h"
 #include "alinous.runtime.engine.debugger.server/ICommandSender.h"
-#include "alinous.runtime.engine.debugger.server/NotifyStepOverFinishedCommand.h"
-#include "alinous.runtime.engine.debugger.server/NotifyTerminatedCommand.h"
-#include "alinous.runtime.engine.debugger.server/NotifyResumeComand.h"
-#include "alinous.runtime.engine.debugger.server/NotifyExceptionThrownCommand.h"
-#include "alinous.runtime.engine.debugger.server/NotifyStepInFinishedCommand.h"
-#include "alinous.runtime.engine.debugger.server/StepOverOperation.h"
-#include "alinous.runtime.engine.debugger.server/NotifyStepReturnFinishedCommand.h"
-#include "alinous.runtime.engine.debugger.server/StepInOperation.h"
-#include "alinous.runtime.engine.debugger.server/StepReturnOperation.h"
-#include "alinous.runtime.engine.debugger.server/NotifyStartCommand.h"
 
 namespace alinous {namespace runtime {namespace engine {namespace debugger {namespace server {
 

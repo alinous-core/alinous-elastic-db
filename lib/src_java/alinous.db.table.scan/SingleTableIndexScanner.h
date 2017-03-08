@@ -3,6 +3,9 @@
 namespace alinous{namespace annotation{
 class OneSource;
 }}
+namespace alinous {namespace compile {namespace sql {namespace expression {
+class ISQLExpression;}}}}
+
 namespace alinous {namespace db {namespace table {namespace scan {
 class SingleTableIndexScanner;}}}}
 
@@ -78,6 +81,7 @@ using namespace ::java::lang;
 using ::java::util::Iterator;
 using ::java::io::IOException;
 using ::alinous::compile::sql::analyze::ScanTableIdentifier;
+using ::alinous::compile::sql::expression::ISQLExpression;
 using ::alinous::db::AlinousDbException;
 using ::alinous::db::table::DatabaseException;
 using ::alinous::db::table::IDatabaseRecord;
@@ -120,6 +124,8 @@ public:
 	void dispose(ISystemLog* logger, ThreadContext* ctx) final;
 private:
 	void startsWithKey(ScanResultIndexKey* indexKeyValue, ThreadContext* ctx);
+public:
+	static void includes(ISQLExpression* arg0, ThreadContext* ctx) throw() ;
 public:
 	static bool __init_done;
 	static bool __init_static_variables();

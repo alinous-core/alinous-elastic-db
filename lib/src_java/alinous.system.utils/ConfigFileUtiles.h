@@ -15,6 +15,9 @@ class Matcher;}}}}
 namespace alinous {namespace html {namespace xpath {namespace match {
 class MatchCandidatesCollection;}}}}
 
+namespace alinous {namespace html {namespace xpath {namespace match {
+class MatchCandidate;}}}}
+
 namespace alinous {namespace html {namespace xpath {
 class IVariableValue;}}}
 
@@ -40,6 +43,7 @@ using ::java::util::Iterator;
 using ::alinous::html::DomDocument;
 using ::alinous::html::DomNode;
 using ::alinous::html::xpath::IVariableValue;
+using ::alinous::html::xpath::match::MatchCandidate;
 using ::alinous::html::xpath::match::MatchCandidatesCollection;
 using ::alinous::html::xpath::match::Matcher;
 using ::alinous::html::xpath::match::MatchingException;

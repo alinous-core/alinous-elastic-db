@@ -1,5 +1,8 @@
 #ifndef ALINOUS_DB_LOCALTABLEREGION_H_
 #define ALINOUS_DB_LOCALTABLEREGION_H_
+namespace alinous {namespace db {
+class ITableSchema;}}
+
 namespace alinous {namespace system {
 class ISystemLog;}}
 
@@ -87,6 +90,8 @@ public:
 	void syncSchemes(ThreadContext* ctx) throw()  final;
 	void dispose(ThreadContext* ctx) throw()  final;
 	long long getSchemeVersion(ThreadContext* ctx) throw()  final;
+public:
+	static void includes(ITableSchema* arg0, ThreadContext* ctx) throw() ;
 public:
 	static bool __init_done;
 	static bool __init_static_variables();

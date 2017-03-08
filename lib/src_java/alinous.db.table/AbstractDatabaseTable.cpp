@@ -1,7 +1,8 @@
 #include "include/global.h"
 
 
-#include "alinous.lock/LockObject.h"
+#include "alinous.numeric/InternalDate.h"
+#include "java.sql/Timestamp.h"
 #include "alinous.lock/ConcurrentGate.h"
 #include "alinous.buffer.storage/FileStorageEntry.h"
 #include "alinous.buffer.storage/IFileStorage.h"
@@ -14,76 +15,25 @@
 #include "alinous.system/AlinousException.h"
 #include "alinous.runtime/ExecutionException.h"
 #include "alinous.runtime.dom/VariableException.h"
-#include "java.lang/Comparable.h"
-#include "alinous.btree/IBTreeKey.h"
-#include "alinous.btree/IValueFetcher.h"
-#include "alinous.btree/IBTreeValue.h"
-#include "alinous.btree/IBTreeNode.h"
 #include "alinous.btree/BTreeGlobalCache.h"
 #include "alinous.btree/BTreeException.h"
 #include "alinous.btree/IBTree.h"
 #include "alinous.btree/BTree.h"
-#include "alinous.compile.sql.analyze/ScanTableIdentifier.h"
-#include "alinous.btree.scan/BTreeScanner.h"
-#include "alinous.compile.sql.analyze/ScanTableColumnIdentifier.h"
 #include "alinous.db/AlinousDbException.h"
-#include "alinous.db.table/DatabaseException.h"
-#include "java.util/Locale.h"
-#include "java.util/Calendar.h"
-#include "java.util/GregorianCalendar.h"
-#include "java.util/Date.h"
-#include "alinous.numeric/InternalDate.h"
-#include "java.util/TimeZone.h"
-#include "java.sql/Timestamp.h"
-#include "alinous.remote.socket/NetworkBinaryBuffer.h"
-#include "alinous.remote.socket/ICommandData.h"
-#include "alinous.runtime.dom/IAlinousVariable.h"
-#include "alinous.runtime.variant/VariantValue.h"
-#include "alinous.db.table/IDatabaseRecord.h"
-#include "alinous.db.table.lockmonitor/IThreadLocker.h"
-#include "alinous.runtime.parallel/ThreadPool.h"
-#include "alinous.runtime.parallel/IThreadAction.h"
-#include "alinous.runtime.parallel/SequentialBackgroundJob.h"
-#include "alinous.system/ISystemLog.h"
 #include "alinous.system/AlinousCore.h"
 #include "java.lang/Number.h"
+#include "java.lang/Comparable.h"
 #include "java.lang/Integer.h"
-#include "alinous.db.table/TableColumnMetadata.h"
-#include "alinous.db.table/DatabaseRecord.h"
-#include "alinous.db.table/IScannableIndex.h"
-#include "alinous.db.table/TableMetadataUnique.h"
-#include "alinous.db.table/TablePartitionKey.h"
-#include "alinous.compile.sql.analyze/ScanUnique.h"
-#include "alinous.db.table/TableIndexMetadata.h"
-#include "alinous.db.table/TablePartitionKeyCollection.h"
-#include "alinous.db.table/TablePartitionRange.h"
-#include "alinous.db.table/TablePartitionRangeCollection.h"
-#include "alinous.db.table/TableMetadata.h"
-#include "alinous.db.table/IDatabaseTable.h"
-#include "alinous.db.trx.scan/ITableTargetScanner.h"
-#include "alinous.db.trx/DbTransaction.h"
-#include "alinous.db.table/IBtreeTableIndex.h"
-#include "alinous.db.table/BTreeIndexKey.h"
-#include "alinous.db.table/TableIndexValue.h"
-#include "alinous.db.table/TableIndex.h"
-#include "alinous.btree/LongValue.h"
-#include "alinous.db.table/AbstractDatabaseTable.h"
-#include "alinous.db.table/DataTableStorageSupport.h"
-#include "alinous.db.table/DatatableLockSupport.h"
-#include "alinous.db.table/DatatableDDLSupport.h"
-#include "alinous.db.table/DatatableUpdateSupport.h"
-#include "alinous.db.table/IndexInsertJob.h"
-#include "alinous.db.table/OidIndexJob.h"
-#include "alinous.db.table.cache/RecordCacheEngine.h"
-#include "alinous.db.table.lockmonitor/DBThreadMonitor.h"
-#include "alinous.db.table/DatabaseTable.h"
-#include "alinous.db.table/DatatableUpdateCache.h"
 #include "alinous.db.table/DatabaseTableIdPublisher.h"
-#include "alinous.db.table/IOidPublisher.h"
-#include "alinous.db.table/OidPublisherFactory.h"
-#include "alinous.db.table/LocalOidCounter.h"
-#include "alinous.db.table/LocalOidPublisher.h"
-#include "alinous.db.table/DatatableConstants.h"
+#include "alinous.db.table/IBtreeTableIndex.h"
+#include "alinous.db.table/IScannableIndex.h"
+#include "alinous.db.table/TableIndex.h"
+#include "alinous.remote.socket/ICommandData.h"
+#include "alinous.db.table/TableMetadata.h"
+#include "alinous.db.table/DatabaseException.h"
+#include "alinous.db.table/DatatableUpdateCache.h"
+#include "alinous.db.table/IDatabaseTable.h"
+#include "alinous.db.table/AbstractDatabaseTable.h"
 
 namespace alinous {namespace db {namespace table {
 
@@ -356,7 +306,7 @@ String* AbstractDatabaseTable::getBaseDir(ThreadContext* ctx) throw()
 }
 bool AbstractDatabaseTable::equals(IObject* obj, ThreadContext* ctx) throw() 
 {
-	return (dynamic_cast<DatabaseTable*>(obj))->tableId->intValue(ctx) == this->tableId->intValue(ctx);
+	return (dynamic_cast<AbstractDatabaseTable*>(obj))->tableId->intValue(ctx) == this->tableId->intValue(ctx);
 }
 Timestamp* AbstractDatabaseTable::getSchmeUpdated(ThreadContext* ctx) throw() 
 {
@@ -491,6 +441,9 @@ void AbstractDatabaseTable::loadIndexes(FileStorageEntryFetcher* fetcher, Thread
 		TableIndex* index = TableIndex::valueFromFetcher(fetcher, this->baseDir, ctx);
 		this->indexes->add(index, ctx);
 	}
+}
+void AbstractDatabaseTable::includes(DatabaseTableIdPublisher* arg0, TableIndex* arg1, ThreadContext* ctx) throw() 
+{
 }
 void AbstractDatabaseTable::__cleanUp(ThreadContext* ctx){
 }

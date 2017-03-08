@@ -1,22 +1,11 @@
 #include "include/global.h"
 
 
-#include "alinous.db.table/DatabaseException.h"
-#include "alinous.db.table.lockmonitor/DatabaseLockException.h"
-#include "alinous.lock/ConcurrentGate.h"
-#include "alinous.db.table.lockmonitor/ConcurrentGatePool.h"
+#include "alinous.db.table/IDatabaseTable.h"
 #include "alinous.db.table.lockmonitor/IDatabaseLock.h"
 #include "alinous.db.table.lockmonitor/TableLock.h"
 #include "alinous.db.table.lockmonitor/RowLock.h"
 #include "alinous.db.table.lockmonitor/IThreadLocker.h"
-#include "alinous.runtime.parallel/ThreadPool.h"
-#include "alinous.db.table/IDatabaseTable.h"
-#include "alinous.db.table.lockmonitor/ThreadLocker.h"
-#include "alinous.db.table.lockmonitor.db/RowLockDb.h"
-#include "alinous.db.table.lockmonitor.db/TableLockHashDb.h"
-#include "alinous.db.table.lockmonitor/DBThreadMonitor.h"
-#include "alinous.runtime.parallel/IThreadAction.h"
-#include "alinous.db.table.lockmonitor/RowLockReleaser.h"
 
 namespace alinous {namespace db {namespace table {namespace lockmonitor {
 

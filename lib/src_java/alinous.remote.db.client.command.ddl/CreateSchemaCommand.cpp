@@ -7,13 +7,11 @@
 #include "alinous.system/AlinousException.h"
 #include "alinous.runtime/ExecutionException.h"
 #include "alinous.runtime.dom/VariableException.h"
-#include "alinous.remote.socket/NetworkBinaryBuffer.h"
-#include "alinous.remote.socket/ICommandData.h"
-#include "alinous.db.table/TableMetadata.h"
 #include "alinous.remote.db/RemoteTableStorageServer.h"
+#include "alinous.remote.socket/NetworkBinaryBuffer.h"
 #include "alinous.remote.db.client.command/AbstractRemoteStorageCommand.h"
 #include "alinous.remote.db.client.command/RemoteStorageConnectCommand.h"
-#include "alinous.remote.db.client.command.ddl/CreateTableCommand.h"
+#include "alinous.remote.db.client.command/RemoteStorageCommandReader.h"
 #include "alinous.remote.db.client.command.ddl/CreateSchemaCommand.h"
 
 namespace alinous {namespace remote {namespace db {namespace client {namespace command {namespace ddl {

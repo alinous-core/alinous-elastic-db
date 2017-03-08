@@ -7,6 +7,12 @@ namespace java {namespace util {
 class TimeZones;}}
 
 namespace java {namespace util {
+class Calendar;}}
+
+namespace java {namespace util {
+class Date;}}
+
+namespace java {namespace util {
 class TimeZone;}}
 
 namespace java {namespace util {
@@ -65,7 +71,7 @@ private:
 	static HashMap<String,TimeZone>* AvailableZones;
 	static TimeZone* Default;
 public:
-	void includeDummy(TimeZones* arg0, ThreadContext* ctx) throw() ;
+	void includeDummy(TimeZones* arg0, Calendar* arg1, java::util::Date* arg2, ThreadContext* ctx) throw() ;
 	virtual IObject* clone(ThreadContext* ctx) throw() ;
 	String* getDisplayName(ThreadContext* ctx) throw() ;
 	String* getDisplayName(Locale* locale, ThreadContext* ctx) throw() ;

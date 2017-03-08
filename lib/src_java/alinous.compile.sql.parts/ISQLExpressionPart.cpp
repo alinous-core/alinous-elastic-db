@@ -4,7 +4,6 @@
 #include "alinous.buffer.storage/FileStorageEntryBuilder.h"
 #include "alinous.buffer.storage/FileStorageEntryFetcher.h"
 #include "alinous.compile/ExpressionSourceId.h"
-#include "alinous.compile/IAlinousElementVisitor.h"
 #include "alinous.compile/IAlinousVisitorContainer.h"
 #include "alinous.compile/AbstractSrcElement.h"
 #include "alinous.remote.socket/ICommandData.h"
@@ -30,9 +29,6 @@
 #include "alinous.db.trx.scan/ScanResultRecord.h"
 #include "alinous.compile.sql.expression/ISQLExpression.h"
 #include "alinous.compile.sql.parts/ISQLExpressionPart.h"
-#include "alinous.compile.sql.parts/AbstractExpressionPart.h"
-#include "alinous.compile.sql.parts/SQLExpressionListAll.h"
-#include "alinous.compile.sql.parts/SQLExpressionList.h"
 
 namespace alinous {namespace compile {namespace sql {namespace parts {
 

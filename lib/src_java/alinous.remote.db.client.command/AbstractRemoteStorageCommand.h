@@ -1,6 +1,9 @@
 #ifndef ALINOUS_REMOTE_DB_CLIENT_COMMAND_ABSTRACTREMOTESTORAGECOMMAND_H_
 #define ALINOUS_REMOTE_DB_CLIENT_COMMAND_ABSTRACTREMOTESTORAGECOMMAND_H_
 namespace alinous {namespace remote {namespace db {namespace client {namespace command {
+class RemoteStorageCommandReader;}}}}}
+
+namespace alinous {namespace remote {namespace db {namespace client {namespace command {
 class AbstractRemoteStorageCommand;}}}}}
 
 namespace alinous {namespace net {
@@ -93,6 +96,8 @@ public:
 	void handleError(Throwable* e, ThreadContext* ctx) throw() ;
 	void writeErrorByteStream(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() ;
 	void readErrorFromStream(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() ;
+public:
+	static void includes(RemoteStorageCommandReader* arg0, ThreadContext* ctx) throw() ;
 public:
 	static bool __init_done;
 	static bool __init_static_variables();

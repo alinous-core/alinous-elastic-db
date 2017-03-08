@@ -1,9 +1,6 @@
 #include "include/global.h"
 
 
-#include "alinous.btree/IBTree.h"
-#include "alinous.db/AlinousDatabase.h"
-#include "alinous.db.variable.util/LongArrayStore.h"
 #include "alinous.db.variable.util/RecordStore.h"
 
 namespace alinous {namespace db {namespace variable {namespace util {

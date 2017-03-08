@@ -3,6 +3,15 @@
 namespace alinous{namespace annotation{
 class OneSource;
 }}
+namespace alinous {namespace runtime {namespace engine {
+class HttpParamHandler;}}}
+
+namespace alinous {namespace system {namespace config {
+class AlinousConfig;}}}
+
+namespace alinous {namespace runtime {namespace dbif {
+class DataSourceManager;}}}
+
 namespace alinous {namespace runtime {
 class AlinousModule;}}
 
@@ -129,6 +138,7 @@ using ::alinous::db::AlinousDbException;
 using ::alinous::db::table::DatabaseException;
 using ::alinous::html::DomNode;
 using ::alinous::runtime::AlinousModule;
+using ::alinous::runtime::dbif::DataSourceManager;
 using ::alinous::runtime::dbif::IDatabaseConnection;
 using ::alinous::runtime::dbif::IDatabaseDriver;
 using ::alinous::runtime::dom::DomVariable;
@@ -142,6 +152,7 @@ using ::alinous::server::http::params::HttpParameter;
 using ::alinous::server::http::params::HttpUploadParameter;
 using ::alinous::system::AlinousCore;
 using ::alinous::system::AlinousException;
+using ::alinous::system::config::AlinousConfig;
 using ::alinous::system::config::SystemInfo;
 
 
@@ -200,6 +211,8 @@ public:
 	void setLeftValue(bool leftValue, ThreadContext* ctx) throw() ;
 	AlinousClassVariable* getThisPtr(ThreadContext* ctx) throw() ;
 	void setThisPtr(AlinousClassVariable* thisPtr, ThreadContext* ctx) throw() ;
+public:
+	static void includes(HttpParamHandler* arg0, AlinousConfig* arg1, DataSourceManager* arg2, ThreadContext* ctx) throw() ;
 public:
 	static bool __init_done;
 	static bool __init_static_variables();

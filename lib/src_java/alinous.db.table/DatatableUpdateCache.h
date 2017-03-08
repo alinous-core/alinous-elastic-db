@@ -4,6 +4,12 @@ namespace alinous{namespace annotation{
 class OneSource;
 }}
 namespace alinous {namespace db {namespace table {
+class TableIndex;}}}
+
+namespace alinous {namespace db {namespace table {
+class DatatableConstants;}}}
+
+namespace alinous {namespace db {namespace table {
 class AbstractDatabaseTable;}}}
 
 namespace alinous {namespace system {
@@ -114,6 +120,8 @@ public:
 	void close(ThreadContext* ctx) throw() ;
 private:
 	String* getOidIndexName(ThreadContext* ctx) throw() ;
+public:
+	static void includes(TableIndex* arg0, DatatableConstants* arg2, ThreadContext* ctx) throw() ;
 public:
 	static bool __init_done;
 	static bool __init_static_variables();

@@ -3,6 +3,9 @@
 namespace alinous{namespace annotation{
 class OneSource;
 }}
+namespace alinous {namespace compile {namespace expression {
+class IExpressionFactory;}}}
+
 namespace alinous {namespace remote {namespace socket {
 class NetworkBinaryBuffer;}}}
 
@@ -51,6 +54,8 @@ public:
 	void readData(NetworkBinaryBuffer* buff, ThreadContext* ctx) final;
 	void writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw()  final;
 	void toFileEntry(FileStorageEntryBuilder* builder, ThreadContext* ctx) final;
+public:
+	static void includes(IExpressionFactory* arg0, ThreadContext* ctx) throw() ;
 public:
 	static bool __init_done;
 	static bool __init_static_variables();

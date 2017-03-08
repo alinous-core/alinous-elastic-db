@@ -1,6 +1,7 @@
 #include "include/global.h"
 
 
+#include "alinous.btree/BTreeException.h"
 #include "alinous.buffer.storage/FileStorageEntry.h"
 #include "alinous.buffer.storage/FileStorageEntryBuilder.h"
 #include "alinous.compile/AbstractSrcElement.h"
@@ -15,19 +16,11 @@
 #include "alinous.btree/BTreeNodeLoader.h"
 #include "alinous.btree/IBTreeValue.h"
 #include "alinous.btree/IBTreeNode.h"
-#include "alinous.btree/BTreeException.h"
-#include "alinous.btreememory.scan/MemoryNodeIterator.h"
-#include "alinous.btreememory/AbstractMemoryNode.h"
-#include "alinous.btreememory/AbstractMemoryBTreeNode.h"
-#include "alinous.btreememory/MBTreeNode.h"
-#include "alinous.btreememory/MBTreeMaxNode.h"
-#include "alinous.btreememory.scan/MemoryMaxNodeIterator.h"
 #include "alinous.btree/IBTree.h"
+#include "alinous.btreememory/AbstractMemoryNode.h"
 #include "alinous.btreememory/MBTreeLeafNode.h"
 #include "alinous.btreememory/BTreeOnMemory.h"
 #include "alinous.btreememory.scan/MemoryBTreeScanner.h"
-#include "alinous.btreememory/AbstractMemoryBTreeLeafContainer.h"
-#include "alinous.btreememory.scan/MemoryLeafContainerIterator.h"
 
 namespace alinous {namespace btreememory {namespace scan {
 

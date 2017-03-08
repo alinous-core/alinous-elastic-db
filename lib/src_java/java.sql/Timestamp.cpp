@@ -13,7 +13,6 @@
 #include "com.google.re2j/PatternSyntaxException.h"
 #include "alinous.numeric/TimeOnlyTimestamp.h"
 #include "java.sql/Timestamp.h"
-#include "java.sql/Date.h"
 
 namespace java {namespace sql {
 

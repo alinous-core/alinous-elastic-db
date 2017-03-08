@@ -1,6 +1,9 @@
 #ifndef ALINOUS_REMOTE_MONITOR_CLIENT_COMMAND_ABSTRACTMONITORCOMMAND_H_
 #define ALINOUS_REMOTE_MONITOR_CLIENT_COMMAND_ABSTRACTMONITORCOMMAND_H_
 namespace alinous {namespace remote {namespace monitor {namespace client {namespace command {
+class MinitorCommandReader;}}}}}
+
+namespace alinous {namespace remote {namespace monitor {namespace client {namespace command {
 class AbstractMonitorCommand;}}}}}
 
 namespace alinous {namespace net {
@@ -93,6 +96,8 @@ public:
 	void handleError(Throwable* e, ThreadContext* ctx) throw() ;
 	void writeErrorByteStream(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() ;
 	void readErrorFromStream(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() ;
+public:
+	static void includes(MinitorCommandReader* arg0, ThreadContext* ctx) throw() ;
 public:
 	static bool __init_done;
 	static bool __init_static_variables();

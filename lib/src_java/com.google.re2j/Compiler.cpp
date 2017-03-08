@@ -11,11 +11,11 @@
 #include "com.google.re2j/RE2.h"
 #include "com.google.re2j/Machine.h"
 #include "com.google.re2j/PatternSyntaxException.h"
-#include "com.google.re2j/Utils.h"
-#include "com.google.re2j/Unicode.h"
 #include "com.google.re2j/CharGroup.h"
 #include "com.google.re2j/CharClass.h"
 #include "com.google.re2j/Parser.h"
+#include "com.google.re2j/Unicode.h"
+#include "com.google.re2j/Utils.h"
 #include "com.google.re2j/Compiler.h"
 #include "com.google.re2j/UnicodeTable2.h"
 #include "com.google.re2j/UnicodeTables.h"
@@ -302,6 +302,9 @@ Compiler::Frag* Compiler::compile(Regexp* re, ThreadContext* ctx) throw()
 		throw (new(ctx) IllegalStateException(ConstStr::getCNST_STR_119(), ctx));
 		break;
 	}
+}
+void Compiler::includes(Unicode* arg0, RE2* arg1, Utils* arg3, ThreadContext* ctx) throw() 
+{
 }
 Prog* Compiler::compileRegexp(Regexp* re, ThreadContext* ctx) throw() 
 {

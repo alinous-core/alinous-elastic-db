@@ -1,10 +1,9 @@
 #include "include/global.h"
 
 
+#include "alinous.compile.sql.analyze/ScanTableColumnIdentifier.h"
 #include "alinous.buffer.storage/FileStorageEntryBuilder.h"
 #include "alinous.buffer.storage/FileStorageEntryFetcher.h"
-#include "alinous.compile.sql.analyze/ScanTableIdentifier.h"
-#include "alinous.compile.sql.analyze/ScanTableColumnIdentifier.h"
 #include "alinous.compile/ExpressionSourceId.h"
 #include "alinous.compile/IAlinousVisitorContainer.h"
 #include "alinous.compile/AbstractSrcElement.h"
@@ -49,19 +48,10 @@
 #include "alinous.runtime.dom.typed/BigDecimalVariable.h"
 #include "alinous.compile.declare/AlinousClass.h"
 #include "alinous.compile.analyse/SrcAnalyseContext.h"
-#include "alinous.compile.sql.analyze/SQLAnalyseContext.h"
 #include "alinous.db.trx.scan/ScanResultRecord.h"
 #include "alinous.compile.sql.expression/ISQLExpression.h"
-#include "alinous.compile.sql.analyze/ScanTableMetadata.h"
-#include "alinous.compile.sql.expression/SQLExpressionStream.h"
-#include "alinous.compile.sql.parts/ISQLExpressionPart.h"
-#include "alinous.compile.sql.parts/AbstractExpressionPart.h"
-#include "alinous.compile.sql.parts/SQLExpressionList.h"
 #include "alinous.compile.sql.result/AbstructSelectResult.h"
-#include "alinous.compile.sql.result/AllColumnResult.h"
 #include "alinous.compile.sql.result/ColumnResult.h"
-#include "alinous.compile.sql.result/FunctionResult.h"
-#include "alinous.compile.sql.result/SelectResultDescription.h"
 
 namespace alinous {namespace compile {namespace sql {namespace result {
 

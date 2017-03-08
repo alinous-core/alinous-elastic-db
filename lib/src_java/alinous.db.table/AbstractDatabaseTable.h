@@ -3,6 +3,12 @@
 namespace alinous{namespace annotation{
 class OneSource;
 }}
+namespace alinous {namespace db {namespace table {
+class DatabaseTableIdPublisher;}}}
+
+namespace alinous {namespace db {namespace table {
+class TableIndex;}}}
+
 namespace java {namespace lang {
 class Integer;}}
 
@@ -79,10 +85,7 @@ namespace alinous {namespace buffer {namespace storage {
 class FileStorageEntryFetcher;}}}
 
 namespace alinous {namespace db {namespace table {
-class TableIndex;}}}
-
-namespace alinous {namespace db {namespace table {
-class DatabaseTable;}}}
+class AbstractDatabaseTable;}}}
 
 namespace alinous {namespace db {namespace table {
 class IDatabaseTable;}}}
@@ -171,6 +174,8 @@ public:
 	String* getOidIndexName(ThreadContext* ctx) throw() ;
 private:
 	void loadIndexes(FileStorageEntryFetcher* fetcher, ThreadContext* ctx) throw() ;
+public:
+	static void includes(DatabaseTableIdPublisher* arg0, TableIndex* arg1, ThreadContext* ctx) throw() ;
 public:
 	static bool __init_done;
 	static bool __init_static_variables();

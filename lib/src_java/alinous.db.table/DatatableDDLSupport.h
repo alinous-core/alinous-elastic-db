@@ -4,6 +4,12 @@ namespace alinous{namespace annotation{
 class OneSource;
 }}
 namespace alinous {namespace db {namespace table {
+class DatatableConstants;}}}
+
+namespace alinous {namespace db {namespace table {
+class DatabaseException;}}}
+
+namespace alinous {namespace db {namespace table {
 class TableMetadata;}}}
 
 namespace alinous {namespace runtime {namespace parallel {
@@ -44,9 +50,6 @@ class InterruptedException;}}
 
 namespace alinous {namespace btree {
 class BTreeException;}}
-
-namespace alinous {namespace db {namespace table {
-class DatabaseException;}}}
 
 namespace alinous {namespace system {
 class AlinousException;}}
@@ -131,6 +134,8 @@ public:
 	void createIndex(String* indexName, ArrayList<String>* columns, AlinousCore* core, BTreeGlobalCache* cache, ThreadContext* ctx) final;
 private:
 	void buildFirstindexValue(TableIndex* newindex, ThreadContext* ctx);
+public:
+	static void includes(DatatableConstants* arg0, DatabaseException* arg2, ThreadContext* ctx) throw() ;
 public:
 	static bool __init_done;
 	static bool __init_static_variables();

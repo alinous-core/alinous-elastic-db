@@ -1,18 +1,13 @@
 #include "include/global.h"
 
 
+#include "alinous.numeric/InternalDate.h"
+#include "alinous.numeric/TimeOnlyTimestamp.h"
+#include "java.sql/Timestamp.h"
 #include "alinous.buffer.storage/FileStorageEntryBuilder.h"
 #include "alinous.buffer.storage/FileStorageEntryFetcher.h"
 #include "alinous.compile/IAlinousElementVisitor.h"
 #include "alinous.compile/IAlinousVisitorContainer.h"
-#include "java.util/Locale.h"
-#include "java.util/Calendar.h"
-#include "java.util/GregorianCalendar.h"
-#include "java.util/Date.h"
-#include "alinous.numeric/InternalDate.h"
-#include "java.util/TimeZone.h"
-#include "alinous.numeric/TimeOnlyTimestamp.h"
-#include "java.sql/Timestamp.h"
 #include "alinous.compile/ExpressionSourceId.h"
 #include "alinous.db.table/DatabaseException.h"
 #include "alinous.html/IDomObject.h"
@@ -22,35 +17,22 @@
 #include "alinous.runtime.dom/VariableException.h"
 #include "alinous.remote.socket/NetworkBinaryBuffer.h"
 #include "alinous.remote.socket/ICommandData.h"
-#include "alinous.lock/LockObject.h"
 #include "java.lang/Number.h"
 #include "java.lang/Comparable.h"
-#include "alinous.numeric/BigInteger.h"
-#include "alinous.numeric/RoundingMode.h"
-#include "alinous.numeric/MathContext.h"
 #include "alinous.numeric/BigDecimal.h"
 #include "alinous.btree/IValueFetcher.h"
 #include "alinous.btree/IBTreeValue.h"
 #include "alinous.runtime.dom/IDomVariableContainer.h"
 #include "alinous.runtime.dom/IAlinousVariable.h"
 #include "alinous.runtime.dom/IDomVariable.h"
-#include "alinous.compile.analyse/SourceValidator.h"
 #include "alinous.compile/AbstractSrcElement.h"
 #include "alinous.compile/IAlinousElement.h"
-#include "alinous.compile/IStatement.h"
 #include "alinous.compile.declare/IDeclare.h"
+#include "alinous.compile/IStatement.h"
 #include "alinous.compile.stmt/AbstractAlinousStatement.h"
 #include "alinous.compile.stmt/StatementList.h"
 #include "alinous.compile.stmt/StatementBlock.h"
 #include "alinous.compile.declare.function/AlinousFunction.h"
-#include "alinous.runtime.engine/AlinousNullPointerException.h"
-#include "alinous.compile.stmt/AssignmentStatement.h"
-#include "alinous.compile.stmt/ExpressionStatement.h"
-#include "alinous.compile.stmt/ReturnStatement.h"
-#include "alinous.compile.stmt/TypedVariableDeclare.h"
-#include "alinous.runtime.engine.debugger.server/ServerBreakPoint.h"
-#include "alinous.runtime.engine.debugger.server/FileBreakpointContainer.h"
-#include "alinous.runtime.dom/DomVariableContainer.h"
 #include "alinous.runtime.dom.typed/ITypedVariable.h"
 #include "alinous.runtime.dom.typed/ITypedCaller.h"
 #include "alinous.runtime.dom.typed/AbstractTypedVariable.h"
@@ -69,33 +51,13 @@
 #include "alinous.runtime.dom.typed/BoolVariable.h"
 #include "alinous.runtime.dom.clazz/IAlinousClassVariable.h"
 #include "alinous.runtime.dom.clazz/AlinousClassVariable.h"
-#include "alinous.runtime.engine/DebugMainFrameSrcElement.h"
-#include "alinous.runtime.dom.typed/TypedVariableContainer.h"
-#include "alinous.runtime.engine/IStackFrame.h"
-#include "alinous.runtime.engine/AbstractStackFrame.h"
-#include "alinous.runtime.engine/SubStackFrame.h"
-#include "alinous.runtime.engine/MainStackFrame.h"
-#include "alinous.runtime.engine.debugger/DebugThread.h"
-#include "alinous.runtime.engine.debugger.server/IDebuggerOperation.h"
-#include "alinous.system/AlinousCore.h"
-#include "alinous.runtime.engine.debugger.server/ICommandSender.h"
-#include "alinous.runtime.engine.debugger/AlinousDebugEventNotifier.h"
-#include "java.lang/Long.h"
+#include "alinous.compile.stmt/AssignmentStatement.h"
+#include "alinous.compile.stmt/ExpressionStatement.h"
+#include "alinous.compile.stmt/ReturnStatement.h"
+#include "alinous.compile.stmt/TypedVariableDeclare.h"
 #include "alinous.runtime.engine.debugger/AlinousScriptDebugger.h"
-#include "alinous.runtime.dbif/IDatabaseConnection.h"
-#include "alinous.runtime.dbif/IDatabaseDriver.h"
-#include "alinous.runtime.engine/DatabaseHandle.h"
-#include "alinous.runtime.engine/SQLStatementRunner.h"
-#include "alinous.compile.expression.expstream/IdentifierVariable.h"
-#include "alinous.system/AlinousNotSupportedException.h"
-#include "alinous.runtime.engine/AlinousStatementRunner.h"
 #include "alinous.runtime.engine/ScriptRunner.h"
-#include "alinous.runtime/AlinousModule.h"
-#include "alinous.server.http.params/AbstractHttpParameter.h"
-#include "alinous.server.http.params/HttpArrayParameter.h"
-#include "alinous.server.http.params/HttpParameter.h"
-#include "alinous.server.http.params/HttpUploadParameter.h"
-#include "alinous.runtime.engine/ExpressionStreamBuffer.h"
+#include "alinous.system/AlinousCore.h"
 #include "alinous.runtime.engine/ScriptMachine.h"
 #include "alinous.compile.expression/IExpression.h"
 #include "alinous.compile.expression/DomVariableDescriptor.h"
@@ -111,7 +73,10 @@
 #include "alinous.compile.declare/ClassMethodFunction.h"
 #include "alinous.compile.declare/AlinousClass.h"
 #include "alinous.compile/Token.h"
-#include "alinous.runtime.engine/HttpParamHandler.h"
+#include "alinous.compile.analyse/SourceValidator.h"
+#include "alinous.compile.expression.expstream/IdentifierVariable.h"
+#include "alinous.system/AlinousNotSupportedException.h"
+#include "alinous.runtime.engine/AlinousStatementRunner.h"
 
 namespace alinous {namespace runtime {namespace engine {
 
@@ -322,8 +287,11 @@ bool AlinousStatementRunner::typedVariableDeclare(TypedVariableDeclare* stmt, Sc
 			variable = (new(ctx) BigDecimalVariable((new(ctx) BigDecimal(0, ctx)), ctx));
 			break ;
 		case TypedVariableDeclare::VariableType::OBJECT_TYPE:
-			variable = (new(ctx) AlinousClassVariable(stmt->getAnalysedType(ctx)->getClazz(ctx), ctx));
+			{
+			AlinousType* analysedType = stmt->getAnalysedType(ctx);
+			variable = (new(ctx) AlinousClassVariable(analysedType->getClazz(ctx), ctx));
 			break ;
+			}
 		default:
 			break ;
 		}
@@ -371,6 +339,9 @@ void AlinousStatementRunner::substituteLocalVariableByIdenifier(ScriptMachine* m
 		leftTypedValue = (static_cast<TypedVariableArray*>(leftTypedValue))->get(index, ctx);
 	}
 	leftTypedValue->substitute(value, ctx);
+}
+void AlinousStatementRunner::includes(ScriptRunner* arg0, ThreadContext* ctx) throw() 
+{
 }
 void AlinousStatementRunner::__cleanUp(ThreadContext* ctx){
 }

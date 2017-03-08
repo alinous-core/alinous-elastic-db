@@ -3,7 +3,6 @@
 
 #include "alinous.net/UnknownHostException.h"
 #include "java.io/ByteArrayOutputStream.h"
-#include "alinous.system/AlinousException.h"
 #include "alinous.http.client/HttpRequestHeaders.h"
 #include "alinous.http.client/HttpClient.h"
 #include "alinous.http.client/HttpsClient.h"

@@ -3,6 +3,9 @@
 namespace alinous{namespace annotation{
 class OneSource;
 }}
+namespace alinous {namespace db {namespace trx {namespace cache {
+class TrxRecordsCacheFactory;}}}}
+
 namespace alinous {namespace db {namespace trx {
 class DbTransaction;}}}
 
@@ -130,6 +133,8 @@ private:
 	void commitRemoteUpdate(AlinousDatabase* db, long long newCommitId, HashMap<String,IDatabaseTable>* tables, ThreadContext* ctx);
 	void commitRemoteDelete(AlinousDatabase* db, long long newCommitId, HashMap<String,IDatabaseTable>* tables, ThreadContext* ctx) throw() ;
 	void commitInsertLocal(long long newCommitId, AlinousDatabase* db, ThreadContext* ctx);
+public:
+	static void includes(TrxRecordsCacheFactory* arg0, ThreadContext* ctx) throw() ;
 public:
 	static bool __init_done;
 	static bool __init_static_variables();

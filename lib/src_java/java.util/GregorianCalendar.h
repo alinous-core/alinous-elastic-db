@@ -4,6 +4,9 @@ namespace alinous{namespace annotation{
 class OneSource;
 }}
 namespace java {namespace util {
+class SimpleTimeZone;}}
+
+namespace java {namespace util {
 class Locale;}}
 
 namespace java {namespace util {
@@ -14,9 +17,6 @@ class IllegalArgumentException;}}
 
 namespace java {namespace util {
 class GregorianCalendar;}}
-
-namespace java {namespace util {
-class SimpleTimeZone;}}
 
 namespace java {namespace util {
 class Date;}}
@@ -118,6 +118,8 @@ private:
 	int julianError(ThreadContext* ctx) throw() ;
 	int _mod(int value, int mod, ThreadContext* ctx) throw() ;
 	int mod7(long long num1, ThreadContext* ctx) throw() ;
+public:
+	static void include(SimpleTimeZone* arg0, ThreadContext* ctx) throw() ;
 public:
 	static bool __init_done;
 	static bool __init_static_variables();

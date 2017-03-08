@@ -4,6 +4,9 @@ namespace alinous{namespace annotation{
 class OneSource;
 }}
 namespace alinous {namespace compile {namespace sql {namespace analyze {
+class IndexSelectionUtils;}}}}
+
+namespace alinous {namespace compile {namespace sql {namespace analyze {
 class ScanTableColumnIdentifier;}}}}
 
 namespace alinous {namespace compile {namespace sql {namespace expression {
@@ -82,6 +85,8 @@ public:
 	bool validateStrategy(ScanTableMetadata* metadata, ThreadContext* ctx) throw() ;
 	ScanTableIndexMetadata* getIndexMetadata(ThreadContext* ctx) throw() ;
 	void setIndexMetadata(ScanTableIndexMetadata* indexMetadata, ThreadContext* ctx) throw() ;
+public:
+	static void includes(IndexSelectionUtils* arg0, ThreadContext* ctx) throw() ;
 public:
 	static bool __init_done;
 	static bool __init_static_variables();

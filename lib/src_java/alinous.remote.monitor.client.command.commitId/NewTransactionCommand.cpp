@@ -5,12 +5,9 @@
 #include "java.io/BufferedOutputStream.h"
 #include "alinous.remote.monitor/TransactionMonitorServer.h"
 #include "alinous.remote.socket/NetworkBinaryBuffer.h"
+#include "alinous.remote.monitor.client.command/MinitorCommandReader.h"
 #include "alinous.remote.monitor.client.command/AbstractMonitorCommand.h"
-#include "alinous.remote.monitor.client.command.commitId/GetMaxCommitIdCommand.h"
-#include "alinous.remote.monitor.client.command.commitId/NewCommitIdCommand.h"
 #include "alinous.remote.monitor.client.command.commitId/NewTransactionCommand.h"
-#include "alinous.remote.monitor.client.command.commitId/ReportSchemaVersionCommand.h"
-#include "alinous.remote.monitor.client.command.commitId/ReportClusterVersionUpCommand.h"
 
 namespace alinous {namespace remote {namespace monitor {namespace client {namespace command {namespace commitId {
 

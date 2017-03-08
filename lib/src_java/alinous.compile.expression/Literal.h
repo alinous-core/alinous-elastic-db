@@ -3,6 +3,9 @@
 namespace alinous{namespace annotation{
 class OneSource;
 }}
+namespace alinous {namespace compile {namespace expression {
+class IExpressionFactory;}}}
+
 namespace alinous {namespace compile {
 class IAlinousElementVisitor;}}
 
@@ -134,6 +137,7 @@ private:
 	int fromEnum(ThreadContext* ctx) throw() ;
 	void toEnum(int num, ThreadContext* ctx) throw() ;
 public:
+	static void includes(IExpressionFactory* arg0, ThreadContext* ctx) throw() ;
 	static Literal* intLiteral(int value, ThreadContext* ctx) throw() ;
 public:
 	static bool __init_done;

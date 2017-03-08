@@ -3,6 +3,9 @@
 namespace alinous{namespace annotation{
 class OneSource;
 }}
+namespace alinous {namespace compile {namespace expression {
+class IExpressionFactory;}}}
+
 namespace alinous {namespace runtime {namespace dom {
 class IAlinousVariable;}}}
 
@@ -164,6 +167,8 @@ private:
 	IAlinousVariable* newStandardType(ScriptMachine* machine, bool debug, ThreadContext* ctx);
 	IAlinousVariable* newArrayObject(ScriptMachine* machine, bool debug, ThreadContext* ctx);
 	bool analyseConstructors(SrcAnalyseContext* context, ThreadContext* ctx) throw() ;
+public:
+	static void includes(IExpressionFactory* arg0, ThreadContext* ctx) throw() ;
 public:
 	static bool __init_done;
 	static bool __init_static_variables();

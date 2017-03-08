@@ -15,8 +15,8 @@
 #include "alinous.remote.db/RemoteTableStorageServer.h"
 #include "alinous.remote.db.client.command/AbstractRemoteStorageCommand.h"
 #include "alinous.remote.db.client.command/RemoteStorageConnectCommand.h"
+#include "alinous.remote.db.client.command/RemoteStorageCommandReader.h"
 #include "alinous.remote.db.client.command.ddl/CreateTableCommand.h"
-#include "alinous.remote.db.client.command.ddl/CreateSchemaCommand.h"
 
 namespace alinous {namespace remote {namespace db {namespace client {namespace command {namespace ddl {
 

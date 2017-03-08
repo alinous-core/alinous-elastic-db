@@ -3,6 +3,9 @@
 namespace alinous{namespace annotation{
 class OneSource;
 }}
+namespace alinous {namespace compile {namespace sql {namespace analyze {
+class IndexConditionDetector;}}}}
+
 namespace alinous {namespace compile {namespace sql {namespace expression {
 class ISQLExpression;}}}}
 
@@ -57,6 +60,8 @@ public:
 	ISQLExpression* getExp(ThreadContext* ctx) throw() ;
 	IndexScanStrategy* getStrategy(ThreadContext* ctx) throw() ;
 	bool optimizeIndexStrategy(AlinousDatabase* database, ArrayList<ScanTableColumnIdentifier>* joinRequest, ThreadContext* ctx) throw() ;
+public:
+	static void includes(IndexConditionDetector* arg0, ThreadContext* ctx) throw() ;
 public:
 	static bool __init_done;
 	static bool __init_static_variables();

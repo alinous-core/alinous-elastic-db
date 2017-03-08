@@ -6,6 +6,8 @@
 #include "alinous.system/AlinousException.h"
 #include "alinous.runtime.engine/ScriptMachine.h"
 #include "alinous.web.htmlxml.inner/IHtmlStringPart.h"
+#include "alinous.web.htmlxml.inner/StaticHtmlString.h"
+#include "alinous.web.htmlxml.inner/HTmlProgramString.h"
 #include "alinous.web.htmlxml.inner/InnerStringParser.h"
 #include "alinous.web.parse.htmlxml/Token.h"
 #include "alinous.web.htmlxml/AbstractXHtmlElement.h"

@@ -12,6 +12,9 @@ class FileStorageEntryBuilder;}}}
 namespace alinous {namespace btree {
 class IBTreeNode;}}
 
+namespace alinous {namespace btree {
+class IBTreeKey;}}
+
 namespace java {namespace lang {
 class StringBuffer;}}
 
@@ -31,6 +34,7 @@ namespace alinous {namespace btreememory {
 using namespace ::alinous;
 using namespace ::java::lang;
 using ::java::util::Iterator;
+using ::alinous::btree::IBTreeKey;
 using ::alinous::btree::IBTreeNode;
 using ::alinous::buffer::storage::FileStorageEntry;
 using ::alinous::buffer::storage::FileStorageEntryBuilder;

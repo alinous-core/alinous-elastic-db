@@ -3,13 +3,8 @@
 
 #include "alinous.lock/LockObject.h"
 #include "alinous.runtime.parallel/LaunchJoin.h"
-#include "alinous.runtime.parallel/IThreadAction.h"
 #include "alinous.runtime.parallel/AlinousThread.h"
 #include "alinous.runtime.parallel/ThreadPool.h"
-#include "alinous.runtime.parallel/IParallelTask.h"
-#include "alinous.runtime.parallel/ConcurrentTaskQueue.h"
-#include "alinous.runtime.parallel/ConcurrentTaskExexutor.h"
-#include "alinous.runtime.parallel/SequentialBackgroundJob.h"
 
 namespace alinous {namespace runtime {namespace parallel {
 

@@ -1,38 +1,26 @@
 #include "include/global.h"
 
 
+#include "java.io/StringReader.h"
 #include "alinous.html.xpath/IVariableValue.h"
-#include "alinous.html.xpath/StringValue.h"
 #include "alinous.html/IDomObject.h"
 #include "alinous.html/Attribute.h"
 #include "alinous.html/DomNode.h"
-#include "alinous.html.xpath/IXpathElement.h"
-#include "alinous.html.xpath.match/MatchCursor.h"
 #include "alinous.html/DomDocument.h"
-#include "alinous.html.xpath.match/MatchingException.h"
+#include "alinous.html.xpath/IXpathElement.h"
+#include "alinous.html.xpath/IXpathBooleanCondition.h"
 #include "alinous.html.xpath/IXpathStatement.h"
-#include "alinous.html.xpath/XpathFunction.h"
+#include "alinous.html.xpath.match/MatchCursor.h"
 #include "alinous.html.xpath.match/MatchCandidate.h"
 #include "alinous.html.xpath.match/MatchCandidatesCollection.h"
-#include "java.io/StringReader.h"
-#include "alinous.html.xpath/XpathIdentifier.h"
-#include "alinous.html.xpath/AttributeIdentifier.h"
-#include "alinous.html.xpath/IXpathBooleanCondition.h"
-#include "alinous.html.xpath/XpathNumber.h"
 #include "alinous.html.xpath/XpathFilter.h"
-#include "alinous.html.xpath/XpathContextLocation.h"
 #include "alinous.html.xpath/XpathContext.h"
 #include "alinous.html.xpath/Xpath.h"
-#include "alinous.html.xpath/XpathReference.h"
-#include "alinous.html.xpath/XpathString.h"
 #include "alinous.parser.xpath/ParseException.h"
 #include "alinous.parser.xpath/AlinousXpathParserConstants.h"
-#include "alinous.parser.xpath/AlinousXpathParserTokenManager.h"
 #include "alinous.parser.xpath/AlinousXpathParser.h"
 #include "alinous.html.xpath.match/Matcher.h"
-#include "alinous.compile/JavaCharStream.h"
 #include "alinous.compile/Token.h"
-#include "alinous.compile/ParseException.h"
 
 namespace alinous {namespace html {namespace xpath {namespace match {
 
@@ -139,7 +127,8 @@ bool Matcher::checkFilter(DomDocument* document, DomNode* node, XpathContext* co
 	{
 		return true;
 	}
-	return filter->getCondition(ctx)->getBooleanValue(document, node, ctx);
+	IXpathBooleanCondition* blcnd = filter->getCondition(ctx);
+	return blcnd->getBooleanValue(document, node, ctx);
 }
 void Matcher::__cleanUp(ThreadContext* ctx){
 }

@@ -1,13 +1,7 @@
 #include "include/global.h"
 
 
-#include "alinous.remote.socket/ISocketConnection.h"
-#include "alinous.remote.socket/ISocketConnectionFactory.h"
-#include "alinous.remote.socket/SocketConnectionPool.h"
 #include "alinous.remote.db.client/RemoteStorageConnectionInfo.h"
-#include "alinous.remote.db.client/RemoteStorageConnection.h"
-#include "alinous.remote.db.client/RemoteStorageClientConnectionFactory.h"
-#include "alinous.remote.db.client/RemoteTableStorageClient.h"
 
 namespace alinous {namespace remote {namespace db {namespace client {
 

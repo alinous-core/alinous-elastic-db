@@ -18,13 +18,8 @@
 #include "alinous.db.table/IDatabaseRecord.h"
 #include "alinous.lock/LockObject.h"
 #include "alinous.lock.unique/UniqueExclusiveLock.h"
-#include "alinous.db/AlinousDbException.h"
-#include "alinous.lock.unique/UniqueExclusiveException.h"
-#include "alinous.lock.unique/ColumnsUniqueCollections.h"
-#include "alinous.lock.unique/TableUniqueCollections.h"
 #include "alinous.lock.unique/UniqueExclusiveLockManager.h"
 #include "alinous.lock.unique/UniqueExclusiveLockClient.h"
-#include "alinous.lock.unique/UniqueLockClientFactory.h"
 
 namespace alinous {namespace lock {namespace unique {
 

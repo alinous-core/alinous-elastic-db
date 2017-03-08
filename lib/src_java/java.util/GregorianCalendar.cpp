@@ -1,18 +1,15 @@
 #include "include/global.h"
 
 
+#include "java.util/Date.h"
+#include "java.util/TimeZones.h"
 #include "java.util/Locale.h"
 #include "java.util/TimeZone.h"
-#include "java.util/SimpleTimeZone.h"
 #include "java.util/Calendar.h"
-#include "java.util/GregorianCalendar.h"
-#include "java.util/Date.h"
 #include "alinous.numeric/InternalDate.h"
-#include "java.util/TimeZones.h"
+#include "java.util/SimpleTimeZone.h"
+#include "java.util/GregorianCalendar.h"
 #include "java.sql/Date.h"
-#include "java.util/BitSet.h"
-#include "java.util/Random.h"
-#include "java.util/Arrays.h"
 
 namespace java {namespace util {
 
@@ -1199,6 +1196,9 @@ int GregorianCalendar::mod7(long long num1, ThreadContext* ctx) throw()
 		return rem + 7;
 	}
 	return rem;
+}
+void GregorianCalendar::include(SimpleTimeZone* arg0, ThreadContext* ctx) throw() 
+{
 }
 void GregorianCalendar::__cleanUp(ThreadContext* ctx){
 }

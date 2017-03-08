@@ -1,5 +1,14 @@
 #ifndef ALINOUS_DB_TABLE_CACHE_DBRECORDCACHE_H_
 #define ALINOUS_DB_TABLE_CACHE_DBRECORDCACHE_H_
+namespace alinous {namespace buffer {
+template <typename  T> class FifoIterator;}}
+
+namespace alinous {namespace db {namespace table {
+class DatabaseRecord;}}}
+
+namespace alinous {namespace buffer {
+template <typename  T> class FifoElement;}}
+
 namespace alinous {namespace db {namespace table {namespace cache {
 class DbRecordCache;}}}}
 
@@ -8,9 +17,6 @@ class DbRecordHashMainList;}}}}
 
 namespace alinous {namespace db {namespace table {
 class IDatabaseTable;}}}
-
-namespace alinous {namespace db {namespace table {
-class DatabaseRecord;}}}
 
 namespace alinous {namespace db {namespace table {
 class DataTableStorageSupport;}}}
@@ -37,6 +43,8 @@ namespace alinous {namespace db {namespace table {namespace cache {
 using namespace ::alinous;
 using namespace ::java::lang;
 using ::java::util::Iterator;
+using ::alinous::buffer::FifoElement;
+using ::alinous::buffer::FifoIterator;
 using ::alinous::buffer::FifoList;
 using ::alinous::concurrent::SpinMutex;
 using ::alinous::db::table::DataTableStorageSupport;
@@ -64,6 +72,8 @@ public:
 	DbRecordCache* init(int MAX_HASH, ThreadContext* ctx);
 	void addCachedRecord(IDatabaseTable* table, DatabaseRecord* record, ThreadContext* ctx);
 	DatabaseRecord* loadRecord(DataTableStorageSupport* table, long long position, ThreadContext* ctx);
+public:
+	static void includes(FifoIterator<DatabaseRecord>* arg0, FifoElement<DatabaseRecord>* arg2, ThreadContext* ctx) throw() ;
 public:
 	static bool __init_done;
 	static bool __init_static_variables();

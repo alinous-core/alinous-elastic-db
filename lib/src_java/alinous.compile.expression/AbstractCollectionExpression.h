@@ -3,6 +3,12 @@
 namespace alinous{namespace annotation{
 class OneSource;
 }}
+namespace alinous {namespace compile {
+class AlinousElementNetworkFactory;}}
+
+namespace alinous {namespace compile {namespace expression {
+class IExpressionFactory;}}}
+
 namespace alinous {namespace compile {namespace expression {
 class IExpression;}}}
 
@@ -41,9 +47,6 @@ class FileStorageEntryFetcher;}}}
 
 namespace alinous {namespace compile {namespace expression {
 class AbstractExpression;}}}
-
-namespace alinous {namespace compile {
-class AlinousElementNetworkFactory;}}
 
 namespace alinous {namespace system {
 class AlinousException;}}
@@ -97,6 +100,8 @@ public:
 	int fileSize(ThreadContext* ctx) final;
 	void __toFileEntry(FileStorageEntryBuilder* builder, ThreadContext* ctx);
 	void fromFileEntry(FileStorageEntryFetcher* fetcher, ThreadContext* ctx) final;
+public:
+	static void includes(AlinousElementNetworkFactory* arg0, IExpressionFactory* arg1, ThreadContext* ctx) throw() ;
 public:
 	static bool __init_done;
 	static bool __init_static_variables();

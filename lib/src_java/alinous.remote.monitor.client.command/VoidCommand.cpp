@@ -3,17 +3,11 @@
 
 #include "java.io/FilterOutputStream.h"
 #include "java.io/BufferedOutputStream.h"
-#include "alinous.remote.socket/NetworkBinaryBuffer.h"
-#include "alinous.remote.socket/ICommandData.h"
-#include "alinous.remote.monitor.client.command.data/RegionInfoData.h"
 #include "alinous.remote.monitor/TransactionMonitorServer.h"
-#include "alinous.remote.monitor.client.command/AbstractMonitorCommand.h"
-#include "alinous.remote.monitor.client.command/TerminateCommand.h"
-#include "alinous.remote.monitor.client.command/FinishConnectionCommand.h"
-#include "alinous.remote.monitor.client.command/VoidCommand.h"
-#include "alinous.remote.monitor.client.command/MonitorConnectCommand.h"
-#include "alinous.remote.monitor.client.command/GetRegionNodeInfoCommand.h"
+#include "alinous.remote.socket/NetworkBinaryBuffer.h"
 #include "alinous.remote.monitor.client.command/MinitorCommandReader.h"
+#include "alinous.remote.monitor.client.command/AbstractMonitorCommand.h"
+#include "alinous.remote.monitor.client.command/VoidCommand.h"
 
 namespace alinous {namespace remote {namespace monitor {namespace client {namespace command {
 

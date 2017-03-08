@@ -8,7 +8,6 @@
 #include "alinous.btree/IBTreeValue.h"
 #include "alinous.db.trx.scan/ScanResultRecord.h"
 #include "alinous.db.trx.scan/ITableTargetScanner.h"
-#include "alinous.compile.sql.analyze.scan/ScanListScanner.h"
 #include "alinous.compile.sql.analyze.scan/VoidScanner.h"
 
 namespace alinous {namespace compile {namespace sql {namespace analyze {namespace scan {

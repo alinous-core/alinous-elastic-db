@@ -9,6 +9,9 @@ class FunctionArgumentDefine;}}}}
 namespace alinous {namespace compile {namespace stmt {
 class TypedVariableDeclare;}}}
 
+namespace alinous {namespace compile {namespace declare {
+class AlinousName;}}}
+
 namespace java {namespace lang {
 class IObject;
 }}
@@ -22,6 +25,7 @@ namespace alinous {namespace compile {namespace analyse {
 using namespace ::alinous;
 using namespace ::java::lang;
 using ::java::util::Iterator;
+using ::alinous::compile::declare::AlinousName;
 using ::alinous::compile::declare::function::FunctionArgumentDefine;
 using ::alinous::compile::stmt::TypedVariableDeclare;
 

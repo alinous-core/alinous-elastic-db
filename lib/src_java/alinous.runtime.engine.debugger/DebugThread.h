@@ -3,6 +3,9 @@
 namespace alinous {namespace runtime {namespace engine {
 class ScriptMachine;}}}
 
+namespace alinous {namespace system {
+class AlinousCore;}}
+
 namespace alinous {namespace runtime {namespace engine {namespace debugger {
 class AlinousScriptDebugger;}}}}
 
@@ -62,6 +65,7 @@ using ::alinous::runtime::engine::MainStackFrame;
 using ::alinous::runtime::engine::ScriptMachine;
 using ::alinous::runtime::engine::debugger::server::IDebuggerOperation;
 using ::alinous::runtime::engine::debugger::server::RunningOperation;
+using ::alinous::system::AlinousCore;
 
 
 

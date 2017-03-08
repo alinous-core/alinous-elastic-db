@@ -1,8 +1,6 @@
 #include "include/global.h"
 
 
-#include "alinous.system/ISystemLog.h"
-#include "alinous.system.functions/IAlinousSystem.h"
 #include "alinous.compile/IAlinousVisitorContainer.h"
 #include "alinous.compile/AbstractSrcElement.h"
 #include "alinous.remote.socket/ICommandData.h"
@@ -15,9 +13,6 @@
 #include "alinous.db.table/DatabaseException.h"
 #include "alinous.system/AlinousException.h"
 #include "alinous.runtime.dom/IAlinousVariable.h"
-#include "alinous.runtime.function/IAlinousNativeFunction.h"
-#include "alinous.system.functions/AlinousFunctionManager.h"
-#include "alinous.system/AlinousCore.h"
 #include "alinous.runtime.engine/ScriptMachine.h"
 #include "alinous.compile.expression/IExpression.h"
 #include "alinous.compile/ExpressionSourceId.h"
@@ -29,6 +24,7 @@
 #include "alinous.compile.declare/ClassMethodFunction.h"
 #include "alinous.compile/Token.h"
 #include "alinous.compile.declare/AlinousClass.h"
+#include "alinous.runtime.function/IAlinousNativeFunction.h"
 #include "alinous.compile.analyse/SrcAnalyseContext.h"
 #include "alinous.compile.analyse/AlinousType.h"
 #include "alinous.runtime.function/AlinousNativeFunctionRegistory.h"

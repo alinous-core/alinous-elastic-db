@@ -4,6 +4,9 @@ namespace alinous{namespace annotation{
 class OneSource;
 }}
 namespace alinous {namespace compile {namespace sql {namespace analyze {
+class IndexSelectionUtils;}}}}
+
+namespace alinous {namespace compile {namespace sql {namespace analyze {
 class ScanTableMetadata;}}}}
 
 namespace alinous {namespace compile {namespace sql {namespace analyze {
@@ -71,6 +74,8 @@ private:
 	void joinEqIndex(IndexColumnMatchCondition* matchingCondition, bool debug, ThreadContext* ctx);
 	void joinIntoRangeWithAfter(IndexColumnMatchCondition* matchingCondition, ThreadContext* ctx) throw() ;
 	void joinIntoRangeWithBefore(IndexColumnMatchCondition* matchingCondition, ThreadContext* ctx) throw() ;
+public:
+	static void includes(IndexSelectionUtils* arg0, ThreadContext* ctx) throw() ;
 public:
 	static bool __init_done;
 	static bool __init_static_variables();

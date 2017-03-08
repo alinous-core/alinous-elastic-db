@@ -4,6 +4,15 @@ namespace alinous{namespace annotation{
 class OneSource;
 }}
 namespace com {namespace google {namespace re2j {
+class Unicode;}}}
+
+namespace com {namespace google {namespace re2j {
+class RE2;}}}
+
+namespace com {namespace google {namespace re2j {
+class Utils;}}}
+
+namespace com {namespace google {namespace re2j {
 class Prog;}}}
 
 namespace com {namespace google {namespace re2j {
@@ -65,6 +74,7 @@ private:
 	Compiler::Frag* rune(IArrayObjectPrimitive<int>* runes, int flags, ThreadContext* ctx) throw() ;
 	Compiler::Frag* compile(Regexp* re, ThreadContext* ctx) throw() ;
 public:
+	static void includes(Unicode* arg0, RE2* arg1, Utils* arg3, ThreadContext* ctx) throw() ;
 	static Prog* compileRegexp(Regexp* re, ThreadContext* ctx) throw() ;
 public:
 

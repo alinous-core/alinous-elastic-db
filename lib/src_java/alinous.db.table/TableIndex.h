@@ -30,6 +30,9 @@ class BTreeIndexKey;}}}
 namespace alinous {namespace db {namespace table {
 class TableIndexValue;}}}
 
+namespace alinous {namespace lock {
+class ConcurrentGate;}}
+
 namespace alinous {namespace db {
 class AlinousDbException;}}
 
@@ -93,6 +96,7 @@ using ::alinous::buffer::storage::FileStorageEntryBuilder;
 using ::alinous::buffer::storage::FileStorageEntryFetcher;
 using ::alinous::compile::sql::analyze::ScanTableColumnIdentifier;
 using ::alinous::db::AlinousDbException;
+using ::alinous::lock::ConcurrentGate;
 using ::alinous::runtime::dom::VariableException;
 using ::alinous::system::AlinousCore;
 using ::alinous::system::AlinousException;

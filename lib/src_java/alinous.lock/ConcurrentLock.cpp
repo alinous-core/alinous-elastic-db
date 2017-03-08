@@ -6,11 +6,6 @@
 #include "alinous.lock/UpdateLock.h"
 #include "alinous.lock/ShareLock.h"
 #include "alinous.lock/ConcurrentLock.h"
-#include "alinous.lock/LockObject.h"
-#include "alinous.lock/UpgreadableGate.h"
-#include "alinous.lock/CriticalSectionMarkerException.h"
-#include "alinous.lock/CriticalSectionMarker.h"
-#include "alinous.lock/ConcurrentGate.h"
 
 namespace alinous {namespace lock {
 

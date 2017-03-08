@@ -3,6 +3,12 @@
 namespace alinous{namespace annotation{
 class OneSource;
 }}
+namespace alinous {namespace compile {namespace sql {namespace expression {
+class ISQLExpression;}}}}
+
+namespace alinous {namespace db {namespace table {namespace scan {
+class IndexScannerLockRequirement;}}}}
+
 namespace alinous {namespace db {namespace table {namespace scan {
 class TableFullScanner;}}}}
 
@@ -99,6 +105,7 @@ using ::alinous::btree::IBTreeNode;
 using ::alinous::btree::IBTreeValue;
 using ::alinous::btree::scan::BTreeScanner;
 using ::alinous::compile::sql::analyze::ScanTableIdentifier;
+using ::alinous::compile::sql::expression::ISQLExpression;
 using ::alinous::db::table::DatabaseException;
 using ::alinous::db::table::IDatabaseRecord;
 using ::alinous::db::table::IDatabaseTable;
@@ -147,6 +154,8 @@ public:
 private:
 	bool loadNextRecord(ThreadContext* ctx);
 	IDatabaseRecord* nextIndexValue(ThreadContext* ctx);
+public:
+	static void includes(ISQLExpression* arg0, IndexScannerLockRequirement* arg1, ThreadContext* ctx) throw() ;
 public:
 	static bool __init_done;
 	static bool __init_static_variables();

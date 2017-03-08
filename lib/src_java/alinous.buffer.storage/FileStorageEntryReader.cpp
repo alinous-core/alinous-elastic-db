@@ -1,17 +1,11 @@
 #include "include/global.h"
 
 
-#include "alinous.buffer.storage/FileStorageEntry.h"
-#include "alinous.buffer.storage/FileStorageEntryFetcher.h"
-#include "alinous.lock/LockObject.h"
 #include "alinous.lock/ConcurrentGate.h"
-#include "alinous.buffer.storage/IFileStorage.h"
-#include "alinous.buffer.storage/FileStorageEntryWriter.h"
-#include "alinous.buffer.storage/FileStorageEntryReader.h"
-#include "alinous.buffer.storage/FileStorage.h"
-#include "alinous.buffer.storage/FileAccessWrapper.h"
 #include "alinous.buffer.storage/FileStorageBlock.h"
-#include "alinous.buffer.storage/FileStorageEntryBuilder.h"
+#include "alinous.buffer.storage/FileStorageEntry.h"
+#include "alinous.buffer.storage/IFileStorage.h"
+#include "alinous.buffer.storage/FileStorageEntryReader.h"
 
 namespace alinous {namespace buffer {namespace storage {
 

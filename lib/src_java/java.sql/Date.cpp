@@ -1,13 +1,7 @@
 #include "include/global.h"
 
 
-#include "java.util/Locale.h"
-#include "java.util/Calendar.h"
-#include "java.util/GregorianCalendar.h"
-#include "java.util/Date.h"
 #include "alinous.numeric/InternalDate.h"
-#include "java.util/TimeZone.h"
-#include "java.sql/Timestamp.h"
 #include "java.sql/Date.h"
 
 namespace java {namespace sql {

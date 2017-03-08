@@ -3,6 +3,9 @@
 namespace alinous{namespace annotation{
 class OneSource;
 }}
+namespace alinous {namespace db {namespace trx {
+class DbTransactionFactory;}}}
+
 namespace alinous {namespace db {
 class AlinousDatabase;}}
 
@@ -79,6 +82,8 @@ public:
 	void returnTransaction(DbTransaction* trx, ThreadContext* ctx) throw() ;
 	void dispose(ThreadContext* ctx) throw() ;
 	ThreadPool* getWorkerThreadsPool(ThreadContext* ctx) throw() ;
+public:
+	static void includes(DbTransactionFactory* arg0, ThreadContext* ctx) throw() ;
 public:
 	static bool __init_done;
 	static bool __init_static_variables();

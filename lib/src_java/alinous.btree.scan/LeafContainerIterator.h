@@ -18,6 +18,9 @@ class IBTreeKey;}}
 namespace alinous {namespace btree {
 class IBTreeNode;}}
 
+namespace alinous {namespace btree {
+class NodeRef;}}
+
 namespace alinous {namespace btree {namespace scan {
 class AbstractNodeIterator;}}}
 
@@ -41,6 +44,7 @@ using ::alinous::btree::AbstractBTreeLeafContainer;
 using ::alinous::btree::BTreeNodeLoader;
 using ::alinous::btree::IBTreeKey;
 using ::alinous::btree::IBTreeNode;
+using ::alinous::btree::NodeRef;
 using ::alinous::system::AlinousException;
 
 

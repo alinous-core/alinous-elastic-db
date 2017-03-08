@@ -4,13 +4,6 @@
 #include "alinous.html.xpath/IVariableValue.h"
 #include "alinous.html/IDomObject.h"
 #include "alinous.html/DomNode.h"
-#include "java.util/Locale.h"
-#include "java.util/Calendar.h"
-#include "java.util/GregorianCalendar.h"
-#include "java.util/Date.h"
-#include "alinous.numeric/InternalDate.h"
-#include "java.util/TimeZone.h"
-#include "alinous.numeric/TimeOnlyTimestamp.h"
 #include "alinous.remote.socket/NetworkBinaryBuffer.h"
 #include "alinous.remote.socket/ICommandData.h"
 #include "alinous.buffer.storage/FileStorageEntryBuilder.h"
@@ -28,10 +21,21 @@
 #include "alinous.runtime.dom/IAlinousVariable.h"
 #include "alinous.runtime.dom/IDomVariable.h"
 #include "alinous.runtime.dom.typed/ITypedVariable.h"
+#include "alinous.runtime.engine/ScriptMachine.h"
+#include "alinous.compile.expression/IExpression.h"
+#include "alinous.compile.declare/ClassMemberModifiers.h"
+#include "alinous.compile.declare/IClassMember.h"
+#include "alinous.compile.declare/AbstractClassMember.h"
+#include "alinous.compile.declare/ClassMethodFunction.h"
+#include "alinous.compile.declare/AlinousClass.h"
+#include "alinous.compile/Token.h"
+#include "alinous.compile.expression/DomVariableDescriptor.h"
 #include "alinous.runtime.dom.typed/ITypedCaller.h"
 #include "alinous.runtime.dom.typed/AbstractTypedVariable.h"
+#include "alinous.runtime.dom.typed/TypedVariableDomFactory.h"
 #include "alinous.runtime.dom.typed/TypedVariableArray.h"
 #include "alinous.runtime.dom.typed/TimestampVariable.h"
+#include "alinous.runtime.dom.typed/TimeVariable.h"
 #include "alinous.runtime.dom.typed/ShortVariable.h"
 #include "alinous.runtime.dom.typed/LongVariable.h"
 #include "alinous.runtime.dom.typed/IntegerVariable.h"
@@ -42,20 +46,9 @@
 #include "alinous.runtime.dom.typed/StringVariable.h"
 #include "alinous.runtime.dom.typed/BoolVariable.h"
 #include "alinous.runtime.variant/VariantValue.h"
-#include "alinous.runtime.dom.typed/BigDecimalVariable.h"
-#include "alinous.runtime.engine/ScriptMachine.h"
-#include "alinous.compile.expression/IExpression.h"
-#include "alinous.compile.declare/ClassMemberModifiers.h"
-#include "alinous.compile.declare/IClassMember.h"
-#include "alinous.compile.declare/AbstractClassMember.h"
-#include "alinous.compile.declare/ClassMethodFunction.h"
-#include "alinous.compile.declare/AlinousClass.h"
-#include "alinous.compile/Token.h"
-#include "alinous.compile.expression/DomVariableDescriptor.h"
 #include "alinous.db.table/IDatabaseRecord.h"
 #include "alinous.runtime.dom/DomVariable.h"
-#include "alinous.runtime.dom.typed/TimeVariable.h"
-#include "alinous.runtime.dom.typed/TypedVariableDomFactory.h"
+#include "alinous.runtime.dom.typed/BigDecimalVariable.h"
 #include "alinous.runtime.dom.typed/TypedVariableContainer.h"
 
 namespace alinous {namespace runtime {namespace dom {namespace typed {
@@ -127,6 +120,9 @@ ITypedVariable* TypedVariableContainer::get(String* name, ThreadContext* ctx) th
 void TypedVariableContainer::put(String* name, ITypedVariable* variable, ThreadContext* ctx) throw() 
 {
 	this->variables->put(name, variable, ctx);
+}
+void TypedVariableContainer::includes(TypedVariableDomFactory* arg0, ThreadContext* ctx) throw() 
+{
 }
 TypedVariableContainer* TypedVariableContainer::importFromDebugXml(DomNode* node, ThreadContext* ctx) throw() 
 {

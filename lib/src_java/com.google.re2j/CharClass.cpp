@@ -11,11 +11,11 @@
 #include "com.google.re2j/RE2.h"
 #include "com.google.re2j/Machine.h"
 #include "com.google.re2j/PatternSyntaxException.h"
-#include "com.google.re2j/Utils.h"
-#include "com.google.re2j/Unicode.h"
 #include "com.google.re2j/CharGroup.h"
 #include "com.google.re2j/CharClass.h"
 #include "com.google.re2j/Parser.h"
+#include "com.google.re2j/Unicode.h"
+#include "com.google.re2j/Utils.h"
 #include "com.google.re2j/Compiler.h"
 #include "com.google.re2j/UnicodeTable2.h"
 #include "com.google.re2j/UnicodeTables.h"
@@ -328,9 +328,6 @@ void CharClass::ensureCapacity(int newLen, ThreadContext* ctx) throw()
 		System::arraycopy(r, 0, r2, 0, len, ctx);
 		__GC_MV(this, &(r), r2, IArrayObjectPrimitive<int>);
 	}
-}
-void CharClass::includes(Utils* arg0, RE2* arg1, Unicode* arg2, ThreadContext* ctx) throw() 
-{
 }
 String* CharClass::charClassToString(IArrayObjectPrimitive<int>* r, int len, ThreadContext* ctx) throw() 
 {

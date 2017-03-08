@@ -1,21 +1,12 @@
 #include "include/global.h"
 
 
-#include "java.util/BitSet.h"
-#include "alinous.lock/LockObject.h"
 #include "alinous.lock/ConcurrentGate.h"
-#include "alinous.db.table.lockmonitor/ConcurrentGatePool.h"
 #include "alinous.db.table.lockmonitor/IDatabaseLock.h"
 #include "alinous.db.table.lockmonitor/TableLock.h"
-#include "alinous.db.table.lockmonitor/RowLock.h"
 #include "alinous.db.table.lockmonitor/IThreadLocker.h"
 #include "alinous.db.table/IDatabaseTable.h"
-#include "alinous.db.table.lockmonitor.db/RowLockManager.h"
-#include "alinous.db.table.lockmonitor.db/RowLockManagerList.h"
-#include "alinous.db.table.lockmonitor.db/RowLockDb.h"
 #include "alinous.db.table.lockmonitor.db/TableLockMamager.h"
-#include "alinous.db.table.lockmonitor.db/TableLockManagerList.h"
-#include "alinous.db.table.lockmonitor.db/TableLockHashDb.h"
 
 namespace alinous {namespace db {namespace table {namespace lockmonitor {namespace db {
 

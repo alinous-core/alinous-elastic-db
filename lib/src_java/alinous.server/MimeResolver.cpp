@@ -1,16 +1,7 @@
 #include "include/global.h"
 
 
-#include "alinous.server.webmodule/WebModuleManager.h"
-#include "alinous.system/AlinousCore.h"
-#include "alinous.server.http/IContentByteStream.h"
 #include "alinous.server/MimeResolver.h"
-#include "alinous.server/ContentResult.h"
-#include "alinous.server.http/HttpHeaderProcessor.h"
-#include "alinous.server/BinaryContentByteStream.h"
-#include "alinous.server/AlinousWebContentProcessor.h"
-#include "alinous.server.http/AlinousHttpServer.h"
-#include "alinous.server/AlinousCoreServer.h"
 
 namespace alinous {namespace server {
 

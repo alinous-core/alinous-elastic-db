@@ -1,10 +1,7 @@
 #include "include/global.h"
 
 
-#include "alinous.system.config/IAlinousConfigElement.h"
-#include "alinous.system.config.remote/RegionRef.h"
 #include "alinous.html.xpath/IVariableValue.h"
-#include "alinous.html.xpath/StringValue.h"
 #include "alinous.html/IDomObject.h"
 #include "alinous.html/Attribute.h"
 #include "alinous.html/DomNode.h"
@@ -17,17 +14,8 @@
 #include "alinous.compile/AbstractSrcElement.h"
 #include "alinous.system/AlinousException.h"
 #include "alinous.system.config/AlinousInitException.h"
-#include "alinous.system.config.remote/RemoteNodeReference.h"
-#include "alinous.system.config.remote/Table.h"
-#include "alinous.system.config.remote/Tables.h"
+#include "alinous.system.config/IAlinousConfigElement.h"
 #include "alinous.system.config.remote/MonitorRef.h"
-#include "alinous.system.config.remote/Node.h"
-#include "alinous.system.config.remote/RegionsServer.h"
-#include "alinous.system.config.remote/Region.h"
-#include "alinous.system.config.remote/Regions.h"
-#include "alinous.system.config.remote/Monitor.h"
-#include "alinous.system.config.remote/RegionsRef.h"
-#include "alinous.system.config.remote/Nodes.h"
 
 namespace alinous {namespace system {namespace config {namespace remote {
 

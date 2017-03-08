@@ -3,10 +3,8 @@
 
 #include "java.lang/Number.h"
 #include "java.lang/Comparable.h"
-#include "java.lang/Integer.h"
-#include "java.harmoney/HexStringParser.h"
-#include "java.harmoney/FloatingPointParser.h"
 #include "java.lang/Double.h"
+#include "java.lang/Integer.h"
 #include "java.harmoney/NumberConverter.h"
 
 namespace java {namespace harmoney {

@@ -3,6 +3,12 @@
 namespace alinous{namespace annotation{
 class OneSource;
 }}
+namespace alinous {namespace compile {namespace sql {namespace expression {
+class ISQLExpression;}}}}
+
+namespace alinous {namespace db {namespace table {namespace scan {
+class IndexScannerLockRequirement;}}}}
+
 namespace alinous {namespace db {namespace table {namespace scan {
 class IndexListScanner;}}}}
 
@@ -101,6 +107,7 @@ using ::java::io::IOException;
 using ::java::util::ArrayList;
 using ::alinous::compile::sql::analyze::InnerNecessaryCondition;
 using ::alinous::compile::sql::analyze::ScanTableIdentifier;
+using ::alinous::compile::sql::expression::ISQLExpression;
 using ::alinous::db::AlinousDbException;
 using ::alinous::db::table::DatabaseException;
 using ::alinous::db::table::IDatabaseRecord;
@@ -158,6 +165,8 @@ private:
 	bool hasNext4CurrentKey(bool debug, ThreadContext* ctx);
 	bool checkEquals(ThreadContext* ctx) throw() ;
 	bool satisfyNececity(bool debug, ThreadContext* ctx);
+public:
+	static void includes(ISQLExpression* arg0, IndexScannerLockRequirement* arg1, ThreadContext* ctx) throw() ;
 public:
 	static bool __init_done;
 	static bool __init_static_variables();

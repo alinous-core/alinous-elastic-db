@@ -33,6 +33,9 @@ class MatchCursor;}}}}
 namespace alinous {namespace html {namespace xpath {
 class XpathFilter;}}}
 
+namespace alinous {namespace html {namespace xpath {
+class IXpathBooleanCondition;}}}
+
 namespace java {namespace io {
 class StringReader;}}
 
@@ -60,6 +63,7 @@ using ::java::util::ArrayList;
 using ::java::util::Iterator;
 using ::alinous::html::DomDocument;
 using ::alinous::html::DomNode;
+using ::alinous::html::xpath::IXpathBooleanCondition;
 using ::alinous::html::xpath::IXpathStatement;
 using ::alinous::html::xpath::Xpath;
 using ::alinous::html::xpath::XpathContext;

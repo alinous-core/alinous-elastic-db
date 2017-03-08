@@ -4,6 +4,9 @@ namespace alinous{namespace annotation{
 class OneSource;
 }}
 namespace alinous {namespace runtime {namespace dom {namespace typed {
+class TypedVariableDomFactory;}}}}
+
+namespace alinous {namespace runtime {namespace dom {namespace typed {
 class TypedVariableArray;}}}}
 
 namespace alinous {namespace html {
@@ -348,6 +351,7 @@ public:
 	void readData(NetworkBinaryBuffer* buff, ThreadContext* ctx) final;
 	void writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) final;
 public:
+	static void includes(TypedVariableDomFactory* arg0, ThreadContext* ctx) throw() ;
 	static TypedVariableArray* fromDebugXml(DomNode* node, ThreadContext* ctx) throw() ;
 public:
 	static bool __init_done;

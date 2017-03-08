@@ -7,11 +7,8 @@
 #include "alinous.runtime.dom/VariableException.h"
 #include "alinous.remote.socket/NetworkBinaryBuffer.h"
 #include "alinous.remote.socket/ICommandData.h"
-#include "alinous.remote.db.client.command.data/TableClusterData.h"
 #include "alinous.db.table/TableMetadata.h"
 #include "alinous.remote.db.client.command.data/StorageNodeData.h"
-#include "alinous.remote.db.client.command.data/SchemaData.h"
-#include "alinous.remote.db.client.command.data/SchemasStructureInfoData.h"
 
 namespace alinous {namespace remote {namespace db {namespace client {namespace command {namespace data {
 

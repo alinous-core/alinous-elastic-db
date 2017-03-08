@@ -3,6 +3,9 @@
 namespace alinous{namespace annotation{
 class OneSource;
 }}
+namespace alinous {namespace runtime {namespace dom {namespace typed {
+class TypedVariableDomFactory;}}}}
+
 namespace java {namespace util {
 template <typename  T, typename V> class Map;}}
 
@@ -70,6 +73,7 @@ public:
 	ITypedVariable* get(String* name, ThreadContext* ctx) throw() ;
 	void put(String* name, ITypedVariable* variable, ThreadContext* ctx) throw() ;
 public:
+	static void includes(TypedVariableDomFactory* arg0, ThreadContext* ctx) throw() ;
 	static TypedVariableContainer* importFromDebugXml(DomNode* node, ThreadContext* ctx) throw() ;
 public:
 	static bool __init_done;

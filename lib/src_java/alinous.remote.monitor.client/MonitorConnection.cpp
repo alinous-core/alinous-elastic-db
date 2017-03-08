@@ -3,10 +3,6 @@
 
 #include "alinous.compile/AbstractSrcElement.h"
 #include "alinous.system/AlinousException.h"
-#include "alinous.remote.socket/ISocketConnection.h"
-#include "alinous.remote.socket/SocketConnectionPool.h"
-#include "alinous.remote.socket/ISocketConnectionFactory.h"
-#include "alinous.remote.monitor.client/MonitorConnectionInfo.h"
 #include "alinous.db/AlinousDbException.h"
 #include "java.io/FilterOutputStream.h"
 #include "java.io/BufferedOutputStream.h"
@@ -15,14 +11,11 @@
 #include "alinous.remote.monitor.client.command/AbstractMonitorCommand.h"
 #include "alinous.remote.monitor.client.command/FinishConnectionCommand.h"
 #include "alinous.remote.monitor.client.command/MonitorConnectCommand.h"
+#include "alinous.remote.monitor.client.command/MinitorCommandReader.h"
+#include "alinous.remote.socket/ISocketConnection.h"
+#include "alinous.remote.socket/SocketConnectionPool.h"
+#include "alinous.remote.monitor.client/MonitorConnectionInfo.h"
 #include "alinous.remote.monitor.client/MonitorConnection.h"
-#include "alinous.remote.monitor.client/MonitorClientConnectionFactory.h"
-#include "alinous.remote.socket/ICommandData.h"
-#include "alinous.db.trx/DbVersionContext.h"
-#include "alinous.db/ICommidIdPublisher.h"
-#include "alinous.system.config/IAlinousConfigElement.h"
-#include "alinous.system.config.remote/MonitorRef.h"
-#include "alinous.remote.monitor.client/RemoteCommitIdPublisher.h"
 
 namespace alinous {namespace remote {namespace monitor {namespace client {
 

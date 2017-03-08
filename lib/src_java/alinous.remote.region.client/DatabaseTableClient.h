@@ -54,6 +54,9 @@ template <typename  T> class List;}}
 namespace alinous {namespace remote {namespace region {namespace client {namespace command {namespace dml {
 class ClientTpcCommitSessionCommand;}}}}}}
 
+namespace alinous {namespace db {namespace trx {
+class DbVersionContext;}}}
+
 namespace alinous {namespace remote {namespace socket {
 class ISocketConnection;}}}
 
@@ -125,6 +128,7 @@ using ::alinous::db::table::lockmonitor::DatabaseLockException;
 using ::alinous::db::table::lockmonitor::IThreadLocker;
 using ::alinous::db::table::lockmonitor::ThreadLocker;
 using ::alinous::db::trx::DbTransaction;
+using ::alinous::db::trx::DbVersionContext;
 using ::alinous::net::AlinousSocket;
 using ::alinous::remote::region::client::command::data::ClientNetworkRecord;
 using ::alinous::remote::region::client::command::dml::ClientInsertDataCommand;

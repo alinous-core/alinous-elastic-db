@@ -3,6 +3,9 @@
 namespace alinous{namespace annotation{
 class OneSource;
 }}
+namespace alinous {namespace runtime {namespace engine {
+class ScriptRunner;}}}
+
 namespace alinous {namespace compile {namespace stmt {
 class AssignmentStatement;}}}
 
@@ -105,6 +108,9 @@ class BigDecimalVariable;}}}}
 namespace alinous {namespace numeric {
 class BigDecimal;}}
 
+namespace alinous {namespace compile {namespace analyse {
+class AlinousType;}}}
+
 namespace alinous {namespace runtime {namespace dom {namespace clazz {
 class AlinousClassVariable;}}}}
 
@@ -136,6 +142,7 @@ using ::java::util::Iterator;
 using ::java::sql::Timestamp;
 using ::java::util::ArrayList;
 using ::alinous::compile::IStatement;
+using ::alinous::compile::analyse::AlinousType;
 using ::alinous::compile::declare::AlinousName;
 using ::alinous::compile::expression::DomVariableDescriptor;
 using ::alinous::compile::expression::IExpression;
@@ -191,6 +198,8 @@ public:
 	bool statementList(StatementList* stmt, ScriptMachine* machine, bool debug, ThreadContext* ctx);
 private:
 	void substituteLocalVariableByIdenifier(ScriptMachine* machine, IdentifierVariable* leftId, IAlinousVariable* value, bool debug, ThreadContext* ctx);
+public:
+	static void includes(ScriptRunner* arg0, ThreadContext* ctx) throw() ;
 public:
 	static bool __init_done;
 	static bool __init_static_variables();

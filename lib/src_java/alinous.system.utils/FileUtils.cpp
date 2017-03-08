@@ -3,11 +3,12 @@
 
 #include "alinous.system.utils/FileUtils.h"
 #include "alinous.html.xpath/IVariableValue.h"
-#include "alinous.html.xpath/StringValue.h"
 #include "alinous.html/IDomObject.h"
 #include "alinous.html/Attribute.h"
 #include "alinous.html/DomNode.h"
 #include "alinous.html/DomDocument.h"
+#include "alinous.html.xpath.match/MatchCandidate.h"
+#include "alinous.html.xpath.match/MatchCandidatesCollection.h"
 #include "alinous.html.xpath.match/Matcher.h"
 #include "alinous.system.utils/ConfigFileUtiles.h"
 

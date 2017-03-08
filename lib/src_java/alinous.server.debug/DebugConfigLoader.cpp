@@ -9,11 +9,6 @@
 #include "alinous.system.config/WebHandlerInfo.h"
 #include "alinous.system.config/AlinousConfig.h"
 #include "alinous.server.debug/DebugConfigLoader.h"
-#include "alinous.system/AlinousCore.h"
-#include "alinous.server.http/IContentByteStream.h"
-#include "alinous.server/BinaryContentByteStream.h"
-#include "alinous.server.http/HttpHeaderProcessor.h"
-#include "alinous.server.debug/DebugProcessor.h"
 
 namespace alinous {namespace server {namespace debug {
 

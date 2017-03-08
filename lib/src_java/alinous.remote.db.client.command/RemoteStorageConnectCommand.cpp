@@ -3,17 +3,11 @@
 
 #include "java.io/FilterOutputStream.h"
 #include "java.io/BufferedOutputStream.h"
-#include "alinous.remote.socket/NetworkBinaryBuffer.h"
-#include "alinous.remote.socket/ICommandData.h"
-#include "alinous.remote.db.client.command.data/SchemasStructureInfoData.h"
 #include "alinous.remote.db/RemoteTableStorageServer.h"
-#include "alinous.remote.db.client.command/AbstractRemoteStorageCommand.h"
-#include "alinous.remote.db.client.command/GetTableSchemeCommand.h"
-#include "alinous.remote.db.client.command/TerminateRemoteStorageCommand.h"
-#include "alinous.remote.db.client.command/FinishRemoteStorageConnectionCommand.h"
-#include "alinous.remote.db.client.command/VoidRemoteStorageCommand.h"
-#include "alinous.remote.db.client.command/RemoteStorageConnectCommand.h"
+#include "alinous.remote.socket/NetworkBinaryBuffer.h"
 #include "alinous.remote.db.client.command/RemoteStorageCommandReader.h"
+#include "alinous.remote.db.client.command/AbstractRemoteStorageCommand.h"
+#include "alinous.remote.db.client.command/RemoteStorageConnectCommand.h"
 
 namespace alinous {namespace remote {namespace db {namespace client {namespace command {
 
@@ -34,11 +28,11 @@ bool RemoteStorageConnectCommand::__init_static_variables(){
 }
  RemoteStorageConnectCommand::RemoteStorageConnectCommand(ThreadContext* ctx) throw()  : IObject(ctx), AbstractRemoteStorageCommand(ctx), connected(0)
 {
-	this->type = RemoteStorageConnectCommand::TYPE_CONNECT;
+	this->type = AbstractRemoteStorageCommand::TYPE_CONNECT;
 }
 void RemoteStorageConnectCommand::__construct_impl(ThreadContext* ctx) throw() 
 {
-	this->type = RemoteStorageConnectCommand::TYPE_CONNECT;
+	this->type = AbstractRemoteStorageCommand::TYPE_CONNECT;
 }
  RemoteStorageConnectCommand::~RemoteStorageConnectCommand() throw() 
 {
@@ -75,7 +69,7 @@ void RemoteStorageConnectCommand::executeOnServer(RemoteTableStorageServer* tabl
 void RemoteStorageConnectCommand::writeByteStream(OutputStream* out, ThreadContext* ctx)
 {
 	NetworkBinaryBuffer* buff = (new(ctx) NetworkBinaryBuffer(32, ctx));
-	buff->putInt(RemoteStorageConnectCommand::TYPE_CONNECT, ctx);
+	buff->putInt(AbstractRemoteStorageCommand::TYPE_CONNECT, ctx);
 	if(this->connected)
 	{
 		buff->putInt(1, ctx);

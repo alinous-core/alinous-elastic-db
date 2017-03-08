@@ -2,17 +2,13 @@
 
 
 #include "java.util/Locale.h"
+#include "java.util/Date.h"
+#include "java.util/Calendar.h"
+#include "alinous.numeric/InternalDate.h"
 #include "java.util/TimeZone.h"
 #include "java.util/SimpleTimeZone.h"
-#include "java.util/Calendar.h"
-#include "java.util/GregorianCalendar.h"
-#include "java.util/Date.h"
-#include "alinous.numeric/InternalDate.h"
 #include "java.util/TimeZones.h"
 #include "java.sql/Date.h"
-#include "java.util/BitSet.h"
-#include "java.util/Random.h"
-#include "java.util/Arrays.h"
 
 namespace java {namespace util {
 
@@ -61,7 +57,7 @@ void TimeZone::__releaseRegerences(bool prepare, ThreadContext* ctx) throw()
 		return;
 	}
 }
-void TimeZone::includeDummy(TimeZones* arg0, ThreadContext* ctx) throw() 
+void TimeZone::includeDummy(TimeZones* arg0, Calendar* arg1, java::util::Date* arg2, ThreadContext* ctx) throw() 
 {
 }
 IObject* TimeZone::clone(ThreadContext* ctx) throw() 

@@ -5,11 +5,8 @@
 #include "java.lang/Comparable.h"
 #include "alinous.btree/IBTreeNode.h"
 #include "alinous.btree/BTreeCacheArray.h"
-#include "alinous.buffer/HashArrayListIterator.h"
-#include "alinous.buffer/FifoElement.h"
-#include "alinous.buffer/FifoIterator.h"
-#include "alinous.buffer/FifoList.h"
 #include "alinous.btree/BTreeException.h"
+#include "alinous.buffer/HashArrayListIterator.h"
 #include "alinous.buffer/HashArrayList.h"
 
 namespace alinous {namespace buffer {

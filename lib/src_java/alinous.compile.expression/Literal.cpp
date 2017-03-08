@@ -4,8 +4,8 @@
 #include "alinous.buffer.storage/FileStorageEntryBuilder.h"
 #include "alinous.buffer.storage/FileStorageEntryFetcher.h"
 #include "alinous.compile/IAlinousElementVisitor.h"
-#include "alinous.compile/IAlinousVisitorContainer.h"
 #include "alinous.compile/ExpressionSourceId.h"
+#include "alinous.compile/IAlinousVisitorContainer.h"
 #include "alinous.system/AlinousException.h"
 #include "alinous.runtime/ExecutionException.h"
 #include "alinous.runtime.dom/VariableException.h"
@@ -13,45 +13,23 @@
 #include "alinous.remote.socket/ICommandData.h"
 #include "alinous.runtime.dom/IAlinousVariable.h"
 #include "alinous.runtime.variant/VariantValue.h"
+#include "alinous.runtime.engine/ScriptMachine.h"
 #include "alinous.compile/AbstractSrcElement.h"
 #include "alinous.compile/IAlinousElement.h"
-#include "alinous.compile.declare/IDeclare.h"
-#include "alinous.compile.declare.function/AlinousFunction.h"
-#include "alinous.compile/Token.h"
-#include "alinous.compile.expression/IDomSegment.h"
-#include "alinous.compile.expression/DomIndexSegment.h"
-#include "alinous.compile.expression/DomNameSegment.h"
-#include "alinous.runtime.engine/ScriptMachine.h"
 #include "alinous.compile.expression/IExpression.h"
 #include "alinous.compile.analyse/AlinousType.h"
-#include "alinous.compile.declare/AlinousName.h"
+#include "alinous.compile.declare/IDeclare.h"
+#include "alinous.compile.declare.function/AlinousFunction.h"
 #include "alinous.compile.analyse/SrcAnalyseContext.h"
-#include "alinous.compile.expression/AbstractExpression.h"
-#include "alinous.compile.expression/FunctionArguments.h"
 #include "alinous.compile.declare/ClassMemberModifiers.h"
 #include "alinous.compile.declare/IClassMember.h"
 #include "alinous.compile.declare/AbstractClassMember.h"
 #include "alinous.compile.declare/ClassMethodFunction.h"
 #include "alinous.compile.declare/AlinousClass.h"
-#include "alinous.compile.analyse/DomVariableDeclareSource.h"
-#include "alinous.compile.expression/DomVariableDescriptor.h"
-#include "alinous.compile.expression/Literal.h"
-#include "alinous.compile.expression/SubExpression.h"
-#include "alinous.compile.expression/AbstractCollectionExpression.h"
-#include "alinous.compile.expression/AdditiveExpression.h"
-#include "alinous.compile.expression/MultiplicativeExpression.h"
-#include "alinous.compile.expression/ShiftExpression.h"
-#include "alinous.compile.expression/AllocationExpression.h"
-#include "alinous.compile.expression/BitReverseExpression.h"
-#include "alinous.compile.expression/CastExpression.h"
-#include "alinous.compile.expression/ConditionalExpression.h"
-#include "alinous.compile.expression/BooleanLiteral.h"
-#include "alinous.compile.expression/NullLiteral.h"
-#include "alinous.compile.expression/ParenthesisExpression.h"
-#include "alinous.compile.expression/PreDecrementExpression.h"
-#include "alinous.compile.expression/PreIncrementExpression.h"
-#include "alinous.compile.expression/UnaryExpression.h"
+#include "alinous.compile/Token.h"
 #include "alinous.compile.expression/IExpressionFactory.h"
+#include "alinous.compile.expression/AbstractExpression.h"
+#include "alinous.compile.expression/Literal.h"
 
 namespace alinous {namespace compile {namespace expression {
 
@@ -335,6 +313,9 @@ void Literal::toEnum(int num, ThreadContext* ctx) throw()
 		this->litType = literalTypes::NULL_LITERAL;
 		break ;
 	}
+}
+void Literal::includes(IExpressionFactory* arg0, ThreadContext* ctx) throw() 
+{
 }
 Literal* Literal::intLiteral(int value, ThreadContext* ctx) throw() 
 {

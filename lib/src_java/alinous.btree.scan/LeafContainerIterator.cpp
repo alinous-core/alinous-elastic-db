@@ -9,21 +9,13 @@
 #include "alinous.system/AlinousException.h"
 #include "alinous.buffer/FifoElement.h"
 #include "alinous.lock/LockObject.h"
-#include "alinous.btree.scan/INodeIterator.h"
-#include "alinous.btree.scan/AbstractNodeIterator.h"
-#include "alinous.btree.scan/NodeIterator.h"
-#include "alinous.btree/NodeRef.h"
-#include "alinous.btree/IBTreeNode.h"
-#include "alinous.btree/AbstractNode.h"
-#include "alinous.btree/BTreeNodeHandler.h"
-#include "alinous.btree/AbstractBTreeNode.h"
-#include "alinous.btree/BTreeNode.h"
 #include "alinous.btree/BTreeNodeLoader.h"
-#include "alinous.btree/BTreeMaxNode.h"
-#include "alinous.btree.scan/MaxNodeIterator.h"
-#include "alinous.btree/IBTree.h"
-#include "alinous.btree.scan/BTreeScanner.h"
+#include "alinous.btree/IBTreeNode.h"
+#include "alinous.btree.scan/INodeIterator.h"
+#include "alinous.btree/NodeRef.h"
+#include "alinous.btree/AbstractNode.h"
 #include "alinous.btree/AbstractBTreeLeafContainer.h"
+#include "alinous.btree.scan/AbstractNodeIterator.h"
 #include "alinous.btree.scan/LeafContainerIterator.h"
 
 namespace alinous {namespace btree {namespace scan {
@@ -96,7 +88,8 @@ bool LeafContainerIterator::hasNext(ThreadContext* ctx) throw()
 IBTreeNode* LeafContainerIterator::next(ThreadContext* ctx)
 {
 	this->container->loadChildren(ctx);
-	return this->container->getNodeAt(this->current++, ctx)->getNode(ctx);
+	NodeRef* nodeRef = this->container->getNodeAt(this->current++, ctx);
+	return nodeRef->getNode(ctx);
 }
 bool LeafContainerIterator::isLeafContainer(ThreadContext* ctx) throw() 
 {

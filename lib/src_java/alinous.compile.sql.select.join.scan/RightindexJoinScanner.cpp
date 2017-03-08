@@ -48,10 +48,6 @@
 #include "alinous.compile.sql.select.join/SQLJoinCondition.h"
 #include "alinous.db.trx.scan/ScanException.h"
 #include "alinous.compile.sql.select.join.scan/RightindexJoinScanner.h"
-#include "alinous.db.trx.scan/ScannedOids.h"
-#include "alinous.compile.sql.select.join.scan/ReverseIndexScanner.h"
-#include "alinous.compile.sql.select.join.scan/CrossJoinScanner.h"
-#include "alinous.compile.sql.select.join.scan/JoinedCollectionScanner.h"
 
 namespace alinous {namespace compile {namespace sql {namespace select {namespace join {namespace scan {
 

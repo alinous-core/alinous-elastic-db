@@ -1,17 +1,7 @@
 #include "include/global.h"
 
 
-#include "alinous.remote.socket/NetworkBinaryBuffer.h"
-#include "alinous.lock/LockObject.h"
-#include "alinous.runtime.parallel/ThreadPool.h"
-#include "alinous.system/ISystemLog.h"
-#include "alinous.remote.socket/ISocketActionFactory.h"
-#include "alinous.remote.socket/SocketServer.h"
-#include "alinous.remote.socket/ISocketConnection.h"
-#include "alinous.remote.socket/ISocketConnectionFactory.h"
-#include "alinous.remote.socket/SocketConnectionPool.h"
 #include "alinous.remote.socket/NetworkBinalyUtils.h"
-#include "alinous.remote.socket/ICommandData.h"
 
 namespace alinous {namespace remote {namespace socket {
 

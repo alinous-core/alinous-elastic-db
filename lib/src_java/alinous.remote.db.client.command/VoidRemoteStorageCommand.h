@@ -21,9 +21,6 @@ class AbstractRemoteStorageCommand;}}}}}
 namespace java {namespace io {
 class IOException;}}
 
-namespace alinous {namespace remote {namespace monitor {namespace client {namespace command {
-class AbstractMonitorCommand;}}}}}
-
 namespace alinous {
 class ThreadContext;
 }
@@ -38,7 +35,6 @@ using ::java::io::IOException;
 using ::java::io::InputStream;
 using ::java::io::OutputStream;
 using ::alinous::remote::db::RemoteTableStorageServer;
-using ::alinous::remote::monitor::client::command::AbstractMonitorCommand;
 using ::alinous::remote::socket::NetworkBinaryBuffer;
 
 

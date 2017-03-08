@@ -3,7 +3,6 @@
 
 #include "alinous.parser.xpath/TokenMgrError.h"
 #include "alinous.html.xpath/IVariableValue.h"
-#include "alinous.html.xpath/StringValue.h"
 #include "alinous.html/IDomObject.h"
 #include "alinous.html/Attribute.h"
 #include "alinous.html/DomNode.h"

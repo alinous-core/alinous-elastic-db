@@ -9,7 +9,6 @@
 #include "alinous.runtime.parallel/IParallelTask.h"
 #include "alinous.runtime.parallel/ConcurrentTaskQueue.h"
 #include "alinous.runtime.parallel/ConcurrentTaskExexutor.h"
-#include "alinous.runtime.parallel/SequentialBackgroundJob.h"
 
 namespace alinous {namespace runtime {namespace parallel {
 

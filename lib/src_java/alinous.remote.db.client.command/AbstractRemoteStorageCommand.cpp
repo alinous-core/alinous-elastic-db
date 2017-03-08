@@ -7,17 +7,10 @@
 #include "alinous.system/AlinousException.h"
 #include "alinous.runtime/ExecutionException.h"
 #include "alinous.runtime.dom/VariableException.h"
-#include "alinous.remote.socket/NetworkBinaryBuffer.h"
-#include "alinous.remote.socket/ICommandData.h"
-#include "alinous.remote.db.client.command.data/SchemasStructureInfoData.h"
 #include "alinous.remote.db/RemoteTableStorageServer.h"
-#include "alinous.remote.db.client.command/AbstractRemoteStorageCommand.h"
-#include "alinous.remote.db.client.command/GetTableSchemeCommand.h"
-#include "alinous.remote.db.client.command/TerminateRemoteStorageCommand.h"
-#include "alinous.remote.db.client.command/FinishRemoteStorageConnectionCommand.h"
-#include "alinous.remote.db.client.command/VoidRemoteStorageCommand.h"
-#include "alinous.remote.db.client.command/RemoteStorageConnectCommand.h"
+#include "alinous.remote.socket/NetworkBinaryBuffer.h"
 #include "alinous.remote.db.client.command/RemoteStorageCommandReader.h"
+#include "alinous.remote.db.client.command/AbstractRemoteStorageCommand.h"
 
 namespace alinous {namespace remote {namespace db {namespace client {namespace command {
 
@@ -125,6 +118,9 @@ void AbstractRemoteStorageCommand::readErrorFromStream(NetworkBinaryBuffer* buff
 			this->errorMessage->add(msg, ctx);
 		}
 	}
+}
+void AbstractRemoteStorageCommand::includes(RemoteStorageCommandReader* arg0, ThreadContext* ctx) throw() 
+{
 }
 void AbstractRemoteStorageCommand::__cleanUp(ThreadContext* ctx){
 }

@@ -4,7 +4,6 @@
 #include "alinous.remote.socket/ICommandData.h"
 #include "alinous.compile.analyse/AlinousType.h"
 #include "alinous.runtime.function/IAlinousNativeFunction.h"
-#include "alinous.runtime.function/AlinousNativeFunctionRegistory.h"
 #include "alinous.runtime.function/AbstractNativeFunction.h"
 
 namespace alinous {namespace runtime {namespace function {

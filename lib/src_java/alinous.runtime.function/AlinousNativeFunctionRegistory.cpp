@@ -1,10 +1,7 @@
 #include "include/global.h"
 
 
-#include "alinous.remote.socket/NetworkBinaryBuffer.h"
 #include "alinous.remote.socket/ICommandData.h"
-#include "alinous.runtime.dom/IAlinousVariable.h"
-#include "alinous.runtime.engine/ScriptMachine.h"
 #include "alinous.compile.analyse/AlinousType.h"
 #include "alinous.runtime.function/IAlinousNativeFunction.h"
 #include "alinous.runtime.function/AbstractNativeFunction.h"

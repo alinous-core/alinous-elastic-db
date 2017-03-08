@@ -4,6 +4,9 @@ namespace alinous{namespace annotation{
 class OneSource;
 }}
 namespace alinous {namespace compile {
+class AlinousElementNetworkFactory;}}
+
+namespace alinous {namespace compile {
 class IncludePreprocessor;}}
 
 namespace alinous {namespace compile {namespace declare {
@@ -90,6 +93,8 @@ public:
 	int getEndPosition(ThreadContext* ctx) throw()  final;
 	AbstractSrcElement* getParent(ThreadContext* ctx) throw()  final;
 	void setParent(AbstractSrcElement* parent, ThreadContext* ctx) throw()  final;
+public:
+	static void includesbase(AlinousElementNetworkFactory* arg0, ThreadContext* ctx) throw() ;
 public:
 	static bool __init_done;
 	static bool __init_static_variables();

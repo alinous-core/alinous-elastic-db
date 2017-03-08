@@ -4,6 +4,12 @@ namespace alinous{namespace annotation{
 class OneSource;
 }}
 namespace alinous {namespace compile {namespace sql {namespace analyze {
+class IndexConditionDetector;}}}}
+
+namespace alinous {namespace compile {namespace sql {namespace analyze {
+class JoinConditionDetector;}}}}
+
+namespace alinous {namespace compile {namespace sql {namespace analyze {
 class SQLAnalyseContext;}}}}
 
 namespace alinous {namespace compile {namespace sql {namespace analyze {
@@ -59,6 +65,8 @@ public:
 	ArrayList<JoinStrategyPart>* getBestParts(ThreadContext* ctx) throw() ;
 private:
 	void analyzeBestJoinKey(ThreadContext* ctx) throw() ;
+public:
+	static void includes(IndexConditionDetector* arg0, JoinConditionDetector* arg1, ThreadContext* ctx) throw() ;
 public:
 	static bool __init_done;
 	static bool __init_static_variables();

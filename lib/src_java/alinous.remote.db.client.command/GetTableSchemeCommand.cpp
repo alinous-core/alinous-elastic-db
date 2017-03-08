@@ -11,13 +11,9 @@
 #include "alinous.remote.socket/ICommandData.h"
 #include "alinous.remote.db.client.command.data/SchemasStructureInfoData.h"
 #include "alinous.remote.db/RemoteTableStorageServer.h"
+#include "alinous.remote.db.client.command/RemoteStorageCommandReader.h"
 #include "alinous.remote.db.client.command/AbstractRemoteStorageCommand.h"
 #include "alinous.remote.db.client.command/GetTableSchemeCommand.h"
-#include "alinous.remote.db.client.command/TerminateRemoteStorageCommand.h"
-#include "alinous.remote.db.client.command/FinishRemoteStorageConnectionCommand.h"
-#include "alinous.remote.db.client.command/VoidRemoteStorageCommand.h"
-#include "alinous.remote.db.client.command/RemoteStorageConnectCommand.h"
-#include "alinous.remote.db.client.command/RemoteStorageCommandReader.h"
 
 namespace alinous {namespace remote {namespace db {namespace client {namespace command {
 

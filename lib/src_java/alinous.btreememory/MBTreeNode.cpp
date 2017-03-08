@@ -16,19 +16,10 @@
 #include "alinous.btree/BTreeNodeLoader.h"
 #include "alinous.btree/IBTreeValue.h"
 #include "alinous.btree/IBTreeNode.h"
-#include "alinous.btreememory.scan/MemoryLeafContainerIterator.h"
-#include "alinous.btreememory/AbstractMemoryNode.h"
-#include "alinous.btreememory/AbstractMemoryBTreeLeafContainer.h"
-#include "alinous.btreememory/MBTreeLeafContainer.h"
-#include "alinous.btreememory/MBTreeMaxLeafContainer.h"
 #include "alinous.btreememory.scan/MemoryNodeIterator.h"
+#include "alinous.btreememory/AbstractMemoryNode.h"
 #include "alinous.btreememory/AbstractMemoryBTreeNode.h"
 #include "alinous.btreememory/MBTreeNode.h"
-#include "alinous.btree/IBTree.h"
-#include "alinous.btreememory/MBTreeLeafNode.h"
-#include "alinous.btreememory/MBTreeMaxNode.h"
-#include "alinous.btreememory/MemoryBTreeMachine.h"
-#include "alinous.btreememory/BTreeOnMemory.h"
 
 namespace alinous {namespace btreememory {
 

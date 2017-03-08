@@ -4,14 +4,12 @@
 #include "com.google.re2j/PatternSyntaxException.h"
 #include "java.lang/Number.h"
 #include "java.lang/Comparable.h"
+#include "java.lang/Double.h"
 #include "java.lang/Float.h"
 #include "java.lang/Long.h"
 #include "com.google.re2j/Pattern.h"
 #include "com.google.re2j/Matcher.h"
 #include "java.harmoney/HexStringParser.h"
-#include "java.harmoney/FloatingPointParser.h"
-#include "java.lang/Double.h"
-#include "java.harmoney/NumberConverter.h"
 
 namespace java {namespace harmoney {
 

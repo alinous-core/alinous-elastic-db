@@ -3,19 +3,11 @@
 
 #include "java.io/FilterOutputStream.h"
 #include "java.io/BufferedOutputStream.h"
-#include "alinous.remote.socket/NetworkBinaryBuffer.h"
-#include "alinous.remote.socket/ICommandData.h"
-#include "alinous.remote.db.client.command.data/SchemasStructureInfoData.h"
 #include "alinous.remote.db/RemoteTableStorageServer.h"
-#include "alinous.remote.db.client.command/AbstractRemoteStorageCommand.h"
-#include "alinous.remote.db.client.command/GetTableSchemeCommand.h"
-#include "alinous.remote.monitor/TransactionMonitorServer.h"
-#include "alinous.remote.monitor.client.command/AbstractMonitorCommand.h"
-#include "alinous.remote.db.client.command/TerminateRemoteStorageCommand.h"
-#include "alinous.remote.db.client.command/FinishRemoteStorageConnectionCommand.h"
-#include "alinous.remote.db.client.command/VoidRemoteStorageCommand.h"
-#include "alinous.remote.db.client.command/RemoteStorageConnectCommand.h"
+#include "alinous.remote.socket/NetworkBinaryBuffer.h"
 #include "alinous.remote.db.client.command/RemoteStorageCommandReader.h"
+#include "alinous.remote.db.client.command/AbstractRemoteStorageCommand.h"
+#include "alinous.remote.db.client.command/TerminateRemoteStorageCommand.h"
 
 namespace alinous {namespace remote {namespace db {namespace client {namespace command {
 
@@ -36,11 +28,11 @@ bool TerminateRemoteStorageCommand::__init_static_variables(){
 }
  TerminateRemoteStorageCommand::TerminateRemoteStorageCommand(ThreadContext* ctx) throw()  : IObject(ctx), AbstractRemoteStorageCommand(ctx)
 {
-	this->type = AbstractMonitorCommand::TYPE_TERMINATE;
+	this->type = AbstractRemoteStorageCommand::TYPE_TERMINATE;
 }
 void TerminateRemoteStorageCommand::__construct_impl(ThreadContext* ctx) throw() 
 {
-	this->type = AbstractMonitorCommand::TYPE_TERMINATE;
+	this->type = AbstractRemoteStorageCommand::TYPE_TERMINATE;
 }
  TerminateRemoteStorageCommand::~TerminateRemoteStorageCommand() throw() 
 {
@@ -66,7 +58,7 @@ void TerminateRemoteStorageCommand::executeOnServer(RemoteTableStorageServer* ta
 void TerminateRemoteStorageCommand::writeByteStream(OutputStream* out, ThreadContext* ctx)
 {
 	NetworkBinaryBuffer* buff = (new(ctx) NetworkBinaryBuffer(32, ctx));
-	buff->putInt(RemoteStorageConnectCommand::TYPE_TERMINATE, ctx);
+	buff->putInt(AbstractRemoteStorageCommand::TYPE_TERMINATE, ctx);
 	IArrayObjectPrimitive<char>* b = buff->toBinary(ctx);
 	int pos = buff->getPutSize(ctx);
 	out->write(b, 0, pos, ctx);

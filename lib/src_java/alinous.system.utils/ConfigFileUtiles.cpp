@@ -3,15 +3,12 @@
 
 #include "alinous.system.utils/FileUtils.h"
 #include "alinous.html.xpath/IVariableValue.h"
-#include "alinous.html.xpath/StringValue.h"
 #include "alinous.html/IDomObject.h"
 #include "alinous.html/Attribute.h"
 #include "alinous.html/DomNode.h"
 #include "alinous.html/DomDocument.h"
-#include "alinous.html.xpath.match/MatchingException.h"
-#include "alinous.html.xpath/IXpathElement.h"
-#include "alinous.html.xpath/IXpathStatement.h"
 #include "alinous.html.xpath.match/MatchCandidate.h"
+#include "alinous.html.xpath.match/MatchingException.h"
 #include "alinous.html.xpath.match/MatchCandidatesCollection.h"
 #include "alinous.parser.xpath/ParseException.h"
 #include "alinous.html.xpath.match/Matcher.h"
@@ -59,7 +56,8 @@ String* ConfigFileUtiles::getAttribute(DomDocument* document, DomNode* start, Ma
 	MatchCandidatesCollection* res = matcher->match(document, start, xpath, ctx);
 	if(!res->getCandidatesList(ctx)->isEmpty(ctx))
 	{
-		DomNode* node = res->getFirstCandidate(ctx)->getCandidateDom(ctx);
+		MatchCandidate* candidate = res->getFirstCandidate(ctx);
+		DomNode* node = candidate->getCandidateDom(ctx);
 		IVariableValue* attr = node->getAttributeValue(name, ctx);
 		if(attr != nullptr)
 		{
