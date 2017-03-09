@@ -81,7 +81,7 @@ AbstractRemoteStorageCommand* RemoteStorageCommandReader::readFromStream(InputSt
 		cmd = (new(ctx) CreateTableCommand(ctx));
 		break ;
 	default:
-		throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3577(), ctx));
+		throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3589(), ctx));
 		break;
 	}
 	cmd->readFromStream(stream, size, ctx);

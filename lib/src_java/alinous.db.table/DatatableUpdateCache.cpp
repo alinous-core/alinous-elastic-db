@@ -95,7 +95,7 @@ void DatatableUpdateCache::open(AlinousCore* core, BTreeGlobalCache* cache, Thre
 		}
 		catch(Throwable* e)
 		{
-			throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1688(), e, ctx));
+			throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1739(), e, ctx));
 		}
 	}
 }
@@ -134,11 +134,11 @@ String* DatatableUpdateCache::getOidIndexName(ThreadContext* ctx) throw()
 	{
 		StringBuilder* buff = (new(ctx) StringBuilder(ctx));
 		buff->append(this->baseDir, ctx);
-		if(!this->baseDir->endsWith(ConstStr::getCNST_STR_1007(), ctx))
+		if(!this->baseDir->endsWith(ConstStr::getCNST_STR_949(), ctx))
 		{
-			buff->append(ConstStr::getCNST_STR_1007(), ctx);
+			buff->append(ConstStr::getCNST_STR_949(), ctx);
 		}
-		buff->append(ConstStr::getCNST_STR_1689(), ctx)->append(this->name, ctx)->append(ConstStr::getCNST_STR_1690(), ctx);
+		buff->append(ConstStr::getCNST_STR_1740(), ctx)->append(this->name, ctx)->append(ConstStr::getCNST_STR_1741(), ctx);
 		__GC_MV(this, &(this->oidIndexPath), buff->toString(ctx), String);
 	}
 	return this->oidIndexPath;

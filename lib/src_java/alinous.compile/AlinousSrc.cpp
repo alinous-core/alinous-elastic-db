@@ -161,7 +161,7 @@ void AlinousSrc::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 		IAlinousElement* element = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
 		if(element == nullptr || !((dynamic_cast<IncludePreprocessor*>(element) != 0)))
 		{
-			throw (new(ctx) VariableException(ConstStr::getCNST_STR_945(), ctx));
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1021(), ctx));
 		}
 		this->includes->add(static_cast<IncludePreprocessor*>(element), ctx);
 	}
@@ -171,7 +171,7 @@ void AlinousSrc::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 		IAlinousElement* element = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
 		if(element == nullptr || !((dynamic_cast<IDeclare*>(element) != 0)))
 		{
-			throw (new(ctx) VariableException(ConstStr::getCNST_STR_946(), ctx));
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1022(), ctx));
 		}
 		this->declares->add(static_cast<IDeclare*>(element), ctx);
 	}
@@ -181,7 +181,7 @@ void AlinousSrc::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 		IAlinousElement* element = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
 		if(element == nullptr || !((dynamic_cast<StatementList*>(element) != 0)))
 		{
-			throw (new(ctx) VariableException(ConstStr::getCNST_STR_947(), ctx));
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1023(), ctx));
 		}
 		this->statements->add(static_cast<StatementList*>(element), ctx);
 	}

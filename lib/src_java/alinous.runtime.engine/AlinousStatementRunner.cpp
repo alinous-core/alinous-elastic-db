@@ -331,7 +331,7 @@ void AlinousStatementRunner::substituteLocalVariableByIdenifier(ScriptMachine* m
 	{
 		if(leftTypedValue->getTypedType(ctx) != ITypedVariable::TYPE_ARRAY)
 		{
-			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1163(), ctx));
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1262(), ctx));
 		}
 		IExpression* exp = arrayIdxList->get(i, ctx);
 		IAlinousVariable* val = exp->resolveExpression(machine, debug, ctx);

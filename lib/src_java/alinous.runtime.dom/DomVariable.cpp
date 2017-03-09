@@ -85,8 +85,8 @@ namespace alinous {namespace runtime {namespace dom {
 
 
 
-String* DomVariable::VAL_TYPE = ConstStr::getCNST_STR_1120();
-String* DomVariable::PROPS = ConstStr::getCNST_STR_1121();
+String* DomVariable::VAL_TYPE = ConstStr::getCNST_STR_1193();
+String* DomVariable::PROPS = ConstStr::getCNST_STR_1194();
 bool DomVariable::__init_done = __init_static_variables();
 bool DomVariable::__init_static_variables(){
 	Java2CppSystem::getSelf();
@@ -278,7 +278,7 @@ String* DomVariable::toString(ThreadContext* ctx) throw()
 {
 	StringBuffer* buff = (new(ctx) StringBuffer(ctx));
 	buff->append(this->value->toString(ctx), ctx);
-	buff->append(ConstStr::getCNST_STR_1116(), ctx);
+	buff->append(ConstStr::getCNST_STR_1189(), ctx);
 	int cnt = 0;
 	Iterator<IDomVariable>* it = this->properties->iterator(ctx);
 	while(it->hasNext(ctx))
@@ -291,7 +291,7 @@ String* DomVariable::toString(ThreadContext* ctx) throw()
 		cnt ++ ;
 		buff->append(value->toString(ctx), ctx);
 	}
-	buff->append(ConstStr::getCNST_STR_1117(), ctx);
+	buff->append(ConstStr::getCNST_STR_1190(), ctx);
 	return buff->toString(ctx);
 }
 IDomVariable* DomVariable::get(int index, ThreadContext* ctx) throw() 
@@ -1262,7 +1262,7 @@ int DomVariable::getKind(ThreadContext* ctx) throw()
 }
 void DomVariable::addValue(VariantValue* vv, ThreadContext* ctx) throw() 
 {
-	throw (new(ctx) RuntimeException(ConstStr::getCNST_STR_1118(), ctx));
+	throw (new(ctx) RuntimeException(ConstStr::getCNST_STR_1191(), ctx));
 }
 long long DomVariable::getOid(ThreadContext* ctx) throw() 
 {
@@ -1321,7 +1321,7 @@ void DomVariable::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 	IAlinousVariable* val = NetworkAlinousVariableFactory::fromNetworkData(buff, ctx);
 	if(val == nullptr || !((dynamic_cast<VariantValue*>(val) != 0)))
 	{
-		throw (new(ctx) VariableException(ConstStr::getCNST_STR_1119(), ctx));
+		throw (new(ctx) VariableException(ConstStr::getCNST_STR_1192(), ctx));
 	}
 	__GC_MV(this, &(this->value), static_cast<VariantValue*>(val), VariantValue);
 }

@@ -288,7 +288,7 @@ void SQLSubqueryExpression::readData(NetworkBinaryBuffer* buff, ThreadContext* c
 		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
 		if(el == nullptr || !((dynamic_cast<SelectStatement*>(el) != 0)))
 		{
-			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1073(), ctx));
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1134(), ctx));
 		}
 		__GC_MV(this, &(this->selectStatement), static_cast<SelectStatement*>(el), SelectStatement);
 	}
@@ -306,7 +306,7 @@ void SQLSubqueryExpression::writeData(NetworkBinaryBuffer* buff, ThreadContext* 
 }
 void SQLSubqueryExpression::toFileEntry(FileStorageEntryBuilder* builder, ThreadContext* ctx)
 {
-	throw (new(ctx) AlinousNotSupportedException(ConstStr::getCNST_STR_1074(), ctx));
+	throw (new(ctx) AlinousNotSupportedException(ConstStr::getCNST_STR_1135(), ctx));
 }
 void SQLSubqueryExpression::__cleanUp(ThreadContext* ctx){
 }

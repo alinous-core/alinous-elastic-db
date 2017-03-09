@@ -257,7 +257,7 @@ TableSchema* CreateTableStatement::createMetadata(ScriptMachine* machine, bool d
 	String* tblName = nullptr;
 	if(segments->size(ctx) == 1)
 	{
-		schemeName = ConstStr::getCNST_STR_955();
+		schemeName = ConstStr::getCNST_STR_1086();
 		tblName = segments->get(0, ctx);
 	}
 		else 
@@ -319,7 +319,7 @@ void CreateTableStatement::validate(SourceValidator* validator, ThreadContext* c
 {
 	if(!((dynamic_cast<TableJoinTarget*>(this->table) != 0)))
 	{
-		validator->addError(ConstStr::getCNST_STR_1029(), this, ctx);
+		validator->addError(ConstStr::getCNST_STR_1109(), this, ctx);
 	}
 		else 
 	{
@@ -327,7 +327,7 @@ void CreateTableStatement::validate(SourceValidator* validator, ThreadContext* c
 		ArrayList<String>* segments = tbl->getName(ctx)->getSegments(ctx);
 		if(segments->size(ctx) > 2)
 		{
-			validator->addError(ConstStr::getCNST_STR_1029(), this, ctx);
+			validator->addError(ConstStr::getCNST_STR_1109(), this, ctx);
 		}
 	}
 	int maxLoop = this->columns->size(ctx);
@@ -338,7 +338,7 @@ void CreateTableStatement::validate(SourceValidator* validator, ThreadContext* c
 	}
 	if(this->primaryKeys == nullptr)
 	{
-		validator->addError(ConstStr::getCNST_STR_1030(), this, ctx);
+		validator->addError(ConstStr::getCNST_STR_1110(), this, ctx);
 	}
 }
 TableMetadata* CreateTableStatement::getMetadata(ThreadContext* ctx) throw() 
@@ -475,7 +475,7 @@ void CreateTableStatement::readData(NetworkBinaryBuffer* buff, ThreadContext* ct
 		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
 		if(el == nullptr || !((dynamic_cast<IJoinTarget*>(el) != 0)))
 		{
-			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1031(), ctx));
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1111(), ctx));
 		}
 		__GC_MV(this, &(this->table), static_cast<IJoinTarget*>(el), IJoinTarget);
 	}
@@ -485,7 +485,7 @@ void CreateTableStatement::readData(NetworkBinaryBuffer* buff, ThreadContext* ct
 		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
 		if(el == nullptr || !((dynamic_cast<DdlColumnDescriptor*>(el) != 0)))
 		{
-			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1032(), ctx));
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1112(), ctx));
 		}
 		this->columns->add(static_cast<DdlColumnDescriptor*>(el), ctx);
 	}
@@ -495,7 +495,7 @@ void CreateTableStatement::readData(NetworkBinaryBuffer* buff, ThreadContext* ct
 		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
 		if(el == nullptr || !((dynamic_cast<Unique*>(el) != 0)))
 		{
-			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1033(), ctx));
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1113(), ctx));
 		}
 		this->uniques->add(static_cast<Unique*>(el), ctx);
 	}
@@ -505,7 +505,7 @@ void CreateTableStatement::readData(NetworkBinaryBuffer* buff, ThreadContext* ct
 		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
 		if(el == nullptr || !((dynamic_cast<CheckDefinition*>(el) != 0)))
 		{
-			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1034(), ctx));
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1114(), ctx));
 		}
 		this->checks->add(static_cast<CheckDefinition*>(el), ctx);
 	}
@@ -515,7 +515,7 @@ void CreateTableStatement::readData(NetworkBinaryBuffer* buff, ThreadContext* ct
 		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
 		if(el == nullptr || !((dynamic_cast<PrimaryKeys*>(el) != 0)))
 		{
-			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1035(), ctx));
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1115(), ctx));
 		}
 		__GC_MV(this, &(this->primaryKeys), static_cast<PrimaryKeys*>(el), PrimaryKeys);
 	}
@@ -530,7 +530,7 @@ void CreateTableStatement::readData(NetworkBinaryBuffer* buff, ThreadContext* ct
 		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
 		if(el == nullptr || !((dynamic_cast<ShardKeys*>(el) != 0)))
 		{
-			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1036(), ctx));
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1116(), ctx));
 		}
 		ShardKeys* keys = static_cast<ShardKeys*>(el);
 		this->partitionKeys->add(keys, ctx);
@@ -600,7 +600,7 @@ TablePartitionKey* CreateTableStatement::toPartitionKeys(TableMetadata* meta, Ar
 		TableColumnMetadata* colmeta = meta->getColumnByName(col, ctx);
 		if(colmeta == nullptr)
 		{
-			throw (new(ctx) DatabaseException(col->clone(ctx)->append(ConstStr::getCNST_STR_1028(), ctx), ctx));
+			throw (new(ctx) DatabaseException(col->clone(ctx)->append(ConstStr::getCNST_STR_1108(), ctx), ctx));
 		}
 		key->addKeyColumn(colmeta, ctx);
 	}

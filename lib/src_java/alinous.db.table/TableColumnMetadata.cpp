@@ -187,6 +187,21 @@ void TableColumnMetadata::setUnique(bool unique, ThreadContext* ctx) throw()
 {
 	this->unique = unique;
 }
+String* TableColumnMetadata::arrayToString(List<TableColumnMetadata>* list, ThreadContext* ctx) throw() 
+{
+	StringBuilder* buff = (new(ctx) StringBuilder(ctx));
+	int maxLoop = list->size(ctx);
+	for(int i = 0; i != maxLoop; ++i)
+	{
+		TableColumnMetadata* col = list->get(i, ctx);
+		if(i != 0)
+		{
+			buff->append(ConstStr::getCNST_STR_888(), ctx);
+		}
+		buff->append(col->name, ctx);
+	}
+	return buff->toString(ctx);
+}
 TableColumnMetadata* TableColumnMetadata::loadFromFetcher(FileStorageEntryFetcher* fetcher, ThreadContext* ctx) throw() 
 {
 	int type = fetcher->fetchInt(ctx);

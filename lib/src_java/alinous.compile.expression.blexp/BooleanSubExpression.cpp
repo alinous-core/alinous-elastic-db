@@ -307,7 +307,7 @@ void BooleanSubExpression::readData(NetworkBinaryBuffer* buff, ThreadContext* ct
 		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
 		if(el == nullptr || !((dynamic_cast<IExpression*>(el) != 0)))
 		{
-			throw (new(ctx) VariableException(ConstStr::getCNST_STR_980(), ctx));
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1027(), ctx));
 		}
 		__GC_MV(this, &(this->exp), static_cast<IExpression*>(el), IExpression);
 	}
@@ -355,7 +355,7 @@ void BooleanSubExpression::fromFileEntry(FileStorageEntryFetcher* fetcher, Threa
 		IExpression* el = IExpressionFactory::fromFetcher(fetcher, ctx);
 		if(el == nullptr || !((dynamic_cast<IExpression*>(el) != 0)))
 		{
-			throw (new(ctx) VariableException(ConstStr::getCNST_STR_980(), ctx));
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1027(), ctx));
 		}
 		__GC_MV(this, &(this->exp), static_cast<IExpression*>(el), IExpression);
 	}

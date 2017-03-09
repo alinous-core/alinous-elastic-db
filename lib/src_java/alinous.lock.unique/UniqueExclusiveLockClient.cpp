@@ -3,19 +3,19 @@
 
 #include "alinous.btree/BTreeException.h"
 #include "alinous.buffer.storage/FileStorageEntryBuilder.h"
-#include "alinous.buffer.storage/FileStorageEntryFetcher.h"
 #include "alinous.compile/AbstractSrcElement.h"
 #include "alinous.system/AlinousException.h"
 #include "alinous.runtime/ExecutionException.h"
 #include "alinous.runtime.dom/VariableException.h"
+#include "alinous.buffer.storage/FileStorageEntryFetcher.h"
+#include "alinous.btree/IValueFetcher.h"
+#include "alinous.btree/IBTreeValue.h"
+#include "alinous.db.table/IDatabaseRecord.h"
 #include "alinous.remote.socket/NetworkBinaryBuffer.h"
 #include "alinous.remote.socket/ICommandData.h"
 #include "alinous.db.table/TableColumnMetadata.h"
 #include "alinous.db.table/TableMetadataUnique.h"
 #include "alinous.compile.sql.analyze/ScanUnique.h"
-#include "alinous.btree/IValueFetcher.h"
-#include "alinous.btree/IBTreeValue.h"
-#include "alinous.db.table/IDatabaseRecord.h"
 #include "alinous.lock/LockObject.h"
 #include "alinous.lock.unique/UniqueExclusiveLock.h"
 #include "alinous.lock.unique/UniqueExclusiveLockManager.h"
@@ -94,19 +94,19 @@ bool UniqueExclusiveLockClient::checkLocking(ScanUnique* unique, IDatabaseRecord
 		}
 		catch(VariableException* e)
 		{
-			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_1761(), e, ctx));
+			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_1765(), e, ctx));
 		}
 		catch(IOException* e)
 		{
-			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_1761(), e, ctx));
+			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_1765(), e, ctx));
 		}
 		catch(InterruptedException* e)
 		{
-			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_1761(), e, ctx));
+			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_1765(), e, ctx));
 		}
 		catch(BTreeException* e)
 		{
-			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_1761(), e, ctx));
+			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_1765(), e, ctx));
 		}
 	}
 	return lock != nullptr;

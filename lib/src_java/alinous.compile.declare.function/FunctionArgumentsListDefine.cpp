@@ -272,7 +272,7 @@ bool FunctionArgumentsListDefine::analyse(SrcAnalyseContext* context, bool leftV
 String* FunctionArgumentsListDefine::toString(ThreadContext* ctx) throw() 
 {
 	StringBuffer* buff = (new(ctx) StringBuffer(ctx));
-	buff->append(ConstStr::getCNST_STR_991(), ctx);
+	buff->append(ConstStr::getCNST_STR_1106(), ctx);
 	int maxLoop = this->list->size(ctx);
 	for(int i = 0; i != maxLoop; ++i)
 	{
@@ -326,7 +326,7 @@ void FunctionArgumentsListDefine::readData(NetworkBinaryBuffer* buff, ThreadCont
 		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
 		if(el == nullptr || !((dynamic_cast<FunctionArgumentDefine*>(el) != 0)))
 		{
-			throw (new(ctx) VariableException(ConstStr::getCNST_STR_992(), ctx));
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1107(), ctx));
 		}
 		this->list->add(static_cast<FunctionArgumentDefine*>(el), ctx);
 	}

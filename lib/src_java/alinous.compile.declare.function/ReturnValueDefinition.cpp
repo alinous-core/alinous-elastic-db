@@ -304,7 +304,7 @@ void ReturnValueDefinition::readData(NetworkBinaryBuffer* buff, ThreadContext* c
 		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
 		if(el == nullptr || !((dynamic_cast<AlinousName*>(el) != 0)))
 		{
-			throw (new(ctx) VariableException(ConstStr::getCNST_STR_970(), ctx));
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1033(), ctx));
 		}
 		__GC_MV(this, &(this->type), static_cast<AlinousName*>(el), AlinousName);
 	}

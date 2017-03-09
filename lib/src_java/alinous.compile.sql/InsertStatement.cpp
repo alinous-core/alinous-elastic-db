@@ -273,7 +273,7 @@ TrxRecordsCache* InsertStatement::getCache(ScriptMachine* machine, TrxStorageMan
 		ArrayList<String>* segments = tbl->getName(ctx)->getSegments(ctx);
 		if(segments->size(ctx) == 1)
 		{
-			__GC_MV(this, &(schemeName), ConstStr::getCNST_STR_955(), String);
+			__GC_MV(this, &(schemeName), ConstStr::getCNST_STR_1086(), String);
 			__GC_MV(this, &(tblName), segments->get(0, ctx), String);
 		}
 				else 
@@ -320,7 +320,7 @@ void InsertStatement::validate(SourceValidator* validator, ThreadContext* ctx) t
 {
 	if(!((dynamic_cast<TableJoinTarget*>(this->table) != 0)))
 	{
-		validator->addError(ConstStr::getCNST_STR_1049(), this->table, ctx);
+		validator->addError(ConstStr::getCNST_STR_1129(), this->table, ctx);
 	}
 }
 bool InsertStatement::visit(IAlinousElementVisitor* visitor, AbstractSrcElement* parent, ThreadContext* ctx) throw() 
@@ -433,7 +433,7 @@ void InsertStatement::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
 		if(el == nullptr || !((dynamic_cast<IJoinTarget*>(el) != 0)))
 		{
-			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1031(), ctx));
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1111(), ctx));
 		}
 		__GC_MV(this, &(this->table), static_cast<IJoinTarget*>(el), IJoinTarget);
 	}
@@ -443,7 +443,7 @@ void InsertStatement::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
 		if(el == nullptr || !((dynamic_cast<SQLExpressionList*>(el) != 0)))
 		{
-			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1039(), ctx));
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1119(), ctx));
 		}
 		__GC_MV(this, &(this->list), static_cast<SQLExpressionList*>(el), SQLExpressionList);
 	}
@@ -453,7 +453,7 @@ void InsertStatement::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
 		if(el == nullptr || !((dynamic_cast<InsertValues*>(el) != 0)))
 		{
-			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1050(), ctx));
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1130(), ctx));
 		}
 		this->values->add(static_cast<InsertValues*>(el), ctx);
 	}

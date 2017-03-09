@@ -106,7 +106,7 @@ void NodeRegionResponceAction::handleCommand(BufferedInputStream* stream, Buffer
 		cmd = NodeRegionCommandReader::readFromStream(stream, ctx);
 		if(cmd == nullptr)
 		{
-			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3570(), ctx));
+			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3575(), ctx));
 		}
 		int type = cmd->getType(ctx);
 		switch(type) {

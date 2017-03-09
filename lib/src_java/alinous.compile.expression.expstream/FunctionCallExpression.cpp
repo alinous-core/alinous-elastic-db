@@ -331,7 +331,7 @@ bool FunctionCallExpression::analyse(SrcAnalyseContext* context, bool leftValue,
 		__GC_MV(this, &(this->memberMethod), clazz->getStaticMemberMethod(this->body, this->arguments, ctx), ClassMethodFunction);
 		if(this->memberMethod == nullptr)
 		{
-			context->addError(this->body->clone(ctx)->append(ConstStr::getCNST_STR_1019(), ctx), this, ctx);
+			context->addError(this->body->clone(ctx)->append(ConstStr::getCNST_STR_1045(), ctx), this, ctx);
 			return false;
 		}
 		AlinousFunction* alinousFunction = this->memberMethod->getFunc(ctx);
@@ -345,7 +345,7 @@ bool FunctionCallExpression::analyse(SrcAnalyseContext* context, bool leftValue,
 	__GC_MV(this, &(this->memberMethod), clazz->getMemberMethod(this->body, this->arguments, ctx), ClassMethodFunction);
 	if(this->memberMethod == nullptr)
 	{
-		context->addError(this->body->clone(ctx)->append(ConstStr::getCNST_STR_1019(), ctx), this, ctx);
+		context->addError(this->body->clone(ctx)->append(ConstStr::getCNST_STR_1045(), ctx), this, ctx);
 		return false;
 	}
 	__GC_MV(this, &(this->analysedType), this->memberMethod->getFunc(ctx)->getReturnType(ctx)->getAnalysedType(ctx), AlinousType);
@@ -395,7 +395,7 @@ void FunctionCallExpression::readData(NetworkBinaryBuffer* buff, ThreadContext* 
 		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
 		if(el == nullptr || !((dynamic_cast<FunctionArguments*>(el) != 0)))
 		{
-			throw (new(ctx) VariableException(ConstStr::getCNST_STR_998(), ctx));
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1034(), ctx));
 		}
 		__GC_MV(this, &(this->arguments), static_cast<FunctionArguments*>(el), FunctionArguments);
 	}
@@ -462,7 +462,7 @@ void FunctionCallExpression::fromFileEntry(FileStorageEntryFetcher* fetcher, Thr
 		IExpression* el = IExpressionFactory::fromFetcher(fetcher, ctx);
 		if(el == nullptr || !((dynamic_cast<FunctionArguments*>(el) != 0)))
 		{
-			throw (new(ctx) VariableException(ConstStr::getCNST_STR_998(), ctx));
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1034(), ctx));
 		}
 		__GC_MV(this, &(this->arguments), static_cast<FunctionArguments*>(el), FunctionArguments);
 	}
@@ -520,7 +520,7 @@ IAlinousVariable* FunctionCallExpression::executeSourceFunction(AlinousFunction*
 	ArrayList<IExpression>* actualArgs = this->arguments->arguments;
 	if(definelist->size(ctx) != actualArgs->size(ctx))
 	{
-		throw (new(ctx) AlinousException(ConstStr::getCNST_STR_1020(), ctx));
+		throw (new(ctx) AlinousException(ConstStr::getCNST_STR_1046(), ctx));
 	}
 	ArrayList<IAlinousVariable>* args = (new(ctx) ArrayList<IAlinousVariable>(ctx));
 	{

@@ -76,7 +76,7 @@ IAlinousVariable* AdditiveExpression::resolveExpression(ScriptMachine* machine, 
 	IAlinousVariable* variable = machine->resolveExpression(this->first, debug, ctx);
 	if(variable == nullptr || variable->isArray(ctx))
 	{
-		throw (new(ctx) VariableException(ConstStr::getCNST_STR_1001(), ctx));
+		throw (new(ctx) VariableException(ConstStr::getCNST_STR_1037(), ctx));
 	}
 	if(variable->isNull(ctx))
 	{

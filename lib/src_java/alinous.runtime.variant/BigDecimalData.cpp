@@ -40,7 +40,7 @@ namespace alinous {namespace runtime {namespace variant {
 
 
 
-String* BigDecimalData::TAG_NAME = ConstStr::getCNST_STR_1243();
+String* BigDecimalData::TAG_NAME = ConstStr::getCNST_STR_1261();
 bool BigDecimalData::__init_done = __init_static_variables();
 bool BigDecimalData::__init_static_variables(){
 	Java2CppSystem::getSelf();

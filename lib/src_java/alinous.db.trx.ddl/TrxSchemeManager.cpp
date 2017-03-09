@@ -87,19 +87,19 @@ void TrxSchemeManager::executeCommit(AlinousCore* core, BTreeGlobalCache* cache,
 			}
 			catch(IOException* e)
 			{
-				throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1742(), e, ctx));
+				throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1733(), e, ctx));
 			}
 			catch(InterruptedException* e)
 			{
-				throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1699(), e, ctx));
+				throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1734(), e, ctx));
 			}
 			catch(BTreeException* e)
 			{
-				throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1743(), e, ctx));
+				throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1735(), e, ctx));
 			}
 			catch(DatabaseException* e)
 			{
-				throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1744(), e, ctx));
+				throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1736(), e, ctx));
 			}
 		}
 	}
@@ -198,7 +198,7 @@ void TrxSchemeManager::executeCreateIndex(CreateIndexMetadata* meta, AlinousCore
 	IDatabaseTable* tableStore = schema->getTableStore(tableName, ctx);
 	if(tableStore == nullptr)
 	{
-		this->logger->logWarning(ConstStr::getCNST_STR_1745()->clone(ctx)->append(meta->getindexName(ctx), ctx)->append(ConstStr::getCNST_STR_1746(), ctx), ctx);
+		this->logger->logWarning(ConstStr::getCNST_STR_1737()->clone(ctx)->append(meta->getindexName(ctx), ctx)->append(ConstStr::getCNST_STR_1738(), ctx), ctx);
 		return;
 	}
 	{
@@ -208,7 +208,7 @@ void TrxSchemeManager::executeCreateIndex(CreateIndexMetadata* meta, AlinousCore
 		}
 		catch(Throwable* e)
 		{
-			this->logger->logWarning(ConstStr::getCNST_STR_1745()->clone(ctx)->append(meta->getindexName(ctx), ctx)->append(ConstStr::getCNST_STR_1746(), ctx), ctx);
+			this->logger->logWarning(ConstStr::getCNST_STR_1737()->clone(ctx)->append(meta->getindexName(ctx), ctx)->append(ConstStr::getCNST_STR_1738(), ctx), ctx);
 			this->logger->logError(e, ctx);
 		}
 	}

@@ -3,11 +3,17 @@
 namespace alinous{namespace annotation{
 class OneSource;
 }}
-namespace alinous {namespace buffer {namespace storage {
-class FileStorageEntryBuilder;}}}
+namespace java {namespace util {
+template <typename  T> class List;}}
 
 namespace alinous {namespace db {namespace table {
 class TableColumnMetadata;}}}
+
+namespace java {namespace lang {
+class StringBuilder;}}
+
+namespace alinous {namespace buffer {namespace storage {
+class FileStorageEntryBuilder;}}}
 
 namespace alinous {namespace buffer {namespace storage {
 class FileStorageEntryFetcher;}}}
@@ -43,6 +49,7 @@ namespace alinous {namespace db {namespace table {
 using namespace ::alinous;
 using namespace ::java::lang;
 using ::java::util::Iterator;
+using ::java::util::List;
 using ::alinous::buffer::storage::FileStorageEntryBuilder;
 using ::alinous::buffer::storage::FileStorageEntryFetcher;
 using ::alinous::compile::sql::ddl::CheckDefinition;
@@ -88,6 +95,7 @@ public:
 	bool isUnique(ThreadContext* ctx) throw() ;
 	void setUnique(bool unique, ThreadContext* ctx) throw() ;
 public:
+	static String* arrayToString(List<TableColumnMetadata>* list, ThreadContext* ctx) throw() ;
 	static TableColumnMetadata* loadFromFetcher(FileStorageEntryFetcher* fetcher, ThreadContext* ctx) throw() ;
 	static TableColumnMetadata* fromNetwork(NetworkBinaryBuffer* buff, ThreadContext* ctx);
 public:

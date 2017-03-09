@@ -114,7 +114,7 @@ void AbstractMemoryNode::printTab(StringBuffer* buff, int level, ThreadContext* 
 {
 	for(int i = 0; i != level; ++i)
 	{
-		buff->append(ConstStr::getCNST_STR_1662(), ctx);
+		buff->append(ConstStr::getCNST_STR_1666(), ctx);
 	}
 }
 void AbstractMemoryNode::__cleanUp(ThreadContext* ctx){

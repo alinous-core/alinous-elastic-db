@@ -71,18 +71,18 @@ HashMap<String,AbstractHttpParameter>* PostUrlEncodedReader::parse(String* encod
 {
 	IArrayObjectPrimitive<char>* buff = ArrayAllocatorPrimitive<char>::allocatep(ctx, this->contentLength);
 	this->inStream->read(buff, ctx);
-	String* content = (new(ctx) String(buff, ConstStr::getCNST_STR_1106(), ctx));
+	String* content = (new(ctx) String(buff, ConstStr::getCNST_STR_955(), ctx));
 	return parseString(content, encode, ctx);
 }
 HashMap<String,AbstractHttpParameter>* PostUrlEncodedReader::parseString(String* content, String* encode, ThreadContext* ctx)
 {
 	HashMap<String,AbstractHttpParameter>* params = (new(ctx) HashMap<String,AbstractHttpParameter>(ctx));
-	ArrayList<String>* list = split(content, ConstStr::getCNST_STR_1015(), ctx);
+	ArrayList<String>* list = split(content, ConstStr::getCNST_STR_1061(), ctx);
 	int maxLoop = list->size(ctx);
 	for(int i = 0; i != maxLoop; ++i)
 	{
 		String* kv = list->get(i, ctx);
-		ArrayList<String>* kvParam = split(kv, ConstStr::getCNST_STR_1079(), ctx);
+		ArrayList<String>* kvParam = split(kv, ConstStr::getCNST_STR_1140(), ctx);
 		if(kvParam->size(ctx) >= 2)
 		{
 			AbstractHttpParameter* p = ParamFactory::getParam(kvParam->get(0, ctx), kvParam->get(1, ctx), encode, ctx);

@@ -291,7 +291,7 @@ bool SQLLiteral::hasArrayResult(ThreadContext* ctx) throw()
 }
 ArrayList<VariantValue>* SQLLiteral::resolveSQLExpressionAsArray(ScanResultRecord* record, ScriptMachine* machine, bool debug, ThreadContext* ctx)
 {
-	throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1038(), ctx));
+	throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1118(), ctx));
 }
 int SQLLiteral::getExpressionType(ThreadContext* ctx) throw() 
 {

@@ -219,7 +219,7 @@ bool RightindexJoinScanner::hasNext(bool debug, ThreadContext* ctx)
 			}
 			catch(VariableException* e)
 			{
-				throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1096(), e, ctx));
+				throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1176(), e, ctx));
 			}
 		}
 		{
@@ -238,7 +238,7 @@ bool RightindexJoinScanner::hasNext(bool debug, ThreadContext* ctx)
 			}
 			catch(AlinousException* e)
 			{
-				throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1097(), e, ctx));
+				throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1177(), e, ctx));
 			}
 		}
 	}

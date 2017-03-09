@@ -312,7 +312,7 @@ void SwitchStatement::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
 		if(el == nullptr || !((dynamic_cast<LabeledStatement*>(el) != 0)))
 		{
-			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1098(), ctx));
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1066(), ctx));
 		}
 		__GC_MV(this, &(this->label), static_cast<LabeledStatement*>(el), LabeledStatement);
 	}
@@ -322,7 +322,7 @@ void SwitchStatement::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
 		if(el == nullptr || !((dynamic_cast<IExpression*>(el) != 0)))
 		{
-			throw (new(ctx) VariableException(ConstStr::getCNST_STR_980(), ctx));
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1027(), ctx));
 		}
 		__GC_MV(this, &(this->exp), static_cast<IExpression*>(el), IExpression);
 	}
@@ -332,7 +332,7 @@ void SwitchStatement::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
 		if(el == nullptr || !((dynamic_cast<SwitchCasePart*>(el) != 0)))
 		{
-			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1009(), ctx));
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1055(), ctx));
 		}
 		this->caseParts->add(static_cast<SwitchCasePart*>(el), ctx);
 	}

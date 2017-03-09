@@ -65,7 +65,7 @@ namespace alinous {namespace runtime {namespace dom {namespace typed {
 
 
 
-String* TimeVariable::VAL_TYPE = ConstStr::getCNST_STR_1132();
+String* TimeVariable::VAL_TYPE = ConstStr::getCNST_STR_1201();
 bool TimeVariable::__init_done = __init_static_variables();
 bool TimeVariable::__init_static_variables(){
 	Java2CppSystem::getSelf();
@@ -164,7 +164,7 @@ bool TimeVariable::isArray(ThreadContext* ctx) throw()
 }
 BoolVariable* TimeVariable::toBoolVariable(ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1127(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1196(), ctx));
 }
 ByteVariable* TimeVariable::toByteVariable(ThreadContext* ctx)
 {
@@ -234,7 +234,7 @@ IAlinousVariable* TimeVariable::add(DomVariable* variable, ThreadContext* ctx)
 }
 IAlinousVariable* TimeVariable::add(BoolVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1127(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1196(), ctx));
 }
 IAlinousVariable* TimeVariable::add(ByteVariable* variable, ThreadContext* ctx)
 {
@@ -303,7 +303,7 @@ IAlinousVariable* TimeVariable::minus(DomVariable* variable, ThreadContext* ctx)
 }
 IAlinousVariable* TimeVariable::minus(BoolVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1127(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1196(), ctx));
 }
 IAlinousVariable* TimeVariable::minus(ByteVariable* variable, ThreadContext* ctx)
 {
@@ -372,7 +372,7 @@ IAlinousVariable* TimeVariable::div(DomVariable* variable, ThreadContext* ctx)
 }
 IAlinousVariable* TimeVariable::div(BoolVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1127(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1196(), ctx));
 }
 IAlinousVariable* TimeVariable::div(ByteVariable* variable, ThreadContext* ctx)
 {
@@ -441,7 +441,7 @@ IAlinousVariable* TimeVariable::multiply(DomVariable* variable, ThreadContext* c
 }
 IAlinousVariable* TimeVariable::multiply(BoolVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1127(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1196(), ctx));
 }
 IAlinousVariable* TimeVariable::multiply(ByteVariable* variable, ThreadContext* ctx)
 {
@@ -510,7 +510,7 @@ IAlinousVariable* TimeVariable::substitute(DomVariable* variable, ThreadContext*
 }
 IAlinousVariable* TimeVariable::substitute(BoolVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1127(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1196(), ctx));
 }
 IAlinousVariable* TimeVariable::substitute(ByteVariable* variable, ThreadContext* ctx)
 {
@@ -577,7 +577,7 @@ int TimeVariable::compareTo(DomVariable* variable, ThreadContext* ctx)
 }
 int TimeVariable::compareTo(BoolVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1128(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1197(), ctx));
 }
 int TimeVariable::compareTo(ByteVariable* variable, ThreadContext* ctx)
 {
@@ -625,407 +625,407 @@ int TimeVariable::compareTo(TimestampVariable* variable, ThreadContext* ctx)
 }
 bool TimeVariable::isTrue(ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1129(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1198(), ctx));
 }
 IAlinousVariable* TimeVariable::shiftLeft(VariantValue* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1130(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1199(), ctx));
 }
 IAlinousVariable* TimeVariable::shiftLeft(DomVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1130(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1199(), ctx));
 }
 IAlinousVariable* TimeVariable::shiftLeft(BoolVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1130(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1199(), ctx));
 }
 IAlinousVariable* TimeVariable::shiftLeft(ByteVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1130(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1199(), ctx));
 }
 IAlinousVariable* TimeVariable::shiftLeft(CharVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1130(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1199(), ctx));
 }
 IAlinousVariable* TimeVariable::shiftLeft(DoubleVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1130(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1199(), ctx));
 }
 IAlinousVariable* TimeVariable::shiftLeft(FloatVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1130(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1199(), ctx));
 }
 IAlinousVariable* TimeVariable::shiftLeft(IntegerVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1130(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1199(), ctx));
 }
 IAlinousVariable* TimeVariable::shiftLeft(LongVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1130(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1199(), ctx));
 }
 IAlinousVariable* TimeVariable::shiftLeft(ShortVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1130(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1199(), ctx));
 }
 IAlinousVariable* TimeVariable::shiftLeft(StringVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1130(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1199(), ctx));
 }
 IAlinousVariable* TimeVariable::shiftLeft(BigDecimalVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1130(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1199(), ctx));
 }
 IAlinousVariable* TimeVariable::shiftLeft(TimeVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1130(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1199(), ctx));
 }
 IAlinousVariable* TimeVariable::shiftLeft(TimestampVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1130(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1199(), ctx));
 }
 IAlinousVariable* TimeVariable::shiftRight(VariantValue* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1130(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1199(), ctx));
 }
 IAlinousVariable* TimeVariable::shiftRight(DomVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1130(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1199(), ctx));
 }
 IAlinousVariable* TimeVariable::shiftRight(BoolVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1130(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1199(), ctx));
 }
 IAlinousVariable* TimeVariable::shiftRight(ByteVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1130(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1199(), ctx));
 }
 IAlinousVariable* TimeVariable::shiftRight(CharVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1130(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1199(), ctx));
 }
 IAlinousVariable* TimeVariable::shiftRight(DoubleVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1130(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1199(), ctx));
 }
 IAlinousVariable* TimeVariable::shiftRight(FloatVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1130(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1199(), ctx));
 }
 IAlinousVariable* TimeVariable::shiftRight(IntegerVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1130(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1199(), ctx));
 }
 IAlinousVariable* TimeVariable::shiftRight(LongVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1130(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1199(), ctx));
 }
 IAlinousVariable* TimeVariable::shiftRight(ShortVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1130(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1199(), ctx));
 }
 IAlinousVariable* TimeVariable::shiftRight(StringVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1130(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1199(), ctx));
 }
 IAlinousVariable* TimeVariable::shiftRight(BigDecimalVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1130(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1199(), ctx));
 }
 IAlinousVariable* TimeVariable::shiftRight(TimeVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1130(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1199(), ctx));
 }
 IAlinousVariable* TimeVariable::shiftRight(TimestampVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1130(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1199(), ctx));
 }
 IAlinousVariable* TimeVariable::shiftRightUnsigned(VariantValue* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1130(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1199(), ctx));
 }
 IAlinousVariable* TimeVariable::shiftRightUnsigned(DomVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1130(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1199(), ctx));
 }
 IAlinousVariable* TimeVariable::shiftRightUnsigned(BoolVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1130(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1199(), ctx));
 }
 IAlinousVariable* TimeVariable::shiftRightUnsigned(ByteVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1130(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1199(), ctx));
 }
 IAlinousVariable* TimeVariable::shiftRightUnsigned(CharVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1130(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1199(), ctx));
 }
 IAlinousVariable* TimeVariable::shiftRightUnsigned(DoubleVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1130(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1199(), ctx));
 }
 IAlinousVariable* TimeVariable::shiftRightUnsigned(FloatVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1130(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1199(), ctx));
 }
 IAlinousVariable* TimeVariable::shiftRightUnsigned(IntegerVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1130(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1199(), ctx));
 }
 IAlinousVariable* TimeVariable::shiftRightUnsigned(LongVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1130(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1199(), ctx));
 }
 IAlinousVariable* TimeVariable::shiftRightUnsigned(ShortVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1130(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1199(), ctx));
 }
 IAlinousVariable* TimeVariable::shiftRightUnsigned(StringVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1130(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1199(), ctx));
 }
 IAlinousVariable* TimeVariable::shiftRightUnsigned(BigDecimalVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1130(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1199(), ctx));
 }
 IAlinousVariable* TimeVariable::shiftRightUnsigned(TimeVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1130(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1199(), ctx));
 }
 IAlinousVariable* TimeVariable::shiftRightUnsigned(TimestampVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1130(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1199(), ctx));
 }
 IAlinousVariable* TimeVariable::modulo(VariantValue* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1130(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1199(), ctx));
 }
 IAlinousVariable* TimeVariable::modulo(DomVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1130(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1199(), ctx));
 }
 IAlinousVariable* TimeVariable::modulo(BoolVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1130(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1199(), ctx));
 }
 IAlinousVariable* TimeVariable::modulo(ByteVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1130(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1199(), ctx));
 }
 IAlinousVariable* TimeVariable::modulo(CharVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1130(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1199(), ctx));
 }
 IAlinousVariable* TimeVariable::modulo(DoubleVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1130(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1199(), ctx));
 }
 IAlinousVariable* TimeVariable::modulo(FloatVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1130(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1199(), ctx));
 }
 IAlinousVariable* TimeVariable::modulo(IntegerVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1130(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1199(), ctx));
 }
 IAlinousVariable* TimeVariable::modulo(LongVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1130(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1199(), ctx));
 }
 IAlinousVariable* TimeVariable::modulo(ShortVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1130(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1199(), ctx));
 }
 IAlinousVariable* TimeVariable::modulo(StringVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1130(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1199(), ctx));
 }
 IAlinousVariable* TimeVariable::modulo(BigDecimalVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1130(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1199(), ctx));
 }
 IAlinousVariable* TimeVariable::modulo(TimeVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1130(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1199(), ctx));
 }
 IAlinousVariable* TimeVariable::modulo(TimestampVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1130(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1199(), ctx));
 }
 IAlinousVariable* TimeVariable::bitOr(VariantValue* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1130(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1199(), ctx));
 }
 IAlinousVariable* TimeVariable::bitOr(DomVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1130(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1199(), ctx));
 }
 IAlinousVariable* TimeVariable::bitOr(BoolVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1130(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1199(), ctx));
 }
 IAlinousVariable* TimeVariable::bitOr(ByteVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1130(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1199(), ctx));
 }
 IAlinousVariable* TimeVariable::bitOr(CharVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1130(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1199(), ctx));
 }
 IAlinousVariable* TimeVariable::bitOr(DoubleVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1130(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1199(), ctx));
 }
 IAlinousVariable* TimeVariable::bitOr(FloatVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1130(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1199(), ctx));
 }
 IAlinousVariable* TimeVariable::bitOr(IntegerVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1130(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1199(), ctx));
 }
 IAlinousVariable* TimeVariable::bitOr(LongVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1130(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1199(), ctx));
 }
 IAlinousVariable* TimeVariable::bitOr(ShortVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1130(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1199(), ctx));
 }
 IAlinousVariable* TimeVariable::bitOr(StringVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1130(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1199(), ctx));
 }
 IAlinousVariable* TimeVariable::bitOr(BigDecimalVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1130(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1199(), ctx));
 }
 IAlinousVariable* TimeVariable::bitOr(TimeVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1130(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1199(), ctx));
 }
 IAlinousVariable* TimeVariable::bitOr(TimestampVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1130(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1199(), ctx));
 }
 IAlinousVariable* TimeVariable::bitAnd(VariantValue* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1130(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1199(), ctx));
 }
 IAlinousVariable* TimeVariable::bitAnd(DomVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1130(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1199(), ctx));
 }
 IAlinousVariable* TimeVariable::bitAnd(BoolVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1130(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1199(), ctx));
 }
 IAlinousVariable* TimeVariable::bitAnd(ByteVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1130(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1199(), ctx));
 }
 IAlinousVariable* TimeVariable::bitAnd(CharVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1130(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1199(), ctx));
 }
 IAlinousVariable* TimeVariable::bitAnd(DoubleVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1130(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1199(), ctx));
 }
 IAlinousVariable* TimeVariable::bitAnd(FloatVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1130(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1199(), ctx));
 }
 IAlinousVariable* TimeVariable::bitAnd(IntegerVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1130(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1199(), ctx));
 }
 IAlinousVariable* TimeVariable::bitAnd(LongVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1130(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1199(), ctx));
 }
 IAlinousVariable* TimeVariable::bitAnd(ShortVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1130(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1199(), ctx));
 }
 IAlinousVariable* TimeVariable::bitAnd(StringVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1130(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1199(), ctx));
 }
 IAlinousVariable* TimeVariable::bitAnd(BigDecimalVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1130(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1199(), ctx));
 }
 IAlinousVariable* TimeVariable::bitAnd(TimeVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1130(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1199(), ctx));
 }
 IAlinousVariable* TimeVariable::bitAnd(TimestampVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1130(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1199(), ctx));
 }
 IAlinousVariable* TimeVariable::bitExor(VariantValue* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1130(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1199(), ctx));
 }
 IAlinousVariable* TimeVariable::bitExor(DomVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1130(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1199(), ctx));
 }
 IAlinousVariable* TimeVariable::bitExor(BoolVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1130(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1199(), ctx));
 }
 IAlinousVariable* TimeVariable::bitExor(ByteVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1130(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1199(), ctx));
 }
 IAlinousVariable* TimeVariable::bitExor(CharVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1130(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1199(), ctx));
 }
 IAlinousVariable* TimeVariable::bitExor(DoubleVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1130(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1199(), ctx));
 }
 IAlinousVariable* TimeVariable::bitExor(FloatVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1130(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1199(), ctx));
 }
 IAlinousVariable* TimeVariable::bitExor(IntegerVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1130(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1199(), ctx));
 }
 IAlinousVariable* TimeVariable::bitExor(LongVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1130(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1199(), ctx));
 }
 IAlinousVariable* TimeVariable::bitExor(ShortVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1130(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1199(), ctx));
 }
 IAlinousVariable* TimeVariable::bitExor(StringVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1130(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1199(), ctx));
 }
 IAlinousVariable* TimeVariable::bitExor(BigDecimalVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1130(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1199(), ctx));
 }
 IAlinousVariable* TimeVariable::bitExor(TimeVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1130(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1199(), ctx));
 }
 IAlinousVariable* TimeVariable::bitExor(TimestampVariable* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1130(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1199(), ctx));
 }
 IAlinousVariable* TimeVariable::bitReverse(ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1130(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1199(), ctx));
 }
 IAlinousVariable* TimeVariable::substitute(TypedVariableArray* variable, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1131(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1200(), ctx));
 }
 void TimeVariable::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw() 
 {

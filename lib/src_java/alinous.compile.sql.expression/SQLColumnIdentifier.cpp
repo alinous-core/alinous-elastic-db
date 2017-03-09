@@ -315,16 +315,16 @@ bool SQLColumnIdentifier::analyseSQL(SQLAnalyseContext* context, bool leftValue,
 	String* column = nullptr;
 	switch(size) {
 	case 1:
-		schema = ConstStr::getCNST_STR_955();
+		schema = ConstStr::getCNST_STR_1086();
 		column = segments->get(0, ctx);
 		table = SQLAnalyseContext::findTable(context, schema, column, ctx);
 		if(table == nullptr)
 		{
-			throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1044()->clone(ctx)->append(this->id->toString(ctx), ctx), ctx));
+			throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1124()->clone(ctx)->append(this->id->toString(ctx), ctx), ctx));
 		}
 		break ;
 	case 2:
-		schema = ConstStr::getCNST_STR_955();
+		schema = ConstStr::getCNST_STR_1086();
 		table = segments->get(0, ctx);
 		column = segments->get(1, ctx);
 		break ;
@@ -334,14 +334,14 @@ bool SQLColumnIdentifier::analyseSQL(SQLAnalyseContext* context, bool leftValue,
 		column = segments->get(2, ctx);
 		break ;
 	default:
-		throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1044()->clone(ctx)->append(this->id->toString(ctx), ctx), ctx));
+		throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1124()->clone(ctx)->append(this->id->toString(ctx), ctx), ctx));
 		break;
 	}
 	AlinousDatabase* database = context->getDatabase(ctx);
 	IDatabaseTable* dataStore = database->getTable(schema, table, ctx);
 	if(dataStore == nullptr)
 	{
-		throw (new(ctx) DatabaseException(schema->clone(ctx)->append(ConstStr::getCNST_STR_950(), ctx)->append(table, ctx)->append(ConstStr::getCNST_STR_1045(), ctx), ctx));
+		throw (new(ctx) DatabaseException(schema->clone(ctx)->append(ConstStr::getCNST_STR_953(), ctx)->append(table, ctx)->append(ConstStr::getCNST_STR_1125(), ctx), ctx));
 	}
 	TableAndSchema* tableSc = (new(ctx) TableAndSchema(schema, table, ctx));
 	ScanTableIdentifier* tableId = (new(ctx) ScanTableIdentifier(tableSc, this->asName, dataStore->getColumnCount(ctx), ctx));
@@ -396,7 +396,7 @@ bool SQLColumnIdentifier::hasArrayResult(ThreadContext* ctx) throw()
 }
 ArrayList<VariantValue>* SQLColumnIdentifier::resolveSQLExpressionAsArray(ScanResultRecord* record, ScriptMachine* machine, bool debug, ThreadContext* ctx)
 {
-	throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1038(), ctx));
+	throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1118(), ctx));
 }
 bool SQLColumnIdentifier::isSQLExp(ThreadContext* ctx) throw() 
 {
@@ -415,7 +415,7 @@ void SQLColumnIdentifier::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx
 		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
 		if(el == nullptr || !((dynamic_cast<AlinousName*>(el) != 0)))
 		{
-			throw (new(ctx) VariableException(ConstStr::getCNST_STR_970(), ctx));
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1033(), ctx));
 		}
 		__GC_MV(this, &(this->id), static_cast<AlinousName*>(el), AlinousName);
 	}
@@ -486,7 +486,7 @@ void SQLColumnIdentifier::fromFileEntry(FileStorageEntryFetcher* fetcher, Thread
 		AlinousName* exp = AlinousName::fromFileEntry(fetcher, ctx);
 		if(exp != nullptr)
 		{
-			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_970(), ctx));
+			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_1033(), ctx));
 		}
 		__GC_MV(this, &(this->id), exp, AlinousName);
 	}

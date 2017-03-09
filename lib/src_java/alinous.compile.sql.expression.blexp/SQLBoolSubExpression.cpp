@@ -357,7 +357,7 @@ bool SQLBoolSubExpression::hasArrayResult(ThreadContext* ctx) throw()
 }
 ArrayList<VariantValue>* SQLBoolSubExpression::resolveSQLExpressionAsArray(ScanResultRecord* record, ScriptMachine* machine, bool debug, ThreadContext* ctx)
 {
-	throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1038(), ctx));
+	throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1118(), ctx));
 }
 int SQLBoolSubExpression::getExpressionType(ThreadContext* ctx) throw() 
 {
@@ -373,7 +373,7 @@ void SQLBoolSubExpression::readData(NetworkBinaryBuffer* buff, ThreadContext* ct
 		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
 		if(el == nullptr || !((dynamic_cast<ISQLExpression*>(el) != 0)))
 		{
-			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1046(), ctx));
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1126(), ctx));
 		}
 		__GC_MV(this, &(this->exp), static_cast<ISQLExpression*>(el), ISQLExpression);
 	}
@@ -424,7 +424,7 @@ void SQLBoolSubExpression::fromFileEntry(FileStorageEntryFetcher* fetcher, Threa
 		IExpression* el = IExpressionFactory::fromFetcher(fetcher, ctx);
 		if(el == nullptr || !((dynamic_cast<ISQLExpression*>(el) != 0)))
 		{
-			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1046(), ctx));
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1126(), ctx));
 		}
 		__GC_MV(this, &(this->exp), static_cast<ISQLExpression*>(el), ISQLExpression);
 	}

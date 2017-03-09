@@ -216,12 +216,12 @@ bool TableMetadata::__init_static_variables(){
 }
  TableMetadata::TableMetadata(String* tableName, ThreadContext* ctx) throw()  : IObject(ctx), ICommandData(ctx), columns(GCUtils<HashMap<String,TableColumnMetadata> >::ins(this, (new(ctx) HashMap<String,TableColumnMetadata>(ctx)), ctx, __FILEW__, __LINE__, L"")), columnsList(GCUtils<ArrayList<TableColumnMetadata> >::ins(this, (new(ctx) ArrayList<TableColumnMetadata>(ctx)), ctx, __FILEW__, __LINE__, L"")), primaryKeys(GCUtils<ArrayList<TableColumnMetadata> >::ins(this, (new(ctx) ArrayList<TableColumnMetadata>(ctx)), ctx, __FILEW__, __LINE__, L"")), indexes(GCUtils<ArrayList<TableIndexMetadata> >::ins(this, (new(ctx) ArrayList<TableIndexMetadata>(ctx)), ctx, __FILEW__, __LINE__, L"")), uniqueList(GCUtils<ArrayList<TableMetadataUnique> >::ins(this, (new(ctx) ArrayList<TableMetadataUnique>(ctx)), ctx, __FILEW__, __LINE__, L"")), schema(nullptr), tableName(nullptr), checks(GCUtils<ArrayList<CheckDefinition> >::ins(this, (new(ctx) ArrayList<CheckDefinition>(ctx)), ctx, __FILEW__, __LINE__, L"")), partitionKeys(nullptr), partitionValueRanges(nullptr)
 {
-	__GC_MV(this, &(this->schema), ConstStr::getCNST_STR_955(), String);
+	__GC_MV(this, &(this->schema), ConstStr::getCNST_STR_1086(), String);
 	__GC_MV(this, &(this->tableName), tableName, String);
 }
 void TableMetadata::__construct_impl(String* tableName, ThreadContext* ctx) throw() 
 {
-	__GC_MV(this, &(this->schema), ConstStr::getCNST_STR_955(), String);
+	__GC_MV(this, &(this->schema), ConstStr::getCNST_STR_1086(), String);
 	__GC_MV(this, &(this->tableName), tableName, String);
 }
  TableMetadata::TableMetadata(String* schema, String* tableName, ThreadContext* ctx) throw()  : IObject(ctx), ICommandData(ctx), columns(GCUtils<HashMap<String,TableColumnMetadata> >::ins(this, (new(ctx) HashMap<String,TableColumnMetadata>(ctx)), ctx, __FILEW__, __LINE__, L"")), columnsList(GCUtils<ArrayList<TableColumnMetadata> >::ins(this, (new(ctx) ArrayList<TableColumnMetadata>(ctx)), ctx, __FILEW__, __LINE__, L"")), primaryKeys(GCUtils<ArrayList<TableColumnMetadata> >::ins(this, (new(ctx) ArrayList<TableColumnMetadata>(ctx)), ctx, __FILEW__, __LINE__, L"")), indexes(GCUtils<ArrayList<TableIndexMetadata> >::ins(this, (new(ctx) ArrayList<TableIndexMetadata>(ctx)), ctx, __FILEW__, __LINE__, L"")), uniqueList(GCUtils<ArrayList<TableMetadataUnique> >::ins(this, (new(ctx) ArrayList<TableMetadataUnique>(ctx)), ctx, __FILEW__, __LINE__, L"")), schema(nullptr), tableName(nullptr), checks(GCUtils<ArrayList<CheckDefinition> >::ins(this, (new(ctx) ArrayList<CheckDefinition>(ctx)), ctx, __FILEW__, __LINE__, L"")), partitionKeys(nullptr), partitionValueRanges(nullptr)
@@ -423,7 +423,7 @@ void TableMetadata::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 			}
 			catch(AlinousDbException* e)
 			{
-				throw (new(ctx) VariableException(ConstStr::getCNST_STR_1703(), e, ctx));
+				throw (new(ctx) VariableException(ConstStr::getCNST_STR_1751(), e, ctx));
 			}
 		}
 	}
@@ -438,7 +438,7 @@ void TableMetadata::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 			}
 			catch(AlinousDbException* e)
 			{
-				throw (new(ctx) VariableException(ConstStr::getCNST_STR_1704(), e, ctx));
+				throw (new(ctx) VariableException(ConstStr::getCNST_STR_1752(), e, ctx));
 			}
 		}
 		indexes->add(idx, ctx);
@@ -460,7 +460,7 @@ void TableMetadata::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
 		if(el == nullptr || !((dynamic_cast<CheckDefinition*>(el) != 0)))
 		{
-			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1034(), ctx));
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1114(), ctx));
 		}
 		CheckDefinition* def = static_cast<CheckDefinition*>(el);
 		this->checks->add(def, ctx);
@@ -593,7 +593,7 @@ void TableMetadata::addPrimaryKey(String* col, ThreadContext* ctx)
 	TableColumnMetadata* colmeta = this->columns->get(col->toLowerCase(ctx), ctx);
 	if(colmeta == nullptr)
 	{
-		throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1705(), ctx));
+		throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1753(), ctx));
 	}
 	this->primaryKeys->add(colmeta, ctx);
 	colmeta->setPrimaryKey(true, ctx);
@@ -632,7 +632,7 @@ bool TableMetadata::checkHasIndex(ArrayList<String>* columns, String* indexName,
 TableMetadataUniqueCollection* TableMetadata::getUniques(ThreadContext* ctx) throw() 
 {
 	StringBuffer* buff = (new(ctx) StringBuffer(ctx));
-	buff->append(this->schema, ctx)->append(ConstStr::getCNST_STR_950(), ctx)->append(this->tableName, ctx);
+	buff->append(this->schema, ctx)->append(ConstStr::getCNST_STR_953(), ctx)->append(this->tableName, ctx);
 	String* fullName = buff->toString(ctx);
 	TableMetadataUniqueCollection* list = (new(ctx) TableMetadataUniqueCollection(ctx));
 	int maxLoop = this->primaryKeys->size(ctx);

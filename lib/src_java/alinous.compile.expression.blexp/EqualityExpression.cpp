@@ -317,7 +317,7 @@ int EqualityExpression::getOpe(ThreadContext* ctx) throw()
 }
 void EqualityExpression::setOpe(String* opeStr, ThreadContext* ctx) throw() 
 {
-	if(opeStr->equals(ConstStr::getCNST_STR_1017(), ctx))
+	if(opeStr->equals(ConstStr::getCNST_STR_1063(), ctx))
 	{
 		this->ope = EQ;
 	}
@@ -353,7 +353,7 @@ void EqualityExpression::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
 		if(el == nullptr || !((dynamic_cast<IExpression*>(el) != 0)))
 		{
-			throw (new(ctx) VariableException(ConstStr::getCNST_STR_980(), ctx));
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1027(), ctx));
 		}
 		__GC_MV(this, &(this->left), static_cast<IExpression*>(el), IExpression);
 	}
@@ -364,7 +364,7 @@ void EqualityExpression::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
 		if(el == nullptr || !((dynamic_cast<IExpression*>(el) != 0)))
 		{
-			throw (new(ctx) VariableException(ConstStr::getCNST_STR_980(), ctx));
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1027(), ctx));
 		}
 		__GC_MV(this, &(this->right), static_cast<IExpression*>(el), IExpression);
 	}
@@ -429,7 +429,7 @@ void EqualityExpression::fromFileEntry(FileStorageEntryFetcher* fetcher, ThreadC
 		IExpression* el = IExpressionFactory::fromFetcher(fetcher, ctx);
 		if(el == nullptr || !((dynamic_cast<IExpression*>(el) != 0)))
 		{
-			throw (new(ctx) VariableException(ConstStr::getCNST_STR_980(), ctx));
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1027(), ctx));
 		}
 		__GC_MV(this, &(this->left), static_cast<IExpression*>(el), IExpression);
 	}
@@ -440,7 +440,7 @@ void EqualityExpression::fromFileEntry(FileStorageEntryFetcher* fetcher, ThreadC
 		IExpression* el = IExpressionFactory::fromFetcher(fetcher, ctx);
 		if(el == nullptr || !((dynamic_cast<IExpression*>(el) != 0)))
 		{
-			throw (new(ctx) VariableException(ConstStr::getCNST_STR_980(), ctx));
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1027(), ctx));
 		}
 		__GC_MV(this, &(this->right), static_cast<IExpression*>(el), IExpression);
 	}

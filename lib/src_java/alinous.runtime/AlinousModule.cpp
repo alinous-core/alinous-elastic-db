@@ -293,7 +293,7 @@ AlinousType* AlinousModule::getFunctionReturnType(String* prefix, String* name, 
 	StringBuffer* buff = (new(ctx) StringBuffer(ctx));
 	if(prefix != nullptr)
 	{
-		buff->append(prefix, ctx)->append(ConstStr::getCNST_STR_950(), ctx);
+		buff->append(prefix, ctx)->append(ConstStr::getCNST_STR_953(), ctx);
 	}
 	buff->append(name, ctx);
 	AlinousFunction* func = this->functionMap->get(buff->toString(ctx), ctx);
@@ -316,7 +316,7 @@ AlinousType* AlinousModule::getFunctionReturnType(String* prefix, String* name, 
 }
 bool AlinousModule::isfunctionPrefix(String* name, ThreadContext* ctx) throw() 
 {
-	String* prefix = name->clone(ctx)->append(ConstStr::getCNST_STR_950(), ctx);
+	String* prefix = name->clone(ctx)->append(ConstStr::getCNST_STR_953(), ctx);
 	Iterator<String>* it = functionMap->keySet(ctx)->iterator(ctx);
 	while(it->hasNext(ctx))
 	{
@@ -448,7 +448,7 @@ void AlinousModule::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
 		if(el == nullptr || !((dynamic_cast<AlinousSrc*>(el) != 0)))
 		{
-			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1104(), ctx));
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1178(), ctx));
 		}
 		__GC_MV(this, &(this->moduleSource), static_cast<AlinousSrc*>(el), AlinousSrc);
 	}

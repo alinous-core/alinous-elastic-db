@@ -75,7 +75,7 @@ RemoteCommitIdPublisher* RemoteCommitIdPublisher::init(ThreadContext* ctx)
 	IArrayObject<String>* segs = this->url->split(ConstStr::getCNST_STR_381(), ctx);
 	if(segs->length != 2)
 	{
-		throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3581(), ctx));
+		throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3578(), ctx));
 	}
 	String* host = segs->get(0);
 	int port = 0;
@@ -86,7 +86,7 @@ RemoteCommitIdPublisher* RemoteCommitIdPublisher::init(ThreadContext* ctx)
 		}
 		catch(NumberFormatException* e)
 		{
-			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3582(), e, ctx));
+			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3579(), e, ctx));
 		}
 	}
 	__GC_MV(this, &(this->info), (new(ctx) MonitorConnectionInfo(host, port, ctx)), MonitorConnectionInfo);
@@ -114,17 +114,17 @@ long long RemoteCommitIdPublisher::getMaxCommitId(ThreadContext* ctx)
 			AbstractMonitorCommand* retcmd = cmd->sendCommand(con->getSocket(ctx), ctx);
 			if(retcmd->getType(ctx) != AbstractMonitorCommand::TYPE_GET_MAX_COMMIT_ID)
 			{
-				throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3583(), ctx));
+				throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3580(), ctx));
 			}
 			cmd = static_cast<GetMaxCommitIdCommand*>(retcmd);
 		}
 		catch(UnknownHostException* e)
 		{
-			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3584(), e, ctx));
+			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3581(), e, ctx));
 		}
 		catch(IOException* e)
 		{
-			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3584(), e, ctx));
+			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3581(), e, ctx));
 		}
 	}
 	return cmd->getCommitId(ctx);
@@ -145,17 +145,17 @@ long long RemoteCommitIdPublisher::newCommitId(ThreadContext* ctx)
 			AbstractMonitorCommand* retcmd = cmd->sendCommand(con->getSocket(ctx), ctx);
 			if(retcmd->getType(ctx) != AbstractMonitorCommand::TYPE_NEW_MAX_COMMIT_ID)
 			{
-				throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3583(), ctx));
+				throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3580(), ctx));
 			}
 			cmd = static_cast<NewCommitIdCommand*>(retcmd);
 		}
 		catch(UnknownHostException* e)
 		{
-			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3584(), e, ctx));
+			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3581(), e, ctx));
 		}
 		catch(IOException* e)
 		{
-			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3584(), e, ctx));
+			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3581(), e, ctx));
 		}
 	}
 	return cmd->getCommitId(ctx);
@@ -177,17 +177,17 @@ DbVersionContext* RemoteCommitIdPublisher::newTransactionContext(ThreadContext* 
 			AbstractMonitorCommand* retcmd = cmd->sendCommand(con->getSocket(ctx), ctx);
 			if(retcmd->getType(ctx) != AbstractMonitorCommand::TYPE_NEW_TRANSACTION)
 			{
-				throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3583(), ctx));
+				throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3580(), ctx));
 			}
 			cmd = static_cast<NewTransactionCommand*>(retcmd);
 		}
 		catch(UnknownHostException* e)
 		{
-			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3584(), e, ctx));
+			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3581(), e, ctx));
 		}
 		catch(IOException* e)
 		{
-			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3584(), e, ctx));
+			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3581(), e, ctx));
 		}
 	}
 	long long trxId = cmd->getTrxId(ctx);

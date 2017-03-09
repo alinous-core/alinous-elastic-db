@@ -1066,7 +1066,7 @@ void DocumentVariable::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 	IAlinousVariable* val = NetworkAlinousVariableFactory::fromNetworkData(buff, ctx);
 	if(val == nullptr || !((dynamic_cast<IDomVariable*>(val) != 0)))
 	{
-		throw (new(ctx) VariableException(ConstStr::getCNST_STR_1123(), ctx));
+		throw (new(ctx) VariableException(ConstStr::getCNST_STR_1195(), ctx));
 	}
 	__GC_MV(this, &(this->value), static_cast<IDomVariable*>(val), IDomVariable);
 }

@@ -110,7 +110,7 @@ DbTransaction* DbTransactionManager::borrowTransaction(int acid, ThreadContext* 
 				catch(InterruptedException* e)
 				{
 					e->printStackTrace(ctx);
-					throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1713(), e, ctx));
+					throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1693(), e, ctx));
 				}
 			}
 		}
@@ -118,7 +118,7 @@ DbTransaction* DbTransactionManager::borrowTransaction(int acid, ThreadContext* 
 	DbVersionContext* vctx = this->database->newTransactionContext(ctx);
 	long long commitId = vctx->getCommitId(ctx);
 	long long trxId = vctx->getTrxId(ctx);
-	String* tmpDir = this->trxTmpDir->clone(ctx)->append(trxId, ctx)->append(ConstStr::getCNST_STR_1007(), ctx);
+	String* tmpDir = this->trxTmpDir->clone(ctx)->append(trxId, ctx)->append(ConstStr::getCNST_STR_949(), ctx);
 	DbTransaction* trx = DbTransactionFactory::newTransaction(acid, this, tmpDir, this->database, this->core, commitId, vctx, ctx);
 	{
 		SynchronizedBlockObj __synchronized_2(this->lock, ctx);

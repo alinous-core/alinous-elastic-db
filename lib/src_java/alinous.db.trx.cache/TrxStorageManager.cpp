@@ -135,7 +135,7 @@ TrxRecordsCache* TrxStorageManager::getInsertCache(String* schema, String* table
 	TableMetadata* metadata = this->trx->getMetadata(schema, table, ctx);
 	if(metadata == nullptr)
 	{
-		throw (new(ctx) AlinousDbException(schema->clone(ctx)->append(ConstStr::getCNST_STR_948(), ctx)->append(table, ctx)->append(ConstStr::getCNST_STR_1045(), ctx), ctx));
+		throw (new(ctx) AlinousDbException(schema->clone(ctx)->append(ConstStr::getCNST_STR_1024(), ctx)->append(table, ctx)->append(ConstStr::getCNST_STR_1125(), ctx), ctx));
 	}
 	HashMap<String,TrxRecordsCache>* tblcache = this->insertStorages->get(schema, ctx);
 	if(tblcache == nullptr)
@@ -150,7 +150,7 @@ TrxRecordsCache* TrxStorageManager::getUpdateCache(String* schema, String* table
 	TableMetadata* metadata = this->trx->getMetadata(schema, table, ctx);
 	if(metadata == nullptr)
 	{
-		throw (new(ctx) AlinousDbException(schema->clone(ctx)->append(ConstStr::getCNST_STR_948(), ctx)->append(table, ctx)->append(ConstStr::getCNST_STR_1045(), ctx), ctx));
+		throw (new(ctx) AlinousDbException(schema->clone(ctx)->append(ConstStr::getCNST_STR_1024(), ctx)->append(table, ctx)->append(ConstStr::getCNST_STR_1125(), ctx), ctx));
 	}
 	HashMap<String,TrxRecordsCache>* tblcache = this->updateStorages->get(schema, ctx);
 	if(tblcache == nullptr)
@@ -165,7 +165,7 @@ TrxRecordsCache* TrxStorageManager::getUpdateCacheWithCreate(String* schema, Str
 	TableMetadata* metadata = this->trx->getMetadata(schema, table, ctx);
 	if(metadata == nullptr)
 	{
-		throw (new(ctx) AlinousDbException(schema->clone(ctx)->append(ConstStr::getCNST_STR_948(), ctx)->append(table, ctx)->append(ConstStr::getCNST_STR_1045(), ctx), ctx));
+		throw (new(ctx) AlinousDbException(schema->clone(ctx)->append(ConstStr::getCNST_STR_1024(), ctx)->append(table, ctx)->append(ConstStr::getCNST_STR_1125(), ctx), ctx));
 	}
 	HashMap<String,TrxRecordsCache>* tblcache = this->updateStorages->get(schema, ctx);
 	if(tblcache == nullptr)
@@ -189,7 +189,7 @@ TrxRecordsCache* TrxStorageManager::getInsertCacheWithCreate(String* schema, Str
 	TableMetadata* metadata = this->trx->getMetadata(schema, table, ctx);
 	if(metadata == nullptr)
 	{
-		throw (new(ctx) AlinousDbException(schema->clone(ctx)->append(ConstStr::getCNST_STR_948(), ctx)->append(table, ctx)->append(ConstStr::getCNST_STR_1045(), ctx), ctx));
+		throw (new(ctx) AlinousDbException(schema->clone(ctx)->append(ConstStr::getCNST_STR_1024(), ctx)->append(table, ctx)->append(ConstStr::getCNST_STR_1125(), ctx), ctx));
 	}
 	this->hasOperation = true;
 	HashMap<String,TrxRecordsCache>* tblcache = this->insertStorages->get(schema, ctx);
@@ -292,15 +292,15 @@ void TrxStorageManager::addIndex(CreateIndexMetadata* createMeta, TableMetadata*
 			}
 			catch(InterruptedException* e)
 			{
-				throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1721(), e, ctx));
+				throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1712(), e, ctx));
 			}
 			catch(VariableException* e)
 			{
-				throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1722(), e, ctx));
+				throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1713(), e, ctx));
 			}
 			catch(AlinousException* e)
 			{
-				throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1723(), e, ctx));
+				throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1714(), e, ctx));
 			}
 		}
 	}

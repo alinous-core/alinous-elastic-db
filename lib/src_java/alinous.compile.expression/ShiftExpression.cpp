@@ -76,7 +76,7 @@ IAlinousVariable* ShiftExpression::resolveExpression(ScriptMachine* machine, boo
 	IAlinousVariable* variable = machine->resolveExpression(this->first, debug, ctx);
 	if(variable == nullptr || variable->isArray(ctx))
 	{
-		throw (new(ctx) VariableException(ConstStr::getCNST_STR_999(), ctx));
+		throw (new(ctx) VariableException(ConstStr::getCNST_STR_1035(), ctx));
 	}
 	if(variable->isNull(ctx))
 	{

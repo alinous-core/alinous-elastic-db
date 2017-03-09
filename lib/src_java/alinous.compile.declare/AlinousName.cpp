@@ -97,7 +97,7 @@ String* AlinousName::getPackageName(ThreadContext* ctx) throw()
 	{
 		if(i != 0)
 		{
-			buff->append(ConstStr::getCNST_STR_950(), ctx);
+			buff->append(ConstStr::getCNST_STR_953(), ctx);
 		}
 		buff->append(this->segments->get(i, ctx), ctx);
 	}
@@ -110,7 +110,7 @@ bool AlinousName::isVoid(ThreadContext* ctx) throw()
 		return false;
 	}
 	String* typeStr = toString(ctx);
-	return typeStr->equals(ConstStr::getCNST_STR_956(), ctx);
+	return typeStr->equals(ConstStr::getCNST_STR_1087(), ctx);
 }
 bool AlinousName::isPrimitive(ThreadContext* ctx) throw() 
 {
@@ -119,7 +119,7 @@ bool AlinousName::isPrimitive(ThreadContext* ctx) throw()
 		return false;
 	}
 	String* typeStr = toString(ctx);
-	return typeStr->equals(ConstStr::getCNST_STR_957(), ctx) || typeStr->equals(ConstStr::getCNST_STR_958(), ctx) || typeStr->equals(ConstStr::getCNST_STR_959(), ctx) || typeStr->equals(ConstStr::getCNST_STR_960(), ctx) || typeStr->equals(ConstStr::getCNST_STR_961(), ctx) || typeStr->equals(ConstStr::getCNST_STR_962(), ctx) || typeStr->equals(ConstStr::getCNST_STR_963(), ctx) || typeStr->equals(ConstStr::getCNST_STR_964(), ctx);
+	return typeStr->equals(ConstStr::getCNST_STR_1070(), ctx) || typeStr->equals(ConstStr::getCNST_STR_1073(), ctx) || typeStr->equals(ConstStr::getCNST_STR_1074(), ctx) || typeStr->equals(ConstStr::getCNST_STR_1075(), ctx) || typeStr->equals(ConstStr::getCNST_STR_1071(), ctx) || typeStr->equals(ConstStr::getCNST_STR_1076(), ctx) || typeStr->equals(ConstStr::getCNST_STR_1078(), ctx) || typeStr->equals(ConstStr::getCNST_STR_1077(), ctx);
 }
 bool AlinousName::isPrimitiveArray(ThreadContext* ctx) throw() 
 {
@@ -128,7 +128,7 @@ bool AlinousName::isPrimitiveArray(ThreadContext* ctx) throw()
 		return false;
 	}
 	String* typeStr = toString(ctx);
-	return typeStr->equals(ConstStr::getCNST_STR_957(), ctx) || typeStr->equals(ConstStr::getCNST_STR_958(), ctx) || typeStr->equals(ConstStr::getCNST_STR_959(), ctx) || typeStr->equals(ConstStr::getCNST_STR_960(), ctx) || typeStr->equals(ConstStr::getCNST_STR_961(), ctx) || typeStr->equals(ConstStr::getCNST_STR_962(), ctx) || typeStr->equals(ConstStr::getCNST_STR_963(), ctx) || typeStr->equals(ConstStr::getCNST_STR_964(), ctx);
+	return typeStr->equals(ConstStr::getCNST_STR_1070(), ctx) || typeStr->equals(ConstStr::getCNST_STR_1073(), ctx) || typeStr->equals(ConstStr::getCNST_STR_1074(), ctx) || typeStr->equals(ConstStr::getCNST_STR_1075(), ctx) || typeStr->equals(ConstStr::getCNST_STR_1071(), ctx) || typeStr->equals(ConstStr::getCNST_STR_1076(), ctx) || typeStr->equals(ConstStr::getCNST_STR_1078(), ctx) || typeStr->equals(ConstStr::getCNST_STR_1077(), ctx);
 }
 bool AlinousName::isStandardType(ThreadContext* ctx) throw() 
 {
@@ -137,7 +137,7 @@ bool AlinousName::isStandardType(ThreadContext* ctx) throw()
 		return false;
 	}
 	String* typeStr = toString(ctx);
-	return typeStr->equals(ConstStr::getCNST_STR_965(), ctx) || typeStr->equals(ConstStr::getCNST_STR_966(), ctx) || typeStr->equals(ConstStr::getCNST_STR_967(), ctx) || typeStr->equals(ConstStr::getCNST_STR_968(), ctx);
+	return typeStr->equals(ConstStr::getCNST_STR_1072(), ctx) || typeStr->equals(ConstStr::getCNST_STR_1080(), ctx) || typeStr->equals(ConstStr::getCNST_STR_1079(), ctx) || typeStr->equals(ConstStr::getCNST_STR_1081(), ctx);
 }
 bool AlinousName::isStandardTypeArray(ThreadContext* ctx) throw() 
 {
@@ -146,7 +146,7 @@ bool AlinousName::isStandardTypeArray(ThreadContext* ctx) throw()
 		return false;
 	}
 	String* typeStr = toString(ctx);
-	return typeStr->equals(ConstStr::getCNST_STR_965(), ctx) || typeStr->equals(ConstStr::getCNST_STR_966(), ctx) || typeStr->equals(ConstStr::getCNST_STR_967(), ctx) || typeStr->equals(ConstStr::getCNST_STR_968(), ctx);
+	return typeStr->equals(ConstStr::getCNST_STR_1072(), ctx) || typeStr->equals(ConstStr::getCNST_STR_1080(), ctx) || typeStr->equals(ConstStr::getCNST_STR_1079(), ctx) || typeStr->equals(ConstStr::getCNST_STR_1081(), ctx);
 }
 AlinousType* AlinousName::toAlinousType(SrcAnalyseContext* context, ThreadContext* ctx) throw() 
 {
@@ -160,49 +160,49 @@ AlinousType* AlinousName::toAlinousType(SrcAnalyseContext* context, ThreadContex
 		if(isPrimitive(ctx) || isPrimitiveArray(ctx))
 		{
 			String* typeStr = toString(ctx);
-			if(typeStr->equals(ConstStr::getCNST_STR_957(), ctx))
+			if(typeStr->equals(ConstStr::getCNST_STR_1070(), ctx))
 			{
 				alType = (new(ctx) AlinousType(AlinousType::BOOL_TYPE, AlinousType::TYPE_PRIMITIVE, ctx));
 			}
 						else 
 			{
-				if(typeStr->equals(ConstStr::getCNST_STR_958(), ctx))
+				if(typeStr->equals(ConstStr::getCNST_STR_1073(), ctx))
 				{
 					alType = (new(ctx) AlinousType(AlinousType::BYTE_TYPE, AlinousType::TYPE_PRIMITIVE, ctx));
 				}
 								else 
 				{
-					if(typeStr->equals(ConstStr::getCNST_STR_959(), ctx))
+					if(typeStr->equals(ConstStr::getCNST_STR_1074(), ctx))
 					{
 						alType = (new(ctx) AlinousType(AlinousType::SHORT_TYPE, AlinousType::TYPE_PRIMITIVE, ctx));
 					}
 										else 
 					{
-						if(typeStr->equals(ConstStr::getCNST_STR_960(), ctx))
+						if(typeStr->equals(ConstStr::getCNST_STR_1075(), ctx))
 						{
 							alType = (new(ctx) AlinousType(AlinousType::CHAR_TYPE, AlinousType::TYPE_PRIMITIVE, ctx));
 						}
 												else 
 						{
-							if(typeStr->equals(ConstStr::getCNST_STR_961(), ctx))
+							if(typeStr->equals(ConstStr::getCNST_STR_1071(), ctx))
 							{
 								alType = (new(ctx) AlinousType(AlinousType::INT_TYPE, AlinousType::TYPE_PRIMITIVE, ctx));
 							}
 														else 
 							{
-								if(typeStr->equals(ConstStr::getCNST_STR_962(), ctx))
+								if(typeStr->equals(ConstStr::getCNST_STR_1076(), ctx))
 								{
 									alType = (new(ctx) AlinousType(AlinousType::LONG_TYPE, AlinousType::TYPE_PRIMITIVE, ctx));
 								}
 																else 
 								{
-									if(typeStr->equals(ConstStr::getCNST_STR_963(), ctx))
+									if(typeStr->equals(ConstStr::getCNST_STR_1078(), ctx))
 									{
 										alType = (new(ctx) AlinousType(AlinousType::DOUBLE_TYPE, AlinousType::TYPE_PRIMITIVE, ctx));
 									}
 																		else 
 									{
-										if(typeStr->equals(ConstStr::getCNST_STR_964(), ctx))
+										if(typeStr->equals(ConstStr::getCNST_STR_1077(), ctx))
 										{
 											alType = (new(ctx) AlinousType(AlinousType::FLOAT_TYPE, AlinousType::TYPE_PRIMITIVE, ctx));
 										}
@@ -219,25 +219,25 @@ AlinousType* AlinousName::toAlinousType(SrcAnalyseContext* context, ThreadContex
 			if(isStandardType(ctx) || isStandardTypeArray(ctx))
 			{
 				String* typeStr = toString(ctx);
-				if(typeStr->equals(ConstStr::getCNST_STR_965(), ctx))
+				if(typeStr->equals(ConstStr::getCNST_STR_1072(), ctx))
 				{
 					alType = (new(ctx) AlinousType(AlinousType::STRING_TYPE, AlinousType::TYPE_STANDARD_OBJ, ctx));
 				}
 								else 
 				{
-					if(typeStr->equals(ConstStr::getCNST_STR_966(), ctx))
+					if(typeStr->equals(ConstStr::getCNST_STR_1080(), ctx))
 					{
 						alType = (new(ctx) AlinousType(AlinousType::TIME, AlinousType::TYPE_STANDARD_OBJ, ctx));
 					}
 										else 
 					{
-						if(typeStr->equals(ConstStr::getCNST_STR_967(), ctx))
+						if(typeStr->equals(ConstStr::getCNST_STR_1079(), ctx))
 						{
 							alType = (new(ctx) AlinousType(AlinousType::TIMESTAMP, AlinousType::TYPE_STANDARD_OBJ, ctx));
 						}
 												else 
 						{
-							if(typeStr->equals(ConstStr::getCNST_STR_968(), ctx))
+							if(typeStr->equals(ConstStr::getCNST_STR_1081(), ctx))
 							{
 								alType = (new(ctx) AlinousType(AlinousType::BIGDECIMAL, AlinousType::TYPE_STANDARD_OBJ, ctx));
 							}
@@ -250,7 +250,7 @@ AlinousType* AlinousName::toAlinousType(SrcAnalyseContext* context, ThreadContex
 				AlinousClass* clazz = context->findClassDeclare(this, ctx);
 				if(clazz == nullptr)
 				{
-					context->addError(toString(ctx)->clone(ctx)->append(ConstStr::getCNST_STR_969(), ctx), this, ctx);
+					context->addError(toString(ctx)->clone(ctx)->append(ConstStr::getCNST_STR_1031(), ctx), this, ctx);
 				}
 								else 
 				{
@@ -289,7 +289,7 @@ String* AlinousName::toString(ThreadContext* ctx) throw()
 	buff->append(segments->get(0, ctx), ctx);
 	for(int i = 1; i != maxLoop; ++i)
 	{
-		buff->append(ConstStr::getCNST_STR_950(), ctx)->append(segments->get(i, ctx), ctx);
+		buff->append(ConstStr::getCNST_STR_953(), ctx)->append(segments->get(i, ctx), ctx);
 	}
 	return buff->toString(ctx);
 }

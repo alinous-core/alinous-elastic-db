@@ -63,20 +63,20 @@ void ClassMemberModifiers::__releaseRegerences(bool prepare, ThreadContext* ctx)
 void ClassMemberModifiers::addModifier(String* mod, ThreadContext* ctx) throw() 
 {
 	this->list->add(mod, ctx);
-	if(mod->equals(ConstStr::getCNST_STR_953(), ctx))
+	if(mod->equals(ConstStr::getCNST_STR_1084(), ctx))
 	{
 		this->staticMod = true;
 	}
 		else 
 	{
-		if(mod->equals(ConstStr::getCNST_STR_954(), ctx))
+		if(mod->equals(ConstStr::getCNST_STR_1085(), ctx))
 		{
 			protectedMod = false;
 			privateMod = true;
 		}
 				else 
 		{
-			if(mod->equals(ConstStr::getCNST_STR_955(), ctx))
+			if(mod->equals(ConstStr::getCNST_STR_1086(), ctx))
 			{
 				protectedMod = false;
 				publicMod = true;

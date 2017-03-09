@@ -402,55 +402,55 @@ void VariableOperationCaller::ObjectCaller::__releaseRegerences(bool prepare, Th
 }
 IAlinousVariable* VariableOperationCaller::ObjectCaller::add(IAlinousVariable* variable, IAlinousVariable* operand, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1114(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1187(), ctx));
 }
 IAlinousVariable* VariableOperationCaller::ObjectCaller::minus(IAlinousVariable* variable, IAlinousVariable* operand, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1114(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1187(), ctx));
 }
 IAlinousVariable* VariableOperationCaller::ObjectCaller::multiply(IAlinousVariable* variable, IAlinousVariable* operand, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1114(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1187(), ctx));
 }
 IAlinousVariable* VariableOperationCaller::ObjectCaller::div(IAlinousVariable* variable, IAlinousVariable* operand, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1114(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1187(), ctx));
 }
 IAlinousVariable* VariableOperationCaller::ObjectCaller::shiftLeft(IAlinousVariable* variable, IAlinousVariable* operand, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1114(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1187(), ctx));
 }
 IAlinousVariable* VariableOperationCaller::ObjectCaller::shiftRight(IAlinousVariable* variable, IAlinousVariable* operand, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1114(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1187(), ctx));
 }
 IAlinousVariable* VariableOperationCaller::ObjectCaller::modulo(IAlinousVariable* variable, IAlinousVariable* operand, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1114(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1187(), ctx));
 }
 IAlinousVariable* VariableOperationCaller::ObjectCaller::substitute(IAlinousVariable* variable, IAlinousVariable* operand, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1114(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1187(), ctx));
 }
 int VariableOperationCaller::ObjectCaller::compareTo(IAlinousVariable* variable, IAlinousVariable* operand, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1114(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1187(), ctx));
 }
 IAlinousVariable* VariableOperationCaller::ObjectCaller::bitOr(IAlinousVariable* variable, IAlinousVariable* operand, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1114(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1187(), ctx));
 }
 IAlinousVariable* VariableOperationCaller::ObjectCaller::bitAnd(IAlinousVariable* variable, IAlinousVariable* operand, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1114(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1187(), ctx));
 }
 IAlinousVariable* VariableOperationCaller::ObjectCaller::bitExor(IAlinousVariable* variable, IAlinousVariable* operand, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1114(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1187(), ctx));
 }
 IAlinousVariable* VariableOperationCaller::ObjectCaller::shiftRightUnsigned(IAlinousVariable* variable, IAlinousVariable* operand, ThreadContext* ctx)
 {
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1114(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1187(), ctx));
 }
 void VariableOperationCaller::ObjectCaller::__cleanUp(ThreadContext* ctx){
 }

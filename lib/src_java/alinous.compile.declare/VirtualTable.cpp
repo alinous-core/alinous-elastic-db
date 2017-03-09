@@ -252,12 +252,12 @@ void VirtualTable::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 		IAlinousElement* clazz = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
 		if(clazz == nullptr || !((dynamic_cast<AlinousClass*>(clazz) != 0)))
 		{
-			throw (new(ctx) VariableException(ConstStr::getCNST_STR_952(), ctx));
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1065(), ctx));
 		}
 		IAlinousElement* func = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
 		if(func == nullptr || !((dynamic_cast<ClassMethodFunction*>(func) != 0)))
 		{
-			throw (new(ctx) VariableException(ConstStr::getCNST_STR_971(), ctx));
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1088(), ctx));
 		}
 		VirtualTable::MethodPair* pair = (new(ctx) VirtualTable::MethodPair(static_cast<AlinousClass*>(clazz), static_cast<ClassMethodFunction*>(func), ctx));
 		this->list->add(pair, ctx);

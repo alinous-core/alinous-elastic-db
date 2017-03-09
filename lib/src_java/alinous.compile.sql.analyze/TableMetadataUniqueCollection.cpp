@@ -29,7 +29,7 @@ bool TableMetadataUniqueCollection::__init_static_variables(){
 	delete ctx;
 	return true;
 }
- TableMetadataUniqueCollection::TableMetadataUniqueCollection(ThreadContext* ctx) throw()  : IObject(ctx), uniqueList(GCUtils<ArrayList<ScanUnique> >::ins(this, (new(ctx) ArrayList<ScanUnique>(ctx)), ctx, __FILEW__, __LINE__, L""))
+ TableMetadataUniqueCollection::TableMetadataUniqueCollection(ThreadContext* ctx) throw()  : IObject(ctx), uniqueList(GCUtils<ArrayList<ScanUnique> >::ins(this, (new(ctx) ArrayList<ScanUnique>(ctx)), ctx, __FILEW__, __LINE__, L"")), fullCover(0)
 {
 }
 void TableMetadataUniqueCollection::__construct_impl(ThreadContext* ctx) throw() 
@@ -68,14 +68,23 @@ void TableMetadataUniqueCollection::calcPartitionCoverage(TablePartitionKeyColle
 		calcCover(unique, partitionKeys, ctx);
 	}
 }
+bool TableMetadataUniqueCollection::isFullCover(ThreadContext* ctx) throw() 
+{
+	return fullCover;
+}
 void TableMetadataUniqueCollection::calcCover(ScanUnique* unique, TablePartitionKeyCollection* partitionKeys, ThreadContext* ctx) throw() 
 {
+	this->fullCover = true;
 	List<TablePartitionKey>* keyslist = partitionKeys->getKeys(ctx);
 	int maxLoop = keyslist->size(ctx);
 	for(int i = 0; i != maxLoop; ++i)
 	{
 		TablePartitionKey* key = keyslist->get(i, ctx);
-		unique->calcCoverage(key, ctx);
+		bool cover = unique->calcCoverage(key, ctx);
+		if(!cover)
+		{
+			this->fullCover = false;
+		}
 	}
 }
 void TableMetadataUniqueCollection::__cleanUp(ThreadContext* ctx){

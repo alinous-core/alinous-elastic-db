@@ -9,8 +9,11 @@ class Long;}}
 namespace alinous {namespace remote {namespace region {namespace client {namespace command {namespace data {
 class ClientNetworkRecord;}}}}}}
 
-namespace alinous {namespace remote {namespace region {namespace server {namespace schema {
-class RegionShardTable;}}}}}
+namespace alinous {namespace remote {namespace region {namespace server {namespace schema {namespace strategy {
+class RegionPartitionTableAccess;}}}}}}
+
+namespace alinous {namespace remote {namespace region {namespace server {namespace schema {namespace strategy {
+class InsertTableStrategy;}}}}}}
 
 namespace java {namespace lang {
 class IObject;
@@ -28,7 +31,8 @@ using ::java::util::Iterator;
 using ::java::util::ArrayList;
 using ::alinous::remote::region::client::command::data::ClientNetworkRecord;
 using ::alinous::remote::region::server::schema::NodeReferenceManager;
-using ::alinous::remote::region::server::schema::RegionShardTable;
+using ::alinous::remote::region::server::schema::strategy::InsertTableStrategy;
+using ::alinous::remote::region::server::schema::strategy::RegionPartitionTableAccess;
 
 
 
@@ -44,6 +48,7 @@ private:
 	NodeReferenceManager* ref;
 	Long* trxId;
 	long long commitId;
+	InsertTableStrategy* strategy;
 public:
 	void prepareInsert(ArrayList<ClientNetworkRecord>* list, String* schema, String* table, ThreadContext* ctx) throw() ;
 	void tpcCommitInsert(ThreadContext* ctx) throw() ;

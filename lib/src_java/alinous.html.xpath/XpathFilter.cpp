@@ -104,7 +104,7 @@ bool XpathFilter::isIndex(ThreadContext* ctx) throw()
 		{
 			return true;
 		}
-		if((dynamic_cast<XpathFunction*>(param) != 0) && (static_cast<XpathFunction*>(param))->getName(ctx)->equals(ConstStr::getCNST_STR_1784(), ctx))
+		if((dynamic_cast<XpathFunction*>(param) != 0) && (static_cast<XpathFunction*>(param))->getName(ctx)->equals(ConstStr::getCNST_STR_1804(), ctx))
 		{
 			return true;
 		}
@@ -119,7 +119,7 @@ IXpathStatement* XpathFilter::getIndexStatement(ThreadContext* ctx) throw()
 String* XpathFilter::toString(ThreadContext* ctx) throw() 
 {
 	StringBuffer* buffer = (new(ctx) StringBuffer(ctx));
-	buffer->append(ConstStr::getCNST_STR_1000(), ctx);
+	buffer->append(ConstStr::getCNST_STR_1036(), ctx);
 	buffer->append(condition->toString(ctx), ctx);
 	buffer->append(ConstStr::getCNST_STR_564(), ctx);
 	return buffer->toString(ctx);

@@ -1,11 +1,11 @@
+template class ::java::util::Stack<::java::lang::String>;
 template class ::java::util::Stack<::alinous::compile::analyse::VariableDeclareHolder>;
 template class ::java::util::Stack<::alinous::compile::analyse::ExpressionStreamResult>;
 template class ::java::util::Stack<::alinous::compile::analyse::SubVariableDeclareHolder>;
+template class ::java::util::Stack<::alinous::runtime::parallel::AlinousThread>;
 template class ::java::util::Stack<::alinous::runtime::engine::SubStackFrame>;
 template class ::java::util::Stack<::alinous::runtime::engine::MainStackFrame>;
 template class ::java::util::Stack<::alinous::runtime::engine::ExpressionStreamBuffer>;
-template class ::java::util::Stack<::alinous::runtime::parallel::AlinousThread>;
-template class ::java::util::Stack<::java::lang::String>;
 template class ::java::util::Stack<::alinous::btree::IBTreeNode>;
 template class ::java::util::Stack<::alinous::btree::scan::INodeIterator>;
 template class ::java::util::Stack<::alinous::lock::ConcurrentGate>;

@@ -42,10 +42,12 @@ public:
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 private:
 	ArrayList<ScanUnique>* uniqueList;
+	bool fullCover;
 public:
 	void addUnique(ScanUnique* unique, ThreadContext* ctx) throw() ;
 	ArrayList<ScanUnique>* getUniqueList(ThreadContext* ctx) throw() ;
 	void calcPartitionCoverage(TablePartitionKeyCollection* partitionKeys, ThreadContext* ctx) throw() ;
+	bool isFullCover(ThreadContext* ctx) throw() ;
 private:
 	void calcCover(ScanUnique* unique, TablePartitionKeyCollection* partitionKeys, ThreadContext* ctx) throw() ;
 public:

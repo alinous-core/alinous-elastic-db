@@ -98,25 +98,25 @@ bool AbstractExpression::isSQLExp(ThreadContext* ctx) throw()
 }
 int AbstractExpression::operatorFromString(String* opStr, ThreadContext* ctx) throw() 
 {
-	if(opStr->equals(ConstStr::getCNST_STR_1002(), ctx))
+	if(opStr->equals(ConstStr::getCNST_STR_1038(), ctx))
 	{
 		return AbstractExpression::SHIFT_LEFT;
 	}
 		else 
 	{
-		if(opStr->equals(ConstStr::getCNST_STR_1003(), ctx))
+		if(opStr->equals(ConstStr::getCNST_STR_1039(), ctx))
 		{
 			return AbstractExpression::SHIFT_RIGHT;
 		}
 				else 
 		{
-			if(opStr->equals(ConstStr::getCNST_STR_1004(), ctx))
+			if(opStr->equals(ConstStr::getCNST_STR_1040(), ctx))
 			{
 				return AbstractExpression::SHIFT_RIGHT_UNSIGNED;
 			}
 						else 
 			{
-				if(opStr->equals(ConstStr::getCNST_STR_1005(), ctx))
+				if(opStr->equals(ConstStr::getCNST_STR_1041(), ctx))
 				{
 					return AbstractExpression::PLUS;
 				}
@@ -128,19 +128,19 @@ int AbstractExpression::operatorFromString(String* opStr, ThreadContext* ctx) th
 					}
 										else 
 					{
-						if(opStr->equals(ConstStr::getCNST_STR_1006(), ctx))
+						if(opStr->equals(ConstStr::getCNST_STR_1042(), ctx))
 						{
 							return AbstractExpression::MUL;
 						}
 												else 
 						{
-							if(opStr->equals(ConstStr::getCNST_STR_1007(), ctx))
+							if(opStr->equals(ConstStr::getCNST_STR_949(), ctx))
 							{
 								return AbstractExpression::DIV;
 							}
 														else 
 							{
-								if(opStr->equals(ConstStr::getCNST_STR_1008(), ctx))
+								if(opStr->equals(ConstStr::getCNST_STR_1043(), ctx))
 								{
 									return AbstractExpression::MOD;
 								}

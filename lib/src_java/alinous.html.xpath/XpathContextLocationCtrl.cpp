@@ -92,13 +92,13 @@ String* XpathContextLocationCtrl::toString(ThreadContext* ctx) throw()
 {
 	switch(this->type) {
 	case XpathContextLocationCtrl::CtrlType::all:
-		return ConstStr::getCNST_STR_1790();
+		return ConstStr::getCNST_STR_1810();
 	case XpathContextLocationCtrl::CtrlType::current:
-		return ConstStr::getCNST_STR_950();
+		return ConstStr::getCNST_STR_953();
 	case XpathContextLocationCtrl::CtrlType::parent:
-		return ConstStr::getCNST_STR_1246();
+		return ConstStr::getCNST_STR_952();
 	case XpathContextLocationCtrl::CtrlType::children:
-		return ConstStr::getCNST_STR_1007();
+		return ConstStr::getCNST_STR_949();
 	default:
 		break ;
 	}

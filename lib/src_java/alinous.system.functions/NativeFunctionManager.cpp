@@ -97,7 +97,7 @@ bool NativeFunctionManager::invoke(String* prefix, String* funcName, FunctionArg
 	int maxLoop = list->size(ctx);
 	if(maxLoop != arguments->getArgumentSize(ctx))
 	{
-		throw (new(ctx) AlinousException(ConstStr::getCNST_STR_1308()->clone(ctx)->append(funcName, ctx)->append(ConstStr::getCNST_STR_1309(), ctx), ctx));
+		throw (new(ctx) AlinousException(ConstStr::getCNST_STR_1018()->clone(ctx)->append(funcName, ctx)->append(ConstStr::getCNST_STR_1019(), ctx), ctx));
 	}
 	ArrayList<IAlinousVariable>* funcArgs = (new(ctx) ArrayList<IAlinousVariable>(ctx));
 	ArrayList<IExpression>* actualArgs = arguments->arguments;
@@ -116,7 +116,7 @@ bool NativeFunctionManager::invoke(IAlinousNativeFunction* func, FunctionArgumen
 	int maxLoop = list->size(ctx);
 	if(maxLoop != arguments->getArgumentSize(ctx))
 	{
-		throw (new(ctx) AlinousException(ConstStr::getCNST_STR_1308()->clone(ctx)->append(func->getName(ctx), ctx)->append(ConstStr::getCNST_STR_1309(), ctx), ctx));
+		throw (new(ctx) AlinousException(ConstStr::getCNST_STR_1018()->clone(ctx)->append(func->getName(ctx), ctx)->append(ConstStr::getCNST_STR_1019(), ctx), ctx));
 	}
 	ArrayList<IAlinousVariable>* funcArgs = (new(ctx) ArrayList<IAlinousVariable>(ctx));
 	ArrayList<IExpression>* actualArgs = arguments->arguments;

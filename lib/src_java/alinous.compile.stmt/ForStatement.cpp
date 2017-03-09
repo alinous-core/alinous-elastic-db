@@ -341,7 +341,7 @@ void ForStatement::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
 		if(el == nullptr || !((dynamic_cast<LabeledStatement*>(el) != 0)))
 		{
-			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1098(), ctx));
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1066(), ctx));
 		}
 		__GC_MV(this, &(this->label), static_cast<LabeledStatement*>(el), LabeledStatement);
 	}
@@ -351,7 +351,7 @@ void ForStatement::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
 		if(el == nullptr || !((dynamic_cast<IStatement*>(el) != 0)))
 		{
-			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1099(), ctx));
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1067(), ctx));
 		}
 		__GC_MV(this, &(this->initStatement), static_cast<IStatement*>(el), IStatement);
 	}
@@ -361,7 +361,7 @@ void ForStatement::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
 		if(el == nullptr || !((dynamic_cast<IExpression*>(el) != 0)))
 		{
-			throw (new(ctx) VariableException(ConstStr::getCNST_STR_980(), ctx));
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1027(), ctx));
 		}
 		__GC_MV(this, &(this->condition), static_cast<IExpression*>(el), IExpression);
 	}
@@ -371,7 +371,7 @@ void ForStatement::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
 		if(el == nullptr || !((dynamic_cast<ForUpdatePart*>(el) != 0)))
 		{
-			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1100(), ctx));
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1068(), ctx));
 		}
 		__GC_MV(this, &(this->updatePart), static_cast<ForUpdatePart*>(el), ForUpdatePart);
 	}
@@ -381,7 +381,7 @@ void ForStatement::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
 		if(el == nullptr || !((dynamic_cast<IStatement*>(el) != 0)))
 		{
-			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1099(), ctx));
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1067(), ctx));
 		}
 		__GC_MV(this, &(this->exec), static_cast<IStatement*>(el), IStatement);
 	}

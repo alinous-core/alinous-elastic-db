@@ -338,7 +338,7 @@ bool SQLJoinCondition::hasArrayResult(ThreadContext* ctx) throw()
 }
 ArrayList<VariantValue>* SQLJoinCondition::resolveSQLExpressionAsArray(ScanResultRecord* record, ScriptMachine* machine, bool debug, ThreadContext* ctx)
 {
-	throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1038(), ctx));
+	throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1118(), ctx));
 }
 String* SQLJoinCondition::getAsName(ThreadContext* ctx) throw() 
 {
@@ -360,7 +360,7 @@ void SQLJoinCondition::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
 		if(el == nullptr || !((dynamic_cast<ISQLExpression*>(el) != 0)))
 		{
-			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1046(), ctx));
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1126(), ctx));
 		}
 		__GC_MV(this, &(this->condition), static_cast<ISQLExpression*>(el), ISQLExpression);
 	}
@@ -378,15 +378,15 @@ void SQLJoinCondition::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 }
 int SQLJoinCondition::fileSize(ThreadContext* ctx)
 {
-	throw (new(ctx) AlinousNotSupportedException(ConstStr::getCNST_STR_1088(), ctx));
+	throw (new(ctx) AlinousNotSupportedException(ConstStr::getCNST_STR_1168(), ctx));
 }
 void SQLJoinCondition::toFileEntry(FileStorageEntryBuilder* builder, ThreadContext* ctx)
 {
-	throw (new(ctx) AlinousNotSupportedException(ConstStr::getCNST_STR_1088(), ctx));
+	throw (new(ctx) AlinousNotSupportedException(ConstStr::getCNST_STR_1168(), ctx));
 }
 void SQLJoinCondition::fromFileEntry(FileStorageEntryFetcher* fetcher, ThreadContext* ctx)
 {
-	throw (new(ctx) AlinousNotSupportedException(ConstStr::getCNST_STR_1088(), ctx));
+	throw (new(ctx) AlinousNotSupportedException(ConstStr::getCNST_STR_1168(), ctx));
 }
 void SQLJoinCondition::__cleanUp(ThreadContext* ctx){
 }

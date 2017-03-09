@@ -92,7 +92,7 @@ String* XpathAndStatement::toString(ThreadContext* ctx) throw()
 		}
 				else 
 		{
-			buffer->append(ConstStr::getCNST_STR_1789(), ctx);
+			buffer->append(ConstStr::getCNST_STR_1809(), ctx);
 		}
 		buffer->append(stmt, ctx);
 	}

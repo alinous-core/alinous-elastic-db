@@ -44,25 +44,25 @@ bool AlinousCore::__init_static_variables(){
 }
  AlinousCore::AlinousCore(String* home, bool debug, ThreadContext* ctx) throw()  : IObject(ctx), diskCache(nullptr), sqlFunctionManager(nullptr), webModuleManager(nullptr), debug(0), alinousHome(nullptr), config(nullptr), logger(nullptr), functionManager(nullptr), modulerepository(nullptr), databaseManager(nullptr), debugger(nullptr), runner(nullptr), monitor(nullptr), storageServers(GCUtils<List<RemoteTableStorageServer> >::ins(this, (new(ctx) ArrayList<RemoteTableStorageServer>(ctx)), ctx, __FILEW__, __LINE__, L"")), regionServers(GCUtils<List<NodeRegionServer> >::ins(this, (new(ctx) ArrayList<NodeRegionServer>(ctx)), ctx, __FILEW__, __LINE__, L""))
 {
-	if(home->endsWith(ConstStr::getCNST_STR_1007(), ctx))
+	if(home->endsWith(ConstStr::getCNST_STR_949(), ctx))
 	{
 		__GC_MV(this, &(this->alinousHome), home, String);
 	}
 		else 
 	{
-		__GC_MV(this, &(this->alinousHome), home->clone(ctx)->append(ConstStr::getCNST_STR_1007(), ctx), String);
+		__GC_MV(this, &(this->alinousHome), home->clone(ctx)->append(ConstStr::getCNST_STR_949(), ctx), String);
 	}
 	this->debug = debug;
 }
 void AlinousCore::__construct_impl(String* home, bool debug, ThreadContext* ctx) throw() 
 {
-	if(home->endsWith(ConstStr::getCNST_STR_1007(), ctx))
+	if(home->endsWith(ConstStr::getCNST_STR_949(), ctx))
 	{
 		__GC_MV(this, &(this->alinousHome), home, String);
 	}
 		else 
 	{
-		__GC_MV(this, &(this->alinousHome), home->clone(ctx)->append(ConstStr::getCNST_STR_1007(), ctx), String);
+		__GC_MV(this, &(this->alinousHome), home->clone(ctx)->append(ConstStr::getCNST_STR_949(), ctx), String);
 	}
 	this->debug = debug;
 }
@@ -230,7 +230,7 @@ void AlinousCore::initDistributedServerParts(ThreadContext* ctx)
 			}
 			catch(Throwable* e)
 			{
-				throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_1244()->clone(ctx)->append(monitorConf->getPort(ctx), ctx), ctx));
+				throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_950()->clone(ctx)->append(monitorConf->getPort(ctx), ctx), ctx));
 			}
 		}
 		__GC_MV(this, &(this->monitor), (new(ctx) TransactionMonitorServer(port, monitorConf->getMaxConnection(ctx), ctx))->init(monitorConf, ctx), TransactionMonitorServer);
@@ -274,15 +274,15 @@ void AlinousCore::initDistributedServerParts(ThreadContext* ctx)
 			}
 			catch(UnknownHostException* e)
 			{
-				throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_1245(), e, ctx));
+				throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_951(), e, ctx));
 			}
 			catch(IOException* e)
 			{
-				throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_1245(), e, ctx));
+				throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_951(), e, ctx));
 			}
 			catch(AlinousException* e)
 			{
-				throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_1245(), e, ctx));
+				throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_951(), e, ctx));
 			}
 		}
 		server->start(this->logger, ctx);

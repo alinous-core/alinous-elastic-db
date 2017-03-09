@@ -118,7 +118,7 @@ void AbstractRemoteClientTransaction::createTable(TableSchema* schema, ThreadCon
 {
 	if(schema->getregionName(ctx) == nullptr)
 	{
-		throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3593(), ctx));
+		throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3598(), ctx));
 	}
 	DbTransaction::createTable(schema, ctx);
 }
@@ -133,19 +133,19 @@ void AbstractRemoteClientTransaction::commitUpdateInsert(long long newCommitId, 
 			}
 			catch(IOException* e)
 			{
-				(new(ctx) AlinousDbException(ConstStr::getCNST_STR_1712(), e, ctx));
+				(new(ctx) AlinousDbException(ConstStr::getCNST_STR_1692(), e, ctx));
 			}
 			catch(InterruptedException* e)
 			{
-				(new(ctx) AlinousDbException(ConstStr::getCNST_STR_1712(), e, ctx));
+				(new(ctx) AlinousDbException(ConstStr::getCNST_STR_1692(), e, ctx));
 			}
 			catch(VariableException* e)
 			{
-				(new(ctx) AlinousDbException(ConstStr::getCNST_STR_1712(), e, ctx));
+				(new(ctx) AlinousDbException(ConstStr::getCNST_STR_1692(), e, ctx));
 			}
 			catch(BTreeException* e)
 			{
-				(new(ctx) AlinousDbException(ConstStr::getCNST_STR_1712(), e, ctx));
+				(new(ctx) AlinousDbException(ConstStr::getCNST_STR_1692(), e, ctx));
 			}
 		}
 	}

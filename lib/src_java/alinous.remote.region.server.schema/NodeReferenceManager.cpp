@@ -16,8 +16,8 @@
 #include "alinous.remote.region.server.schema/NodeReference.h"
 #include "alinous.remote.region.server.schema/NodeCluster.h"
 #include "alinous.remote.region.server.schema/NodeTableClaster.h"
+#include "alinous.remote.region.server.schema.strategy/RegionPartitionTableAccess.h"
 #include "alinous.remote.region.server.schema/NodeRegionSchema.h"
-#include "alinous.remote.region.server.schema/RegionShardTable.h"
 #include "alinous.remote.region.server.schema/NodeReferenceManager.h"
 
 namespace alinous {namespace remote {namespace region {namespace server {namespace schema {
@@ -67,7 +67,7 @@ long long NodeReferenceManager::getClientData(ClientStructureMetadata* data, Thr
 {
 	if(this->nodeReferences == nullptr)
 	{
-		throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3604(), ctx));
+		throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3611(), ctx));
 	}
 	{
 		SynchronizedBlockObj __synchronized_2(this->lock, ctx);
@@ -86,7 +86,7 @@ void NodeReferenceManager::syncSchemeTables(String* regionName, ThreadContext* c
 {
 	if(this->nodeReferences == nullptr)
 	{
-		throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3604(), ctx));
+		throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3611(), ctx));
 	}
 	SchemasStructureInfoData* data = this->nodeReferences->getSchemeInfo(regionName, ctx);
 	{
@@ -142,12 +142,12 @@ void NodeReferenceManager::createTable(TableMetadata* meta, ThreadContext* ctx)
 	List<NodeReference>* list = this->nodeReferences->getNodes(ctx);
 	if(list->isEmpty(ctx))
 	{
-		throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3605(), ctx));
+		throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3612(), ctx));
 	}
 	NodeReference* nodeRef = list->get(0, ctx);
 	nodeRef->createTable(meta, ctx);
 }
-RegionShardTable* NodeReferenceManager::getCluster(String* schemaName, String* tableName, ThreadContext* ctx) throw() 
+RegionPartitionTableAccess* NodeReferenceManager::getCluster(String* schemaName, String* tableName, ThreadContext* ctx) throw() 
 {
 	{
 		SynchronizedBlockObj __synchronized_2(this->lock, ctx);
@@ -161,7 +161,7 @@ RegionShardTable* NodeReferenceManager::getCluster(String* schemaName, String* t
 		{
 			return nullptr;
 		}
-		RegionShardTable* shard = (new(ctx) RegionShardTable(table, ctx));
+		RegionPartitionTableAccess* shard = (new(ctx) RegionPartitionTableAccess(table, ctx));
 		return shard;
 	}
 }

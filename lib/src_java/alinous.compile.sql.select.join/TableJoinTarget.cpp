@@ -279,7 +279,7 @@ bool TableJoinTarget::analyseSQLTables(SQLAnalyseContext* context, bool leftValu
 	String* table = nullptr;
 	switch(size) {
 	case 1:
-		schema = ConstStr::getCNST_STR_955();
+		schema = ConstStr::getCNST_STR_1086();
 		table = segments->get(0, ctx);
 		break ;
 	case 2:
@@ -287,14 +287,14 @@ bool TableJoinTarget::analyseSQLTables(SQLAnalyseContext* context, bool leftValu
 		table = segments->get(1, ctx);
 		break ;
 	default:
-		throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1089()->clone(ctx)->append(this->name->toString(ctx), ctx), ctx));
+		throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1169()->clone(ctx)->append(this->name->toString(ctx), ctx), ctx));
 		break;
 	}
 	AlinousDatabase* db = context->getDatabase(ctx);
 	IDatabaseTable* tableStore = db->getTable(schema, table, ctx);
 	if(tableStore == nullptr)
 	{
-		throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1089()->clone(ctx)->append(this->name->toString(ctx), ctx), ctx));
+		throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1169()->clone(ctx)->append(this->name->toString(ctx), ctx), ctx));
 	}
 	__GC_MV(this, &(this->scanMeta), (new(ctx) ScanTableMetadata(tableStore->getMetadata(ctx), this->asName, ctx)), ScanTableMetadata);
 	__GC_MV(this, &(this->tableId), (new(ctx) ScanTableIdentifier((new(ctx) TableAndSchema(schema, table, ctx)), this->asName, this->scanMeta->getColumns(ctx)->size(ctx), ctx)), ScanTableIdentifier);
@@ -347,7 +347,7 @@ void TableJoinTarget::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
 		if(el == nullptr || !((dynamic_cast<AlinousName*>(el) != 0)))
 		{
-			throw (new(ctx) VariableException(ConstStr::getCNST_STR_970(), ctx));
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1033(), ctx));
 		}
 		__GC_MV(this, &(this->name), static_cast<AlinousName*>(el), AlinousName);
 	}

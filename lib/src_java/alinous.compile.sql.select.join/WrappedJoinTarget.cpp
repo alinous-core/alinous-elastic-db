@@ -303,7 +303,7 @@ void WrappedJoinTarget::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
 		if(el == nullptr || !((dynamic_cast<IJoin*>(el) != 0)))
 		{
-			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1086(), ctx));
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1166(), ctx));
 		}
 		__GC_MV(this, &(this->join), static_cast<IJoin*>(el), IJoin);
 	}

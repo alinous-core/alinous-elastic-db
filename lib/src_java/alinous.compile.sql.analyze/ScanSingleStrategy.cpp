@@ -223,7 +223,7 @@ SingleTableIndexScanner* ScanSingleStrategy::getIndexScanner(DbTransaction* trx,
 		}
 		catch(AlinousDbException* e)
 		{
-			throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1052(), e, ctx));
+			throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1142(), e, ctx));
 		}
 	}
 	SingleTableIndexScanner* scanner = (new(ctx) SingleTableIndexScanner(ctx))->init(this->tableId, trx, index, tableStore, insertCacheindex, updateCacheindex, IndexScannerLockRequirement::INSTANT_SHARE, ctx);
@@ -262,7 +262,7 @@ ITableTargetScanner* ScanSingleStrategy::getFullScanScanner(DbTransaction* trx, 
 		}
 		catch(AlinousDbException* e)
 		{
-			throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1052(), e, ctx));
+			throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1142(), e, ctx));
 		}
 	}
 	SingleTableIndexScanner* scanner = (new(ctx) SingleTableIndexScanner(ctx))->init(this->tableId, trx, index, tableStore, insertCacheindex, updateCacheindex, IndexScannerLockRequirement::INSTANT_SHARE, ctx);
@@ -314,21 +314,21 @@ ITableTargetScanner* ScanSingleStrategy::necessaryCollectionScanner(ScriptMachin
 				nscan = initOnTheFlyScanner(machine, plan, trx, joinRequest, ncd, debug, ctx);
 				if(nscan == nullptr)
 				{
-					throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1053(), ctx));
+					throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1143(), ctx));
 				}
 				list->add(nscan, ctx);
 			}
 			catch(IOException* e)
 			{
-				throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1054(), e, ctx));
+				throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1144(), e, ctx));
 			}
 			catch(InterruptedException* e)
 			{
-				throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1054(), e, ctx));
+				throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1144(), e, ctx));
 			}
 			catch(AlinousDbException* e)
 			{
-				throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1054(), e, ctx));
+				throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1144(), e, ctx));
 			}
 		}
 	}
@@ -368,7 +368,7 @@ ITableTargetScanner* ScanSingleStrategy::initOnTheFlyScanner(ScriptMachine* mach
 		}
 		catch(AlinousDbException* e)
 		{
-			throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1052(), e, ctx));
+			throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1142(), e, ctx));
 		}
 	}
 	int matchMode = plan->getScanMode(ctx);
@@ -397,7 +397,7 @@ ITableTargetScanner* ScanSingleStrategy::initOnTheFlyScanner(ScriptMachine* mach
 			return listScanner;
 		}
 	default:
-		throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1055(), ctx));
+		throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1145(), ctx));
 		break;
 	}
 }

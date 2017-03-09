@@ -10,6 +10,9 @@
 #include "alinous.runtime.dom/VariableException.h"
 #include "alinous.remote.socket/NetworkBinaryBuffer.h"
 #include "alinous.remote.socket/ICommandData.h"
+#include "alinous.runtime.dom/IAlinousVariable.h"
+#include "alinous.runtime.variant/VariantValue.h"
+#include "alinous.db.table/TablePartitionKey.h"
 #include "alinous.db.table/TablePartitionRange.h"
 #include "alinous.db.table/TablePartitionRangeCollection.h"
 
@@ -30,7 +33,7 @@ bool TablePartitionRangeCollection::__init_static_variables(){
 	delete ctx;
 	return true;
 }
- TablePartitionRangeCollection::TablePartitionRangeCollection(ThreadContext* ctx) throw()  : IObject(ctx), ICommandData(ctx), ranges(GCUtils<ArrayList<TablePartitionRange> >::ins(this, (new(ctx) ArrayList<TablePartitionRange>(ctx)), ctx, __FILEW__, __LINE__, L""))
+ TablePartitionRangeCollection::TablePartitionRangeCollection(ThreadContext* ctx) throw()  : IObject(ctx), ICommandData(ctx), ranges(GCUtils<HashMap<String,TablePartitionRange> >::ins(this, (new(ctx) HashMap<String,TablePartitionRange>(ctx)), ctx, __FILEW__, __LINE__, L""))
 {
 }
 void TablePartitionRangeCollection::__construct_impl(ThreadContext* ctx) throw() 
@@ -52,21 +55,31 @@ void TablePartitionRangeCollection::__releaseRegerences(bool prepare, ThreadCont
 		return;
 	}
 }
+bool TablePartitionRangeCollection::isInRange(TablePartitionKey* key, List<VariantValue>* values, ThreadContext* ctx) throw() 
+{
+	String* colStr = key->getColumnString(ctx);
+	TablePartitionRange* range = this->ranges->get(colStr, ctx);
+	return false;
+}
 void TablePartitionRangeCollection::addRange(TablePartitionRange* value, ThreadContext* ctx) throw() 
 {
-	this->ranges->add(value, ctx);
+	TablePartitionKey* ptkey = value->getKey(ctx);
+	String* key = ptkey->getColumnString(ctx);
+	this->ranges->put(key, value, ctx);
 }
-ArrayList<TablePartitionRange>* TablePartitionRangeCollection::getRanges(ThreadContext* ctx) throw() 
+HashMap<String,TablePartitionRange>* TablePartitionRangeCollection::getRanges(ThreadContext* ctx) throw() 
 {
 	return ranges;
 }
 int TablePartitionRangeCollection::fileSize(ThreadContext* ctx)
 {
 	int total = 4;
-	int maxLoop = this->ranges->size(ctx);
-	for(int i = 0; i != maxLoop; ++i)
+	Iterator<String>* it = this->ranges->keySet(ctx)->iterator(ctx);
+	while(it->hasNext(ctx))
 	{
-		TablePartitionRange* range = this->ranges->get(i, ctx);
+		String* key = it->next(ctx);
+		TablePartitionRange* range = this->ranges->get(key, ctx);
+		total += 4 + key->length(ctx) * 2;
 		total += range->fileSize(ctx);
 	}
 	return total;
@@ -75,9 +88,12 @@ void TablePartitionRangeCollection::toFileEntry(FileStorageEntryBuilder* builder
 {
 	int maxLoop = this->ranges->size(ctx);
 	builder->putInt(maxLoop, ctx);
-	for(int i = 0; i != maxLoop; ++i)
+	Iterator<String>* it = this->ranges->keySet(ctx)->iterator(ctx);
+	while(it->hasNext(ctx))
 	{
-		TablePartitionRange* range = this->ranges->get(i, ctx);
+		String* key = it->next(ctx);
+		TablePartitionRange* range = this->ranges->get(key, ctx);
+		builder->putString(key, ctx);
 		range->toFileEntry(builder, ctx);
 	}
 }
@@ -86,17 +102,21 @@ void TablePartitionRangeCollection::readData(NetworkBinaryBuffer* buff, ThreadCo
 	int maxLoop = buff->getInt(ctx);
 	for(int i = 0; i != maxLoop; ++i)
 	{
+		String* key = buff->getString(ctx);
 		TablePartitionRange* range = TablePartitionRange::fromNetwork(buff, ctx);
-		this->ranges->add(range, ctx);
+		this->ranges->put(key, range, ctx);
 	}
 }
 void TablePartitionRangeCollection::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 {
 	int maxLoop = this->ranges->size(ctx);
 	buff->putInt(maxLoop, ctx);
-	for(int i = 0; i != maxLoop; ++i)
+	Iterator<String>* it = this->ranges->keySet(ctx)->iterator(ctx);
+	while(it->hasNext(ctx))
 	{
-		TablePartitionRange* range = this->ranges->get(i, ctx);
+		String* key = it->next(ctx);
+		TablePartitionRange* range = this->ranges->get(key, ctx);
+		buff->putString(key, ctx);
 		range->writeData(buff, ctx);
 	}
 }
@@ -106,8 +126,9 @@ TablePartitionRangeCollection* TablePartitionRangeCollection::loadFromFetcher(Fi
 	int maxLoop = fetcher->fetchInt(ctx);
 	for(int i = 0; i != maxLoop; ++i)
 	{
+		String* key = fetcher->fetchString(ctx);
 		TablePartitionRange* range = TablePartitionRange::loadFromFetcher(fetcher, ctx);
-		collection->ranges->add(range, ctx);
+		collection->ranges->put(key, range, ctx);
 	}
 	return collection;
 }

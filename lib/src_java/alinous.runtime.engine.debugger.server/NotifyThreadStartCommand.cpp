@@ -13,7 +13,7 @@ namespace alinous {namespace runtime {namespace engine {namespace debugger {name
 
 
 
-String* NotifyThreadStartCommand::CMD_STRING = ConstStr::getCNST_STR_1211();
+String* NotifyThreadStartCommand::CMD_STRING = ConstStr::getCNST_STR_1310();
 bool NotifyThreadStartCommand::__init_done = __init_static_variables();
 bool NotifyThreadStartCommand::__init_static_variables(){
 	Java2CppSystem::getSelf();
@@ -47,7 +47,7 @@ void NotifyThreadStartCommand::__releaseRegerences(bool prepare, ThreadContext* 
 }
 void NotifyThreadStartCommand::sendCommand(ICommandSender* notifier, ScriptMachine* context, ThreadContext* ctx)
 {
-	notifier->debugOut(ConstStr::getCNST_STR_1210()->clone(ctx)->append(this, ctx), ctx);
+	notifier->debugOut(ConstStr::getCNST_STR_1309()->clone(ctx)->append(this, ctx), ctx);
 }
 void NotifyThreadStartCommand::writeCommand(Writer* writer, ThreadContext* ctx)
 {

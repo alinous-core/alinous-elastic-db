@@ -45,8 +45,8 @@ class TableMetadata;}}}
 namespace alinous {namespace db {
 class AlinousDbException;}}
 
-namespace alinous {namespace remote {namespace region {namespace server {namespace schema {
-class RegionShardTable;}}}}}
+namespace alinous {namespace remote {namespace region {namespace server {namespace schema {namespace strategy {
+class RegionPartitionTableAccess;}}}}}}
 
 namespace alinous {namespace remote {namespace region {namespace server {namespace schema {
 class NodeTableClaster;}}}}}
@@ -83,6 +83,7 @@ using ::alinous::remote::monitor::RegionNodeInfo;
 using ::alinous::remote::monitor::client::command::data::RegionInfoData;
 using ::alinous::remote::region::client::command::data::ClientSchemaData;
 using ::alinous::remote::region::client::command::data::ClientStructureMetadata;
+using ::alinous::remote::region::server::schema::strategy::RegionPartitionTableAccess;
 using ::alinous::system::AlinousException;
 
 
@@ -108,7 +109,7 @@ public:
 	long long getSchemaVersion(ThreadContext* ctx) throw() ;
 	void createSchema(String* schemaName, ThreadContext* ctx);
 	void createTable(TableMetadata* meta, ThreadContext* ctx);
-	RegionShardTable* getCluster(String* schemaName, String* tableName, ThreadContext* ctx) throw() ;
+	RegionPartitionTableAccess* getCluster(String* schemaName, String* tableName, ThreadContext* ctx) throw() ;
 private:
 	void doSyncScmema(SchemasStructureInfoData* data, ThreadContext* ctx) throw() ;
 	NodeRegionSchema* getNodeRegionSchema(String* schemaName, ThreadContext* ctx) throw() ;

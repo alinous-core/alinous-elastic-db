@@ -310,7 +310,7 @@ void AbstractBooleanCollectionExpression::__readData(NetworkBinaryBuffer* buff, 
 		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
 		if(el == nullptr || !((dynamic_cast<IExpression*>(el) != 0)))
 		{
-			throw (new(ctx) VariableException(ConstStr::getCNST_STR_980(), ctx));
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1027(), ctx));
 		}
 		__GC_MV(this, &(this->first), static_cast<IExpression*>(el), IExpression);
 	}
@@ -320,7 +320,7 @@ void AbstractBooleanCollectionExpression::__readData(NetworkBinaryBuffer* buff, 
 		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
 		if(el == nullptr || !((dynamic_cast<BooleanSubExpression*>(el) != 0)))
 		{
-			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1009(), ctx));
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1055(), ctx));
 		}
 		this->expressions->add(static_cast<BooleanSubExpression*>(el), ctx);
 	}
@@ -383,7 +383,7 @@ void AbstractBooleanCollectionExpression::fromFileEntry(FileStorageEntryFetcher*
 		IExpression* el = IExpressionFactory::fromFetcher(fetcher, ctx);
 		if(el == nullptr || !((dynamic_cast<IExpression*>(el) != 0)))
 		{
-			throw (new(ctx) VariableException(ConstStr::getCNST_STR_980(), ctx));
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1027(), ctx));
 		}
 		__GC_MV(this, &(this->first), static_cast<IExpression*>(el), IExpression);
 	}
@@ -393,7 +393,7 @@ void AbstractBooleanCollectionExpression::fromFileEntry(FileStorageEntryFetcher*
 		IExpression* el = IExpressionFactory::fromFetcher(fetcher, ctx);
 		if(el == nullptr || !((dynamic_cast<BooleanSubExpression*>(el) != 0)))
 		{
-			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1009(), ctx));
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1055(), ctx));
 		}
 		this->expressions->add(static_cast<BooleanSubExpression*>(el), ctx);
 	}

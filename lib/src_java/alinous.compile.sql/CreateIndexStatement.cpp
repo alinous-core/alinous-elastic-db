@@ -249,7 +249,7 @@ TableAndSchema* CreateIndexStatement::getTableAndSchema(ThreadContext* ctx) thro
 	String* tblName = nullptr;
 	if(segments->size(ctx) == 1)
 	{
-		schemeName = ConstStr::getCNST_STR_955();
+		schemeName = ConstStr::getCNST_STR_1086();
 		tblName = segments->get(0, ctx);
 	}
 		else 
@@ -270,7 +270,7 @@ void CreateIndexStatement::validate(SourceValidator* validator, ThreadContext* c
 {
 	if(!((dynamic_cast<TableJoinTarget*>(table) != 0)))
 	{
-		validator->addError(ConstStr::getCNST_STR_1051(), this, ctx);
+		validator->addError(ConstStr::getCNST_STR_1131(), this, ctx);
 	}
 }
 bool CreateIndexStatement::visit(IAlinousElementVisitor* visitor, AbstractSrcElement* parent, ThreadContext* ctx) throw() 
@@ -336,7 +336,7 @@ void CreateIndexStatement::readData(NetworkBinaryBuffer* buff, ThreadContext* ct
 		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
 		if(el == nullptr || !((dynamic_cast<IJoinTarget*>(el) != 0)))
 		{
-			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1031(), ctx));
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1111(), ctx));
 		}
 		__GC_MV(this, &(this->name), static_cast<IJoinTarget*>(el), IJoinTarget);
 	}
@@ -346,7 +346,7 @@ void CreateIndexStatement::readData(NetworkBinaryBuffer* buff, ThreadContext* ct
 		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
 		if(el == nullptr || !((dynamic_cast<IJoinTarget*>(el) != 0)))
 		{
-			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1031(), ctx));
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1111(), ctx));
 		}
 		__GC_MV(this, &(this->table), static_cast<IJoinTarget*>(el), IJoinTarget);
 	}

@@ -260,7 +260,7 @@ bool ClassImplements::analyse(SrcAnalyseContext* context, bool leftValue, Thread
 	__GC_MV(this, &(this->analysedClazz), context->findClassDeclare(this->className, ctx), AlinousClass);
 	if(this->analysedClazz == nullptr)
 	{
-		context->addError(toString(ctx)->clone(ctx)->append(ConstStr::getCNST_STR_969(), ctx), this, ctx);
+		context->addError(toString(ctx)->clone(ctx)->append(ConstStr::getCNST_STR_1031(), ctx), this, ctx);
 	}
 	return true;
 }
@@ -296,7 +296,7 @@ void ClassImplements::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
 		if(el == nullptr || !((dynamic_cast<AlinousName*>(el) != 0)))
 		{
-			throw (new(ctx) VariableException(ConstStr::getCNST_STR_970(), ctx));
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1033(), ctx));
 		}
 		__GC_MV(this, &(this->className), static_cast<AlinousName*>(el), AlinousName);
 	}

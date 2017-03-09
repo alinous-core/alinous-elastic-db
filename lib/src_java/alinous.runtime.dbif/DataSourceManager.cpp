@@ -69,7 +69,7 @@ void DataSourceManager::init(ThreadContext* ctx)
 		IDatabaseDriver* driver = this->drivers->get(id, ctx);
 		if(driver != nullptr)
 		{
-			this->core->getLogger(ctx)->logWarning(ConstStr::getCNST_STR_1107()->clone(ctx)->append(id, ctx)->append(ConstStr::getCNST_STR_1108(), ctx), ctx);
+			this->core->getLogger(ctx)->logWarning(ConstStr::getCNST_STR_1180()->clone(ctx)->append(id, ctx)->append(ConstStr::getCNST_STR_1181(), ctx), ctx);
 			continue;
 		}
 		driver = (new(ctx) AlinousDatabaseHandler(instanceConfig, ctx));

@@ -80,7 +80,7 @@ DbRecordHashMainList* DbRecordHashMainList::init(int MAX_HASH, ThreadContext* ct
 {
 	if((MAX_HASH & 1) != 0)
 	{
-		throw (new(ctx) AlinousException(ConstStr::getCNST_STR_1669(), ctx));
+		throw (new(ctx) AlinousException(ConstStr::getCNST_STR_1757(), ctx));
 	}
 	this->MAX_HASH = MAX_HASH;
 	this->MAX_HASH_MASK = this->MAX_HASH - 1;

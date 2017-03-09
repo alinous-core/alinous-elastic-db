@@ -81,7 +81,7 @@ bool VariableException::__init_static_variables(){
 	delete ctx;
 	return true;
 }
- VariableException::VariableException(ThreadContext* ctx) throw()  : IObject(ctx), ExecutionException(ConstStr::getCNST_STR_1110(), ctx)
+ VariableException::VariableException(ThreadContext* ctx) throw()  : IObject(ctx), ExecutionException(ConstStr::getCNST_STR_1183(), ctx)
 {
 }
 void VariableException::__construct_impl(ThreadContext* ctx) throw() 

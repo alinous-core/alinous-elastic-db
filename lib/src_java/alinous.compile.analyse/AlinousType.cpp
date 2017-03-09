@@ -352,7 +352,7 @@ void AlinousType::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
 		if(el == nullptr || !((dynamic_cast<AlinousClass*>(el) != 0)))
 		{
-			throw (new(ctx) VariableException(ConstStr::getCNST_STR_952(), ctx));
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1065(), ctx));
 		}
 		__GC_MV(this, &(this->clazz), static_cast<AlinousClass*>(el), AlinousClass);
 	}
@@ -489,7 +489,7 @@ ITypedVariable* AlinousType::newBlankVariable(AlinousType* analysedType, ThreadC
 	default:
 		break ;
 	}
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_951(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1064(), ctx));
 }
 void AlinousType::__cleanUp(ThreadContext* ctx){
 }

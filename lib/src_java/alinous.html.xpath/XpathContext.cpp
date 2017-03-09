@@ -208,7 +208,7 @@ String* XpathContext::toString(ThreadContext* ctx) throw()
 	}
 	if(this->index != nullptr)
 	{
-		buffer->append(ConstStr::getCNST_STR_1000(), ctx);
+		buffer->append(ConstStr::getCNST_STR_1036(), ctx);
 		buffer->append(this->index->toString(ctx), ctx);
 		buffer->append(ConstStr::getCNST_STR_564(), ctx);
 	}
@@ -225,7 +225,7 @@ void XpathContext::setXpath(Xpath* xpath, ThreadContext* ctx) throw()
 bool XpathContext::matchIdentifier(XpathIdentifier* xpathId, DomNode* node, ThreadContext* ctx) throw() 
 {
 	String* id = xpathId->getId(ctx);
-	if(id->equals(ConstStr::getCNST_STR_1006(), ctx))
+	if(id->equals(ConstStr::getCNST_STR_1042(), ctx))
 	{
 		return true;
 	}
@@ -235,13 +235,13 @@ bool XpathContext::hasAttribute(AttributeIdentifier* attrId, DomNode* node, Thre
 {
 	String* attrIdStr = attrId->getId(ctx);
 	IArrayObject<Attribute>* nodeAttributes = node->getAttributes(ctx);
-	if(attrIdStr->equals(ConstStr::getCNST_STR_1006(), ctx) && nodeAttributes->length > 0)
+	if(attrIdStr->equals(ConstStr::getCNST_STR_1042(), ctx) && nodeAttributes->length > 0)
 	{
 		return true;
 	}
 		else 
 	{
-		if(attrIdStr->equals(ConstStr::getCNST_STR_1006(), ctx) && nodeAttributes->length == 0)
+		if(attrIdStr->equals(ConstStr::getCNST_STR_1042(), ctx) && nodeAttributes->length == 0)
 		{
 			return false;
 		}

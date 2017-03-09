@@ -425,7 +425,7 @@ bool InsertValues::hasArrayResult(ThreadContext* ctx) throw()
 }
 ArrayList<VariantValue>* InsertValues::resolveSQLExpressionAsArray(ScanResultRecord* record, ScriptMachine* machine, bool debug, ThreadContext* ctx)
 {
-	throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1038(), ctx));
+	throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1118(), ctx));
 }
 bool InsertValues::isSQLExp(ThreadContext* ctx) throw() 
 {
@@ -450,7 +450,7 @@ void InsertValues::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
 		if(el == nullptr || !((dynamic_cast<SQLExpressionList*>(el) != 0)))
 		{
-			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1039(), ctx));
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1119(), ctx));
 		}
 		__GC_MV(this, &(this->vlist), static_cast<SQLExpressionList*>(el), SQLExpressionList);
 	}
@@ -460,7 +460,7 @@ void InsertValues::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
 		if(el == nullptr || !((dynamic_cast<SQLExpressionStream*>(el) != 0)))
 		{
-			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1040(), ctx));
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1120(), ctx));
 		}
 		__GC_MV(this, &(this->domDesc), static_cast<SQLExpressionStream*>(el), SQLExpressionStream);
 	}
@@ -522,7 +522,7 @@ void InsertValues::fromFileEntry(FileStorageEntryFetcher* fetcher, ThreadContext
 		IExpression* exp = IExpressionFactory::fromFetcher(fetcher, ctx);
 		if(exp != nullptr || !((dynamic_cast<SQLExpressionList*>(exp) != 0)))
 		{
-			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_1040(), ctx));
+			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_1120(), ctx));
 		}
 		__GC_MV(this, &(this->vlist), static_cast<SQLExpressionList*>(exp), SQLExpressionList);
 	}
@@ -532,7 +532,7 @@ void InsertValues::fromFileEntry(FileStorageEntryFetcher* fetcher, ThreadContext
 		IExpression* exp = IExpressionFactory::fromFetcher(fetcher, ctx);
 		if(exp != nullptr || !((dynamic_cast<SQLExpressionStream*>(exp) != 0)))
 		{
-			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_1040(), ctx));
+			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_1120(), ctx));
 		}
 		__GC_MV(this, &(this->domDesc), static_cast<SQLExpressionStream*>(exp), SQLExpressionStream);
 	}

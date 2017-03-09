@@ -226,7 +226,7 @@ Xpath* AlinousXpathParser::xpath(ThreadContext* ctx)
 			return xpath;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1320(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1324(), ctx));
 }
 XpathContext* AlinousXpathParser::context(ThreadContext* ctx)
 {
@@ -293,7 +293,7 @@ XpathContext* AlinousXpathParser::context(ThreadContext* ctx)
 			return context;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1320(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1324(), ctx));
 }
 XpathContextLocation* AlinousXpathParser::location(ThreadContext* ctx)
 {
@@ -365,7 +365,7 @@ XpathContextLocation* AlinousXpathParser::location(ThreadContext* ctx)
 			return loc;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1320(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1324(), ctx));
 }
 IXpathStatement* AlinousXpathParser::filterindex(ThreadContext* ctx)
 {
@@ -378,7 +378,7 @@ IXpathStatement* AlinousXpathParser::filterindex(ThreadContext* ctx)
 			return p;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1320(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1324(), ctx));
 }
 XpathFilter* AlinousXpathParser::filter(ThreadContext* ctx)
 {
@@ -393,7 +393,7 @@ XpathFilter* AlinousXpathParser::filter(ThreadContext* ctx)
 			return filter;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1320(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1324(), ctx));
 }
 IXpathBooleanCondition* AlinousXpathParser::orStatement(ThreadContext* ctx)
 {
@@ -436,7 +436,7 @@ IXpathBooleanCondition* AlinousXpathParser::orStatement(ThreadContext* ctx)
 			return containerStmt;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1320(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1324(), ctx));
 }
 IXpathBooleanCondition* AlinousXpathParser::andStatement(ThreadContext* ctx)
 {
@@ -477,7 +477,7 @@ IXpathBooleanCondition* AlinousXpathParser::andStatement(ThreadContext* ctx)
 			return containerStmt;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1320(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1324(), ctx));
 }
 IXpathBooleanCondition* AlinousXpathParser::notStatement(ThreadContext* ctx)
 {
@@ -535,7 +535,7 @@ IXpathBooleanCondition* AlinousXpathParser::notStatement(ThreadContext* ctx)
 		throw (new(ctx) ParseException(ctx));
 		break;
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1320(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1324(), ctx));
 }
 IXpathBooleanCondition* AlinousXpathParser::compareStatement(ThreadContext* ctx)
 {
@@ -605,7 +605,7 @@ IXpathBooleanCondition* AlinousXpathParser::compareStatement(ThreadContext* ctx)
 			return compare;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1320(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1324(), ctx));
 }
 IXpathStatement* AlinousXpathParser::param(ThreadContext* ctx)
 {
@@ -653,7 +653,7 @@ IXpathStatement* AlinousXpathParser::param(ThreadContext* ctx)
 			return element;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1320(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1324(), ctx));
 }
 XpathFunction* AlinousXpathParser::xpathFunction(ThreadContext* ctx)
 {
@@ -707,7 +707,7 @@ XpathFunction* AlinousXpathParser::xpathFunction(ThreadContext* ctx)
 			return func;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1320(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1324(), ctx));
 }
 XpathReference* AlinousXpathParser::xpathReference(ThreadContext* ctx)
 {
@@ -720,7 +720,7 @@ XpathReference* AlinousXpathParser::xpathReference(ThreadContext* ctx)
 			return ref;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1320(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1324(), ctx));
 }
 XpathNumber* AlinousXpathParser::xpathNumber(ThreadContext* ctx)
 {
@@ -733,7 +733,7 @@ XpathNumber* AlinousXpathParser::xpathNumber(ThreadContext* ctx)
 			return num;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1320(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1324(), ctx));
 }
 XpathString* AlinousXpathParser::xpathString(ThreadContext* ctx)
 {
@@ -746,7 +746,7 @@ XpathString* AlinousXpathParser::xpathString(ThreadContext* ctx)
 			return str;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1320(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1324(), ctx));
 }
 AttributeIdentifier* AlinousXpathParser::attributeIdentifier(ThreadContext* ctx)
 {
@@ -760,7 +760,7 @@ AttributeIdentifier* AlinousXpathParser::attributeIdentifier(ThreadContext* ctx)
 			return aid;
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1320(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1324(), ctx));
 }
 XpathIdentifier* AlinousXpathParser::identifier(ThreadContext* ctx)
 {
@@ -787,7 +787,7 @@ XpathIdentifier* AlinousXpathParser::identifier(ThreadContext* ctx)
 			return (new(ctx) XpathIdentifier(t->image, ctx));
 		}
 	}
-	throw (new(ctx) Error(ConstStr::getCNST_STR_1320(), ctx));
+	throw (new(ctx) Error(ConstStr::getCNST_STR_1324(), ctx));
 }
 void AlinousXpathParser::ReInit(java::io::InputStream* stream, ThreadContext* ctx)
 {

@@ -22,7 +22,7 @@ bool ParseException::__init_static_variables(){
 	delete ctx;
 	return true;
 }
- ParseException::ParseException(Token* currentTokenVal, IArrayObject<IArrayObjectPrimitive<long long>>* expectedTokenSequencesVal, IArrayObject<String>* tokenImageVal, ThreadContext* ctx) throw()  : IObject(ctx), Exception(initialise(currentTokenVal, expectedTokenSequencesVal, tokenImageVal, ctx), ctx), currentToken(nullptr), expectedTokenSequences(nullptr), tokenImage(nullptr), eol(__GC_INS(this, System::getProperty(ConstStr::getCNST_STR_1322(), ConstStr::getCNST_STR_1214(), ctx), String))
+ ParseException::ParseException(Token* currentTokenVal, IArrayObject<IArrayObjectPrimitive<long long>>* expectedTokenSequencesVal, IArrayObject<String>* tokenImageVal, ThreadContext* ctx) throw()  : IObject(ctx), Exception(initialise(currentTokenVal, expectedTokenSequencesVal, tokenImageVal, ctx), ctx), currentToken(nullptr), expectedTokenSequences(nullptr), tokenImage(nullptr), eol(__GC_INS(this, System::getProperty(ConstStr::getCNST_STR_1326(), ConstStr::getCNST_STR_1313(), ctx), String))
 {
 	__GC_MV(this, &(currentToken), currentTokenVal, Token);
 	GCUtils<IArrayObject<IArrayObjectPrimitive<long long>> >::mv(this, &(expectedTokenSequences), expectedTokenSequencesVal, ctx);
@@ -34,13 +34,13 @@ void ParseException::__construct_impl(Token* currentTokenVal, IArrayObject<IArra
 	GCUtils<IArrayObject<IArrayObjectPrimitive<long long>> >::mv(this, &(expectedTokenSequences), expectedTokenSequencesVal, ctx);
 	__GC_MV(this, &(tokenImage), tokenImageVal, IArrayObject<String>);
 }
- ParseException::ParseException(ThreadContext* ctx) throw()  : IObject(ctx), Exception(ctx), currentToken(nullptr), expectedTokenSequences(nullptr), tokenImage(nullptr), eol(__GC_INS(this, System::getProperty(ConstStr::getCNST_STR_1322(), ConstStr::getCNST_STR_1214(), ctx), String))
+ ParseException::ParseException(ThreadContext* ctx) throw()  : IObject(ctx), Exception(ctx), currentToken(nullptr), expectedTokenSequences(nullptr), tokenImage(nullptr), eol(__GC_INS(this, System::getProperty(ConstStr::getCNST_STR_1326(), ConstStr::getCNST_STR_1313(), ctx), String))
 {
 }
 void ParseException::__construct_impl(ThreadContext* ctx) throw() 
 {
 }
- ParseException::ParseException(String* message, ThreadContext* ctx) throw()  : IObject(ctx), Exception(message, ctx), currentToken(nullptr), expectedTokenSequences(nullptr), tokenImage(nullptr), eol(__GC_INS(this, System::getProperty(ConstStr::getCNST_STR_1322(), ConstStr::getCNST_STR_1214(), ctx), String))
+ ParseException::ParseException(String* message, ThreadContext* ctx) throw()  : IObject(ctx), Exception(message, ctx), currentToken(nullptr), expectedTokenSequences(nullptr), tokenImage(nullptr), eol(__GC_INS(this, System::getProperty(ConstStr::getCNST_STR_1326(), ConstStr::getCNST_STR_1313(), ctx), String))
 {
 }
 void ParseException::__construct_impl(String* message, ThreadContext* ctx) throw() 
@@ -97,7 +97,7 @@ String* ParseException::add_escapes(String* str, ThreadContext* ctx) throw()
 			retval->append(ConstStr::getCNST_STR_123(), ctx);
 			continue;
 		case L'\'':
-			retval->append(ConstStr::getCNST_STR_1311(), ctx);
+			retval->append(ConstStr::getCNST_STR_1315(), ctx);
 			continue;
 		case L'\\':
 			retval->append(ConstStr::getCNST_STR_124(), ctx);
@@ -107,7 +107,7 @@ String* ParseException::add_escapes(String* str, ThreadContext* ctx) throw()
 			if((ch) < (wchar_t)0x20 || ch > (wchar_t)0x7e)
 			{
 				String* s = ConstStr::getCNST_STR_384()->clone(ctx)->append(Integer::toString((int)ch, 16, ctx), ctx);
-				retval->append(ConstStr::getCNST_STR_1312()->clone(ctx)->append(s->substring(s->length(ctx) - 4, s->length(ctx), ctx), ctx), ctx);
+				retval->append(ConstStr::getCNST_STR_1316()->clone(ctx)->append(s->substring(s->length(ctx) - 4, s->length(ctx), ctx), ctx), ctx);
 			}
 						else 
 			{
@@ -121,7 +121,7 @@ String* ParseException::add_escapes(String* str, ThreadContext* ctx) throw()
 }
 String* ParseException::initialise(Token* currentToken, IArrayObject<IArrayObjectPrimitive<long long>>* expectedTokenSequences, IArrayObject<String>* tokenImage, ThreadContext* ctx) throw() 
 {
-	String* eol = System::getProperty(ConstStr::getCNST_STR_1322(), ConstStr::getCNST_STR_1214(), ctx);
+	String* eol = System::getProperty(ConstStr::getCNST_STR_1326(), ConstStr::getCNST_STR_1313(), ctx);
 	StringBuffer* expected = (new(ctx) StringBuffer(ctx));
 	long long maxSize = 0;
 	for(long long i = 0; i < (long long)expectedTokenSequences->length; i ++ )
@@ -136,11 +136,11 @@ String* ParseException::initialise(Token* currentToken, IArrayObject<IArrayObjec
 		}
 		if(expectedTokenSequences->get(i)->get(expectedTokenSequences->get(i)->length - 1) != (long long)0)
 		{
-			expected->append(ConstStr::getCNST_STR_1323(), ctx);
+			expected->append(ConstStr::getCNST_STR_1327(), ctx);
 		}
-		expected->append(eol, ctx)->append(ConstStr::getCNST_STR_1324(), ctx);
+		expected->append(eol, ctx)->append(ConstStr::getCNST_STR_1328(), ctx);
 	}
-	String* retval = ConstStr::getCNST_STR_1325();
+	String* retval = ConstStr::getCNST_STR_1329();
 	Token* tok = currentToken->next;
 	for(long long i = 0; i < maxSize; i ++ )
 	{
@@ -154,20 +154,20 @@ String* ParseException::initialise(Token* currentToken, IArrayObject<IArrayObjec
 			break ;
 		}
 		retval->append(ConstStr::getCNST_STR_380()->clone(ctx)->append(tokenImage->get(tok->kind), ctx), ctx);
-		retval->append(ConstStr::getCNST_STR_1326(), ctx);
+		retval->append(ConstStr::getCNST_STR_1330(), ctx);
 		retval->append(add_escapes(tok->image, ctx), ctx);
-		retval->append(ConstStr::getCNST_STR_1326(), ctx);
+		retval->append(ConstStr::getCNST_STR_1330(), ctx);
 		tok = tok->next;
 	}
-	retval->append(ConstStr::getCNST_STR_1327()->clone(ctx)->append(currentToken->next->beginLine, ctx)->append(ConstStr::getCNST_STR_1314(), ctx)->append(currentToken->next->beginColumn, ctx), ctx);
-	retval->append(ConstStr::getCNST_STR_950()->clone(ctx)->append(eol, ctx), ctx);
+	retval->append(ConstStr::getCNST_STR_1331()->clone(ctx)->append(currentToken->next->beginLine, ctx)->append(ConstStr::getCNST_STR_1318(), ctx)->append(currentToken->next->beginColumn, ctx), ctx);
+	retval->append(ConstStr::getCNST_STR_953()->clone(ctx)->append(eol, ctx), ctx);
 	if(expectedTokenSequences->length == 1)
 	{
-		retval->append(ConstStr::getCNST_STR_1328()->clone(ctx)->append(eol, ctx)->append(ConstStr::getCNST_STR_1324(), ctx), ctx);
+		retval->append(ConstStr::getCNST_STR_1332()->clone(ctx)->append(eol, ctx)->append(ConstStr::getCNST_STR_1328(), ctx), ctx);
 	}
 		else 
 	{
-		retval->append(ConstStr::getCNST_STR_1329()->clone(ctx)->append(eol, ctx)->append(ConstStr::getCNST_STR_1324(), ctx), ctx);
+		retval->append(ConstStr::getCNST_STR_1333()->clone(ctx)->append(eol, ctx)->append(ConstStr::getCNST_STR_1328(), ctx), ctx);
 	}
 	retval->append(expected->toString(ctx), ctx);
 	return retval;

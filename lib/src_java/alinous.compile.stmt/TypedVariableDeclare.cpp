@@ -253,73 +253,73 @@ void TypedVariableDeclare::setTypeName(AlinousName* typeName, ThreadContext* ctx
 {
 	__GC_MV(this, &(this->typeName), typeName, AlinousName);
 	String* strName = this->typeName->toString(ctx);
-	if(strName->equals(ConstStr::getCNST_STR_957(), ctx))
+	if(strName->equals(ConstStr::getCNST_STR_1070(), ctx))
 	{
 		this->typeEnum = VariableType::BOOL_TYPE;
 	}
 		else 
 	{
-		if(strName->equals(ConstStr::getCNST_STR_961(), ctx))
+		if(strName->equals(ConstStr::getCNST_STR_1071(), ctx))
 		{
 			this->typeEnum = VariableType::INT_TYPE;
 		}
 				else 
 		{
-			if(strName->equals(ConstStr::getCNST_STR_965(), ctx))
+			if(strName->equals(ConstStr::getCNST_STR_1072(), ctx))
 			{
 				this->typeEnum = VariableType::STRING_TYPE;
 			}
 						else 
 			{
-				if(strName->equals(ConstStr::getCNST_STR_958(), ctx))
+				if(strName->equals(ConstStr::getCNST_STR_1073(), ctx))
 				{
 					this->typeEnum = VariableType::BYTE_TYPE;
 				}
 								else 
 				{
-					if(strName->equals(ConstStr::getCNST_STR_959(), ctx))
+					if(strName->equals(ConstStr::getCNST_STR_1074(), ctx))
 					{
 						this->typeEnum = VariableType::SHORT_TYPE;
 					}
 										else 
 					{
-						if(strName->equals(ConstStr::getCNST_STR_960(), ctx))
+						if(strName->equals(ConstStr::getCNST_STR_1075(), ctx))
 						{
 							this->typeEnum = VariableType::CHAR_TYPE;
 						}
 												else 
 						{
-							if(strName->equals(ConstStr::getCNST_STR_962(), ctx))
+							if(strName->equals(ConstStr::getCNST_STR_1076(), ctx))
 							{
 								this->typeEnum = VariableType::LONG_TYPE;
 							}
 														else 
 							{
-								if(strName->equals(ConstStr::getCNST_STR_964(), ctx))
+								if(strName->equals(ConstStr::getCNST_STR_1077(), ctx))
 								{
 									this->typeEnum = VariableType::FLOAT_TYPE;
 								}
 																else 
 								{
-									if(strName->equals(ConstStr::getCNST_STR_963(), ctx))
+									if(strName->equals(ConstStr::getCNST_STR_1078(), ctx))
 									{
 										this->typeEnum = VariableType::DOUBLE_TYPE;
 									}
 																		else 
 									{
-										if(strName->equals(ConstStr::getCNST_STR_967(), ctx))
+										if(strName->equals(ConstStr::getCNST_STR_1079(), ctx))
 										{
 											this->typeEnum = VariableType::TIMESTAMP;
 										}
 																				else 
 										{
-											if(strName->equals(ConstStr::getCNST_STR_966(), ctx))
+											if(strName->equals(ConstStr::getCNST_STR_1080(), ctx))
 											{
 												this->typeEnum = VariableType::TIME;
 											}
 																						else 
 											{
-												if(strName->equals(ConstStr::getCNST_STR_968(), ctx))
+												if(strName->equals(ConstStr::getCNST_STR_1081(), ctx))
 												{
 													this->typeEnum = VariableType::BIGDECIMAL;
 												}
@@ -351,7 +351,7 @@ void TypedVariableDeclare::validate(SourceValidator* validator, ThreadContext* c
 {
 	if(this->name->getSegments(ctx)->size(ctx) != 1)
 	{
-		validator->addError(ConstStr::getCNST_STR_1102(), this->name, ctx);
+		validator->addError(ConstStr::getCNST_STR_1082(), this->name, ctx);
 	}
 }
 bool TypedVariableDeclare::visit(IAlinousElementVisitor* visitor, AbstractSrcElement* parent, ThreadContext* ctx) throw() 
@@ -422,7 +422,7 @@ bool TypedVariableDeclare::analyse(SrcAnalyseContext* context, bool leftValue, T
 		clazz = context->findClassDeclare(this->typeName, ctx);
 		if(clazz == nullptr)
 		{
-			context->addError(this->typeName->toString(ctx)->clone(ctx)->append(ConstStr::getCNST_STR_969(), ctx), this, ctx);
+			context->addError(this->typeName->toString(ctx)->clone(ctx)->append(ConstStr::getCNST_STR_1031(), ctx), this, ctx);
 		}
 				else 
 		{
@@ -477,7 +477,7 @@ void TypedVariableDeclare::readData(NetworkBinaryBuffer* buff, ThreadContext* ct
 		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
 		if(el == nullptr || !((dynamic_cast<AlinousName*>(el) != 0)))
 		{
-			throw (new(ctx) VariableException(ConstStr::getCNST_STR_970(), ctx));
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1033(), ctx));
 		}
 		__GC_MV(this, &(this->typeName), static_cast<AlinousName*>(el), AlinousName);
 	}
@@ -488,7 +488,7 @@ void TypedVariableDeclare::readData(NetworkBinaryBuffer* buff, ThreadContext* ct
 		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
 		if(el == nullptr || !((dynamic_cast<IExpression*>(el) != 0)))
 		{
-			throw (new(ctx) VariableException(ConstStr::getCNST_STR_980(), ctx));
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1027(), ctx));
 		}
 		__GC_MV(this, &(this->initExp), static_cast<IExpression*>(el), IExpression);
 	}

@@ -3,8 +3,13 @@
 
 #include "alinous.buffer.storage/FileStorageEntryBuilder.h"
 #include "alinous.buffer.storage/FileStorageEntryFetcher.h"
+#include "alinous.btree/IValueFetcher.h"
+#include "alinous.btree/IBTreeValue.h"
 #include "alinous.remote.socket/NetworkBinaryBuffer.h"
 #include "alinous.remote.socket/ICommandData.h"
+#include "alinous.runtime.dom/IAlinousVariable.h"
+#include "alinous.runtime.variant/VariantValue.h"
+#include "alinous.db.table/IDatabaseRecord.h"
 #include "alinous.db.table/TableColumnMetadata.h"
 #include "alinous.db.table/TableMetadataUnique.h"
 #include "alinous.db.table/TablePartitionKey.h"
@@ -52,6 +57,19 @@ void ScanUnique::__releaseRegerences(bool prepare, ThreadContext* ctx) throw()
 	}
 	TableMetadataUnique::__releaseRegerences(true, ctx);
 }
+List<VariantValue>* ScanUnique::makeValues(IDatabaseRecord* record, ThreadContext* ctx) throw() 
+{
+	List<VariantValue>* values = (new(ctx) ArrayList<VariantValue>(ctx));
+	int maxLoop = this->uniqueColList->size(ctx);
+	for(int i = 0; i != maxLoop; ++i)
+	{
+		TableColumnMetadata* col = this->uniqueColList->get(i, ctx);
+		int colOrder = col->columnOrder;
+		VariantValue* vv = record->getColumnValue(colOrder, ctx);
+		values->add(vv, ctx);
+	}
+	return values;
+}
 TablePartitionKey* ScanUnique::getCoveredKey(ThreadContext* ctx) throw() 
 {
 	return coveredKey;
@@ -68,7 +86,7 @@ int ScanUnique::getMatchLength(ThreadContext* ctx) throw()
 {
 	return matchLength;
 }
-void ScanUnique::calcCoverage(TablePartitionKey* key, ThreadContext* ctx) throw() 
+bool ScanUnique::calcCoverage(TablePartitionKey* key, ThreadContext* ctx) throw() 
 {
 	ArrayList<TableColumnMetadata>* keys = key->getKeys(ctx);
 	int matchLength = 0;
@@ -88,6 +106,7 @@ void ScanUnique::calcCoverage(TablePartitionKey* key, ThreadContext* ctx) throw(
 		this->matchLength = matchLength;
 		__GC_MV(this, &(this->coveredKey), key, TablePartitionKey);
 	}
+	return this->coveredKey != nullptr;
 }
 String* ScanUnique::getTableFullName(ThreadContext* ctx) throw() 
 {

@@ -89,7 +89,7 @@ MatchCandidatesCollection* MatchCandidatesCollection::filterByIndex(IXpathStatem
 	if((dynamic_cast<XpathFunction*>(indexStmt) != 0))
 	{
 		XpathFunction* f = static_cast<XpathFunction*>(indexStmt);
-		if(f->getName(ctx)->equals(ConstStr::getCNST_STR_1784(), ctx))
+		if(f->getName(ctx)->equals(ConstStr::getCNST_STR_1804(), ctx))
 		{
 			return filterByLast(ctx);
 		}
@@ -97,7 +97,7 @@ MatchCandidatesCollection* MatchCandidatesCollection::filterByIndex(IXpathStatem
 	IVariableValue* val = indexStmt->getValue(document, document, ctx);
 	if(!((dynamic_cast<NumberValue*>(val) != 0)))
 	{
-		throw (new(ctx) MatchingException(ConstStr::getCNST_STR_1791(), ctx));
+		throw (new(ctx) MatchingException(ConstStr::getCNST_STR_1811(), ctx));
 	}
 	index = (static_cast<NumberValue*>(val))->getValue(ctx) - 1;
 	return filterByindex(index, ctx);
@@ -116,7 +116,7 @@ String* MatchCandidatesCollection::toString(ThreadContext* ctx) throw()
 		}
 				else 
 		{
-			buff->append(ConstStr::getCNST_STR_1214(), ctx);
+			buff->append(ConstStr::getCNST_STR_1313(), ctx);
 		}
 		buff->append(candidate->toString(ctx), ctx);
 	}

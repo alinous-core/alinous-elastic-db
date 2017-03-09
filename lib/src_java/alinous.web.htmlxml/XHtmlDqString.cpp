@@ -72,9 +72,9 @@ bool XHtmlDqString::isDinamicAll(ThreadContext* ctx) throw()
 }
 void XHtmlDqString::serialize(SerializeContext* context, ThreadContext* ctx)
 {
-	context->addStaticString(ConstStr::getCNST_STR_1317(), ctx);
+	context->addStaticString(ConstStr::getCNST_STR_1321(), ctx);
 	context->addParts(this->parts, ctx);
-	context->addStaticString(ConstStr::getCNST_STR_1317(), ctx);
+	context->addStaticString(ConstStr::getCNST_STR_1321(), ctx);
 }
 String* XHtmlDqString::execute(ScriptMachine* machine, bool debug, ThreadContext* ctx)
 {
@@ -85,7 +85,7 @@ String* XHtmlDqString::toString(ThreadContext* ctx) throw()
 	StringBuffer* buff = (new(ctx) StringBuffer(ctx));
 	if(this->value != nullptr)
 	{
-		buff->append(ConstStr::getCNST_STR_1317(), ctx)->append(this->value->toString(ctx), ctx)->append(ConstStr::getCNST_STR_1317(), ctx);
+		buff->append(ConstStr::getCNST_STR_1321(), ctx)->append(this->value->toString(ctx), ctx)->append(ConstStr::getCNST_STR_1321(), ctx);
 	}
 	return buff->toString(ctx);
 }

@@ -351,7 +351,7 @@ void ClassMethodFunction::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx
 		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
 		if(el == nullptr || !((dynamic_cast<AlinousFunction*>(el) != 0)))
 		{
-			throw (new(ctx) VariableException(ConstStr::getCNST_STR_977(), ctx));
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1094(), ctx));
 		}
 		__GC_MV(this, &(this->func), static_cast<AlinousFunction*>(el), AlinousFunction);
 	}
@@ -363,7 +363,7 @@ void ClassMethodFunction::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx
 		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
 		if(el == nullptr || !((dynamic_cast<VirtualTable*>(el) != 0)))
 		{
-			throw (new(ctx) VariableException(ConstStr::getCNST_STR_978(), ctx));
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1095(), ctx));
 		}
 		__GC_MV(this, &(this->vtable), static_cast<VirtualTable*>(el), VirtualTable);
 	}
@@ -373,7 +373,7 @@ void ClassMethodFunction::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx
 		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
 		if(el == nullptr || !((dynamic_cast<ClassMethodFunction*>(el) != 0)))
 		{
-			throw (new(ctx) VariableException(ConstStr::getCNST_STR_971(), ctx));
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1088(), ctx));
 		}
 		__GC_MV(this, &(this->superConstructor), static_cast<ClassMethodFunction*>(el), ClassMethodFunction);
 	}

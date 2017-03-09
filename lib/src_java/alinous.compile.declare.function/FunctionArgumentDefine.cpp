@@ -304,7 +304,7 @@ void FunctionArgumentDefine::putArgument(ScriptMachine* machine, MainStackFrame*
 	case FunctionArgumentDefine::FunctionArgumentType::DOM_ARRAY_VARIABLE:
 		if(variable->getVariableClass(ctx) != IAlinousVariable::CLASS_DOM || (static_cast<IDomVariable*>(variable))->getDomType(ctx) != IDomVariable::TYPE_ARRAY)
 		{
-			throw (new(ctx) VariableException(ConstStr::getCNST_STR_988(), ctx));
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1103(), ctx));
 		}
 		frame->putVariable(machine, this->domDescriptor, static_cast<IDomVariable*>(variable), debug, ctx);
 		break ;
@@ -456,7 +456,7 @@ void FunctionArgumentDefine::putArgument(ScriptMachine* machine, MainStackFrame*
 	default:
 		if(!((dynamic_cast<IAlinousClassVariable*>(variable) != 0)))
 		{
-			throw (new(ctx) VariableException(ConstStr::getCNST_STR_989(), ctx));
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1104(), ctx));
 		}
 		{
 			try
@@ -475,7 +475,7 @@ FunctionArgumentDefine::FunctionArgumentType FunctionArgumentDefine::getVariable
 {
 	if(this->domDescriptor != nullptr)
 	{
-		if(this->domDescriptor->getPrefix(ctx)->equals(ConstStr::getCNST_STR_990(), ctx))
+		if(this->domDescriptor->getPrefix(ctx)->equals(ConstStr::getCNST_STR_1105(), ctx))
 		{
 			return FunctionArgumentType::DOM_VARIABLE;
 		}
@@ -485,61 +485,61 @@ FunctionArgumentDefine::FunctionArgumentType FunctionArgumentDefine::getVariable
 		}
 	}
 	String* strName = this->type->toString(ctx);
-	if(strName->equals(ConstStr::getCNST_STR_957(), ctx))
+	if(strName->equals(ConstStr::getCNST_STR_1070(), ctx))
 	{
 		return FunctionArgumentType::BOOL_TYPE;
 	}
 		else 
 	{
-		if(strName->equals(ConstStr::getCNST_STR_961(), ctx))
+		if(strName->equals(ConstStr::getCNST_STR_1071(), ctx))
 		{
 			return FunctionArgumentType::INT_TYPE;
 		}
 				else 
 		{
-			if(strName->equals(ConstStr::getCNST_STR_965(), ctx))
+			if(strName->equals(ConstStr::getCNST_STR_1072(), ctx))
 			{
 				return FunctionArgumentType::STRING_TYPE;
 			}
 						else 
 			{
-				if(strName->equals(ConstStr::getCNST_STR_965(), ctx))
+				if(strName->equals(ConstStr::getCNST_STR_1072(), ctx))
 				{
 					return FunctionArgumentType::STRING_TYPE;
 				}
 								else 
 				{
-					if(strName->equals(ConstStr::getCNST_STR_958(), ctx))
+					if(strName->equals(ConstStr::getCNST_STR_1073(), ctx))
 					{
 						return FunctionArgumentType::BYTE_TYPE;
 					}
 										else 
 					{
-						if(strName->equals(ConstStr::getCNST_STR_959(), ctx))
+						if(strName->equals(ConstStr::getCNST_STR_1074(), ctx))
 						{
 							return FunctionArgumentType::SHORT_TYPE;
 						}
 												else 
 						{
-							if(strName->equals(ConstStr::getCNST_STR_960(), ctx))
+							if(strName->equals(ConstStr::getCNST_STR_1075(), ctx))
 							{
 								return FunctionArgumentType::CHAR_TYPE;
 							}
 														else 
 							{
-								if(strName->equals(ConstStr::getCNST_STR_962(), ctx))
+								if(strName->equals(ConstStr::getCNST_STR_1076(), ctx))
 								{
 									return FunctionArgumentType::LONG_TYPE;
 								}
 																else 
 								{
-									if(strName->equals(ConstStr::getCNST_STR_964(), ctx))
+									if(strName->equals(ConstStr::getCNST_STR_1077(), ctx))
 									{
 										return FunctionArgumentType::FLOAT_TYPE;
 									}
 																		else 
 									{
-										if(strName->equals(ConstStr::getCNST_STR_963(), ctx))
+										if(strName->equals(ConstStr::getCNST_STR_1078(), ctx))
 										{
 											return FunctionArgumentType::DOUBLE_TYPE;
 										}
@@ -662,7 +662,7 @@ void FunctionArgumentDefine::readData(NetworkBinaryBuffer* buff, ThreadContext* 
 		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
 		if(el == nullptr || !((dynamic_cast<AlinousName*>(el) != 0)))
 		{
-			throw (new(ctx) VariableException(ConstStr::getCNST_STR_970(), ctx));
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1033(), ctx));
 		}
 		__GC_MV(this, &(this->type), static_cast<AlinousName*>(el), AlinousName);
 	}
@@ -672,7 +672,7 @@ void FunctionArgumentDefine::readData(NetworkBinaryBuffer* buff, ThreadContext* 
 		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
 		if(el == nullptr || !((dynamic_cast<AlinousName*>(el) != 0)))
 		{
-			throw (new(ctx) VariableException(ConstStr::getCNST_STR_970(), ctx));
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1033(), ctx));
 		}
 		__GC_MV(this, &(this->name), static_cast<AlinousName*>(el), AlinousName);
 	}
@@ -682,7 +682,7 @@ void FunctionArgumentDefine::readData(NetworkBinaryBuffer* buff, ThreadContext* 
 		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
 		if(el == nullptr || !((dynamic_cast<DomVariableDescriptor*>(el) != 0)))
 		{
-			throw (new(ctx) VariableException(ConstStr::getCNST_STR_979(), ctx));
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1049(), ctx));
 		}
 		__GC_MV(this, &(this->domDescriptor), static_cast<DomVariableDescriptor*>(el), DomVariableDescriptor);
 	}

@@ -292,7 +292,7 @@ IAlinousVariable* PreIncrementExpression::resolveExpression(ScriptMachine* machi
 	IAlinousVariable* variable = machine->resolveExpression(this->exp, debug, ctx);
 	if(variable == nullptr || variable->isArray(ctx))
 	{
-		throw (new(ctx) VariableException(ConstStr::getCNST_STR_995(), ctx));
+		throw (new(ctx) VariableException(ConstStr::getCNST_STR_1029(), ctx));
 	}
 	if(variable->isNull(ctx))
 	{
@@ -323,7 +323,7 @@ void PreIncrementExpression::readData(NetworkBinaryBuffer* buff, ThreadContext* 
 		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
 		if(el == nullptr || !((dynamic_cast<IExpression*>(el) != 0)))
 		{
-			throw (new(ctx) VariableException(ConstStr::getCNST_STR_980(), ctx));
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1027(), ctx));
 		}
 		__GC_MV(this, &(this->exp), static_cast<IExpression*>(el), IExpression);
 	}
@@ -367,7 +367,7 @@ void PreIncrementExpression::fromFileEntry(FileStorageEntryFetcher* fetcher, Thr
 		IExpression* el = IExpressionFactory::fromFetcher(fetcher, ctx);
 		if(el == nullptr || !((dynamic_cast<IExpression*>(el) != 0)))
 		{
-			throw (new(ctx) VariableException(ConstStr::getCNST_STR_980(), ctx));
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1027(), ctx));
 		}
 		__GC_MV(this, &(this->exp), static_cast<IExpression*>(el), IExpression);
 	}

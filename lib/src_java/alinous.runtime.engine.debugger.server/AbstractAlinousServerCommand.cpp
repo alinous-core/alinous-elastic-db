@@ -51,7 +51,7 @@ long long AbstractAlinousServerCommand::getThreadId(ThreadContext* ctx) throw()
 }
 void AbstractAlinousServerCommand::sendCommand(ICommandSender* notifier, ScriptMachine* context, ThreadContext* ctx)
 {
-	notifier->debugOut(ConstStr::getCNST_STR_1212()->clone(ctx)->append(this->toString(ctx), ctx), ctx);
+	notifier->debugOut(ConstStr::getCNST_STR_1311()->clone(ctx)->append(this->toString(ctx), ctx), ctx);
 	notifier->sendCommand(this, context, ctx);
 }
 bool AbstractAlinousServerCommand::containsThread(long long threadId, List<IServerCommand>* needfinish, bool remove, ThreadContext* ctx) throw() 

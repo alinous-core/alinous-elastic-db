@@ -51,12 +51,12 @@ void FileUtils::__releaseRegerences(bool prepare, ThreadContext* ctx) throw()
 String* FileUtils::removeLastSegments(String* formattedpath, int count, ThreadContext* ctx) throw() 
 {
 	Stack<String>* stack = (new(ctx) Stack<String>(ctx));
-	IArrayObject<String>* elements = formattedpath->split(ConstStr::getCNST_STR_1007(), ctx);
+	IArrayObject<String>* elements = formattedpath->split(ConstStr::getCNST_STR_949(), ctx);
 	int maxLoop = elements->length;
 	for(int i = 0; i != maxLoop; ++i)
 	{
 		String* str = elements->get(i);
-		if(str->length(ctx) == 0 || str->equals(ConstStr::getCNST_STR_950(), ctx))
+		if(str->length(ctx) == 0 || str->equals(ConstStr::getCNST_STR_953(), ctx))
 		{
 			continue;
 		}
@@ -71,7 +71,7 @@ String* FileUtils::removeLastSegments(String* formattedpath, int count, ThreadCo
 	while(it->hasNext(ctx))
 	{
 		String* el = it->next(ctx);
-		buff->append(ConstStr::getCNST_STR_1007(), ctx)->append(el, ctx);
+		buff->append(ConstStr::getCNST_STR_949(), ctx)->append(el, ctx);
 	}
 	return buff->toString(ctx);
 }
@@ -79,16 +79,16 @@ String* FileUtils::formatAfterAbsolutePath(String* path, ThreadContext* ctx) thr
 {
 	path = path->replace(L'/', File::separator->charAt(0, ctx), ctx);
 	Stack<String>* stack = (new(ctx) Stack<String>(ctx));
-	IArrayObject<String>* elements = path->split(ConstStr::getCNST_STR_1007(), ctx);
+	IArrayObject<String>* elements = path->split(ConstStr::getCNST_STR_949(), ctx);
 	int maxLoop = elements->length;
 	for(int i = 0; i != maxLoop; ++i)
 	{
 		String* str = elements->get(i);
-		if(str->length(ctx) == 0 || str->equals(ConstStr::getCNST_STR_950(), ctx))
+		if(str->length(ctx) == 0 || str->equals(ConstStr::getCNST_STR_953(), ctx))
 		{
 			continue;
 		}
-		if(str->equals(ConstStr::getCNST_STR_1246(), ctx))
+		if(str->equals(ConstStr::getCNST_STR_952(), ctx))
 		{
 			stack->pop(ctx);
 			continue;
@@ -102,7 +102,7 @@ String* FileUtils::formatAfterAbsolutePath(String* path, ThreadContext* ctx) thr
 		String* str = stack->get(i, ctx);
 		if(str->indexOf(ConstStr::getCNST_STR_381(), ctx) < 0)
 		{
-			buff->append(ConstStr::getCNST_STR_1007(), ctx);
+			buff->append(ConstStr::getCNST_STR_949(), ctx);
 		}
 		buff->append(str, ctx);
 	}

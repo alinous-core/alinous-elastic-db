@@ -7,8 +7,9 @@
 #include "alinous.db.table/IDatabaseRecord.h"
 #include "alinous.remote.socket/ICommandData.h"
 #include "alinous.remote.region.client.command.data/ClientNetworkRecord.h"
-#include "alinous.remote.region.server.schema/RegionShardTable.h"
+#include "alinous.remote.region.server.schema.strategy/RegionPartitionTableAccess.h"
 #include "alinous.remote.region.server.schema/NodeReferenceManager.h"
+#include "alinous.remote.region.server.schema.strategy/InsertTableStrategy.h"
 #include "java.lang/Number.h"
 #include "java.lang/Comparable.h"
 #include "java.lang/Long.h"
@@ -31,7 +32,7 @@ bool RegionInsertExecutor::__init_static_variables(){
 	delete ctx;
 	return true;
 }
- RegionInsertExecutor::RegionInsertExecutor(long long trxId, long long commitId, NodeReferenceManager* ref, ThreadContext* ctx) throw()  : IObject(ctx), ref(nullptr), trxId(nullptr), commitId(0)
+ RegionInsertExecutor::RegionInsertExecutor(long long trxId, long long commitId, NodeReferenceManager* ref, ThreadContext* ctx) throw()  : IObject(ctx), ref(nullptr), trxId(nullptr), commitId(0), strategy(nullptr)
 {
 	__GC_MV(this, &(this->ref), ref, NodeReferenceManager);
 	__GC_MV(this, &(this->trxId), (new(ctx) Long(trxId, ctx)), Long);
@@ -57,15 +58,17 @@ void RegionInsertExecutor::__releaseRegerences(bool prepare, ThreadContext* ctx)
 	ref = nullptr;
 	__e_obj1.add(this->trxId, this);
 	trxId = nullptr;
+	__e_obj1.add(this->strategy, this);
+	strategy = nullptr;
 	if(!prepare){
 		return;
 	}
 }
 void RegionInsertExecutor::prepareInsert(ArrayList<ClientNetworkRecord>* list, String* schema, String* table, ThreadContext* ctx) throw() 
 {
-	RegionShardTable* shard = this->ref->getCluster(schema, table, ctx);
-	shard->setCommitId(this->commitId, ctx);
-	shard->putRecords(list, ctx);
+	RegionPartitionTableAccess* tableAccess = this->ref->getCluster(schema, table, ctx);
+	__GC_MV(this, &(this->strategy), (new(ctx) InsertTableStrategy(this->commitId, tableAccess, ctx)), InsertTableStrategy);
+	this->strategy->build(list, ctx);
 }
 void RegionInsertExecutor::tpcCommitInsert(ThreadContext* ctx) throw() 
 {

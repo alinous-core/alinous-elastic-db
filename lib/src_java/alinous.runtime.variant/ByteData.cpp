@@ -40,7 +40,7 @@ namespace alinous {namespace runtime {namespace variant {
 
 
 
-String* ByteData::TAG_NAME = ConstStr::getCNST_STR_1220();
+String* ByteData::TAG_NAME = ConstStr::getCNST_STR_1238();
 bool ByteData::__init_done = __init_static_variables();
 bool ByteData::__init_static_variables(){
 	Java2CppSystem::getSelf();

@@ -57,13 +57,13 @@
 #include "alinous.compile.sql.analyze/ScanTableColumnIdentifier.h"
 #include "alinous.compile.sql.ddl/CheckDefinition.h"
 #include "alinous.db.table/TableColumnMetadata.h"
+#include "alinous.db.table/IDatabaseRecord.h"
 #include "alinous.db.table/TablePartitionKey.h"
 #include "alinous.db.table/TablePartitionKeyCollection.h"
 #include "alinous.db.table/TablePartitionRange.h"
 #include "alinous.db.table/TablePartitionRangeCollection.h"
 #include "alinous.db.table/TableMetadata.h"
 #include "alinous.compile.sql.analyze/ScanTableMetadata.h"
-#include "alinous.db.table/IDatabaseRecord.h"
 #include "alinous.compile.sql/ISqlStatement.h"
 #include "alinous.compile.expression/IExpression.h"
 #include "alinous.compile.sql.expression/ISQLExpression.h"
@@ -304,7 +304,7 @@ bool ScriptRunner::executeStatement(IStatement* stmt, ScriptMachine* machine, bo
 	default:
 		break ;
 	}
-	throw (new(ctx) AlinousException(ConstStr::getCNST_STR_1164(), ctx));
+	throw (new(ctx) AlinousException(ConstStr::getCNST_STR_1263(), ctx));
 }
 void ScriptRunner::__cleanUp(ThreadContext* ctx){
 }

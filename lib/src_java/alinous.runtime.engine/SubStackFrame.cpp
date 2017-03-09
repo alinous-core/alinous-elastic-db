@@ -68,9 +68,9 @@ namespace alinous {namespace runtime {namespace engine {
 
 
 
-String* SubStackFrame::TAG_SUB_STACKFRAME = ConstStr::getCNST_STR_1175();
-String* SubStackFrame::ATTR_LINE = ConstStr::getCNST_STR_1166();
-String* SubStackFrame::ATTR_FILENAME = ConstStr::getCNST_STR_1167();
+String* SubStackFrame::TAG_SUB_STACKFRAME = ConstStr::getCNST_STR_1274();
+String* SubStackFrame::ATTR_LINE = ConstStr::getCNST_STR_1265();
+String* SubStackFrame::ATTR_FILENAME = ConstStr::getCNST_STR_1266();
 bool SubStackFrame::__init_done = __init_static_variables();
 bool SubStackFrame::__init_static_variables(){
 	Java2CppSystem::getSelf();

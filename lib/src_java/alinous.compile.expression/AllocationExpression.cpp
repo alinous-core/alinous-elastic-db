@@ -279,7 +279,7 @@ IAlinousVariable* AllocationExpression::resolveExpression(ScriptMachine* machine
 		break ;
 	case AlinousType::TYPE_PRIMITIVE:
 	default:
-		throw (new(ctx) VariableException(ConstStr::getCNST_STR_996(), ctx));
+		throw (new(ctx) VariableException(ConstStr::getCNST_STR_1030(), ctx));
 		break;
 	}
 	return returnValue;
@@ -298,7 +298,7 @@ bool AllocationExpression::analyse(SrcAnalyseContext* context, bool leftValue, T
 	__GC_MV(this, &(this->analysedType), this->objectClassName->toAlinousType(context, ctx), AlinousType);
 	if(this->analysedType == nullptr)
 	{
-		srcValidator->addError(this->objectClassName->toString(ctx)->clone(ctx)->append(ConstStr::getCNST_STR_969(), ctx), this, ctx);
+		srcValidator->addError(this->objectClassName->toString(ctx)->clone(ctx)->append(ConstStr::getCNST_STR_1031(), ctx), this, ctx);
 		return false;
 	}
 	switch(this->analysedType->getTypeClass(ctx)) {
@@ -307,25 +307,25 @@ bool AllocationExpression::analyse(SrcAnalyseContext* context, bool leftValue, T
 		case AlinousType::STRING_TYPE:
 			if(this->arguments->getArgumentSize(ctx) != 1)
 			{
-				srcValidator->addError(ConstStr::getCNST_STR_997(), this, ctx);
+				srcValidator->addError(ConstStr::getCNST_STR_1032(), this, ctx);
 			}
 			break ;
 		case AlinousType::TIME:
 			if(this->arguments->getArgumentSize(ctx) != 1)
 			{
-				srcValidator->addError(ConstStr::getCNST_STR_997(), this, ctx);
+				srcValidator->addError(ConstStr::getCNST_STR_1032(), this, ctx);
 			}
 			break ;
 		case AlinousType::TIMESTAMP:
 			if(this->arguments->getArgumentSize(ctx) != 1)
 			{
-				srcValidator->addError(ConstStr::getCNST_STR_997(), this, ctx);
+				srcValidator->addError(ConstStr::getCNST_STR_1032(), this, ctx);
 			}
 			break ;
 		case AlinousType::BIGDECIMAL:
 			if(this->arguments->getArgumentSize(ctx) != 1)
 			{
-				srcValidator->addError(ConstStr::getCNST_STR_997(), this, ctx);
+				srcValidator->addError(ConstStr::getCNST_STR_1032(), this, ctx);
 			}
 			break ;
 		default:
@@ -340,7 +340,7 @@ bool AllocationExpression::analyse(SrcAnalyseContext* context, bool leftValue, T
 		break ;
 	case AlinousType::TYPE_PRIMITIVE:
 	default:
-		srcValidator->addError(ConstStr::getCNST_STR_996(), this, ctx);
+		srcValidator->addError(ConstStr::getCNST_STR_1030(), this, ctx);
 		break;
 	}
 	return true;
@@ -418,7 +418,7 @@ void AllocationExpression::readData(NetworkBinaryBuffer* buff, ThreadContext* ct
 		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
 		if(el == nullptr || !((dynamic_cast<AlinousName*>(el) != 0)))
 		{
-			throw (new(ctx) VariableException(ConstStr::getCNST_STR_970(), ctx));
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1033(), ctx));
 		}
 		__GC_MV(this, &(this->objectClassName), static_cast<AlinousName*>(el), AlinousName);
 	}
@@ -428,7 +428,7 @@ void AllocationExpression::readData(NetworkBinaryBuffer* buff, ThreadContext* ct
 		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
 		if(el == nullptr || !((dynamic_cast<FunctionArguments*>(el) != 0)))
 		{
-			throw (new(ctx) VariableException(ConstStr::getCNST_STR_998(), ctx));
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1034(), ctx));
 		}
 		__GC_MV(this, &(this->arguments), static_cast<FunctionArguments*>(el), FunctionArguments);
 	}
@@ -438,7 +438,7 @@ void AllocationExpression::readData(NetworkBinaryBuffer* buff, ThreadContext* ct
 		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
 		if(el == nullptr || !((dynamic_cast<IExpression*>(el) != 0)))
 		{
-			throw (new(ctx) VariableException(ConstStr::getCNST_STR_980(), ctx));
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1027(), ctx));
 		}
 		this->arrayCapacity->add(static_cast<IExpression*>(el), ctx);
 	}
@@ -521,7 +521,7 @@ void AllocationExpression::fromFileEntry(FileStorageEntryFetcher* fetcher, Threa
 		AlinousName* el = AlinousName::fromFileEntry(fetcher, ctx);
 		if(el == nullptr)
 		{
-			throw (new(ctx) VariableException(ConstStr::getCNST_STR_970(), ctx));
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1033(), ctx));
 		}
 		__GC_MV(this, &(this->objectClassName), el, AlinousName);
 	}
@@ -531,7 +531,7 @@ void AllocationExpression::fromFileEntry(FileStorageEntryFetcher* fetcher, Threa
 		IExpression* el = IExpressionFactory::fromFetcher(fetcher, ctx);
 		if(el == nullptr || !((dynamic_cast<FunctionArguments*>(el) != 0)))
 		{
-			throw (new(ctx) VariableException(ConstStr::getCNST_STR_998(), ctx));
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1034(), ctx));
 		}
 		__GC_MV(this, &(this->arguments), static_cast<FunctionArguments*>(el), FunctionArguments);
 	}
@@ -541,7 +541,7 @@ void AllocationExpression::fromFileEntry(FileStorageEntryFetcher* fetcher, Threa
 		IExpression* el = IExpressionFactory::fromFetcher(fetcher, ctx);
 		if(el == nullptr || !((dynamic_cast<IExpression*>(el) != 0)))
 		{
-			throw (new(ctx) VariableException(ConstStr::getCNST_STR_980(), ctx));
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1027(), ctx));
 		}
 		this->arrayCapacity->add(static_cast<IExpression*>(el), ctx);
 	}

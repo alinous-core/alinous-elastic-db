@@ -17,8 +17,8 @@ namespace alinous {namespace runtime {namespace engine {namespace debugger {name
 
 
 
-String* StepOverRequest::THREAD_ID = ConstStr::getCNST_STR_1198();
-String* StepOverRequest::STACK_ID = ConstStr::getCNST_STR_1199();
+String* StepOverRequest::THREAD_ID = ConstStr::getCNST_STR_1297();
+String* StepOverRequest::STACK_ID = ConstStr::getCNST_STR_1298();
 bool StepOverRequest::__init_done = __init_static_variables();
 bool StepOverRequest::__init_static_variables(){
 	Java2CppSystem::getSelf();
@@ -52,7 +52,7 @@ void StepOverRequest::__releaseRegerences(bool prepare, ThreadContext* ctx) thro
 }
 AlinousServerDebugHttpResponse* StepOverRequest::executeRequest(AlinousScriptDebugger* debugManager, ThreadContext* ctx) throw() 
 {
-	System::out->println(ConstStr::getCNST_STR_1202(), ctx);
+	System::out->println(ConstStr::getCNST_STR_1301(), ctx);
 	DebugThread* debugThread = debugManager->getDebugThread(this->threadId, ctx);
 	debugManager->setOperation(this->threadId, (new(ctx) StepOverOperation(debugThread, debugManager, this->stackId, ctx)), ctx);
 	debugManager->resume(this->threadId, ctx);

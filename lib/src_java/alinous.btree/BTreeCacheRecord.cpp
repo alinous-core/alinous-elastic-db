@@ -168,7 +168,7 @@ IBTreeNode* BTreeCacheRecord::split(IBTreeNode* newNode, BTreeNodeLoader* loader
 }
 void BTreeCacheRecord::addNode(IBTreeNode* newNode, ThreadContext* ctx)
 {
-	throw (new(ctx) BTreeException(ConstStr::getCNST_STR_1023(), ctx));
+	throw (new(ctx) BTreeException(ConstStr::getCNST_STR_1050(), ctx));
 }
 void BTreeCacheRecord::incCount(ThreadContext* ctx) throw() 
 {

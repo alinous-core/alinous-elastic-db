@@ -430,7 +430,7 @@ bool SQLExpressionStream::hasArrayResult(ThreadContext* ctx) throw()
 }
 ArrayList<VariantValue>* SQLExpressionStream::resolveSQLExpressionAsArray(ScanResultRecord* record, ScriptMachine* machine, bool debug, ThreadContext* ctx)
 {
-	throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1038(), ctx));
+	throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1118(), ctx));
 }
 bool SQLExpressionStream::isSQLExp(ThreadContext* ctx) throw() 
 {
@@ -456,7 +456,7 @@ void SQLExpressionStream::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx
 		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
 		if(el == nullptr || !((dynamic_cast<ExpressionStream*>(el) != 0)))
 		{
-			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1018(), ctx));
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1044(), ctx));
 		}
 		__GC_MV(this, &(this->exp), static_cast<ExpressionStream*>(el), ExpressionStream);
 	}
@@ -523,7 +523,7 @@ void SQLExpressionStream::fromFileEntry(FileStorageEntryFetcher* fetcher, Thread
 		IExpression* el = IExpressionFactory::fromFetcher(fetcher, ctx);
 		if(el == nullptr || !((dynamic_cast<ExpressionStream*>(el) != 0)))
 		{
-			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1018(), ctx));
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1044(), ctx));
 		}
 		__GC_MV(this, &(this->exp), static_cast<ExpressionStream*>(el), ExpressionStream);
 	}

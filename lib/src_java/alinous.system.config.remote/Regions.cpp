@@ -70,7 +70,7 @@ Regions* Regions::parseInstance(MatchCandidate* candidate, DomDocument* document
 {
 	Regions* regions = (new(ctx) Regions(ctx));
 	DomNode* selfDom = candidate->getCandidateDom(ctx);
-	MatchCandidatesCollection* result = matcher->match(document, selfDom, ConstStr::getCNST_STR_1286(), ctx);
+	MatchCandidatesCollection* result = matcher->match(document, selfDom, ConstStr::getCNST_STR_995(), ctx);
 	ArrayList<MatchCandidate>* list = result->getCandidatesList(ctx);
 	Iterator<MatchCandidate>* it = list->iterator(ctx);
 	while(it->hasNext(ctx))

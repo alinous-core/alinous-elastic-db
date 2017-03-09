@@ -49,7 +49,7 @@ namespace alinous {namespace runtime {
 
 
 
-String* AlinousModuleRepository::encode = ConstStr::getCNST_STR_1106();
+String* AlinousModuleRepository::encode = ConstStr::getCNST_STR_955();
 bool AlinousModuleRepository::__init_done = __init_static_variables();
 bool AlinousModuleRepository::__init_static_variables(){
 	Java2CppSystem::getSelf();
@@ -159,7 +159,7 @@ AlinousModule* AlinousModuleRepository::loadModule(String* path, ArrayList<Strin
 					}
 				}
 			}
-			throw (new(ctx) CompileErrorException(ConstStr::getCNST_STR_1105(), e, ctx));
+			throw (new(ctx) CompileErrorException(ConstStr::getCNST_STR_1179(), e, ctx));
 		}
 	}
 	if(stream != nullptr)

@@ -72,13 +72,13 @@ bool AbstractBooleanExpression::isSQLExp(ThreadContext* ctx) throw()
 }
 int AbstractBooleanExpression::operatorFromString(String* opStr, ThreadContext* ctx) throw() 
 {
-	if(opStr->equals(ConstStr::getCNST_STR_1013(), ctx))
+	if(opStr->equals(ConstStr::getCNST_STR_1059(), ctx))
 	{
 		return AbstractBooleanExpression::CONDITIONAL_OR;
 	}
 		else 
 	{
-		if(opStr->equals(ConstStr::getCNST_STR_1014(), ctx))
+		if(opStr->equals(ConstStr::getCNST_STR_1060(), ctx))
 		{
 			return AbstractBooleanExpression::CONDITIONAL_AND;
 		}
@@ -90,13 +90,13 @@ int AbstractBooleanExpression::operatorFromString(String* opStr, ThreadContext* 
 			}
 						else 
 			{
-				if(opStr->equals(ConstStr::getCNST_STR_1015(), ctx))
+				if(opStr->equals(ConstStr::getCNST_STR_1061(), ctx))
 				{
 					return AbstractBooleanExpression::INCLUSIVE_AND;
 				}
 								else 
 				{
-					if(opStr->equals(ConstStr::getCNST_STR_1016(), ctx))
+					if(opStr->equals(ConstStr::getCNST_STR_1062(), ctx))
 					{
 						return AbstractBooleanExpression::EXCUSIVE_OR;
 					}

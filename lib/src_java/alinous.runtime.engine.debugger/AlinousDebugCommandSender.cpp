@@ -14,7 +14,7 @@ namespace alinous {namespace runtime {namespace engine {namespace debugger {
 
 
 
-String* AlinousDebugCommandSender::COMMAND = ConstStr::getCNST_STR_1176();
+String* AlinousDebugCommandSender::COMMAND = ConstStr::getCNST_STR_1275();
 bool AlinousDebugCommandSender::__init_done = __init_static_variables();
 bool AlinousDebugCommandSender::__init_static_variables(){
 	Java2CppSystem::getSelf();

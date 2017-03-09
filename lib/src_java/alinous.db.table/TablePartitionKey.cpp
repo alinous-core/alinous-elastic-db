@@ -10,7 +10,12 @@
 #include "alinous.runtime.dom/VariableException.h"
 #include "alinous.remote.socket/NetworkBinaryBuffer.h"
 #include "alinous.remote.socket/ICommandData.h"
+#include "alinous.runtime.dom/IAlinousVariable.h"
+#include "alinous.runtime.variant/VariantValue.h"
 #include "alinous.db.table/TableColumnMetadata.h"
+#include "alinous.btree/IValueFetcher.h"
+#include "alinous.btree/IBTreeValue.h"
+#include "alinous.db.table/IDatabaseRecord.h"
 #include "alinous.db.table/TablePartitionKey.h"
 
 namespace alinous {namespace db {namespace table {
@@ -30,7 +35,7 @@ bool TablePartitionKey::__init_static_variables(){
 	delete ctx;
 	return true;
 }
- TablePartitionKey::TablePartitionKey(ThreadContext* ctx) throw()  : IObject(ctx), ICommandData(ctx), keys(GCUtils<ArrayList<TableColumnMetadata> >::ins(this, (new(ctx) ArrayList<TableColumnMetadata>(ctx)), ctx, __FILEW__, __LINE__, L""))
+ TablePartitionKey::TablePartitionKey(ThreadContext* ctx) throw()  : IObject(ctx), ICommandData(ctx), keys(GCUtils<ArrayList<TableColumnMetadata> >::ins(this, (new(ctx) ArrayList<TableColumnMetadata>(ctx)), ctx, __FILEW__, __LINE__, L"")), colString(nullptr)
 {
 }
 void TablePartitionKey::__construct_impl(ThreadContext* ctx) throw() 
@@ -48,6 +53,8 @@ void TablePartitionKey::__releaseRegerences(bool prepare, ThreadContext* ctx) th
 	ObjectEraser __e_obj1(ctx, __FILEW__, __LINE__, L"TablePartitionKey", L"~TablePartitionKey");
 	__e_obj1.add(this->keys, this);
 	keys = nullptr;
+	__e_obj1.add(this->colString, this);
+	colString = nullptr;
 	if(!prepare){
 		return;
 	}
@@ -55,6 +62,27 @@ void TablePartitionKey::__releaseRegerences(bool prepare, ThreadContext* ctx) th
 void TablePartitionKey::addKeyColumn(TableColumnMetadata* col, ThreadContext* ctx) throw() 
 {
 	this->keys->add(col, ctx);
+}
+List<VariantValue>* TablePartitionKey::makeValues(IDatabaseRecord* record, ThreadContext* ctx) throw() 
+{
+	List<VariantValue>* values = (new(ctx) ArrayList<VariantValue>(ctx));
+	int maxLoop = this->keys->size(ctx);
+	for(int i = 0; i != maxLoop; ++i)
+	{
+		TableColumnMetadata* col = this->keys->get(i, ctx);
+		int colOrder = col->columnOrder;
+		VariantValue* vv = record->getColumnValue(colOrder, ctx);
+		values->add(vv, ctx);
+	}
+	return values;
+}
+String* TablePartitionKey::getColumnString(ThreadContext* ctx) throw() 
+{
+	if(this->colString == nullptr)
+	{
+		__GC_MV(this, &(this->colString), TableColumnMetadata::arrayToString(this->keys, ctx), String);
+	}
+	return this->colString;
 }
 String* TablePartitionKey::toString(ThreadContext* ctx) throw() 
 {

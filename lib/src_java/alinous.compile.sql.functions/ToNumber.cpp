@@ -70,7 +70,7 @@ void ToNumber::__releaseRegerences(bool prepare, ThreadContext* ctx) throw()
 }
 String* ToNumber::getName(ThreadContext* ctx) throw() 
 {
-	return ConstStr::getCNST_STR_1081();
+	return ConstStr::getCNST_STR_1148();
 }
 VariantValue* ToNumber::resolveSQLExpression(ScanResultRecord* record, ScriptMachine* machine, FunctionArguments* args, bool debug, ThreadContext* ctx)
 {

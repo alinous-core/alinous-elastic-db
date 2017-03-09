@@ -293,7 +293,7 @@ void ExpStreamCast::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
 		if(el == nullptr || !((dynamic_cast<AlinousName*>(el) != 0)))
 		{
-			throw (new(ctx) VariableException(ConstStr::getCNST_STR_970(), ctx));
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1033(), ctx));
 		}
 		__GC_MV(this, &(this->type), static_cast<AlinousName*>(el), AlinousName);
 	}
@@ -303,7 +303,7 @@ void ExpStreamCast::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
 		if(el == nullptr || !((dynamic_cast<ExpressionStream*>(el) != 0)))
 		{
-			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1018(), ctx));
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1044(), ctx));
 		}
 		__GC_MV(this, &(this->exp), static_cast<ExpressionStream*>(el), ExpressionStream);
 	}
@@ -365,7 +365,7 @@ void ExpStreamCast::fromFileEntry(FileStorageEntryFetcher* fetcher, ThreadContex
 		AlinousName* el = AlinousName::fromFileEntry(fetcher, ctx);
 		if(el == nullptr)
 		{
-			throw (new(ctx) VariableException(ConstStr::getCNST_STR_970(), ctx));
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1033(), ctx));
 		}
 		__GC_MV(this, &(this->type), el, AlinousName);
 	}
@@ -375,7 +375,7 @@ void ExpStreamCast::fromFileEntry(FileStorageEntryFetcher* fetcher, ThreadContex
 		IExpression* el = IExpressionFactory::fromFetcher(fetcher, ctx);
 		if(el == nullptr || !((dynamic_cast<ExpressionStream*>(el) != 0)))
 		{
-			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1018(), ctx));
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1044(), ctx));
 		}
 		__GC_MV(this, &(this->exp), static_cast<ExpressionStream*>(el), ExpressionStream);
 	}

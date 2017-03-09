@@ -360,7 +360,7 @@ ExpressionSourceId* DomVariableDescriptor::getSourceId(ThreadContext* ctx) throw
 		case IDomSegment::TYPE_NORMAL:
 			if(i != 0)
 			{
-				buff->append(ConstStr::getCNST_STR_950(), ctx);
+				buff->append(ConstStr::getCNST_STR_953(), ctx);
 			}
 			buff->append(seg->toString(ctx), ctx);
 			break ;
@@ -415,7 +415,7 @@ void DomVariableDescriptor::readData(NetworkBinaryBuffer* buff, ThreadContext* c
 		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
 		if(el == nullptr || !((dynamic_cast<IDomSegment*>(el) != 0)))
 		{
-			throw (new(ctx) VariableException(ConstStr::getCNST_STR_993(), ctx));
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1026(), ctx));
 		}
 		this->segments->add(static_cast<IDomSegment*>(el), ctx);
 	}
@@ -485,7 +485,7 @@ void DomVariableDescriptor::fromFileEntry(FileStorageEntryFetcher* fetcher, Thre
 		IDomSegment* el = IDomSegment::fromFetcher(fetcher, ctx);
 		if(el == nullptr)
 		{
-			throw (new(ctx) VariableException(ConstStr::getCNST_STR_993(), ctx));
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1026(), ctx));
 		}
 		this->segments->add(el, ctx);
 	}

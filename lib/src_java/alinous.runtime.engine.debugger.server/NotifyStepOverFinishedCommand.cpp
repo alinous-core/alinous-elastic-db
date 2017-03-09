@@ -13,7 +13,7 @@ namespace alinous {namespace runtime {namespace engine {namespace debugger {name
 
 
 
-String* NotifyStepOverFinishedCommand::CMD_STRING = ConstStr::getCNST_STR_1203();
+String* NotifyStepOverFinishedCommand::CMD_STRING = ConstStr::getCNST_STR_1302();
 bool NotifyStepOverFinishedCommand::__init_done = __init_static_variables();
 bool NotifyStepOverFinishedCommand::__init_static_variables(){
 	Java2CppSystem::getSelf();

@@ -79,7 +79,7 @@ void AttributeIdentifier::__releaseRegerences(bool prepare, ThreadContext* ctx) 
 }
 String* AttributeIdentifier::toString(ThreadContext* ctx) throw() 
 {
-	return ConstStr::getCNST_STR_1321()->clone(ctx)->append(this->id, ctx);
+	return ConstStr::getCNST_STR_1325()->clone(ctx)->append(this->id, ctx);
 }
 void AttributeIdentifier::__cleanUp(ThreadContext* ctx){
 }

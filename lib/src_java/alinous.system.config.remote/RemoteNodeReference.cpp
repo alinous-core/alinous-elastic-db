@@ -74,17 +74,17 @@ void RemoteNodeReference::setIpv6(bool ipv6, ThreadContext* ctx) throw()
 RemoteNodeReference* RemoteNodeReference::parseInstance(DomNode* dom, DomDocument* document, Matcher* matcher, ThreadContext* ctx)
 {
 	RemoteNodeReference* noderef = (new(ctx) RemoteNodeReference(ctx));
-	IVariableValue* attr = dom->getAttributeValue(ConstStr::getCNST_STR_1278(), ctx);
+	IVariableValue* attr = dom->getAttributeValue(ConstStr::getCNST_STR_986(), ctx);
 	if(attr == nullptr)
 	{
-		throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_1279(), ctx));
+		throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_987(), ctx));
 	}
 	noderef->setUrl(attr->toString(ctx)->trim(ctx), ctx);
-	attr = dom->getAttributeValue(ConstStr::getCNST_STR_1280(), ctx);
+	attr = dom->getAttributeValue(ConstStr::getCNST_STR_988(), ctx);
 	if(attr != nullptr)
 	{
 		String* ipv6 = attr->toString(ctx)->trim(ctx);
-		noderef->setIpv6(!ipv6->equalsIgnoreCase(ConstStr::getCNST_STR_1144(), ctx), ctx);
+		noderef->setIpv6(!ipv6->equalsIgnoreCase(ConstStr::getCNST_STR_989(), ctx), ctx);
 	}
 	return noderef;
 }

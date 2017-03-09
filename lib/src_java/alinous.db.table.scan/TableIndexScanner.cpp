@@ -325,7 +325,7 @@ IDatabaseRecord* TableIndexScanner::nextIndexValue(ThreadContext* ctx)
 				locker->shareUnlockRow(this->tableStore, oid, ctx);
 				break ;
 			}
-			throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1708(), e, ctx));
+			throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1755(), e, ctx));
 		}
 	}
 	switch(this->lockMode) {

@@ -77,15 +77,15 @@ bool MBTreeLeafNode::isFull(ThreadContext* ctx) throw()
 }
 IBTreeNode* MBTreeLeafNode::addLeafNode(IBTreeNode* newNode, ThreadContext* ctx)
 {
-	throw (new(ctx) BTreeException(ConstStr::getCNST_STR_1023(), ctx));
+	throw (new(ctx) BTreeException(ConstStr::getCNST_STR_1050(), ctx));
 }
 IBTreeNode* MBTreeLeafNode::getNodeAtInsertPosition(IBTreeKey* key, ThreadContext* ctx)
 {
-	throw (new(ctx) BTreeException(ConstStr::getCNST_STR_1023(), ctx));
+	throw (new(ctx) BTreeException(ConstStr::getCNST_STR_1050(), ctx));
 }
 void MBTreeLeafNode::setNodeUsed(int nodeUsed, ThreadContext* ctx)
 {
-	throw (new(ctx) BTreeException(ConstStr::getCNST_STR_1023(), ctx));
+	throw (new(ctx) BTreeException(ConstStr::getCNST_STR_1050(), ctx));
 }
 IBTreeNode* MBTreeLeafNode::split(IBTreeNode* newNode, BTreeNodeLoader* loader, ThreadContext* ctx) throw() 
 {
@@ -93,11 +93,11 @@ IBTreeNode* MBTreeLeafNode::split(IBTreeNode* newNode, BTreeNodeLoader* loader, 
 }
 void MBTreeLeafNode::addNode(IBTreeNode* newNode, ThreadContext* ctx)
 {
-	throw (new(ctx) BTreeException(ConstStr::getCNST_STR_1023(), ctx));
+	throw (new(ctx) BTreeException(ConstStr::getCNST_STR_1050(), ctx));
 }
 INodeIterator* MBTreeLeafNode::iterator(bool endStart, ThreadContext* ctx)
 {
-	throw (new(ctx) BTreeException(ConstStr::getCNST_STR_1023(), ctx));
+	throw (new(ctx) BTreeException(ConstStr::getCNST_STR_1050(), ctx));
 }
 void MBTreeLeafNode::loadChildren(ThreadContext* ctx)
 {
@@ -110,11 +110,11 @@ void MBTreeLeafNode::printNode(StringBuffer* buff, int level, ThreadContext* ctx
 {
 	printTab(buff, level, ctx);
 	printTab(buff, level, ctx);
-	buff->append(ConstStr::getCNST_STR_1658(), ctx)->append(getKey(ctx)->toString(ctx), ctx)->append(ConstStr::getCNST_STR_1659(), ctx);
+	buff->append(ConstStr::getCNST_STR_1662(), ctx)->append(getKey(ctx)->toString(ctx), ctx)->append(ConstStr::getCNST_STR_1663(), ctx);
 }
 bool MBTreeLeafNode::removeChild(IBTreeKey* key, ThreadContext* ctx)
 {
-	throw (new(ctx) BTreeException(ConstStr::getCNST_STR_1023(), ctx));
+	throw (new(ctx) BTreeException(ConstStr::getCNST_STR_1050(), ctx));
 }
 bool MBTreeLeafNode::isEmpty(ThreadContext* ctx) throw() 
 {

@@ -34,7 +34,7 @@ bool StaticHtmlModuleStream::__init_static_variables(){
 	{
 		try
 		{
-			__GC_MV(this, &(this->buff), code->getBytes(ConstStr::getCNST_STR_1106(), ctx), IArrayObjectPrimitive<char>);
+			__GC_MV(this, &(this->buff), code->getBytes(ConstStr::getCNST_STR_955(), ctx), IArrayObjectPrimitive<char>);
 		}
 		catch(UnsupportedEncodingException* e)
 		{
@@ -49,7 +49,7 @@ void StaticHtmlModuleStream::__construct_impl(HttpHeaderProcessor* httpRequest, 
 	{
 		try
 		{
-			__GC_MV(this, &(this->buff), code->getBytes(ConstStr::getCNST_STR_1106(), ctx), IArrayObjectPrimitive<char>);
+			__GC_MV(this, &(this->buff), code->getBytes(ConstStr::getCNST_STR_955(), ctx), IArrayObjectPrimitive<char>);
 		}
 		catch(UnsupportedEncodingException* e)
 		{
@@ -88,7 +88,7 @@ void StaticHtmlModuleStream::prepare(AlinousCore* core, bool debug, ThreadContex
 }
 String* StaticHtmlModuleStream::getContentType(ThreadContext* ctx) throw() 
 {
-	return ConstStr::getCNST_STR_1894();
+	return ConstStr::getCNST_STR_1898();
 }
 void StaticHtmlModuleStream::__cleanUp(ThreadContext* ctx){
 }

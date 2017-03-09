@@ -276,7 +276,7 @@ bool DomVariableJoinTarget::analyse(SrcAnalyseContext* context, bool leftValue, 
 	}
 	if(this->asName == nullptr)
 	{
-		context->addError(ConstStr::getCNST_STR_1090(), this, ctx);
+		context->addError(ConstStr::getCNST_STR_1170(), this, ctx);
 	}
 	return true;
 }
@@ -301,7 +301,7 @@ bool DomVariableJoinTarget::analyseSQLTables(SQLAnalyseContext* context, bool le
 	IAlinousVariable* val = context->getMachine(ctx)->resolveExpression(this->domDesc, debug, ctx);
 	if(val->getVariableClass(ctx) != IAlinousVariable::CLASS_DOM)
 	{
-		throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1091(), ctx));
+		throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1171(), ctx));
 	}
 	IDomVariable* domvariable = static_cast<IDomVariable*>(val);
 	if(domvariable->getDomType(ctx) == IDomVariable::TYPE_DOM)
@@ -315,7 +315,7 @@ bool DomVariableJoinTarget::analyseSQLTables(SQLAnalyseContext* context, bool le
 			DomArray* array = static_cast<DomArray*>(domvariable);
 			if(array->size(ctx) == 0 || !((dynamic_cast<DomVariable*>(array->get(0, ctx)) != 0)))
 			{
-				throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1092(), ctx));
+				throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1172(), ctx));
 			}
 			analyseDomTable(context, static_cast<DomVariable*>(array->get(0, ctx)), ctx);
 		}
@@ -363,7 +363,7 @@ void DomVariableJoinTarget::readData(NetworkBinaryBuffer* buff, ThreadContext* c
 		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
 		if(el == nullptr || !((dynamic_cast<DomVariableDescriptor*>(el) != 0)))
 		{
-			throw (new(ctx) VariableException(ConstStr::getCNST_STR_979(), ctx));
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1049(), ctx));
 		}
 		__GC_MV(this, &(this->domDesc), static_cast<DomVariableDescriptor*>(el), DomVariableDescriptor);
 	}

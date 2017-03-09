@@ -106,7 +106,7 @@ String* TableAndSchema::toString(ThreadContext* ctx) throw()
 	if(this->toStr == nullptr)
 	{
 		StringBuffer* buff = (new(ctx) StringBuffer(ctx));
-		buff->append(this->schema, ctx)->append(ConstStr::getCNST_STR_950(), ctx)->append(this->table, ctx);
+		buff->append(this->schema, ctx)->append(ConstStr::getCNST_STR_953(), ctx)->append(this->table, ctx);
 		__GC_MV(this, &(this->toStr), buff->toString(ctx), String);
 	}
 	return this->toStr;

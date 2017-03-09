@@ -45,7 +45,7 @@ void AlinousModulePackage::__construct_impl(ThreadContext* ctx) throw()
 }
  AlinousModulePackage::AlinousModulePackage(String* path, ThreadContext* ctx) throw()  : IObject(ctx), IAlinousElement(ctx), segments(GCUtils<ArrayList<String> >::ins(this, (new(ctx) ArrayList<String>(ctx)), ctx, __FILEW__, __LINE__, L""))
 {
-	IArrayObject<String>* segments = path->split(ConstStr::getCNST_STR_1007(), ctx);
+	IArrayObject<String>* segments = path->split(ConstStr::getCNST_STR_949(), ctx);
 	int maxLoop = segments->length;
 	for(int i = 0; i != maxLoop; ++i)
 	{
@@ -64,7 +64,7 @@ void AlinousModulePackage::__construct_impl(ThreadContext* ctx) throw()
 }
 void AlinousModulePackage::__construct_impl(String* path, ThreadContext* ctx) throw() 
 {
-	IArrayObject<String>* segments = path->split(ConstStr::getCNST_STR_1007(), ctx);
+	IArrayObject<String>* segments = path->split(ConstStr::getCNST_STR_949(), ctx);
 	int maxLoop = segments->length;
 	for(int i = 0; i != maxLoop; ++i)
 	{
@@ -128,7 +128,7 @@ String* AlinousModulePackage::toString(ThreadContext* ctx) throw()
 		String* seg = this->segments->get(i, ctx);
 		if(i != 0)
 		{
-			buff->append(ConstStr::getCNST_STR_950(), ctx);
+			buff->append(ConstStr::getCNST_STR_953(), ctx);
 		}
 		buff->append(seg, ctx);
 	}

@@ -1,7 +1,22 @@
 #ifndef ALINOUS_DB_TABLE_TABLEPARTITIONRANGECOLLECTION_H_
 #define ALINOUS_DB_TABLE_TABLEPARTITIONRANGECOLLECTION_H_
 namespace alinous {namespace db {namespace table {
+class TablePartitionKey;}}}
+
+namespace java {namespace util {
+template <typename  T> class List;}}
+
+namespace alinous {namespace runtime {namespace variant {
+class VariantValue;}}}
+
+namespace alinous {namespace db {namespace table {
 class TablePartitionRange;}}}
+
+namespace java {namespace util {
+template <typename  T, typename V> class HashMap;}}
+
+namespace java {namespace util {
+template <typename  T> class Iterator;}}
 
 namespace alinous {namespace buffer {namespace storage {
 class FileStorageEntryBuilder;}}}
@@ -40,13 +55,16 @@ namespace alinous {namespace db {namespace table {
 using namespace ::alinous;
 using namespace ::java::lang;
 using ::java::util::Iterator;
-using ::java::util::ArrayList;
+using ::java::util::HashMap;
+using ::java::util::Iterator;
+using ::java::util::List;
 using ::alinous::buffer::storage::FileStorageEntryBuilder;
 using ::alinous::buffer::storage::FileStorageEntryFetcher;
 using ::alinous::db::AlinousDbException;
 using ::alinous::remote::socket::ICommandData;
 using ::alinous::remote::socket::NetworkBinaryBuffer;
 using ::alinous::runtime::dom::VariableException;
+using ::alinous::runtime::variant::VariantValue;
 using ::alinous::system::AlinousException;
 
 
@@ -60,10 +78,11 @@ public:
 	virtual ~TablePartitionRangeCollection() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 private:
-	ArrayList<TablePartitionRange>* ranges;
+	HashMap<String,TablePartitionRange>* ranges;
 public:
+	bool isInRange(TablePartitionKey* key, List<VariantValue>* values, ThreadContext* ctx) throw() ;
 	void addRange(TablePartitionRange* value, ThreadContext* ctx) throw() ;
-	ArrayList<TablePartitionRange>* getRanges(ThreadContext* ctx) throw() ;
+	HashMap<String,TablePartitionRange>* getRanges(ThreadContext* ctx) throw() ;
 	int fileSize(ThreadContext* ctx);
 	void toFileEntry(FileStorageEntryBuilder* builder, ThreadContext* ctx);
 	void readData(NetworkBinaryBuffer* buff, ThreadContext* ctx) final;

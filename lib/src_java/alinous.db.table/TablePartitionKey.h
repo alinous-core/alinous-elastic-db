@@ -3,6 +3,15 @@
 namespace alinous {namespace db {namespace table {
 class TableColumnMetadata;}}}
 
+namespace java {namespace util {
+template <typename  T> class List;}}
+
+namespace alinous {namespace runtime {namespace variant {
+class VariantValue;}}}
+
+namespace alinous {namespace db {namespace table {
+class IDatabaseRecord;}}}
+
 namespace java {namespace lang {
 class StringBuffer;}}
 
@@ -44,12 +53,14 @@ using namespace ::alinous;
 using namespace ::java::lang;
 using ::java::util::Iterator;
 using ::java::util::ArrayList;
+using ::java::util::List;
 using ::alinous::buffer::storage::FileStorageEntryBuilder;
 using ::alinous::buffer::storage::FileStorageEntryFetcher;
 using ::alinous::db::AlinousDbException;
 using ::alinous::remote::socket::ICommandData;
 using ::alinous::remote::socket::NetworkBinaryBuffer;
 using ::alinous::runtime::dom::VariableException;
+using ::alinous::runtime::variant::VariantValue;
 using ::alinous::system::AlinousException;
 
 
@@ -64,8 +75,11 @@ public:
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 private:
 	ArrayList<TableColumnMetadata>* keys;
+	String* colString;
 public:
 	void addKeyColumn(TableColumnMetadata* col, ThreadContext* ctx) throw() ;
+	List<VariantValue>* makeValues(IDatabaseRecord* record, ThreadContext* ctx) throw() ;
+	String* getColumnString(ThreadContext* ctx) throw() ;
 	String* toString(ThreadContext* ctx) throw() ;
 	int fileSize(ThreadContext* ctx);
 	void toFileEntry(FileStorageEntryBuilder* builder, ThreadContext* ctx);

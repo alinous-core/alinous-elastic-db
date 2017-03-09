@@ -57,7 +57,7 @@ namespace alinous {namespace runtime {namespace dom {namespace typed {
 
 
 
-String* TypedVariableContainer::TAG_TYPED_VARIABLE_CONTAINER = ConstStr::getCNST_STR_1152();
+String* TypedVariableContainer::TAG_TYPED_VARIABLE_CONTAINER = ConstStr::getCNST_STR_1220();
 bool TypedVariableContainer::__init_done = __init_static_variables();
 bool TypedVariableContainer::__init_static_variables(){
 	Java2CppSystem::getSelf();

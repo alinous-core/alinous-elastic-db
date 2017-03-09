@@ -3,6 +3,9 @@
 namespace java{namespace net{
 class UnknownHostException;
 }}
+namespace java {namespace lang {
+class StringBuilder;}}
+
 namespace alinous {namespace remote {namespace db {namespace client {
 class RemoteStorageConnectionInfo;}}}}
 
@@ -89,6 +92,7 @@ private:
 	bool ipv6;
 	SocketConnectionPool* nodeConnectionPool;
 public:
+	String* toString(ThreadContext* ctx) throw() ;
 	void initConnectionPool(ThreadContext* ctx) throw() ;
 	void dispose(ThreadContext* ctx) throw() ;
 	SchemasStructureInfoData* getSchemeInfo(String* region, ThreadContext* ctx);

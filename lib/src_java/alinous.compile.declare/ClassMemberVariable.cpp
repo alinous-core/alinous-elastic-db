@@ -407,7 +407,7 @@ void ClassMemberVariable::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx
 		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
 		if(el == nullptr || !((dynamic_cast<AlinousName*>(el) != 0)))
 		{
-			throw (new(ctx) VariableException(ConstStr::getCNST_STR_970(), ctx));
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1033(), ctx));
 		}
 		__GC_MV(this, &(this->type), static_cast<AlinousName*>(el), AlinousName);
 	}
@@ -418,7 +418,7 @@ void ClassMemberVariable::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx
 		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
 		if(el == nullptr || !((dynamic_cast<AlinousName*>(el) != 0)))
 		{
-			throw (new(ctx) VariableException(ConstStr::getCNST_STR_970(), ctx));
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1033(), ctx));
 		}
 		__GC_MV(this, &(this->name), static_cast<AlinousName*>(el), AlinousName);
 	}
@@ -428,7 +428,7 @@ void ClassMemberVariable::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx
 		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
 		if(el == nullptr || !((dynamic_cast<DomVariableDescriptor*>(el) != 0)))
 		{
-			throw (new(ctx) VariableException(ConstStr::getCNST_STR_979(), ctx));
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1049(), ctx));
 		}
 		__GC_MV(this, &(this->domDescriptor), static_cast<DomVariableDescriptor*>(el), DomVariableDescriptor);
 	}
@@ -438,7 +438,7 @@ void ClassMemberVariable::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx
 		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
 		if(el == nullptr || !((dynamic_cast<IExpression*>(el) != 0)))
 		{
-			throw (new(ctx) VariableException(ConstStr::getCNST_STR_980(), ctx));
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1027(), ctx));
 		}
 		__GC_MV(this, &(this->init), static_cast<IExpression*>(el), IExpression);
 	}
@@ -448,7 +448,7 @@ void ClassMemberVariable::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx
 		IAlinousVariable* el = NetworkAlinousVariableFactory::fromNetworkData(buff, ctx);
 		if(el == nullptr)
 		{
-			throw (new(ctx) VariableException(ConstStr::getCNST_STR_981(), ctx));
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1096(), ctx));
 		}
 		__GC_MV(this, &(this->staticValue), el, IAlinousVariable);
 	}

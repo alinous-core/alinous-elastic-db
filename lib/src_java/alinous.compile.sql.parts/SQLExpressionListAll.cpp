@@ -210,7 +210,7 @@ bool SQLExpressionListAll::hasArrayResult(ThreadContext* ctx) throw()
 }
 ArrayList<VariantValue>* SQLExpressionListAll::resolveSQLExpressionAsArray(ScanResultRecord* record, ScriptMachine* machine, bool debug, ThreadContext* ctx)
 {
-	throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1038(), ctx));
+	throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1118(), ctx));
 }
 String* SQLExpressionListAll::getAsName(ThreadContext* ctx) throw() 
 {

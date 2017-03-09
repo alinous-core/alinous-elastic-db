@@ -324,7 +324,7 @@ IAlinousVariable* ExpStreamSegment::resolveExpression(ScriptMachine* machine, bo
 	default:
 		break ;
 	}
-	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1023(), ctx));
+	throw (new(ctx) VariableException(ConstStr::getCNST_STR_1050(), ctx));
 }
 bool ExpStreamSegment::visit(IAlinousElementVisitor* visitor, AbstractSrcElement* parent, ThreadContext* ctx) throw() 
 {
@@ -425,7 +425,7 @@ String* ExpStreamSegment::toString(ThreadContext* ctx) throw()
 	int maxLoop = this->arrayIndexes->size(ctx);
 	for(int i = 0; i != maxLoop; ++i)
 	{
-		buff->append(ConstStr::getCNST_STR_1027(), ctx);
+		buff->append(ConstStr::getCNST_STR_1054(), ctx);
 	}
 	return buff->toString(ctx);
 }
@@ -455,7 +455,7 @@ void ExpStreamSegment::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 		IAlinousElement* el = AlinousElementNetworkFactory::formNetworkData(buff, ctx);
 		if(el == nullptr || !((dynamic_cast<IExpression*>(el) != 0)))
 		{
-			throw (new(ctx) VariableException(ConstStr::getCNST_STR_980(), ctx));
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1027(), ctx));
 		}
 		this->arrayIndexes->add(static_cast<IExpression*>(el), ctx);
 	}
@@ -548,7 +548,7 @@ void ExpStreamSegment::fromFileEntry(FileStorageEntryFetcher* fetcher, ThreadCon
 		IExpression* el = IExpressionFactory::fromFetcher(fetcher, ctx);
 		if(el == nullptr || !((dynamic_cast<IExpression*>(el) != 0)))
 		{
-			throw (new(ctx) VariableException(ConstStr::getCNST_STR_980(), ctx));
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1027(), ctx));
 		}
 		this->arrayIndexes->add(static_cast<IExpression*>(el), ctx);
 	}
@@ -671,7 +671,7 @@ IAlinousVariable* ExpStreamSegment::getDomProperty(ScriptMachine* machine, IDomV
 {
 	if(lastSegmentVariable->getDomType(ctx) == IDomVariable::TYPE_ARRAY)
 	{
-		throw (new(ctx) VariableException(ConstStr::getCNST_STR_1024(), ctx));
+		throw (new(ctx) VariableException(ConstStr::getCNST_STR_1051(), ctx));
 	}
 	IDomVariable* dom = static_cast<IDomVariable*>(lastSegmentVariable);
 	IDomVariable* prop = static_cast<IDomVariable*>(dom->getProperty(this->name, ctx));
@@ -689,7 +689,7 @@ IDomVariable* ExpStreamSegment::handleDomArrayIndexes(ScriptMachine* machine, ID
 	{
 		if(current->getDomType(ctx) != IDomVariable::TYPE_ARRAY)
 		{
-			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1025(), ctx));
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1052(), ctx));
 		}
 		IExpression* idxexp = this->arrayIndexes->get(i, ctx);
 		IAlinousVariable* val = idxexp->resolveExpression(machine, debug, ctx);
@@ -758,7 +758,7 @@ IAlinousVariable* ExpStreamSegment::handleTypedArrayIndexes(ScriptMachine* machi
 	{
 		if(current->getTypedType(ctx) != ITypedVariable::TYPE_ARRAY)
 		{
-			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1025(), ctx));
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_1052(), ctx));
 		}
 		IExpression* idxexp = this->arrayIndexes->get(i, ctx);
 		IAlinousVariable* val = idxexp->resolveExpression(machine, debug, ctx);
@@ -857,7 +857,7 @@ bool ExpStreamSegment::analyseFirstSegment(ExpressionStreamResult* result, SrcAn
 }
 bool ExpStreamSegment::analyseFirstObject(ExpressionStreamResult* result, SrcAnalyseContext* context, bool leftValue, ThreadContext* ctx) throw() 
 {
-	if(this->name->equals(ConstStr::getCNST_STR_1026(), ctx))
+	if(this->name->equals(ConstStr::getCNST_STR_1053(), ctx))
 	{
 		this->segmentType = SegmentType::SEG_THIS;
 		result->clear(ctx);
