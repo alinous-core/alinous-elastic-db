@@ -13,10 +13,7 @@ namespace alinous {namespace db {namespace table {
 class TableMetadata;}}}
 
 namespace java {namespace util {
-template <typename  T> class Set;}}
-
-namespace java {namespace util {
-template <typename  T> class Iterator;}}
+template <typename  T> class List;}}
 
 namespace alinous {namespace db {namespace table {
 class TableColumnMetadata;}}}
@@ -90,8 +87,7 @@ using namespace ::java::lang;
 using ::java::util::Iterator;
 using ::java::util::ArrayList;
 using ::java::util::HashMap;
-using ::java::util::Iterator;
-using ::java::util::Set;
+using ::java::util::List;
 using ::alinous::buffer::storage::FileStorageEntryBuilder;
 using ::alinous::buffer::storage::FileStorageEntryFetcher;
 using ::alinous::compile::AlinousElementNetworkFactory;

@@ -301,16 +301,15 @@ int TableMetadata::fileSize(ThreadContext* ctx)
 {
 	int total = this->schema->length(ctx) * 2 + 4;
 	total += this->tableName->length(ctx) * 2 + 4;
+	List<TableColumnMetadata>* list = this->columnsList;
+	int maxLoop = list->size(ctx);
 	total += 4;
-	Set<String>* list = this->columns->keySet(ctx);
-	Iterator<String>* it = list->iterator(ctx);
-	while(it->hasNext(ctx))
+	for(int i = 0; i != maxLoop; ++i)
 	{
-		String* key = it->next(ctx);
-		TableColumnMetadata* col = this->columns->get(key, ctx);
+		TableColumnMetadata* col = list->get(i, ctx);
 		total += col->fileSize(ctx);
 	}
-	int maxLoop = this->primaryKeys->size(ctx);
+	maxLoop = this->primaryKeys->size(ctx);
 	total += 4;
 	for(int i = 0; i != maxLoop; ++i)
 	{
@@ -354,16 +353,15 @@ void TableMetadata::toFileEntry(FileStorageEntryBuilder* builder, ThreadContext*
 {
 	builder->putString(this->schema, ctx);
 	builder->putString(this->tableName, ctx);
-	Set<String>* list = this->columns->keySet(ctx);
-	builder->putInt(list->size(ctx), ctx);
-	Iterator<String>* it = list->iterator(ctx);
-	while(it->hasNext(ctx))
+	List<TableColumnMetadata>* list = this->columnsList;
+	int maxLoop = list->size(ctx);
+	builder->putInt(maxLoop, ctx);
+	for(int i = 0; i != maxLoop; ++i)
 	{
-		String* key = it->next(ctx);
-		TableColumnMetadata* col = this->columns->get(key, ctx);
+		TableColumnMetadata* col = list->get(i, ctx);
 		col->toFileEntry(builder, ctx);
 	}
-	int maxLoop = this->primaryKeys->size(ctx);
+	maxLoop = this->primaryKeys->size(ctx);
 	builder->putInt(maxLoop, ctx);
 	for(int i = 0; i != maxLoop; ++i)
 	{
@@ -475,16 +473,15 @@ void TableMetadata::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 {
 	buff->putString(this->schema, ctx);
 	buff->putString(this->tableName, ctx);
-	Set<String>* list = this->columns->keySet(ctx);
-	buff->putInt(list->size(ctx), ctx);
-	Iterator<String>* it = list->iterator(ctx);
-	while(it->hasNext(ctx))
+	List<TableColumnMetadata>* list = this->columnsList;
+	int maxLoop = list->size(ctx);
+	buff->putInt(maxLoop, ctx);
+	for(int i = 0; i != maxLoop; ++i)
 	{
-		String* key = it->next(ctx);
-		TableColumnMetadata* col = this->columns->get(key, ctx);
+		TableColumnMetadata* col = list->get(i, ctx);
 		col->writeData(buff, ctx);
 	}
-	int maxLoop = this->primaryKeys->size(ctx);
+	maxLoop = this->primaryKeys->size(ctx);
 	buff->putInt(maxLoop, ctx);
 	for(int i = 0; i != maxLoop; ++i)
 	{
