@@ -123,4 +123,5 @@ template class ::java::util::ArrayListIterator<::alinous::remote::db::client::co
 template class ::java::util::ArrayListIterator<::alinous::remote::region::client::command::data::ClientNetworkRecord>;
 template class ::java::util::ArrayListIterator<::alinous::remote::region::server::schema::NodeTableReference>;
 template class ::java::util::ArrayListIterator<::alinous::remote::region::server::schema::NodeReference>;
+template class ::java::util::ArrayListIterator<::alinous::remote::region::server::schema::strategy::UniqueOpValue>;
 template class ::java::util::ArrayListIterator<::alinous::remote::region::server::schema::strategy::RegionShardPartAccess>;

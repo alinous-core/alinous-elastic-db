@@ -53,12 +53,25 @@ void InsertNodeAccessStrategy::__releaseRegerences(bool prepare, ThreadContext* 
 		return;
 	}
 }
-void InsertNodeAccessStrategy::addUniqueCheck(ArrayList<TableColumnMetadata>* uniqueColList, List<VariantValue>* values, ThreadContext* ctx) throw() 
+void InsertNodeAccessStrategy::addUniqueCheckOperation(List<TableColumnMetadata>* uniqueColList, List<VariantValue>* values, ThreadContext* ctx) throw() 
 {
+	UniqueCheckOperation* op = getOperation(uniqueColList, ctx);
+	op->addValue(values, ctx);
 }
 NodeReference* InsertNodeAccessStrategy::getNodeAccessRef(ThreadContext* ctx) throw() 
 {
 	return nodeAccessRef;
+}
+UniqueCheckOperation* InsertNodeAccessStrategy::getOperation(List<TableColumnMetadata>* uniqueColList, ThreadContext* ctx) throw() 
+{
+	String* key = TableColumnMetadata::arrayToString(uniqueColList, ctx);
+	UniqueCheckOperation* op = this->uniqueCheckOps->get(key, ctx);
+	if(op == nullptr)
+	{
+		op = (new(ctx) UniqueCheckOperation(uniqueColList, ctx));
+		this->uniqueCheckOps->put(key, op, ctx);
+	}
+	return op;
 }
 void InsertNodeAccessStrategy::__cleanUp(ThreadContext* ctx){
 }

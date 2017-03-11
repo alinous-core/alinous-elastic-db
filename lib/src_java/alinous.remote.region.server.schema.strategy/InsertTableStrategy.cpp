@@ -115,18 +115,37 @@ void InsertTableStrategy::addUniqueCheck(RegionShardPartAccess* node, ClientNetw
 		if(key == nullptr)
 		{
 			List<VariantValue>* values = unique->makeValues(record, ctx);
-			nodeStoragegy->addUniqueCheck(unique->getUniqueColList(ctx), values, ctx);
+			nodeStoragegy->addUniqueCheckOperation(unique->getUniqueColList(ctx), values, ctx);
 			continue;
 		}
 		List<VariantValue>* values = key->makeValues(record, ctx);
 		if(ranges->isInRange(key, values, ctx))
 		{
-			nodeStoragegy->addUniqueCheck(unique->getUniqueColList(ctx), values, ctx);
+			nodeStoragegy->addUniqueCheckOperation(unique->getUniqueColList(ctx), values, ctx);
 		}
 	}
 }
 void InsertTableStrategy::buildUniqueStrategy(RegionShardPartAccess* node, ClientNetworkRecord* record, TableMetadataUniqueCollection* uniqueCollection, ThreadContext* ctx) throw() 
 {
+	ArrayList<ScanUnique>* list = uniqueCollection->getUniqueList(ctx);
+	InsertNodeAccessStrategy* nodeStoragegy = nullptr;
+	NodeReference* nodeAccessRef = node->getNodeAccessRef(ctx);
+	TablePartitionRangeCollection* ranges = node->getPartitionRange(ctx);
+	int maxLoop = list->size(ctx);
+	for(int i = 0; i != maxLoop; ++i)
+	{
+		ScanUnique* unique = list->get(i, ctx);
+		TablePartitionKey* key = unique->getCoveredKey(ctx);
+		if(nodeStoragegy == nullptr)
+		{
+			nodeStoragegy = getInsertNodeAccessStorategy(nodeAccessRef, ctx);
+		}
+		List<VariantValue>* values = key->makeValues(record, ctx);
+		if(ranges->isInRange(key, values, ctx))
+		{
+			nodeStoragegy->addUniqueCheckOperation(unique->getUniqueColList(ctx), values, ctx);
+		}
+	}
 }
 void InsertTableStrategy::buildRecordStrategy(RegionShardPartAccess* node, ClientNetworkRecord* record, ThreadContext* ctx) throw() 
 {

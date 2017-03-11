@@ -111,6 +111,10 @@ void TablePartitionRange::__releaseRegerences(bool prepare, ThreadContext* ctx) 
 		return;
 	}
 }
+bool TablePartitionRange::isInRange(List<VariantValue>* values, ThreadContext* ctx) throw() 
+{
+	return isEqGreater(values, ctx) && isLessThan(values, ctx);
+}
 void TablePartitionRange::addMaxKeyValue(VariantValue* value, ThreadContext* ctx) throw() 
 {
 	this->max->add(value, ctx);
@@ -211,6 +215,46 @@ void TablePartitionRange::writeData(NetworkBinaryBuffer* buff, ThreadContext* ct
 		VariantValue* vv = this->min->get(i, ctx);
 		vv->writeData(buff, ctx);
 	}
+}
+bool TablePartitionRange::isLessThan(List<VariantValue>* values, ThreadContext* ctx) throw() 
+{
+	int rangeLength = this->max->size(ctx);
+	int valueLength = values->size(ctx);
+	int maxLoop = rangeLength < valueLength ? rangeLength : valueLength;
+	for(int i = 0; i != maxLoop; ++i)
+	{
+		VariantValue* vmax = this->max->get(i, ctx);
+		VariantValue* vv = values->get(i, ctx);
+		int comp = vmax->compareTo(vv, ctx);
+		if(comp == 0)
+		{
+			continue;
+		}
+		return comp < 0 ? false : true;
+	}
+	if(rangeLength == valueLength)
+	{
+		return false;
+	}
+	return true;
+}
+bool TablePartitionRange::isEqGreater(List<VariantValue>* values, ThreadContext* ctx) throw() 
+{
+	int rangeLength = this->min->size(ctx);
+	int valueLength = values->size(ctx);
+	int maxLoop = rangeLength < valueLength ? rangeLength : valueLength;
+	for(int i = 0; i != maxLoop; ++i)
+	{
+		VariantValue* min = this->max->get(i, ctx);
+		VariantValue* vv = values->get(i, ctx);
+		int comp = min->compareTo(vv, ctx);
+		if(comp == 0)
+		{
+			continue;
+		}
+		return comp > 0 ? false : true;
+	}
+	return true;
 }
 TablePartitionRange* TablePartitionRange::loadFromFetcher(FileStorageEntryFetcher* fetcher, ThreadContext* ctx)
 {

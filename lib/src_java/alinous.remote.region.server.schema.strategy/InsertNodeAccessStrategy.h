@@ -3,20 +3,20 @@
 namespace alinous {namespace remote {namespace region {namespace server {namespace schema {
 class NodeReference;}}}}}
 
-namespace alinous {namespace db {namespace table {
-class TableColumnMetadata;}}}
-
 namespace java {namespace util {
 template <typename  T> class List;}}
+
+namespace alinous {namespace db {namespace table {
+class TableColumnMetadata;}}}
 
 namespace alinous {namespace runtime {namespace variant {
 class VariantValue;}}}
 
-namespace java {namespace util {
-template <typename  T, typename V> class HashMap;}}
-
 namespace alinous {namespace remote {namespace region {namespace server {namespace schema {namespace strategy {
 class UniqueCheckOperation;}}}}}}
+
+namespace java {namespace util {
+template <typename  T, typename V> class HashMap;}}
 
 namespace java {namespace lang {
 class IObject;
@@ -31,7 +31,6 @@ namespace alinous {namespace remote {namespace region {namespace server {namespa
 using namespace ::alinous;
 using namespace ::java::lang;
 using ::java::util::Iterator;
-using ::java::util::ArrayList;
 using ::java::util::HashMap;
 using ::java::util::List;
 using ::alinous::db::table::TableColumnMetadata;
@@ -52,8 +51,10 @@ private:
 	NodeReference* nodeAccessRef;
 	HashMap<String,UniqueCheckOperation>* uniqueCheckOps;
 public:
-	void addUniqueCheck(ArrayList<TableColumnMetadata>* uniqueColList, List<VariantValue>* values, ThreadContext* ctx) throw() ;
+	void addUniqueCheckOperation(List<TableColumnMetadata>* uniqueColList, List<VariantValue>* values, ThreadContext* ctx) throw() ;
 	NodeReference* getNodeAccessRef(ThreadContext* ctx) throw() ;
+private:
+	UniqueCheckOperation* getOperation(List<TableColumnMetadata>* uniqueColList, ThreadContext* ctx) throw() ;
 public:
 	static bool __init_done;
 	static bool __init_static_variables();

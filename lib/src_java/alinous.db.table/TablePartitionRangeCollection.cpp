@@ -59,7 +59,7 @@ bool TablePartitionRangeCollection::isInRange(TablePartitionKey* key, List<Varia
 {
 	String* colStr = key->getColumnString(ctx);
 	TablePartitionRange* range = this->ranges->get(colStr, ctx);
-	return false;
+	return range->isInRange(values, ctx);
 }
 void TablePartitionRangeCollection::addRange(TablePartitionRange* value, ThreadContext* ctx) throw() 
 {

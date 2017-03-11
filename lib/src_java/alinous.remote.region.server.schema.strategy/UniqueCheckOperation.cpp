@@ -1,6 +1,12 @@
 #include "include/global.h"
 
 
+#include "alinous.remote.socket/NetworkBinaryBuffer.h"
+#include "alinous.remote.socket/ICommandData.h"
+#include "alinous.db.table/TableColumnMetadata.h"
+#include "alinous.runtime.dom/IAlinousVariable.h"
+#include "alinous.runtime.variant/VariantValue.h"
+#include "alinous.remote.region.server.schema.strategy/UniqueOpValue.h"
 #include "alinous.remote.region.server.schema.strategy/UniqueCheckOperation.h"
 
 namespace alinous {namespace remote {namespace region {namespace server {namespace schema {namespace strategy {
@@ -20,11 +26,13 @@ bool UniqueCheckOperation::__init_static_variables(){
 	delete ctx;
 	return true;
 }
- UniqueCheckOperation::UniqueCheckOperation(ThreadContext* ctx) throw()  : IObject(ctx)
+ UniqueCheckOperation::UniqueCheckOperation(List<TableColumnMetadata>* uniqueColList, ThreadContext* ctx) throw()  : IObject(ctx), uniqueColList(nullptr), values(GCUtils<List<UniqueOpValue> >::ins(this, (new(ctx) ArrayList<UniqueOpValue>(ctx)), ctx, __FILEW__, __LINE__, L""))
 {
+	GCUtils<List<TableColumnMetadata> >::mv(this, &(this->uniqueColList), uniqueColList, ctx);
 }
-void UniqueCheckOperation::__construct_impl(ThreadContext* ctx) throw() 
+void UniqueCheckOperation::__construct_impl(List<TableColumnMetadata>* uniqueColList, ThreadContext* ctx) throw() 
 {
+	GCUtils<List<TableColumnMetadata> >::mv(this, &(this->uniqueColList), uniqueColList, ctx);
 }
  UniqueCheckOperation::~UniqueCheckOperation() throw() 
 {
@@ -35,9 +43,27 @@ void UniqueCheckOperation::__construct_impl(ThreadContext* ctx) throw()
 }
 void UniqueCheckOperation::__releaseRegerences(bool prepare, ThreadContext* ctx) throw() 
 {
+	ObjectEraser __e_obj1(ctx, __FILEW__, __LINE__, L"UniqueCheckOperation", L"~UniqueCheckOperation");
+	__e_obj1.add(this->uniqueColList, this);
+	uniqueColList = nullptr;
+	__e_obj1.add(this->values, this);
+	values = nullptr;
 	if(!prepare){
 		return;
 	}
+}
+void UniqueCheckOperation::addValue(List<VariantValue>* values, ThreadContext* ctx) throw() 
+{
+	UniqueOpValue* value = (new(ctx) UniqueOpValue(values, ctx));
+	this->values->add(value, ctx);
+}
+List<TableColumnMetadata>* UniqueCheckOperation::getUniqueColList(ThreadContext* ctx) throw() 
+{
+	return uniqueColList;
+}
+List<UniqueOpValue>* UniqueCheckOperation::getValues(ThreadContext* ctx) throw() 
+{
+	return values;
 }
 void UniqueCheckOperation::__cleanUp(ThreadContext* ctx){
 }

@@ -112,6 +112,7 @@ template class ::java::util::ArrayList<::alinous::remote::db::client::command::d
 template class ::java::util::ArrayList<::alinous::remote::region::client::command::data::ClientNetworkRecord>;
 template class ::java::util::ArrayList<::alinous::remote::region::server::schema::NodeTableReference>;
 template class ::java::util::ArrayList<::alinous::remote::region::server::schema::NodeReference>;
+template class ::java::util::ArrayList<::alinous::remote::region::server::schema::strategy::UniqueOpValue>;
 template class ::java::util::ArrayList<::alinous::remote::region::server::schema::strategy::RegionShardPartAccess>;
 template class ::java::util::ArrayList<::alinous::compile::analyse::VariableDeclareHolder>;
 template class ::java::util::ArrayList<::alinous::compile::analyse::ExpressionStreamResult>;

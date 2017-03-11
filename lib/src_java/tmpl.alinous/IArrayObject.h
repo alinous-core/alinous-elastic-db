@@ -348,6 +348,13 @@ template class alinous::IArrayObject<alinous::ArrayObject<alinous::IArrayObject<
 template class alinous::IArrayObject<alinous::ArrayObject<::alinous::remote::region::server::schema::NodeReference>>;
 template class alinous::IArrayObject<alinous::IArrayObject<alinous::ArrayObject<::alinous::remote::region::server::schema::NodeReference>>>;
 template class alinous::IArrayObject<alinous::ArrayObject<alinous::ArrayObject<::alinous::remote::region::server::schema::NodeReference>>>;
+template class alinous::IArrayObject<::alinous::remote::region::server::schema::strategy::UniqueOpValue>;
+template class alinous::IArrayObject<alinous::IArrayObject<::alinous::remote::region::server::schema::strategy::UniqueOpValue>>;
+template class alinous::IArrayObject<alinous::IArrayObject<alinous::IArrayObject<::alinous::remote::region::server::schema::strategy::UniqueOpValue>>>;
+template class alinous::IArrayObject<alinous::ArrayObject<alinous::IArrayObject<::alinous::remote::region::server::schema::strategy::UniqueOpValue>>>;
+template class alinous::IArrayObject<alinous::ArrayObject<::alinous::remote::region::server::schema::strategy::UniqueOpValue>>;
+template class alinous::IArrayObject<alinous::IArrayObject<alinous::ArrayObject<::alinous::remote::region::server::schema::strategy::UniqueOpValue>>>;
+template class alinous::IArrayObject<alinous::ArrayObject<alinous::ArrayObject<::alinous::remote::region::server::schema::strategy::UniqueOpValue>>>;
 template class alinous::IArrayObject<::alinous::remote::region::server::schema::strategy::RegionShardPartAccess>;
 template class alinous::IArrayObject<alinous::IArrayObject<::alinous::remote::region::server::schema::strategy::RegionShardPartAccess>>;
 template class alinous::IArrayObject<alinous::IArrayObject<alinous::IArrayObject<::alinous::remote::region::server::schema::strategy::RegionShardPartAccess>>>;

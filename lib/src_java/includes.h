@@ -408,6 +408,7 @@
 #include "alinous.remote.region.server.schema.strategy/RegionPartitionTableAccess.h"
 #include "alinous.remote.region.server.schema/NodeRegionSchema.h"
 #include "alinous.remote.region.server.schema/NodeReferenceManager.h"
+#include "alinous.remote.region.server.schema.strategy/UniqueOpValue.h"
 #include "alinous.remote.region.server.schema.strategy/UniqueCheckOperation.h"
 #include "alinous.remote.region.server.schema.strategy/InsertNodeAccessStrategy.h"
 #include "alinous.remote.region.server.schema.strategy/InsertTableStrategy.h"
@@ -1851,6 +1852,7 @@ inline static void __cleanUpStatics(alinous::ThreadContext* ctx){
 	alinous::remote::region::server::schema::NodeCluster::__cleanUp(ctx);
 	alinous::remote::region::server::schema::strategy::UniqueCheckOperation::__cleanUp(ctx);
 	alinous::remote::region::server::schema::strategy::InsertTableStrategy::__cleanUp(ctx);
+	alinous::remote::region::server::schema::strategy::UniqueOpValue::__cleanUp(ctx);
 	alinous::remote::region::server::schema::strategy::RegionShardPartAccess::__cleanUp(ctx);
 	alinous::remote::region::server::schema::strategy::RegionPartitionTableAccess::__cleanUp(ctx);
 	alinous::remote::region::server::schema::strategy::InsertNodeAccessStrategy::__cleanUp(ctx);

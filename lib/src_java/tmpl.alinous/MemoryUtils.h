@@ -444,6 +444,13 @@ template class alinous::MemoryUtils<alinous::ArrayObject<alinous::IArrayObject<:
 template class alinous::MemoryUtils<alinous::ArrayObject<::alinous::remote::region::server::schema::NodeReference>>;
 template class alinous::MemoryUtils<alinous::IArrayObject<alinous::ArrayObject<::alinous::remote::region::server::schema::NodeReference>>>;
 template class alinous::MemoryUtils<alinous::ArrayObject<alinous::ArrayObject<::alinous::remote::region::server::schema::NodeReference>>>;
+template class alinous::MemoryUtils<::alinous::remote::region::server::schema::strategy::UniqueOpValue>;
+template class alinous::MemoryUtils<alinous::IArrayObject<::alinous::remote::region::server::schema::strategy::UniqueOpValue>>;
+template class alinous::MemoryUtils<alinous::IArrayObject<alinous::IArrayObject<::alinous::remote::region::server::schema::strategy::UniqueOpValue>>>;
+template class alinous::MemoryUtils<alinous::ArrayObject<alinous::IArrayObject<::alinous::remote::region::server::schema::strategy::UniqueOpValue>>>;
+template class alinous::MemoryUtils<alinous::ArrayObject<::alinous::remote::region::server::schema::strategy::UniqueOpValue>>;
+template class alinous::MemoryUtils<alinous::IArrayObject<alinous::ArrayObject<::alinous::remote::region::server::schema::strategy::UniqueOpValue>>>;
+template class alinous::MemoryUtils<alinous::ArrayObject<alinous::ArrayObject<::alinous::remote::region::server::schema::strategy::UniqueOpValue>>>;
 template class alinous::MemoryUtils<::alinous::remote::region::server::schema::strategy::RegionShardPartAccess>;
 template class alinous::MemoryUtils<alinous::IArrayObject<::alinous::remote::region::server::schema::strategy::RegionShardPartAccess>>;
 template class alinous::MemoryUtils<alinous::IArrayObject<alinous::IArrayObject<::alinous::remote::region::server::schema::strategy::RegionShardPartAccess>>>;

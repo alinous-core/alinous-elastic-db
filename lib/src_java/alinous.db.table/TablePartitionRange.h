@@ -3,11 +3,11 @@
 namespace alinous {namespace db {namespace table {
 class TablePartitionKey;}}}
 
-namespace alinous {namespace runtime {namespace variant {
-class VariantValue;}}}
-
 namespace java {namespace util {
 template <typename  T> class List;}}
+
+namespace alinous {namespace runtime {namespace variant {
+class VariantValue;}}}
 
 namespace alinous {namespace buffer {namespace storage {
 class FileStorageEntryBuilder;}}}
@@ -82,6 +82,7 @@ private:
 	List<VariantValue>* max;
 	List<VariantValue>* min;
 public:
+	bool isInRange(List<VariantValue>* values, ThreadContext* ctx) throw() ;
 	void addMaxKeyValue(VariantValue* value, ThreadContext* ctx) throw() ;
 	void addMinKeyValue(VariantValue* value, ThreadContext* ctx) throw() ;
 	TablePartitionKey* getKey(ThreadContext* ctx) throw() ;
@@ -91,6 +92,9 @@ public:
 	void toFileEntry(FileStorageEntryBuilder* builder, ThreadContext* ctx);
 	void readData(NetworkBinaryBuffer* buff, ThreadContext* ctx) final;
 	void writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) final;
+private:
+	bool isLessThan(List<VariantValue>* values, ThreadContext* ctx) throw() ;
+	bool isEqGreater(List<VariantValue>* values, ThreadContext* ctx) throw() ;
 public:
 	static TablePartitionRange* loadFromFetcher(FileStorageEntryFetcher* fetcher, ThreadContext* ctx);
 	static TablePartitionRange* fromNetwork(NetworkBinaryBuffer* buff, ThreadContext* ctx);

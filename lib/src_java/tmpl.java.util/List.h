@@ -23,6 +23,7 @@ template class ::java::util::List<::alinous::db::table::TableColumnMetadata>;
 template class ::java::util::List<::alinous::remote::monitor::NodeInfo>;
 template class ::java::util::List<::alinous::remote::region::server::schema::NodeTableReference>;
 template class ::java::util::List<::alinous::remote::region::server::schema::NodeReference>;
+template class ::java::util::List<::alinous::remote::region::server::schema::strategy::UniqueOpValue>;
 template class ::java::util::List<::alinous::remote::region::server::schema::strategy::RegionShardPartAccess>;
 template class ::java::util::List<::alinous::compile::analyse::VariableDeclareHolder>;
 template class ::java::util::List<::alinous::compile::analyse::ExpressionStreamResult>;

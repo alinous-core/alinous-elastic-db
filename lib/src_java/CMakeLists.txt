@@ -479,6 +479,7 @@ set(srcjava
 	"src_java/alinous.remote.region.server.schema.strategy/InsertNodeAccessStrategy.cpp"
 	"src_java/alinous.remote.region.server.schema.strategy/UniqueCheckOperation.cpp"
 	"src_java/alinous.remote.region.server.schema.strategy/RegionPartitionTableAccess.cpp"
+	"src_java/alinous.remote.region.server.schema.strategy/UniqueOpValue.cpp"
 	"src_java/alinous.remote.region.server.schema.strategy/RegionShardPartAccess.cpp"
 	"src_java/alinous.remote.region.server.schema.strategy/InsertTableStrategy.cpp"
 	"src_java/alinous.web.htmlxml.inner/IHtmlStringPart.cpp"
