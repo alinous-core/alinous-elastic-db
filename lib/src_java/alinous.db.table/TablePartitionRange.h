@@ -85,6 +85,8 @@ public:
 	bool isInRange(List<VariantValue>* values, ThreadContext* ctx) throw() ;
 	void addMaxKeyValue(VariantValue* value, ThreadContext* ctx) throw() ;
 	void addMinKeyValue(VariantValue* value, ThreadContext* ctx) throw() ;
+	void setMax(List<VariantValue>* max, ThreadContext* ctx) throw() ;
+	void setMin(List<VariantValue>* min, ThreadContext* ctx) throw() ;
 	TablePartitionKey* getKey(ThreadContext* ctx) throw() ;
 	List<VariantValue>* getMax(ThreadContext* ctx) throw() ;
 	List<VariantValue>* getMin(ThreadContext* ctx) throw() ;

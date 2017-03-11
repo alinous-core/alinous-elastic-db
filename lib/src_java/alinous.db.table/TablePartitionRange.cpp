@@ -123,6 +123,14 @@ void TablePartitionRange::addMinKeyValue(VariantValue* value, ThreadContext* ctx
 {
 	this->min->add(value, ctx);
 }
+void TablePartitionRange::setMax(List<VariantValue>* max, ThreadContext* ctx) throw() 
+{
+	GCUtils<List<VariantValue> >::mv(this, &(this->max), max, ctx);
+}
+void TablePartitionRange::setMin(List<VariantValue>* min, ThreadContext* ctx) throw() 
+{
+	GCUtils<List<VariantValue> >::mv(this, &(this->min), min, ctx);
+}
 TablePartitionKey* TablePartitionRange::getKey(ThreadContext* ctx) throw() 
 {
 	return key;
@@ -236,7 +244,7 @@ bool TablePartitionRange::isLessThan(List<VariantValue>* values, ThreadContext* 
 	{
 		return false;
 	}
-	return true;
+	return false;
 }
 bool TablePartitionRange::isEqGreater(List<VariantValue>* values, ThreadContext* ctx) throw() 
 {
@@ -245,7 +253,7 @@ bool TablePartitionRange::isEqGreater(List<VariantValue>* values, ThreadContext*
 	int maxLoop = rangeLength < valueLength ? rangeLength : valueLength;
 	for(int i = 0; i != maxLoop; ++i)
 	{
-		VariantValue* min = this->max->get(i, ctx);
+		VariantValue* min = this->min->get(i, ctx);
 		VariantValue* vv = values->get(i, ctx);
 		int comp = min->compareTo(vv, ctx);
 		if(comp == 0)

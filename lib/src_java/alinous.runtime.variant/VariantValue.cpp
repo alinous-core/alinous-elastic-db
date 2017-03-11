@@ -474,13 +474,13 @@ bool VariantValue::isNull(ThreadContext* ctx) throw()
 }
 int VariantValue::compareTo(VariantValue* variant, ThreadContext* ctx) throw() 
 {
-	if(isNull(ctx) || variant->isNull(ctx))
-	{
-		return nullCompare(variant, ctx);
-	}
 	if(this->max != (char)0 || variant->max != (char)0)
 	{
 		return compareMinMax(variant, ctx);
+	}
+	if(isNull(ctx) || variant->isNull(ctx))
+	{
+		return nullCompare(variant, ctx);
 	}
 	return this->data->compareTo(variant, ctx);
 }
@@ -1983,7 +1983,7 @@ int VariantValue::compareMinMax(VariantValue* variable, ThreadContext* ctx) thro
 {
 	if(this->max == (char)0)
 	{
-		return variable->max;
+		return (-1) * variable->max;
 	}
 	if(variable->max == (char)0)
 	{
