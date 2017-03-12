@@ -1,6 +1,12 @@
 #ifndef ALINOUS_DB_TABLE_TABLEPARTITIONRANGECOLLECTION_H_
 #define ALINOUS_DB_TABLE_TABLEPARTITIONRANGECOLLECTION_H_
 namespace alinous {namespace db {namespace table {
+class IDatabaseRecord;}}}
+
+namespace alinous {namespace db {namespace table {
+class TablePartitionRange;}}}
+
+namespace alinous {namespace db {namespace table {
 class TablePartitionKey;}}}
 
 namespace java {namespace util {
@@ -10,7 +16,7 @@ namespace alinous {namespace runtime {namespace variant {
 class VariantValue;}}}
 
 namespace alinous {namespace db {namespace table {
-class TablePartitionRange;}}}
+class TableColumnMetadata;}}}
 
 namespace alinous {namespace buffer {namespace storage {
 class FileStorageEntryBuilder;}}}
@@ -78,12 +84,15 @@ private:
 	HashMap<String,TablePartitionRange>* ranges;
 	List<TablePartitionRange>* rangesList;
 public:
+	int compareTo(IDatabaseRecord* record, ThreadContext* ctx) throw() ;
 	bool isInRange(TablePartitionKey* key, List<VariantValue>* values, ThreadContext* ctx) throw() ;
 	void addRange(TablePartitionRange* value, ThreadContext* ctx) throw() ;
 	int fileSize(ThreadContext* ctx);
 	void toFileEntry(FileStorageEntryBuilder* builder, ThreadContext* ctx);
 	void readData(NetworkBinaryBuffer* buff, ThreadContext* ctx) final;
 	void writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) final;
+private:
+	List<VariantValue>* createKeyValues(TablePartitionKey* pkey, IDatabaseRecord* record, ThreadContext* ctx) throw() ;
 public:
 	static TablePartitionRangeCollection* loadFromFetcher(FileStorageEntryFetcher* fetcher, ThreadContext* ctx);
 	static TablePartitionRangeCollection* fromNetwork(NetworkBinaryBuffer* buff, ThreadContext* ctx);
@@ -92,6 +101,10 @@ public:
 	static bool __init_static_variables();
 public:
 	static void __cleanUp(ThreadContext* ctx);
+	class ValueCompare {
+	public:
+		int operator() (IDatabaseRecord* _this, IDatabaseRecord* record, ThreadContext* ctx) const throw();
+	};
 };
 
 }}}

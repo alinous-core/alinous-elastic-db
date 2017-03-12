@@ -82,6 +82,7 @@ private:
 	List<VariantValue>* max;
 	List<VariantValue>* min;
 public:
+	int compareRangeTo(List<VariantValue>* values, ThreadContext* ctx) throw() ;
 	bool isInRange(List<VariantValue>* values, ThreadContext* ctx) throw() ;
 	void addMaxKeyValue(VariantValue* value, ThreadContext* ctx) throw() ;
 	void addMinKeyValue(VariantValue* value, ThreadContext* ctx) throw() ;

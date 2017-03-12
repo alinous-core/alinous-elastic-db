@@ -111,6 +111,20 @@ void TablePartitionRange::__releaseRegerences(bool prepare, ThreadContext* ctx) 
 		return;
 	}
 }
+int TablePartitionRange::compareRangeTo(List<VariantValue>* values, ThreadContext* ctx) throw() 
+{
+	bool lessThanMax = isLessThan(values, ctx);
+	bool eqGreaterMin = isEqGreater(values, ctx);
+	if(lessThanMax && eqGreaterMin)
+	{
+		return 0;
+	}
+	if(!lessThanMax)
+	{
+		return 1;
+	}
+	return -1;
+}
 bool TablePartitionRange::isInRange(List<VariantValue>* values, ThreadContext* ctx) throw() 
 {
 	return isEqGreater(values, ctx) && isLessThan(values, ctx);

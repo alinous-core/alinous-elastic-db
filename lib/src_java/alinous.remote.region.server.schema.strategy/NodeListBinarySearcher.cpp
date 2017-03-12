@@ -97,7 +97,7 @@ RegionShardPartAccess* NodeListBinarySearcher::binarySearch(List<RegionShardPart
 }
 int NodeListBinarySearcher::compareTo(TablePartitionRangeCollection* collectionValue, IDatabaseRecord* record, ThreadContext* ctx) throw() 
 {
-	return 0;
+	return collectionValue->compareTo(record, ctx);
 }
 void NodeListBinarySearcher::__cleanUp(ThreadContext* ctx){
 }

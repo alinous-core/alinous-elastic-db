@@ -12,6 +12,10 @@
 #include "alinous.remote.socket/ICommandData.h"
 #include "alinous.runtime.dom/IAlinousVariable.h"
 #include "alinous.runtime.variant/VariantValue.h"
+#include "alinous.btree/IValueFetcher.h"
+#include "alinous.btree/IBTreeValue.h"
+#include "alinous.db.table/IDatabaseRecord.h"
+#include "alinous.db.table/TableColumnMetadata.h"
 #include "alinous.db.table/TablePartitionKey.h"
 #include "alinous.db.table/TablePartitionRange.h"
 #include "alinous.db.table/TablePartitionRangeCollection.h"
@@ -56,6 +60,22 @@ void TablePartitionRangeCollection::__releaseRegerences(bool prepare, ThreadCont
 	if(!prepare){
 		return;
 	}
+}
+int TablePartitionRangeCollection::compareTo(IDatabaseRecord* record, ThreadContext* ctx) throw() 
+{
+	int maxLoop = this->rangesList->size(ctx);
+	for(int i = 0; i != maxLoop; ++i)
+	{
+		TablePartitionRange* range = this->rangesList->get(i, ctx);
+		TablePartitionKey* pkey = range->getKey(ctx);
+		List<VariantValue>* values = createKeyValues(pkey, record, ctx);
+		int cmp = range->compareRangeTo(values, ctx);
+		if(cmp != 0)
+		{
+			return cmp;
+		}
+	}
+	return 0;
 }
 bool TablePartitionRangeCollection::isInRange(TablePartitionKey* key, List<VariantValue>* values, ThreadContext* ctx) throw() 
 {
@@ -110,6 +130,19 @@ void TablePartitionRangeCollection::writeData(NetworkBinaryBuffer* buff, ThreadC
 		range->writeData(buff, ctx);
 	}
 }
+List<VariantValue>* TablePartitionRangeCollection::createKeyValues(TablePartitionKey* pkey, IDatabaseRecord* record, ThreadContext* ctx) throw() 
+{
+	List<VariantValue>* values = (new(ctx) ArrayList<VariantValue>(ctx));
+	ArrayList<TableColumnMetadata>* keylist = pkey->getKeys(ctx);
+	int maxLoop = keylist->size(ctx);
+	for(int i = 0; i != maxLoop; ++i)
+	{
+		TableColumnMetadata* col = keylist->get(i, ctx);
+		VariantValue* vv = record->getColumnValue(col->columnOrder, ctx);
+		values->add(vv, ctx);
+	}
+	return values;
+}
 TablePartitionRangeCollection* TablePartitionRangeCollection::loadFromFetcher(FileStorageEntryFetcher* fetcher, ThreadContext* ctx)
 {
 	TablePartitionRangeCollection* collection = (new(ctx) TablePartitionRangeCollection(ctx));
@@ -128,6 +161,10 @@ TablePartitionRangeCollection* TablePartitionRangeCollection::fromNetwork(Networ
 	return collection;
 }
 void TablePartitionRangeCollection::__cleanUp(ThreadContext* ctx){
+}
+int TablePartitionRangeCollection::ValueCompare::operator() (IDatabaseRecord* _this, IDatabaseRecord* record, ThreadContext* ctx) const throw()
+{
+	return _this->compareTo(record, ctx);
 }
 }}}
 
