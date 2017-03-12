@@ -18,6 +18,7 @@ template class ::java::util::List<::alinous::runtime::engine::debugger::DebugThr
 template class ::java::util::List<::alinous::runtime::engine::debugger::server::ServerBreakPoint>;
 template class ::java::util::List<::alinous::db::ITableRegion>;
 template class ::java::util::List<::alinous::db::ITableSchema>;
+template class ::java::util::List<::alinous::db::table::TablePartitionRange>;
 template class ::java::util::List<::alinous::db::table::IDatabaseRecord>;
 template class ::java::util::List<::alinous::db::table::TableColumnMetadata>;
 template class ::java::util::List<::alinous::remote::monitor::NodeInfo>;

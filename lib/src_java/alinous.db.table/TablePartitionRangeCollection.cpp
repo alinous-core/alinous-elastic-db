@@ -33,7 +33,7 @@ bool TablePartitionRangeCollection::__init_static_variables(){
 	delete ctx;
 	return true;
 }
- TablePartitionRangeCollection::TablePartitionRangeCollection(ThreadContext* ctx) throw()  : IObject(ctx), ICommandData(ctx), ranges(GCUtils<HashMap<String,TablePartitionRange> >::ins(this, (new(ctx) HashMap<String,TablePartitionRange>(ctx)), ctx, __FILEW__, __LINE__, L""))
+ TablePartitionRangeCollection::TablePartitionRangeCollection(ThreadContext* ctx) throw()  : IObject(ctx), ICommandData(ctx), ranges(GCUtils<HashMap<String,TablePartitionRange> >::ins(this, (new(ctx) HashMap<String,TablePartitionRange>(ctx)), ctx, __FILEW__, __LINE__, L"")), rangesList(GCUtils<List<TablePartitionRange> >::ins(this, (new(ctx) ArrayList<TablePartitionRange>(ctx)), ctx, __FILEW__, __LINE__, L""))
 {
 }
 void TablePartitionRangeCollection::__construct_impl(ThreadContext* ctx) throw() 
@@ -51,6 +51,8 @@ void TablePartitionRangeCollection::__releaseRegerences(bool prepare, ThreadCont
 	ObjectEraser __e_obj1(ctx, __FILEW__, __LINE__, L"TablePartitionRangeCollection", L"~TablePartitionRangeCollection");
 	__e_obj1.add(this->ranges, this);
 	ranges = nullptr;
+	__e_obj1.add(this->rangesList, this);
+	rangesList = nullptr;
 	if(!prepare){
 		return;
 	}
@@ -66,34 +68,26 @@ void TablePartitionRangeCollection::addRange(TablePartitionRange* value, ThreadC
 	TablePartitionKey* ptkey = value->getKey(ctx);
 	String* key = ptkey->getColumnString(ctx);
 	this->ranges->put(key, value, ctx);
-}
-HashMap<String,TablePartitionRange>* TablePartitionRangeCollection::getRanges(ThreadContext* ctx) throw() 
-{
-	return ranges;
+	this->rangesList->add(value, ctx);
 }
 int TablePartitionRangeCollection::fileSize(ThreadContext* ctx)
 {
 	int total = 4;
-	Iterator<String>* it = this->ranges->keySet(ctx)->iterator(ctx);
-	while(it->hasNext(ctx))
+	int maxLoop = this->rangesList->size(ctx);
+	for(int i = 0; i != maxLoop; ++i)
 	{
-		String* key = it->next(ctx);
-		TablePartitionRange* range = this->ranges->get(key, ctx);
-		total += 4 + key->length(ctx) * 2;
+		TablePartitionRange* range = this->rangesList->get(i, ctx);
 		total += range->fileSize(ctx);
 	}
 	return total;
 }
 void TablePartitionRangeCollection::toFileEntry(FileStorageEntryBuilder* builder, ThreadContext* ctx)
 {
-	int maxLoop = this->ranges->size(ctx);
+	int maxLoop = this->rangesList->size(ctx);
 	builder->putInt(maxLoop, ctx);
-	Iterator<String>* it = this->ranges->keySet(ctx)->iterator(ctx);
-	while(it->hasNext(ctx))
+	for(int i = 0; i != maxLoop; ++i)
 	{
-		String* key = it->next(ctx);
-		TablePartitionRange* range = this->ranges->get(key, ctx);
-		builder->putString(key, ctx);
+		TablePartitionRange* range = this->rangesList->get(i, ctx);
 		range->toFileEntry(builder, ctx);
 	}
 }
@@ -102,21 +96,17 @@ void TablePartitionRangeCollection::readData(NetworkBinaryBuffer* buff, ThreadCo
 	int maxLoop = buff->getInt(ctx);
 	for(int i = 0; i != maxLoop; ++i)
 	{
-		String* key = buff->getString(ctx);
 		TablePartitionRange* range = TablePartitionRange::fromNetwork(buff, ctx);
-		this->ranges->put(key, range, ctx);
+		addRange(range, ctx);
 	}
 }
 void TablePartitionRangeCollection::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 {
-	int maxLoop = this->ranges->size(ctx);
+	int maxLoop = this->rangesList->size(ctx);
 	buff->putInt(maxLoop, ctx);
-	Iterator<String>* it = this->ranges->keySet(ctx)->iterator(ctx);
-	while(it->hasNext(ctx))
+	for(int i = 0; i != maxLoop; ++i)
 	{
-		String* key = it->next(ctx);
-		TablePartitionRange* range = this->ranges->get(key, ctx);
-		buff->putString(key, ctx);
+		TablePartitionRange* range = this->rangesList->get(i, ctx);
 		range->writeData(buff, ctx);
 	}
 }
@@ -126,9 +116,8 @@ TablePartitionRangeCollection* TablePartitionRangeCollection::loadFromFetcher(Fi
 	int maxLoop = fetcher->fetchInt(ctx);
 	for(int i = 0; i != maxLoop; ++i)
 	{
-		String* key = fetcher->fetchString(ctx);
 		TablePartitionRange* range = TablePartitionRange::loadFromFetcher(fetcher, ctx);
-		collection->ranges->put(key, range, ctx);
+		collection->addRange(range, ctx);
 	}
 	return collection;
 }

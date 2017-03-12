@@ -3,6 +3,9 @@
 namespace alinous {namespace remote {namespace region {namespace server {namespace schema {namespace strategy {
 class RegionPartitionTableAccess;}}}}}}
 
+namespace alinous {namespace remote {namespace region {namespace server {namespace schema {namespace strategy {
+class NodeListBinarySearcher;}}}}}}
+
 namespace alinous {namespace remote {namespace region {namespace client {namespace command {namespace data {
 class ClientNetworkRecord;}}}}}}
 
@@ -36,6 +39,9 @@ class VariantValue;}}}
 namespace java {namespace util {
 template <typename  T, typename V> class HashMap;}}
 
+namespace alinous {namespace db {
+class AlinousDbException;}}
+
 namespace java {namespace lang {
 class IObject;
 }}
@@ -54,6 +60,7 @@ using ::java::util::HashMap;
 using ::java::util::List;
 using ::alinous::compile::sql::analyze::ScanUnique;
 using ::alinous::compile::sql::analyze::TableMetadataUniqueCollection;
+using ::alinous::db::AlinousDbException;
 using ::alinous::db::table::TablePartitionKey;
 using ::alinous::db::table::TablePartitionRangeCollection;
 using ::alinous::remote::region::client::command::data::ClientNetworkRecord;
@@ -73,15 +80,16 @@ public:
 private:
 	long long commitId;
 	RegionPartitionTableAccess* tableAccess;
+	NodeListBinarySearcher* nodeSearcher;
 	HashMap<String,InsertNodeAccessStrategy>* nodeStrategy;
 public:
-	void build(ArrayList<ClientNetworkRecord>* list, ThreadContext* ctx) throw() ;
+	void build(ArrayList<ClientNetworkRecord>* list, ThreadContext* ctx);
 	long long getCommitId(ThreadContext* ctx) throw() ;
 private:
-	void buildNodeStrategy(ClientNetworkRecord* record, TableMetadataUniqueCollection* uniqueCollection, ThreadContext* ctx) throw() ;
+	void buildNodeStrategy(ClientNetworkRecord* record, TableMetadataUniqueCollection* uniqueCollection, ThreadContext* ctx);
+	void buildRecordStrategy(List<RegionShardPartAccess>* nodeList, ClientNetworkRecord* record, ThreadContext* ctx);
 	void addUniqueCheck(RegionShardPartAccess* node, ClientNetworkRecord* record, TableMetadataUniqueCollection* uniqueCollection, ThreadContext* ctx) throw() ;
 	void buildUniqueStrategy(RegionShardPartAccess* node, ClientNetworkRecord* record, TableMetadataUniqueCollection* uniqueCollection, ThreadContext* ctx) throw() ;
-	void buildRecordStrategy(RegionShardPartAccess* node, ClientNetworkRecord* record, ThreadContext* ctx) throw() ;
 	InsertNodeAccessStrategy* getInsertNodeAccessStorategy(NodeReference* nodeAccessRef, ThreadContext* ctx) throw() ;
 public:
 	static bool __init_done;

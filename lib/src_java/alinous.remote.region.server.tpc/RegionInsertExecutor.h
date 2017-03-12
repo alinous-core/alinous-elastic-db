@@ -15,6 +15,9 @@ class RegionPartitionTableAccess;}}}}}}
 namespace alinous {namespace remote {namespace region {namespace server {namespace schema {namespace strategy {
 class InsertTableStrategy;}}}}}}
 
+namespace alinous {namespace db {
+class AlinousDbException;}}
+
 namespace java {namespace lang {
 class IObject;
 }}
@@ -29,6 +32,7 @@ using namespace ::alinous;
 using namespace ::java::lang;
 using ::java::util::Iterator;
 using ::java::util::ArrayList;
+using ::alinous::db::AlinousDbException;
 using ::alinous::remote::region::client::command::data::ClientNetworkRecord;
 using ::alinous::remote::region::server::schema::NodeReferenceManager;
 using ::alinous::remote::region::server::schema::strategy::InsertTableStrategy;
@@ -50,7 +54,7 @@ private:
 	long long commitId;
 	InsertTableStrategy* strategy;
 public:
-	void prepareInsert(ArrayList<ClientNetworkRecord>* list, String* schema, String* table, ThreadContext* ctx) throw() ;
+	void prepareInsert(ArrayList<ClientNetworkRecord>* list, String* schema, String* table, ThreadContext* ctx);
 	void tpcCommitInsert(ThreadContext* ctx) throw() ;
 	void dispose(ThreadContext* ctx) throw() ;
 	Long* getTrxId(ThreadContext* ctx) throw() ;

@@ -313,6 +313,13 @@ template class alinous::IArrayObject<alinous::ArrayObject<alinous::IArrayObject<
 template class alinous::IArrayObject<alinous::ArrayObject<::alinous::db::ITableSchema>>;
 template class alinous::IArrayObject<alinous::IArrayObject<alinous::ArrayObject<::alinous::db::ITableSchema>>>;
 template class alinous::IArrayObject<alinous::ArrayObject<alinous::ArrayObject<::alinous::db::ITableSchema>>>;
+template class alinous::IArrayObject<::alinous::db::table::TablePartitionRange>;
+template class alinous::IArrayObject<alinous::IArrayObject<::alinous::db::table::TablePartitionRange>>;
+template class alinous::IArrayObject<alinous::IArrayObject<alinous::IArrayObject<::alinous::db::table::TablePartitionRange>>>;
+template class alinous::IArrayObject<alinous::ArrayObject<alinous::IArrayObject<::alinous::db::table::TablePartitionRange>>>;
+template class alinous::IArrayObject<alinous::ArrayObject<::alinous::db::table::TablePartitionRange>>;
+template class alinous::IArrayObject<alinous::IArrayObject<alinous::ArrayObject<::alinous::db::table::TablePartitionRange>>>;
+template class alinous::IArrayObject<alinous::ArrayObject<alinous::ArrayObject<::alinous::db::table::TablePartitionRange>>>;
 template class alinous::IArrayObject<::alinous::db::table::IDatabaseRecord>;
 template class alinous::IArrayObject<alinous::IArrayObject<::alinous::db::table::IDatabaseRecord>>;
 template class alinous::IArrayObject<alinous::IArrayObject<alinous::IArrayObject<::alinous::db::table::IDatabaseRecord>>>;

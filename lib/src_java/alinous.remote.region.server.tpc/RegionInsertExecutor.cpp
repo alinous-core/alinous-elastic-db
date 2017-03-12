@@ -1,6 +1,9 @@
 #include "include/global.h"
 
 
+#include "alinous.compile/AbstractSrcElement.h"
+#include "alinous.system/AlinousException.h"
+#include "alinous.db/AlinousDbException.h"
 #include "alinous.buffer.storage/FileStorageEntryBuilder.h"
 #include "alinous.btree/IValueFetcher.h"
 #include "alinous.btree/IBTreeValue.h"
@@ -64,7 +67,7 @@ void RegionInsertExecutor::__releaseRegerences(bool prepare, ThreadContext* ctx)
 		return;
 	}
 }
-void RegionInsertExecutor::prepareInsert(ArrayList<ClientNetworkRecord>* list, String* schema, String* table, ThreadContext* ctx) throw() 
+void RegionInsertExecutor::prepareInsert(ArrayList<ClientNetworkRecord>* list, String* schema, String* table, ThreadContext* ctx)
 {
 	RegionPartitionTableAccess* tableAccess = this->ref->getCluster(schema, table, ctx);
 	__GC_MV(this, &(this->strategy), (new(ctx) InsertTableStrategy(this->commitId, tableAccess, ctx)), InsertTableStrategy);

@@ -43,6 +43,7 @@ template class alinous::ArrayAllocator<::alinous::db::table::TablePartitionKey>;
 template class alinous::ArrayAllocator<::alinous::runtime::engine::debugger::server::IServerCommand>;
 template class alinous::ArrayAllocator<::alinous::db::ITableRegion>;
 template class alinous::ArrayAllocator<::alinous::db::ITableSchema>;
+template class alinous::ArrayAllocator<::alinous::db::table::TablePartitionRange>;
 template class alinous::ArrayAllocator<::alinous::db::table::IDatabaseRecord>;
 template class alinous::ArrayAllocator<::alinous::db::table::TableColumnMetadata>;
 template class alinous::ArrayAllocator<::alinous::remote::monitor::NodeInfo>;

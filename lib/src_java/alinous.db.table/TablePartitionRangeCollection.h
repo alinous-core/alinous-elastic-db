@@ -12,12 +12,6 @@ class VariantValue;}}}
 namespace alinous {namespace db {namespace table {
 class TablePartitionRange;}}}
 
-namespace java {namespace util {
-template <typename  T, typename V> class HashMap;}}
-
-namespace java {namespace util {
-template <typename  T> class Iterator;}}
-
 namespace alinous {namespace buffer {namespace storage {
 class FileStorageEntryBuilder;}}}
 
@@ -29,6 +23,9 @@ class FileStorageEntryFetcher;}}}
 
 namespace alinous {namespace remote {namespace socket {
 class NetworkBinaryBuffer;}}}
+
+namespace java {namespace util {
+template <typename  T, typename V> class HashMap;}}
 
 namespace alinous {namespace remote {namespace socket {
 class ICommandData;}}}
@@ -55,8 +52,8 @@ namespace alinous {namespace db {namespace table {
 using namespace ::alinous;
 using namespace ::java::lang;
 using ::java::util::Iterator;
+using ::java::util::ArrayList;
 using ::java::util::HashMap;
-using ::java::util::Iterator;
 using ::java::util::List;
 using ::alinous::buffer::storage::FileStorageEntryBuilder;
 using ::alinous::buffer::storage::FileStorageEntryFetcher;
@@ -79,10 +76,10 @@ public:
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 private:
 	HashMap<String,TablePartitionRange>* ranges;
+	List<TablePartitionRange>* rangesList;
 public:
 	bool isInRange(TablePartitionKey* key, List<VariantValue>* values, ThreadContext* ctx) throw() ;
 	void addRange(TablePartitionRange* value, ThreadContext* ctx) throw() ;
-	HashMap<String,TablePartitionRange>* getRanges(ThreadContext* ctx) throw() ;
 	int fileSize(ThreadContext* ctx);
 	void toFileEntry(FileStorageEntryBuilder* builder, ThreadContext* ctx);
 	void readData(NetworkBinaryBuffer* buff, ThreadContext* ctx) final;

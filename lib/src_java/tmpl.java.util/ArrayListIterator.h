@@ -94,6 +94,7 @@ template class ::java::util::ArrayListIterator<::alinous::db::trx::scan::ScanRes
 template class ::java::util::ArrayListIterator<::alinous::db::trx::cache::TrxRecordCacheIndex>;
 template class ::java::util::ArrayListIterator<::alinous::db::TableSchema>;
 template class ::java::util::ArrayListIterator<::alinous::db::trx::CreateIndexMetadata>;
+template class ::java::util::ArrayListIterator<::alinous::db::table::TablePartitionRange>;
 template class ::java::util::ArrayListIterator<::alinous::db::table::TablePartitionKey>;
 template class ::java::util::ArrayListIterator<::alinous::db::table::IScannableIndex>;
 template class ::java::util::ArrayListIterator<::alinous::db::table::TableMetadataUnique>;

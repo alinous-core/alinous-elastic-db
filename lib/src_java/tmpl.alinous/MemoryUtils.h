@@ -409,6 +409,13 @@ template class alinous::MemoryUtils<alinous::ArrayObject<alinous::IArrayObject<:
 template class alinous::MemoryUtils<alinous::ArrayObject<::alinous::db::ITableSchema>>;
 template class alinous::MemoryUtils<alinous::IArrayObject<alinous::ArrayObject<::alinous::db::ITableSchema>>>;
 template class alinous::MemoryUtils<alinous::ArrayObject<alinous::ArrayObject<::alinous::db::ITableSchema>>>;
+template class alinous::MemoryUtils<::alinous::db::table::TablePartitionRange>;
+template class alinous::MemoryUtils<alinous::IArrayObject<::alinous::db::table::TablePartitionRange>>;
+template class alinous::MemoryUtils<alinous::IArrayObject<alinous::IArrayObject<::alinous::db::table::TablePartitionRange>>>;
+template class alinous::MemoryUtils<alinous::ArrayObject<alinous::IArrayObject<::alinous::db::table::TablePartitionRange>>>;
+template class alinous::MemoryUtils<alinous::ArrayObject<::alinous::db::table::TablePartitionRange>>;
+template class alinous::MemoryUtils<alinous::IArrayObject<alinous::ArrayObject<::alinous::db::table::TablePartitionRange>>>;
+template class alinous::MemoryUtils<alinous::ArrayObject<alinous::ArrayObject<::alinous::db::table::TablePartitionRange>>>;
 template class alinous::MemoryUtils<::alinous::db::table::IDatabaseRecord>;
 template class alinous::MemoryUtils<alinous::IArrayObject<::alinous::db::table::IDatabaseRecord>>;
 template class alinous::MemoryUtils<alinous::IArrayObject<alinous::IArrayObject<::alinous::db::table::IDatabaseRecord>>>;

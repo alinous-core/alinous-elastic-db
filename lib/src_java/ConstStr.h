@@ -9480,6 +9480,9 @@ public:
 	constexpr static StaticUnicodeString __CNST_STR_2930{L"application/vnd.cups-ppd",24};
 public:
 	static UnicodeStringWrapper* getCNST_STR_2930() throw();
+	constexpr static StaticUnicodeString __CNST_STR_3613{L"Node info is broken",19};
+public:
+	static UnicodeStringWrapper* getCNST_STR_3613() throw();
 	constexpr static StaticUnicodeString __CNST_STR_0{L"Invalid parameter",17};
 public:
 	static UnicodeStringWrapper* getCNST_STR_0() throw();

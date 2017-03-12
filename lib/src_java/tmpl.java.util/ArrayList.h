@@ -82,6 +82,7 @@ template class ::java::util::ArrayList<::alinous::db::trx::scan::ScanResultRecor
 template class ::java::util::ArrayList<::alinous::db::trx::cache::TrxRecordCacheIndex>;
 template class ::java::util::ArrayList<::alinous::db::TableSchema>;
 template class ::java::util::ArrayList<::alinous::db::trx::CreateIndexMetadata>;
+template class ::java::util::ArrayList<::alinous::db::table::TablePartitionRange>;
 template class ::java::util::ArrayList<::alinous::db::table::TablePartitionKey>;
 template class ::java::util::ArrayList<::alinous::db::table::IScannableIndex>;
 template class ::java::util::ArrayList<::alinous::db::table::TableMetadataUnique>;

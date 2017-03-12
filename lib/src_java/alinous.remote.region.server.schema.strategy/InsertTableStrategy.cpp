@@ -2,6 +2,8 @@
 
 
 #include "alinous.buffer.storage/FileStorageEntryBuilder.h"
+#include "alinous.compile/AbstractSrcElement.h"
+#include "alinous.system/AlinousException.h"
 #include "alinous.buffer.storage/FileStorageEntryFetcher.h"
 #include "alinous.btree/IValueFetcher.h"
 #include "alinous.btree/IBTreeValue.h"
@@ -12,6 +14,7 @@
 #include "alinous.db.table/IDatabaseRecord.h"
 #include "alinous.db.table/TableColumnMetadata.h"
 #include "alinous.db.table/TableMetadataUnique.h"
+#include "alinous.db/AlinousDbException.h"
 #include "alinous.db.table/TablePartitionKey.h"
 #include "alinous.compile.sql.analyze/ScanUnique.h"
 #include "alinous.compile.sql.analyze/TableMetadataUniqueCollection.h"
@@ -20,6 +23,7 @@
 #include "alinous.remote.region.server.schema/NodeReference.h"
 #include "alinous.remote.region.server.schema.strategy/RegionShardPartAccess.h"
 #include "alinous.remote.region.server.schema.strategy/RegionPartitionTableAccess.h"
+#include "alinous.remote.region.server.schema.strategy/NodeListBinarySearcher.h"
 #include "alinous.remote.region.server.schema.strategy/InsertNodeAccessStrategy.h"
 #include "alinous.remote.region.server.schema.strategy/InsertTableStrategy.h"
 
@@ -40,15 +44,17 @@ bool InsertTableStrategy::__init_static_variables(){
 	delete ctx;
 	return true;
 }
- InsertTableStrategy::InsertTableStrategy(long long commitId, RegionPartitionTableAccess* tableAccess, ThreadContext* ctx) throw()  : IObject(ctx), commitId(0), tableAccess(nullptr), nodeStrategy(GCUtils<HashMap<String,InsertNodeAccessStrategy> >::ins(this, (new(ctx) HashMap<String,InsertNodeAccessStrategy>(ctx)), ctx, __FILEW__, __LINE__, L""))
+ InsertTableStrategy::InsertTableStrategy(long long commitId, RegionPartitionTableAccess* tableAccess, ThreadContext* ctx) throw()  : IObject(ctx), commitId(0), tableAccess(nullptr), nodeSearcher(nullptr), nodeStrategy(GCUtils<HashMap<String,InsertNodeAccessStrategy> >::ins(this, (new(ctx) HashMap<String,InsertNodeAccessStrategy>(ctx)), ctx, __FILEW__, __LINE__, L""))
 {
 	this->commitId = commitId;
 	__GC_MV(this, &(this->tableAccess), tableAccess, RegionPartitionTableAccess);
+	__GC_MV(this, &(this->nodeSearcher), (new(ctx) NodeListBinarySearcher(tableAccess->getShardParts(ctx), ctx)), NodeListBinarySearcher);
 }
 void InsertTableStrategy::__construct_impl(long long commitId, RegionPartitionTableAccess* tableAccess, ThreadContext* ctx) throw() 
 {
 	this->commitId = commitId;
 	__GC_MV(this, &(this->tableAccess), tableAccess, RegionPartitionTableAccess);
+	__GC_MV(this, &(this->nodeSearcher), (new(ctx) NodeListBinarySearcher(tableAccess->getShardParts(ctx), ctx)), NodeListBinarySearcher);
 }
  InsertTableStrategy::~InsertTableStrategy() throw() 
 {
@@ -62,13 +68,15 @@ void InsertTableStrategy::__releaseRegerences(bool prepare, ThreadContext* ctx) 
 	ObjectEraser __e_obj1(ctx, __FILEW__, __LINE__, L"InsertTableStrategy", L"~InsertTableStrategy");
 	__e_obj1.add(this->tableAccess, this);
 	tableAccess = nullptr;
+	__e_obj1.add(this->nodeSearcher, this);
+	nodeSearcher = nullptr;
 	__e_obj1.add(this->nodeStrategy, this);
 	nodeStrategy = nullptr;
 	if(!prepare){
 		return;
 	}
 }
-void InsertTableStrategy::build(ArrayList<ClientNetworkRecord>* list, ThreadContext* ctx) throw() 
+void InsertTableStrategy::build(ArrayList<ClientNetworkRecord>* list, ThreadContext* ctx)
 {
 	TableMetadataUniqueCollection* uniqueCollection = tableAccess->getMetadata(ctx)->getUniques(ctx);
 	int maxLoop = list->size(ctx);
@@ -82,7 +90,7 @@ long long InsertTableStrategy::getCommitId(ThreadContext* ctx) throw()
 {
 	return commitId;
 }
-void InsertTableStrategy::buildNodeStrategy(ClientNetworkRecord* record, TableMetadataUniqueCollection* uniqueCollection, ThreadContext* ctx) throw() 
+void InsertTableStrategy::buildNodeStrategy(ClientNetworkRecord* record, TableMetadataUniqueCollection* uniqueCollection, ThreadContext* ctx)
 {
 	List<RegionShardPartAccess>* list = this->tableAccess->getShardParts(ctx);
 	bool fullCover = uniqueCollection->isFullCover(ctx);
@@ -98,8 +106,12 @@ void InsertTableStrategy::buildNodeStrategy(ClientNetworkRecord* record, TableMe
 		{
 			addUniqueCheck(node, record, uniqueCollection, ctx);
 		}
-		buildRecordStrategy(node, record, ctx);
 	}
+	buildRecordStrategy(list, record, ctx);
+}
+void InsertTableStrategy::buildRecordStrategy(List<RegionShardPartAccess>* nodeList, ClientNetworkRecord* record, ThreadContext* ctx)
+{
+	nodeSearcher->searchNode(record, ctx);
 }
 void InsertTableStrategy::addUniqueCheck(RegionShardPartAccess* node, ClientNetworkRecord* record, TableMetadataUniqueCollection* uniqueCollection, ThreadContext* ctx) throw() 
 {
@@ -146,9 +158,6 @@ void InsertTableStrategy::buildUniqueStrategy(RegionShardPartAccess* node, Clien
 			nodeStoragegy->addUniqueCheckOperation(unique->getUniqueColList(ctx), values, ctx);
 		}
 	}
-}
-void InsertTableStrategy::buildRecordStrategy(RegionShardPartAccess* node, ClientNetworkRecord* record, ThreadContext* ctx) throw() 
-{
 }
 InsertNodeAccessStrategy* InsertTableStrategy::getInsertNodeAccessStorategy(NodeReference* nodeAccessRef, ThreadContext* ctx) throw() 
 {
