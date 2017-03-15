@@ -54,7 +54,7 @@ void ClientTpcCommitSessionCommand::__releaseRegerences(bool prepare, ThreadCont
 }
 void ClientTpcCommitSessionCommand::executeOnServer(NodeRegionServer* nodeRegionServer, BufferedOutputStream* outStream, ThreadContext* ctx)
 {
-	nodeRegionServer->finishInsertData(this->trxId, ctx);
+	nodeRegionServer->commitUpdateData(this->trxId, ctx);
 	writeByteStream(outStream, ctx);
 }
 void ClientTpcCommitSessionCommand::readFromStream(InputStream* stream, int remain, ThreadContext* ctx)

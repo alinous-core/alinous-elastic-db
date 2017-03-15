@@ -2184,6 +2184,9 @@ public:
 	constexpr static StaticUnicodeString __CNST_STR_3420{L"application/vnd.wordperfect",27};
 public:
 	static UnicodeStringWrapper* getCNST_STR_3420() throw();
+	constexpr static StaticUnicodeString __CNST_STR_3614{L"UniqueOpValue is required",25};
+public:
+	static UnicodeStringWrapper* getCNST_STR_3614() throw();
 	constexpr static StaticUnicodeString __CNST_STR_322{L"0x",2};
 public:
 	static UnicodeStringWrapper* getCNST_STR_322() throw();
@@ -7464,6 +7467,9 @@ public:
 	constexpr static StaticUnicodeString __CNST_STR_2420{L"application/x-hdf",17};
 public:
 	static UnicodeStringWrapper* getCNST_STR_2420() throw();
+	constexpr static StaticUnicodeString __CNST_STR_3613{L"TableColumnMetadata is required",31};
+public:
+	static UnicodeStringWrapper* getCNST_STR_3613() throw();
 	constexpr static StaticUnicodeString __CNST_STR_1401{L"\"continue\"",10};
 public:
 	static UnicodeStringWrapper* getCNST_STR_1401() throw();
@@ -9480,9 +9486,9 @@ public:
 	constexpr static StaticUnicodeString __CNST_STR_2930{L"application/vnd.cups-ppd",24};
 public:
 	static UnicodeStringWrapper* getCNST_STR_2930() throw();
-	constexpr static StaticUnicodeString __CNST_STR_3613{L"Node info is broken",19};
+	constexpr static StaticUnicodeString __CNST_STR_3615{L"Node info is broken",19};
 public:
-	static UnicodeStringWrapper* getCNST_STR_3613() throw();
+	static UnicodeStringWrapper* getCNST_STR_3615() throw();
 	constexpr static StaticUnicodeString __CNST_STR_0{L"Invalid parameter",17};
 public:
 	static UnicodeStringWrapper* getCNST_STR_0() throw();

@@ -73,7 +73,7 @@ void ClientInsertDataCommand::executeOnServer(NodeRegionServer* nodeRegionServer
 	{
 		try
 		{
-			nodeRegionServer->InsertData(this->list, this->commitId, this->schema, this->table, this->vctx, ctx);
+			nodeRegionServer->insertData(this->list, this->commitId, this->schema, this->table, this->vctx, ctx);
 		}
 		catch(AlinousException* e)
 		{

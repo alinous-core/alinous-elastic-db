@@ -1,6 +1,10 @@
 #include "include/global.h"
 
 
+#include "alinous.compile/AbstractSrcElement.h"
+#include "alinous.system/AlinousException.h"
+#include "alinous.runtime/ExecutionException.h"
+#include "alinous.runtime.dom/VariableException.h"
 #include "alinous.remote.socket/NetworkBinaryBuffer.h"
 #include "alinous.remote.socket/ICommandData.h"
 #include "alinous.db.table/TableColumnMetadata.h"
@@ -26,7 +30,7 @@ bool UniqueCheckOperation::__init_static_variables(){
 	delete ctx;
 	return true;
 }
- UniqueCheckOperation::UniqueCheckOperation(List<TableColumnMetadata>* uniqueColList, ThreadContext* ctx) throw()  : IObject(ctx), uniqueColList(nullptr), values(GCUtils<List<UniqueOpValue> >::ins(this, (new(ctx) ArrayList<UniqueOpValue>(ctx)), ctx, __FILEW__, __LINE__, L""))
+ UniqueCheckOperation::UniqueCheckOperation(List<TableColumnMetadata>* uniqueColList, ThreadContext* ctx) throw()  : IObject(ctx), ICommandData(ctx), uniqueColList(nullptr), values(GCUtils<List<UniqueOpValue> >::ins(this, (new(ctx) ArrayList<UniqueOpValue>(ctx)), ctx, __FILEW__, __LINE__, L""))
 {
 	GCUtils<List<TableColumnMetadata> >::mv(this, &(this->uniqueColList), uniqueColList, ctx);
 }
@@ -64,6 +68,46 @@ List<TableColumnMetadata>* UniqueCheckOperation::getUniqueColList(ThreadContext*
 List<UniqueOpValue>* UniqueCheckOperation::getValues(ThreadContext* ctx) throw() 
 {
 	return values;
+}
+void UniqueCheckOperation::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
+{
+	int maxLoop = buff->getInt(ctx);
+	for(int i = 0; i != maxLoop; ++i)
+	{
+		TableColumnMetadata* col = TableColumnMetadata::fromNetwork(buff, ctx);
+		if(col == nullptr)
+		{
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_3613(), ctx));
+		}
+		this->uniqueColList->add(col, ctx);
+	}
+	maxLoop = buff->getInt(ctx);
+	for(int i = 0; i != maxLoop; ++i)
+	{
+		UniqueOpValue* op = UniqueOpValue::fromNetwork(buff, ctx);
+		if(op == nullptr)
+		{
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_3614(), ctx));
+		}
+		this->values->add(op, ctx);
+	}
+}
+void UniqueCheckOperation::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
+{
+	int maxLoop = this->uniqueColList->size(ctx);
+	buff->putInt(maxLoop, ctx);
+	for(int i = 0; i != maxLoop; ++i)
+	{
+		TableColumnMetadata* col = this->uniqueColList->get(i, ctx);
+		col->writeData(buff, ctx);
+	}
+	maxLoop = this->values->size(ctx);
+	buff->putInt(maxLoop, ctx);
+	for(int i = 0; i != maxLoop; ++i)
+	{
+		UniqueOpValue* op = this->values->get(i, ctx);
+		op->writeData(buff, ctx);
+	}
 }
 void UniqueCheckOperation::__cleanUp(ThreadContext* ctx){
 }

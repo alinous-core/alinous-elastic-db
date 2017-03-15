@@ -186,13 +186,13 @@ void NodeRegionServer::createTable(TableMetadata* metadata, ThreadContext* ctx)
 	}
 	syncScheme(ctx);
 }
-void NodeRegionServer::InsertData(ArrayList<ClientNetworkRecord>* list, long long commitId, String* schema, String* table, DbVersionContext* vctx, ThreadContext* ctx)
+void NodeRegionServer::insertData(ArrayList<ClientNetworkRecord>* list, long long commitId, String* schema, String* table, DbVersionContext* vctx, ThreadContext* ctx)
 {
 	checkVersion(vctx, ctx);
 	RegionInsertExecutor* exec = this->insertSessions->getInsertSession(vctx->getTrxId(ctx), commitId, vctx, this->refs, ctx);
 	exec->prepareInsert(list, schema, table, ctx);
 }
-void NodeRegionServer::finishInsertData(long long trxId, ThreadContext* ctx) throw() 
+void NodeRegionServer::commitUpdateData(long long trxId, ThreadContext* ctx) throw() 
 {
 	this->insertSessions->removeInsertSession(trxId, ctx);
 }

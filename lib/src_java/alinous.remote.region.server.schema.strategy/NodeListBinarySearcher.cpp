@@ -59,7 +59,7 @@ RegionShardPartAccess* NodeListBinarySearcher::searchNode(IDatabaseRecord* recor
 	RegionShardPartAccess* access = binarySearch(nodeList, record, ctx);
 	if(access == nullptr)
 	{
-		throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3613(), ctx));
+		throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3615(), ctx));
 	}
 	return access;
 }
@@ -97,7 +97,7 @@ RegionShardPartAccess* NodeListBinarySearcher::binarySearch(List<RegionShardPart
 }
 int NodeListBinarySearcher::compareTo(TablePartitionRangeCollection* collectionValue, IDatabaseRecord* record, ThreadContext* ctx) throw() 
 {
-	return collectionValue->compareTo(record, ctx);
+	return collectionValue->compareToRecord(record, ctx);
 }
 void NodeListBinarySearcher::__cleanUp(ThreadContext* ctx){
 }

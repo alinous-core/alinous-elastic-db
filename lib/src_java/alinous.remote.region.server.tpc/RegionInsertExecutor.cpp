@@ -4,12 +4,19 @@
 #include "alinous.compile/AbstractSrcElement.h"
 #include "alinous.system/AlinousException.h"
 #include "alinous.db/AlinousDbException.h"
+#include "java.io/FilterOutputStream.h"
+#include "java.io/BufferedOutputStream.h"
 #include "alinous.buffer.storage/FileStorageEntryBuilder.h"
 #include "alinous.btree/IValueFetcher.h"
 #include "alinous.btree/IBTreeValue.h"
+#include "alinous.remote.db/RemoteTableStorageServer.h"
+#include "alinous.remote.socket/NetworkBinaryBuffer.h"
+#include "alinous.remote.db.client.command/RemoteStorageCommandReader.h"
+#include "alinous.remote.db.client.command/AbstractRemoteStorageCommand.h"
 #include "alinous.db.table/IDatabaseRecord.h"
 #include "alinous.remote.socket/ICommandData.h"
 #include "alinous.remote.region.client.command.data/ClientNetworkRecord.h"
+#include "alinous.remote.db.client.command.dml/InsertPrepareCommand.h"
 #include "alinous.remote.region.server.schema.strategy/RegionPartitionTableAccess.h"
 #include "alinous.remote.region.server.schema/NodeReferenceManager.h"
 #include "alinous.remote.region.server.schema.strategy/InsertTableStrategy.h"
@@ -72,6 +79,13 @@ void RegionInsertExecutor::prepareInsert(ArrayList<ClientNetworkRecord>* list, S
 	RegionPartitionTableAccess* tableAccess = this->ref->getCluster(schema, table, ctx);
 	__GC_MV(this, &(this->strategy), (new(ctx) InsertTableStrategy(this->commitId, tableAccess, ctx)), InsertTableStrategy);
 	this->strategy->build(list, ctx);
+	List<InsertPrepareCommand>* prepares = this->strategy->toPrepareCommand(ctx);
+	int maxLoop = prepares->size(ctx);
+	for(int i = 0; i != maxLoop; ++i)
+	{
+		InsertPrepareCommand* cmd = prepares->get(i, ctx);
+		sendPrepareCommand(cmd, ctx);
+	}
 }
 void RegionInsertExecutor::tpcCommitInsert(ThreadContext* ctx) throw() 
 {
@@ -82,6 +96,9 @@ void RegionInsertExecutor::dispose(ThreadContext* ctx) throw()
 Long* RegionInsertExecutor::getTrxId(ThreadContext* ctx) throw() 
 {
 	return trxId;
+}
+void RegionInsertExecutor::sendPrepareCommand(InsertPrepareCommand* cmd, ThreadContext* ctx) throw() 
+{
 }
 void RegionInsertExecutor::__cleanUp(ThreadContext* ctx){
 }

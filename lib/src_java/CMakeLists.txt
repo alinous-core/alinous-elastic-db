@@ -625,6 +625,8 @@ set(srcjava
 	"src_java/alinous.compile.stmt/StatementList.cpp"
 	"src_java/alinous.compile.stmt/ThrowStatement.cpp"
 	"src_java/alinous.compile.stmt/DoWhileStatement.cpp"
+	"src_java/alinous.remote.db.client.command.dml/InsertPrepareCommand.cpp"
+	"src_java/alinous.remote.db.client.command.dml/CommitDMLCommand.cpp"
 	"src_java/alinous.compile.sql.select.join.scan/JoinedCollectionScanner.cpp"
 	"src_java/alinous.compile.sql.select.join.scan/ReverseIndexScanner.cpp"
 	"src_java/alinous.compile.sql.select.join.scan/RightindexJoinScanner.cpp"

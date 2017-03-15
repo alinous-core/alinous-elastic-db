@@ -12,6 +12,15 @@ class VariantValue;}}}
 namespace alinous {namespace remote {namespace region {namespace server {namespace schema {namespace strategy {
 class UniqueOpValue;}}}}}}
 
+namespace alinous {namespace remote {namespace socket {
+class NetworkBinaryBuffer;}}}
+
+namespace alinous {namespace runtime {namespace dom {
+class VariableException;}}}
+
+namespace alinous {namespace remote {namespace socket {
+class ICommandData;}}}
+
 namespace java {namespace lang {
 class IObject;
 }}
@@ -28,11 +37,14 @@ using ::java::util::Iterator;
 using ::java::util::ArrayList;
 using ::java::util::List;
 using ::alinous::db::table::TableColumnMetadata;
+using ::alinous::remote::socket::ICommandData;
+using ::alinous::remote::socket::NetworkBinaryBuffer;
+using ::alinous::runtime::dom::VariableException;
 using ::alinous::runtime::variant::VariantValue;
 
 
 
-class UniqueCheckOperation final : public virtual IObject {
+class UniqueCheckOperation final : public ICommandData, public virtual IObject {
 public:
 	UniqueCheckOperation(const UniqueCheckOperation& base) = default;
 public:
@@ -47,6 +59,8 @@ public:
 	void addValue(List<VariantValue>* values, ThreadContext* ctx) throw() ;
 	List<TableColumnMetadata>* getUniqueColList(ThreadContext* ctx) throw() ;
 	List<UniqueOpValue>* getValues(ThreadContext* ctx) throw() ;
+	void readData(NetworkBinaryBuffer* buff, ThreadContext* ctx) final;
+	void writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) final;
 public:
 	static bool __init_done;
 	static bool __init_static_variables();

@@ -25,6 +25,8 @@ constexpr const int AbstractRemoteStorageCommand::TYPE_TERMINATE;
 constexpr const int AbstractRemoteStorageCommand::TYPE_GET_TABLE_SCHEME;
 constexpr const int AbstractRemoteStorageCommand::TYPE_CREATE_SCHEMA;
 constexpr const int AbstractRemoteStorageCommand::TYPE_CREATE_TABLE;
+constexpr const int AbstractRemoteStorageCommand::TYPE_INSERT_PREPARE;
+constexpr const int AbstractRemoteStorageCommand::TYPE_COMMIT_DML;
 bool AbstractRemoteStorageCommand::__init_done = __init_static_variables();
 bool AbstractRemoteStorageCommand::__init_static_variables(){
 	Java2CppSystem::getSelf();

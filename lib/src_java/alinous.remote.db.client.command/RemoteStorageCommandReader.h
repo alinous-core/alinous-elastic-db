@@ -27,6 +27,12 @@ class CreateSchemaCommand;}}}}}}
 namespace alinous {namespace remote {namespace db {namespace client {namespace command {namespace ddl {
 class CreateTableCommand;}}}}}}
 
+namespace alinous {namespace remote {namespace db {namespace client {namespace command {namespace dml {
+class InsertPrepareCommand;}}}}}}
+
+namespace alinous {namespace remote {namespace db {namespace client {namespace command {namespace dml {
+class CommitDMLCommand;}}}}}}
+
 namespace alinous {namespace system {
 class AlinousException;}}
 
@@ -53,6 +59,8 @@ using ::java::io::IOException;
 using ::java::io::InputStream;
 using ::alinous::remote::db::client::command::ddl::CreateSchemaCommand;
 using ::alinous::remote::db::client::command::ddl::CreateTableCommand;
+using ::alinous::remote::db::client::command::dml::CommitDMLCommand;
+using ::alinous::remote::db::client::command::dml::InsertPrepareCommand;
 using ::alinous::remote::socket::NetworkBinalyUtils;
 using ::alinous::system::AlinousException;
 

@@ -84,7 +84,7 @@ private:
 	HashMap<String,TablePartitionRange>* ranges;
 	List<TablePartitionRange>* rangesList;
 public:
-	int compareTo(IDatabaseRecord* record, ThreadContext* ctx) throw() ;
+	int compareToRecord(IDatabaseRecord* record, ThreadContext* ctx) throw() ;
 	bool isInRange(TablePartitionKey* key, List<VariantValue>* values, ThreadContext* ctx) throw() ;
 	void addRange(TablePartitionRange* value, ThreadContext* ctx) throw() ;
 	int fileSize(ThreadContext* ctx);
@@ -101,10 +101,6 @@ public:
 	static bool __init_static_variables();
 public:
 	static void __cleanUp(ThreadContext* ctx);
-	class ValueCompare {
-	public:
-		int operator() (IDatabaseRecord* _this, IDatabaseRecord* record, ThreadContext* ctx) const throw();
-	};
 };
 
 }}}

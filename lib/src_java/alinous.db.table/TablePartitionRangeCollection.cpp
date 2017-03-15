@@ -61,7 +61,7 @@ void TablePartitionRangeCollection::__releaseRegerences(bool prepare, ThreadCont
 		return;
 	}
 }
-int TablePartitionRangeCollection::compareTo(IDatabaseRecord* record, ThreadContext* ctx) throw() 
+int TablePartitionRangeCollection::compareToRecord(IDatabaseRecord* record, ThreadContext* ctx) throw() 
 {
 	int maxLoop = this->rangesList->size(ctx);
 	for(int i = 0; i != maxLoop; ++i)
@@ -161,10 +161,6 @@ TablePartitionRangeCollection* TablePartitionRangeCollection::fromNetwork(Networ
 	return collection;
 }
 void TablePartitionRangeCollection::__cleanUp(ThreadContext* ctx){
-}
-int TablePartitionRangeCollection::ValueCompare::operator() (IDatabaseRecord* _this, IDatabaseRecord* record, ThreadContext* ctx) const throw()
-{
-	return _this->compareTo(record, ctx);
 }
 }}}
 

@@ -19,8 +19,15 @@
 #include "alinous.compile.sql.analyze/ScanUnique.h"
 #include "alinous.compile.sql.analyze/TableMetadataUniqueCollection.h"
 #include "alinous.db.table/TablePartitionRangeCollection.h"
+#include "alinous.db.table/TableMetadata.h"
+#include "java.io/FilterOutputStream.h"
+#include "java.io/BufferedOutputStream.h"
+#include "alinous.remote.db/RemoteTableStorageServer.h"
+#include "alinous.remote.db.client.command/RemoteStorageCommandReader.h"
+#include "alinous.remote.db.client.command/AbstractRemoteStorageCommand.h"
 #include "alinous.remote.region.client.command.data/ClientNetworkRecord.h"
 #include "alinous.remote.region.server.schema/NodeReference.h"
+#include "alinous.remote.db.client.command.dml/InsertPrepareCommand.h"
 #include "alinous.remote.region.server.schema.strategy/RegionShardPartAccess.h"
 #include "alinous.remote.region.server.schema.strategy/RegionPartitionTableAccess.h"
 #include "alinous.remote.region.server.schema.strategy/NodeListBinarySearcher.h"
@@ -76,9 +83,23 @@ void InsertTableStrategy::__releaseRegerences(bool prepare, ThreadContext* ctx) 
 		return;
 	}
 }
+List<InsertPrepareCommand>* InsertTableStrategy::toPrepareCommand(ThreadContext* ctx) throw() 
+{
+	List<InsertPrepareCommand>* list = (new(ctx) ArrayList<InsertPrepareCommand>(ctx));
+	Iterator<String>* it = this->nodeStrategy->keySet(ctx)->iterator(ctx);
+	while(it->hasNext(ctx))
+	{
+		String* nodestr = it->next(ctx);
+		InsertNodeAccessStrategy* strategy = this->nodeStrategy->get(nodestr, ctx);
+		InsertPrepareCommand* cmd = strategy->toCommand(ctx);
+		list->add(cmd, ctx);
+	}
+	return list;
+}
 void InsertTableStrategy::build(ArrayList<ClientNetworkRecord>* list, ThreadContext* ctx)
 {
-	TableMetadataUniqueCollection* uniqueCollection = tableAccess->getMetadata(ctx)->getUniques(ctx);
+	TableMetadata* meta = tableAccess->getMetadata(ctx);
+	TableMetadataUniqueCollection* uniqueCollection = meta->getUniques(ctx);
 	int maxLoop = list->size(ctx);
 	for(int i = 0; i != maxLoop; ++i)
 	{
@@ -111,7 +132,9 @@ void InsertTableStrategy::buildNodeStrategy(ClientNetworkRecord* record, TableMe
 }
 void InsertTableStrategy::buildRecordStrategy(List<RegionShardPartAccess>* nodeList, ClientNetworkRecord* record, ThreadContext* ctx)
 {
-	nodeSearcher->searchNode(record, ctx);
+	RegionShardPartAccess* access = nodeSearcher->searchNode(record, ctx);
+	InsertNodeAccessStrategy* nodeStoragegy = getInsertNodeAccessStorategy(access->getNodeAccessRef(ctx), ctx);
+	nodeStoragegy->addRecord(record, ctx);
 }
 void InsertTableStrategy::addUniqueCheck(RegionShardPartAccess* node, ClientNetworkRecord* record, TableMetadataUniqueCollection* uniqueCollection, ThreadContext* ctx) throw() 
 {

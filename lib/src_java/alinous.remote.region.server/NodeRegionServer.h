@@ -156,8 +156,8 @@ public:
 	NodeReferenceManager* getRefs(ThreadContext* ctx) throw() ;
 	void createSchema(String* schemaName, ThreadContext* ctx);
 	void createTable(TableMetadata* metadata, ThreadContext* ctx);
-	void InsertData(ArrayList<ClientNetworkRecord>* list, long long commitId, String* schema, String* table, DbVersionContext* vctx, ThreadContext* ctx);
-	void finishInsertData(long long trxId, ThreadContext* ctx) throw() ;
+	void insertData(ArrayList<ClientNetworkRecord>* list, long long commitId, String* schema, String* table, DbVersionContext* vctx, ThreadContext* ctx);
+	void commitUpdateData(long long trxId, ThreadContext* ctx) throw() ;
 private:
 	void initMonitorRef(MonitorRef* monRef, ThreadContext* ctx) throw() ;
 	void checkVersion(DbVersionContext* vctx, ThreadContext* ctx);

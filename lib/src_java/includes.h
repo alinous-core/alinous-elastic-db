@@ -384,23 +384,27 @@
 #include "alinous.remote.db.client.command/RemoteStorageConnectCommand.h"
 #include "alinous.remote.db.client.command.ddl/CreateSchemaCommand.h"
 #include "alinous.remote.db.client.command.ddl/CreateTableCommand.h"
+#include "alinous.remote.db.client.command.dml/CommitDMLCommand.h"
+#include "alinous.remote.region.client.command.data/ClientNetworkRecord.h"
+#include "alinous.remote.db.client/RemoteStorageConnectionInfo.h"
 #include "alinous.remote.db.client.command/FinishRemoteStorageConnectionCommand.h"
+#include "alinous.remote.db.client/RemoteStorageConnection.h"
+#include "alinous.remote.db.client/RemoteStorageClientConnectionFactory.h"
+#include "alinous.remote.db.client.command/GetTableSchemeCommand.h"
+#include "alinous.remote.region.server.schema/NodeReference.h"
+#include "alinous.remote.region.server.schema.strategy/UniqueOpValue.h"
+#include "alinous.remote.region.server.schema.strategy/UniqueCheckOperation.h"
+#include "alinous.remote.db.client.command.dml/InsertPrepareCommand.h"
 #include "alinous.remote.db.client.command/TerminateRemoteStorageCommand.h"
 #include "alinous.remote.db.client.command/VoidRemoteStorageCommand.h"
-#include "alinous.remote.db.client.command/GetTableSchemeCommand.h"
 #include "alinous.remote.db.client.command/RemoteStorageCommandReader.h"
 #include "alinous.remote.db/RemoteStorageResponceAction.h"
 #include "alinous.remote.db/RemoteStorageResponceActionFactory.h"
 #include "alinous.remote.db/RemoteTableStorageServer.h"
 #include "alinous.db.trx/DbVersionContext.h"
-#include "alinous.remote.region.client.command.data/ClientNetworkRecord.h"
 #include "alinous.remote.region.client.command.data/ClientTableData.h"
 #include "alinous.remote.region.client.command.data/ClientSchemaData.h"
 #include "alinous.remote.region.client.command.data/ClientStructureMetadata.h"
-#include "alinous.remote.db.client/RemoteStorageConnectionInfo.h"
-#include "alinous.remote.db.client/RemoteStorageConnection.h"
-#include "alinous.remote.db.client/RemoteStorageClientConnectionFactory.h"
-#include "alinous.remote.region.server.schema/NodeReference.h"
 #include "alinous.remote.region.server.schema/NodeCluster.h"
 #include "alinous.remote.region.server.schema/NodeTableReference.h"
 #include "alinous.remote.region.server.schema/NodeTableClaster.h"
@@ -409,8 +413,6 @@
 #include "alinous.remote.region.server.schema/NodeRegionSchema.h"
 #include "alinous.remote.region.server.schema/NodeReferenceManager.h"
 #include "alinous.remote.region.server.schema.strategy/NodeListBinarySearcher.h"
-#include "alinous.remote.region.server.schema.strategy/UniqueOpValue.h"
-#include "alinous.remote.region.server.schema.strategy/UniqueCheckOperation.h"
 #include "alinous.remote.region.server.schema.strategy/InsertNodeAccessStrategy.h"
 #include "alinous.remote.region.server.schema.strategy/InsertTableStrategy.h"
 #include "alinous.remote.region.server.tpc/RegionInsertExecutor.h"
@@ -1806,6 +1808,8 @@ inline static void __cleanUpStatics(alinous::ThreadContext* ctx){
 	alinous::remote::db::client::command::data::TableClusterData::__cleanUp(ctx);
 	alinous::remote::db::client::command::data::SchemaData::__cleanUp(ctx);
 	alinous::remote::db::client::command::data::SchemasStructureInfoData::__cleanUp(ctx);
+	alinous::remote::db::client::command::dml::CommitDMLCommand::__cleanUp(ctx);
+	alinous::remote::db::client::command::dml::InsertPrepareCommand::__cleanUp(ctx);
 	alinous::remote::db::client::command::ddl::CreateTableCommand::__cleanUp(ctx);
 	alinous::remote::db::client::command::ddl::CreateSchemaCommand::__cleanUp(ctx);
 	alinous::remote::socket::NetworkBinaryBuffer::__cleanUp(ctx);

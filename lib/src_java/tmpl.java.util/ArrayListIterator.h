@@ -121,8 +121,10 @@ template class ::java::util::ArrayListIterator<::alinous::server::http::MimePart
 template class ::java::util::ArrayListIterator<::alinous::buffer::FifoElement<::alinous::server::webmodule::AbstractWebModule>>;
 template class ::java::util::ArrayListIterator<::alinous::remote::monitor::NodeInfo>;
 template class ::java::util::ArrayListIterator<::alinous::remote::db::client::command::data::StorageNodeData>;
+template class ::java::util::ArrayListIterator<::alinous::remote::region::server::schema::strategy::UniqueCheckOperation>;
 template class ::java::util::ArrayListIterator<::alinous::remote::region::client::command::data::ClientNetworkRecord>;
 template class ::java::util::ArrayListIterator<::alinous::remote::region::server::schema::NodeTableReference>;
 template class ::java::util::ArrayListIterator<::alinous::remote::region::server::schema::NodeReference>;
 template class ::java::util::ArrayListIterator<::alinous::remote::region::server::schema::strategy::UniqueOpValue>;
+template class ::java::util::ArrayListIterator<::alinous::remote::db::client::command::dml::InsertPrepareCommand>;
 template class ::java::util::ArrayListIterator<::alinous::remote::region::server::schema::strategy::RegionShardPartAccess>;

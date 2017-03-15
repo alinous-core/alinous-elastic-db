@@ -6,6 +6,24 @@ template <typename  T> class List;}}
 namespace alinous {namespace runtime {namespace variant {
 class VariantValue;}}}
 
+namespace alinous {namespace remote {namespace region {namespace server {namespace schema {namespace strategy {
+class UniqueOpValue;}}}}}}
+
+namespace alinous {namespace remote {namespace socket {
+class NetworkBinaryBuffer;}}}
+
+namespace alinous {namespace runtime {namespace dom {
+class IAlinousVariable;}}}
+
+namespace alinous {namespace runtime {namespace dom {
+class VariableException;}}}
+
+namespace alinous {namespace remote {namespace socket {
+class ICommandData;}}}
+
+namespace alinous {namespace runtime {namespace dom {
+class NetworkAlinousVariableFactory;}}}
+
 namespace java {namespace lang {
 class IObject;
 }}
@@ -19,12 +37,18 @@ namespace alinous {namespace remote {namespace region {namespace server {namespa
 using namespace ::alinous;
 using namespace ::java::lang;
 using ::java::util::Iterator;
+using ::java::util::ArrayList;
 using ::java::util::List;
+using ::alinous::remote::socket::ICommandData;
+using ::alinous::remote::socket::NetworkBinaryBuffer;
+using ::alinous::runtime::dom::IAlinousVariable;
+using ::alinous::runtime::dom::NetworkAlinousVariableFactory;
+using ::alinous::runtime::dom::VariableException;
 using ::alinous::runtime::variant::VariantValue;
 
 
 
-class UniqueOpValue final : public virtual IObject {
+class UniqueOpValue final : public ICommandData, public virtual IObject {
 public:
 	UniqueOpValue(const UniqueOpValue& base) = default;
 public:
@@ -36,6 +60,10 @@ private:
 	List<VariantValue>* values;
 public:
 	List<VariantValue>* getValues(ThreadContext* ctx) throw() ;
+	void readData(NetworkBinaryBuffer* buff, ThreadContext* ctx) final;
+	void writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) final;
+public:
+	static UniqueOpValue* fromNetwork(NetworkBinaryBuffer* buff, ThreadContext* ctx);
 public:
 	static bool __init_done;
 	static bool __init_static_variables();

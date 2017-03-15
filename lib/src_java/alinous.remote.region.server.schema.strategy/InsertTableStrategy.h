@@ -6,14 +6,26 @@ class RegionPartitionTableAccess;}}}}}}
 namespace alinous {namespace remote {namespace region {namespace server {namespace schema {namespace strategy {
 class NodeListBinarySearcher;}}}}}}
 
+namespace java {namespace util {
+template <typename  T> class List;}}
+
+namespace alinous {namespace remote {namespace db {namespace client {namespace command {namespace dml {
+class InsertPrepareCommand;}}}}}}
+
+namespace java {namespace util {
+template <typename  T> class Iterator;}}
+
+namespace alinous {namespace remote {namespace region {namespace server {namespace schema {namespace strategy {
+class InsertNodeAccessStrategy;}}}}}}
+
 namespace alinous {namespace remote {namespace region {namespace client {namespace command {namespace data {
 class ClientNetworkRecord;}}}}}}
 
+namespace alinous {namespace db {namespace table {
+class TableMetadata;}}}
+
 namespace alinous {namespace compile {namespace sql {namespace analyze {
 class TableMetadataUniqueCollection;}}}}
-
-namespace java {namespace util {
-template <typename  T> class List;}}
 
 namespace alinous {namespace remote {namespace region {namespace server {namespace schema {namespace strategy {
 class RegionShardPartAccess;}}}}}}
@@ -23,9 +35,6 @@ class ScanUnique;}}}}
 
 namespace alinous {namespace remote {namespace region {namespace server {namespace schema {
 class NodeReference;}}}}}
-
-namespace alinous {namespace remote {namespace region {namespace server {namespace schema {namespace strategy {
-class InsertNodeAccessStrategy;}}}}}}
 
 namespace alinous {namespace db {namespace table {
 class TablePartitionRangeCollection;}}}
@@ -57,12 +66,15 @@ using namespace ::java::lang;
 using ::java::util::Iterator;
 using ::java::util::ArrayList;
 using ::java::util::HashMap;
+using ::java::util::Iterator;
 using ::java::util::List;
 using ::alinous::compile::sql::analyze::ScanUnique;
 using ::alinous::compile::sql::analyze::TableMetadataUniqueCollection;
 using ::alinous::db::AlinousDbException;
+using ::alinous::db::table::TableMetadata;
 using ::alinous::db::table::TablePartitionKey;
 using ::alinous::db::table::TablePartitionRangeCollection;
+using ::alinous::remote::db::client::command::dml::InsertPrepareCommand;
 using ::alinous::remote::region::client::command::data::ClientNetworkRecord;
 using ::alinous::remote::region::server::schema::NodeReference;
 using ::alinous::runtime::variant::VariantValue;
@@ -83,6 +95,7 @@ private:
 	NodeListBinarySearcher* nodeSearcher;
 	HashMap<String,InsertNodeAccessStrategy>* nodeStrategy;
 public:
+	List<InsertPrepareCommand>* toPrepareCommand(ThreadContext* ctx) throw() ;
 	void build(ArrayList<ClientNetworkRecord>* list, ThreadContext* ctx);
 	long long getCommitId(ThreadContext* ctx) throw() ;
 private:
