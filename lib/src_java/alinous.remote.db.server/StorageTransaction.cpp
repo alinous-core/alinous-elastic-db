@@ -1,8 +1,16 @@
 #include "include/global.h"
 
 
+#include "alinous.buffer.storage/FileStorageEntryBuilder.h"
+#include "alinous.btree/IValueFetcher.h"
+#include "alinous.btree/IBTreeValue.h"
+#include "alinous.db.table/IDatabaseRecord.h"
+#include "alinous.db.table/IDatabaseTable.h"
 #include "alinous.remote.socket/ICommandData.h"
 #include "alinous.db.trx/DbVersionContext.h"
+#include "alinous.lock.unique/UniqueExclusiveLockManager.h"
+#include "alinous.remote.region.client.command.data/ClientNetworkRecord.h"
+#include "alinous.remote.region.server.schema.strategy/UniqueCheckOperation.h"
 #include "alinous.remote.db.server/RemoteTableStorageServer.h"
 #include "alinous.remote.db.server/StorageTransaction.h"
 
@@ -59,6 +67,11 @@ void StorageTransaction::__releaseRegerences(bool prepare, ThreadContext* ctx) t
 		return;
 	}
 }
+void StorageTransaction::prepareInsert(IDatabaseTable* table, List<UniqueCheckOperation>* uniqueCheckOps, List<ClientNetworkRecord>* records, ThreadContext* ctx) throw() 
+{
+	UniqueExclusiveLockManager* uniqueLockMgr = this->server->getUniqueExclusiveLock(ctx);
+	checkUnique(uniqueLockMgr, uniqueCheckOps, ctx);
+}
 String* StorageTransaction::getTmpDir(ThreadContext* ctx) throw() 
 {
 	if(this->tmpDir != nullptr)
@@ -87,6 +100,14 @@ DbVersionContext* StorageTransaction::getVctx(ThreadContext* ctx) throw()
 }
 void StorageTransaction::dispose(ThreadContext* ctx) throw() 
 {
+}
+void StorageTransaction::checkUnique(UniqueExclusiveLockManager* uniqueLockMgr, List<UniqueCheckOperation>* uniqueCheckOps, ThreadContext* ctx) throw() 
+{
+	int maxLoop = uniqueCheckOps->size(ctx);
+	for(int i = 0; i != maxLoop; ++i)
+	{
+		UniqueCheckOperation* op = uniqueCheckOps->get(i, ctx);
+	}
 }
 void StorageTransaction::__cleanUp(ThreadContext* ctx){
 }

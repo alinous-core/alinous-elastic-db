@@ -70,7 +70,7 @@ private:
 	long long commitId;
 	InsertTableStrategy* strategy;
 public:
-	void prepareInsert(ArrayList<ClientNetworkRecord>* list, String* schema, String* table, DbVersionContext* vctx, long long newCommitId, ThreadContext* ctx);
+	void prepareInsert(ArrayList<ClientNetworkRecord>* list, String* schema, String* table, DbVersionContext* vctx, long long newCommitId, int isolationLevel, ThreadContext* ctx);
 	void tpcCommitInsert(ThreadContext* ctx) throw() ;
 	void dispose(ThreadContext* ctx) throw() ;
 	Long* getTrxId(ThreadContext* ctx) throw() ;

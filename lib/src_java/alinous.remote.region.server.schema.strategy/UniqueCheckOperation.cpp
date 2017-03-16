@@ -77,7 +77,7 @@ void UniqueCheckOperation::readData(NetworkBinaryBuffer* buff, ThreadContext* ct
 		TableColumnMetadata* col = TableColumnMetadata::fromNetwork(buff, ctx);
 		if(col == nullptr)
 		{
-			throw (new(ctx) VariableException(ConstStr::getCNST_STR_3614(), ctx));
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_3615(), ctx));
 		}
 		this->uniqueColList->add(col, ctx);
 	}
@@ -87,7 +87,7 @@ void UniqueCheckOperation::readData(NetworkBinaryBuffer* buff, ThreadContext* ct
 		UniqueOpValue* op = UniqueOpValue::fromNetwork(buff, ctx);
 		if(op == nullptr)
 		{
-			throw (new(ctx) VariableException(ConstStr::getCNST_STR_3615(), ctx));
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_3616(), ctx));
 		}
 		this->values->add(op, ctx);
 	}

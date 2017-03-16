@@ -11,11 +11,11 @@
 #include "alinous.system/AlinousException.h"
 #include "alinous.btree/IValueFetcher.h"
 #include "alinous.btree/IBTreeValue.h"
+#include "alinous.db.table/IDatabaseRecord.h"
+#include "alinous.remote.region.client.command.data/ClientNetworkRecord.h"
 #include "alinous.remote.db.server/RemoteTableStorageServer.h"
 #include "alinous.remote.db.client.command/RemoteStorageCommandReader.h"
 #include "alinous.remote.db.client.command/AbstractRemoteStorageCommand.h"
-#include "alinous.db.table/IDatabaseRecord.h"
-#include "alinous.remote.region.client.command.data/ClientNetworkRecord.h"
 #include "alinous.remote.region.server.schema/NodeReference.h"
 #include "alinous.remote.db.client.command.dml/InsertPrepareCommand.h"
 #include "alinous.remote.region.server.schema.strategy/RegionPartitionTableAccess.h"
@@ -75,12 +75,12 @@ void RegionInsertExecutor::__releaseRegerences(bool prepare, ThreadContext* ctx)
 		return;
 	}
 }
-void RegionInsertExecutor::prepareInsert(ArrayList<ClientNetworkRecord>* list, String* schema, String* table, DbVersionContext* vctx, long long newCommitId, ThreadContext* ctx)
+void RegionInsertExecutor::prepareInsert(ArrayList<ClientNetworkRecord>* list, String* schema, String* table, DbVersionContext* vctx, long long newCommitId, int isolationLevel, ThreadContext* ctx)
 {
 	RegionPartitionTableAccess* tableAccess = this->ref->getCluster(schema, table, ctx);
 	__GC_MV(this, &(this->strategy), (new(ctx) InsertTableStrategy(this->commitId, tableAccess, ctx)), InsertTableStrategy);
 	this->strategy->build(list, ctx);
-	List<InsertPrepareCommand>* prepares = this->strategy->toPrepareCommand(vctx, newCommitId, ctx);
+	List<InsertPrepareCommand>* prepares = this->strategy->toPrepareCommand(vctx, newCommitId, isolationLevel, ctx);
 	int maxLoop = prepares->size(ctx);
 	for(int i = 0; i != maxLoop; ++i)
 	{

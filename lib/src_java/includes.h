@@ -304,6 +304,15 @@
 #include "alinous.compile.sql.functions/Coalesce.h"
 #include "alinous.compile.sql.functions/ToNumber.h"
 #include "alinous.compile.sql.functions/SQLFunctionManager.h"
+#include "alinous.remote.db.client.command.data/SchemaData.h"
+#include "alinous.db/ITableSchema.h"
+#include "alinous.db/TableSchema.h"
+#include "alinous.db.trx/DbVersionContext.h"
+#include "alinous.lock.unique/UniqueExclusiveLock.h"
+#include "alinous.lock.unique/UniqueExclusiveException.h"
+#include "alinous.lock.unique/ColumnsUniqueCollections.h"
+#include "alinous.lock.unique/TableUniqueCollections.h"
+#include "alinous.lock.unique/UniqueExclusiveLockManager.h"
 #include "alinous.remote.socket/ISocketConnection.h"
 #include "alinous.remote.socket/SocketConnectionPool.h"
 #include "alinous.remote.socket/ISocketConnectionFactory.h"
@@ -383,13 +392,11 @@
 #include "alinous.remote.db.client.command.ddl/CreateSchemaCommand.h"
 #include "alinous.remote.db.client.command.ddl/CreateTableCommand.h"
 #include "alinous.remote.db.client.command.dml/CommitDMLCommand.h"
-#include "alinous.db.trx/DbVersionContext.h"
 #include "alinous.remote.region.client.command.data/ClientNetworkRecord.h"
 #include "alinous.remote.db.client/RemoteStorageConnectionInfo.h"
 #include "alinous.remote.db.client.command/FinishRemoteStorageConnectionCommand.h"
 #include "alinous.remote.db.client/RemoteStorageConnection.h"
 #include "alinous.remote.db.client/RemoteStorageClientConnectionFactory.h"
-#include "alinous.remote.db.client.command.data/SchemaData.h"
 #include "alinous.remote.db.client.command.data/SchemasStructureInfoData.h"
 #include "alinous.remote.db.client.command/GetTableSchemeCommand.h"
 #include "alinous.remote.region.server.schema/NodeReference.h"
@@ -459,8 +466,6 @@
 #include "alinous.compile.sql.ddl/PrimaryKeys.h"
 #include "alinous.compile.sql.ddl/ShardKeys.h"
 #include "alinous.compile.sql.ddl/Unique.h"
-#include "alinous.db/ITableSchema.h"
-#include "alinous.db/TableSchema.h"
 #include "alinous.compile.sql/CreateTableStatement.h"
 #include "alinous.compile.sql/DeleteStatement.h"
 #include "alinous.compile.sql/DropIndexStatement.h"
@@ -480,11 +485,6 @@
 #include "alinous.btreememory/MBTreeLeafContainer.h"
 #include "alinous.btreememory/MBTreeMaxLeafContainer.h"
 #include "alinous.btreememory/BTreeOnMemory.h"
-#include "alinous.lock.unique/UniqueExclusiveLock.h"
-#include "alinous.lock.unique/UniqueExclusiveException.h"
-#include "alinous.lock.unique/ColumnsUniqueCollections.h"
-#include "alinous.lock.unique/TableUniqueCollections.h"
-#include "alinous.lock.unique/UniqueExclusiveLockManager.h"
 #include "alinous.lock.unique/UniqueExclusiveLockClient.h"
 #include "alinous.runtime.parallel/SequentialBackgroundJob.h"
 #include "alinous.db.trx.cache/TrxRecordCacheIndex.h"
@@ -890,6 +890,10 @@
 #include "alinous.server.webmodule/BinaryModuleStream.h"
 #include "alinous.server.webmodule/BinaryModule.h"
 #include "alinous.remote.db.client/RemoteTableStorageClient.h"
+#include "alinous.remote.db.server.commit/PrepareStorageManager.h"
+#include "alinous.remote.db.server.commit/DeleteStore.h"
+#include "alinous.remote.db.server.commit/InsertStore.h"
+#include "alinous.remote.db.server.commit/UpdateStore.h"
 #include "alinous.remote.region.server.lock/RegionTableLockManager.h"
 
 
@@ -1816,6 +1820,10 @@ inline static void __cleanUpStatics(alinous::ThreadContext* ctx){
 	alinous::remote::db::server::StorageTransaction::__cleanUp(ctx);
 	alinous::remote::db::server::RemoteTableStorageServer::__cleanUp(ctx);
 	alinous::remote::db::server::StorageTransactionManager::__cleanUp(ctx);
+	alinous::remote::db::server::commit::PrepareStorageManager::__cleanUp(ctx);
+	alinous::remote::db::server::commit::DeleteStore::__cleanUp(ctx);
+	alinous::remote::db::server::commit::InsertStore::__cleanUp(ctx);
+	alinous::remote::db::server::commit::UpdateStore::__cleanUp(ctx);
 	alinous::remote::socket::NetworkBinaryBuffer::__cleanUp(ctx);
 	alinous::remote::socket::SocketServer::__cleanUp(ctx);
 	alinous::remote::socket::SocketConnectionPool::__cleanUp(ctx);

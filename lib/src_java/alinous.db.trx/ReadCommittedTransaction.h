@@ -39,6 +39,9 @@ class BTreeException;}}
 namespace alinous {namespace db {namespace trx {
 class DbTransaction;}}}
 
+namespace alinous {namespace runtime {namespace dbif {
+class IDatabaseDriver;}}}
+
 namespace alinous {namespace system {
 class AlinousException;}}
 
@@ -57,6 +60,7 @@ using ::alinous::db::AlinousDatabase;
 using ::alinous::db::table::DatabaseException;
 using ::alinous::db::table::IDatabaseRecord;
 using ::alinous::db::table::IDatabaseTable;
+using ::alinous::runtime::dbif::IDatabaseDriver;
 using ::alinous::runtime::dom::VariableException;
 using ::alinous::system::AlinousCore;
 using ::alinous::system::AlinousException;
@@ -73,6 +77,7 @@ public:
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 public:
 	bool isVisible(IDatabaseRecord* record, IDatabaseTable* tableStore, ThreadContext* ctx) final;
+	int getIsolationLevel(ThreadContext* ctx) throw()  final;
 public:
 	static bool __init_done;
 	static bool __init_static_variables();

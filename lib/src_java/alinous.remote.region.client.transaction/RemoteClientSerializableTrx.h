@@ -24,6 +24,9 @@ class AbstractRemoteClientTransaction;}}}}}
 namespace alinous {namespace db {namespace table {
 class DatabaseException;}}}
 
+namespace alinous {namespace runtime {namespace dbif {
+class IDatabaseDriver;}}}
+
 namespace alinous {namespace system {
 class AlinousException;}}
 
@@ -42,6 +45,7 @@ using ::alinous::db::table::IDatabaseRecord;
 using ::alinous::db::table::IDatabaseTable;
 using ::alinous::db::trx::DbTransactionManager;
 using ::alinous::db::trx::DbVersionContext;
+using ::alinous::runtime::dbif::IDatabaseDriver;
 using ::alinous::system::AlinousCore;
 using ::alinous::system::AlinousException;
 
@@ -57,6 +61,7 @@ public:
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 public:
 	bool isVisible(IDatabaseRecord* record, IDatabaseTable* tableStore, ThreadContext* ctx) final;
+	int getIsolationLevel(ThreadContext* ctx) throw()  final;
 public:
 	static bool __init_done;
 	static bool __init_static_variables();

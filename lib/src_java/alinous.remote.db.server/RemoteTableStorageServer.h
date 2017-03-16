@@ -3,6 +3,9 @@
 namespace alinous {namespace remote {namespace db {namespace server {
 class StorageTransactionManager;}}}}
 
+namespace alinous {namespace lock {namespace unique {
+class UniqueExclusiveLockManager;}}}
+
 namespace alinous {namespace system {
 class AlinousCore;}}
 
@@ -75,6 +78,27 @@ class SchemasStructureInfoData;}}}}}}
 namespace alinous {namespace db {namespace table {
 class TableMetadata;}}}
 
+namespace java {namespace util {
+template <typename  T> class List;}}
+
+namespace alinous {namespace remote {namespace region {namespace server {namespace schema {namespace strategy {
+class UniqueCheckOperation;}}}}}}
+
+namespace alinous {namespace remote {namespace region {namespace client {namespace command {namespace data {
+class ClientNetworkRecord;}}}}}}
+
+namespace alinous {namespace db {namespace trx {
+class DbVersionContext;}}}
+
+namespace alinous {namespace db {
+class TableSchema;}}
+
+namespace alinous {namespace db {namespace table {
+class IDatabaseTable;}}}
+
+namespace alinous {namespace remote {namespace db {namespace server {
+class StorageTransaction;}}}}
+
 namespace alinous {namespace btree {
 class IntKey;}}
 
@@ -100,6 +124,7 @@ using ::java::util::Iterator;
 using ::java::io::File;
 using ::java::io::IOException;
 using ::java::util::ArrayList;
+using ::java::util::List;
 using ::alinous::btree::BTree;
 using ::alinous::btree::BTreeException;
 using ::alinous::btree::BTreeGlobalCache;
@@ -109,12 +134,18 @@ using ::alinous::btree::IntKey;
 using ::alinous::btree::LongValue;
 using ::alinous::db::AlinousDbException;
 using ::alinous::db::SchemaManager;
+using ::alinous::db::TableSchema;
 using ::alinous::db::table::DatabaseException;
+using ::alinous::db::table::IDatabaseTable;
 using ::alinous::db::table::TableMetadata;
+using ::alinous::db::trx::DbVersionContext;
 using ::alinous::lock::LockObject;
+using ::alinous::lock::unique::UniqueExclusiveLockManager;
 using ::alinous::remote::db::MonitorAccess;
 using ::alinous::remote::db::RemoteStorageResponceActionFactory;
 using ::alinous::remote::db::client::command::data::SchemasStructureInfoData;
+using ::alinous::remote::region::client::command::data::ClientNetworkRecord;
+using ::alinous::remote::region::server::schema::strategy::UniqueCheckOperation;
 using ::alinous::remote::socket::SocketServer;
 using ::alinous::runtime::dom::VariableException;
 using ::alinous::runtime::parallel::ThreadPool;
@@ -153,6 +184,7 @@ private:
 	long long schemaVersion;
 	MonitorAccess* monitorAccess;
 	StorageTransactionManager* storageTrxManager;
+	UniqueExclusiveLockManager* uniqueExclusiveLock;
 public:
 	const static IntKey __SCHEMA;
 	constexpr static IntKey* SCHEMA{const_cast<IntKey*>(&__SCHEMA)};
@@ -165,11 +197,13 @@ public:
 	bool exists(ThreadContext* ctx) throw() ;
 	void start(AlinousCore* core, ThreadContext* ctx);
 	void dispose(ThreadContext* ctx) throw() ;
+	UniqueExclusiveLockManager* getUniqueExclusiveLock(ThreadContext* ctx) throw() ;
 	AlinousCore* getCore(ThreadContext* ctx) throw() ;
 	void logError(Throwable* e, ThreadContext* ctx) throw() ;
 	long long getSchemeInfo(SchemasStructureInfoData* data, String* region, String* host, int port, bool ipv6, ThreadContext* ctx) throw() ;
 	void createSchema(String* schemaName, ThreadContext* ctx);
 	void createTable(TableMetadata* metadata, ThreadContext* ctx);
+	void prepareInsert(String* schemaName, String* tableName, long long newCommitId, List<UniqueCheckOperation>* uniqueCheckOps, List<ClientNetworkRecord>* records, DbVersionContext* vctx, int isolationLevel, ThreadContext* ctx);
 private:
 	void initInstance(AlinousCore* core, ThreadContext* ctx);
 	File* getConfigFile(ThreadContext* ctx) throw() ;

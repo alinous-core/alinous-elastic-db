@@ -75,6 +75,7 @@ private:
 	String* schema;
 	String* table;
 	DbVersionContext* vctx;
+	int isolationLevel;
 public:
 	void executeOnServer(NodeRegionServer* nodeRegionServer, BufferedOutputStream* outStream, ThreadContext* ctx) final;
 	void readFromStream(InputStream* stream, int remain, ThreadContext* ctx) final;
@@ -88,6 +89,8 @@ public:
 	void setTable(String* table, ThreadContext* ctx) throw() ;
 	DbVersionContext* getVctx(ThreadContext* ctx) throw() ;
 	void setVctx(DbVersionContext* vctx, ThreadContext* ctx) throw() ;
+	int getIsolationLevel(ThreadContext* ctx) throw() ;
+	void setIsolationLevel(int isolationLevel, ThreadContext* ctx) throw() ;
 	void writeByteStream(OutputStream* outStream, ThreadContext* ctx) final;
 public:
 	static bool __init_done;

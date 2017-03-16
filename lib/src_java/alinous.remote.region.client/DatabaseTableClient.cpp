@@ -318,15 +318,15 @@ void DatabaseTableClient::finishCommitSession(DbTransaction* trx, long long newC
 		}
 		catch(UnknownHostException* e)
 		{
-			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3592(), e, ctx));
+			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3593(), e, ctx));
 		}
 		catch(IOException* e)
 		{
-			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3592(), e, ctx));
+			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3593(), e, ctx));
 		}
 		catch(AlinousException* e)
 		{
-			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3592(), e, ctx));
+			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3593(), e, ctx));
 		}
 	}
 }
@@ -382,6 +382,7 @@ void DatabaseTableClient::doInsertData(DbTransaction* trx, List<IDatabaseRecord>
 	cmd->setTable(this->name, ctx);
 	cmd->setSchema(this->schema, ctx);
 	cmd->setVctx(trx->getVersionContext(ctx), ctx);
+	cmd->setIsolationLevel(trx->getIsolationLevel(ctx), ctx);
 	ArrayList<ClientNetworkRecord>* list = cmd->getList(ctx);
 	int maxLoop = records->size(ctx);
 	for(int i = 0; i != maxLoop; ++i)
@@ -395,7 +396,7 @@ void DatabaseTableClient::doInsertData(DbTransaction* trx, List<IDatabaseRecord>
 			}
 			catch(VariableException* e)
 			{
-				throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3593(), e, ctx));
+				throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3594(), e, ctx));
 			}
 		}
 		list->add(netRec, ctx);
@@ -415,15 +416,15 @@ void DatabaseTableClient::doInsertData(DbTransaction* trx, List<IDatabaseRecord>
 		}
 		catch(UnknownHostException* e)
 		{
-			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3594(), e, ctx));
+			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3595(), e, ctx));
 		}
 		catch(IOException* e)
 		{
-			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3594(), e, ctx));
+			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3595(), e, ctx));
 		}
 		catch(AlinousException* e)
 		{
-			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3594(), e, ctx));
+			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3595(), e, ctx));
 		}
 	}
 }

@@ -37,7 +37,7 @@ bool ClientInsertDataCommand::__init_static_variables(){
 	delete ctx;
 	return true;
 }
- ClientInsertDataCommand::ClientInsertDataCommand(ThreadContext* ctx) throw()  : IObject(ctx), AbstractNodeRegionCommand(ctx), list(GCUtils<ArrayList<ClientNetworkRecord> >::ins(this, (new(ctx) ArrayList<ClientNetworkRecord>(ctx)), ctx, __FILEW__, __LINE__, L"")), commitId(0), schema(nullptr), table(nullptr), vctx(nullptr)
+ ClientInsertDataCommand::ClientInsertDataCommand(ThreadContext* ctx) throw()  : IObject(ctx), AbstractNodeRegionCommand(ctx), list(GCUtils<ArrayList<ClientNetworkRecord> >::ins(this, (new(ctx) ArrayList<ClientNetworkRecord>(ctx)), ctx, __FILEW__, __LINE__, L"")), commitId(0), schema(nullptr), table(nullptr), vctx(nullptr), isolationLevel(0)
 {
 	this->type = AbstractNodeRegionCommand::TYPE_INSERT_DATA;
 }
@@ -73,7 +73,7 @@ void ClientInsertDataCommand::executeOnServer(NodeRegionServer* nodeRegionServer
 	{
 		try
 		{
-			nodeRegionServer->insertData(this->list, this->commitId, this->schema, this->table, this->vctx, ctx);
+			nodeRegionServer->insertData(this->list, this->commitId, this->schema, this->table, this->vctx, this->isolationLevel, ctx);
 		}
 		catch(AlinousException* e)
 		{
@@ -114,6 +114,7 @@ void ClientInsertDataCommand::readFromStream(InputStream* stream, int remain, Th
 		__GC_MV(this, &(this->vctx), (new(ctx) DbVersionContext(ctx)), DbVersionContext);
 		this->vctx->readData(buff, ctx);
 	}
+	this->isolationLevel = buff->getInt(ctx);
 }
 ArrayList<ClientNetworkRecord>* ClientInsertDataCommand::getList(ThreadContext* ctx) throw() 
 {
@@ -155,6 +156,14 @@ void ClientInsertDataCommand::setVctx(DbVersionContext* vctx, ThreadContext* ctx
 {
 	__GC_MV(this, &(this->vctx), vctx, DbVersionContext);
 }
+int ClientInsertDataCommand::getIsolationLevel(ThreadContext* ctx) throw() 
+{
+	return isolationLevel;
+}
+void ClientInsertDataCommand::setIsolationLevel(int isolationLevel, ThreadContext* ctx) throw() 
+{
+	this->isolationLevel = isolationLevel;
+}
 void ClientInsertDataCommand::writeByteStream(OutputStream* outStream, ThreadContext* ctx)
 {
 	NetworkBinaryBuffer* buff = (new(ctx) NetworkBinaryBuffer(32, ctx));
@@ -185,6 +194,7 @@ void ClientInsertDataCommand::writeByteStream(OutputStream* outStream, ThreadCon
 	{
 		this->vctx->writeData(buff, ctx);
 	}
+	buff->putInt(this->isolationLevel, ctx);
 	IArrayObjectPrimitive<char>* b = buff->toBinary(ctx);
 	int pos = buff->getPutSize(ctx);
 	outStream->write(b, 0, pos, ctx);

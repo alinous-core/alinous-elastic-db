@@ -259,6 +259,7 @@ private:
 	AlinousCore* core;
 public:
 	virtual bool isVisible(IDatabaseRecord* record, IDatabaseTable* tableStore, ThreadContext* ctx) = 0;
+	virtual int getIsolationLevel(ThreadContext* ctx) throw()  = 0;
 	virtual bool isRemote(ThreadContext* ctx) throw() ;
 	long long newSoid(ThreadContext* ctx) throw() ;
 	ScanResult* newResult(ScanTableMetadata* metadata, ThreadContext* ctx);

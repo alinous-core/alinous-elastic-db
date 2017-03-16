@@ -23,10 +23,10 @@
 #include "alinous.db.trx/DbVersionContext.h"
 #include "java.io/FilterOutputStream.h"
 #include "java.io/BufferedOutputStream.h"
+#include "alinous.remote.region.client.command.data/ClientNetworkRecord.h"
 #include "alinous.remote.db.server/RemoteTableStorageServer.h"
 #include "alinous.remote.db.client.command/RemoteStorageCommandReader.h"
 #include "alinous.remote.db.client.command/AbstractRemoteStorageCommand.h"
-#include "alinous.remote.region.client.command.data/ClientNetworkRecord.h"
 #include "alinous.remote.region.server.schema/NodeReference.h"
 #include "alinous.remote.db.client.command.dml/InsertPrepareCommand.h"
 #include "alinous.remote.region.server.schema.strategy/RegionShardPartAccess.h"
@@ -84,9 +84,12 @@ void InsertTableStrategy::__releaseRegerences(bool prepare, ThreadContext* ctx) 
 		return;
 	}
 }
-List<InsertPrepareCommand>* InsertTableStrategy::toPrepareCommand(DbVersionContext* vctx, long long newCommitId, ThreadContext* ctx) throw() 
+List<InsertPrepareCommand>* InsertTableStrategy::toPrepareCommand(DbVersionContext* vctx, long long newCommitId, int isolationLevel, ThreadContext* ctx) throw() 
 {
 	List<InsertPrepareCommand>* list = (new(ctx) ArrayList<InsertPrepareCommand>(ctx));
+	TableMetadata* meta = this->tableAccess->getMetadata(ctx);
+	String* schemaName = meta->getSchema(ctx);
+	String* tableName = meta->getTableName(ctx);
 	Iterator<String>* it = this->nodeStrategy->keySet(ctx)->iterator(ctx);
 	while(it->hasNext(ctx))
 	{
@@ -95,6 +98,9 @@ List<InsertPrepareCommand>* InsertTableStrategy::toPrepareCommand(DbVersionConte
 		InsertPrepareCommand* cmd = strategy->toCommand(ctx);
 		cmd->setNewCommitId(newCommitId, ctx);
 		cmd->setVctx(vctx, ctx);
+		cmd->setSchemaName(schemaName, ctx);
+		cmd->setTableName(tableName, ctx);
+		cmd->setIsolationLevel(isolationLevel, ctx);
 		list->add(cmd, ctx);
 	}
 	return list;

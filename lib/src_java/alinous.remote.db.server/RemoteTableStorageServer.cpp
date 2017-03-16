@@ -1,6 +1,7 @@
 #include "include/global.h"
 
 
+#include "alinous.buffer.storage/FileStorageEntryBuilder.h"
 #include "alinous.compile/AbstractSrcElement.h"
 #include "alinous.system/AlinousException.h"
 #include "alinous.runtime/ExecutionException.h"
@@ -18,20 +19,29 @@
 #include "alinous.btree/LongValue.h"
 #include "alinous.db/AlinousDbException.h"
 #include "alinous.db.table/DatabaseException.h"
-#include "alinous.remote.socket/ICommandData.h"
-#include "alinous.db.table/TableMetadata.h"
-#include "alinous.remote.db.client.command.data/SchemasStructureInfoData.h"
 #include "alinous.runtime.parallel/ThreadPool.h"
 #include "alinous.system.config/AlinousInitException.h"
 #include "alinous.system/ISystemLog.h"
 #include "alinous.system/AlinousCore.h"
+#include "alinous.remote.socket/ICommandData.h"
+#include "alinous.db.table/TableMetadata.h"
+#include "alinous.db.table/IDatabaseRecord.h"
+#include "alinous.db.table/IDatabaseTable.h"
+#include "alinous.remote.db.client.command.data/SchemasStructureInfoData.h"
+#include "alinous.db/ITableSchema.h"
+#include "alinous.db/TableSchema.h"
 #include "alinous.db/SchemaManager.h"
+#include "alinous.db.trx/DbVersionContext.h"
+#include "alinous.lock.unique/UniqueExclusiveLockManager.h"
 #include "alinous.system.config/IAlinousConfigElement.h"
 #include "alinous.system.config.remote/MonitorRef.h"
 #include "alinous.remote.db/MonitorAccess.h"
 #include "alinous.remote.socket/SocketServer.h"
 #include "alinous.remote.socket/ISocketActionFactory.h"
 #include "alinous.remote.db/RemoteStorageResponceActionFactory.h"
+#include "alinous.remote.region.client.command.data/ClientNetworkRecord.h"
+#include "alinous.remote.region.server.schema.strategy/UniqueCheckOperation.h"
+#include "alinous.remote.db.server/StorageTransaction.h"
 #include "alinous.remote.db.server/StorageTransactionManager.h"
 #include "alinous.remote.db.server/RemoteTableStorageServer.h"
 
@@ -41,7 +51,7 @@ namespace alinous {namespace remote {namespace db {namespace server {
 
 
 
-String* RemoteTableStorageServer::THREAD_NAME = ConstStr::getCNST_STR_3590();
+String* RemoteTableStorageServer::THREAD_NAME = ConstStr::getCNST_STR_3591();
 const IntKey RemoteTableStorageServer:: __SCHEMA = (IntKey(10, nullptr));
 const IntKey RemoteTableStorageServer:: __SCHEMA_VERSION = (IntKey(11, nullptr));
 bool RemoteTableStorageServer::__init_done = __init_static_variables();
@@ -55,12 +65,13 @@ bool RemoteTableStorageServer::__init_static_variables(){
 	delete ctx;
 	return true;
 }
- RemoteTableStorageServer::RemoteTableStorageServer(int port, int maxthread, String* datadir, ThreadContext* ctx) throw()  : IObject(ctx), schemas(nullptr), BLOCK_SIZE(256), nodeCapacity(8), capacity(1024), port(0), maxthread(0), dataDir(nullptr), socketServer(nullptr), btreeCache(nullptr), workerThreadsPool(nullptr), core(nullptr), dbconfig(nullptr), configFile(nullptr), schemaVersionLock(__GC_INS(this, (new(ctx) LockObject(ctx)), LockObject)), schemaVersion(0), monitorAccess(nullptr), storageTrxManager(nullptr)
+ RemoteTableStorageServer::RemoteTableStorageServer(int port, int maxthread, String* datadir, ThreadContext* ctx) throw()  : IObject(ctx), schemas(nullptr), BLOCK_SIZE(256), nodeCapacity(8), capacity(1024), port(0), maxthread(0), dataDir(nullptr), socketServer(nullptr), btreeCache(nullptr), workerThreadsPool(nullptr), core(nullptr), dbconfig(nullptr), configFile(nullptr), schemaVersionLock(__GC_INS(this, (new(ctx) LockObject(ctx)), LockObject)), schemaVersion(0), monitorAccess(nullptr), storageTrxManager(nullptr), uniqueExclusiveLock(nullptr)
 {
 	this->port = port;
 	this->maxthread = maxthread;
 	__GC_MV(this, &(this->dataDir), datadir, String);
 	__GC_MV(this, &(this->storageTrxManager), (new(ctx) StorageTransactionManager(datadir, this, ctx)), StorageTransactionManager);
+	__GC_MV(this, &(this->uniqueExclusiveLock), (new(ctx) UniqueExclusiveLockManager(ctx)), UniqueExclusiveLockManager);
 }
 void RemoteTableStorageServer::__construct_impl(int port, int maxthread, String* datadir, ThreadContext* ctx) throw() 
 {
@@ -68,6 +79,7 @@ void RemoteTableStorageServer::__construct_impl(int port, int maxthread, String*
 	this->maxthread = maxthread;
 	__GC_MV(this, &(this->dataDir), datadir, String);
 	__GC_MV(this, &(this->storageTrxManager), (new(ctx) StorageTransactionManager(datadir, this, ctx)), StorageTransactionManager);
+	__GC_MV(this, &(this->uniqueExclusiveLock), (new(ctx) UniqueExclusiveLockManager(ctx)), UniqueExclusiveLockManager);
 }
  RemoteTableStorageServer::~RemoteTableStorageServer() throw() 
 {
@@ -101,6 +113,8 @@ void RemoteTableStorageServer::__releaseRegerences(bool prepare, ThreadContext* 
 	monitorAccess = nullptr;
 	__e_obj1.add(this->storageTrxManager, this);
 	storageTrxManager = nullptr;
+	__e_obj1.add(this->uniqueExclusiveLock, this);
+	uniqueExclusiveLock = nullptr;
 	if(!prepare){
 		return;
 	}
@@ -211,6 +225,14 @@ void RemoteTableStorageServer::dispose(ThreadContext* ctx) throw()
 	{
 		this->storageTrxManager->dispose(ctx);
 	}
+	if(this->uniqueExclusiveLock != nullptr)
+	{
+		this->uniqueExclusiveLock->dispose(ctx);
+	}
+}
+UniqueExclusiveLockManager* RemoteTableStorageServer::getUniqueExclusiveLock(ThreadContext* ctx) throw() 
+{
+	return uniqueExclusiveLock;
 }
 AlinousCore* RemoteTableStorageServer::getCore(ThreadContext* ctx) throw() 
 {
@@ -248,6 +270,21 @@ void RemoteTableStorageServer::createTable(TableMetadata* metadata, ThreadContex
 		this->schemaVersion ++ ;
 		this->monitorAccess->reportSchemaUpdated(ctx);
 	}
+}
+void RemoteTableStorageServer::prepareInsert(String* schemaName, String* tableName, long long newCommitId, List<UniqueCheckOperation>* uniqueCheckOps, List<ClientNetworkRecord>* records, DbVersionContext* vctx, int isolationLevel, ThreadContext* ctx)
+{
+	TableSchema* schema = this->schemas->getSchema(schemaName, ctx);
+	if(schema == nullptr)
+	{
+		throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3590()->clone(ctx)->append(schemaName, ctx)->append(ConstStr::getCNST_STR_1125(), ctx), ctx));
+	}
+	IDatabaseTable* table = schema->getTableStore(tableName, ctx);
+	if(table == nullptr)
+	{
+		throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3590()->clone(ctx)->append(schemaName, ctx)->append(ConstStr::getCNST_STR_953(), ctx)->append(tableName, ctx)->append(ConstStr::getCNST_STR_1125(), ctx), ctx));
+	}
+	StorageTransaction* storageTrx = this->storageTrxManager->getStorageTransaction(isolationLevel, vctx, ctx);
+	storageTrx->prepareInsert(table, uniqueCheckOps, records, ctx);
 }
 void RemoteTableStorageServer::initInstance(AlinousCore* core, ThreadContext* ctx)
 {

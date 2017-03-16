@@ -62,7 +62,7 @@ void UniqueExclusiveLockManager::__releaseRegerences(bool prepare, ThreadContext
 		return;
 	}
 }
-UniqueExclusiveLock* UniqueExclusiveLockManager::lockWithCheck(ScanUnique* unique, IDatabaseRecord* value, bool throwex, ThreadContext* ctx)
+UniqueExclusiveLock* UniqueExclusiveLockManager::lockWithCheck(ScanUnique* unique, IDatabaseRecord* record, bool throwex, ThreadContext* ctx)
 {
 	TableUniqueCollections* tableUnique = nullptr;
 	{
@@ -75,7 +75,7 @@ UniqueExclusiveLock* UniqueExclusiveLockManager::lockWithCheck(ScanUnique* uniqu
 			this->tables->put(fullName, tableUnique, ctx);
 		}
 	}
-	return tableUnique->lockWithCheck(unique, value, throwex, ctx);
+	return tableUnique->lockWithCheck(unique, record, throwex, ctx);
 }
 void UniqueExclusiveLockManager::unlock(UniqueExclusiveLock* lock, ThreadContext* ctx) throw() 
 {

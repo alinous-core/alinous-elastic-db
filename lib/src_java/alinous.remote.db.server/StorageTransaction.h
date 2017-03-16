@@ -6,6 +6,21 @@ class DbVersionContext;}}}
 namespace alinous {namespace remote {namespace db {namespace server {
 class RemoteTableStorageServer;}}}}
 
+namespace alinous {namespace db {namespace table {
+class IDatabaseTable;}}}
+
+namespace java {namespace util {
+template <typename  T> class List;}}
+
+namespace alinous {namespace remote {namespace region {namespace server {namespace schema {namespace strategy {
+class UniqueCheckOperation;}}}}}}
+
+namespace alinous {namespace remote {namespace region {namespace client {namespace command {namespace data {
+class ClientNetworkRecord;}}}}}}
+
+namespace alinous {namespace lock {namespace unique {
+class UniqueExclusiveLockManager;}}}
+
 namespace java {namespace lang {
 class StringBuilder;}}
 
@@ -22,7 +37,12 @@ namespace alinous {namespace remote {namespace db {namespace server {
 using namespace ::alinous;
 using namespace ::java::lang;
 using ::java::util::Iterator;
+using ::java::util::List;
+using ::alinous::db::table::IDatabaseTable;
 using ::alinous::db::trx::DbVersionContext;
+using ::alinous::lock::unique::UniqueExclusiveLockManager;
+using ::alinous::remote::region::client::command::data::ClientNetworkRecord;
+using ::alinous::remote::region::server::schema::strategy::UniqueCheckOperation;
 
 
 
@@ -41,10 +61,13 @@ private:
 	String* tmpDir;
 	RemoteTableStorageServer* server;
 public:
+	void prepareInsert(IDatabaseTable* table, List<UniqueCheckOperation>* uniqueCheckOps, List<ClientNetworkRecord>* records, ThreadContext* ctx) throw() ;
 	String* getTmpDir(ThreadContext* ctx) throw() ;
 	int getIsolationLevel(ThreadContext* ctx) throw() ;
 	DbVersionContext* getVctx(ThreadContext* ctx) throw() ;
 	void dispose(ThreadContext* ctx) throw() ;
+private:
+	void checkUnique(UniqueExclusiveLockManager* uniqueLockMgr, List<UniqueCheckOperation>* uniqueCheckOps, ThreadContext* ctx) throw() ;
 public:
 	static bool __init_done;
 	static bool __init_static_variables();

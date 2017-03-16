@@ -59,7 +59,7 @@ RegionShardPartAccess* NodeListBinarySearcher::searchNode(IDatabaseRecord* recor
 	RegionShardPartAccess* access = binarySearch(nodeList, record, ctx);
 	if(access == nullptr)
 	{
-		throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3616(), ctx));
+		throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3617(), ctx));
 	}
 	return access;
 }

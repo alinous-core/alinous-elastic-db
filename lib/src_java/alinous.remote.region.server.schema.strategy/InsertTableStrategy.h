@@ -15,6 +15,9 @@ class InsertPrepareCommand;}}}}}}
 namespace alinous {namespace db {namespace trx {
 class DbVersionContext;}}}
 
+namespace alinous {namespace db {namespace table {
+class TableMetadata;}}}
+
 namespace java {namespace util {
 template <typename  T> class Iterator;}}
 
@@ -23,9 +26,6 @@ class InsertNodeAccessStrategy;}}}}}}
 
 namespace alinous {namespace remote {namespace region {namespace client {namespace command {namespace data {
 class ClientNetworkRecord;}}}}}}
-
-namespace alinous {namespace db {namespace table {
-class TableMetadata;}}}
 
 namespace alinous {namespace compile {namespace sql {namespace analyze {
 class TableMetadataUniqueCollection;}}}}
@@ -99,7 +99,7 @@ private:
 	NodeListBinarySearcher* nodeSearcher;
 	HashMap<String,InsertNodeAccessStrategy>* nodeStrategy;
 public:
-	List<InsertPrepareCommand>* toPrepareCommand(DbVersionContext* vctx, long long newCommitId, ThreadContext* ctx) throw() ;
+	List<InsertPrepareCommand>* toPrepareCommand(DbVersionContext* vctx, long long newCommitId, int isolationLevel, ThreadContext* ctx) throw() ;
 	void build(ArrayList<ClientNetworkRecord>* list, ThreadContext* ctx);
 	long long getCommitId(ThreadContext* ctx) throw() ;
 private:

@@ -74,7 +74,7 @@ private:
 	Map<String,TableUniqueCollections>* tables;
 	LockObject* lock;
 public:
-	UniqueExclusiveLock* lockWithCheck(ScanUnique* unique, IDatabaseRecord* value, bool throwex, ThreadContext* ctx);
+	UniqueExclusiveLock* lockWithCheck(ScanUnique* unique, IDatabaseRecord* record, bool throwex, ThreadContext* ctx);
 	void unlock(UniqueExclusiveLock* lock, ThreadContext* ctx) throw() ;
 	UniqueExclusiveLock* findLock(ScanUnique* unique, IDatabaseRecord* value, ThreadContext* ctx);
 	void dispose(ThreadContext* ctx) throw() ;
