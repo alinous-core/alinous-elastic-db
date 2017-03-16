@@ -92,6 +92,12 @@ void DbVersionContext::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) 
 	buff->putLong(this->schemaVersion, ctx);
 	buff->putLong(this->nodeClusterVersion, ctx);
 }
+DbVersionContext* DbVersionContext::fromNetwork(NetworkBinaryBuffer* buff, ThreadContext* ctx)
+{
+	DbVersionContext* vctx = (new(ctx) DbVersionContext(ctx));
+	vctx->readData(buff, ctx);
+	return vctx;
+}
 void DbVersionContext::__cleanUp(ThreadContext* ctx){
 }
 }}}

@@ -108,6 +108,7 @@ public:
 	bool equals(IObject* obj, ThreadContext* ctx) throw()  final;
 public:
 	static ClientNetworkRecord* valueFromFetcher(FileStorageEntryFetcher* fetcher, ThreadContext* ctx);
+	static ClientNetworkRecord* fromNetwork(NetworkBinaryBuffer* buff, ThreadContext* ctx);
 public:
 	static bool __init_done;
 	static bool __init_static_variables();

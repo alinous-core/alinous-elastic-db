@@ -1,7 +1,7 @@
 #ifndef ALINOUS_REMOTE_DB_REMOTESTORAGERESPONCEACTION_H_
 #define ALINOUS_REMOTE_DB_REMOTESTORAGERESPONCEACTION_H_
-namespace alinous {namespace remote {namespace db {
-class RemoteTableStorageServer;}}}
+namespace alinous {namespace remote {namespace db {namespace server {
+class RemoteTableStorageServer;}}}}
 
 namespace java {namespace net {
 class Socket;}}
@@ -60,6 +60,7 @@ using ::java::io::OutputStream;
 using ::java::net::Socket;
 using ::alinous::remote::db::client::command::AbstractRemoteStorageCommand;
 using ::alinous::remote::db::client::command::RemoteStorageCommandReader;
+using ::alinous::remote::db::server::RemoteTableStorageServer;
 using ::alinous::remote::socket::SocketServer;
 using ::alinous::runtime::parallel::IThreadAction;
 using ::alinous::system::AlinousException;

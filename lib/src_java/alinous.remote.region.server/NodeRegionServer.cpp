@@ -45,7 +45,7 @@ namespace alinous {namespace remote {namespace region {namespace server {
 
 
 
-String* NodeRegionServer::THREAD_NAME = ConstStr::getCNST_STR_3603();
+String* NodeRegionServer::THREAD_NAME = ConstStr::getCNST_STR_3604();
 bool NodeRegionServer::__init_done = __init_static_variables();
 bool NodeRegionServer::__init_static_variables(){
 	Java2CppSystem::getSelf();
@@ -143,7 +143,7 @@ void NodeRegionServer::syncNodes(ThreadContext* ctx)
 			AbstractMonitorCommand* retcmd = cmd->sendCommand(socket, ctx);
 			if(retcmd->getType(ctx) != AbstractMonitorCommand::TYPE_GET_REGION_INFO)
 			{
-				throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3602(), ctx));
+				throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3603(), ctx));
 			}
 			cmd = static_cast<GetRegionNodeInfoCommand*>(retcmd);
 			RegionInfoData* data = cmd->getRegionData(ctx);
@@ -186,11 +186,11 @@ void NodeRegionServer::createTable(TableMetadata* metadata, ThreadContext* ctx)
 	}
 	syncScheme(ctx);
 }
-void NodeRegionServer::insertData(ArrayList<ClientNetworkRecord>* list, long long commitId, String* schema, String* table, DbVersionContext* vctx, ThreadContext* ctx)
+void NodeRegionServer::insertData(ArrayList<ClientNetworkRecord>* list, long long newCommitId, String* schema, String* table, DbVersionContext* vctx, ThreadContext* ctx)
 {
 	checkVersion(vctx, ctx);
-	RegionInsertExecutor* exec = this->insertSessions->getInsertSession(vctx->getTrxId(ctx), commitId, vctx, this->refs, ctx);
-	exec->prepareInsert(list, schema, table, ctx);
+	RegionInsertExecutor* exec = this->insertSessions->getInsertSession(vctx->getTrxId(ctx), newCommitId, vctx, this->refs, ctx);
+	exec->prepareInsert(list, schema, table, vctx, newCommitId, ctx);
 }
 void NodeRegionServer::commitUpdateData(long long trxId, ThreadContext* ctx) throw() 
 {
@@ -237,17 +237,17 @@ void NodeRegionServer::reportClusterUpdate(ThreadContext* ctx)
 			AbstractMonitorCommand* retcmd = cmd->sendCommand(socket, ctx);
 			if(retcmd->getType(ctx) != AbstractMonitorCommand::TYPE_REPORT_CLUSTER_UPDATED)
 			{
-				throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3602(), ctx));
+				throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3603(), ctx));
 			}
 			cmd = static_cast<ReportClusterVersionUpCommand*>(retcmd);
 		}
 		catch(UnknownHostException* e)
 		{
-			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3602(), ctx));
+			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3603(), ctx));
 		}
 		catch(IOException* e)
 		{
-			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3602(), ctx));
+			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3603(), ctx));
 		}
 	}
 }

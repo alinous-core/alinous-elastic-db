@@ -12,7 +12,7 @@
 #include "alinous.remote.socket/NetworkBinaryBuffer.h"
 #include "alinous.remote.socket/ICommandData.h"
 #include "alinous.db.table/TableMetadata.h"
-#include "alinous.remote.db/RemoteTableStorageServer.h"
+#include "alinous.remote.db.server/RemoteTableStorageServer.h"
 #include "alinous.remote.db.client.command/AbstractRemoteStorageCommand.h"
 #include "alinous.remote.db.client.command/RemoteStorageConnectCommand.h"
 #include "alinous.remote.db.client.command/RemoteStorageCommandReader.h"

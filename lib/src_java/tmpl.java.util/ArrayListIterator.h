@@ -16,7 +16,7 @@ template class ::java::util::ArrayListIterator<::com::google::re2j::Regexp>;
 template class ::java::util::ArrayListIterator<::com::google::re2j::Machine::LogicalThread>;
 template class ::java::util::ArrayListIterator<::com::google::re2j::Inst>;
 template class ::java::util::ArrayListIterator<::com::google::re2j::Machine>;
-template class ::java::util::ArrayListIterator<::alinous::remote::db::RemoteTableStorageServer>;
+template class ::java::util::ArrayListIterator<::alinous::remote::db::server::RemoteTableStorageServer>;
 template class ::java::util::ArrayListIterator<::alinous::remote::region::server::NodeRegionServer>;
 template class ::java::util::ArrayListIterator<::alinous::html::xpath::match::MatchCandidate>;
 template class ::java::util::ArrayListIterator<::alinous::system::config::remote::RegionsServer>;

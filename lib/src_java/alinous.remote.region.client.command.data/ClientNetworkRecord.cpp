@@ -237,7 +237,7 @@ void ClientNetworkRecord::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx
 		IAlinousVariable* val = NetworkAlinousVariableFactory::fromNetworkData(buff, ctx);
 		if(val == nullptr || !((dynamic_cast<VariantValue*>(val) != 0)))
 		{
-			throw (new(ctx) VariableException(ConstStr::getCNST_STR_3600(), ctx));
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_3601(), ctx));
 		}
 		VariantValue* variant = static_cast<VariantValue*>(val);
 		this->values->add(variant, ctx);
@@ -276,6 +276,12 @@ ClientNetworkRecord* ClientNetworkRecord::valueFromFetcher(FileStorageEntryFetch
 		rec->setValue(i, variant, ctx);
 	}
 	return rec;
+}
+ClientNetworkRecord* ClientNetworkRecord::fromNetwork(NetworkBinaryBuffer* buff, ThreadContext* ctx)
+{
+	ClientNetworkRecord* record = (new(ctx) ClientNetworkRecord(ctx));
+	record->readData(buff, ctx);
+	return record;
 }
 void ClientNetworkRecord::__cleanUp(ThreadContext* ctx){
 }

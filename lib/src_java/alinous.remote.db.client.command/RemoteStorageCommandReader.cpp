@@ -4,7 +4,7 @@
 #include "java.io/FilterOutputStream.h"
 #include "java.io/BufferedOutputStream.h"
 #include "alinous.system/AlinousException.h"
-#include "alinous.remote.db/RemoteTableStorageServer.h"
+#include "alinous.remote.db.server/RemoteTableStorageServer.h"
 #include "alinous.remote.socket/NetworkBinaryBuffer.h"
 #include "alinous.remote.db.client.command/AbstractRemoteStorageCommand.h"
 #include "alinous.remote.db.client.command/RemoteStorageConnectCommand.h"
@@ -89,7 +89,7 @@ AbstractRemoteStorageCommand* RemoteStorageCommandReader::readFromStream(InputSt
 		cmd = (new(ctx) CommitDMLCommand(ctx));
 		break ;
 	default:
-		throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3589(), ctx));
+		throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3585(), ctx));
 		break;
 	}
 	cmd->readFromStream(stream, size, ctx);

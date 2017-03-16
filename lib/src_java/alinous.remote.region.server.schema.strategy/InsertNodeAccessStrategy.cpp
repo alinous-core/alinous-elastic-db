@@ -9,7 +9,7 @@
 #include "java.io/BufferedOutputStream.h"
 #include "alinous.btree/IValueFetcher.h"
 #include "alinous.btree/IBTreeValue.h"
-#include "alinous.remote.db/RemoteTableStorageServer.h"
+#include "alinous.remote.db.server/RemoteTableStorageServer.h"
 #include "alinous.remote.db.client.command/RemoteStorageCommandReader.h"
 #include "alinous.remote.db.client.command/AbstractRemoteStorageCommand.h"
 #include "alinous.runtime.dom/IAlinousVariable.h"

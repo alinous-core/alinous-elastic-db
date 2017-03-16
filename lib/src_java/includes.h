@@ -304,8 +304,10 @@
 #include "alinous.compile.sql.functions/Coalesce.h"
 #include "alinous.compile.sql.functions/ToNumber.h"
 #include "alinous.compile.sql.functions/SQLFunctionManager.h"
-#include "alinous.remote.db.client.command.data/SchemaData.h"
-#include "alinous.remote.db.client.command.data/SchemasStructureInfoData.h"
+#include "alinous.remote.socket/ISocketConnection.h"
+#include "alinous.remote.socket/SocketConnectionPool.h"
+#include "alinous.remote.socket/ISocketConnectionFactory.h"
+#include "alinous.remote.monitor.client/MonitorConnectionInfo.h"
 #include "alinous.html/DomDocument.h"
 #include "alinous.html.xpath.match/MatchingException.h"
 #include "alinous.html.xpath/IXpathElement.h"
@@ -351,11 +353,13 @@
 #include "alinous.remote.monitor/NodeInfo.h"
 #include "alinous.remote.monitor/RegionNodeInfo.h"
 #include "alinous.remote.monitor.client.command.data/RegionInfoData.h"
+#include "alinous.remote.monitor.client.command/AbstractMonitorCommand.h"
+#include "alinous.remote.monitor.client.command/TerminateCommand.h"
+#include "alinous.remote.socket/ISocketActionFactory.h"
+#include "alinous.remote.socket/SocketServer.h"
 #include "alinous.system.config.remote/Regions.h"
 #include "alinous.system.config.remote/Monitor.h"
 #include "alinous.remote.monitor/RegionNodeInfoManager.h"
-#include "alinous.remote.socket/ISocketActionFactory.h"
-#include "alinous.remote.monitor.client.command/AbstractMonitorCommand.h"
 #include "alinous.remote.monitor.client.command.commitId/GetMaxCommitIdCommand.h"
 #include "alinous.remote.monitor.client.command.commitId/NewCommitIdCommand.h"
 #include "alinous.remote.monitor.client.command.commitId/NewTransactionCommand.h"
@@ -370,26 +374,23 @@
 #include "alinous.remote.monitor/MonitorResponceAction.h"
 #include "alinous.remote.monitor/MonitorResponseActionFactory.h"
 #include "alinous.remote.monitor/TransactionMonitorServer.h"
-#include "alinous.remote.monitor.client.command/TerminateCommand.h"
-#include "alinous.remote.socket/SocketServer.h"
-#include "alinous.system.config.remote/MonitorRef.h"
-#include "alinous.remote.socket/ISocketConnection.h"
-#include "alinous.remote.socket/SocketConnectionPool.h"
-#include "alinous.remote.socket/ISocketConnectionFactory.h"
-#include "alinous.remote.monitor.client/MonitorConnectionInfo.h"
 #include "alinous.remote.monitor.client/MonitorConnection.h"
 #include "alinous.remote.monitor.client/MonitorClientConnectionFactory.h"
+#include "alinous.system.config.remote/MonitorRef.h"
 #include "alinous.remote.db/MonitorAccess.h"
 #include "alinous.remote.db.client.command/AbstractRemoteStorageCommand.h"
 #include "alinous.remote.db.client.command/RemoteStorageConnectCommand.h"
 #include "alinous.remote.db.client.command.ddl/CreateSchemaCommand.h"
 #include "alinous.remote.db.client.command.ddl/CreateTableCommand.h"
 #include "alinous.remote.db.client.command.dml/CommitDMLCommand.h"
+#include "alinous.db.trx/DbVersionContext.h"
 #include "alinous.remote.region.client.command.data/ClientNetworkRecord.h"
 #include "alinous.remote.db.client/RemoteStorageConnectionInfo.h"
 #include "alinous.remote.db.client.command/FinishRemoteStorageConnectionCommand.h"
 #include "alinous.remote.db.client/RemoteStorageConnection.h"
 #include "alinous.remote.db.client/RemoteStorageClientConnectionFactory.h"
+#include "alinous.remote.db.client.command.data/SchemaData.h"
+#include "alinous.remote.db.client.command.data/SchemasStructureInfoData.h"
 #include "alinous.remote.db.client.command/GetTableSchemeCommand.h"
 #include "alinous.remote.region.server.schema/NodeReference.h"
 #include "alinous.remote.region.server.schema.strategy/UniqueOpValue.h"
@@ -400,8 +401,9 @@
 #include "alinous.remote.db.client.command/RemoteStorageCommandReader.h"
 #include "alinous.remote.db/RemoteStorageResponceAction.h"
 #include "alinous.remote.db/RemoteStorageResponceActionFactory.h"
-#include "alinous.remote.db/RemoteTableStorageServer.h"
-#include "alinous.db.trx/DbVersionContext.h"
+#include "alinous.remote.db.server/StorageTransaction.h"
+#include "alinous.remote.db.server/StorageTransactionManager.h"
+#include "alinous.remote.db.server/RemoteTableStorageServer.h"
 #include "alinous.remote.region.client.command.data/ClientTableData.h"
 #include "alinous.remote.region.client.command.data/ClientSchemaData.h"
 #include "alinous.remote.region.client.command.data/ClientStructureMetadata.h"
@@ -1790,7 +1792,6 @@ inline static void __cleanUpStatics(alinous::ThreadContext* ctx){
 	alinous::remote::monitor::client::command::commitId::ReportClusterVersionUpCommand::__cleanUp(ctx);
 	alinous::remote::monitor::client::command::data::RegionInfoData::__cleanUp(ctx);
 	alinous::remote::db::RemoteStorageResponceAction::__cleanUp(ctx);
-	alinous::remote::db::RemoteTableStorageServer::__cleanUp(ctx);
 	alinous::remote::db::MonitorAccess::__cleanUp(ctx);
 	alinous::remote::db::RemoteStorageResponceActionFactory::__cleanUp(ctx);
 	alinous::remote::db::client::RemoteStorageConnection::__cleanUp(ctx);
@@ -1812,6 +1813,9 @@ inline static void __cleanUpStatics(alinous::ThreadContext* ctx){
 	alinous::remote::db::client::command::dml::InsertPrepareCommand::__cleanUp(ctx);
 	alinous::remote::db::client::command::ddl::CreateTableCommand::__cleanUp(ctx);
 	alinous::remote::db::client::command::ddl::CreateSchemaCommand::__cleanUp(ctx);
+	alinous::remote::db::server::StorageTransaction::__cleanUp(ctx);
+	alinous::remote::db::server::RemoteTableStorageServer::__cleanUp(ctx);
+	alinous::remote::db::server::StorageTransactionManager::__cleanUp(ctx);
 	alinous::remote::socket::NetworkBinaryBuffer::__cleanUp(ctx);
 	alinous::remote::socket::SocketServer::__cleanUp(ctx);
 	alinous::remote::socket::SocketConnectionPool::__cleanUp(ctx);

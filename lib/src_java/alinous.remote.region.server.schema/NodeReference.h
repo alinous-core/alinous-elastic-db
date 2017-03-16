@@ -96,6 +96,7 @@ public:
 	void initConnectionPool(ThreadContext* ctx) throw() ;
 	void dispose(ThreadContext* ctx) throw() ;
 	SchemasStructureInfoData* getSchemeInfo(String* region, ThreadContext* ctx);
+	AbstractRemoteStorageCommand* sendCommand(AbstractRemoteStorageCommand* cmd, ThreadContext* ctx);
 	void createSchema(String* schemaName, ThreadContext* ctx);
 	void createTable(TableMetadata* meta, ThreadContext* ctx);
 	String* getHost(ThreadContext* ctx) throw() ;

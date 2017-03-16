@@ -2,9 +2,9 @@
 
 
 #include "alinous.runtime.parallel/IThreadAction.h"
-#include "alinous.remote.socket/SocketServer.h"
 #include "alinous.remote.socket/ISocketActionFactory.h"
-#include "alinous.remote.db/RemoteTableStorageServer.h"
+#include "alinous.remote.socket/SocketServer.h"
+#include "alinous.remote.db.server/RemoteTableStorageServer.h"
 #include "alinous.remote.db/RemoteStorageResponceAction.h"
 #include "alinous.remote.db/RemoteStorageResponceActionFactory.h"
 

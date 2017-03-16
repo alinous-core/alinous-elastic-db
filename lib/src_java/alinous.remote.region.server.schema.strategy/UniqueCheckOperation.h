@@ -12,6 +12,9 @@ class VariantValue;}}}
 namespace alinous {namespace remote {namespace region {namespace server {namespace schema {namespace strategy {
 class UniqueOpValue;}}}}}}
 
+namespace alinous {namespace remote {namespace region {namespace server {namespace schema {namespace strategy {
+class UniqueCheckOperation;}}}}}}
+
 namespace alinous {namespace remote {namespace socket {
 class NetworkBinaryBuffer;}}}
 
@@ -61,6 +64,8 @@ public:
 	List<UniqueOpValue>* getValues(ThreadContext* ctx) throw() ;
 	void readData(NetworkBinaryBuffer* buff, ThreadContext* ctx) final;
 	void writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) final;
+public:
+	static UniqueCheckOperation* fromNetwork(NetworkBinaryBuffer* buff, ThreadContext* ctx);
 public:
 	static bool __init_done;
 	static bool __init_static_variables();

@@ -9,6 +9,9 @@ class Long;}}
 namespace alinous {namespace remote {namespace region {namespace client {namespace command {namespace data {
 class ClientNetworkRecord;}}}}}}
 
+namespace alinous {namespace db {namespace trx {
+class DbVersionContext;}}}
+
 namespace alinous {namespace remote {namespace region {namespace server {namespace schema {namespace strategy {
 class RegionPartitionTableAccess;}}}}}}
 
@@ -21,8 +24,11 @@ template <typename  T> class List;}}
 namespace alinous {namespace remote {namespace db {namespace client {namespace command {namespace dml {
 class InsertPrepareCommand;}}}}}}
 
-namespace alinous {namespace db {
-class AlinousDbException;}}
+namespace alinous {namespace remote {namespace region {namespace server {namespace schema {
+class NodeReference;}}}}}
+
+namespace alinous {namespace system {
+class AlinousException;}}
 
 namespace java {namespace lang {
 class IObject;
@@ -39,12 +45,14 @@ using namespace ::java::lang;
 using ::java::util::Iterator;
 using ::java::util::ArrayList;
 using ::java::util::List;
-using ::alinous::db::AlinousDbException;
+using ::alinous::db::trx::DbVersionContext;
 using ::alinous::remote::db::client::command::dml::InsertPrepareCommand;
 using ::alinous::remote::region::client::command::data::ClientNetworkRecord;
+using ::alinous::remote::region::server::schema::NodeReference;
 using ::alinous::remote::region::server::schema::NodeReferenceManager;
 using ::alinous::remote::region::server::schema::strategy::InsertTableStrategy;
 using ::alinous::remote::region::server::schema::strategy::RegionPartitionTableAccess;
+using ::alinous::system::AlinousException;
 
 
 
@@ -62,12 +70,12 @@ private:
 	long long commitId;
 	InsertTableStrategy* strategy;
 public:
-	void prepareInsert(ArrayList<ClientNetworkRecord>* list, String* schema, String* table, ThreadContext* ctx);
+	void prepareInsert(ArrayList<ClientNetworkRecord>* list, String* schema, String* table, DbVersionContext* vctx, long long newCommitId, ThreadContext* ctx);
 	void tpcCommitInsert(ThreadContext* ctx) throw() ;
 	void dispose(ThreadContext* ctx) throw() ;
 	Long* getTrxId(ThreadContext* ctx) throw() ;
 private:
-	void sendPrepareCommand(InsertPrepareCommand* cmd, ThreadContext* ctx) throw() ;
+	void sendPrepareCommand(InsertPrepareCommand* cmd, ThreadContext* ctx);
 public:
 	static bool __init_done;
 	static bool __init_static_variables();

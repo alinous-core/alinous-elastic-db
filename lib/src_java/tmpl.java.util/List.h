@@ -4,7 +4,7 @@ template class ::java::util::List<::java::lang::String>;
 template class ::java::util::List<::com::google::re2j::Machine>;
 template class ::java::util::List<::alinous::system::config::remote::Node>;
 template class ::java::util::List<::alinous::system::config::remote::RegionsServer>;
-template class ::java::util::List<::alinous::remote::db::RemoteTableStorageServer>;
+template class ::java::util::List<::alinous::remote::db::server::RemoteTableStorageServer>;
 template class ::java::util::List<::alinous::remote::region::server::NodeRegionServer>;
 template class ::java::util::List<::alinous::system::config::remote::RemoteNodeReference>;
 template class ::java::util::List<::alinous::system::config::remote::Table>;

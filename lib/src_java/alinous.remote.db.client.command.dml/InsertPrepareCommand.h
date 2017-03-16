@@ -1,7 +1,7 @@
 #ifndef ALINOUS_REMOTE_DB_CLIENT_COMMAND_DML_INSERTPREPARECOMMAND_H_
 #define ALINOUS_REMOTE_DB_CLIENT_COMMAND_DML_INSERTPREPARECOMMAND_H_
-namespace alinous {namespace remote {namespace db {
-class RemoteTableStorageServer;}}}
+namespace alinous {namespace remote {namespace db {namespace server {
+class RemoteTableStorageServer;}}}}
 
 namespace java {namespace io {
 class BufferedOutputStream;}}
@@ -9,8 +9,8 @@ class BufferedOutputStream;}}
 namespace java {namespace io {
 class OutputStream;}}
 
-namespace java {namespace io {
-class InputStream;}}
+namespace alinous {namespace remote {namespace socket {
+class NetworkBinaryBuffer;}}}
 
 namespace alinous {namespace remote {namespace region {namespace server {namespace schema {namespace strategy {
 class UniqueCheckOperation;}}}}}}
@@ -18,8 +18,14 @@ class UniqueCheckOperation;}}}}}}
 namespace alinous {namespace remote {namespace region {namespace client {namespace command {namespace data {
 class ClientNetworkRecord;}}}}}}
 
+namespace java {namespace io {
+class InputStream;}}
+
 namespace alinous {namespace remote {namespace region {namespace server {namespace schema {
 class NodeReference;}}}}}
+
+namespace alinous {namespace db {namespace trx {
+class DbVersionContext;}}}
 
 namespace java {namespace util {
 template <typename  T> class List;}}
@@ -48,11 +54,13 @@ using ::java::io::InputStream;
 using ::java::io::OutputStream;
 using ::java::util::ArrayList;
 using ::java::util::List;
-using ::alinous::remote::db::RemoteTableStorageServer;
+using ::alinous::db::trx::DbVersionContext;
 using ::alinous::remote::db::client::command::AbstractRemoteStorageCommand;
+using ::alinous::remote::db::server::RemoteTableStorageServer;
 using ::alinous::remote::region::client::command::data::ClientNetworkRecord;
 using ::alinous::remote::region::server::schema::NodeReference;
 using ::alinous::remote::region::server::schema::strategy::UniqueCheckOperation;
+using ::alinous::remote::socket::NetworkBinaryBuffer;
 using ::alinous::runtime::dom::VariableException;
 
 
@@ -68,6 +76,8 @@ public:
 private:
 	List<UniqueCheckOperation>* uniqueCheckOps;
 	List<ClientNetworkRecord>* records;
+	long long newCommitId;
+	DbVersionContext* vctx;
 	NodeReference* nodeAccessRef;
 public:
 	void executeOnServer(RemoteTableStorageServer* tableStorageServer, BufferedOutputStream* outStream, ThreadContext* ctx) final;
@@ -76,6 +86,10 @@ public:
 	void addRecord(ClientNetworkRecord* record, ThreadContext* ctx) throw() ;
 	NodeReference* getNodeAccessRef(ThreadContext* ctx) throw() ;
 	void setNodeAccessRef(NodeReference* nodeAccessRef, ThreadContext* ctx) throw() ;
+	long long getNewCommitId(ThreadContext* ctx) throw() ;
+	void setNewCommitId(long long newCommitId, ThreadContext* ctx) throw() ;
+	DbVersionContext* getVctx(ThreadContext* ctx) throw() ;
+	void setVctx(DbVersionContext* vctx, ThreadContext* ctx) throw() ;
 	void writeByteStream(OutputStream* out, ThreadContext* ctx) final;
 public:
 	static bool __init_done;

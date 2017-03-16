@@ -117,13 +117,13 @@ void RemoteRegionRef::syncSchemes(ThreadContext* ctx)
 			AbstractNodeRegionCommand* retcmd = cmd->sendCommand(socket, ctx);
 			if(retcmd->getType(ctx) != AbstractNodeRegionCommand::TYPE_GET_SCHEMA_FROM_REGION)
 			{
-				throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3594(), ctx));
+				throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3595(), ctx));
 			}
 			cmd = static_cast<GetSchemaFromRegionCommand*>(retcmd);
 		}
 		catch(AlinousException* e)
 		{
-			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3595(), e, ctx));
+			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3596(), e, ctx));
 		}
 	}
 	{
@@ -171,21 +171,21 @@ void RemoteRegionRef::createSchema(String* schemaName, ThreadContext* ctx)
 			AbstractNodeRegionCommand* retcmd = cmd->sendCommand(socket, ctx);
 			if(retcmd->getType(ctx) != AbstractNodeRegionCommand::TYPE_CREATE_SCHEMA)
 			{
-				throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3594(), ctx));
+				throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3595(), ctx));
 			}
 			syncSchemes(ctx);
 		}
 		catch(UnknownHostException* e)
 		{
-			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3596(), e, ctx));
+			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3597(), e, ctx));
 		}
 		catch(IOException* e)
 		{
-			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3596(), e, ctx));
+			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3597(), e, ctx));
 		}
 		catch(AlinousException* e)
 		{
-			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3596(), e, ctx));
+			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3597(), e, ctx));
 		}
 	}
 }
@@ -207,7 +207,7 @@ void RemoteRegionRef::createTable(String* schemaName, TableMetadata* tblMeta, Th
 			AbstractNodeRegionCommand* retcmd = cmd->sendCommand(socket, ctx);
 			if(retcmd->getType(ctx) != AbstractNodeRegionCommand::TYPE_CREATE_TABLE)
 			{
-				throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3597(), ctx));
+				throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3598(), ctx));
 			}
 			syncSchemes(ctx);
 		}

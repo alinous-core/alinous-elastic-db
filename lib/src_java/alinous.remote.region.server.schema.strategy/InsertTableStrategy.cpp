@@ -20,9 +20,10 @@
 #include "alinous.compile.sql.analyze/TableMetadataUniqueCollection.h"
 #include "alinous.db.table/TablePartitionRangeCollection.h"
 #include "alinous.db.table/TableMetadata.h"
+#include "alinous.db.trx/DbVersionContext.h"
 #include "java.io/FilterOutputStream.h"
 #include "java.io/BufferedOutputStream.h"
-#include "alinous.remote.db/RemoteTableStorageServer.h"
+#include "alinous.remote.db.server/RemoteTableStorageServer.h"
 #include "alinous.remote.db.client.command/RemoteStorageCommandReader.h"
 #include "alinous.remote.db.client.command/AbstractRemoteStorageCommand.h"
 #include "alinous.remote.region.client.command.data/ClientNetworkRecord.h"
@@ -83,7 +84,7 @@ void InsertTableStrategy::__releaseRegerences(bool prepare, ThreadContext* ctx) 
 		return;
 	}
 }
-List<InsertPrepareCommand>* InsertTableStrategy::toPrepareCommand(ThreadContext* ctx) throw() 
+List<InsertPrepareCommand>* InsertTableStrategy::toPrepareCommand(DbVersionContext* vctx, long long newCommitId, ThreadContext* ctx) throw() 
 {
 	List<InsertPrepareCommand>* list = (new(ctx) ArrayList<InsertPrepareCommand>(ctx));
 	Iterator<String>* it = this->nodeStrategy->keySet(ctx)->iterator(ctx);
@@ -92,6 +93,8 @@ List<InsertPrepareCommand>* InsertTableStrategy::toPrepareCommand(ThreadContext*
 		String* nodestr = it->next(ctx);
 		InsertNodeAccessStrategy* strategy = this->nodeStrategy->get(nodestr, ctx);
 		InsertPrepareCommand* cmd = strategy->toCommand(ctx);
+		cmd->setNewCommitId(newCommitId, ctx);
+		cmd->setVctx(vctx, ctx);
 		list->add(cmd, ctx);
 	}
 	return list;

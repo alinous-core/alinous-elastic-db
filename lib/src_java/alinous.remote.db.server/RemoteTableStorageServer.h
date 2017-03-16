@@ -1,5 +1,8 @@
-#ifndef ALINOUS_REMOTE_DB_REMOTETABLESTORAGESERVER_H_
-#define ALINOUS_REMOTE_DB_REMOTETABLESTORAGESERVER_H_
+#ifndef ALINOUS_REMOTE_DB_SERVER_REMOTETABLESTORAGESERVER_H_
+#define ALINOUS_REMOTE_DB_SERVER_REMOTETABLESTORAGESERVER_H_
+namespace alinous {namespace remote {namespace db {namespace server {
+class StorageTransactionManager;}}}}
+
 namespace alinous {namespace system {
 class AlinousCore;}}
 
@@ -89,7 +92,7 @@ namespace alinous {
 class ThreadContext;
 }
 
-namespace alinous {namespace remote {namespace db {
+namespace alinous {namespace remote {namespace db {namespace server {
 
 using namespace ::alinous;
 using namespace ::java::lang;
@@ -109,6 +112,8 @@ using ::alinous::db::SchemaManager;
 using ::alinous::db::table::DatabaseException;
 using ::alinous::db::table::TableMetadata;
 using ::alinous::lock::LockObject;
+using ::alinous::remote::db::MonitorAccess;
+using ::alinous::remote::db::RemoteStorageResponceActionFactory;
 using ::alinous::remote::db::client::command::data::SchemasStructureInfoData;
 using ::alinous::remote::socket::SocketServer;
 using ::alinous::runtime::dom::VariableException;
@@ -147,6 +152,7 @@ private:
 	LockObject* schemaVersionLock;
 	long long schemaVersion;
 	MonitorAccess* monitorAccess;
+	StorageTransactionManager* storageTrxManager;
 public:
 	const static IntKey __SCHEMA;
 	constexpr static IntKey* SCHEMA{const_cast<IntKey*>(&__SCHEMA)};
@@ -174,6 +180,6 @@ public:
 	static void __cleanUp(ThreadContext* ctx);
 };
 
-}}}
+}}}}
 
-#endif /* end of ALINOUS_REMOTE_DB_REMOTETABLESTORAGESERVER_H_ */
+#endif /* end of ALINOUS_REMOTE_DB_SERVER_REMOTETABLESTORAGESERVER_H_ */

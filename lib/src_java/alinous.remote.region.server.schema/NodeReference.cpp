@@ -13,7 +13,7 @@
 #include "java.io/FilterOutputStream.h"
 #include "java.io/BufferedOutputStream.h"
 #include "alinous.remote.db.client.command.data/SchemasStructureInfoData.h"
-#include "alinous.remote.db/RemoteTableStorageServer.h"
+#include "alinous.remote.db.server/RemoteTableStorageServer.h"
 #include "alinous.remote.db.client.command/AbstractRemoteStorageCommand.h"
 #include "alinous.remote.db.client.command.ddl/CreateSchemaCommand.h"
 #include "alinous.remote.db.client.command.ddl/CreateTableCommand.h"
@@ -73,11 +73,11 @@ String* NodeReference::toString(ThreadContext* ctx) throw()
 	StringBuilder* buff = (new(ctx) StringBuilder(256, ctx));
 	if(this->ipv6)
 	{
-		buff->append(ConstStr::getCNST_STR_3604(), ctx);
+		buff->append(ConstStr::getCNST_STR_3605(), ctx);
 	}
 		else 
 	{
-		buff->append(ConstStr::getCNST_STR_3605(), ctx);
+		buff->append(ConstStr::getCNST_STR_3606(), ctx);
 	}
 	buff->append(host, ctx);
 	buff->append(ConstStr::getCNST_STR_381(), ctx)->append(Integer::toString(this->port, ctx), ctx);
@@ -117,20 +117,55 @@ SchemasStructureInfoData* NodeReference::getSchemeInfo(String* region, ThreadCon
 			AbstractRemoteStorageCommand* retcmd = cmd->sendCommand(socket, ctx);
 			if(retcmd->getType(ctx) != AbstractRemoteStorageCommand::TYPE_GET_TABLE_SCHEME)
 			{
-				throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3606(), ctx));
+				throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3607(), ctx));
 			}
 			cmd = static_cast<GetTableSchemeCommand*>(retcmd);
 		}
 		catch(UnknownHostException* e)
 		{
-			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3607(), e, ctx));
+			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3608(), e, ctx));
 		}
 		catch(IOException* e)
 		{
-			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3608(), e, ctx));
+			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3609(), e, ctx));
 		}
 	}
 	return cmd->getData(ctx);
+}
+AbstractRemoteStorageCommand* NodeReference::sendCommand(AbstractRemoteStorageCommand* cmd, ThreadContext* ctx)
+{
+	ISocketConnection* con = nullptr;
+	{
+		std::function<void(void)> finallyLm2= [&, this]()
+		{
+			this->nodeConnectionPool->returnConnection(con, ctx);
+		};
+		Releaser finalyCaller2(finallyLm2);
+		try
+		{
+			con = this->nodeConnectionPool->getConnection(ctx);
+			AlinousSocket* socket = con->getSocket(ctx);
+			int type = cmd->getType(ctx);
+			AbstractRemoteStorageCommand* retcmd = cmd->sendCommand(socket, ctx);
+			if(retcmd->getType(ctx) != type)
+			{
+				throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3607(), ctx));
+			}
+			return retcmd;
+		}
+		catch(UnknownHostException* e)
+		{
+			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3610(), e, ctx));
+		}
+		catch(IOException* e)
+		{
+			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3610(), e, ctx));
+		}
+		catch(AlinousException* e)
+		{
+			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3610(), e, ctx));
+		}
+	}
 }
 void NodeReference::createSchema(String* schemaName, ThreadContext* ctx)
 {
@@ -149,21 +184,21 @@ void NodeReference::createSchema(String* schemaName, ThreadContext* ctx)
 			AbstractRemoteStorageCommand* retcmd = cmd->sendCommand(socket, ctx);
 			if(retcmd->getType(ctx) != AbstractRemoteStorageCommand::TYPE_CREATE_SCHEMA)
 			{
-				throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3606(), ctx));
+				throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3607(), ctx));
 			}
 			cmd = static_cast<CreateSchemaCommand*>(retcmd);
 		}
 		catch(UnknownHostException* e)
 		{
-			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3609(), e, ctx));
+			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3610(), e, ctx));
 		}
 		catch(IOException* e)
 		{
-			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3609(), e, ctx));
+			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3610(), e, ctx));
 		}
 		catch(AlinousException* e)
 		{
-			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3609(), e, ctx));
+			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3610(), e, ctx));
 		}
 	}
 }
@@ -185,20 +220,20 @@ void NodeReference::createTable(TableMetadata* meta, ThreadContext* ctx)
 			AbstractRemoteStorageCommand* retcmd = cmd->sendCommand(socket, ctx);
 			if(retcmd->getType(ctx) != AbstractRemoteStorageCommand::TYPE_CREATE_TABLE)
 			{
-				throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3606(), ctx));
+				throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3607(), ctx));
 			}
 		}
 		catch(UnknownHostException* e)
 		{
-			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3610(), e, ctx));
+			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3611(), e, ctx));
 		}
 		catch(IOException* e)
 		{
-			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3610(), e, ctx));
+			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3611(), e, ctx));
 		}
 		catch(AlinousException* e)
 		{
-			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3610(), e, ctx));
+			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3611(), e, ctx));
 		}
 	}
 }

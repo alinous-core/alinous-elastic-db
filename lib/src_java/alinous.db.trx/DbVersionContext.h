@@ -1,5 +1,8 @@
 #ifndef ALINOUS_DB_TRX_DBVERSIONCONTEXT_H_
 #define ALINOUS_DB_TRX_DBVERSIONCONTEXT_H_
+namespace alinous {namespace db {namespace trx {
+class DbVersionContext;}}}
+
 namespace alinous {namespace remote {namespace socket {
 class NetworkBinaryBuffer;}}}
 
@@ -52,6 +55,8 @@ public:
 	void setTrxId(long long trxId, ThreadContext* ctx) throw() ;
 	void readData(NetworkBinaryBuffer* buff, ThreadContext* ctx) final;
 	void writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) throw()  final;
+public:
+	static DbVersionContext* fromNetwork(NetworkBinaryBuffer* buff, ThreadContext* ctx);
 public:
 	static bool __init_done;
 	static bool __init_static_variables();

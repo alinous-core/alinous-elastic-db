@@ -1,7 +1,7 @@
 #ifndef ALINOUS_REMOTE_DB_CLIENT_COMMAND_DDL_CREATESCHEMACOMMAND_H_
 #define ALINOUS_REMOTE_DB_CLIENT_COMMAND_DDL_CREATESCHEMACOMMAND_H_
-namespace alinous {namespace remote {namespace db {
-class RemoteTableStorageServer;}}}
+namespace alinous {namespace remote {namespace db {namespace server {
+class RemoteTableStorageServer;}}}}
 
 namespace java {namespace io {
 class BufferedOutputStream;}}
@@ -43,9 +43,9 @@ using ::java::io::BufferedOutputStream;
 using ::java::io::IOException;
 using ::java::io::InputStream;
 using ::java::io::OutputStream;
-using ::alinous::remote::db::RemoteTableStorageServer;
 using ::alinous::remote::db::client::command::AbstractRemoteStorageCommand;
 using ::alinous::remote::db::client::command::RemoteStorageConnectCommand;
+using ::alinous::remote::db::server::RemoteTableStorageServer;
 using ::alinous::remote::socket::NetworkBinaryBuffer;
 using ::alinous::runtime::dom::VariableException;
 using ::alinous::system::AlinousException;

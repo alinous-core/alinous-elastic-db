@@ -3,7 +3,7 @@ template class ::java::util::ArrayList<::com::google::re2j::Machine::LogicalThre
 template class ::java::util::ArrayList<::com::google::re2j::Inst>;
 template class ::java::util::ArrayList<::java::lang::String>;
 template class ::java::util::ArrayList<::com::google::re2j::Machine>;
-template class ::java::util::ArrayList<::alinous::remote::db::RemoteTableStorageServer>;
+template class ::java::util::ArrayList<::alinous::remote::db::server::RemoteTableStorageServer>;
 template class ::java::util::ArrayList<::alinous::remote::region::server::NodeRegionServer>;
 template class ::java::util::ArrayList<::alinous::html::xpath::match::MatchCandidate>;
 template class ::java::util::ArrayList<::alinous::system::config::remote::RegionsServer>;

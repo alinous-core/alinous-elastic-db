@@ -1,7 +1,7 @@
 #ifndef ALINOUS_REMOTE_DB_CLIENT_COMMAND_DML_COMMITDMLCOMMAND_H_
 #define ALINOUS_REMOTE_DB_CLIENT_COMMAND_DML_COMMITDMLCOMMAND_H_
-namespace alinous {namespace remote {namespace db {
-class RemoteTableStorageServer;}}}
+namespace alinous {namespace remote {namespace db {namespace server {
+class RemoteTableStorageServer;}}}}
 
 namespace java {namespace io {
 class BufferedOutputStream;}}
@@ -34,8 +34,8 @@ using ::java::io::BufferedOutputStream;
 using ::java::io::IOException;
 using ::java::io::InputStream;
 using ::java::io::OutputStream;
-using ::alinous::remote::db::RemoteTableStorageServer;
 using ::alinous::remote::db::client::command::AbstractRemoteStorageCommand;
+using ::alinous::remote::db::server::RemoteTableStorageServer;
 using ::alinous::runtime::dom::VariableException;
 
 

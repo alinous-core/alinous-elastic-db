@@ -7,7 +7,7 @@
 #include "alinous.db/AlinousDbException.h"
 #include "alinous.system/ISystemLog.h"
 #include "alinous.system.config/AlinousInitException.h"
-#include "alinous.remote.db/RemoteTableStorageServer.h"
+#include "alinous.remote.db.server/RemoteTableStorageServer.h"
 #include "alinous.system.config.remote/Monitor.h"
 #include "alinous.remote.monitor/TransactionMonitorServer.h"
 #include "alinous.system.config/IAlinousConfigElement.h"

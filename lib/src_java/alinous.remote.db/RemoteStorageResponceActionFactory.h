@@ -1,7 +1,7 @@
 #ifndef ALINOUS_REMOTE_DB_REMOTESTORAGERESPONCEACTIONFACTORY_H_
 #define ALINOUS_REMOTE_DB_REMOTESTORAGERESPONCEACTIONFACTORY_H_
-namespace alinous {namespace remote {namespace db {
-class RemoteTableStorageServer;}}}
+namespace alinous {namespace remote {namespace db {namespace server {
+class RemoteTableStorageServer;}}}}
 
 namespace alinous {namespace runtime {namespace parallel {
 class IThreadAction;}}}
@@ -32,6 +32,7 @@ using namespace ::alinous;
 using namespace ::java::lang;
 using ::java::util::Iterator;
 using ::java::net::Socket;
+using ::alinous::remote::db::server::RemoteTableStorageServer;
 using ::alinous::remote::socket::ISocketActionFactory;
 using ::alinous::remote::socket::SocketServer;
 using ::alinous::runtime::parallel::IThreadAction;

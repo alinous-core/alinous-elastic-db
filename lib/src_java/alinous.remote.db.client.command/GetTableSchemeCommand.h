@@ -3,8 +3,8 @@
 namespace alinous {namespace remote {namespace db {namespace client {namespace command {namespace data {
 class SchemasStructureInfoData;}}}}}}
 
-namespace alinous {namespace remote {namespace db {
-class RemoteTableStorageServer;}}}
+namespace alinous {namespace remote {namespace db {namespace server {
+class RemoteTableStorageServer;}}}}
 
 namespace java {namespace io {
 class BufferedOutputStream;}}
@@ -40,8 +40,8 @@ using ::java::io::BufferedOutputStream;
 using ::java::io::IOException;
 using ::java::io::InputStream;
 using ::java::io::OutputStream;
-using ::alinous::remote::db::RemoteTableStorageServer;
 using ::alinous::remote::db::client::command::data::SchemasStructureInfoData;
+using ::alinous::remote::db::server::RemoteTableStorageServer;
 using ::alinous::remote::socket::NetworkBinaryBuffer;
 using ::alinous::runtime::dom::VariableException;
 

@@ -26,21 +26,22 @@
 #include "alinous.system/ISystemLog.h"
 #include "alinous.system/AlinousCore.h"
 #include "alinous.db/SchemaManager.h"
-#include "alinous.remote.socket/ISocketActionFactory.h"
-#include "alinous.remote.socket/SocketServer.h"
 #include "alinous.system.config/IAlinousConfigElement.h"
 #include "alinous.system.config.remote/MonitorRef.h"
 #include "alinous.remote.db/MonitorAccess.h"
+#include "alinous.remote.socket/SocketServer.h"
+#include "alinous.remote.socket/ISocketActionFactory.h"
 #include "alinous.remote.db/RemoteStorageResponceActionFactory.h"
-#include "alinous.remote.db/RemoteTableStorageServer.h"
+#include "alinous.remote.db.server/StorageTransactionManager.h"
+#include "alinous.remote.db.server/RemoteTableStorageServer.h"
 
-namespace alinous {namespace remote {namespace db {
-
-
-
+namespace alinous {namespace remote {namespace db {namespace server {
 
 
-String* RemoteTableStorageServer::THREAD_NAME = ConstStr::getCNST_STR_3587();
+
+
+
+String* RemoteTableStorageServer::THREAD_NAME = ConstStr::getCNST_STR_3590();
 const IntKey RemoteTableStorageServer:: __SCHEMA = (IntKey(10, nullptr));
 const IntKey RemoteTableStorageServer:: __SCHEMA_VERSION = (IntKey(11, nullptr));
 bool RemoteTableStorageServer::__init_done = __init_static_variables();
@@ -54,17 +55,19 @@ bool RemoteTableStorageServer::__init_static_variables(){
 	delete ctx;
 	return true;
 }
- RemoteTableStorageServer::RemoteTableStorageServer(int port, int maxthread, String* datadir, ThreadContext* ctx) throw()  : IObject(ctx), schemas(nullptr), BLOCK_SIZE(256), nodeCapacity(8), capacity(1024), port(0), maxthread(0), dataDir(nullptr), socketServer(nullptr), btreeCache(nullptr), workerThreadsPool(nullptr), core(nullptr), dbconfig(nullptr), configFile(nullptr), schemaVersionLock(__GC_INS(this, (new(ctx) LockObject(ctx)), LockObject)), schemaVersion(0), monitorAccess(nullptr)
+ RemoteTableStorageServer::RemoteTableStorageServer(int port, int maxthread, String* datadir, ThreadContext* ctx) throw()  : IObject(ctx), schemas(nullptr), BLOCK_SIZE(256), nodeCapacity(8), capacity(1024), port(0), maxthread(0), dataDir(nullptr), socketServer(nullptr), btreeCache(nullptr), workerThreadsPool(nullptr), core(nullptr), dbconfig(nullptr), configFile(nullptr), schemaVersionLock(__GC_INS(this, (new(ctx) LockObject(ctx)), LockObject)), schemaVersion(0), monitorAccess(nullptr), storageTrxManager(nullptr)
 {
 	this->port = port;
 	this->maxthread = maxthread;
 	__GC_MV(this, &(this->dataDir), datadir, String);
+	__GC_MV(this, &(this->storageTrxManager), (new(ctx) StorageTransactionManager(datadir, this, ctx)), StorageTransactionManager);
 }
 void RemoteTableStorageServer::__construct_impl(int port, int maxthread, String* datadir, ThreadContext* ctx) throw() 
 {
 	this->port = port;
 	this->maxthread = maxthread;
 	__GC_MV(this, &(this->dataDir), datadir, String);
+	__GC_MV(this, &(this->storageTrxManager), (new(ctx) StorageTransactionManager(datadir, this, ctx)), StorageTransactionManager);
 }
  RemoteTableStorageServer::~RemoteTableStorageServer() throw() 
 {
@@ -96,6 +99,8 @@ void RemoteTableStorageServer::__releaseRegerences(bool prepare, ThreadContext* 
 	schemaVersionLock = nullptr;
 	__e_obj1.add(this->monitorAccess, this);
 	monitorAccess = nullptr;
+	__e_obj1.add(this->storageTrxManager, this);
+	storageTrxManager = nullptr;
 	if(!prepare){
 		return;
 	}
@@ -115,10 +120,10 @@ void RemoteTableStorageServer::init(AlinousCore* core, MonitorRef* monitorRef, T
 		catch(BTreeException* e)
 		{
 			e->printStackTrace(ctx);
-			throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_3584(), e, ctx));
+			throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_3587(), e, ctx));
 		}
 	}
-	__GC_MV(this, &(this->workerThreadsPool), (new(ctx) ThreadPool(16, ConstStr::getCNST_STR_3585(), ctx)), ThreadPool);
+	__GC_MV(this, &(this->workerThreadsPool), (new(ctx) ThreadPool(16, ConstStr::getCNST_STR_3588(), ctx)), ThreadPool);
 	__GC_MV(this, &(this->monitorAccess), (new(ctx) MonitorAccess(monitorRef, ctx)), MonitorAccess);
 	this->monitorAccess->init(ctx);
 	if(exists(ctx))
@@ -150,27 +155,27 @@ void RemoteTableStorageServer::start(AlinousCore* core, ThreadContext* ctx)
 		}
 		catch(IOException* e)
 		{
-			throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_3586(), ctx));
+			throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_3589(), ctx));
 		}
 		catch(InterruptedException* e)
 		{
-			throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_3586(), ctx));
+			throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_3589(), ctx));
 		}
 		catch(BTreeException* e)
 		{
-			throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_3586(), ctx));
+			throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_3589(), ctx));
 		}
 		catch(VariableException* e)
 		{
-			throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_3586(), ctx));
+			throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_3589(), ctx));
 		}
 		catch(DatabaseException* e)
 		{
-			throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_3586(), ctx));
+			throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_3589(), ctx));
 		}
 		catch(AlinousException* e)
 		{
-			throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_3586(), ctx));
+			throw (new(ctx) AlinousInitException(ConstStr::getCNST_STR_3589(), ctx));
 		}
 	}
 	RemoteStorageResponceActionFactory* factory = (new(ctx) RemoteStorageResponceActionFactory(this, ctx));
@@ -201,6 +206,10 @@ void RemoteTableStorageServer::dispose(ThreadContext* ctx) throw()
 	if(this->monitorAccess != nullptr)
 	{
 		this->monitorAccess->dispose(ctx);
+	}
+	if(this->storageTrxManager != nullptr)
+	{
+		this->storageTrxManager->dispose(ctx);
 	}
 }
 AlinousCore* RemoteTableStorageServer::getCore(ThreadContext* ctx) throw() 
@@ -314,5 +323,5 @@ File* RemoteTableStorageServer::getConfigFile(ThreadContext* ctx) throw()
 }
 void RemoteTableStorageServer::__cleanUp(ThreadContext* ctx){
 }
-}}}
+}}}}
 

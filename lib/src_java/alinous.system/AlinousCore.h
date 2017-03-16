@@ -60,8 +60,8 @@ class Node;}}}}
 namespace java {namespace util {
 template <typename  T> class Iterator;}}
 
-namespace alinous {namespace remote {namespace db {
-class RemoteTableStorageServer;}}}
+namespace alinous {namespace remote {namespace db {namespace server {
+class RemoteTableStorageServer;}}}}
 
 namespace alinous {namespace db {
 class AlinousDbException;}}
@@ -105,7 +105,7 @@ using ::java::util::List;
 using ::alinous::compile::sql::functions::SQLFunctionManager;
 using ::alinous::db::AlinousDbException;
 using ::alinous::io::DiskCacheManager;
-using ::alinous::remote::db::RemoteTableStorageServer;
+using ::alinous::remote::db::server::RemoteTableStorageServer;
 using ::alinous::remote::monitor::TransactionMonitorServer;
 using ::alinous::remote::region::server::NodeRegionServer;
 using ::alinous::runtime::AlinousModuleRepository;

@@ -12,6 +12,9 @@ template <typename  T> class List;}}
 namespace alinous {namespace remote {namespace db {namespace client {namespace command {namespace dml {
 class InsertPrepareCommand;}}}}}}
 
+namespace alinous {namespace db {namespace trx {
+class DbVersionContext;}}}
+
 namespace java {namespace util {
 template <typename  T> class Iterator;}}
 
@@ -74,6 +77,7 @@ using ::alinous::db::AlinousDbException;
 using ::alinous::db::table::TableMetadata;
 using ::alinous::db::table::TablePartitionKey;
 using ::alinous::db::table::TablePartitionRangeCollection;
+using ::alinous::db::trx::DbVersionContext;
 using ::alinous::remote::db::client::command::dml::InsertPrepareCommand;
 using ::alinous::remote::region::client::command::data::ClientNetworkRecord;
 using ::alinous::remote::region::server::schema::NodeReference;
@@ -95,7 +99,7 @@ private:
 	NodeListBinarySearcher* nodeSearcher;
 	HashMap<String,InsertNodeAccessStrategy>* nodeStrategy;
 public:
-	List<InsertPrepareCommand>* toPrepareCommand(ThreadContext* ctx) throw() ;
+	List<InsertPrepareCommand>* toPrepareCommand(DbVersionContext* vctx, long long newCommitId, ThreadContext* ctx) throw() ;
 	void build(ArrayList<ClientNetworkRecord>* list, ThreadContext* ctx);
 	long long getCommitId(ThreadContext* ctx) throw() ;
 private:

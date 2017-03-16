@@ -11,6 +11,7 @@ template class ::alinous::HashMapRawArray<::alinous::html::DomNode, ::java::util
 template class ::alinous::HashMapRawArray<::java::lang::String, ::alinous::remote::monitor::RegionNodeInfo>;
 template class ::alinous::HashMapRawArray<::java::lang::String, ::alinous::remote::db::client::command::data::TableClusterData>;
 template class ::alinous::HashMapRawArray<::java::lang::String, ::alinous::remote::db::client::command::data::SchemaData>;
+template class ::alinous::HashMapRawArray<::java::lang::Long, ::alinous::remote::db::server::StorageTransaction>;
 template class ::alinous::HashMapRawArray<::java::lang::String, ::alinous::remote::region::client::command::data::ClientTableData>;
 template class ::alinous::HashMapRawArray<::java::lang::String, ::alinous::remote::region::client::DatabaseTableClient>;
 template class ::alinous::HashMapRawArray<::java::lang::String, ::alinous::remote::region::client::command::data::ClientSchemaData>;
