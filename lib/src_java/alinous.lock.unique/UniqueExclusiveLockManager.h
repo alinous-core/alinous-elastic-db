@@ -12,6 +12,15 @@ class IDatabaseRecord;}}}
 namespace alinous {namespace lock {namespace unique {
 class TableUniqueCollections;}}}
 
+namespace java {namespace lang {
+class StringBuilder;}}
+
+namespace alinous {namespace db {namespace table {
+class TableColumnMetadata;}}}
+
+namespace alinous {namespace runtime {namespace variant {
+class VariantValue;}}}
+
 namespace java {namespace util {
 template <typename  T> class Iterator;}}
 
@@ -50,14 +59,17 @@ using namespace ::alinous;
 using namespace ::java::lang;
 using ::java::util::Iterator;
 using ::java::io::IOException;
+using ::java::util::ArrayList;
 using ::java::util::HashMap;
 using ::java::util::Iterator;
 using ::java::util::Map;
 using ::alinous::btree::BTreeException;
 using ::alinous::compile::sql::analyze::ScanUnique;
 using ::alinous::db::table::IDatabaseRecord;
+using ::alinous::db::table::TableColumnMetadata;
 using ::alinous::lock::LockObject;
 using ::alinous::runtime::dom::VariableException;
+using ::alinous::runtime::variant::VariantValue;
 using ::alinous::system::AlinousException;
 
 
@@ -75,10 +87,12 @@ private:
 	LockObject* lock;
 public:
 	UniqueExclusiveLock* lockWithCheck(ScanUnique* unique, IDatabaseRecord* record, bool throwex, ThreadContext* ctx);
+	UniqueExclusiveLock* lockWithCheck(ScanUnique* unique, String* lockString, bool throwex, ThreadContext* ctx);
 	void unlock(UniqueExclusiveLock* lock, ThreadContext* ctx) throw() ;
-	UniqueExclusiveLock* findLock(ScanUnique* unique, IDatabaseRecord* value, ThreadContext* ctx);
+	UniqueExclusiveLock* findLock(ScanUnique* unique, IDatabaseRecord* record, ThreadContext* ctx);
 	void dispose(ThreadContext* ctx) throw() ;
 private:
+	String* getLockValueString(ScanUnique* unique, IDatabaseRecord* value, ThreadContext* ctx) throw() ;
 	TableUniqueCollections* getTableUnique(String* fullName, ThreadContext* ctx) throw() ;
 public:
 	static bool __init_done;

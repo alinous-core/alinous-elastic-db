@@ -3,11 +3,11 @@
 namespace alinous {namespace compile {namespace sql {namespace analyze {
 class ScanUnique;}}}}
 
-namespace alinous {namespace db {namespace table {
-class IDatabaseRecord;}}}
-
 namespace alinous {namespace lock {
 class ConcurrentGate;}}
+
+namespace alinous {namespace db {namespace table {
+class IDatabaseRecord;}}}
 
 namespace java {namespace lang {
 class StringBuffer;}}
@@ -47,22 +47,22 @@ class UniqueExclusiveLock final : public virtual IObject {
 public:
 	UniqueExclusiveLock(const UniqueExclusiveLock& base) = default;
 public:
-	UniqueExclusiveLock(ScanUnique* unique, IDatabaseRecord* record, ThreadContext* ctx) throw() ;
-	void __construct_impl(ScanUnique* unique, IDatabaseRecord* record, ThreadContext* ctx) throw() ;
+	UniqueExclusiveLock(ScanUnique* unique, String* lockString, ThreadContext* ctx) throw() ;
+	void __construct_impl(ScanUnique* unique, String* lockString, ThreadContext* ctx) throw() ;
 	virtual ~UniqueExclusiveLock() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 private:
 	ConcurrentGate* gate;
 	ScanUnique* unique;
-	IDatabaseRecord* record;
+	String* lockString;
 	int count;
 public:
 	String* toString(ThreadContext* ctx) throw() ;
 	void lock(ThreadContext* ctx);
 	void unlock(ThreadContext* ctx) throw() ;
 	ScanUnique* getUnique(ThreadContext* ctx) throw() ;
-	IDatabaseRecord* getRecord(ThreadContext* ctx) throw() ;
 	int getCount(ThreadContext* ctx) throw() ;
+	String* getLockString(ThreadContext* ctx) throw() ;
 public:
 	static String* makeString(ScanUnique* unique, IDatabaseRecord* record, ThreadContext* ctx) throw() ;
 public:

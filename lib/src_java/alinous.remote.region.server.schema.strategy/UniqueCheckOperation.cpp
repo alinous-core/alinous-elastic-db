@@ -1,6 +1,8 @@
 #include "include/global.h"
 
 
+#include "alinous.buffer.storage/FileStorageEntryBuilder.h"
+#include "alinous.buffer.storage/FileStorageEntryFetcher.h"
 #include "alinous.compile/AbstractSrcElement.h"
 #include "alinous.system/AlinousException.h"
 #include "alinous.runtime/ExecutionException.h"
@@ -8,8 +10,10 @@
 #include "alinous.remote.socket/NetworkBinaryBuffer.h"
 #include "alinous.remote.socket/ICommandData.h"
 #include "alinous.db.table/TableColumnMetadata.h"
+#include "alinous.db.table/TableMetadataUnique.h"
 #include "alinous.runtime.dom/IAlinousVariable.h"
 #include "alinous.runtime.variant/VariantValue.h"
+#include "alinous.compile.sql.analyze/ScanUnique.h"
 #include "alinous.remote.region.server.schema.strategy/UniqueOpValue.h"
 #include "alinous.remote.region.server.schema.strategy/UniqueCheckOperation.h"
 
@@ -30,7 +34,7 @@ bool UniqueCheckOperation::__init_static_variables(){
 	delete ctx;
 	return true;
 }
- UniqueCheckOperation::UniqueCheckOperation(List<TableColumnMetadata>* uniqueColList, ThreadContext* ctx) throw()  : IObject(ctx), ICommandData(ctx), uniqueColList(nullptr), values(GCUtils<List<UniqueOpValue> >::ins(this, (new(ctx) ArrayList<UniqueOpValue>(ctx)), ctx, __FILEW__, __LINE__, L""))
+ UniqueCheckOperation::UniqueCheckOperation(List<TableColumnMetadata>* uniqueColList, ThreadContext* ctx) throw()  : IObject(ctx), ICommandData(ctx), uniqueColList(nullptr), values(GCUtils<List<UniqueOpValue> >::ins(this, (new(ctx) ArrayList<UniqueOpValue>(ctx)), ctx, __FILEW__, __LINE__, L"")), unique(nullptr)
 {
 	GCUtils<List<TableColumnMetadata> >::mv(this, &(this->uniqueColList), uniqueColList, ctx);
 }
@@ -52,6 +56,8 @@ void UniqueCheckOperation::__releaseRegerences(bool prepare, ThreadContext* ctx)
 	uniqueColList = nullptr;
 	__e_obj1.add(this->values, this);
 	values = nullptr;
+	__e_obj1.add(this->unique, this);
+	unique = nullptr;
 	if(!prepare){
 		return;
 	}
@@ -77,7 +83,7 @@ void UniqueCheckOperation::readData(NetworkBinaryBuffer* buff, ThreadContext* ct
 		TableColumnMetadata* col = TableColumnMetadata::fromNetwork(buff, ctx);
 		if(col == nullptr)
 		{
-			throw (new(ctx) VariableException(ConstStr::getCNST_STR_3615(), ctx));
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_3616(), ctx));
 		}
 		this->uniqueColList->add(col, ctx);
 	}
@@ -87,10 +93,11 @@ void UniqueCheckOperation::readData(NetworkBinaryBuffer* buff, ThreadContext* ct
 		UniqueOpValue* op = UniqueOpValue::fromNetwork(buff, ctx);
 		if(op == nullptr)
 		{
-			throw (new(ctx) VariableException(ConstStr::getCNST_STR_3616(), ctx));
+			throw (new(ctx) VariableException(ConstStr::getCNST_STR_3617(), ctx));
 		}
 		this->values->add(op, ctx);
 	}
+	__GC_MV(this, &(this->unique), ScanUnique::fromNetwork(buff, ctx), ScanUnique);
 }
 void UniqueCheckOperation::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 {
@@ -108,6 +115,15 @@ void UniqueCheckOperation::writeData(NetworkBinaryBuffer* buff, ThreadContext* c
 		UniqueOpValue* op = this->values->get(i, ctx);
 		op->writeData(buff, ctx);
 	}
+	this->unique->writeData(buff, ctx);
+}
+ScanUnique* UniqueCheckOperation::getUnique(ThreadContext* ctx) throw() 
+{
+	return unique;
+}
+void UniqueCheckOperation::setUnique(ScanUnique* unique, ThreadContext* ctx) throw() 
+{
+	__GC_MV(this, &(this->unique), unique, ScanUnique);
 }
 UniqueCheckOperation* UniqueCheckOperation::fromNetwork(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 {

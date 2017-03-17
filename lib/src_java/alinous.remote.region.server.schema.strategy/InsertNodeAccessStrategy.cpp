@@ -2,16 +2,19 @@
 
 
 #include "alinous.buffer.storage/FileStorageEntryBuilder.h"
-#include "alinous.remote.socket/NetworkBinaryBuffer.h"
-#include "alinous.remote.socket/ICommandData.h"
-#include "alinous.db.table/TableColumnMetadata.h"
-#include "java.io/FilterOutputStream.h"
-#include "java.io/BufferedOutputStream.h"
+#include "alinous.buffer.storage/FileStorageEntryFetcher.h"
 #include "alinous.btree/IValueFetcher.h"
 #include "alinous.btree/IBTreeValue.h"
+#include "alinous.remote.socket/NetworkBinaryBuffer.h"
+#include "alinous.remote.socket/ICommandData.h"
 #include "alinous.runtime.dom/IAlinousVariable.h"
 #include "alinous.runtime.variant/VariantValue.h"
 #include "alinous.db.table/IDatabaseRecord.h"
+#include "alinous.db.table/TableColumnMetadata.h"
+#include "alinous.db.table/TableMetadataUnique.h"
+#include "alinous.compile.sql.analyze/ScanUnique.h"
+#include "java.io/FilterOutputStream.h"
+#include "java.io/BufferedOutputStream.h"
 #include "alinous.remote.region.client.command.data/ClientNetworkRecord.h"
 #include "alinous.remote.region.server.schema.strategy/UniqueCheckOperation.h"
 #include "alinous.remote.db.server/RemoteTableStorageServer.h"
@@ -89,22 +92,23 @@ void InsertNodeAccessStrategy::addRecord(ClientNetworkRecord* record, ThreadCont
 {
 	this->records->add(record, ctx);
 }
-void InsertNodeAccessStrategy::addUniqueCheckOperation(List<TableColumnMetadata>* uniqueColList, List<VariantValue>* values, ThreadContext* ctx) throw() 
+void InsertNodeAccessStrategy::addUniqueCheckOperation(ScanUnique* unique, List<TableColumnMetadata>* uniqueColList, List<VariantValue>* values, ThreadContext* ctx) throw() 
 {
-	UniqueCheckOperation* op = getOperation(uniqueColList, ctx);
+	UniqueCheckOperation* op = getOperation(unique, uniqueColList, ctx);
 	op->addValue(values, ctx);
 }
 NodeReference* InsertNodeAccessStrategy::getNodeAccessRef(ThreadContext* ctx) throw() 
 {
 	return nodeAccessRef;
 }
-UniqueCheckOperation* InsertNodeAccessStrategy::getOperation(List<TableColumnMetadata>* uniqueColList, ThreadContext* ctx) throw() 
+UniqueCheckOperation* InsertNodeAccessStrategy::getOperation(ScanUnique* unique, List<TableColumnMetadata>* uniqueColList, ThreadContext* ctx) throw() 
 {
 	String* key = TableColumnMetadata::arrayToString(uniqueColList, ctx);
 	UniqueCheckOperation* op = this->uniqueCheckOps->get(key, ctx);
 	if(op == nullptr)
 	{
 		op = (new(ctx) UniqueCheckOperation(uniqueColList, ctx));
+		op->setUnique(unique, ctx);
 		this->uniqueCheckOps->put(key, op, ctx);
 	}
 	return op;

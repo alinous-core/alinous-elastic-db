@@ -123,6 +123,7 @@ template class ::java::util::ArrayListIterator<::alinous::remote::monitor::NodeI
 template class ::java::util::ArrayListIterator<::alinous::remote::db::client::command::data::StorageNodeData>;
 template class ::java::util::ArrayListIterator<::alinous::remote::region::server::schema::strategy::UniqueCheckOperation>;
 template class ::java::util::ArrayListIterator<::alinous::remote::region::client::command::data::ClientNetworkRecord>;
+template class ::java::util::ArrayListIterator<::alinous::lock::unique::UniqueExclusiveLock>;
 template class ::java::util::ArrayListIterator<::alinous::remote::region::server::schema::NodeTableReference>;
 template class ::java::util::ArrayListIterator<::alinous::remote::region::server::schema::NodeReference>;
 template class ::java::util::ArrayListIterator<::alinous::remote::region::server::schema::strategy::UniqueOpValue>;

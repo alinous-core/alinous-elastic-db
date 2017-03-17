@@ -83,7 +83,7 @@ int TableMetadataUnique::fileSize(ThreadContext* ctx)
 	}
 	return total;
 }
-void TableMetadataUnique::toFileEntry(FileStorageEntryBuilder* builder, ThreadContext* ctx) throw() 
+void TableMetadataUnique::toFileEntry(FileStorageEntryBuilder* builder, ThreadContext* ctx)
 {
 	int maxLoop = this->uniqueColList->size(ctx);
 	builder->putInt(maxLoop, ctx);
@@ -105,6 +105,7 @@ void TableMetadataUnique::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx
 void TableMetadataUnique::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 {
 	int maxLoop = this->uniqueColList->size(ctx);
+	buff->putInt(maxLoop, ctx);
 	for(int i = 0; i != maxLoop; ++i)
 	{
 		TableColumnMetadata* col = this->uniqueColList->get(i, ctx);

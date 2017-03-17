@@ -33,18 +33,18 @@ bool UniqueExclusiveLock::__init_static_variables(){
 	delete ctx;
 	return true;
 }
- UniqueExclusiveLock::UniqueExclusiveLock(ScanUnique* unique, IDatabaseRecord* record, ThreadContext* ctx) throw()  : IObject(ctx), gate(nullptr), unique(nullptr), record(nullptr), count(0)
+ UniqueExclusiveLock::UniqueExclusiveLock(ScanUnique* unique, String* lockString, ThreadContext* ctx) throw()  : IObject(ctx), gate(nullptr), unique(nullptr), lockString(nullptr), count(0)
 {
 	__GC_MV(this, &(this->gate), (new(ctx) ConcurrentGate(ctx)), ConcurrentGate);
 	__GC_MV(this, &(this->unique), unique, ScanUnique);
-	__GC_MV(this, &(this->record), record, IDatabaseRecord);
+	__GC_MV(this, &(this->lockString), lockString, String);
 	this->count = 0;
 }
-void UniqueExclusiveLock::__construct_impl(ScanUnique* unique, IDatabaseRecord* record, ThreadContext* ctx) throw() 
+void UniqueExclusiveLock::__construct_impl(ScanUnique* unique, String* lockString, ThreadContext* ctx) throw() 
 {
 	__GC_MV(this, &(this->gate), (new(ctx) ConcurrentGate(ctx)), ConcurrentGate);
 	__GC_MV(this, &(this->unique), unique, ScanUnique);
-	__GC_MV(this, &(this->record), record, IDatabaseRecord);
+	__GC_MV(this, &(this->lockString), lockString, String);
 	this->count = 0;
 }
  UniqueExclusiveLock::~UniqueExclusiveLock() throw() 
@@ -61,15 +61,15 @@ void UniqueExclusiveLock::__releaseRegerences(bool prepare, ThreadContext* ctx) 
 	gate = nullptr;
 	__e_obj1.add(this->unique, this);
 	unique = nullptr;
-	__e_obj1.add(this->record, this);
-	record = nullptr;
+	__e_obj1.add(this->lockString, this);
+	lockString = nullptr;
 	if(!prepare){
 		return;
 	}
 }
 String* UniqueExclusiveLock::toString(ThreadContext* ctx) throw() 
 {
-	return makeString(unique, record, ctx);
+	return this->lockString;
 }
 void UniqueExclusiveLock::lock(ThreadContext* ctx)
 {
@@ -94,13 +94,13 @@ ScanUnique* UniqueExclusiveLock::getUnique(ThreadContext* ctx) throw()
 {
 	return unique;
 }
-IDatabaseRecord* UniqueExclusiveLock::getRecord(ThreadContext* ctx) throw() 
-{
-	return record;
-}
 int UniqueExclusiveLock::getCount(ThreadContext* ctx) throw() 
 {
 	return count;
+}
+String* UniqueExclusiveLock::getLockString(ThreadContext* ctx) throw() 
+{
+	return lockString;
 }
 String* UniqueExclusiveLock::makeString(ScanUnique* unique, IDatabaseRecord* record, ThreadContext* ctx) throw() 
 {

@@ -3,24 +3,19 @@
 
 #include "alinous.btree/BTreeException.h"
 #include "alinous.buffer.storage/FileStorageEntryBuilder.h"
+#include "alinous.buffer.storage/FileStorageEntryFetcher.h"
 #include "alinous.compile/AbstractSrcElement.h"
 #include "alinous.system/AlinousException.h"
+#include "alinous.db/AlinousDbException.h"
 #include "alinous.runtime/ExecutionException.h"
 #include "alinous.runtime.dom/VariableException.h"
-#include "alinous.buffer.storage/FileStorageEntryFetcher.h"
-#include "alinous.btree/IValueFetcher.h"
-#include "alinous.btree/IBTreeValue.h"
 #include "alinous.remote.socket/NetworkBinaryBuffer.h"
 #include "alinous.remote.socket/ICommandData.h"
-#include "alinous.runtime.dom/IAlinousVariable.h"
-#include "alinous.runtime.variant/VariantValue.h"
-#include "alinous.db.table/IDatabaseRecord.h"
 #include "alinous.db.table/TableColumnMetadata.h"
 #include "alinous.db.table/TableMetadataUnique.h"
 #include "alinous.compile.sql.analyze/ScanUnique.h"
 #include "alinous.lock/LockObject.h"
 #include "alinous.lock.unique/UniqueExclusiveLock.h"
-#include "alinous.db/AlinousDbException.h"
 #include "alinous.lock.unique/UniqueExclusiveException.h"
 #include "alinous.lock.unique/ColumnsUniqueCollections.h"
 
@@ -65,9 +60,8 @@ void ColumnsUniqueCollections::__releaseRegerences(bool prepare, ThreadContext* 
 		return;
 	}
 }
-UniqueExclusiveLock* ColumnsUniqueCollections::lockWithCheck(ScanUnique* unique, IDatabaseRecord* record, bool throwex, ThreadContext* ctx)
+UniqueExclusiveLock* ColumnsUniqueCollections::lockWithCheck(ScanUnique* unique, String* lockString, bool throwex, ThreadContext* ctx)
 {
-	String* lockString = getLockValueString(unique, record, ctx);
 	UniqueExclusiveLock* lock = nullptr;
 	{
 		SynchronizedBlockObj __synchronized_2(this->lock, ctx);
@@ -90,7 +84,7 @@ UniqueExclusiveLock* ColumnsUniqueCollections::lockWithCheck(ScanUnique* unique,
 			}
 			return lock;
 		}
-		lock = (new(ctx) UniqueExclusiveLock(unique, record, ctx));
+		lock = (new(ctx) UniqueExclusiveLock(unique, lockString, ctx));
 		this->locks->put(lockString, lock, ctx);
 		{
 			try
@@ -105,9 +99,8 @@ UniqueExclusiveLock* ColumnsUniqueCollections::lockWithCheck(ScanUnique* unique,
 	}
 	return lock;
 }
-bool ColumnsUniqueCollections::unlock(ScanUnique* unique, IDatabaseRecord* record, ThreadContext* ctx) throw() 
+bool ColumnsUniqueCollections::unlock(ScanUnique* unique, String* lockString, ThreadContext* ctx) throw() 
 {
-	String* lockString = getLockValueString(unique, record, ctx);
 	UniqueExclusiveLock* lock = nullptr;
 	{
 		SynchronizedBlockObj __synchronized_2(this->lock, ctx);
@@ -125,9 +118,8 @@ bool ColumnsUniqueCollections::unlock(ScanUnique* unique, IDatabaseRecord* recor
 	}
 	return false;
 }
-UniqueExclusiveLock* ColumnsUniqueCollections::getLock(ScanUnique* unique, IDatabaseRecord* value, ThreadContext* ctx)
+UniqueExclusiveLock* ColumnsUniqueCollections::getLock(ScanUnique* unique, String* lockString, ThreadContext* ctx)
 {
-	String* lockString = getLockValueString(unique, value, ctx);
 	UniqueExclusiveLock* lock = nullptr;
 	{
 		SynchronizedBlockObj __synchronized_2(this->lock, ctx);
@@ -137,24 +129,6 @@ UniqueExclusiveLock* ColumnsUniqueCollections::getLock(ScanUnique* unique, IData
 }
 void ColumnsUniqueCollections::dispose(ThreadContext* ctx) throw() 
 {
-}
-String* ColumnsUniqueCollections::getLockValueString(ScanUnique* unique, IDatabaseRecord* value, ThreadContext* ctx) throw() 
-{
-	StringBuffer* buff = (new(ctx) StringBuffer(ctx));
-	ArrayList<TableColumnMetadata>* colslist = unique->getUniqueColList(ctx);
-	int maxLoop = colslist->size(ctx);
-	for(int i = 0; i != maxLoop; ++i)
-	{
-		TableColumnMetadata* col = colslist->get(i, ctx);
-		VariantValue* vv = value->getColumnValue(col->columnOrder, ctx);
-		if(i != 0)
-		{
-			buff->append(ConstStr::getCNST_STR_888(), ctx);
-		}
-		String* str = vv->toString(ctx);
-		buff->append(str, ctx);
-	}
-	return buff->toString(ctx);
 }
 void ColumnsUniqueCollections::__cleanUp(ThreadContext* ctx){
 }

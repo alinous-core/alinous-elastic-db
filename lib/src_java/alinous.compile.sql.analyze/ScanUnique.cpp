@@ -3,6 +3,11 @@
 
 #include "alinous.buffer.storage/FileStorageEntryBuilder.h"
 #include "alinous.buffer.storage/FileStorageEntryFetcher.h"
+#include "alinous.compile/AbstractSrcElement.h"
+#include "alinous.system/AlinousException.h"
+#include "alinous.db/AlinousDbException.h"
+#include "alinous.runtime/ExecutionException.h"
+#include "alinous.runtime.dom/VariableException.h"
 #include "alinous.btree/IValueFetcher.h"
 #include "alinous.btree/IBTreeValue.h"
 #include "alinous.remote.socket/NetworkBinaryBuffer.h"
@@ -70,6 +75,35 @@ List<VariantValue>* ScanUnique::makeValues(IDatabaseRecord* record, ThreadContex
 	}
 	return values;
 }
+int ScanUnique::fileSize(ThreadContext* ctx)
+{
+	int total = TableMetadataUnique::fileSize(ctx);
+	total += this->coveredKey->fileSize(ctx);
+	total += 4;
+	total += this->tableFullName->length(ctx) * 2 + 4;
+	return total;
+}
+void ScanUnique::toFileEntry(FileStorageEntryBuilder* builder, ThreadContext* ctx)
+{
+	TableMetadataUnique::toFileEntry(builder, ctx);
+	this->coveredKey->toFileEntry(builder, ctx);
+	builder->putInt(this->matchLength, ctx);
+	builder->putString(this->tableFullName, ctx);
+}
+void ScanUnique::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
+{
+	TableMetadataUnique::readData(buff, ctx);
+	__GC_MV(this, &(this->coveredKey), TablePartitionKey::fromNetwork(buff, ctx), TablePartitionKey);
+	this->matchLength = buff->getInt(ctx);
+	__GC_MV(this, &(this->tableFullName), buff->getString(ctx), String);
+}
+void ScanUnique::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
+{
+	TableMetadataUnique::writeData(buff, ctx);
+	this->coveredKey->writeData(buff, ctx);
+	buff->putInt(this->matchLength, ctx);
+	buff->putString(this->tableFullName, ctx);
+}
 TablePartitionKey* ScanUnique::getCoveredKey(ThreadContext* ctx) throw() 
 {
 	return coveredKey;
@@ -115,6 +149,26 @@ String* ScanUnique::getTableFullName(ThreadContext* ctx) throw()
 void ScanUnique::setTableFullName(String* tableFullName, ThreadContext* ctx) throw() 
 {
 	__GC_MV(this, &(this->tableFullName), tableFullName, String);
+}
+ScanUnique* ScanUnique::loadScannerFromFetcher(FileStorageEntryFetcher* fetcher, ThreadContext* ctx)
+{
+	ScanUnique* unique = (new(ctx) ScanUnique(ctx));
+	int maxLoop = fetcher->fetchInt(ctx);
+	for(int i = 0; i != maxLoop; ++i)
+	{
+		TableColumnMetadata* col = TableColumnMetadata::loadFromFetcher(fetcher, ctx);
+		unique->addUnique(col, ctx);
+	}
+	__GC_MV(unique, &(unique->coveredKey), TablePartitionKey::loadFromFetcher(fetcher, ctx), TablePartitionKey);
+	unique->matchLength = fetcher->fetchInt(ctx);
+	__GC_MV(unique, &(unique->tableFullName), fetcher->fetchString(ctx), String);
+	return unique;
+}
+ScanUnique* ScanUnique::fromNetwork(NetworkBinaryBuffer* buff, ThreadContext* ctx)
+{
+	ScanUnique* unique = (new(ctx) ScanUnique(ctx));
+	unique->readData(buff, ctx);
+	return unique;
 }
 void ScanUnique::__cleanUp(ThreadContext* ctx){
 }

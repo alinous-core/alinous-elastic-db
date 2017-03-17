@@ -103,6 +103,21 @@ List<VariantValue>* UniqueOpValue::getValues(ThreadContext* ctx) throw()
 {
 	return values;
 }
+String* UniqueOpValue::getLockStr(ThreadContext* ctx) throw() 
+{
+	StringBuilder* buff = (new(ctx) StringBuilder(256, ctx));
+	int maxLoop = this->values->size(ctx);
+	for(int i = 0; i != maxLoop; ++i)
+	{
+		VariantValue* vv = this->values->get(i, ctx);
+		if(i != 0)
+		{
+			buff->append(ConstStr::getCNST_STR_888(), ctx);
+		}
+		buff->append(vv->getString(ctx), ctx);
+	}
+	return buff->toString(ctx);
+}
 void UniqueOpValue::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 {
 	int maxLoop = buff->getInt(ctx);

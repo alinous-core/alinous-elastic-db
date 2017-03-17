@@ -3,14 +3,11 @@
 
 #include "alinous.btree/BTreeException.h"
 #include "alinous.buffer.storage/FileStorageEntryBuilder.h"
+#include "alinous.buffer.storage/FileStorageEntryFetcher.h"
 #include "alinous.compile/AbstractSrcElement.h"
 #include "alinous.system/AlinousException.h"
 #include "alinous.runtime/ExecutionException.h"
 #include "alinous.runtime.dom/VariableException.h"
-#include "alinous.buffer.storage/FileStorageEntryFetcher.h"
-#include "alinous.btree/IValueFetcher.h"
-#include "alinous.btree/IBTreeValue.h"
-#include "alinous.db.table/IDatabaseRecord.h"
 #include "alinous.remote.socket/NetworkBinaryBuffer.h"
 #include "alinous.remote.socket/ICommandData.h"
 #include "alinous.db.table/TableColumnMetadata.h"
@@ -63,7 +60,7 @@ void TableUniqueCollections::__releaseRegerences(bool prepare, ThreadContext* ct
 		return;
 	}
 }
-UniqueExclusiveLock* TableUniqueCollections::lockWithCheck(ScanUnique* unique, IDatabaseRecord* record, bool throwex, ThreadContext* ctx)
+UniqueExclusiveLock* TableUniqueCollections::lockWithCheck(ScanUnique* unique, String* lockString, bool throwex, ThreadContext* ctx)
 {
 	TablePartitionKey* coverKey = unique->getCoveredKey(ctx);
 	String* colsstr = coverKey->toString(ctx);
@@ -77,9 +74,9 @@ UniqueExclusiveLock* TableUniqueCollections::lockWithCheck(ScanUnique* unique, I
 			this->uniqueLocks->put(colsstr, col, ctx);
 		}
 	}
-	return col->lockWithCheck(unique, record, throwex, ctx);
+	return col->lockWithCheck(unique, lockString, throwex, ctx);
 }
-bool TableUniqueCollections::unlock(ScanUnique* unique, IDatabaseRecord* record, ThreadContext* ctx) throw() 
+bool TableUniqueCollections::unlock(ScanUnique* unique, String* lockString, ThreadContext* ctx) throw() 
 {
 	TablePartitionKey* coverKey = unique->getCoveredKey(ctx);
 	String* colsstr = coverKey->toString(ctx);
@@ -91,7 +88,7 @@ bool TableUniqueCollections::unlock(ScanUnique* unique, IDatabaseRecord* record,
 		{
 			return this->uniqueLocks->isEmpty(ctx);
 		}
-		bool isEmpty = col->unlock(unique, record, ctx);
+		bool isEmpty = col->unlock(unique, lockString, ctx);
 		if(isEmpty)
 		{
 			this->uniqueLocks->remove(colsstr, ctx);
@@ -99,7 +96,7 @@ bool TableUniqueCollections::unlock(ScanUnique* unique, IDatabaseRecord* record,
 		return this->uniqueLocks->isEmpty(ctx);
 	}
 }
-UniqueExclusiveLock* TableUniqueCollections::findLock(ScanUnique* unique, IDatabaseRecord* record, ThreadContext* ctx)
+UniqueExclusiveLock* TableUniqueCollections::findLock(ScanUnique* unique, String* lockString, ThreadContext* ctx)
 {
 	TablePartitionKey* coverKey = unique->getCoveredKey(ctx);
 	String* colsstr = coverKey->toString(ctx);
@@ -112,7 +109,7 @@ UniqueExclusiveLock* TableUniqueCollections::findLock(ScanUnique* unique, IDatab
 	{
 		return nullptr;
 	}
-	return col->getLock(unique, record, ctx);
+	return col->getLock(unique, lockString, ctx);
 }
 void TableUniqueCollections::dispose(ThreadContext* ctx) throw() 
 {

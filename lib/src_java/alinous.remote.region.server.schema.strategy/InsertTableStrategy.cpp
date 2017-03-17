@@ -2,9 +2,10 @@
 
 
 #include "alinous.buffer.storage/FileStorageEntryBuilder.h"
+#include "alinous.buffer.storage/FileStorageEntryFetcher.h"
 #include "alinous.compile/AbstractSrcElement.h"
 #include "alinous.system/AlinousException.h"
-#include "alinous.buffer.storage/FileStorageEntryFetcher.h"
+#include "alinous.db/AlinousDbException.h"
 #include "alinous.btree/IValueFetcher.h"
 #include "alinous.btree/IBTreeValue.h"
 #include "alinous.remote.socket/NetworkBinaryBuffer.h"
@@ -14,7 +15,6 @@
 #include "alinous.db.table/IDatabaseRecord.h"
 #include "alinous.db.table/TableColumnMetadata.h"
 #include "alinous.db.table/TableMetadataUnique.h"
-#include "alinous.db/AlinousDbException.h"
 #include "alinous.db.table/TablePartitionKey.h"
 #include "alinous.compile.sql.analyze/ScanUnique.h"
 #include "alinous.compile.sql.analyze/TableMetadataUniqueCollection.h"
@@ -159,13 +159,13 @@ void InsertTableStrategy::addUniqueCheck(RegionShardPartAccess* node, ClientNetw
 		if(key == nullptr)
 		{
 			List<VariantValue>* values = unique->makeValues(record, ctx);
-			nodeStoragegy->addUniqueCheckOperation(unique->getUniqueColList(ctx), values, ctx);
+			nodeStoragegy->addUniqueCheckOperation(unique, unique->getUniqueColList(ctx), values, ctx);
 			continue;
 		}
 		List<VariantValue>* values = key->makeValues(record, ctx);
 		if(ranges->isInRange(key, values, ctx))
 		{
-			nodeStoragegy->addUniqueCheckOperation(unique->getUniqueColList(ctx), values, ctx);
+			nodeStoragegy->addUniqueCheckOperation(unique, unique->getUniqueColList(ctx), values, ctx);
 		}
 	}
 }
@@ -187,7 +187,7 @@ void InsertTableStrategy::buildUniqueStrategy(RegionShardPartAccess* node, Clien
 		List<VariantValue>* values = key->makeValues(record, ctx);
 		if(ranges->isInRange(key, values, ctx))
 		{
-			nodeStoragegy->addUniqueCheckOperation(unique->getUniqueColList(ctx), values, ctx);
+			nodeStoragegy->addUniqueCheckOperation(unique, unique->getUniqueColList(ctx), values, ctx);
 		}
 	}
 }

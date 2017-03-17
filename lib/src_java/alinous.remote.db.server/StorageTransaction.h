@@ -18,11 +18,23 @@ class UniqueCheckOperation;}}}}}}
 namespace alinous {namespace remote {namespace region {namespace client {namespace command {namespace data {
 class ClientNetworkRecord;}}}}}}
 
+namespace alinous {namespace remote {namespace region {namespace server {namespace schema {namespace strategy {
+class UniqueOpValue;}}}}}}
+
+namespace alinous {namespace compile {namespace sql {namespace analyze {
+class ScanUnique;}}}}
+
 namespace alinous {namespace lock {namespace unique {
-class UniqueExclusiveLockManager;}}}
+class UniqueExclusiveLock;}}}
+
+namespace alinous {namespace lock {namespace unique {
+class UniqueExclusiveException;}}}
 
 namespace java {namespace lang {
 class StringBuilder;}}
+
+namespace alinous {namespace lock {namespace unique {
+class UniqueExclusiveLockManager;}}}
 
 namespace java {namespace lang {
 class IObject;
@@ -37,12 +49,17 @@ namespace alinous {namespace remote {namespace db {namespace server {
 using namespace ::alinous;
 using namespace ::java::lang;
 using ::java::util::Iterator;
+using ::java::util::ArrayList;
 using ::java::util::List;
+using ::alinous::compile::sql::analyze::ScanUnique;
 using ::alinous::db::table::IDatabaseTable;
 using ::alinous::db::trx::DbVersionContext;
+using ::alinous::lock::unique::UniqueExclusiveException;
+using ::alinous::lock::unique::UniqueExclusiveLock;
 using ::alinous::lock::unique::UniqueExclusiveLockManager;
 using ::alinous::remote::region::client::command::data::ClientNetworkRecord;
 using ::alinous::remote::region::server::schema::strategy::UniqueCheckOperation;
+using ::alinous::remote::region::server::schema::strategy::UniqueOpValue;
 
 
 
@@ -60,14 +77,19 @@ private:
 	String* datadir;
 	String* tmpDir;
 	RemoteTableStorageServer* server;
+	UniqueExclusiveLockManager* uniqueLockMgr;
+	List<UniqueExclusiveLock>* uniqueLocks;
 public:
-	void prepareInsert(IDatabaseTable* table, List<UniqueCheckOperation>* uniqueCheckOps, List<ClientNetworkRecord>* records, ThreadContext* ctx) throw() ;
+	void prepareInsert(IDatabaseTable* table, List<UniqueCheckOperation>* uniqueCheckOps, List<ClientNetworkRecord>* records, ThreadContext* ctx);
+	void unlockUniqueAll(ThreadContext* ctx) throw() ;
 	String* getTmpDir(ThreadContext* ctx) throw() ;
 	int getIsolationLevel(ThreadContext* ctx) throw() ;
 	DbVersionContext* getVctx(ThreadContext* ctx) throw() ;
 	void dispose(ThreadContext* ctx) throw() ;
+	RemoteTableStorageServer* getServer(ThreadContext* ctx) throw() ;
 private:
-	void checkUnique(UniqueExclusiveLockManager* uniqueLockMgr, List<UniqueCheckOperation>* uniqueCheckOps, ThreadContext* ctx) throw() ;
+	void checkUnique(IDatabaseTable* table, List<UniqueCheckOperation>* uniqueCheckOps, ThreadContext* ctx);
+	void handleUniqueOp(IDatabaseTable* table, UniqueCheckOperation* op, ThreadContext* ctx);
 public:
 	static bool __init_done;
 	static bool __init_static_variables();

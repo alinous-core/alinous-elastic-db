@@ -21,6 +21,9 @@ class NetworkBinaryBuffer;}}}
 namespace alinous {namespace runtime {namespace dom {
 class VariableException;}}}
 
+namespace alinous {namespace compile {namespace sql {namespace analyze {
+class ScanUnique;}}}}
+
 namespace alinous {namespace remote {namespace socket {
 class ICommandData;}}}
 
@@ -39,6 +42,7 @@ using namespace ::java::lang;
 using ::java::util::Iterator;
 using ::java::util::ArrayList;
 using ::java::util::List;
+using ::alinous::compile::sql::analyze::ScanUnique;
 using ::alinous::db::table::TableColumnMetadata;
 using ::alinous::remote::socket::ICommandData;
 using ::alinous::remote::socket::NetworkBinaryBuffer;
@@ -58,12 +62,15 @@ public:
 private:
 	List<TableColumnMetadata>* uniqueColList;
 	List<UniqueOpValue>* values;
+	ScanUnique* unique;
 public:
 	void addValue(List<VariantValue>* values, ThreadContext* ctx) throw() ;
 	List<TableColumnMetadata>* getUniqueColList(ThreadContext* ctx) throw() ;
 	List<UniqueOpValue>* getValues(ThreadContext* ctx) throw() ;
 	void readData(NetworkBinaryBuffer* buff, ThreadContext* ctx) final;
 	void writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) final;
+	ScanUnique* getUnique(ThreadContext* ctx) throw() ;
+	void setUnique(ScanUnique* unique, ThreadContext* ctx) throw() ;
 public:
 	static UniqueCheckOperation* fromNetwork(NetworkBinaryBuffer* buff, ThreadContext* ctx);
 public:

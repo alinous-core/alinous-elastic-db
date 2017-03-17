@@ -65,10 +65,10 @@ public:
 	ScanUnique* toScanUnique(String* tableFullName, ThreadContext* ctx) throw() ;
 	void addUnique(TableColumnMetadata* col, ThreadContext* ctx) throw() ;
 	ArrayList<TableColumnMetadata>* getUniqueColList(ThreadContext* ctx) throw() ;
-	int fileSize(ThreadContext* ctx);
-	void toFileEntry(FileStorageEntryBuilder* builder, ThreadContext* ctx) throw() ;
-	void readData(NetworkBinaryBuffer* buff, ThreadContext* ctx) final;
-	void writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) final;
+	virtual int fileSize(ThreadContext* ctx);
+	virtual void toFileEntry(FileStorageEntryBuilder* builder, ThreadContext* ctx);
+	virtual void readData(NetworkBinaryBuffer* buff, ThreadContext* ctx);
+	virtual void writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx);
 public:
 	static TableMetadataUnique* loadFromFetcher(FileStorageEntryFetcher* fetcher, ThreadContext* ctx) throw() ;
 	static TableMetadataUnique* fromNetwork(NetworkBinaryBuffer* buff, ThreadContext* ctx);

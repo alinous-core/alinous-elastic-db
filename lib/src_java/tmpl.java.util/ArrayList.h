@@ -112,6 +112,7 @@ template class ::java::util::ArrayList<::alinous::remote::monitor::NodeInfo>;
 template class ::java::util::ArrayList<::alinous::remote::db::client::command::data::StorageNodeData>;
 template class ::java::util::ArrayList<::alinous::remote::region::server::schema::strategy::UniqueCheckOperation>;
 template class ::java::util::ArrayList<::alinous::remote::region::client::command::data::ClientNetworkRecord>;
+template class ::java::util::ArrayList<::alinous::lock::unique::UniqueExclusiveLock>;
 template class ::java::util::ArrayList<::alinous::remote::region::server::schema::NodeTableReference>;
 template class ::java::util::ArrayList<::alinous::remote::region::server::schema::NodeReference>;
 template class ::java::util::ArrayList<::alinous::remote::region::server::schema::strategy::UniqueOpValue>;

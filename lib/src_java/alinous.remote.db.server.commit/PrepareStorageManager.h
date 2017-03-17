@@ -1,6 +1,9 @@
 #ifndef ALINOUS_REMOTE_DB_SERVER_COMMIT_PREPARESTORAGEMANAGER_H_
 #define ALINOUS_REMOTE_DB_SERVER_COMMIT_PREPARESTORAGEMANAGER_H_
 namespace java {namespace lang {
+class StringBuilder;}}
+
+namespace java {namespace lang {
 class IObject;
 }}
 
@@ -27,6 +30,9 @@ public:
 private:
 	String* tmpDir;
 	long long strxId;
+	String* filePath;
+public:
+	String* getFilePath(ThreadContext* ctx) throw() ;
 public:
 	static bool __init_done;
 	static bool __init_static_variables();

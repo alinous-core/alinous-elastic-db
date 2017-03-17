@@ -7,9 +7,6 @@ namespace alinous {namespace compile {namespace sql {namespace analyze {
 class ScanUnique;}}}}
 
 namespace alinous {namespace db {namespace table {
-class IDatabaseRecord;}}}
-
-namespace alinous {namespace db {namespace table {
 class TablePartitionKey;}}}
 
 namespace alinous {namespace lock {namespace unique {
@@ -58,7 +55,6 @@ using ::java::util::Iterator;
 using ::java::util::Map;
 using ::alinous::btree::BTreeException;
 using ::alinous::compile::sql::analyze::ScanUnique;
-using ::alinous::db::table::IDatabaseRecord;
 using ::alinous::db::table::TablePartitionKey;
 using ::alinous::lock::LockObject;
 using ::alinous::runtime::dom::VariableException;
@@ -78,9 +74,9 @@ private:
 	Map<String,ColumnsUniqueCollections>* uniqueLocks;
 	LockObject* lock;
 public:
-	UniqueExclusiveLock* lockWithCheck(ScanUnique* unique, IDatabaseRecord* record, bool throwex, ThreadContext* ctx);
-	bool unlock(ScanUnique* unique, IDatabaseRecord* record, ThreadContext* ctx) throw() ;
-	UniqueExclusiveLock* findLock(ScanUnique* unique, IDatabaseRecord* record, ThreadContext* ctx);
+	UniqueExclusiveLock* lockWithCheck(ScanUnique* unique, String* lockString, bool throwex, ThreadContext* ctx);
+	bool unlock(ScanUnique* unique, String* lockString, ThreadContext* ctx) throw() ;
+	UniqueExclusiveLock* findLock(ScanUnique* unique, String* lockString, ThreadContext* ctx);
 	void dispose(ThreadContext* ctx) throw() ;
 public:
 	static bool __init_done;

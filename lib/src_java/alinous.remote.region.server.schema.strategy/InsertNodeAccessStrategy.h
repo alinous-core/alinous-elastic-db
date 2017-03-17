@@ -15,6 +15,9 @@ class UniqueCheckOperation;}}}}}}
 namespace alinous {namespace remote {namespace region {namespace client {namespace command {namespace data {
 class ClientNetworkRecord;}}}}}}
 
+namespace alinous {namespace compile {namespace sql {namespace analyze {
+class ScanUnique;}}}}
+
 namespace java {namespace util {
 template <typename  T> class List;}}
 
@@ -44,6 +47,7 @@ using ::java::util::ArrayList;
 using ::java::util::HashMap;
 using ::java::util::Iterator;
 using ::java::util::List;
+using ::alinous::compile::sql::analyze::ScanUnique;
 using ::alinous::db::table::TableColumnMetadata;
 using ::alinous::remote::db::client::command::dml::InsertPrepareCommand;
 using ::alinous::remote::region::client::command::data::ClientNetworkRecord;
@@ -67,10 +71,10 @@ private:
 public:
 	InsertPrepareCommand* toCommand(ThreadContext* ctx) throw() ;
 	void addRecord(ClientNetworkRecord* record, ThreadContext* ctx) throw() ;
-	void addUniqueCheckOperation(List<TableColumnMetadata>* uniqueColList, List<VariantValue>* values, ThreadContext* ctx) throw() ;
+	void addUniqueCheckOperation(ScanUnique* unique, List<TableColumnMetadata>* uniqueColList, List<VariantValue>* values, ThreadContext* ctx) throw() ;
 	NodeReference* getNodeAccessRef(ThreadContext* ctx) throw() ;
 private:
-	UniqueCheckOperation* getOperation(List<TableColumnMetadata>* uniqueColList, ThreadContext* ctx) throw() ;
+	UniqueCheckOperation* getOperation(ScanUnique* unique, List<TableColumnMetadata>* uniqueColList, ThreadContext* ctx) throw() ;
 public:
 	static bool __init_done;
 	static bool __init_static_variables();

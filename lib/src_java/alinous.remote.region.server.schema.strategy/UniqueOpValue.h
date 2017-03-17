@@ -6,6 +6,9 @@ template <typename  T> class List;}}
 namespace alinous {namespace runtime {namespace variant {
 class VariantValue;}}}
 
+namespace java {namespace lang {
+class StringBuilder;}}
+
 namespace alinous {namespace remote {namespace region {namespace server {namespace schema {namespace strategy {
 class UniqueOpValue;}}}}}}
 
@@ -60,6 +63,7 @@ private:
 	List<VariantValue>* values;
 public:
 	List<VariantValue>* getValues(ThreadContext* ctx) throw() ;
+	String* getLockStr(ThreadContext* ctx) throw() ;
 	void readData(NetworkBinaryBuffer* buff, ThreadContext* ctx) final;
 	void writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) final;
 public:
