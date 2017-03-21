@@ -39,6 +39,9 @@ class ISystemLog;}}
 namespace java {namespace util {
 template <typename  T> class List;}}
 
+namespace alinous {namespace db {namespace table {
+class TableColumnMetadata;}}}
+
 namespace java {namespace io {
 class IOException;}}
 
@@ -131,6 +134,7 @@ public:
 	virtual void close(ThreadContext* ctx) throw()  = 0;
 	virtual String* getFullName(ThreadContext* ctx) throw()  = 0;
 	virtual void finishCommitSession(DbTransaction* trx, long long newCommitId, ThreadContext* ctx) = 0;
+	virtual IScannableIndex* getTableUniqueIndexByCols(List<TableColumnMetadata>* columns, ThreadContext* ctx) throw()  = 0;
 public:
 	static bool __init_done;
 	static bool __init_static_variables();

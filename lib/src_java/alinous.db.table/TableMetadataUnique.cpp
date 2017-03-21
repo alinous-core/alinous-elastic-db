@@ -68,7 +68,7 @@ void TableMetadataUnique::addUnique(TableColumnMetadata* col, ThreadContext* ctx
 {
 	this->uniqueColList->add(col, ctx);
 }
-ArrayList<TableColumnMetadata>* TableMetadataUnique::getUniqueColList(ThreadContext* ctx) throw() 
+List<TableColumnMetadata>* TableMetadataUnique::getUniqueColList(ThreadContext* ctx) throw() 
 {
 	return uniqueColList;
 }

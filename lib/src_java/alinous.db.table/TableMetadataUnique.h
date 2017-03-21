@@ -6,6 +6,9 @@ class ScanUnique;}}}}
 namespace alinous {namespace db {namespace table {
 class TableColumnMetadata;}}}
 
+namespace java {namespace util {
+template <typename  T> class List;}}
+
 namespace alinous {namespace buffer {namespace storage {
 class FileStorageEntryBuilder;}}}
 
@@ -41,6 +44,7 @@ using namespace ::alinous;
 using namespace ::java::lang;
 using ::java::util::Iterator;
 using ::java::util::ArrayList;
+using ::java::util::List;
 using ::alinous::buffer::storage::FileStorageEntryBuilder;
 using ::alinous::buffer::storage::FileStorageEntryFetcher;
 using ::alinous::compile::sql::analyze::ScanUnique;
@@ -64,7 +68,7 @@ public:
 public:
 	ScanUnique* toScanUnique(String* tableFullName, ThreadContext* ctx) throw() ;
 	void addUnique(TableColumnMetadata* col, ThreadContext* ctx) throw() ;
-	ArrayList<TableColumnMetadata>* getUniqueColList(ThreadContext* ctx) throw() ;
+	List<TableColumnMetadata>* getUniqueColList(ThreadContext* ctx) throw() ;
 	virtual int fileSize(ThreadContext* ctx);
 	virtual void toFileEntry(FileStorageEntryBuilder* builder, ThreadContext* ctx);
 	virtual void readData(NetworkBinaryBuffer* buff, ThreadContext* ctx);

@@ -408,8 +408,10 @@
 #include "alinous.remote.db.client.command/RemoteStorageCommandReader.h"
 #include "alinous.remote.db/RemoteStorageResponceAction.h"
 #include "alinous.remote.db/RemoteStorageResponceActionFactory.h"
-#include "alinous.remote.db.server/StorageTransaction.h"
-#include "alinous.remote.db.server/StorageTransactionManager.h"
+#include "alinous.db.table/IScannableIndex.h"
+#include "alinous.db.table/TableIndexValue.h"
+#include "alinous.remote.db.server.trx/StorageTransaction.h"
+#include "alinous.remote.db.server.trx/StorageTransactionManager.h"
 #include "alinous.remote.db.server/RemoteTableStorageServer.h"
 #include "alinous.remote.region.client.command.data/ClientTableData.h"
 #include "alinous.remote.region.client.command.data/ClientSchemaData.h"
@@ -538,7 +540,6 @@
 #include "alinous.db.trx.scan/ScanException.h"
 #include "alinous.db.trx.scan/ScannedOids.h"
 #include "alinous.compile.sql.select.join.scan/JoinedCollectionScanner.h"
-#include "alinous.db.table/IScannableIndex.h"
 #include "alinous.db.table.scan/IndexListScannerParam.h"
 #include "alinous.db.table.scan/IndexRangeScannerParam.h"
 #include "alinous.compile.sql.analyze/IndexScanStrategyPlan.h"
@@ -716,7 +717,6 @@
 #include "alinous.compile.sql.analyze/InnerNecessaryCondition.h"
 #include "alinous.db.trx.cache/TrxRecordCacheIndexScanner.h"
 #include "alinous.db.trx.scan/IFilterScanner.h"
-#include "alinous.db.table/TableIndexValue.h"
 #include "alinous.db.table.scan/TableIndexScanner.h"
 #include "alinous.db.table.scan/IndexEqScanner.h"
 #include "alinous.db.table.scan/IndexListScanner.h"
@@ -890,6 +890,9 @@
 #include "alinous.server.webmodule/BinaryModuleStream.h"
 #include "alinous.server.webmodule/BinaryModule.h"
 #include "alinous.remote.db.client/RemoteTableStorageClient.h"
+#include "alinous.remote.db.server.trx/SerializableStorageTransaction.h"
+#include "alinous.remote.db.server.trx/ReadCommittedStorageTransaction.h"
+#include "alinous.remote.db.server.trx/StorageTransactionFactory.h"
 #include "alinous.remote.db.server.commit/PrepareStorageManager.h"
 #include "alinous.remote.db.server.commit/DeleteStore.h"
 #include "alinous.remote.db.server.commit/InsertStore.h"
@@ -1817,9 +1820,12 @@ inline static void __cleanUpStatics(alinous::ThreadContext* ctx){
 	alinous::remote::db::client::command::dml::InsertPrepareCommand::__cleanUp(ctx);
 	alinous::remote::db::client::command::ddl::CreateTableCommand::__cleanUp(ctx);
 	alinous::remote::db::client::command::ddl::CreateSchemaCommand::__cleanUp(ctx);
-	alinous::remote::db::server::StorageTransaction::__cleanUp(ctx);
 	alinous::remote::db::server::RemoteTableStorageServer::__cleanUp(ctx);
-	alinous::remote::db::server::StorageTransactionManager::__cleanUp(ctx);
+	alinous::remote::db::server::trx::StorageTransaction::__cleanUp(ctx);
+	alinous::remote::db::server::trx::StorageTransactionFactory::__cleanUp(ctx);
+	alinous::remote::db::server::trx::SerializableStorageTransaction::__cleanUp(ctx);
+	alinous::remote::db::server::trx::ReadCommittedStorageTransaction::__cleanUp(ctx);
+	alinous::remote::db::server::trx::StorageTransactionManager::__cleanUp(ctx);
 	alinous::remote::db::server::commit::PrepareStorageManager::__cleanUp(ctx);
 	alinous::remote::db::server::commit::DeleteStore::__cleanUp(ctx);
 	alinous::remote::db::server::commit::InsertStore::__cleanUp(ctx);

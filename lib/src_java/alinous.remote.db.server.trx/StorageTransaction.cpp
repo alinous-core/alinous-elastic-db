@@ -5,16 +5,30 @@
 #include "alinous.buffer.storage/FileStorageEntryFetcher.h"
 #include "alinous.compile/AbstractSrcElement.h"
 #include "alinous.system/AlinousException.h"
-#include "alinous.db/AlinousDbException.h"
+#include "alinous.runtime/ExecutionException.h"
+#include "alinous.runtime.dom/VariableException.h"
 #include "alinous.btree/IValueFetcher.h"
 #include "alinous.btree/IBTreeValue.h"
-#include "alinous.db.table/IDatabaseRecord.h"
+#include "java.lang/Comparable.h"
+#include "alinous.btree/IBTreeKey.h"
+#include "alinous.btree/IBTreeNode.h"
+#include "alinous.btree/BTreeException.h"
+#include "alinous.btree/IBTree.h"
+#include "alinous.btree/BTree.h"
+#include "alinous.btree.scan/BTreeScanner.h"
+#include "alinous.db/AlinousDbException.h"
 #include "alinous.remote.socket/NetworkBinaryBuffer.h"
 #include "alinous.remote.socket/ICommandData.h"
+#include "alinous.runtime.dom/IAlinousVariable.h"
+#include "alinous.runtime.variant/VariantValue.h"
+#include "alinous.db.table/IDatabaseRecord.h"
 #include "alinous.db.table/TableColumnMetadata.h"
 #include "alinous.db.table/TableMetadataUnique.h"
 #include "alinous.compile.sql.analyze/ScanUnique.h"
+#include "alinous.db.table/BTreeIndexKey.h"
+#include "alinous.db.table/IScannableIndex.h"
 #include "alinous.db.table/IDatabaseTable.h"
+#include "alinous.db.table/TableIndexValue.h"
 #include "alinous.db.trx/DbVersionContext.h"
 #include "alinous.lock.unique/UniqueExclusiveException.h"
 #include "alinous.lock.unique/UniqueExclusiveLock.h"
@@ -23,9 +37,9 @@
 #include "alinous.remote.region.server.schema.strategy/UniqueOpValue.h"
 #include "alinous.remote.region.server.schema.strategy/UniqueCheckOperation.h"
 #include "alinous.remote.db.server/RemoteTableStorageServer.h"
-#include "alinous.remote.db.server/StorageTransaction.h"
+#include "alinous.remote.db.server.trx/StorageTransaction.h"
 
-namespace alinous {namespace remote {namespace db {namespace server {
+namespace alinous {namespace remote {namespace db {namespace server {namespace trx {
 
 
 
@@ -110,7 +124,7 @@ String* StorageTransaction::getTmpDir(ThreadContext* ctx) throw()
 	{
 		buff->append(ConstStr::getCNST_STR_949(), ctx);
 	}
-	buff->append(ConstStr::getCNST_STR_3586(), ctx);
+	buff->append(ConstStr::getCNST_STR_3592(), ctx);
 	String* strTrxId = Long::toString(this->vctx->getTrxId(ctx), ctx);
 	buff->append(strTrxId, ctx);
 	__GC_MV(this, &(this->tmpDir), buff->toString(ctx), String);
@@ -163,8 +177,94 @@ void StorageTransaction::handleUniqueOp(IDatabaseTable* table, UniqueCheckOperat
 			}
 		}
 	}
+	List<TableColumnMetadata>* cols = unique->getUniqueColList(ctx);
+	IScannableIndex* scanIndex = table->getTableUniqueIndexByCols(cols, ctx);
+	BTree* btree = nullptr;
+	bool scanAll = scanIndex == nullptr;
+	if(scanAll)
+	{
+		scanIndex = table->getPrimaryIndex(ctx);
+	}
+	btree = scanIndex->getStorage(ctx);
+	BTreeScanner* scanner = (new(ctx) BTreeScanner(btree, ctx));
+	for(int i = 0; i != maxLoop; ++i)
+	{
+		UniqueOpValue* val = values->get(i, ctx);
+		List<VariantValue>* valuesList = val->getValues(ctx);
+		if(!scanAll)
+		{
+			if(findUnique(table, cols, valuesList, scanner, ctx))
+			{
+				throw (new(ctx) UniqueExclusiveException(ConstStr::getCNST_STR_3591(), ctx));
+			}
+		}
+				else 
+		{
+		}
+	}
+}
+bool StorageTransaction::findUnique(IDatabaseTable* table, List<TableColumnMetadata>* cols, List<VariantValue>* valuesList, BTreeScanner* scanner, ThreadContext* ctx)
+{
+	IBTreeKey* key = (new(ctx) BTreeIndexKey(valuesList, ctx));
+	{
+		std::function<void(void)> finallyLm2= [&, this]()
+		{
+			scanner->endScan(ctx);
+		};
+		Releaser finalyCaller2(finallyLm2);
+		try
+		{
+			scanner->startScan(key, ctx);
+			while(scanner->hasNext(ctx))
+			{
+				IBTreeNode* node = scanner->next(ctx);
+				ArrayList<IBTreeValue>* values = node->getValues(ctx);
+				if(checkUniqueValueWithBtreeValues(values, table, cols, valuesList, ctx))
+				{
+					return true;
+				}
+			}
+		}
+		catch(...){throw;}
+	}
+	return false;
+}
+bool StorageTransaction::checkUniqueValueWithBtreeValues(ArrayList<IBTreeValue>* values, IDatabaseTable* table, List<TableColumnMetadata>* cols, List<VariantValue>* valuesList, ThreadContext* ctx)
+{
+	int maxLoop = values->size(ctx);
+	for(int i = 0; i != maxLoop; ++i)
+	{
+		IBTreeValue* v = values->get(i, ctx);
+		TableIndexValue* value = static_cast<TableIndexValue*>(v);
+		long long position = value->getPosition(ctx);
+		IDatabaseRecord* record = table->loadRecord(position, ctx);
+		if(isVisible(record, ctx))
+		{
+			continue;
+		}
+		if(checkEquals(record, cols, valuesList, ctx))
+		{
+			return true;
+		}
+	}
+	return false;
+}
+bool StorageTransaction::checkEquals(IDatabaseRecord* record, List<TableColumnMetadata>* cols, List<VariantValue>* valuesList, ThreadContext* ctx) throw() 
+{
+	int maxLoop = cols->size(ctx);
+	for(int i = 0; i != maxLoop; ++i)
+	{
+		TableColumnMetadata* metacol = cols->get(i, ctx);
+		VariantValue* recvv = record->getColumnValue(metacol->columnOrder, ctx);
+		VariantValue* vv = valuesList->get(i, ctx);
+		if(vv->equals(recvv, ctx))
+		{
+			return true;
+		}
+	}
+	return false;
 }
 void StorageTransaction::__cleanUp(ThreadContext* ctx){
 }
-}}}}
+}}}}}
 

@@ -107,7 +107,7 @@ String* UniqueExclusiveLock::makeString(ScanUnique* unique, IDatabaseRecord* rec
 	StringBuffer* buff = (new(ctx) StringBuffer(ctx));
 	StringBuffer* vbuff = (new(ctx) StringBuffer(ctx));
 	buff->append(unique->getTableFullName(ctx), ctx);
-	ArrayList<TableColumnMetadata>* list = unique->getUniqueColList(ctx);
+	List<TableColumnMetadata>* list = unique->getUniqueColList(ctx);
 	int maxLoop = list->size(ctx);
 	for(int i = 0; i != maxLoop; ++i)
 	{

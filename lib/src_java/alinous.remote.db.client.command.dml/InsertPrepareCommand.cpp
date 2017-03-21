@@ -5,7 +5,6 @@
 #include "java.io/BufferedOutputStream.h"
 #include "alinous.compile/AbstractSrcElement.h"
 #include "alinous.system/AlinousException.h"
-#include "alinous.db/AlinousDbException.h"
 #include "alinous.runtime/ExecutionException.h"
 #include "alinous.runtime.dom/VariableException.h"
 #include "alinous.remote.socket/NetworkBinaryBuffer.h"
@@ -83,7 +82,7 @@ void InsertPrepareCommand::executeOnServer(RemoteTableStorageServer* tableStorag
 		{
 			tableStorageServer->prepareInsert(this->schemaName, this->tableName, newCommitId, uniqueCheckOps, records, vctx, isolationLevel, ctx);
 		}
-		catch(AlinousDbException* e)
+		catch(Throwable* e)
 		{
 			e->printStackTrace(ctx);
 			AlinousCore* core = tableStorageServer->getCore(ctx);

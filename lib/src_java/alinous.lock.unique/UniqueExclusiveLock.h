@@ -12,6 +12,9 @@ class IDatabaseRecord;}}}
 namespace java {namespace lang {
 class StringBuffer;}}
 
+namespace java {namespace util {
+template <typename  T> class List;}}
+
 namespace alinous {namespace db {namespace table {
 class TableColumnMetadata;}}}
 
@@ -34,7 +37,7 @@ namespace alinous {namespace lock {namespace unique {
 using namespace ::alinous;
 using namespace ::java::lang;
 using ::java::util::Iterator;
-using ::java::util::ArrayList;
+using ::java::util::List;
 using ::alinous::compile::sql::analyze::ScanUnique;
 using ::alinous::db::table::IDatabaseRecord;
 using ::alinous::db::table::TableColumnMetadata;

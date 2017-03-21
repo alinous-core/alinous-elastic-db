@@ -135,7 +135,7 @@ void UniqueExclusiveLockManager::dispose(ThreadContext* ctx) throw()
 String* UniqueExclusiveLockManager::getLockValueString(ScanUnique* unique, IDatabaseRecord* value, ThreadContext* ctx) throw() 
 {
 	StringBuilder* buff = (new(ctx) StringBuilder(ctx));
-	ArrayList<TableColumnMetadata>* colslist = unique->getUniqueColList(ctx);
+	List<TableColumnMetadata>* colslist = unique->getUniqueColList(ctx);
 	int maxLoop = colslist->size(ctx);
 	for(int i = 0; i != maxLoop; ++i)
 	{

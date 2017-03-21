@@ -15,11 +15,14 @@ class Integer;}}
 namespace alinous {namespace db {namespace table {
 class IScannableIndex;}}}
 
-namespace alinous {namespace compile {namespace sql {namespace analyze {
-class ScanTableColumnIdentifier;}}}}
+namespace java {namespace util {
+template <typename  T> class List;}}
 
 namespace alinous {namespace db {namespace table {
 class TableColumnMetadata;}}}
+
+namespace alinous {namespace compile {namespace sql {namespace analyze {
+class ScanTableColumnIdentifier;}}}}
 
 namespace alinous {namespace db {namespace table {
 class IDatabaseRecord;}}}
@@ -47,9 +50,6 @@ class SequentialBackgroundJob;}}}
 
 namespace alinous {namespace system {
 class ISystemLog;}}
-
-namespace java {namespace util {
-template <typename  T> class List;}}
 
 namespace alinous {namespace remote {namespace region {namespace client {namespace command {namespace dml {
 class ClientTpcCommitSessionCommand;}}}}}}
@@ -166,6 +166,7 @@ public:
 	void updateMetadata(TableMetadata* metadata, ThreadContext* ctx) throw() ;
 	Integer* getTableId(ThreadContext* ctx) throw()  final;
 	int getColumnCount(ThreadContext* ctx) throw()  final;
+	IScannableIndex* getTableUniqueIndexByCols(List<TableColumnMetadata>* columns, ThreadContext* ctx) throw()  final;
 	IScannableIndex* getTableIndexByColIds(ArrayList<ScanTableColumnIdentifier>* columns, ThreadContext* ctx) throw()  final;
 	IScannableIndex* getPrimaryIndex(ThreadContext* ctx) throw()  final;
 	TableMetadata* getMetadata(ThreadContext* ctx) throw()  final;
@@ -198,6 +199,7 @@ public:
 	void close(ThreadContext* ctx) throw()  final;
 	String* getFullName(ThreadContext* ctx) throw()  final;
 private:
+	bool matchUniqueIndexByIdList(ArrayList<TableColumnMetadata>* columnsMetadataList, List<TableColumnMetadata>* columns, ThreadContext* ctx) throw() ;
 	bool matchIndexByIdList(ArrayList<TableColumnMetadata>* columnsMetadataList, ArrayList<ScanTableColumnIdentifier>* columns, ThreadContext* ctx) throw() ;
 	bool matchIndexByStrList(ArrayList<TableColumnMetadata>* columnsMetadataList, ArrayList<String>* columns, ThreadContext* ctx) throw() ;
 	void doInsertData(DbTransaction* trx, List<IDatabaseRecord>* records, long long newCommitId, ThreadContext* ctx);

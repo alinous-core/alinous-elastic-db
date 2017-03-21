@@ -4,14 +4,14 @@
 #include "alinous.remote.socket/ICommandData.h"
 #include "alinous.db.trx/DbVersionContext.h"
 #include "alinous.lock/LockObject.h"
-#include "alinous.remote.db.server/StorageTransaction.h"
+#include "alinous.remote.db.server.trx/StorageTransaction.h"
 #include "alinous.remote.db.server/RemoteTableStorageServer.h"
 #include "java.lang/Number.h"
 #include "java.lang/Comparable.h"
 #include "java.lang/Long.h"
-#include "alinous.remote.db.server/StorageTransactionManager.h"
+#include "alinous.remote.db.server.trx/StorageTransactionManager.h"
 
-namespace alinous {namespace remote {namespace db {namespace server {
+namespace alinous {namespace remote {namespace db {namespace server {namespace trx {
 
 
 
@@ -71,7 +71,7 @@ StorageTransaction* StorageTransactionManager::getStorageTransaction(int isolati
 		StorageTransaction* strx = this->transactions->get(id, ctx);
 		if(strx == nullptr)
 		{
-			strx = (new(ctx) StorageTransaction(isolationLevel, vctx, this->datadir, this->server, ctx));
+			strx = StorageTransactionFactory::createTrx(isolationLevel, vctx, this->datadir, this->server, ctx);
 			this->transactions->put(id, strx, ctx);
 		}
 		return strx;
@@ -90,5 +90,5 @@ void StorageTransactionManager::finishTransaction(long long strxId, ThreadContex
 }
 void StorageTransactionManager::__cleanUp(ThreadContext* ctx){
 }
-}}}}
+}}}}}
 

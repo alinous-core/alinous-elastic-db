@@ -9,8 +9,8 @@ class BufferedOutputStream;}}
 namespace alinous {namespace system {
 class AlinousCore;}}
 
-namespace alinous {namespace db {
-class AlinousDbException;}}
+namespace java {namespace lang {
+class Throwable;}}
 
 namespace java {namespace io {
 class OutputStream;}}
@@ -60,7 +60,6 @@ using ::java::io::InputStream;
 using ::java::io::OutputStream;
 using ::java::util::ArrayList;
 using ::java::util::List;
-using ::alinous::db::AlinousDbException;
 using ::alinous::db::trx::DbVersionContext;
 using ::alinous::remote::db::client::command::AbstractRemoteStorageCommand;
 using ::alinous::remote::db::server::RemoteTableStorageServer;

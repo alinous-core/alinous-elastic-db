@@ -1,7 +1,7 @@
 #ifndef ALINOUS_REMOTE_DB_SERVER_REMOTETABLESTORAGESERVER_H_
 #define ALINOUS_REMOTE_DB_SERVER_REMOTETABLESTORAGESERVER_H_
-namespace alinous {namespace remote {namespace db {namespace server {
-class StorageTransactionManager;}}}}
+namespace alinous {namespace remote {namespace db {namespace server {namespace trx {
+class StorageTransactionManager;}}}}}
 
 namespace alinous {namespace lock {namespace unique {
 class UniqueExclusiveLockManager;}}}
@@ -96,8 +96,8 @@ class TableSchema;}}
 namespace alinous {namespace db {namespace table {
 class IDatabaseTable;}}}
 
-namespace alinous {namespace remote {namespace db {namespace server {
-class StorageTransaction;}}}}
+namespace alinous {namespace remote {namespace db {namespace server {namespace trx {
+class StorageTransaction;}}}}}
 
 namespace alinous {namespace btree {
 class IntKey;}}
@@ -144,6 +144,8 @@ using ::alinous::lock::unique::UniqueExclusiveLockManager;
 using ::alinous::remote::db::MonitorAccess;
 using ::alinous::remote::db::RemoteStorageResponceActionFactory;
 using ::alinous::remote::db::client::command::data::SchemasStructureInfoData;
+using ::alinous::remote::db::server::trx::StorageTransaction;
+using ::alinous::remote::db::server::trx::StorageTransactionManager;
 using ::alinous::remote::region::client::command::data::ClientNetworkRecord;
 using ::alinous::remote::region::server::schema::strategy::UniqueCheckOperation;
 using ::alinous::remote::socket::SocketServer;

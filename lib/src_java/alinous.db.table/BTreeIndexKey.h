@@ -18,6 +18,9 @@ class IDatabaseRecord;}}}
 namespace alinous {namespace db {namespace table {
 class TableColumnMetadata;}}}
 
+namespace java {namespace util {
+template <typename  T> class List;}}
+
 namespace alinous {namespace btree {
 class IBTreeKey;}}
 
@@ -47,6 +50,7 @@ using namespace ::alinous;
 using namespace ::java::lang;
 using ::java::util::Iterator;
 using ::java::util::ArrayList;
+using ::java::util::List;
 using ::alinous::btree::IBTreeKey;
 using ::alinous::buffer::storage::FileStorageEntryBuilder;
 using ::alinous::buffer::storage::FileStorageEntryFetcher;
@@ -66,16 +70,19 @@ public:
 	void __construct_impl(ScanResultIndexKey* indexKeyValue, ThreadContext* ctx) throw() ;
 	BTreeIndexKey(IBtreeTableIndex* index, IDatabaseRecord* dbrecord, ThreadContext* ctx) throw() ;
 	void __construct_impl(IBtreeTableIndex* index, IDatabaseRecord* dbrecord, ThreadContext* ctx) throw() ;
+	BTreeIndexKey(List<VariantValue>* valuesList, ThreadContext* ctx) throw() ;
+	void __construct_impl(List<VariantValue>* valuesList, ThreadContext* ctx) throw() ;
 	virtual ~BTreeIndexKey() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 public:
-	ArrayList<VariantValue>* values;
+	List<VariantValue>* values;
 public:
 	int compareTo(IBTreeKey* another, ThreadContext* ctx) throw() ;
 	int getNumCols(ThreadContext* ctx) throw() ;
 	bool equals(IObject* obj, ThreadContext* ctx) throw() ;
 	void appendToEntry(FileStorageEntryBuilder* builder, ThreadContext* ctx) final;
 	int size(ThreadContext* ctx) final;
+	void setValues(List<VariantValue>* values, ThreadContext* ctx) throw() ;
 public:
 	static BTreeIndexKey* fetchFromEntry(FileStorageEntryFetcher* fetcher, ThreadContext* ctx);
 public:

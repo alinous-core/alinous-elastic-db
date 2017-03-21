@@ -11,7 +11,7 @@ template class ::alinous::HashMapInternalElement<::alinous::html::DomNode, ::jav
 template class ::alinous::HashMapInternalElement<::java::lang::String, ::alinous::remote::monitor::RegionNodeInfo>;
 template class ::alinous::HashMapInternalElement<::java::lang::String, ::alinous::remote::db::client::command::data::TableClusterData>;
 template class ::alinous::HashMapInternalElement<::java::lang::String, ::alinous::remote::db::client::command::data::SchemaData>;
-template class ::alinous::HashMapInternalElement<::java::lang::Long, ::alinous::remote::db::server::StorageTransaction>;
+template class ::alinous::HashMapInternalElement<::java::lang::Long, ::alinous::remote::db::server::trx::StorageTransaction>;
 template class ::alinous::HashMapInternalElement<::java::lang::String, ::alinous::remote::region::client::command::data::ClientTableData>;
 template class ::alinous::HashMapInternalElement<::java::lang::String, ::alinous::remote::region::client::DatabaseTableClient>;
 template class ::alinous::HashMapInternalElement<::java::lang::String, ::alinous::remote::region::client::command::data::ClientSchemaData>;

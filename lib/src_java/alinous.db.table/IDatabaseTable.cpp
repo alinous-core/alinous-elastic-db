@@ -17,6 +17,7 @@
 #include "alinous.btree/IBTreeValue.h"
 #include "alinous.db.table/IDatabaseRecord.h"
 #include "alinous.remote.socket/ICommandData.h"
+#include "alinous.db.table/TableColumnMetadata.h"
 #include "alinous.db.table/TableMetadata.h"
 #include "alinous.runtime.parallel/ThreadPool.h"
 #include "alinous.system/ISystemLog.h"

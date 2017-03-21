@@ -122,6 +122,33 @@ int DatabaseTableClient::getColumnCount(ThreadContext* ctx) throw()
 {
 	return this->metadata->getColumnCount(ctx);
 }
+IScannableIndex* DatabaseTableClient::getTableUniqueIndexByCols(List<TableColumnMetadata>* columns, ThreadContext* ctx) throw() 
+{
+	int maxLoop = this->indexes->size(ctx);
+	IScannableIndex* matchedindex = nullptr;
+	if(matchUniqueIndexByIdList(this->primaryIndex->getColumns(ctx), columns, ctx))
+	{
+		return this->primaryIndex;
+	}
+	for(int i = 0; i != maxLoop; ++i)
+	{
+		IScannableIndex* index = this->indexes->get(i, ctx);
+		ArrayList<TableColumnMetadata>* columnsMetadataList = index->getColumns(ctx);
+		bool match = matchUniqueIndexByIdList(columnsMetadataList, columns, ctx);
+		if(columnsMetadataList->size(ctx) == columns->size(ctx) && match)
+		{
+			return index;
+		}
+				else 
+		{
+			if(match)
+			{
+				matchedindex = index;
+			}
+		}
+	}
+	return matchedindex;
+}
 IScannableIndex* DatabaseTableClient::getTableIndexByColIds(ArrayList<ScanTableColumnIdentifier>* columns, ThreadContext* ctx) throw() 
 {
 	int maxLoop = this->indexes->size(ctx);
@@ -318,15 +345,15 @@ void DatabaseTableClient::finishCommitSession(DbTransaction* trx, long long newC
 		}
 		catch(UnknownHostException* e)
 		{
-			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3594(), e, ctx));
+			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3595(), e, ctx));
 		}
 		catch(IOException* e)
 		{
-			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3594(), e, ctx));
+			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3595(), e, ctx));
 		}
 		catch(AlinousException* e)
 		{
-			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3594(), e, ctx));
+			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3595(), e, ctx));
 		}
 	}
 }
@@ -342,6 +369,24 @@ void DatabaseTableClient::close(ThreadContext* ctx) throw()
 String* DatabaseTableClient::getFullName(ThreadContext* ctx) throw() 
 {
 	return this->fullName;
+}
+bool DatabaseTableClient::matchUniqueIndexByIdList(ArrayList<TableColumnMetadata>* columnsMetadataList, List<TableColumnMetadata>* columns, ThreadContext* ctx) throw() 
+{
+	int maxLoop = columns->size(ctx);
+	if(maxLoop > columnsMetadataList->size(ctx))
+	{
+		return false;
+	}
+	for(int i = 0; i != maxLoop; ++i)
+	{
+		TableColumnMetadata* requiredColumn = columns->get(i, ctx);
+		TableColumnMetadata* metadata = columnsMetadataList->get(i, ctx);
+		if(!metadata->name->equals(requiredColumn->name, ctx))
+		{
+			return false;
+		}
+	}
+	return true;
 }
 bool DatabaseTableClient::matchIndexByIdList(ArrayList<TableColumnMetadata>* columnsMetadataList, ArrayList<ScanTableColumnIdentifier>* columns, ThreadContext* ctx) throw() 
 {
@@ -396,7 +441,7 @@ void DatabaseTableClient::doInsertData(DbTransaction* trx, List<IDatabaseRecord>
 			}
 			catch(VariableException* e)
 			{
-				throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3595(), e, ctx));
+				throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3596(), e, ctx));
 			}
 		}
 		list->add(netRec, ctx);
@@ -416,15 +461,15 @@ void DatabaseTableClient::doInsertData(DbTransaction* trx, List<IDatabaseRecord>
 		}
 		catch(UnknownHostException* e)
 		{
-			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3596(), e, ctx));
+			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3597(), e, ctx));
 		}
 		catch(IOException* e)
 		{
-			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3596(), e, ctx));
+			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3597(), e, ctx));
 		}
 		catch(AlinousException* e)
 		{
-			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3596(), e, ctx));
+			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3597(), e, ctx));
 		}
 	}
 }

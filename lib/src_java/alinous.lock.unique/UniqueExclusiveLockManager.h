@@ -15,6 +15,9 @@ class TableUniqueCollections;}}}
 namespace java {namespace lang {
 class StringBuilder;}}
 
+namespace java {namespace util {
+template <typename  T> class List;}}
+
 namespace alinous {namespace db {namespace table {
 class TableColumnMetadata;}}}
 
@@ -59,9 +62,9 @@ using namespace ::alinous;
 using namespace ::java::lang;
 using ::java::util::Iterator;
 using ::java::io::IOException;
-using ::java::util::ArrayList;
 using ::java::util::HashMap;
 using ::java::util::Iterator;
+using ::java::util::List;
 using ::java::util::Map;
 using ::alinous::btree::BTreeException;
 using ::alinous::compile::sql::analyze::ScanUnique;

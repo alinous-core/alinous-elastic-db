@@ -15,11 +15,14 @@ class DBThreadMonitor;}}}}
 namespace alinous {namespace db {namespace table {
 class IScannableIndex;}}}
 
-namespace alinous {namespace compile {namespace sql {namespace analyze {
-class ScanTableColumnIdentifier;}}}}
+namespace java {namespace util {
+template <typename  T> class List;}}
 
 namespace alinous {namespace db {namespace table {
 class TableColumnMetadata;}}}
+
+namespace alinous {namespace compile {namespace sql {namespace analyze {
+class ScanTableColumnIdentifier;}}}}
 
 namespace alinous {namespace db {namespace table {namespace lockmonitor {
 class IThreadLocker;}}}}
@@ -49,6 +52,7 @@ using namespace ::alinous;
 using namespace ::java::lang;
 using ::java::util::Iterator;
 using ::java::util::ArrayList;
+using ::java::util::List;
 using ::alinous::compile::sql::analyze::ScanTableColumnIdentifier;
 using ::alinous::db::AlinousDbException;
 using ::alinous::db::table::cache::RecordCacheEngine;
@@ -72,6 +76,7 @@ public:
 private:
 	DBThreadMonitor* monitor;
 public:
+	IScannableIndex* getTableUniqueIndexByCols(List<TableColumnMetadata>* columns, ThreadContext* ctx) throw()  final;
 	IScannableIndex* getTableIndexByColIds(ArrayList<ScanTableColumnIdentifier>* columns, ThreadContext* ctx) throw()  final;
 	IScannableIndex* getAbailableIndex(ArrayList<String>* columns, ThreadContext* ctx) throw()  final;
 	IScannableIndex* getAbailableIndexByScanColId(ArrayList<ScanTableColumnIdentifier>* columns, ThreadContext* ctx) throw()  final;
@@ -87,6 +92,7 @@ public:
 	void updateUnlockRow(long long oid, IThreadLocker* locker, ThreadContext* ctx) final;
 	void finishCommitSession(DbTransaction* trx, long long newCommitId, ThreadContext* ctx) final;
 private:
+	bool matchUniqueIndexByIdList(ArrayList<TableColumnMetadata>* columnsMetadataList, List<TableColumnMetadata>* columns, ThreadContext* ctx) throw() ;
 	bool matchIndexByIdList(ArrayList<TableColumnMetadata>* columnsMetadataList, ArrayList<ScanTableColumnIdentifier>* columns, ThreadContext* ctx) throw() ;
 	bool matchIndexByStrList(ArrayList<TableColumnMetadata>* columnsMetadataList, ArrayList<String>* columns, ThreadContext* ctx) throw() ;
 public:

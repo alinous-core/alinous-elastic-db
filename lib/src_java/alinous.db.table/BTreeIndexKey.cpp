@@ -38,13 +38,13 @@ bool BTreeIndexKey::__init_static_variables(){
 	delete ctx;
 	return true;
 }
- BTreeIndexKey::BTreeIndexKey(ThreadContext* ctx) throw()  : IObject(ctx), IBTreeKey(ctx), values(GCUtils<ArrayList<VariantValue> >::ins(this, (new(ctx) ArrayList<VariantValue>(ctx)), ctx, __FILEW__, __LINE__, L""))
+ BTreeIndexKey::BTreeIndexKey(ThreadContext* ctx) throw()  : IObject(ctx), IBTreeKey(ctx), values(GCUtils<List<VariantValue> >::ins(this, (new(ctx) ArrayList<VariantValue>(ctx)), ctx, __FILEW__, __LINE__, L""))
 {
 }
 void BTreeIndexKey::__construct_impl(ThreadContext* ctx) throw() 
 {
 }
- BTreeIndexKey::BTreeIndexKey(ScanResultIndexKey* indexKeyValue, ThreadContext* ctx) throw()  : IObject(ctx), IBTreeKey(ctx), values(GCUtils<ArrayList<VariantValue> >::ins(this, (new(ctx) ArrayList<VariantValue>(ctx)), ctx, __FILEW__, __LINE__, L""))
+ BTreeIndexKey::BTreeIndexKey(ScanResultIndexKey* indexKeyValue, ThreadContext* ctx) throw()  : IObject(ctx), IBTreeKey(ctx), values(GCUtils<List<VariantValue> >::ins(this, (new(ctx) ArrayList<VariantValue>(ctx)), ctx, __FILEW__, __LINE__, L""))
 {
 	int maxLoop = indexKeyValue->getNumCols(ctx);
 	for(int i = 0; i != maxLoop; ++i)
@@ -62,7 +62,7 @@ void BTreeIndexKey::__construct_impl(ScanResultIndexKey* indexKeyValue, ThreadCo
 		this->values->add(vv, ctx);
 	}
 }
- BTreeIndexKey::BTreeIndexKey(IBtreeTableIndex* index, IDatabaseRecord* dbrecord, ThreadContext* ctx) throw()  : IObject(ctx), IBTreeKey(ctx), values(GCUtils<ArrayList<VariantValue> >::ins(this, (new(ctx) ArrayList<VariantValue>(ctx)), ctx, __FILEW__, __LINE__, L""))
+ BTreeIndexKey::BTreeIndexKey(IBtreeTableIndex* index, IDatabaseRecord* dbrecord, ThreadContext* ctx) throw()  : IObject(ctx), IBTreeKey(ctx), values(GCUtils<List<VariantValue> >::ins(this, (new(ctx) ArrayList<VariantValue>(ctx)), ctx, __FILEW__, __LINE__, L""))
 {
 	ArrayList<TableColumnMetadata>* list = index->getColumns(ctx);
 	int maxLoop = list->size(ctx);
@@ -85,6 +85,14 @@ void BTreeIndexKey::__construct_impl(IBtreeTableIndex* index, IDatabaseRecord* d
 		VariantValue* value = dbrecord->getColumnValue(colOrder, ctx);
 		this->values->add(value, ctx);
 	}
+}
+ BTreeIndexKey::BTreeIndexKey(List<VariantValue>* valuesList, ThreadContext* ctx) throw()  : IObject(ctx), IBTreeKey(ctx), values(GCUtils<List<VariantValue> >::ins(this, (new(ctx) ArrayList<VariantValue>(ctx)), ctx, __FILEW__, __LINE__, L""))
+{
+	GCUtils<List<VariantValue> >::mv(this, &(this->values), valuesList, ctx);
+}
+void BTreeIndexKey::__construct_impl(List<VariantValue>* valuesList, ThreadContext* ctx) throw() 
+{
+	GCUtils<List<VariantValue> >::mv(this, &(this->values), valuesList, ctx);
 }
  BTreeIndexKey::~BTreeIndexKey() throw() 
 {
@@ -163,6 +171,10 @@ int BTreeIndexKey::size(ThreadContext* ctx)
 		total += value->bufferSize(ctx);
 	}
 	return total;
+}
+void BTreeIndexKey::setValues(List<VariantValue>* values, ThreadContext* ctx) throw() 
+{
+	GCUtils<List<VariantValue> >::mv(this, &(this->values), values, ctx);
 }
 BTreeIndexKey* BTreeIndexKey::fetchFromEntry(FileStorageEntryFetcher* fetcher, ThreadContext* ctx)
 {

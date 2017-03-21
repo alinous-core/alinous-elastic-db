@@ -94,6 +94,33 @@ void DatabaseTable::__releaseRegerences(bool prepare, ThreadContext* ctx) throw(
 	}
 	DatatableUpdateSupport::__releaseRegerences(true, ctx);
 }
+IScannableIndex* DatabaseTable::getTableUniqueIndexByCols(List<TableColumnMetadata>* columns, ThreadContext* ctx) throw() 
+{
+	int maxLoop = this->indexes->size(ctx);
+	IScannableIndex* matchedindex = nullptr;
+	if(matchUniqueIndexByIdList(this->primaryIndex->getColumns(ctx), columns, ctx))
+	{
+		return this->primaryIndex;
+	}
+	for(int i = 0; i != maxLoop; ++i)
+	{
+		IScannableIndex* index = this->indexes->get(i, ctx);
+		ArrayList<TableColumnMetadata>* columnsMetadataList = index->getColumns(ctx);
+		bool match = matchUniqueIndexByIdList(columnsMetadataList, columns, ctx);
+		if(columnsMetadataList->size(ctx) == columns->size(ctx) && match)
+		{
+			return index;
+		}
+				else 
+		{
+			if(match)
+			{
+				matchedindex = index;
+			}
+		}
+	}
+	return matchedindex;
+}
 IScannableIndex* DatabaseTable::getTableIndexByColIds(ArrayList<ScanTableColumnIdentifier>* columns, ThreadContext* ctx) throw() 
 {
 	int maxLoop = this->indexes->size(ctx);
@@ -216,6 +243,24 @@ void DatabaseTable::updateUnlockRow(long long oid, IThreadLocker* locker, Thread
 }
 void DatabaseTable::finishCommitSession(DbTransaction* trx, long long newCommitId, ThreadContext* ctx)
 {
+}
+bool DatabaseTable::matchUniqueIndexByIdList(ArrayList<TableColumnMetadata>* columnsMetadataList, List<TableColumnMetadata>* columns, ThreadContext* ctx) throw() 
+{
+	int maxLoop = columns->size(ctx);
+	if(maxLoop > columnsMetadataList->size(ctx))
+	{
+		return false;
+	}
+	for(int i = 0; i != maxLoop; ++i)
+	{
+		TableColumnMetadata* requiredColumn = columns->get(i, ctx);
+		TableColumnMetadata* metadata = columnsMetadataList->get(i, ctx);
+		if(!metadata->name->equals(requiredColumn->name, ctx))
+		{
+			return false;
+		}
+	}
+	return true;
 }
 bool DatabaseTable::matchIndexByIdList(ArrayList<TableColumnMetadata>* columnsMetadataList, ArrayList<ScanTableColumnIdentifier>* columns, ThreadContext* ctx) throw() 
 {

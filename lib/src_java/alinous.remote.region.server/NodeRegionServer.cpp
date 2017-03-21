@@ -45,7 +45,7 @@ namespace alinous {namespace remote {namespace region {namespace server {
 
 
 
-String* NodeRegionServer::THREAD_NAME = ConstStr::getCNST_STR_3606();
+String* NodeRegionServer::THREAD_NAME = ConstStr::getCNST_STR_3607();
 bool NodeRegionServer::__init_done = __init_static_variables();
 bool NodeRegionServer::__init_static_variables(){
 	Java2CppSystem::getSelf();
@@ -143,7 +143,7 @@ void NodeRegionServer::syncNodes(ThreadContext* ctx)
 			AbstractMonitorCommand* retcmd = cmd->sendCommand(socket, ctx);
 			if(retcmd->getType(ctx) != AbstractMonitorCommand::TYPE_GET_REGION_INFO)
 			{
-				throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3605(), ctx));
+				throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3606(), ctx));
 			}
 			cmd = static_cast<GetRegionNodeInfoCommand*>(retcmd);
 			RegionInfoData* data = cmd->getRegionData(ctx);
@@ -237,17 +237,17 @@ void NodeRegionServer::reportClusterUpdate(ThreadContext* ctx)
 			AbstractMonitorCommand* retcmd = cmd->sendCommand(socket, ctx);
 			if(retcmd->getType(ctx) != AbstractMonitorCommand::TYPE_REPORT_CLUSTER_UPDATED)
 			{
-				throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3605(), ctx));
+				throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3606(), ctx));
 			}
 			cmd = static_cast<ReportClusterVersionUpCommand*>(retcmd);
 		}
 		catch(UnknownHostException* e)
 		{
-			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3605(), ctx));
+			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3606(), ctx));
 		}
 		catch(IOException* e)
 		{
-			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3605(), ctx));
+			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3606(), ctx));
 		}
 	}
 }

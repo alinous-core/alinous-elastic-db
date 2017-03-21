@@ -378,9 +378,9 @@ public:
 	constexpr static StaticUnicodeString __CNST_STR_2336{L"image/vnd.fpx",13};
 public:
 	static UnicodeStringWrapper* getCNST_STR_2336() throw();
-	constexpr static StaticUnicodeString __CNST_STR_3609{L"Returning command is wrong",26};
+	constexpr static StaticUnicodeString __CNST_STR_3610{L"Returning command is wrong",26};
 public:
-	static UnicodeStringWrapper* getCNST_STR_3609() throw();
+	static UnicodeStringWrapper* getCNST_STR_3610() throw();
 	constexpr static StaticUnicodeString __CNST_STR_2090{L"chm",3};
 public:
 	static UnicodeStringWrapper* getCNST_STR_2090() throw();
@@ -462,6 +462,9 @@ public:
 	constexpr static StaticUnicodeString __CNST_STR_1274{L"SubStackFrame",13};
 public:
 	static UnicodeStringWrapper* getCNST_STR_1274() throw();
+	constexpr static StaticUnicodeString __CNST_STR_3591{L"Already exist",13};
+public:
+	static UnicodeStringWrapper* getCNST_STR_3591() throw();
 	constexpr static StaticUnicodeString __CNST_STR_604{L"Europe/Moscow",13};
 public:
 	static UnicodeStringWrapper* getCNST_STR_604() throw();
@@ -768,9 +771,9 @@ public:
 	constexpr static StaticUnicodeString __CNST_STR_2152{L"cst",3};
 public:
 	static UnicodeStringWrapper* getCNST_STR_2152() throw();
-	constexpr static StaticUnicodeString __CNST_STR_3606{L"NodeRegionServer",16};
+	constexpr static StaticUnicodeString __CNST_STR_3607{L"NodeRegionServer",16};
 public:
-	static UnicodeStringWrapper* getCNST_STR_3606() throw();
+	static UnicodeStringWrapper* getCNST_STR_3607() throw();
 	constexpr static StaticUnicodeString __CNST_STR_2153{L"csv",3};
 public:
 	static UnicodeStringWrapper* getCNST_STR_2153() throw();
@@ -1002,9 +1005,9 @@ public:
 	constexpr static StaticUnicodeString __CNST_STR_3291{L"ustar",5};
 public:
 	static UnicodeStringWrapper* getCNST_STR_3291() throw();
-	constexpr static StaticUnicodeString __CNST_STR_3614{L"Node info is not initialized",28};
+	constexpr static StaticUnicodeString __CNST_STR_3615{L"Node info is not initialized",28};
 public:
-	static UnicodeStringWrapper* getCNST_STR_3614() throw();
+	static UnicodeStringWrapper* getCNST_STR_3615() throw();
 	constexpr static StaticUnicodeString __CNST_STR_837{L"Asia/Brunei",11};
 public:
 	static UnicodeStringWrapper* getCNST_STR_837() throw();
@@ -1038,9 +1041,9 @@ public:
 	constexpr static StaticUnicodeString __CNST_STR_1976{L"application/vnd.accpac.simply.aso",33};
 public:
 	static UnicodeStringWrapper* getCNST_STR_1976() throw();
-	constexpr static StaticUnicodeString __CNST_STR_3590{L"Schema ",7};
+	constexpr static StaticUnicodeString __CNST_STR_3589{L"Schema ",7};
 public:
-	static UnicodeStringWrapper* getCNST_STR_3590() throw();
+	static UnicodeStringWrapper* getCNST_STR_3589() throw();
 	constexpr static StaticUnicodeString __CNST_STR_1403{L"\"else\"",6};
 public:
 	static UnicodeStringWrapper* getCNST_STR_1403() throw();
@@ -1284,9 +1287,9 @@ public:
 	constexpr static StaticUnicodeString __CNST_STR_954{L"alinous-config.xml",18};
 public:
 	static UnicodeStringWrapper* getCNST_STR_954() throw();
-	constexpr static StaticUnicodeString __CNST_STR_3596{L"Failed in insert command",24};
+	constexpr static StaticUnicodeString __CNST_STR_3597{L"Failed in insert command",24};
 public:
-	static UnicodeStringWrapper* getCNST_STR_3596() throw();
+	static UnicodeStringWrapper* getCNST_STR_3597() throw();
 	constexpr static StaticUnicodeString __CNST_STR_1172{L"Can not use empty array or wrong structured dom variable as a table",67};
 public:
 	static UnicodeStringWrapper* getCNST_STR_1172() throw();
@@ -1383,9 +1386,9 @@ public:
 	constexpr static StaticUnicodeString __CNST_STR_43{L"Sep",3};
 public:
 	static UnicodeStringWrapper* getCNST_STR_43() throw();
-	constexpr static StaticUnicodeString __CNST_STR_3589{L"Failed in start node storage server.",36};
+	constexpr static StaticUnicodeString __CNST_STR_3588{L"Failed in start node storage server.",36};
 public:
-	static UnicodeStringWrapper* getCNST_STR_3589() throw();
+	static UnicodeStringWrapper* getCNST_STR_3588() throw();
 	constexpr static StaticUnicodeString __CNST_STR_1494{L"\"TO\"",4};
 public:
 	static UnicodeStringWrapper* getCNST_STR_1494() throw();
@@ -1746,9 +1749,9 @@ public:
 	constexpr static StaticUnicodeString __CNST_STR_3465{L"application/vnd.adobe.xfdf",26};
 public:
 	static UnicodeStringWrapper* getCNST_STR_3465() throw();
-	constexpr static StaticUnicodeString __CNST_STR_3598{L"Failed in getting scheme info",29};
+	constexpr static StaticUnicodeString __CNST_STR_3599{L"Failed in getting scheme info",29};
 public:
-	static UnicodeStringWrapper* getCNST_STR_3598() throw();
+	static UnicodeStringWrapper* getCNST_STR_3599() throw();
 	constexpr static StaticUnicodeString __CNST_STR_1626{L"\151\156\143\154\165\144\145",7};
 public:
 	static UnicodeStringWrapper* getCNST_STR_1626() throw();
@@ -1800,9 +1803,9 @@ public:
 	constexpr static StaticUnicodeString __CNST_STR_1341{L"<NOTASCII>",10};
 public:
 	static UnicodeStringWrapper* getCNST_STR_1341() throw();
-	constexpr static StaticUnicodeString __CNST_STR_3586{L"strx_work_dir/",14};
+	constexpr static StaticUnicodeString __CNST_STR_3592{L"strx_work_dir/",14};
 public:
-	static UnicodeStringWrapper* getCNST_STR_3586() throw();
+	static UnicodeStringWrapper* getCNST_STR_3592() throw();
 	constexpr static StaticUnicodeString __CNST_STR_2613{L"mag",3};
 public:
 	static UnicodeStringWrapper* getCNST_STR_2613() throw();
@@ -2190,9 +2193,9 @@ public:
 	constexpr static StaticUnicodeString __CNST_STR_3420{L"application/vnd.wordperfect",27};
 public:
 	static UnicodeStringWrapper* getCNST_STR_3420() throw();
-	constexpr static StaticUnicodeString __CNST_STR_3617{L"UniqueOpValue is required",25};
+	constexpr static StaticUnicodeString __CNST_STR_3618{L"UniqueOpValue is required",25};
 public:
-	static UnicodeStringWrapper* getCNST_STR_3617() throw();
+	static UnicodeStringWrapper* getCNST_STR_3618() throw();
 	constexpr static StaticUnicodeString __CNST_STR_322{L"0x",2};
 public:
 	static UnicodeStringWrapper* getCNST_STR_322() throw();
@@ -2694,9 +2697,9 @@ public:
 	constexpr static StaticUnicodeString __CNST_STR_1160{L"DATE",4};
 public:
 	static UnicodeStringWrapper* getCNST_STR_1160() throw();
-	constexpr static StaticUnicodeString __CNST_STR_3592{L"prepare/",8};
+	constexpr static StaticUnicodeString __CNST_STR_3593{L"prepare/",8};
 public:
-	static UnicodeStringWrapper* getCNST_STR_3592() throw();
+	static UnicodeStringWrapper* getCNST_STR_3593() throw();
 	constexpr static StaticUnicodeString __CNST_STR_3039{L"application/rls-services+xml",28};
 public:
 	static UnicodeStringWrapper* getCNST_STR_3039() throw();
@@ -3666,9 +3669,9 @@ public:
 	constexpr static StaticUnicodeString __CNST_STR_2500{L"java",4};
 public:
 	static UnicodeStringWrapper* getCNST_STR_2500() throw();
-	constexpr static StaticUnicodeString __CNST_STR_3612{L"Failed in creating schema",25};
+	constexpr static StaticUnicodeString __CNST_STR_3613{L"Failed in creating schema",25};
 public:
-	static UnicodeStringWrapper* getCNST_STR_3612() throw();
+	static UnicodeStringWrapper* getCNST_STR_3613() throw();
 	constexpr static StaticUnicodeString __CNST_STR_283{L"Pd",2};
 public:
 	static UnicodeStringWrapper* getCNST_STR_283() throw();
@@ -3717,9 +3720,9 @@ public:
 	constexpr static StaticUnicodeString __CNST_STR_331{L"[:^alnum:]",10};
 public:
 	static UnicodeStringWrapper* getCNST_STR_331() throw();
-	constexpr static StaticUnicodeString __CNST_STR_3594{L"Failed in finish commit session command",39};
+	constexpr static StaticUnicodeString __CNST_STR_3595{L"Failed in finish commit session command",39};
 public:
-	static UnicodeStringWrapper* getCNST_STR_3594() throw();
+	static UnicodeStringWrapper* getCNST_STR_3595() throw();
 	constexpr static StaticUnicodeString __CNST_STR_2958{L"ptid",4};
 public:
 	static UnicodeStringWrapper* getCNST_STR_2958() throw();
@@ -3882,9 +3885,9 @@ public:
 	constexpr static StaticUnicodeString __CNST_STR_1357{L"\";\"",3};
 public:
 	static UnicodeStringWrapper* getCNST_STR_1357() throw();
-	constexpr static StaticUnicodeString __CNST_STR_3603{L"Failed in reading variant value from network",44};
+	constexpr static StaticUnicodeString __CNST_STR_3604{L"Failed in reading variant value from network",44};
 public:
-	static UnicodeStringWrapper* getCNST_STR_3603() throw();
+	static UnicodeStringWrapper* getCNST_STR_3604() throw();
 	constexpr static StaticUnicodeString __CNST_STR_2252{L"ecma",4};
 public:
 	static UnicodeStringWrapper* getCNST_STR_2252() throw();
@@ -3915,9 +3918,9 @@ public:
 	constexpr static StaticUnicodeString __CNST_STR_1407{L"\"finally\"",9};
 public:
 	static UnicodeStringWrapper* getCNST_STR_1407() throw();
-	constexpr static StaticUnicodeString __CNST_STR_3604{L"Failed in reading metadata from network",39};
+	constexpr static StaticUnicodeString __CNST_STR_3605{L"Failed in reading metadata from network",39};
 public:
-	static UnicodeStringWrapper* getCNST_STR_3604() throw();
+	static UnicodeStringWrapper* getCNST_STR_3605() throw();
 	constexpr static StaticUnicodeString __CNST_STR_1051{L"Array variables do not have property",36};
 public:
 	static UnicodeStringWrapper* getCNST_STR_1051() throw();
@@ -3984,9 +3987,9 @@ public:
 	constexpr static StaticUnicodeString __CNST_STR_2164{L"model/vnd.collada+xml",21};
 public:
 	static UnicodeStringWrapper* getCNST_STR_2164() throw();
-	constexpr static StaticUnicodeString __CNST_STR_3607{L"ipv6:",5};
+	constexpr static StaticUnicodeString __CNST_STR_3608{L"ipv6:",5};
 public:
-	static UnicodeStringWrapper* getCNST_STR_3607() throw();
+	static UnicodeStringWrapper* getCNST_STR_3608() throw();
 	constexpr static StaticUnicodeString __CNST_STR_1286{L"HOT_THREAD",10};
 public:
 	static UnicodeStringWrapper* getCNST_STR_1286() throw();
@@ -4047,9 +4050,9 @@ public:
 	constexpr static StaticUnicodeString __CNST_STR_3470{L"xhtml",5};
 public:
 	static UnicodeStringWrapper* getCNST_STR_3470() throw();
-	constexpr static StaticUnicodeString __CNST_STR_3601{L"Region name is necessary on Remote Mode.",40};
+	constexpr static StaticUnicodeString __CNST_STR_3602{L"Region name is necessary on Remote Mode.",40};
 public:
-	static UnicodeStringWrapper* getCNST_STR_3601() throw();
+	static UnicodeStringWrapper* getCNST_STR_3602() throw();
 	constexpr static StaticUnicodeString __CNST_STR_2769{L"npx",3};
 public:
 	static UnicodeStringWrapper* getCNST_STR_2769() throw();
@@ -4074,9 +4077,9 @@ public:
 	constexpr static StaticUnicodeString __CNST_STR_3377{L"wbs",3};
 public:
 	static UnicodeStringWrapper* getCNST_STR_3377() throw();
-	constexpr static StaticUnicodeString __CNST_STR_3608{L"ipv4:",5};
+	constexpr static StaticUnicodeString __CNST_STR_3609{L"ipv4:",5};
 public:
-	static UnicodeStringWrapper* getCNST_STR_3608() throw();
+	static UnicodeStringWrapper* getCNST_STR_3609() throw();
 	constexpr static StaticUnicodeString __CNST_STR_411{L"YE",2};
 public:
 	static UnicodeStringWrapper* getCNST_STR_411() throw();
@@ -4086,9 +4089,9 @@ public:
 	constexpr static StaticUnicodeString __CNST_STR_3149{L"application/scvp-vp-response",28};
 public:
 	static UnicodeStringWrapper* getCNST_STR_3149() throw();
-	constexpr static StaticUnicodeString __CNST_STR_3595{L"Local Record Cache is broken",28};
+	constexpr static StaticUnicodeString __CNST_STR_3596{L"Local Record Cache is broken",28};
 public:
-	static UnicodeStringWrapper* getCNST_STR_3595() throw();
+	static UnicodeStringWrapper* getCNST_STR_3596() throw();
 	constexpr static StaticUnicodeString __CNST_STR_530{L",minimalDaysInFirstWeek=",24};
 public:
 	static UnicodeStringWrapper* getCNST_STR_530() throw();
@@ -4503,9 +4506,9 @@ public:
 	constexpr static StaticUnicodeString __CNST_STR_3387{L"video/webm",10};
 public:
 	static UnicodeStringWrapper* getCNST_STR_3387() throw();
-	constexpr static StaticUnicodeString __CNST_STR_3602{L"Wrong Command Type of Node Region Command.",42};
+	constexpr static StaticUnicodeString __CNST_STR_3603{L"Wrong Command Type of Node Region Command.",42};
 public:
-	static UnicodeStringWrapper* getCNST_STR_3602() throw();
+	static UnicodeStringWrapper* getCNST_STR_3603() throw();
 	constexpr static StaticUnicodeString __CNST_STR_453{L"bg",2};
 public:
 	static UnicodeStringWrapper* getCNST_STR_453() throw();
@@ -5193,9 +5196,9 @@ public:
 	constexpr static StaticUnicodeString __CNST_STR_2030{L"application/x-bzip2",19};
 public:
 	static UnicodeStringWrapper* getCNST_STR_2030() throw();
-	constexpr static StaticUnicodeString __CNST_STR_3587{L"Failed in making cache",22};
+	constexpr static StaticUnicodeString __CNST_STR_3586{L"Failed in making cache",22};
 public:
-	static UnicodeStringWrapper* getCNST_STR_3587() throw();
+	static UnicodeStringWrapper* getCNST_STR_3586() throw();
 	constexpr static StaticUnicodeString __CNST_STR_1982{L"application/atomcat+xml",23};
 public:
 	static UnicodeStringWrapper* getCNST_STR_1982() throw();
@@ -5415,9 +5418,9 @@ public:
 	constexpr static StaticUnicodeString __CNST_STR_1423{L"\"this\"",6};
 public:
 	static UnicodeStringWrapper* getCNST_STR_1423() throw();
-	constexpr static StaticUnicodeString __CNST_STR_3597{L"Failed in getting scheme info from region server",48};
+	constexpr static StaticUnicodeString __CNST_STR_3598{L"Failed in getting scheme info from region server",48};
 public:
-	static UnicodeStringWrapper* getCNST_STR_3597() throw();
+	static UnicodeStringWrapper* getCNST_STR_3598() throw();
 	constexpr static StaticUnicodeString __CNST_STR_504{L"tr",2};
 public:
 	static UnicodeStringWrapper* getCNST_STR_504() throw();
@@ -6057,9 +6060,9 @@ public:
 	constexpr static StaticUnicodeString __CNST_STR_2052{L"application/vnd.tcpdump.pcap",28};
 public:
 	static UnicodeStringWrapper* getCNST_STR_2052() throw();
-	constexpr static StaticUnicodeString __CNST_STR_3605{L"Get Region info command failed",30};
+	constexpr static StaticUnicodeString __CNST_STR_3606{L"Get Region info command failed",30};
 public:
-	static UnicodeStringWrapper* getCNST_STR_3605() throw();
+	static UnicodeStringWrapper* getCNST_STR_3606() throw();
 	constexpr static StaticUnicodeString __CNST_STR_1616{L"\163\164\141\164\151\143",6};
 public:
 	static UnicodeStringWrapper* getCNST_STR_1616() throw();
@@ -6324,9 +6327,9 @@ public:
 	constexpr static StaticUnicodeString __CNST_STR_2888{L"pfr",3};
 public:
 	static UnicodeStringWrapper* getCNST_STR_2888() throw();
-	constexpr static StaticUnicodeString __CNST_STR_3615{L"Node is not registered",22};
+	constexpr static StaticUnicodeString __CNST_STR_3616{L"Node is not registered",22};
 public:
-	static UnicodeStringWrapper* getCNST_STR_3615() throw();
+	static UnicodeStringWrapper* getCNST_STR_3616() throw();
 	constexpr static StaticUnicodeString __CNST_STR_2172{L"dcurl",5};
 public:
 	static UnicodeStringWrapper* getCNST_STR_2172() throw();
@@ -6630,9 +6633,9 @@ public:
 	constexpr static StaticUnicodeString __CNST_STR_1586{L"\76\76",2};
 public:
 	static UnicodeStringWrapper* getCNST_STR_1586() throw();
-	constexpr static StaticUnicodeString __CNST_STR_3588{L"StorageWorker",13};
+	constexpr static StaticUnicodeString __CNST_STR_3587{L"StorageWorker",13};
 public:
-	static UnicodeStringWrapper* getCNST_STR_3588() throw();
+	static UnicodeStringWrapper* getCNST_STR_3587() throw();
 	constexpr static StaticUnicodeString __CNST_STR_217{L"Sundanese",9};
 public:
 	static UnicodeStringWrapper* getCNST_STR_217() throw();
@@ -7476,9 +7479,9 @@ public:
 	constexpr static StaticUnicodeString __CNST_STR_2420{L"application/x-hdf",17};
 public:
 	static UnicodeStringWrapper* getCNST_STR_2420() throw();
-	constexpr static StaticUnicodeString __CNST_STR_3616{L"TableColumnMetadata is required",31};
+	constexpr static StaticUnicodeString __CNST_STR_3617{L"TableColumnMetadata is required",31};
 public:
-	static UnicodeStringWrapper* getCNST_STR_3616() throw();
+	static UnicodeStringWrapper* getCNST_STR_3617() throw();
 	constexpr static StaticUnicodeString __CNST_STR_1401{L"\"continue\"",10};
 public:
 	static UnicodeStringWrapper* getCNST_STR_1401() throw();
@@ -7755,9 +7758,9 @@ public:
 	constexpr static StaticUnicodeString __CNST_STR_1385{L"\"<\"",3};
 public:
 	static UnicodeStringWrapper* getCNST_STR_1385() throw();
-	constexpr static StaticUnicodeString __CNST_STR_3599{L"Failed in making scheme info",28};
+	constexpr static StaticUnicodeString __CNST_STR_3600{L"Failed in making scheme info",28};
 public:
-	static UnicodeStringWrapper* getCNST_STR_3599() throw();
+	static UnicodeStringWrapper* getCNST_STR_3600() throw();
 	constexpr static StaticUnicodeString __CNST_STR_1096{L"IAlinousVariable is required",28};
 public:
 	static UnicodeStringWrapper* getCNST_STR_1096() throw();
@@ -7776,9 +7779,9 @@ public:
 	constexpr static StaticUnicodeString __CNST_STR_3208{L"application/vnd.sun.xml.writer.global",37};
 public:
 	static UnicodeStringWrapper* getCNST_STR_3208() throw();
-	constexpr static StaticUnicodeString __CNST_STR_3611{L"IOException",11};
+	constexpr static StaticUnicodeString __CNST_STR_3612{L"IOException",11};
 public:
-	static UnicodeStringWrapper* getCNST_STR_3611() throw();
+	static UnicodeStringWrapper* getCNST_STR_3612() throw();
 	constexpr static StaticUnicodeString __CNST_STR_1621{L"\164\150\162\157\167",5};
 public:
 	static UnicodeStringWrapper* getCNST_STR_1621() throw();
@@ -8955,9 +8958,9 @@ public:
 	constexpr static StaticUnicodeString __CNST_STR_1595{L"\143\141\163\145",4};
 public:
 	static UnicodeStringWrapper* getCNST_STR_1595() throw();
-	constexpr static StaticUnicodeString __CNST_STR_3593{L"Socket factory is not activated.",32};
+	constexpr static StaticUnicodeString __CNST_STR_3594{L"Socket factory is not activated.",32};
 public:
-	static UnicodeStringWrapper* getCNST_STR_3593() throw();
+	static UnicodeStringWrapper* getCNST_STR_3594() throw();
 	constexpr static StaticUnicodeString __CNST_STR_1426{L"\"try\"",5};
 public:
 	static UnicodeStringWrapper* getCNST_STR_1426() throw();
@@ -9072,9 +9075,9 @@ public:
 	constexpr static StaticUnicodeString __CNST_STR_1482{L"\"COMMIT\"",8};
 public:
 	static UnicodeStringWrapper* getCNST_STR_1482() throw();
-	constexpr static StaticUnicodeString __CNST_STR_3613{L"Failed in creating table",24};
+	constexpr static StaticUnicodeString __CNST_STR_3614{L"Failed in creating table",24};
 public:
-	static UnicodeStringWrapper* getCNST_STR_3613() throw();
+	static UnicodeStringWrapper* getCNST_STR_3614() throw();
 	constexpr static StaticUnicodeString __CNST_STR_1345{L"<INTEGER_LITERAL>",17};
 public:
 	static UnicodeStringWrapper* getCNST_STR_1345() throw();
@@ -9495,9 +9498,9 @@ public:
 	constexpr static StaticUnicodeString __CNST_STR_2930{L"application/vnd.cups-ppd",24};
 public:
 	static UnicodeStringWrapper* getCNST_STR_2930() throw();
-	constexpr static StaticUnicodeString __CNST_STR_3618{L"Node info is broken",19};
+	constexpr static StaticUnicodeString __CNST_STR_3619{L"Node info is broken",19};
 public:
-	static UnicodeStringWrapper* getCNST_STR_3618() throw();
+	static UnicodeStringWrapper* getCNST_STR_3619() throw();
 	constexpr static StaticUnicodeString __CNST_STR_0{L"Invalid parameter",17};
 public:
 	static UnicodeStringWrapper* getCNST_STR_0() throw();
@@ -10269,9 +10272,9 @@ public:
 	constexpr static StaticUnicodeString __CNST_STR_677{L"America/Santiago",16};
 public:
 	static UnicodeStringWrapper* getCNST_STR_677() throw();
-	constexpr static StaticUnicodeString __CNST_STR_3591{L"TableStorage",12};
+	constexpr static StaticUnicodeString __CNST_STR_3590{L"TableStorage",12};
 public:
-	static UnicodeStringWrapper* getCNST_STR_3591() throw();
+	static UnicodeStringWrapper* getCNST_STR_3590() throw();
 	constexpr static StaticUnicodeString __CNST_STR_3181{L"application/vnd.sun.xml.writer.template",39};
 public:
 	static UnicodeStringWrapper* getCNST_STR_3181() throw();
@@ -10326,9 +10329,9 @@ public:
 	constexpr static StaticUnicodeString __CNST_STR_1656{L"Not Supported",13};
 public:
 	static UnicodeStringWrapper* getCNST_STR_1656() throw();
-	constexpr static StaticUnicodeString __CNST_STR_3610{L"UnknownHostException",20};
+	constexpr static StaticUnicodeString __CNST_STR_3611{L"UnknownHostException",20};
 public:
-	static UnicodeStringWrapper* getCNST_STR_3610() throw();
+	static UnicodeStringWrapper* getCNST_STR_3611() throw();
 	constexpr static StaticUnicodeString __CNST_STR_3195{L"svg",3};
 public:
 	static UnicodeStringWrapper* getCNST_STR_3195() throw();
@@ -10638,9 +10641,9 @@ public:
 	constexpr static StaticUnicodeString __CNST_STR_2560{L"application/vnd.llamagraphics.life-balance.desktop",50};
 public:
 	static UnicodeStringWrapper* getCNST_STR_2560() throw();
-	constexpr static StaticUnicodeString __CNST_STR_3600{L"Failed in creating table fo from region server",46};
+	constexpr static StaticUnicodeString __CNST_STR_3601{L"Failed in creating table fo from region server",46};
 public:
-	static UnicodeStringWrapper* getCNST_STR_3600() throw();
+	static UnicodeStringWrapper* getCNST_STR_3601() throw();
 	constexpr static StaticUnicodeString __CNST_STR_1453{L"\"OUTER\"",7};
 public:
 	static UnicodeStringWrapper* getCNST_STR_1453() throw();

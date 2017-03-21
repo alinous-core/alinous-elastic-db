@@ -1,10 +1,10 @@
-#ifndef ALINOUS_REMOTE_DB_SERVER_STORAGETRANSACTIONMANAGER_H_
-#define ALINOUS_REMOTE_DB_SERVER_STORAGETRANSACTIONMANAGER_H_
+#ifndef ALINOUS_REMOTE_DB_SERVER_TRX_STORAGETRANSACTIONMANAGER_H_
+#define ALINOUS_REMOTE_DB_SERVER_TRX_STORAGETRANSACTIONMANAGER_H_
 namespace alinous {namespace remote {namespace db {namespace server {
 class RemoteTableStorageServer;}}}}
 
-namespace alinous {namespace remote {namespace db {namespace server {
-class StorageTransaction;}}}}
+namespace alinous {namespace remote {namespace db {namespace server {namespace trx {
+class StorageTransaction;}}}}}
 
 namespace alinous {namespace db {namespace trx {
 class DbVersionContext;}}}
@@ -29,7 +29,7 @@ namespace alinous {
 class ThreadContext;
 }
 
-namespace alinous {namespace remote {namespace db {namespace server {
+namespace alinous {namespace remote {namespace db {namespace server {namespace trx {
 
 using namespace ::alinous;
 using namespace ::java::lang;
@@ -38,6 +38,7 @@ using ::java::util::HashMap;
 using ::java::util::Map;
 using ::alinous::db::trx::DbVersionContext;
 using ::alinous::lock::LockObject;
+using ::alinous::remote::db::server::RemoteTableStorageServer;
 
 
 
@@ -65,6 +66,6 @@ public:
 	static void __cleanUp(ThreadContext* ctx);
 };
 
-}}}}
+}}}}}
 
-#endif /* end of ALINOUS_REMOTE_DB_SERVER_STORAGETRANSACTIONMANAGER_H_ */
+#endif /* end of ALINOUS_REMOTE_DB_SERVER_TRX_STORAGETRANSACTIONMANAGER_H_ */
