@@ -462,9 +462,9 @@ public:
 	constexpr static StaticUnicodeString __CNST_STR_1274{L"SubStackFrame",13};
 public:
 	static UnicodeStringWrapper* getCNST_STR_1274() throw();
-	constexpr static StaticUnicodeString __CNST_STR_3591{L"Already exist",13};
+	constexpr static StaticUnicodeString __CNST_STR_3592{L"Already exist",13};
 public:
-	static UnicodeStringWrapper* getCNST_STR_3591() throw();
+	static UnicodeStringWrapper* getCNST_STR_3592() throw();
 	constexpr static StaticUnicodeString __CNST_STR_604{L"Europe/Moscow",13};
 public:
 	static UnicodeStringWrapper* getCNST_STR_604() throw();
@@ -1803,9 +1803,9 @@ public:
 	constexpr static StaticUnicodeString __CNST_STR_1341{L"<NOTASCII>",10};
 public:
 	static UnicodeStringWrapper* getCNST_STR_1341() throw();
-	constexpr static StaticUnicodeString __CNST_STR_3592{L"strx_work_dir/",14};
+	constexpr static StaticUnicodeString __CNST_STR_3591{L"strx_work_dir/",14};
 public:
-	static UnicodeStringWrapper* getCNST_STR_3592() throw();
+	static UnicodeStringWrapper* getCNST_STR_3591() throw();
 	constexpr static StaticUnicodeString __CNST_STR_2613{L"mag",3};
 public:
 	static UnicodeStringWrapper* getCNST_STR_2613() throw();

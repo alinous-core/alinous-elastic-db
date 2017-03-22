@@ -846,6 +846,7 @@ set(srcjava
 	"src_java/alinous.remote.db.server.trx/StorageTransactionManager.cpp"
 	"src_java/alinous.remote.db.server.trx/SerializableStorageTransaction.cpp"
 	"src_java/alinous.remote.db.server.trx/StorageTransactionFactory.cpp"
+	"src_java/alinous.remote.db.server.trx/UniqueChecker.cpp"
 	"src_java/alinous.remote.db.server.trx/ReadCommittedStorageTransaction.cpp"
 	"src_java/alinous.system.functions/NativeFunctionManager.cpp"
 	"src_java/alinous.system.functions/IAlinousSystem.cpp"

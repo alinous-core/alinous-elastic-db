@@ -453,13 +453,6 @@ template class alinous::MemoryUtils<alinous::ArrayObject<alinous::IArrayObject<:
 template class alinous::MemoryUtils<alinous::ArrayObject<::alinous::remote::region::client::command::data::ClientNetworkRecord>>;
 template class alinous::MemoryUtils<alinous::IArrayObject<alinous::ArrayObject<::alinous::remote::region::client::command::data::ClientNetworkRecord>>>;
 template class alinous::MemoryUtils<alinous::ArrayObject<alinous::ArrayObject<::alinous::remote::region::client::command::data::ClientNetworkRecord>>>;
-template class alinous::MemoryUtils<::alinous::remote::region::server::schema::strategy::UniqueOpValue>;
-template class alinous::MemoryUtils<alinous::IArrayObject<::alinous::remote::region::server::schema::strategy::UniqueOpValue>>;
-template class alinous::MemoryUtils<alinous::IArrayObject<alinous::IArrayObject<::alinous::remote::region::server::schema::strategy::UniqueOpValue>>>;
-template class alinous::MemoryUtils<alinous::ArrayObject<alinous::IArrayObject<::alinous::remote::region::server::schema::strategy::UniqueOpValue>>>;
-template class alinous::MemoryUtils<alinous::ArrayObject<::alinous::remote::region::server::schema::strategy::UniqueOpValue>>;
-template class alinous::MemoryUtils<alinous::IArrayObject<alinous::ArrayObject<::alinous::remote::region::server::schema::strategy::UniqueOpValue>>>;
-template class alinous::MemoryUtils<alinous::ArrayObject<alinous::ArrayObject<::alinous::remote::region::server::schema::strategy::UniqueOpValue>>>;
 template class alinous::MemoryUtils<::alinous::lock::unique::UniqueExclusiveLock>;
 template class alinous::MemoryUtils<alinous::IArrayObject<::alinous::lock::unique::UniqueExclusiveLock>>;
 template class alinous::MemoryUtils<alinous::IArrayObject<alinous::IArrayObject<::alinous::lock::unique::UniqueExclusiveLock>>>;
@@ -467,6 +460,13 @@ template class alinous::MemoryUtils<alinous::ArrayObject<alinous::IArrayObject<:
 template class alinous::MemoryUtils<alinous::ArrayObject<::alinous::lock::unique::UniqueExclusiveLock>>;
 template class alinous::MemoryUtils<alinous::IArrayObject<alinous::ArrayObject<::alinous::lock::unique::UniqueExclusiveLock>>>;
 template class alinous::MemoryUtils<alinous::ArrayObject<alinous::ArrayObject<::alinous::lock::unique::UniqueExclusiveLock>>>;
+template class alinous::MemoryUtils<::alinous::remote::region::server::schema::strategy::UniqueOpValue>;
+template class alinous::MemoryUtils<alinous::IArrayObject<::alinous::remote::region::server::schema::strategy::UniqueOpValue>>;
+template class alinous::MemoryUtils<alinous::IArrayObject<alinous::IArrayObject<::alinous::remote::region::server::schema::strategy::UniqueOpValue>>>;
+template class alinous::MemoryUtils<alinous::ArrayObject<alinous::IArrayObject<::alinous::remote::region::server::schema::strategy::UniqueOpValue>>>;
+template class alinous::MemoryUtils<alinous::ArrayObject<::alinous::remote::region::server::schema::strategy::UniqueOpValue>>;
+template class alinous::MemoryUtils<alinous::IArrayObject<alinous::ArrayObject<::alinous::remote::region::server::schema::strategy::UniqueOpValue>>>;
+template class alinous::MemoryUtils<alinous::ArrayObject<alinous::ArrayObject<::alinous::remote::region::server::schema::strategy::UniqueOpValue>>>;
 template class alinous::MemoryUtils<::alinous::remote::region::server::schema::NodeTableReference>;
 template class alinous::MemoryUtils<alinous::IArrayObject<::alinous::remote::region::server::schema::NodeTableReference>>;
 template class alinous::MemoryUtils<alinous::IArrayObject<alinous::IArrayObject<::alinous::remote::region::server::schema::NodeTableReference>>>;

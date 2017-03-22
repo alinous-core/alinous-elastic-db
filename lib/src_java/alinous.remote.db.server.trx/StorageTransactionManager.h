@@ -1,5 +1,8 @@
 #ifndef ALINOUS_REMOTE_DB_SERVER_TRX_STORAGETRANSACTIONMANAGER_H_
 #define ALINOUS_REMOTE_DB_SERVER_TRX_STORAGETRANSACTIONMANAGER_H_
+namespace alinous {namespace remote {namespace db {namespace server {namespace trx {
+class StorageTransactionFactory;}}}}}
+
 namespace alinous {namespace remote {namespace db {namespace server {
 class RemoteTableStorageServer;}}}}
 
@@ -59,6 +62,8 @@ public:
 	void dispose(ThreadContext* ctx) throw() ;
 	StorageTransaction* getStorageTransaction(int isolationLevel, DbVersionContext* vctx, ThreadContext* ctx) throw() ;
 	void finishTransaction(long long strxId, ThreadContext* ctx) throw() ;
+public:
+	static void includes(StorageTransactionFactory* arg0, ThreadContext* ctx) throw() ;
 public:
 	static bool __init_done;
 	static bool __init_static_variables();

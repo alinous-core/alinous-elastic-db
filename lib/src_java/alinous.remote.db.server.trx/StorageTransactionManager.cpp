@@ -6,6 +6,7 @@
 #include "alinous.lock/LockObject.h"
 #include "alinous.remote.db.server.trx/StorageTransaction.h"
 #include "alinous.remote.db.server/RemoteTableStorageServer.h"
+#include "alinous.remote.db.server.trx/StorageTransactionFactory.h"
 #include "java.lang/Number.h"
 #include "java.lang/Comparable.h"
 #include "java.lang/Long.h"
@@ -87,6 +88,9 @@ void StorageTransactionManager::finishTransaction(long long strxId, ThreadContex
 	}
 	strx->dispose(ctx);
 	this->transactions->remove(id, ctx);
+}
+void StorageTransactionManager::includes(StorageTransactionFactory* arg0, ThreadContext* ctx) throw() 
+{
 }
 void StorageTransactionManager::__cleanUp(ThreadContext* ctx){
 }

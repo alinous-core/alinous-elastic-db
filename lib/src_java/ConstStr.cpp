@@ -764,10 +764,10 @@ UnicodeStringWrapper* ConstStr::getCNST_STR_1274() throw() {
 	static UnicodeStringWrapper CNST_STR_1274{__CNST_STR_1274};
 	return &CNST_STR_1274;
 };
-constexpr StaticUnicodeString ConstStr::__CNST_STR_3591;
-UnicodeStringWrapper* ConstStr::getCNST_STR_3591() throw() {
-	static UnicodeStringWrapper CNST_STR_3591{__CNST_STR_3591};
-	return &CNST_STR_3591;
+constexpr StaticUnicodeString ConstStr::__CNST_STR_3592;
+UnicodeStringWrapper* ConstStr::getCNST_STR_3592() throw() {
+	static UnicodeStringWrapper CNST_STR_3592{__CNST_STR_3592};
+	return &CNST_STR_3592;
 };
 constexpr StaticUnicodeString ConstStr::__CNST_STR_604;
 UnicodeStringWrapper* ConstStr::getCNST_STR_604() throw() {
@@ -2999,10 +2999,10 @@ UnicodeStringWrapper* ConstStr::getCNST_STR_1341() throw() {
 	static UnicodeStringWrapper CNST_STR_1341{__CNST_STR_1341};
 	return &CNST_STR_1341;
 };
-constexpr StaticUnicodeString ConstStr::__CNST_STR_3592;
-UnicodeStringWrapper* ConstStr::getCNST_STR_3592() throw() {
-	static UnicodeStringWrapper CNST_STR_3592{__CNST_STR_3592};
-	return &CNST_STR_3592;
+constexpr StaticUnicodeString ConstStr::__CNST_STR_3591;
+UnicodeStringWrapper* ConstStr::getCNST_STR_3591() throw() {
+	static UnicodeStringWrapper CNST_STR_3591{__CNST_STR_3591};
+	return &CNST_STR_3591;
 };
 constexpr StaticUnicodeString ConstStr::__CNST_STR_2613;
 UnicodeStringWrapper* ConstStr::getCNST_STR_2613() throw() {
