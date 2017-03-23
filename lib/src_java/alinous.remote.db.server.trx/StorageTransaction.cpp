@@ -88,6 +88,7 @@ void StorageTransaction::__releaseRegerences(bool prepare, ThreadContext* ctx) t
 void StorageTransaction::prepareInsert(IDatabaseTable* table, List<UniqueCheckOperation>* uniqueCheckOps, List<ClientNetworkRecord>* records, ThreadContext* ctx)
 {
 	this->uniqueChecker->checkUnique(table, uniqueCheckOps, ctx);
+	this->prepareManager->addInsert(table, records, ctx);
 }
 void StorageTransaction::addUniqueExclusiveLock(UniqueExclusiveLock* lock, ThreadContext* ctx) throw() 
 {
@@ -136,6 +137,12 @@ void StorageTransaction::dispose(ThreadContext* ctx) throw()
 RemoteTableStorageServer* StorageTransaction::getServer(ThreadContext* ctx) throw() 
 {
 	return server;
+}
+StorageTransaction* StorageTransaction::init(ThreadContext* ctx) throw() 
+{
+	String* tmpDir = getTmpDir(ctx);
+	__GC_MV(this, &(this->prepareManager), (new(ctx) PrepareStorageManager(tmpDir, this->vctx->getTrxId(ctx), ctx))->init(ctx), PrepareStorageManager);
+	return this;
 }
 void StorageTransaction::__cleanUp(ThreadContext* ctx){
 }

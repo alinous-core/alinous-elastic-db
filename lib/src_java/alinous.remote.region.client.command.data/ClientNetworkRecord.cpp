@@ -75,7 +75,7 @@ bool ClientNetworkRecord::__init_static_variables(){
 	delete ctx;
 	return true;
 }
- ClientNetworkRecord::ClientNetworkRecord(long long oid, int numColumn, ThreadContext* ctx) throw()  : IObject(ctx), IDatabaseRecord(ctx), ICommandData(ctx), oid(0), lastUpdateCommitId(0), insertedCommitId(0), values(GCUtils<ArrayList<VariantValue> >::ins(this, (new(ctx) ArrayList<VariantValue>(ctx)), ctx, __FILEW__, __LINE__, L""))
+ ClientNetworkRecord::ClientNetworkRecord(long long oid, int numColumn, ThreadContext* ctx) throw()  : IObject(ctx), IDatabaseRecord(ctx), ICommandData(ctx), oid(0), lastUpdateCommitId(0), insertedCommitId(0), deletedCommitId(0), values(GCUtils<ArrayList<VariantValue> >::ins(this, (new(ctx) ArrayList<VariantValue>(ctx)), ctx, __FILEW__, __LINE__, L""))
 {
 	this->oid = oid;
 	for(int i = 0; i != numColumn; ++i)
@@ -91,7 +91,7 @@ void ClientNetworkRecord::__construct_impl(long long oid, int numColumn, ThreadC
 		this->values->add((new(ctx) VariantValue(ctx)), ctx);
 	}
 }
- ClientNetworkRecord::ClientNetworkRecord(IDatabaseRecord* databaseRecord, ThreadContext* ctx) : IObject(ctx), IDatabaseRecord(ctx), ICommandData(ctx), oid(0), lastUpdateCommitId(0), insertedCommitId(0), values(GCUtils<ArrayList<VariantValue> >::ins(this, (new(ctx) ArrayList<VariantValue>(ctx)), ctx, __FILEW__, __LINE__, L""))
+ ClientNetworkRecord::ClientNetworkRecord(IDatabaseRecord* databaseRecord, ThreadContext* ctx) : IObject(ctx), IDatabaseRecord(ctx), ICommandData(ctx), oid(0), lastUpdateCommitId(0), insertedCommitId(0), deletedCommitId(0), values(GCUtils<ArrayList<VariantValue> >::ins(this, (new(ctx) ArrayList<VariantValue>(ctx)), ctx, __FILEW__, __LINE__, L""))
 {
 	this->oid = databaseRecord->getOid(ctx);
 	this->lastUpdateCommitId = databaseRecord->getLastUpdateCommitId(ctx);
@@ -117,7 +117,7 @@ void ClientNetworkRecord::__construct_impl(IDatabaseRecord* databaseRecord, Thre
 		this->values->add(static_cast<VariantValue*>(vv->copy(ctx)), ctx);
 	}
 }
- ClientNetworkRecord::ClientNetworkRecord(ThreadContext* ctx) throw()  : IObject(ctx), IDatabaseRecord(ctx), ICommandData(ctx), oid(0), lastUpdateCommitId(0), insertedCommitId(0), values(GCUtils<ArrayList<VariantValue> >::ins(this, (new(ctx) ArrayList<VariantValue>(ctx)), ctx, __FILEW__, __LINE__, L""))
+ ClientNetworkRecord::ClientNetworkRecord(ThreadContext* ctx) throw()  : IObject(ctx), IDatabaseRecord(ctx), ICommandData(ctx), oid(0), lastUpdateCommitId(0), insertedCommitId(0), deletedCommitId(0), values(GCUtils<ArrayList<VariantValue> >::ins(this, (new(ctx) ArrayList<VariantValue>(ctx)), ctx, __FILEW__, __LINE__, L""))
 {
 }
 void ClientNetworkRecord::__construct_impl(ThreadContext* ctx) throw() 
@@ -191,7 +191,7 @@ long long ClientNetworkRecord::getLastUpdateCommitId(ThreadContext* ctx) throw()
 }
 long long ClientNetworkRecord::getDeletedCommitId(ThreadContext* ctx) throw() 
 {
-	return 0;
+	return this->deletedCommitId;
 }
 ArrayList<VariantValue>* ClientNetworkRecord::getValues(ThreadContext* ctx) throw() 
 {

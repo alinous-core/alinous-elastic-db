@@ -65,8 +65,8 @@
 #include "alinous.db.table/IDatabaseTable.h"
 #include "alinous.lock.unique/UniqueExclusiveLock.h"
 #include "alinous.lock.unique/UniqueExclusiveLockManager.h"
-#include "alinous.remote.db.server.commit/PrepareStorageManager.h"
 #include "alinous.remote.region.client.command.data/ClientNetworkRecord.h"
+#include "alinous.remote.db.server.commit/PrepareStorageManager.h"
 #include "alinous.remote.region.server.schema.strategy/UniqueCheckOperation.h"
 #include "alinous.remote.db.server.trx/UniqueChecker.h"
 #include "alinous.remote.db.server.trx/StorageTransaction.h"
@@ -116,11 +116,11 @@ StorageTransaction* StorageTransactionFactory::createTrx(int isolationLevel, DbV
 	StorageTransaction* trx = nullptr;
 	if(isolationLevel == IDatabaseDriver::SERIALIZABLE)
 	{
-		trx = (new(ctx) SerializableStorageTransaction(isolationLevel, vctx, datadir, server, ctx));
+		trx = (new(ctx) SerializableStorageTransaction(isolationLevel, vctx, datadir, server, ctx))->init(ctx);
 	}
 		else 
 	{
-		trx = (new(ctx) ReadCommittedStorageTransaction(isolationLevel, vctx, datadir, server, ctx));
+		trx = (new(ctx) ReadCommittedStorageTransaction(isolationLevel, vctx, datadir, server, ctx))->init(ctx);
 	}
 	return trx;
 }

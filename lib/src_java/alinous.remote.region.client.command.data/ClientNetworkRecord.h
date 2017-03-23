@@ -84,6 +84,7 @@ private:
 	long long oid;
 	long long lastUpdateCommitId;
 	long long insertedCommitId;
+	long long deletedCommitId;
 	ArrayList<VariantValue>* values;
 public:
 	void appendToEntry(FileStorageEntryBuilder* builder, ThreadContext* ctx) final;

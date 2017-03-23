@@ -1,6 +1,19 @@
 #include "include/global.h"
 
 
+#include "alinous.btree/BTreeException.h"
+#include "alinous.compile/AbstractSrcElement.h"
+#include "alinous.system/AlinousException.h"
+#include "alinous.runtime/ExecutionException.h"
+#include "alinous.runtime.dom/VariableException.h"
+#include "alinous.buffer.storage/FileStorageEntryBuilder.h"
+#include "alinous.btree/IValueFetcher.h"
+#include "alinous.btree/IBTreeValue.h"
+#include "alinous.db.table/IDatabaseRecord.h"
+#include "alinous.db.table/IDatabaseTable.h"
+#include "alinous.remote.socket/ICommandData.h"
+#include "alinous.remote.region.client.command.data/ClientNetworkRecord.h"
+#include "alinous.remote.db.server.commit/InsertStore.h"
 #include "alinous.remote.db.server.commit/PrepareStorageManager.h"
 
 namespace alinous {namespace remote {namespace db {namespace server {namespace commit {
@@ -20,7 +33,7 @@ bool PrepareStorageManager::__init_static_variables(){
 	delete ctx;
 	return true;
 }
- PrepareStorageManager::PrepareStorageManager(String* tmpDir, long long strxId, ThreadContext* ctx) throw()  : IObject(ctx), tmpDir(nullptr), strxId(0), filePath(nullptr)
+ PrepareStorageManager::PrepareStorageManager(String* tmpDir, long long strxId, ThreadContext* ctx) throw()  : IObject(ctx), tmpDir(nullptr), strxId(0), filePath(nullptr), insertStore(nullptr)
 {
 	__GC_MV(this, &(this->tmpDir), tmpDir, String);
 }
@@ -42,9 +55,21 @@ void PrepareStorageManager::__releaseRegerences(bool prepare, ThreadContext* ctx
 	tmpDir = nullptr;
 	__e_obj1.add(this->filePath, this);
 	filePath = nullptr;
+	__e_obj1.add(this->insertStore, this);
+	insertStore = nullptr;
 	if(!prepare){
 		return;
 	}
+}
+PrepareStorageManager* PrepareStorageManager::init(ThreadContext* ctx) throw() 
+{
+	String* filePath = getFilePath(ctx);
+	__GC_MV(this, &(this->insertStore), (new(ctx) InsertStore(filePath, ctx))->init(ctx), InsertStore);
+	return this;
+}
+void PrepareStorageManager::addInsert(IDatabaseTable* table, List<ClientNetworkRecord>* records, ThreadContext* ctx)
+{
+	this->insertStore->add(table, records, ctx);
 }
 String* PrepareStorageManager::getFilePath(ThreadContext* ctx) throw() 
 {

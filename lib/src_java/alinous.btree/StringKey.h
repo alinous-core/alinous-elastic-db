@@ -46,7 +46,6 @@ public:
 	int size(ThreadContext* ctx) throw()  final;
 	int compareTo(IBTreeKey* another, ThreadContext* ctx) throw() ;
 	bool equals(IObject* obj, ThreadContext* ctx) throw() ;
-	bool equals(StringKey* obj, ThreadContext* ctx) throw() ;
 public:
 	static bool __init_done;
 	static bool __init_static_variables();

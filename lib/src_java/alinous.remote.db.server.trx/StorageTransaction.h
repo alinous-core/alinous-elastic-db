@@ -9,6 +9,12 @@ class RemoteTableStorageServer;}}}}
 namespace alinous {namespace remote {namespace db {namespace server {namespace trx {
 class UniqueChecker;}}}}}
 
+namespace alinous {namespace remote {namespace db {namespace server {namespace trx {
+class StorageTransaction;}}}}}
+
+namespace alinous {namespace remote {namespace db {namespace server {namespace commit {
+class PrepareStorageManager;}}}}}
+
 namespace alinous {namespace db {namespace table {
 class IDatabaseRecord;}}}
 
@@ -32,9 +38,6 @@ class StringBuilder;}}
 
 namespace alinous {namespace lock {namespace unique {
 class UniqueExclusiveLockManager;}}}
-
-namespace alinous {namespace remote {namespace db {namespace server {namespace commit {
-class PrepareStorageManager;}}}}}
 
 namespace java {namespace io {
 class IOException;}}
@@ -103,6 +106,7 @@ public:
 	DbVersionContext* getVctx(ThreadContext* ctx) throw() ;
 	void dispose(ThreadContext* ctx) throw() ;
 	RemoteTableStorageServer* getServer(ThreadContext* ctx) throw() ;
+	StorageTransaction* init(ThreadContext* ctx) throw() ;
 public:
 	static bool __init_done;
 	static bool __init_static_variables();

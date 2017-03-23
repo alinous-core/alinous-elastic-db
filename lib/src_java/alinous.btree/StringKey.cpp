@@ -113,11 +113,8 @@ int StringKey::compareTo(IBTreeKey* another, ThreadContext* ctx) throw()
 }
 bool StringKey::equals(IObject* obj, ThreadContext* ctx) throw() 
 {
-	return this->value->equals(obj, ctx);
-}
-bool StringKey::equals(StringKey* obj, ThreadContext* ctx) throw() 
-{
-	return this->value->equals(obj->value, ctx);
+	StringKey* kobj = dynamic_cast<StringKey*>(obj);
+	return this->value->equals(kobj->value, ctx);
 }
 void StringKey::__cleanUp(ThreadContext* ctx){
 }
