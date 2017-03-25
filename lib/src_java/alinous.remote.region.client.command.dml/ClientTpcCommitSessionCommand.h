@@ -6,6 +6,12 @@ class NodeRegionServer;}}}}
 namespace java {namespace io {
 class BufferedOutputStream;}}
 
+namespace alinous {namespace system {
+class AlinousCore;}}
+
+namespace alinous {namespace db {
+class AlinousDbException;}}
+
 namespace java {namespace io {
 class OutputStream;}}
 
@@ -15,6 +21,9 @@ class NetworkBinaryBuffer;}}}
 namespace java {namespace io {
 class InputStream;}}
 
+namespace alinous {namespace db {namespace trx {
+class DbVersionContext;}}}
+
 namespace alinous {namespace remote {namespace region {namespace client {namespace command {
 class AbstractNodeRegionCommand;}}}}}
 
@@ -23,6 +32,9 @@ class IOException;}}
 
 namespace alinous {namespace runtime {namespace dom {
 class VariableException;}}}
+
+namespace alinous {namespace system {
+class AlinousException;}}
 
 namespace alinous {
 class ThreadContext;
@@ -37,10 +49,14 @@ using ::java::io::BufferedOutputStream;
 using ::java::io::IOException;
 using ::java::io::InputStream;
 using ::java::io::OutputStream;
+using ::alinous::db::AlinousDbException;
+using ::alinous::db::trx::DbVersionContext;
 using ::alinous::remote::region::client::command::AbstractNodeRegionCommand;
 using ::alinous::remote::region::server::NodeRegionServer;
 using ::alinous::remote::socket::NetworkBinaryBuffer;
 using ::alinous::runtime::dom::VariableException;
+using ::alinous::system::AlinousCore;
+using ::alinous::system::AlinousException;
 
 
 
@@ -54,12 +70,11 @@ public:
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 private:
 	long long commitId;
-	long long trxId;
+	DbVersionContext* vctx;
 public:
 	void executeOnServer(NodeRegionServer* nodeRegionServer, BufferedOutputStream* outStream, ThreadContext* ctx) final;
 	void readFromStream(InputStream* stream, int remain, ThreadContext* ctx) final;
-	long long getTrxId(ThreadContext* ctx) throw() ;
-	void setTrxId(long long trxId, ThreadContext* ctx) throw() ;
+	void setVctx(DbVersionContext* vctx, ThreadContext* ctx) throw() ;
 	long long getCommitId(ThreadContext* ctx) throw() ;
 	void setCommitId(long long commitId, ThreadContext* ctx) throw() ;
 	void writeByteStream(OutputStream* outStream, ThreadContext* ctx) final;

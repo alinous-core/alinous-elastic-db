@@ -490,6 +490,7 @@
 #include "alinous.remote.region.server.schema.strategy/NodeListBinarySearcher.h"
 #include "alinous.remote.region.server.schema.strategy/InsertNodeAccessStrategy.h"
 #include "alinous.remote.region.server.schema.strategy/InsertTableStrategy.h"
+#include "alinous.remote.region.server.tpc/CommitClusterNodeListner.h"
 #include "alinous.remote.region.server.tpc/RegionInsertExecutor.h"
 #include "alinous.remote.region.server.tpc/RegionTpcExecutorPool.h"
 #include "alinous.system.config.remote/RegionsServer.h"
@@ -1884,6 +1885,7 @@ inline static void __cleanUpStatics(alinous::ThreadContext* ctx){
 	alinous::remote::region::server::schema::strategy::NodeListBinarySearcher::__cleanUp(ctx);
 	alinous::remote::region::server::lock::RegionTableLockManager::__cleanUp(ctx);
 	alinous::remote::region::server::tpc::RegionInsertExecutor::__cleanUp(ctx);
+	alinous::remote::region::server::tpc::CommitClusterNodeListner::__cleanUp(ctx);
 	alinous::remote::region::server::tpc::RegionTpcExecutorPool::__cleanUp(ctx);
 	java::io::File::__cleanUp(ctx);
 	java::nio::charset::CoderResult::__cleanUp(ctx);

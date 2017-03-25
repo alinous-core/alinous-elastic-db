@@ -329,7 +329,7 @@ void DatabaseTableClient::finishCommitSession(DbTransaction* trx, long long newC
 	ClientTpcCommitSessionCommand* cmd = (new(ctx) ClientTpcCommitSessionCommand(ctx));
 	cmd->setCommitId(newCommitId, ctx);
 	DbVersionContext* vctx = trx->getVersionContext(ctx);
-	cmd->setTrxId(vctx->getTrxId(ctx), ctx);
+	cmd->setVctx(vctx, ctx);
 	ISocketConnection* con = nullptr;
 	{
 		std::function<void(void)> finallyLm2= [&, this]()

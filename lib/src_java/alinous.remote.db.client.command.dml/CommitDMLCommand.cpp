@@ -7,8 +7,10 @@
 #include "alinous.system/AlinousException.h"
 #include "alinous.runtime/ExecutionException.h"
 #include "alinous.runtime.dom/VariableException.h"
-#include "alinous.remote.db.server/RemoteTableStorageServer.h"
 #include "alinous.remote.socket/NetworkBinaryBuffer.h"
+#include "alinous.remote.socket/ICommandData.h"
+#include "alinous.db.trx/DbVersionContext.h"
+#include "alinous.remote.db.server/RemoteTableStorageServer.h"
 #include "alinous.remote.db.client.command/RemoteStorageCommandReader.h"
 #include "alinous.remote.db.client.command/AbstractRemoteStorageCommand.h"
 #include "alinous.remote.db.client.command.dml/CommitDMLCommand.h"
@@ -30,7 +32,7 @@ bool CommitDMLCommand::__init_static_variables(){
 	delete ctx;
 	return true;
 }
- CommitDMLCommand::CommitDMLCommand(ThreadContext* ctx) throw()  : IObject(ctx), AbstractRemoteStorageCommand(ctx)
+ CommitDMLCommand::CommitDMLCommand(ThreadContext* ctx) throw()  : IObject(ctx), AbstractRemoteStorageCommand(ctx), newCommitId(0), vctx(nullptr)
 {
 	this->type = AbstractRemoteStorageCommand::TYPE_COMMIT_DML;
 }
@@ -47,6 +49,9 @@ void CommitDMLCommand::__construct_impl(ThreadContext* ctx) throw()
 }
 void CommitDMLCommand::__releaseRegerences(bool prepare, ThreadContext* ctx) throw() 
 {
+	ObjectEraser __e_obj1(ctx, __FILEW__, __LINE__, L"CommitDMLCommand", L"~CommitDMLCommand");
+	__e_obj1.add(this->vctx, this);
+	vctx = nullptr;
 	if(!prepare){
 		return;
 	}
@@ -58,6 +63,22 @@ void CommitDMLCommand::executeOnServer(RemoteTableStorageServer* tableStorageSer
 }
 void CommitDMLCommand::readFromStream(InputStream* stream, int remain, ThreadContext* ctx)
 {
+}
+long long CommitDMLCommand::getNewCommitId(ThreadContext* ctx) throw() 
+{
+	return newCommitId;
+}
+void CommitDMLCommand::setNewCommitId(long long newCommitId, ThreadContext* ctx) throw() 
+{
+	this->newCommitId = newCommitId;
+}
+DbVersionContext* CommitDMLCommand::getVctx(ThreadContext* ctx) throw() 
+{
+	return vctx;
+}
+void CommitDMLCommand::setVctx(DbVersionContext* vctx, ThreadContext* ctx) throw() 
+{
+	__GC_MV(this, &(this->vctx), vctx, DbVersionContext);
 }
 void CommitDMLCommand::writeByteStream(OutputStream* outStream, ThreadContext* ctx)
 {

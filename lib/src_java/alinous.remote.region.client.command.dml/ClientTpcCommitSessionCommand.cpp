@@ -5,10 +5,14 @@
 #include "java.io/BufferedOutputStream.h"
 #include "alinous.compile/AbstractSrcElement.h"
 #include "alinous.system/AlinousException.h"
-#include "alinous.remote.region.server/NodeRegionServer.h"
-#include "alinous.remote.socket/NetworkBinaryBuffer.h"
+#include "alinous.db/AlinousDbException.h"
 #include "alinous.runtime/ExecutionException.h"
 #include "alinous.runtime.dom/VariableException.h"
+#include "alinous.remote.socket/NetworkBinaryBuffer.h"
+#include "alinous.remote.socket/ICommandData.h"
+#include "alinous.db.trx/DbVersionContext.h"
+#include "alinous.system/AlinousCore.h"
+#include "alinous.remote.region.server/NodeRegionServer.h"
 #include "alinous.remote.region.client.command/AbstractNodeRegionCommand.h"
 #include "alinous.remote.region.client.command.dml/ClientTpcCommitSessionCommand.h"
 
@@ -29,7 +33,7 @@ bool ClientTpcCommitSessionCommand::__init_static_variables(){
 	delete ctx;
 	return true;
 }
- ClientTpcCommitSessionCommand::ClientTpcCommitSessionCommand(ThreadContext* ctx) throw()  : IObject(ctx), AbstractNodeRegionCommand(ctx), commitId(0), trxId(0)
+ ClientTpcCommitSessionCommand::ClientTpcCommitSessionCommand(ThreadContext* ctx) throw()  : IObject(ctx), AbstractNodeRegionCommand(ctx), commitId(0), vctx(nullptr)
 {
 	this->type = AbstractNodeRegionCommand::TYPE_TPC_COMMIT_SESSION;
 }
@@ -47,6 +51,8 @@ void ClientTpcCommitSessionCommand::__construct_impl(ThreadContext* ctx) throw()
 void ClientTpcCommitSessionCommand::__releaseRegerences(bool prepare, ThreadContext* ctx) throw() 
 {
 	ObjectEraser __e_obj1(ctx, __FILEW__, __LINE__, L"ClientTpcCommitSessionCommand", L"~ClientTpcCommitSessionCommand");
+	__e_obj1.add(this->vctx, this);
+	vctx = nullptr;
 	if(!prepare){
 		return;
 	}
@@ -54,7 +60,19 @@ void ClientTpcCommitSessionCommand::__releaseRegerences(bool prepare, ThreadCont
 }
 void ClientTpcCommitSessionCommand::executeOnServer(NodeRegionServer* nodeRegionServer, BufferedOutputStream* outStream, ThreadContext* ctx)
 {
-	nodeRegionServer->commitUpdateData(this->trxId, ctx);
+	{
+		try
+		{
+			nodeRegionServer->commitUpdateData(this->commitId, this->vctx, ctx);
+		}
+		catch(AlinousDbException* e)
+		{
+			e->printStackTrace(ctx);
+			AlinousCore* core = nodeRegionServer->getCore(ctx);
+			core->logError(e, ctx);
+			handleError(e, ctx);
+		}
+	}
 	writeByteStream(outStream, ctx);
 }
 void ClientTpcCommitSessionCommand::readFromStream(InputStream* stream, int remain, ThreadContext* ctx)
@@ -63,14 +81,11 @@ void ClientTpcCommitSessionCommand::readFromStream(InputStream* stream, int rema
 	stream->read(src, ctx);
 	NetworkBinaryBuffer* buff = (new(ctx) NetworkBinaryBuffer(src, ctx));
 	this->commitId = buff->getLong(ctx);
+	__GC_MV(this, &(this->vctx), DbVersionContext::fromNetwork(buff, ctx), DbVersionContext);
 }
-long long ClientTpcCommitSessionCommand::getTrxId(ThreadContext* ctx) throw() 
+void ClientTpcCommitSessionCommand::setVctx(DbVersionContext* vctx, ThreadContext* ctx) throw() 
 {
-	return trxId;
-}
-void ClientTpcCommitSessionCommand::setTrxId(long long trxId, ThreadContext* ctx) throw() 
-{
-	this->trxId = trxId;
+	__GC_MV(this, &(this->vctx), vctx, DbVersionContext);
 }
 long long ClientTpcCommitSessionCommand::getCommitId(ThreadContext* ctx) throw() 
 {
@@ -85,6 +100,7 @@ void ClientTpcCommitSessionCommand::writeByteStream(OutputStream* outStream, Thr
 	NetworkBinaryBuffer* buff = (new(ctx) NetworkBinaryBuffer(32, ctx));
 	buff->putInt(this->type, ctx);
 	buff->putLong(this->commitId, ctx);
+	this->vctx->writeData(buff, ctx);
 	IArrayObjectPrimitive<char>* b = buff->toBinary(ctx);
 	int pos = buff->getPutSize(ctx);
 	outStream->write(b, 0, pos, ctx);

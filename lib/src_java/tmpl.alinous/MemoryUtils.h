@@ -18,7 +18,9 @@ template class alinous::MemoryUtils<::alinous::HashMapInternalElement<::java::la
 template class alinous::MemoryUtils<::alinous::HashMapInternalElement<::java::lang::String, ::alinous::remote::region::client::RemoteTableScheme>>;
 template class alinous::MemoryUtils<::alinous::HashMapInternalElement<::java::lang::String, ::alinous::remote::region::server::schema::NodeTableClaster>>;
 template class alinous::MemoryUtils<::alinous::HashMapInternalElement<::java::lang::String, ::alinous::remote::region::server::schema::NodeRegionSchema>>;
+template class alinous::MemoryUtils<::alinous::HashMapInternalElement<::java::lang::String, ::alinous::remote::region::server::schema::NodeReference>>;
 template class alinous::MemoryUtils<::alinous::HashMapInternalElement<::java::lang::Long, ::alinous::remote::region::server::tpc::RegionInsertExecutor>>;
+template class alinous::MemoryUtils<::alinous::HashMapInternalElement<::java::lang::Long, ::alinous::remote::region::server::tpc::CommitClusterNodeListner>>;
 template class alinous::MemoryUtils<::alinous::HashMapInternalElement<::java::lang::String, ::java::util::TimeZone>>;
 template class alinous::MemoryUtils<::alinous::HashMapInternalElement<::java::lang::String, ::org::alinous::charset::CharsetConverter>>;
 template class alinous::MemoryUtils<::alinous::HashMapInternalElement<::java::lang::String, ::alinous::system::config::AlinousDbInstanceInfo>>;
@@ -67,7 +69,9 @@ template class alinous::MemoryUtils<::alinous::HashMapRawArray<::java::lang::Str
 template class alinous::MemoryUtils<::alinous::HashMapRawArray<::java::lang::String, ::alinous::remote::region::client::RemoteTableScheme>>;
 template class alinous::MemoryUtils<::alinous::HashMapRawArray<::java::lang::String, ::alinous::remote::region::server::schema::NodeTableClaster>>;
 template class alinous::MemoryUtils<::alinous::HashMapRawArray<::java::lang::String, ::alinous::remote::region::server::schema::NodeRegionSchema>>;
+template class alinous::MemoryUtils<::alinous::HashMapRawArray<::java::lang::String, ::alinous::remote::region::server::schema::NodeReference>>;
 template class alinous::MemoryUtils<::alinous::HashMapRawArray<::java::lang::Long, ::alinous::remote::region::server::tpc::RegionInsertExecutor>>;
+template class alinous::MemoryUtils<::alinous::HashMapRawArray<::java::lang::Long, ::alinous::remote::region::server::tpc::CommitClusterNodeListner>>;
 template class alinous::MemoryUtils<::alinous::HashMapRawArray<::java::lang::String, ::java::util::TimeZone>>;
 template class alinous::MemoryUtils<::alinous::HashMapRawArray<::java::lang::String, ::org::alinous::charset::CharsetConverter>>;
 template class alinous::MemoryUtils<::alinous::HashMapRawArray<::java::lang::String, ::alinous::system::config::AlinousDbInstanceInfo>>;

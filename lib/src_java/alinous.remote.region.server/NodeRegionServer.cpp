@@ -57,7 +57,7 @@ bool NodeRegionServer::__init_static_variables(){
 	delete ctx;
 	return true;
 }
- NodeRegionServer::NodeRegionServer(int port, int maxthread, AlinousCore* core, ThreadContext* ctx) throw()  : IObject(ctx), port(0), maxthread(0), refs(nullptr), socketServer(nullptr), monitorConnectionPool(nullptr), nodeClusterRevisionLock(__GC_INS(this, (new(ctx) LockObject(ctx)), LockObject)), nodeClusterRevision(1), region(nullptr), core(nullptr), insertSessions(__GC_INS(this, (new(ctx) RegionTpcExecutorPool(ctx)), RegionTpcExecutorPool))
+ NodeRegionServer::NodeRegionServer(int port, int maxthread, AlinousCore* core, ThreadContext* ctx) throw()  : IObject(ctx), port(0), maxthread(0), refs(nullptr), socketServer(nullptr), monitorConnectionPool(nullptr), nodeClusterRevisionLock(__GC_INS(this, (new(ctx) LockObject(ctx)), LockObject)), nodeClusterRevision(1), region(nullptr), core(nullptr), dmlSessions(__GC_INS(this, (new(ctx) RegionTpcExecutorPool(ctx)), RegionTpcExecutorPool))
 {
 	this->port = port;
 	this->maxthread = maxthread;
@@ -93,8 +93,8 @@ void NodeRegionServer::__releaseRegerences(bool prepare, ThreadContext* ctx) thr
 	region = nullptr;
 	__e_obj1.add(this->core, this);
 	core = nullptr;
-	__e_obj1.add(this->insertSessions, this);
-	insertSessions = nullptr;
+	__e_obj1.add(this->dmlSessions, this);
+	dmlSessions = nullptr;
 	if(!prepare){
 		return;
 	}
@@ -189,18 +189,43 @@ void NodeRegionServer::createTable(TableMetadata* metadata, ThreadContext* ctx)
 void NodeRegionServer::insertData(ArrayList<ClientNetworkRecord>* list, long long newCommitId, String* schema, String* table, DbVersionContext* vctx, int isolationLevel, ThreadContext* ctx)
 {
 	checkVersion(vctx, ctx);
-	RegionInsertExecutor* exec = this->insertSessions->getInsertSession(vctx->getTrxId(ctx), newCommitId, vctx, this->refs, ctx);
-	exec->prepareInsert(list, schema, table, vctx, newCommitId, isolationLevel, ctx);
+	RegionInsertExecutor* exec = this->dmlSessions->getInsertSession(vctx->getTrxId(ctx), newCommitId, vctx, this->refs, ctx);
+	{
+		try
+		{
+			exec->prepareInsert(list, schema, table, vctx, newCommitId, isolationLevel, ctx);
+		}
+		catch(Throwable* e)
+		{
+			clearSessions(vctx->getTrxId(ctx), ctx);
+			throw e;
+		}
+	}
 }
-void NodeRegionServer::commitUpdateData(long long trxId, ThreadContext* ctx) throw() 
+void NodeRegionServer::commitUpdateData(long long newCommitId, DbVersionContext* vctx, ThreadContext* ctx)
 {
-	this->insertSessions->removeInsertSession(trxId, ctx);
+	{
+		std::function<void(void)> finallyLm2= [&, this]()
+		{
+			clearSessions(vctx->getTrxId(ctx), ctx);
+		};
+		Releaser finalyCaller2(finallyLm2);
+		try
+		{
+			this->dmlSessions->tcpCommit(newCommitId, vctx, ctx);
+		}
+		catch(...){throw;}
+	}
 }
 void NodeRegionServer::initMonitorRef(MonitorRef* monRef, ThreadContext* ctx) throw() 
 {
 	MonitorConnectionInfo* monInfo = (new(ctx) MonitorConnectionInfo(monRef->getHost(ctx), monRef->getPort(ctx), ctx));
 	MonitorClientConnectionFactory* factory = (new(ctx) MonitorClientConnectionFactory(monInfo, ctx));
 	__GC_MV(this, &(this->monitorConnectionPool), (new(ctx) SocketConnectionPool(factory, ctx)), SocketConnectionPool);
+}
+void NodeRegionServer::clearSessions(long long trxId, ThreadContext* ctx) throw() 
+{
+	this->dmlSessions->removeSession(trxId, ctx);
 }
 void NodeRegionServer::checkVersion(DbVersionContext* vctx, ThreadContext* ctx)
 {

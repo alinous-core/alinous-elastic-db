@@ -45,5 +45,7 @@ template class ::java::util::HashMap<::java::lang::String, ::alinous::remote::re
 template class ::java::util::HashMap<::java::lang::String, ::alinous::remote::region::server::schema::NodeRegionSchema>;
 template class ::java::util::HashMap<::java::lang::String, ::alinous::remote::region::server::schema::strategy::InsertNodeAccessStrategy>;
 template class ::java::util::HashMap<::java::lang::String, ::alinous::remote::region::server::schema::strategy::UniqueCheckOperation>;
+template class ::java::util::HashMap<::java::lang::String, ::alinous::remote::region::server::schema::NodeReference>;
 template class ::java::util::HashMap<::java::lang::Long, ::alinous::remote::region::server::tpc::RegionInsertExecutor>;
+template class ::java::util::HashMap<::java::lang::Long, ::alinous::remote::region::server::tpc::CommitClusterNodeListner>;
 template class ::java::util::HashMap<::java::lang::String, ::com::google::re2j::CharGroup>;

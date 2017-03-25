@@ -3,6 +3,9 @@
 namespace alinous {namespace remote {namespace region {namespace server {namespace schema {
 class NodeReferenceManager;}}}}}
 
+namespace alinous {namespace remote {namespace region {namespace server {namespace tpc {
+class CommitClusterNodeListner;}}}}}
+
 namespace java {namespace lang {
 class Long;}}
 
@@ -60,8 +63,8 @@ class RegionInsertExecutor final : public virtual IObject {
 public:
 	RegionInsertExecutor(const RegionInsertExecutor& base) = default;
 public:
-	RegionInsertExecutor(long long trxId, long long commitId, NodeReferenceManager* ref, ThreadContext* ctx) throw() ;
-	void __construct_impl(long long trxId, long long commitId, NodeReferenceManager* ref, ThreadContext* ctx) throw() ;
+	RegionInsertExecutor(long long trxId, long long commitId, NodeReferenceManager* ref, CommitClusterNodeListner* listner, ThreadContext* ctx) throw() ;
+	void __construct_impl(long long trxId, long long commitId, NodeReferenceManager* ref, CommitClusterNodeListner* listner, ThreadContext* ctx) throw() ;
 	virtual ~RegionInsertExecutor() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 private:
@@ -69,9 +72,9 @@ private:
 	Long* trxId;
 	long long commitId;
 	InsertTableStrategy* strategy;
+	CommitClusterNodeListner* listner;
 public:
 	void prepareInsert(ArrayList<ClientNetworkRecord>* list, String* schema, String* table, DbVersionContext* vctx, long long newCommitId, int isolationLevel, ThreadContext* ctx);
-	void tpcCommitInsert(ThreadContext* ctx) throw() ;
 	void dispose(ThreadContext* ctx) throw() ;
 	Long* getTrxId(ThreadContext* ctx) throw() ;
 private:

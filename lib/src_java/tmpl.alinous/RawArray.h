@@ -18,7 +18,9 @@ template class alinous::RawArray<::alinous::HashMapInternalElement<::java::lang:
 template class alinous::RawArray<::alinous::HashMapInternalElement<::java::lang::String, ::alinous::remote::region::client::RemoteTableScheme>, ::alinous::HashMapInternalElement<::java::lang::String, ::alinous::remote::region::client::RemoteTableScheme>::ValueCompare>;
 template class alinous::RawArray<::alinous::HashMapInternalElement<::java::lang::String, ::alinous::remote::region::server::schema::NodeTableClaster>, ::alinous::HashMapInternalElement<::java::lang::String, ::alinous::remote::region::server::schema::NodeTableClaster>::ValueCompare>;
 template class alinous::RawArray<::alinous::HashMapInternalElement<::java::lang::String, ::alinous::remote::region::server::schema::NodeRegionSchema>, ::alinous::HashMapInternalElement<::java::lang::String, ::alinous::remote::region::server::schema::NodeRegionSchema>::ValueCompare>;
+template class alinous::RawArray<::alinous::HashMapInternalElement<::java::lang::String, ::alinous::remote::region::server::schema::NodeReference>, ::alinous::HashMapInternalElement<::java::lang::String, ::alinous::remote::region::server::schema::NodeReference>::ValueCompare>;
 template class alinous::RawArray<::alinous::HashMapInternalElement<::java::lang::Long, ::alinous::remote::region::server::tpc::RegionInsertExecutor>, ::alinous::HashMapInternalElement<::java::lang::Long, ::alinous::remote::region::server::tpc::RegionInsertExecutor>::ValueCompare>;
+template class alinous::RawArray<::alinous::HashMapInternalElement<::java::lang::Long, ::alinous::remote::region::server::tpc::CommitClusterNodeListner>, ::alinous::HashMapInternalElement<::java::lang::Long, ::alinous::remote::region::server::tpc::CommitClusterNodeListner>::ValueCompare>;
 template class alinous::RawArray<::alinous::HashMapInternalElement<::java::lang::String, ::java::util::TimeZone>, ::alinous::HashMapInternalElement<::java::lang::String, ::java::util::TimeZone>::ValueCompare>;
 template class alinous::RawArray<::alinous::HashMapInternalElement<::java::lang::String, ::org::alinous::charset::CharsetConverter>, ::alinous::HashMapInternalElement<::java::lang::String, ::org::alinous::charset::CharsetConverter>::ValueCompare>;
 template class alinous::RawArray<::alinous::HashMapInternalElement<::java::lang::String, ::alinous::system::config::AlinousDbInstanceInfo>, ::alinous::HashMapInternalElement<::java::lang::String, ::alinous::system::config::AlinousDbInstanceInfo>::ValueCompare>;
@@ -67,7 +69,9 @@ template class alinous::RawArray<::alinous::HashMapRawArray<::java::lang::String
 template class alinous::RawArray<::alinous::HashMapRawArray<::java::lang::String, ::alinous::remote::region::client::RemoteTableScheme>>;
 template class alinous::RawArray<::alinous::HashMapRawArray<::java::lang::String, ::alinous::remote::region::server::schema::NodeTableClaster>>;
 template class alinous::RawArray<::alinous::HashMapRawArray<::java::lang::String, ::alinous::remote::region::server::schema::NodeRegionSchema>>;
+template class alinous::RawArray<::alinous::HashMapRawArray<::java::lang::String, ::alinous::remote::region::server::schema::NodeReference>>;
 template class alinous::RawArray<::alinous::HashMapRawArray<::java::lang::Long, ::alinous::remote::region::server::tpc::RegionInsertExecutor>>;
+template class alinous::RawArray<::alinous::HashMapRawArray<::java::lang::Long, ::alinous::remote::region::server::tpc::CommitClusterNodeListner>>;
 template class alinous::RawArray<::alinous::HashMapRawArray<::java::lang::String, ::java::util::TimeZone>>;
 template class alinous::RawArray<::alinous::HashMapRawArray<::java::lang::String, ::org::alinous::charset::CharsetConverter>>;
 template class alinous::RawArray<::alinous::HashMapRawArray<::java::lang::String, ::alinous::system::config::AlinousDbInstanceInfo>>;

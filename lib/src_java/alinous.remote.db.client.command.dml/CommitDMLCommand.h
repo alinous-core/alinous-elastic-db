@@ -12,6 +12,9 @@ class OutputStream;}}
 namespace java {namespace io {
 class InputStream;}}
 
+namespace alinous {namespace db {namespace trx {
+class DbVersionContext;}}}
+
 namespace alinous {namespace remote {namespace db {namespace client {namespace command {
 class AbstractRemoteStorageCommand;}}}}}
 
@@ -34,6 +37,7 @@ using ::java::io::BufferedOutputStream;
 using ::java::io::IOException;
 using ::java::io::InputStream;
 using ::java::io::OutputStream;
+using ::alinous::db::trx::DbVersionContext;
 using ::alinous::remote::db::client::command::AbstractRemoteStorageCommand;
 using ::alinous::remote::db::server::RemoteTableStorageServer;
 using ::alinous::runtime::dom::VariableException;
@@ -48,9 +52,16 @@ public:
 	void __construct_impl(ThreadContext* ctx) throw() ;
 	virtual ~CommitDMLCommand() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
+private:
+	long long newCommitId;
+	DbVersionContext* vctx;
 public:
 	void executeOnServer(RemoteTableStorageServer* tableStorageServer, BufferedOutputStream* outStream, ThreadContext* ctx) final;
 	void readFromStream(InputStream* stream, int remain, ThreadContext* ctx) final;
+	long long getNewCommitId(ThreadContext* ctx) throw() ;
+	void setNewCommitId(long long newCommitId, ThreadContext* ctx) throw() ;
+	DbVersionContext* getVctx(ThreadContext* ctx) throw() ;
+	void setVctx(DbVersionContext* vctx, ThreadContext* ctx) throw() ;
 	void writeByteStream(OutputStream* outStream, ThreadContext* ctx) final;
 public:
 	static bool __init_done;

@@ -21,6 +21,7 @@
 #include "alinous.remote.region.server.schema.strategy/RegionPartitionTableAccess.h"
 #include "alinous.remote.region.server.schema/NodeReferenceManager.h"
 #include "alinous.remote.region.server.schema.strategy/InsertTableStrategy.h"
+#include "alinous.remote.region.server.tpc/CommitClusterNodeListner.h"
 #include "java.lang/Number.h"
 #include "java.lang/Comparable.h"
 #include "java.lang/Long.h"
@@ -43,17 +44,19 @@ bool RegionInsertExecutor::__init_static_variables(){
 	delete ctx;
 	return true;
 }
- RegionInsertExecutor::RegionInsertExecutor(long long trxId, long long commitId, NodeReferenceManager* ref, ThreadContext* ctx) throw()  : IObject(ctx), ref(nullptr), trxId(nullptr), commitId(0), strategy(nullptr)
+ RegionInsertExecutor::RegionInsertExecutor(long long trxId, long long commitId, NodeReferenceManager* ref, CommitClusterNodeListner* listner, ThreadContext* ctx) throw()  : IObject(ctx), ref(nullptr), trxId(nullptr), commitId(0), strategy(nullptr), listner(nullptr)
 {
 	__GC_MV(this, &(this->ref), ref, NodeReferenceManager);
 	__GC_MV(this, &(this->trxId), (new(ctx) Long(trxId, ctx)), Long);
 	this->commitId = commitId;
+	__GC_MV(this, &(this->listner), listner, CommitClusterNodeListner);
 }
-void RegionInsertExecutor::__construct_impl(long long trxId, long long commitId, NodeReferenceManager* ref, ThreadContext* ctx) throw() 
+void RegionInsertExecutor::__construct_impl(long long trxId, long long commitId, NodeReferenceManager* ref, CommitClusterNodeListner* listner, ThreadContext* ctx) throw() 
 {
 	__GC_MV(this, &(this->ref), ref, NodeReferenceManager);
 	__GC_MV(this, &(this->trxId), (new(ctx) Long(trxId, ctx)), Long);
 	this->commitId = commitId;
+	__GC_MV(this, &(this->listner), listner, CommitClusterNodeListner);
 }
  RegionInsertExecutor::~RegionInsertExecutor() throw() 
 {
@@ -71,6 +74,8 @@ void RegionInsertExecutor::__releaseRegerences(bool prepare, ThreadContext* ctx)
 	trxId = nullptr;
 	__e_obj1.add(this->strategy, this);
 	strategy = nullptr;
+	__e_obj1.add(this->listner, this);
+	listner = nullptr;
 	if(!prepare){
 		return;
 	}
@@ -88,9 +93,6 @@ void RegionInsertExecutor::prepareInsert(ArrayList<ClientNetworkRecord>* list, S
 		sendPrepareCommand(cmd, ctx);
 	}
 }
-void RegionInsertExecutor::tpcCommitInsert(ThreadContext* ctx) throw() 
-{
-}
 void RegionInsertExecutor::dispose(ThreadContext* ctx) throw() 
 {
 }
@@ -102,6 +104,7 @@ void RegionInsertExecutor::sendPrepareCommand(InsertPrepareCommand* cmd, ThreadC
 {
 	NodeReference* ref = cmd->getNodeAccessRef(ctx);
 	ref->sendCommand(cmd, ctx);
+	this->listner->addNode(ref, ctx);
 }
 void RegionInsertExecutor::__cleanUp(ThreadContext* ctx){
 }

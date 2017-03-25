@@ -754,6 +754,7 @@ set(srcjava
 	"src_java/alinous.compile.expression/ShiftExpression.cpp"
 	"src_java/alinous.remote.region.server.tpc/RegionTpcExecutorPool.cpp"
 	"src_java/alinous.remote.region.server.tpc/RegionInsertExecutor.cpp"
+	"src_java/alinous.remote.region.server.tpc/CommitClusterNodeListner.cpp"
 	"src_java/alinous.http.client/HttpClient.cpp"
 	"src_java/alinous.http.client/HttpRequestHeaders.cpp"
 	"src_java/alinous.http.client/HttpsClient.cpp"

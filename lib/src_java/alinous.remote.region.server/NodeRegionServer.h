@@ -141,7 +141,7 @@ private:
 	long long nodeClusterRevision;
 	String* region;
 	AlinousCore* core;
-	RegionTpcExecutorPool* insertSessions;
+	RegionTpcExecutorPool* dmlSessions;
 private:
 	static String* THREAD_NAME;
 public:
@@ -157,9 +157,10 @@ public:
 	void createSchema(String* schemaName, ThreadContext* ctx);
 	void createTable(TableMetadata* metadata, ThreadContext* ctx);
 	void insertData(ArrayList<ClientNetworkRecord>* list, long long newCommitId, String* schema, String* table, DbVersionContext* vctx, int isolationLevel, ThreadContext* ctx);
-	void commitUpdateData(long long trxId, ThreadContext* ctx) throw() ;
+	void commitUpdateData(long long newCommitId, DbVersionContext* vctx, ThreadContext* ctx);
 private:
 	void initMonitorRef(MonitorRef* monRef, ThreadContext* ctx) throw() ;
+	void clearSessions(long long trxId, ThreadContext* ctx) throw() ;
 	void checkVersion(DbVersionContext* vctx, ThreadContext* ctx);
 	void reportClusterUpdate(ThreadContext* ctx);
 public:
