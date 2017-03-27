@@ -345,15 +345,15 @@ void DatabaseTableClient::finishCommitSession(DbTransaction* trx, long long newC
 		}
 		catch(UnknownHostException* e)
 		{
-			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3595(), e, ctx));
+			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3597(), e, ctx));
 		}
 		catch(IOException* e)
 		{
-			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3595(), e, ctx));
+			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3597(), e, ctx));
 		}
 		catch(AlinousException* e)
 		{
-			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3595(), e, ctx));
+			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3597(), e, ctx));
 		}
 	}
 }
@@ -369,6 +369,9 @@ void DatabaseTableClient::close(ThreadContext* ctx) throw()
 String* DatabaseTableClient::getFullName(ThreadContext* ctx) throw() 
 {
 	return this->fullName;
+}
+void DatabaseTableClient::tcpInsertCommit(IDatabaseRecord* data, ThreadPool* pool, ISystemLog* log, ThreadContext* ctx) throw() 
+{
 }
 bool DatabaseTableClient::matchUniqueIndexByIdList(ArrayList<TableColumnMetadata>* columnsMetadataList, List<TableColumnMetadata>* columns, ThreadContext* ctx) throw() 
 {
@@ -441,7 +444,7 @@ void DatabaseTableClient::doInsertData(DbTransaction* trx, List<IDatabaseRecord>
 			}
 			catch(VariableException* e)
 			{
-				throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3596(), e, ctx));
+				throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3598(), e, ctx));
 			}
 		}
 		list->add(netRec, ctx);
@@ -461,15 +464,15 @@ void DatabaseTableClient::doInsertData(DbTransaction* trx, List<IDatabaseRecord>
 		}
 		catch(UnknownHostException* e)
 		{
-			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3597(), e, ctx));
+			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3599(), e, ctx));
 		}
 		catch(IOException* e)
 		{
-			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3597(), e, ctx));
+			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3599(), e, ctx));
 		}
 		catch(AlinousException* e)
 		{
-			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3597(), e, ctx));
+			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3599(), e, ctx));
 		}
 	}
 }

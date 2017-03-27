@@ -83,9 +83,13 @@ String* PrepareStorageManager::getFilePath(ThreadContext* ctx) throw()
 	{
 		buff->append(ConstStr::getCNST_STR_949(), ctx);
 	}
-	buff->append(ConstStr::getCNST_STR_3593(), ctx)->append(Long::toString(this->strxId, ctx), ctx)->append(ConstStr::getCNST_STR_949(), ctx);
+	buff->append(ConstStr::getCNST_STR_3594(), ctx)->append(Long::toString(this->strxId, ctx), ctx)->append(ConstStr::getCNST_STR_949(), ctx);
 	__GC_MV(this, &(this->filePath), buff->toString(ctx), String);
 	return this->filePath;
+}
+InsertStore* PrepareStorageManager::getInsertStore(ThreadContext* ctx) throw() 
+{
+	return insertStore;
 }
 void PrepareStorageManager::__cleanUp(ThreadContext* ctx){
 }

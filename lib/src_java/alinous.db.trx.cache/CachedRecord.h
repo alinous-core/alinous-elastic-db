@@ -95,6 +95,7 @@ public:
 	void addValue(VariantValue* vv, ThreadContext* ctx) throw()  final;
 	long long getMaxCommitId(ThreadContext* ctx) throw()  final;
 	void setOid(long long oid, ThreadContext* ctx) throw() ;
+	long long getPosition(ThreadContext* ctx) throw()  final;
 public:
 	static CachedRecord* valueFromFetcher(FileStorageEntryFetcher* fetcher, ThreadContext* ctx);
 public:

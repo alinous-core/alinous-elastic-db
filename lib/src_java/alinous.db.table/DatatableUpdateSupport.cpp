@@ -25,12 +25,12 @@
 #include "java.lang/Comparable.h"
 #include "java.lang/Integer.h"
 #include "alinous.btree/BTree.h"
-#include "alinous.db.table/DatabaseRecord.h"
 #include "alinous.db.table/IScannableIndex.h"
 #include "alinous.remote.socket/ICommandData.h"
 #include "alinous.db.table/TableMetadata.h"
 #include "alinous.db.table/IDatabaseTable.h"
 #include "alinous.db.trx/DbTransaction.h"
+#include "alinous.db.table/DatabaseRecord.h"
 #include "alinous.numeric/InternalDate.h"
 #include "java.sql/Timestamp.h"
 #include "alinous.db.table/DatatableConstants.h"
@@ -102,6 +102,9 @@ void DatatableUpdateSupport::insertData(DbTransaction* trx, List<IDatabaseRecord
 		IDatabaseRecord* data = records->get(i, ctx);
 		insertData(trx, data, newCommitId, jobs, logger, ctx);
 	}
+}
+void DatatableUpdateSupport::tcpInsertCommit(IDatabaseRecord* data, ThreadPool* pool, ISystemLog* log, ThreadContext* ctx) throw() 
+{
 }
 void DatatableUpdateSupport::__cleanUp(ThreadContext* ctx){
 }

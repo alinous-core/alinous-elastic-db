@@ -85,6 +85,7 @@ private:
 	long long lastUpdateCommitId;
 	long long insertedCommitId;
 	long long deletedCommitId;
+	long long position;
 	ArrayList<VariantValue>* values;
 public:
 	void appendToEntry(FileStorageEntryBuilder* builder, ThreadContext* ctx) final;
@@ -107,6 +108,7 @@ public:
 	void readData(NetworkBinaryBuffer* buff, ThreadContext* ctx) final;
 	void writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) final;
 	bool equals(IObject* obj, ThreadContext* ctx) throw()  final;
+	long long getPosition(ThreadContext* ctx) throw()  final;
 public:
 	static ClientNetworkRecord* valueFromFetcher(FileStorageEntryFetcher* fetcher, ThreadContext* ctx);
 	static ClientNetworkRecord* fromNetwork(NetworkBinaryBuffer* buff, ThreadContext* ctx);

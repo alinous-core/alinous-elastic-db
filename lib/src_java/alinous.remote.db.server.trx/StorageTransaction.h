@@ -30,6 +30,9 @@ class UniqueCheckOperation;}}}}}}
 namespace alinous {namespace remote {namespace region {namespace client {namespace command {namespace data {
 class ClientNetworkRecord;}}}}}}
 
+namespace alinous {namespace remote {namespace db {namespace server {namespace commit {
+class InsertStore;}}}}}
+
 namespace alinous {namespace lock {namespace unique {
 class UniqueExclusiveLock;}}}
 
@@ -44,6 +47,9 @@ class IOException;}}
 
 namespace alinous {namespace btree {
 class BTreeException;}}
+
+namespace alinous {namespace db {
+class AlinousDbException;}}
 
 namespace alinous {namespace system {
 class AlinousException;}}
@@ -65,12 +71,14 @@ using ::java::io::IOException;
 using ::java::util::ArrayList;
 using ::java::util::List;
 using ::alinous::btree::BTreeException;
+using ::alinous::db::AlinousDbException;
 using ::alinous::db::table::IDatabaseRecord;
 using ::alinous::db::table::IDatabaseTable;
 using ::alinous::db::trx::DbVersionContext;
 using ::alinous::lock::unique::UniqueExclusiveLock;
 using ::alinous::lock::unique::UniqueExclusiveLockManager;
 using ::alinous::remote::db::server::RemoteTableStorageServer;
+using ::alinous::remote::db::server::commit::InsertStore;
 using ::alinous::remote::db::server::commit::PrepareStorageManager;
 using ::alinous::remote::region::client::command::data::ClientNetworkRecord;
 using ::alinous::remote::region::server::schema::strategy::UniqueCheckOperation;
@@ -99,6 +107,7 @@ private:
 public:
 	virtual bool isVisible(IDatabaseRecord* record, ThreadContext* ctx) throw()  = 0;
 	void prepareInsert(IDatabaseTable* table, List<UniqueCheckOperation>* uniqueCheckOps, List<ClientNetworkRecord>* records, ThreadContext* ctx);
+	void commitPrepared(long long newCommitId, DbVersionContext* vctx, RemoteTableStorageServer* server, ThreadContext* ctx);
 	void addUniqueExclusiveLock(UniqueExclusiveLock* lock, ThreadContext* ctx) throw() ;
 	void unlockUniqueAll(ThreadContext* ctx) throw() ;
 	String* getTmpDir(ThreadContext* ctx) throw() ;

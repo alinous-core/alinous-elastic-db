@@ -6,38 +6,65 @@ class InsertStore;}}}}}
 namespace alinous {namespace btreememory {
 class BTreeOnMemory;}}
 
-namespace alinous {namespace db {namespace table {
-class IDatabaseTable;}}}
+namespace alinous {namespace db {namespace trx {
+class DbVersionContext;}}}
 
-namespace java {namespace util {
-template <typename  T> class List;}}
+namespace alinous {namespace remote {namespace db {namespace server {
+class RemoteTableStorageServer;}}}}
 
-namespace alinous {namespace remote {namespace region {namespace client {namespace command {namespace data {
-class ClientNetworkRecord;}}}}}}
-
-namespace alinous {namespace btree {
-class StringKey;}}
+namespace alinous {namespace btree {namespace scan {
+class BTreeScanner;}}}
 
 namespace alinous {namespace btree {
 class IBTreeNode;}}
 
+namespace alinous {namespace remote {namespace db {namespace server {namespace commit {
+class TableFullNameKey;}}}}}
+
 namespace alinous {namespace btree {
 class IBTreeValue;}}
 
-namespace alinous {namespace btree {
-class IBTree;}}
+namespace alinous {namespace db {
+class AlinousDbException;}}
 
 namespace java {namespace io {
 class IOException;}}
 
+namespace java {namespace lang {
+class InterruptedException;}}
+
 namespace alinous {namespace btree {
 class BTreeException;}}
 
-namespace alinous {namespace runtime {namespace dom {
-class VariableException;}}}
-
 namespace alinous {namespace system {
 class AlinousException;}}
+
+namespace alinous {namespace db {
+class TableSchema;}}
+
+namespace alinous {namespace db {namespace table {
+class IDatabaseTable;}}}
+
+namespace alinous {namespace system {
+class AlinousCore;}}
+
+namespace alinous {namespace system {
+class ISystemLog;}}
+
+namespace alinous {namespace remote {namespace region {namespace client {namespace command {namespace data {
+class ClientNetworkRecord;}}}}}}
+
+namespace java {namespace util {
+template <typename  T> class List;}}
+
+namespace alinous {namespace db {namespace table {
+class TableMetadata;}}}
+
+namespace alinous {namespace btree {
+class IBTree;}}
+
+namespace alinous {namespace runtime {namespace dom {
+class VariableException;}}}
 
 namespace java {namespace lang {
 class IObject;
@@ -59,12 +86,19 @@ using ::alinous::btree::BTreeException;
 using ::alinous::btree::IBTree;
 using ::alinous::btree::IBTreeNode;
 using ::alinous::btree::IBTreeValue;
-using ::alinous::btree::StringKey;
+using ::alinous::btree::scan::BTreeScanner;
 using ::alinous::btreememory::BTreeOnMemory;
+using ::alinous::db::AlinousDbException;
+using ::alinous::db::TableSchema;
 using ::alinous::db::table::IDatabaseTable;
+using ::alinous::db::table::TableMetadata;
+using ::alinous::db::trx::DbVersionContext;
+using ::alinous::remote::db::server::RemoteTableStorageServer;
 using ::alinous::remote::region::client::command::data::ClientNetworkRecord;
 using ::alinous::runtime::dom::VariableException;
+using ::alinous::system::AlinousCore;
 using ::alinous::system::AlinousException;
+using ::alinous::system::ISystemLog;
 
 
 
@@ -81,9 +115,12 @@ private:
 	String* baseDir;
 public:
 	InsertStore* init(ThreadContext* ctx) throw() ;
+	void commitPrepared(long long newCommitId, DbVersionContext* vctx, RemoteTableStorageServer* server, ThreadContext* ctx);
 	void add(IDatabaseTable* table, List<ClientNetworkRecord>* records, ThreadContext* ctx);
 	IBTree* getStore(ThreadContext* ctx) throw() ;
 	String* getBaseDir(ThreadContext* ctx) throw() ;
+private:
+	void handleCommitTable(long long newCommitId, DbVersionContext* vctx, TableFullNameKey* fullName, ArrayList<IBTreeValue>* values, RemoteTableStorageServer* server, ThreadContext* ctx);
 public:
 	static bool __init_done;
 	static bool __init_static_variables();

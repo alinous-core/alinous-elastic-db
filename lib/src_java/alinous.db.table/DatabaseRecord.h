@@ -98,7 +98,7 @@ public:
 	void setDeletedCommitId(long long deletedCommitId, ThreadContext* ctx) throw() ;
 	long long getMaxCommitId(ThreadContext* ctx) throw()  final;
 	String* toString(ThreadContext* ctx) throw() ;
-	long long getPosition(ThreadContext* ctx) throw() ;
+	long long getPosition(ThreadContext* ctx) throw()  final;
 	void setPosition(long long position, ThreadContext* ctx) throw() ;
 	bool equals(IObject* obj, ThreadContext* ctx) throw()  final;
 	int getHashKey(ThreadContext* ctx) throw() ;

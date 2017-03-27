@@ -7,7 +7,7 @@ namespace alinous {namespace db {namespace table {
 class IScannableIndex;}}}
 
 namespace alinous {namespace db {namespace table {
-class DatabaseRecord;}}}
+class IDatabaseRecord;}}}
 
 namespace alinous {namespace runtime {namespace parallel {
 class IThreadAction;}}}
@@ -33,13 +33,13 @@ class IndexInsertJob final : public IThreadAction, public virtual IObject {
 public:
 	IndexInsertJob(const IndexInsertJob& base) = default;
 public:
-	IndexInsertJob(IScannableIndex* tableIndex, DatabaseRecord* dbrecord, ThreadContext* ctx) throw() ;
-	void __construct_impl(IScannableIndex* tableIndex, DatabaseRecord* dbrecord, ThreadContext* ctx) throw() ;
+	IndexInsertJob(IScannableIndex* tableIndex, IDatabaseRecord* dbrecord, ThreadContext* ctx) throw() ;
+	void __construct_impl(IScannableIndex* tableIndex, IDatabaseRecord* dbrecord, ThreadContext* ctx) throw() ;
 	virtual ~IndexInsertJob() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 private:
 	IScannableIndex* tableIndex;
-	DatabaseRecord* dbrecord;
+	IDatabaseRecord* dbrecord;
 public:
 	void execute(ThreadContext* ctx) final;
 public:

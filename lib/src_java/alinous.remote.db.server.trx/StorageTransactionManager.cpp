@@ -1,6 +1,9 @@
 #include "include/global.h"
 
 
+#include "alinous.compile/AbstractSrcElement.h"
+#include "alinous.system/AlinousException.h"
+#include "alinous.db/AlinousDbException.h"
 #include "alinous.remote.socket/ICommandData.h"
 #include "alinous.db.trx/DbVersionContext.h"
 #include "alinous.lock/LockObject.h"
@@ -74,6 +77,19 @@ StorageTransaction* StorageTransactionManager::getStorageTransaction(int isolati
 		{
 			strx = StorageTransactionFactory::createTrx(isolationLevel, vctx, this->datadir, this->server, ctx);
 			this->transactions->put(id, strx, ctx);
+		}
+		return strx;
+	}
+}
+StorageTransaction* StorageTransactionManager::getStorageTransaction(DbVersionContext* vctx, ThreadContext* ctx)
+{
+	Long* id = (new(ctx) Long(vctx->getTrxId(ctx), ctx));
+	{
+		SynchronizedBlockObj __synchronized_2(this->lock, ctx);
+		StorageTransaction* strx = this->transactions->get(id, ctx);
+		if(strx == nullptr)
+		{
+			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3593(), ctx));
 		}
 		return strx;
 	}

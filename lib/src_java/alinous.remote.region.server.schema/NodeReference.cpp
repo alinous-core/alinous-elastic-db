@@ -73,11 +73,11 @@ String* NodeReference::toString(ThreadContext* ctx) throw()
 	StringBuilder* buff = (new(ctx) StringBuilder(256, ctx));
 	if(this->ipv6)
 	{
-		buff->append(ConstStr::getCNST_STR_3608(), ctx);
+		buff->append(ConstStr::getCNST_STR_3610(), ctx);
 	}
 		else 
 	{
-		buff->append(ConstStr::getCNST_STR_3609(), ctx);
+		buff->append(ConstStr::getCNST_STR_3611(), ctx);
 	}
 	buff->append(host, ctx);
 	buff->append(ConstStr::getCNST_STR_381(), ctx)->append(Integer::toString(this->port, ctx), ctx);
@@ -117,17 +117,17 @@ SchemasStructureInfoData* NodeReference::getSchemeInfo(String* region, ThreadCon
 			AbstractRemoteStorageCommand* retcmd = cmd->sendCommand(socket, ctx);
 			if(retcmd->getType(ctx) != AbstractRemoteStorageCommand::TYPE_GET_TABLE_SCHEME)
 			{
-				throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3610(), ctx));
+				throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3612(), ctx));
 			}
 			cmd = static_cast<GetTableSchemeCommand*>(retcmd);
 		}
 		catch(UnknownHostException* e)
 		{
-			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3611(), e, ctx));
+			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3613(), e, ctx));
 		}
 		catch(IOException* e)
 		{
-			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3612(), e, ctx));
+			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3614(), e, ctx));
 		}
 	}
 	return cmd->getData(ctx);
@@ -149,21 +149,21 @@ AbstractRemoteStorageCommand* NodeReference::sendCommand(AbstractRemoteStorageCo
 			AbstractRemoteStorageCommand* retcmd = cmd->sendCommand(socket, ctx);
 			if(retcmd->getType(ctx) != type)
 			{
-				throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3610(), ctx));
+				throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3612(), ctx));
 			}
 			return retcmd;
 		}
 		catch(UnknownHostException* e)
 		{
-			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3613(), e, ctx));
+			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3615(), e, ctx));
 		}
 		catch(IOException* e)
 		{
-			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3613(), e, ctx));
+			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3615(), e, ctx));
 		}
 		catch(AlinousException* e)
 		{
-			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3613(), e, ctx));
+			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3615(), e, ctx));
 		}
 	}
 }
@@ -184,21 +184,21 @@ void NodeReference::createSchema(String* schemaName, ThreadContext* ctx)
 			AbstractRemoteStorageCommand* retcmd = cmd->sendCommand(socket, ctx);
 			if(retcmd->getType(ctx) != AbstractRemoteStorageCommand::TYPE_CREATE_SCHEMA)
 			{
-				throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3610(), ctx));
+				throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3612(), ctx));
 			}
 			cmd = static_cast<CreateSchemaCommand*>(retcmd);
 		}
 		catch(UnknownHostException* e)
 		{
-			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3613(), e, ctx));
+			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3615(), e, ctx));
 		}
 		catch(IOException* e)
 		{
-			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3613(), e, ctx));
+			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3615(), e, ctx));
 		}
 		catch(AlinousException* e)
 		{
-			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3613(), e, ctx));
+			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3615(), e, ctx));
 		}
 	}
 }
@@ -220,20 +220,20 @@ void NodeReference::createTable(TableMetadata* meta, ThreadContext* ctx)
 			AbstractRemoteStorageCommand* retcmd = cmd->sendCommand(socket, ctx);
 			if(retcmd->getType(ctx) != AbstractRemoteStorageCommand::TYPE_CREATE_TABLE)
 			{
-				throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3610(), ctx));
+				throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3612(), ctx));
 			}
 		}
 		catch(UnknownHostException* e)
 		{
-			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3614(), e, ctx));
+			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3616(), e, ctx));
 		}
 		catch(IOException* e)
 		{
-			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3614(), e, ctx));
+			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3616(), e, ctx));
 		}
 		catch(AlinousException* e)
 		{
-			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3614(), e, ctx));
+			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3616(), e, ctx));
 		}
 	}
 }

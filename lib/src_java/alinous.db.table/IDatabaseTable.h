@@ -135,6 +135,7 @@ public:
 	virtual String* getFullName(ThreadContext* ctx) throw()  = 0;
 	virtual void finishCommitSession(DbTransaction* trx, long long newCommitId, ThreadContext* ctx) = 0;
 	virtual IScannableIndex* getTableUniqueIndexByCols(List<TableColumnMetadata>* columns, ThreadContext* ctx) throw()  = 0;
+	virtual void tcpInsertCommit(IDatabaseRecord* data, ThreadPool* pool, ISystemLog* log, ThreadContext* ctx) throw()  = 0;
 public:
 	static bool __init_done;
 	static bool __init_static_variables();

@@ -70,6 +70,7 @@ public:
 	PrepareStorageManager* init(ThreadContext* ctx) throw() ;
 	void addInsert(IDatabaseTable* table, List<ClientNetworkRecord>* records, ThreadContext* ctx);
 	String* getFilePath(ThreadContext* ctx) throw() ;
+	InsertStore* getInsertStore(ThreadContext* ctx) throw() ;
 public:
 	static bool __init_done;
 	static bool __init_static_variables();

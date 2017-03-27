@@ -5,11 +5,13 @@
 #include "java.io/BufferedOutputStream.h"
 #include "alinous.compile/AbstractSrcElement.h"
 #include "alinous.system/AlinousException.h"
+#include "alinous.db/AlinousDbException.h"
 #include "alinous.runtime/ExecutionException.h"
 #include "alinous.runtime.dom/VariableException.h"
 #include "alinous.remote.socket/NetworkBinaryBuffer.h"
 #include "alinous.remote.socket/ICommandData.h"
 #include "alinous.db.trx/DbVersionContext.h"
+#include "alinous.system/AlinousCore.h"
 #include "alinous.remote.db.server/RemoteTableStorageServer.h"
 #include "alinous.remote.db.client.command/RemoteStorageCommandReader.h"
 #include "alinous.remote.db.client.command/AbstractRemoteStorageCommand.h"
@@ -59,7 +61,19 @@ void CommitDMLCommand::__releaseRegerences(bool prepare, ThreadContext* ctx) thr
 }
 void CommitDMLCommand::executeOnServer(RemoteTableStorageServer* tableStorageServer, BufferedOutputStream* outStream, ThreadContext* ctx)
 {
-	tableStorageServer->commitDmlTransaction(this->newCommitId, this->vctx, ctx);
+	{
+		try
+		{
+			tableStorageServer->commitDmlTransaction(this->newCommitId, this->vctx, ctx);
+		}
+		catch(AlinousDbException* e)
+		{
+			e->printStackTrace(ctx);
+			AlinousCore* core = tableStorageServer->getCore(ctx);
+			core->logError(e, ctx);
+			handleError(e, ctx);
+		}
+	}
 	writeByteStream(outStream, ctx);
 }
 void CommitDMLCommand::readFromStream(InputStream* stream, int remain, ThreadContext* ctx)

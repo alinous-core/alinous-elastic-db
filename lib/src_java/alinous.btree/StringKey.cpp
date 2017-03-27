@@ -116,6 +116,10 @@ bool StringKey::equals(IObject* obj, ThreadContext* ctx) throw()
 	StringKey* kobj = dynamic_cast<StringKey*>(obj);
 	return this->value->equals(kobj->value, ctx);
 }
+String* StringKey::getValue(ThreadContext* ctx) throw() 
+{
+	return value;
+}
 void StringKey::__cleanUp(ThreadContext* ctx){
 }
 int StringKey::ValueCompare::operator() (IBTreeKey* _this, IBTreeKey* another, ThreadContext* ctx) const throw()

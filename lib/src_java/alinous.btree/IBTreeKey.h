@@ -46,6 +46,7 @@ public:
 	constexpr static const int TYPE_DOUBLE{5};
 	constexpr static const int TYPE_BTREE_INDEX_KEY{6};
 	constexpr static const int TYPE_SCAN_RESULT_INDEX_KEY{7};
+	constexpr static const int TYPE_TABLE_FULL_NAME_KEY{8};
 public:
 	virtual void appendToEntry(FileStorageEntryBuilder* builder, ThreadContext* ctx) = 0;
 	virtual int size(ThreadContext* ctx) = 0;

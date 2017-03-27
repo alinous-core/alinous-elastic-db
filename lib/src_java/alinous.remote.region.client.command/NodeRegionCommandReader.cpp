@@ -89,7 +89,7 @@ AbstractNodeRegionCommand* NodeRegionCommandReader::readFromStream(InputStream* 
 		cmd = (new(ctx) ClientTpcCommitSessionCommand(ctx));
 		break ;
 	default:
-		throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3603(), ctx));
+		throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3605(), ctx));
 		break;
 	}
 	cmd->readFromStream(stream, size, ctx);

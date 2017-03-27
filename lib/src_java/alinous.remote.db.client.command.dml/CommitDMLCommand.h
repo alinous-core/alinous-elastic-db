@@ -6,6 +6,12 @@ class RemoteTableStorageServer;}}}}
 namespace java {namespace io {
 class BufferedOutputStream;}}
 
+namespace alinous {namespace system {
+class AlinousCore;}}
+
+namespace alinous {namespace db {
+class AlinousDbException;}}
+
 namespace java {namespace io {
 class OutputStream;}}
 
@@ -40,11 +46,13 @@ using ::java::io::BufferedOutputStream;
 using ::java::io::IOException;
 using ::java::io::InputStream;
 using ::java::io::OutputStream;
+using ::alinous::db::AlinousDbException;
 using ::alinous::db::trx::DbVersionContext;
 using ::alinous::remote::db::client::command::AbstractRemoteStorageCommand;
 using ::alinous::remote::db::server::RemoteTableStorageServer;
 using ::alinous::remote::socket::NetworkBinaryBuffer;
 using ::alinous::runtime::dom::VariableException;
+using ::alinous::system::AlinousCore;
 
 
 

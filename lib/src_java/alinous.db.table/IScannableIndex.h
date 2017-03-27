@@ -7,7 +7,7 @@ namespace alinous {namespace btree {
 class BTree;}}
 
 namespace alinous {namespace db {namespace table {
-class DatabaseRecord;}}}
+class IDatabaseRecord;}}}
 
 namespace alinous {namespace system {
 class AlinousCore;}}
@@ -76,7 +76,7 @@ public:
 	virtual BTree* getStorage(ThreadContext* ctx) throw()  = 0;
 	virtual String* getName(ThreadContext* ctx) throw()  = 0;
 	virtual bool isPrimary(ThreadContext* ctx) throw()  = 0;
-	virtual void addIndexValue(DatabaseRecord* record, ThreadContext* ctx) = 0;
+	virtual void addIndexValue(IDatabaseRecord* record, ThreadContext* ctx) = 0;
 	virtual void createIndex(AlinousCore* core, BTreeGlobalCache* cache, ThreadContext* ctx) = 0;
 	virtual bool isAvailableByScanId(ArrayList<ScanTableColumnIdentifier>* columnIds, ThreadContext* ctx) throw()  = 0;
 	virtual bool isAvailable(ArrayList<String>* columnsStr, ThreadContext* ctx) throw()  = 0;

@@ -15,6 +15,9 @@ class DbVersionContext;}}}
 namespace java {namespace lang {
 class Long;}}
 
+namespace alinous {namespace db {
+class AlinousDbException;}}
+
 namespace alinous {namespace lock {
 class LockObject;}}
 
@@ -39,6 +42,7 @@ using namespace ::java::lang;
 using ::java::util::Iterator;
 using ::java::util::HashMap;
 using ::java::util::Map;
+using ::alinous::db::AlinousDbException;
 using ::alinous::db::trx::DbVersionContext;
 using ::alinous::lock::LockObject;
 using ::alinous::remote::db::server::RemoteTableStorageServer;
@@ -61,6 +65,7 @@ private:
 public:
 	void dispose(ThreadContext* ctx) throw() ;
 	StorageTransaction* getStorageTransaction(int isolationLevel, DbVersionContext* vctx, ThreadContext* ctx) throw() ;
+	StorageTransaction* getStorageTransaction(DbVersionContext* vctx, ThreadContext* ctx);
 	void finishTransaction(long long strxId, ThreadContext* ctx) throw() ;
 public:
 	static void includes(StorageTransactionFactory* arg0, ThreadContext* ctx) throw() ;

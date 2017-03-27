@@ -69,6 +69,7 @@ constexpr const int IBTreeKey::TYPE_TIMESTAMP;
 constexpr const int IBTreeKey::TYPE_DOUBLE;
 constexpr const int IBTreeKey::TYPE_BTREE_INDEX_KEY;
 constexpr const int IBTreeKey::TYPE_SCAN_RESULT_INDEX_KEY;
+constexpr const int IBTreeKey::TYPE_TABLE_FULL_NAME_KEY;
 bool IBTreeKey::__init_done = __init_static_variables();
 bool IBTreeKey::__init_static_variables(){
 	Java2CppSystem::getSelf();

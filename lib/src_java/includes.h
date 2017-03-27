@@ -408,7 +408,6 @@
 #include "alinous.remote.db.client.command/RemoteStorageCommandReader.h"
 #include "alinous.remote.db/RemoteStorageResponceAction.h"
 #include "alinous.remote.db/RemoteStorageResponceActionFactory.h"
-#include "alinous.btree/StringKey.h"
 #include "alinous.btreememory/AbstractMemoryNode.h"
 #include "alinous.btreememory/MBTreeLeafNode.h"
 #include "alinous.btreememory.scan/MemoryMaxNodeIterator.h"
@@ -422,6 +421,7 @@
 #include "alinous.btreememory/MBTreeLeafContainer.h"
 #include "alinous.btreememory/MBTreeMaxLeafContainer.h"
 #include "alinous.btreememory/BTreeOnMemory.h"
+#include "alinous.remote.db.server.commit/TableFullNameKey.h"
 #include "alinous.remote.db.server.commit/InsertStore.h"
 #include "alinous.remote.db.server.commit/PrepareStorageManager.h"
 #include "alinous.db.table/IScannableIndex.h"
@@ -767,6 +767,7 @@
 #include "alinous.btree/StringValue.h"
 #include "alinous.btree/TimestampValue.h"
 #include "alinous.btree/DoubleValue.h"
+#include "alinous.btree/StringKey.h"
 #include "alinous.btree/DoubleKey.h"
 #include "alinous.btree/TimestampKey.h"
 #include "alinous.btree/KeyValueFactory.h"
@@ -1829,6 +1830,7 @@ inline static void __cleanUpStatics(alinous::ThreadContext* ctx){
 	alinous::remote::db::server::trx::UniqueChecker::__cleanUp(ctx);
 	alinous::remote::db::server::trx::ReadCommittedStorageTransaction::__cleanUp(ctx);
 	alinous::remote::db::server::trx::StorageTransactionManager::__cleanUp(ctx);
+	alinous::remote::db::server::commit::TableFullNameKey::__cleanUp(ctx);
 	alinous::remote::db::server::commit::PrepareStorageManager::__cleanUp(ctx);
 	alinous::remote::db::server::commit::DeleteStore::__cleanUp(ctx);
 	alinous::remote::db::server::commit::InsertStore::__cleanUp(ctx);

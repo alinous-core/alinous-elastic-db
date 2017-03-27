@@ -75,6 +75,9 @@ class PadddingRecord;}}}}
 namespace alinous {namespace db {namespace trx {namespace scan {
 class ScanResultRecord;}}}}
 
+namespace alinous {namespace remote {namespace db {namespace server {namespace commit {
+class TableFullNameKey;}}}}}
+
 namespace alinous {namespace runtime {namespace dom {
 class DomVariable;}}}
 
@@ -104,6 +107,7 @@ using ::alinous::db::table::TableIndexValue;
 using ::alinous::db::trx::cache::CachedRecord;
 using ::alinous::db::trx::scan::PadddingRecord;
 using ::alinous::db::trx::scan::ScanResultRecord;
+using ::alinous::remote::db::server::commit::TableFullNameKey;
 using ::alinous::runtime::dom::DomVariable;
 using ::alinous::runtime::dom::VariableException;
 using ::alinous::system::AlinousException;

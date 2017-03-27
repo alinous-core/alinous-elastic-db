@@ -13,12 +13,21 @@
 #include "alinous.btree/IBTreeValue.h"
 #include "alinous.btree/IBTreeNode.h"
 #include "alinous.btree/IBTree.h"
-#include "alinous.btree/StringKey.h"
+#include "alinous.btree.scan/BTreeScanner.h"
 #include "alinous.btreememory/BTreeOnMemory.h"
-#include "alinous.db.table/IDatabaseRecord.h"
-#include "alinous.db.table/IDatabaseTable.h"
+#include "alinous.db/AlinousDbException.h"
 #include "alinous.remote.socket/ICommandData.h"
+#include "alinous.db.table/TableMetadata.h"
+#include "alinous.db.trx/DbVersionContext.h"
+#include "alinous.db.table/IDatabaseRecord.h"
 #include "alinous.remote.region.client.command.data/ClientNetworkRecord.h"
+#include "alinous.system/ISystemLog.h"
+#include "alinous.remote.db.server/RemoteTableStorageServer.h"
+#include "alinous.system/AlinousCore.h"
+#include "alinous.db.table/IDatabaseTable.h"
+#include "alinous.db/ITableSchema.h"
+#include "alinous.db/TableSchema.h"
+#include "alinous.remote.db.server.commit/TableFullNameKey.h"
 #include "alinous.remote.db.server.commit/InsertStore.h"
 
 namespace alinous {namespace remote {namespace db {namespace server {namespace commit {
@@ -69,10 +78,57 @@ InsertStore* InsertStore::init(ThreadContext* ctx) throw()
 	__GC_MV(this, &(this->store), (new(ctx) BTreeOnMemory(8, ctx)), IBTree);
 	return this;
 }
+void InsertStore::commitPrepared(long long newCommitId, DbVersionContext* vctx, RemoteTableStorageServer* server, ThreadContext* ctx)
+{
+	BTreeScanner* scanner = (new(ctx) BTreeScanner(this->store, ctx));
+	{
+		std::function<void(void)> finallyLm2= [&, this]()
+		{
+			{
+				try
+				{
+					scanner->endScan(ctx);
+				}
+				catch(InterruptedException* ignore)
+				{
+					ignore->printStackTrace(ctx);
+				}
+			}
+		};
+		Releaser finalyCaller2(finallyLm2);
+		try
+		{
+			scanner->startScan(false, ctx);
+			while(scanner->hasNext(ctx))
+			{
+				IBTreeNode* node = scanner->next(ctx);
+				TableFullNameKey* tablekey = static_cast<TableFullNameKey*>(node->getKey(ctx));
+				ArrayList<IBTreeValue>* values = node->getValues(ctx);
+				handleCommitTable(newCommitId, vctx, tablekey, values, server, ctx);
+			}
+		}
+		catch(IOException* e)
+		{
+			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3595(), ctx));
+		}
+		catch(InterruptedException* e)
+		{
+			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3595(), ctx));
+		}
+		catch(BTreeException* e)
+		{
+			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3595(), ctx));
+		}
+		catch(AlinousException* e)
+		{
+			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3595(), ctx));
+		}
+	}
+}
 void InsertStore::add(IDatabaseTable* table, List<ClientNetworkRecord>* records, ThreadContext* ctx)
 {
-	String* fullName = table->getFullName(ctx);
-	StringKey* key = (new(ctx) StringKey(fullName, ctx));
+	TableMetadata* meta = table->getMetadata(ctx);
+	TableFullNameKey* key = (new(ctx) TableFullNameKey(meta->getSchema(ctx), meta->getTableName(ctx), ctx));
 	IBTreeNode* node = this->store->findByKey(key, ctx);
 	if(node == nullptr)
 	{
@@ -94,6 +150,29 @@ IBTree* InsertStore::getStore(ThreadContext* ctx) throw()
 String* InsertStore::getBaseDir(ThreadContext* ctx) throw() 
 {
 	return baseDir;
+}
+void InsertStore::handleCommitTable(long long newCommitId, DbVersionContext* vctx, TableFullNameKey* fullName, ArrayList<IBTreeValue>* values, RemoteTableStorageServer* server, ThreadContext* ctx)
+{
+	String* schemaName = fullName->getSchema(ctx);
+	String* tableName = fullName->getTable(ctx);
+	TableSchema* schema = server->schemas->getSchema(schemaName, ctx);
+	if(schema == nullptr)
+	{
+		throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3589()->clone(ctx)->append(schemaName, ctx)->append(ConstStr::getCNST_STR_1125(), ctx), ctx));
+	}
+	IDatabaseTable* table = schema->getTableStore(tableName, ctx);
+	if(table == nullptr)
+	{
+		throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3589()->clone(ctx)->append(schemaName, ctx)->append(ConstStr::getCNST_STR_953(), ctx)->append(tableName, ctx)->append(ConstStr::getCNST_STR_1125(), ctx), ctx));
+	}
+	AlinousCore* core = server->getCore(ctx);
+	ISystemLog* log = core->getLogger(ctx);
+	int maxLoop = values->size(ctx);
+	for(int i = 0; i != maxLoop; ++i)
+	{
+		ClientNetworkRecord* record = static_cast<ClientNetworkRecord*>(values->get(i, ctx));
+		table->tcpInsertCommit(record, server->getWorkerThreadsPool(ctx), log, ctx);
+	}
 }
 void InsertStore::__cleanUp(ThreadContext* ctx){
 }

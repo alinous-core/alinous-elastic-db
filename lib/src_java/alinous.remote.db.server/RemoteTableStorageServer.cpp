@@ -286,8 +286,26 @@ void RemoteTableStorageServer::prepareInsert(String* schemaName, String* tableNa
 	StorageTransaction* storageTrx = this->storageTrxManager->getStorageTransaction(isolationLevel, vctx, ctx);
 	storageTrx->prepareInsert(table, uniqueCheckOps, records, ctx);
 }
-void RemoteTableStorageServer::commitDmlTransaction(long long newCommitId, DbVersionContext* vctx, ThreadContext* ctx) throw() 
+void RemoteTableStorageServer::commitDmlTransaction(long long newCommitId, DbVersionContext* vctx, ThreadContext* ctx)
 {
+	StorageTransaction* trx = this->storageTrxManager->getStorageTransaction(vctx, ctx);
+	{
+		std::function<void(void)> finallyLm2= [&, this]()
+		{
+			trx->dispose(ctx);
+			this->storageTrxManager->finishTransaction(vctx->getTrxId(ctx), ctx);
+		};
+		Releaser finalyCaller2(finallyLm2);
+		try
+		{
+			trx->commitPrepared(newCommitId, vctx, this, ctx);
+		}
+		catch(...){throw;}
+	}
+}
+ThreadPool* RemoteTableStorageServer::getWorkerThreadsPool(ThreadContext* ctx) throw() 
+{
+	return workerThreadsPool;
 }
 void RemoteTableStorageServer::initInstance(AlinousCore* core, ThreadContext* ctx)
 {

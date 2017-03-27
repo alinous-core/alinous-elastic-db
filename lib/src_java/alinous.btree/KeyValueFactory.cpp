@@ -139,6 +139,7 @@
 #include "alinous.db.table/DatabaseTable.h"
 #include "alinous.remote.db.client.command.data/SchemasStructureInfoData.h"
 #include "alinous.db/SchemaManager.h"
+#include "alinous.remote.db.server.commit/TableFullNameKey.h"
 #include "alinous.btree/StringValue.h"
 #include "alinous.btree/DoubleValue.h"
 #include "alinous.btree/StringKey.h"
@@ -272,6 +273,8 @@ IBTreeKey* KeyValueFactory::keyFromFetcher(FileStorageEntryFetcher* fetcher, Thr
 	case IBTreeKey::TYPE_BTREE_INDEX_KEY:
 		key = BTreeIndexKey::fetchFromEntry(fetcher, ctx);
 		break ;
+	case IBTreeKey::TYPE_TABLE_FULL_NAME_KEY:
+		key = TableFullNameKey::fetchFromEntry(fetcher, ctx);
 	default:
 		key = nullptr;
 		break ;

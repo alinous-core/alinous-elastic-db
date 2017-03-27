@@ -1346,6 +1346,10 @@ void DomVariable::setLastUpdateCommitId(long long commitId, ThreadContext* ctx) 
 void DomVariable::setInsertedCommitId(long long insertedCommitId, ThreadContext* ctx) throw() 
 {
 }
+long long DomVariable::getPosition(ThreadContext* ctx) throw() 
+{
+	return -1;
+}
 DomVariable* DomVariable::importFromDebugXml(DomNode* node, ThreadContext* ctx) throw() 
 {
 	if(!node->getName(ctx)->equals(DomVariable::VAL_TYPE, ctx))

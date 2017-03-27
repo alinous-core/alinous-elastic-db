@@ -6,7 +6,6 @@
 #include "alinous.btree/IValueFetcher.h"
 #include "alinous.btree/IBTreeValue.h"
 #include "alinous.db.table/IDatabaseRecord.h"
-#include "alinous.db.table/DatabaseRecord.h"
 #include "alinous.db.table/IScannableIndex.h"
 #include "alinous.db.table/IndexInsertJob.h"
 
@@ -27,15 +26,15 @@ bool IndexInsertJob::__init_static_variables(){
 	delete ctx;
 	return true;
 }
- IndexInsertJob::IndexInsertJob(IScannableIndex* tableIndex, DatabaseRecord* dbrecord, ThreadContext* ctx) throw()  : IObject(ctx), IThreadAction(ctx), tableIndex(nullptr), dbrecord(nullptr)
+ IndexInsertJob::IndexInsertJob(IScannableIndex* tableIndex, IDatabaseRecord* dbrecord, ThreadContext* ctx) throw()  : IObject(ctx), IThreadAction(ctx), tableIndex(nullptr), dbrecord(nullptr)
 {
 	__GC_MV(this, &(this->tableIndex), tableIndex, IScannableIndex);
-	__GC_MV(this, &(this->dbrecord), dbrecord, DatabaseRecord);
+	__GC_MV(this, &(this->dbrecord), dbrecord, IDatabaseRecord);
 }
-void IndexInsertJob::__construct_impl(IScannableIndex* tableIndex, DatabaseRecord* dbrecord, ThreadContext* ctx) throw() 
+void IndexInsertJob::__construct_impl(IScannableIndex* tableIndex, IDatabaseRecord* dbrecord, ThreadContext* ctx) throw() 
 {
 	__GC_MV(this, &(this->tableIndex), tableIndex, IScannableIndex);
-	__GC_MV(this, &(this->dbrecord), dbrecord, DatabaseRecord);
+	__GC_MV(this, &(this->dbrecord), dbrecord, IDatabaseRecord);
 }
  IndexInsertJob::~IndexInsertJob() throw() 
 {

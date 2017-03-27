@@ -853,6 +853,7 @@ set(srcjava
 	"src_java/alinous.system.functions/IAlinousSystem.cpp"
 	"src_java/alinous.system.functions/AlinousFunctionManager.cpp"
 	"src_java/alinous.remote.db.server.commit/PrepareStorageManager.cpp"
+	"src_java/alinous.remote.db.server.commit/TableFullNameKey.cpp"
 	"src_java/alinous.remote.db.server.commit/InsertStore.cpp"
 	"src_java/alinous.remote.db.server.commit/UpdateStore.cpp"
 	"src_java/alinous.remote.db.server.commit/DeleteStore.cpp"

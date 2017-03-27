@@ -21,7 +21,6 @@
 #include "alinous.remote.socket/ICommandData.h"
 #include "alinous.db.table/TableColumnMetadata.h"
 #include "alinous.db.table/IDatabaseRecord.h"
-#include "alinous.db.table/DatabaseRecord.h"
 #include "alinous.db.table/IBtreeTableIndex.h"
 #include "alinous.db.table/BTreeIndexKey.h"
 #include "alinous.db.table/TableIndexValue.h"
@@ -147,7 +146,7 @@ bool TableIndex::isAvailableByScanId(ArrayList<ScanTableColumnIdentifier>* colum
 	}
 	return true;
 }
-void TableIndex::addIndexValue(DatabaseRecord* record, ThreadContext* ctx)
+void TableIndex::addIndexValue(IDatabaseRecord* record, ThreadContext* ctx)
 {
 	BTreeIndexKey* indexKey = (new(ctx) BTreeIndexKey(this, record, ctx));
 	TableIndexValue* positionValue = (new(ctx) TableIndexValue(record->getOid(ctx), record->getPosition(ctx), ctx));

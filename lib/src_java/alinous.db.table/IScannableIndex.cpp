@@ -18,7 +18,6 @@
 #include "alinous.remote.socket/ICommandData.h"
 #include "alinous.db.table/TableColumnMetadata.h"
 #include "alinous.db.table/IDatabaseRecord.h"
-#include "alinous.db.table/DatabaseRecord.h"
 #include "alinous.db.table/IScannableIndex.h"
 
 namespace alinous {namespace db {namespace table {

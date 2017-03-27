@@ -78,6 +78,7 @@ public:
 	int getNumColumn(ThreadContext* ctx) throw()  final;
 	void setLastUpdateCommitId(long long commitId, ThreadContext* ctx) throw()  final;
 	void setInsertedCommitId(long long insertedCommitId, ThreadContext* ctx) throw()  final;
+	long long getPosition(ThreadContext* ctx) throw()  final;
 public:
 	static PadddingRecord* fromFetcher(FileStorageEntryFetcher* fetcher, ThreadContext* ctx) throw() ;
 public:

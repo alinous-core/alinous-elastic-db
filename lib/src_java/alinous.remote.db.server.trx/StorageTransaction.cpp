@@ -2,9 +2,10 @@
 
 
 #include "alinous.btree/BTreeException.h"
-#include "alinous.buffer.storage/FileStorageEntryBuilder.h"
 #include "alinous.compile/AbstractSrcElement.h"
 #include "alinous.system/AlinousException.h"
+#include "alinous.db/AlinousDbException.h"
+#include "alinous.buffer.storage/FileStorageEntryBuilder.h"
 #include "alinous.btree/IValueFetcher.h"
 #include "alinous.btree/IBTreeValue.h"
 #include "alinous.db.table/IDatabaseRecord.h"
@@ -16,6 +17,7 @@
 #include "alinous.remote.region.client.command.data/ClientNetworkRecord.h"
 #include "alinous.remote.region.server.schema.strategy/UniqueCheckOperation.h"
 #include "alinous.remote.db.server/RemoteTableStorageServer.h"
+#include "alinous.remote.db.server.commit/InsertStore.h"
 #include "alinous.remote.db.server.commit/PrepareStorageManager.h"
 #include "alinous.remote.db.server.trx/UniqueChecker.h"
 #include "alinous.remote.db.server.trx/StorageTransaction.h"
@@ -89,6 +91,11 @@ void StorageTransaction::prepareInsert(IDatabaseTable* table, List<UniqueCheckOp
 {
 	this->uniqueChecker->checkUnique(table, uniqueCheckOps, ctx);
 	this->prepareManager->addInsert(table, records, ctx);
+}
+void StorageTransaction::commitPrepared(long long newCommitId, DbVersionContext* vctx, RemoteTableStorageServer* server, ThreadContext* ctx)
+{
+	InsertStore* insertStore = this->prepareManager->getInsertStore(ctx);
+	insertStore->commitPrepared(newCommitId, vctx, server, ctx);
 }
 void StorageTransaction::addUniqueExclusiveLock(UniqueExclusiveLock* lock, ThreadContext* ctx) throw() 
 {

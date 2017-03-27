@@ -22,7 +22,7 @@ namespace alinous {namespace compile {namespace sql {namespace analyze {
 class ScanTableColumnIdentifier;}}}}
 
 namespace alinous {namespace db {namespace table {
-class DatabaseRecord;}}}
+class IDatabaseRecord;}}}
 
 namespace alinous {namespace db {namespace table {
 class BTreeIndexKey;}}}
@@ -124,7 +124,7 @@ public:
 	void close(ThreadContext* ctx) final;
 	bool isAvailable(ArrayList<String>* columnsStr, ThreadContext* ctx) throw()  final;
 	bool isAvailableByScanId(ArrayList<ScanTableColumnIdentifier>* columnIds, ThreadContext* ctx) throw()  final;
-	void addIndexValue(DatabaseRecord* record, ThreadContext* ctx) final;
+	void addIndexValue(IDatabaseRecord* record, ThreadContext* ctx) final;
 	void createIndex(AlinousCore* core, BTreeGlobalCache* cache, ThreadContext* ctx) final;
 	int archiveSize(ThreadContext* ctx) final;
 	void appendToEntry(FileStorageEntryBuilder* builder, ThreadContext* ctx) final;
