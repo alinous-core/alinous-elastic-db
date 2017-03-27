@@ -3,7 +3,6 @@
 
 #include "alinous.buffer.storage/FileStorageEntryBuilder.h"
 #include "alinous.buffer.storage/FileStorageEntryFetcher.h"
-#include "alinous.lock/ConcurrentGate.h"
 #include "alinous.compile/AbstractSrcElement.h"
 #include "alinous.system/AlinousException.h"
 #include "alinous.runtime/ExecutionException.h"
@@ -152,10 +151,9 @@ void TableIndex::addIndexValue(DatabaseRecord* record, ThreadContext* ctx)
 {
 	BTreeIndexKey* indexKey = (new(ctx) BTreeIndexKey(this, record, ctx));
 	TableIndexValue* positionValue = (new(ctx) TableIndexValue(record->getOid(ctx), record->getPosition(ctx), ctx));
-	ConcurrentGate* gate = this->storage->gate;
-	gate->close(ctx);
+	this->storage->openGate(ctx);
 	this->storage->putKeyValue(indexKey, positionValue, ctx);
-	gate->open(ctx);
+	this->storage->closeGate(ctx);
 }
 void TableIndex::createIndex(AlinousCore* core, BTreeGlobalCache* cache, ThreadContext* ctx)
 {

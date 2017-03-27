@@ -9,6 +9,9 @@ class BufferedOutputStream;}}
 namespace java {namespace io {
 class OutputStream;}}
 
+namespace alinous {namespace remote {namespace socket {
+class NetworkBinaryBuffer;}}}
+
 namespace java {namespace io {
 class InputStream;}}
 
@@ -40,6 +43,7 @@ using ::java::io::OutputStream;
 using ::alinous::db::trx::DbVersionContext;
 using ::alinous::remote::db::client::command::AbstractRemoteStorageCommand;
 using ::alinous::remote::db::server::RemoteTableStorageServer;
+using ::alinous::remote::socket::NetworkBinaryBuffer;
 using ::alinous::runtime::dom::VariableException;
 
 

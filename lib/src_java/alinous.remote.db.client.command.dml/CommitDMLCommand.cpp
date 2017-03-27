@@ -59,10 +59,16 @@ void CommitDMLCommand::__releaseRegerences(bool prepare, ThreadContext* ctx) thr
 }
 void CommitDMLCommand::executeOnServer(RemoteTableStorageServer* tableStorageServer, BufferedOutputStream* outStream, ThreadContext* ctx)
 {
+	tableStorageServer->commitDmlTransaction(this->newCommitId, this->vctx, ctx);
 	writeByteStream(outStream, ctx);
 }
 void CommitDMLCommand::readFromStream(InputStream* stream, int remain, ThreadContext* ctx)
 {
+	IArrayObjectPrimitive<char>* src = ArrayAllocatorPrimitive<char>::allocatep(ctx, remain);
+	stream->read(src, ctx);
+	NetworkBinaryBuffer* buff = (new(ctx) NetworkBinaryBuffer(src, ctx));
+	this->newCommitId = buff->getLong(ctx);
+	__GC_MV(this, &(this->vctx), DbVersionContext::fromNetwork(buff, ctx), DbVersionContext);
 }
 long long CommitDMLCommand::getNewCommitId(ThreadContext* ctx) throw() 
 {
@@ -82,6 +88,15 @@ void CommitDMLCommand::setVctx(DbVersionContext* vctx, ThreadContext* ctx) throw
 }
 void CommitDMLCommand::writeByteStream(OutputStream* outStream, ThreadContext* ctx)
 {
+	NetworkBinaryBuffer* buff = (new(ctx) NetworkBinaryBuffer(1024 * 2, ctx));
+	buff->putInt(this->type, ctx);
+	buff->putLong(this->newCommitId, ctx);
+	this->vctx->writeData(buff, ctx);
+	writeErrorByteStream(buff, ctx);
+	IArrayObjectPrimitive<char>* b = buff->toBinary(ctx);
+	int pos = buff->getPutSize(ctx);
+	outStream->write(b, 0, pos, ctx);
+	outStream->flush(ctx);
 }
 void CommitDMLCommand::__cleanUp(ThreadContext* ctx){
 }

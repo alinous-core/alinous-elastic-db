@@ -77,7 +77,7 @@ bool BTree::__init_static_variables(){
 	delete ctx;
 	return true;
 }
- BTree::BTree(ThreadContext* ctx) throw()  : IObject(ctx), IBTree(ctx), gate(nullptr), root(0), storage(nullptr), nodeCapacity(0), keyType(0), valueType(0), loader(nullptr), fetcher(nullptr)
+ BTree::BTree(ThreadContext* ctx) throw()  : IObject(ctx), IBTree(ctx), root(0), storage(nullptr), nodeCapacity(0), keyType(0), valueType(0), loader(nullptr), fetcher(nullptr), gate(nullptr)
 {
 }
 void BTree::__construct_impl(ThreadContext* ctx) throw() 
@@ -93,17 +93,33 @@ void BTree::__construct_impl(ThreadContext* ctx) throw()
 void BTree::__releaseRegerences(bool prepare, ThreadContext* ctx) throw() 
 {
 	ObjectEraser __e_obj1(ctx, __FILEW__, __LINE__, L"BTree", L"~BTree");
-	__e_obj1.add(this->gate, this);
-	gate = nullptr;
 	__e_obj1.add(this->storage, this);
 	storage = nullptr;
 	__e_obj1.add(this->loader, this);
 	loader = nullptr;
 	__e_obj1.add(this->fetcher, this);
 	fetcher = nullptr;
+	__e_obj1.add(this->gate, this);
+	gate = nullptr;
 	if(!prepare){
 		return;
 	}
+}
+void BTree::closeGate(ThreadContext* ctx)
+{
+	this->gate->close(ctx);
+}
+void BTree::openGate(ThreadContext* ctx)
+{
+	this->gate->open(ctx);
+}
+void BTree::enterGate(ThreadContext* ctx)
+{
+	this->gate->enter(ctx);
+}
+void BTree::exitGate(ThreadContext* ctx) throw() 
+{
+	this->gate->exit(ctx);
 }
 BTree* BTree::init(File* file, BTreeGlobalCache* cacheEngine, DiskCacheManager* diskCache, ThreadContext* ctx)
 {

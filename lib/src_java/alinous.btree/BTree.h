@@ -112,8 +112,6 @@ public:
 	void __construct_impl(ThreadContext* ctx) throw() ;
 	virtual ~BTree() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
-public:
-	ConcurrentGate* gate;
 private:
 	long long root;
 	FileStorage* storage;
@@ -122,7 +120,12 @@ private:
 	int valueType;
 	BTreeNodeLoader* loader;
 	FileStorageEntryFetcher* fetcher;
+	ConcurrentGate* gate;
 public:
+	void closeGate(ThreadContext* ctx) final;
+	void openGate(ThreadContext* ctx) final;
+	void enterGate(ThreadContext* ctx) final;
+	void exitGate(ThreadContext* ctx) throw()  final;
 	BTree* init(File* file, BTreeGlobalCache* cacheEngine, DiskCacheManager* diskCache, ThreadContext* ctx);
 	ArrayList<IBTreeValue>* getValues(IBTreeKey* key, ThreadContext* ctx);
 	bool putUniqueKeyValue(IBTreeKey* key, IBTreeValue* value, ThreadContext* ctx);

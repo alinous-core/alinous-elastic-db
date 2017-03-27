@@ -206,6 +206,7 @@ public:
 	void createSchema(String* schemaName, ThreadContext* ctx);
 	void createTable(TableMetadata* metadata, ThreadContext* ctx);
 	void prepareInsert(String* schemaName, String* tableName, long long newCommitId, List<UniqueCheckOperation>* uniqueCheckOps, List<ClientNetworkRecord>* records, DbVersionContext* vctx, int isolationLevel, ThreadContext* ctx);
+	void commitDmlTransaction(long long newCommitId, DbVersionContext* vctx, ThreadContext* ctx) throw() ;
 private:
 	void initInstance(AlinousCore* core, ThreadContext* ctx);
 	File* getConfigFile(ThreadContext* ctx) throw() ;

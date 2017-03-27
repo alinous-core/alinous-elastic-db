@@ -92,6 +92,10 @@ public:
 	void putKeyValue(IBTreeKey* key, IBTreeValue* value, ThreadContext* ctx) final;
 	void putKey(IBTreeKey* key, ThreadContext* ctx) final;
 	void appendKeyValue(IBTreeKey* key, IBTreeValue* value, ThreadContext* ctx) final;
+	void closeGate(ThreadContext* ctx) final;
+	void openGate(ThreadContext* ctx) final;
+	void enterGate(ThreadContext* ctx) final;
+	void exitGate(ThreadContext* ctx) throw()  final;
 private:
 	void putRooNode(ThreadContext* ctx);
 	MBTreeLeafNode* internalPutKey(IBTreeKey* key, ThreadContext* ctx);

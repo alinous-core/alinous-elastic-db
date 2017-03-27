@@ -1,7 +1,6 @@
 #include "include/global.h"
 
 
-#include "alinous.lock/ConcurrentGate.h"
 #include "alinous.btree/IValueFetcher.h"
 #include "alinous.btree/IBTreeValue.h"
 #include "java.lang/Comparable.h"
@@ -67,10 +66,9 @@ void OidIndexJob::execute(ThreadContext* ctx)
 	LongValue* positionValue = (new(ctx) LongValue(this->position, ctx));
 	BTreeIndexKey* indexKey = (new(ctx) BTreeIndexKey(ctx));
 	indexKey->values->add((new(ctx) VariantValue(nextOid, ctx)), ctx);
-	ConcurrentGate* gate = this->oidIndex->gate;
-	gate->close(ctx);
+	this->oidIndex->closeGate(ctx);
 	this->oidIndex->putKeyValue(indexKey, positionValue, ctx);
-	gate->open(ctx);
+	this->oidIndex->openGate(ctx);
 }
 void OidIndexJob::__cleanUp(ThreadContext* ctx){
 }

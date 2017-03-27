@@ -59,6 +59,10 @@ public:
 	virtual void putKeyValue(IBTreeKey* key, IBTreeValue* value, ThreadContext* ctx) = 0;
 	virtual void putKey(IBTreeKey* key, ThreadContext* ctx) = 0;
 	virtual void appendKeyValue(IBTreeKey* key, IBTreeValue* value, ThreadContext* ctx) = 0;
+	virtual void closeGate(ThreadContext* ctx) = 0;
+	virtual void openGate(ThreadContext* ctx) = 0;
+	virtual void enterGate(ThreadContext* ctx) = 0;
+	virtual void exitGate(ThreadContext* ctx) throw()  = 0;
 public:
 	static bool __init_done;
 	static bool __init_static_variables();

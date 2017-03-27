@@ -58,6 +58,7 @@ void BTreeScanner::__releaseRegerences(bool prepare, ThreadContext* ctx) throw()
 }
 void BTreeScanner::startScan(bool endStart, ThreadContext* ctx)
 {
+	this->btree->enterGate(ctx);
 	if(this->btree->isEmpty(ctx))
 	{
 		return;
@@ -164,6 +165,7 @@ void BTreeScanner::endScan(ThreadContext* ctx)
 		nit->dispose(ctx);
 	}
 	this->stack->clear(ctx);
+	this->btree->exitGate(ctx);
 }
 void BTreeScanner::gotoKey(IBTreeKey* key, IBTreeNode* rootNode, ThreadContext* ctx)
 {

@@ -286,6 +286,9 @@ void RemoteTableStorageServer::prepareInsert(String* schemaName, String* tableNa
 	StorageTransaction* storageTrx = this->storageTrxManager->getStorageTransaction(isolationLevel, vctx, ctx);
 	storageTrx->prepareInsert(table, uniqueCheckOps, records, ctx);
 }
+void RemoteTableStorageServer::commitDmlTransaction(long long newCommitId, DbVersionContext* vctx, ThreadContext* ctx) throw() 
+{
+}
 void RemoteTableStorageServer::initInstance(AlinousCore* core, ThreadContext* ctx)
 {
 	{

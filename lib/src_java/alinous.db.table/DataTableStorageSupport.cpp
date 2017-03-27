@@ -92,7 +92,7 @@ bool DataTableStorageSupport::hasLaterVersionBefore(long long oid, long long com
 	BTreeIndexKey* indexKey = (new(ctx) BTreeIndexKey(ctx));
 	indexKey->values->add((new(ctx) VariantValue(oid, ctx)), ctx);
 	ArrayList<IBTreeValue>* values = nullptr;
-	this->oidIndex->gate->enter(ctx);
+	this->oidIndex->enterGate(ctx);
 	{
 		try
 		{
@@ -101,11 +101,11 @@ bool DataTableStorageSupport::hasLaterVersionBefore(long long oid, long long com
 		}
 		catch(Throwable* e)
 		{
-			this->oidIndex->gate->exit(ctx);
+			this->oidIndex->exitGate(ctx);
 			throw e;
 		}
 	}
-	this->oidIndex->gate->exit(ctx);
+	this->oidIndex->exitGate(ctx);
 	int maxIndex = values->size(ctx) - 1;
 	int i = 0;
 	IDatabaseRecord* lastRecord = nullptr;
@@ -135,7 +135,7 @@ bool DataTableStorageSupport::isDeleted(long long oid, ThreadContext* ctx)
 	BTreeIndexKey* indexKey = (new(ctx) BTreeIndexKey(ctx));
 	indexKey->values->add((new(ctx) VariantValue(oid, ctx)), ctx);
 	ArrayList<IBTreeValue>* values = nullptr;
-	this->oidIndex->gate->enter(ctx);
+	this->oidIndex->enterGate(ctx);
 	{
 		try
 		{
@@ -144,11 +144,11 @@ bool DataTableStorageSupport::isDeleted(long long oid, ThreadContext* ctx)
 		}
 		catch(Throwable* e)
 		{
-			this->oidIndex->gate->exit(ctx);
+			this->oidIndex->exitGate(ctx);
 			throw e;
 		}
 	}
-	this->oidIndex->gate->exit(ctx);
+	this->oidIndex->exitGate(ctx);
 	int maxIndex = values->size(ctx) - 1;
 	LongValue* positionValue = static_cast<LongValue*>(values->get(maxIndex, ctx));
 	IDatabaseRecord* lastRecord = this->cacheEngine->loadRecord(this, positionValue->value, ctx);
@@ -159,7 +159,7 @@ bool DataTableStorageSupport::isLatest(long long oid, long long commitId, Thread
 	BTreeIndexKey* indexKey = (new(ctx) BTreeIndexKey(ctx));
 	indexKey->values->add((new(ctx) VariantValue(oid, ctx)), ctx);
 	ArrayList<IBTreeValue>* values = nullptr;
-	this->oidIndex->gate->enter(ctx);
+	this->oidIndex->enterGate(ctx);
 	{
 		try
 		{
@@ -168,11 +168,11 @@ bool DataTableStorageSupport::isLatest(long long oid, long long commitId, Thread
 		}
 		catch(Throwable* e)
 		{
-			this->oidIndex->gate->exit(ctx);
+			this->oidIndex->exitGate(ctx);
 			throw e;
 		}
 	}
-	this->oidIndex->gate->exit(ctx);
+	this->oidIndex->exitGate(ctx);
 	int maxIndex = values->size(ctx) - 1;
 	LongValue* positionValue = static_cast<LongValue*>(values->get(maxIndex, ctx));
 	IDatabaseRecord* lastRecord = this->cacheEngine->loadRecord(this, positionValue->value, ctx);
@@ -183,7 +183,7 @@ DatabaseRecord* DataTableStorageSupport::getLastRecord(long long oid, long long 
 	BTreeIndexKey* indexKey = (new(ctx) BTreeIndexKey(ctx));
 	indexKey->values->add((new(ctx) VariantValue(oid, ctx)), ctx);
 	ArrayList<IBTreeValue>* values = nullptr;
-	this->oidIndex->gate->enter(ctx);
+	this->oidIndex->enterGate(ctx);
 	{
 		try
 		{
@@ -192,11 +192,11 @@ DatabaseRecord* DataTableStorageSupport::getLastRecord(long long oid, long long 
 		}
 		catch(Throwable* e)
 		{
-			this->oidIndex->gate->exit(ctx);
+			this->oidIndex->exitGate(ctx);
 			throw e;
 		}
 	}
-	this->oidIndex->gate->exit(ctx);
+	this->oidIndex->exitGate(ctx);
 	int maxIndex = values->size(ctx) - 1;
 	for(int i = maxIndex; i != -1; --i)
 	{

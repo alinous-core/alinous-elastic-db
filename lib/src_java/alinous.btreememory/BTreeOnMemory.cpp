@@ -192,6 +192,18 @@ void BTreeOnMemory::appendKeyValue(IBTreeKey* key, IBTreeValue* value, ThreadCon
 	}
 	node->getValues(ctx)->add(value, ctx);
 }
+void BTreeOnMemory::closeGate(ThreadContext* ctx)
+{
+}
+void BTreeOnMemory::openGate(ThreadContext* ctx)
+{
+}
+void BTreeOnMemory::enterGate(ThreadContext* ctx)
+{
+}
+void BTreeOnMemory::exitGate(ThreadContext* ctx) throw() 
+{
+}
 void BTreeOnMemory::putRooNode(ThreadContext* ctx)
 {
 	__GC_MV(this, &(this->rootNode), (new(ctx) MBTreeMaxLeafContainer(this->nodeCapacity, nullptr, ctx)), IBTreeNode);

@@ -15,9 +15,6 @@ class BTreeIndexKey;}}}
 namespace alinous {namespace runtime {namespace variant {
 class VariantValue;}}}
 
-namespace alinous {namespace lock {
-class ConcurrentGate;}}
-
 namespace alinous {namespace runtime {namespace parallel {
 class IThreadAction;}}}
 
@@ -36,7 +33,6 @@ using namespace ::java::lang;
 using ::java::util::Iterator;
 using ::alinous::btree::BTree;
 using ::alinous::btree::LongValue;
-using ::alinous::lock::ConcurrentGate;
 using ::alinous::runtime::parallel::IThreadAction;
 using ::alinous::runtime::variant::VariantValue;
 
