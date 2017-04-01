@@ -13,6 +13,7 @@
 #include "alinous.system.config.remote/Monitor.h"
 #include "alinous.remote.monitor/RegionNodeInfoManager.h"
 #include "alinous.remote.monitor/MonitorResponseActionFactory.h"
+#include "alinous.remote.monitor/TableOidHolder.h"
 #include "alinous.remote.monitor/TransactionMonitorServer.h"
 
 namespace alinous {namespace remote {namespace monitor {
@@ -33,7 +34,7 @@ bool TransactionMonitorServer::__init_static_variables(){
 	delete ctx;
 	return true;
 }
- TransactionMonitorServer::TransactionMonitorServer(int port, int maxthread, ThreadContext* ctx) throw()  : IObject(ctx), port(0), trxLock(__GC_INS(this, (new(ctx) LockObject(ctx)), LockObject)), trxId(1), commitIdLock(__GC_INS(this, (new(ctx) LockObject(ctx)), LockObject)), lastCommitId(0), lastOid(0), maxthread(0), socketServer(nullptr), nodeInfo(nullptr), schemaVersionLock(__GC_INS(this, (new(ctx) LockObject(ctx)), LockObject)), schemaVersion(1)
+ TransactionMonitorServer::TransactionMonitorServer(int port, int maxthread, ThreadContext* ctx) throw()  : IObject(ctx), port(0), trxLock(__GC_INS(this, (new(ctx) LockObject(ctx)), LockObject)), trxId(1), commitIdLock(__GC_INS(this, (new(ctx) LockObject(ctx)), LockObject)), lastCommitId(0), oidHolder(__GC_INS(this, (new(ctx) TableOidHolder(ctx)), TableOidHolder)), maxthread(0), socketServer(nullptr), nodeInfo(nullptr), schemaVersionLock(__GC_INS(this, (new(ctx) LockObject(ctx)), LockObject)), schemaVersion(1)
 {
 	this->port = port;
 	this->maxthread = maxthread;
@@ -57,6 +58,8 @@ void TransactionMonitorServer::__releaseRegerences(bool prepare, ThreadContext* 
 	trxLock = nullptr;
 	__e_obj1.add(this->commitIdLock, this);
 	commitIdLock = nullptr;
+	__e_obj1.add(this->oidHolder, this);
+	oidHolder = nullptr;
 	__e_obj1.add(this->socketServer, this);
 	socketServer = nullptr;
 	__e_obj1.add(this->nodeInfo, this);
@@ -132,10 +135,9 @@ void TransactionMonitorServer::updateSchemaVersion(ThreadContext* ctx) throw()
 		this->schemaVersion ++ ;
 	}
 }
-long long TransactionMonitorServer::getNextOid(ThreadContext* ctx) throw() 
+long long TransactionMonitorServer::getNextOid(String* tableFullName, int length, ThreadContext* ctx) throw() 
 {
-	this->lastOid ++ ;
-	return lastOid;
+	return this->oidHolder->getNextOid(tableFullName, length, ctx);
 }
 RegionNodeInfoManager* TransactionMonitorServer::getNodeInfo(ThreadContext* ctx) throw() 
 {

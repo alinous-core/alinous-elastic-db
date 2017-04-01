@@ -36,6 +36,9 @@ class ReportSchemaVersionCommand;}}}}}}
 namespace alinous {namespace remote {namespace monitor {namespace client {namespace command {namespace commitId {
 class ReportClusterVersionUpCommand;}}}}}}
 
+namespace alinous {namespace remote {namespace monitor {namespace client {namespace command {
+class AllocOidCommand;}}}}}
+
 namespace alinous {namespace system {
 class AlinousException;}}
 

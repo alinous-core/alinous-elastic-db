@@ -307,6 +307,10 @@ ThreadPool* RemoteTableStorageServer::getWorkerThreadsPool(ThreadContext* ctx) t
 {
 	return workerThreadsPool;
 }
+MonitorAccess* RemoteTableStorageServer::getMonitorAccess(ThreadContext* ctx) throw() 
+{
+	return monitorAccess;
+}
 void RemoteTableStorageServer::initInstance(AlinousCore* core, ThreadContext* ctx)
 {
 	{

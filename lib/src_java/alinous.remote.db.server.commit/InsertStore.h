@@ -54,6 +54,12 @@ class ISystemLog;}}
 namespace alinous {namespace remote {namespace region {namespace client {namespace command {namespace data {
 class ClientNetworkRecord;}}}}}}
 
+namespace alinous {namespace remote {namespace db {
+class MonitorAccess;}}}
+
+namespace java {namespace lang {
+class StringBuilder;}}
+
 namespace java {namespace util {
 template <typename  T> class List;}}
 
@@ -93,6 +99,7 @@ using ::alinous::db::TableSchema;
 using ::alinous::db::table::IDatabaseTable;
 using ::alinous::db::table::TableMetadata;
 using ::alinous::db::trx::DbVersionContext;
+using ::alinous::remote::db::MonitorAccess;
 using ::alinous::remote::db::server::RemoteTableStorageServer;
 using ::alinous::remote::region::client::command::data::ClientNetworkRecord;
 using ::alinous::runtime::dom::VariableException;
@@ -121,6 +128,7 @@ public:
 	String* getBaseDir(ThreadContext* ctx) throw() ;
 private:
 	void handleCommitTable(long long newCommitId, DbVersionContext* vctx, TableFullNameKey* fullName, ArrayList<IBTreeValue>* values, RemoteTableStorageServer* server, ThreadContext* ctx);
+	long long allocOids(RemoteTableStorageServer* server, TableFullNameKey* fullName, int allocNum, ThreadContext* ctx);
 public:
 	static bool __init_done;
 	static bool __init_static_variables();

@@ -7,6 +7,7 @@ template class ::java::util::Map<::java::lang::String, ::alinous::lock::unique::
 template class ::java::util::Map<::java::lang::String, ::alinous::lock::unique::TableUniqueCollections>;
 template class ::java::util::Map<::java::lang::String, ::alinous::lock::unique::UniqueExclusiveLock>;
 template class ::java::util::Map<::alinous::html::DomNode, ::java::util::ArrayList<::alinous::html::xpath::match::MatchCandidate>>;
+template class ::java::util::Map<::java::lang::String, ::alinous::remote::monitor::OidHolder>;
 template class ::java::util::Map<::java::lang::String, ::alinous::remote::monitor::RegionNodeInfo>;
 template class ::java::util::Map<::java::lang::String, ::alinous::remote::db::client::command::data::TableClusterData>;
 template class ::java::util::Map<::java::lang::String, ::alinous::remote::db::client::command::data::SchemaData>;

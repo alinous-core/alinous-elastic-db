@@ -101,6 +101,7 @@ public:
 	void setValue(int index, VariantValue* value, ThreadContext* ctx) throw()  final;
 	void addValue(VariantValue* vv, ThreadContext* ctx) throw()  final;
 	long long getOid(ThreadContext* ctx) throw()  final;
+	void setOid(long long oid, ThreadContext* ctx) throw() ;
 	long long getMaxCommitId(ThreadContext* ctx) throw()  final;
 	int getNumColumn(ThreadContext* ctx) throw()  final;
 	void setLastUpdateCommitId(long long commitId, ThreadContext* ctx) throw()  final;

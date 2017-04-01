@@ -58,7 +58,7 @@ void VoidCommand::executeOnServer(TransactionMonitorServer* monitorServer, Buffe
 void VoidCommand::writeByteStream(OutputStream* out, ThreadContext* ctx)
 {
 	NetworkBinaryBuffer* buff = (new(ctx) NetworkBinaryBuffer(32, ctx));
-	buff->putInt(AbstractMonitorCommand::TYPE_VOID, ctx);
+	buff->putInt(this->type, ctx);
 	IArrayObjectPrimitive<char>* b = buff->toBinary(ctx);
 	int pos = buff->getPutSize(ctx);
 	out->write(b, 0, pos, ctx);

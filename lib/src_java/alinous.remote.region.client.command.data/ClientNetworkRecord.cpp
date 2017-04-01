@@ -209,6 +209,10 @@ long long ClientNetworkRecord::getOid(ThreadContext* ctx) throw()
 {
 	return this->oid;
 }
+void ClientNetworkRecord::setOid(long long oid, ThreadContext* ctx) throw() 
+{
+	this->oid = oid;
+}
 long long ClientNetworkRecord::getMaxCommitId(ThreadContext* ctx) throw() 
 {
 	long long commitId = this->lastUpdateCommitId < this->insertedCommitId ? this->insertedCommitId : this->lastUpdateCommitId;

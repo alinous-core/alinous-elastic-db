@@ -379,9 +379,12 @@
 #include "alinous.remote.monitor.client.command/VoidCommand.h"
 #include "alinous.remote.monitor.client.command/MonitorConnectCommand.h"
 #include "alinous.remote.monitor.client.command/GetRegionNodeInfoCommand.h"
+#include "alinous.remote.monitor.client.command/AllocOidCommand.h"
 #include "alinous.remote.monitor.client.command/MinitorCommandReader.h"
 #include "alinous.remote.monitor/MonitorResponceAction.h"
 #include "alinous.remote.monitor/MonitorResponseActionFactory.h"
+#include "alinous.remote.monitor/OidHolder.h"
+#include "alinous.remote.monitor/TableOidHolder.h"
 #include "alinous.remote.monitor/TransactionMonitorServer.h"
 #include "alinous.remote.monitor.client/MonitorConnection.h"
 #include "alinous.remote.monitor.client/MonitorClientConnectionFactory.h"
@@ -1780,10 +1783,12 @@ inline static void __cleanUpStatics(alinous::ThreadContext* ctx){
 	alinous::server::webmodule::WebModuleManager::__cleanUp(ctx);
 	alinous::remote::monitor::MonitorResponseActionFactory::__cleanUp(ctx);
 	alinous::remote::monitor::TransactionMonitorServer::__cleanUp(ctx);
+	alinous::remote::monitor::TableOidHolder::__cleanUp(ctx);
 	alinous::remote::monitor::MonitorResponceAction::__cleanUp(ctx);
 	alinous::remote::monitor::RegionNodeInfoManager::__cleanUp(ctx);
 	alinous::remote::monitor::RegionNodeInfo::__cleanUp(ctx);
 	alinous::remote::monitor::NodeInfo::__cleanUp(ctx);
+	alinous::remote::monitor::OidHolder::__cleanUp(ctx);
 	alinous::remote::monitor::client::MonitorClientConnectionFactory::__cleanUp(ctx);
 	alinous::remote::monitor::client::RemoteCommitIdPublisher::__cleanUp(ctx);
 	alinous::remote::monitor::client::MonitorConnectionInfo::__cleanUp(ctx);
@@ -1791,6 +1796,7 @@ inline static void __cleanUpStatics(alinous::ThreadContext* ctx){
 	alinous::remote::monitor::client::command::TerminateCommand::__cleanUp(ctx);
 	alinous::remote::monitor::client::command::MinitorCommandReader::__cleanUp(ctx);
 	alinous::remote::monitor::client::command::MonitorConnectCommand::__cleanUp(ctx);
+	alinous::remote::monitor::client::command::AllocOidCommand::__cleanUp(ctx);
 	alinous::remote::monitor::client::command::GetRegionNodeInfoCommand::__cleanUp(ctx);
 	alinous::remote::monitor::client::command::FinishConnectionCommand::__cleanUp(ctx);
 	alinous::remote::monitor::client::command::AbstractMonitorCommand::__cleanUp(ctx);

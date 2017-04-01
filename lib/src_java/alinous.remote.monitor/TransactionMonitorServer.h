@@ -24,6 +24,9 @@ class SocketServer;}}}
 namespace alinous {namespace lock {
 class LockObject;}}
 
+namespace alinous {namespace remote {namespace monitor {
+class TableOidHolder;}}}
+
 namespace alinous {namespace db {
 class AlinousDbException;}}
 
@@ -63,7 +66,7 @@ private:
 	long long trxId;
 	LockObject* commitIdLock;
 	long long lastCommitId;
-	long long lastOid;
+	TableOidHolder* oidHolder;
 	int maxthread;
 	SocketServer* socketServer;
 	RegionNodeInfoManager* nodeInfo;
@@ -83,7 +86,7 @@ public:
 	long long getNodeClusterVersion(ThreadContext* ctx) throw() ;
 	long long getSchemaVersion(ThreadContext* ctx) throw() ;
 	void updateSchemaVersion(ThreadContext* ctx) throw() ;
-	long long getNextOid(ThreadContext* ctx) throw() ;
+	long long getNextOid(String* tableFullName, int length, ThreadContext* ctx) throw() ;
 	RegionNodeInfoManager* getNodeInfo(ThreadContext* ctx) throw() ;
 	long long updateNodeClusterVersion(long long nodeClusterRevision, ThreadContext* ctx) throw() ;
 public:

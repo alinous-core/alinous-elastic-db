@@ -18,6 +18,7 @@
 #include "alinous.remote.monitor.client.command/VoidCommand.h"
 #include "alinous.remote.monitor.client.command/MonitorConnectCommand.h"
 #include "alinous.remote.monitor.client.command/GetRegionNodeInfoCommand.h"
+#include "alinous.remote.monitor.client.command/AllocOidCommand.h"
 #include "alinous.remote.monitor.client.command/MinitorCommandReader.h"
 
 namespace alinous {namespace remote {namespace monitor {namespace client {namespace command {
@@ -91,6 +92,9 @@ AbstractMonitorCommand* MinitorCommandReader::readFromStream(InputStream* stream
 		break ;
 	case AbstractMonitorCommand::TYPE_REPORT_CLUSTER_UPDATED:
 		cmd = (new(ctx) ReportClusterVersionUpCommand(ctx));
+		break ;
+	case AbstractMonitorCommand::TYPE_ALLOC_OID:
+		cmd = (new(ctx) AllocOidCommand(ctx));
 		break ;
 	default:
 		throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3583(), ctx));

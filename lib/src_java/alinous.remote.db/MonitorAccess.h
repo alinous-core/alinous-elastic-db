@@ -33,6 +33,9 @@ class AlinousException;}}
 namespace java {namespace io {
 class IOException;}}
 
+namespace alinous {namespace remote {namespace monitor {namespace client {namespace command {
+class AllocOidCommand;}}}}}
+
 namespace java {namespace lang {
 class IObject;
 }}
@@ -52,6 +55,7 @@ using ::alinous::net::AlinousSocket;
 using ::alinous::remote::monitor::client::MonitorClientConnectionFactory;
 using ::alinous::remote::monitor::client::MonitorConnectionInfo;
 using ::alinous::remote::monitor::client::command::AbstractMonitorCommand;
+using ::alinous::remote::monitor::client::command::AllocOidCommand;
 using ::alinous::remote::monitor::client::command::commitId::ReportSchemaVersionCommand;
 using ::alinous::remote::socket::ISocketConnection;
 using ::alinous::remote::socket::SocketConnectionPool;
@@ -74,6 +78,7 @@ private:
 public:
 	void init(ThreadContext* ctx) throw() ;
 	void reportSchemaUpdated(ThreadContext* ctx);
+	long long allocOids(String* tableFullName, int allocNum, ThreadContext* ctx);
 	void dispose(ThreadContext* ctx) throw() ;
 public:
 	static bool __init_done;

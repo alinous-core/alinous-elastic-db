@@ -84,6 +84,7 @@ public:
 	constexpr static const int TYPE_NEW_TRANSACTION{104};
 	constexpr static const int TYPE_REPORT_SCHEMA_UPDATED{105};
 	constexpr static const int TYPE_REPORT_CLUSTER_UPDATED{106};
+	constexpr static const int TYPE_ALLOC_OID{107};
 	constexpr static const int TYPE_TERMINATE{404};
 public:
 	int getType(ThreadContext* ctx) throw() ;

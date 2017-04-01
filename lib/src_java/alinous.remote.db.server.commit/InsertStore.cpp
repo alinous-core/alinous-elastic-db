@@ -19,6 +19,7 @@
 #include "alinous.remote.socket/ICommandData.h"
 #include "alinous.db.table/TableMetadata.h"
 #include "alinous.db.trx/DbVersionContext.h"
+#include "alinous.remote.db/MonitorAccess.h"
 #include "alinous.db.table/IDatabaseRecord.h"
 #include "alinous.remote.region.client.command.data/ClientNetworkRecord.h"
 #include "alinous.system/ISystemLog.h"
@@ -168,11 +169,22 @@ void InsertStore::handleCommitTable(long long newCommitId, DbVersionContext* vct
 	AlinousCore* core = server->getCore(ctx);
 	ISystemLog* log = core->getLogger(ctx);
 	int maxLoop = values->size(ctx);
+	long long nextOid = allocOids(server, fullName, maxLoop, ctx);
 	for(int i = 0; i != maxLoop; ++i)
 	{
 		ClientNetworkRecord* record = static_cast<ClientNetworkRecord*>(values->get(i, ctx));
+		record->setOid(nextOid, ctx);
+		nextOid ++ ;
 		table->tcpInsertCommit(record, server->getWorkerThreadsPool(ctx), log, ctx);
 	}
+}
+long long InsertStore::allocOids(RemoteTableStorageServer* server, TableFullNameKey* fullName, int allocNum, ThreadContext* ctx)
+{
+	MonitorAccess* monitorAccess = server->getMonitorAccess(ctx);
+	StringBuilder* buff = (new(ctx) StringBuilder(64, ctx));
+	buff->append(fullName->getSchema(ctx), ctx)->append(ConstStr::getCNST_STR_953(), ctx)->append(fullName->getTable(ctx), ctx);
+	long long nextOid = monitorAccess->allocOids(buff->toString(ctx), allocNum, ctx);
+	return nextOid;
 }
 void InsertStore::__cleanUp(ThreadContext* ctx){
 }

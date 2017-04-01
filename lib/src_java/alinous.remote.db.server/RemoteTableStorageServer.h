@@ -208,6 +208,7 @@ public:
 	void prepareInsert(String* schemaName, String* tableName, long long newCommitId, List<UniqueCheckOperation>* uniqueCheckOps, List<ClientNetworkRecord>* records, DbVersionContext* vctx, int isolationLevel, ThreadContext* ctx);
 	void commitDmlTransaction(long long newCommitId, DbVersionContext* vctx, ThreadContext* ctx);
 	ThreadPool* getWorkerThreadsPool(ThreadContext* ctx) throw() ;
+	MonitorAccess* getMonitorAccess(ThreadContext* ctx) throw() ;
 private:
 	void initInstance(AlinousCore* core, ThreadContext* ctx);
 	File* getConfigFile(ThreadContext* ctx) throw() ;
