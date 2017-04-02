@@ -17,6 +17,7 @@
 #include "alinous.remote.db.client.command/TerminateRemoteStorageCommand.h"
 #include "alinous.remote.db.client.command/VoidRemoteStorageCommand.h"
 #include "alinous.remote.db.client.command/GetTableSchemeCommand.h"
+#include "alinous.remote.db.client.command/RequestSyncOidCommand.h"
 #include "alinous.remote.db.client.command/RemoteStorageCommandReader.h"
 
 namespace alinous {namespace remote {namespace db {namespace client {namespace command {
@@ -87,6 +88,9 @@ AbstractRemoteStorageCommand* RemoteStorageCommandReader::readFromStream(InputSt
 		break ;
 	case AbstractRemoteStorageCommand::TYPE_COMMIT_DML:
 		cmd = (new(ctx) CommitDMLCommand(ctx));
+		break ;
+	case AbstractRemoteStorageCommand::TYPE_REQUEST_SYNC_OID:
+		cmd = (new(ctx) RequestSyncOidCommand(ctx));
 		break ;
 	default:
 		throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3585(), ctx));

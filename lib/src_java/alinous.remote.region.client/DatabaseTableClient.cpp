@@ -373,6 +373,13 @@ String* DatabaseTableClient::getFullName(ThreadContext* ctx) throw()
 void DatabaseTableClient::tcpInsertCommit(IDatabaseRecord* data, ThreadPool* pool, ISystemLog* log, ThreadContext* ctx) throw() 
 {
 }
+long long DatabaseTableClient::getNextOid(ThreadContext* ctx) throw() 
+{
+	return -1;
+}
+void DatabaseTableClient::setNextOid(long long nextOid, ThreadContext* ctx) throw() 
+{
+}
 bool DatabaseTableClient::matchUniqueIndexByIdList(ArrayList<TableColumnMetadata>* columnsMetadataList, List<TableColumnMetadata>* columns, ThreadContext* ctx) throw() 
 {
 	int maxLoop = columns->size(ctx);

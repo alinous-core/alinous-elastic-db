@@ -43,6 +43,7 @@
 #include "alinous.runtime.parallel/AlinousThread.h"
 #include "alinous.runtime.parallel/ThreadPool.h"
 #include "alinous.system/ISystemLog.h"
+#include "alinous.remote.monitor/TransactionMonitorServer.h"
 #include "alinous.system/AlinousCore.h"
 #include "alinous.db.trx/DbVersionContext.h"
 #include "alinous.db.trx/DbTransactionManager.h"
@@ -52,8 +53,19 @@
 #include "alinous.lock.unique/UniqueExclusiveLockManager.h"
 #include "alinous.lock.unique/UniqueExclusiveLockClient.h"
 #include "alinous.db/ICommidIdPublisher.h"
+#include "java.io/FilterOutputStream.h"
+#include "java.io/BufferedOutputStream.h"
+#include "alinous.remote.monitor.client.command/AbstractMonitorCommand.h"
+#include "alinous.remote.monitor.client.command.commitId/ReportSchemaVersionCommand.h"
+#include "alinous.remote.monitor.client.command/AllocOidCommand.h"
+#include "alinous.remote.monitor.client.command/MinitorCommandReader.h"
+#include "alinous.remote.socket/ISocketConnection.h"
+#include "alinous.remote.socket/ISocketConnectionFactory.h"
+#include "alinous.remote.socket/SocketConnectionPool.h"
 #include "alinous.system.config/IAlinousConfigElement.h"
 #include "alinous.system.config.remote/MonitorRef.h"
+#include "alinous.remote.monitor.client/MonitorConnectionInfo.h"
+#include "alinous.remote.monitor.client/MonitorClientConnectionFactory.h"
 #include "alinous.remote.monitor.client/RemoteCommitIdPublisher.h"
 #include "alinous.remote.db.client.command.data/TableClusterData.h"
 #include "alinous.db.table/TableMetadata.h"
@@ -83,8 +95,11 @@
 #include "alinous.db.table/DatatableUpdateSupport.h"
 #include "alinous.db.table.cache/RecordCacheEngine.h"
 #include "alinous.db.table/DatabaseTable.h"
+#include "alinous.remote.db/MonitorAccess.h"
 #include "alinous.remote.db.client.command.data/SchemaData.h"
 #include "alinous.remote.db.client.command.data/SchemasStructureInfoData.h"
+#include "alinous.remote.monitor.client.command.data/OidSchema.h"
+#include "alinous.remote.monitor.client.command.data/OidSchemaContainer.h"
 #include "alinous.db/ITableSchema.h"
 #include "alinous.db/TableSchema.h"
 #include "alinous.db/SchemaManager.h"
@@ -173,6 +188,17 @@ TableSchema* SchemaManager::getSchema(String* name, ThreadContext* ctx) throw()
 {
 	return this->schemas->get(name, ctx);
 }
+void SchemaManager::reportMaxOids(MonitorAccess* monitorAccess, ThreadContext* ctx) throw() 
+{
+	OidSchemaContainer* container = (new(ctx) OidSchemaContainer(ctx));
+	Iterator<String>* it = this->schemas->keySet(ctx)->iterator(ctx);
+	while(it->hasNext(ctx))
+	{
+		String* scName = it->next(ctx);
+		TableSchema* sc = this->schemas->get(scName, ctx);
+		reportMaxOidsSchema(monitorAccess, sc, container, ctx);
+	}
+}
 void SchemaManager::loadAfterFetch(String* dataDir, ISystemLog* logger, ThreadPool* threadPool, AlinousCore* core, BTreeGlobalCache* cache, ThreadContext* ctx)
 {
 	__GC_MV(this, &(this->dataDir), dataDir, String);
@@ -248,6 +274,19 @@ void SchemaManager::doCreateTable(String* schemaName, TableMetadata* tableMetada
 	IDatabaseTable* tableStore = (new(ctx) DatabaseTable(schemaName, tableMetadata->getTableName(ctx), schema->getSchemaDir(ctx), this->threadPool, ctx));
 	tableStore->createTable(tableMetadata, threadPool, core, cache, ctx);
 	schema->addTableStore(tableStore, ctx);
+}
+void SchemaManager::reportMaxOidsSchema(MonitorAccess* monitorAccess, TableSchema* sc, OidSchemaContainer* container, ThreadContext* ctx) throw() 
+{
+	HashMap<String,IDatabaseTable>* tableStores = sc->getTableStores(ctx);
+	String* schemaName = sc->name;
+	Iterator<String>* it = tableStores->keySet(ctx)->iterator(ctx);
+	while(it->hasNext(ctx))
+	{
+		String* tableName = it->next(ctx);
+		IDatabaseTable* table = tableStores->get(tableName, ctx);
+		long long nextOid = table->getNextOid(ctx);
+		container->addOid(schemaName, tableName, nextOid, ctx);
+	}
 }
 SchemaManager* SchemaManager::valueFromFetcher(FileStorageEntryFetcher* fetcher, ThreadContext* ctx)
 {

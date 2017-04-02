@@ -87,6 +87,7 @@ public:
 	constexpr static const int TYPE_CREATE_TABLE{1003};
 	constexpr static const int TYPE_INSERT_PREPARE{1004};
 	constexpr static const int TYPE_COMMIT_DML{1005};
+	constexpr static const int TYPE_REQUEST_SYNC_OID{1006};
 public:
 	int getType(ThreadContext* ctx) throw() ;
 	AbstractRemoteStorageCommand* sendCommand(AlinousSocket* socket, ThreadContext* ctx);

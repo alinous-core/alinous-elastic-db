@@ -33,6 +33,9 @@ class InsertPrepareCommand;}}}}}}
 namespace alinous {namespace remote {namespace db {namespace client {namespace command {namespace dml {
 class CommitDMLCommand;}}}}}}
 
+namespace alinous {namespace remote {namespace db {namespace client {namespace command {
+class RequestSyncOidCommand;}}}}}
+
 namespace alinous {namespace system {
 class AlinousException;}}
 

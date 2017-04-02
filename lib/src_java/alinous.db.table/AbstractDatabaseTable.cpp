@@ -3,6 +3,7 @@
 
 #include "alinous.numeric/InternalDate.h"
 #include "java.sql/Timestamp.h"
+#include "alinous.lock/LockObject.h"
 #include "alinous.lock/ConcurrentGate.h"
 #include "alinous.buffer.storage/FileStorageEntry.h"
 #include "alinous.buffer.storage/IFileStorage.h"
@@ -52,7 +53,7 @@ bool AbstractDatabaseTable::__init_static_variables(){
 	delete ctx;
 	return true;
 }
- AbstractDatabaseTable::AbstractDatabaseTable(String* schema, String* name, String* baseDir, ThreadContext* ctx) throw()  : IObject(ctx), IDatabaseTable(ctx), tableId(nullptr), metadata(nullptr), indexes(GCUtils<ArrayList<IScannableIndex> >::ins(this, (new(ctx) ArrayList<IScannableIndex>(ctx)), ctx, __FILEW__, __LINE__, L"")), primaryIndex(nullptr), name(nullptr), baseDir(nullptr), oidIndexPath(nullptr), dataStoragePath(nullptr), oidIndex(nullptr), dataStorage(nullptr), storageLock(nullptr), schmeUpdated(nullptr), updateHistoryCache(nullptr), fullName(nullptr)
+ AbstractDatabaseTable::AbstractDatabaseTable(String* schema, String* name, String* baseDir, ThreadContext* ctx) throw()  : IObject(ctx), IDatabaseTable(ctx), tableId(nullptr), metadata(nullptr), indexes(GCUtils<ArrayList<IScannableIndex> >::ins(this, (new(ctx) ArrayList<IScannableIndex>(ctx)), ctx, __FILEW__, __LINE__, L"")), primaryIndex(nullptr), name(nullptr), baseDir(nullptr), oidIndexPath(nullptr), dataStoragePath(nullptr), oidIndex(nullptr), dataStorage(nullptr), storageLock(nullptr), schmeUpdated(nullptr), updateHistoryCache(nullptr), fullName(nullptr), nextOidLock(__GC_INS(this, (new(ctx) LockObject(ctx)), LockObject)), nextOid(0)
 {
 	__GC_MV(this, &(this->tableId), (new(ctx) Integer(DatabaseTableIdPublisher::getId(name, ctx), ctx)), Integer);
 	__GC_MV(this, &(this->metadata), (new(ctx) TableMetadata(schema, name, ctx)), TableMetadata);
@@ -118,6 +119,8 @@ void AbstractDatabaseTable::__releaseRegerences(bool prepare, ThreadContext* ctx
 	updateHistoryCache = nullptr;
 	__e_obj1.add(this->fullName, this);
 	fullName = nullptr;
+	__e_obj1.add(this->nextOidLock, this);
+	nextOidLock = nullptr;
 	if(!prepare){
 		return;
 	}
@@ -344,6 +347,20 @@ String* AbstractDatabaseTable::getFullName(ThreadContext* ctx) throw()
 {
 	return fullName;
 }
+long long AbstractDatabaseTable::getNextOid(ThreadContext* ctx) throw() 
+{
+	{
+		SynchronizedBlockObj __synchronized_2(this->nextOidLock, ctx);
+		return nextOid;
+	}
+}
+void AbstractDatabaseTable::setNextOid(long long nextOid, ThreadContext* ctx) throw() 
+{
+	{
+		SynchronizedBlockObj __synchronized_2(this->nextOidLock, ctx);
+		this->nextOid = nextOid;
+	}
+}
 void AbstractDatabaseTable::syncScheme(ThreadContext* ctx)
 {
 	FileStorageEntryWriter* writer = this->dataStorage->getWriter(ctx);
@@ -354,6 +371,7 @@ void AbstractDatabaseTable::syncScheme(ThreadContext* ctx)
 	this->metadata->toFileEntry(builder, ctx);
 	syncIndexScheme(builder, ctx);
 	builder->putLong(this->schmeUpdated->getTime(ctx), ctx);
+	builder->putLong(this->nextOid, ctx);
 	FileStorageEntry* entry = builder->toEntry((long long)FileStorage::DATA_BEGIN, ctx);
 	writer->write(entry, ctx);
 	writer->end(ctx);
@@ -415,6 +433,7 @@ void AbstractDatabaseTable::loadScheme(ThreadContext* ctx)
 	loadIndexes(fetcher, ctx);
 	long long mills = fetcher->fetchLong(ctx);
 	__GC_MV(this, &(this->schmeUpdated), (new(ctx) Timestamp(mills, ctx)), Timestamp);
+	this->nextOid = fetcher->fetchLong(ctx);
 	fetcher->close(ctx);
 }
 String* AbstractDatabaseTable::getOidIndexName(ThreadContext* ctx) throw() 

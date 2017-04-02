@@ -2,6 +2,7 @@
 
 
 #include "alinous.btree/BTreeException.h"
+#include "alinous.lock/LockObject.h"
 #include "alinous.lock/ConcurrentGate.h"
 #include "alinous.buffer.storage/FileStorageEntry.h"
 #include "alinous.buffer.storage/IFileStorage.h"

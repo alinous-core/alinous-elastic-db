@@ -27,15 +27,15 @@
 #include "alinous.db.table/TableMetadata.h"
 #include "alinous.db.table/IDatabaseRecord.h"
 #include "alinous.db.table/IDatabaseTable.h"
+#include "alinous.system.config/IAlinousConfigElement.h"
+#include "alinous.system.config.remote/MonitorRef.h"
+#include "alinous.remote.db/MonitorAccess.h"
 #include "alinous.remote.db.client.command.data/SchemasStructureInfoData.h"
 #include "alinous.db/ITableSchema.h"
 #include "alinous.db/TableSchema.h"
 #include "alinous.db/SchemaManager.h"
 #include "alinous.db.trx/DbVersionContext.h"
 #include "alinous.lock.unique/UniqueExclusiveLockManager.h"
-#include "alinous.system.config/IAlinousConfigElement.h"
-#include "alinous.system.config.remote/MonitorRef.h"
-#include "alinous.remote.db/MonitorAccess.h"
 #include "alinous.remote.socket/SocketServer.h"
 #include "alinous.remote.socket/ISocketActionFactory.h"
 #include "alinous.remote.db/RemoteStorageResponceActionFactory.h"
@@ -236,7 +236,7 @@ UniqueExclusiveLockManager* RemoteTableStorageServer::getUniqueExclusiveLock(Thr
 }
 AlinousCore* RemoteTableStorageServer::getCore(ThreadContext* ctx) throw() 
 {
-	return core;
+	return this->core;
 }
 void RemoteTableStorageServer::logError(Throwable* e, ThreadContext* ctx) throw() 
 {
@@ -250,6 +250,13 @@ long long RemoteTableStorageServer::getSchemeInfo(SchemasStructureInfoData* data
 		SynchronizedBlockObj __synchronized_2(this->schemaVersionLock, ctx);
 		data->setSchemaVersion(this->schemaVersion, ctx);
 		return this->schemaVersion;
+	}
+}
+void RemoteTableStorageServer::reportMaxOids(ThreadContext* ctx) throw() 
+{
+	{
+		SynchronizedBlockObj __synchronized_2(this->schemaVersionLock, ctx);
+		this->schemas->reportMaxOids(this->monitorAccess, ctx);
 	}
 }
 void RemoteTableStorageServer::createSchema(String* schemaName, ThreadContext* ctx)

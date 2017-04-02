@@ -203,6 +203,7 @@ public:
 	AlinousCore* getCore(ThreadContext* ctx) throw() ;
 	void logError(Throwable* e, ThreadContext* ctx) throw() ;
 	long long getSchemeInfo(SchemasStructureInfoData* data, String* region, String* host, int port, bool ipv6, ThreadContext* ctx) throw() ;
+	void reportMaxOids(ThreadContext* ctx) throw() ;
 	void createSchema(String* schemaName, ThreadContext* ctx);
 	void createTable(TableMetadata* metadata, ThreadContext* ctx);
 	void prepareInsert(String* schemaName, String* tableName, long long newCommitId, List<UniqueCheckOperation>* uniqueCheckOps, List<ClientNetworkRecord>* records, DbVersionContext* vctx, int isolationLevel, ThreadContext* ctx);

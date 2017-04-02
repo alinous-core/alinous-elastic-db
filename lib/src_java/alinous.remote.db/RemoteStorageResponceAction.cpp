@@ -20,6 +20,7 @@
 #include "alinous.remote.db.client.command/TerminateRemoteStorageCommand.h"
 #include "alinous.remote.db.client.command/VoidRemoteStorageCommand.h"
 #include "alinous.remote.db.client.command/GetTableSchemeCommand.h"
+#include "alinous.remote.db.client.command/RequestSyncOidCommand.h"
 #include "alinous.remote.db.client.command/RemoteStorageCommandReader.h"
 #include "alinous.remote.db/RemoteStorageResponceAction.h"
 
@@ -125,6 +126,7 @@ void RemoteStorageResponceAction::handleCommand(BufferedInputStream* stream, Buf
 		case AbstractRemoteStorageCommand::TYPE_CREATE_TABLE:
 		case AbstractRemoteStorageCommand::TYPE_INSERT_PREPARE:
 		case AbstractRemoteStorageCommand::TYPE_COMMIT_DML:
+		case AbstractRemoteStorageCommand::TYPE_REQUEST_SYNC_OID:
 			cmd->executeOnServer(this->tableStorageServer, outStream, ctx);
 			break ;
 		default:

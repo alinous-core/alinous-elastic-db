@@ -19,8 +19,8 @@ template class ::java::util::HashMap<::java::lang::String, ::alinous::server::ht
 template class ::java::util::HashMap<::java::lang::Long, ::alinous::runtime::engine::debugger::DebugThread>;
 template class ::java::util::HashMap<::java::lang::String, ::alinous::runtime::engine::debugger::server::FileBreakpointContainer>;
 template class ::java::util::HashMap<::java::lang::String, ::java::lang::String>;
-template class ::java::util::HashMap<::java::lang::String, ::alinous::db::table::TableMetadata>;
 template class ::java::util::HashMap<::java::lang::String, ::alinous::db::table::IDatabaseTable>;
+template class ::java::util::HashMap<::java::lang::String, ::alinous::db::table::TableMetadata>;
 template class ::java::util::HashMap<::java::lang::String, ::alinous::db::TableSchema>;
 template class ::java::util::HashMap<::java::lang::String, ::alinous::db::table::lockmonitor::IThreadLocker>;
 template class ::java::util::HashMap<::java::lang::String, ::alinous::db::trx::cache::TrxRecordsCache>;
@@ -35,6 +35,8 @@ template class ::java::util::HashMap<::java::lang::String, ::alinous::lock::uniq
 template class ::java::util::HashMap<::alinous::html::DomNode, ::java::util::ArrayList<::alinous::html::xpath::match::MatchCandidate>>;
 template class ::java::util::HashMap<::java::lang::String, ::alinous::remote::monitor::OidHolder>;
 template class ::java::util::HashMap<::java::lang::String, ::alinous::remote::monitor::RegionNodeInfo>;
+template class ::java::util::HashMap<::java::lang::String, ::alinous::remote::monitor::client::command::data::OidSchema>;
+template class ::java::util::HashMap<::java::lang::String, ::alinous::remote::monitor::client::command::data::OidTable>;
 template class ::java::util::HashMap<::java::lang::String, ::alinous::remote::db::client::command::data::TableClusterData>;
 template class ::java::util::HashMap<::java::lang::String, ::alinous::remote::db::client::command::data::SchemaData>;
 template class ::java::util::HashMap<::java::lang::Long, ::alinous::remote::db::server::trx::StorageTransaction>;

@@ -266,6 +266,10 @@ void TableSchema::setRegionName(String* regionName, ThreadContext* ctx) throw()
 {
 	__GC_MV(this, &(this->regionName), regionName, String);
 }
+HashMap<String,IDatabaseTable>* TableSchema::getTableStores(ThreadContext* ctx) throw() 
+{
+	return tableStores;
+}
 TableSchema* TableSchema::valueFromFetcher(FileStorageEntryFetcher* fetcher, ThreadContext* ctx)
 {
 	String* name = fetcher->fetchString(ctx);

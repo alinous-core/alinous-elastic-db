@@ -3,6 +3,7 @@
 
 #include "alinous.numeric/InternalDate.h"
 #include "java.sql/Timestamp.h"
+#include "alinous.lock/LockObject.h"
 #include "alinous.lock/ConcurrentGate.h"
 #include "alinous.buffer.storage/FileStorageEntry.h"
 #include "alinous.buffer.storage/IFileStorage.h"
@@ -108,6 +109,7 @@ void DatatableDDLSupport::createTable(TableMetadata* metadata, ThreadPool* threa
 			this->updateHistoryCache->execCreateTable(core, cache, ctx);
 			open(false, core, cache, ctx);
 			__GC_MV(this, &(this->schmeUpdated), (new(ctx) Timestamp(System::currentTimeMillis(ctx), ctx)), Timestamp);
+			setNextOid((long long)1, ctx);
 			syncScheme(ctx);
 		}
 		catch(IOException* e)

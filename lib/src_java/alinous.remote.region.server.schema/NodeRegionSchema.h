@@ -67,6 +67,7 @@ private:
 	String* schemaName;
 public:
 	ClientSchemaData* toClientData(ThreadContext* ctx) throw() ;
+	void requestSyncMaxOid(ThreadContext* ctx) throw() ;
 	void updateTableClusters(SchemaData* scdata, NodeCluster* nodeAccessRefs, ThreadContext* ctx) throw() ;
 	void dispose(ThreadContext* ctx) throw() ;
 	NodeTableClaster* getNodeTableCluster(String* tableName, ThreadContext* ctx) throw() ;

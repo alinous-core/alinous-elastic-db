@@ -1,12 +1,19 @@
 #include "include/global.h"
 
 
+#include "java.io/FilterOutputStream.h"
+#include "java.io/BufferedOutputStream.h"
+#include "alinous.remote.socket/NetworkBinaryBuffer.h"
 #include "alinous.remote.socket/ICommandData.h"
 #include "alinous.remote.db.client.command.data/SchemasStructureInfoData.h"
-#include "alinous.remote.monitor/NodeInfo.h"
-#include "alinous.remote.monitor/RegionNodeInfo.h"
 #include "alinous.compile/AbstractSrcElement.h"
 #include "alinous.system/AlinousException.h"
+#include "alinous.remote.db.server/RemoteTableStorageServer.h"
+#include "alinous.remote.db.client.command/RemoteStorageCommandReader.h"
+#include "alinous.remote.db.client.command/AbstractRemoteStorageCommand.h"
+#include "alinous.remote.db.client.command/RequestSyncOidCommand.h"
+#include "alinous.remote.monitor/NodeInfo.h"
+#include "alinous.remote.monitor/RegionNodeInfo.h"
 #include "alinous.remote.region.server.schema/NodeReference.h"
 #include "alinous.remote.region.server.schema/NodeCluster.h"
 
@@ -47,6 +54,15 @@ void NodeCluster::__releaseRegerences(bool prepare, ThreadContext* ctx) throw()
 	nodes = nullptr;
 	if(!prepare){
 		return;
+	}
+}
+void NodeCluster::requestSyncMaxOid(ThreadContext* ctx)
+{
+	int maxLoop = this->nodes->size(ctx);
+	for(int i = 0; i != maxLoop; ++i)
+	{
+		NodeReference* ref = this->nodes->get(i, ctx);
+		sendOidRequestCommand(ref, ctx);
 	}
 }
 SchemasStructureInfoData* NodeCluster::getSchemeInfo(String* region, ThreadContext* ctx)
@@ -130,6 +146,11 @@ void NodeCluster::dispose(ThreadContext* ctx) throw()
 		NodeReference* node = this->nodes->get(i, ctx);
 		node->dispose(ctx);
 	}
+}
+void NodeCluster::sendOidRequestCommand(NodeReference* ref, ThreadContext* ctx)
+{
+	RequestSyncOidCommand* cmd = (new(ctx) RequestSyncOidCommand(ctx));
+	ref->sendCommand(cmd, ctx);
 }
 void NodeCluster::__cleanUp(ThreadContext* ctx){
 }

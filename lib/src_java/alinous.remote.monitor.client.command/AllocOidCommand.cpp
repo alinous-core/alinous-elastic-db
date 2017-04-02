@@ -28,11 +28,11 @@ bool AllocOidCommand::__init_static_variables(){
 }
  AllocOidCommand::AllocOidCommand(ThreadContext* ctx) throw()  : IObject(ctx), AbstractMonitorCommand(ctx), nextOid(0), length(0), tableFullName(nullptr)
 {
-	this->type = AllocOidCommand::TYPE_ALLOC_OID;
+	this->type = AbstractMonitorCommand::TYPE_ALLOC_OID;
 }
 void AllocOidCommand::__construct_impl(ThreadContext* ctx) throw() 
 {
-	this->type = AllocOidCommand::TYPE_ALLOC_OID;
+	this->type = AbstractMonitorCommand::TYPE_ALLOC_OID;
 }
  AllocOidCommand::~AllocOidCommand() throw() 
 {

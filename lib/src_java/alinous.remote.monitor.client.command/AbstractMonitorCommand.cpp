@@ -26,6 +26,7 @@ constexpr const int AbstractMonitorCommand::TYPE_NEW_TRANSACTION;
 constexpr const int AbstractMonitorCommand::TYPE_REPORT_SCHEMA_UPDATED;
 constexpr const int AbstractMonitorCommand::TYPE_REPORT_CLUSTER_UPDATED;
 constexpr const int AbstractMonitorCommand::TYPE_ALLOC_OID;
+constexpr const int AbstractMonitorCommand::TYPE_REPORT_OID;
 constexpr const int AbstractMonitorCommand::TYPE_TERMINATE;
 bool AbstractMonitorCommand::__init_done = __init_static_variables();
 bool AbstractMonitorCommand::__init_static_variables(){

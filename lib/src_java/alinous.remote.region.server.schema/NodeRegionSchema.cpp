@@ -69,6 +69,9 @@ ClientSchemaData* NodeRegionSchema::toClientData(ThreadContext* ctx) throw()
 	}
 	return data;
 }
+void NodeRegionSchema::requestSyncMaxOid(ThreadContext* ctx) throw() 
+{
+}
 void NodeRegionSchema::updateTableClusters(SchemaData* scdata, NodeCluster* nodeAccessRefs, ThreadContext* ctx) throw() 
 {
 	Map<String,TableClusterData>* clusterMap = scdata->getTablesMap(ctx);

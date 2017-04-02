@@ -87,6 +87,9 @@ class FileStorageEntryFetcher;}}}
 namespace alinous {namespace db {namespace table {
 class AbstractDatabaseTable;}}}
 
+namespace alinous {namespace lock {
+class LockObject;}}
+
 namespace alinous {namespace db {namespace table {
 class IDatabaseTable;}}}
 
@@ -118,6 +121,7 @@ using ::alinous::buffer::storage::FileStorageEntryReader;
 using ::alinous::buffer::storage::FileStorageEntryWriter;
 using ::alinous::db::AlinousDbException;
 using ::alinous::lock::ConcurrentGate;
+using ::alinous::lock::LockObject;
 using ::alinous::runtime::dom::VariableException;
 using ::alinous::system::AlinousCore;
 using ::alinous::system::AlinousException;
@@ -147,6 +151,9 @@ public:
 	Timestamp* schmeUpdated;
 	DatatableUpdateCache* updateHistoryCache;
 	String* fullName;
+private:
+	LockObject* nextOidLock;
+	long long nextOid;
 public:
 	void open(AlinousCore* core, BTreeGlobalCache* cache, ThreadContext* ctx) final;
 	void open(bool loadscheme, AlinousCore* core, BTreeGlobalCache* cache, ThreadContext* ctx);
@@ -166,6 +173,8 @@ public:
 	Integer* getTableId(ThreadContext* ctx) throw()  final;
 	void setTableId(Integer* tableId, ThreadContext* ctx) throw() ;
 	String* getFullName(ThreadContext* ctx) throw()  final;
+	long long getNextOid(ThreadContext* ctx) throw()  final;
+	void setNextOid(long long nextOid, ThreadContext* ctx) throw()  final;
 	void syncScheme(ThreadContext* ctx);
 	String* getDataStorageName(ThreadContext* ctx) throw() ;
 	int indexSchemeSize(ThreadContext* ctx);

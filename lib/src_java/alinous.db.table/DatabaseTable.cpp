@@ -5,6 +5,7 @@
 #include "alinous.compile/AbstractSrcElement.h"
 #include "alinous.system/AlinousException.h"
 #include "alinous.db/AlinousDbException.h"
+#include "alinous.lock/LockObject.h"
 #include "alinous.lock/ConcurrentGate.h"
 #include "alinous.buffer.storage/IFileStorage.h"
 #include "alinous.buffer.storage/FileStorage.h"

@@ -63,6 +63,10 @@ void NodeReferenceManager::__releaseRegerences(bool prepare, ThreadContext* ctx)
 		return;
 	}
 }
+void NodeReferenceManager::requestSyncMaxOid(ThreadContext* ctx)
+{
+	this->nodeReferences->requestSyncMaxOid(ctx);
+}
 long long NodeReferenceManager::getClientData(ClientStructureMetadata* data, ThreadContext* ctx)
 {
 	if(this->nodeReferences == nullptr)

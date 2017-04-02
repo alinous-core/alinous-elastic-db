@@ -1,10 +1,13 @@
 #ifndef ALINOUS_REMOTE_REGION_SERVER_SCHEMA_NODECLUSTER_H_
 #define ALINOUS_REMOTE_REGION_SERVER_SCHEMA_NODECLUSTER_H_
-namespace alinous {namespace remote {namespace db {namespace client {namespace command {namespace data {
-class SchemasStructureInfoData;}}}}}}
-
 namespace alinous {namespace remote {namespace region {namespace server {namespace schema {
 class NodeReference;}}}}}
+
+namespace alinous {namespace remote {namespace db {namespace client {namespace command {
+class RequestSyncOidCommand;}}}}}
+
+namespace alinous {namespace remote {namespace db {namespace client {namespace command {namespace data {
+class SchemasStructureInfoData;}}}}}}
 
 namespace alinous {namespace remote {namespace monitor {
 class RegionNodeInfo;}}}
@@ -33,6 +36,7 @@ using namespace ::java::lang;
 using ::java::util::Iterator;
 using ::java::util::ArrayList;
 using ::java::util::List;
+using ::alinous::remote::db::client::command::RequestSyncOidCommand;
 using ::alinous::remote::db::client::command::data::SchemasStructureInfoData;
 using ::alinous::remote::monitor::NodeInfo;
 using ::alinous::remote::monitor::RegionNodeInfo;
@@ -51,12 +55,15 @@ public:
 private:
 	List<NodeReference>* nodes;
 public:
+	void requestSyncMaxOid(ThreadContext* ctx);
 	SchemasStructureInfoData* getSchemeInfo(String* region, ThreadContext* ctx);
 	void update(RegionNodeInfo* refinfo, ThreadContext* ctx) throw() ;
 	NodeReference* getNode(String* host, int port, bool ipv6, ThreadContext* ctx) throw() ;
 	void addNode(NodeReference* nodeRef, ThreadContext* ctx) throw() ;
 	List<NodeReference>* getNodes(ThreadContext* ctx) throw() ;
 	void dispose(ThreadContext* ctx) throw() ;
+private:
+	void sendOidRequestCommand(NodeReference* ref, ThreadContext* ctx);
 public:
 	static bool __init_done;
 	static bool __init_static_variables();

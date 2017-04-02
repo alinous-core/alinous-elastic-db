@@ -159,6 +159,7 @@ public:
 	void insertData(ArrayList<ClientNetworkRecord>* list, long long newCommitId, String* schema, String* table, DbVersionContext* vctx, int isolationLevel, ThreadContext* ctx);
 	void commitUpdateData(long long newCommitId, DbVersionContext* vctx, ThreadContext* ctx);
 private:
+	void requestSyncMaxOid(ThreadContext* ctx);
 	void initMonitorRef(MonitorRef* monRef, ThreadContext* ctx) throw() ;
 	void clearSessions(long long trxId, ThreadContext* ctx) throw() ;
 	void checkVersion(DbVersionContext* vctx, ThreadContext* ctx);

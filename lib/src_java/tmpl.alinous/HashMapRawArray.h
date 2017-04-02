@@ -10,6 +10,8 @@ template class ::alinous::HashMapRawArray<::java::lang::String, ::alinous::lock:
 template class ::alinous::HashMapRawArray<::alinous::html::DomNode, ::java::util::ArrayList<::alinous::html::xpath::match::MatchCandidate>>;
 template class ::alinous::HashMapRawArray<::java::lang::String, ::alinous::remote::monitor::OidHolder>;
 template class ::alinous::HashMapRawArray<::java::lang::String, ::alinous::remote::monitor::RegionNodeInfo>;
+template class ::alinous::HashMapRawArray<::java::lang::String, ::alinous::remote::monitor::client::command::data::OidSchema>;
+template class ::alinous::HashMapRawArray<::java::lang::String, ::alinous::remote::monitor::client::command::data::OidTable>;
 template class ::alinous::HashMapRawArray<::java::lang::String, ::alinous::remote::db::client::command::data::TableClusterData>;
 template class ::alinous::HashMapRawArray<::java::lang::String, ::alinous::remote::db::client::command::data::SchemaData>;
 template class ::alinous::HashMapRawArray<::java::lang::Long, ::alinous::remote::db::server::trx::StorageTransaction>;
@@ -40,8 +42,8 @@ template class ::alinous::HashMapRawArray<::java::lang::String, ::alinous::runti
 template class ::alinous::HashMapRawArray<::java::lang::String, ::alinous::server::http::params::AbstractHttpParameter>;
 template class ::alinous::HashMapRawArray<::java::lang::Long, ::alinous::runtime::engine::debugger::DebugThread>;
 template class ::alinous::HashMapRawArray<::java::lang::String, ::alinous::runtime::engine::debugger::server::FileBreakpointContainer>;
-template class ::alinous::HashMapRawArray<::java::lang::String, ::alinous::db::table::TableMetadata>;
 template class ::alinous::HashMapRawArray<::java::lang::String, ::alinous::db::table::IDatabaseTable>;
+template class ::alinous::HashMapRawArray<::java::lang::String, ::alinous::db::table::TableMetadata>;
 template class ::alinous::HashMapRawArray<::java::lang::String, ::alinous::db::TableSchema>;
 template class ::alinous::HashMapRawArray<::java::lang::String, ::alinous::db::trx::cache::TrxRecordsCache>;
 template class ::alinous::HashMapRawArray<::java::lang::String, ::java::util::HashMap<::java::lang::String, ::alinous::db::trx::cache::TrxRecordsCache>>;

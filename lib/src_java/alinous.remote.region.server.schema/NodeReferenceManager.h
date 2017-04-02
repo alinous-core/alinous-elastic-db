@@ -102,6 +102,7 @@ private:
 	NodeCluster* nodeReferences;
 	LockObject* lock;
 public:
+	void requestSyncMaxOid(ThreadContext* ctx);
 	long long getClientData(ClientStructureMetadata* data, ThreadContext* ctx);
 	void syncSchemeTables(String* regionName, ThreadContext* ctx);
 	void syncNodeReference(RegionInfoData* data, ThreadContext* ctx) throw() ;

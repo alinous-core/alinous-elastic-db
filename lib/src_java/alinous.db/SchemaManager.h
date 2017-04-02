@@ -27,14 +27,23 @@ class IDatabaseTable;}}}
 namespace alinous {namespace db {namespace table {
 class DatabaseTable;}}}
 
+namespace alinous {namespace remote {namespace db {
+class MonitorAccess;}}}
+
+namespace alinous {namespace remote {namespace monitor {namespace client {namespace command {namespace data {
+class OidSchemaContainer;}}}}}}
+
+namespace java {namespace util {
+template <typename  T> class Iterator;}}
+
+namespace java {namespace util {
+template <typename  T, typename V> class HashMap;}}
+
 namespace alinous {namespace db {
 class SchemaManager;}}
 
 namespace alinous {namespace buffer {namespace storage {
 class FileStorageEntryFetcher;}}}
-
-namespace java {namespace util {
-template <typename  T> class Iterator;}}
 
 namespace alinous {namespace buffer {namespace storage {
 class FileStorageEntryBuilder;}}}
@@ -47,9 +56,6 @@ class SchemasStructureInfoData;}}}}}}
 
 namespace alinous {namespace remote {namespace db {namespace client {namespace command {namespace data {
 class SchemaData;}}}}}}
-
-namespace java {namespace util {
-template <typename  T, typename V> class HashMap;}}
 
 namespace alinous {namespace lock {
 class LockObject;}}
@@ -96,8 +102,10 @@ using ::alinous::db::table::DatabaseTable;
 using ::alinous::db::table::IDatabaseTable;
 using ::alinous::db::table::TableMetadata;
 using ::alinous::lock::LockObject;
+using ::alinous::remote::db::MonitorAccess;
 using ::alinous::remote::db::client::command::data::SchemaData;
 using ::alinous::remote::db::client::command::data::SchemasStructureInfoData;
+using ::alinous::remote::monitor::client::command::data::OidSchemaContainer;
 using ::alinous::runtime::parallel::ThreadPool;
 using ::alinous::system::AlinousCore;
 using ::alinous::system::AlinousException;
@@ -123,6 +131,7 @@ public:
 	void createTable(String* schemaName, TableMetadata* tableMetadata, ThreadPool* threadPool, AlinousCore* core, BTreeGlobalCache* cache, ThreadContext* ctx);
 	TableSchema* createSchema(String* name, ThreadContext* ctx) throw() ;
 	TableSchema* getSchema(String* name, ThreadContext* ctx) throw() ;
+	void reportMaxOids(MonitorAccess* monitorAccess, ThreadContext* ctx) throw() ;
 	void loadAfterFetch(String* dataDir, ISystemLog* logger, ThreadPool* threadPool, AlinousCore* core, BTreeGlobalCache* cache, ThreadContext* ctx);
 	void appendToEntry(FileStorageEntryBuilder* builder, ThreadContext* ctx) final;
 	int diskSize(ThreadContext* ctx) throw()  final;
@@ -131,6 +140,7 @@ public:
 	void getSchemaData(SchemasStructureInfoData* data, String* region, String* host, int port, bool ipv6, ThreadContext* ctx) throw() ;
 private:
 	void doCreateTable(String* schemaName, TableMetadata* tableMetadata, ThreadPool* threadPool, AlinousCore* core, BTreeGlobalCache* cache, ThreadContext* ctx);
+	void reportMaxOidsSchema(MonitorAccess* monitorAccess, TableSchema* sc, OidSchemaContainer* container, ThreadContext* ctx) throw() ;
 public:
 	static SchemaManager* valueFromFetcher(FileStorageEntryFetcher* fetcher, ThreadContext* ctx);
 public:

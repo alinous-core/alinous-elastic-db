@@ -22,6 +22,7 @@
 #include "alinous.remote.monitor.client.command/MonitorConnectCommand.h"
 #include "alinous.remote.monitor.client.command/GetRegionNodeInfoCommand.h"
 #include "alinous.remote.monitor.client.command/AllocOidCommand.h"
+#include "alinous.remote.monitor.client.command/ReportMaxOidCommand.h"
 #include "alinous.remote.monitor.client.command/MinitorCommandReader.h"
 #include "alinous.remote.monitor/MonitorResponceAction.h"
 
@@ -128,6 +129,7 @@ void MonitorResponceAction::handleCommand(BufferedInputStream* stream, BufferedO
 		case AbstractMonitorCommand::TYPE_REPORT_SCHEMA_UPDATED:
 		case AbstractMonitorCommand::TYPE_REPORT_CLUSTER_UPDATED:
 		case AbstractMonitorCommand::TYPE_ALLOC_OID:
+		case AbstractMonitorCommand::TYPE_REPORT_OID:
 		case AbstractMonitorCommand::TYPE_VOID:
 			handleCommand(cmd, outStream, ctx);
 			break ;

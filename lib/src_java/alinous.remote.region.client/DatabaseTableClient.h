@@ -199,6 +199,8 @@ public:
 	void close(ThreadContext* ctx) throw()  final;
 	String* getFullName(ThreadContext* ctx) throw()  final;
 	void tcpInsertCommit(IDatabaseRecord* data, ThreadPool* pool, ISystemLog* log, ThreadContext* ctx) throw()  final;
+	long long getNextOid(ThreadContext* ctx) throw()  final;
+	void setNextOid(long long nextOid, ThreadContext* ctx) throw()  final;
 private:
 	bool matchUniqueIndexByIdList(ArrayList<TableColumnMetadata>* columnsMetadataList, List<TableColumnMetadata>* columns, ThreadContext* ctx) throw() ;
 	bool matchIndexByIdList(ArrayList<TableColumnMetadata>* columnsMetadataList, ArrayList<ScanTableColumnIdentifier>* columns, ThreadContext* ctx) throw() ;

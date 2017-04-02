@@ -115,6 +115,7 @@ void NodeRegionServer::initNodes(RegionsServer* srvconf, ThreadContext* ctx)
 	initMonitorRef(monRef, ctx);
 	syncNodes(ctx);
 	syncScheme(ctx);
+	requestSyncMaxOid(ctx);
 }
 long long NodeRegionServer::getClientData(ClientStructureMetadata* data, ThreadContext* ctx)
 {
@@ -216,6 +217,10 @@ void NodeRegionServer::commitUpdateData(long long newCommitId, DbVersionContext*
 		}
 		catch(...){throw;}
 	}
+}
+void NodeRegionServer::requestSyncMaxOid(ThreadContext* ctx)
+{
+	this->refs->requestSyncMaxOid(ctx);
 }
 void NodeRegionServer::initMonitorRef(MonitorRef* monRef, ThreadContext* ctx) throw() 
 {
