@@ -9,11 +9,14 @@
 #include "alinous.remote.monitor.client/MonitorClientConnectionFactory.h"
 #include "java.io/FilterOutputStream.h"
 #include "java.io/BufferedOutputStream.h"
-#include "alinous.remote.monitor/TransactionMonitorServer.h"
 #include "alinous.remote.socket/NetworkBinaryBuffer.h"
+#include "alinous.remote.socket/ICommandData.h"
+#include "alinous.remote.monitor.client.command.data/OidSchemaContainer.h"
+#include "alinous.remote.monitor/TransactionMonitorServer.h"
 #include "alinous.remote.monitor.client.command/AbstractMonitorCommand.h"
 #include "alinous.remote.monitor.client.command.commitId/ReportSchemaVersionCommand.h"
 #include "alinous.remote.monitor.client.command/AllocOidCommand.h"
+#include "alinous.remote.monitor.client.command/ReportMaxOidCommand.h"
 #include "alinous.remote.monitor.client.command/MinitorCommandReader.h"
 #include "alinous.system.config/IAlinousConfigElement.h"
 #include "alinous.system.config.remote/MonitorRef.h"
@@ -126,6 +129,41 @@ long long MonitorAccess::allocOids(String* tableFullName, int allocNum, ThreadCo
 			}
 			cmd = static_cast<AllocOidCommand*>(retcmd);
 			return cmd->getNextOid(ctx);
+		}
+		catch(UnknownHostException* e)
+		{
+			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3584(), e, ctx));
+		}
+		catch(IOException* e)
+		{
+			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3584(), e, ctx));
+		}
+		catch(AlinousException* e)
+		{
+			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3584(), e, ctx));
+		}
+	}
+}
+void MonitorAccess::reportMaxOid(OidSchemaContainer* container, ThreadContext* ctx)
+{
+	ReportMaxOidCommand* cmd = (new(ctx) ReportMaxOidCommand(ctx));
+	cmd->setOidsContainer(container, ctx);
+	ISocketConnection* con = nullptr;
+	{
+		std::function<void(void)> finallyLm2= [&, this]()
+		{
+			this->pool->returnConnection(con, ctx);
+		};
+		Releaser finalyCaller2(finallyLm2);
+		try
+		{
+			con = this->pool->getConnection(ctx);
+			AlinousSocket* socket = con->getSocket(ctx);
+			AbstractMonitorCommand* retcmd = cmd->sendCommand(socket, ctx);
+			if(retcmd->getType(ctx) != AbstractMonitorCommand::TYPE_REPORT_OID)
+			{
+				throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3584(), ctx));
+			}
 		}
 		catch(UnknownHostException* e)
 		{

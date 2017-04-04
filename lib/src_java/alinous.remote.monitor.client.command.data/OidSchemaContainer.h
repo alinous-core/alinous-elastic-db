@@ -60,6 +60,7 @@ public:
 	void addOid(String* schemaName, String* tableName, long long nextOid, ThreadContext* ctx) throw() ;
 	void readData(NetworkBinaryBuffer* buff, ThreadContext* ctx) final;
 	void writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) final;
+	Map<String,OidSchema>* getSchemas(ThreadContext* ctx) throw() ;
 public:
 	static OidSchemaContainer* fromNetwork(NetworkBinaryBuffer* buff, ThreadContext* ctx);
 public:

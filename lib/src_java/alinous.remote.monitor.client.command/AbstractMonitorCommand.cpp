@@ -7,6 +7,8 @@
 #include "alinous.remote.socket/NetworkBinaryBuffer.h"
 #include "alinous.compile/AbstractSrcElement.h"
 #include "alinous.system/AlinousException.h"
+#include "alinous.runtime/ExecutionException.h"
+#include "alinous.runtime.dom/VariableException.h"
 #include "alinous.remote.monitor.client.command/MinitorCommandReader.h"
 #include "alinous.remote.monitor.client.command/AbstractMonitorCommand.h"
 

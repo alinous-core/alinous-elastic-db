@@ -39,6 +39,9 @@ class IOException;}}
 namespace alinous {namespace remote {namespace monitor {namespace client {namespace command {
 class MinitorCommandReader;}}}}}
 
+namespace alinous {namespace runtime {namespace dom {
+class VariableException;}}}
+
 namespace java {namespace lang {
 class IObject;
 }}
@@ -61,6 +64,7 @@ using ::java::net::Socket;
 using ::alinous::remote::monitor::client::command::AbstractMonitorCommand;
 using ::alinous::remote::monitor::client::command::MinitorCommandReader;
 using ::alinous::remote::socket::SocketServer;
+using ::alinous::runtime::dom::VariableException;
 using ::alinous::runtime::parallel::IThreadAction;
 using ::alinous::system::AlinousException;
 

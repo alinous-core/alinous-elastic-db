@@ -252,7 +252,7 @@ long long RemoteTableStorageServer::getSchemeInfo(SchemasStructureInfoData* data
 		return this->schemaVersion;
 	}
 }
-void RemoteTableStorageServer::reportMaxOids(ThreadContext* ctx) throw() 
+void RemoteTableStorageServer::reportMaxOids(ThreadContext* ctx)
 {
 	{
 		SynchronizedBlockObj __synchronized_2(this->schemaVersionLock, ctx);
@@ -276,6 +276,7 @@ void RemoteTableStorageServer::createTable(TableMetadata* metadata, ThreadContex
 		this->schemas->createTable(schemaName, metadata, this->workerThreadsPool, this->core, this->btreeCache, ctx);
 		this->schemaVersion ++ ;
 		this->monitorAccess->reportSchemaUpdated(ctx);
+		this->schemas->reportMaxOids(this->monitorAccess, ctx);
 	}
 }
 void RemoteTableStorageServer::prepareInsert(String* schemaName, String* tableName, long long newCommitId, List<UniqueCheckOperation>* uniqueCheckOps, List<ClientNetworkRecord>* records, DbVersionContext* vctx, int isolationLevel, ThreadContext* ctx)

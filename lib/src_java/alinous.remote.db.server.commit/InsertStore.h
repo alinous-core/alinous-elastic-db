@@ -40,6 +40,9 @@ namespace alinous {namespace system {
 class AlinousException;}}
 
 namespace alinous {namespace db {
+class SchemaManager;}}
+
+namespace alinous {namespace db {
 class TableSchema;}}
 
 namespace alinous {namespace db {namespace table {
@@ -95,6 +98,7 @@ using ::alinous::btree::IBTreeValue;
 using ::alinous::btree::scan::BTreeScanner;
 using ::alinous::btreememory::BTreeOnMemory;
 using ::alinous::db::AlinousDbException;
+using ::alinous::db::SchemaManager;
 using ::alinous::db::TableSchema;
 using ::alinous::db::table::IDatabaseTable;
 using ::alinous::db::table::TableMetadata;

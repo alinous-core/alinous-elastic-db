@@ -6,6 +6,9 @@
 #include "alinous.db/AlinousDbException.h"
 #include "alinous.lock/LockObject.h"
 #include "alinous.remote.socket/ICommandData.h"
+#include "alinous.remote.monitor.client.command.data/OidTable.h"
+#include "alinous.remote.monitor.client.command.data/OidSchema.h"
+#include "alinous.remote.monitor.client.command.data/OidSchemaContainer.h"
 #include "alinous.remote.monitor.client.command.data/RegionInfoData.h"
 #include "alinous.system/ISystemLog.h"
 #include "alinous.remote.socket/ISocketActionFactory.h"
@@ -139,6 +142,17 @@ long long TransactionMonitorServer::getNextOid(String* tableFullName, int length
 {
 	return this->oidHolder->getNextOid(tableFullName, length, ctx);
 }
+void TransactionMonitorServer::syncNextOids(OidSchemaContainer* container, ThreadContext* ctx) throw() 
+{
+	Map<String,OidSchema>* schemaMap = container->getSchemas(ctx);
+	Iterator<String>* it = schemaMap->keySet(ctx)->iterator(ctx);
+	while(it->hasNext(ctx))
+	{
+		String* schemaName = it->next(ctx);
+		OidSchema* sc = schemaMap->get(schemaName, ctx);
+		syncNextOidTable(sc, schemaName, ctx);
+	}
+}
 RegionNodeInfoManager* TransactionMonitorServer::getNodeInfo(ThreadContext* ctx) throw() 
 {
 	return nodeInfo;
@@ -146,6 +160,21 @@ RegionNodeInfoManager* TransactionMonitorServer::getNodeInfo(ThreadContext* ctx)
 long long TransactionMonitorServer::updateNodeClusterVersion(long long nodeClusterRevision, ThreadContext* ctx) throw() 
 {
 	return this->nodeInfo->updateNodeClusterRevision(nodeClusterRevision, ctx);
+}
+void TransactionMonitorServer::syncNextOidTable(OidSchema* sc, String* schemaName, ThreadContext* ctx) throw() 
+{
+	Map<String,OidTable>* tablesMap = sc->getTables(ctx);
+	Iterator<String>* it = tablesMap->keySet(ctx)->iterator(ctx);
+	while(it->hasNext(ctx))
+	{
+		String* tableName = it->next(ctx);
+		OidTable* table = tablesMap->get(tableName, ctx);
+		long long nextOidTable = table->getNextOid(ctx);
+		StringBuilder* buff = (new(ctx) StringBuilder(ctx));
+		buff->append(schemaName, ctx)->append(ConstStr::getCNST_STR_953(), ctx)->append(tableName, ctx);
+		String* tableFullName = buff->toString(ctx);
+		this->oidHolder->syncNextOid(tableFullName, nextOidTable, ctx);
+	}
 }
 void TransactionMonitorServer::__cleanUp(ThreadContext* ctx){
 }

@@ -30,10 +30,11 @@ public:
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 private:
 	LockObject* oidLock;
-	long long lastOid;
+	long long nextOid;
 public:
 	void setNextOid(long long lastOid, ThreadContext* ctx) throw() ;
 	long long getNextOid(int length, ThreadContext* ctx) throw() ;
+	void syncNextOid(long long nextOid, ThreadContext* ctx) throw() ;
 public:
 	static bool __init_done;
 	static bool __init_static_variables();

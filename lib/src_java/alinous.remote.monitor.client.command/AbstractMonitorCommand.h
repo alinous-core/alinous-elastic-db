@@ -33,6 +33,9 @@ class NetworkBinaryBuffer;}}}
 namespace java {namespace io {
 class IOException;}}
 
+namespace alinous {namespace runtime {namespace dom {
+class VariableException;}}}
+
 namespace alinous {namespace system {
 class AlinousException;}}
 
@@ -58,6 +61,7 @@ using ::java::util::List;
 using ::alinous::net::AlinousSocket;
 using ::alinous::remote::monitor::TransactionMonitorServer;
 using ::alinous::remote::socket::NetworkBinaryBuffer;
+using ::alinous::runtime::dom::VariableException;
 using ::alinous::system::AlinousException;
 
 

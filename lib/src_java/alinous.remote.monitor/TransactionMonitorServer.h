@@ -21,6 +21,24 @@ class MonitorResponseActionFactory;}}}
 namespace alinous {namespace remote {namespace socket {
 class SocketServer;}}}
 
+namespace alinous {namespace remote {namespace monitor {namespace client {namespace command {namespace data {
+class OidSchemaContainer;}}}}}}
+
+namespace java {namespace util {
+template <typename  T, typename V> class Map;}}
+
+namespace alinous {namespace remote {namespace monitor {namespace client {namespace command {namespace data {
+class OidSchema;}}}}}}
+
+namespace java {namespace util {
+template <typename  T> class Iterator;}}
+
+namespace alinous {namespace remote {namespace monitor {namespace client {namespace command {namespace data {
+class OidTable;}}}}}}
+
+namespace java {namespace lang {
+class StringBuilder;}}
+
 namespace alinous {namespace lock {
 class LockObject;}}
 
@@ -43,8 +61,13 @@ namespace alinous {namespace remote {namespace monitor {
 using namespace ::alinous;
 using namespace ::java::lang;
 using ::java::util::Iterator;
+using ::java::util::Iterator;
+using ::java::util::Map;
 using ::alinous::db::AlinousDbException;
 using ::alinous::lock::LockObject;
+using ::alinous::remote::monitor::client::command::data::OidSchema;
+using ::alinous::remote::monitor::client::command::data::OidSchemaContainer;
+using ::alinous::remote::monitor::client::command::data::OidTable;
 using ::alinous::remote::monitor::client::command::data::RegionInfoData;
 using ::alinous::remote::socket::SocketServer;
 using ::alinous::system::ISystemLog;
@@ -87,8 +110,11 @@ public:
 	long long getSchemaVersion(ThreadContext* ctx) throw() ;
 	void updateSchemaVersion(ThreadContext* ctx) throw() ;
 	long long getNextOid(String* tableFullName, int length, ThreadContext* ctx) throw() ;
+	void syncNextOids(OidSchemaContainer* container, ThreadContext* ctx) throw() ;
 	RegionNodeInfoManager* getNodeInfo(ThreadContext* ctx) throw() ;
 	long long updateNodeClusterVersion(long long nodeClusterRevision, ThreadContext* ctx) throw() ;
+private:
+	void syncNextOidTable(OidSchema* sc, String* schemaName, ThreadContext* ctx) throw() ;
 public:
 	static bool __init_done;
 	static bool __init_static_variables();

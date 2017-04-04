@@ -42,6 +42,7 @@
 #include "alinous.runtime.parallel/IThreadAction.h"
 #include "alinous.runtime.parallel/AlinousThread.h"
 #include "alinous.runtime.parallel/ThreadPool.h"
+#include "alinous.remote.monitor.client.command.data/OidSchemaContainer.h"
 #include "alinous.system/ISystemLog.h"
 #include "alinous.remote.monitor/TransactionMonitorServer.h"
 #include "alinous.system/AlinousCore.h"
@@ -58,6 +59,7 @@
 #include "alinous.remote.monitor.client.command/AbstractMonitorCommand.h"
 #include "alinous.remote.monitor.client.command.commitId/ReportSchemaVersionCommand.h"
 #include "alinous.remote.monitor.client.command/AllocOidCommand.h"
+#include "alinous.remote.monitor.client.command/ReportMaxOidCommand.h"
 #include "alinous.remote.monitor.client.command/MinitorCommandReader.h"
 #include "alinous.remote.socket/ISocketConnection.h"
 #include "alinous.remote.socket/ISocketConnectionFactory.h"
@@ -98,8 +100,6 @@
 #include "alinous.remote.db/MonitorAccess.h"
 #include "alinous.remote.db.client.command.data/SchemaData.h"
 #include "alinous.remote.db.client.command.data/SchemasStructureInfoData.h"
-#include "alinous.remote.monitor.client.command.data/OidSchema.h"
-#include "alinous.remote.monitor.client.command.data/OidSchemaContainer.h"
 #include "alinous.db/ITableSchema.h"
 #include "alinous.db/TableSchema.h"
 #include "alinous.db/SchemaManager.h"
@@ -188,7 +188,7 @@ TableSchema* SchemaManager::getSchema(String* name, ThreadContext* ctx) throw()
 {
 	return this->schemas->get(name, ctx);
 }
-void SchemaManager::reportMaxOids(MonitorAccess* monitorAccess, ThreadContext* ctx) throw() 
+void SchemaManager::reportMaxOids(MonitorAccess* monitorAccess, ThreadContext* ctx)
 {
 	OidSchemaContainer* container = (new(ctx) OidSchemaContainer(ctx));
 	Iterator<String>* it = this->schemas->keySet(ctx)->iterator(ctx);
@@ -198,6 +198,7 @@ void SchemaManager::reportMaxOids(MonitorAccess* monitorAccess, ThreadContext* c
 		TableSchema* sc = this->schemas->get(scName, ctx);
 		reportMaxOidsSchema(monitorAccess, sc, container, ctx);
 	}
+	monitorAccess->reportMaxOid(container, ctx);
 }
 void SchemaManager::loadAfterFetch(String* dataDir, ISystemLog* logger, ThreadPool* threadPool, AlinousCore* core, BTreeGlobalCache* cache, ThreadContext* ctx)
 {

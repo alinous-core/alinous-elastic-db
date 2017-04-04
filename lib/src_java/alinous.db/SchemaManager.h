@@ -131,7 +131,7 @@ public:
 	void createTable(String* schemaName, TableMetadata* tableMetadata, ThreadPool* threadPool, AlinousCore* core, BTreeGlobalCache* cache, ThreadContext* ctx);
 	TableSchema* createSchema(String* name, ThreadContext* ctx) throw() ;
 	TableSchema* getSchema(String* name, ThreadContext* ctx) throw() ;
-	void reportMaxOids(MonitorAccess* monitorAccess, ThreadContext* ctx) throw() ;
+	void reportMaxOids(MonitorAccess* monitorAccess, ThreadContext* ctx);
 	void loadAfterFetch(String* dataDir, ISystemLog* logger, ThreadPool* threadPool, AlinousCore* core, BTreeGlobalCache* cache, ThreadContext* ctx);
 	void appendToEntry(FileStorageEntryBuilder* builder, ThreadContext* ctx) final;
 	int diskSize(ThreadContext* ctx) throw()  final;

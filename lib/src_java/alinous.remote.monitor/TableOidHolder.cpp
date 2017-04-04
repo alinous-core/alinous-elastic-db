@@ -64,6 +64,15 @@ long long TableOidHolder::getNextOid(String* tableFullName, int length, ThreadCo
 	}
 	return holder->getNextOid(length, ctx);
 }
+void TableOidHolder::syncNextOid(String* tableFullName, long long nextOid, ThreadContext* ctx) throw() 
+{
+	OidHolder* holder = nullptr;
+	{
+		SynchronizedBlockObj __synchronized_2(this->lock, ctx);
+		holder = getOidHolder(tableFullName, ctx);
+	}
+	holder->syncNextOid(nextOid, ctx);
+}
 OidHolder* TableOidHolder::getOidHolder(String* tableFullName, ThreadContext* ctx) throw() 
 {
 	OidHolder* holder = tableOids->get(tableFullName, ctx);

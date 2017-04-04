@@ -7,6 +7,7 @@
 #include "alinous.system/AlinousException.h"
 #include "alinous.runtime/ExecutionException.h"
 #include "alinous.runtime.dom/VariableException.h"
+#include "alinous.system/AlinousCore.h"
 #include "alinous.remote.db.server/RemoteTableStorageServer.h"
 #include "alinous.remote.socket/NetworkBinaryBuffer.h"
 #include "alinous.remote.db.client.command/RemoteStorageCommandReader.h"
@@ -54,7 +55,19 @@ void RequestSyncOidCommand::__releaseRegerences(bool prepare, ThreadContext* ctx
 }
 void RequestSyncOidCommand::executeOnServer(RemoteTableStorageServer* tableStorageServer, BufferedOutputStream* outStream, ThreadContext* ctx)
 {
-	tableStorageServer->reportMaxOids(ctx);
+	{
+		try
+		{
+			tableStorageServer->reportMaxOids(ctx);
+		}
+		catch(AlinousException* e)
+		{
+			e->printStackTrace(ctx);
+			AlinousCore* core = tableStorageServer->getCore(ctx);
+			core->logError(e, ctx);
+			handleError(e, ctx);
+		}
+	}
 	writeByteStream(outStream, ctx);
 }
 void RequestSyncOidCommand::readFromStream(InputStream* stream, int remain, ThreadContext* ctx)
@@ -65,11 +78,14 @@ void RequestSyncOidCommand::readFromStream(InputStream* stream, int remain, Thre
 	}
 	IArrayObjectPrimitive<char>* src = ArrayAllocatorPrimitive<char>::allocatep(ctx, remain);
 	stream->read(src, ctx);
+	NetworkBinaryBuffer* buff = (new(ctx) NetworkBinaryBuffer(src, ctx));
+	readErrorFromStream(buff, ctx);
 }
 void RequestSyncOidCommand::writeByteStream(OutputStream* outStream, ThreadContext* ctx)
 {
 	NetworkBinaryBuffer* buff = (new(ctx) NetworkBinaryBuffer(32, ctx));
 	buff->putInt(AbstractRemoteStorageCommand::TYPE_REQUEST_SYNC_OID, ctx);
+	writeErrorByteStream(buff, ctx);
 	IArrayObjectPrimitive<char>* b = buff->toBinary(ctx);
 	int pos = buff->getPutSize(ctx);
 	outStream->write(b, 0, pos, ctx);

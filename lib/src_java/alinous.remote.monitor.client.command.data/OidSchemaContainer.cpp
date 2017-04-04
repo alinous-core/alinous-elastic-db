@@ -57,6 +57,7 @@ void OidSchemaContainer::addOid(String* schemaName, String* tableName, long long
 		schema = (new(ctx) OidSchema(ctx));
 		this->schemas->put(schemaName, schema, ctx);
 	}
+	schema->addOid(tableName, nextOid, ctx);
 }
 void OidSchemaContainer::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 {
@@ -80,6 +81,10 @@ void OidSchemaContainer::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx
 		buff->putString(tableName, ctx);
 		sc->writeData(buff, ctx);
 	}
+}
+Map<String,OidSchema>* OidSchemaContainer::getSchemas(ThreadContext* ctx) throw() 
+{
+	return schemas;
 }
 OidSchemaContainer* OidSchemaContainer::fromNetwork(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 {

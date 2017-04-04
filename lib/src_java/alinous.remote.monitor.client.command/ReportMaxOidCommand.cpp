@@ -3,10 +3,14 @@
 
 #include "java.io/FilterOutputStream.h"
 #include "java.io/BufferedOutputStream.h"
-#include "alinous.remote.monitor/TransactionMonitorServer.h"
+#include "alinous.compile/AbstractSrcElement.h"
+#include "alinous.system/AlinousException.h"
+#include "alinous.runtime/ExecutionException.h"
+#include "alinous.runtime.dom/VariableException.h"
 #include "alinous.remote.socket/NetworkBinaryBuffer.h"
 #include "alinous.remote.socket/ICommandData.h"
 #include "alinous.remote.monitor.client.command.data/OidSchemaContainer.h"
+#include "alinous.remote.monitor/TransactionMonitorServer.h"
 #include "alinous.remote.monitor.client.command/MinitorCommandReader.h"
 #include "alinous.remote.monitor.client.command/AbstractMonitorCommand.h"
 #include "alinous.remote.monitor.client.command/ReportMaxOidCommand.h"
@@ -28,7 +32,7 @@ bool ReportMaxOidCommand::__init_static_variables(){
 	delete ctx;
 	return true;
 }
- ReportMaxOidCommand::ReportMaxOidCommand(ThreadContext* ctx) throw()  : IObject(ctx), AbstractMonitorCommand(ctx), oids(nullptr)
+ ReportMaxOidCommand::ReportMaxOidCommand(ThreadContext* ctx) throw()  : IObject(ctx), AbstractMonitorCommand(ctx), container(nullptr)
 {
 	this->type = AbstractMonitorCommand::TYPE_REPORT_OID;
 }
@@ -46,8 +50,8 @@ void ReportMaxOidCommand::__construct_impl(ThreadContext* ctx) throw()
 void ReportMaxOidCommand::__releaseRegerences(bool prepare, ThreadContext* ctx) throw() 
 {
 	ObjectEraser __e_obj1(ctx, __FILEW__, __LINE__, L"ReportMaxOidCommand", L"~ReportMaxOidCommand");
-	__e_obj1.add(this->oids, this);
-	oids = nullptr;
+	__e_obj1.add(this->container, this);
+	container = nullptr;
 	if(!prepare){
 		return;
 	}
@@ -55,21 +59,35 @@ void ReportMaxOidCommand::__releaseRegerences(bool prepare, ThreadContext* ctx) 
 }
 void ReportMaxOidCommand::executeOnServer(TransactionMonitorServer* monitorServer, BufferedOutputStream* outStream, ThreadContext* ctx)
 {
+	monitorServer->syncNextOids(container, ctx);
 	writeByteStream(outStream, ctx);
 }
 void ReportMaxOidCommand::readFromStream(InputStream* stream, int remain, ThreadContext* ctx)
 {
+	IArrayObjectPrimitive<char>* src = ArrayAllocatorPrimitive<char>::allocatep(ctx, remain);
+	stream->read(src, ctx);
+	NetworkBinaryBuffer* buff = (new(ctx) NetworkBinaryBuffer(src, ctx));
+	__GC_MV(this, &(this->container), OidSchemaContainer::fromNetwork(buff, ctx), OidSchemaContainer);
+	readErrorFromStream(buff, ctx);
 }
-OidSchemaContainer* ReportMaxOidCommand::getOids(ThreadContext* ctx) throw() 
+OidSchemaContainer* ReportMaxOidCommand::getOidsContainer(ThreadContext* ctx) throw() 
 {
-	return oids;
+	return this->container;
 }
-void ReportMaxOidCommand::setOids(OidSchemaContainer* oids, ThreadContext* ctx) throw() 
+void ReportMaxOidCommand::setOidsContainer(OidSchemaContainer* container, ThreadContext* ctx) throw() 
 {
-	__GC_MV(this, &(this->oids), oids, OidSchemaContainer);
+	__GC_MV(this, &(this->container), container, OidSchemaContainer);
 }
 void ReportMaxOidCommand::writeByteStream(OutputStream* out, ThreadContext* ctx)
 {
+	NetworkBinaryBuffer* buff = (new(ctx) NetworkBinaryBuffer(64, ctx));
+	buff->putInt(this->type, ctx);
+	this->container->writeData(buff, ctx);
+	writeErrorByteStream(buff, ctx);
+	IArrayObjectPrimitive<char>* b = buff->toBinary(ctx);
+	int pos = buff->getPutSize(ctx);
+	out->write(b, 0, pos, ctx);
+	out->flush(ctx);
 }
 void ReportMaxOidCommand::__cleanUp(ThreadContext* ctx){
 }

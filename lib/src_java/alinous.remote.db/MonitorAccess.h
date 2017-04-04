@@ -36,6 +36,12 @@ class IOException;}}
 namespace alinous {namespace remote {namespace monitor {namespace client {namespace command {
 class AllocOidCommand;}}}}}
 
+namespace alinous {namespace remote {namespace monitor {namespace client {namespace command {namespace data {
+class OidSchemaContainer;}}}}}}
+
+namespace alinous {namespace remote {namespace monitor {namespace client {namespace command {
+class ReportMaxOidCommand;}}}}}
+
 namespace java {namespace lang {
 class IObject;
 }}
@@ -56,7 +62,9 @@ using ::alinous::remote::monitor::client::MonitorClientConnectionFactory;
 using ::alinous::remote::monitor::client::MonitorConnectionInfo;
 using ::alinous::remote::monitor::client::command::AbstractMonitorCommand;
 using ::alinous::remote::monitor::client::command::AllocOidCommand;
+using ::alinous::remote::monitor::client::command::ReportMaxOidCommand;
 using ::alinous::remote::monitor::client::command::commitId::ReportSchemaVersionCommand;
+using ::alinous::remote::monitor::client::command::data::OidSchemaContainer;
 using ::alinous::remote::socket::ISocketConnection;
 using ::alinous::remote::socket::SocketConnectionPool;
 using ::alinous::system::AlinousException;
@@ -79,6 +87,7 @@ public:
 	void init(ThreadContext* ctx) throw() ;
 	void reportSchemaUpdated(ThreadContext* ctx);
 	long long allocOids(String* tableFullName, int allocNum, ThreadContext* ctx);
+	void reportMaxOid(OidSchemaContainer* container, ThreadContext* ctx);
 	void dispose(ThreadContext* ctx) throw() ;
 public:
 	static bool __init_done;

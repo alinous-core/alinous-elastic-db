@@ -9,6 +9,9 @@ class BufferedOutputStream;}}
 namespace java {namespace io {
 class OutputStream;}}
 
+namespace alinous {namespace remote {namespace socket {
+class NetworkBinaryBuffer;}}}
+
 namespace java {namespace io {
 class InputStream;}}
 
@@ -20,6 +23,9 @@ class AbstractMonitorCommand;}}}}}
 
 namespace java {namespace io {
 class IOException;}}
+
+namespace alinous {namespace runtime {namespace dom {
+class VariableException;}}}
 
 namespace alinous {
 class ThreadContext;
@@ -36,6 +42,8 @@ using ::java::io::InputStream;
 using ::java::io::OutputStream;
 using ::alinous::remote::monitor::TransactionMonitorServer;
 using ::alinous::remote::monitor::client::command::data::OidSchemaContainer;
+using ::alinous::remote::socket::NetworkBinaryBuffer;
+using ::alinous::runtime::dom::VariableException;
 
 
 
@@ -48,12 +56,12 @@ public:
 	virtual ~ReportMaxOidCommand() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 private:
-	OidSchemaContainer* oids;
+	OidSchemaContainer* container;
 public:
 	void executeOnServer(TransactionMonitorServer* monitorServer, BufferedOutputStream* outStream, ThreadContext* ctx) final;
 	void readFromStream(InputStream* stream, int remain, ThreadContext* ctx) final;
-	OidSchemaContainer* getOids(ThreadContext* ctx) throw() ;
-	void setOids(OidSchemaContainer* oids, ThreadContext* ctx) throw() ;
+	OidSchemaContainer* getOidsContainer(ThreadContext* ctx) throw() ;
+	void setOidsContainer(OidSchemaContainer* container, ThreadContext* ctx) throw() ;
 	void writeByteStream(OutputStream* out, ThreadContext* ctx) final;
 public:
 	static bool __init_done;

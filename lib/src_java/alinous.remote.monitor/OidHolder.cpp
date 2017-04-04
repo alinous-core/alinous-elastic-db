@@ -21,7 +21,7 @@ bool OidHolder::__init_static_variables(){
 	delete ctx;
 	return true;
 }
- OidHolder::OidHolder(ThreadContext* ctx) throw()  : IObject(ctx), oidLock(__GC_INS(this, (new(ctx) LockObject(ctx)), LockObject)), lastOid(0)
+ OidHolder::OidHolder(ThreadContext* ctx) throw()  : IObject(ctx), oidLock(__GC_INS(this, (new(ctx) LockObject(ctx)), LockObject)), nextOid(0)
 {
 }
 void OidHolder::__construct_impl(ThreadContext* ctx) throw() 
@@ -47,16 +47,26 @@ void OidHolder::setNextOid(long long lastOid, ThreadContext* ctx) throw()
 {
 	{
 		SynchronizedBlockObj __synchronized_2(this->oidLock, ctx);
-		this->lastOid = lastOid;
+		this->nextOid = lastOid;
 	}
 }
 long long OidHolder::getNextOid(int length, ThreadContext* ctx) throw() 
 {
 	{
 		SynchronizedBlockObj __synchronized_2(this->oidLock, ctx);
-		long long cur = this->lastOid;
-		this->lastOid += length;
+		long long cur = this->nextOid;
+		this->nextOid += length;
 		return cur;
+	}
+}
+void OidHolder::syncNextOid(long long nextOid, ThreadContext* ctx) throw() 
+{
+	{
+		SynchronizedBlockObj __synchronized_2(this->oidLock, ctx);
+		if(nextOid > this->nextOid)
+		{
+			this->nextOid = nextOid;
+		}
 	}
 }
 void OidHolder::__cleanUp(ThreadContext* ctx){

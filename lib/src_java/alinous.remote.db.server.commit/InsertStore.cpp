@@ -18,6 +18,8 @@
 #include "alinous.db/AlinousDbException.h"
 #include "alinous.remote.socket/ICommandData.h"
 #include "alinous.db.table/TableMetadata.h"
+#include "alinous.db/ITableSchema.h"
+#include "alinous.db/TableSchema.h"
 #include "alinous.db.trx/DbVersionContext.h"
 #include "alinous.remote.db/MonitorAccess.h"
 #include "alinous.db.table/IDatabaseRecord.h"
@@ -26,8 +28,7 @@
 #include "alinous.remote.db.server/RemoteTableStorageServer.h"
 #include "alinous.system/AlinousCore.h"
 #include "alinous.db.table/IDatabaseTable.h"
-#include "alinous.db/ITableSchema.h"
-#include "alinous.db/TableSchema.h"
+#include "alinous.db/SchemaManager.h"
 #include "alinous.remote.db.server.commit/TableFullNameKey.h"
 #include "alinous.remote.db.server.commit/InsertStore.h"
 
@@ -156,7 +157,8 @@ void InsertStore::handleCommitTable(long long newCommitId, DbVersionContext* vct
 {
 	String* schemaName = fullName->getSchema(ctx);
 	String* tableName = fullName->getTable(ctx);
-	TableSchema* schema = server->schemas->getSchema(schemaName, ctx);
+	SchemaManager* scMgr = server->schemas;
+	TableSchema* schema = scMgr->getSchema(schemaName, ctx);
 	if(schema == nullptr)
 	{
 		throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3589()->clone(ctx)->append(schemaName, ctx)->append(ConstStr::getCNST_STR_1125(), ctx), ctx));

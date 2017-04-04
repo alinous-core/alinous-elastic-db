@@ -45,6 +45,7 @@ private:
 public:
 	void setNextOid(String* tableFullName, long long nextOid, ThreadContext* ctx) throw() ;
 	long long getNextOid(String* tableFullName, int length, ThreadContext* ctx) throw() ;
+	void syncNextOid(String* tableFullName, long long nextOid, ThreadContext* ctx) throw() ;
 private:
 	OidHolder* getOidHolder(String* tableFullName, ThreadContext* ctx) throw() ;
 public:

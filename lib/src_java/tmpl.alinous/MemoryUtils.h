@@ -8,10 +8,10 @@ template class alinous::MemoryUtils<::alinous::HashMapInternalElement<::java::la
 template class alinous::MemoryUtils<::alinous::HashMapInternalElement<::java::lang::String, ::alinous::lock::unique::TableUniqueCollections>>;
 template class alinous::MemoryUtils<::alinous::HashMapInternalElement<::java::lang::String, ::alinous::lock::unique::UniqueExclusiveLock>>;
 template class alinous::MemoryUtils<::alinous::HashMapInternalElement<::alinous::html::DomNode, ::java::util::ArrayList<::alinous::html::xpath::match::MatchCandidate>>>;
-template class alinous::MemoryUtils<::alinous::HashMapInternalElement<::java::lang::String, ::alinous::remote::monitor::OidHolder>>;
-template class alinous::MemoryUtils<::alinous::HashMapInternalElement<::java::lang::String, ::alinous::remote::monitor::RegionNodeInfo>>;
 template class alinous::MemoryUtils<::alinous::HashMapInternalElement<::java::lang::String, ::alinous::remote::monitor::client::command::data::OidSchema>>;
 template class alinous::MemoryUtils<::alinous::HashMapInternalElement<::java::lang::String, ::alinous::remote::monitor::client::command::data::OidTable>>;
+template class alinous::MemoryUtils<::alinous::HashMapInternalElement<::java::lang::String, ::alinous::remote::monitor::OidHolder>>;
+template class alinous::MemoryUtils<::alinous::HashMapInternalElement<::java::lang::String, ::alinous::remote::monitor::RegionNodeInfo>>;
 template class alinous::MemoryUtils<::alinous::HashMapInternalElement<::java::lang::String, ::alinous::remote::db::client::command::data::TableClusterData>>;
 template class alinous::MemoryUtils<::alinous::HashMapInternalElement<::java::lang::String, ::alinous::remote::db::client::command::data::SchemaData>>;
 template class alinous::MemoryUtils<::alinous::HashMapInternalElement<::java::lang::Long, ::alinous::remote::db::server::trx::StorageTransaction>>;
@@ -62,10 +62,10 @@ template class alinous::MemoryUtils<::alinous::HashMapRawArray<::java::lang::Str
 template class alinous::MemoryUtils<::alinous::HashMapRawArray<::java::lang::String, ::alinous::lock::unique::TableUniqueCollections>>;
 template class alinous::MemoryUtils<::alinous::HashMapRawArray<::java::lang::String, ::alinous::lock::unique::UniqueExclusiveLock>>;
 template class alinous::MemoryUtils<::alinous::HashMapRawArray<::alinous::html::DomNode, ::java::util::ArrayList<::alinous::html::xpath::match::MatchCandidate>>>;
-template class alinous::MemoryUtils<::alinous::HashMapRawArray<::java::lang::String, ::alinous::remote::monitor::OidHolder>>;
-template class alinous::MemoryUtils<::alinous::HashMapRawArray<::java::lang::String, ::alinous::remote::monitor::RegionNodeInfo>>;
 template class alinous::MemoryUtils<::alinous::HashMapRawArray<::java::lang::String, ::alinous::remote::monitor::client::command::data::OidSchema>>;
 template class alinous::MemoryUtils<::alinous::HashMapRawArray<::java::lang::String, ::alinous::remote::monitor::client::command::data::OidTable>>;
+template class alinous::MemoryUtils<::alinous::HashMapRawArray<::java::lang::String, ::alinous::remote::monitor::OidHolder>>;
+template class alinous::MemoryUtils<::alinous::HashMapRawArray<::java::lang::String, ::alinous::remote::monitor::RegionNodeInfo>>;
 template class alinous::MemoryUtils<::alinous::HashMapRawArray<::java::lang::String, ::alinous::remote::db::client::command::data::TableClusterData>>;
 template class alinous::MemoryUtils<::alinous::HashMapRawArray<::java::lang::String, ::alinous::remote::db::client::command::data::SchemaData>>;
 template class alinous::MemoryUtils<::alinous::HashMapRawArray<::java::lang::Long, ::alinous::remote::db::server::trx::StorageTransaction>>;
