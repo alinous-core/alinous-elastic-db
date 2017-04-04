@@ -2,19 +2,21 @@
 
 
 #include "alinous.btree/BTreeException.h"
+#include "alinous.buffer.storage/FileStorageEntry.h"
+#include "alinous.buffer.storage/FileStorageEntryBuilder.h"
+#include "alinous.lock/LockObject.h"
+#include "alinous.lock/ConcurrentGate.h"
+#include "alinous.buffer.storage/IFileStorage.h"
+#include "alinous.buffer.storage/FileStorageEntryWriter.h"
 #include "alinous.compile/AbstractSrcElement.h"
 #include "alinous.system/AlinousException.h"
 #include "alinous.db/AlinousDbException.h"
-#include "alinous.buffer.storage/FileStorageEntryBuilder.h"
 #include "alinous.buffer.storage/FileStorageEntryFetcher.h"
 #include "alinous.btree/IValueFetcher.h"
 #include "alinous.btree/IBTreeValue.h"
 #include "alinous.btree/IBTree.h"
 #include "alinous.db.table/DatabaseException.h"
 #include "alinous.db.table/IDatabaseRecord.h"
-#include "alinous.lock/LockObject.h"
-#include "alinous.lock/ConcurrentGate.h"
-#include "alinous.buffer.storage/IFileStorage.h"
 #include "alinous.buffer.storage/FileStorage.h"
 #include "alinous.btree/BTreeGlobalCache.h"
 #include "alinous.runtime.parallel/ThreadPool.h"
@@ -32,6 +34,8 @@
 #include "alinous.db.table/IDatabaseTable.h"
 #include "alinous.db.trx/DbTransaction.h"
 #include "alinous.db.table/DatabaseRecord.h"
+#include "alinous.db.table/OidIndexJob.h"
+#include "alinous.db.table/IndexInsertJob.h"
 #include "alinous.numeric/InternalDate.h"
 #include "java.sql/Timestamp.h"
 #include "alinous.db.table/DatatableConstants.h"
@@ -104,8 +108,44 @@ void DatatableUpdateSupport::insertData(DbTransaction* trx, List<IDatabaseRecord
 		insertData(trx, data, newCommitId, jobs, logger, ctx);
 	}
 }
-void DatatableUpdateSupport::tcpInsertCommit(IDatabaseRecord* data, ThreadPool* pool, ISystemLog* log, ThreadContext* ctx) throw() 
+void DatatableUpdateSupport::tcpInsertCommit(IDatabaseRecord* dbrecord, ThreadPool* pool, ISystemLog* log, ThreadContext* ctx)
 {
+	int slotSize = getIndexes(ctx)->size(ctx) + 2;
+	IArrayObject<SequentialBackgroundJob>* jobs = ArrayAllocator<SequentialBackgroundJob>::allocate(ctx, slotSize);
+	for(int i = 0; i != slotSize; ++i)
+	{
+		jobs->set((new(ctx) SequentialBackgroundJob(ctx))->init(pool, ctx),i, ctx);
+	}
+	lockStorage(ctx);
+	FileStorageEntryWriter* writer = nullptr;
+	{
+		std::function<void(void)> finallyLm2= [&, this]()
+		{
+			writer->end(ctx);
+			unlockStorage(ctx);
+		};
+		Releaser finalyCaller2(finallyLm2);
+		try
+		{
+			writer = this->dataStorage->getWriter(ctx);
+			int cap = dbrecord->diskSize(ctx);
+			FileStorageEntryBuilder* builder = (new(ctx) FileStorageEntryBuilder(cap, ctx));
+			dbrecord->appendToEntry(builder, ctx);
+			FileStorageEntry* entry = builder->toEntry(ctx);
+			writer->write(entry, ctx);
+			int slot = 0;
+			jobs->get(slot++)->addJob((new(ctx) OidIndexJob(dbrecord->getOid(ctx), getOidIndex(ctx), entry->position, ctx)), ctx);
+			jobs->get(slot++)->addJob((new(ctx) IndexInsertJob(getPrimaryIndex(ctx), dbrecord, ctx)), ctx);
+			ArrayList<IScannableIndex>* indexes = getIndexes(ctx);
+			int maxLoop = indexes->size(ctx);
+			for(int i = 0; i != maxLoop; ++i)
+			{
+				IScannableIndex* tableIndex = indexes->get(i, ctx);
+				jobs->get(slot++)->addJob((new(ctx) IndexInsertJob(tableIndex, dbrecord, ctx)), ctx);
+			}
+		}
+		catch(...){throw;}
+	}
 }
 void DatatableUpdateSupport::__cleanUp(ThreadContext* ctx){
 }

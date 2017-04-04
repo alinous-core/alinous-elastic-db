@@ -24,6 +24,24 @@ template <typename  T> class List;}}
 namespace alinous {namespace runtime {namespace parallel {
 class ThreadPool;}}}
 
+namespace alinous {namespace buffer {namespace storage {
+class FileStorageEntryWriter;}}}
+
+namespace alinous {namespace buffer {namespace storage {
+class FileStorageEntryBuilder;}}}
+
+namespace alinous {namespace buffer {namespace storage {
+class FileStorageEntry;}}}
+
+namespace alinous {namespace db {namespace table {
+class OidIndexJob;}}}
+
+namespace alinous {namespace db {namespace table {
+class IndexInsertJob;}}}
+
+namespace alinous {namespace db {namespace table {
+class IScannableIndex;}}}
+
 namespace alinous {namespace db {namespace table {
 class DatatableDDLSupport;}}}
 
@@ -49,8 +67,12 @@ using namespace ::alinous;
 using namespace ::java::lang;
 using ::java::util::Iterator;
 using ::java::io::IOException;
+using ::java::util::ArrayList;
 using ::java::util::List;
 using ::alinous::btree::BTreeException;
+using ::alinous::buffer::storage::FileStorageEntry;
+using ::alinous::buffer::storage::FileStorageEntryBuilder;
+using ::alinous::buffer::storage::FileStorageEntryWriter;
 using ::alinous::db::AlinousDbException;
 using ::alinous::db::trx::DbTransaction;
 using ::alinous::runtime::parallel::SequentialBackgroundJob;
@@ -72,7 +94,7 @@ public:
 	void updateData(IDatabaseRecord* data, long long commitId, IArrayObject<SequentialBackgroundJob>* jobs, ISystemLog* log, ThreadContext* ctx) final;
 	void insertData(DbTransaction* trx, IDatabaseRecord* data, long long commitId, IArrayObject<SequentialBackgroundJob>* jobs, ISystemLog* log, ThreadContext* ctx) final;
 	void insertData(DbTransaction* trx, List<IDatabaseRecord>* records, long long newCommitId, IArrayObject<SequentialBackgroundJob>* jobs, ISystemLog* logger, ThreadContext* ctx) final;
-	void tcpInsertCommit(IDatabaseRecord* data, ThreadPool* pool, ISystemLog* log, ThreadContext* ctx) throw()  final;
+	void tcpInsertCommit(IDatabaseRecord* dbrecord, ThreadPool* pool, ISystemLog* log, ThreadContext* ctx) final;
 public:
 	static bool __init_done;
 	static bool __init_static_variables();

@@ -45,11 +45,11 @@
 #include "alinous.db.table/DatatableUpdateCache.h"
 #include "alinous.db.table/AbstractDatabaseTable.h"
 #include "alinous.db.table/DataTableStorageSupport.h"
+#include "alinous.db.table/OidIndexJob.h"
+#include "alinous.db.table/IndexInsertJob.h"
 #include "alinous.db.table/DatatableLockSupport.h"
 #include "alinous.db.table/DatatableDDLSupport.h"
 #include "alinous.db.table/DatatableUpdateSupport.h"
-#include "alinous.db.table/IndexInsertJob.h"
-#include "alinous.db.table/OidIndexJob.h"
 #include "alinous.db.table.cache/DbRecordCache.h"
 #include "alinous.db.table.cache/RecordCacheEngine.h"
 
