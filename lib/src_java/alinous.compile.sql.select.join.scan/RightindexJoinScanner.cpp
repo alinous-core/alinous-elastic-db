@@ -46,6 +46,7 @@
 #include "alinous.compile.sql.expression.blexp/ISQLBoolExpression.h"
 #include "alinous.compile.sql.expression.blexp/AbstractSQLBooleanExpression.h"
 #include "alinous.compile.sql.select.join/SQLJoinCondition.h"
+#include "alinous.db.trx.scan/IJoinScanner.h"
 #include "alinous.db.trx.scan/ScanException.h"
 #include "alinous.compile.sql.select.join.scan/RightindexJoinScanner.h"
 
@@ -66,39 +67,11 @@ bool RightindexJoinScanner::__init_static_variables(){
 	delete ctx;
 	return true;
 }
- RightindexJoinScanner::RightindexJoinScanner(DbTransaction* trx, ITableTargetScanner* left, ITableTargetScanner* right, ScanTableMetadata* leftMetadata, ScanTableMetadata* rightMetadata, bool inner, JoinMatchExpression* match, SQLJoinCondition* condition, ScriptMachine* machine, ThreadContext* ctx) throw()  : IObject(ctx), ITableTargetScanner(ctx), left(nullptr), right(nullptr), inner(0), rightIndex(nullptr), rightMetadata(nullptr), leftColumnIndex(0), rightColumnIndex(0), currentLeft(nullptr), leftValue(nullptr), joinedCount(0), joinCondition(nullptr), machine(nullptr), nextRightResult(nullptr), nextResult(nullptr), locker(nullptr), trx(nullptr)
+ RightindexJoinScanner::RightindexJoinScanner(ThreadContext* ctx) throw()  : IObject(ctx), IJoinScanner(ctx), left(nullptr), right(nullptr), inner(0), rightIndex(nullptr), rightMetadata(nullptr), leftColumnIndex(0), rightColumnIndex(0), currentLeft(nullptr), leftValue(nullptr), joinedCount(0), joinCondition(nullptr), machine(nullptr), nextRightResult(nullptr), nextResult(nullptr), locker(nullptr), trx(nullptr)
 {
-	__GC_MV(this, &(this->trx), trx, DbTransaction);
-	__GC_MV(this, &(this->left), left, ITableTargetScanner);
-	__GC_MV(this, &(this->right), right, ITableTargetScanner);
-	this->inner = inner;
-	__GC_MV(this, &(this->locker), trx->lockContext, TrxLockContext);
-	this->leftColumnIndex = leftMetadata->getColumnOrder(match->getLeftColumn(ctx), ctx);
-	this->rightColumnIndex = rightMetadata->getColumnOrder(match->getRightColumn(ctx), ctx);
-	__GC_MV(this, &(this->rightMetadata), rightMetadata, ScanTableMetadata);
-	__GC_MV(this, &(this->rightIndex), match->getRightIndex(ctx), ScanTableIndexMetadata);
-	__GC_MV(this, &(this->machine), machine, ScriptMachine);
-	if(condition != nullptr)
-	{
-		__GC_MV(this, &(this->joinCondition), condition->getCondition(ctx), ISQLExpression);
-	}
 }
-void RightindexJoinScanner::__construct_impl(DbTransaction* trx, ITableTargetScanner* left, ITableTargetScanner* right, ScanTableMetadata* leftMetadata, ScanTableMetadata* rightMetadata, bool inner, JoinMatchExpression* match, SQLJoinCondition* condition, ScriptMachine* machine, ThreadContext* ctx) throw() 
+void RightindexJoinScanner::__construct_impl(ThreadContext* ctx) throw() 
 {
-	__GC_MV(this, &(this->trx), trx, DbTransaction);
-	__GC_MV(this, &(this->left), left, ITableTargetScanner);
-	__GC_MV(this, &(this->right), right, ITableTargetScanner);
-	this->inner = inner;
-	__GC_MV(this, &(this->locker), trx->lockContext, TrxLockContext);
-	this->leftColumnIndex = leftMetadata->getColumnOrder(match->getLeftColumn(ctx), ctx);
-	this->rightColumnIndex = rightMetadata->getColumnOrder(match->getRightColumn(ctx), ctx);
-	__GC_MV(this, &(this->rightMetadata), rightMetadata, ScanTableMetadata);
-	__GC_MV(this, &(this->rightIndex), match->getRightIndex(ctx), ScanTableIndexMetadata);
-	__GC_MV(this, &(this->machine), machine, ScriptMachine);
-	if(condition != nullptr)
-	{
-		__GC_MV(this, &(this->joinCondition), condition->getCondition(ctx), ISQLExpression);
-	}
 }
  RightindexJoinScanner::~RightindexJoinScanner() throw() 
 {
@@ -137,6 +110,24 @@ void RightindexJoinScanner::__releaseRegerences(bool prepare, ThreadContext* ctx
 	if(!prepare){
 		return;
 	}
+}
+RightindexJoinScanner* RightindexJoinScanner::init(DbTransaction* trx, ITableTargetScanner* left, ITableTargetScanner* right, ScanTableMetadata* leftMetadata, ScanTableMetadata* rightMetadata, bool inner, JoinMatchExpression* match, SQLJoinCondition* condition, ScriptMachine* machine, ThreadContext* ctx) throw() 
+{
+	__GC_MV(this, &(this->trx), trx, DbTransaction);
+	__GC_MV(this, &(this->left), left, ITableTargetScanner);
+	__GC_MV(this, &(this->right), right, ITableTargetScanner);
+	this->inner = inner;
+	__GC_MV(this, &(this->locker), trx->lockContext, TrxLockContext);
+	this->leftColumnIndex = leftMetadata->getColumnOrder(match->getLeftColumn(ctx), ctx);
+	this->rightColumnIndex = rightMetadata->getColumnOrder(match->getRightColumn(ctx), ctx);
+	__GC_MV(this, &(this->rightMetadata), rightMetadata, ScanTableMetadata);
+	__GC_MV(this, &(this->rightIndex), match->getRightIndex(ctx), ScanTableIndexMetadata);
+	__GC_MV(this, &(this->machine), machine, ScriptMachine);
+	if(condition != nullptr)
+	{
+		__GC_MV(this, &(this->joinCondition), condition->getCondition(ctx), ISQLExpression);
+	}
+	return this;
 }
 void RightindexJoinScanner::startScan(ScanResultIndexKey* indexKeyValue, ThreadContext* ctx)
 {

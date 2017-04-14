@@ -46,6 +46,7 @@
 #include "alinous.compile.sql.expression.blexp/ISQLBoolExpression.h"
 #include "alinous.compile.sql.expression.blexp/AbstractSQLBooleanExpression.h"
 #include "alinous.compile.sql.select.join/SQLJoinCondition.h"
+#include "alinous.db.trx.scan/IJoinScanner.h"
 #include "alinous.db.trx.scan/ScanException.h"
 #include "alinous.db.trx.scan/ScannedOids.h"
 #include "alinous.compile.sql.select.join.scan/ReverseIndexScanner.h"
@@ -67,49 +68,11 @@ bool ReverseIndexScanner::__init_static_variables(){
 	delete ctx;
 	return true;
 }
- ReverseIndexScanner::ReverseIndexScanner(DbTransaction* trx, ITableTargetScanner* left, ITableTargetScanner* right, ScanTableMetadata* leftMetadata, ScanTableMetadata* rightMetadata, bool inner, JoinMatchExpression* match, SQLJoinCondition* condition, ScriptMachine* machine, ThreadContext* ctx) throw()  : IObject(ctx), ITableTargetScanner(ctx), left(nullptr), right(nullptr), leftIndex(nullptr), rightColumnIndex(0), leftColumnIndex(0), nextLeftResult(nullptr), currentRight(nullptr), rightValue(nullptr), rightNumCols(0), nextResult(nullptr), joinedCount(0), inner(0), firstScanDone(0), scannedoids(nullptr), joinCondition(nullptr), machine(nullptr), lockContext(nullptr), trx(nullptr)
+ ReverseIndexScanner::ReverseIndexScanner(ThreadContext* ctx) throw()  : IObject(ctx), IJoinScanner(ctx), left(nullptr), right(nullptr), leftIndex(nullptr), rightColumnIndex(0), leftColumnIndex(0), nextLeftResult(nullptr), currentRight(nullptr), rightValue(nullptr), rightNumCols(0), nextResult(nullptr), joinedCount(0), inner(0), firstScanDone(0), scannedoids(nullptr), joinCondition(nullptr), machine(nullptr), lockContext(nullptr), trx(nullptr)
 {
-	__GC_MV(this, &(this->trx), trx, DbTransaction);
-	__GC_MV(this, &(this->left), left, ITableTargetScanner);
-	__GC_MV(this, &(this->right), right, ITableTargetScanner);
-	this->inner = inner;
-	this->leftColumnIndex = leftMetadata->getColumnOrder(match->getLeftColumn(ctx), ctx);
-	this->rightColumnIndex = rightMetadata->getColumnOrder(match->getRightColumn(ctx), ctx);
-	this->rightNumCols = rightMetadata->getColumns(ctx)->size(ctx);
-	__GC_MV(this, &(this->leftIndex), match->getLeftIndex(ctx), ScanTableIndexMetadata);
-	if(!this->inner)
-	{
-		__GC_MV(this, &(this->scannedoids), (new(ctx) ScannedOids(ctx)), ScannedOids);
-	}
-	if(condition != nullptr)
-	{
-		condition->getCondition(ctx);
-	}
-	__GC_MV(this, &(this->machine), machine, ScriptMachine);
-	this->firstScanDone = false;
-	__GC_MV(this, &(this->lockContext), trx->lockContext, TrxLockContext);
 }
-void ReverseIndexScanner::__construct_impl(DbTransaction* trx, ITableTargetScanner* left, ITableTargetScanner* right, ScanTableMetadata* leftMetadata, ScanTableMetadata* rightMetadata, bool inner, JoinMatchExpression* match, SQLJoinCondition* condition, ScriptMachine* machine, ThreadContext* ctx) throw() 
+void ReverseIndexScanner::__construct_impl(ThreadContext* ctx) throw() 
 {
-	__GC_MV(this, &(this->trx), trx, DbTransaction);
-	__GC_MV(this, &(this->left), left, ITableTargetScanner);
-	__GC_MV(this, &(this->right), right, ITableTargetScanner);
-	this->inner = inner;
-	this->leftColumnIndex = leftMetadata->getColumnOrder(match->getLeftColumn(ctx), ctx);
-	this->rightColumnIndex = rightMetadata->getColumnOrder(match->getRightColumn(ctx), ctx);
-	this->rightNumCols = rightMetadata->getColumns(ctx)->size(ctx);
-	__GC_MV(this, &(this->leftIndex), match->getLeftIndex(ctx), ScanTableIndexMetadata);
-	if(!this->inner)
-	{
-		__GC_MV(this, &(this->scannedoids), (new(ctx) ScannedOids(ctx)), ScannedOids);
-	}
-	if(condition != nullptr)
-	{
-		condition->getCondition(ctx);
-	}
-	__GC_MV(this, &(this->machine), machine, ScriptMachine);
-	this->firstScanDone = false;
-	__GC_MV(this, &(this->lockContext), trx->lockContext, TrxLockContext);
 }
  ReverseIndexScanner::~ReverseIndexScanner() throw() 
 {
@@ -148,6 +111,29 @@ void ReverseIndexScanner::__releaseRegerences(bool prepare, ThreadContext* ctx) 
 	if(!prepare){
 		return;
 	}
+}
+ReverseIndexScanner* ReverseIndexScanner::init(DbTransaction* trx, ITableTargetScanner* left, ITableTargetScanner* right, ScanTableMetadata* leftMetadata, ScanTableMetadata* rightMetadata, bool inner, JoinMatchExpression* match, SQLJoinCondition* condition, ScriptMachine* machine, ThreadContext* ctx) throw() 
+{
+	__GC_MV(this, &(this->trx), trx, DbTransaction);
+	__GC_MV(this, &(this->left), left, ITableTargetScanner);
+	__GC_MV(this, &(this->right), right, ITableTargetScanner);
+	this->inner = inner;
+	this->leftColumnIndex = leftMetadata->getColumnOrder(match->getLeftColumn(ctx), ctx);
+	this->rightColumnIndex = rightMetadata->getColumnOrder(match->getRightColumn(ctx), ctx);
+	this->rightNumCols = rightMetadata->getColumns(ctx)->size(ctx);
+	__GC_MV(this, &(this->leftIndex), match->getLeftIndex(ctx), ScanTableIndexMetadata);
+	if(!this->inner)
+	{
+		__GC_MV(this, &(this->scannedoids), (new(ctx) ScannedOids(ctx)), ScannedOids);
+	}
+	if(condition != nullptr)
+	{
+		condition->getCondition(ctx);
+	}
+	__GC_MV(this, &(this->machine), machine, ScriptMachine);
+	this->firstScanDone = false;
+	__GC_MV(this, &(this->lockContext), trx->lockContext, TrxLockContext);
+	return this;
 }
 bool ReverseIndexScanner::hasNext(bool debug, ThreadContext* ctx)
 {

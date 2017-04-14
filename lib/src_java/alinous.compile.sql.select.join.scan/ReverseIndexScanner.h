@@ -3,6 +3,9 @@
 namespace alinous{namespace annotation{
 class OneSource;
 }}
+namespace alinous {namespace compile {namespace sql {namespace select {namespace join {namespace scan {
+class ReverseIndexScanner;}}}}}}
+
 namespace alinous {namespace db {namespace trx {
 class DbTransaction;}}}
 
@@ -55,6 +58,9 @@ namespace alinous {namespace db {namespace trx {
 class TrxLockContext;}}}
 
 namespace alinous {namespace db {namespace trx {namespace scan {
+class IJoinScanner;}}}}
+
+namespace alinous {namespace db {namespace trx {namespace scan {
 class ScanException;}}}}
 
 namespace java {namespace lang {
@@ -78,6 +84,7 @@ using ::alinous::compile::sql::select::join::SQLJoinCondition;
 using ::alinous::db::table::DatabaseException;
 using ::alinous::db::trx::DbTransaction;
 using ::alinous::db::trx::TrxLockContext;
+using ::alinous::db::trx::scan::IJoinScanner;
 using ::alinous::db::trx::scan::ITableTargetScanner;
 using ::alinous::db::trx::scan::ScanException;
 using ::alinous::db::trx::scan::ScanResultIndexKey;
@@ -91,12 +98,12 @@ using ::alinous::system::ISystemLog;
 
 
 
-class ReverseIndexScanner final : public ITableTargetScanner, public virtual IObject {
+class ReverseIndexScanner final : public IJoinScanner, public virtual IObject {
 public:
 	ReverseIndexScanner(const ReverseIndexScanner& base) = default;
 public:
-	ReverseIndexScanner(DbTransaction* trx, ITableTargetScanner* left, ITableTargetScanner* right, ScanTableMetadata* leftMetadata, ScanTableMetadata* rightMetadata, bool inner, JoinMatchExpression* match, SQLJoinCondition* condition, ScriptMachine* machine, ThreadContext* ctx) throw() ;
-	void __construct_impl(DbTransaction* trx, ITableTargetScanner* left, ITableTargetScanner* right, ScanTableMetadata* leftMetadata, ScanTableMetadata* rightMetadata, bool inner, JoinMatchExpression* match, SQLJoinCondition* condition, ScriptMachine* machine, ThreadContext* ctx) throw() ;
+	ReverseIndexScanner(ThreadContext* ctx) throw() ;
+	void __construct_impl(ThreadContext* ctx) throw() ;
 	virtual ~ReverseIndexScanner() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 private:
@@ -119,6 +126,7 @@ private:
 	TrxLockContext* lockContext;
 	DbTransaction* trx;
 public:
+	ReverseIndexScanner* init(DbTransaction* trx, ITableTargetScanner* left, ITableTargetScanner* right, ScanTableMetadata* leftMetadata, ScanTableMetadata* rightMetadata, bool inner, JoinMatchExpression* match, SQLJoinCondition* condition, ScriptMachine* machine, ThreadContext* ctx) throw() ;
 	bool hasNext(bool debug, ThreadContext* ctx) final;
 	ScanResultRecord* next(bool debug, ThreadContext* ctx) final;
 	void startScan(ScanResultIndexKey* indexKeyValue, ThreadContext* ctx) final;

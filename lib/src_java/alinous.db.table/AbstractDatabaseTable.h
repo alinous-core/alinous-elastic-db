@@ -140,7 +140,7 @@ public:
 	Integer* tableId;
 	TableMetadata* metadata;
 	ArrayList<IScannableIndex>* indexes;
-	TableIndex* primaryIndex;
+	IScannableIndex* primaryIndex;
 	String* name;
 	String* baseDir;
 	String* oidIndexPath;
@@ -166,7 +166,7 @@ public:
 	bool equals(IObject* obj, ThreadContext* ctx) throw() ;
 	Timestamp* getSchmeUpdated(ThreadContext* ctx) throw() ;
 	DatatableUpdateCache* getUpdateHistoryCache(ThreadContext* ctx) throw() ;
-	TableIndex* getPrimaryIndex(ThreadContext* ctx) throw()  final;
+	IScannableIndex* getPrimaryIndex(ThreadContext* ctx) throw()  final;
 	int getColumnCount(ThreadContext* ctx) throw()  final;
 	FileStorage* getDataStorage(ThreadContext* ctx) throw() ;
 	BTree* getOidIndex(ThreadContext* ctx) throw() ;

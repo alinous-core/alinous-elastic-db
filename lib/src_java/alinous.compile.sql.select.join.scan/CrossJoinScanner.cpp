@@ -16,6 +16,7 @@
 #include "alinous.db.trx.scan/ITableTargetScanner.h"
 #include "alinous.runtime.engine/ScriptMachine.h"
 #include "alinous.db.trx/DbTransaction.h"
+#include "alinous.db.trx.scan/IJoinScanner.h"
 #include "alinous.db.trx.scan/ScanException.h"
 #include "alinous.compile.sql.select.join.scan/CrossJoinScanner.h"
 
@@ -36,17 +37,11 @@ bool CrossJoinScanner::__init_static_variables(){
 	delete ctx;
 	return true;
 }
- CrossJoinScanner::CrossJoinScanner(DbTransaction* trx, ITableTargetScanner* left, ITableTargetScanner* right, ScanTableMetadata* leftMetadata, ScanTableMetadata* rightMetadata, ScriptMachine* machine, ThreadContext* ctx) throw()  : IObject(ctx), ITableTargetScanner(ctx), left(nullptr), right(nullptr), currentLeft(nullptr), nextResult(nullptr), trx(nullptr)
+ CrossJoinScanner::CrossJoinScanner(ThreadContext* ctx) throw()  : IObject(ctx), IJoinScanner(ctx), left(nullptr), right(nullptr), currentLeft(nullptr), nextResult(nullptr), trx(nullptr)
 {
-	__GC_MV(this, &(this->trx), trx, DbTransaction);
-	__GC_MV(this, &(this->left), left, ITableTargetScanner);
-	__GC_MV(this, &(this->right), right, ITableTargetScanner);
 }
-void CrossJoinScanner::__construct_impl(DbTransaction* trx, ITableTargetScanner* left, ITableTargetScanner* right, ScanTableMetadata* leftMetadata, ScanTableMetadata* rightMetadata, ScriptMachine* machine, ThreadContext* ctx) throw() 
+void CrossJoinScanner::__construct_impl(ThreadContext* ctx) throw() 
 {
-	__GC_MV(this, &(this->trx), trx, DbTransaction);
-	__GC_MV(this, &(this->left), left, ITableTargetScanner);
-	__GC_MV(this, &(this->right), right, ITableTargetScanner);
 }
  CrossJoinScanner::~CrossJoinScanner() throw() 
 {
@@ -71,6 +66,13 @@ void CrossJoinScanner::__releaseRegerences(bool prepare, ThreadContext* ctx) thr
 	if(!prepare){
 		return;
 	}
+}
+CrossJoinScanner* CrossJoinScanner::init(DbTransaction* trx, ITableTargetScanner* left, ITableTargetScanner* right, ScanTableMetadata* leftMetadata, ScanTableMetadata* rightMetadata, ScriptMachine* machine, ThreadContext* ctx) throw() 
+{
+	__GC_MV(this, &(this->trx), trx, DbTransaction);
+	__GC_MV(this, &(this->left), left, ITableTargetScanner);
+	__GC_MV(this, &(this->right), right, ITableTargetScanner);
+	return this;
 }
 void CrossJoinScanner::startScan(ScanResultIndexKey* indexKeyValue, ThreadContext* ctx)
 {

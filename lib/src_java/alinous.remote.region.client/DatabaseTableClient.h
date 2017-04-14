@@ -13,13 +13,19 @@ namespace java {namespace lang {
 class Integer;}}
 
 namespace alinous {namespace db {namespace table {
+class TableColumnMetadata;}}}
+
+namespace alinous {namespace remote {namespace region {namespace client {
+class RemoteTableIndex;}}}}
+
+namespace alinous {namespace db {namespace table {
+class TableIndexMetadata;}}}
+
+namespace alinous {namespace db {namespace table {
 class IScannableIndex;}}}
 
 namespace java {namespace util {
 template <typename  T> class List;}}
-
-namespace alinous {namespace db {namespace table {
-class TableColumnMetadata;}}}
 
 namespace alinous {namespace compile {namespace sql {namespace analyze {
 class ScanTableColumnIdentifier;}}}}
@@ -123,6 +129,7 @@ using ::alinous::db::table::IDatabaseRecord;
 using ::alinous::db::table::IDatabaseTable;
 using ::alinous::db::table::IScannableIndex;
 using ::alinous::db::table::TableColumnMetadata;
+using ::alinous::db::table::TableIndexMetadata;
 using ::alinous::db::table::TableMetadata;
 using ::alinous::db::table::lockmonitor::DatabaseLockException;
 using ::alinous::db::table::lockmonitor::IThreadLocker;
@@ -163,6 +170,7 @@ private:
 	ArrayList<IScannableIndex>* indexes;
 	IScannableIndex* primaryIndex;
 public:
+	void init(ThreadContext* ctx) throw() ;
 	void updateMetadata(TableMetadata* metadata, ThreadContext* ctx) throw() ;
 	Integer* getTableId(ThreadContext* ctx) throw()  final;
 	int getColumnCount(ThreadContext* ctx) throw()  final;

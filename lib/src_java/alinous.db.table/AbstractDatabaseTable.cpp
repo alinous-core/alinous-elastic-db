@@ -319,7 +319,7 @@ DatatableUpdateCache* AbstractDatabaseTable::getUpdateHistoryCache(ThreadContext
 {
 	return updateHistoryCache;
 }
-TableIndex* AbstractDatabaseTable::getPrimaryIndex(ThreadContext* ctx) throw() 
+IScannableIndex* AbstractDatabaseTable::getPrimaryIndex(ThreadContext* ctx) throw() 
 {
 	return primaryIndex;
 }
@@ -453,7 +453,7 @@ String* AbstractDatabaseTable::getOidIndexName(ThreadContext* ctx) throw()
 }
 void AbstractDatabaseTable::loadIndexes(FileStorageEntryFetcher* fetcher, ThreadContext* ctx) throw() 
 {
-	__GC_MV(this, &(this->primaryIndex), TableIndex::valueFromFetcher(fetcher, this->baseDir, ctx), TableIndex);
+	__GC_MV(this, &(this->primaryIndex), TableIndex::valueFromFetcher(fetcher, this->baseDir, ctx), IScannableIndex);
 	int maxLoop = fetcher->fetchInt(ctx);
 	for(int i = 0; i != maxLoop; ++i)
 	{

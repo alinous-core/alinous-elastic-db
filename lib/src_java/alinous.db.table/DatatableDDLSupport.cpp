@@ -102,7 +102,7 @@ void DatatableDDLSupport::createTable(TableMetadata* metadata, ThreadPool* threa
 			this->oidIndex->initTreeStorage(32, IBTreeValue::TYPE_LONG, IBTreeValue::TYPE_LONG, (long long)DatatableConstants::capacity, (long long)64, ctx);
 			StringBuilder* primname = (new(ctx) StringBuilder(ctx));
 			primname->append(this->name, ctx)->append(ConstStr::getCNST_STR_1742(), ctx);
-			__GC_MV(this, &(this->primaryIndex), (new(ctx) TableIndex(primname->toString(ctx), this->baseDir, true, metadata->getPrimaryKeys(ctx), ctx)), TableIndex);
+			__GC_MV(this, &(this->primaryIndex), (new(ctx) TableIndex(primname->toString(ctx), this->baseDir, true, metadata->getPrimaryKeys(ctx), ctx)), IScannableIndex);
 			this->primaryIndex->createIndex(core, cache, ctx);
 			__GC_MV(this, &(this->metadata), metadata, TableMetadata);
 			__GC_MV(this, &(this->updateHistoryCache), (new(ctx) DatatableUpdateCache(this, ctx)), DatatableUpdateCache);

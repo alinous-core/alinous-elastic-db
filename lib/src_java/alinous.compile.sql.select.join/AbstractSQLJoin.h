@@ -66,9 +66,6 @@ class DbTransaction;}}}
 namespace alinous {namespace runtime {namespace engine {
 class ScriptMachine;}}}
 
-namespace alinous {namespace compile {namespace sql {namespace select {namespace join {namespace scan {
-class CrossJoinScanner;}}}}}}
-
 namespace alinous {namespace db {namespace trx {namespace scan {
 class ScannedResultIndexScanner;}}}}
 
@@ -84,12 +81,6 @@ class DatabaseException;}}}
 namespace java {namespace lang {
 class Throwable;}}
 
-namespace alinous {namespace compile {namespace sql {namespace select {namespace join {namespace scan {
-class RightindexJoinScanner;}}}}}}
-
-namespace alinous {namespace compile {namespace sql {namespace select {namespace join {namespace scan {
-class ReverseIndexScanner;}}}}}}
-
 namespace alinous {namespace remote {namespace socket {
 class NetworkBinaryBuffer;}}}
 
@@ -101,6 +92,9 @@ class VariableException;}}}
 
 namespace alinous {namespace compile {
 class AlinousElementNetworkFactory;}}
+
+namespace alinous {namespace db {namespace table {namespace scan {
+class ScannerFactory;}}}}
 
 namespace alinous {namespace system {
 class AlinousException;}}
@@ -133,10 +127,8 @@ using ::alinous::compile::sql::expression::ISQLExpression;
 using ::alinous::compile::sql::select::SQLGroupBy;
 using ::alinous::compile::sql::select::SQLLimitOffset;
 using ::alinous::compile::sql::select::SQLWhere;
-using ::alinous::compile::sql::select::join::scan::CrossJoinScanner;
-using ::alinous::compile::sql::select::join::scan::ReverseIndexScanner;
-using ::alinous::compile::sql::select::join::scan::RightindexJoinScanner;
 using ::alinous::db::table::DatabaseException;
+using ::alinous::db::table::scan::ScannerFactory;
 using ::alinous::db::trx::DbTransaction;
 using ::alinous::db::trx::scan::ITableTargetScanner;
 using ::alinous::db::trx::scan::ScanResult;

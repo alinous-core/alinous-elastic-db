@@ -23,6 +23,7 @@
 #include "alinous.remote.socket/NetworkBinaryBuffer.h"
 #include "alinous.remote.socket/ICommandData.h"
 #include "alinous.db.table/TableColumnMetadata.h"
+#include "alinous.db.table/TableIndexMetadata.h"
 #include "alinous.db.table/TableMetadata.h"
 #include "alinous.runtime.parallel/ThreadPool.h"
 #include "alinous.db.trx/DbVersionContext.h"
@@ -43,6 +44,7 @@
 #include "alinous.remote.region.client.command/AbstractNodeRegionCommand.h"
 #include "alinous.remote.region.client.command.dml/ClientInsertDataCommand.h"
 #include "alinous.remote.region.client.command.dml/ClientTpcCommitSessionCommand.h"
+#include "alinous.remote.region.client/RemoteTableIndex.h"
 #include "alinous.remote.region.client/DatabaseTableClient.h"
 
 namespace alinous {namespace remote {namespace region {namespace client {
@@ -108,6 +110,19 @@ void DatabaseTableClient::__releaseRegerences(bool prepare, ThreadContext* ctx) 
 	primaryIndex = nullptr;
 	if(!prepare){
 		return;
+	}
+}
+void DatabaseTableClient::init(ThreadContext* ctx) throw() 
+{
+	ArrayList<TableColumnMetadata>* keys = this->metadata->getPrimaryKeys(ctx);
+	__GC_MV(this, &(this->primaryIndex), (new(ctx) RemoteTableIndex(fullName, keys, true, this->regionAccessPool, ctx)), IScannableIndex);
+	ArrayList<TableIndexMetadata>* list = this->metadata->getIndexes(ctx);
+	int maxLoop = list->size(ctx);
+	for(int i = 0; i != maxLoop; ++i)
+	{
+		TableIndexMetadata* idx = list->get(i, ctx);
+		RemoteTableIndex* rindex = (new(ctx) RemoteTableIndex(idx->getName(ctx), idx->getMetadata(ctx), false, this->regionAccessPool, ctx));
+		this->indexes->add(rindex, ctx);
 	}
 }
 void DatabaseTableClient::updateMetadata(TableMetadata* metadata, ThreadContext* ctx) throw() 

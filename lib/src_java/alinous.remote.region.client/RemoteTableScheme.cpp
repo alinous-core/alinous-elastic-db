@@ -109,6 +109,7 @@ DatabaseTableClient* RemoteTableScheme::getOrInitDatabaseTableClient(String* tab
 	if(client == nullptr)
 	{
 		client = (new(ctx) DatabaseTableClient(this->name, tableName, tableData->getMetadata(ctx), regionAccessPool, ctx));
+		client->init(ctx);
 		this->tables->put(tableName, client, ctx);
 	}
 	return client;

@@ -97,25 +97,10 @@ namespace alinous {namespace db {namespace trx {namespace scan {
 class ScanResultIndexKey;}}}}
 
 namespace alinous {namespace db {namespace table {namespace scan {
-class IndexEqScanner;}}}}
-
-namespace alinous {namespace db {namespace table {namespace scan {
 class IndexRangeScannerParam;}}}}
 
 namespace alinous {namespace db {namespace table {namespace scan {
-class IndexRangeScanner;}}}}
-
-namespace alinous {namespace db {namespace table {namespace scan {
 class IndexListScannerParam;}}}}
-
-namespace alinous {namespace db {namespace table {namespace scan {
-class IndexListScanner;}}}}
-
-namespace alinous {namespace db {namespace table {namespace scan {
-class TableIndexScanner;}}}}
-
-namespace alinous {namespace db {namespace table {namespace scan {
-class TableFullScanner;}}}}
 
 namespace alinous {namespace compile {namespace sql {namespace select {
 class SQLWhere;}}}}
@@ -125,6 +110,9 @@ class ISQLExpression;}}}}
 
 namespace alinous {namespace db {namespace table {namespace scan {
 class IndexScannerLockRequirement;}}}}
+
+namespace alinous {namespace db {namespace table {namespace scan {
+class ScannerFactory;}}}}
 
 namespace java {namespace lang {
 class IObject;
@@ -151,15 +139,11 @@ using ::alinous::db::table::DatabaseException;
 using ::alinous::db::table::IDatabaseTable;
 using ::alinous::db::table::IScannableIndex;
 using ::alinous::db::table::TableColumnMetadata;
-using ::alinous::db::table::scan::IndexEqScanner;
-using ::alinous::db::table::scan::IndexListScanner;
 using ::alinous::db::table::scan::IndexListScannerParam;
-using ::alinous::db::table::scan::IndexRangeScanner;
 using ::alinous::db::table::scan::IndexRangeScannerParam;
 using ::alinous::db::table::scan::IndexScannerLockRequirement;
+using ::alinous::db::table::scan::ScannerFactory;
 using ::alinous::db::table::scan::SingleTableIndexScanner;
-using ::alinous::db::table::scan::TableFullScanner;
-using ::alinous::db::table::scan::TableIndexScanner;
 using ::alinous::db::trx::DbTransaction;
 using ::alinous::db::trx::cache::TrxRecordCacheIndex;
 using ::alinous::db::trx::cache::TrxRecordsCache;

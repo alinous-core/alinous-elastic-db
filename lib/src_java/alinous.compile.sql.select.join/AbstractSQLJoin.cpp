@@ -67,6 +67,10 @@
 #include "alinous.compile.sql.select/SQLGroupBy.h"
 #include "alinous.compile.sql.select/SQLLimitOffset.h"
 #include "alinous.compile.sql.select/SQLWhere.h"
+#include "alinous.system/ISystemLog.h"
+#include "java.lang/Comparable.h"
+#include "alinous.btree/IBTreeKey.h"
+#include "alinous.db.trx.scan/ScanResultIndexKey.h"
 #include "alinous.db.trx.scan/ITableTargetScanner.h"
 #include "alinous.compile.sql.analyze/IndexColumnMatchCondition.h"
 #include "alinous.compile.sql.expression.blexp/ISQLBoolExpression.h"
@@ -85,6 +89,8 @@
 #include "alinous.compile.sql/UpdateStatement.h"
 #include "alinous.db.trx.scan/ScanResult.h"
 #include "alinous.db.trx/DbTransaction.h"
+#include "alinous.db.table/IScannableIndex.h"
+#include "alinous.db.table/IDatabaseTable.h"
 #include "alinous.db.trx.scan/ScanResultRecord.h"
 #include "alinous.compile.sql.analyze/SQLAnalyseContext.h"
 #include "alinous.compile.sql.expression/AbstractSQLExpression.h"
@@ -189,9 +195,31 @@
 #include "alinous.compile/AlinousElementNetworkFactory.h"
 #include "alinous.compile.declare/AlinousClass.h"
 #include "alinous.compile.sql.analyze/JoinStrategy.h"
+#include "alinous.compile.sql.analyze/InnerNecessaryCondition.h"
+#include "alinous.db.trx.scan/IJoinScanner.h"
 #include "alinous.compile.sql.select.join.scan/CrossJoinScanner.h"
 #include "alinous.compile.sql.select.join.scan/ReverseIndexScanner.h"
 #include "alinous.compile.sql.select.join.scan/RightindexJoinScanner.h"
+#include "alinous.db.table/IBtreeTableIndex.h"
+#include "alinous.db.trx.cache/TrxRecordCacheIndex.h"
+#include "alinous.remote.region.client.scan/IRemoteScanner.h"
+#include "alinous.remote.region.client.scan/IRemoteJoinScanner.h"
+#include "alinous.remote.region.client/RemoteReverseIndexScanner.h"
+#include "alinous.remote.region.client.scan/RemoteCrossJoinScanner.h"
+#include "alinous.remote.region.client.scan/RemoteIndexEqScanner.h"
+#include "alinous.db.table.scan/IndexListScannerParam.h"
+#include "alinous.remote.region.client.scan/RemoteIndexListScanner.h"
+#include "alinous.db.table.scan/IndexRangeScannerParam.h"
+#include "alinous.remote.region.client.scan/RemoteIndexRangeScanner.h"
+#include "alinous.remote.region.client.scan/RemoteTableFullScanner.h"
+#include "alinous.remote.region.client.scan/RemoteTableIndexScanner.h"
+#include "alinous.db.trx.scan/IFilterScanner.h"
+#include "alinous.db.table.scan/TableFullScanner.h"
+#include "alinous.db.table.scan/TableIndexScanner.h"
+#include "alinous.db.table.scan/IndexEqScanner.h"
+#include "alinous.db.table.scan/IndexRangeScanner.h"
+#include "alinous.db.table.scan/IndexListScanner.h"
+#include "alinous.db.table.scan/ScannerFactory.h"
 #include "alinous.db.trx.scan/ScannedResultIndexScanner.h"
 
 namespace alinous {namespace compile {namespace sql {namespace select {namespace join {
@@ -500,7 +528,7 @@ ITableTargetScanner* AbstractSQLJoin::getCrossJoinsScanner(DbTransaction* trx, S
 {
 	ITableTargetScanner* leftScanner = this->left->getScanner(trx, machine, nullptr, debug, ctx);
 	ITableTargetScanner* rightScanner = this->right->getScanner(trx, machine, nullptr, debug, ctx);
-	CrossJoinScanner* scanner = (new(ctx) CrossJoinScanner(trx, leftScanner, rightScanner, this->left->getScanTableMetadata(ctx), this->right->getScanTableMetadata(ctx), machine, ctx));
+	ITableTargetScanner* scanner = ScannerFactory::getCrossJoinScanner(trx, leftScanner, rightScanner, this->left->getScanTableMetadata(ctx), this->right->getScanTableMetadata(ctx), machine, ctx);
 	if(joinRequest == nullptr)
 	{
 		return scanner;
@@ -557,23 +585,23 @@ ITableTargetScanner* AbstractSQLJoin::getJoinStrategyScanner(DbTransaction* trx,
 			rightCols = (new(ctx) ArrayList<ScanTableColumnIdentifier>(ctx));
 			rightCols->add(exp->getRightColumn(ctx), ctx);
 			rightScanner = this->right->getScanner(trx, machine, rightCols, debug, ctx);
-			return (new(ctx) RightindexJoinScanner(trx, leftScanner, rightScanner, left->getScanTableMetadata(ctx), right->getScanTableMetadata(ctx), inner, exp, this->condition, machine, ctx));
+			return ScannerFactory::getRightindexJoinScanner(trx, leftScanner, rightScanner, left->getScanTableMetadata(ctx), right->getScanTableMetadata(ctx), inner, exp, this->condition, machine, ctx);
 		}
 	case JoinMatchExpression::LEFT_INDEX:
 		leftIndex = exp->getLeftIndex(ctx);
 		leftScanner = this->left->getScanner(trx, machine, leftIndex->getColumnIds(ctx), debug, ctx);
 		rightScanner = this->right->getScanner(trx, machine, nullptr, debug, ctx);
-		return (new(ctx) ReverseIndexScanner(trx, leftScanner, rightScanner, left->getScanTableMetadata(ctx), right->getScanTableMetadata(ctx), inner, exp, this->condition, machine, ctx));
+		return ScannerFactory::getReverseIndexScanner(trx, leftScanner, rightScanner, left->getScanTableMetadata(ctx), right->getScanTableMetadata(ctx), inner, exp, this->condition, machine, ctx);
 	case JoinMatchExpression::RIGHT_INDEX:
 		leftScanner = this->left->getScanner(trx, machine, nullptr, debug, ctx);
 		rightIndex = exp->getRightIndex(ctx);
 		rightScanner = this->right->getScanner(trx, machine, rightIndex->getColumnIds(ctx), debug, ctx);
-		return (new(ctx) RightindexJoinScanner(trx, leftScanner, rightScanner, left->getScanTableMetadata(ctx), right->getScanTableMetadata(ctx), inner, exp, this->condition, machine, ctx));
+		return ScannerFactory::getRightindexJoinScanner(trx, leftScanner, rightScanner, left->getScanTableMetadata(ctx), right->getScanTableMetadata(ctx), inner, exp, this->condition, machine, ctx);
 	case JoinMatchExpression::BOTH_INDEX:
 		leftIndex = exp->getLeftIndex(ctx);
 		leftScanner = this->left->getScanner(trx, machine, leftIndex->getColumnIds(ctx), debug, ctx);
 		rightScanner = this->right->getScanner(trx, machine, nullptr, debug, ctx);
-		return (new(ctx) ReverseIndexScanner(trx, leftScanner, rightScanner, left->getScanTableMetadata(ctx), right->getScanTableMetadata(ctx), inner, exp, this->condition, machine, ctx));
+		return ScannerFactory::getReverseIndexScanner(trx, leftScanner, rightScanner, left->getScanTableMetadata(ctx), right->getScanTableMetadata(ctx), inner, exp, this->condition, machine, ctx);
 	}
 	throw (new(ctx) DatabaseException(ConstStr::getCNST_STR_1174(), ctx));
 }

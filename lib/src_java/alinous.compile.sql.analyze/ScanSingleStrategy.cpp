@@ -15,6 +15,7 @@
 #include "alinous.buffer.storage/FileStorageEntryFetcher.h"
 #include "alinous.compile/ExpressionSourceId.h"
 #include "alinous.runtime.dom/IAlinousVariable.h"
+#include "alinous.runtime.variant/VariantValue.h"
 #include "alinous.system/AlinousException.h"
 #include "alinous.db/AlinousDbException.h"
 #include "alinous.runtime.engine/ScriptMachine.h"
@@ -32,11 +33,8 @@
 #include "alinous.btree/IBTreeValue.h"
 #include "alinous.compile.sql.analyze/ScanTableIdentifier.h"
 #include "alinous.compile.sql.analyze/ScanTableColumnIdentifier.h"
-#include "alinous.compile.sql.expression/ISQLExpression.h"
-#include "alinous.db.table/TableColumnMetadata.h"
-#include "alinous.compile.sql.analyze/ScanTableIndexMetadata.h"
-#include "alinous.compile.sql.analyze/ScanTableMetadata.h"
 #include "alinous.compile.sql.select/SQLWhere.h"
+#include "alinous.db.table/TableColumnMetadata.h"
 #include "alinous.db.table/IBtreeTableIndex.h"
 #include "alinous.db.trx.cache/TrxRecordCacheIndex.h"
 #include "alinous.db.trx.cache/TrxRecordsCache.h"
@@ -47,21 +45,44 @@
 #include "alinous.db.table/IScannableIndex.h"
 #include "alinous.db.table/IDatabaseTable.h"
 #include "alinous.db/AlinousDatabase.h"
+#include "alinous.compile.sql.analyze/SQLAnalyseContext.h"
+#include "alinous.compile.sql.expression/ISQLExpression.h"
+#include "alinous.compile.sql.analyze/ScanTableIndexMetadata.h"
+#include "alinous.compile.sql.analyze/ScanTableMetadata.h"
 #include "alinous.db.trx.scan/ScanResultRecord.h"
 #include "alinous.db.trx.scan/ITableTargetScanner.h"
 #include "alinous.compile.sql.analyze.scan/VoidScanner.h"
 #include "alinous.db.table.scan/IndexListScannerParam.h"
 #include "alinous.db.table.scan/IndexRangeScannerParam.h"
+#include "alinous.compile.sql.analyze/IndexColumnMatchCondition.h"
+#include "alinous.compile.sql.expression.blexp/ISQLBoolExpression.h"
+#include "alinous.compile.sql.expression.blexp/AbstractSQLBooleanExpression.h"
 #include "alinous.compile.sql.analyze/IndexScanStrategyPlan.h"
 #include "alinous.compile.sql.analyze/IndexScanStrategy.h"
 #include "alinous.compile.sql.analyze/InnerNecessaryCondition.h"
+#include "alinous.compile.sql.analyze/JoinMatchExpression.h"
+#include "alinous.compile.sql.select.join/SQLJoinCondition.h"
+#include "alinous.db.trx.scan/IJoinScanner.h"
+#include "alinous.compile.sql.select.join.scan/CrossJoinScanner.h"
+#include "alinous.compile.sql.select.join.scan/ReverseIndexScanner.h"
+#include "alinous.compile.sql.select.join.scan/RightindexJoinScanner.h"
+#include "alinous.remote.region.client.scan/IRemoteScanner.h"
+#include "alinous.remote.region.client.scan/IRemoteJoinScanner.h"
+#include "alinous.remote.region.client/RemoteReverseIndexScanner.h"
+#include "alinous.remote.region.client.scan/RemoteCrossJoinScanner.h"
+#include "alinous.remote.region.client.scan/RemoteIndexEqScanner.h"
+#include "alinous.remote.region.client.scan/RemoteIndexListScanner.h"
+#include "alinous.remote.region.client.scan/RemoteIndexRangeScanner.h"
+#include "alinous.remote.region.client.scan/RemoteTableFullScanner.h"
+#include "alinous.remote.region.client.scan/RemoteTableIndexScanner.h"
 #include "alinous.db.trx.scan/IFilterScanner.h"
+#include "alinous.db.table.scan/TableFullScanner.h"
 #include "alinous.db.table.scan/TableIndexScanner.h"
 #include "alinous.db.table.scan/IndexEqScanner.h"
-#include "alinous.db.table.scan/IndexListScanner.h"
 #include "alinous.db.table.scan/IndexRangeScanner.h"
+#include "alinous.db.table.scan/IndexListScanner.h"
+#include "alinous.db.table.scan/ScannerFactory.h"
 #include "alinous.db.table.scan/SingleTableIndexScanner.h"
-#include "alinous.db.table.scan/TableFullScanner.h"
 #include "alinous.db.trx.scan/ScannedResultIndexScanner.h"
 #include "alinous.compile.sql.analyze/BooleanFilterConditionUtil.h"
 #include "alinous.compile.sql.analyze/ScanSingleStrategy.h"
@@ -379,21 +400,21 @@ ITableTargetScanner* ScanSingleStrategy::initOnTheFlyScanner(ScriptMachine* mach
 		{
 			ScanResultIndexKey* eqKey = plan->getEqIndexKey(machine, index->getColumns(ctx), debug, ctx);
 			int effectiveKeyLength = plan->getEqKeyLength(ctx);
-			IndexEqScanner* intnlScanner = (new(ctx) IndexEqScanner(ctx))->init(this->tableId, trx, index, tableStore, insertCacheindex, updateCacheindex, IndexScannerLockRequirement::INSTANT_SHARE, eqKey, effectiveKeyLength, necessaryCnd, machine, ctx);
+			ITableTargetScanner* intnlScanner = ScannerFactory::getIndexEqScanner(this->tableId, trx, index, tableStore, insertCacheindex, updateCacheindex, IndexScannerLockRequirement::INSTANT_SHARE, eqKey, effectiveKeyLength, necessaryCnd, machine, ctx);
 			return intnlScanner;
 		}
 	case IndexScanStrategyPlan::SCAN_RANGE:
 		{
 			IndexRangeScannerParam* param = plan->getRamgeIndexKeyParam(machine, index->getColumns(ctx), debug, ctx);
 			int effectiveKeyLength = 1;
-			IndexRangeScanner* rangeScanner = (new(ctx) IndexRangeScanner(ctx))->init(this->tableId, trx, index, tableStore, insertCacheindex, updateCacheindex, IndexScannerLockRequirement::INSTANT_SHARE, param, effectiveKeyLength, necessaryCnd, machine, ctx);
+			ITableTargetScanner* rangeScanner = ScannerFactory::getIndexRangeScanner(this->tableId, trx, index, tableStore, insertCacheindex, updateCacheindex, IndexScannerLockRequirement::INSTANT_SHARE, param, effectiveKeyLength, necessaryCnd, machine, ctx);
 			return rangeScanner;
 		}
 	case IndexScanStrategyPlan::SCAN_LIST:
 		{
 			IndexListScannerParam* param = plan->getListIndexKey(machine, index->getColumns(ctx), debug, ctx);
 			int effectiveKeyLength = 1;
-			IndexListScanner* listScanner = (new(ctx) IndexListScanner(ctx))->init(this->tableId, trx, index, tableStore, insertCacheindex, updateCacheindex, IndexScannerLockRequirement::INSTANT_SHARE, param, effectiveKeyLength, necessaryCnd, machine, ctx);
+			ITableTargetScanner* listScanner = ScannerFactory::getIndexListScanner(this->tableId, trx, index, tableStore, insertCacheindex, updateCacheindex, IndexScannerLockRequirement::INSTANT_SHARE, param, effectiveKeyLength, necessaryCnd, machine, ctx);
 			return listScanner;
 		}
 	default:
@@ -408,10 +429,10 @@ ITableTargetScanner* ScanSingleStrategy::initOnTheFlyScanner4Join(ScriptMachine*
 	IScannableIndex* index = tableStore->getAbailableIndexByScanColId(joinRequest, ctx);
 	if(index == nullptr)
 	{
-		TableIndexScanner* indexScanner = (new(ctx) TableIndexScanner(ctx))->init(this->tableId, trx, index, tableStore, IndexScannerLockRequirement::INSTANT_SHARE, ctx);
+		ITableTargetScanner* indexScanner = ScannerFactory::getTableIndexScanner(this->tableId, trx, index, tableStore, IndexScannerLockRequirement::INSTANT_SHARE, ctx);
 		return indexScanner;
 	}
-	TableFullScanner* scanner = (new(ctx) TableFullScanner(ctx))->init(this->tableId, trx, tableStore, IndexScannerLockRequirement::INSTANT_SHARE, ctx);
+	ITableTargetScanner* scanner = ScannerFactory::getTableFullScanner(this->tableId, trx, tableStore, IndexScannerLockRequirement::INSTANT_SHARE, ctx);
 	return scanner;
 }
 void ScanSingleStrategy::includes(BooleanFilterConditionUtil* arg0, ThreadContext* ctx) throw() 
