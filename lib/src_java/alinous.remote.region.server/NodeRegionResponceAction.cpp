@@ -15,6 +15,8 @@
 #include "alinous.remote.region.client.command.ddl/RegionCreateSchemaCommand.h"
 #include "alinous.remote.region.client.command.ddl/RegionCreateTableCommand.h"
 #include "alinous.remote.region.client.command.dml/ClientInsertDataCommand.h"
+#include "alinous.remote.region.client.command.dml/ClientScanCommand.h"
+#include "alinous.remote.region.client.command.dml/ClientScanEndCommand.h"
 #include "alinous.remote.region.client.command.dml/ClientTpcCommitSessionCommand.h"
 #include "alinous.remote.region.client.command/NodeRegionFinishConnectionCommand.h"
 #include "alinous.remote.region.client.command/NodeRegionTerminateCommand.h"
@@ -125,6 +127,8 @@ void NodeRegionResponceAction::handleCommand(BufferedInputStream* stream, Buffer
 		case AbstractNodeRegionCommand::TYPE_CREATE_TABLE:
 		case AbstractNodeRegionCommand::TYPE_INSERT_DATA:
 		case AbstractNodeRegionCommand::TYPE_TPC_COMMIT_SESSION:
+		case AbstractNodeRegionCommand::TYPE_SCAN:
+		case AbstractNodeRegionCommand::TYPE_SCAN_END:
 		default:
 			cmd->executeOnServer(this->nodeRegionServer, outStream, ctx);
 			break ;

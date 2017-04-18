@@ -19,6 +19,8 @@
 #include "alinous.remote.region.client.command.ddl/RegionCreateSchemaCommand.h"
 #include "alinous.remote.region.client.command.ddl/RegionCreateTableCommand.h"
 #include "alinous.remote.region.client.command.dml/ClientInsertDataCommand.h"
+#include "alinous.remote.region.client.command.dml/ClientScanCommand.h"
+#include "alinous.remote.region.client.command.dml/ClientScanEndCommand.h"
 #include "alinous.remote.region.client.command.dml/ClientTpcCommitSessionCommand.h"
 #include "alinous.remote.region.client.command/NodeRegionFinishConnectionCommand.h"
 #include "alinous.remote.region.client.command/NodeRegionTerminateCommand.h"
@@ -41,6 +43,8 @@ constexpr const int AbstractNodeRegionCommand::TYPE_CREATE_SCHEMA;
 constexpr const int AbstractNodeRegionCommand::TYPE_CREATE_TABLE;
 constexpr const int AbstractNodeRegionCommand::TYPE_INSERT_DATA;
 constexpr const int AbstractNodeRegionCommand::TYPE_TPC_COMMIT_SESSION;
+constexpr const int AbstractNodeRegionCommand::TYPE_SCAN;
+constexpr const int AbstractNodeRegionCommand::TYPE_SCAN_END;
 bool AbstractNodeRegionCommand::__init_done = __init_static_variables();
 bool AbstractNodeRegionCommand::__init_static_variables(){
 	Java2CppSystem::getSelf();

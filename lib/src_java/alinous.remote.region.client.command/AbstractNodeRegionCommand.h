@@ -88,6 +88,8 @@ public:
 	constexpr static const int TYPE_CREATE_TABLE{1003};
 	constexpr static const int TYPE_INSERT_DATA{1004};
 	constexpr static const int TYPE_TPC_COMMIT_SESSION{1005};
+	constexpr static const int TYPE_SCAN{1006};
+	constexpr static const int TYPE_SCAN_END{1007};
 public:
 	int getType(ThreadContext* ctx) throw() ;
 	AbstractNodeRegionCommand* sendCommand(AlinousSocket* socket, ThreadContext* ctx);

@@ -507,6 +507,8 @@
 #include "alinous.remote.region.client.command.ddl/RegionCreateSchemaCommand.h"
 #include "alinous.remote.region.client.command.ddl/RegionCreateTableCommand.h"
 #include "alinous.remote.region.client.command.dml/ClientInsertDataCommand.h"
+#include "alinous.remote.region.client.command.dml/ClientScanCommand.h"
+#include "alinous.remote.region.client.command.dml/ClientScanEndCommand.h"
 #include "alinous.remote.region.client.command.dml/ClientTpcCommitSessionCommand.h"
 #include "alinous.remote.region.client.command/NodeRegionFinishConnectionCommand.h"
 #include "alinous.remote.region.client.command/NodeRegionTerminateCommand.h"
@@ -1907,6 +1909,8 @@ inline static void __cleanUpStatics(alinous::ThreadContext* ctx){
 	alinous::remote::region::client::command::data::ClientTableData::__cleanUp(ctx);
 	alinous::remote::region::client::command::data::ClientSchemaData::__cleanUp(ctx);
 	alinous::remote::region::client::command::data::ClientNetworkRecord::__cleanUp(ctx);
+	alinous::remote::region::client::command::dml::ClientScanCommand::__cleanUp(ctx);
+	alinous::remote::region::client::command::dml::ClientScanEndCommand::__cleanUp(ctx);
 	alinous::remote::region::client::command::dml::ClientInsertDataCommand::__cleanUp(ctx);
 	alinous::remote::region::client::command::dml::ClientTpcCommitSessionCommand::__cleanUp(ctx);
 	alinous::remote::region::client::command::ddl::RegionCreateSchemaCommand::__cleanUp(ctx);

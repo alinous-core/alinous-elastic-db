@@ -47,7 +47,6 @@
 #include "alinous.db.trx.scan/ScanException.h"
 #include "alinous.db.trx.cache/TrxRecordCacheIndexScanner.h"
 #include "alinous.db.trx.scan/IFilterScanner.h"
-#include "alinous.db.table.scan/TableIndexScanner.h"
 #include "alinous.db.table.scan/SingleTableIndexScanner.h"
 
 namespace alinous {namespace db {namespace table {namespace scan {
@@ -104,7 +103,7 @@ SingleTableIndexScanner* SingleTableIndexScanner::init(ScanTableIdentifier* tabl
 	TrxStorageManager* storageManager = this->trx->getTrxStorageManager(ctx);
 	TrxRecordsCache* insertCache = storageManager->getInsertCache(tableMeta->getSchema(ctx), tableMeta->getTableName(ctx), ctx);
 	TrxRecordsCache* updateCache = storageManager->getUpdateCache(tableMeta->getSchema(ctx), tableMeta->getTableName(ctx), ctx);
-	__GC_MV(this, &(this->scanner), (new(ctx) TableIndexScanner(ctx))->init(tableId, trx, index, tableStore, lockMode, ctx), TableIndexScanner);
+	__GC_MV(this, &(this->scanner), ScannerFactory::getTableIndexScanner(tableId, trx, index, tableStore, lockMode, ctx), ITableTargetScanner);
 	if(insertCacheindex != nullptr && insertCache != nullptr)
 	{
 		__GC_MV(this, &(this->insertScanner), (new(ctx) TrxRecordCacheIndexScanner(tableId, trx, insertCacheindex, insertCache, IDatabaseRecord::TRX_CACHE, ctx)), TrxRecordCacheIndexScanner);

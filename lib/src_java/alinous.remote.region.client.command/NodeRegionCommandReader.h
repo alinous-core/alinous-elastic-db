@@ -33,6 +33,12 @@ class ClientInsertDataCommand;}}}}}}
 namespace alinous {namespace remote {namespace region {namespace client {namespace command {namespace dml {
 class ClientTpcCommitSessionCommand;}}}}}}
 
+namespace alinous {namespace remote {namespace region {namespace client {namespace command {namespace dml {
+class ClientScanCommand;}}}}}}
+
+namespace alinous {namespace remote {namespace region {namespace client {namespace command {namespace dml {
+class ClientScanEndCommand;}}}}}}
+
 namespace alinous {namespace system {
 class AlinousException;}}
 
@@ -60,6 +66,8 @@ using ::java::io::InputStream;
 using ::alinous::remote::region::client::command::ddl::RegionCreateSchemaCommand;
 using ::alinous::remote::region::client::command::ddl::RegionCreateTableCommand;
 using ::alinous::remote::region::client::command::dml::ClientInsertDataCommand;
+using ::alinous::remote::region::client::command::dml::ClientScanCommand;
+using ::alinous::remote::region::client::command::dml::ClientScanEndCommand;
 using ::alinous::remote::region::client::command::dml::ClientTpcCommitSessionCommand;
 using ::alinous::remote::socket::NetworkBinalyUtils;
 using ::alinous::system::AlinousException;

@@ -33,9 +33,6 @@ class TrxStorageManager;}}}}
 namespace alinous {namespace db {namespace trx {namespace cache {
 class TrxRecordsCache;}}}}
 
-namespace alinous {namespace db {namespace table {namespace scan {
-class TableIndexScanner;}}}}
-
 namespace alinous {namespace db {namespace trx {namespace cache {
 class TrxRecordCacheIndexScanner;}}}}
 
@@ -47,6 +44,9 @@ class ScanResultIndexKey;}}}}
 
 namespace alinous {namespace system {
 class ISystemLog;}}
+
+namespace alinous {namespace db {namespace trx {namespace scan {
+class ITableTargetScanner;}}}}
 
 namespace alinous {namespace db {namespace trx {namespace scan {
 class IFilterScanner;}}}}
@@ -65,6 +65,9 @@ class IDatabaseRecord;}}}
 
 namespace alinous {namespace db {namespace trx {namespace scan {
 class ScanException;}}}}
+
+namespace alinous {namespace system {
+class AlinousException;}}
 
 namespace java {namespace lang {
 class IObject;
@@ -94,9 +97,11 @@ using ::alinous::db::trx::cache::TrxRecordCacheIndexScanner;
 using ::alinous::db::trx::cache::TrxRecordsCache;
 using ::alinous::db::trx::cache::TrxStorageManager;
 using ::alinous::db::trx::scan::IFilterScanner;
+using ::alinous::db::trx::scan::ITableTargetScanner;
 using ::alinous::db::trx::scan::ScanException;
 using ::alinous::db::trx::scan::ScanResultIndexKey;
 using ::alinous::db::trx::scan::ScanResultRecord;
+using ::alinous::system::AlinousException;
 using ::alinous::system::ISystemLog;
 
 
@@ -111,7 +116,7 @@ public:
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 private:
 	DbTransaction* trx;
-	TableIndexScanner* scanner;
+	ITableTargetScanner* scanner;
 	TrxRecordCacheIndexScanner* insertScanner;
 	TrxRecordCacheIndexScanner* updateScanner;
 	ScanResultRecord* result;

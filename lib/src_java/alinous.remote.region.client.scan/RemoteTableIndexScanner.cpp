@@ -13,6 +13,8 @@
 #include "alinous.db.trx.scan/ScanResultRecord.h"
 #include "alinous.db.trx.scan/ITableTargetScanner.h"
 #include "alinous.db.trx/DbTransaction.h"
+#include "alinous.remote.socket/ICommandData.h"
+#include "alinous.db.table/TableColumnMetadata.h"
 #include "alinous.db.table/IScannableIndex.h"
 #include "alinous.db.table/IDatabaseTable.h"
 #include "alinous.db.trx.scan/ScanException.h"
@@ -36,7 +38,7 @@ bool RemoteTableIndexScanner::__init_static_variables(){
 	delete ctx;
 	return true;
 }
- RemoteTableIndexScanner::RemoteTableIndexScanner(ThreadContext* ctx) throw()  : IObject(ctx), IRemoteScanner(ctx)
+ RemoteTableIndexScanner::RemoteTableIndexScanner(ThreadContext* ctx) throw()  : IObject(ctx), IRemoteScanner(ctx), trx(nullptr), index(nullptr), lockMode(0), tableId(nullptr), tableStore(nullptr), nextresult(nullptr)
 {
 }
 void RemoteTableIndexScanner::__construct_impl(ThreadContext* ctx) throw() 
@@ -51,16 +53,33 @@ void RemoteTableIndexScanner::__construct_impl(ThreadContext* ctx) throw()
 }
 void RemoteTableIndexScanner::__releaseRegerences(bool prepare, ThreadContext* ctx) throw() 
 {
+	ObjectEraser __e_obj1(ctx, __FILEW__, __LINE__, L"RemoteTableIndexScanner", L"~RemoteTableIndexScanner");
+	__e_obj1.add(this->trx, this);
+	trx = nullptr;
+	__e_obj1.add(this->index, this);
+	index = nullptr;
+	__e_obj1.add(this->tableId, this);
+	tableId = nullptr;
+	__e_obj1.add(this->tableStore, this);
+	tableStore = nullptr;
+	__e_obj1.add(this->nextresult, this);
+	nextresult = nullptr;
 	if(!prepare){
 		return;
 	}
 }
 RemoteTableIndexScanner* RemoteTableIndexScanner::init(ScanTableIdentifier* tableId, DbTransaction* trx, IScannableIndex* index, IDatabaseTable* tableStore, int lockMode, ThreadContext* ctx)
 {
+	__GC_MV(this, &(this->trx), trx, DbTransaction);
+	__GC_MV(this, &(this->index), index, IScannableIndex);
+	__GC_MV(this, &(this->tableStore), tableStore, IDatabaseTable);
+	this->lockMode = lockMode;
+	__GC_MV(this, &(this->tableId), tableId, ScanTableIdentifier);
 	return this;
 }
 void RemoteTableIndexScanner::startScan(ScanResultIndexKey* indexKeyValue, ThreadContext* ctx)
 {
+	ArrayList<TableColumnMetadata>* colmns = this->index->getColumns(ctx);
 }
 void RemoteTableIndexScanner::endScan(ThreadContext* ctx)
 {

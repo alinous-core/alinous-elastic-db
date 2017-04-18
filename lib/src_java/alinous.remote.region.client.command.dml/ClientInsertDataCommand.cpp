@@ -115,6 +115,7 @@ void ClientInsertDataCommand::readFromStream(InputStream* stream, int remain, Th
 		this->vctx->readData(buff, ctx);
 	}
 	this->isolationLevel = buff->getInt(ctx);
+	readErrorFromStream(buff, ctx);
 }
 ArrayList<ClientNetworkRecord>* ClientInsertDataCommand::getList(ThreadContext* ctx) throw() 
 {
@@ -195,6 +196,7 @@ void ClientInsertDataCommand::writeByteStream(OutputStream* outStream, ThreadCon
 		this->vctx->writeData(buff, ctx);
 	}
 	buff->putInt(this->isolationLevel, ctx);
+	writeErrorByteStream(buff, ctx);
 	IArrayObjectPrimitive<char>* b = buff->toBinary(ctx);
 	int pos = buff->getPutSize(ctx);
 	outStream->write(b, 0, pos, ctx);

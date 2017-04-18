@@ -256,6 +256,8 @@ set(srcjava
 	"src_java/alinous.runtime.dom/VariableException.cpp"
 	"src_java/alinous.runtime.dom/IVariableClassOperationCaller.cpp"
 	"src_java/alinous.runtime.dom/DocumentVariable.cpp"
+	"src_java/alinous.remote.region.client.command.dml/ClientScanCommand.cpp"
+	"src_java/alinous.remote.region.client.command.dml/ClientScanEndCommand.cpp"
 	"src_java/alinous.remote.region.client.command.dml/ClientTpcCommitSessionCommand.cpp"
 	"src_java/alinous.remote.region.client.command.dml/ClientInsertDataCommand.cpp"
 	"src_java/alinous.system.utils/FileUtils.cpp"

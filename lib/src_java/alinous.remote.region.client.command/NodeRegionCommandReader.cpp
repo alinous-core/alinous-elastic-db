@@ -11,6 +11,8 @@
 #include "alinous.remote.region.client.command.ddl/RegionCreateSchemaCommand.h"
 #include "alinous.remote.region.client.command.ddl/RegionCreateTableCommand.h"
 #include "alinous.remote.region.client.command.dml/ClientInsertDataCommand.h"
+#include "alinous.remote.region.client.command.dml/ClientScanCommand.h"
+#include "alinous.remote.region.client.command.dml/ClientScanEndCommand.h"
 #include "alinous.remote.region.client.command.dml/ClientTpcCommitSessionCommand.h"
 #include "alinous.remote.socket/NetworkBinalyUtils.h"
 #include "alinous.remote.region.client.command/NodeRegionFinishConnectionCommand.h"
@@ -87,6 +89,12 @@ AbstractNodeRegionCommand* NodeRegionCommandReader::readFromStream(InputStream* 
 		break ;
 	case AbstractNodeRegionCommand::TYPE_TPC_COMMIT_SESSION:
 		cmd = (new(ctx) ClientTpcCommitSessionCommand(ctx));
+		break ;
+	case AbstractNodeRegionCommand::TYPE_SCAN:
+		cmd = (new(ctx) ClientScanCommand(ctx));
+		break ;
+	case AbstractNodeRegionCommand::TYPE_SCAN_END:
+		cmd = (new(ctx) ClientScanEndCommand(ctx));
 		break ;
 	default:
 		throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3605(), ctx));

@@ -17,6 +17,8 @@
 #include "alinous.remote.region.client.command.ddl/RegionCreateSchemaCommand.h"
 #include "alinous.remote.region.client.command.ddl/RegionCreateTableCommand.h"
 #include "alinous.remote.region.client.command.dml/ClientInsertDataCommand.h"
+#include "alinous.remote.region.client.command.dml/ClientScanCommand.h"
+#include "alinous.remote.region.client.command.dml/ClientScanEndCommand.h"
 #include "alinous.remote.region.client.command.dml/ClientTpcCommitSessionCommand.h"
 #include "alinous.remote.region.client.command/NodeRegionFinishConnectionCommand.h"
 #include "alinous.remote.region.client.command/NodeRegionTerminateCommand.h"

@@ -18,6 +18,9 @@ class IDatabaseTable;}}}
 namespace alinous {namespace db {namespace trx {namespace scan {
 class ScanResultIndexKey;}}}}
 
+namespace alinous {namespace db {namespace table {
+class TableColumnMetadata;}}}
+
 namespace alinous {namespace db {namespace trx {namespace scan {
 class ScanResultRecord;}}}}
 
@@ -53,10 +56,12 @@ using namespace ::alinous;
 using namespace ::java::lang;
 using ::java::util::Iterator;
 using ::java::io::IOException;
+using ::java::util::ArrayList;
 using ::alinous::compile::sql::analyze::ScanTableIdentifier;
 using ::alinous::db::table::DatabaseException;
 using ::alinous::db::table::IDatabaseTable;
 using ::alinous::db::table::IScannableIndex;
+using ::alinous::db::table::TableColumnMetadata;
 using ::alinous::db::trx::DbTransaction;
 using ::alinous::db::trx::scan::ScanException;
 using ::alinous::db::trx::scan::ScanResultIndexKey;
@@ -74,6 +79,13 @@ public:
 	void __construct_impl(ThreadContext* ctx) throw() ;
 	virtual ~RemoteTableIndexScanner() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
+private:
+	DbTransaction* trx;
+	IScannableIndex* index;
+	int lockMode;
+	ScanTableIdentifier* tableId;
+	IDatabaseTable* tableStore;
+	ScanResultRecord* nextresult;
 public:
 	RemoteTableIndexScanner* init(ScanTableIdentifier* tableId, DbTransaction* trx, IScannableIndex* index, IDatabaseTable* tableStore, int lockMode, ThreadContext* ctx);
 	void startScan(ScanResultIndexKey* indexKeyValue, ThreadContext* ctx) final;
