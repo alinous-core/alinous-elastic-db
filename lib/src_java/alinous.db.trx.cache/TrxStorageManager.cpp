@@ -292,15 +292,15 @@ void TrxStorageManager::addIndex(CreateIndexMetadata* createMeta, TableMetadata*
 			}
 			catch(InterruptedException* e)
 			{
-				throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1712(), e, ctx));
+				throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1713(), e, ctx));
 			}
 			catch(VariableException* e)
 			{
-				throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1713(), e, ctx));
+				throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1714(), e, ctx));
 			}
 			catch(AlinousException* e)
 			{
-				throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1714(), e, ctx));
+				throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1715(), e, ctx));
 			}
 		}
 	}

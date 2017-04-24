@@ -54,6 +54,7 @@ void ClientScanEndCommand::__releaseRegerences(bool prepare, ThreadContext* ctx)
 }
 void ClientScanEndCommand::executeOnServer(NodeRegionServer* nodeRegionServer, BufferedOutputStream* outStream, ThreadContext* ctx)
 {
+	nodeRegionServer->endScan(this->trxId, ctx);
 	writeByteStream(outStream, ctx);
 }
 void ClientScanEndCommand::readFromStream(InputStream* stream, int remain, ThreadContext* ctx)
@@ -63,6 +64,14 @@ void ClientScanEndCommand::readFromStream(InputStream* stream, int remain, Threa
 	NetworkBinaryBuffer* buff = (new(ctx) NetworkBinaryBuffer(src, ctx));
 	this->trxId = buff->getLong(ctx);
 	readErrorFromStream(buff, ctx);
+}
+long long ClientScanEndCommand::getTrxId(ThreadContext* ctx) throw() 
+{
+	return trxId;
+}
+void ClientScanEndCommand::setTrxId(long long trxId, ThreadContext* ctx) throw() 
+{
+	this->trxId = trxId;
 }
 void ClientScanEndCommand::writeByteStream(OutputStream* outStream, ThreadContext* ctx)
 {

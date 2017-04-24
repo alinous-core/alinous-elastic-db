@@ -16,6 +16,7 @@
 #include "alinous.system/ISystemLog.h"
 #include "alinous.db.trx.scan/ScanResultRecord.h"
 #include "alinous.db.trx.scan/ScanResult.h"
+#include "alinous.remote.socket/ICommandData.h"
 #include "alinous.db.trx.scan/ScanResultIndexKey.h"
 #include "alinous.db.trx.scan/ScanException.h"
 #include "alinous.db.trx.scan/ITableTargetScanner.h"
@@ -82,23 +83,23 @@ void ScanResultScanner::startScan(ScanResultIndexKey* indexKeyValue, ThreadConte
 		}
 		catch(VariableException* e)
 		{
-			throw (new(ctx) ScanException(ConstStr::getCNST_STR_1701(), e, ctx));
+			throw (new(ctx) ScanException(ConstStr::getCNST_STR_1702(), e, ctx));
 		}
 		catch(IOException* e)
 		{
-			throw (new(ctx) ScanException(ConstStr::getCNST_STR_1701(), e, ctx));
+			throw (new(ctx) ScanException(ConstStr::getCNST_STR_1702(), e, ctx));
 		}
 		catch(InterruptedException* e)
 		{
-			throw (new(ctx) ScanException(ConstStr::getCNST_STR_1701(), e, ctx));
+			throw (new(ctx) ScanException(ConstStr::getCNST_STR_1702(), e, ctx));
 		}
 		catch(BTreeException* e)
 		{
-			throw (new(ctx) ScanException(ConstStr::getCNST_STR_1701(), e, ctx));
+			throw (new(ctx) ScanException(ConstStr::getCNST_STR_1702(), e, ctx));
 		}
 		catch(AlinousException* e)
 		{
-			throw (new(ctx) ScanException(ConstStr::getCNST_STR_1701(), e, ctx));
+			throw (new(ctx) ScanException(ConstStr::getCNST_STR_1702(), e, ctx));
 		}
 	}
 }
@@ -116,23 +117,23 @@ bool ScanResultScanner::hasNext(bool debug, ThreadContext* ctx)
 			}
 			catch(VariableException* e)
 			{
-				throw (new(ctx) ScanException(ConstStr::getCNST_STR_1702(), e, ctx));
+				throw (new(ctx) ScanException(ConstStr::getCNST_STR_1703(), e, ctx));
 			}
 			catch(InterruptedException* e)
 			{
-				throw (new(ctx) ScanException(ConstStr::getCNST_STR_1702(), e, ctx));
+				throw (new(ctx) ScanException(ConstStr::getCNST_STR_1703(), e, ctx));
 			}
 			catch(IOException* e)
 			{
-				throw (new(ctx) ScanException(ConstStr::getCNST_STR_1702(), e, ctx));
+				throw (new(ctx) ScanException(ConstStr::getCNST_STR_1703(), e, ctx));
 			}
 			catch(BTreeException* e)
 			{
-				throw (new(ctx) ScanException(ConstStr::getCNST_STR_1702(), e, ctx));
+				throw (new(ctx) ScanException(ConstStr::getCNST_STR_1703(), e, ctx));
 			}
 			catch(AlinousException* e)
 			{
-				throw (new(ctx) ScanException(ConstStr::getCNST_STR_1702(), e, ctx));
+				throw (new(ctx) ScanException(ConstStr::getCNST_STR_1703(), e, ctx));
 			}
 		}
 		IBTreeNode* node = nullptr;

@@ -101,7 +101,7 @@ String* Attribute::toString(ThreadContext* ctx) throw()
 	if(this->name != nullptr && this->value != nullptr)
 	{
 		buff->append(this->name, ctx);
-		buff->append(ConstStr::getCNST_STR_1798(), ctx);
+		buff->append(ConstStr::getCNST_STR_1799(), ctx);
 		buff->append(this->value, ctx);
 		buff->append(ConstStr::getCNST_STR_1321(), ctx);
 	}

@@ -44,6 +44,7 @@ template class ::java::util::HashMap<::java::lang::String, ::alinous::remote::re
 template class ::java::util::HashMap<::java::lang::String, ::alinous::remote::region::client::RemoteTableScheme>;
 template class ::java::util::HashMap<::java::lang::String, ::alinous::remote::region::client::command::data::ClientSchemaData>;
 template class ::java::util::HashMap<::java::lang::String, ::alinous::remote::region::client::command::data::ClientTableData>;
+template class ::java::util::HashMap<::java::lang::Long, ::alinous::remote::region::server::scan::ScanSession>;
 template class ::java::util::HashMap<::java::lang::String, ::alinous::remote::region::server::schema::NodeTableClaster>;
 template class ::java::util::HashMap<::java::lang::String, ::alinous::remote::region::server::schema::NodeRegionSchema>;
 template class ::java::util::HashMap<::java::lang::String, ::alinous::remote::region::server::schema::strategy::InsertNodeAccessStrategy>;

@@ -119,11 +119,11 @@ String* StorageTransaction::getTmpDir(ThreadContext* ctx) throw()
 	}
 	StringBuilder* buff = (new(ctx) StringBuilder(256, ctx));
 	buff->append(this->datadir, ctx);
-	if(!this->datadir->endsWith(ConstStr::getCNST_STR_949(), ctx) && !this->datadir->endsWith(ConstStr::getCNST_STR_1789(), ctx))
+	if(!this->datadir->endsWith(ConstStr::getCNST_STR_949(), ctx) && !this->datadir->endsWith(ConstStr::getCNST_STR_1790(), ctx))
 	{
 		buff->append(ConstStr::getCNST_STR_949(), ctx);
 	}
-	buff->append(ConstStr::getCNST_STR_3591(), ctx);
+	buff->append(ConstStr::getCNST_STR_3592(), ctx);
 	String* strTrxId = Long::toString(this->vctx->getTrxId(ctx), ctx);
 	buff->append(strTrxId, ctx);
 	__GC_MV(this, &(this->tmpDir), buff->toString(ctx), String);

@@ -2,22 +2,31 @@
 
 
 #include "alinous.compile.sql.analyze/ScanTableIdentifier.h"
-#include "alinous.db.table/DatabaseException.h"
 #include "alinous.compile/AbstractSrcElement.h"
 #include "alinous.system/AlinousException.h"
+#include "alinous.db/AlinousDbException.h"
+#include "alinous.db.table/DatabaseException.h"
 #include "alinous.system/ISystemLog.h"
 #include "java.lang/Comparable.h"
 #include "alinous.btree/IBTreeKey.h"
+#include "alinous.remote.socket/NetworkBinaryBuffer.h"
+#include "alinous.remote.socket/ICommandData.h"
 #include "alinous.db.trx.scan/ScanResultIndexKey.h"
 #include "alinous.btree/IBTreeValue.h"
 #include "alinous.db.trx.scan/ScanResultRecord.h"
 #include "alinous.db.trx.scan/ITableTargetScanner.h"
+#include "alinous.db.trx/DbVersionContext.h"
 #include "alinous.db.trx/DbTransaction.h"
-#include "alinous.remote.socket/ICommandData.h"
+#include "java.io/FilterOutputStream.h"
+#include "java.io/BufferedOutputStream.h"
+#include "alinous.remote.region.server/NodeRegionServer.h"
+#include "alinous.remote.region.client.command/AbstractNodeRegionCommand.h"
 #include "alinous.db.table/TableColumnMetadata.h"
 #include "alinous.db.table/IScannableIndex.h"
 #include "alinous.db.table/IDatabaseTable.h"
 #include "alinous.db.trx.scan/ScanException.h"
+#include "alinous.remote.region.client.command.dml/ClientScanCommand.h"
+#include "alinous.remote.region.client.command.dml/ClientScanEndCommand.h"
 #include "alinous.remote.region.client.scan/IRemoteScanner.h"
 #include "alinous.remote.region.client.scan/RemoteTableIndexScanner.h"
 
@@ -79,10 +88,32 @@ RemoteTableIndexScanner* RemoteTableIndexScanner::init(ScanTableIdentifier* tabl
 }
 void RemoteTableIndexScanner::startScan(ScanResultIndexKey* indexKeyValue, ThreadContext* ctx)
 {
-	ArrayList<TableColumnMetadata>* colmns = this->index->getColumns(ctx);
+	ClientScanCommand* command = (new(ctx) ClientScanCommand(ctx));
+	DbVersionContext* vctx = trx->getVersionContext(ctx);
+	command->setVctx(vctx, ctx);
+	command->setTable(this->tableId->getTable(ctx), ctx);
+	command->setLockMode(this->lockMode, ctx);
+	ArrayList<TableColumnMetadata>* indexColmns = this->index->getColumns(ctx);
+	bool primaryIndex = this->index->isPrimary(ctx);
+	command->setFullscan(true, ctx);
+	command->setPrimaryIndex(primaryIndex, ctx);
+	command->setIndexColmns(indexColmns, ctx);
+	this->tableStore->sendCommand(command, ctx);
 }
 void RemoteTableIndexScanner::endScan(ThreadContext* ctx)
 {
+	ClientScanEndCommand* cmd = (new(ctx) ClientScanEndCommand(ctx));
+	cmd->setTrxId(trx->getVersionContext(ctx)->getTrxId(ctx), ctx);
+	{
+		try
+		{
+			this->tableStore->sendCommand(cmd, ctx);
+		}
+		catch(AlinousDbException* e)
+		{
+			throw (new(ctx) ScanException(ConstStr::getCNST_STR_3606(), e, ctx));
+		}
+	}
 }
 bool RemoteTableIndexScanner::hasNext(bool debug, ThreadContext* ctx)
 {
@@ -90,7 +121,9 @@ bool RemoteTableIndexScanner::hasNext(bool debug, ThreadContext* ctx)
 }
 ScanResultRecord* RemoteTableIndexScanner::next(bool debug, ThreadContext* ctx)
 {
-	return nullptr;
+	ScanResultRecord* nextresult = this->nextresult;
+	__GC_MV(this, &(this->nextresult), nullptr, ScanResultRecord);
+	return nextresult;
 }
 void RemoteTableIndexScanner::dispose(ISystemLog* logger, ThreadContext* ctx)
 {

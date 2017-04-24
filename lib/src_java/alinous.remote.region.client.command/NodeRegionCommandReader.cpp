@@ -97,7 +97,7 @@ AbstractNodeRegionCommand* NodeRegionCommandReader::readFromStream(InputStream* 
 		cmd = (new(ctx) ClientScanEndCommand(ctx));
 		break ;
 	default:
-		throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3605(), ctx));
+		throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3608(), ctx));
 		break;
 	}
 	cmd->readFromStream(stream, size, ctx);

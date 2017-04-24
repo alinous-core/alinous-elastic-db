@@ -30,6 +30,9 @@ class IThreadLocker;}}}}
 namespace alinous {namespace db {namespace trx {
 class DbTransaction;}}}
 
+namespace alinous {namespace remote {namespace region {namespace client {namespace command {
+class AbstractNodeRegionCommand;}}}}}
+
 namespace alinous {namespace db {namespace table {
 class DatatableUpdateSupport;}}}
 
@@ -60,6 +63,7 @@ using ::alinous::db::table::lockmonitor::DBThreadMonitor;
 using ::alinous::db::table::lockmonitor::DatabaseLockException;
 using ::alinous::db::table::lockmonitor::IThreadLocker;
 using ::alinous::db::trx::DbTransaction;
+using ::alinous::remote::region::client::command::AbstractNodeRegionCommand;
 using ::alinous::runtime::parallel::ThreadPool;
 using ::alinous::system::AlinousException;
 
@@ -91,6 +95,7 @@ public:
 	void updateLockRow(long long oid, IThreadLocker* locker, ThreadContext* ctx) final;
 	void updateUnlockRow(long long oid, IThreadLocker* locker, ThreadContext* ctx) final;
 	void finishCommitSession(DbTransaction* trx, long long newCommitId, ThreadContext* ctx) final;
+	AbstractNodeRegionCommand* sendCommand(AbstractNodeRegionCommand* cmd, ThreadContext* ctx) final;
 private:
 	bool matchUniqueIndexByIdList(ArrayList<TableColumnMetadata>* columnsMetadataList, List<TableColumnMetadata>* columns, ThreadContext* ctx) throw() ;
 	bool matchIndexByIdList(ArrayList<TableColumnMetadata>* columnsMetadataList, ArrayList<ScanTableColumnIdentifier>* columns, ThreadContext* ctx) throw() ;

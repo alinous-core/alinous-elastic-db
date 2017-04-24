@@ -53,17 +53,17 @@ bool DomConverter::__init_static_variables(){
 		GCNotifier __refobj1(ctx, __FILEW__, __LINE__, L"DomConverter", L"__init_static_variables");
 		__GC_MV(nullptr, &(GT), ConstStr::getCNST_STR_82(), String);
 		__GC_MV(nullptr, &(LT), ConstStr::getCNST_STR_1056(), String);
-		__GC_MV(nullptr, &(QUOTE), ConstStr::getCNST_STR_1780(), String);
+		__GC_MV(nullptr, &(QUOTE), ConstStr::getCNST_STR_1781(), String);
 		__GC_MV(nullptr, &(DOUBLE_QUOTE), ConstStr::getCNST_STR_1321(), String);
-		__GC_MV(nullptr, &(SRC), ConstStr::getCNST_STR_1786(), String);
+		__GC_MV(nullptr, &(SRC), ConstStr::getCNST_STR_1787(), String);
 		__GC_MV(nullptr, &(EQUALS), ConstStr::getCNST_STR_1140(), String);
-		__GC_MV(nullptr, &(A), ConstStr::getCNST_STR_1787(), String);
-		__GC_MV(nullptr, &(IMG), ConstStr::getCNST_STR_1788(), String);
+		__GC_MV(nullptr, &(A), ConstStr::getCNST_STR_1788(), String);
+		__GC_MV(nullptr, &(IMG), ConstStr::getCNST_STR_1789(), String);
 		__GC_MV(nullptr, &(SPACE), ConstStr::getCNST_STR_380(), String);
 		__GC_MV(nullptr, &(TAB), ConstStr::getCNST_STR_380(), String);
 		__GC_MV(nullptr, &(NEW_LINE), ConstStr::getCNST_STR_1313(), String);
 		__GC_MV(nullptr, &(SLASH), ConstStr::getCNST_STR_949(), String);
-		__GC_MV(nullptr, &(BACK_SLASH), ConstStr::getCNST_STR_1789(), String);
+		__GC_MV(nullptr, &(BACK_SLASH), ConstStr::getCNST_STR_1790(), String);
 	}
 	ctx->localGC();
 	delete ctx;
@@ -152,7 +152,7 @@ void DomConverter::parse(ThreadContext* ctx) throw()
 }
 void DomConverter::handleIncomment(String* token, ThreadContext* ctx) throw() 
 {
-	if(token->endsWith(ConstStr::getCNST_STR_1783(), ctx))
+	if(token->endsWith(ConstStr::getCNST_STR_1784(), ctx))
 	{
 		String* next = this->tokenizer->lookAhead(ctx);
 		if(next->equals(ConstStr::getCNST_STR_82(), ctx))
@@ -299,7 +299,7 @@ void DomConverter::handleIntag(String* token, ThreadContext* ctx) throw()
 			this->endingTag = true;
 			return;
 		}
-		if(token->startsWith(ConstStr::getCNST_STR_1784(), ctx))
+		if(token->startsWith(ConstStr::getCNST_STR_1785(), ctx))
 		{
 			changeStatus(Status::incomment, ctx);
 			this->replacer->startComment(ctx);
@@ -382,7 +382,7 @@ void DomConverter::handleJavaScriptCode(String* token, ThreadContext* ctx) throw
 			ahead ++ ;
 			tagName = this->tokenizer->lookAhead(ahead, ctx);
 		}
-		if(tagEnds->equals(ConstStr::getCNST_STR_949(), ctx) && tagName->toLowerCase(ctx)->equals(ConstStr::getCNST_STR_1785(), ctx))
+		if(tagEnds->equals(ConstStr::getCNST_STR_949(), ctx) && tagName->toLowerCase(ctx)->equals(ConstStr::getCNST_STR_1786(), ctx))
 		{
 			this->replacer->addBodyString(this->buffer->toString(ctx), ctx);
 			changeStatus(Status::intag, ctx);
@@ -418,7 +418,7 @@ bool DomConverter::isJavaScript(ThreadContext* ctx) throw()
 	{
 		return false;
 	}
-	if(this->replacer->getCurrentTag(ctx)->getName(ctx)->toLowerCase(ctx)->equals(ConstStr::getCNST_STR_1785(), ctx))
+	if(this->replacer->getCurrentTag(ctx)->getName(ctx)->toLowerCase(ctx)->equals(ConstStr::getCNST_STR_1786(), ctx))
 	{
 		return true;
 	}

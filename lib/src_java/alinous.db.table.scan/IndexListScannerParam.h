@@ -6,6 +6,18 @@ class OneSource;
 namespace alinous {namespace db {namespace trx {namespace scan {
 class ScanResultIndexKey;}}}}
 
+namespace alinous {namespace db {namespace table {namespace scan {
+class IndexListScannerParam;}}}}
+
+namespace alinous {namespace remote {namespace socket {
+class NetworkBinaryBuffer;}}}
+
+namespace alinous {namespace remote {namespace socket {
+class ICommandData;}}}
+
+namespace alinous {namespace runtime {namespace dom {
+class VariableException;}}}
+
 namespace java {namespace lang {
 class IObject;
 }}
@@ -21,10 +33,13 @@ using namespace ::java::lang;
 using ::java::util::Iterator;
 using ::java::util::ArrayList;
 using ::alinous::db::trx::scan::ScanResultIndexKey;
+using ::alinous::remote::socket::ICommandData;
+using ::alinous::remote::socket::NetworkBinaryBuffer;
+using ::alinous::runtime::dom::VariableException;
 
 
 
-class IndexListScannerParam final : public virtual IObject {
+class IndexListScannerParam final : public ICommandData, public virtual IObject {
 public:
 	IndexListScannerParam(const IndexListScannerParam& base) = default;
 public:
@@ -41,6 +56,10 @@ public:
 	bool hasNext(ThreadContext* ctx) throw() ;
 	ScanResultIndexKey* nextKey(ThreadContext* ctx) throw() ;
 	void reset(ThreadContext* ctx) throw() ;
+	void readData(NetworkBinaryBuffer* buff, ThreadContext* ctx) final;
+	void writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) final;
+public:
+	static IndexListScannerParam* fromNetwork(NetworkBinaryBuffer* buff, ThreadContext* ctx);
 public:
 	static bool __init_done;
 	static bool __init_static_variables();

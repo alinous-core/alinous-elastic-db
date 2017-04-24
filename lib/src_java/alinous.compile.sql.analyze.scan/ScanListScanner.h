@@ -15,6 +15,9 @@ class ScanResultRecord;}}}}
 namespace alinous {namespace system {
 class ISystemLog;}}
 
+namespace alinous {namespace db {
+class AlinousDbException;}}
+
 namespace alinous {namespace db {namespace table {
 class DatabaseException;}}}
 
@@ -38,6 +41,7 @@ using namespace ::alinous;
 using namespace ::java::lang;
 using ::java::util::Iterator;
 using ::java::util::ArrayList;
+using ::alinous::db::AlinousDbException;
 using ::alinous::db::table::DatabaseException;
 using ::alinous::db::trx::scan::ITableTargetScanner;
 using ::alinous::db::trx::scan::ScanException;

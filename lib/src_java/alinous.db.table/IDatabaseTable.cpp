@@ -23,6 +23,7 @@
 #include "alinous.system/ISystemLog.h"
 #include "alinous.system/AlinousCore.h"
 #include "alinous.db.trx/DbTransaction.h"
+#include "alinous.remote.region.client.command/AbstractNodeRegionCommand.h"
 #include "alinous.runtime.parallel/IThreadAction.h"
 #include "alinous.runtime.parallel/SequentialBackgroundJob.h"
 #include "java.lang/Number.h"

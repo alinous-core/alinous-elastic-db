@@ -60,21 +60,21 @@ void HttpClient::get(String* host, int port, String* path, HttpRequestHeaders* h
 	OutputStream* out = socket->getOutputStream(ctx);
 	OutputStreamWriter* writer = (new(ctx) OutputStreamWriter(out, ConstStr::getCNST_STR_955(), ctx));
 	StringBuffer* buff = (new(ctx) StringBuffer(ctx));
-	buff->append(ConstStr::getCNST_STR_1890(), ctx)->append(path, ctx)->append(ConstStr::getCNST_STR_1891(), ctx);
+	buff->append(ConstStr::getCNST_STR_1891(), ctx)->append(path, ctx)->append(ConstStr::getCNST_STR_1892(), ctx);
 	writer->write(buff->toString(ctx), ctx);
 	buff->setLength(0, ctx);
-	buff->append(ConstStr::getCNST_STR_1892(), ctx)->append(host, ctx)->append(ConstStr::getCNST_STR_1888(), ctx);
+	buff->append(ConstStr::getCNST_STR_1893(), ctx)->append(host, ctx)->append(ConstStr::getCNST_STR_1889(), ctx);
 	writer->write(buff->toString(ctx), ctx);
 	buff->setLength(0, ctx);
 	headers->writeHeader(buff, ctx);
 	writer->write(buff->toString(ctx), ctx);
-	writer->append(ConstStr::getCNST_STR_1888(), ctx)->flush(ctx);
+	writer->append(ConstStr::getCNST_STR_1889(), ctx)->flush(ctx);
 	InputStream* inStream = this->socket->getInputStream(ctx);
 	parseHeader(inStream, ctx);
 	__GC_MV(this, &(this->resultStream), (new(ctx) ByteArrayOutputStream(2048, ctx)), ByteArrayOutputStream);
-	String* transferEncoding = this->responseHeader->get(ConstStr::getCNST_STR_1893(), ctx);
-	String* contentLength = this->responseHeader->get(ConstStr::getCNST_STR_1894(), ctx);
-	if(transferEncoding != nullptr && transferEncoding->equals(ConstStr::getCNST_STR_1895(), ctx))
+	String* transferEncoding = this->responseHeader->get(ConstStr::getCNST_STR_1894(), ctx);
+	String* contentLength = this->responseHeader->get(ConstStr::getCNST_STR_1895(), ctx);
+	if(transferEncoding != nullptr && transferEncoding->equals(ConstStr::getCNST_STR_1896(), ctx))
 	{
 		readChunkedContent(inStream, ctx);
 	}
@@ -136,7 +136,7 @@ void HttpClient::readByContentLength(String* contentLength, InputStream* inStrea
 		}
 		catch(NumberFormatException* e)
 		{
-			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_1896(), e, ctx));
+			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_1897(), e, ctx));
 		}
 	}
 }
@@ -158,7 +158,7 @@ void HttpClient::readChunkedContent(InputStream* inStream, ThreadContext* ctx)
 			}
 			catch(NumberFormatException* e)
 			{
-				throw (new(ctx) AlinousException(ConstStr::getCNST_STR_1896(), e, ctx));
+				throw (new(ctx) AlinousException(ConstStr::getCNST_STR_1897(), e, ctx));
 			}
 		}
 	}
@@ -207,7 +207,7 @@ void HttpClient::analyseHeaderLine(String* line, ThreadContext* ctx)
 		IArrayObject<String>* codes = line->split(ConstStr::getCNST_STR_380(), ctx);
 		if(codes->length < 3)
 		{
-			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_1897(), ctx));
+			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_1898(), ctx));
 		}
 		return;
 	}

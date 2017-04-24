@@ -131,14 +131,14 @@ void UniqueChecker::handleUniqueOp(IDatabaseTable* table, UniqueCheckOperation* 
 		{
 			if(findUnique(table, cols, valuesList, scanner, ctx))
 			{
-				throw (new(ctx) UniqueExclusiveException(ConstStr::getCNST_STR_3592(), ctx));
+				throw (new(ctx) UniqueExclusiveException(ConstStr::getCNST_STR_3593(), ctx));
 			}
 		}
 				else 
 		{
 			if(findUniqueScanAll(table, cols, valuesList, scanner, ctx))
 			{
-				throw (new(ctx) UniqueExclusiveException(ConstStr::getCNST_STR_3592(), ctx));
+				throw (new(ctx) UniqueExclusiveException(ConstStr::getCNST_STR_3593(), ctx));
 			}
 		}
 	}

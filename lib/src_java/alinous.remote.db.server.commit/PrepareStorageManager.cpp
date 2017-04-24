@@ -79,11 +79,11 @@ String* PrepareStorageManager::getFilePath(ThreadContext* ctx) throw()
 	}
 	StringBuilder* buff = (new(ctx) StringBuilder(256, ctx));
 	buff->append(this->tmpDir, ctx);
-	if(!this->tmpDir->endsWith(ConstStr::getCNST_STR_949(), ctx) && !this->tmpDir->endsWith(ConstStr::getCNST_STR_1789(), ctx))
+	if(!this->tmpDir->endsWith(ConstStr::getCNST_STR_949(), ctx) && !this->tmpDir->endsWith(ConstStr::getCNST_STR_1790(), ctx))
 	{
 		buff->append(ConstStr::getCNST_STR_949(), ctx);
 	}
-	buff->append(ConstStr::getCNST_STR_3594(), ctx)->append(Long::toString(this->strxId, ctx), ctx)->append(ConstStr::getCNST_STR_949(), ctx);
+	buff->append(ConstStr::getCNST_STR_3595(), ctx)->append(Long::toString(this->strxId, ctx), ctx)->append(ConstStr::getCNST_STR_949(), ctx);
 	__GC_MV(this, &(this->filePath), buff->toString(ctx), String);
 	return this->filePath;
 }

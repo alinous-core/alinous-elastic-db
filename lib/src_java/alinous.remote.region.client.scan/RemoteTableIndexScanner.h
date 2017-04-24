@@ -18,8 +18,23 @@ class IDatabaseTable;}}}
 namespace alinous {namespace db {namespace trx {namespace scan {
 class ScanResultIndexKey;}}}}
 
+namespace alinous {namespace remote {namespace region {namespace client {namespace command {namespace dml {
+class ClientScanCommand;}}}}}}
+
+namespace alinous {namespace db {namespace trx {
+class DbVersionContext;}}}
+
 namespace alinous {namespace db {namespace table {
 class TableColumnMetadata;}}}
+
+namespace alinous {namespace remote {namespace region {namespace client {namespace command {namespace dml {
+class ClientScanEndCommand;}}}}}}
+
+namespace alinous {namespace db {namespace trx {namespace scan {
+class ScanException;}}}}
+
+namespace alinous {namespace db {
+class AlinousDbException;}}
 
 namespace alinous {namespace db {namespace trx {namespace scan {
 class ScanResultRecord;}}}}
@@ -35,9 +50,6 @@ class IOException;}}
 
 namespace alinous {namespace db {namespace table {
 class DatabaseException;}}}
-
-namespace alinous {namespace db {namespace trx {namespace scan {
-class ScanException;}}}}
 
 namespace alinous {namespace system {
 class AlinousException;}}
@@ -58,14 +70,18 @@ using ::java::util::Iterator;
 using ::java::io::IOException;
 using ::java::util::ArrayList;
 using ::alinous::compile::sql::analyze::ScanTableIdentifier;
+using ::alinous::db::AlinousDbException;
 using ::alinous::db::table::DatabaseException;
 using ::alinous::db::table::IDatabaseTable;
 using ::alinous::db::table::IScannableIndex;
 using ::alinous::db::table::TableColumnMetadata;
 using ::alinous::db::trx::DbTransaction;
+using ::alinous::db::trx::DbVersionContext;
 using ::alinous::db::trx::scan::ScanException;
 using ::alinous::db::trx::scan::ScanResultIndexKey;
 using ::alinous::db::trx::scan::ScanResultRecord;
+using ::alinous::remote::region::client::command::dml::ClientScanCommand;
+using ::alinous::remote::region::client::command::dml::ClientScanEndCommand;
 using ::alinous::system::AlinousException;
 using ::alinous::system::ISystemLog;
 

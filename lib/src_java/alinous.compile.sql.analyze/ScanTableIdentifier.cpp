@@ -7,6 +7,7 @@
 #include "alinous.system/AlinousException.h"
 #include "alinous.runtime/ExecutionException.h"
 #include "alinous.runtime.dom/VariableException.h"
+#include "alinous.remote.socket/ICommandData.h"
 #include "alinous.compile.sql/TableAndSchema.h"
 #include "alinous.compile.sql.analyze/ScanTableIdentifier.h"
 

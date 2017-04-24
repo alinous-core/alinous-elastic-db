@@ -111,19 +111,19 @@ void InsertStore::commitPrepared(long long newCommitId, DbVersionContext* vctx, 
 		}
 		catch(IOException* e)
 		{
-			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3595(), ctx));
+			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3596(), ctx));
 		}
 		catch(InterruptedException* e)
 		{
-			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3595(), ctx));
+			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3596(), ctx));
 		}
 		catch(BTreeException* e)
 		{
-			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3595(), ctx));
+			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3596(), ctx));
 		}
 		catch(AlinousException* e)
 		{
-			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3595(), ctx));
+			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3596(), ctx));
 		}
 	}
 }
@@ -161,12 +161,12 @@ void InsertStore::handleCommitTable(long long newCommitId, DbVersionContext* vct
 	TableSchema* schema = scMgr->getSchema(schemaName, ctx);
 	if(schema == nullptr)
 	{
-		throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3589()->clone(ctx)->append(schemaName, ctx)->append(ConstStr::getCNST_STR_1125(), ctx), ctx));
+		throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3590()->clone(ctx)->append(schemaName, ctx)->append(ConstStr::getCNST_STR_1125(), ctx), ctx));
 	}
 	IDatabaseTable* table = schema->getTableStore(tableName, ctx);
 	if(table == nullptr)
 	{
-		throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3589()->clone(ctx)->append(schemaName, ctx)->append(ConstStr::getCNST_STR_953(), ctx)->append(tableName, ctx)->append(ConstStr::getCNST_STR_1125(), ctx), ctx));
+		throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3590()->clone(ctx)->append(schemaName, ctx)->append(ConstStr::getCNST_STR_953(), ctx)->append(tableName, ctx)->append(ConstStr::getCNST_STR_1125(), ctx), ctx));
 	}
 	AlinousCore* core = server->getCore(ctx);
 	ISystemLog* log = core->getLogger(ctx);

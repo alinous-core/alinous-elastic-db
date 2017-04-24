@@ -88,20 +88,20 @@ void MonitorAccess::reportSchemaUpdated(ThreadContext* ctx)
 			AbstractMonitorCommand* retcmd = cmd->sendCommand(socket, ctx);
 			if(retcmd->getType(ctx) != AbstractMonitorCommand::TYPE_REPORT_SCHEMA_UPDATED)
 			{
-				throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3584(), ctx));
+				throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3585(), ctx));
 			}
 		}
 		catch(UnknownHostException* e)
 		{
-			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3584(), e, ctx));
+			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3585(), e, ctx));
 		}
 		catch(IOException* e)
 		{
-			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3584(), e, ctx));
+			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3585(), e, ctx));
 		}
 		catch(AlinousException* e)
 		{
-			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3584(), e, ctx));
+			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3585(), e, ctx));
 		}
 	}
 }
@@ -125,22 +125,22 @@ long long MonitorAccess::allocOids(String* tableFullName, int allocNum, ThreadCo
 			AbstractMonitorCommand* retcmd = cmd->sendCommand(socket, ctx);
 			if(retcmd->getType(ctx) != AbstractMonitorCommand::TYPE_ALLOC_OID)
 			{
-				throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3584(), ctx));
+				throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3585(), ctx));
 			}
 			cmd = static_cast<AllocOidCommand*>(retcmd);
 			return cmd->getNextOid(ctx);
 		}
 		catch(UnknownHostException* e)
 		{
-			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3584(), e, ctx));
+			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3585(), e, ctx));
 		}
 		catch(IOException* e)
 		{
-			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3584(), e, ctx));
+			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3585(), e, ctx));
 		}
 		catch(AlinousException* e)
 		{
-			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3584(), e, ctx));
+			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3585(), e, ctx));
 		}
 	}
 }
@@ -162,20 +162,20 @@ void MonitorAccess::reportMaxOid(OidSchemaContainer* container, ThreadContext* c
 			AbstractMonitorCommand* retcmd = cmd->sendCommand(socket, ctx);
 			if(retcmd->getType(ctx) != AbstractMonitorCommand::TYPE_REPORT_OID)
 			{
-				throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3584(), ctx));
+				throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3585(), ctx));
 			}
 		}
 		catch(UnknownHostException* e)
 		{
-			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3584(), e, ctx));
+			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3585(), e, ctx));
 		}
 		catch(IOException* e)
 		{
-			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3584(), e, ctx));
+			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3585(), e, ctx));
 		}
 		catch(AlinousException* e)
 		{
-			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3584(), e, ctx));
+			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3585(), e, ctx));
 		}
 	}
 }

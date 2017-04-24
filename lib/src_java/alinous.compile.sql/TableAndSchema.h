@@ -15,6 +15,12 @@ class FileStorageEntryFetcher;}}}
 namespace java {namespace lang {
 class StringBuffer;}}
 
+namespace alinous {namespace remote {namespace socket {
+class NetworkBinaryBuffer;}}}
+
+namespace alinous {namespace remote {namespace socket {
+class ICommandData;}}}
+
 namespace alinous {namespace runtime {namespace dom {
 class VariableException;}}}
 
@@ -33,14 +39,18 @@ using namespace ::java::lang;
 using ::java::util::Iterator;
 using ::alinous::buffer::storage::FileStorageEntryBuilder;
 using ::alinous::buffer::storage::FileStorageEntryFetcher;
+using ::alinous::remote::socket::ICommandData;
+using ::alinous::remote::socket::NetworkBinaryBuffer;
 using ::alinous::runtime::dom::VariableException;
 
 
 
-class TableAndSchema final : public virtual IObject {
+class TableAndSchema final : public ICommandData, public virtual IObject {
 public:
 	TableAndSchema(const TableAndSchema& base) = default;
 public:
+	TableAndSchema(ThreadContext* ctx) throw() ;
+	void __construct_impl(ThreadContext* ctx) throw() ;
 	TableAndSchema(String* schema, String* table, ThreadContext* ctx) throw() ;
 	void __construct_impl(String* schema, String* table, ThreadContext* ctx) throw() ;
 	virtual ~TableAndSchema() throw();
@@ -59,8 +69,11 @@ public:
 	void appendToEntry(FileStorageEntryBuilder* builder, ThreadContext* ctx);
 	bool equals(IObject* obj, ThreadContext* ctx) throw() ;
 	String* toString(ThreadContext* ctx) throw() ;
+	void readData(NetworkBinaryBuffer* buff, ThreadContext* ctx) final;
+	void writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) final;
 public:
 	static TableAndSchema* valueFromFetcher(FileStorageEntryFetcher* fetcher, ThreadContext* ctx);
+	static TableAndSchema* fromNetwork(NetworkBinaryBuffer* buff, ThreadContext* ctx);
 public:
 	static bool __init_done;
 	static bool __init_static_variables();

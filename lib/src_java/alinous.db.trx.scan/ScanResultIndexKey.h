@@ -21,8 +21,20 @@ class BTreeIndexKey;}}}
 namespace alinous {namespace buffer {namespace storage {
 class FileStorageEntryFetcher;}}}
 
+namespace alinous {namespace remote {namespace socket {
+class NetworkBinaryBuffer;}}}
+
+namespace alinous {namespace runtime {namespace dom {
+class IAlinousVariable;}}}
+
 namespace alinous {namespace runtime {namespace dom {
 class VariableException;}}}
+
+namespace alinous {namespace remote {namespace socket {
+class ICommandData;}}}
+
+namespace alinous {namespace runtime {namespace dom {
+class NetworkAlinousVariableFactory;}}}
 
 namespace java {namespace lang {
 class IObject;
@@ -42,12 +54,16 @@ using ::alinous::btree::IBTreeKey;
 using ::alinous::buffer::storage::FileStorageEntryBuilder;
 using ::alinous::buffer::storage::FileStorageEntryFetcher;
 using ::alinous::db::table::BTreeIndexKey;
+using ::alinous::remote::socket::ICommandData;
+using ::alinous::remote::socket::NetworkBinaryBuffer;
+using ::alinous::runtime::dom::IAlinousVariable;
+using ::alinous::runtime::dom::NetworkAlinousVariableFactory;
 using ::alinous::runtime::dom::VariableException;
 using ::alinous::runtime::variant::VariantValue;
 
 
 
-class ScanResultIndexKey final : public IBTreeKey, public virtual IObject {
+class ScanResultIndexKey final : public IBTreeKey, public ICommandData, public virtual IObject {
 public:
 	ScanResultIndexKey(const ScanResultIndexKey& base) = default;
 public:
@@ -65,8 +81,11 @@ public:
 	bool equals(IObject* obj, ThreadContext* ctx) throw() ;
 	void appendToEntry(FileStorageEntryBuilder* builder, ThreadContext* ctx) final;
 	int size(ThreadContext* ctx) final;
+	void readData(NetworkBinaryBuffer* buff, ThreadContext* ctx) final;
+	void writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) final;
 public:
 	static BTreeIndexKey* fetchFromEntry(FileStorageEntryFetcher* fetcher, ThreadContext* ctx);
+	static ScanResultIndexKey* fromNetwork(NetworkBinaryBuffer* buff, ThreadContext* ctx);
 public:
 	static bool __init_done;
 	static bool __init_static_variables();

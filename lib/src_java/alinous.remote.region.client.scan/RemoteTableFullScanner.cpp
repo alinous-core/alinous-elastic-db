@@ -8,6 +8,7 @@
 #include "alinous.system/ISystemLog.h"
 #include "java.lang/Comparable.h"
 #include "alinous.btree/IBTreeKey.h"
+#include "alinous.remote.socket/ICommandData.h"
 #include "alinous.db.trx.scan/ScanResultIndexKey.h"
 #include "alinous.btree/IBTreeValue.h"
 #include "alinous.db.trx.scan/ScanResultRecord.h"

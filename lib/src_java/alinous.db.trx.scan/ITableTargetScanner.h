@@ -12,6 +12,9 @@ class ScanResultRecord;}}}}
 namespace alinous {namespace system {
 class ISystemLog;}}
 
+namespace alinous {namespace db {
+class AlinousDbException;}}
+
 namespace alinous {namespace db {namespace table {
 class DatabaseException;}}}
 
@@ -31,6 +34,7 @@ namespace alinous {namespace db {namespace trx {namespace scan {
 using namespace ::alinous;
 using namespace ::java::lang;
 using ::java::util::Iterator;
+using ::alinous::db::AlinousDbException;
 using ::alinous::db::table::DatabaseException;
 using ::alinous::system::AlinousException;
 using ::alinous::system::ISystemLog;

@@ -19,6 +19,7 @@ template class ::alinous::HashMapRawArray<::java::lang::String, ::alinous::remot
 template class ::alinous::HashMapRawArray<::java::lang::String, ::alinous::remote::region::client::DatabaseTableClient>;
 template class ::alinous::HashMapRawArray<::java::lang::String, ::alinous::remote::region::client::command::data::ClientSchemaData>;
 template class ::alinous::HashMapRawArray<::java::lang::String, ::alinous::remote::region::client::RemoteTableScheme>;
+template class ::alinous::HashMapRawArray<::java::lang::Long, ::alinous::remote::region::server::scan::ScanSession>;
 template class ::alinous::HashMapRawArray<::java::lang::String, ::alinous::remote::region::server::schema::NodeTableClaster>;
 template class ::alinous::HashMapRawArray<::java::lang::String, ::alinous::remote::region::server::schema::NodeRegionSchema>;
 template class ::alinous::HashMapRawArray<::java::lang::String, ::alinous::remote::region::server::schema::NodeReference>;

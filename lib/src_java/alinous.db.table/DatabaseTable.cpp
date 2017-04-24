@@ -26,6 +26,7 @@
 #include "alinous.system/ISystemLog.h"
 #include "alinous.system/AlinousCore.h"
 #include "alinous.db.trx/DbTransaction.h"
+#include "alinous.remote.region.client.command/AbstractNodeRegionCommand.h"
 #include "alinous.runtime.parallel/IThreadAction.h"
 #include "alinous.runtime.parallel/SequentialBackgroundJob.h"
 #include "java.lang/Number.h"
@@ -244,6 +245,10 @@ void DatabaseTable::updateUnlockRow(long long oid, IThreadLocker* locker, Thread
 }
 void DatabaseTable::finishCommitSession(DbTransaction* trx, long long newCommitId, ThreadContext* ctx)
 {
+}
+AbstractNodeRegionCommand* DatabaseTable::sendCommand(AbstractNodeRegionCommand* cmd, ThreadContext* ctx)
+{
+	return nullptr;
 }
 bool DatabaseTable::matchUniqueIndexByIdList(ArrayList<TableColumnMetadata>* columnsMetadataList, List<TableColumnMetadata>* columns, ThreadContext* ctx) throw() 
 {

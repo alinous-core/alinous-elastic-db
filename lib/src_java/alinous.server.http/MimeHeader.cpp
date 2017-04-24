@@ -29,8 +29,8 @@ namespace alinous {namespace server {namespace http {
 
 constexpr const int MimeHeader::TYPE_CONTENT_DESCRIPTION;
 constexpr const int MimeHeader::TYPE_CONTENT_TYPE;
-String* MimeHeader::CONTENT_DESCRIPTION = ConstStr::getCNST_STR_3542();
-String* MimeHeader::CONTENT_TYPE = ConstStr::getCNST_STR_3543();
+String* MimeHeader::CONTENT_DESCRIPTION = ConstStr::getCNST_STR_3543();
+String* MimeHeader::CONTENT_TYPE = ConstStr::getCNST_STR_3544();
 bool MimeHeader::__init_done = __init_static_variables();
 bool MimeHeader::__init_static_variables(){
 	Java2CppSystem::getSelf();
@@ -75,13 +75,13 @@ MimeHeader* MimeHeader::init(String* line, ThreadContext* ctx)
 	int pos = line->indexOf((int)L':', ctx);
 	if(pos < 0)
 	{
-		throw (new(ctx) IOException(ConstStr::getCNST_STR_3541(), ctx));
+		throw (new(ctx) IOException(ConstStr::getCNST_STR_3542(), ctx));
 	}
 	__GC_MV(this, &(this->headerName), line->substring(0, pos, ctx), String);
 	pos ++ ;
 	if(pos >= line->length(ctx))
 	{
-		throw (new(ctx) IOException(ConstStr::getCNST_STR_3541(), ctx));
+		throw (new(ctx) IOException(ConstStr::getCNST_STR_3542(), ctx));
 	}
 	String* value = line->substring(pos, line->length(ctx), ctx);
 	if(this->headerName->equals(CONTENT_DESCRIPTION, ctx))
@@ -144,7 +144,7 @@ String* MimeHeader::afterEq(String* value, ThreadContext* ctx)
 	int idx = value->indexOf(ConstStr::getCNST_STR_1140(), ctx);
 	if(idx < 0)
 	{
-		throw (new(ctx) IOException(ConstStr::getCNST_STR_3541(), ctx));
+		throw (new(ctx) IOException(ConstStr::getCNST_STR_3542(), ctx));
 	}
 	return value->substring(idx + 1, ctx);
 }

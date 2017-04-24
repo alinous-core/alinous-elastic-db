@@ -2,7 +2,6 @@
 
 
 #include "alinous.btree/BTreeException.h"
-#include "alinous.db.table/DatabaseException.h"
 #include "alinous.compile/IAlinousVisitorContainer.h"
 #include "alinous.compile/AbstractSrcElement.h"
 #include "alinous.remote.socket/ICommandData.h"
@@ -14,10 +13,9 @@
 #include "alinous.buffer.storage/FileStorageEntryBuilder.h"
 #include "alinous.buffer.storage/FileStorageEntryFetcher.h"
 #include "alinous.compile/ExpressionSourceId.h"
+#include "alinous.db.table/DatabaseException.h"
 #include "alinous.runtime.dom/IAlinousVariable.h"
 #include "alinous.runtime.variant/VariantValue.h"
-#include "alinous.system/AlinousException.h"
-#include "alinous.db/AlinousDbException.h"
 #include "alinous.runtime.engine/ScriptMachine.h"
 #include "alinous.compile.expression/IExpression.h"
 #include "alinous.compile.declare/ClassMemberModifiers.h"
@@ -26,6 +24,8 @@
 #include "alinous.compile.declare/ClassMethodFunction.h"
 #include "alinous.compile.declare/AlinousClass.h"
 #include "alinous.compile/Token.h"
+#include "alinous.system/AlinousException.h"
+#include "alinous.db/AlinousDbException.h"
 #include "alinous.system/ISystemLog.h"
 #include "java.lang/Comparable.h"
 #include "alinous.btree/IBTreeKey.h"

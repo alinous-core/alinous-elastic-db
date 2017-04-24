@@ -30,7 +30,7 @@ bool HashArrayList::__init_static_variables(){
 {
 	if((MAX_HASH & 1) != 0)
 	{
-		throw (new(ctx) BTreeException(ConstStr::getCNST_STR_1757(), ctx));
+		throw (new(ctx) BTreeException(ConstStr::getCNST_STR_1758(), ctx));
 	}
 	this->MAX_HASH = MAX_HASH;
 	this->MAX_HASH_MASK = this->MAX_HASH - 1;
@@ -44,7 +44,7 @@ void HashArrayList::__construct_impl(int MAX_HASH, ThreadContext* ctx)
 {
 	if((MAX_HASH & 1) != 0)
 	{
-		throw (new(ctx) BTreeException(ConstStr::getCNST_STR_1757(), ctx));
+		throw (new(ctx) BTreeException(ConstStr::getCNST_STR_1758(), ctx));
 	}
 	this->MAX_HASH = MAX_HASH;
 	this->MAX_HASH_MASK = this->MAX_HASH - 1;

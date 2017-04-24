@@ -7,6 +7,8 @@
 #include "alinous.system/AlinousException.h"
 #include "alinous.runtime/ExecutionException.h"
 #include "alinous.runtime.dom/VariableException.h"
+#include "alinous.remote.socket/NetworkBinaryBuffer.h"
+#include "alinous.remote.socket/ICommandData.h"
 #include "alinous.compile.sql/TableAndSchema.h"
 
 namespace alinous {namespace compile {namespace sql {
@@ -26,7 +28,13 @@ bool TableAndSchema::__init_static_variables(){
 	delete ctx;
 	return true;
 }
- TableAndSchema::TableAndSchema(String* schema, String* table, ThreadContext* ctx) throw()  : IObject(ctx), table(nullptr), schema(nullptr), toStr(nullptr)
+ TableAndSchema::TableAndSchema(ThreadContext* ctx) throw()  : IObject(ctx), ICommandData(ctx), table(nullptr), schema(nullptr), toStr(nullptr)
+{
+}
+void TableAndSchema::__construct_impl(ThreadContext* ctx) throw() 
+{
+}
+ TableAndSchema::TableAndSchema(String* schema, String* table, ThreadContext* ctx) throw()  : IObject(ctx), ICommandData(ctx), table(nullptr), schema(nullptr), toStr(nullptr)
 {
 	__GC_MV(this, &(this->schema), schema, String);
 	__GC_MV(this, &(this->table), table, String);
@@ -111,11 +119,27 @@ String* TableAndSchema::toString(ThreadContext* ctx) throw()
 	}
 	return this->toStr;
 }
+void TableAndSchema::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
+{
+	__GC_MV(this, &(this->table), buff->getString(ctx), String);
+	__GC_MV(this, &(this->schema), buff->getString(ctx), String);
+}
+void TableAndSchema::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
+{
+	buff->putString(this->table, ctx);
+	buff->putString(this->schema, ctx);
+}
 TableAndSchema* TableAndSchema::valueFromFetcher(FileStorageEntryFetcher* fetcher, ThreadContext* ctx)
 {
 	String* table = fetcher->fetchString(ctx);
 	String* schema = fetcher->fetchString(ctx);
 	return (new(ctx) TableAndSchema(schema, table, ctx));
+}
+TableAndSchema* TableAndSchema::fromNetwork(NetworkBinaryBuffer* buff, ThreadContext* ctx)
+{
+	TableAndSchema* schema = (new(ctx) TableAndSchema(ctx));
+	schema->readData(buff, ctx);
+	return schema;
 }
 void TableAndSchema::__cleanUp(ThreadContext* ctx){
 }

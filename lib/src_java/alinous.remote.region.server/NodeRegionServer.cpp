@@ -1,10 +1,12 @@
 #include "include/global.h"
 
 
+#include "alinous.compile/AbstractSrcElement.h"
+#include "alinous.system/AlinousException.h"
+#include "alinous.db/AlinousDbException.h"
 #include "alinous.buffer.storage/FileStorageEntryBuilder.h"
 #include "alinous.remote.socket/NetworkBinaryBuffer.h"
 #include "alinous.remote.socket/ICommandData.h"
-#include "alinous.system/AlinousException.h"
 #include "alinous.db.table/TableMetadata.h"
 #include "alinous.db.trx/DbVersionContext.h"
 #include "alinous.lock/LockObject.h"
@@ -29,6 +31,9 @@
 #include "alinous.db.table/IDatabaseRecord.h"
 #include "alinous.remote.region.client.command.data/ClientNetworkRecord.h"
 #include "alinous.remote.region.client.command.data/ClientStructureMetadata.h"
+#include "alinous.remote.region.client.command.dml/ClientScanCommandData.h"
+#include "alinous.remote.region.server.scan/ScanSession.h"
+#include "alinous.remote.region.server.scan/RegionScanManager.h"
 #include "alinous.remote.region.server.schema/NodeReferenceManager.h"
 #include "alinous.remote.region.server.tpc/RegionInsertExecutor.h"
 #include "alinous.remote.region.server.tpc/RegionTpcExecutorPool.h"
@@ -45,7 +50,7 @@ namespace alinous {namespace remote {namespace region {namespace server {
 
 
 
-String* NodeRegionServer::THREAD_NAME = ConstStr::getCNST_STR_3609();
+String* NodeRegionServer::THREAD_NAME = ConstStr::getCNST_STR_3612();
 bool NodeRegionServer::__init_done = __init_static_variables();
 bool NodeRegionServer::__init_static_variables(){
 	Java2CppSystem::getSelf();
@@ -57,12 +62,13 @@ bool NodeRegionServer::__init_static_variables(){
 	delete ctx;
 	return true;
 }
- NodeRegionServer::NodeRegionServer(int port, int maxthread, AlinousCore* core, ThreadContext* ctx) throw()  : IObject(ctx), port(0), maxthread(0), refs(nullptr), socketServer(nullptr), monitorConnectionPool(nullptr), nodeClusterRevisionLock(__GC_INS(this, (new(ctx) LockObject(ctx)), LockObject)), nodeClusterRevision(1), region(nullptr), core(nullptr), dmlSessions(__GC_INS(this, (new(ctx) RegionTpcExecutorPool(ctx)), RegionTpcExecutorPool))
+ NodeRegionServer::NodeRegionServer(int port, int maxthread, AlinousCore* core, ThreadContext* ctx) throw()  : IObject(ctx), port(0), maxthread(0), refs(nullptr), socketServer(nullptr), monitorConnectionPool(nullptr), nodeClusterRevisionLock(__GC_INS(this, (new(ctx) LockObject(ctx)), LockObject)), nodeClusterRevision(1), region(nullptr), core(nullptr), dmlSessions(__GC_INS(this, (new(ctx) RegionTpcExecutorPool(ctx)), RegionTpcExecutorPool)), scanManager(nullptr)
 {
 	this->port = port;
 	this->maxthread = maxthread;
 	__GC_MV(this, &(this->refs), (new(ctx) NodeReferenceManager(ctx)), NodeReferenceManager);
 	__GC_MV(this, &(this->core), core, AlinousCore);
+	__GC_MV(this, &(this->scanManager), (new(ctx) RegionScanManager(ctx)), RegionScanManager);
 }
 void NodeRegionServer::__construct_impl(int port, int maxthread, AlinousCore* core, ThreadContext* ctx) throw() 
 {
@@ -70,6 +76,7 @@ void NodeRegionServer::__construct_impl(int port, int maxthread, AlinousCore* co
 	this->maxthread = maxthread;
 	__GC_MV(this, &(this->refs), (new(ctx) NodeReferenceManager(ctx)), NodeReferenceManager);
 	__GC_MV(this, &(this->core), core, AlinousCore);
+	__GC_MV(this, &(this->scanManager), (new(ctx) RegionScanManager(ctx)), RegionScanManager);
 }
  NodeRegionServer::~NodeRegionServer() throw() 
 {
@@ -95,6 +102,8 @@ void NodeRegionServer::__releaseRegerences(bool prepare, ThreadContext* ctx) thr
 	core = nullptr;
 	__e_obj1.add(this->dmlSessions, this);
 	dmlSessions = nullptr;
+	__e_obj1.add(this->scanManager, this);
+	scanManager = nullptr;
 	if(!prepare){
 		return;
 	}
@@ -144,7 +153,7 @@ void NodeRegionServer::syncNodes(ThreadContext* ctx)
 			AbstractMonitorCommand* retcmd = cmd->sendCommand(socket, ctx);
 			if(retcmd->getType(ctx) != AbstractMonitorCommand::TYPE_GET_REGION_INFO)
 			{
-				throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3608(), ctx));
+				throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3611(), ctx));
 			}
 			cmd = static_cast<GetRegionNodeInfoCommand*>(retcmd);
 			RegionInfoData* data = cmd->getRegionData(ctx);
@@ -218,6 +227,16 @@ void NodeRegionServer::commitUpdateData(long long newCommitId, DbVersionContext*
 		catch(...){throw;}
 	}
 }
+bool NodeRegionServer::scan(ClientScanCommandData* data, ThreadContext* ctx)
+{
+	DbVersionContext* vctx = data->getVctx(ctx);
+	ScanSession* session = this->scanManager->getScanSession(vctx->getTrxId(ctx), data, ctx);
+	return false;
+}
+void NodeRegionServer::endScan(long long trxId, ThreadContext* ctx) throw() 
+{
+	this->scanManager->endSession(trxId, ctx);
+}
 void NodeRegionServer::requestSyncMaxOid(ThreadContext* ctx)
 {
 	this->refs->requestSyncMaxOid(ctx);
@@ -267,17 +286,17 @@ void NodeRegionServer::reportClusterUpdate(ThreadContext* ctx)
 			AbstractMonitorCommand* retcmd = cmd->sendCommand(socket, ctx);
 			if(retcmd->getType(ctx) != AbstractMonitorCommand::TYPE_REPORT_CLUSTER_UPDATED)
 			{
-				throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3608(), ctx));
+				throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3611(), ctx));
 			}
 			cmd = static_cast<ReportClusterVersionUpCommand*>(retcmd);
 		}
 		catch(UnknownHostException* e)
 		{
-			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3608(), ctx));
+			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3611(), ctx));
 		}
 		catch(IOException* e)
 		{
-			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3608(), ctx));
+			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3611(), ctx));
 		}
 	}
 }

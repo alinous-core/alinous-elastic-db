@@ -1,6 +1,7 @@
 #include "include/global.h"
 
 
+#include "alinous.remote.socket/ICommandData.h"
 #include "alinous.compile.sql/TableAndSchema.h"
 #include "alinous.db.trx/CreateIndexMetadata.h"
 

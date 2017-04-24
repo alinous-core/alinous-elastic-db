@@ -101,7 +101,7 @@ AbstractMonitorCommand* MinitorCommandReader::readFromStream(InputStream* stream
 		cmd = (new(ctx) ReportMaxOidCommand(ctx));
 		break ;
 	default:
-		throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3583(), ctx));
+		throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3584(), ctx));
 		break;
 	}
 	cmd->readFromStream(stream, size, ctx);

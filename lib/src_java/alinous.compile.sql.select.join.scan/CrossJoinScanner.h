@@ -36,6 +36,9 @@ class ISystemLog;}}
 namespace alinous {namespace db {namespace trx {namespace scan {
 class IJoinScanner;}}}}
 
+namespace alinous {namespace db {
+class AlinousDbException;}}
+
 namespace alinous {namespace db {namespace trx {namespace scan {
 class ScanException;}}}}
 
@@ -56,6 +59,7 @@ using namespace ::alinous;
 using namespace ::java::lang;
 using ::java::util::Iterator;
 using ::alinous::compile::sql::analyze::ScanTableMetadata;
+using ::alinous::db::AlinousDbException;
 using ::alinous::db::table::DatabaseException;
 using ::alinous::db::trx::DbTransaction;
 using ::alinous::db::trx::scan::IJoinScanner;

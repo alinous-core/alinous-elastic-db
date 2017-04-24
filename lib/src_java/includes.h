@@ -488,6 +488,13 @@
 #include "alinous.remote.region.client.command.data/ClientTableData.h"
 #include "alinous.remote.region.client.command.data/ClientSchemaData.h"
 #include "alinous.remote.region.client.command.data/ClientStructureMetadata.h"
+#include "alinous.db.table.scan/IndexListScannerParam.h"
+#include "alinous.db.table.scan/IndexRangeScannerParam.h"
+#include "alinous.remote.region.client.command.dml/ClientScanCommandData.h"
+#include "alinous.remote.region.server.scan/IScanWorker.h"
+#include "alinous.remote.region.server.scan/FullScanWorker.h"
+#include "alinous.remote.region.server.scan/ScanSession.h"
+#include "alinous.remote.region.server.scan/RegionScanManager.h"
 #include "alinous.remote.region.server.schema/NodeCluster.h"
 #include "alinous.remote.region.server.schema/NodeTableReference.h"
 #include "alinous.remote.region.server.schema/NodeTableClaster.h"
@@ -564,8 +571,6 @@
 #include "alinous.db.trx.scan/ScanException.h"
 #include "alinous.db.trx.scan/ScannedOids.h"
 #include "alinous.compile.sql.select.join.scan/JoinedCollectionScanner.h"
-#include "alinous.db.table.scan/IndexListScannerParam.h"
-#include "alinous.db.table.scan/IndexRangeScannerParam.h"
 #include "alinous.compile.sql.analyze/IndexScanStrategyPlan.h"
 #include "alinous.compile.sql.analyze/IndexScanStrategy.h"
 #include "alinous.compile.sql.analyze/IndexConditionDetector.h"
@@ -1913,11 +1918,16 @@ inline static void __cleanUpStatics(alinous::ThreadContext* ctx){
 	alinous::remote::region::client::command::dml::ClientScanEndCommand::__cleanUp(ctx);
 	alinous::remote::region::client::command::dml::ClientInsertDataCommand::__cleanUp(ctx);
 	alinous::remote::region::client::command::dml::ClientTpcCommitSessionCommand::__cleanUp(ctx);
+	alinous::remote::region::client::command::dml::ClientScanCommandData::__cleanUp(ctx);
 	alinous::remote::region::client::command::ddl::RegionCreateSchemaCommand::__cleanUp(ctx);
 	alinous::remote::region::client::command::ddl::RegionCreateTableCommand::__cleanUp(ctx);
 	alinous::remote::region::server::NodeRegionServer::__cleanUp(ctx);
 	alinous::remote::region::server::NodeRegionResponceAction::__cleanUp(ctx);
 	alinous::remote::region::server::NodeRegionResponceActionFactory::__cleanUp(ctx);
+	alinous::remote::region::server::scan::FullScanWorker::__cleanUp(ctx);
+	alinous::remote::region::server::scan::RegionScanManager::__cleanUp(ctx);
+	alinous::remote::region::server::scan::IScanWorker::__cleanUp(ctx);
+	alinous::remote::region::server::scan::ScanSession::__cleanUp(ctx);
 	alinous::remote::region::server::schema::NodeTableReference::__cleanUp(ctx);
 	alinous::remote::region::server::schema::NodeReference::__cleanUp(ctx);
 	alinous::remote::region::server::schema::NodeTableClaster::__cleanUp(ctx);

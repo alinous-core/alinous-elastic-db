@@ -33,13 +33,13 @@ bool DomComment::__init_static_variables(){
 	delete ctx;
 	return true;
 }
- DomComment::DomComment(ThreadContext* ctx) throw()  : IObject(ctx), DomNode(ConstStr::getCNST_STR_1800(), ctx), buff(__GC_INS(this, (new(ctx) StringBuffer(ctx)), StringBuffer))
+ DomComment::DomComment(ThreadContext* ctx) throw()  : IObject(ctx), DomNode(ConstStr::getCNST_STR_1801(), ctx), buff(__GC_INS(this, (new(ctx) StringBuffer(ctx)), StringBuffer))
 {
-	this->buff->append(ConstStr::getCNST_STR_1801(), ctx);
+	this->buff->append(ConstStr::getCNST_STR_1802(), ctx);
 }
 void DomComment::__construct_impl(ThreadContext* ctx) throw() 
 {
-	this->buff->append(ConstStr::getCNST_STR_1801(), ctx);
+	this->buff->append(ConstStr::getCNST_STR_1802(), ctx);
 }
  DomComment::~DomComment() throw() 
 {
@@ -64,7 +64,7 @@ void DomComment::addComment(String* token, ThreadContext* ctx) throw()
 }
 String* DomComment::toString(ThreadContext* ctx) throw() 
 {
-	this->buff->append(ConstStr::getCNST_STR_1802(), ctx);
+	this->buff->append(ConstStr::getCNST_STR_1803(), ctx);
 	return this->buff->toString(ctx);
 }
 int DomComment::getType(ThreadContext* ctx) throw() 

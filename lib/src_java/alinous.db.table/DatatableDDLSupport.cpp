@@ -101,7 +101,7 @@ void DatatableDDLSupport::createTable(TableMetadata* metadata, ThreadPool* threa
 			__GC_MV(this, &(this->oidIndex), (new(ctx) BTree(ctx))->init((new(ctx) File(this->oidIndexPath, ctx)), cache, core->diskCache, ctx), BTree);
 			this->oidIndex->initTreeStorage(32, IBTreeValue::TYPE_LONG, IBTreeValue::TYPE_LONG, (long long)DatatableConstants::capacity, (long long)64, ctx);
 			StringBuilder* primname = (new(ctx) StringBuilder(ctx));
-			primname->append(this->name, ctx)->append(ConstStr::getCNST_STR_1742(), ctx);
+			primname->append(this->name, ctx)->append(ConstStr::getCNST_STR_1743(), ctx);
 			__GC_MV(this, &(this->primaryIndex), (new(ctx) TableIndex(primname->toString(ctx), this->baseDir, true, metadata->getPrimaryKeys(ctx), ctx)), IScannableIndex);
 			this->primaryIndex->createIndex(core, cache, ctx);
 			__GC_MV(this, &(this->metadata), metadata, TableMetadata);
@@ -145,7 +145,7 @@ void DatatableDDLSupport::createIndex(String* indexName, ArrayList<String>* colu
 	if(this->metadata->checkHasIndex(columns, indexName, ctx))
 	{
 		unlockStorage(ctx);
-		throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1743(), ctx));
+		throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1744(), ctx));
 	}
 	{
 		try
@@ -164,7 +164,7 @@ void DatatableDDLSupport::createIndex(String* indexName, ArrayList<String>* colu
 		catch(Throwable* e)
 		{
 			unlockStorage(ctx);
-			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1744(), e, ctx));
+			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_1745(), e, ctx));
 		}
 	}
 	unlockStorage(ctx);
@@ -187,7 +187,7 @@ void DatatableDDLSupport::buildFirstindexValue(TableIndex* newindex, ThreadConte
 		int type = fetcher->fetchInt(ctx);
 		if(type != IBTreeValue::TYPE_DATABASE_RECORD)
 		{
-			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_1745(), ctx));
+			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_1746(), ctx));
 		}
 		DatabaseRecord* dbrecord = DatabaseRecord::valueFromFetcher(fetcher, ctx);
 		newindex->addIndexValue(dbrecord, ctx);

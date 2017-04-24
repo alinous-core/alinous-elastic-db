@@ -57,6 +57,9 @@ class TrxLockContext;}}}
 namespace alinous {namespace db {namespace trx {namespace scan {
 class IJoinScanner;}}}}
 
+namespace alinous {namespace db {
+class AlinousDbException;}}
+
 namespace alinous {namespace db {namespace trx {namespace scan {
 class ScanException;}}}}
 
@@ -78,6 +81,7 @@ using ::alinous::compile::sql::analyze::ScanTableIndexMetadata;
 using ::alinous::compile::sql::analyze::ScanTableMetadata;
 using ::alinous::compile::sql::expression::ISQLExpression;
 using ::alinous::compile::sql::select::join::SQLJoinCondition;
+using ::alinous::db::AlinousDbException;
 using ::alinous::db::table::DatabaseException;
 using ::alinous::db::trx::DbTransaction;
 using ::alinous::db::trx::TrxLockContext;

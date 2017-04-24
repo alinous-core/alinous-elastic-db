@@ -42,6 +42,9 @@ template <typename  T> class List;}}
 namespace alinous {namespace db {namespace table {
 class TableColumnMetadata;}}}
 
+namespace alinous {namespace remote {namespace region {namespace client {namespace command {
+class AbstractNodeRegionCommand;}}}}}
+
 namespace java {namespace io {
 class IOException;}}
 
@@ -83,6 +86,7 @@ using ::alinous::db::AlinousDbException;
 using ::alinous::db::table::lockmonitor::DatabaseLockException;
 using ::alinous::db::table::lockmonitor::IThreadLocker;
 using ::alinous::db::trx::DbTransaction;
+using ::alinous::remote::region::client::command::AbstractNodeRegionCommand;
 using ::alinous::runtime::dom::VariableException;
 using ::alinous::runtime::parallel::SequentialBackgroundJob;
 using ::alinous::runtime::parallel::ThreadPool;
@@ -138,6 +142,7 @@ public:
 	virtual void tcpInsertCommit(IDatabaseRecord* data, ThreadPool* pool, ISystemLog* log, ThreadContext* ctx) = 0;
 	virtual long long getNextOid(ThreadContext* ctx) throw()  = 0;
 	virtual void setNextOid(long long nextOid, ThreadContext* ctx) throw()  = 0;
+	virtual AbstractNodeRegionCommand* sendCommand(AbstractNodeRegionCommand* cmd, ThreadContext* ctx) = 0;
 public:
 	static bool __init_done;
 	static bool __init_static_variables();

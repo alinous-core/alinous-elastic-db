@@ -94,19 +94,19 @@ bool UniqueExclusiveLockClient::checkLocking(ScanUnique* unique, IDatabaseRecord
 		}
 		catch(VariableException* e)
 		{
-			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_1765(), e, ctx));
+			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_1766(), e, ctx));
 		}
 		catch(IOException* e)
 		{
-			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_1765(), e, ctx));
+			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_1766(), e, ctx));
 		}
 		catch(InterruptedException* e)
 		{
-			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_1765(), e, ctx));
+			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_1766(), e, ctx));
 		}
 		catch(BTreeException* e)
 		{
-			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_1765(), e, ctx));
+			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_1766(), e, ctx));
 		}
 	}
 	return lock != nullptr;

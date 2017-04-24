@@ -22,6 +22,7 @@
 #include "alinous.db.table/DatabaseException.h"
 #include "alinous.runtime.dom/IAlinousVariable.h"
 #include "alinous.runtime.variant/VariantValue.h"
+#include "alinous.db/AlinousDbException.h"
 #include "alinous.runtime.engine/ScriptMachine.h"
 #include "alinous.compile.declare/AlinousClass.h"
 #include "alinous.compile.analyse/SrcAnalyseContext.h"
