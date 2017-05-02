@@ -6,6 +6,9 @@ class StorageTransactionManager;}}}}}
 namespace alinous {namespace lock {namespace unique {
 class UniqueExclusiveLockManager;}}}
 
+namespace alinous {namespace remote {namespace db {namespace server {namespace scan {
+class StorageScanSessionManager;}}}}}
+
 namespace alinous {namespace system {
 class AlinousCore;}}
 
@@ -99,6 +102,18 @@ class IDatabaseTable;}}}
 namespace alinous {namespace remote {namespace db {namespace server {namespace trx {
 class StorageTransaction;}}}}}
 
+namespace alinous {namespace remote {namespace region {namespace server {namespace scan {
+class ScanWorkerResult;}}}}}
+
+namespace alinous {namespace remote {namespace region {namespace client {namespace command {namespace dml {
+class ClientScanCommandData;}}}}}}
+
+namespace alinous {namespace compile {namespace sql {
+class TableAndSchema;}}}
+
+namespace alinous {namespace remote {namespace db {namespace server {namespace scan {
+class AbstractStorageScanSession;}}}}}
+
 namespace alinous {namespace btree {
 class IntKey;}}
 
@@ -132,6 +147,7 @@ using ::alinous::btree::IBTreeKey;
 using ::alinous::btree::IBTreeValue;
 using ::alinous::btree::IntKey;
 using ::alinous::btree::LongValue;
+using ::alinous::compile::sql::TableAndSchema;
 using ::alinous::db::AlinousDbException;
 using ::alinous::db::SchemaManager;
 using ::alinous::db::TableSchema;
@@ -144,9 +160,13 @@ using ::alinous::lock::unique::UniqueExclusiveLockManager;
 using ::alinous::remote::db::MonitorAccess;
 using ::alinous::remote::db::RemoteStorageResponceActionFactory;
 using ::alinous::remote::db::client::command::data::SchemasStructureInfoData;
+using ::alinous::remote::db::server::scan::AbstractStorageScanSession;
+using ::alinous::remote::db::server::scan::StorageScanSessionManager;
 using ::alinous::remote::db::server::trx::StorageTransaction;
 using ::alinous::remote::db::server::trx::StorageTransactionManager;
 using ::alinous::remote::region::client::command::data::ClientNetworkRecord;
+using ::alinous::remote::region::client::command::dml::ClientScanCommandData;
+using ::alinous::remote::region::server::scan::ScanWorkerResult;
 using ::alinous::remote::region::server::schema::strategy::UniqueCheckOperation;
 using ::alinous::remote::socket::SocketServer;
 using ::alinous::runtime::dom::VariableException;
@@ -187,6 +207,7 @@ private:
 	MonitorAccess* monitorAccess;
 	StorageTransactionManager* storageTrxManager;
 	UniqueExclusiveLockManager* uniqueExclusiveLock;
+	StorageScanSessionManager* scanSessionManager;
 public:
 	const static IntKey __SCHEMA;
 	constexpr static IntKey* SCHEMA{const_cast<IntKey*>(&__SCHEMA)};
@@ -210,6 +231,7 @@ public:
 	void commitDmlTransaction(long long newCommitId, DbVersionContext* vctx, ThreadContext* ctx);
 	ThreadPool* getWorkerThreadsPool(ThreadContext* ctx) throw() ;
 	MonitorAccess* getMonitorAccess(ThreadContext* ctx) throw() ;
+	ScanWorkerResult* scan(DbVersionContext* vctx, ClientScanCommandData* data, ThreadContext* ctx);
 private:
 	void initInstance(AlinousCore* core, ThreadContext* ctx);
 	File* getConfigFile(ThreadContext* ctx) throw() ;

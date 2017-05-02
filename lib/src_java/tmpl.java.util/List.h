@@ -26,10 +26,10 @@ template class ::java::util::List<::alinous::remote::region::server::schema::str
 template class ::java::util::List<::alinous::remote::region::client::command::data::ClientNetworkRecord>;
 template class ::java::util::List<::alinous::lock::unique::UniqueExclusiveLock>;
 template class ::java::util::List<::alinous::remote::region::server::schema::strategy::UniqueOpValue>;
+template class ::java::util::List<::alinous::remote::region::server::schema::strategy::RegionShardPartAccess>;
 template class ::java::util::List<::alinous::remote::region::server::schema::NodeTableReference>;
 template class ::java::util::List<::alinous::remote::region::server::schema::NodeReference>;
 template class ::java::util::List<::alinous::remote::db::client::command::dml::InsertPrepareCommand>;
-template class ::java::util::List<::alinous::remote::region::server::schema::strategy::RegionShardPartAccess>;
 template class ::java::util::List<::alinous::compile::analyse::VariableDeclareHolder>;
 template class ::java::util::List<::alinous::compile::analyse::ExpressionStreamResult>;
 template class ::java::util::List<::alinous::compile::analyse::SubVariableDeclareHolder>;

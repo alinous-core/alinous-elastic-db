@@ -11,7 +11,9 @@
 #include "alinous.remote.db.client.command.ddl/CreateSchemaCommand.h"
 #include "alinous.remote.db.client.command.ddl/CreateTableCommand.h"
 #include "alinous.remote.db.client.command.dml/CommitDMLCommand.h"
+#include "alinous.remote.db.client.command.dml/EndScanStorageCommand.h"
 #include "alinous.remote.db.client.command.dml/InsertPrepareCommand.h"
+#include "alinous.remote.db.client.command.dml/ScanStorageCommand.h"
 #include "alinous.remote.socket/NetworkBinalyUtils.h"
 #include "alinous.remote.db.client.command/FinishRemoteStorageConnectionCommand.h"
 #include "alinous.remote.db.client.command/TerminateRemoteStorageCommand.h"
@@ -91,6 +93,12 @@ AbstractRemoteStorageCommand* RemoteStorageCommandReader::readFromStream(InputSt
 		break ;
 	case AbstractRemoteStorageCommand::TYPE_REQUEST_SYNC_OID:
 		cmd = (new(ctx) RequestSyncOidCommand(ctx));
+		break ;
+	case AbstractRemoteStorageCommand::TYPE_SCAN_STORAGE:
+		cmd = (new(ctx) ScanStorageCommand(ctx));
+		break ;
+	case AbstractRemoteStorageCommand::TYPE_END_SCAN_STORAGE:
+		cmd = (new(ctx) EndScanStorageCommand(ctx));
 		break ;
 	default:
 		throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3586(), ctx));

@@ -51,10 +51,10 @@ template class alinous::ArrayAllocator<::alinous::remote::region::server::schema
 template class alinous::ArrayAllocator<::alinous::remote::region::client::command::data::ClientNetworkRecord>;
 template class alinous::ArrayAllocator<::alinous::lock::unique::UniqueExclusiveLock>;
 template class alinous::ArrayAllocator<::alinous::remote::region::server::schema::strategy::UniqueOpValue>;
+template class alinous::ArrayAllocator<::alinous::remote::region::server::schema::strategy::RegionShardPartAccess>;
 template class alinous::ArrayAllocator<::alinous::remote::region::server::schema::NodeTableReference>;
 template class alinous::ArrayAllocator<::alinous::remote::region::server::schema::NodeReference>;
 template class alinous::ArrayAllocator<::alinous::remote::db::client::command::dml::InsertPrepareCommand>;
-template class alinous::ArrayAllocator<::alinous::remote::region::server::schema::strategy::RegionShardPartAccess>;
 template class alinous::ArrayAllocator<::alinous::html::xpath::match::MatchCandidate>;
 template class alinous::ArrayAllocator<::alinous::compile::analyse::AlinousType>;
 template class alinous::ArrayAllocator<::alinous::runtime::dom::IAlinousVariable>;

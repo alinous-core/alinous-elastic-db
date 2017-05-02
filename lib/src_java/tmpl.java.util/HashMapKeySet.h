@@ -15,6 +15,7 @@ template class ::java::util::HashMapKeySet<::java::lang::String, ::alinous::remo
 template class ::java::util::HashMapKeySet<::java::lang::String, ::alinous::remote::db::client::command::data::TableClusterData>;
 template class ::java::util::HashMapKeySet<::java::lang::String, ::alinous::remote::db::client::command::data::SchemaData>;
 template class ::java::util::HashMapKeySet<::java::lang::Long, ::alinous::remote::db::server::trx::StorageTransaction>;
+template class ::java::util::HashMapKeySet<::java::lang::Long, ::alinous::remote::db::server::scan::AbstractStorageScanSession>;
 template class ::java::util::HashMapKeySet<::java::lang::String, ::alinous::remote::region::client::command::data::ClientTableData>;
 template class ::java::util::HashMapKeySet<::java::lang::String, ::alinous::remote::region::client::DatabaseTableClient>;
 template class ::java::util::HashMapKeySet<::java::lang::String, ::alinous::remote::region::client::command::data::ClientSchemaData>;

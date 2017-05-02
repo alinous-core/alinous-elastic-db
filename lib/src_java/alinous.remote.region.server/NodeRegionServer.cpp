@@ -1,12 +1,11 @@
 #include "include/global.h"
 
 
-#include "alinous.compile/AbstractSrcElement.h"
-#include "alinous.system/AlinousException.h"
-#include "alinous.db/AlinousDbException.h"
 #include "alinous.buffer.storage/FileStorageEntryBuilder.h"
 #include "alinous.remote.socket/NetworkBinaryBuffer.h"
 #include "alinous.remote.socket/ICommandData.h"
+#include "alinous.compile.sql/TableAndSchema.h"
+#include "alinous.system/AlinousException.h"
 #include "alinous.db.table/TableMetadata.h"
 #include "alinous.db.trx/DbVersionContext.h"
 #include "alinous.lock/LockObject.h"
@@ -32,6 +31,8 @@
 #include "alinous.remote.region.client.command.data/ClientNetworkRecord.h"
 #include "alinous.remote.region.client.command.data/ClientStructureMetadata.h"
 #include "alinous.remote.region.client.command.dml/ClientScanCommandData.h"
+#include "alinous.remote.region.server.schema.strategy/RegionPartitionTableAccess.h"
+#include "alinous.remote.region.server.scan/ScanWorkerResult.h"
 #include "alinous.remote.region.server.scan/ScanSession.h"
 #include "alinous.remote.region.server.scan/RegionScanManager.h"
 #include "alinous.remote.region.server.schema/NodeReferenceManager.h"
@@ -50,7 +51,7 @@ namespace alinous {namespace remote {namespace region {namespace server {
 
 
 
-String* NodeRegionServer::THREAD_NAME = ConstStr::getCNST_STR_3612();
+String* NodeRegionServer::THREAD_NAME = ConstStr::getCNST_STR_3615();
 bool NodeRegionServer::__init_done = __init_static_variables();
 bool NodeRegionServer::__init_static_variables(){
 	Java2CppSystem::getSelf();
@@ -153,7 +154,7 @@ void NodeRegionServer::syncNodes(ThreadContext* ctx)
 			AbstractMonitorCommand* retcmd = cmd->sendCommand(socket, ctx);
 			if(retcmd->getType(ctx) != AbstractMonitorCommand::TYPE_GET_REGION_INFO)
 			{
-				throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3611(), ctx));
+				throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3614(), ctx));
 			}
 			cmd = static_cast<GetRegionNodeInfoCommand*>(retcmd);
 			RegionInfoData* data = cmd->getRegionData(ctx);
@@ -227,11 +228,15 @@ void NodeRegionServer::commitUpdateData(long long newCommitId, DbVersionContext*
 		catch(...){throw;}
 	}
 }
-bool NodeRegionServer::scan(ClientScanCommandData* data, ThreadContext* ctx)
+ScanWorkerResult* NodeRegionServer::scan(ClientScanCommandData* data, ThreadContext* ctx)
 {
 	DbVersionContext* vctx = data->getVctx(ctx);
-	ScanSession* session = this->scanManager->getScanSession(vctx->getTrxId(ctx), data, ctx);
-	return false;
+	checkVersion(vctx, ctx);
+	TableAndSchema* sctable = data->getTable(ctx);
+	RegionPartitionTableAccess* tableAccess = this->refs->getCluster(sctable->getSchema(ctx), sctable->getTable(ctx), ctx);
+	ScanSession* session = this->scanManager->getScanSession(vctx->getTrxId(ctx), data, tableAccess, ctx);
+	ScanWorkerResult* result = session->scan(ctx);
+	return result;
 }
 void NodeRegionServer::endScan(long long trxId, ThreadContext* ctx) throw() 
 {
@@ -286,17 +291,17 @@ void NodeRegionServer::reportClusterUpdate(ThreadContext* ctx)
 			AbstractMonitorCommand* retcmd = cmd->sendCommand(socket, ctx);
 			if(retcmd->getType(ctx) != AbstractMonitorCommand::TYPE_REPORT_CLUSTER_UPDATED)
 			{
-				throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3611(), ctx));
+				throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3614(), ctx));
 			}
 			cmd = static_cast<ReportClusterVersionUpCommand*>(retcmd);
 		}
 		catch(UnknownHostException* e)
 		{
-			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3611(), ctx));
+			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3614(), ctx));
 		}
 		catch(IOException* e)
 		{
-			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3611(), ctx));
+			throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3614(), ctx));
 		}
 	}
 }

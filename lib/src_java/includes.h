@@ -399,6 +399,7 @@
 #include "alinous.remote.db.client.command.ddl/CreateSchemaCommand.h"
 #include "alinous.remote.db.client.command.ddl/CreateTableCommand.h"
 #include "alinous.remote.db.client.command.dml/CommitDMLCommand.h"
+#include "alinous.remote.db.client.command.dml/EndScanStorageCommand.h"
 #include "alinous.remote.region.client.command.data/ClientNetworkRecord.h"
 #include "alinous.remote.db.client/RemoteStorageConnectionInfo.h"
 #include "alinous.remote.db.client.command/FinishRemoteStorageConnectionCommand.h"
@@ -406,6 +407,11 @@
 #include "alinous.remote.db.client/RemoteStorageClientConnectionFactory.h"
 #include "alinous.remote.db.client.command.data/SchemasStructureInfoData.h"
 #include "alinous.remote.db.client.command/GetTableSchemeCommand.h"
+#include "alinous.db.table.scan/IndexListScannerParam.h"
+#include "alinous.db.table.scan/IndexRangeScannerParam.h"
+#include "alinous.remote.region.client.command.dml/ClientScanCommandData.h"
+#include "alinous.remote.region.server.scan/ScanWorkerResult.h"
+#include "alinous.remote.db.client.command.dml/ScanStorageCommand.h"
 #include "alinous.remote.region.server.schema/NodeReference.h"
 #include "alinous.remote.region.server.schema.strategy/UniqueOpValue.h"
 #include "alinous.remote.region.server.schema.strategy/UniqueCheckOperation.h"
@@ -416,6 +422,12 @@
 #include "alinous.remote.db.client.command/RemoteStorageCommandReader.h"
 #include "alinous.remote.db/RemoteStorageResponceAction.h"
 #include "alinous.remote.db/RemoteStorageResponceActionFactory.h"
+#include "alinous.remote.db.server.scan/AbstractStorageScanSession.h"
+#include "alinous.remote.db.server.scan/FullScanSession.h"
+#include "alinous.remote.db.server.scan/EqKeyScanSession.h"
+#include "alinous.remote.db.server.scan/ListScanSession.h"
+#include "alinous.remote.db.server.scan/RangeScanSession.h"
+#include "alinous.remote.db.server.scan/StorageScanSessionManager.h"
 #include "alinous.btreememory/AbstractMemoryNode.h"
 #include "alinous.btreememory/MBTreeLeafNode.h"
 #include "alinous.btreememory.scan/MemoryMaxNodeIterator.h"
@@ -488,18 +500,18 @@
 #include "alinous.remote.region.client.command.data/ClientTableData.h"
 #include "alinous.remote.region.client.command.data/ClientSchemaData.h"
 #include "alinous.remote.region.client.command.data/ClientStructureMetadata.h"
-#include "alinous.db.table.scan/IndexListScannerParam.h"
-#include "alinous.db.table.scan/IndexRangeScannerParam.h"
-#include "alinous.remote.region.client.command.dml/ClientScanCommandData.h"
-#include "alinous.remote.region.server.scan/IScanWorker.h"
-#include "alinous.remote.region.server.scan/FullScanWorker.h"
-#include "alinous.remote.region.server.scan/ScanSession.h"
-#include "alinous.remote.region.server.scan/RegionScanManager.h"
 #include "alinous.remote.region.server.schema/NodeCluster.h"
 #include "alinous.remote.region.server.schema/NodeTableReference.h"
 #include "alinous.remote.region.server.schema/NodeTableClaster.h"
 #include "alinous.remote.region.server.schema.strategy/RegionShardPartAccess.h"
 #include "alinous.remote.region.server.schema.strategy/RegionPartitionTableAccess.h"
+#include "alinous.remote.region.server.scan/IScanWorker.h"
+#include "alinous.remote.region.server.scan/FullScanWorker.h"
+#include "alinous.remote.region.server.scan/EqKeyScanWorker.h"
+#include "alinous.remote.region.server.scan/ListScanWorker.h"
+#include "alinous.remote.region.server.scan/RangeScanWorker.h"
+#include "alinous.remote.region.server.scan/ScanSession.h"
+#include "alinous.remote.region.server.scan/RegionScanManager.h"
 #include "alinous.remote.region.server.schema/NodeRegionSchema.h"
 #include "alinous.remote.region.server.schema/NodeReferenceManager.h"
 #include "alinous.remote.region.server.schema.strategy/NodeListBinarySearcher.h"
@@ -1858,7 +1870,9 @@ inline static void __cleanUpStatics(alinous::ThreadContext* ctx){
 	alinous::remote::db::client::command::data::SchemaData::__cleanUp(ctx);
 	alinous::remote::db::client::command::data::SchemasStructureInfoData::__cleanUp(ctx);
 	alinous::remote::db::client::command::dml::CommitDMLCommand::__cleanUp(ctx);
+	alinous::remote::db::client::command::dml::EndScanStorageCommand::__cleanUp(ctx);
 	alinous::remote::db::client::command::dml::InsertPrepareCommand::__cleanUp(ctx);
+	alinous::remote::db::client::command::dml::ScanStorageCommand::__cleanUp(ctx);
 	alinous::remote::db::client::command::ddl::CreateTableCommand::__cleanUp(ctx);
 	alinous::remote::db::client::command::ddl::CreateSchemaCommand::__cleanUp(ctx);
 	alinous::remote::db::server::RemoteTableStorageServer::__cleanUp(ctx);
@@ -1868,6 +1882,12 @@ inline static void __cleanUpStatics(alinous::ThreadContext* ctx){
 	alinous::remote::db::server::trx::UniqueChecker::__cleanUp(ctx);
 	alinous::remote::db::server::trx::ReadCommittedStorageTransaction::__cleanUp(ctx);
 	alinous::remote::db::server::trx::StorageTransactionManager::__cleanUp(ctx);
+	alinous::remote::db::server::scan::StorageScanSessionManager::__cleanUp(ctx);
+	alinous::remote::db::server::scan::ListScanSession::__cleanUp(ctx);
+	alinous::remote::db::server::scan::RangeScanSession::__cleanUp(ctx);
+	alinous::remote::db::server::scan::AbstractStorageScanSession::__cleanUp(ctx);
+	alinous::remote::db::server::scan::EqKeyScanSession::__cleanUp(ctx);
+	alinous::remote::db::server::scan::FullScanSession::__cleanUp(ctx);
 	alinous::remote::db::server::commit::TableFullNameKey::__cleanUp(ctx);
 	alinous::remote::db::server::commit::PrepareStorageManager::__cleanUp(ctx);
 	alinous::remote::db::server::commit::DeleteStore::__cleanUp(ctx);
@@ -1924,10 +1944,14 @@ inline static void __cleanUpStatics(alinous::ThreadContext* ctx){
 	alinous::remote::region::server::NodeRegionServer::__cleanUp(ctx);
 	alinous::remote::region::server::NodeRegionResponceAction::__cleanUp(ctx);
 	alinous::remote::region::server::NodeRegionResponceActionFactory::__cleanUp(ctx);
+	alinous::remote::region::server::scan::ListScanWorker::__cleanUp(ctx);
 	alinous::remote::region::server::scan::FullScanWorker::__cleanUp(ctx);
 	alinous::remote::region::server::scan::RegionScanManager::__cleanUp(ctx);
 	alinous::remote::region::server::scan::IScanWorker::__cleanUp(ctx);
+	alinous::remote::region::server::scan::RangeScanWorker::__cleanUp(ctx);
+	alinous::remote::region::server::scan::EqKeyScanWorker::__cleanUp(ctx);
 	alinous::remote::region::server::scan::ScanSession::__cleanUp(ctx);
+	alinous::remote::region::server::scan::ScanWorkerResult::__cleanUp(ctx);
 	alinous::remote::region::server::schema::NodeTableReference::__cleanUp(ctx);
 	alinous::remote::region::server::schema::NodeReference::__cleanUp(ctx);
 	alinous::remote::region::server::schema::NodeTableClaster::__cleanUp(ctx);

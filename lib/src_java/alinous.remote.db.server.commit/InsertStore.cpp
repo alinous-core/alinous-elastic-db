@@ -111,19 +111,19 @@ void InsertStore::commitPrepared(long long newCommitId, DbVersionContext* vctx, 
 		}
 		catch(IOException* e)
 		{
-			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3596(), ctx));
+			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3599(), ctx));
 		}
 		catch(InterruptedException* e)
 		{
-			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3596(), ctx));
+			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3599(), ctx));
 		}
 		catch(BTreeException* e)
 		{
-			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3596(), ctx));
+			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3599(), ctx));
 		}
 		catch(AlinousException* e)
 		{
-			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3596(), ctx));
+			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3599(), ctx));
 		}
 	}
 }

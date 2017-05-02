@@ -42,6 +42,9 @@ class ScanResultIndexKey;}}}}
 namespace alinous {namespace db {namespace table {namespace scan {
 class IndexRangeScannerParam;}}}}
 
+namespace alinous {namespace remote {namespace region {namespace server {namespace scan {
+class ScanWorkerResult;}}}}}
+
 namespace alinous {namespace remote {namespace region {namespace client {namespace command {namespace dml {
 class ClientScanCommandData;}}}}}}
 
@@ -80,6 +83,7 @@ using ::alinous::db::trx::DbVersionContext;
 using ::alinous::db::trx::scan::ScanResultIndexKey;
 using ::alinous::remote::region::client::command::AbstractNodeRegionCommand;
 using ::alinous::remote::region::server::NodeRegionServer;
+using ::alinous::remote::region::server::scan::ScanWorkerResult;
 using ::alinous::remote::socket::NetworkBinaryBuffer;
 using ::alinous::runtime::dom::VariableException;
 using ::alinous::system::AlinousCore;
@@ -97,7 +101,7 @@ public:
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 private:
 	ClientScanCommandData* data;
-	bool hasNext;
+	ScanWorkerResult* result;
 public:
 	void executeOnServer(NodeRegionServer* nodeRegionServer, BufferedOutputStream* outStream, ThreadContext* ctx) final;
 	void readFromStream(InputStream* stream, int remain, ThreadContext* ctx) final;
@@ -121,8 +125,7 @@ public:
 	void setEqKey(ScanResultIndexKey* eqKey, ThreadContext* ctx) throw() ;
 	IndexRangeScannerParam* getRangeParam(ThreadContext* ctx) throw() ;
 	void setRangeParam(IndexRangeScannerParam* rangeParam, ThreadContext* ctx) throw() ;
-	bool isHasNext(ThreadContext* ctx) throw() ;
-	void setHasNext(bool hasNext, ThreadContext* ctx) throw() ;
+	ScanWorkerResult* getResult(ThreadContext* ctx) throw() ;
 	void writeByteStream(OutputStream* outStream, ThreadContext* ctx) final;
 public:
 	static bool __init_done;

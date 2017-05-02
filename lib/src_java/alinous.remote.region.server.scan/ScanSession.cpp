@@ -6,8 +6,13 @@
 #include "alinous.db/AlinousDbException.h"
 #include "alinous.remote.socket/ICommandData.h"
 #include "alinous.remote.region.client.command.dml/ClientScanCommandData.h"
+#include "alinous.remote.region.server.schema.strategy/RegionPartitionTableAccess.h"
+#include "alinous.remote.region.server.scan/ScanWorkerResult.h"
 #include "alinous.remote.region.server.scan/IScanWorker.h"
 #include "alinous.remote.region.server.scan/FullScanWorker.h"
+#include "alinous.remote.region.server.scan/EqKeyScanWorker.h"
+#include "alinous.remote.region.server.scan/ListScanWorker.h"
+#include "alinous.remote.region.server.scan/RangeScanWorker.h"
 #include "alinous.remote.region.server.scan/ScanSession.h"
 
 namespace alinous {namespace remote {namespace region {namespace server {namespace scan {
@@ -53,17 +58,43 @@ void ScanSession::__releaseRegerences(bool prepare, ThreadContext* ctx) throw()
 		return;
 	}
 }
-ScanSession* ScanSession::init(ThreadContext* ctx)
+ScanSession* ScanSession::init(RegionPartitionTableAccess* tableAccess, ThreadContext* ctx)
 {
-	if(data->isFullscan(ctx))
+	if(this->data->isFullscan(ctx))
 	{
-		__GC_MV(this, &(this->worker), (new(ctx) FullScanWorker(ctx)), IScanWorker);
+		__GC_MV(this, &(this->worker), (new(ctx) FullScanWorker(this->data, tableAccess, ctx)), IScanWorker);
 	}
 		else 
 	{
-		throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3613(), ctx));
+		if(this->data->getEqKey(ctx) != nullptr)
+		{
+			__GC_MV(this, &(this->worker), (new(ctx) EqKeyScanWorker(this->data, tableAccess, ctx)), IScanWorker);
+		}
+				else 
+		{
+			if(this->data->getListParam(ctx) != nullptr)
+			{
+				__GC_MV(this, &(this->worker), (new(ctx) ListScanWorker(this->data, tableAccess, ctx)), IScanWorker);
+			}
+						else 
+			{
+				if(this->data->getRangeParam(ctx) != nullptr)
+				{
+					__GC_MV(this, &(this->worker), (new(ctx) RangeScanWorker(this->data, tableAccess, ctx)), IScanWorker);
+				}
+								else 
+				{
+					throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3597(), ctx));
+				}
+			}
+		}
 	}
+	this->worker->init(ctx);
 	return this;
+}
+ScanWorkerResult* ScanSession::scan(ThreadContext* ctx)
+{
+	return this->worker->scan(ctx);
 }
 void ScanSession::__cleanUp(ThreadContext* ctx){
 }

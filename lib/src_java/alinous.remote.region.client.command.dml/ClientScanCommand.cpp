@@ -26,6 +26,7 @@
 #include "alinous.db.table.scan/IndexListScannerParam.h"
 #include "alinous.db.table.scan/IndexRangeScannerParam.h"
 #include "alinous.remote.region.client.command.dml/ClientScanCommandData.h"
+#include "alinous.remote.region.server.scan/ScanWorkerResult.h"
 #include "alinous.remote.region.server/NodeRegionServer.h"
 #include "alinous.system/AlinousCore.h"
 #include "alinous.runtime.engine/ScriptMachine.h"
@@ -58,15 +59,13 @@ bool ClientScanCommand::__init_static_variables(){
 	delete ctx;
 	return true;
 }
- ClientScanCommand::ClientScanCommand(ThreadContext* ctx) throw()  : IObject(ctx), AbstractNodeRegionCommand(ctx), data(__GC_INS(this, (new(ctx) ClientScanCommandData(ctx)), ClientScanCommandData)), hasNext(0)
+ ClientScanCommand::ClientScanCommand(ThreadContext* ctx) throw()  : IObject(ctx), AbstractNodeRegionCommand(ctx), data(__GC_INS(this, (new(ctx) ClientScanCommandData(ctx)), ClientScanCommandData)), result(nullptr)
 {
 	this->type = AbstractNodeRegionCommand::TYPE_SCAN;
-	this->hasNext = false;
 }
 void ClientScanCommand::__construct_impl(ThreadContext* ctx) throw() 
 {
 	this->type = AbstractNodeRegionCommand::TYPE_SCAN;
-	this->hasNext = false;
 }
  ClientScanCommand::~ClientScanCommand() throw() 
 {
@@ -80,6 +79,8 @@ void ClientScanCommand::__releaseRegerences(bool prepare, ThreadContext* ctx) th
 	ObjectEraser __e_obj1(ctx, __FILEW__, __LINE__, L"ClientScanCommand", L"~ClientScanCommand");
 	__e_obj1.add(this->data, this);
 	data = nullptr;
+	__e_obj1.add(this->result, this);
+	result = nullptr;
 	if(!prepare){
 		return;
 	}
@@ -90,7 +91,7 @@ void ClientScanCommand::executeOnServer(NodeRegionServer* nodeRegionServer, Buff
 	{
 		try
 		{
-			this->hasNext = nodeRegionServer->scan(this->data, ctx);
+			__GC_MV(this, &(this->result), nodeRegionServer->scan(this->data, ctx), ScanWorkerResult);
 		}
 		catch(Throwable* e)
 		{
@@ -107,7 +108,11 @@ void ClientScanCommand::readFromStream(InputStream* stream, int remain, ThreadCo
 	stream->read(src, ctx);
 	NetworkBinaryBuffer* buff = (new(ctx) NetworkBinaryBuffer(src, ctx));
 	__GC_MV(this, &(this->data), ClientScanCommandData::fromNetwork(buff, ctx), ClientScanCommandData);
-	this->hasNext = buff->getBoolean(ctx);
+	bool isnull = buff->getBoolean(ctx);
+	if(!isnull)
+	{
+		__GC_MV(this, &(this->result), ScanWorkerResult::fromNetwork(buff, ctx), ScanWorkerResult);
+	}
 	readErrorFromStream(buff, ctx);
 }
 DbVersionContext* ClientScanCommand::getVctx(ThreadContext* ctx) throw() 
@@ -190,20 +195,21 @@ void ClientScanCommand::setRangeParam(IndexRangeScannerParam* rangeParam, Thread
 {
 	this->data->setRangeParam(rangeParam, ctx);
 }
-bool ClientScanCommand::isHasNext(ThreadContext* ctx) throw() 
+ScanWorkerResult* ClientScanCommand::getResult(ThreadContext* ctx) throw() 
 {
-	return hasNext;
-}
-void ClientScanCommand::setHasNext(bool hasNext, ThreadContext* ctx) throw() 
-{
-	this->hasNext = hasNext;
+	return result;
 }
 void ClientScanCommand::writeByteStream(OutputStream* outStream, ThreadContext* ctx)
 {
 	NetworkBinaryBuffer* buff = (new(ctx) NetworkBinaryBuffer(32, ctx));
 	buff->putInt(this->type, ctx);
 	this->data->writeData(buff, ctx);
-	buff->putBoolean(this->hasNext, ctx);
+	bool isnull = (this->result == nullptr);
+	buff->putBoolean(isnull, ctx);
+	if(!isnull)
+	{
+		this->result->writeData(buff, ctx);
+	}
 	writeErrorByteStream(buff, ctx);
 	IArrayObjectPrimitive<char>* b = buff->toBinary(ctx);
 	int pos = buff->getPutSize(ctx);

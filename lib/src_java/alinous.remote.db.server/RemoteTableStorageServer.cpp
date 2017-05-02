@@ -17,13 +17,14 @@
 #include "alinous.btree/BTree.h"
 #include "alinous.btree/IntKey.h"
 #include "alinous.btree/LongValue.h"
+#include "alinous.remote.socket/ICommandData.h"
+#include "alinous.compile.sql/TableAndSchema.h"
 #include "alinous.db/AlinousDbException.h"
 #include "alinous.db.table/DatabaseException.h"
 #include "alinous.runtime.parallel/ThreadPool.h"
 #include "alinous.system.config/AlinousInitException.h"
 #include "alinous.system/ISystemLog.h"
 #include "alinous.system/AlinousCore.h"
-#include "alinous.remote.socket/ICommandData.h"
 #include "alinous.db.table/TableMetadata.h"
 #include "alinous.db.table/IDatabaseRecord.h"
 #include "alinous.db.table/IDatabaseTable.h"
@@ -39,6 +40,10 @@
 #include "alinous.remote.socket/SocketServer.h"
 #include "alinous.remote.socket/ISocketActionFactory.h"
 #include "alinous.remote.db/RemoteStorageResponceActionFactory.h"
+#include "alinous.remote.region.client.command.dml/ClientScanCommandData.h"
+#include "alinous.remote.region.server.scan/ScanWorkerResult.h"
+#include "alinous.remote.db.server.scan/AbstractStorageScanSession.h"
+#include "alinous.remote.db.server.scan/StorageScanSessionManager.h"
 #include "alinous.remote.region.client.command.data/ClientNetworkRecord.h"
 #include "alinous.remote.region.server.schema.strategy/UniqueCheckOperation.h"
 #include "alinous.remote.db.server.trx/StorageTransaction.h"
@@ -51,7 +56,7 @@ namespace alinous {namespace remote {namespace db {namespace server {
 
 
 
-String* RemoteTableStorageServer::THREAD_NAME = ConstStr::getCNST_STR_3591();
+String* RemoteTableStorageServer::THREAD_NAME = ConstStr::getCNST_STR_3593();
 const IntKey RemoteTableStorageServer:: __SCHEMA = (IntKey(10, nullptr));
 const IntKey RemoteTableStorageServer:: __SCHEMA_VERSION = (IntKey(11, nullptr));
 bool RemoteTableStorageServer::__init_done = __init_static_variables();
@@ -65,13 +70,14 @@ bool RemoteTableStorageServer::__init_static_variables(){
 	delete ctx;
 	return true;
 }
- RemoteTableStorageServer::RemoteTableStorageServer(int port, int maxthread, String* datadir, ThreadContext* ctx) throw()  : IObject(ctx), schemas(nullptr), BLOCK_SIZE(256), nodeCapacity(8), capacity(1024), port(0), maxthread(0), dataDir(nullptr), socketServer(nullptr), btreeCache(nullptr), workerThreadsPool(nullptr), core(nullptr), dbconfig(nullptr), configFile(nullptr), schemaVersionLock(__GC_INS(this, (new(ctx) LockObject(ctx)), LockObject)), schemaVersion(0), monitorAccess(nullptr), storageTrxManager(nullptr), uniqueExclusiveLock(nullptr)
+ RemoteTableStorageServer::RemoteTableStorageServer(int port, int maxthread, String* datadir, ThreadContext* ctx) throw()  : IObject(ctx), schemas(nullptr), BLOCK_SIZE(256), nodeCapacity(8), capacity(1024), port(0), maxthread(0), dataDir(nullptr), socketServer(nullptr), btreeCache(nullptr), workerThreadsPool(nullptr), core(nullptr), dbconfig(nullptr), configFile(nullptr), schemaVersionLock(__GC_INS(this, (new(ctx) LockObject(ctx)), LockObject)), schemaVersion(0), monitorAccess(nullptr), storageTrxManager(nullptr), uniqueExclusiveLock(nullptr), scanSessionManager(nullptr)
 {
 	this->port = port;
 	this->maxthread = maxthread;
 	__GC_MV(this, &(this->dataDir), datadir, String);
 	__GC_MV(this, &(this->storageTrxManager), (new(ctx) StorageTransactionManager(datadir, this, ctx)), StorageTransactionManager);
 	__GC_MV(this, &(this->uniqueExclusiveLock), (new(ctx) UniqueExclusiveLockManager(ctx)), UniqueExclusiveLockManager);
+	__GC_MV(this, &(this->scanSessionManager), (new(ctx) StorageScanSessionManager(ctx)), StorageScanSessionManager);
 }
 void RemoteTableStorageServer::__construct_impl(int port, int maxthread, String* datadir, ThreadContext* ctx) throw() 
 {
@@ -80,6 +86,7 @@ void RemoteTableStorageServer::__construct_impl(int port, int maxthread, String*
 	__GC_MV(this, &(this->dataDir), datadir, String);
 	__GC_MV(this, &(this->storageTrxManager), (new(ctx) StorageTransactionManager(datadir, this, ctx)), StorageTransactionManager);
 	__GC_MV(this, &(this->uniqueExclusiveLock), (new(ctx) UniqueExclusiveLockManager(ctx)), UniqueExclusiveLockManager);
+	__GC_MV(this, &(this->scanSessionManager), (new(ctx) StorageScanSessionManager(ctx)), StorageScanSessionManager);
 }
  RemoteTableStorageServer::~RemoteTableStorageServer() throw() 
 {
@@ -115,6 +122,8 @@ void RemoteTableStorageServer::__releaseRegerences(bool prepare, ThreadContext* 
 	storageTrxManager = nullptr;
 	__e_obj1.add(this->uniqueExclusiveLock, this);
 	uniqueExclusiveLock = nullptr;
+	__e_obj1.add(this->scanSessionManager, this);
+	scanSessionManager = nullptr;
 	if(!prepare){
 		return;
 	}
@@ -318,6 +327,22 @@ ThreadPool* RemoteTableStorageServer::getWorkerThreadsPool(ThreadContext* ctx) t
 MonitorAccess* RemoteTableStorageServer::getMonitorAccess(ThreadContext* ctx) throw() 
 {
 	return monitorAccess;
+}
+ScanWorkerResult* RemoteTableStorageServer::scan(DbVersionContext* vctx, ClientScanCommandData* data, ThreadContext* ctx)
+{
+	TableAndSchema* tableSc = data->getTable(ctx);
+	TableSchema* sc = this->schemas->getSchema(tableSc->getSchema(ctx), ctx);
+	if(sc == nullptr)
+	{
+		throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3591(), ctx));
+	}
+	IDatabaseTable* table = sc->getTableStore(tableSc->getTable(ctx), ctx);
+	if(table == nullptr)
+	{
+		throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3592()->clone(ctx)->append(tableSc->getTable(ctx), ctx)->append(ConstStr::getCNST_STR_1089(), ctx), ctx));
+	}
+	AbstractStorageScanSession* session = this->scanSessionManager->getScanSession(table, vctx, data, ctx);
+	return session->scan(ctx);
 }
 void RemoteTableStorageServer::initInstance(AlinousCore* core, ThreadContext* ctx)
 {

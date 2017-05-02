@@ -78,8 +78,17 @@ class ReportClusterVersionUpCommand;}}}}}}
 namespace java {namespace io {
 class IOException;}}
 
+namespace alinous {namespace remote {namespace region {namespace server {namespace scan {
+class ScanWorkerResult;}}}}}
+
 namespace alinous {namespace remote {namespace region {namespace client {namespace command {namespace dml {
 class ClientScanCommandData;}}}}}}
+
+namespace alinous {namespace compile {namespace sql {
+class TableAndSchema;}}}
+
+namespace alinous {namespace remote {namespace region {namespace server {namespace schema {namespace strategy {
+class RegionPartitionTableAccess;}}}}}}
 
 namespace alinous {namespace remote {namespace region {namespace server {namespace scan {
 class ScanSession;}}}}}
@@ -89,9 +98,6 @@ class LockObject;}}
 
 namespace alinous {namespace remote {namespace region {namespace server {namespace tpc {
 class RegionTpcExecutorPool;}}}}}
-
-namespace alinous {namespace db {
-class AlinousDbException;}}
 
 namespace java {namespace lang {
 class IObject;
@@ -109,7 +115,7 @@ using ::java::util::Iterator;
 using ::java::io::IOException;
 using ::java::net::UnknownHostException;
 using ::java::util::ArrayList;
-using ::alinous::db::AlinousDbException;
+using ::alinous::compile::sql::TableAndSchema;
 using ::alinous::db::table::TableMetadata;
 using ::alinous::db::trx::DbVersionContext;
 using ::alinous::lock::LockObject;
@@ -125,7 +131,9 @@ using ::alinous::remote::region::client::command::data::ClientStructureMetadata;
 using ::alinous::remote::region::client::command::dml::ClientScanCommandData;
 using ::alinous::remote::region::server::scan::RegionScanManager;
 using ::alinous::remote::region::server::scan::ScanSession;
+using ::alinous::remote::region::server::scan::ScanWorkerResult;
 using ::alinous::remote::region::server::schema::NodeReferenceManager;
+using ::alinous::remote::region::server::schema::strategy::RegionPartitionTableAccess;
 using ::alinous::remote::region::server::tpc::RegionInsertExecutor;
 using ::alinous::remote::region::server::tpc::RegionTpcExecutorPool;
 using ::alinous::remote::socket::ISocketConnection;
@@ -175,7 +183,7 @@ public:
 	void createTable(TableMetadata* metadata, ThreadContext* ctx);
 	void insertData(ArrayList<ClientNetworkRecord>* list, long long newCommitId, String* schema, String* table, DbVersionContext* vctx, int isolationLevel, ThreadContext* ctx);
 	void commitUpdateData(long long newCommitId, DbVersionContext* vctx, ThreadContext* ctx);
-	bool scan(ClientScanCommandData* data, ThreadContext* ctx);
+	ScanWorkerResult* scan(ClientScanCommandData* data, ThreadContext* ctx);
 	void endScan(long long trxId, ThreadContext* ctx) throw() ;
 private:
 	void requestSyncMaxOid(ThreadContext* ctx);

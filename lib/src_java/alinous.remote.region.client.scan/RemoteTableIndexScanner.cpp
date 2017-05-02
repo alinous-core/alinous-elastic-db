@@ -111,7 +111,7 @@ void RemoteTableIndexScanner::endScan(ThreadContext* ctx)
 		}
 		catch(AlinousDbException* e)
 		{
-			throw (new(ctx) ScanException(ConstStr::getCNST_STR_3606(), e, ctx));
+			throw (new(ctx) ScanException(ConstStr::getCNST_STR_3609(), e, ctx));
 		}
 	}
 }

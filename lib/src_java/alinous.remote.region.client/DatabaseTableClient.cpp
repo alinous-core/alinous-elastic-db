@@ -360,15 +360,15 @@ void DatabaseTableClient::finishCommitSession(DbTransaction* trx, long long newC
 		}
 		catch(UnknownHostException* e)
 		{
-			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3598(), e, ctx));
+			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3601(), e, ctx));
 		}
 		catch(IOException* e)
 		{
-			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3598(), e, ctx));
+			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3601(), e, ctx));
 		}
 		catch(AlinousException* e)
 		{
-			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3598(), e, ctx));
+			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3601(), e, ctx));
 		}
 	}
 }
@@ -389,20 +389,20 @@ AbstractNodeRegionCommand* DatabaseTableClient::sendCommand(AbstractNodeRegionCo
 			retcmd = cmd->sendCommand(socket, ctx);
 			if(retcmd == nullptr || retcmd->getType(ctx) != cmd->getType(ctx))
 			{
-				throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3601(), ctx));
+				throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3604(), ctx));
 			}
 		}
 		catch(UnknownHostException* e)
 		{
-			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3600(), e, ctx));
+			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3603(), e, ctx));
 		}
 		catch(IOException* e)
 		{
-			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3600(), e, ctx));
+			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3603(), e, ctx));
 		}
 		catch(AlinousException* e)
 		{
-			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3600(), e, ctx));
+			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3603(), e, ctx));
 		}
 	}
 	return retcmd;
@@ -501,7 +501,7 @@ void DatabaseTableClient::doInsertData(DbTransaction* trx, List<IDatabaseRecord>
 			}
 			catch(VariableException* e)
 			{
-				throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3599(), e, ctx));
+				throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3602(), e, ctx));
 			}
 		}
 		list->add(netRec, ctx);
@@ -521,15 +521,15 @@ void DatabaseTableClient::doInsertData(DbTransaction* trx, List<IDatabaseRecord>
 		}
 		catch(UnknownHostException* e)
 		{
-			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3600(), e, ctx));
+			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3603(), e, ctx));
 		}
 		catch(IOException* e)
 		{
-			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3600(), e, ctx));
+			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3603(), e, ctx));
 		}
 		catch(AlinousException* e)
 		{
-			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3600(), e, ctx));
+			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3603(), e, ctx));
 		}
 	}
 }

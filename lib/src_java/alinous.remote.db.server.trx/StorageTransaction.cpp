@@ -123,7 +123,7 @@ String* StorageTransaction::getTmpDir(ThreadContext* ctx) throw()
 	{
 		buff->append(ConstStr::getCNST_STR_949(), ctx);
 	}
-	buff->append(ConstStr::getCNST_STR_3592(), ctx);
+	buff->append(ConstStr::getCNST_STR_3594(), ctx);
 	String* strTrxId = Long::toString(this->vctx->getTrxId(ctx), ctx);
 	buff->append(strTrxId, ctx);
 	__GC_MV(this, &(this->tmpDir), buff->toString(ctx), String);

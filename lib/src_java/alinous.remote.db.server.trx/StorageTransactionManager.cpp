@@ -89,7 +89,7 @@ StorageTransaction* StorageTransactionManager::getStorageTransaction(DbVersionCo
 		StorageTransaction* strx = this->transactions->get(id, ctx);
 		if(strx == nullptr)
 		{
-			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3594(), ctx));
+			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3596(), ctx));
 		}
 		return strx;
 	}

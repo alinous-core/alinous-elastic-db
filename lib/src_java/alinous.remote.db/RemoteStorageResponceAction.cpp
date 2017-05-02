@@ -15,7 +15,9 @@
 #include "alinous.remote.db.client.command.ddl/CreateSchemaCommand.h"
 #include "alinous.remote.db.client.command.ddl/CreateTableCommand.h"
 #include "alinous.remote.db.client.command.dml/CommitDMLCommand.h"
+#include "alinous.remote.db.client.command.dml/EndScanStorageCommand.h"
 #include "alinous.remote.db.client.command.dml/InsertPrepareCommand.h"
+#include "alinous.remote.db.client.command.dml/ScanStorageCommand.h"
 #include "alinous.remote.db.client.command/FinishRemoteStorageConnectionCommand.h"
 #include "alinous.remote.db.client.command/TerminateRemoteStorageCommand.h"
 #include "alinous.remote.db.client.command/VoidRemoteStorageCommand.h"
@@ -127,6 +129,8 @@ void RemoteStorageResponceAction::handleCommand(BufferedInputStream* stream, Buf
 		case AbstractRemoteStorageCommand::TYPE_INSERT_PREPARE:
 		case AbstractRemoteStorageCommand::TYPE_COMMIT_DML:
 		case AbstractRemoteStorageCommand::TYPE_REQUEST_SYNC_OID:
+		case AbstractRemoteStorageCommand::TYPE_SCAN_STORAGE:
+		case AbstractRemoteStorageCommand::TYPE_END_SCAN_STORAGE:
 			cmd->executeOnServer(this->tableStorageServer, outStream, ctx);
 			break ;
 		default:

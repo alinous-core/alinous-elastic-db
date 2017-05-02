@@ -45,6 +45,18 @@ class TableMetadata;}}}
 namespace alinous {namespace remote {namespace db {namespace client {namespace command {namespace ddl {
 class CreateTableCommand;}}}}}}
 
+namespace alinous {namespace remote {namespace region {namespace server {namespace scan {
+class ScanWorkerResult;}}}}}
+
+namespace alinous {namespace db {namespace trx {
+class DbVersionContext;}}}
+
+namespace alinous {namespace remote {namespace region {namespace client {namespace command {namespace dml {
+class ClientScanCommandData;}}}}}}
+
+namespace alinous {namespace remote {namespace db {namespace client {namespace command {namespace dml {
+class ScanStorageCommand;}}}}}}
+
 namespace alinous {namespace remote {namespace region {namespace server {namespace schema {
 class NodeReference;}}}}}
 
@@ -64,6 +76,7 @@ using ::java::util::Iterator;
 using ::java::io::IOException;
 using ::java::net::UnknownHostException;
 using ::alinous::db::table::TableMetadata;
+using ::alinous::db::trx::DbVersionContext;
 using ::alinous::net::AlinousSocket;
 using ::alinous::remote::db::client::RemoteStorageClientConnectionFactory;
 using ::alinous::remote::db::client::RemoteStorageConnectionInfo;
@@ -72,6 +85,9 @@ using ::alinous::remote::db::client::command::GetTableSchemeCommand;
 using ::alinous::remote::db::client::command::data::SchemasStructureInfoData;
 using ::alinous::remote::db::client::command::ddl::CreateSchemaCommand;
 using ::alinous::remote::db::client::command::ddl::CreateTableCommand;
+using ::alinous::remote::db::client::command::dml::ScanStorageCommand;
+using ::alinous::remote::region::client::command::dml::ClientScanCommandData;
+using ::alinous::remote::region::server::scan::ScanWorkerResult;
 using ::alinous::remote::socket::ISocketConnection;
 using ::alinous::remote::socket::SocketConnectionPool;
 using ::alinous::system::AlinousException;
@@ -99,6 +115,7 @@ public:
 	AbstractRemoteStorageCommand* sendCommand(AbstractRemoteStorageCommand* cmd, ThreadContext* ctx);
 	void createSchema(String* schemaName, ThreadContext* ctx);
 	void createTable(TableMetadata* meta, ThreadContext* ctx);
+	ScanWorkerResult* scan(DbVersionContext* vctx, ClientScanCommandData* data, ThreadContext* ctx);
 	String* getHost(ThreadContext* ctx) throw() ;
 	int getPort(ThreadContext* ctx) throw() ;
 	bool isIpv6(ThreadContext* ctx) throw() ;
