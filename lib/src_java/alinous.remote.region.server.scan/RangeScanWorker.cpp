@@ -26,10 +26,10 @@ bool RangeScanWorker::__init_static_variables(){
 	delete ctx;
 	return true;
 }
- RangeScanWorker::RangeScanWorker(ClientScanCommandData* data, RegionPartitionTableAccess* tableAccess, ThreadContext* ctx) throw()  : IObject(ctx), IScanWorker(ctx)
+ RangeScanWorker::RangeScanWorker(ClientScanCommandData* data, RegionPartitionTableAccess* tableAccess, CommitClusterNodeListner* accessListner, ThreadContext* ctx) throw()  : IObject(ctx), IScanWorker(ctx)
 {
 }
-void RangeScanWorker::__construct_impl(ClientScanCommandData* data, RegionPartitionTableAccess* tableAccess, ThreadContext* ctx) throw() 
+void RangeScanWorker::__construct_impl(ClientScanCommandData* data, RegionPartitionTableAccess* tableAccess, CommitClusterNodeListner* accessListner, ThreadContext* ctx) throw() 
 {
 }
  RangeScanWorker::~RangeScanWorker() throw() 

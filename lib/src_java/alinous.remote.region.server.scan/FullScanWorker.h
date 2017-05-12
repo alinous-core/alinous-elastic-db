@@ -58,8 +58,8 @@ class FullScanWorker final : public IScanWorker, public virtual IObject {
 public:
 	FullScanWorker(const FullScanWorker& base) = default;
 public:
-	FullScanWorker(ClientScanCommandData* data, RegionPartitionTableAccess* tableAccess, ThreadContext* ctx) throw() ;
-	void __construct_impl(ClientScanCommandData* data, RegionPartitionTableAccess* tableAccess, ThreadContext* ctx) throw() ;
+	FullScanWorker(ClientScanCommandData* data, RegionPartitionTableAccess* tableAccess, CommitClusterNodeListner* accessListner, ThreadContext* ctx) throw() ;
+	void __construct_impl(ClientScanCommandData* data, RegionPartitionTableAccess* tableAccess, CommitClusterNodeListner* accessListner, ThreadContext* ctx) throw() ;
 	virtual ~FullScanWorker() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 private:

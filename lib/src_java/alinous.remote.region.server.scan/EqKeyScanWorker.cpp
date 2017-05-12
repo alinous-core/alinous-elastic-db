@@ -26,10 +26,10 @@ bool EqKeyScanWorker::__init_static_variables(){
 	delete ctx;
 	return true;
 }
- EqKeyScanWorker::EqKeyScanWorker(ClientScanCommandData* data, RegionPartitionTableAccess* tableAccess, ThreadContext* ctx) throw()  : IObject(ctx), IScanWorker(ctx)
+ EqKeyScanWorker::EqKeyScanWorker(ClientScanCommandData* data, RegionPartitionTableAccess* tableAccess, CommitClusterNodeListner* accessListner, ThreadContext* ctx) throw()  : IObject(ctx), IScanWorker(ctx)
 {
 }
-void EqKeyScanWorker::__construct_impl(ClientScanCommandData* data, RegionPartitionTableAccess* tableAccess, ThreadContext* ctx) throw() 
+void EqKeyScanWorker::__construct_impl(ClientScanCommandData* data, RegionPartitionTableAccess* tableAccess, CommitClusterNodeListner* accessListner, ThreadContext* ctx) throw() 
 {
 }
  EqKeyScanWorker::~EqKeyScanWorker() throw() 

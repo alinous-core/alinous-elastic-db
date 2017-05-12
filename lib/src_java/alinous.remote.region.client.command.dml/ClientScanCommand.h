@@ -111,6 +111,8 @@ public:
 	void setTable(TableAndSchema* table, ThreadContext* ctx) throw() ;
 	int getLockMode(ThreadContext* ctx) throw() ;
 	void setLockMode(int lockMode, ThreadContext* ctx) throw() ;
+	void setIsolationLevel(int isolationLevel, ThreadContext* ctx) throw() ;
+	int getIsolationLevel(ThreadContext* ctx) throw() ;
 	bool isPrimaryIndex(ThreadContext* ctx) throw() ;
 	void setPrimaryIndex(bool primaryIndex, ThreadContext* ctx) throw() ;
 	bool isFullscan(ThreadContext* ctx) throw() ;

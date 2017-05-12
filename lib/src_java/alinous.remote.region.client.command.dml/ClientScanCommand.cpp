@@ -139,6 +139,14 @@ void ClientScanCommand::setLockMode(int lockMode, ThreadContext* ctx) throw()
 {
 	this->data->setLockMode(lockMode, ctx);
 }
+void ClientScanCommand::setIsolationLevel(int isolationLevel, ThreadContext* ctx) throw() 
+{
+	this->data->setIsolationLevel(isolationLevel, ctx);
+}
+int ClientScanCommand::getIsolationLevel(ThreadContext* ctx) throw() 
+{
+	return this->data->getIsolationLevel(ctx);
+}
 bool ClientScanCommand::isPrimaryIndex(ThreadContext* ctx) throw() 
 {
 	return this->data->isPrimaryIndex(ctx);

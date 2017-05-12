@@ -26,10 +26,10 @@ bool ListScanWorker::__init_static_variables(){
 	delete ctx;
 	return true;
 }
- ListScanWorker::ListScanWorker(ClientScanCommandData* data, RegionPartitionTableAccess* tableAccess, ThreadContext* ctx) throw()  : IObject(ctx), IScanWorker(ctx)
+ ListScanWorker::ListScanWorker(ClientScanCommandData* data, RegionPartitionTableAccess* tableAccess, CommitClusterNodeListner* accessListner, ThreadContext* ctx) throw()  : IObject(ctx), IScanWorker(ctx)
 {
 }
-void ListScanWorker::__construct_impl(ClientScanCommandData* data, RegionPartitionTableAccess* tableAccess, ThreadContext* ctx) throw() 
+void ListScanWorker::__construct_impl(ClientScanCommandData* data, RegionPartitionTableAccess* tableAccess, CommitClusterNodeListner* accessListner, ThreadContext* ctx) throw() 
 {
 }
  ListScanWorker::~ListScanWorker() throw() 

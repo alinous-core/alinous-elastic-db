@@ -97,6 +97,7 @@ void RemoteTableIndexScanner::startScan(ScanResultIndexKey* indexKeyValue, Threa
 	command->setVctx(vctx, ctx);
 	command->setTable(this->tableId->getTable(ctx), ctx);
 	command->setLockMode(this->lockMode, ctx);
+	command->setIsolationLevel(this->trx->getIsolationLevel(ctx), ctx);
 	ArrayList<TableColumnMetadata>* indexColmns = this->index->getColumns(ctx);
 	bool primaryIndex = this->index->isPrimary(ctx);
 	command->setFullscan(true, ctx);

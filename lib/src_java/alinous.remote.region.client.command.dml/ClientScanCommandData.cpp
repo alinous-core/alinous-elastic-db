@@ -212,7 +212,7 @@ bool ClientScanCommandData::__init_static_variables(){
 	delete ctx;
 	return true;
 }
- ClientScanCommandData::ClientScanCommandData(ThreadContext* ctx) throw()  : IObject(ctx), ICommandData(ctx), vctx(nullptr), table(nullptr), lockMode(0), primaryIndex(0), fullscan(0), indexColmns(nullptr), exp(nullptr), listParam(nullptr), eqKey(nullptr), rangeParam(nullptr)
+ ClientScanCommandData::ClientScanCommandData(ThreadContext* ctx) throw()  : IObject(ctx), ICommandData(ctx), vctx(nullptr), table(nullptr), lockMode(0), isolationLevel(0), primaryIndex(0), fullscan(0), indexColmns(nullptr), exp(nullptr), listParam(nullptr), eqKey(nullptr), rangeParam(nullptr)
 {
 }
 void ClientScanCommandData::__construct_impl(ThreadContext* ctx) throw() 
@@ -431,6 +431,14 @@ IndexRangeScannerParam* ClientScanCommandData::getRangeParam(ThreadContext* ctx)
 void ClientScanCommandData::setRangeParam(IndexRangeScannerParam* rangeParam, ThreadContext* ctx) throw() 
 {
 	__GC_MV(this, &(this->rangeParam), rangeParam, IndexRangeScannerParam);
+}
+int ClientScanCommandData::getIsolationLevel(ThreadContext* ctx) throw() 
+{
+	return isolationLevel;
+}
+void ClientScanCommandData::setIsolationLevel(int isolationLevel, ThreadContext* ctx) throw() 
+{
+	this->isolationLevel = isolationLevel;
 }
 ClientScanCommandData* ClientScanCommandData::fromNetwork(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 {

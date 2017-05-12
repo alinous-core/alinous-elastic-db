@@ -80,6 +80,7 @@ private:
 	DbVersionContext* vctx;
 	TableAndSchema* table;
 	int lockMode;
+	int isolationLevel;
 	bool primaryIndex;
 	bool fullscan;
 	ArrayList<TableColumnMetadata>* indexColmns;
@@ -110,6 +111,8 @@ public:
 	void setEqKey(ScanResultIndexKey* eqKey, ThreadContext* ctx) throw() ;
 	IndexRangeScannerParam* getRangeParam(ThreadContext* ctx) throw() ;
 	void setRangeParam(IndexRangeScannerParam* rangeParam, ThreadContext* ctx) throw() ;
+	int getIsolationLevel(ThreadContext* ctx) throw() ;
+	void setIsolationLevel(int isolationLevel, ThreadContext* ctx) throw() ;
 public:
 	static ClientScanCommandData* fromNetwork(NetworkBinaryBuffer* buff, ThreadContext* ctx);
 public:

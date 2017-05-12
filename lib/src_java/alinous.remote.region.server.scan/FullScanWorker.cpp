@@ -31,12 +31,12 @@ bool FullScanWorker::__init_static_variables(){
 	delete ctx;
 	return true;
 }
- FullScanWorker::FullScanWorker(ClientScanCommandData* data, RegionPartitionTableAccess* tableAccess, ThreadContext* ctx) throw()  : IObject(ctx), IScanWorker(ctx), tableAccess(nullptr), shardParts(nullptr), index(0), data(nullptr)
+ FullScanWorker::FullScanWorker(ClientScanCommandData* data, RegionPartitionTableAccess* tableAccess, CommitClusterNodeListner* accessListner, ThreadContext* ctx) throw()  : IObject(ctx), IScanWorker(ctx), tableAccess(nullptr), shardParts(nullptr), index(0), data(nullptr)
 {
 	__GC_MV(this, &(this->tableAccess), tableAccess, RegionPartitionTableAccess);
 	__GC_MV(this, &(this->data), data, ClientScanCommandData);
 }
-void FullScanWorker::__construct_impl(ClientScanCommandData* data, RegionPartitionTableAccess* tableAccess, ThreadContext* ctx) throw() 
+void FullScanWorker::__construct_impl(ClientScanCommandData* data, RegionPartitionTableAccess* tableAccess, CommitClusterNodeListner* accessListner, ThreadContext* ctx) throw() 
 {
 	__GC_MV(this, &(this->tableAccess), tableAccess, RegionPartitionTableAccess);
 	__GC_MV(this, &(this->data), data, ClientScanCommandData);

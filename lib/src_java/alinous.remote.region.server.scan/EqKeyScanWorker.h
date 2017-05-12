@@ -38,8 +38,8 @@ class EqKeyScanWorker final : public IScanWorker, public virtual IObject {
 public:
 	EqKeyScanWorker(const EqKeyScanWorker& base) = default;
 public:
-	EqKeyScanWorker(ClientScanCommandData* data, RegionPartitionTableAccess* tableAccess, ThreadContext* ctx) throw() ;
-	void __construct_impl(ClientScanCommandData* data, RegionPartitionTableAccess* tableAccess, ThreadContext* ctx) throw() ;
+	EqKeyScanWorker(ClientScanCommandData* data, RegionPartitionTableAccess* tableAccess, CommitClusterNodeListner* accessListner, ThreadContext* ctx) throw() ;
+	void __construct_impl(ClientScanCommandData* data, RegionPartitionTableAccess* tableAccess, CommitClusterNodeListner* accessListner, ThreadContext* ctx) throw() ;
 	virtual ~EqKeyScanWorker() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 public:

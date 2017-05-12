@@ -67,25 +67,25 @@ ScanSession* ScanSession::init(RegionPartitionTableAccess* tableAccess, ThreadCo
 {
 	if(this->data->isFullscan(ctx))
 	{
-		__GC_MV(this, &(this->worker), (new(ctx) FullScanWorker(this->data, tableAccess, ctx)), IScanWorker);
+		__GC_MV(this, &(this->worker), (new(ctx) FullScanWorker(this->data, tableAccess, this->accessListner, ctx)), IScanWorker);
 	}
 		else 
 	{
 		if(this->data->getEqKey(ctx) != nullptr)
 		{
-			__GC_MV(this, &(this->worker), (new(ctx) EqKeyScanWorker(this->data, tableAccess, ctx)), IScanWorker);
+			__GC_MV(this, &(this->worker), (new(ctx) EqKeyScanWorker(this->data, tableAccess, this->accessListner, ctx)), IScanWorker);
 		}
 				else 
 		{
 			if(this->data->getListParam(ctx) != nullptr)
 			{
-				__GC_MV(this, &(this->worker), (new(ctx) ListScanWorker(this->data, tableAccess, ctx)), IScanWorker);
+				__GC_MV(this, &(this->worker), (new(ctx) ListScanWorker(this->data, tableAccess, this->accessListner, ctx)), IScanWorker);
 			}
 						else 
 			{
 				if(this->data->getRangeParam(ctx) != nullptr)
 				{
-					__GC_MV(this, &(this->worker), (new(ctx) RangeScanWorker(this->data, tableAccess, ctx)), IScanWorker);
+					__GC_MV(this, &(this->worker), (new(ctx) RangeScanWorker(this->data, tableAccess, this->accessListner, ctx)), IScanWorker);
 				}
 								else 
 				{
