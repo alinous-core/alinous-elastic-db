@@ -41,10 +41,10 @@
 #include "alinous.remote.socket/ISocketActionFactory.h"
 #include "alinous.remote.db/RemoteStorageResponceActionFactory.h"
 #include "alinous.remote.region.client.command.dml/ClientScanCommandData.h"
+#include "alinous.remote.region.client.command.data/ClientNetworkRecord.h"
 #include "alinous.remote.region.server.scan/ScanWorkerResult.h"
 #include "alinous.remote.db.server.scan/AbstractStorageScanSession.h"
 #include "alinous.remote.db.server.scan/StorageScanSessionManager.h"
-#include "alinous.remote.region.client.command.data/ClientNetworkRecord.h"
 #include "alinous.remote.region.server.schema.strategy/UniqueCheckOperation.h"
 #include "alinous.remote.db.server.trx/StorageTransaction.h"
 #include "alinous.remote.db.server.trx/StorageTransactionManager.h"
@@ -342,7 +342,8 @@ ScanWorkerResult* RemoteTableStorageServer::scan(DbVersionContext* vctx, ClientS
 		throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3592()->clone(ctx)->append(tableSc->getTable(ctx), ctx)->append(ConstStr::getCNST_STR_1089(), ctx), ctx));
 	}
 	AbstractStorageScanSession* session = this->scanSessionManager->getScanSession(table, vctx, data, ctx);
-	return session->scan(ctx);
+	ScanWorkerResult* result = session->scan(ctx);
+	return result;
 }
 void RemoteTableStorageServer::initInstance(AlinousCore* core, ThreadContext* ctx)
 {

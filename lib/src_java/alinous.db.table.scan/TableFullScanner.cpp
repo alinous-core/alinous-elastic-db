@@ -285,9 +285,11 @@ IDatabaseRecord* TableFullScanner::nextIndexValue(ThreadContext* ctx)
 		catch(Throwable* e)
 		{
 			switch(this->lockMode) {
+			case IndexScannerLockRequirement::EXPLICIT_SHARE:
 			case IndexScannerLockRequirement::INSTANT_SHARE:
 				locker->shareUnlockRow(this->tableStore, oid, ctx);
 				break ;
+			case IndexScannerLockRequirement::EXPLICIT_UPDATE:
 			case IndexScannerLockRequirement::INSTANT_UPDATE:
 				locker->updateUnlockRow(this->tableStore, oid, ctx);
 				break ;

@@ -42,6 +42,7 @@ template class ::java::util::HashMap<::java::lang::String, ::alinous::remote::db
 template class ::java::util::HashMap<::java::lang::Long, ::alinous::remote::db::server::trx::StorageTransaction>;
 template class ::java::util::HashMap<::java::lang::Long, ::alinous::remote::db::server::scan::AbstractStorageScanSession>;
 template class ::java::util::HashMap<::java::lang::String, ::alinous::remote::region::client::DatabaseTableClient>;
+template class ::java::util::HashMap<::java::lang::String, ::alinous::remote::region::client::TableAccessStatus>;
 template class ::java::util::HashMap<::java::lang::String, ::alinous::remote::region::client::RemoteTableScheme>;
 template class ::java::util::HashMap<::java::lang::String, ::alinous::remote::region::client::command::data::ClientSchemaData>;
 template class ::java::util::HashMap<::java::lang::String, ::alinous::remote::region::client::command::data::ClientTableData>;

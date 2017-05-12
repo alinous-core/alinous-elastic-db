@@ -90,6 +90,9 @@ class TableAndSchema;}}}
 namespace alinous {namespace remote {namespace region {namespace server {namespace schema {namespace strategy {
 class RegionPartitionTableAccess;}}}}}}
 
+namespace alinous {namespace remote {namespace region {namespace server {namespace tpc {
+class CommitClusterNodeListner;}}}}}
+
 namespace alinous {namespace remote {namespace region {namespace server {namespace scan {
 class ScanSession;}}}}}
 
@@ -134,6 +137,7 @@ using ::alinous::remote::region::server::scan::ScanSession;
 using ::alinous::remote::region::server::scan::ScanWorkerResult;
 using ::alinous::remote::region::server::schema::NodeReferenceManager;
 using ::alinous::remote::region::server::schema::strategy::RegionPartitionTableAccess;
+using ::alinous::remote::region::server::tpc::CommitClusterNodeListner;
 using ::alinous::remote::region::server::tpc::RegionInsertExecutor;
 using ::alinous::remote::region::server::tpc::RegionTpcExecutorPool;
 using ::alinous::remote::socket::ISocketConnection;

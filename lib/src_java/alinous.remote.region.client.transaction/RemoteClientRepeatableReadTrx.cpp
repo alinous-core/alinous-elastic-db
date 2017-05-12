@@ -56,6 +56,7 @@
 #include "alinous.db/ITableSchema.h"
 #include "alinous.db/TableSchema.h"
 #include "alinous.db.trx/DbTransactionManager.h"
+#include "alinous.remote.region.client/TableAccessStatusListner.h"
 #include "alinous.db.trx/DbTransaction.h"
 #include "alinous.remote.region.client.transaction/AbstractRemoteClientTransaction.h"
 #include "alinous.db.trx.cache/TrxStorageManager.h"

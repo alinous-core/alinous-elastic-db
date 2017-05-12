@@ -15,6 +15,8 @@
 #include "alinous.btree/IBTreeValue.h"
 #include "alinous.db.trx.scan/ScanResultRecord.h"
 #include "alinous.db.trx.scan/ITableTargetScanner.h"
+#include "alinous.remote.region.client/TableAccessStatus.h"
+#include "alinous.remote.region.client/TableAccessStatusListner.h"
 #include "alinous.runtime.engine/ScriptMachine.h"
 #include "alinous.db.trx/DbTransaction.h"
 #include "alinous.db.table/IScannableIndex.h"
@@ -64,6 +66,8 @@ void RemoteIndexRangeScanner::__releaseRegerences(bool prepare, ThreadContext* c
 }
 RemoteIndexRangeScanner* RemoteIndexRangeScanner::init(ScanTableIdentifier* tableId, DbTransaction* trx, IScannableIndex* index, IDatabaseTable* tableStore, TrxRecordCacheIndex* insertCacheindex, TrxRecordCacheIndex* updateCacheindex, int lockMode, IndexRangeScannerParam* param, int effectiveKeyLength, InnerNecessaryCondition* necessaryCondition, ScriptMachine* machine, ThreadContext* ctx)
 {
+	TableAccessStatusListner* listner = trx->getAccessListner(ctx);
+	listner->setStatus(tableStore->getFullName(ctx), TableAccessStatus::STAT_COMMITTED_NEEDED, ctx);
 	return this;
 }
 void RemoteIndexRangeScanner::startScan(ScanResultIndexKey* indexKeyValue, ThreadContext* ctx)

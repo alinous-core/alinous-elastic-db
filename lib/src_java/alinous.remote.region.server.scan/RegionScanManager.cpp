@@ -8,6 +8,7 @@
 #include "alinous.remote.socket/ICommandData.h"
 #include "alinous.remote.region.client.command.dml/ClientScanCommandData.h"
 #include "alinous.remote.region.server.schema.strategy/RegionPartitionTableAccess.h"
+#include "alinous.remote.region.server.tpc/CommitClusterNodeListner.h"
 #include "alinous.remote.region.server.scan/ScanSession.h"
 #include "java.lang/Number.h"
 #include "java.lang/Comparable.h"
@@ -55,7 +56,7 @@ void RegionScanManager::__releaseRegerences(bool prepare, ThreadContext* ctx) th
 		return;
 	}
 }
-ScanSession* RegionScanManager::getScanSession(long long trxId, ClientScanCommandData* data, RegionPartitionTableAccess* tableAccess, ThreadContext* ctx)
+ScanSession* RegionScanManager::getScanSession(long long trxId, ClientScanCommandData* data, RegionPartitionTableAccess* tableAccess, CommitClusterNodeListner* accessListner, ThreadContext* ctx)
 {
 	Long* id = (new(ctx) Long(trxId, ctx));
 	{
@@ -63,7 +64,7 @@ ScanSession* RegionScanManager::getScanSession(long long trxId, ClientScanComman
 		ScanSession* session = this->sessions->get(id, ctx);
 		if(session == nullptr)
 		{
-			session = (new(ctx) ScanSession(data, ctx))->init(tableAccess, ctx);
+			session = (new(ctx) ScanSession(data, accessListner, ctx))->init(tableAccess, ctx);
 			this->sessions->put(id, session, ctx);
 		}
 		return session;

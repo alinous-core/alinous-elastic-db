@@ -113,6 +113,7 @@
 #include "alinous.db.trx.ddl/TrxSchemeManager.h"
 #include "alinous.db.trx.scan/ScanResultIndex.h"
 #include "alinous.db.trx.scan/ScanResult.h"
+#include "alinous.remote.region.client/TableAccessStatusListner.h"
 #include "alinous.db.trx/DbTransaction.h"
 
 namespace alinous {namespace db {namespace trx {
@@ -432,6 +433,10 @@ DbVersionContext* DbTransaction::getVersionContext(ThreadContext* ctx) throw()
 UniqueExclusiveLockClient* DbTransaction::getUniqueExclusiveLock(ThreadContext* ctx) throw() 
 {
 	return uniqueExclusiveLock;
+}
+TableAccessStatusListner* DbTransaction::getAccessListner(ThreadContext* ctx) throw() 
+{
+	return nullptr;
 }
 void DbTransaction::commitUpdateInsert(long long newCommitId, ThreadContext* ctx)
 {

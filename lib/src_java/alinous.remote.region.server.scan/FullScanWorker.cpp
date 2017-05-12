@@ -10,6 +10,7 @@
 #include "alinous.remote.region.server.schema/NodeReference.h"
 #include "alinous.remote.region.server.schema.strategy/RegionShardPartAccess.h"
 #include "alinous.remote.region.server.schema.strategy/RegionPartitionTableAccess.h"
+#include "alinous.remote.region.server.tpc/CommitClusterNodeListner.h"
 #include "alinous.remote.region.server.scan/IScanWorker.h"
 #include "alinous.remote.region.server.scan/FullScanWorker.h"
 
@@ -60,7 +61,7 @@ void FullScanWorker::__releaseRegerences(bool prepare, ThreadContext* ctx) throw
 		return;
 	}
 }
-void FullScanWorker::init(ThreadContext* ctx) throw() 
+void FullScanWorker::init(CommitClusterNodeListner* accessListner, ThreadContext* ctx) throw() 
 {
 	GCUtils<List<RegionShardPartAccess> >::mv(this, &(this->shardParts), this->tableAccess->getShardParts(ctx), ctx);
 }

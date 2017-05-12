@@ -55,6 +55,7 @@
 #include "alinous.db.trx/TrxLockContext.h"
 #include "alinous.db.trx.scan/ScanResult.h"
 #include "alinous.lock.unique/UniqueExclusiveLockClient.h"
+#include "alinous.remote.region.client/TableAccessStatusListner.h"
 #include "alinous.db.trx/DbTransactionManager.h"
 #include "alinous.db.trx/DbTransaction.h"
 #include "alinous.db.table/IDatabaseTable.h"

@@ -3,6 +3,7 @@
 
 #include "alinous.compile/AbstractSrcElement.h"
 #include "alinous.system/AlinousException.h"
+#include "alinous.remote.region.server.tpc/CommitClusterNodeListner.h"
 #include "alinous.remote.socket/ICommandData.h"
 #include "alinous.remote.region.server.scan/ScanWorkerResult.h"
 #include "alinous.remote.region.server.scan/IScanWorker.h"

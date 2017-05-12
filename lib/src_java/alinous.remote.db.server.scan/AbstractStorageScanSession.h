@@ -6,8 +6,29 @@ class IDatabaseTable;}}}
 namespace alinous {namespace remote {namespace region {namespace client {namespace command {namespace dml {
 class ClientScanCommandData;}}}}}}
 
+namespace alinous {namespace db {namespace trx {
+class TrxLockContext;}}}
+
+namespace alinous {namespace db {namespace table {namespace lockmonitor {
+class DatabaseLockException;}}}}
+
 namespace alinous {namespace remote {namespace region {namespace server {namespace scan {
 class ScanWorkerResult;}}}}}
+
+namespace java {namespace io {
+class IOException;}}
+
+namespace alinous {namespace btree {
+class BTreeException;}}
+
+namespace alinous {namespace db {namespace table {
+class DatabaseException;}}}
+
+namespace alinous {namespace db {namespace trx {namespace scan {
+class ScanException;}}}}
+
+namespace alinous {namespace system {
+class AlinousException;}}
 
 namespace java {namespace lang {
 class IObject;
@@ -22,9 +43,16 @@ namespace alinous {namespace remote {namespace db {namespace server {namespace s
 using namespace ::alinous;
 using namespace ::java::lang;
 using ::java::util::Iterator;
+using ::java::io::IOException;
+using ::alinous::btree::BTreeException;
+using ::alinous::db::table::DatabaseException;
 using ::alinous::db::table::IDatabaseTable;
+using ::alinous::db::table::lockmonitor::DatabaseLockException;
+using ::alinous::db::trx::TrxLockContext;
+using ::alinous::db::trx::scan::ScanException;
 using ::alinous::remote::region::client::command::dml::ClientScanCommandData;
 using ::alinous::remote::region::server::scan::ScanWorkerResult;
+using ::alinous::system::AlinousException;
 
 
 
@@ -39,9 +67,12 @@ public:
 public:
 	IDatabaseTable* table;
 	ClientScanCommandData* data;
+	int maxRecords;
+	TrxLockContext* locker;
 public:
-	virtual void init(ThreadContext* ctx) throw()  = 0;
-	virtual ScanWorkerResult* scan(ThreadContext* ctx) throw()  = 0;
+	void dispose(ThreadContext* ctx) throw() ;
+	virtual void init(ThreadContext* ctx) = 0;
+	virtual ScanWorkerResult* scan(ThreadContext* ctx) = 0;
 public:
 	static bool __init_done;
 	static bool __init_static_variables();

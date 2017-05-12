@@ -6,6 +6,12 @@ class ScanWorkerResult;}}}}}
 namespace alinous {namespace remote {namespace socket {
 class NetworkBinaryBuffer;}}}
 
+namespace alinous {namespace remote {namespace region {namespace client {namespace command {namespace data {
+class ClientNetworkRecord;}}}}}}
+
+namespace java {namespace util {
+template <typename  T> class List;}}
+
 namespace alinous {namespace remote {namespace socket {
 class ICommandData;}}}
 
@@ -25,6 +31,9 @@ namespace alinous {namespace remote {namespace region {namespace server {namespa
 using namespace ::alinous;
 using namespace ::java::lang;
 using ::java::util::Iterator;
+using ::java::util::ArrayList;
+using ::java::util::List;
+using ::alinous::remote::region::client::command::data::ClientNetworkRecord;
 using ::alinous::remote::socket::ICommandData;
 using ::alinous::remote::socket::NetworkBinaryBuffer;
 using ::alinous::runtime::dom::VariableException;
@@ -41,9 +50,15 @@ public:
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 private:
 	bool finished;
+	List<ClientNetworkRecord>* records;
 public:
 	void readData(NetworkBinaryBuffer* buff, ThreadContext* ctx) final;
 	void writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) final;
+	bool isFinished(ThreadContext* ctx) throw() ;
+	void setFinished(bool finished, ThreadContext* ctx) throw() ;
+	void setRecords(List<ClientNetworkRecord>* records, ThreadContext* ctx) throw() ;
+	List<ClientNetworkRecord>* getRecords(ThreadContext* ctx) throw() ;
+	void addRecord(ClientNetworkRecord* record, ThreadContext* ctx) throw() ;
 public:
 	static ScanWorkerResult* fromNetwork(NetworkBinaryBuffer* buff, ThreadContext* ctx);
 public:

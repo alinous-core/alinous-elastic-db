@@ -12,6 +12,9 @@ class AlinousCore;}}
 namespace alinous {namespace db {namespace trx {
 class DbVersionContext;}}}
 
+namespace alinous {namespace remote {namespace region {namespace client {
+class TableAccessStatusListner;}}}}
+
 namespace alinous {namespace db {
 class TableSchema;}}
 
@@ -53,6 +56,7 @@ using ::alinous::db::TableSchema;
 using ::alinous::db::trx::DbTransaction;
 using ::alinous::db::trx::DbTransactionManager;
 using ::alinous::db::trx::DbVersionContext;
+using ::alinous::remote::region::client::TableAccessStatusListner;
 using ::alinous::runtime::dom::VariableException;
 using ::alinous::system::AlinousCore;
 using ::alinous::system::AlinousException;
@@ -67,9 +71,12 @@ public:
 	void __construct_impl(DbTransactionManager* mgr, String* tmpDir, AlinousDatabase* database, AlinousCore* core, long long commitId, DbVersionContext* vctx, ThreadContext* ctx) throw() ;
 	virtual ~AbstractRemoteClientTransaction() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
+private:
+	TableAccessStatusListner* accessListner;
 public:
 	bool isRemote(ThreadContext* ctx) throw()  final;
 	void createTable(TableSchema* schema, ThreadContext* ctx) final;
+	TableAccessStatusListner* getAccessListner(ThreadContext* ctx) throw()  final;
 	void commitUpdateInsert(long long newCommitId, ThreadContext* ctx) final;
 public:
 	static bool __init_done;

@@ -1,6 +1,12 @@
 #ifndef ALINOUS_REMOTE_REGION_SERVER_TPC_REGIONTPCEXECUTORPOOL_H_
 #define ALINOUS_REMOTE_REGION_SERVER_TPC_REGIONTPCEXECUTORPOOL_H_
 namespace alinous {namespace remote {namespace region {namespace server {namespace tpc {
+class CommitClusterNodeListner;}}}}}
+
+namespace java {namespace lang {
+class Long;}}
+
+namespace alinous {namespace remote {namespace region {namespace server {namespace tpc {
 class RegionInsertExecutor;}}}}}
 
 namespace alinous {namespace db {namespace trx {
@@ -8,12 +14,6 @@ class DbVersionContext;}}}
 
 namespace alinous {namespace remote {namespace region {namespace server {namespace schema {
 class NodeReferenceManager;}}}}}
-
-namespace java {namespace lang {
-class Long;}}
-
-namespace alinous {namespace remote {namespace region {namespace server {namespace tpc {
-class CommitClusterNodeListner;}}}}}
 
 namespace alinous {namespace db {
 class AlinousDbException;}}
@@ -66,6 +66,7 @@ private:
 	Map<Long,CommitClusterNodeListner>* listners;
 	LockObject* lock;
 public:
+	CommitClusterNodeListner* getListner(long long trxId, ThreadContext* ctx) throw() ;
 	RegionInsertExecutor* getInsertSession(long long trxId, long long commitId, DbVersionContext* vctx, NodeReferenceManager* refs, ThreadContext* ctx) throw() ;
 	void tcpCommit(long long newCommitId, DbVersionContext* vctx, ThreadContext* ctx);
 	void removeSession(long long trxId, ThreadContext* ctx) throw() ;

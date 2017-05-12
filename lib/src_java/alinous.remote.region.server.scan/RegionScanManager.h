@@ -9,6 +9,9 @@ class ClientScanCommandData;}}}}}}
 namespace alinous {namespace remote {namespace region {namespace server {namespace schema {namespace strategy {
 class RegionPartitionTableAccess;}}}}}}
 
+namespace alinous {namespace remote {namespace region {namespace server {namespace tpc {
+class CommitClusterNodeListner;}}}}}
+
 namespace java {namespace lang {
 class Long;}}
 
@@ -43,6 +46,7 @@ using ::alinous::db::AlinousDbException;
 using ::alinous::lock::LockObject;
 using ::alinous::remote::region::client::command::dml::ClientScanCommandData;
 using ::alinous::remote::region::server::schema::strategy::RegionPartitionTableAccess;
+using ::alinous::remote::region::server::tpc::CommitClusterNodeListner;
 
 
 
@@ -58,7 +62,7 @@ private:
 	Map<Long,ScanSession>* sessions;
 	LockObject* lock;
 public:
-	ScanSession* getScanSession(long long trxId, ClientScanCommandData* data, RegionPartitionTableAccess* tableAccess, ThreadContext* ctx);
+	ScanSession* getScanSession(long long trxId, ClientScanCommandData* data, RegionPartitionTableAccess* tableAccess, CommitClusterNodeListner* accessListner, ThreadContext* ctx);
 	void endSession(long long trxId, ThreadContext* ctx) throw() ;
 public:
 	static bool __init_done;

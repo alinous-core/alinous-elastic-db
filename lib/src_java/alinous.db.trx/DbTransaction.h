@@ -159,6 +159,9 @@ class ThreadPool;}}}
 namespace alinous {namespace lock {namespace unique {
 class UniqueExclusiveLockClient;}}}
 
+namespace alinous {namespace remote {namespace region {namespace client {
+class TableAccessStatusListner;}}}}
+
 namespace alinous {namespace db {namespace trx {
 class DbTransaction;}}}
 
@@ -219,6 +222,7 @@ using ::alinous::db::trx::scan::ScanResult;
 using ::alinous::db::trx::scan::ScanResultIndex;
 using ::alinous::db::trx::scan::ScanResultRecord;
 using ::alinous::lock::unique::UniqueExclusiveLockClient;
+using ::alinous::remote::region::client::TableAccessStatusListner;
 using ::alinous::runtime::dom::DomArray;
 using ::alinous::runtime::dom::DomVariable;
 using ::alinous::runtime::dom::IDomVariable;
@@ -281,6 +285,7 @@ public:
 	bool equals(IObject* obj, ThreadContext* ctx) throw() ;
 	DbVersionContext* getVersionContext(ThreadContext* ctx) throw() ;
 	UniqueExclusiveLockClient* getUniqueExclusiveLock(ThreadContext* ctx) throw() ;
+	virtual TableAccessStatusListner* getAccessListner(ThreadContext* ctx) throw() ;
 	virtual void commitUpdateInsert(long long newCommitId, ThreadContext* ctx);
 private:
 	void noGroupBySelect(SelectStatement* selectStmt, ScriptMachine* machine, bool debug, ThreadContext* ctx);

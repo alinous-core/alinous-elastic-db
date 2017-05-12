@@ -39,6 +39,9 @@ template <typename  T, typename V> class Map;}}
 namespace java {namespace util {
 template <typename  T, typename V> class HashMap;}}
 
+namespace alinous {namespace db {namespace trx {namespace scan {
+class ScanException;}}}}
+
 namespace java {namespace lang {
 class IObject;
 }}
@@ -57,6 +60,7 @@ using ::java::util::Map;
 using ::alinous::db::AlinousDbException;
 using ::alinous::db::table::IDatabaseTable;
 using ::alinous::db::trx::DbVersionContext;
+using ::alinous::db::trx::scan::ScanException;
 using ::alinous::lock::LockObject;
 using ::alinous::remote::region::client::command::dml::ClientScanCommandData;
 
@@ -75,6 +79,7 @@ private:
 	Map<Long,AbstractStorageScanSession>* sessions;
 public:
 	AbstractStorageScanSession* getScanSession(IDatabaseTable* table, DbVersionContext* vctx, ClientScanCommandData* data, ThreadContext* ctx);
+	void removeSession(DbVersionContext* vctx, ThreadContext* ctx) throw() ;
 private:
 	AbstractStorageScanSession* newSession(IDatabaseTable* table, ClientScanCommandData* data, ThreadContext* ctx);
 public:

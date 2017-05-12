@@ -32,6 +32,7 @@
 #include "alinous.remote.region.client.command.data/ClientStructureMetadata.h"
 #include "alinous.remote.region.client.command.dml/ClientScanCommandData.h"
 #include "alinous.remote.region.server.schema.strategy/RegionPartitionTableAccess.h"
+#include "alinous.remote.region.server.tpc/CommitClusterNodeListner.h"
 #include "alinous.remote.region.server.scan/ScanWorkerResult.h"
 #include "alinous.remote.region.server.scan/ScanSession.h"
 #include "alinous.remote.region.server.scan/RegionScanManager.h"
@@ -234,7 +235,8 @@ ScanWorkerResult* NodeRegionServer::scan(ClientScanCommandData* data, ThreadCont
 	checkVersion(vctx, ctx);
 	TableAndSchema* sctable = data->getTable(ctx);
 	RegionPartitionTableAccess* tableAccess = this->refs->getCluster(sctable->getSchema(ctx), sctable->getTable(ctx), ctx);
-	ScanSession* session = this->scanManager->getScanSession(vctx->getTrxId(ctx), data, tableAccess, ctx);
+	CommitClusterNodeListner* accessListner = this->dmlSessions->getListner(vctx->getTrxId(ctx), ctx);
+	ScanSession* session = this->scanManager->getScanSession(vctx->getTrxId(ctx), data, tableAccess, accessListner, ctx);
 	ScanWorkerResult* result = session->scan(ctx);
 	return result;
 }

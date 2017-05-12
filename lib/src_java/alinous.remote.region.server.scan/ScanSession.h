@@ -3,6 +3,9 @@
 namespace alinous {namespace remote {namespace region {namespace client {namespace command {namespace dml {
 class ClientScanCommandData;}}}}}}
 
+namespace alinous {namespace remote {namespace region {namespace server {namespace tpc {
+class CommitClusterNodeListner;}}}}}
+
 namespace alinous {namespace remote {namespace region {namespace server {namespace scan {
 class ScanSession;}}}}}
 
@@ -49,6 +52,7 @@ using ::java::util::Iterator;
 using ::alinous::db::AlinousDbException;
 using ::alinous::remote::region::client::command::dml::ClientScanCommandData;
 using ::alinous::remote::region::server::schema::strategy::RegionPartitionTableAccess;
+using ::alinous::remote::region::server::tpc::CommitClusterNodeListner;
 using ::alinous::system::AlinousException;
 
 
@@ -57,13 +61,14 @@ class ScanSession final : public virtual IObject {
 public:
 	ScanSession(const ScanSession& base) = default;
 public:
-	ScanSession(ClientScanCommandData* data, ThreadContext* ctx) throw() ;
-	void __construct_impl(ClientScanCommandData* data, ThreadContext* ctx) throw() ;
+	ScanSession(ClientScanCommandData* data, CommitClusterNodeListner* accessListner, ThreadContext* ctx) throw() ;
+	void __construct_impl(ClientScanCommandData* data, CommitClusterNodeListner* accessListner, ThreadContext* ctx) throw() ;
 	virtual ~ScanSession() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 private:
 	ClientScanCommandData* data;
 	IScanWorker* worker;
+	CommitClusterNodeListner* accessListner;
 public:
 	ScanSession* init(RegionPartitionTableAccess* tableAccess, ThreadContext* ctx);
 	ScanWorkerResult* scan(ThreadContext* ctx);

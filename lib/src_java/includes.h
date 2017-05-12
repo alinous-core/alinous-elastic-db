@@ -422,7 +422,12 @@
 #include "alinous.remote.db.client.command/RemoteStorageCommandReader.h"
 #include "alinous.remote.db/RemoteStorageResponceAction.h"
 #include "alinous.remote.db/RemoteStorageResponceActionFactory.h"
+#include "alinous.db.trx/TrxLockContext.h"
+#include "alinous.db.trx.scan/ScanException.h"
 #include "alinous.remote.db.server.scan/AbstractStorageScanSession.h"
+#include "alinous.db.table/IScannableIndex.h"
+#include "alinous.db.table/TableIndexValue.h"
+#include "alinous.db.table.scan/IndexScannerLockRequirement.h"
 #include "alinous.remote.db.server.scan/FullScanSession.h"
 #include "alinous.remote.db.server.scan/EqKeyScanSession.h"
 #include "alinous.remote.db.server.scan/ListScanSession.h"
@@ -444,8 +449,6 @@
 #include "alinous.remote.db.server.commit/TableFullNameKey.h"
 #include "alinous.remote.db.server.commit/InsertStore.h"
 #include "alinous.remote.db.server.commit/PrepareStorageManager.h"
-#include "alinous.db.table/IScannableIndex.h"
-#include "alinous.db.table/TableIndexValue.h"
 #include "alinous.remote.db.server.trx/UniqueChecker.h"
 #include "alinous.remote.db.server.trx/StorageTransaction.h"
 #include "alinous.compile.sql.ddl/DdlColumnDescriptor.h"
@@ -465,6 +468,8 @@
 #include "alinous.db.trx.cache/TrxRecordsCache.h"
 #include "alinous.db/TableSchemaCollection.h"
 #include "alinous.db.trx/CreateIndexMetadata.h"
+#include "alinous.remote.region.client/TableAccessStatus.h"
+#include "alinous.remote.region.client/TableAccessStatusListner.h"
 #include "alinous.db.trx/DbTransaction.h"
 #include "alinous.remote.region.client.transaction/AbstractRemoteClientTransaction.h"
 #include "alinous.system.utils/FileUtils.h"
@@ -505,6 +510,7 @@
 #include "alinous.remote.region.server.schema/NodeTableClaster.h"
 #include "alinous.remote.region.server.schema.strategy/RegionShardPartAccess.h"
 #include "alinous.remote.region.server.schema.strategy/RegionPartitionTableAccess.h"
+#include "alinous.remote.region.server.tpc/CommitClusterNodeListner.h"
 #include "alinous.remote.region.server.scan/IScanWorker.h"
 #include "alinous.remote.region.server.scan/FullScanWorker.h"
 #include "alinous.remote.region.server.scan/EqKeyScanWorker.h"
@@ -517,7 +523,6 @@
 #include "alinous.remote.region.server.schema.strategy/NodeListBinarySearcher.h"
 #include "alinous.remote.region.server.schema.strategy/InsertNodeAccessStrategy.h"
 #include "alinous.remote.region.server.schema.strategy/InsertTableStrategy.h"
-#include "alinous.remote.region.server.tpc/CommitClusterNodeListner.h"
 #include "alinous.remote.region.server.tpc/RegionInsertExecutor.h"
 #include "alinous.remote.region.server.tpc/RegionTpcExecutorPool.h"
 #include "alinous.system.config.remote/RegionsServer.h"
@@ -580,7 +585,6 @@
 #include "alinous.compile.sql.select.join/DomVariableJoinTarget.h"
 #include "alinous.compile.sql.analyze/JoinMatchExpression.h"
 #include "alinous.compile.sql.analyze/JoinStrategyPart.h"
-#include "alinous.db.trx.scan/ScanException.h"
 #include "alinous.db.trx.scan/ScannedOids.h"
 #include "alinous.compile.sql.select.join.scan/JoinedCollectionScanner.h"
 #include "alinous.compile.sql.analyze/IndexScanStrategyPlan.h"
@@ -591,7 +595,6 @@
 #include "alinous.compile.sql.analyze/InnerNecessaryCondition.h"
 #include "alinous.db.trx.scan/IJoinScanner.h"
 #include "alinous.compile.sql.select.join.scan/CrossJoinScanner.h"
-#include "alinous.db.trx/TrxLockContext.h"
 #include "alinous.compile.sql.select.join.scan/ReverseIndexScanner.h"
 #include "alinous.compile.sql.select.join.scan/RightindexJoinScanner.h"
 #include "alinous.remote.region.client.scan/IRemoteScanner.h"
@@ -604,7 +607,6 @@
 #include "alinous.remote.region.client.scan/RemoteTableFullScanner.h"
 #include "alinous.remote.region.client.scan/RemoteTableIndexScanner.h"
 #include "alinous.db.trx.scan/IFilterScanner.h"
-#include "alinous.db.table.scan/IndexScannerLockRequirement.h"
 #include "alinous.db.table.scan/TableFullScanner.h"
 #include "alinous.db.table.scan/TableIndexScanner.h"
 #include "alinous.db.trx.cache/TrxRecordCacheIndexScanner.h"
@@ -1905,11 +1907,13 @@ inline static void __cleanUpStatics(alinous::ThreadContext* ctx){
 	alinous::remote::region::client::RemoteTableIndex::__cleanUp(ctx);
 	alinous::remote::region::client::RemoteTableScheme::__cleanUp(ctx);
 	alinous::remote::region::client::RegionClientConnectionFactory::__cleanUp(ctx);
+	alinous::remote::region::client::TableAccessStatusListner::__cleanUp(ctx);
 	alinous::remote::region::client::RemoteClientTrxRecordsCache::__cleanUp(ctx);
 	alinous::remote::region::client::RegionConnection::__cleanUp(ctx);
 	alinous::remote::region::client::RemoteRegionRef::__cleanUp(ctx);
 	alinous::remote::region::client::RemoteReverseIndexScanner::__cleanUp(ctx);
 	alinous::remote::region::client::RegionConnectionInfo::__cleanUp(ctx);
+	alinous::remote::region::client::TableAccessStatus::__cleanUp(ctx);
 	alinous::remote::region::client::scan::RemoteIndexRangeScanner::__cleanUp(ctx);
 	alinous::remote::region::client::scan::RemoteIndexListScanner::__cleanUp(ctx);
 	alinous::remote::region::client::scan::RemoteIndexEqScanner::__cleanUp(ctx);

@@ -52,6 +52,7 @@
 #include "alinous.compile.sql/DropTableStatement.h"
 #include "alinous.db.trx/DbVersionContext.h"
 #include "alinous.db.trx/DbTransactionManager.h"
+#include "alinous.remote.region.client/TableAccessStatusListner.h"
 #include "alinous.db.trx/DbTransaction.h"
 #include "alinous.remote.region.client.transaction/AbstractRemoteClientTransaction.h"
 #include "alinous.db.trx.cache/TrxStorageManager.h"

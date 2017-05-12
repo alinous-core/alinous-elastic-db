@@ -13,6 +13,8 @@
 #include "alinous.btree/IBTreeValue.h"
 #include "alinous.db.trx.scan/ScanResultRecord.h"
 #include "alinous.db.trx.scan/ITableTargetScanner.h"
+#include "alinous.remote.region.client/TableAccessStatus.h"
+#include "alinous.remote.region.client/TableAccessStatusListner.h"
 #include "alinous.db.trx/DbTransaction.h"
 #include "alinous.db.table/IDatabaseTable.h"
 #include "alinous.db.trx.scan/ScanException.h"
@@ -57,6 +59,8 @@ void RemoteTableFullScanner::__releaseRegerences(bool prepare, ThreadContext* ct
 }
 RemoteTableFullScanner* RemoteTableFullScanner::init(ScanTableIdentifier* tableId, DbTransaction* trx, IDatabaseTable* tableStore, int lockMode, ThreadContext* ctx)
 {
+	TableAccessStatusListner* listner = trx->getAccessListner(ctx);
+	listner->setStatus(tableStore->getFullName(ctx), TableAccessStatus::STAT_COMMITTED_NEEDED, ctx);
 	return this;
 }
 void RemoteTableFullScanner::startScan(ScanResultIndexKey* indexKeyValue, ThreadContext* ctx)

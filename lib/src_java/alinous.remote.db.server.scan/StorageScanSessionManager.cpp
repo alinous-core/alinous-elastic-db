@@ -7,8 +7,11 @@
 #include "alinous.db.table/IDatabaseTable.h"
 #include "alinous.remote.socket/ICommandData.h"
 #include "alinous.db.trx/DbVersionContext.h"
+#include "alinous.db.table/DatabaseException.h"
+#include "alinous.db.trx.scan/ScanException.h"
 #include "alinous.lock/LockObject.h"
 #include "alinous.remote.region.client.command.dml/ClientScanCommandData.h"
+#include "alinous.db.trx/TrxLockContext.h"
 #include "alinous.remote.region.server.scan/ScanWorkerResult.h"
 #include "alinous.remote.db.server.scan/AbstractStorageScanSession.h"
 #include "java.lang/Number.h"
@@ -73,6 +76,14 @@ AbstractStorageScanSession* StorageScanSessionManager::getScanSession(IDatabaseT
 			this->sessions->put(trxId, session, ctx);
 		}
 		return session;
+	}
+}
+void StorageScanSessionManager::removeSession(DbVersionContext* vctx, ThreadContext* ctx) throw() 
+{
+	Long* trxId = (new(ctx) Long(vctx->getTrxId(ctx), ctx));
+	{
+		SynchronizedBlockObj __synchronized_2(this->lock, ctx);
+		this->sessions->remove(trxId, ctx);
 	}
 }
 AbstractStorageScanSession* StorageScanSessionManager::newSession(IDatabaseTable* table, ClientScanCommandData* data, ThreadContext* ctx)

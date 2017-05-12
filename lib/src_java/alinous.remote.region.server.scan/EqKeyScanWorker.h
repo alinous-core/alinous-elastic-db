@@ -6,6 +6,9 @@ class ClientScanCommandData;}}}}}}
 namespace alinous {namespace remote {namespace region {namespace server {namespace schema {namespace strategy {
 class RegionPartitionTableAccess;}}}}}}
 
+namespace alinous {namespace remote {namespace region {namespace server {namespace tpc {
+class CommitClusterNodeListner;}}}}}
+
 namespace alinous {namespace remote {namespace region {namespace server {namespace scan {
 class ScanWorkerResult;}}}}}
 
@@ -27,6 +30,7 @@ using namespace ::java::lang;
 using ::java::util::Iterator;
 using ::alinous::remote::region::client::command::dml::ClientScanCommandData;
 using ::alinous::remote::region::server::schema::strategy::RegionPartitionTableAccess;
+using ::alinous::remote::region::server::tpc::CommitClusterNodeListner;
 
 
 
@@ -39,7 +43,7 @@ public:
 	virtual ~EqKeyScanWorker() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 public:
-	void init(ThreadContext* ctx) throw()  final;
+	void init(CommitClusterNodeListner* accessListner, ThreadContext* ctx) throw()  final;
 	ScanWorkerResult* scan(ThreadContext* ctx) throw()  final;
 public:
 	static bool __init_done;

@@ -15,6 +15,9 @@ class IScannableIndex;}}}
 namespace alinous {namespace db {namespace table {
 class IDatabaseTable;}}}
 
+namespace alinous {namespace remote {namespace region {namespace client {
+class TableAccessStatusListner;}}}}
+
 namespace alinous {namespace db {namespace trx {namespace scan {
 class ScanResultIndexKey;}}}}
 
@@ -51,6 +54,9 @@ class IOException;}}
 namespace alinous {namespace db {namespace table {
 class DatabaseException;}}}
 
+namespace alinous {namespace remote {namespace region {namespace client {
+class TableAccessStatus;}}}}
+
 namespace alinous {namespace system {
 class AlinousException;}}
 
@@ -80,6 +86,8 @@ using ::alinous::db::trx::DbVersionContext;
 using ::alinous::db::trx::scan::ScanException;
 using ::alinous::db::trx::scan::ScanResultIndexKey;
 using ::alinous::db::trx::scan::ScanResultRecord;
+using ::alinous::remote::region::client::TableAccessStatus;
+using ::alinous::remote::region::client::TableAccessStatusListner;
 using ::alinous::remote::region::client::command::dml::ClientScanCommand;
 using ::alinous::remote::region::client::command::dml::ClientScanEndCommand;
 using ::alinous::system::AlinousException;

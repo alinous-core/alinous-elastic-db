@@ -18,6 +18,7 @@ template class alinous::RawArray<::alinous::HashMapInternalElement<::java::lang:
 template class alinous::RawArray<::alinous::HashMapInternalElement<::java::lang::Long, ::alinous::remote::db::server::scan::AbstractStorageScanSession>, ::alinous::HashMapInternalElement<::java::lang::Long, ::alinous::remote::db::server::scan::AbstractStorageScanSession>::ValueCompare>;
 template class alinous::RawArray<::alinous::HashMapInternalElement<::java::lang::String, ::alinous::remote::region::client::command::data::ClientTableData>, ::alinous::HashMapInternalElement<::java::lang::String, ::alinous::remote::region::client::command::data::ClientTableData>::ValueCompare>;
 template class alinous::RawArray<::alinous::HashMapInternalElement<::java::lang::String, ::alinous::remote::region::client::DatabaseTableClient>, ::alinous::HashMapInternalElement<::java::lang::String, ::alinous::remote::region::client::DatabaseTableClient>::ValueCompare>;
+template class alinous::RawArray<::alinous::HashMapInternalElement<::java::lang::String, ::alinous::remote::region::client::TableAccessStatus>, ::alinous::HashMapInternalElement<::java::lang::String, ::alinous::remote::region::client::TableAccessStatus>::ValueCompare>;
 template class alinous::RawArray<::alinous::HashMapInternalElement<::java::lang::String, ::alinous::remote::region::client::command::data::ClientSchemaData>, ::alinous::HashMapInternalElement<::java::lang::String, ::alinous::remote::region::client::command::data::ClientSchemaData>::ValueCompare>;
 template class alinous::RawArray<::alinous::HashMapInternalElement<::java::lang::String, ::alinous::remote::region::client::RemoteTableScheme>, ::alinous::HashMapInternalElement<::java::lang::String, ::alinous::remote::region::client::RemoteTableScheme>::ValueCompare>;
 template class alinous::RawArray<::alinous::HashMapInternalElement<::java::lang::Long, ::alinous::remote::region::server::scan::ScanSession>, ::alinous::HashMapInternalElement<::java::lang::Long, ::alinous::remote::region::server::scan::ScanSession>::ValueCompare>;
@@ -74,6 +75,7 @@ template class alinous::RawArray<::alinous::HashMapRawArray<::java::lang::Long, 
 template class alinous::RawArray<::alinous::HashMapRawArray<::java::lang::Long, ::alinous::remote::db::server::scan::AbstractStorageScanSession>>;
 template class alinous::RawArray<::alinous::HashMapRawArray<::java::lang::String, ::alinous::remote::region::client::command::data::ClientTableData>>;
 template class alinous::RawArray<::alinous::HashMapRawArray<::java::lang::String, ::alinous::remote::region::client::DatabaseTableClient>>;
+template class alinous::RawArray<::alinous::HashMapRawArray<::java::lang::String, ::alinous::remote::region::client::TableAccessStatus>>;
 template class alinous::RawArray<::alinous::HashMapRawArray<::java::lang::String, ::alinous::remote::region::client::command::data::ClientSchemaData>>;
 template class alinous::RawArray<::alinous::HashMapRawArray<::java::lang::String, ::alinous::remote::region::client::RemoteTableScheme>>;
 template class alinous::RawArray<::alinous::HashMapRawArray<::java::lang::Long, ::alinous::remote::region::server::scan::ScanSession>>;

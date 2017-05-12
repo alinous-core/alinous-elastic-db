@@ -1,5 +1,8 @@
 #ifndef ALINOUS_REMOTE_REGION_SERVER_SCAN_ISCANWORKER_H_
 #define ALINOUS_REMOTE_REGION_SERVER_SCAN_ISCANWORKER_H_
+namespace alinous {namespace remote {namespace region {namespace server {namespace tpc {
+class CommitClusterNodeListner;}}}}}
+
 namespace alinous {namespace remote {namespace region {namespace server {namespace scan {
 class ScanWorkerResult;}}}}}
 
@@ -19,6 +22,7 @@ namespace alinous {namespace remote {namespace region {namespace server {namespa
 using namespace ::alinous;
 using namespace ::java::lang;
 using ::java::util::Iterator;
+using ::alinous::remote::region::server::tpc::CommitClusterNodeListner;
 using ::alinous::system::AlinousException;
 
 
@@ -32,7 +36,7 @@ public:
 	virtual ~IScanWorker() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 public:
-	virtual void init(ThreadContext* ctx) throw()  = 0;
+	virtual void init(CommitClusterNodeListner* accessListner, ThreadContext* ctx) throw()  = 0;
 	virtual ScanWorkerResult* scan(ThreadContext* ctx) = 0;
 public:
 	static bool __init_done;

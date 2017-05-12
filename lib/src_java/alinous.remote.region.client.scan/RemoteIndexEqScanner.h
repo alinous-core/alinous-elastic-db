@@ -27,6 +27,9 @@ class InnerNecessaryCondition;}}}}
 namespace alinous {namespace runtime {namespace engine {
 class ScriptMachine;}}}
 
+namespace alinous {namespace remote {namespace region {namespace client {
+class TableAccessStatusListner;}}}}
+
 namespace alinous {namespace db {namespace trx {namespace scan {
 class ScanResultRecord;}}}}
 
@@ -41,6 +44,9 @@ class DatabaseException;}}}
 
 namespace alinous {namespace db {namespace trx {namespace scan {
 class ScanException;}}}}
+
+namespace alinous {namespace remote {namespace region {namespace client {
+class TableAccessStatus;}}}}
 
 namespace alinous {namespace system {
 class AlinousException;}}
@@ -68,6 +74,8 @@ using ::alinous::db::trx::cache::TrxRecordCacheIndex;
 using ::alinous::db::trx::scan::ScanException;
 using ::alinous::db::trx::scan::ScanResultIndexKey;
 using ::alinous::db::trx::scan::ScanResultRecord;
+using ::alinous::remote::region::client::TableAccessStatus;
+using ::alinous::remote::region::client::TableAccessStatusListner;
 using ::alinous::runtime::engine::ScriptMachine;
 using ::alinous::system::AlinousException;
 using ::alinous::system::ISystemLog;

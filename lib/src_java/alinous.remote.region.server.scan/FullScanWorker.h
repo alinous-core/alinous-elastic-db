@@ -6,6 +6,9 @@ class ClientScanCommandData;}}}}}}
 namespace alinous {namespace remote {namespace region {namespace server {namespace schema {namespace strategy {
 class RegionPartitionTableAccess;}}}}}}
 
+namespace alinous {namespace remote {namespace region {namespace server {namespace tpc {
+class CommitClusterNodeListner;}}}}}
+
 namespace alinous {namespace remote {namespace region {namespace server {namespace scan {
 class ScanWorkerResult;}}}}}
 
@@ -46,6 +49,7 @@ using ::alinous::remote::region::client::command::dml::ClientScanCommandData;
 using ::alinous::remote::region::server::schema::NodeReference;
 using ::alinous::remote::region::server::schema::strategy::RegionPartitionTableAccess;
 using ::alinous::remote::region::server::schema::strategy::RegionShardPartAccess;
+using ::alinous::remote::region::server::tpc::CommitClusterNodeListner;
 using ::alinous::system::AlinousException;
 
 
@@ -64,7 +68,7 @@ private:
 	int index;
 	ClientScanCommandData* data;
 public:
-	void init(ThreadContext* ctx) throw()  final;
+	void init(CommitClusterNodeListner* accessListner, ThreadContext* ctx) throw()  final;
 	ScanWorkerResult* scan(ThreadContext* ctx) final;
 public:
 	static bool __init_done;

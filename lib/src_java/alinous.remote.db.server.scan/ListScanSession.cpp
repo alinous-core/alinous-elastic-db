@@ -5,6 +5,7 @@
 #include "alinous.remote.socket/ICommandData.h"
 #include "alinous.remote.region.client.command.dml/ClientScanCommandData.h"
 #include "alinous.remote.region.server.scan/ScanWorkerResult.h"
+#include "alinous.db.trx/TrxLockContext.h"
 #include "alinous.remote.db.server.scan/AbstractStorageScanSession.h"
 #include "alinous.remote.db.server.scan/ListScanSession.h"
 

@@ -67,6 +67,7 @@
 #include "alinous.db.trx.ddl/TrxSchemeManager.h"
 #include "alinous.db.trx.scan/ScanResult.h"
 #include "alinous.lock.unique/UniqueExclusiveLockClient.h"
+#include "alinous.remote.region.client/TableAccessStatusListner.h"
 #include "alinous.db.trx/DbTransactionManager.h"
 #include "alinous.db.trx/DbTransaction.h"
 #include "alinous.db.table/IDatabaseTable.h"
@@ -90,11 +91,13 @@ bool AbstractRemoteClientTransaction::__init_static_variables(){
 	delete ctx;
 	return true;
 }
- AbstractRemoteClientTransaction::AbstractRemoteClientTransaction(DbTransactionManager* mgr, String* tmpDir, AlinousDatabase* database, AlinousCore* core, long long commitId, DbVersionContext* vctx, ThreadContext* ctx) throw()  : IObject(ctx), DbTransaction(mgr, tmpDir, database, core, commitId, vctx, ctx)
+ AbstractRemoteClientTransaction::AbstractRemoteClientTransaction(DbTransactionManager* mgr, String* tmpDir, AlinousDatabase* database, AlinousCore* core, long long commitId, DbVersionContext* vctx, ThreadContext* ctx) throw()  : IObject(ctx), DbTransaction(mgr, tmpDir, database, core, commitId, vctx, ctx), accessListner(nullptr)
 {
+	__GC_MV(this, &(this->accessListner), (new(ctx) TableAccessStatusListner(ctx)), TableAccessStatusListner);
 }
 void AbstractRemoteClientTransaction::__construct_impl(DbTransactionManager* mgr, String* tmpDir, AlinousDatabase* database, AlinousCore* core, long long commitId, DbVersionContext* vctx, ThreadContext* ctx) throw() 
 {
+	__GC_MV(this, &(this->accessListner), (new(ctx) TableAccessStatusListner(ctx)), TableAccessStatusListner);
 }
  AbstractRemoteClientTransaction::~AbstractRemoteClientTransaction() throw() 
 {
@@ -105,6 +108,9 @@ void AbstractRemoteClientTransaction::__construct_impl(DbTransactionManager* mgr
 }
 void AbstractRemoteClientTransaction::__releaseRegerences(bool prepare, ThreadContext* ctx) throw() 
 {
+	ObjectEraser __e_obj1(ctx, __FILEW__, __LINE__, L"AbstractRemoteClientTransaction", L"~AbstractRemoteClientTransaction");
+	__e_obj1.add(this->accessListner, this);
+	accessListner = nullptr;
 	if(!prepare){
 		return;
 	}
@@ -121,6 +127,10 @@ void AbstractRemoteClientTransaction::createTable(TableSchema* schema, ThreadCon
 		throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3610(), ctx));
 	}
 	DbTransaction::createTable(schema, ctx);
+}
+TableAccessStatusListner* AbstractRemoteClientTransaction::getAccessListner(ThreadContext* ctx) throw() 
+{
+	return accessListner;
 }
 void AbstractRemoteClientTransaction::commitUpdateInsert(long long newCommitId, ThreadContext* ctx)
 {

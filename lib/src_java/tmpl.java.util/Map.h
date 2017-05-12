@@ -17,6 +17,7 @@ template class ::java::util::Map<::java::lang::Long, ::alinous::remote::db::serv
 template class ::java::util::Map<::java::lang::Long, ::alinous::remote::db::server::scan::AbstractStorageScanSession>;
 template class ::java::util::Map<::java::lang::String, ::alinous::remote::region::client::command::data::ClientTableData>;
 template class ::java::util::Map<::java::lang::String, ::alinous::remote::region::client::DatabaseTableClient>;
+template class ::java::util::Map<::java::lang::String, ::alinous::remote::region::client::TableAccessStatus>;
 template class ::java::util::Map<::java::lang::String, ::alinous::remote::region::client::command::data::ClientSchemaData>;
 template class ::java::util::Map<::java::lang::String, ::alinous::remote::region::client::RemoteTableScheme>;
 template class ::java::util::Map<::java::lang::Long, ::alinous::remote::region::server::scan::ScanSession>;

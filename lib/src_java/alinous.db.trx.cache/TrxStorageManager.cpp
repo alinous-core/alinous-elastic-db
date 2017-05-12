@@ -70,6 +70,7 @@
 #include "alinous.db.trx/CreateIndexMetadata.h"
 #include "alinous.db.trx.ddl/TrxSchemeManager.h"
 #include "alinous.db.trx.scan/ScanResult.h"
+#include "alinous.remote.region.client/TableAccessStatusListner.h"
 #include "alinous.system.utils/FileUtils.h"
 #include "alinous.db.trx/DbTransactionManager.h"
 #include "alinous.db.trx/DbTransaction.h"

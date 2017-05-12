@@ -15,6 +15,8 @@
 #include "alinous.btree/IBTreeValue.h"
 #include "alinous.db.trx.scan/ScanResultRecord.h"
 #include "alinous.db.trx.scan/ITableTargetScanner.h"
+#include "alinous.remote.region.client/TableAccessStatus.h"
+#include "alinous.remote.region.client/TableAccessStatusListner.h"
 #include "alinous.db.trx/DbVersionContext.h"
 #include "alinous.db.trx/DbTransaction.h"
 #include "java.io/FilterOutputStream.h"
@@ -84,6 +86,8 @@ RemoteTableIndexScanner* RemoteTableIndexScanner::init(ScanTableIdentifier* tabl
 	__GC_MV(this, &(this->tableStore), tableStore, IDatabaseTable);
 	this->lockMode = lockMode;
 	__GC_MV(this, &(this->tableId), tableId, ScanTableIdentifier);
+	TableAccessStatusListner* listner = trx->getAccessListner(ctx);
+	listner->setStatus(tableStore->getFullName(ctx), TableAccessStatus::STAT_COMMITTED_NEEDED, ctx);
 	return this;
 }
 void RemoteTableIndexScanner::startScan(ScanResultIndexKey* indexKeyValue, ThreadContext* ctx)

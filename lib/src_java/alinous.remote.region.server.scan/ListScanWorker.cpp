@@ -4,6 +4,7 @@
 #include "alinous.remote.socket/ICommandData.h"
 #include "alinous.remote.region.client.command.dml/ClientScanCommandData.h"
 #include "alinous.remote.region.server.schema.strategy/RegionPartitionTableAccess.h"
+#include "alinous.remote.region.server.tpc/CommitClusterNodeListner.h"
 #include "alinous.remote.region.server.scan/ScanWorkerResult.h"
 #include "alinous.remote.region.server.scan/IScanWorker.h"
 #include "alinous.remote.region.server.scan/ListScanWorker.h"
@@ -44,7 +45,7 @@ void ListScanWorker::__releaseRegerences(bool prepare, ThreadContext* ctx) throw
 		return;
 	}
 }
-void ListScanWorker::init(ThreadContext* ctx) throw() 
+void ListScanWorker::init(CommitClusterNodeListner* accessListner, ThreadContext* ctx) throw() 
 {
 }
 ScanWorkerResult* ListScanWorker::scan(ThreadContext* ctx) throw() 

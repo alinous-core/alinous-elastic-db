@@ -1293,9 +1293,9 @@ public:
 	constexpr static StaticUnicodeString __CNST_STR_954{L"alinous-config.xml",18};
 public:
 	static UnicodeStringWrapper* getCNST_STR_954() throw();
-	constexpr static StaticUnicodeString __CNST_STR_3603{L"Failed in insert command",24};
+	constexpr static StaticUnicodeString __CNST_STR_3602{L"Failed in insert command",24};
 public:
-	static UnicodeStringWrapper* getCNST_STR_3603() throw();
+	static UnicodeStringWrapper* getCNST_STR_3602() throw();
 	constexpr static StaticUnicodeString __CNST_STR_1172{L"Can not use empty array or wrong structured dom variable as a table",67};
 public:
 	static UnicodeStringWrapper* getCNST_STR_1172() throw();
@@ -3735,9 +3735,9 @@ public:
 	constexpr static StaticUnicodeString __CNST_STR_331{L"[:^alnum:]",10};
 public:
 	static UnicodeStringWrapper* getCNST_STR_331() throw();
-	constexpr static StaticUnicodeString __CNST_STR_3601{L"Failed in finish commit session command",39};
+	constexpr static StaticUnicodeString __CNST_STR_3603{L"Failed in finish commit session command",39};
 public:
-	static UnicodeStringWrapper* getCNST_STR_3601() throw();
+	static UnicodeStringWrapper* getCNST_STR_3603() throw();
 	constexpr static StaticUnicodeString __CNST_STR_2959{L"ptid",4};
 public:
 	static UnicodeStringWrapper* getCNST_STR_2959() throw();
@@ -4104,9 +4104,9 @@ public:
 	constexpr static StaticUnicodeString __CNST_STR_3150{L"application/scvp-vp-response",28};
 public:
 	static UnicodeStringWrapper* getCNST_STR_3150() throw();
-	constexpr static StaticUnicodeString __CNST_STR_3602{L"Local Record Cache is broken",28};
+	constexpr static StaticUnicodeString __CNST_STR_3601{L"Local Record Cache is broken",28};
 public:
-	static UnicodeStringWrapper* getCNST_STR_3602() throw();
+	static UnicodeStringWrapper* getCNST_STR_3601() throw();
 	constexpr static StaticUnicodeString __CNST_STR_530{L",minimalDaysInFirstWeek=",24};
 public:
 	static UnicodeStringWrapper* getCNST_STR_530() throw();

@@ -7,6 +7,7 @@
 #include "alinous.remote.socket/ICommandData.h"
 #include "alinous.remote.region.client.command.dml/ClientScanCommandData.h"
 #include "alinous.remote.region.server.schema.strategy/RegionPartitionTableAccess.h"
+#include "alinous.remote.region.server.tpc/CommitClusterNodeListner.h"
 #include "alinous.remote.region.server.scan/ScanWorkerResult.h"
 #include "alinous.remote.region.server.scan/IScanWorker.h"
 #include "alinous.remote.region.server.scan/FullScanWorker.h"
@@ -32,13 +33,15 @@ bool ScanSession::__init_static_variables(){
 	delete ctx;
 	return true;
 }
- ScanSession::ScanSession(ClientScanCommandData* data, ThreadContext* ctx) throw()  : IObject(ctx), data(nullptr), worker(nullptr)
+ ScanSession::ScanSession(ClientScanCommandData* data, CommitClusterNodeListner* accessListner, ThreadContext* ctx) throw()  : IObject(ctx), data(nullptr), worker(nullptr), accessListner(nullptr)
 {
 	__GC_MV(this, &(this->data), data, ClientScanCommandData);
+	__GC_MV(this, &(this->accessListner), accessListner, CommitClusterNodeListner);
 }
-void ScanSession::__construct_impl(ClientScanCommandData* data, ThreadContext* ctx) throw() 
+void ScanSession::__construct_impl(ClientScanCommandData* data, CommitClusterNodeListner* accessListner, ThreadContext* ctx) throw() 
 {
 	__GC_MV(this, &(this->data), data, ClientScanCommandData);
+	__GC_MV(this, &(this->accessListner), accessListner, CommitClusterNodeListner);
 }
  ScanSession::~ScanSession() throw() 
 {
@@ -54,6 +57,8 @@ void ScanSession::__releaseRegerences(bool prepare, ThreadContext* ctx) throw()
 	data = nullptr;
 	__e_obj1.add(this->worker, this);
 	worker = nullptr;
+	__e_obj1.add(this->accessListner, this);
+	accessListner = nullptr;
 	if(!prepare){
 		return;
 	}
@@ -89,7 +94,7 @@ ScanSession* ScanSession::init(RegionPartitionTableAccess* tableAccess, ThreadCo
 			}
 		}
 	}
-	this->worker->init(ctx);
+	this->worker->init(this->accessListner, ctx);
 	return this;
 }
 ScanWorkerResult* ScanSession::scan(ThreadContext* ctx)

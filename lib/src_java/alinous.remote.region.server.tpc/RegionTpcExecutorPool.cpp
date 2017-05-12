@@ -58,6 +58,14 @@ void RegionTpcExecutorPool::__releaseRegerences(bool prepare, ThreadContext* ctx
 		return;
 	}
 }
+CommitClusterNodeListner* RegionTpcExecutorPool::getListner(long long trxId, ThreadContext* ctx) throw() 
+{
+	{
+		SynchronizedBlockObj __synchronized_2(this->lock, ctx);
+		Long* key = (new(ctx) Long(trxId, ctx));
+		return this->listners->get(key, ctx);
+	}
+}
 RegionInsertExecutor* RegionTpcExecutorPool::getInsertSession(long long trxId, long long commitId, DbVersionContext* vctx, NodeReferenceManager* refs, ThreadContext* ctx) throw() 
 {
 	{
