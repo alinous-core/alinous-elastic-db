@@ -78,6 +78,7 @@ public:
 	IBTreeNode* next(ThreadContext* ctx);
 	bool hasNext(ThreadContext* ctx);
 	void endScan(ThreadContext* ctx);
+	void endScan(bool closeGate, ThreadContext* ctx);
 private:
 	void gotoKey(IBTreeKey* key, IBTreeNode* rootNode, ThreadContext* ctx);
 	void gotoNextLeafContainer(ThreadContext* ctx);

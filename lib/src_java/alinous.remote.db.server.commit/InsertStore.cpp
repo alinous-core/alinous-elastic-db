@@ -16,6 +16,8 @@
 #include "alinous.btree.scan/BTreeScanner.h"
 #include "alinous.btreememory/BTreeOnMemory.h"
 #include "alinous.db/AlinousDbException.h"
+#include "alinous.runtime.parallel/IThreadAction.h"
+#include "alinous.runtime.parallel/SequentialBackgroundJob.h"
 #include "alinous.remote.socket/ICommandData.h"
 #include "alinous.db.table/TableMetadata.h"
 #include "alinous.db/ITableSchema.h"
@@ -172,12 +174,32 @@ void InsertStore::handleCommitTable(long long newCommitId, DbVersionContext* vct
 	ISystemLog* log = core->getLogger(ctx);
 	int maxLoop = values->size(ctx);
 	long long nextOid = allocOids(server, fullName, maxLoop, ctx);
-	for(int i = 0; i != maxLoop; ++i)
+	int slotSize = table->getIndexes(ctx)->size(ctx) + 2;
+	IArrayObject<SequentialBackgroundJob>* jobs = ArrayAllocator<SequentialBackgroundJob>::allocate(ctx, slotSize);
+	for(int i = 0; i != slotSize; ++i)
 	{
-		ClientNetworkRecord* record = static_cast<ClientNetworkRecord*>(values->get(i, ctx));
-		record->setOid(nextOid, ctx);
-		nextOid ++ ;
-		table->tcpInsertCommit(record, server->getWorkerThreadsPool(ctx), log, ctx);
+		jobs->set((new(ctx) SequentialBackgroundJob(ctx))->init(server->getWorkerThreadsPool(ctx), ctx),i, ctx);
+	}
+	{
+		std::function<void(void)> finallyLm2= [&, this]()
+		{
+			for(int i = 0; i != slotSize; ++i)
+			{
+				jobs->get(i)->joinAndEnd(ctx);
+			}
+		};
+		Releaser finalyCaller2(finallyLm2);
+		try
+		{
+			for(int i = 0; i != maxLoop; ++i)
+			{
+				ClientNetworkRecord* record = static_cast<ClientNetworkRecord*>(values->get(i, ctx));
+				record->setOid(nextOid, ctx);
+				nextOid ++ ;
+				table->tcpInsertCommit(record, jobs, log, ctx);
+			}
+		}
+		catch(...){throw;}
 	}
 }
 long long InsertStore::allocOids(RemoteTableStorageServer* server, TableFullNameKey* fullName, int allocNum, ThreadContext* ctx)

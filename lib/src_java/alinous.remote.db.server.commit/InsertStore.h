@@ -54,6 +54,9 @@ class AlinousCore;}}
 namespace alinous {namespace system {
 class ISystemLog;}}
 
+namespace alinous {namespace runtime {namespace parallel {
+class SequentialBackgroundJob;}}}
+
 namespace alinous {namespace remote {namespace region {namespace client {namespace command {namespace data {
 class ClientNetworkRecord;}}}}}}
 
@@ -107,6 +110,7 @@ using ::alinous::remote::db::MonitorAccess;
 using ::alinous::remote::db::server::RemoteTableStorageServer;
 using ::alinous::remote::region::client::command::data::ClientNetworkRecord;
 using ::alinous::runtime::dom::VariableException;
+using ::alinous::runtime::parallel::SequentialBackgroundJob;
 using ::alinous::system::AlinousCore;
 using ::alinous::system::AlinousException;
 using ::alinous::system::ISystemLog;

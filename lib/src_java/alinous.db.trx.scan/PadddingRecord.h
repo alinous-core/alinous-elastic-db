@@ -79,6 +79,7 @@ public:
 	void setLastUpdateCommitId(long long commitId, ThreadContext* ctx) throw()  final;
 	void setInsertedCommitId(long long insertedCommitId, ThreadContext* ctx) throw()  final;
 	long long getPosition(ThreadContext* ctx) throw()  final;
+	void setPosition(long long position, ThreadContext* ctx) throw()  final;
 public:
 	static PadddingRecord* fromFetcher(FileStorageEntryFetcher* fetcher, ThreadContext* ctx) throw() ;
 public:

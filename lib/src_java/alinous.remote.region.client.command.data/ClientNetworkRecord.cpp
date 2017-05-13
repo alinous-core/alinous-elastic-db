@@ -141,10 +141,11 @@ void ClientNetworkRecord::__releaseRegerences(bool prepare, ThreadContext* ctx) 
 }
 void ClientNetworkRecord::appendToEntry(FileStorageEntryBuilder* builder, ThreadContext* ctx)
 {
-	builder->putInt(IBTreeValue::TYPE_CACHE_RECORD, ctx);
+	builder->putInt(IBTreeValue::TYPE_DATABASE_RECORD, ctx);
 	builder->putLong(this->oid, ctx);
 	builder->putLong(this->lastUpdateCommitId, ctx);
 	builder->putLong(this->insertedCommitId, ctx);
+	builder->putLong(this->deletedCommitId, ctx);
 	int maxLoop = this->values->size(ctx);
 	builder->putInt(maxLoop, ctx);
 	for(int i = 0; i != maxLoop; ++i)
@@ -155,9 +156,10 @@ void ClientNetworkRecord::appendToEntry(FileStorageEntryBuilder* builder, Thread
 }
 int ClientNetworkRecord::diskSize(ThreadContext* ctx)
 {
-	int total = 8;
-	total += 8 * 2;
+	int total = 4 + 8;
+	total += 8 * 3;
 	int maxLoop = this->values->size(ctx);
+	total += 4;
 	for(int i = 0; i != maxLoop; ++i)
 	{
 		VariantValue* val = this->values->get(i, ctx);
@@ -269,15 +271,21 @@ long long ClientNetworkRecord::getPosition(ThreadContext* ctx) throw()
 {
 	return this->position;
 }
+void ClientNetworkRecord::setPosition(long long position, ThreadContext* ctx) throw() 
+{
+	this->position = position;
+}
 ClientNetworkRecord* ClientNetworkRecord::valueFromFetcher(FileStorageEntryFetcher* fetcher, ThreadContext* ctx)
 {
 	long long oid = fetcher->fetchLong(ctx);
-	int maxLoop = fetcher->fetchInt(ctx);
-	ClientNetworkRecord* rec = (new(ctx) ClientNetworkRecord(oid, maxLoop, ctx));
 	long long uid = fetcher->fetchLong(ctx);
 	long long iid = fetcher->fetchLong(ctx);
+	long long did = fetcher->fetchLong(ctx);
+	int maxLoop = fetcher->fetchInt(ctx);
+	ClientNetworkRecord* rec = (new(ctx) ClientNetworkRecord(oid, maxLoop, ctx));
 	rec->lastUpdateCommitId = uid;
-	rec->setInsertedCommitId(iid, ctx);
+	rec->insertedCommitId = iid;
+	rec->deletedCommitId = did;
 	for(int i = 0; i != maxLoop; ++i)
 	{
 		VariantValue* variant = VariantValue::valueFromFetcher(fetcher, ctx);

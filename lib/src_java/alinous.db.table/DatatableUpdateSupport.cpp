@@ -108,14 +108,8 @@ void DatatableUpdateSupport::insertData(DbTransaction* trx, List<IDatabaseRecord
 		insertData(trx, data, newCommitId, jobs, logger, ctx);
 	}
 }
-void DatatableUpdateSupport::tcpInsertCommit(IDatabaseRecord* dbrecord, ThreadPool* pool, ISystemLog* log, ThreadContext* ctx)
+void DatatableUpdateSupport::tcpInsertCommit(IDatabaseRecord* dbrecord, IArrayObject<SequentialBackgroundJob>* jobs, ISystemLog* log, ThreadContext* ctx)
 {
-	int slotSize = getIndexes(ctx)->size(ctx) + 2;
-	IArrayObject<SequentialBackgroundJob>* jobs = ArrayAllocator<SequentialBackgroundJob>::allocate(ctx, slotSize);
-	for(int i = 0; i != slotSize; ++i)
-	{
-		jobs->set((new(ctx) SequentialBackgroundJob(ctx))->init(pool, ctx),i, ctx);
-	}
 	lockStorage(ctx);
 	FileStorageEntryWriter* writer = nullptr;
 	{
@@ -133,6 +127,7 @@ void DatatableUpdateSupport::tcpInsertCommit(IDatabaseRecord* dbrecord, ThreadPo
 			dbrecord->appendToEntry(builder, ctx);
 			FileStorageEntry* entry = builder->toEntry(ctx);
 			writer->write(entry, ctx);
+			dbrecord->setPosition(entry->position, ctx);
 			int slot = 0;
 			jobs->get(slot++)->addJob((new(ctx) OidIndexJob(dbrecord->getOid(ctx), getOidIndex(ctx), entry->position, ctx)), ctx);
 			jobs->get(slot++)->addJob((new(ctx) IndexInsertJob(getPrimaryIndex(ctx), dbrecord, ctx)), ctx);

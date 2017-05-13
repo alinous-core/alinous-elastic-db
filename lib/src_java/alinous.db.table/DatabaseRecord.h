@@ -99,7 +99,7 @@ public:
 	long long getMaxCommitId(ThreadContext* ctx) throw()  final;
 	String* toString(ThreadContext* ctx) throw() ;
 	long long getPosition(ThreadContext* ctx) throw()  final;
-	void setPosition(long long position, ThreadContext* ctx) throw() ;
+	void setPosition(long long position, ThreadContext* ctx) throw()  final;
 	bool equals(IObject* obj, ThreadContext* ctx) throw()  final;
 	int getHashKey(ThreadContext* ctx) throw() ;
 	IDatabaseTable* getStorageForCache(ThreadContext* ctx) throw() ;

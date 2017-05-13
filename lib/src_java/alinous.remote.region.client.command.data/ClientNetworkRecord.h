@@ -110,6 +110,7 @@ public:
 	void writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx) final;
 	bool equals(IObject* obj, ThreadContext* ctx) throw()  final;
 	long long getPosition(ThreadContext* ctx) throw()  final;
+	void setPosition(long long position, ThreadContext* ctx) throw()  final;
 public:
 	static ClientNetworkRecord* valueFromFetcher(FileStorageEntryFetcher* fetcher, ThreadContext* ctx);
 	static ClientNetworkRecord* fromNetwork(NetworkBinaryBuffer* buff, ThreadContext* ctx);

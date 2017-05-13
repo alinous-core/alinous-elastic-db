@@ -214,7 +214,7 @@ public:
 	void createIndex(String* getindexName, ArrayList<String>* columns, AlinousCore* core, BTreeGlobalCache* cache, ThreadContext* ctx) final;
 	void close(ThreadContext* ctx) throw()  final;
 	String* getFullName(ThreadContext* ctx) throw()  final;
-	void tcpInsertCommit(IDatabaseRecord* data, ThreadPool* pool, ISystemLog* log, ThreadContext* ctx) throw()  final;
+	void tcpInsertCommit(IDatabaseRecord* data, IArrayObject<SequentialBackgroundJob>* jobs, ISystemLog* log, ThreadContext* ctx) throw()  final;
 	long long getNextOid(ThreadContext* ctx) throw()  final;
 	void setNextOid(long long nextOid, ThreadContext* ctx) throw()  final;
 private:

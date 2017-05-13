@@ -150,9 +150,19 @@ void TableIndex::addIndexValue(IDatabaseRecord* record, ThreadContext* ctx)
 {
 	BTreeIndexKey* indexKey = (new(ctx) BTreeIndexKey(this, record, ctx));
 	TableIndexValue* positionValue = (new(ctx) TableIndexValue(record->getOid(ctx), record->getPosition(ctx), ctx));
-	this->storage->openGate(ctx);
-	this->storage->putKeyValue(indexKey, positionValue, ctx);
 	this->storage->closeGate(ctx);
+	{
+		std::function<void(void)> finallyLm2= [&, this]()
+		{
+			this->storage->openGate(ctx);
+		};
+		Releaser finalyCaller2(finallyLm2);
+		try
+		{
+			this->storage->putKeyValue(indexKey, positionValue, ctx);
+		}
+		catch(...){throw;}
+	}
 }
 void TableIndex::createIndex(AlinousCore* core, BTreeGlobalCache* cache, ThreadContext* ctx)
 {

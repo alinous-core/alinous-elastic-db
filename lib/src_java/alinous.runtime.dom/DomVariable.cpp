@@ -1350,6 +1350,9 @@ long long DomVariable::getPosition(ThreadContext* ctx) throw()
 {
 	return -1;
 }
+void DomVariable::setPosition(long long position, ThreadContext* ctx) throw() 
+{
+}
 DomVariable* DomVariable::importFromDebugXml(DomNode* node, ThreadContext* ctx) throw() 
 {
 	if(!node->getName(ctx)->equals(DomVariable::VAL_TYPE, ctx))

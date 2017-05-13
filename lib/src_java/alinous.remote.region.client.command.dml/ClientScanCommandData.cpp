@@ -259,6 +259,7 @@ void ClientScanCommandData::readData(NetworkBinaryBuffer* buff, ThreadContext* c
 		__GC_MV(this, &(this->table), TableAndSchema::fromNetwork(buff, ctx), TableAndSchema);
 	}
 	this->lockMode = buff->getInt(ctx);
+	this->isolationLevel = buff->getInt(ctx);
 	this->fullscan = buff->getBoolean(ctx);
 	this->primaryIndex = buff->getBoolean(ctx);
 	isnull = buff->getBoolean(ctx);
@@ -313,6 +314,7 @@ void ClientScanCommandData::writeData(NetworkBinaryBuffer* buff, ThreadContext* 
 		this->table->writeData(buff, ctx);
 	}
 	buff->putInt(this->lockMode, ctx);
+	buff->putInt(this->isolationLevel, ctx);
 	buff->putBoolean(this->fullscan, ctx);
 	buff->putBoolean(this->primaryIndex, ctx);
 	isnull = (this->indexColmns == nullptr);

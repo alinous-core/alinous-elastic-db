@@ -236,7 +236,7 @@ void AlinousDbConnection::begin(int acid, ThreadContext* ctx)
 {
 	if(acid < 0)
 	{
-		acid = IDatabaseDriver::SERIALIZABLE;
+		acid = IDatabaseDriver::READ_COMMITTED;
 	}
 	__GC_MV(this, &(this->trx), this->database->trxManager->borrowTransaction(acid, ctx), DbTransaction);
 	this->autoCommit = false;

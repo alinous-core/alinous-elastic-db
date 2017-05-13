@@ -189,6 +189,9 @@ long long CachedRecord::getPosition(ThreadContext* ctx) throw()
 {
 	return -1;
 }
+void CachedRecord::setPosition(long long position, ThreadContext* ctx) throw() 
+{
+}
 CachedRecord* CachedRecord::valueFromFetcher(FileStorageEntryFetcher* fetcher, ThreadContext* ctx)
 {
 	long long oid = fetcher->fetchLong(ctx);

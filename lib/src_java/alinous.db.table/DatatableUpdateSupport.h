@@ -21,9 +21,6 @@ class DbTransaction;}}}
 namespace java {namespace util {
 template <typename  T> class List;}}
 
-namespace alinous {namespace runtime {namespace parallel {
-class ThreadPool;}}}
-
 namespace alinous {namespace buffer {namespace storage {
 class FileStorageEntryWriter;}}}
 
@@ -76,7 +73,6 @@ using ::alinous::buffer::storage::FileStorageEntryWriter;
 using ::alinous::db::AlinousDbException;
 using ::alinous::db::trx::DbTransaction;
 using ::alinous::runtime::parallel::SequentialBackgroundJob;
-using ::alinous::runtime::parallel::ThreadPool;
 using ::alinous::system::AlinousException;
 using ::alinous::system::ISystemLog;
 
@@ -94,7 +90,7 @@ public:
 	void updateData(IDatabaseRecord* data, long long commitId, IArrayObject<SequentialBackgroundJob>* jobs, ISystemLog* log, ThreadContext* ctx) final;
 	void insertData(DbTransaction* trx, IDatabaseRecord* data, long long commitId, IArrayObject<SequentialBackgroundJob>* jobs, ISystemLog* log, ThreadContext* ctx) final;
 	void insertData(DbTransaction* trx, List<IDatabaseRecord>* records, long long newCommitId, IArrayObject<SequentialBackgroundJob>* jobs, ISystemLog* logger, ThreadContext* ctx) final;
-	void tcpInsertCommit(IDatabaseRecord* dbrecord, ThreadPool* pool, ISystemLog* log, ThreadContext* ctx) final;
+	void tcpInsertCommit(IDatabaseRecord* dbrecord, IArrayObject<SequentialBackgroundJob>* jobs, ISystemLog* log, ThreadContext* ctx) final;
 public:
 	static bool __init_done;
 	static bool __init_static_variables();

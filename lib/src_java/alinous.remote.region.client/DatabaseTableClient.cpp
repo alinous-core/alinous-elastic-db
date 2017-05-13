@@ -425,7 +425,7 @@ String* DatabaseTableClient::getFullName(ThreadContext* ctx) throw()
 {
 	return this->fullName;
 }
-void DatabaseTableClient::tcpInsertCommit(IDatabaseRecord* data, ThreadPool* pool, ISystemLog* log, ThreadContext* ctx) throw() 
+void DatabaseTableClient::tcpInsertCommit(IDatabaseRecord* data, IArrayObject<SequentialBackgroundJob>* jobs, ISystemLog* log, ThreadContext* ctx) throw() 
 {
 }
 long long DatabaseTableClient::getNextOid(ThreadContext* ctx) throw() 

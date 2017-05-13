@@ -61,11 +61,13 @@ void BTreeScanner::startScan(bool endStart, ThreadContext* ctx)
 	this->btree->enterGate(ctx);
 	if(this->btree->isEmpty(ctx))
 	{
+		endScan(false, ctx);
 		return;
 	}
 	if(!this->stack->isEmpty(ctx))
 	{
-		endScan(ctx);
+		endScan(false, ctx);
+		return;
 	}
 	IBTreeNode* node = this->btree->getRootNode(ctx);
 	INodeIterator* iterator = node->iterator(endStart, ctx);
@@ -74,13 +76,16 @@ void BTreeScanner::startScan(bool endStart, ThreadContext* ctx)
 }
 void BTreeScanner::startScan(IBTreeKey* key, ThreadContext* ctx)
 {
+	this->btree->enterGate(ctx);
 	if(this->btree->isEmpty(ctx))
 	{
+		endScan(false, ctx);
 		return;
 	}
 	if(!this->stack->isEmpty(ctx))
 	{
-		endScan(ctx);
+		endScan(false, ctx);
+		return;
 	}
 	IBTreeNode* node = this->btree->getRootNode(ctx);
 	INodeIterator* iterator = node->iterator(false, ctx);
@@ -158,6 +163,10 @@ bool BTreeScanner::hasNext(ThreadContext* ctx)
 }
 void BTreeScanner::endScan(ThreadContext* ctx)
 {
+	endScan(true, ctx);
+}
+void BTreeScanner::endScan(bool closeGate, ThreadContext* ctx)
+{
 	Iterator<INodeIterator>* it = this->stack->iterator(ctx);
 	while(it->hasNext(ctx))
 	{
@@ -165,7 +174,10 @@ void BTreeScanner::endScan(ThreadContext* ctx)
 		nit->dispose(ctx);
 	}
 	this->stack->clear(ctx);
-	this->btree->exitGate(ctx);
+	if(closeGate)
+	{
+		this->btree->exitGate(ctx);
+	}
 }
 void BTreeScanner::gotoKey(IBTreeKey* key, IBTreeNode* rootNode, ThreadContext* ctx)
 {
