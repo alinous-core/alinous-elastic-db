@@ -19,6 +19,7 @@ constexpr const int IDatabaseRecord::NORMAL_RECORD;
 constexpr const int IDatabaseRecord::TRX_CACHE;
 constexpr const int IDatabaseRecord::DOM_VARIABLE;
 constexpr const int IDatabaseRecord::NULL_PADDING;
+constexpr const int IDatabaseRecord::NETWORK_RECORD;
 bool IDatabaseRecord::__init_done = __init_static_variables();
 bool IDatabaseRecord::__init_static_variables(){
 	Java2CppSystem::getSelf();

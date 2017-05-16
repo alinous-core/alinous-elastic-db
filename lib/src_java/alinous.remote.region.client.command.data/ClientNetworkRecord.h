@@ -87,6 +87,7 @@ private:
 	long long deletedCommitId;
 	long long position;
 	ArrayList<VariantValue>* values;
+	int lockMode;
 public:
 	void appendToEntry(FileStorageEntryBuilder* builder, ThreadContext* ctx) final;
 	int diskSize(ThreadContext* ctx) final;
@@ -111,6 +112,8 @@ public:
 	bool equals(IObject* obj, ThreadContext* ctx) throw()  final;
 	long long getPosition(ThreadContext* ctx) throw()  final;
 	void setPosition(long long position, ThreadContext* ctx) throw()  final;
+	int getLockMode(ThreadContext* ctx) throw()  final;
+	void setLockMode(int lockMode, ThreadContext* ctx) throw()  final;
 public:
 	static ClientNetworkRecord* valueFromFetcher(FileStorageEntryFetcher* fetcher, ThreadContext* ctx);
 	static ClientNetworkRecord* fromNetwork(NetworkBinaryBuffer* buff, ThreadContext* ctx);

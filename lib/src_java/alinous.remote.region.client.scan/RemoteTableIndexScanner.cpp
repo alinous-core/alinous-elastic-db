@@ -1,18 +1,21 @@
 #include "include/global.h"
 
 
+#include "alinous.buffer.storage/FileStorageEntryBuilder.h"
 #include "alinous.compile.sql.analyze/ScanTableIdentifier.h"
 #include "alinous.compile/AbstractSrcElement.h"
 #include "alinous.system/AlinousException.h"
 #include "alinous.db/AlinousDbException.h"
 #include "alinous.db.table/DatabaseException.h"
+#include "alinous.btree/IValueFetcher.h"
+#include "alinous.btree/IBTreeValue.h"
+#include "alinous.db.table/IDatabaseRecord.h"
 #include "alinous.system/ISystemLog.h"
 #include "java.lang/Comparable.h"
 #include "alinous.btree/IBTreeKey.h"
 #include "alinous.remote.socket/NetworkBinaryBuffer.h"
 #include "alinous.remote.socket/ICommandData.h"
 #include "alinous.db.trx.scan/ScanResultIndexKey.h"
-#include "alinous.btree/IBTreeValue.h"
 #include "alinous.db.trx.scan/ScanResultRecord.h"
 #include "alinous.db.trx.scan/ITableTargetScanner.h"
 #include "alinous.remote.region.client/TableAccessStatus.h"
@@ -21,6 +24,8 @@
 #include "alinous.db.trx/DbTransaction.h"
 #include "java.io/FilterOutputStream.h"
 #include "java.io/BufferedOutputStream.h"
+#include "alinous.remote.region.client.command.data/ClientNetworkRecord.h"
+#include "alinous.remote.region.server.scan/ScanWorkerResult.h"
 #include "alinous.remote.region.server/NodeRegionServer.h"
 #include "alinous.remote.region.client.command/AbstractNodeRegionCommand.h"
 #include "alinous.db.table/TableColumnMetadata.h"
@@ -29,6 +34,7 @@
 #include "alinous.db.trx.scan/ScanException.h"
 #include "alinous.remote.region.client.command.dml/ClientScanCommand.h"
 #include "alinous.remote.region.client.command.dml/ClientScanEndCommand.h"
+#include "alinous.remote.region.client.scan/ResultHolder.h"
 #include "alinous.remote.region.client.scan/IRemoteScanner.h"
 #include "alinous.remote.region.client.scan/RemoteTableIndexScanner.h"
 
@@ -49,7 +55,7 @@ bool RemoteTableIndexScanner::__init_static_variables(){
 	delete ctx;
 	return true;
 }
- RemoteTableIndexScanner::RemoteTableIndexScanner(ThreadContext* ctx) throw()  : IObject(ctx), IRemoteScanner(ctx), trx(nullptr), index(nullptr), lockMode(0), tableId(nullptr), tableStore(nullptr), nextresult(nullptr)
+ RemoteTableIndexScanner::RemoteTableIndexScanner(ThreadContext* ctx) throw()  : IObject(ctx), IRemoteScanner(ctx), trx(nullptr), index(nullptr), lockMode(0), tableId(nullptr), tableStore(nullptr), nextresult(nullptr), resultHolder(nullptr), scanEnd(0)
 {
 }
 void RemoteTableIndexScanner::__construct_impl(ThreadContext* ctx) throw() 
@@ -75,6 +81,8 @@ void RemoteTableIndexScanner::__releaseRegerences(bool prepare, ThreadContext* c
 	tableStore = nullptr;
 	__e_obj1.add(this->nextresult, this);
 	nextresult = nullptr;
+	__e_obj1.add(this->resultHolder, this);
+	resultHolder = nullptr;
 	if(!prepare){
 		return;
 	}
@@ -92,18 +100,7 @@ RemoteTableIndexScanner* RemoteTableIndexScanner::init(ScanTableIdentifier* tabl
 }
 void RemoteTableIndexScanner::startScan(ScanResultIndexKey* indexKeyValue, ThreadContext* ctx)
 {
-	ClientScanCommand* command = (new(ctx) ClientScanCommand(ctx));
-	DbVersionContext* vctx = trx->getVersionContext(ctx);
-	command->setVctx(vctx, ctx);
-	command->setTable(this->tableId->getTable(ctx), ctx);
-	command->setLockMode(this->lockMode, ctx);
-	command->setIsolationLevel(this->trx->getIsolationLevel(ctx), ctx);
-	ArrayList<TableColumnMetadata>* indexColmns = this->index->getColumns(ctx);
-	bool primaryIndex = this->index->isPrimary(ctx);
-	command->setFullscan(true, ctx);
-	command->setPrimaryIndex(primaryIndex, ctx);
-	command->setIndexColmns(indexColmns, ctx);
-	this->tableStore->sendCommand(command, ctx);
+	scanFromNetwork(ctx);
 }
 void RemoteTableIndexScanner::endScan(ThreadContext* ctx)
 {
@@ -122,6 +119,23 @@ void RemoteTableIndexScanner::endScan(ThreadContext* ctx)
 }
 bool RemoteTableIndexScanner::hasNext(bool debug, ThreadContext* ctx)
 {
+	ClientNetworkRecord* record = this->resultHolder->getNextRecord(ctx);
+	if(record != nullptr)
+	{
+		__GC_MV(this, &(this->nextresult), (new(ctx) ScanResultRecord(this->tableId, IDatabaseRecord::NETWORK_RECORD, record->getOid(ctx), this->trx, record, this->lockMode, ctx)), ScanResultRecord);
+		return true;
+	}
+	if(this->scanEnd)
+	{
+		return false;
+	}
+	scanFromNetwork(ctx);
+	record = this->resultHolder->getNextRecord(ctx);
+	if(record != nullptr)
+	{
+		__GC_MV(this, &(this->nextresult), (new(ctx) ScanResultRecord(this->tableId, IDatabaseRecord::NETWORK_RECORD, record->getOid(ctx), this->trx, record, this->lockMode, ctx)), ScanResultRecord);
+		return true;
+	}
 	return false;
 }
 ScanResultRecord* RemoteTableIndexScanner::next(bool debug, ThreadContext* ctx)
@@ -132,6 +146,24 @@ ScanResultRecord* RemoteTableIndexScanner::next(bool debug, ThreadContext* ctx)
 }
 void RemoteTableIndexScanner::dispose(ISystemLog* logger, ThreadContext* ctx)
 {
+}
+void RemoteTableIndexScanner::scanFromNetwork(ThreadContext* ctx)
+{
+	ClientScanCommand* command = (new(ctx) ClientScanCommand(ctx));
+	DbVersionContext* vctx = trx->getVersionContext(ctx);
+	command->setVctx(vctx, ctx);
+	command->setTable(this->tableId->getTable(ctx), ctx);
+	command->setLockMode(this->lockMode, ctx);
+	command->setIsolationLevel(this->trx->getIsolationLevel(ctx), ctx);
+	ArrayList<TableColumnMetadata>* indexColmns = this->index->getColumns(ctx);
+	bool primaryIndex = this->index->isPrimary(ctx);
+	command->setFullscan(true, ctx);
+	command->setPrimaryIndex(primaryIndex, ctx);
+	command->setIndexColmns(indexColmns, ctx);
+	command = static_cast<ClientScanCommand*>(this->tableStore->sendCommand(command, ctx));
+	ScanWorkerResult* result = command->getResult(ctx);
+	__GC_MV(this, &(this->resultHolder), (new(ctx) ResultHolder(result->getRecords(ctx), ctx)), ResultHolder);
+	this->scanEnd = result->isFinished(ctx);
 }
 void RemoteTableIndexScanner::__cleanUp(ThreadContext* ctx){
 }

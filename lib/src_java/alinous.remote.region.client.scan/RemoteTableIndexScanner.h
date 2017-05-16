@@ -30,6 +30,12 @@ class DbVersionContext;}}}
 namespace alinous {namespace db {namespace table {
 class TableColumnMetadata;}}}
 
+namespace alinous {namespace remote {namespace region {namespace server {namespace scan {
+class ScanWorkerResult;}}}}}
+
+namespace alinous {namespace remote {namespace region {namespace client {namespace scan {
+class ResultHolder;}}}}}
+
 namespace alinous {namespace remote {namespace region {namespace client {namespace command {namespace dml {
 class ClientScanEndCommand;}}}}}}
 
@@ -38,6 +44,9 @@ class ScanException;}}}}
 
 namespace alinous {namespace db {
 class AlinousDbException;}}
+
+namespace alinous {namespace remote {namespace region {namespace client {namespace command {namespace data {
+class ClientNetworkRecord;}}}}}}
 
 namespace alinous {namespace db {namespace trx {namespace scan {
 class ScanResultRecord;}}}}
@@ -53,6 +62,9 @@ class IOException;}}
 
 namespace alinous {namespace db {namespace table {
 class DatabaseException;}}}
+
+namespace alinous {namespace db {namespace table {
+class IDatabaseRecord;}}}
 
 namespace alinous {namespace remote {namespace region {namespace client {
 class TableAccessStatus;}}}}
@@ -78,6 +90,7 @@ using ::java::util::ArrayList;
 using ::alinous::compile::sql::analyze::ScanTableIdentifier;
 using ::alinous::db::AlinousDbException;
 using ::alinous::db::table::DatabaseException;
+using ::alinous::db::table::IDatabaseRecord;
 using ::alinous::db::table::IDatabaseTable;
 using ::alinous::db::table::IScannableIndex;
 using ::alinous::db::table::TableColumnMetadata;
@@ -88,8 +101,10 @@ using ::alinous::db::trx::scan::ScanResultIndexKey;
 using ::alinous::db::trx::scan::ScanResultRecord;
 using ::alinous::remote::region::client::TableAccessStatus;
 using ::alinous::remote::region::client::TableAccessStatusListner;
+using ::alinous::remote::region::client::command::data::ClientNetworkRecord;
 using ::alinous::remote::region::client::command::dml::ClientScanCommand;
 using ::alinous::remote::region::client::command::dml::ClientScanEndCommand;
+using ::alinous::remote::region::server::scan::ScanWorkerResult;
 using ::alinous::system::AlinousException;
 using ::alinous::system::ISystemLog;
 
@@ -110,6 +125,8 @@ private:
 	ScanTableIdentifier* tableId;
 	IDatabaseTable* tableStore;
 	ScanResultRecord* nextresult;
+	ResultHolder* resultHolder;
+	bool scanEnd;
 public:
 	RemoteTableIndexScanner* init(ScanTableIdentifier* tableId, DbTransaction* trx, IScannableIndex* index, IDatabaseTable* tableStore, int lockMode, ThreadContext* ctx);
 	void startScan(ScanResultIndexKey* indexKeyValue, ThreadContext* ctx) final;
@@ -117,6 +134,8 @@ public:
 	bool hasNext(bool debug, ThreadContext* ctx) final;
 	ScanResultRecord* next(bool debug, ThreadContext* ctx) final;
 	void dispose(ISystemLog* logger, ThreadContext* ctx) final;
+private:
+	void scanFromNetwork(ThreadContext* ctx);
 public:
 	static bool __init_done;
 	static bool __init_static_variables();

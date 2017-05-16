@@ -162,6 +162,7 @@ IDatabaseRecord* FullScanSession::loadFromStorage(ThreadContext* ctx)
 		try
 		{
 			record = this->table->loadRecord(position, ctx);
+			record->setLockMode(lockMode, ctx);
 		}
 		catch(Throwable* e)
 		{
@@ -181,9 +182,11 @@ IDatabaseRecord* FullScanSession::loadFromStorage(ThreadContext* ctx)
 	switch(this->lockMode) {
 	case IndexScannerLockRequirement::INSTANT_SHARE:
 		locker->shareUnlockRow(this->table, oid, ctx);
+		record->setLockMode(-1, ctx);
 		break ;
 	case IndexScannerLockRequirement::INSTANT_UPDATE:
 		locker->updateUnlockRow(this->table, oid, ctx);
+		record->setLockMode(-1, ctx);
 		break ;
 	}
 	return record;

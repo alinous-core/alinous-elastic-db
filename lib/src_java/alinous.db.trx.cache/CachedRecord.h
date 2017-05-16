@@ -97,6 +97,8 @@ public:
 	void setOid(long long oid, ThreadContext* ctx) throw() ;
 	long long getPosition(ThreadContext* ctx) throw()  final;
 	void setPosition(long long position, ThreadContext* ctx) throw()  final;
+	int getLockMode(ThreadContext* ctx) throw()  final;
+	void setLockMode(int lockMode, ThreadContext* ctx) throw()  final;
 public:
 	static CachedRecord* valueFromFetcher(FileStorageEntryFetcher* fetcher, ThreadContext* ctx);
 public:

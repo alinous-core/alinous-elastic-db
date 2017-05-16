@@ -107,6 +107,8 @@ public:
 	ArrayList<VariantValue>* getValues(ThreadContext* ctx) throw()  final;
 	int getKind(ThreadContext* ctx) throw()  final;
 	int getNumColumn(ThreadContext* ctx) throw()  final;
+	int getLockMode(ThreadContext* ctx) throw()  final;
+	void setLockMode(int lockMode, ThreadContext* ctx) throw()  final;
 public:
 	static DatabaseRecord* valueFromFetcher(FileStorageEntryFetcher* fetcher, ThreadContext* ctx);
 public:

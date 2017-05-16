@@ -4,6 +4,7 @@ set(srcjava
 	"src_java/alinous.remote.region.client.scan/RemoteIndexRangeScanner.cpp"
 	"src_java/alinous.remote.region.client.scan/RemoteTableFullScanner.cpp"
 	"src_java/alinous.remote.region.client.scan/IRemoteJoinScanner.cpp"
+	"src_java/alinous.remote.region.client.scan/ResultHolder.cpp"
 	"src_java/alinous.remote.region.client.scan/RemoteRightindexJoinScanner.cpp"
 	"src_java/alinous.remote.region.client.scan/RemoteTableIndexScanner.cpp"
 	"src_java/alinous.remote.region.client.scan/IRemoteScanner.cpp"

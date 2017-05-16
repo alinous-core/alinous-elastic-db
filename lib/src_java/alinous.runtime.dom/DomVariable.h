@@ -454,6 +454,8 @@ public:
 	void setInsertedCommitId(long long insertedCommitId, ThreadContext* ctx) throw()  final;
 	long long getPosition(ThreadContext* ctx) throw()  final;
 	void setPosition(long long position, ThreadContext* ctx) throw()  final;
+	int getLockMode(ThreadContext* ctx) throw()  final;
+	void setLockMode(int lockMode, ThreadContext* ctx) throw()  final;
 public:
 	static DomVariable* importFromDebugXml(DomNode* node, ThreadContext* ctx) throw() ;
 	static DomVariable* valueFromFetcher(FileStorageEntryFetcher* fetcher, ThreadContext* ctx);

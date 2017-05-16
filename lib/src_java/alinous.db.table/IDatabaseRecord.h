@@ -37,6 +37,7 @@ public:
 	constexpr static const int TRX_CACHE{1};
 	constexpr static const int DOM_VARIABLE{3};
 	constexpr static const int NULL_PADDING{4};
+	constexpr static const int NETWORK_RECORD{5};
 public:
 	virtual int getKind(ThreadContext* ctx) throw()  = 0;
 	virtual VariantValue* getColumnValue(int colOrder, ThreadContext* ctx) throw()  = 0;
@@ -54,6 +55,8 @@ public:
 	virtual void setInsertedCommitId(long long insertedCommitId, ThreadContext* ctx) throw()  = 0;
 	virtual long long getPosition(ThreadContext* ctx) throw()  = 0;
 	virtual void setPosition(long long position, ThreadContext* ctx) throw()  = 0;
+	virtual int getLockMode(ThreadContext* ctx) throw()  = 0;
+	virtual void setLockMode(int lockMode, ThreadContext* ctx) throw()  = 0;
 public:
 	static bool __init_done;
 	static bool __init_static_variables();

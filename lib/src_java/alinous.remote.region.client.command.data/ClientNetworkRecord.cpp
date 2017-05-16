@@ -75,7 +75,7 @@ bool ClientNetworkRecord::__init_static_variables(){
 	delete ctx;
 	return true;
 }
- ClientNetworkRecord::ClientNetworkRecord(long long oid, int numColumn, ThreadContext* ctx) throw()  : IObject(ctx), IDatabaseRecord(ctx), ICommandData(ctx), oid(0), lastUpdateCommitId(0), insertedCommitId(0), deletedCommitId(0), position(0), values(GCUtils<ArrayList<VariantValue> >::ins(this, (new(ctx) ArrayList<VariantValue>(ctx)), ctx, __FILEW__, __LINE__, L""))
+ ClientNetworkRecord::ClientNetworkRecord(long long oid, int numColumn, ThreadContext* ctx) throw()  : IObject(ctx), IDatabaseRecord(ctx), ICommandData(ctx), oid(0), lastUpdateCommitId(0), insertedCommitId(0), deletedCommitId(0), position(0), values(GCUtils<ArrayList<VariantValue> >::ins(this, (new(ctx) ArrayList<VariantValue>(ctx)), ctx, __FILEW__, __LINE__, L"")), lockMode(-1)
 {
 	this->oid = oid;
 	for(int i = 0; i != numColumn; ++i)
@@ -91,7 +91,7 @@ void ClientNetworkRecord::__construct_impl(long long oid, int numColumn, ThreadC
 		this->values->add((new(ctx) VariantValue(ctx)), ctx);
 	}
 }
- ClientNetworkRecord::ClientNetworkRecord(IDatabaseRecord* databaseRecord, ThreadContext* ctx) : IObject(ctx), IDatabaseRecord(ctx), ICommandData(ctx), oid(0), lastUpdateCommitId(0), insertedCommitId(0), deletedCommitId(0), position(0), values(GCUtils<ArrayList<VariantValue> >::ins(this, (new(ctx) ArrayList<VariantValue>(ctx)), ctx, __FILEW__, __LINE__, L""))
+ ClientNetworkRecord::ClientNetworkRecord(IDatabaseRecord* databaseRecord, ThreadContext* ctx) : IObject(ctx), IDatabaseRecord(ctx), ICommandData(ctx), oid(0), lastUpdateCommitId(0), insertedCommitId(0), deletedCommitId(0), position(0), values(GCUtils<ArrayList<VariantValue> >::ins(this, (new(ctx) ArrayList<VariantValue>(ctx)), ctx, __FILEW__, __LINE__, L"")), lockMode(-1)
 {
 	this->oid = databaseRecord->getOid(ctx);
 	this->lastUpdateCommitId = databaseRecord->getLastUpdateCommitId(ctx);
@@ -117,7 +117,7 @@ void ClientNetworkRecord::__construct_impl(IDatabaseRecord* databaseRecord, Thre
 		this->values->add(static_cast<VariantValue*>(vv->copy(ctx)), ctx);
 	}
 }
- ClientNetworkRecord::ClientNetworkRecord(ThreadContext* ctx) throw()  : IObject(ctx), IDatabaseRecord(ctx), ICommandData(ctx), oid(0), lastUpdateCommitId(0), insertedCommitId(0), deletedCommitId(0), position(0), values(GCUtils<ArrayList<VariantValue> >::ins(this, (new(ctx) ArrayList<VariantValue>(ctx)), ctx, __FILEW__, __LINE__, L""))
+ ClientNetworkRecord::ClientNetworkRecord(ThreadContext* ctx) throw()  : IObject(ctx), IDatabaseRecord(ctx), ICommandData(ctx), oid(0), lastUpdateCommitId(0), insertedCommitId(0), deletedCommitId(0), position(0), values(GCUtils<ArrayList<VariantValue> >::ins(this, (new(ctx) ArrayList<VariantValue>(ctx)), ctx, __FILEW__, __LINE__, L"")), lockMode(-1)
 {
 }
 void ClientNetworkRecord::__construct_impl(ThreadContext* ctx) throw() 
@@ -173,7 +173,7 @@ IValueFetcher* ClientNetworkRecord::getFetcher(ThreadContext* ctx) throw()
 }
 int ClientNetworkRecord::getKind(ThreadContext* ctx) throw() 
 {
-	return IDatabaseRecord::TRX_CACHE;
+	return IDatabaseRecord::NETWORK_RECORD;
 }
 VariantValue* ClientNetworkRecord::getColumnValue(int index, ThreadContext* ctx) throw() 
 {
@@ -248,6 +248,7 @@ void ClientNetworkRecord::readData(NetworkBinaryBuffer* buff, ThreadContext* ctx
 		VariantValue* variant = static_cast<VariantValue*>(val);
 		this->values->add(variant, ctx);
 	}
+	this->lockMode = buff->getInt(ctx);
 }
 void ClientNetworkRecord::writeData(NetworkBinaryBuffer* buff, ThreadContext* ctx)
 {
@@ -261,6 +262,7 @@ void ClientNetworkRecord::writeData(NetworkBinaryBuffer* buff, ThreadContext* ct
 		VariantValue* variant = this->values->get(i, ctx);
 		variant->writeData(buff, ctx);
 	}
+	buff->putInt(this->lockMode, ctx);
 }
 bool ClientNetworkRecord::equals(IObject* obj, ThreadContext* ctx) throw() 
 {
@@ -274,6 +276,14 @@ long long ClientNetworkRecord::getPosition(ThreadContext* ctx) throw()
 void ClientNetworkRecord::setPosition(long long position, ThreadContext* ctx) throw() 
 {
 	this->position = position;
+}
+int ClientNetworkRecord::getLockMode(ThreadContext* ctx) throw() 
+{
+	return lockMode;
+}
+void ClientNetworkRecord::setLockMode(int lockMode, ThreadContext* ctx) throw() 
+{
+	this->lockMode = lockMode;
 }
 ClientNetworkRecord* ClientNetworkRecord::valueFromFetcher(FileStorageEntryFetcher* fetcher, ThreadContext* ctx)
 {

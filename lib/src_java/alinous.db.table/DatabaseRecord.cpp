@@ -233,6 +233,13 @@ int DatabaseRecord::getNumColumn(ThreadContext* ctx) throw()
 {
 	return this->values->size(ctx);
 }
+int DatabaseRecord::getLockMode(ThreadContext* ctx) throw() 
+{
+	return -1;
+}
+void DatabaseRecord::setLockMode(int lockMode, ThreadContext* ctx) throw() 
+{
+}
 DatabaseRecord* DatabaseRecord::valueFromFetcher(FileStorageEntryFetcher* fetcher, ThreadContext* ctx)
 {
 	long long oid = fetcher->fetchLong(ctx);

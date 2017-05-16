@@ -139,6 +139,13 @@ long long PadddingRecord::getPosition(ThreadContext* ctx) throw()
 void PadddingRecord::setPosition(long long position, ThreadContext* ctx) throw() 
 {
 }
+int PadddingRecord::getLockMode(ThreadContext* ctx) throw() 
+{
+	return -1;
+}
+void PadddingRecord::setLockMode(int lockMode, ThreadContext* ctx) throw() 
+{
+}
 PadddingRecord* PadddingRecord::fromFetcher(FileStorageEntryFetcher* fetcher, ThreadContext* ctx) throw() 
 {
 	PadddingRecord* rec = (new(ctx) PadddingRecord(fetcher->fetchInt(ctx), ctx));
