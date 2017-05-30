@@ -43,8 +43,7 @@
 #include "alinous.compile.sql.expression.blexp/AbstractSQLBooleanExpression.h"
 #include "alinous.compile.sql.select.join/SQLJoinCondition.h"
 #include "alinous.db.trx.scan/ScanException.h"
-#include "alinous.remote.region.client.scan/IRemoteScanner.h"
-#include "alinous.remote.region.client.scan/IRemoteJoinScanner.h"
+#include "alinous.remote.region.client.scan/AbstractRemoteScanner.h"
 #include "alinous.remote.region.client.scan/RemoteRightindexJoinScanner.h"
 
 namespace alinous {namespace remote {namespace region {namespace client {namespace scan {
@@ -64,7 +63,7 @@ bool RemoteRightindexJoinScanner::__init_static_variables(){
 	delete ctx;
 	return true;
 }
- RemoteRightindexJoinScanner::RemoteRightindexJoinScanner(ThreadContext* ctx) throw()  : IObject(ctx), IRemoteJoinScanner(ctx)
+ RemoteRightindexJoinScanner::RemoteRightindexJoinScanner(ThreadContext* ctx) throw()  : IObject(ctx), AbstractRemoteScanner(ctx)
 {
 }
 void RemoteRightindexJoinScanner::__construct_impl(ThreadContext* ctx) throw() 
@@ -82,6 +81,7 @@ void RemoteRightindexJoinScanner::__releaseRegerences(bool prepare, ThreadContex
 	if(!prepare){
 		return;
 	}
+	AbstractRemoteScanner::__releaseRegerences(true, ctx);
 }
 RemoteRightindexJoinScanner* RemoteRightindexJoinScanner::init(DbTransaction* trx, ITableTargetScanner* left, ITableTargetScanner* right, ScanTableMetadata* leftMetadata, ScanTableMetadata* rightMetadata, bool inner, JoinMatchExpression* match, SQLJoinCondition* condition, ScriptMachine* machine, ThreadContext* ctx) throw() 
 {

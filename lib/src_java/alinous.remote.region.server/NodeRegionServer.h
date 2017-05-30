@@ -12,6 +12,9 @@ class NodeReferenceManager;}}}}}
 namespace alinous {namespace remote {namespace region {namespace server {namespace scan {
 class RegionScanManager;}}}}}
 
+namespace alinous {namespace remote {namespace region {namespace server {namespace lock {
+class RegionTableLockManager;}}}}}
+
 namespace java {namespace lang {
 class Throwable;}}
 
@@ -132,6 +135,7 @@ using ::alinous::remote::monitor::client::command::data::RegionInfoData;
 using ::alinous::remote::region::client::command::data::ClientNetworkRecord;
 using ::alinous::remote::region::client::command::data::ClientStructureMetadata;
 using ::alinous::remote::region::client::command::dml::ClientScanCommandData;
+using ::alinous::remote::region::server::lock::RegionTableLockManager;
 using ::alinous::remote::region::server::scan::RegionScanManager;
 using ::alinous::remote::region::server::scan::ScanSession;
 using ::alinous::remote::region::server::scan::ScanWorkerResult;
@@ -171,6 +175,8 @@ private:
 	AlinousCore* core;
 	RegionTpcExecutorPool* dmlSessions;
 	RegionScanManager* scanManager;
+	RegionTableLockManager* tableLockManager;
+	bool scale;
 private:
 	static String* THREAD_NAME;
 public:
@@ -189,6 +195,7 @@ public:
 	void commitUpdateData(long long newCommitId, DbVersionContext* vctx, ThreadContext* ctx);
 	ScanWorkerResult* scan(ClientScanCommandData* data, ThreadContext* ctx);
 	void endScan(long long trxId, ThreadContext* ctx) throw() ;
+	bool isScale(ThreadContext* ctx) throw() ;
 private:
 	void requestSyncMaxOid(ThreadContext* ctx);
 	void initMonitorRef(MonitorRef* monRef, ThreadContext* ctx) throw() ;

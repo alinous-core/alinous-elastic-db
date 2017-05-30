@@ -31,7 +31,7 @@ namespace alinous {namespace system {
 class ISystemLog;}}
 
 namespace alinous {namespace remote {namespace region {namespace client {namespace scan {
-class IRemoteJoinScanner;}}}}}
+class AbstractRemoteScanner;}}}}}
 
 namespace alinous {namespace db {namespace table {
 class DatabaseException;}}}
@@ -41,10 +41,6 @@ class ScanException;}}}}
 
 namespace alinous {namespace system {
 class AlinousException;}}
-
-namespace java {namespace lang {
-class IObject;
-}}
 
 namespace alinous {
 class ThreadContext;
@@ -70,7 +66,7 @@ using ::alinous::system::ISystemLog;
 
 
 
-class RemoteRightindexJoinScanner final : public IRemoteJoinScanner, public virtual IObject {
+class RemoteRightindexJoinScanner final : public AbstractRemoteScanner {
 public:
 	RemoteRightindexJoinScanner(const RemoteRightindexJoinScanner& base) = default;
 public:

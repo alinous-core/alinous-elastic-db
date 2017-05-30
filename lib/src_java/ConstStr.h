@@ -459,6 +459,9 @@ public:
 	constexpr static StaticUnicodeString __CNST_STR_232{L"Mongolian",9};
 public:
 	static UnicodeStringWrapper* getCNST_STR_232() throw();
+	constexpr static StaticUnicodeString __CNST_STR_3629{L"The table is already locked by share lock",41};
+public:
+	static UnicodeStringWrapper* getCNST_STR_3629() throw();
 	constexpr static StaticUnicodeString __CNST_STR_1691{L"Error on creating index on transaction cache",44};
 public:
 	static UnicodeStringWrapper* getCNST_STR_1691() throw();
@@ -6819,9 +6822,9 @@ public:
 	constexpr static StaticUnicodeString __CNST_STR_809{L"Asia/Ashgabat",13};
 public:
 	static UnicodeStringWrapper* getCNST_STR_809() throw();
-	constexpr static StaticUnicodeString __CNST_STR_3629{L"No Commit Listner",17};
+	constexpr static StaticUnicodeString __CNST_STR_3630{L"No Commit Listner",17};
 public:
-	static UnicodeStringWrapper* getCNST_STR_3629() throw();
+	static UnicodeStringWrapper* getCNST_STR_3630() throw();
 	constexpr static StaticUnicodeString __CNST_STR_563{L",endTime=",9};
 public:
 	static UnicodeStringWrapper* getCNST_STR_563() throw();

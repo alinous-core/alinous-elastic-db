@@ -35,7 +35,7 @@
 #include "alinous.remote.region.client.command.dml/ClientScanCommand.h"
 #include "alinous.remote.region.client.command.dml/ClientScanEndCommand.h"
 #include "alinous.remote.region.client.scan/ResultHolder.h"
-#include "alinous.remote.region.client.scan/IRemoteScanner.h"
+#include "alinous.remote.region.client.scan/AbstractRemoteScanner.h"
 #include "alinous.remote.region.client.scan/RemoteTableIndexScanner.h"
 
 namespace alinous {namespace remote {namespace region {namespace client {namespace scan {
@@ -55,7 +55,7 @@ bool RemoteTableIndexScanner::__init_static_variables(){
 	delete ctx;
 	return true;
 }
- RemoteTableIndexScanner::RemoteTableIndexScanner(ThreadContext* ctx) throw()  : IObject(ctx), IRemoteScanner(ctx), trx(nullptr), index(nullptr), lockMode(0), tableId(nullptr), tableStore(nullptr), nextresult(nullptr), resultHolder(nullptr), scanEnd(0)
+ RemoteTableIndexScanner::RemoteTableIndexScanner(ThreadContext* ctx) throw()  : IObject(ctx), AbstractRemoteScanner(ctx), trx(nullptr), index(nullptr), lockMode(0), tableId(nullptr), tableStore(nullptr), nextresult(nullptr), resultHolder(nullptr), scanEnd(0)
 {
 }
 void RemoteTableIndexScanner::__construct_impl(ThreadContext* ctx) throw() 
@@ -86,6 +86,7 @@ void RemoteTableIndexScanner::__releaseRegerences(bool prepare, ThreadContext* c
 	if(!prepare){
 		return;
 	}
+	AbstractRemoteScanner::__releaseRegerences(true, ctx);
 }
 RemoteTableIndexScanner* RemoteTableIndexScanner::init(ScanTableIdentifier* tableId, DbTransaction* trx, IScannableIndex* index, IDatabaseTable* tableStore, int lockMode, ThreadContext* ctx)
 {

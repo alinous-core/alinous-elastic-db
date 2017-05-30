@@ -3,6 +3,9 @@
 namespace java{namespace net{
 class UnknownHostException;
 }}
+namespace alinous {namespace remote {namespace region {namespace client {
+class TableAccessStatus;}}}}
+
 namespace alinous {namespace db {namespace table {
 class TableMetadata;}}}
 
@@ -222,6 +225,8 @@ private:
 	bool matchIndexByIdList(ArrayList<TableColumnMetadata>* columnsMetadataList, ArrayList<ScanTableColumnIdentifier>* columns, ThreadContext* ctx) throw() ;
 	bool matchIndexByStrList(ArrayList<TableColumnMetadata>* columnsMetadataList, ArrayList<String>* columns, ThreadContext* ctx) throw() ;
 	void doInsertData(DbTransaction* trx, List<IDatabaseRecord>* records, long long newCommitId, ThreadContext* ctx);
+public:
+	static void includes(TableAccessStatus* arg0, ThreadContext* ctx) throw() ;
 public:
 	static bool __init_done;
 	static bool __init_static_variables();

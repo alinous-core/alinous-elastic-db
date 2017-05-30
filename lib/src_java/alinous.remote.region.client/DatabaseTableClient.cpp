@@ -25,6 +25,7 @@
 #include "alinous.db.table/TableColumnMetadata.h"
 #include "alinous.db.table/TableIndexMetadata.h"
 #include "alinous.db.table/TableMetadata.h"
+#include "alinous.remote.region.client/TableAccessStatus.h"
 #include "alinous.remote.region.client/TableAccessStatusListner.h"
 #include "alinous.runtime.parallel/ThreadPool.h"
 #include "alinous.db.trx/DbVersionContext.h"
@@ -537,6 +538,9 @@ void DatabaseTableClient::doInsertData(DbTransaction* trx, List<IDatabaseRecord>
 			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3602(), e, ctx));
 		}
 	}
+}
+void DatabaseTableClient::includes(TableAccessStatus* arg0, ThreadContext* ctx) throw() 
+{
 }
 void DatabaseTableClient::__cleanUp(ThreadContext* ctx){
 }

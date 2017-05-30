@@ -505,6 +505,11 @@
 #include "alinous.remote.region.client.command.data/ClientTableData.h"
 #include "alinous.remote.region.client.command.data/ClientSchemaData.h"
 #include "alinous.remote.region.client.command.data/ClientStructureMetadata.h"
+#include "alinous.remote.region.server.lock/IRemoteTableLock.h"
+#include "alinous.remote.region.server.lock/TrxLockContextLockHolder.h"
+#include "alinous.remote.region.server.lock/RemoteTrxLockContext.h"
+#include "alinous.remote.region.server.lock/RemoteTableLock.h"
+#include "alinous.remote.region.server.lock/RegionTableLockManager.h"
 #include "alinous.remote.region.server.schema/NodeCluster.h"
 #include "alinous.remote.region.server.schema/NodeTableReference.h"
 #include "alinous.remote.region.server.schema/NodeTableClaster.h"
@@ -597,7 +602,7 @@
 #include "alinous.compile.sql.select.join.scan/CrossJoinScanner.h"
 #include "alinous.compile.sql.select.join.scan/ReverseIndexScanner.h"
 #include "alinous.compile.sql.select.join.scan/RightindexJoinScanner.h"
-#include "alinous.remote.region.client.scan/IRemoteScanner.h"
+#include "alinous.remote.region.client.scan/AbstractRemoteScanner.h"
 #include "alinous.remote.region.client.scan/IRemoteJoinScanner.h"
 #include "alinous.remote.region.client/RemoteReverseIndexScanner.h"
 #include "alinous.remote.region.client.scan/RemoteCrossJoinScanner.h"
@@ -943,7 +948,6 @@
 #include "alinous.remote.db.server.commit/DeleteStore.h"
 #include "alinous.remote.db.server.commit/UpdateStore.h"
 #include "alinous.remote.region.client.scan/RemoteRightindexJoinScanner.h"
-#include "alinous.remote.region.server.lock/RegionTableLockManager.h"
 
 
 inline static void __cleanUpStatics(alinous::ThreadContext* ctx){
@@ -1916,11 +1920,11 @@ inline static void __cleanUpStatics(alinous::ThreadContext* ctx){
 	alinous::remote::region::client::RegionConnectionInfo::__cleanUp(ctx);
 	alinous::remote::region::client::TableAccessStatus::__cleanUp(ctx);
 	alinous::remote::region::client::scan::RemoteIndexRangeScanner::__cleanUp(ctx);
+	alinous::remote::region::client::scan::AbstractRemoteScanner::__cleanUp(ctx);
 	alinous::remote::region::client::scan::RemoteIndexListScanner::__cleanUp(ctx);
 	alinous::remote::region::client::scan::ResultHolder::__cleanUp(ctx);
 	alinous::remote::region::client::scan::RemoteIndexEqScanner::__cleanUp(ctx);
 	alinous::remote::region::client::scan::IRemoteJoinScanner::__cleanUp(ctx);
-	alinous::remote::region::client::scan::IRemoteScanner::__cleanUp(ctx);
 	alinous::remote::region::client::scan::RemoteTableFullScanner::__cleanUp(ctx);
 	alinous::remote::region::client::scan::RemoteCrossJoinScanner::__cleanUp(ctx);
 	alinous::remote::region::client::scan::RemoteTableIndexScanner::__cleanUp(ctx);
@@ -1972,6 +1976,10 @@ inline static void __cleanUpStatics(alinous::ThreadContext* ctx){
 	alinous::remote::region::server::schema::strategy::InsertNodeAccessStrategy::__cleanUp(ctx);
 	alinous::remote::region::server::schema::strategy::NodeListBinarySearcher::__cleanUp(ctx);
 	alinous::remote::region::server::lock::RegionTableLockManager::__cleanUp(ctx);
+	alinous::remote::region::server::lock::IRemoteTableLock::__cleanUp(ctx);
+	alinous::remote::region::server::lock::RemoteTrxLockContext::__cleanUp(ctx);
+	alinous::remote::region::server::lock::RemoteTableLock::__cleanUp(ctx);
+	alinous::remote::region::server::lock::TrxLockContextLockHolder::__cleanUp(ctx);
 	alinous::remote::region::server::tpc::RegionInsertExecutor::__cleanUp(ctx);
 	alinous::remote::region::server::tpc::CommitClusterNodeListner::__cleanUp(ctx);
 	alinous::remote::region::server::tpc::RegionTpcExecutorPool::__cleanUp(ctx);

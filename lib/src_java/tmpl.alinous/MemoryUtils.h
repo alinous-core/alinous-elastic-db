@@ -24,6 +24,9 @@ template class alinous::MemoryUtils<::alinous::HashMapInternalElement<::java::la
 template class alinous::MemoryUtils<::alinous::HashMapInternalElement<::java::lang::Long, ::alinous::remote::region::server::scan::ScanSession>>;
 template class alinous::MemoryUtils<::alinous::HashMapInternalElement<::java::lang::String, ::alinous::remote::region::server::schema::NodeTableClaster>>;
 template class alinous::MemoryUtils<::alinous::HashMapInternalElement<::java::lang::String, ::alinous::remote::region::server::schema::NodeRegionSchema>>;
+template class alinous::MemoryUtils<::alinous::HashMapInternalElement<::java::lang::Long, ::alinous::remote::region::server::lock::RemoteTrxLockContext>>;
+template class alinous::MemoryUtils<::alinous::HashMapInternalElement<::java::lang::String, ::alinous::remote::region::server::lock::IRemoteTableLock>>;
+template class alinous::MemoryUtils<::alinous::HashMapInternalElement<::java::lang::String, ::alinous::remote::region::server::lock::TrxLockContextLockHolder>>;
 template class alinous::MemoryUtils<::alinous::HashMapInternalElement<::java::lang::String, ::alinous::remote::region::server::schema::NodeReference>>;
 template class alinous::MemoryUtils<::alinous::HashMapInternalElement<::java::lang::Long, ::alinous::remote::region::server::tpc::RegionInsertExecutor>>;
 template class alinous::MemoryUtils<::alinous::HashMapInternalElement<::java::lang::Long, ::alinous::remote::region::server::tpc::CommitClusterNodeListner>>;
@@ -81,6 +84,9 @@ template class alinous::MemoryUtils<::alinous::HashMapRawArray<::java::lang::Str
 template class alinous::MemoryUtils<::alinous::HashMapRawArray<::java::lang::Long, ::alinous::remote::region::server::scan::ScanSession>>;
 template class alinous::MemoryUtils<::alinous::HashMapRawArray<::java::lang::String, ::alinous::remote::region::server::schema::NodeTableClaster>>;
 template class alinous::MemoryUtils<::alinous::HashMapRawArray<::java::lang::String, ::alinous::remote::region::server::schema::NodeRegionSchema>>;
+template class alinous::MemoryUtils<::alinous::HashMapRawArray<::java::lang::Long, ::alinous::remote::region::server::lock::RemoteTrxLockContext>>;
+template class alinous::MemoryUtils<::alinous::HashMapRawArray<::java::lang::String, ::alinous::remote::region::server::lock::IRemoteTableLock>>;
+template class alinous::MemoryUtils<::alinous::HashMapRawArray<::java::lang::String, ::alinous::remote::region::server::lock::TrxLockContextLockHolder>>;
 template class alinous::MemoryUtils<::alinous::HashMapRawArray<::java::lang::String, ::alinous::remote::region::server::schema::NodeReference>>;
 template class alinous::MemoryUtils<::alinous::HashMapRawArray<::java::lang::Long, ::alinous::remote::region::server::tpc::RegionInsertExecutor>>;
 template class alinous::MemoryUtils<::alinous::HashMapRawArray<::java::lang::Long, ::alinous::remote::region::server::tpc::CommitClusterNodeListner>>;

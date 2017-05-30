@@ -51,7 +51,7 @@
 #include "alinous.compile.sql.select.join.scan/RightindexJoinScanner.h"
 #include "alinous.db.table/IBtreeTableIndex.h"
 #include "alinous.db.trx.cache/TrxRecordCacheIndex.h"
-#include "alinous.remote.region.client.scan/IRemoteScanner.h"
+#include "alinous.remote.region.client.scan/AbstractRemoteScanner.h"
 #include "alinous.remote.region.client.scan/IRemoteJoinScanner.h"
 #include "alinous.remote.region.client/RemoteReverseIndexScanner.h"
 #include "alinous.remote.region.client.scan/RemoteCrossJoinScanner.h"

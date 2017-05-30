@@ -31,6 +31,7 @@
 #include "alinous.remote.region.client.command.data/ClientNetworkRecord.h"
 #include "alinous.remote.region.client.command.data/ClientStructureMetadata.h"
 #include "alinous.remote.region.client.command.dml/ClientScanCommandData.h"
+#include "alinous.remote.region.server.lock/RegionTableLockManager.h"
 #include "alinous.remote.region.server.schema.strategy/RegionPartitionTableAccess.h"
 #include "alinous.remote.region.server.tpc/CommitClusterNodeListner.h"
 #include "alinous.remote.region.server.scan/ScanWorkerResult.h"
@@ -64,13 +65,15 @@ bool NodeRegionServer::__init_static_variables(){
 	delete ctx;
 	return true;
 }
- NodeRegionServer::NodeRegionServer(int port, int maxthread, AlinousCore* core, ThreadContext* ctx) throw()  : IObject(ctx), port(0), maxthread(0), refs(nullptr), socketServer(nullptr), monitorConnectionPool(nullptr), nodeClusterRevisionLock(__GC_INS(this, (new(ctx) LockObject(ctx)), LockObject)), nodeClusterRevision(1), region(nullptr), core(nullptr), dmlSessions(__GC_INS(this, (new(ctx) RegionTpcExecutorPool(ctx)), RegionTpcExecutorPool)), scanManager(nullptr)
+ NodeRegionServer::NodeRegionServer(int port, int maxthread, AlinousCore* core, ThreadContext* ctx) throw()  : IObject(ctx), port(0), maxthread(0), refs(nullptr), socketServer(nullptr), monitorConnectionPool(nullptr), nodeClusterRevisionLock(__GC_INS(this, (new(ctx) LockObject(ctx)), LockObject)), nodeClusterRevision(1), region(nullptr), core(nullptr), dmlSessions(__GC_INS(this, (new(ctx) RegionTpcExecutorPool(ctx)), RegionTpcExecutorPool)), scanManager(nullptr), tableLockManager(nullptr), scale(0)
 {
 	this->port = port;
 	this->maxthread = maxthread;
 	__GC_MV(this, &(this->refs), (new(ctx) NodeReferenceManager(ctx)), NodeReferenceManager);
 	__GC_MV(this, &(this->core), core, AlinousCore);
 	__GC_MV(this, &(this->scanManager), (new(ctx) RegionScanManager(ctx)), RegionScanManager);
+	__GC_MV(this, &(this->tableLockManager), (new(ctx) RegionTableLockManager(ctx)), RegionTableLockManager);
+	this->scale = false;
 }
 void NodeRegionServer::__construct_impl(int port, int maxthread, AlinousCore* core, ThreadContext* ctx) throw() 
 {
@@ -79,6 +82,8 @@ void NodeRegionServer::__construct_impl(int port, int maxthread, AlinousCore* co
 	__GC_MV(this, &(this->refs), (new(ctx) NodeReferenceManager(ctx)), NodeReferenceManager);
 	__GC_MV(this, &(this->core), core, AlinousCore);
 	__GC_MV(this, &(this->scanManager), (new(ctx) RegionScanManager(ctx)), RegionScanManager);
+	__GC_MV(this, &(this->tableLockManager), (new(ctx) RegionTableLockManager(ctx)), RegionTableLockManager);
+	this->scale = false;
 }
  NodeRegionServer::~NodeRegionServer() throw() 
 {
@@ -106,6 +111,8 @@ void NodeRegionServer::__releaseRegerences(bool prepare, ThreadContext* ctx) thr
 	dmlSessions = nullptr;
 	__e_obj1.add(this->scanManager, this);
 	scanManager = nullptr;
+	__e_obj1.add(this->tableLockManager, this);
+	tableLockManager = nullptr;
 	if(!prepare){
 		return;
 	}
@@ -234,15 +241,32 @@ ScanWorkerResult* NodeRegionServer::scan(ClientScanCommandData* data, ThreadCont
 	DbVersionContext* vctx = data->getVctx(ctx);
 	checkVersion(vctx, ctx);
 	TableAndSchema* sctable = data->getTable(ctx);
-	RegionPartitionTableAccess* tableAccess = this->refs->getCluster(sctable->getSchema(ctx), sctable->getTable(ctx), ctx);
-	CommitClusterNodeListner* accessListner = this->dmlSessions->getListner(vctx->getTrxId(ctx), ctx);
-	ScanSession* session = this->scanManager->getScanSession(vctx->getTrxId(ctx), data, tableAccess, accessListner, ctx);
-	ScanWorkerResult* result = session->scan(ctx);
+	this->tableLockManager->lockTable(sctable->getSchema(ctx), sctable->getTable(ctx), data->getLockMode(ctx), vctx->getTrxId(ctx), this, ctx);
+	ScanWorkerResult* result = nullptr;
+	{
+		std::function<void(void)> finallyLm2= [&, this]()
+		{
+			this->tableLockManager->unlockShared(sctable->getSchema(ctx), sctable->getTable(ctx), vctx->getTrxId(ctx), this, ctx);
+		};
+		Releaser finalyCaller2(finallyLm2);
+		try
+		{
+			RegionPartitionTableAccess* tableAccess = this->refs->getCluster(sctable->getSchema(ctx), sctable->getTable(ctx), ctx);
+			CommitClusterNodeListner* accessListner = this->dmlSessions->getListner(vctx->getTrxId(ctx), ctx);
+			ScanSession* session = this->scanManager->getScanSession(vctx->getTrxId(ctx), data, tableAccess, accessListner, ctx);
+			result = session->scan(ctx);
+		}
+		catch(...){throw;}
+	}
 	return result;
 }
 void NodeRegionServer::endScan(long long trxId, ThreadContext* ctx) throw() 
 {
 	this->scanManager->endSession(trxId, ctx);
+}
+bool NodeRegionServer::isScale(ThreadContext* ctx) throw() 
+{
+	return scale;
 }
 void NodeRegionServer::requestSyncMaxOid(ThreadContext* ctx)
 {

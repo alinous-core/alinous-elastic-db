@@ -43,7 +43,7 @@
 #include "alinous.compile.sql.expression.blexp/AbstractSQLBooleanExpression.h"
 #include "alinous.compile.sql.select.join/SQLJoinCondition.h"
 #include "alinous.db.trx.scan/ScanException.h"
-#include "alinous.remote.region.client.scan/IRemoteScanner.h"
+#include "alinous.remote.region.client.scan/AbstractRemoteScanner.h"
 #include "alinous.remote.region.client.scan/IRemoteJoinScanner.h"
 #include "alinous.remote.region.client/RemoteReverseIndexScanner.h"
 
@@ -82,6 +82,7 @@ void RemoteReverseIndexScanner::__releaseRegerences(bool prepare, ThreadContext*
 	if(!prepare){
 		return;
 	}
+	IRemoteJoinScanner::__releaseRegerences(true, ctx);
 }
 RemoteReverseIndexScanner* RemoteReverseIndexScanner::init(DbTransaction* trx, ITableTargetScanner* left, ITableTargetScanner* right, ScanTableMetadata* leftMetadata, ScanTableMetadata* rightMetadata, bool inner, JoinMatchExpression* match, SQLJoinCondition* condition, ScriptMachine* machine, ThreadContext* ctx) throw() 
 {

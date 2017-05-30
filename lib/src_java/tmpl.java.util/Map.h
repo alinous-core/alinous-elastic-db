@@ -23,6 +23,9 @@ template class ::java::util::Map<::java::lang::String, ::alinous::remote::region
 template class ::java::util::Map<::java::lang::Long, ::alinous::remote::region::server::scan::ScanSession>;
 template class ::java::util::Map<::java::lang::String, ::alinous::remote::region::server::schema::NodeTableClaster>;
 template class ::java::util::Map<::java::lang::String, ::alinous::remote::region::server::schema::NodeRegionSchema>;
+template class ::java::util::Map<::java::lang::Long, ::alinous::remote::region::server::lock::RemoteTrxLockContext>;
+template class ::java::util::Map<::java::lang::String, ::alinous::remote::region::server::lock::IRemoteTableLock>;
+template class ::java::util::Map<::java::lang::String, ::alinous::remote::region::server::lock::TrxLockContextLockHolder>;
 template class ::java::util::Map<::java::lang::String, ::alinous::remote::region::server::schema::NodeReference>;
 template class ::java::util::Map<::java::lang::Long, ::alinous::remote::region::server::tpc::RegionInsertExecutor>;
 template class ::java::util::Map<::java::lang::Long, ::alinous::remote::region::server::tpc::CommitClusterNodeListner>;

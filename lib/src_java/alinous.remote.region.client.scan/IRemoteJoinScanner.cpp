@@ -1,18 +1,12 @@
 #include "include/global.h"
 
 
-#include "alinous.system/ISystemLog.h"
-#include "java.lang/Comparable.h"
-#include "alinous.btree/IBTreeKey.h"
-#include "alinous.remote.socket/ICommandData.h"
-#include "alinous.db.trx.scan/ScanResultIndexKey.h"
-#include "alinous.btree/IBTreeValue.h"
-#include "alinous.db.trx.scan/ScanResultRecord.h"
 #include "alinous.db.trx.scan/ITableTargetScanner.h"
-#include "alinous.remote.region.client.scan/IRemoteScanner.h"
+#include "alinous.remote.region.client.scan/AbstractRemoteScanner.h"
 #include "alinous.remote.region.client.scan/IRemoteJoinScanner.h"
 
 namespace alinous {namespace remote {namespace region {namespace client {namespace scan {
+
 
 
 
@@ -28,7 +22,7 @@ bool IRemoteJoinScanner::__init_static_variables(){
 	delete ctx;
 	return true;
 }
- IRemoteJoinScanner::IRemoteJoinScanner(ThreadContext* ctx) throw()  : IObject(ctx), IRemoteScanner(ctx)
+ IRemoteJoinScanner::IRemoteJoinScanner(ThreadContext* ctx) throw()  : IObject(ctx), AbstractRemoteScanner(ctx)
 {
 }
 void IRemoteJoinScanner::__construct_impl(ThreadContext* ctx) throw() 
@@ -46,7 +40,7 @@ void IRemoteJoinScanner::__releaseRegerences(bool prepare, ThreadContext* ctx) t
 	if(!prepare){
 		return;
 	}
-	IRemoteScanner::__releaseRegerences(true, ctx);
+	AbstractRemoteScanner::__releaseRegerences(true, ctx);
 }
 void IRemoteJoinScanner::__cleanUp(ThreadContext* ctx){
 }

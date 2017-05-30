@@ -1,7 +1,7 @@
 #ifndef ALINOUS_REMOTE_REGION_CLIENT_SCAN_IREMOTEJOINSCANNER_H_
 #define ALINOUS_REMOTE_REGION_CLIENT_SCAN_IREMOTEJOINSCANNER_H_
 namespace alinous {namespace remote {namespace region {namespace client {namespace scan {
-class IRemoteScanner;}}}}}
+class AbstractRemoteScanner;}}}}}
 
 namespace alinous {
 class ThreadContext;
@@ -15,7 +15,7 @@ using ::java::util::Iterator;
 
 
 
-class IRemoteJoinScanner : public virtual IObject, public IRemoteScanner {
+class IRemoteJoinScanner : public AbstractRemoteScanner {
 public:
 	IRemoteJoinScanner(const IRemoteJoinScanner& base) = default;
 public:

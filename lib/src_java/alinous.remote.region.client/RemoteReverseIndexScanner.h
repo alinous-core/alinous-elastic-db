@@ -42,10 +42,6 @@ class ScanException;}}}}
 namespace alinous {namespace system {
 class AlinousException;}}
 
-namespace java {namespace lang {
-class IObject;
-}}
-
 namespace alinous {
 class ThreadContext;
 }
@@ -71,7 +67,7 @@ using ::alinous::system::ISystemLog;
 
 
 
-class RemoteReverseIndexScanner final : public IRemoteJoinScanner, public virtual IObject {
+class RemoteReverseIndexScanner final : public IRemoteJoinScanner {
 public:
 	RemoteReverseIndexScanner(const RemoteReverseIndexScanner& base) = default;
 public:

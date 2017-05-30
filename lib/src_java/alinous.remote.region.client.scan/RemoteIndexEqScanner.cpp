@@ -23,7 +23,7 @@
 #include "alinous.db.table/IBtreeTableIndex.h"
 #include "alinous.db.trx.cache/TrxRecordCacheIndex.h"
 #include "alinous.db.trx.scan/ScanException.h"
-#include "alinous.remote.region.client.scan/IRemoteScanner.h"
+#include "alinous.remote.region.client.scan/AbstractRemoteScanner.h"
 #include "alinous.remote.region.client.scan/RemoteIndexEqScanner.h"
 
 namespace alinous {namespace remote {namespace region {namespace client {namespace scan {
@@ -43,7 +43,7 @@ bool RemoteIndexEqScanner::__init_static_variables(){
 	delete ctx;
 	return true;
 }
- RemoteIndexEqScanner::RemoteIndexEqScanner(ThreadContext* ctx) throw()  : IObject(ctx), IRemoteScanner(ctx)
+ RemoteIndexEqScanner::RemoteIndexEqScanner(ThreadContext* ctx) throw()  : IObject(ctx), AbstractRemoteScanner(ctx)
 {
 }
 void RemoteIndexEqScanner::__construct_impl(ThreadContext* ctx) throw() 
@@ -61,6 +61,7 @@ void RemoteIndexEqScanner::__releaseRegerences(bool prepare, ThreadContext* ctx)
 	if(!prepare){
 		return;
 	}
+	AbstractRemoteScanner::__releaseRegerences(true, ctx);
 }
 RemoteIndexEqScanner* RemoteIndexEqScanner::init(ScanTableIdentifier* tableId, DbTransaction* trx, IScannableIndex* index, IDatabaseTable* tableStore, TrxRecordCacheIndex* insertCacheindex, TrxRecordCacheIndex* updateCacheindex, int lockMode, ScanResultIndexKey* eqKey, int effectiveKeyLength, InnerNecessaryCondition* necessaryCondition, ScriptMachine* machine, ThreadContext* ctx) throw() 
 {

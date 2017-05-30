@@ -7,6 +7,9 @@ namespace alinous {namespace compile {namespace sql {namespace expression {
 class ISQLExpression;}}}}
 
 namespace alinous {namespace db {namespace table {namespace scan {
+class ScannerFactory;}}}}
+
+namespace alinous {namespace db {namespace table {namespace scan {
 class SingleTableIndexScanner;}}}}
 
 namespace alinous {namespace compile {namespace sql {namespace analyze {
@@ -130,7 +133,7 @@ public:
 private:
 	void startsWithKey(ScanResultIndexKey* indexKeyValue, ThreadContext* ctx);
 public:
-	static void includes(ISQLExpression* arg0, ThreadContext* ctx) throw() ;
+	static void includes(ISQLExpression* arg0, ScannerFactory* arg1, ThreadContext* ctx) throw() ;
 public:
 	static bool __init_done;
 	static bool __init_static_variables();

@@ -475,11 +475,22 @@ void DbTransaction::noGroupBySelect(SelectStatement* selectStmt, ScriptMachine* 
 	frame->putVariable(machine, selectStmt->intoDesc, selectResult, debug, ctx);
 	SelectResultDescription* desc = selectStmt->resultDesc;
 	scanner->startScan(nullptr, ctx);
-	while(scanner->hasNext(debug, ctx))
 	{
-		ScanResultRecord* srecord = scanner->next(debug, ctx);
-		DomVariable* domVariable = desc->fetchDom(srecord, machine, debug, ctx);
-		selectResult->put(domVariable, ctx);
+		std::function<void(void)> finallyLm2= [&, this]()
+		{
+			scanner->endScan(ctx);
+		};
+		Releaser finalyCaller2(finallyLm2);
+		try
+		{
+			while(scanner->hasNext(debug, ctx))
+			{
+				ScanResultRecord* srecord = scanner->next(debug, ctx);
+				DomVariable* domVariable = desc->fetchDom(srecord, machine, debug, ctx);
+				selectResult->put(domVariable, ctx);
+			}
+		}
+		catch(...){throw;}
 	}
 }
 void DbTransaction::doUpdate(ScanResultRecord* record, UpdateStatement* update, ScriptMachine* machine, bool debug, ThreadContext* ctx)

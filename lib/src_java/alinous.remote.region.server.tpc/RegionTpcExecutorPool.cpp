@@ -91,7 +91,7 @@ void RegionTpcExecutorPool::tcpCommit(long long newCommitId, DbVersionContext* v
 		commitListner = this->listners->get(key, ctx);
 		if(commitListner == nullptr)
 		{
-			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3629(), ctx));
+			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3630(), ctx));
 		}
 	}
 	commitListner->sendCommit(newCommitId, vctx, ctx);

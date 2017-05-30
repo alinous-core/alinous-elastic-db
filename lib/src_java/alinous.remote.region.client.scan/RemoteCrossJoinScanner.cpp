@@ -16,8 +16,7 @@
 #include "alinous.runtime.engine/ScriptMachine.h"
 #include "alinous.db.trx/DbTransaction.h"
 #include "alinous.db.trx.scan/ScanException.h"
-#include "alinous.remote.region.client.scan/IRemoteScanner.h"
-#include "alinous.remote.region.client.scan/IRemoteJoinScanner.h"
+#include "alinous.remote.region.client.scan/AbstractRemoteScanner.h"
 #include "alinous.remote.region.client.scan/RemoteCrossJoinScanner.h"
 
 namespace alinous {namespace remote {namespace region {namespace client {namespace scan {
@@ -37,7 +36,7 @@ bool RemoteCrossJoinScanner::__init_static_variables(){
 	delete ctx;
 	return true;
 }
- RemoteCrossJoinScanner::RemoteCrossJoinScanner(ThreadContext* ctx) throw()  : IObject(ctx), IRemoteJoinScanner(ctx)
+ RemoteCrossJoinScanner::RemoteCrossJoinScanner(ThreadContext* ctx) throw()  : IObject(ctx), AbstractRemoteScanner(ctx)
 {
 }
 void RemoteCrossJoinScanner::__construct_impl(ThreadContext* ctx) throw() 
@@ -55,6 +54,7 @@ void RemoteCrossJoinScanner::__releaseRegerences(bool prepare, ThreadContext* ct
 	if(!prepare){
 		return;
 	}
+	AbstractRemoteScanner::__releaseRegerences(true, ctx);
 }
 RemoteCrossJoinScanner* RemoteCrossJoinScanner::init(DbTransaction* trx, ITableTargetScanner* left, ITableTargetScanner* right, ScanTableMetadata* leftMetadata, ScanTableMetadata* rightMetadata, ScriptMachine* machine, ThreadContext* ctx) throw() 
 {

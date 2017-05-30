@@ -18,7 +18,7 @@
 #include "alinous.db.trx/DbTransaction.h"
 #include "alinous.db.table/IDatabaseTable.h"
 #include "alinous.db.trx.scan/ScanException.h"
-#include "alinous.remote.region.client.scan/IRemoteScanner.h"
+#include "alinous.remote.region.client.scan/AbstractRemoteScanner.h"
 #include "alinous.remote.region.client.scan/RemoteTableFullScanner.h"
 
 namespace alinous {namespace remote {namespace region {namespace client {namespace scan {
@@ -38,7 +38,7 @@ bool RemoteTableFullScanner::__init_static_variables(){
 	delete ctx;
 	return true;
 }
- RemoteTableFullScanner::RemoteTableFullScanner(ThreadContext* ctx) throw()  : IObject(ctx), IRemoteScanner(ctx)
+ RemoteTableFullScanner::RemoteTableFullScanner(ThreadContext* ctx) throw()  : IObject(ctx), AbstractRemoteScanner(ctx)
 {
 }
 void RemoteTableFullScanner::__construct_impl(ThreadContext* ctx) throw() 
@@ -56,6 +56,7 @@ void RemoteTableFullScanner::__releaseRegerences(bool prepare, ThreadContext* ct
 	if(!prepare){
 		return;
 	}
+	AbstractRemoteScanner::__releaseRegerences(true, ctx);
 }
 RemoteTableFullScanner* RemoteTableFullScanner::init(ScanTableIdentifier* tableId, DbTransaction* trx, IDatabaseTable* tableStore, int lockMode, ThreadContext* ctx)
 {

@@ -1,7 +1,11 @@
-#ifndef ALINOUS_REMOTE_REGION_CLIENT_SCAN_IREMOTESCANNER_H_
-#define ALINOUS_REMOTE_REGION_CLIENT_SCAN_IREMOTESCANNER_H_
+#ifndef ALINOUS_REMOTE_REGION_CLIENT_SCAN_ABSTRACTREMOTESCANNER_H_
+#define ALINOUS_REMOTE_REGION_CLIENT_SCAN_ABSTRACTREMOTESCANNER_H_
 namespace alinous {namespace db {namespace trx {namespace scan {
 class ITableTargetScanner;}}}}
+
+namespace java {namespace lang {
+class IObject;
+}}
 
 namespace alinous {
 class ThreadContext;
@@ -16,13 +20,13 @@ using ::alinous::db::trx::scan::ITableTargetScanner;
 
 
 
-class IRemoteScanner : public virtual IObject, public ITableTargetScanner {
+class AbstractRemoteScanner : public ITableTargetScanner, public virtual IObject {
 public:
-	IRemoteScanner(const IRemoteScanner& base) = default;
+	AbstractRemoteScanner(const AbstractRemoteScanner& base) = default;
 public:
-	IRemoteScanner(ThreadContext* ctx) throw() ;
+	AbstractRemoteScanner(ThreadContext* ctx) throw() ;
 	void __construct_impl(ThreadContext* ctx) throw() ;
-	virtual ~IRemoteScanner() throw();
+	virtual ~AbstractRemoteScanner() throw();
 	virtual void __releaseRegerences(bool prepare, ThreadContext* ctx) throw();
 public:
 	static bool __init_done;
@@ -33,4 +37,4 @@ public:
 
 }}}}}
 
-#endif /* end of ALINOUS_REMOTE_REGION_CLIENT_SCAN_IREMOTESCANNER_H_ */
+#endif /* end of ALINOUS_REMOTE_REGION_CLIENT_SCAN_ABSTRACTREMOTESCANNER_H_ */

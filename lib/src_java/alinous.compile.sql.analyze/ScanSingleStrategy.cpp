@@ -66,7 +66,7 @@
 #include "alinous.compile.sql.select.join.scan/CrossJoinScanner.h"
 #include "alinous.compile.sql.select.join.scan/ReverseIndexScanner.h"
 #include "alinous.compile.sql.select.join.scan/RightindexJoinScanner.h"
-#include "alinous.remote.region.client.scan/IRemoteScanner.h"
+#include "alinous.remote.region.client.scan/AbstractRemoteScanner.h"
 #include "alinous.remote.region.client.scan/IRemoteJoinScanner.h"
 #include "alinous.remote.region.client/RemoteReverseIndexScanner.h"
 #include "alinous.remote.region.client.scan/RemoteCrossJoinScanner.h"

@@ -47,6 +47,7 @@
 #include "alinous.db.trx.scan/ScanException.h"
 #include "alinous.db.trx.cache/TrxRecordCacheIndexScanner.h"
 #include "alinous.db.trx.scan/IFilterScanner.h"
+#include "alinous.db.table.scan/ScannerFactory.h"
 #include "alinous.db.table.scan/SingleTableIndexScanner.h"
 
 namespace alinous {namespace db {namespace table {namespace scan {
@@ -202,7 +203,7 @@ void SingleTableIndexScanner::startsWithKey(ScanResultIndexKey* indexKeyValue, T
 		this->updateScanner->startScan(key, ctx);
 	}
 }
-void SingleTableIndexScanner::includes(ISQLExpression* arg0, ThreadContext* ctx) throw() 
+void SingleTableIndexScanner::includes(ISQLExpression* arg0, ScannerFactory* arg1, ThreadContext* ctx) throw() 
 {
 }
 void SingleTableIndexScanner::__cleanUp(ThreadContext* ctx){
