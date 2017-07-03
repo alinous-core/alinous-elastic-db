@@ -262,6 +262,7 @@ set(srcjava
 	"src_java/alinous.runtime.dom/IVariableClassOperationCaller.cpp"
 	"src_java/alinous.runtime.dom/DocumentVariable.cpp"
 	"src_java/alinous.remote.region.client.command.dml/ClientScanCommand.cpp"
+	"src_java/alinous.remote.region.client.command.dml/ClientClearSelectSessionCommand.cpp"
 	"src_java/alinous.remote.region.client.command.dml/ClientScanEndCommand.cpp"
 	"src_java/alinous.remote.region.client.command.dml/ClientScanCommandData.cpp"
 	"src_java/alinous.remote.region.client.command.dml/ClientTpcCommitSessionCommand.cpp"

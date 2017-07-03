@@ -7,6 +7,12 @@ namespace alinous {namespace remote {namespace region {namespace client {
 class TableAccessStatus;}}}}
 
 namespace java {namespace util {
+template <typename  T> class List;}}
+
+namespace java {namespace util {
+template <typename  T> class Iterator;}}
+
+namespace java {namespace util {
 template <typename  T, typename V> class Map;}}
 
 namespace java {namespace util {
@@ -25,7 +31,10 @@ namespace alinous {namespace remote {namespace region {namespace client {
 using namespace ::alinous;
 using namespace ::java::lang;
 using ::java::util::Iterator;
+using ::java::util::ArrayList;
 using ::java::util::HashMap;
+using ::java::util::Iterator;
+using ::java::util::List;
 using ::java::util::Map;
 
 
@@ -43,6 +52,7 @@ private:
 public:
 	void setStatus(String* schemaName, String* TableName, int status, ThreadContext* ctx) throw() ;
 	void setStatus(String* fullName, int status, ThreadContext* ctx) throw() ;
+	List<String>* getUncommitedTables(ThreadContext* ctx) throw() ;
 public:
 	static bool __init_done;
 	static bool __init_static_variables();

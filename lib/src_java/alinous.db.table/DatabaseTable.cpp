@@ -250,6 +250,9 @@ AbstractNodeRegionCommand* DatabaseTable::sendCommand(AbstractNodeRegionCommand*
 {
 	return nullptr;
 }
+void DatabaseTable::cleanSelectLocks(DbTransaction* trx, long long newCommitId, ThreadContext* ctx)
+{
+}
 bool DatabaseTable::matchUniqueIndexByIdList(ArrayList<TableColumnMetadata>* columnsMetadataList, List<TableColumnMetadata>* columns, ThreadContext* ctx) throw() 
 {
 	int maxLoop = columns->size(ctx);

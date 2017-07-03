@@ -90,6 +90,7 @@ public:
 	constexpr static const int TYPE_TPC_COMMIT_SESSION{1005};
 	constexpr static const int TYPE_SCAN{1006};
 	constexpr static const int TYPE_SCAN_END{1007};
+	constexpr static const int TYPE_CLEAR_SELECT_SESSION{1008};
 public:
 	int getType(ThreadContext* ctx) throw() ;
 	AbstractNodeRegionCommand* sendCommand(AlinousSocket* socket, ThreadContext* ctx);

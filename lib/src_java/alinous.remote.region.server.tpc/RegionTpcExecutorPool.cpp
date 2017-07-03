@@ -63,7 +63,13 @@ CommitClusterNodeListner* RegionTpcExecutorPool::getListner(long long trxId, Thr
 	{
 		SynchronizedBlockObj __synchronized_2(this->lock, ctx);
 		Long* key = (new(ctx) Long(trxId, ctx));
-		return this->listners->get(key, ctx);
+		CommitClusterNodeListner* listner = this->listners->get(key, ctx);
+		if(listner == nullptr)
+		{
+			listner = (new(ctx) CommitClusterNodeListner(ctx));
+			this->listners->put(trxId, listner, ctx);
+		}
+		return listner;
 	}
 }
 RegionInsertExecutor* RegionTpcExecutorPool::getInsertSession(long long trxId, long long commitId, DbVersionContext* vctx, NodeReferenceManager* refs, ThreadContext* ctx) throw() 

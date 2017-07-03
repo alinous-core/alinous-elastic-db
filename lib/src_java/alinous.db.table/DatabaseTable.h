@@ -96,6 +96,7 @@ public:
 	void updateUnlockRow(long long oid, IThreadLocker* locker, ThreadContext* ctx) final;
 	void finishCommitSession(DbTransaction* trx, long long newCommitId, ThreadContext* ctx) final;
 	AbstractNodeRegionCommand* sendCommand(AbstractNodeRegionCommand* cmd, ThreadContext* ctx) final;
+	void cleanSelectLocks(DbTransaction* trx, long long newCommitId, ThreadContext* ctx) final;
 private:
 	bool matchUniqueIndexByIdList(ArrayList<TableColumnMetadata>* columnsMetadataList, List<TableColumnMetadata>* columns, ThreadContext* ctx) throw() ;
 	bool matchIndexByIdList(ArrayList<TableColumnMetadata>* columnsMetadataList, ArrayList<ScanTableColumnIdentifier>* columns, ThreadContext* ctx) throw() ;

@@ -31,15 +31,17 @@ bool FullScanWorker::__init_static_variables(){
 	delete ctx;
 	return true;
 }
- FullScanWorker::FullScanWorker(ClientScanCommandData* data, RegionPartitionTableAccess* tableAccess, CommitClusterNodeListner* accessListner, ThreadContext* ctx) throw()  : IObject(ctx), IScanWorker(ctx), tableAccess(nullptr), shardParts(nullptr), index(0), data(nullptr)
+ FullScanWorker::FullScanWorker(ClientScanCommandData* data, RegionPartitionTableAccess* tableAccess, CommitClusterNodeListner* accessListner, ThreadContext* ctx) throw()  : IObject(ctx), IScanWorker(ctx), tableAccess(nullptr), shardParts(nullptr), index(0), data(nullptr), accessListner(nullptr)
 {
 	__GC_MV(this, &(this->tableAccess), tableAccess, RegionPartitionTableAccess);
 	__GC_MV(this, &(this->data), data, ClientScanCommandData);
+	__GC_MV(this, &(this->accessListner), accessListner, CommitClusterNodeListner);
 }
 void FullScanWorker::__construct_impl(ClientScanCommandData* data, RegionPartitionTableAccess* tableAccess, CommitClusterNodeListner* accessListner, ThreadContext* ctx) throw() 
 {
 	__GC_MV(this, &(this->tableAccess), tableAccess, RegionPartitionTableAccess);
 	__GC_MV(this, &(this->data), data, ClientScanCommandData);
+	__GC_MV(this, &(this->accessListner), accessListner, CommitClusterNodeListner);
 }
  FullScanWorker::~FullScanWorker() throw() 
 {
@@ -57,6 +59,8 @@ void FullScanWorker::__releaseRegerences(bool prepare, ThreadContext* ctx) throw
 	shardParts = nullptr;
 	__e_obj1.add(this->data, this);
 	data = nullptr;
+	__e_obj1.add(this->accessListner, this);
+	accessListner = nullptr;
 	if(!prepare){
 		return;
 	}
@@ -72,7 +76,9 @@ ScanWorkerResult* FullScanWorker::scan(ThreadContext* ctx)
 		throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3616(), ctx));
 	}
 	RegionShardPartAccess* access = this->shardParts->get(this->index, ctx);
+	this->index ++ ;
 	NodeReference* refAccess = access->getNodeAccessRef(ctx);
+	this->accessListner->addNode(refAccess, ctx);
 	ScanWorkerResult* result = refAccess->scan(this->data->getVctx(ctx), this->data, ctx);
 	return result;
 }

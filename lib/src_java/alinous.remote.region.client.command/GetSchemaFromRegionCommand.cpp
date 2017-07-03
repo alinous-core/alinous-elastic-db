@@ -16,6 +16,7 @@
 #include "alinous.remote.region.client.command/NodeRegionConnectCommand.h"
 #include "alinous.remote.region.client.command.ddl/RegionCreateSchemaCommand.h"
 #include "alinous.remote.region.client.command.ddl/RegionCreateTableCommand.h"
+#include "alinous.remote.region.client.command.dml/ClientClearSelectSessionCommand.h"
 #include "alinous.remote.region.client.command.dml/ClientInsertDataCommand.h"
 #include "alinous.remote.region.client.command.dml/ClientScanCommand.h"
 #include "alinous.remote.region.client.command.dml/ClientScanEndCommand.h"

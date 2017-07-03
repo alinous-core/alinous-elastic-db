@@ -63,6 +63,16 @@ void CommitClusterNodeListner::addNode(NodeReference* ref, ThreadContext* ctx) t
 		this->nodeRefs->put(key, ref, ctx);
 	}
 }
+void CommitClusterNodeListner::sendRemoveRowLocks(DbVersionContext* vctx, ThreadContext* ctx) throw() 
+{
+	Iterator<String>* it = this->nodeRefs->keySet(ctx)->iterator(ctx);
+	while(it->hasNext(ctx))
+	{
+		String* key = it->next(ctx);
+		NodeReference* ref = this->nodeRefs->get(key, ctx);
+		doSendRemoveRowLocks(ref, vctx, ctx);
+	}
+}
 void CommitClusterNodeListner::sendCommit(long long newCommitId, DbVersionContext* vctx, ThreadContext* ctx)
 {
 	Iterator<String>* it = this->nodeRefs->keySet(ctx)->iterator(ctx);
@@ -72,6 +82,9 @@ void CommitClusterNodeListner::sendCommit(long long newCommitId, DbVersionContex
 		NodeReference* ref = this->nodeRefs->get(key, ctx);
 		sendCommitCommand(newCommitId, vctx, ref, ctx);
 	}
+}
+void CommitClusterNodeListner::doSendRemoveRowLocks(NodeReference* ref, DbVersionContext* vctx, ThreadContext* ctx) throw() 
+{
 }
 void CommitClusterNodeListner::sendCommitCommand(long long newCommitId, DbVersionContext* vctx, NodeReference* ref, ThreadContext* ctx)
 {

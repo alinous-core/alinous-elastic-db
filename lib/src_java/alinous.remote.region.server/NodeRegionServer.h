@@ -194,6 +194,7 @@ public:
 	void insertData(ArrayList<ClientNetworkRecord>* list, long long newCommitId, String* schema, String* table, DbVersionContext* vctx, int isolationLevel, ThreadContext* ctx);
 	void commitUpdateData(long long newCommitId, DbVersionContext* vctx, ThreadContext* ctx);
 	ScanWorkerResult* scan(ClientScanCommandData* data, ThreadContext* ctx);
+	void clearSelectLocks(long long commitId, DbVersionContext* vctx, ThreadContext* ctx) throw() ;
 	void endScan(long long trxId, ThreadContext* ctx) throw() ;
 	bool isScale(ThreadContext* ctx) throw() ;
 private:

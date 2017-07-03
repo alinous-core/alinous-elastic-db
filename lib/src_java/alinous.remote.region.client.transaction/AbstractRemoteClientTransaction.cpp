@@ -57,17 +57,18 @@
 #include "alinous.compile.sql/AbstractSQLStatement.h"
 #include "alinous.compile.sql/CreateIndexStatement.h"
 #include "alinous.db.trx/DbVersionContext.h"
+#include "alinous.db/ITableSchema.h"
+#include "alinous.db/TableSchemaCollection.h"
+#include "alinous.remote.region.client/TableAccessStatusListner.h"
 #include "alinous.db.trx.cache/TrxStorageManager.h"
 #include "alinous.compile.sql/InsertStatement.h"
 #include "alinous.compile.sql/SelectStatement.h"
 #include "alinous.compile.sql/UpdateStatement.h"
 #include "alinous.runtime.parallel/ThreadPool.h"
-#include "alinous.db/ITableSchema.h"
 #include "alinous.db/TableSchema.h"
 #include "alinous.db.trx.ddl/TrxSchemeManager.h"
 #include "alinous.db.trx.scan/ScanResult.h"
 #include "alinous.lock.unique/UniqueExclusiveLockClient.h"
-#include "alinous.remote.region.client/TableAccessStatusListner.h"
 #include "alinous.db.trx/DbTransactionManager.h"
 #include "alinous.db.trx/DbTransaction.h"
 #include "alinous.db.table/IDatabaseTable.h"
@@ -139,7 +140,7 @@ void AbstractRemoteClientTransaction::commitUpdateInsert(long long newCommitId, 
 		{
 			try
 			{
-				this->trxStorageManager->commitRemote(this, newCommitId, ctx);
+				this->trxStorageManager->commitRemote(this, newCommitId, this->accessListner, ctx);
 			}
 			catch(IOException* e)
 			{
@@ -159,7 +160,23 @@ void AbstractRemoteClientTransaction::commitUpdateInsert(long long newCommitId, 
 			}
 		}
 	}
+	List<String>* commitList = this->accessListner->getUncommitedTables(ctx);
+	int maxLoop = commitList->size(ctx);
+	for(int i = 0; i != maxLoop; ++i)
+	{
+		String* fullName = commitList->get(i, ctx);
+		IDatabaseTable* table = getTable(fullName, ctx);
+		table->cleanSelectLocks(this, newCommitId, ctx);
+	}
 	this->trxStorageManager->reset(ctx);
+}
+IDatabaseTable* AbstractRemoteClientTransaction::getTable(String* fullName, ThreadContext* ctx) throw() 
+{
+	AlinousDatabase* database = this->database;
+	IArrayObject<String>* names = fullName->split(ConstStr::getCNST_STR_361(), ctx);
+	TableSchemaCollection* schema = database->getSchema(names->get(0), ctx);
+	IDatabaseTable* table = schema->getTableStore(names->get(1), ctx);
+	return table;
 }
 void AbstractRemoteClientTransaction::__cleanUp(ThreadContext* ctx){
 }

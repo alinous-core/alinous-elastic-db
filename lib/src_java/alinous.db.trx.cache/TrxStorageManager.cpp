@@ -70,6 +70,7 @@
 #include "alinous.db.trx/CreateIndexMetadata.h"
 #include "alinous.db.trx.ddl/TrxSchemeManager.h"
 #include "alinous.db.trx.scan/ScanResult.h"
+#include "alinous.remote.region.client/TableAccessStatus.h"
 #include "alinous.remote.region.client/TableAccessStatusListner.h"
 #include "alinous.system.utils/FileUtils.h"
 #include "alinous.db.trx/DbTransactionManager.h"
@@ -210,14 +211,14 @@ TrxRecordsCache* TrxStorageManager::getInsertCacheWithCreate(String* schema, Str
 	}
 	return cache;
 }
-void TrxStorageManager::commitRemote(AbstractRemoteClientTransaction* trx, long long newCommitId, ThreadContext* ctx)
+void TrxStorageManager::commitRemote(AbstractRemoteClientTransaction* trx, long long newCommitId, TableAccessStatusListner* accessListner, ThreadContext* ctx)
 {
 	AlinousDatabase* db = this->trx->getDatabase(ctx);
 	HashMap<String,IDatabaseTable>* tables = (new(ctx) HashMap<String,IDatabaseTable>(ctx));
 	commitRemoteInsert(db, newCommitId, tables, ctx);
 	commitRemoteUpdate(db, newCommitId, tables, ctx);
 	commitRemoteDelete(db, newCommitId, tables, ctx);
-	tpcCommitAll(trx, tables, newCommitId, ctx);
+	tpcCommitAll(trx, tables, newCommitId, accessListner, ctx);
 }
 void TrxStorageManager::commitLocal(long long newCommitId, ThreadContext* ctx)
 {
@@ -315,7 +316,7 @@ void TrxStorageManager::initStorage(ThreadContext* ctx) throw()
 	}
 	file->mkdirs(ctx);
 }
-void TrxStorageManager::tpcCommitAll(AbstractRemoteClientTransaction* trx, HashMap<String,IDatabaseTable>* tables, long long newCommitId, ThreadContext* ctx)
+void TrxStorageManager::tpcCommitAll(AbstractRemoteClientTransaction* trx, HashMap<String,IDatabaseTable>* tables, long long newCommitId, TableAccessStatusListner* accessListner, ThreadContext* ctx)
 {
 	Iterator<String>* it = tables->keySet(ctx)->iterator(ctx);
 	while(it->hasNext(ctx))
@@ -323,6 +324,8 @@ void TrxStorageManager::tpcCommitAll(AbstractRemoteClientTransaction* trx, HashM
 		String* key = it->next(ctx);
 		IDatabaseTable* table = tables->get(key, ctx);
 		table->finishCommitSession(trx, newCommitId, ctx);
+		String* fullName = table->getFullName(ctx);
+		accessListner->setStatus(fullName, TableAccessStatus::STAT_COMMITTED_DONE, ctx);
 	}
 }
 void TrxStorageManager::commitRemoteInsert(AlinousDatabase* db, long long newCommitId, HashMap<String,IDatabaseTable>* tables, ThreadContext* ctx)
@@ -400,7 +403,7 @@ void TrxStorageManager::commitInsertLocal(long long newCommitId, AlinousDatabase
 		}
 	}
 }
-void TrxStorageManager::includes(TrxRecordsCacheFactory* arg0, ThreadContext* ctx) throw() 
+void TrxStorageManager::includes(TrxRecordsCacheFactory* arg0, TableAccessStatus* arg1, ThreadContext* ctx) throw() 
 {
 }
 void TrxStorageManager::__cleanUp(ThreadContext* ctx){

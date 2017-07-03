@@ -44,6 +44,7 @@
 #include "alinous.db.table/IScannableIndex.h"
 #include "alinous.db.table/IDatabaseTable.h"
 #include "alinous.db.table.lockmonitor/ThreadLocker.h"
+#include "alinous.remote.region.client.command.dml/ClientClearSelectSessionCommand.h"
 #include "alinous.remote.region.client.command.dml/ClientInsertDataCommand.h"
 #include "alinous.remote.region.client.command.dml/ClientTpcCommitSessionCommand.h"
 #include "alinous.remote.region.client/RemoteTableIndex.h"
@@ -346,6 +347,41 @@ void DatabaseTableClient::insertData(DbTransaction* trx, List<IDatabaseRecord>* 
 void DatabaseTableClient::finishCommitSession(DbTransaction* trx, long long newCommitId, ThreadContext* ctx)
 {
 	ClientTpcCommitSessionCommand* cmd = (new(ctx) ClientTpcCommitSessionCommand(ctx));
+	cmd->setCommitId(newCommitId, ctx);
+	DbVersionContext* vctx = trx->getVersionContext(ctx);
+	cmd->setVctx(vctx, ctx);
+	ISocketConnection* con = nullptr;
+	{
+		std::function<void(void)> finallyLm2= [&, this]()
+		{
+			this->regionAccessPool->returnConnection(con, ctx);
+		};
+		Releaser finalyCaller2(finallyLm2);
+		try
+		{
+			con = this->regionAccessPool->getConnection(ctx);
+			AlinousSocket* socket = con->getSocket(ctx);
+			cmd->sendCommand(socket, ctx);
+			TableAccessStatusListner* listner = trx->getAccessListner(ctx);
+			listner->setStatus(this->schema, this->name, TableAccessStatus::STAT_COMMITTED_DONE, ctx);
+		}
+		catch(UnknownHostException* e)
+		{
+			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3603(), e, ctx));
+		}
+		catch(IOException* e)
+		{
+			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3603(), e, ctx));
+		}
+		catch(AlinousException* e)
+		{
+			throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3603(), e, ctx));
+		}
+	}
+}
+void DatabaseTableClient::cleanSelectLocks(DbTransaction* trx, long long newCommitId, ThreadContext* ctx)
+{
+	ClientClearSelectSessionCommand* cmd = (new(ctx) ClientClearSelectSessionCommand(ctx));
 	cmd->setCommitId(newCommitId, ctx);
 	DbVersionContext* vctx = trx->getVersionContext(ctx);
 	cmd->setVctx(vctx, ctx);

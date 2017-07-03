@@ -67,6 +67,7 @@ private:
 	List<RegionShardPartAccess>* shardParts;
 	int index;
 	ClientScanCommandData* data;
+	CommitClusterNodeListner* accessListner;
 public:
 	void init(CommitClusterNodeListner* accessListner, ThreadContext* ctx) throw()  final;
 	ScanWorkerResult* scan(ThreadContext* ctx) final;

@@ -138,6 +138,7 @@ public:
 	virtual void close(ThreadContext* ctx) throw()  = 0;
 	virtual String* getFullName(ThreadContext* ctx) throw()  = 0;
 	virtual void finishCommitSession(DbTransaction* trx, long long newCommitId, ThreadContext* ctx) = 0;
+	virtual void cleanSelectLocks(DbTransaction* trx, long long newCommitId, ThreadContext* ctx) = 0;
 	virtual IScannableIndex* getTableUniqueIndexByCols(List<TableColumnMetadata>* columns, ThreadContext* ctx) throw()  = 0;
 	virtual void tcpInsertCommit(IDatabaseRecord* data, IArrayObject<SequentialBackgroundJob>* jobs, ISystemLog* log, ThreadContext* ctx) = 0;
 	virtual long long getNextOid(ThreadContext* ctx) throw()  = 0;

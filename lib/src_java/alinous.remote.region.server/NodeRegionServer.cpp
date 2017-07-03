@@ -260,6 +260,15 @@ ScanWorkerResult* NodeRegionServer::scan(ClientScanCommandData* data, ThreadCont
 	}
 	return result;
 }
+void NodeRegionServer::clearSelectLocks(long long commitId, DbVersionContext* vctx, ThreadContext* ctx) throw() 
+{
+	CommitClusterNodeListner* accessListner = this->dmlSessions->getListner(vctx->getTrxId(ctx), ctx);
+	if(accessListner != nullptr)
+	{
+		accessListner->sendRemoveRowLocks(vctx, ctx);
+	}
+	this->dmlSessions->removeSession(vctx->getTrxId(ctx), ctx);
+}
 void NodeRegionServer::endScan(long long trxId, ThreadContext* ctx) throw() 
 {
 	this->scanManager->endSession(trxId, ctx);

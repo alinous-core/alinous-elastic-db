@@ -6,6 +6,9 @@ class OneSource;
 namespace alinous {namespace db {namespace trx {namespace cache {
 class TrxRecordsCacheFactory;}}}}
 
+namespace alinous {namespace remote {namespace region {namespace client {
+class TableAccessStatus;}}}}
+
 namespace alinous {namespace db {namespace trx {
 class DbTransaction;}}}
 
@@ -26,6 +29,9 @@ template <typename  T, typename V> class HashMap;}}
 
 namespace alinous {namespace remote {namespace region {namespace client {namespace transaction {
 class AbstractRemoteClientTransaction;}}}}}
+
+namespace alinous {namespace remote {namespace region {namespace client {
+class TableAccessStatusListner;}}}}
 
 namespace alinous {namespace db {
 class AlinousDatabase;}}
@@ -92,6 +98,8 @@ using ::alinous::db::table::IDatabaseTable;
 using ::alinous::db::table::TableMetadata;
 using ::alinous::db::trx::CreateIndexMetadata;
 using ::alinous::db::trx::DbTransaction;
+using ::alinous::remote::region::client::TableAccessStatus;
+using ::alinous::remote::region::client::TableAccessStatusListner;
 using ::alinous::remote::region::client::transaction::AbstractRemoteClientTransaction;
 using ::alinous::runtime::dom::VariableException;
 using ::alinous::system::AlinousException;
@@ -119,7 +127,7 @@ public:
 	TrxRecordsCache* getUpdateCache(String* schema, String* table, ThreadContext* ctx);
 	TrxRecordsCache* getUpdateCacheWithCreate(String* schema, String* table, ThreadContext* ctx);
 	TrxRecordsCache* getInsertCacheWithCreate(String* schema, String* table, ThreadContext* ctx);
-	void commitRemote(AbstractRemoteClientTransaction* trx, long long newCommitId, ThreadContext* ctx);
+	void commitRemote(AbstractRemoteClientTransaction* trx, long long newCommitId, TableAccessStatusListner* accessListner, ThreadContext* ctx);
 	void commitLocal(long long newCommitId, ThreadContext* ctx);
 	bool isHasOperation(ThreadContext* ctx) throw() ;
 	void setHasOperation(bool hasOperation, ThreadContext* ctx) throw() ;
@@ -128,13 +136,13 @@ public:
 	void addIndex(CreateIndexMetadata* createMeta, TableMetadata* tblmetadata, AlinousDatabase* database, ThreadContext* ctx);
 private:
 	void initStorage(ThreadContext* ctx) throw() ;
-	void tpcCommitAll(AbstractRemoteClientTransaction* trx, HashMap<String,IDatabaseTable>* tables, long long newCommitId, ThreadContext* ctx);
+	void tpcCommitAll(AbstractRemoteClientTransaction* trx, HashMap<String,IDatabaseTable>* tables, long long newCommitId, TableAccessStatusListner* accessListner, ThreadContext* ctx);
 	void commitRemoteInsert(AlinousDatabase* db, long long newCommitId, HashMap<String,IDatabaseTable>* tables, ThreadContext* ctx);
 	void commitRemoteUpdate(AlinousDatabase* db, long long newCommitId, HashMap<String,IDatabaseTable>* tables, ThreadContext* ctx);
 	void commitRemoteDelete(AlinousDatabase* db, long long newCommitId, HashMap<String,IDatabaseTable>* tables, ThreadContext* ctx) throw() ;
 	void commitInsertLocal(long long newCommitId, AlinousDatabase* db, ThreadContext* ctx);
 public:
-	static void includes(TrxRecordsCacheFactory* arg0, ThreadContext* ctx) throw() ;
+	static void includes(TrxRecordsCacheFactory* arg0, TableAccessStatus* arg1, ThreadContext* ctx) throw() ;
 public:
 	static bool __init_done;
 	static bool __init_static_variables();

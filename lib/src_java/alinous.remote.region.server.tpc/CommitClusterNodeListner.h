@@ -56,8 +56,10 @@ private:
 	Map<String,NodeReference>* nodeRefs;
 public:
 	void addNode(NodeReference* ref, ThreadContext* ctx) throw() ;
+	void sendRemoveRowLocks(DbVersionContext* vctx, ThreadContext* ctx) throw() ;
 	void sendCommit(long long newCommitId, DbVersionContext* vctx, ThreadContext* ctx);
 private:
+	void doSendRemoveRowLocks(NodeReference* ref, DbVersionContext* vctx, ThreadContext* ctx) throw() ;
 	void sendCommitCommand(long long newCommitId, DbVersionContext* vctx, NodeReference* ref, ThreadContext* ctx);
 public:
 	static bool __init_done;

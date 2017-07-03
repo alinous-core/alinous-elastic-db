@@ -59,6 +59,21 @@ void TableAccessStatusListner::setStatus(String* fullName, int status, ThreadCon
 	}
 	access->setStatus(status, ctx);
 }
+List<String>* TableAccessStatusListner::getUncommitedTables(ThreadContext* ctx) throw() 
+{
+	List<String>* list = (new(ctx) ArrayList<String>(ctx));
+	Iterator<String>* it = this->stats->keySet(ctx)->iterator(ctx);
+	while(it->hasNext(ctx))
+	{
+		String* tableName = it->next(ctx);
+		TableAccessStatus* stat = this->stats->get(tableName, ctx);
+		if(stat->getStatus(ctx) == TableAccessStatus::STAT_COMMITTED_NEEDED)
+		{
+			list->add(tableName, ctx);
+		}
+	}
+	return list;
+}
 void TableAccessStatusListner::__cleanUp(ThreadContext* ctx){
 }
 }}}}

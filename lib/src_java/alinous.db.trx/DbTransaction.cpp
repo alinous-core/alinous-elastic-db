@@ -103,6 +103,7 @@
 #include "alinous.db.trx.cache/CachedRecord.h"
 #include "alinous.db.trx.cache/TrxRecordsCache.h"
 #include "alinous.db.trx/CreateIndexMetadata.h"
+#include "alinous.remote.region.client/TableAccessStatusListner.h"
 #include "alinous.db.trx.cache/TrxStorageManager.h"
 #include "alinous.compile.sql/InsertStatement.h"
 #include "alinous.compile.sql.result/SelectResultDescription.h"
@@ -113,7 +114,6 @@
 #include "alinous.db.trx.ddl/TrxSchemeManager.h"
 #include "alinous.db.trx.scan/ScanResultIndex.h"
 #include "alinous.db.trx.scan/ScanResult.h"
-#include "alinous.remote.region.client/TableAccessStatusListner.h"
 #include "alinous.db.trx/DbTransaction.h"
 
 namespace alinous {namespace db {namespace trx {

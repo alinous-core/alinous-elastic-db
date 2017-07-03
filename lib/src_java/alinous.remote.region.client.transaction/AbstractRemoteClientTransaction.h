@@ -33,6 +33,15 @@ class VariableException;}}}
 namespace alinous {namespace btree {
 class BTreeException;}}
 
+namespace java {namespace util {
+template <typename  T> class List;}}
+
+namespace alinous {namespace db {namespace table {
+class IDatabaseTable;}}}
+
+namespace alinous {namespace db {
+class TableSchemaCollection;}}
+
 namespace alinous {namespace db {namespace trx {
 class DbTransaction;}}}
 
@@ -49,10 +58,13 @@ using namespace ::alinous;
 using namespace ::java::lang;
 using ::java::util::Iterator;
 using ::java::io::IOException;
+using ::java::util::List;
 using ::alinous::btree::BTreeException;
 using ::alinous::db::AlinousDatabase;
 using ::alinous::db::AlinousDbException;
 using ::alinous::db::TableSchema;
+using ::alinous::db::TableSchemaCollection;
+using ::alinous::db::table::IDatabaseTable;
 using ::alinous::db::trx::DbTransaction;
 using ::alinous::db::trx::DbTransactionManager;
 using ::alinous::db::trx::DbVersionContext;
@@ -78,6 +90,8 @@ public:
 	void createTable(TableSchema* schema, ThreadContext* ctx) final;
 	TableAccessStatusListner* getAccessListner(ThreadContext* ctx) throw()  final;
 	void commitUpdateInsert(long long newCommitId, ThreadContext* ctx) final;
+private:
+	IDatabaseTable* getTable(String* fullName, ThreadContext* ctx) throw() ;
 public:
 	static bool __init_done;
 	static bool __init_static_variables();

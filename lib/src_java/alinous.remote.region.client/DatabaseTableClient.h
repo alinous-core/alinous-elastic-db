@@ -93,6 +93,9 @@ class ClientTpcCommitSessionCommand;}}}}}}
 namespace alinous {namespace db {namespace trx {
 class DbVersionContext;}}}
 
+namespace alinous {namespace remote {namespace region {namespace client {namespace command {namespace dml {
+class ClientClearSelectSessionCommand;}}}}}}
+
 namespace alinous {namespace remote {namespace region {namespace client {namespace command {
 class AbstractNodeRegionCommand;}}}}}
 
@@ -148,6 +151,7 @@ using ::alinous::db::trx::DbVersionContext;
 using ::alinous::net::AlinousSocket;
 using ::alinous::remote::region::client::command::AbstractNodeRegionCommand;
 using ::alinous::remote::region::client::command::data::ClientNetworkRecord;
+using ::alinous::remote::region::client::command::dml::ClientClearSelectSessionCommand;
 using ::alinous::remote::region::client::command::dml::ClientInsertDataCommand;
 using ::alinous::remote::region::client::command::dml::ClientTpcCommitSessionCommand;
 using ::alinous::remote::socket::ISocketConnection;
@@ -212,6 +216,7 @@ public:
 	void insertData(DbTransaction* trx, IDatabaseRecord* record, long long newCommitId, IArrayObject<SequentialBackgroundJob>* jobs, ISystemLog* logger, ThreadContext* ctx) final;
 	void insertData(DbTransaction* trx, List<IDatabaseRecord>* records, long long newCommitId, IArrayObject<SequentialBackgroundJob>* jobs, ISystemLog* logger, ThreadContext* ctx) final;
 	void finishCommitSession(DbTransaction* trx, long long newCommitId, ThreadContext* ctx) final;
+	void cleanSelectLocks(DbTransaction* trx, long long newCommitId, ThreadContext* ctx) final;
 	AbstractNodeRegionCommand* sendCommand(AbstractNodeRegionCommand* cmd, ThreadContext* ctx) final;
 	void updateData(IDatabaseRecord* record, long long newCommitId, IArrayObject<SequentialBackgroundJob>* jobs, ISystemLog* logger, ThreadContext* ctx) final;
 	void createIndex(String* getindexName, ArrayList<String>* columns, AlinousCore* core, BTreeGlobalCache* cache, ThreadContext* ctx) final;
