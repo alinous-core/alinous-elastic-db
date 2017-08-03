@@ -42,6 +42,9 @@ class ScanStorageCommand;}}}}}}
 namespace alinous {namespace remote {namespace db {namespace client {namespace command {namespace dml {
 class EndScanStorageCommand;}}}}}}
 
+namespace alinous {namespace remote {namespace db {namespace client {namespace command {namespace dml {
+class ClearRowLocksCommand;}}}}}}
+
 namespace alinous {namespace system {
 class AlinousException;}}
 
@@ -68,6 +71,7 @@ using ::java::io::IOException;
 using ::java::io::InputStream;
 using ::alinous::remote::db::client::command::ddl::CreateSchemaCommand;
 using ::alinous::remote::db::client::command::ddl::CreateTableCommand;
+using ::alinous::remote::db::client::command::dml::ClearRowLocksCommand;
 using ::alinous::remote::db::client::command::dml::CommitDMLCommand;
 using ::alinous::remote::db::client::command::dml::EndScanStorageCommand;
 using ::alinous::remote::db::client::command::dml::InsertPrepareCommand;

@@ -662,6 +662,7 @@ set(srcjava
 	"src_java/alinous.remote.db.client.command.dml/InsertPrepareCommand.cpp"
 	"src_java/alinous.remote.db.client.command.dml/ScanStorageCommand.cpp"
 	"src_java/alinous.remote.db.client.command.dml/EndScanStorageCommand.cpp"
+	"src_java/alinous.remote.db.client.command.dml/ClearRowLocksCommand.cpp"
 	"src_java/alinous.remote.db.client.command.dml/CommitDMLCommand.cpp"
 	"src_java/alinous.compile.sql.select.join.scan/JoinedCollectionScanner.cpp"
 	"src_java/alinous.compile.sql.select.join.scan/ReverseIndexScanner.cpp"

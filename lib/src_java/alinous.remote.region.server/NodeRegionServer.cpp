@@ -260,14 +260,24 @@ ScanWorkerResult* NodeRegionServer::scan(ClientScanCommandData* data, ThreadCont
 	}
 	return result;
 }
-void NodeRegionServer::clearSelectLocks(long long commitId, DbVersionContext* vctx, ThreadContext* ctx) throw() 
+void NodeRegionServer::clearSelectLocks(long long commitId, DbVersionContext* vctx, ThreadContext* ctx)
 {
-	CommitClusterNodeListner* accessListner = this->dmlSessions->getListner(vctx->getTrxId(ctx), ctx);
-	if(accessListner != nullptr)
 	{
-		accessListner->sendRemoveRowLocks(vctx, ctx);
+		std::function<void(void)> finallyLm2= [&, this]()
+		{
+			this->dmlSessions->removeSession(vctx->getTrxId(ctx), ctx);
+		};
+		Releaser finalyCaller2(finallyLm2);
+		try
+		{
+			CommitClusterNodeListner* accessListner = this->dmlSessions->getListner(vctx->getTrxId(ctx), ctx);
+			if(accessListner != nullptr)
+			{
+				accessListner->sendRemoveRowLocks(vctx, ctx);
+			}
+		}
+		catch(...){throw;}
 	}
-	this->dmlSessions->removeSession(vctx->getTrxId(ctx), ctx);
 }
 void NodeRegionServer::endScan(long long trxId, ThreadContext* ctx) throw() 
 {

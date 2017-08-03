@@ -65,6 +65,27 @@ void AbstractStorageScanSession::__releaseRegerences(bool prepare, ThreadContext
 }
 void AbstractStorageScanSession::dispose(ThreadContext* ctx) throw() 
 {
+	if(this->locker != nullptr)
+	{
+		{
+			try
+			{
+				this->locker->reset(ctx);
+			}
+			catch(DatabaseLockException* e)
+			{
+				e->printStackTrace(ctx);
+			}
+		}
+		__GC_MV(this, &(this->locker), nullptr, TrxLockContext);
+	}
+}
+void AbstractStorageScanSession::clearRowLocks(ThreadContext* ctx) throw() 
+{
+	if(this->locker == nullptr)
+	{
+		return;
+	}
 	{
 		try
 		{

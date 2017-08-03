@@ -78,6 +78,19 @@ AbstractStorageScanSession* StorageScanSessionManager::getScanSession(IDatabaseT
 		return session;
 	}
 }
+void StorageScanSessionManager::clearRowLocks(DbVersionContext* vctx, ThreadContext* ctx) throw() 
+{
+	Long* trxId = (new(ctx) Long(vctx->getTrxId(ctx), ctx));
+	{
+		SynchronizedBlockObj __synchronized_2(this->lock, ctx);
+		AbstractStorageScanSession* session = this->sessions->get(trxId, ctx);
+		if(session == nullptr)
+		{
+			return;
+		}
+		session->clearRowLocks(ctx);
+	}
+}
 void StorageScanSessionManager::removeSession(DbVersionContext* vctx, ThreadContext* ctx) throw() 
 {
 	Long* trxId = (new(ctx) Long(vctx->getTrxId(ctx), ctx));

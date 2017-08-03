@@ -398,6 +398,7 @@
 #include "alinous.remote.db.client.command/RemoteStorageConnectCommand.h"
 #include "alinous.remote.db.client.command.ddl/CreateSchemaCommand.h"
 #include "alinous.remote.db.client.command.ddl/CreateTableCommand.h"
+#include "alinous.remote.db.client.command.dml/ClearRowLocksCommand.h"
 #include "alinous.remote.db.client.command.dml/CommitDMLCommand.h"
 #include "alinous.remote.db.client.command.dml/EndScanStorageCommand.h"
 #include "alinous.remote.region.client.command.data/ClientNetworkRecord.h"
@@ -1877,6 +1878,7 @@ inline static void __cleanUpStatics(alinous::ThreadContext* ctx){
 	alinous::remote::db::client::command::data::TableClusterData::__cleanUp(ctx);
 	alinous::remote::db::client::command::data::SchemaData::__cleanUp(ctx);
 	alinous::remote::db::client::command::data::SchemasStructureInfoData::__cleanUp(ctx);
+	alinous::remote::db::client::command::dml::ClearRowLocksCommand::__cleanUp(ctx);
 	alinous::remote::db::client::command::dml::CommitDMLCommand::__cleanUp(ctx);
 	alinous::remote::db::client::command::dml::EndScanStorageCommand::__cleanUp(ctx);
 	alinous::remote::db::client::command::dml::InsertPrepareCommand::__cleanUp(ctx);

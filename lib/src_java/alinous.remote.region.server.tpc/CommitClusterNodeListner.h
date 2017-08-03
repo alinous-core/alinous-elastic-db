@@ -10,6 +10,9 @@ namespace java {namespace util {
 template <typename  T> class Iterator;}}
 
 namespace alinous {namespace remote {namespace db {namespace client {namespace command {namespace dml {
+class ClearRowLocksCommand;}}}}}}
+
+namespace alinous {namespace remote {namespace db {namespace client {namespace command {namespace dml {
 class CommitDMLCommand;}}}}}}
 
 namespace java {namespace util {
@@ -38,6 +41,7 @@ using ::java::util::HashMap;
 using ::java::util::Iterator;
 using ::java::util::Map;
 using ::alinous::db::trx::DbVersionContext;
+using ::alinous::remote::db::client::command::dml::ClearRowLocksCommand;
 using ::alinous::remote::db::client::command::dml::CommitDMLCommand;
 using ::alinous::remote::region::server::schema::NodeReference;
 using ::alinous::system::AlinousException;
@@ -56,10 +60,10 @@ private:
 	Map<String,NodeReference>* nodeRefs;
 public:
 	void addNode(NodeReference* ref, ThreadContext* ctx) throw() ;
-	void sendRemoveRowLocks(DbVersionContext* vctx, ThreadContext* ctx) throw() ;
+	void sendRemoveRowLocks(DbVersionContext* vctx, ThreadContext* ctx);
 	void sendCommit(long long newCommitId, DbVersionContext* vctx, ThreadContext* ctx);
 private:
-	void doSendRemoveRowLocks(NodeReference* ref, DbVersionContext* vctx, ThreadContext* ctx) throw() ;
+	void doSendRemoveRowLocks(NodeReference* ref, DbVersionContext* vctx, ThreadContext* ctx);
 	void sendCommitCommand(long long newCommitId, DbVersionContext* vctx, NodeReference* ref, ThreadContext* ctx);
 public:
 	static bool __init_done;

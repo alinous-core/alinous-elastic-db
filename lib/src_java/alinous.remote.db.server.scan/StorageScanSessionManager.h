@@ -79,6 +79,7 @@ private:
 	Map<Long,AbstractStorageScanSession>* sessions;
 public:
 	AbstractStorageScanSession* getScanSession(IDatabaseTable* table, DbVersionContext* vctx, ClientScanCommandData* data, ThreadContext* ctx);
+	void clearRowLocks(DbVersionContext* vctx, ThreadContext* ctx) throw() ;
 	void removeSession(DbVersionContext* vctx, ThreadContext* ctx) throw() ;
 private:
 	AbstractStorageScanSession* newSession(IDatabaseTable* table, ClientScanCommandData* data, ThreadContext* ctx);

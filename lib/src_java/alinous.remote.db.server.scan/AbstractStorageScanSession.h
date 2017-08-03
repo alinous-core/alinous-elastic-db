@@ -71,6 +71,7 @@ public:
 	TrxLockContext* locker;
 public:
 	void dispose(ThreadContext* ctx) throw() ;
+	void clearRowLocks(ThreadContext* ctx) throw() ;
 	virtual void init(ThreadContext* ctx) = 0;
 	virtual ScanWorkerResult* scan(ThreadContext* ctx) = 0;
 public:

@@ -232,6 +232,7 @@ public:
 	ThreadPool* getWorkerThreadsPool(ThreadContext* ctx) throw() ;
 	MonitorAccess* getMonitorAccess(ThreadContext* ctx) throw() ;
 	ScanWorkerResult* scan(DbVersionContext* vctx, ClientScanCommandData* data, ThreadContext* ctx);
+	void clearRowLocks(DbVersionContext* vctx, ThreadContext* ctx) throw() ;
 private:
 	void initInstance(AlinousCore* core, ThreadContext* ctx);
 	File* getConfigFile(ThreadContext* ctx) throw() ;

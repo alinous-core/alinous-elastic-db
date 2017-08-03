@@ -71,16 +71,19 @@ void FullScanWorker::init(CommitClusterNodeListner* accessListner, ThreadContext
 }
 ScanWorkerResult* FullScanWorker::scan(ThreadContext* ctx)
 {
-	if(this->shardParts->size(ctx) <= index)
+	if(isIndexConsumed(ctx))
 	{
 		throw (new(ctx) AlinousDbException(ConstStr::getCNST_STR_3616(), ctx));
 	}
 	RegionShardPartAccess* access = this->shardParts->get(this->index, ctx);
-	this->index ++ ;
 	NodeReference* refAccess = access->getNodeAccessRef(ctx);
 	this->accessListner->addNode(refAccess, ctx);
 	ScanWorkerResult* result = refAccess->scan(this->data->getVctx(ctx), this->data, ctx);
 	return result;
+}
+bool FullScanWorker::isIndexConsumed(ThreadContext* ctx) throw() 
+{
+	return this->shardParts->size(ctx) <= index;
 }
 void FullScanWorker::__cleanUp(ThreadContext* ctx){
 }

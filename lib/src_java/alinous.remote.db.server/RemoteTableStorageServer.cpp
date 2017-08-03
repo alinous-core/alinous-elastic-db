@@ -345,6 +345,10 @@ ScanWorkerResult* RemoteTableStorageServer::scan(DbVersionContext* vctx, ClientS
 	ScanWorkerResult* result = session->scan(ctx);
 	return result;
 }
+void RemoteTableStorageServer::clearRowLocks(DbVersionContext* vctx, ThreadContext* ctx) throw() 
+{
+	this->scanSessionManager->clearRowLocks(vctx, ctx);
+}
 void RemoteTableStorageServer::initInstance(AlinousCore* core, ThreadContext* ctx)
 {
 	{

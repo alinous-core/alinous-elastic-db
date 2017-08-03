@@ -30,6 +30,7 @@ constexpr const int AbstractRemoteStorageCommand::TYPE_COMMIT_DML;
 constexpr const int AbstractRemoteStorageCommand::TYPE_REQUEST_SYNC_OID;
 constexpr const int AbstractRemoteStorageCommand::TYPE_SCAN_STORAGE;
 constexpr const int AbstractRemoteStorageCommand::TYPE_END_SCAN_STORAGE;
+constexpr const int AbstractRemoteStorageCommand::TYPE_CLEAR_ROW_LOCKS;
 bool AbstractRemoteStorageCommand::__init_done = __init_static_variables();
 bool AbstractRemoteStorageCommand::__init_static_variables(){
 	Java2CppSystem::getSelf();

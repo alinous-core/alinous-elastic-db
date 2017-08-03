@@ -71,6 +71,8 @@ private:
 public:
 	void init(CommitClusterNodeListner* accessListner, ThreadContext* ctx) throw()  final;
 	ScanWorkerResult* scan(ThreadContext* ctx) final;
+private:
+	bool isIndexConsumed(ThreadContext* ctx) throw() ;
 public:
 	static bool __init_done;
 	static bool __init_static_variables();

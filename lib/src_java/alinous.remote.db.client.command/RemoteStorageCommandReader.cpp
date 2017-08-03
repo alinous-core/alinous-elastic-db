@@ -10,6 +10,7 @@
 #include "alinous.remote.db.client.command/RemoteStorageConnectCommand.h"
 #include "alinous.remote.db.client.command.ddl/CreateSchemaCommand.h"
 #include "alinous.remote.db.client.command.ddl/CreateTableCommand.h"
+#include "alinous.remote.db.client.command.dml/ClearRowLocksCommand.h"
 #include "alinous.remote.db.client.command.dml/CommitDMLCommand.h"
 #include "alinous.remote.db.client.command.dml/EndScanStorageCommand.h"
 #include "alinous.remote.db.client.command.dml/InsertPrepareCommand.h"
@@ -99,6 +100,9 @@ AbstractRemoteStorageCommand* RemoteStorageCommandReader::readFromStream(InputSt
 		break ;
 	case AbstractRemoteStorageCommand::TYPE_END_SCAN_STORAGE:
 		cmd = (new(ctx) EndScanStorageCommand(ctx));
+		break ;
+	case AbstractRemoteStorageCommand::TYPE_CLEAR_ROW_LOCKS:
+		cmd = (new(ctx) ClearRowLocksCommand(ctx));
 		break ;
 	default:
 		throw (new(ctx) AlinousException(ConstStr::getCNST_STR_3586(), ctx));

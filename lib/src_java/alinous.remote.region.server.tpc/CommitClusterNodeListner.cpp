@@ -9,9 +9,10 @@
 #include "alinous.compile/AbstractSrcElement.h"
 #include "alinous.system/AlinousException.h"
 #include "alinous.remote.db.server/RemoteTableStorageServer.h"
-#include "alinous.remote.db.client.command/RemoteStorageCommandReader.h"
 #include "alinous.remote.db.client.command/AbstractRemoteStorageCommand.h"
 #include "alinous.remote.db.client.command.dml/CommitDMLCommand.h"
+#include "alinous.remote.db.client.command/RemoteStorageCommandReader.h"
+#include "alinous.remote.db.client.command.dml/ClearRowLocksCommand.h"
 #include "alinous.remote.region.server.schema/NodeReference.h"
 #include "alinous.remote.region.server.tpc/CommitClusterNodeListner.h"
 
@@ -63,7 +64,7 @@ void CommitClusterNodeListner::addNode(NodeReference* ref, ThreadContext* ctx) t
 		this->nodeRefs->put(key, ref, ctx);
 	}
 }
-void CommitClusterNodeListner::sendRemoveRowLocks(DbVersionContext* vctx, ThreadContext* ctx) throw() 
+void CommitClusterNodeListner::sendRemoveRowLocks(DbVersionContext* vctx, ThreadContext* ctx)
 {
 	Iterator<String>* it = this->nodeRefs->keySet(ctx)->iterator(ctx);
 	while(it->hasNext(ctx))
@@ -83,8 +84,11 @@ void CommitClusterNodeListner::sendCommit(long long newCommitId, DbVersionContex
 		sendCommitCommand(newCommitId, vctx, ref, ctx);
 	}
 }
-void CommitClusterNodeListner::doSendRemoveRowLocks(NodeReference* ref, DbVersionContext* vctx, ThreadContext* ctx) throw() 
+void CommitClusterNodeListner::doSendRemoveRowLocks(NodeReference* ref, DbVersionContext* vctx, ThreadContext* ctx)
 {
+	ClearRowLocksCommand* cmd = (new(ctx) ClearRowLocksCommand(ctx));
+	cmd->setVctx(vctx, ctx);
+	ref->sendCommand(cmd, ctx);
 }
 void CommitClusterNodeListner::sendCommitCommand(long long newCommitId, DbVersionContext* vctx, NodeReference* ref, ThreadContext* ctx)
 {

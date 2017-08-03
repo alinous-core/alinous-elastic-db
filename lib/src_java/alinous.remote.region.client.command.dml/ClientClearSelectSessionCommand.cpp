@@ -10,6 +10,7 @@
 #include "alinous.remote.socket/NetworkBinaryBuffer.h"
 #include "alinous.remote.socket/ICommandData.h"
 #include "alinous.db.trx/DbVersionContext.h"
+#include "alinous.system/AlinousCore.h"
 #include "alinous.remote.region.server/NodeRegionServer.h"
 #include "alinous.remote.region.client.command/AbstractNodeRegionCommand.h"
 #include "alinous.remote.region.client.command.dml/ClientClearSelectSessionCommand.h"
@@ -58,7 +59,18 @@ void ClientClearSelectSessionCommand::__releaseRegerences(bool prepare, ThreadCo
 }
 void ClientClearSelectSessionCommand::executeOnServer(NodeRegionServer* nodeRegionServer, BufferedOutputStream* outStream, ThreadContext* ctx)
 {
-	nodeRegionServer->clearSelectLocks(this->commitId, this->vctx, ctx);
+	{
+		try
+		{
+			nodeRegionServer->clearSelectLocks(this->commitId, this->vctx, ctx);
+		}
+		catch(Throwable* e)
+		{
+			AlinousCore* core = nodeRegionServer->getCore(ctx);
+			core->logError(e, ctx);
+			handleError(e, ctx);
+		}
+	}
 	writeByteStream(outStream, ctx);
 }
 void ClientClearSelectSessionCommand::readFromStream(InputStream* stream, int remain, ThreadContext* ctx)
