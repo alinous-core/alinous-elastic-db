@@ -93,6 +93,16 @@ Map<String,TrxLockContextLockHolder>* RemoteTrxLockContext::getTables(ThreadCont
 {
 	return tables;
 }
+void RemoteTrxLockContext::releaseAll(ThreadContext* ctx) throw() 
+{
+	Iterator<String>* it = this->tables->keySet(ctx)->iterator(ctx);
+	while(it->hasNext(ctx))
+	{
+		String* fullname = it->next(ctx);
+		TrxLockContextLockHolder* lockHolder = this->tables->get(fullname, ctx);
+		lockHolder->clearLocks(ctx);
+	}
+}
 void RemoteTrxLockContext::__cleanUp(ThreadContext* ctx){
 }
 }}}}}

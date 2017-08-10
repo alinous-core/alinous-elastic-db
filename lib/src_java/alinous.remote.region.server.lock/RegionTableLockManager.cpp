@@ -92,6 +92,16 @@ void RegionTableLockManager::unlockShared(String* schema, String* table, long lo
 		context->releaseLock(fullName, IndexScannerLockRequirement::INSTANT_SHARE, ctx);
 	}
 }
+void RegionTableLockManager::clearLocks(long long trxId, ThreadContext* ctx) throw() 
+{
+	Long* trxIdObj = (new(ctx) Long(trxId, ctx));
+	{
+		SynchronizedBlockObj __synchronized_2(this->ctxlock, ctx);
+		RemoteTrxLockContext* context = this->lockContext->get(trxIdObj, ctx);
+		this->lockContext->remove(trxIdObj, ctx);
+		context->releaseAll(ctx);
+	}
+}
 IRemoteTableLock* RegionTableLockManager::getLock(String* fullName, NodeRegionServer* server, bool create, ThreadContext* ctx) throw() 
 {
 	IRemoteTableLock* lock = this->locks->get(fullName, ctx);

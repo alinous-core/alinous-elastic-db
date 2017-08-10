@@ -70,6 +70,7 @@ private:
 public:
 	void lockTable(String* schema, String* table, int lockMode, long long trxId, NodeRegionServer* server, ThreadContext* ctx);
 	void unlockShared(String* schema, String* table, long long trxId, NodeRegionServer* server, ThreadContext* ctx);
+	void clearLocks(long long trxId, ThreadContext* ctx) throw() ;
 private:
 	IRemoteTableLock* getLock(String* fullName, NodeRegionServer* server, bool create, ThreadContext* ctx) throw() ;
 	IRemoteTableLock* createTableLock(NodeRegionServer* server, ThreadContext* ctx) throw() ;

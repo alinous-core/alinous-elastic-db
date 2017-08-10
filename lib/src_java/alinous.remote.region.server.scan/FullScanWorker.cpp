@@ -79,6 +79,15 @@ ScanWorkerResult* FullScanWorker::scan(ThreadContext* ctx)
 	NodeReference* refAccess = access->getNodeAccessRef(ctx);
 	this->accessListner->addNode(refAccess, ctx);
 	ScanWorkerResult* result = refAccess->scan(this->data->getVctx(ctx), this->data, ctx);
+	if(result->isFinished(ctx))
+	{
+		this->index ++ ;
+		if(isIndexConsumed(ctx))
+		{
+			return result;
+		}
+		result->setFinished(false, ctx);
+	}
 	return result;
 }
 bool FullScanWorker::isIndexConsumed(ThreadContext* ctx) throw() 

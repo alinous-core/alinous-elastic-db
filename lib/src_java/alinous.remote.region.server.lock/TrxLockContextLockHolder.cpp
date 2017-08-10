@@ -88,6 +88,28 @@ void TrxLockContextLockHolder::updateUnlock(ThreadContext* ctx)
 	this->remoteLock->updateUnlock(ctx);
 	decUpdateCount(ctx);
 }
+void TrxLockContextLockHolder::clearLocks(ThreadContext* ctx) throw() 
+{
+	if(this->updateCount > 0)
+	{
+		this->updateCount = 0;
+		{
+			try
+			{
+				this->remoteLock->updateUnlock(ctx);
+			}
+			catch(InterruptedException* ignore)
+			{
+				ignore->printStackTrace(ctx);
+			}
+		}
+	}
+	if(this->shareCount > 0)
+	{
+		this->shareCount = 0;
+		this->remoteLock->shareUnlock(ctx);
+	}
+}
 void TrxLockContextLockHolder::incShareCount(ThreadContext* ctx) throw() 
 {
 	this->shareCount ++ ;

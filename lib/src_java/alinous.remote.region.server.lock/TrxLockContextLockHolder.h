@@ -7,6 +7,9 @@ namespace alinous {namespace db {
 class AlinousDbException;}}
 
 namespace java {namespace lang {
+class InterruptedException;}}
+
+namespace java {namespace lang {
 class IObject;
 }}
 
@@ -40,6 +43,7 @@ public:
 	void shareUnlock(ThreadContext* ctx) throw() ;
 	void updateLock(ThreadContext* ctx);
 	void updateUnlock(ThreadContext* ctx);
+	void clearLocks(ThreadContext* ctx) throw() ;
 	void incShareCount(ThreadContext* ctx) throw() ;
 	void decShareCount(ThreadContext* ctx) throw() ;
 	void incUpdateCount(ThreadContext* ctx) throw() ;

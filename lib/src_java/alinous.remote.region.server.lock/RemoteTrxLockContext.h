@@ -10,6 +10,9 @@ namespace java {namespace util {
 template <typename  T, typename V> class Map;}}
 
 namespace java {namespace util {
+template <typename  T> class Iterator;}}
+
+namespace java {namespace util {
 template <typename  T, typename V> class HashMap;}}
 
 namespace alinous {namespace db {
@@ -32,6 +35,7 @@ using namespace ::alinous;
 using namespace ::java::lang;
 using ::java::util::Iterator;
 using ::java::util::HashMap;
+using ::java::util::Iterator;
 using ::java::util::Map;
 using ::alinous::db::AlinousDbException;
 using ::alinous::db::table::scan::IndexScannerLockRequirement;
@@ -52,6 +56,7 @@ public:
 	void addLock(String* fullName, IRemoteTableLock* lock, int lockMode, ThreadContext* ctx);
 	void releaseLock(String* fullName, int lockMode, ThreadContext* ctx);
 	Map<String,TrxLockContextLockHolder>* getTables(ThreadContext* ctx) throw() ;
+	void releaseAll(ThreadContext* ctx) throw() ;
 public:
 	static bool __init_done;
 	static bool __init_static_variables();

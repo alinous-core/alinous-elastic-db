@@ -262,6 +262,7 @@ ScanWorkerResult* NodeRegionServer::scan(ClientScanCommandData* data, ThreadCont
 }
 void NodeRegionServer::clearSelectLocks(long long commitId, DbVersionContext* vctx, ThreadContext* ctx)
 {
+	this->tableLockManager->clearLocks(vctx->getTrxId(ctx), ctx);
 	{
 		std::function<void(void)> finallyLm2= [&, this]()
 		{
