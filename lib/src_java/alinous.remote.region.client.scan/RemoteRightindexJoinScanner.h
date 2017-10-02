@@ -31,7 +31,7 @@ namespace alinous {namespace system {
 class ISystemLog;}}
 
 namespace alinous {namespace remote {namespace region {namespace client {namespace scan {
-class AbstractRemoteScanner;}}}}}
+class IRemoteJoinScanner;}}}}}
 
 namespace alinous {namespace db {namespace table {
 class DatabaseException;}}}
@@ -66,7 +66,7 @@ using ::alinous::system::ISystemLog;
 
 
 
-class RemoteRightindexJoinScanner final : public AbstractRemoteScanner {
+class RemoteRightindexJoinScanner final : public IRemoteJoinScanner {
 public:
 	RemoteRightindexJoinScanner(const RemoteRightindexJoinScanner& base) = default;
 public:

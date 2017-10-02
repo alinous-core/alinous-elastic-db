@@ -211,6 +211,7 @@
 #include "alinous.remote.region.client.scan/RemoteIndexListScanner.h"
 #include "alinous.db.table.scan/IndexRangeScannerParam.h"
 #include "alinous.remote.region.client.scan/RemoteIndexRangeScanner.h"
+#include "alinous.remote.region.client.scan/RemoteRightindexJoinScanner.h"
 #include "alinous.remote.region.client.scan/RemoteTableFullScanner.h"
 #include "alinous.remote.region.client.scan/RemoteTableIndexScanner.h"
 #include "alinous.db.trx.scan/IFilterScanner.h"

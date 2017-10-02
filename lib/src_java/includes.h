@@ -611,6 +611,7 @@
 #include "alinous.remote.region.client.scan/RemoteIndexEqScanner.h"
 #include "alinous.remote.region.client.scan/RemoteIndexListScanner.h"
 #include "alinous.remote.region.client.scan/RemoteIndexRangeScanner.h"
+#include "alinous.remote.region.client.scan/RemoteRightindexJoinScanner.h"
 #include "alinous.remote.region.client.scan/RemoteTableFullScanner.h"
 #include "alinous.remote.region.client.scan/ResultHolder.h"
 #include "alinous.remote.region.client.scan/RemoteTableIndexScanner.h"
@@ -949,7 +950,6 @@
 #include "alinous.remote.db.client/RemoteTableStorageClient.h"
 #include "alinous.remote.db.server.commit/DeleteStore.h"
 #include "alinous.remote.db.server.commit/UpdateStore.h"
-#include "alinous.remote.region.client.scan/RemoteRightindexJoinScanner.h"
 
 
 inline static void __cleanUpStatics(alinous::ThreadContext* ctx){

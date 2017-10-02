@@ -78,6 +78,9 @@ class JoinMatchExpression;}}}}
 namespace alinous {namespace compile {namespace sql {namespace select {namespace join {
 class SQLJoinCondition;}}}}}
 
+namespace alinous {namespace remote {namespace region {namespace client {namespace scan {
+class RemoteRightindexJoinScanner;}}}}}
+
 namespace alinous {namespace compile {namespace sql {namespace select {namespace join {namespace scan {
 class RightindexJoinScanner;}}}}}}
 
@@ -127,6 +130,7 @@ using ::alinous::remote::region::client::scan::RemoteCrossJoinScanner;
 using ::alinous::remote::region::client::scan::RemoteIndexEqScanner;
 using ::alinous::remote::region::client::scan::RemoteIndexListScanner;
 using ::alinous::remote::region::client::scan::RemoteIndexRangeScanner;
+using ::alinous::remote::region::client::scan::RemoteRightindexJoinScanner;
 using ::alinous::remote::region::client::scan::RemoteTableFullScanner;
 using ::alinous::remote::region::client::scan::RemoteTableIndexScanner;
 using ::alinous::runtime::engine::ScriptMachine;
